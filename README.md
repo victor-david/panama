@@ -19,8 +19,8 @@ search the text of files; consolidate files to a single export directory; create
 ## Dependencies
 The solution file for **Panama ∑en** references other projects. To build, you'll need to use these projects as well:
 
-- [Main Support Library](https://github.com/victor-david/library-wpf)
-- [Office Support Library](https://github.com/victor-david/library-wpf-office)
+- [Main Support Library](https://github.com/victor-david/restless-tools)
+- [Office Support Library](https://github.com/victor-david/restless-tools-office)
 
 In addition, the app uses the following .dlls
 
@@ -31,21 +31,21 @@ These can be found in the [ReferenceAssembles Folder](ReferenceAssemblies/)
 
 ## How to Build
 - Download this project
-- Download the [Main Support Library](https://github.com/victor-david/library-wpf)
-- Download the [Office Support Library](https://github.com/victor-david/library-wpf-office)
+- Download the [Main Support Library](https://github.com/victor-david/restless-tools)
+- Download the [Office Support Library](https://github.com/victor-david/restless-tools-office)
 
-Download all projects to the same parent directory, each in its own folder
+Download all projects to the same parent directory, each in its own folder. Name the folders as shown:
 
 |--Panama
 
-|--Xam.Library.Wpf
+|--Restless.Tools.Library
 
-|--Xam.Library.Wpf.OfficeAutomation
+|--Restless.Tools.Library.OfficeAutomation
 
-- Open Panama/Panama.sln in Visual Studio
+- Open Panama/Source/Panama.sln in Visual Studio
 - Build
 
-The  [Office Support Library](https://github.com/victor-david/library-wpf-office) dependency project is used to provide a tool that enables batch conversion
+The  [Office Support Library](https://github.com/victor-david/restless-tools-office) dependency project is used to provide a tool that enables batch conversion
 of .doc files to .docx. This library requires a reference to Microsoft.Office.Interop.Word. If you don't have MS Office installed, and want to build a version
 of **Panama ∑en** without this support, do the following:
 
