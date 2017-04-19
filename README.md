@@ -27,7 +27,7 @@ In addition, the app uses the following .dlls
 - Microsoft.WindowsAPICodePack.dll
 - Microsoft.WindowsAPICodePack.Shell.dll
 
-These can be found in the [ReferenceAssembles Folder](ReferenceAssemblies/)
+These can be found in the [Reference Assembles](Reference Assemblies/) folder.
 
 ## How to Build
 - Download this project
