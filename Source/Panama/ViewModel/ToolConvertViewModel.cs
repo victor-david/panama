@@ -1,0 +1,227 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using Restless.App.Panama.Collections;
+using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Controls;
+using Restless.App.Panama.Converters;
+using Restless.App.Panama.Database;
+using Restless.App.Panama.Database.Tables;
+using Restless.App.Panama.Resources;
+using Restless.App.Panama.Tools;
+using Restless.Tools.Threading;
+using Restless.Tools.Utility;
+
+namespace Restless.App.Panama.ViewModel
+{
+    /// <summary>
+    /// Provides the logic that is used for the .doc to .docx file conversion tool.
+    /// </summary>
+    public class ToolConvertViewModel : DataGridViewModelBase
+    {
+#if DOCX
+        #region Private
+        private string selectedFolder;
+        private bool isReadyToRun;
+        private bool isRunning;
+        private string foundHeader;
+        #endregion
+
+        /************************************************************************/
+
+        #region Properties
+
+        /// <summary>
+        /// Gets the document converter object.
+        /// </summary>
+        public DocumentConverter Converter
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets a string value for the results header.
+        /// </summary>
+        public string FoundHeader
+        {
+            get { return foundHeader; }
+            private set
+            {
+                foundHeader = value;
+                OnPropertyChanged("FoundHeader");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected folder
+        /// </summary>
+        public string SelectedFolder
+        {
+            get { return selectedFolder; }
+            set
+            {
+                selectedFolder = value;
+                OnPropertyChanged("SelectedFolder");
+            }
+        }
+
+        /// <summary>
+        /// Gets a boolean value that indicates if the conversion process is ready to run.
+        /// </summary>
+        public bool IsReadyToRun
+        {
+            get { return isReadyToRun; }
+            private set
+            {
+                isReadyToRun = value;
+                OnPropertyChanged("IsReadyToRun");
+            }
+        }
+
+        /// <summary>
+        /// Gets a boolean value that indicates if the conversion process is running.
+        /// </summary>
+        public bool IsRunning
+        {
+            get { return isRunning; }
+            private set
+            {
+                isRunning = value;
+                OnPropertyChanged("IsRunning");
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Constructor
+        #pragma warning disable 1591
+        public ToolConvertViewModel()
+        {
+            DisplayName = Strings.CommandToolConvert;
+            MaxCreatable = 1;
+            Converter = new DocumentConverter();
+            Converter.ItemCompleted += ConverterItemCompleted;
+            Converter.ConversionCompleted += ConverterConversionCompleted;
+
+            //versionTable = DatabaseController.Instance.GetTable<TitleVersionTable>();
+            //submissionDocumentTable = DatabaseController.Instance.GetTable<SubmissionDocumentTable>();
+
+            // resultsView = new ObservableCollection<FileConvertItem>();
+            MainSource.Source = Converter.Items;
+
+            Columns.CreateImage<BooleanToImageConverter>("V", "IsVersion");
+            Columns.Create("Id", "TitleId").MakeFixedWidth(FixedWidth.Standard);
+            Columns.CreateImage<BooleanToImageConverter>("S", "IsSubmissionDoc");
+            Columns.CreateImage<BooleanToImageConverter>("C", "Result.Success");
+            //Columns.Create("Id", "TitleId").MakeFixedWidth(FixedWidth.Standard);
+            
+            Columns.Create("Created", "Info.CreationTimeUtc").MakeDate();
+            Columns.Create("Modified", "Info.LastWriteTimeUtc").MakeDate();
+            Columns.SetDefaultSort(Columns.Create("File name", "Info.FullName").MakeFlexWidth(2.0), ListSortDirection.Ascending);
+            Columns.Create("Message", "Result.Message");
+            
+            RawCommands.Add("SelectFolder", RunSelectFolderCommand, CanRunSelectFolderCommand);
+            RawCommands.Add("Convert", RunConvertCommand);
+            RawCommands.Add("Cancel", RunCancelCommand);
+            UpdateFoundHeader();
+        }
+
+
+        #pragma warning restore 1591
+        #endregion
+
+        /************************************************************************/
+
+        #region Protected Methods
+        /// <summary>
+        /// Raises the Closing event.
+        /// </summary>
+        /// <param name="e">The event arguments</param>
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
+            {
+                MainViewModel.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
+                System.Media.SystemSounds.Beep.Play();
+
+            }, null);
+            base.OnClosing(e);
+        }
+        #endregion
+
+        /************************************************************************/
+        
+        #region Private Methods
+        private void UpdateFoundHeader()
+        {
+            FoundHeader = String.Format(Strings.HeaderToolOperationConvertFoundFormat, Converter.Items.Count, Converter.ConvertedCount);
+        }
+
+        private void RunSelectFolderCommand(object o)
+        {
+            using (var dialog = CommonDialogFactory.Create(Config.FolderTitleRoot, "Select a directory", true))
+            {
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    SelectedFolder = dialog.FileName;
+                    Converter.FindFiles(SelectedFolder);
+                    UpdateFoundHeader();
+                    SetIsReadyToRun();
+                }
+            }
+        }
+
+        private bool CanRunSelectFolderCommand(object o)
+        {
+            return true;
+        }
+
+        private void RunConvertCommand(object o)
+        {
+            IsRunning = true;
+            IsReadyToRun = false;
+            Converter.Convert(AppTaskId.Convert);
+        }
+
+        private void RunCancelCommand(object o)
+        {
+            if (IsRunning)
+            {
+                TaskManager.Instance.CancelTask(AppTaskId.Convert);
+            }
+        }
+
+        private void ConverterItemCompleted(object sender, ConversionCompletedEventArgs e)
+        {
+            UpdateFoundHeader();
+            e.Item.SignalPropertyUpdates();
+        }
+
+        private void ConverterConversionCompleted(object sender, EventArgs e)
+        {
+            SetIsReadyToRun();
+            IsRunning = false;
+        }
+
+        private void SetIsReadyToRun()
+        {
+            IsReadyToRun = Converter.ConvertedCount < Converter.Items.Count;
+        }
+        #endregion
+#endif
+    }
+}

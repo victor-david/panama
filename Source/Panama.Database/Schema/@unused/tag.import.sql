@@ -1,0 +1,16 @@
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (1, 'ES', 'Has a version in español', 49);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (2, 'Narrative', 'Written in the narrative style, sort of like a prose poem', 68);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (4, 'Essay', 'An essay or other article', 15);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (5, 'Story', 'A story', 13);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (6, 'Long', 'Long piece', 11);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (11, 'Samuel', 'Part of The Book Of Samuel', 34);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (26, 'ES-EN', 'Written in spanish, translated to english', 14);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (27, 'EN-ES', 'Written in English, translated to spanish', 24);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (29, 'ESR', 'Need to review the spanish version, whether original or translated', 25);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (31, 'X-Audio', 'Has an audio recording', 2);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (32, 'X-Tarea', 'Una tarea para una clase de la universidad', 10);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (33, 'X-Incomplete', 'Incomplete', 6);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (34, 'Manuscript', 'Manuscript', 10);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (35, 'Book-Pub', 'Belonging to the book pf published pieces', 32);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (36, 'My Life', 'Personal vignettes', 7);
+INSERT INTO "tag" ("id", "tag", "description", "usagecount") VALUES (37, 'Follow', 'Follow up, submit', 33);

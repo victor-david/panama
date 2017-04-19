@@ -1,0 +1,168 @@
+﻿<UserControl 
+    x:Class="Restless.App.Panama.View.SubmissionEditWithTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:vw="clr-namespace:Restless.App.Panama.View"
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    mc:Ignorable="d" 
+    d:DesignHeight="600" d:DesignWidth="498">
+    <Control.Resources>
+        <ResourceDictionary Source="../../Resources/Merged.xaml" />
+    </Control.Resources>
+    <con:TabControlExtended>
+        <TabControl.Items>
+            <!-- Main data: flags, fees, notes -->
+            <TabItem Header="Data">
+                <DockPanel>
+                    <Label DockPanel.Dock="Top">Flags</Label>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="8,0">
+                        <CheckBox IsChecked="{Binding SelectedRow[online]}">Online</CheckBox>
+                        <CheckBox IsChecked="{Binding SelectedRow[contest]}">Contest</CheckBox>
+                        <CheckBox IsChecked="{Binding SelectedRow[locked]}">Locked</CheckBox>
+                    </StackPanel>
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Label>Fee</Label>
+                            <TextBox Text="{Binding SelectedRow[fee]}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <Label>Award</Label>
+                            <TextBox Text="{Binding SelectedRow[award]}"/>
+                        </StackPanel>
+                    </Grid>
+                    <Label DockPanel.Dock="Top">Notes</Label>
+                    <TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Text="{Binding SelectedRow[notes]}" />
+                </DockPanel>
+            </TabItem>
+            <!-- Submitted and response dates  -->
+            <TabItem Header="Dates">
+                <StackPanel>
+                    <Expander Header="{Binding Submitted.Header}" IsExpanded="False">
+                        <con:CalendarExtended SelectedDate="{Binding Submitted.SubmittedDate}" DisplayDate="{Binding Submitted.DisplayDate,Mode=OneWay}" HorizontalAlignment="Left"/>
+                    </Expander>
+
+                    <Expander Header="{Binding Response.Header}" IsExpanded="False">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Label>Date</Label>
+                                <con:CalendarExtended SelectedDate="{Binding Response.ResponseDate}" DisplayDate="{Binding Response.DisplayDate,Mode=OneWay}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <Label>Type</Label>
+                                <ListBox IsEnabled="{Binding Response.HaveResponseDate}" ItemsSource="{Binding Response.DataView}" SelectedValue="{Binding Response.ResponseType}" SelectedValuePath="id" DisplayMemberPath="name"></ListBox>
+                                <Button Content="Clear Response Date" Command="{Binding Response.ClearResponseCommand}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Expander>
+                </StackPanel>
+            </TabItem>
+            <!-- Titles -->
+            <TabItem Header="{Binding Titles.Header}">
+                <StackPanel>
+                    <DataGrid x:Name="grid1" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Titles.DataView}" SelectedItem="{Binding Titles.SelectedItem}" con:DataGridColumns.Columns="{Binding Titles.Columns}">
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid1, Path=DataContext.Titles.OpenRowCommand}"/>
+                            </Style>
+                        </DataGrid.RowStyle>
+                    </DataGrid>
+                    <ToolBarTray>
+                        <ToolBar Style="{StaticResource ToolBarCommandHolder}">
+                            <Button Command="{Binding Titles.RawCommands[MoveUp]}" Content="{StaticResource ImageArrowUpTool}" ToolTip="Move up"/>
+                            <Button Command="{Binding Titles.RawCommands[MoveDown]}" Content="{StaticResource ImageArrowDownTool}" ToolTip="Move down"/>
+                            <Separator/>
+                            <Button Command="{Binding Titles.RawCommands[SetStatusAccepted]}" Content="Accepted" ToolTip="Set the status of the selected title to accepted"/>
+                            <Button Command="{Binding Titles.RawCommands[SetStatusWithdrawn]}" Content="Withdrawn" ToolTip="Set the status of the selected title to withdrawn"/>
+                            <Button Command="{Binding Titles.RawCommands[ResetStatus]}" Content="Reset" ToolTip="Reset the status of the selected title"/>
+                            <Separator/>
+                            <Button Command="{Binding Titles.RawCommands[RemoveFromSubmission]}" Content="Remove" ToolTip="Remove the selected title from the submission (does not affect the file system)"/>
+                            <Separator/>
+                            <Button Command="{Binding Titles.RawCommands[CopyToClipboard]}" Content="Copy" ToolTip="Copy the list of titles to the clipboard"/>
+                        </ToolBar>
+                    </ToolBarTray>
+                </StackPanel>
+            </TabItem>
+            <!-- Documents -->
+            <TabItem Header="{Binding Documents.Header}">
+                <StackPanel>
+                    <DataGrid x:Name="grid2" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Documents.DataView}" SelectedItem="{Binding Documents.SelectedItem}" con:DataGridColumns.Columns="{Binding Documents.Columns}">
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid2, Path=DataContext.Documents.OpenRowCommand}"/>
+                            </Style>
+                        </DataGrid.RowStyle>
+                    </DataGrid>
+                    <ToolBarTray>
+                        <ToolBar Style="{StaticResource ToolBarCommandHolder}">
+                            <Button Command="{Binding RawCommands[DocumentAdd]}" Content="Create" ToolTip="Create a document to associate with this submission"/>
+                            <Button Command="{Binding RawCommands[DocumentReplace]}" Content="Replace" ToolTip="Replace the selected document with another file"/>
+                            <Button Command="{Binding RawCommands[DocumentRemove]}" Content="Remove" ToolTip="Remove the selected document (does not affect the file system)"/>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <StackPanel Margin="0,8" Visibility="{Binding Documents.EditVisibility}">
+                        <Label>Document title</Label>
+                        <TextBox Text="{Binding Documents.SelectedRow[title]}"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <!-- Messages -->
+            <TabItem Header="{Binding Messages.Header}">
+                <DockPanel>
+                    <DataGrid DockPanel.Dock="Top" x:Name="grid3" Style="{StaticResource DataGridEdit}" Height="120" ItemsSource="{Binding Path=Messages.DataView}" SelectedItem="{Binding Messages.SelectedItem}" con:DataGridColumns.Columns="{Binding Messages.Columns}">
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid3, Path=DataContext.Messages.OpenRowCommand}"/>
+                            </Style>
+                        </DataGrid.RowStyle>
+                    </DataGrid>
+                    <ToolBarTray DockPanel.Dock="Top">
+                        <ToolBar Style="{StaticResource ToolBarCommandHolder}">
+                            <Button Command="{Binding RawCommands[SelectMessage]}" Content="Add"/>
+                            <Button Command="{Binding RawCommands[RemoveMessage]}" Content="Remove"/>
+                        </ToolBar>
+                    </ToolBarTray>
+
+                    <!-- Message display / edit controls -->
+                    <DockPanel DockPanel.Dock="Top" Margin="0,8" Visibility="{Binding Messages.EditVisibility, Mode=OneWay}">
+                        <Label DockPanel.Dock="Top">Subject</Label>
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockMessage}" Text="{Binding Messages.SelectedRow[subject]}" />
+                        <Label DockPanel.Dock="Top">Display subject</Label>
+                        <TextBox DockPanel.Dock="Top" Text="{Binding Messages.SelectedRow[display]}" />
+                        <Label DockPanel.Dock="Top">Sender</Label>
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockMessage}" Text="{Binding Messages.SelectedRow[SenderFull]}" />
+                        <Label DockPanel.Dock="Top">Recipient</Label>
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockMessage}" Text="{Binding Messages.SelectedRow[RecipientFull]}" />
+                        <Label DockPanel.Dock="Top">Message</Label>
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockError}" Visibility="{Binding Messages.IsMapiMessage, Converter={cv:BooleanToVisibilityConverter}, Mode=OneWay}">
+                            The message contents can't be displayed here. This message is a direct reference to the item stored in the Outlook message store.
+                            Double click the row to open the message
+                        </TextBlock>
+                        <TextBox 
+                            DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" 
+                            Visibility="{Binding Messages.IsMapiMessage, Converter={cv:BooleanToVisibilityConverter}, ConverterParameter={StaticResource BooleanFalseToVisibility}, Mode=OneWay}" 
+                            Text="{Binding Messages.MessageText, Mode=OneWay}" />
+                    </DockPanel>
+
+
+                </DockPanel>
+            </TabItem>
+
+
+
+        </TabControl.Items>
+    </con:TabControlExtended>
+</UserControl>

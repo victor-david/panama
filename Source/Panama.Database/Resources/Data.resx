@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Author" xml:space="preserve">
+    <value>INSERT INTO "author" ("id", "name", "isdefault") VALUES (1, 'Your Author Name', 1);</value>
+    <comment>SQL to create the standard data for the author table</comment>
+  </data>
+  <data name="Config" xml:space="preserve">
+    <value>INSERT INTO "config"  VALUES ('AutoSwitchToSubmission', 'Create if necessary and switch to the submission tab when creating a submission', 'bool', '1', 1);
+INSERT INTO "config"  VALUES ('ColorPeriodPublisher', 'Color used to show publishers in submission period', 'color', '#FF008000', 1);
+INSERT INTO "config"  VALUES ('ColorPublishedTitle', 'Color used to show published titles', 'color', '#FF00FF00', 1);
+INSERT INTO "config"  VALUES ('ColorSubmittedTitle', 'Color used to show submitted titles', 'color', '#FFFF0000', 1);
+INSERT INTO "config"  VALUES ('DateFormat', 'The format string used to display dates', 'string', 'MMM dd, yyyy', 1);
+INSERT INTO "config"  VALUES ('DefaultBrowser', 'The browser to use when opening a link', 'browser', '', 0);
+INSERT INTO "config"  VALUES ('FolderExport', 'Folder to place documents for the export operation', 'path', NULL, 1);
+INSERT INTO "config"  VALUES ('FolderMapi', 'The Outlook folder that contains submission messages', 'mapi', NULL, 1);
+INSERT INTO "config"  VALUES ('FolderSubmissionDocument', 'The folder for submission documents', 'path', NULL, 1);
+INSERT INTO "config"  VALUES ('FolderSubmissionMessageAttachment', 'Folder where submission message attachments are saved', 'path', NULL, 1);
+INSERT INTO "config"  VALUES ('FolderTitle', 'The default folder for selecting a title version document', 'path', NULL, 1);
+INSERT INTO "config"  VALUES ('FolderTitleRoot', 'Root folder of title documents', 'path', NULL, 1);
+INSERT INTO "config"  VALUES ('LeftColumnPublisher', 'The left column width for publisher view', 'int', '684', 0);
+INSERT INTO "config"  VALUES ('LeftColumnSubmission', 'The left column width for submission view', 'int', '684', 0);
+INSERT INTO "config"  VALUES ('LeftColumnTable', 'The left column width for table view', 'int', '684', 0);
+INSERT INTO "config"  VALUES ('LeftColumnTitle', 'The left column width for title view', 'int', '684', 0);
+INSERT INTO "config"  VALUES ('MainWindowHeight', 'The height of the main window', 'int', '840', 0);
+INSERT INTO "config"  VALUES ('MainWindowState', 'The state of the main window. 0=normal, 1=min,2-max', 'int', '0', 0);
+INSERT INTO "config"  VALUES ('MainWindowWidth', 'The width of the main window', 'int', '1420', 0);
+INSERT INTO "config"  VALUES ('OpsConfig', 'Toolbar, status bar, etc. A bit-mapped value', 'int', '348807', 0);
+INSERT INTO "config"  VALUES ('OpsStartup', 'The startup options. A bit-mapped value.', 'int', '577', 0);
+INSERT INTO "config"  VALUES ('OpsToolbar', 'Options to display toolbar buttons. A bit-mapped value', 'int', '5114', 0);
+INSERT INTO "config"  VALUES ('PublisherFilter', 'The publisher filter object', 'object', NULL, 0);
+INSERT INTO "config"  VALUES ('SubDocumentAuthor', 'The author name placed in a new submission document', 'string', NULL, 1);
+INSERT INTO "config"  VALUES ('SubDocumentCompany', 'The company name inserted into a new submission document', 'string', NULL, 1);
+INSERT INTO "config"  VALUES ('SubDocumentFooter', 'The footer template for creating a new document', 'string', 'Submissions to [publisher] - [author] - [month], [year]', 1);
+INSERT INTO "config"  VALUES ('SubDocumentFooterPages', 'Add page # in the footer when creating a submission document', 'bool', '1', 1);
+INSERT INTO "config"  VALUES ('SubDocumentHeader', 'The header template for creating a new document', 'string', NULL, 1);
+INSERT INTO "config"  VALUES ('SubDocumentHeaderPages', 'Add page # in the header when creating a submission document', 'bool', '1', 1);
+INSERT INTO "config"  VALUES ('SubDocumentText', 'Text inserted into a new submission document', 'mstring', NULL, 1);
+INSERT INTO "config"  VALUES ('SyncDocumentInternalDates', 'During a meta-data update operation, updates document internal dates (created, modified) to be consistent with the title written date and the file system modified date, respectively. This only works on Open Xml documents.', 'bool', '0', 1);
+INSERT INTO "config"  VALUES ('TitleFilter', 'The title filter object', 'object', NULL, 0);</value>
+    <comment>SQL to create the standard data for the config table</comment>
+  </data>
+  <data name="DocumentType" xml:space="preserve">
+    <value>INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (0, 'Unknown', NULL, 100, 0);
+INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (1, 'Word Document (OpenXml)', '.docx', 1, 1);
+INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (2, 'Word Document (Old)', '.doc;.rtf', 2, 1);
+INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (3, 'Pdf Document', '.pdf', 3, 1);
+INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (4, 'Text Document', '.txt', 4, 1);
+INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (5, 'Outlook Message', '.msg', 7, 1);
+INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (6, 'Outlook Message (Direct Reference)', NULL, 100, 0);
+INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (7, 'Outlook Folder (Direct Reference)', NULL, 100, 0);
+INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (8, 'Audio', '.mp3', 6, 1);
+INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (9, 'Html', '.html;.htm', 5, 1);</value>
+    <comment>SQL to create the standard data for the documenttype table</comment>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>INSERT INTO "language" ("id", "name") VALUES ('en-us', 'English (US)');
+INSERT INTO "language" ("id", "name") VALUES ('es-mx', 'Spanish (Mexico)');</value>
+    <comment>SQL to create the standard data for the language table</comment>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>INSERT INTO "response" ("id", "name", "description") VALUES (0, NULL, 'None. The submission has not yet received a response.');
+INSERT INTO "response" ("id", "name", "description") VALUES (1, '(not specified)', 'Not Specified. The response type has not been specified.');
+INSERT INTO "response" ("id", "name", "description") VALUES (2, 'BFN', 'Form Rejection. Standard BFN note. No personalization. No encouragement.');
+INSERT INTO "response" ("id", "name", "description") VALUES (3, 'Try Again', 'A rejection with at least a hint of encouragement to submit again.');
+INSERT INTO "response" ("id", "name", "description") VALUES (4, 'Personal Note', 'Received a personal note.');
+INSERT INTO "response" ("id", "name", "description") VALUES (10, 'General Blast', 'Sent a general email announcing new issue / contest winners, or just posted on web site.');
+INSERT INTO "response" ("id", "name", "description") VALUES (11, 'Flakey', 'Flakey. Didn''t respond at all.');
+INSERT INTO "response" ("id", "name", "description") VALUES (255, 'Accepted', 'Acceptance of one or more pieces in the submission.');</value>
+    <comment>SQL to create the standard data for the response table</comment>
+  </data>
+  <data name="Schema" xml:space="preserve">
+    <value>INSERT INTO "schema" ("id", "version", "ts") VALUES (1, 100, '2017-02-01 00:00:00');</value>
+    <comment>SQL to create the standard data for the schema table</comment>
+  </data>
+</root>

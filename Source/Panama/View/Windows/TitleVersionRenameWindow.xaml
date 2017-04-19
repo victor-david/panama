@@ -1,0 +1,38 @@
+﻿<Window 
+    x:Class="Restless.App.Panama.View.TitleVersionRenameWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:Restless.App.Panama.View"
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    Height="280" Width="960" ShowInTaskbar="False" ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <ResourceDictionary Source="../../Resources/Windows.xaml" />
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="{StaticResource GridRowHeightTool}" />
+        </Grid.RowDefinitions>
+        <!-- Main data grid to display the tabular data  -->
+        <con:DataGridExtended 
+            Grid.Column="0" Grid.Row="0" 
+            ItemsSource="{Binding Path=MainSource.View}"
+            SelectedItem="{Binding SelectedItem}"
+            con:DataGridColumns.Columns="{Binding Columns}"/>
+        <StackPanel Grid.Column="0" Grid.Row="1" Style="{StaticResource StackPanelCommandHolder}">
+            <Button Command="{Binding RawCommands[Rename]}">Rename</Button>
+            <Button Command="{Binding RawCommands[Close]}">Close</Button>
+            <TextBlock Style="{StaticResource TextBlockError}" Text="{Binding OperationMessage}"/>
+        </StackPanel>
+        
+        
+
+
+    </Grid>
+</Window>

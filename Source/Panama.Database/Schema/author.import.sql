@@ -1,0 +1,1 @@
+INSERT INTO "author" ("id", "name", "isdefault") VALUES (1, 'Your Author Name', 1);

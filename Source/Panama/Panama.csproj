@@ -1,0 +1,801 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{027477DC-4D9D-4E37-A282-60B19898E797}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Restless.App.Panama</RootNamespace>
+    <AssemblyName>Panama</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.Main.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Panama.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugType>full</DebugType>
+    <DefineConstants>DEBUG</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;DOCX</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <DocumentationFile>bin\x86\Release\Panama.XML</DocumentationFile>
+    <DefineConstants>DOCX</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\..\Reference Assemblies\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\..\Reference Assemblies\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\..\Reference Assemblies\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Collections\TagCommandViewModelCollection.cs" />
+    <Compile Include="Collections\DataRowCacheDictionary.cs" />
+    <Compile Include="Config\Config.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\GridRowDisplay\GridRowDisplay.xaml.cs">
+      <DependentUpon>GridRowDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityMultiConverterOptions.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverterOptions.cs" />
+    <Compile Include="Converters\StringToMaskedStringConverter.cs" />
+    <Compile Include="Converters\TriggerToBrushOptions.cs" />
+    <Compile Include="Filter\FilterBase.cs" />
+    <Compile Include="Filter\PublisherFilter.cs" />
+    <Compile Include="Filter\FilterState.cs" />
+    <Compile Include="Config\SubmissionDocumentOptions.cs" />
+    <Compile Include="Config\Paths.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Filter\TagFilterCombine.cs" />
+    <Compile Include="Filter\TitleFilter.cs" />
+    <Compile Include="Controls\Calendar\CalendarExtended.cs" />
+    <Compile Include="Controls\DataGrid\DataGridColumnSortSpec.cs" />
+    <Compile Include="Controls\DataGrid\DataGridCustomSortBehavior.cs" />
+    <Compile Include="Controls\DataGrid\DataGridExtended.cs" />
+    <Compile Include="Controls\TabControl\TabItemDragDrop.cs" />
+    <Compile Include="Converters\BooleanToBooleanMultiConverter.cs" />
+    <Compile Include="Converters\BooleanToIntegerConverter.cs" />
+    <Compile Include="Converters\BooleanToSelectionModeConverter.cs" />
+    <Compile Include="Converters\DateToFormattedDateConverter.cs" />
+    <Compile Include="Converters\StringToCleanStringOptions.cs" />
+    <Compile Include="Converters\SubtractionConverter.cs" />
+    <Compile Include="Other\ApplicationInfo.cs" />
+    <Compile Include="Other\TitleVersionRenameItem.cs" />
+    <Compile Include="Other\DocumentPreviewer.cs" />
+    <Compile Include="Other\NotifyPropertyChangedBase.cs" />
+    <Compile Include="Other\CommonDialogFactory.cs" />
+    <Compile Include="Config\RegistrySettings.cs" />
+    <Compile Include="Other\MessageSelectMode.cs" />
+    <Compile Include="Other\FixedWidth.cs" />
+    <Compile Include="Other\MessageSelectOptions.cs" />
+    <Compile Include="Other\RelayCommand.cs" />
+    <Compile Include="Other\CommandSupported.cs" />
+    <Compile Include="Other\TitleVersionRenameItemCollection.cs" />
+    <Compile Include="Other\WindowFactory.cs" />
+    <Compile Include="Startup\StartupOptions.cs" />
+    <Compile Include="Tools\Convert\ConversionCompletedEventArgs.cs" />
+    <Compile Include="Tools\Convert\DocumentConverter.cs" />
+    <Compile Include="Tools\Convert\DocumentConversionCandidate.cs" />
+    <Compile Include="Tools\FileScanBase.cs" />
+    <Compile Include="Tools\FileScanDisplayObject.cs" />
+    <Compile Include="Tools\Export\TitleExporter.cs" />
+    <Compile Include="Tools\Export\TitleExportStatus.cs" />
+    <Compile Include="Tools\Export\TitleExportCandidate.cs" />
+    <Compile Include="Tools\Export\TitleExportTitleList.cs" />
+    <Compile Include="Tools\FolderStatistics\FolderStatisticItem.cs" />
+    <Compile Include="Tools\List\TitleLister.cs" />
+    <Compile Include="Tools\FileScanEventArgs.cs" />
+    <Compile Include="Tools\Orphan\OrphanFinder.cs" />
+    <Compile Include="Tools\Submission\SubmissionUpdater.cs" />
+    <Compile Include="Tools\Version\VersionUpdater.cs" />
+    <Compile Include="ViewModel\Controllers\CredentialPublisherController.cs" />
+    <Compile Include="ViewModel\Controllers\ToolTitleListController.cs" />
+    <Compile Include="ViewModel\Controllers\ToolOrphanFinderController.cs" />
+    <Compile Include="ViewModel\Controllers\PublisherSubmissionTitleController.cs" />
+    <Compile Include="ViewModel\Controllers\PublisherSubmissionController.cs" />
+    <Compile Include="ViewModel\Controllers\PublisherController.cs" />
+    <Compile Include="ViewModel\Controllers\PublisherFilterController.cs" />
+    <Compile Include="ViewModel\Controllers\PublisherPeriodController.cs" />
+    <Compile Include="ViewModel\Controllers\TitleLatestVersionController.cs" />
+    <Compile Include="ViewModel\Controllers\TitlePublishedController.cs" />
+    <Compile Include="ViewModel\Controllers\ToolExportTitleController.cs" />
+    <Compile Include="ViewModel\Controllers\ToolSubmissionDocumentController.cs" />
+    <Compile Include="ViewModel\Controllers\ToolTitleVersionController.cs" />
+    <Compile Include="Controls\TabControl\TabControlExtended.cs" />
+    <Compile Include="Controls\DataGrid\DataGridColumnCollection.cs" />
+    <Compile Include="Controls\DataGrid\DataGridColumnExtensions.cs" />
+    <Compile Include="Collections\MenuItemCollection.cs" />
+    <Compile Include="Collections\RawCommandDictionary.cs" />
+    <Compile Include="Converters\DatesToDayDiffConverter.cs" />
+    <Compile Include="Converters\ValueToBooleanConverter.cs" />
+    <Compile Include="Converters\TriggerToBrushConverter.cs" />
+    <Compile Include="Converters\IntegerToVisibilityConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityMultiConverter.cs" />
+    <Compile Include="Converters\ValueToDebugConverter.cs" />
+    <Compile Include="Converters\IntegerToImageConverter.cs" />
+    <Compile Include="Converters\StringToCleanStringConverter.cs" />
+    <Compile Include="Converters\BooleanToImageConverter.cs" />
+    <Compile Include="Other\TagCache.cs" />
+    <Compile Include="Other\TagCacheDictionary.cs" />
+    <Compile Include="Other\TitleStyleSelector.cs" />
+    <Compile Include="Resources\ResourceHelper.cs" />
+    <Compile Include="ViewModel\AuthorViewModel.cs" />
+    <Compile Include="ViewModel\Controllers\ControllerBase.cs" />
+    <Compile Include="ViewModel\Controllers\TableConstraintController.cs" />
+    <Compile Include="ViewModel\Controllers\TableRelationController.cs" />
+    <Compile Include="ViewModel\Controllers\TableChildRelationController.cs" />
+    <Compile Include="ViewModel\Controllers\TableParentRelationController.cs" />
+    <Compile Include="ViewModel\Controllers\TableColumnController.cs" />
+    <Compile Include="ViewModel\Controllers\SubmissionSubmittedController.cs" />
+    <Compile Include="ViewModel\Controllers\TitleFilterController.cs" />
+    <Compile Include="ViewModel\Controllers\TitleAddToSubmissionController.cs" />
+    <Compile Include="ViewModel\Controllers\SubmissionResponseController.cs" />
+    <Compile Include="ViewModel\Controllers\TitleSubmissionController.cs" />
+    <Compile Include="ViewModel\Controllers\SubmissionMessageController.cs" />
+    <Compile Include="ViewModel\Controllers\SubmissionDocumentController.cs" />
+    <Compile Include="ViewModel\Controllers\SubmissionTitleController.cs" />
+    <Compile Include="ViewModel\Controllers\SubmissionController.cs" />
+    <Compile Include="ViewModel\Controllers\TitleVersionController.cs" />
+    <Compile Include="ViewModel\Controllers\ToolControllerBase.cs" />
+    <Compile Include="ViewModel\CredentialViewModel.cs" />
+    <Compile Include="ViewModel\StatisticsViewModel.cs" />
+    <Compile Include="ViewModel\ToolConvertViewModel.cs" />
+    <Compile Include="ViewModel\ToolScrambleViewModel.cs" />
+    <Compile Include="ViewModel\ToolTitleListViewModel.cs" />
+    <Compile Include="ViewModel\DataGridViewModelBase.cs" />
+    <Compile Include="ViewModel\ToolSearchViewModel.cs" />
+    <Compile Include="ViewModel\ToolOrphanViewModel.cs" />
+    <Compile Include="ViewModel\ToolExportViewModel.cs" />
+    <Compile Include="ViewModel\UserNoteViewModel.cs" />
+    <Compile Include="ViewModel\Windows\AboutWindowViewModel.cs" />
+    <Compile Include="ViewModel\Windows\CommandToolsWindowViewModel.cs" />
+    <Compile Include="ViewModel\Windows\TitleVersionRenameWindowViewModel.cs" />
+    <Compile Include="ViewModel\Windows\MessageSelectWindowViewModel.cs" />
+    <Compile Include="ViewModel\Windows\SubmissionDocumentCreateType.cs" />
+    <Compile Include="ViewModel\Windows\SubmissionDocumentSelectWindowViewModel.cs" />
+    <Compile Include="ViewModel\Windows\WindowDataGridViewModel.cs" />
+    <Compile Include="ViewModel\Windows\PublisherSelectWindowViewModel.cs" />
+    <Compile Include="ViewModel\ToolMetaUpdateViewModel.cs" />
+    <Compile Include="ViewModel\LinkViewModel.cs" />
+    <Compile Include="ViewModel\TableViewModel.cs" />
+    <Compile Include="ViewModel\TagViewModel.cs" />
+    <Compile Include="ViewModel\TagCommandViewModel.cs" />
+    <Compile Include="ViewModel\SubmissionViewModel.cs" />
+    <Compile Include="ViewModel\Controllers\TitleController.cs" />
+    <Compile Include="ViewModel\Controllers\TitleTagController.cs" />
+    <Compile Include="ViewModel\Windows\WindowViewModel.cs" />
+    <Compile Include="View\AuthorView.xaml.cs">
+      <DependentUpon>AuthorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\KeyValueDisplay\KeyValueDisplay.xaml.cs">
+      <DependentUpon>KeyValueDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CredentialView.xaml.cs">
+      <DependentUpon>CredentialView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\CredentialEdit.xaml.cs">
+      <DependentUpon>CredentialEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StatisticsView.xaml.cs">
+      <DependentUpon>StatisticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToolConvertView.xaml.cs">
+      <DependentUpon>ToolConvertView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToolScrambleView.xaml.cs">
+      <DependentUpon>ToolScrambleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToolTitleListView.xaml.cs">
+      <DependentUpon>ToolTitleListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToolSearchView.xaml.cs">
+      <DependentUpon>ToolSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToolOrphanView.xaml.cs">
+      <DependentUpon>ToolOrphanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\PublisherFilter.xaml.cs">
+      <DependentUpon>PublisherFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\PublisherEditAddPeriod.xaml.cs">
+      <DependentUpon>PublisherEditAddPeriod.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\PublisherEditWithTab.xaml.cs">
+      <DependentUpon>PublisherEditWithTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\UserNoteEdit.xaml.cs">
+      <DependentUpon>UserNoteEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserNoteView.xaml.cs">
+      <DependentUpon>UserNoteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\TitleEditPublished.xaml.cs">
+      <DependentUpon>TitleEditPublished.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\SubmissionEditWithTab.xaml.cs">
+      <DependentUpon>SubmissionEditWithTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\TitleEditWithTab.xaml.cs">
+      <DependentUpon>TitleEditWithTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\LinkEdit.xaml.cs">
+      <DependentUpon>LinkEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToolExportView.xaml.cs">
+      <DependentUpon>ToolExportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToolMetaUpdateView.xaml.cs">
+      <DependentUpon>ToolMetaUpdateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LinkView.xaml.cs">
+      <DependentUpon>LinkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\TableDetail.xaml.cs">
+      <DependentUpon>TableDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TableView.xaml.cs">
+      <DependentUpon>TableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\TagEdit.xaml.cs">
+      <DependentUpon>TagEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\TitleFilter.xaml.cs">
+      <DependentUpon>TitleFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TagView.xaml.cs">
+      <DependentUpon>TagView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\AuthorEdit.xaml.cs">
+      <DependentUpon>AuthorEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\SimpleRowFilter.xaml.cs">
+      <DependentUpon>SimpleRowFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\SubmissionEdit.xaml.cs">
+      <DependentUpon>SubmissionEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\TitleEditAddToSubmission.xaml.cs">
+      <DependentUpon>TitleEditAddToSubmission.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\TitleEditVersion.xaml.cs">
+      <DependentUpon>TitleEditVersion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SubmissionView.xaml.cs">
+      <DependentUpon>SubmissionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\ConfigEdit.xaml.cs">
+      <DependentUpon>ConfigEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\PublisherEdit.xaml.cs">
+      <DependentUpon>PublisherEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\TitleEdit.xaml.cs">
+      <DependentUpon>TitleEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\CommandToolsWindow.xaml.cs">
+      <DependentUpon>CommandToolsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\TitleVersionRenameWindow.xaml.cs">
+      <DependentUpon>TitleVersionRenameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\MessageSelectWindow.xaml.cs">
+      <DependentUpon>MessageSelectWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\PublisherSelectWindow.xaml.cs">
+      <DependentUpon>PublisherSelectWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\SubmissionDocumentSelectWindow.xaml.cs">
+      <DependentUpon>SubmissionDocumentSelectWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\WorkspaceWindow.xaml.cs">
+      <DependentUpon>WorkspaceWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\GridRowDisplay\GridRowDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Controls.2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\WorkspaceTemplateMapping.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Windows.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Values.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\App.Brushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Controls.1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\App.Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Main.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Merged.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Templates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\App.Controls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AuthorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\KeyValueDisplay\KeyValueDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CredentialView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\CredentialEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\StatisticsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ToolConvertView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ToolScrambleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ToolTitleListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ToolSearchView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ToolOrphanView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\PublisherFilter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\PublisherEditAddPeriod.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditControls\PublisherEditWithTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\UserNoteEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\UserNoteView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\TitleEditPublished.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\SubmissionEditWithTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\TitleEditWithTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\LinkEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ToolExportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ToolMetaUpdateView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LinkView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\TableDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TableView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\TagEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\TitleFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TagView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\AuthorEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\SimpleRowFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditControls\SubmissionEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\TitleEditAddToSubmission.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditControls\TitleEditVersion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SubmissionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\ConfigEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditControls\PublisherEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditControls\TitleEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PublisherView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ConfigView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TitleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\CommandToolsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\TitleVersionRenameWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\MessageSelectWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="View\Windows\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\BooleanToTextWrappingConverter.cs" />
+    <Compile Include="Converters\StringToDateConverter.cs" />
+    <Compile Include="Other\AppTaskId.cs" />
+    <Compile Include="Controls\DataGrid\DataGridColumns.cs" />
+    <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
+    <Compile Include="Validation\StringToIntValidationRule.cs" />
+    <Compile Include="ViewModel\VisualCommandViewModel.cs" />
+    <Compile Include="ViewModel\DataGridViewModel.cs" />
+    <Compile Include="ViewModel\PublisherViewModel.cs" />
+    <Compile Include="ViewModel\ConfigViewModel.cs" />
+    <Compile Include="ViewModel\TitleViewModel.cs" />
+    <Compile Include="ViewModel\Windows\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\WorkspaceViewModel.cs" />
+    <Compile Include="View\PublisherView.xaml.cs">
+      <DependentUpon>PublisherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ConfigView.xaml.cs">
+      <DependentUpon>ConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TitleView.xaml.cs">
+      <DependentUpon>TitleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\Windows\PublisherSelectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\SubmissionDocumentSelectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\WorkspaceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Resources\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <AppDesigner Include="Properties\" />
+    <None Include="Panama.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Database.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Information.48.png" />
+    <Resource Include="Resources\Images\Image.Config.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Restless.Tools.Library.OfficeAutomation\Source\Restless.Tools.Library.OfficeAutomation.csproj">
+      <Project>{6DB76CAD-D35A-4BDF-9A01-DD0DB96C4019}</Project>
+      <Name>Restless.Tools.Library.OfficeAutomation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Restless.Tools.Library\Source\Restless.Tools.Library.csproj">
+      <Project>{9A112D3A-717C-4387-A831-F0077C6CC437}</Project>
+      <Name>Restless.Tools.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Panama.Database\Panama.Database.csproj">
+      <Project>{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}</Project>
+      <Name>Panama.Database</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Book.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Publisher.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Close.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Save.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Calendar.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Check.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Folder.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Add.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Undo.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Send.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Chevron.Left.48.png" />
+    <Resource Include="Resources\Images\Image.Chevron.Right.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Delete.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.User.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.FileType.Pdf.48.png" />
+    <Resource Include="Resources\Images\Image.FileType.Text.48.png" />
+    <Resource Include="Resources\Images\Image.FileType.Unknown.48.png" />
+    <Resource Include="Resources\Images\Image.FileType.Word.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.FileType.Outlook.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.FileType.Audio.48.png" />
+    <Resource Include="Resources\Images\Image.FileType.Html.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Arrow.Down.48.png" />
+    <Resource Include="Resources\Images\Image.Arrow.Left.48.png" />
+    <Resource Include="Resources\Images\Image.Arrow.Right.48.png" />
+    <Resource Include="Resources\Images\Image.Arrow.Up.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Tag.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Refresh.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Accepted.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Filter.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Note.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon.Main.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Dot.Blue.32.png" />
+    <Resource Include="Resources\Images\Image.Dot.Green.32.png" />
+    <Resource Include="Resources\Images\Image.Dot.Red.32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Tool.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Money.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Tool.Export.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Search.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Orphan.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.OpenFile.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Reference.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ProjectNotes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Convert.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Statistics.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Table.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DevelopmentRoot.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>copy "$(SolutionDir)..\Reference Assemblies\SQLite\$(PlatformName)\SQLite.Interop.dll" $(TargetDir)</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

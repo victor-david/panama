@@ -1,0 +1,11 @@
+INSERT INTO "credential" ("id", "name", "loginid", "password") VALUES (1, 'Submishmash (Universal)', 'vds', 'cats47');
+INSERT INTO "credential" ("id", "name", "loginid", "password") VALUES (2, '99 Poets (Standard)', '99poets@VictorDavid.com', 'cats47');
+INSERT INTO "credential" ("id", "name", "loginid", "password") VALUES (3, '99 Poets (Extended)', '99poets@VictorDavid.com', 'cats4747');
+INSERT INTO "credential" ("id", "name", "loginid", "password") VALUES (4, '2009 (old credentials)', 'poetry2009@victordavidsandiego.com', 'cats47');
+INSERT INTO "credential" ("id", "name", "loginid", "password") VALUES (5, 'Funky Arvon', '99poets@victordavidsandiego.com', '57peace');
+INSERT INTO "credential" ("id", "name", "loginid", "password") VALUES (6, 'Funky Bridport', '99poets@victordavid.com', 'tr57women');
+INSERT INTO "credential" ("id", "name", "loginid", "password") VALUES (7, 'Smashwords', 'smashw@balticsoap.com', 'KitesSwimBlue54');
+INSERT INTO "credential" ("id", "name", "loginid", "password") VALUES (8, 'Tell It Slant', 'vds', 'zx99poets');
+INSERT INTO "credential" ("id", "name", "loginid", "password") VALUES (9, 'Duotrope', 'duotrope@VictorDavid.com', 'longCat99');
+INSERT INTO "credential" ("id", "name", "loginid", "password") VALUES (10, 'Victor.David', 'victor.david', 'HouseCat37.7');
+INSERT INTO "credential" ("id", "name", "loginid", "password") VALUES (11, 'Poets & Writers', 'victor.david', 'E9*34$saPT3.5#');

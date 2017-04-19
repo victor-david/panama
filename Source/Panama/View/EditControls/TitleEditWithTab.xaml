@@ -1,0 +1,80 @@
+﻿<UserControl 
+    x:Class="Restless.App.Panama.View.TitleEditWithTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:view="clr-namespace:Restless.App.Panama.View"
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    mc:Ignorable="d" 
+    d:DesignHeight="500" d:DesignWidth="350">
+    <Control.Resources>
+        <ResourceDictionary Source="../../Resources/Merged.xaml" />
+    </Control.Resources>
+    <con:TabControlExtended SelectedIndex="{Binding SelectedTabIndex,Mode=OneWayToSource}">
+        <TabControl.Items>
+            <TabItem Header="Title data">
+                <StackPanel>
+                    <StackPanel Style="{StaticResource StackPanelCommandHolder}">
+                        <Label>Title</Label>
+                        <Label>
+                            <Hyperlink Command="{Binding RawCommands[ExtractTitle]}">Extract from latest version</Hyperlink>
+                        </Label>
+                    </StackPanel>
+                    <TextBox Text="{Binding SelectedRow[title]}" />
+                    
+                    <!-- Don't need a stack panel for one item, but we'll leave it in case we have more -->
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding SelectedRow[ready]}">Ready</CheckBox>
+                    </StackPanel>
+
+                    <Expander Header="{Binding WrittenHeader}" IsExpanded="False">
+                        <con:CalendarExtended SelectedDate="{Binding WrittenDate}" DisplayDate="{Binding WrittenDisplayDate,Mode=OneWay}" HorizontalAlignment="Left" />
+                    </Expander>
+
+                    <Expander Header="Current Tags" IsExpanded="True">
+                        <StackPanel>
+                            <Label Visibility="{Binding Tags.HasZeroTags,Converter={cv:BooleanToVisibilityConverter}}">(none)</Label>
+                            <ItemsControl Style="{StaticResource ICTagItems}" ItemsSource="{Binding Tags.Current}" />
+                        </StackPanel>
+                    </Expander>
+
+                    <Expander Header="Available Tags" IsExpanded="True">
+                        <ItemsControl Style="{StaticResource ICTagItems}" ItemsSource="{Binding Tags.Available}" />
+                    </Expander>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="{Binding Versions.Header}">
+                <view:TitleEditVersion Margin="-3,-3,0,-3" />
+            </TabItem>
+            <TabItem Header="{Binding Submissions.Header}">
+                <StackPanel>
+                    <DataGrid 
+                        Style="{StaticResource DataGridEdit}" 
+                        ItemsSource="{Binding Path=Submissions.DataView}" 
+                        con:DataGridColumns.Columns="{Binding Submissions.Columns}"
+                        CanUserSortColumns="False"
+                        CanUserReorderColumns="False" />
+                    <Label>
+                        <Hyperlink Command="{Binding RawCommands[AddTitleToSubmission]}">Add this title to a submission</Hyperlink>
+                    </Label>
+                    <!-- Control to add title to submission -->
+                    <view:TitleEditAddToSubmission/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="{Binding Published.Header}">
+                <view:TitleEditPublished/>
+            </TabItem>
+            <TabItem Header="Preview">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockMessage}" Margin="0,2">Text of the latest version of this title</TextBlock>
+                    <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockError}" Margin="8" VerticalAlignment="Top" Visibility="{Binding IsOpenXml,Converter={cv:BooleanToVisibilityConverter},ConverterParameter={StaticResource BooleanFalseToVisibility}}">
+                        The text for the latest version of this title cannot be displayed. Only Open Xml documents are supported.
+                    </TextBlock>                  
+                    <TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Margin="4,8" Text="{Binding PreviewText,Mode=OneWay}" Visibility="{Binding IsOpenXml,Converter={cv:BooleanToVisibilityConverter}}"/>
+                </DockPanel>
+            </TabItem>
+        </TabControl.Items>
+    </con:TabControlExtended>
+</UserControl>

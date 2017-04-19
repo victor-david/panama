@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RestlessAnimal.Applications.Panama.Database</RootNamespace>
+    <AssemblyName>Panama.Database</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;ANYCPU</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;ANYCPU</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Panama.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DocumentationFile>bin\x86\Release\Panama.Database.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.SQLite, Version=1.0.104.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Reference Assemblies\SQLite\x86\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Database\IColumnRowImporter.cs" />
+    <Compile Include="Database\DatabaseImporter.cs" />
+    <Compile Include="Database\Tables\DummyTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\PublisherTableStats.cs" />
+    <Compile Include="Database\Tables\SubmissionBatchTableStats.cs" />
+    <Compile Include="Database\Tables\TitleVersionTableStats.cs" />
+    <Compile Include="Database\Tables\ConfigTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\AuthorTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\SubmissionPeriodTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\TableTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\DocumentTypeTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\SubmissionMessageAttachmentTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\SubmissionMessageTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\UserNoteTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\TitleVersionTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\SubmissionDocumentTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\ResponseTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\PublishedTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\SubmissionBatchTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\SubmissionTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\LinkTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\LanguageTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\CredentialTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\TitleTagTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\TagTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\PublisherTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\DatabaseController.cs" />
+    <Compile Include="Database\Tables\SchemaTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Database\Tables\TitleTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Create.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Create.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Data.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Data.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Panama.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Schema\author.ddl.sql" />
+    <Content Include="Schema\author.import.sql" />
+    <Content Include="Schema\config.ddl.sql" />
+    <Content Include="Schema\config.import.sql" />
+    <Content Include="Schema\documenttype.import.sql" />
+    <Content Include="Schema\documenttype.ddl.sql" />
+    <Content Include="Schema\credential.ddl.sql" />
+    <Content Include="Schema\language.ddl.sql" />
+    <Content Include="Schema\language.import.sql" />
+    <Content Include="Schema\link.ddl.sql" />
+    <Content Include="Schema\published.ddl.sql" />
+    <Content Include="Schema\publisher.ddl.sql" />
+    <Content Include="Schema\response.ddl.sql" />
+    <Content Include="Schema\response.import.sql" />
+    <Content Include="Schema\schema.ddl.sql" />
+    <Content Include="Schema\schema.import.sql" />
+    <Content Include="Schema\submission.ddl.sql" />
+    <Content Include="Schema\submissionbatch.ddl.sql" />
+    <Content Include="Schema\submissiondocument.ddl.sql" />
+    <Content Include="Schema\submissionmessage.ddl.sql" />
+    <Content Include="Schema\submissionmessageattachment.ddl.sql" />
+    <Content Include="Schema\submissionperiod.ddl.sql" />
+    <Content Include="Schema\tag.ddl.sql" />
+    <Content Include="Schema\title.ddl.sql" />
+    <Content Include="Schema\titletag.ddl.sql" />
+    <Content Include="Schema\titleversion.ddl.sql" />
+    <Content Include="Schema\usernote.ddl.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Create.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Create.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Data.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Data.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Restless.Tools.Library\Source\Restless.Tools.Library.csproj">
+      <Project>{9A112D3A-717C-4387-A831-F0077C6CC437}</Project>
+      <Name>Restless.Tools.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

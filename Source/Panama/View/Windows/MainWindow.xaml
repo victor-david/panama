@@ -1,0 +1,86 @@
+﻿<Window x:Class="Restless.App.Panama.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        d:DesignHeight="300" d:DesignWidth="610"
+        mc:Ignorable="d" 
+        Title="{Binding Path=DisplayName}" 
+        FontFamily="Verdana"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/WorkspaceTemplateMapping.xaml" />
+                <ResourceDictionary Source="../../Resources/Main.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" KeyboardNavigation.TabNavigation="None">
+            <Menu KeyboardNavigation.TabNavigation="Cycle">
+                <MenuItem Header="_File">
+                    <MenuItem Header="Save" Icon="{StaticResource ImageSaveMenu}" Command="{Binding RawCommands[Save]}" />
+                    <MenuItem Header="Close all tabs" Command="{Binding RawCommands[CloseAll]}"/>
+                    <Separator />
+                    <MenuItem Header="E_xit" Icon="{StaticResource ImageCloseMenu}" Command="{Binding RawCommands[Close]}" />
+                </MenuItem>
+                <MenuItem Header="_Settings">
+                    <MenuItem Header="Authors" Icon="{StaticResource ImageUserMenu}" Command="{Binding RawCommands[Author]}" />
+                    <MenuItem Header="Tags" Icon="{StaticResource ImageTagMenu}" Command="{Binding RawCommands[Tag]}"/>
+                    <MenuItem Header="Credentials" Icon="{StaticResource ImageCredentialMenu}" Command="{Binding RawCommands[Credential]}"/>
+                    <Separator />
+                    <MenuItem Header="Settings" Icon="{StaticResource ImageConfigMenu}" Command="{Binding RawCommands[Config]}" />
+                </MenuItem>
+                <MenuItem Header="_Other">
+                    <MenuItem Header="Notes" Icon="{StaticResource ImageNoteMenu}" Command="{Binding RawCommands[Note]}"/>
+                    <MenuItem Header="Links" Icon="{StaticResource ImageLinkMenu}" Command="{Binding RawCommands[Link]}"/>
+                    <Separator/>
+                    <MenuItem Header="Statistics" Icon="{StaticResource ImageStatisticsMenu}" Command="{Binding RawCommands[Statistics]}"/>
+                    <MenuItem Header="Table Info" Icon="{StaticResource ImageDatabaseMenu}" Command="{Binding RawCommands[Table]}"/>
+                </MenuItem>
+                <MenuItem Header="_Tools">
+                    <MenuItem Header="Update Meta" Icon="{StaticResource ImageToolMetaMenu}" Command="{Binding RawCommands[ToolMeta]}"/>
+                    <MenuItem Header="Export" Icon="{StaticResource ImageToolExportMenu}" Command="{Binding RawCommands[ToolExport]}"/>
+                    <MenuItem Header="Title List" Icon="{StaticResource ImageToolTitleListMenu}" Command="{Binding RawCommands[ToolTitleList]}"/>
+                    <Separator/>
+                    <MenuItem Header="Find Orphans" Icon="{StaticResource ImageToolOrphanMenu}" Command="{Binding RawCommands[ToolOrphan]}"/>
+                    <MenuItem Header="Search" Icon="{StaticResource ImageToolSearchMenu}" Command="{Binding RawCommands[ToolSearch]}"/>
+                    <MenuItem Header="Convert" Icon="{StaticResource ImageToolConvertMenu}" Command="{Binding RawCommands[ToolConvert]}"/>
+                    <Separator/>
+                    <MenuItem Header="Scramble" Command="{Binding RawCommands[ToolScramble]}"/>
+                    <Separator/>
+                    <MenuItem Header="Reset window" Icon="{StaticResource ImageUndoMenu}" Command="{Binding RawCommands[ResetWindow]}" ToolTip="Reset the main window size to default"/>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="Reference" Icon="{StaticResource ImageReferenceMenu}" Command="{Binding RawCommands[Reference]}"/>
+                    <Separator/>
+                    <MenuItem Header="About" Icon="{StaticResource ImageInformationMenu}" Command="{Binding RawCommands[About]}"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <!-- ItemsControl to hold the main toolbar button -->
+        <ItemsControl DockPanel.Dock="Top" Style="{StaticResource ICMenuItems}" ItemsSource="{Binding Path=VisualCommands}"/>
+        <Border DockPanel.Dock="Top" Style="{StaticResource MainBorderSeparator}" />
+
+        <Grid Margin="4" DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="24" />
+            </Grid.RowDefinitions>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock  Style="{StaticResource TextBlockOpener}" Text="{Binding AppInfo.Assembly.Title}" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="{StaticResource ImageDotBlue}" Style="{StaticResource ImageOpener}" />
+                    <Image Source="{StaticResource ImageDotRed}" Style="{StaticResource ImageOpener}" />
+                    <Image Source="{StaticResource ImageDotGreen}" Style="{StaticResource ImageOpener}" />
+                </StackPanel>
+            </StackPanel>
+            <ContentControl Content="{Binding Path=Workspaces}" ContentTemplate="{StaticResource WorkspacesTemplate}" />
+            <StatusBar Grid.Row="1">
+                <TextBlock Style="{StaticResource StatusBarNotificationMessage}"/>
+            </StatusBar>
+        </Grid>
+    </DockPanel>
+</Window>

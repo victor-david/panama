@@ -1,0 +1,33 @@
+﻿<UserControl 
+    x:Class="Restless.App.Panama.View.TitleEditAddToSubmission"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    mc:Ignorable="d" 
+    d:DesignHeight="217" d:DesignWidth="422">
+    <Control.Resources>
+        <ResourceDictionary Source="../../Resources/Merged.xaml" />
+    </Control.Resources>
+    <!-- -->
+    <StackPanel Visibility="{Binding Submissions.Available.Visible,Converter={cv:BooleanToVisibilityConverter}}">
+        <!-- Binds to Available.SourceCount. When greater than zero, will be visible  -->
+        <StackPanel Visibility="{Binding Submissions.Available.SourceCount,Converter={StaticResource IntegerToVisibilityConverter}}">
+            <Label>Select the submission to add this title to</Label>
+            <DataGrid Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Submissions.Available.DataView}" SelectedItem="{Binding Submissions.Available.SelectedItem}" con:DataGridColumns.Columns="{Binding Submissions.Available.Columns}"/>
+            <!-- StackPanel to hold our Confirm and Cancel buttons -->
+            <StackPanel Style="{StaticResource StackPanelCommandHolder}">
+                <Button Command="{Binding RawCommands[AddTitleToSubmissionConfirm]}">Add</Button>
+                <Button Command="{Binding RawCommands[AddTitleToSubmissionCancel]}">Cancel</Button>
+            </StackPanel>
+        </StackPanel>
+        <!-- Binds to AvailableCount. When zero, will be visible b/c converter uses R parameter-->
+        <Border Visibility="{Binding Submissions.Available.SourceCount,Converter={StaticResource IntegerToVisibilityConverter},ConverterParameter=R}">
+            <TextBlock Style="{StaticResource TextBlockError}" >
+                There are no submissions available for this operation. A submission must be unlocked and not yet have a response date.
+            </TextBlock>
+        </Border>
+    </StackPanel>
+</UserControl>

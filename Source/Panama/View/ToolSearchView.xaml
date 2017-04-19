@@ -1,0 +1,78 @@
+﻿<UserControl 
+    x:Class="Restless.App.Panama.View.ToolSearchView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    mc:Ignorable="d" 
+    d:DesignHeight="300" d:DesignWidth="600">
+    <Control.Resources>
+        <ResourceDictionary Source="../Resources/Merged.xaml" />
+    </Control.Resources>
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationSearch}"/>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" DockPanel.Dock="Top" Style="{StaticResource StackPanelCommandHolder}">
+                <Label>Search text</Label>
+                <TextBox Text="{Binding SearchText}"/>
+                <Button Command="{Binding RawCommands[Begin]}" Content="Search" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Button
+                Grid.Column="1"
+                Style="{StaticResource ToolBarButton}"
+                HorizontalAlignment="Left"
+                Command="{Binding RawCommands[TogglePreview]}"
+                Content="{StaticResource ImageChevronLeftTool}" />
+        </Grid>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <HeaderedContentControl 
+                Grid.Column="0" 
+                Grid.ColumnSpan="{Binding IsPreviewMode, Converter={cv:BooleanToIntegerConverter}, ConverterParameter={StaticResource Integer1}}"
+                Style="{StaticResource HCCTool}"
+                Header="{Binding FoundHeader}" Margin="4">
+                <Grid>
+                    <DataGrid x:Name="grid" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.RawCommands[OpenItem]}"/>
+                            </Style>
+                        </DataGrid.RowStyle>
+                    </DataGrid>
+                    <TextBlock 
+                        Style="{StaticResource TextBlockError}"
+                        FontSize="14"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="Search returned no results" 
+                        Visibility="{Binding IsEmptyResultSet,Converter={cv:BooleanToVisibilityConverter}}"
+                        />
+                </Grid>
+            </HeaderedContentControl>
+            <HeaderedContentControl
+                Grid.Column="1" Header="Preview" Margin="4"
+                Visibility="{Binding IsPreviewMode, Converter={cv:BooleanToVisibilityConverter}}">
+                <TextBox Style="{StaticResource TextBoxMultiFull}" Margin="0,4" Text="{Binding PreviewText, Mode=OneWay}"/>
+            </HeaderedContentControl>
+        </Grid>
+    </DockPanel>
+</UserControl>

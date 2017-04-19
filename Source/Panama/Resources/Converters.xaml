@@ -1,0 +1,26 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:swc="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+    xmlns:c="clr-namespace:Restless.App.Panama.Converters">
+
+    <!--<c:BooleanToImageConverter x:Key="BooleanToImageConverter" />-->
+
+    <!-- 
+    NOTE: Converters that are commented out have been modified to derive from MarkupExtension. 
+    They can be used directly without a static resource.
+    -->
+    <c:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <c:BooleanToBooleanMultiConverter x:Key="BooleanToBooleanMultiConverter" />
+    <!--<c:BooleanToIntegerConverter x:Key="BooleanToIntegerConverter"/>-->
+    <!--<c:BooleanToSelectionModeConverter x:Key="BooleanToSelectionModeConverter" />-->
+    <c:BooleanToTextWrappingConverter x:Key="BooleanToTextWrappingConverter" />
+    <c:DateToFormattedDateConverter x:Key="DateToFormattedDateConverter" />
+    <!--<c:ValueToBooleanConverter x:Key="ValueToBooleanConverter" />-->
+    <c:IntegerToVisibilityConverter x:Key="IntegerToVisibilityConverter" />
+    
+    <!--<c:StringToBooleanConverter x:Key="StringToBooleanConverter" />-->
+    <!--<c:TextInputToVisibilityConverter x:Key="TextInputToVisibilityConverter" />-->
+    <!--<c:TriggerToBrushConverter x:Key="TriggerToBrushConverter" />-->
+    <c:ValueToDebugConverter x:Key="ValueToDebugConverter"/>
+</ResourceDictionary>

@@ -1,0 +1,81 @@
+﻿<UserControl 
+    x:Class="Restless.App.Panama.View.TitleEditVersion"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
+    mc:Ignorable="d" 
+    d:DesignHeight="600" d:DesignWidth="554">
+    <Control.Resources>
+        <ResourceDictionary Source="../../Resources/Merged.xaml" />
+    </Control.Resources>
+    <StackPanel>
+        <con:DataGridExtended 
+            x:Name="grid" 
+            Style="{StaticResource DataGridEdit}"
+            CanUserSortColumns="False"
+            CanUserReorderColumns="False"
+            ItemsSource="{Binding Path=Versions.DataView}"
+            SelectedItem="{Binding Versions.SelectedItem}"
+            con:DataGridColumns.Columns="{Binding Versions.Columns}" 
+            ContextMenuOpeningCommand="{Binding Versions.RawCommands[ContextMenuOpening]}"  >
+            <DataGrid.ContextMenu>
+                <ContextMenu ItemsSource="{Binding Versions.MenuItems}"  />
+            </DataGrid.ContextMenu>            
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Versions.OpenRowCommand}"/>
+                </Style>
+            </DataGrid.RowStyle>
+        </con:DataGridExtended>
+        <ToolBarTray>
+            <ToolBar Style="{StaticResource ToolBarCommandHolder}">
+                <Button Command="{Binding Versions.RawCommands[VersionMoveUp]}" Content="{StaticResource ImageArrowUpTool}" ToolTip="Move the selected version up"/>
+                <Button Command="{Binding Versions.RawCommands[VersionMoveDown]}" Content="{StaticResource ImageArrowDownTool}" ToolTip="Move the selected version down"/>
+                <Separator/>
+                <Button Command="{Binding Versions.RawCommands[VersionAddByFile]}" ToolTip="Add a version by selecting an existing file">File</Button>
+                <Button Command="{Binding Versions.RawCommands[VersionReplace]}" ToolTip="Replace the selected version with another file">Replace</Button>
+                <Button Command="{Binding Versions.RawCommands[VersionRemove]}" ToolTip="Remove the selected version (does not affect the file system)">Remove</Button>
+                <Separator/>
+                <Button Command="{Binding Versions.RawCommands[VersionSync]}" ToolTip="Rename the version files in accordance with title, language id and version #">Sync</Button>
+            </ToolBar>
+        </ToolBarTray>
+        <StackPanel Margin="0,8" Visibility="{Binding Versions.EditVisibility}">
+            <!--<TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding Versions.VersionFileName}"/>-->
+            <Label>Note</Label>
+            <TextBox Text="{Binding Versions.SelectedRow[note]}" />
+            
+            <Expander Header="Internal File Properties" IsExpanded="False">
+                <StackPanel>
+                    <!-- Only displays when the selected version is Open Xml -->
+                    <StackPanel Visibility="{Binding Versions.IsOpenXml,Converter={cv:BooleanToVisibilityConverter}}">
+                        <UniformGrid Rows="7" Columns="2">
+                            <Label>Created</Label>
+                            <Label>Modified</Label>
+                            <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding Versions.Properties.Core.Created}"/>
+                            <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding Versions.Properties.Core.Modified}"/>
+                            <Label>Title</Label>
+                            <Label>Description / Comment</Label>
+                            <TextBox Text="{Binding Versions.Properties.Core.Title}"/>
+                            <TextBox Text="{Binding Versions.Properties.Core.Description}"/>
+                            <Label>Subject</Label>
+                            <Label>Company</Label>
+                            <TextBox Text="{Binding Versions.Properties.Core.Subject}"/>
+                            <TextBox Text="{Binding Versions.Properties.Extended.Company}"/>
+                            <Button Width="124" HorizontalAlignment="Left" Command="{Binding Versions.RawCommands[SaveProperty]}">Save</Button>
+                        </UniformGrid>
+                        <TextBlock Style="{StaticResource TextBlockMessage}" Margin="16,6" Text="{x:Static r:Strings.HeaderVersionProperties}"/>
+                    </StackPanel>
+                    <!-- Only displays when the selected version is not Open Xml -->
+                    <TextBlock 
+                        Style="{StaticResource TextBlockError}" Margin="8"
+                        Text="{x:Static r:Strings.HeaderVersionPropertiesNotOpenXml}"
+                        Visibility="{Binding Versions.IsOpenXml,Converter={cv:BooleanToVisibilityConverter},ConverterParameter={StaticResource BooleanFalseToVisibility}}"/>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

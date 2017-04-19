@@ -1,0 +1,8 @@
+﻿; This file enables you to specify a default application root used during development.
+; The application root is used to locate the database file. The sub-directory "db" is always appended.
+;
+; During normal application execution, the directory from which the app is running is used.
+; This setting is only used when the path to the executable includes:
+;		"bin\debug", "bin\x86\debug", "bin\release", or "bin\x86\release".
+;
+DevelopmentRoot=D:\vds\Writing\Panama

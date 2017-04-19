@@ -1,0 +1,152 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Image size for menu items -->
+    <!--<sys:Double x:Key="MenuImageXY">24</sys:Double>-->
+    <!-- Image size for tool bar buttons -->
+    <!--<sys:Double x:Key="ToolBarImageXY">32</sys:Double>-->
+
+    <!--<sys:Double x:Key="ToolBarToggleImageXY">16</sys:Double>-->
+
+    <!-- Images -->
+    <BitmapImage x:Key="ImageAccepted" UriSource="/Panama;component/Resources/Images/Image.Accepted.48.png"/>
+    <BitmapImage x:Key="ImageAdd" UriSource="/Panama;component/Resources/Images/Image.Add.48.png"/>
+    <BitmapImage x:Key="ImageArrowDown" UriSource="/Panama;component/Resources/Images/Image.Arrow.Down.48.png"/>
+    <BitmapImage x:Key="ImageArrowLeft" UriSource="/Panama;component/Resources/Images/Image.Arrow.Left.48.png"/>
+    <BitmapImage x:Key="ImageArrowRight" UriSource="/Panama;component/Resources/Images/Image.Arrow.Right.48.png"/>
+    <BitmapImage x:Key="ImageArrowUp" UriSource="/Panama;component/Resources/Images/Image.Arrow.Up.48.png"/>
+    <BitmapImage x:Key="ImageBrowseToUrl" UriSource="/Panama;component/Resources/Images/Image.Arrow.Right.48.png"/>
+    <BitmapImage x:Key="ImageCalendar" UriSource="/Panama;component/Resources/Images/Image.Calendar.48.png"/>
+    <BitmapImage x:Key="ImageCheck" UriSource="/Panama;component/Resources/Images/Image.Check.48.png"/>
+    <BitmapImage x:Key="ImageChevronLeft" UriSource="/Panama;component/Resources/Images/Image.Chevron.Left.48.png"/>
+    <BitmapImage x:Key="ImageChevronRight" UriSource="/Panama;component/Resources/Images/Image.Chevron.Right.48.png"/>
+    <BitmapImage x:Key="ImageClose" UriSource="/Panama;component/Resources/Images/Image.Close.48.png"/>
+    <BitmapImage x:Key="ImageConfig" UriSource="/Panama;component/Resources/Images/Image.Config.48.png"/>
+    <BitmapImage x:Key="ImageDatabase" UriSource="/Panama;component/Resources/Images/Image.Database.48.png"/>
+    <BitmapImage x:Key="ImageDelete" UriSource="/Panama;component/Resources/Images/Image.Delete.48.png"/>
+    <BitmapImage x:Key="ImageDotBlue" UriSource="/Panama;component/Resources/Images/Image.Dot.Blue.32.png"/>
+    <BitmapImage x:Key="ImageDotGreen" UriSource="/Panama;component/Resources/Images/Image.Dot.Green.32.png"/>
+    <BitmapImage x:Key="ImageDotRed" UriSource="/Panama;component/Resources/Images/Image.Dot.Red.32.png"/>
+    
+    <BitmapImage x:Key="ImageFileType0" UriSource="/Panama;component/Resources/Images/Image.FileType.Unknown.48.png"/>
+    <!-- Type 1 is Word (.doc / .docx) -->
+    <BitmapImage x:Key="ImageFileType1" UriSource="/Panama;component/Resources/Images/Image.FileType.Word.48.png"/>
+    <!-- Type 2 is Word also (rtf) -->
+    <BitmapImage x:Key="ImageFileType2" UriSource="/Panama;component/Resources/Images/Image.FileType.Word.48.png"/>
+    <!-- Type 3 is pdf (.pdf) -->
+    <BitmapImage x:Key="ImageFileType3" UriSource="/Panama;component/Resources/Images/Image.FileType.Pdf.48.png"/>
+    <!-- Type 4 is text (.txt) -->
+    <BitmapImage x:Key="ImageFileType4" UriSource="/Panama;component/Resources/Images/Image.FileType.Text.48.png"/>
+    <!-- Type 5 is Outlook message (.msg) -->
+    <BitmapImage x:Key="ImageFileType5" UriSource="/Panama;component/Resources/Images/Image.FileType.Outlook.48.png"/>
+    <!-- Type 6 is also Outlook message (direct reference [no longer used]) -->
+    <BitmapImage x:Key="ImageFileType6" UriSource="/Panama;component/Resources/Images/Image.FileType.Outlook.48.png"/>
+    <!-- Type 7 is also Outlook folder (direct reference [no longer used]) -->
+    <BitmapImage x:Key="ImageFileType7" UriSource="/Panama;component/Resources/Images/Image.FileType.Outlook.48.png"/>
+    <!-- Type 8 is audio -->
+    <BitmapImage x:Key="ImageFileType8" UriSource="/Panama;component/Resources/Images/Image.FileType.Audio.48.png"/>
+    <!-- Type 9 is Html -->
+    <BitmapImage x:Key="ImageFileType9" UriSource="/Panama;component/Resources/Images/Image.FileType.Html.48.png"/>
+
+    <BitmapImage x:Key="ImageFilter" UriSource="/Panama;component/Resources/Images/Image.Filter.48.png"/>
+    <BitmapImage x:Key="ImageFolder" UriSource="/Panama;component/Resources/Images/Image.Folder.48.png"/>
+    <BitmapImage x:Key="ImageInformation" UriSource="/Panama;component/Resources/Images/Image.Information.48.png"/>
+    <BitmapImage x:Key="ImageMoney" UriSource="/Panama;component/Resources/Images/Image.Money.48.png"/>
+    <BitmapImage x:Key="ImageNote" UriSource="/Panama;component/Resources/Images/Image.Note.48.png"/>
+    <BitmapImage x:Key="ImageOpenFile" UriSource="/Panama;component/Resources/Images/Image.OpenFile.48.png"/>
+    <BitmapImage x:Key="ImageOrphan" UriSource="/Panama;component/Resources/Images/Image.Orphan.48.png"/>
+    <BitmapImage x:Key="ImagePublisher" UriSource="/Panama;component/Resources/Images/Image.Publisher.48.png"/>
+    <BitmapImage x:Key="ImageReference" UriSource="/Panama;component/Resources/Images/Image.Reference.48.png"/>
+    <BitmapImage x:Key="ImageRefresh" UriSource="/Panama;component/Resources/Images/Image.Refresh.48.png"/>
+    <BitmapImage x:Key="ImageSave" UriSource="/Panama;component/Resources/Images/Image.Save.48.png"/>
+    <BitmapImage x:Key="ImageSearch" UriSource="/Panama;component/Resources/Images/Image.Search.48.png"/>
+    <BitmapImage x:Key="ImageStatistics" UriSource="/Panama;component/Resources/Images/Image.Statistics.48.png"/>
+    <BitmapImage x:Key="ImageSubStatus1" UriSource="/Panama;component/Resources/Images/Image.Check.48.png"/>
+    <BitmapImage x:Key="ImageSubStatus255" UriSource="/Panama;component/Resources/Images/Image.Accepted.48.png"/>
+    <BitmapImage x:Key="ImageSubmission" UriSource="/Panama;component/Resources/Images/Image.Send.48.png"/>
+    <BitmapImage x:Key="ImageTable" UriSource="/Panama;component/Resources/Images/Image.Table.48.png"/>
+    <BitmapImage x:Key="ImageTag" UriSource="/Panama;component/Resources/Images/Image.Tag.48.png"/>
+    <BitmapImage x:Key="ImageTitle" UriSource="/Panama;component/Resources/Images/Image.Book.48.png"/>
+    <BitmapImage x:Key="ImageTool" UriSource="/Panama;component/Resources/Images/Image.Tool.48.png"/>
+    <BitmapImage x:Key="ImageToolConvert" UriSource="/Panama;component/Resources/Images/Image.Convert.48.png"/>
+    <BitmapImage x:Key="ImageToolExport" UriSource="/Panama;component/Resources/Images/Image.Tool.Export.48.png"/>
+    <BitmapImage x:Key="ImageToolMeta" UriSource="/Panama;component/Resources/Images/Image.Refresh.48.png"/>
+    <BitmapImage x:Key="ImageToolTitleList" UriSource="/Panama;component/Resources/Images/Image.FileType.Text.48.png"/>
+    <BitmapImage x:Key="ImageUndo" UriSource="/Panama;component/Resources/Images/Image.Undo.48.png"/>
+    <BitmapImage x:Key="ImageUser" UriSource="/Panama;component/Resources/Images/Image.User.48.png"/>
+
+    <Style TargetType="Image" x:Key="MenuItemImage">
+        <Setter Property="Height" Value="24" />
+        <Setter Property="Width" Value="24" />
+    </Style>
+
+    <Style TargetType="Image" x:Key="ToolBarImage">
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Width" Value="32" />
+    </Style>
+    
+    <Style TargetType="Image" x:Key="ToolBarImageSmall">
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Width" Value="20" />
+    </Style>
+    
+    <Style TargetType="Image" x:Key="ToolBarToggleImage">
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Width" Value="16" />
+    </Style>
+    
+    <!-- Images ready for assignment to the Icon property of MenuItem -->
+    <!-- x:Shared="False" allows an image to be used multiple times-->
+    <Image x:Key="ImageAddDocumentMenu" Source="{StaticResource ImageFileType1}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageBrowseToUrlMenu" x:Shared="False"  Source="{StaticResource ImageBrowseToUrl}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageCheckMenu" x:Shared="False" Source="{StaticResource ImageCheck}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageCloseMenu" x:Shared="False" Source="{StaticResource ImageClose}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageConfigMenu" Source="{StaticResource ImageConfig}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageCredentialMenu" Source="{StaticResource ImageTable}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageDatabaseMenu" Source="{StaticResource ImageDatabase}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageDeleteMenu" x:Shared="False"  Source="{StaticResource ImageDelete}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageDotGreenMenu" x:Shared="False"  Source="{StaticResource ImageDotGreen}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageFilterMenu" Source="{StaticResource ImageFilter}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageInformationMenu" Source="{StaticResource ImageInformation}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageLinkMenu" Source="{StaticResource ImageArrowRight}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageNoteMenu" Source="{StaticResource ImageNote}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageOpenFileMenu" Source="{StaticResource ImageOpenFile}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageOpenWordMenu" Source="{StaticResource ImageFileType1}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImagePublisherMenu" Source="{StaticResource ImagePublisher}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageReferenceMenu" Source="{StaticResource ImageReference}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageSaveMenu" Source="{StaticResource ImageSave}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageSearchMenu" Source="{StaticResource ImageSearch}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageStatisticsMenu" Source="{StaticResource ImageStatistics}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageSubmissionMenu" Source="{StaticResource ImageSubmission}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageSubStatus1Menu" x:Shared="False" Source="{StaticResource ImageSubStatus1}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageSubStatus255Menu" x:Shared="False" Source="{StaticResource ImageSubStatus255}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageTagMenu" Source="{StaticResource ImageTag}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageTitleMenu" Source="{StaticResource ImageTitle}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageToolMenu" Source="{StaticResource ImageTool}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageToolConvertMenu" Source="{StaticResource ImageToolConvert}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageToolExportMenu" Source="{StaticResource ImageToolExport}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageToolMetaMenu" Source="{StaticResource ImageToolMeta}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageToolOrphanMenu" Source="{StaticResource ImageOrphan}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageToolSearchMenu" Source="{StaticResource ImageSearch}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageToolTitleListMenu" Source="{StaticResource ImageToolTitleList}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageUserMenu" Source="{StaticResource ImageUser}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageUndoMenu" Source="{StaticResource ImageUndo}" Style="{StaticResource MenuItemImage}"/>
+    
+    <!-- Images ready for assignment to content of a ToolBarButton -->
+    <Image x:Key="ImageCalendarTool" x:Shared="False" Source="{StaticResource ImageCalendar}" Style="{StaticResource ToolBarImage}"/>
+    <Image x:Key="ImageFolderTool" x:Shared="False" Source="{StaticResource ImageFolder}" Style="{StaticResource ToolBarImage}"/>
+    <Image x:Key="ImageClearTool" x:Shared="False" Source="{StaticResource ImageClose}" Style="{StaticResource ToolBarImage}"/>
+
+
+
+
+    <Image x:Key="ImageArrowUpTool" x:Shared="False" Source="{StaticResource ImageArrowUp}" Style="{StaticResource ToolBarImageSmall}"/>
+    <Image x:Key="ImageArrowDownTool" x:Shared="False" Source="{StaticResource ImageArrowDown}" Style="{StaticResource ToolBarImageSmall}"/>
+    
+    <!-- Images used in the toogle command -->
+    <Image x:Key="ImageChevronLeftTool" Source="{StaticResource ImageChevronLeft}" Style="{StaticResource ToolBarToggleImage}"/>
+    <Image x:Key="ImageChevronRightTool" Source="{StaticResource ImageChevronRight}" Style="{StaticResource ToolBarToggleImage}"/>
+
+</ResourceDictionary>
