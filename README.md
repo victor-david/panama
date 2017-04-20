@@ -1,5 +1,5 @@
 # Panama ∑en
-A desktop application for writers. Manages titles (articles, stories, etc.), publishers, submissions and more. 
+A Windows desktop application for writers. Manages titles (articles, stories, etc.), publishers, submissions and more. 
 
 ## General Description
 **Panama ∑en** is a desktop application for writers that enables you to keep track of various types of writing (articles, stories, etc), 
