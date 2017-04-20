@@ -3,5 +3,7 @@ obj/
 bin/
 Help/
 !Reference Assemblies/*.dll
+!Reference Assemblies/SQLite/x86/*.dll
+!Reference Assemblies/SQLite/x64/*.dll
 Reference Assemblies/*.xml
 Panama.xlsx
