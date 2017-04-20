@@ -13,8 +13,9 @@ if exist "%BIN%\Panama.exe" (
   copy "%BIN%\*.dll" %DEST%
   rem This doesn't get copied to Panama\bin
   copy "%ROOT%..\Restless.Tools.Library\Reference Assemblies\DocumentFormat.OpenXml.dll" %DEST%
-  rem Copy CHM file if it's there
-)  
+)
+
+rem Copy CHM file if it's there
 if exist "%ROOT%\Help\Panama.Reference.chm" (
   copy "%ROOT%\Help\Panama.Reference.chm" %DEST%
 )
