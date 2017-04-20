@@ -17,7 +17,9 @@
             <TextBox Text="{Binding SelectedRow[url]}" />
             <Label>Note</Label>
             <TextBox Text="{Binding SelectedRow[notes], TargetNullValue=''}" />
-            <Button Command="{Binding RawCommands[BrowseCommand]}" Width="120" HorizontalAlignment="Left">Go to url</Button>
+            <Label>
+                <Hyperlink Command="{Binding OpenRowCommand}">Go to url</Hyperlink>
+            </Label>
         </StackPanel>
     </Border>
 </UserControl>

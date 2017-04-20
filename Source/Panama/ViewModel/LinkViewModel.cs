@@ -45,16 +45,9 @@ namespace Restless.App.Panama.ViewModel
             AddViewSourceSortDescriptions();
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddLink, Strings.CommandAddLinkTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
-            RawCommands.Add("BrowseCommand", (o) =>
-                {
-                    OpenHelper.OpenWebSite(null,SelectedRow[LinkTable.Defs.Columns.Url].ToString());
-                },
-                (o) => 
-                { 
-                    return SelectedRow != null && !String.IsNullOrWhiteSpace(SelectedRow[LinkTable.Defs.Columns.Url].ToString()); 
-                });
-
             /* Context menu items */
+            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, OpenRowCommand, "ImageBrowseToUrlMenu");
+            MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandDeleteLink, DeleteCommand, "ImageDeleteMenu");
             FilterPrompt = Strings.FilterPromptLink;
         }
@@ -118,6 +111,27 @@ namespace Restless.App.Panama.ViewModel
         protected override bool CanRunDeleteCommand()
         {
             return CanRunCommandIfRowSelected(null);
+        }
+
+        /// <summary>
+        /// Runs the open row command to browse to the row's url.
+        /// </summary>
+        /// <param name="item">The command parameter (not used)</param>
+        protected override void RunOpenRowCommand(object item)
+        {
+            OpenHelper.OpenWebSite(null, SelectedRow[LinkTable.Defs.Columns.Url].ToString());
+        }
+
+        /// <summary>
+        /// Gets a boolean value that indicates if the <see cref=" DataGridViewModel{T}.OpenRowCommand"/> can run.
+        /// </summary>
+        /// <param name="item">The command parameter (not used)</param>
+        /// <returns>true if the command can execute (row selected and has a url); otherwise, false.</returns>
+        protected override bool CanRunOpenRowCommand(object item)
+        {
+            return 
+                base.CanRunOpenRowCommand(item) &&
+                !String.IsNullOrWhiteSpace(SelectedRow[LinkTable.Defs.Columns.Url].ToString());
         }
         #endregion
 

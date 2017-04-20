@@ -335,6 +335,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse to this url (or double click the row).
+        /// </summary>
+        public static string CommandBrowseToUrlOrClick {
+            get {
+                return ResourceManager.GetString("CommandBrowseToUrlOrClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string CommandClearFilter {

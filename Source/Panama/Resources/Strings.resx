@@ -711,4 +711,7 @@ The application cannot continue.</value>
   <data name="InstallationCaption" xml:space="preserve">
     <value>Select the directory that will hold the database files</value>
   </data>
+  <data name="CommandBrowseToUrlOrClick" xml:space="preserve">
+    <value>Browse to this url (or double click the row)</value>
+  </data>
 </root>
