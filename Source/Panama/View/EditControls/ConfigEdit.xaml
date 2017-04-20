@@ -45,8 +45,8 @@
                     <Label Margin="-4,4">
                         <Hyperlink Command="{Binding RawCommands[Path]}">Change</Hyperlink>
                     </Label>
-
                 </StackPanel>
+                
                 <!-- Object view. Only displays when the config type is object. -->
                 <TextBlock Style="{StaticResource TextBlockConfigDesc}" Text="{Binding SelectedRow[value]}" Visibility="{Binding ObjectTypeVisibility}" />
             </StackPanel>

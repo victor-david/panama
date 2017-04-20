@@ -68,7 +68,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public Visibility ObjectTypeVisibility
         {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Path, ConfigTable.Defs.Types.Object); }
+            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Object); }
         }
         #endregion
 
