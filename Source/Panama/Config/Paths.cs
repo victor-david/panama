@@ -73,22 +73,22 @@ namespace Restless.App.Panama.Configuration
 
         #region Export document paths
         /// <summary>
-        /// Provides static methods for handling rooted and non-rooted paths for submission documents.
+        /// Provides static methods for handling rooted and non-rooted paths for exported documents.
         /// </summary>
         public static class Export
         {
             /// <summary>
-            /// Returns the file name without the portion that is the submission document root.
+            /// Returns the file name without the portion that is the export root.
             /// </summary>
             /// <param name="fileName">The file name</param>
-            /// <returns>The file name without the submission document root portion.</returns>
+            /// <returns>The file name without the export root portion.</returns>
             public static string WithoutRoot(string fileName)
             {
                 return Handlers.WithoutRoot(fileName, Config.Instance.FolderExport);
             }
 
             /// <summary>
-            /// Returns the file name combined with the submission document root.
+            /// Returns the file name combined with the export root.
             /// </summary>
             /// <param name="fileName">The file name.</param>
             /// <returns>The combined path, or <paramref name="fileName"/> unaltered if it is already rooted.</returns>
@@ -98,6 +98,7 @@ namespace Restless.App.Panama.Configuration
             }
         }
         #endregion
+
         /************************************************************************/
         
         #region Common handler (private static class)

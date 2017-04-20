@@ -205,7 +205,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Restless.Tools.Library\Source\Restless.Tools.Library.csproj">
+    <ProjectReference Include="..\..\..\Restless.Tools.Library\Source\Restless.Tools.Library\Restless.Tools.Library.csproj">
       <Project>{9A112D3A-717C-4387-A831-F0077C6CC437}</Project>
       <Name>Restless.Tools.Library</Name>
     </ProjectReference>

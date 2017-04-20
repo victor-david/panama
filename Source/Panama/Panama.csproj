@@ -650,11 +650,11 @@
     <Resource Include="Resources\Images\Image.Config.48.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Restless.Tools.Library.OfficeAutomation\Source\Restless.Tools.Library.OfficeAutomation.csproj">
+    <ProjectReference Include="..\..\..\Restless.Tools.Library\Source\Restless.Tools.Library.OfficeAutomation\Restless.Tools.Library.OfficeAutomation.csproj">
       <Project>{6DB76CAD-D35A-4BDF-9A01-DD0DB96C4019}</Project>
       <Name>Restless.Tools.Library.OfficeAutomation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Restless.Tools.Library\Source\Restless.Tools.Library.csproj">
+    <ProjectReference Include="..\..\..\Restless.Tools.Library\Source\Restless.Tools.Library\Restless.Tools.Library.csproj">
       <Project>{9A112D3A-717C-4387-A831-F0077C6CC437}</Project>
       <Name>Restless.Tools.Library</Name>
     </ProjectReference>

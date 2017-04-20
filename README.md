@@ -17,37 +17,34 @@ through its submission process until publication.
 search the text of files; consolidate files to a single export directory; create a list of titles; view title and submission statistics, etc.
 
 ## Dependencies
-The solution file for **Panama ∑en** references other projects. To build, you'll need to use these projects as well:
+The solution file for **Panama ∑en** references the **Restless Tools** project. To build, you'll need to use:
 
-- [Main Support Library](https://github.com/victor-david/restless-tools)
-- [Office Support Library](https://github.com/victor-david/restless-tools-office)
+- [Restless Tools Library](https://github.com/victor-david/restless-tools)
 
 In addition, the app uses the following .dlls
 
 - Microsoft.WindowsAPICodePack.dll
 - Microsoft.WindowsAPICodePack.Shell.dll
 
-These can be found in the **Reference Assembles** folder.
+These .dlls can be found in the **Reference Assembles** folder.
 
 ## How to Build
 - Download this project
-- Download the [Main Support Library](https://github.com/victor-david/restless-tools)
-- Download the [Office Support Library](https://github.com/victor-david/restless-tools-office)
+- Download the [Restless Tools Library](https://github.com/victor-david/restless-tools)
 
-Download all projects to the same parent directory, each in its own folder. Name the folders as shown:
+Download both projects to the same parent directory, each in its own folder. Name the folders as shown:
 
 |--Panama
 
 |--Restless.Tools.Library
 
-|--Restless.Tools.Library.OfficeAutomation
-
 - Open Panama/Source/Panama.sln in Visual Studio
 - Build
 
-The  [Office Support Library](https://github.com/victor-david/restless-tools-office) dependency project is used to provide a tool that enables batch conversion
-of .doc files to .docx. This library requires a reference to Microsoft.Office.Interop.Word. If you don't have MS Office installed, and want to build a version
-of **Panama ∑en** without this support, do the following:
+## .Doc to .Docx Conversion
+The [Restless Tools Library](https://github.com/victor-david/restless-tools) dependency project contains a sub-project that enables batch conversion
+of .doc files to .docx. This .dll project requires a reference to Microsoft.Office.Interop.Word. If you don't have MS Office installed, and/or want to build 
+a version of **Panama ∑en** without this support, do the following:
 
-- Remove the Xam.Library.Wpf.OfficeAutomation from the application solution.
-- On the application's property page, remove the conditional compilation symbol DOCX.
+- Remove the Restless.Tools.Library.OfficeAutomation from the application solution.
+- On the application's property page, remove the conditional compilation symbol **DOCX**.

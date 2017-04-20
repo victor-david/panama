@@ -5,9 +5,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panama", "Panama\Panama.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panama.Database", "Panama.Database\Panama.Database.csproj", "{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restless.Tools.Library", "..\..\Restless.Tools.Library\Source\Restless.Tools.Library.csproj", "{9A112D3A-717C-4387-A831-F0077C6CC437}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restless.Tools.Library", "..\..\Restless.Tools.Library\Source\Restless.Tools.Library\Restless.Tools.Library.csproj", "{9A112D3A-717C-4387-A831-F0077C6CC437}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restless.Tools.Library.OfficeAutomation", "..\..\Restless.Tools.Library.OfficeAutomation\Source\Restless.Tools.Library.OfficeAutomation.csproj", "{6DB76CAD-D35A-4BDF-9A01-DD0DB96C4019}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restless.Tools.Library.OfficeAutomation", "..\..\Restless.Tools.Library\Source\Restless.Tools.Library.OfficeAutomation\Restless.Tools.Library.OfficeAutomation.csproj", "{6DB76CAD-D35A-4BDF-9A01-DD0DB96C4019}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
