@@ -8,7 +8,7 @@
     <ProjectGuid>{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RestlessAnimal.Applications.Panama.Database</RootNamespace>
+    <RootNamespace>Restless.App.Panama.Database</RootNamespace>
     <AssemblyName>Panama.Database</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
