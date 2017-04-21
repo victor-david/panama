@@ -590,7 +590,6 @@
     <Compile Include="Other\AppTaskId.cs" />
     <Compile Include="Controls\DataGrid\DataGridColumns.cs" />
     <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
-    <Compile Include="Validation\StringToIntValidationRule.cs" />
     <Compile Include="ViewModel\VisualCommandViewModel.cs" />
     <Compile Include="ViewModel\DataGridViewModel.cs" />
     <Compile Include="ViewModel\PublisherViewModel.cs" />
