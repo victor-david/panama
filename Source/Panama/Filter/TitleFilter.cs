@@ -20,9 +20,6 @@ namespace Restless.App.Panama.Filter
         private TagFilterCombine tagCombine;
         private int wordCount;
         private string folder;
-        private DispatcherTimer wordCountTimer;
-        // The number of milliseconds to delay the word count update.
-        private const int wordCountUpdateDelay = 200;
         #endregion
 
         /************************************************************************/
@@ -143,13 +140,7 @@ namespace Restless.App.Panama.Filter
             {
                 wordCount = value;
                 OnPropertyChanged("WordCount");
-                wordCountTimer.Stop();
-                // Because this value can change very rapidly, we delay OnChanged() unless currently suspended. 
-                // If suspended, it's because we're in the middle of a reset; the Reset() method calls OnChanged when it's done.
-                if (!IsChangedEventSuspended)
-                {
-                    wordCountTimer.Start();
-                }
+                OnChanged();
             }
         }
 
@@ -184,9 +175,6 @@ namespace Restless.App.Panama.Filter
         public TitleFilter()
         {
             Tags = new Integer64List();
-            wordCountTimer = new DispatcherTimer();
-            wordCountTimer.Interval = TimeSpan.FromMilliseconds(wordCountUpdateDelay);
-            wordCountTimer.Tick += WordCountTimerTick;
             Reset();
         }
         #pragma warning restore 1591
@@ -226,13 +214,6 @@ namespace Restless.App.Panama.Filter
             base.OnChanged();
             OnPropertyChanged("IsTagFilterActive");
         }
-
-        private void WordCountTimerTick(object sender, EventArgs e)
-        {
-            wordCountTimer.Stop();
-            OnChanged();
-        }
-
         #endregion
     }
 }
