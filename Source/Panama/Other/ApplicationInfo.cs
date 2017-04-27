@@ -21,6 +21,7 @@ namespace Restless.App.Panama
 
         /************************************************************************/
 
+        #region Public properties
         /// <summary>
         /// Gets the singleton instance of this class.
         /// </summary>
@@ -95,9 +96,11 @@ namespace Restless.App.Panama
             get { return Environment.Is64BitProcess; }
         }
 
+        #endregion
+
         /************************************************************************/
 
-#region Constructpr (private)
+        #region Constructor (private)
 
         private ApplicationInfo()
         {
@@ -125,6 +128,6 @@ namespace Restless.App.Panama
             }
 
         }
-#endregion
+        #endregion
     }
 }
