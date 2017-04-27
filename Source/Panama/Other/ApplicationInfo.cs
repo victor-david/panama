@@ -87,9 +87,17 @@ namespace Restless.App.Panama
             get { return DatabaseImporter.Instance.IsEnabled; }
         }
 
+        /// <summary>
+        /// Gets a boolean value that indicates if the current process is a 64 bit process.
+        /// </summary>
+        public bool Is64Bit
+        {
+            get { return Environment.Is64BitProcess; }
+        }
+
         /************************************************************************/
 
-        #region Constructpr (private)
+#region Constructpr (private)
 
         private ApplicationInfo()
         {
@@ -117,6 +125,6 @@ namespace Restless.App.Panama
             }
 
         }
-        #endregion
+#endregion
     }
 }

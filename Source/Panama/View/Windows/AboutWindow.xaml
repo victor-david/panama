@@ -32,10 +32,10 @@
             <TextBlock Margin="18,0" Text="{Binding Path=AppInfo.Assembly.FrameworkVersion, Mode=OneTime}" />
             <Label>Executable</Label>
             <TextBlock Margin="18,0" Text="{Binding Path=AppInfo.Assembly.Location, Mode=OneTime}" TextWrapping="Wrap" />
+            <Label>64 Bit</Label>
+            <TextBlock Margin="18,0" Text="{Binding Path=AppInfo.Is64Bit, Mode=OneTime}" />
             <Label>Database</Label>
             <TextBlock  Margin="18,0" Text="{Binding Path=AppInfo.DatabaseFileName, Mode=OneTime}" TextWrapping="Wrap" />
-            <Label>Import Operations</Label>
-            <TextBlock  Margin="18,0" Text="{Binding Path=AppInfo.DatabaseImportEnabled, Mode=OneTime}"/>
         </StackPanel>
     </Grid>
 </Window>
