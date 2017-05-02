@@ -12,9 +12,9 @@
     <!-- Some colors to stay consistent -->
     <SolidColorBrush x:Key="LabelBrush" Color="#FF0D5102"/>
     <!-- This enables the selected row to retain a highlight when the data grid loses focus. Has a problem with .Net 4.0 -->
-    <!--<SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightSalmon"/>-->
+    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightSalmon"/>
     <!-- This works in .Net 4.0 -->
-    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="LightSalmon"/>
+    <!--<SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="LightSalmon"/>-->
 
     <!-- Base style for all controls   -->
     <Style TargetType="Control" x:Key="BaseControl">
