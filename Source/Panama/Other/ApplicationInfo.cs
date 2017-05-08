@@ -21,6 +21,7 @@ namespace Restless.App.Panama
 
         /************************************************************************/
 
+        #region Public properties
         /// <summary>
         /// Gets the singleton instance of this class.
         /// </summary>
@@ -87,17 +88,30 @@ namespace Restless.App.Panama
             get { return DatabaseImporter.Instance.IsEnabled; }
         }
 
+        /// <summary>
+        /// Gets a boolean value that indicates if the current process is a 64 bit process.
+        /// </summary>
+        public bool Is64Bit
+        {
+            get { return Environment.Is64BitProcess; }
+        }
+
+        #endregion
+
         /************************************************************************/
 
-        #region Constructpr (private)
+        #region Constructor (private)
 
         private ApplicationInfo()
         {
             Assembly = new AssemblyInfo(AssemblyInfoType.Entry);
             RootFolder = Path.GetDirectoryName(Assembly.Location);
             string loc = RootFolder.ToLower();
-            if (loc.Contains(@"bin\debug") || loc.Contains(@"bin\x86\debug") ||
-                loc.Contains(@"bin\release") || loc.Contains(@"bin\x86\release"))
+            if (
+                loc.Contains(@"bin\debug") || loc.Contains(@"bin\release") ||
+                loc.Contains(@"bin\x86\debug") || loc.Contains(@"bin\x86\release") ||
+                loc.Contains(@"bin\x64\debug") || loc.Contains(@"bin\x64\release")
+               )
             {
                 string devName = Path.Combine(RootFolder, DefaultRootFileName);
                 if (File.Exists(devName))

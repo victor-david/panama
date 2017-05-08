@@ -61,7 +61,7 @@
                     <Label>Word count</Label>
                     <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding Filters.WordCountText, Mode=OneWay}"/>
                 </StackPanel>
-                <Slider Minimum="-3000" Maximum="3000" TickPlacement="BottomRight" TickFrequency="100" IsSnapToTickEnabled="True" Value="{Binding Config.TitleFilter.WordCount}"/>
+                <Slider Minimum="-3000" Maximum="3000" TickPlacement="BottomRight" TickFrequency="100" IsSnapToTickEnabled="True" Value="{Binding Config.TitleFilter.WordCount,Delay=150}"/>
             </StackPanel>
         </HeaderedContentControl>
 

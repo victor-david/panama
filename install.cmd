@@ -9,15 +9,13 @@ set BIN=%ROOT%Source\Panama\bin\x86\release
 rem Change the destination path as needed and use this file to install.
 set DEST=D:\Writing\Panama
 if exist "%BIN%\Panama.exe" (
-  copy "%BIN%\Panama.exe" %DEST%
-  copy "%BIN%\*.dll" %DEST%
-  rem This doesn't get copied to Panama\bin
-  copy "%ROOT%..\Restless.Tools.Library\Reference Assemblies\DocumentFormat.OpenXml.dll" %DEST%
+  xcopy "%BIN%\Panama.exe" %DEST% /Y
+  xcopy "%BIN%\*.dll" %DEST% /E /Y
 )
 
 rem Copy CHM file if it's there
 if exist "%ROOT%\Help\Panama.Reference.chm" (
-  copy "%ROOT%\Help\Panama.Reference.chm" %DEST%
+  xcopy "%ROOT%\Help\Panama.Reference.chm" %DEST% /Y
 )
 dir %DEST%
 endlocal
