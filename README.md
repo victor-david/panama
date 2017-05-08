@@ -21,13 +21,6 @@ The solution file for **Panama ∑en** references the **Restless Tools** project
 
 - [Restless Tools Library](https://github.com/victor-david/restless-tools)
 
-In addition, the app uses the following .dlls
-
-- Microsoft.WindowsAPICodePack.dll
-- Microsoft.WindowsAPICodePack.Shell.dll
-
-These .dlls can be found in the **Reference Assembles** folder.
-
 ## How to Build
 - Download this project
 - Download the [Restless Tools Library](https://github.com/victor-david/restless-tools)
@@ -38,8 +31,16 @@ Download both projects to the same parent directory, each in its own folder. Nam
 
 |--Restless.Tools.Library
 
-- Open Panama/Source/Panama.sln in Visual Studio
-- Build
+1. Open Restless.Tools.Library/Source/Restless.Tools.Library.sln in Visual Studio
+2. Build
+3. Open Panama/Source/Panama.sln in Visual Studio
+4. Build
+
+**NOTE:** Although Panama.sln uses the **Restless Tools** project, it's neccessary to build the library
+first in order to allow the packages for the library to be downloaded. If you build Panama.sln first,
+the packages will be downloaded, but they'll be relative to the Panama.sln and the library project references 
+won't be correct. Once you've build the **Restless Tools** project, you can skip steps 1 and 2 in future builds
+of **Panama ∑en**.
 
 ## .Doc to .Docx Conversion
 The [Restless Tools Library](https://github.com/victor-david/restless-tools) dependency project contains a sub-project that enables batch conversion
