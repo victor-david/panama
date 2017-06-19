@@ -45,7 +45,9 @@
         <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource GridSplitterVertical}" />
 
         <!-- Nested editing control on the right -->
-        <view:SubmissionEditWithTab Grid.Row="1" Grid.Column="2" Visibility="{Binding EditVisibility}"/>
+        <ScrollViewer Grid.Row="1" Grid.Column="2" VerticalScrollBarVisibility="Auto">
+            <view:SubmissionEditWithTab Visibility="{Binding EditVisibility}"/>
+        </ScrollViewer>
     </Grid>
     <!-- end main grid-->
 </UserControl>

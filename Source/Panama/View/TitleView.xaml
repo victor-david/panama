@@ -59,12 +59,14 @@
         <!-- Splitter -->
         <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource GridSplitterVertical}" />
 
-        <DockPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Margin="0,0,0,3">
-            <Expander DockPanel.Dock="Top" Header="Row Filter Options" IsExpanded="False">
-                <view:TitleFilter Margin="4,12,4,0"/>
-            </Expander>
-            <view:TitleEditWithTab DockPanel.Dock="Top" Margin="0,4,0,0" Visibility="{Binding EditVisibility}"/>
-        </DockPanel>
+        <ScrollViewer Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Margin="0,0,0,3" VerticalScrollBarVisibility="Auto">
+            <DockPanel>
+                <Expander DockPanel.Dock="Top" Header="Row Filter Options" IsExpanded="False">
+                    <view:TitleFilter Margin="4,12,4,0"/>
+                </Expander>
+                <view:TitleEditWithTab DockPanel.Dock="Top" Margin="0,4,0,0" Visibility="{Binding EditVisibility}"/>
+            </DockPanel>
+        </ScrollViewer>
     </Grid>
     <!-- end main grid-->
 </UserControl>
