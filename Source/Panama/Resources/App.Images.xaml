@@ -139,14 +139,11 @@
     <Image x:Key="ImageFolderTool" x:Shared="False" Source="{StaticResource ImageFolder}" Style="{StaticResource ToolBarImage}"/>
     <Image x:Key="ImageClearTool" x:Shared="False" Source="{StaticResource ImageClose}" Style="{StaticResource ToolBarImage}"/>
 
-
-
-
     <Image x:Key="ImageArrowUpTool" x:Shared="False" Source="{StaticResource ImageArrowUp}" Style="{StaticResource ToolBarImageSmall}"/>
     <Image x:Key="ImageArrowDownTool" x:Shared="False" Source="{StaticResource ImageArrowDown}" Style="{StaticResource ToolBarImageSmall}"/>
     
     <!-- Images used in the toogle command -->
-    <Image x:Key="ImageChevronLeftTool" Source="{StaticResource ImageChevronLeft}" Style="{StaticResource ToolBarToggleImage}"/>
-    <Image x:Key="ImageChevronRightTool" Source="{StaticResource ImageChevronRight}" Style="{StaticResource ToolBarToggleImage}"/>
+    <Image x:Key="ImageChevronLeftTool" x:Shared="False"  Source="{StaticResource ImageChevronLeft}" Style="{StaticResource ToolBarToggleImage}"/>
+    <Image x:Key="ImageChevronRightTool" x:Shared="False"  Source="{StaticResource ImageChevronRight}" Style="{StaticResource ToolBarToggleImage}"/>
 
 </ResourceDictionary>

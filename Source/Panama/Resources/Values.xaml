@@ -44,4 +44,8 @@
     <cv:TriggerToBrushOptions x:Key="BrushOptionPublished">Published</cv:TriggerToBrushOptions>
     <cv:TriggerToBrushOptions x:Key="BrushOptionSubmitted">Submitted</cv:TriggerToBrushOptions>
     <cv:TriggerToBrushOptions x:Key="BrushOptionPeriod">Period</cv:TriggerToBrushOptions>
+
+    <cv:PreviewModeToVisibilityConverterOptions x:Key="PreviewModeTextToVisibility">TextToVisibility</cv:PreviewModeToVisibilityConverterOptions>
+    <cv:PreviewModeToVisibilityConverterOptions x:Key="PreviewModeImageToVisibility">ImageToVisibility</cv:PreviewModeToVisibilityConverterOptions>
+    <cv:PreviewModeToVisibilityConverterOptions x:Key="PreviewModeUnsupportedToVisibility">UnsupportedToVisibility</cv:PreviewModeToVisibilityConverterOptions>
 </ResourceDictionary>

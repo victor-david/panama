@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:view="clr-namespace:Restless.App.Panama.View"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="600">
@@ -32,7 +33,7 @@
                 Style="{StaticResource ToolBarButton}"
                 HorizontalAlignment="Left"
                 Command="{Binding RawCommands[TogglePreview]}"
-                Content="{StaticResource ImageChevronLeftTool}" />
+                Content="{Binding PreviewActiveIcon}" />
         </Grid>
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
@@ -44,7 +45,7 @@
             </Grid.RowDefinitions>
             <HeaderedContentControl 
                 Grid.Column="0" 
-                Grid.ColumnSpan="{Binding IsPreviewMode, Converter={cv:BooleanToIntegerConverter}, ConverterParameter={StaticResource Integer1}}"
+                Grid.ColumnSpan="{Binding IsPreviewActive, Converter={cv:BooleanToIntegerConverter}, ConverterParameter={StaticResource Integer1}}"
                 Style="{StaticResource HCCTool}"
                 Header="{Binding FoundHeader}" Margin="4">
                 <Grid>
@@ -60,7 +61,7 @@
                     </DataGrid>
                     <TextBlock 
                         Style="{StaticResource TextBlockError}"
-                        FontSize="14"
+                        FontSize="12"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Text="Search returned no results" 
@@ -68,11 +69,7 @@
                         />
                 </Grid>
             </HeaderedContentControl>
-            <HeaderedContentControl
-                Grid.Column="1" Header="Preview" Margin="4"
-                Visibility="{Binding IsPreviewMode, Converter={cv:BooleanToVisibilityConverter}}">
-                <TextBox Style="{StaticResource TextBoxMultiFull}" Margin="0,4" Text="{Binding PreviewText, Mode=OneWay}"/>
-            </HeaderedContentControl>
+            <view:ToolPreview Grid.Column="1"/>
         </Grid>
     </DockPanel>
 </UserControl>

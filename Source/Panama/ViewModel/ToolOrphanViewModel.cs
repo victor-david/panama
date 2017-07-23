@@ -21,15 +21,18 @@ using System.IO;
 using Restless.Tools.Threading;
 using System.Text;
 using Restless.App.Panama.Tools;
+using System.Windows.Media.Imaging;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
     /// Provides the logic that is used for the orphan finder tool.
     /// </summary>
-    public class ToolOrphanViewModel : DataGridViewModelBase
+    public class ToolOrphanViewModel : DataGridPreviewViewModel
     {
         #region Private
+        private bool isPreviewMode;
+        private string previewText;
         #endregion
 
         /************************************************************************/
@@ -65,12 +68,41 @@ namespace Restless.App.Panama.ViewModel
             MenuItems.AddItem("Delete this file", RawCommands["DeleteFile"], "ImageDeleteMenu");
             
         }
-        #pragma warning restore 1591
+#pragma warning restore 1591
         #endregion
 
         /************************************************************************/
 
         #region Protected Methods
+        /// <summary>
+        /// Called by the ancestor class when a preview of the selected item is needed.
+        /// </summary>
+        /// <param name="selectedItem">The currently selected grid item.</param>
+        protected override void OnPreview(object selectedItem)
+        {
+            var item = selectedItem as FileScanDisplayObject;
+            if (item != null)
+            {
+                string fileName = Paths.Title.WithRoot(item.FileName);
+                PerformPreview(fileName);
+            }
+        }
+
+        /// <summary>
+        /// Gets the preview mode for the specified item.
+        /// </summary>
+        /// <param name="selectedItem">The selected grid item</param>
+        /// <returns>The preview mode</returns>
+        protected override PreviewMode GetPreviewMode(object selectedItem)
+        {
+            var item = selectedItem as FileScanDisplayObject;
+            if (item != null)
+            {
+                return DocumentPreviewer.GetPreviewMode(item.FileName);
+            }
+            return PreviewMode.Unsupported;
+        }
+
         /// <summary>
         /// Raises the Closing event.
         /// </summary>

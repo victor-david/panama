@@ -91,6 +91,11 @@ namespace Restless.App.Panama.Database.Tables
                 /// </summary>
                 public const Int64 HtmlFileType = 9;
 
+                /// <summary>
+                /// The value of the <see cref="Columns.Id"/> column that represents an image document.
+                /// </summary>
+                public const Int64 ImageFileType = 10;
+
             }
 
         }

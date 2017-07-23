@@ -43,15 +43,6 @@ namespace Restless.App.Panama.ViewModel
         {
             get { return scanner; }
         }
-
-        /// <summary>
-        /// Gets or sets the selected item.
-        /// </summary>
-        public object SelectedItem
-        {
-            get;
-            set;
-        }
         #endregion
 
         /************************************************************************/
@@ -79,7 +70,7 @@ namespace Restless.App.Panama.ViewModel
             };
 
             Owner.RawCommands.Add("OpenFile", RunOpenFileCommand);
-            Owner.RawCommands.Add("DeleteFile", RunDeleteFileCommand, (o) => { return SelectedItem != null; });
+            Owner.RawCommands.Add("DeleteFile", RunDeleteFileCommand, (o) => { return Owner.SelectedItem != null; });
             UpdateNotFoundHeader();
         }
         #endregion
@@ -113,7 +104,7 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunOpenFileCommand(object o)
         {
-            var row = SelectedItem as FileScanDisplayObject;
+            var row = Owner.SelectedItem as FileScanDisplayObject;
             if (row != null)
             {
                 OpenHelper.OpenFile(Paths.Title.WithRoot(row.FileName));
@@ -122,7 +113,7 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunDeleteFileCommand(object o)
         {
-            var row = SelectedItem as FileScanDisplayObject;
+            var row = Owner.SelectedItem as FileScanDisplayObject;
             if (row != null)
             {
                 if (Restless.Tools.Win32.FileOperations.SendToRecycle(Paths.Title.WithRoot(row.FileName)))

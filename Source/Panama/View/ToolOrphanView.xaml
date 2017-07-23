@@ -5,7 +5,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
+    xmlns:view="clr-namespace:Restless.App.Panama.View"
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="600">
     <Control.Resources>
@@ -13,25 +15,55 @@
     </Control.Resources>
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationOrphan}"/>
-        <Button DockPanel.Dock="Top" Width="120" HorizontalAlignment="Left" Command="{Binding RawCommands[Begin]}" Content="Begin">
-            <Button.IsEnabled>
-                <MultiBinding Converter="{StaticResource BooleanToBooleanMultiConverter}" ConverterParameter="{StaticResource True}">
-                    <Binding Path="Controller.Scanner.IsRunning" />
-                </MultiBinding>
-            </Button.IsEnabled>
-        </Button>
-        <ProgressBar DockPanel.Dock="Top"  Height="30" Margin="4,10" Minimum="0" Maximum="{Binding Controller.Scanner.TotalCount}" Value="{Binding Controller.Scanner.ScanCount,Mode=OneWay}"/>
-        <HeaderedContentControl DockPanel.Dock="Top"  Style="{StaticResource HCCTool}" Header="{Binding Controller.NotFoundHeader, Mode=OneWay}" Margin="4">
-            <DataGrid x:Name="grid" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding Controller.SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
-                <DataGrid.ContextMenu>
-                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
-                </DataGrid.ContextMenu>                
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.RawCommands[OpenFile]}"/>
-                    </Style>
-                </DataGrid.RowStyle>
-            </DataGrid>
-        </HeaderedContentControl>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Style="{StaticResource StackPanelCommandHolder}">
+                <Button Width="120" HorizontalAlignment="Left" Command="{Binding RawCommands[Begin]}" Content="Begin">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource BooleanToBooleanMultiConverter}" ConverterParameter="{StaticResource True}">
+                            <Binding Path="Controller.Scanner.IsRunning" />
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+                <!--<ProgressBar Height="30" HorizontalAlignment="Stretch" Width="250" Margin="4,10" Minimum="0" Maximum="{Binding Controller.Scanner.TotalCount}" Value="{Binding Controller.Scanner.ScanCount,Mode=OneWay}"/>-->
+            </StackPanel>
+            <Button
+                Grid.Column="1"
+                Style="{StaticResource ToolBarButton}"
+                HorizontalAlignment="Left"
+                Command="{Binding RawCommands[TogglePreview]}"
+                Content="{Binding PreviewActiveIcon}" />
+        </Grid>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <HeaderedContentControl 
+                Grid.Column="0"
+                Grid.ColumnSpan="{Binding IsPreviewActive, Converter={cv:BooleanToIntegerConverter}, ConverterParameter={StaticResource Integer1}}"
+                Style="{StaticResource HCCTool}" Header="{Binding Controller.NotFoundHeader, Mode=OneWay}" Margin="4">
+                <DataGrid x:Name="grid" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
+                    <DataGrid.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                    </DataGrid.ContextMenu>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.RawCommands[OpenFile]}"/>
+                        </Style>
+                    </DataGrid.RowStyle>
+                </DataGrid>
+            </HeaderedContentControl>
+            <view:ToolPreview Grid.Column="1"/>
+        </Grid>
     </DockPanel>
 </UserControl>

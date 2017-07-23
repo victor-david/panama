@@ -29,11 +29,9 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for the search tool.
     /// </summary>
-    public class ToolSearchViewModel : DataGridViewModelBase
+    public class ToolSearchViewModel : DataGridPreviewViewModel
     {
         #region Private
-        private bool isPreviewMode;
-        private string previewText;
         private string foundHeader;
         private ObservableCollection<WindowsSearchResult> resultsView;
         private List<DataGridColumn> previewColumns;
@@ -64,34 +62,6 @@ namespace Restless.App.Panama.ViewModel
         {
             get;
             set;
-        }
-
-        /// <summary>
-        /// Gets a boolean value that indicates if preview mode is active.
-        /// </summary>
-        public bool IsPreviewMode
-        {
-            get { return isPreviewMode; }
-            private set
-            {
-                isPreviewMode = value;
-                OnPropertyChanged("IsPreviewMode");
-                SetPreviewColumns();
-                if (IsPreviewMode) OnSelectedItemChanged();
-            }
-        }
-
-        /// <summary>
-        /// When <see cref="IsPreviewMode"/> is true, gets the preview text for the selected item.
-        /// </summary>
-        public string PreviewText
-        {
-            get { return previewText; }
-            private set
-            {
-                previewText = value;
-                OnPropertyChanged("PreviewText");
-            }
         }
 
         /// <summary>
@@ -150,7 +120,7 @@ namespace Restless.App.Panama.ViewModel
             RawCommands.Add("OpenItem", RunOpenItemCommand, CanRunCommandIfRowSelected);
             RawCommands.Add("GoToTitleRecord", RunGoToTitleRecordCommand, CanRunGoToTitleRecordCommand);
             RawCommands.Add("DeleteItem", RunDeleteItemCommand, CanRunDeleteItemCommand);
-            RawCommands.Add("TogglePreview", (o) => { IsPreviewMode = !IsPreviewMode; });
+            //RawCommands.Add("TogglePreview", (o) => { IsPreviewMode = !IsPreviewMode; });
 
             MenuItems.AddItem(Strings.CommandOpenItemOrDoubleClick, RawCommands["OpenItem"], "ImageOpenFileMenu");
             MenuItems.AddItem("Go to title record for this item", RawCommands["GoToTitleRecord"], "ImageBrowseToUrlMenu");
@@ -165,34 +135,63 @@ namespace Restless.App.Panama.ViewModel
             provider.ExcludedScopes.Add(Config.Instance.FolderSubmissionMessageAttachment);
             IsEmptyResultSet = false;
         }
-        #pragma warning restore 1591
+#pragma warning restore 1591
         #endregion
 
         /************************************************************************/
 
         #region Protected Methods
         /// <summary>
-        /// Called when the selected item changes.
+        /// Called by the ancestor class when a preview of the selected item is needed.
         /// </summary>
-        protected override void OnSelectedItemChanged()
+        /// <param name="selectedItem">The currently selected grid item.</param>
+        protected override void OnPreview(object selectedItem)
         {
-            PreviewText = null;
-            if (IsPreviewMode)
+            WindowsSearchResult item = selectedItem as WindowsSearchResult;
+            if (item != null)
             {
-                WindowsSearchResult item = SelectedItem as WindowsSearchResult;
-                if (item != null)
+                string path = item.Values[SysProps.System.ItemFolderPathDisplay].ToString();
+                string file = item.Values[SysProps.System.FileName].ToString();
+                string fileName = Path.Combine(path, file);
+                PerformPreview(fileName);
+            }
+        }
+
+        /// <summary>
+        /// Gets the preview mode for the specified item.
+        /// </summary>
+        /// <param name="selectedItem">The selected grid item</param>
+        /// <returns>The preview mode</returns>
+        protected override PreviewMode GetPreviewMode(object selectedItem)
+        {
+            var item = selectedItem as WindowsSearchResult;
+            if (item != null)
+            {
+                string path = item.Values[SysProps.System.ItemFolderPathDisplay].ToString();
+                string file = item.Values[SysProps.System.FileName].ToString();
+                return DocumentPreviewer.GetPreviewMode(Path.Combine(path, file));
+            }
+            return PreviewMode.Unsupported;
+        }
+
+        /// <summary>
+        /// Called by the ancestor class when <see cref="DataGridPreviewViewModel.IsPreviewActive"/> changes.
+        /// </summary>
+        protected override void OnIsPreviewActiveChanged()
+        {
+            if (previewColumns != null)
+            {
+                Visibility visibility = (IsPreviewActive) ? Visibility.Hidden : Visibility.Visible;
+                foreach (var col in previewColumns)
                 {
-                    string path = item.Values[SysProps.System.ItemFolderPathDisplay].ToString();
-                    string file = item.Values[SysProps.System.FileName].ToString();
-                    PreviewText = DocumentPreviewer.Preview(Path.Combine(path, file));
+                    col.Visibility = visibility;
                 }
             }
-
         }
         #endregion
-
-        /************************************************************************/
         
+        /************************************************************************/
+
         #region Private Methods
         private void UpdateFoundHeader()
         {
@@ -294,14 +293,7 @@ namespace Restless.App.Panama.ViewModel
             return false;
         }
 
-        private void SetPreviewColumns()
-        {
-            Visibility visibility = (IsPreviewMode) ? Visibility.Hidden : Visibility.Visible;
-            foreach (var col in previewColumns)
-            {
-                col.Visibility = visibility;
-            }
-        }
+
         #endregion
 
         private class ExtendedSearchResult

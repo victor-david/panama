@@ -134,7 +134,8 @@ namespace Restless.App.Panama.ViewModel
 
         #region Protected methods
         /// <summary>
-        /// Override in a derived class to perform actions when the selected item changes. 
+        /// Override in a derived class to perform actions when the selected item changes.
+        /// The base implementation does nothing.
         /// </summary>
         protected virtual void OnSelectedItemChanged()
         {
