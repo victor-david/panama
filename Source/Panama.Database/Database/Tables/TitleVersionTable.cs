@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Restless.Tools.Database.SQLite;
+using Restless.Tools.OpenXml;
+using Restless.Tools.Utility;
+using System;
 using System.Data;
 using System.IO;
-using Restless.App.Panama.Database;
-using Restless.Tools.Database.Generic;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
-using Restless.Tools.OpenXml;
 
 namespace Restless.App.Panama.Database.Tables
 {

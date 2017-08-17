@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Restless.Tools.Database.SQLite;
+using System;
 using System.Data;
-using System.Diagnostics;
-using Restless.App.Panama.Database;
-using Restless.Tools.Database.Generic;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
 
 namespace Restless.App.Panama.Database.Tables
 {    /// <summary>
-    /// Represents the table that contains submission records. A submission record maps to a title and the submission batch.
-    /// </summary>
+     /// Represents the table that contains submission records. A submission record maps to a title and the submission batch.
+     /// </summary>
     [System.ComponentModel.DesignerCategory("foo")]
     public class SubmissionTable : TableBase
     {

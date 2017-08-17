@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Restless.Tools.Database.SQLite;
+using System;
 using System.Data;
-using System.Diagnostics;
-using Restless.App.Panama.Database;
-using Restless.Tools.Database.Generic;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
 
 namespace Restless.App.Panama.Database.Tables
 {
