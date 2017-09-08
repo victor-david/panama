@@ -116,7 +116,7 @@ namespace Restless.App.Panama.ViewModel
             var row = Owner.SelectedItem as FileScanDisplayObject;
             if (row != null)
             {
-                if (Restless.Tools.Win32.FileOperations.SendToRecycle(Paths.Title.WithRoot(row.FileName)))
+                if (Restless.Tools.Utility.FileOperations.SendToRecycle(Paths.Title.WithRoot(row.FileName)))
                 {
                     RemoveFromNotFound(row);
                 }

@@ -68,7 +68,7 @@ namespace Restless.App.Panama
 #if !DEBUG
             TopLevelExceptionHandler.Initialize();
 #endif
-            OpenHelper.ThrowIfNotWindows7();
+            Validations.ThrowIfNotWindows7();
             ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
             StartupOptions ops = new StartupOptions(e.Args);
             DatabaseController.Instance.Init(ApplicationInfo.Instance.RootFolder, ops.DatabaseFileName);

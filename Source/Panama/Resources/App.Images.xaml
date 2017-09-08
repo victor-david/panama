@@ -23,7 +23,7 @@
     <BitmapImage x:Key="ImageChevronLeft" UriSource="/Panama;component/Resources/Images/Image.Chevron.Left.48.png"/>
     <BitmapImage x:Key="ImageChevronRight" UriSource="/Panama;component/Resources/Images/Image.Chevron.Right.48.png"/>
     <BitmapImage x:Key="ImageClose" UriSource="/Panama;component/Resources/Images/Image.Close.48.png"/>
-    <BitmapImage x:Key="ImageConfig" UriSource="/Panama;component/Resources/Images/Image.Config.48.png"/>
+    <BitmapImage x:Key="ImageConfig" UriSource="/Panama;component/Resources/Images/Image.Config.64.png"/>
     <BitmapImage x:Key="ImageDatabase" UriSource="/Panama;component/Resources/Images/Image.Database.48.png"/>
     <BitmapImage x:Key="ImageDelete" UriSource="/Panama;component/Resources/Images/Image.Delete.48.png"/>
     <BitmapImage x:Key="ImageDotBlue" UriSource="/Panama;component/Resources/Images/Image.Dot.Blue.32.png"/>
@@ -57,18 +57,18 @@
     <BitmapImage x:Key="ImageNote" UriSource="/Panama;component/Resources/Images/Image.Note.48.png"/>
     <BitmapImage x:Key="ImageOpenFile" UriSource="/Panama;component/Resources/Images/Image.OpenFile.48.png"/>
     <BitmapImage x:Key="ImageOrphan" UriSource="/Panama;component/Resources/Images/Image.Orphan.48.png"/>
-    <BitmapImage x:Key="ImagePublisher" UriSource="/Panama;component/Resources/Images/Image.Publisher.48.png"/>
+    <BitmapImage x:Key="ImagePublisher" UriSource="/Panama;component/Resources/Images/Image.Publisher.64.png"/>
     <BitmapImage x:Key="ImageReference" UriSource="/Panama;component/Resources/Images/Image.Reference.48.png"/>
     <BitmapImage x:Key="ImageRefresh" UriSource="/Panama;component/Resources/Images/Image.Refresh.48.png"/>
-    <BitmapImage x:Key="ImageSave" UriSource="/Panama;component/Resources/Images/Image.Save.48.png"/>
+    <BitmapImage x:Key="ImageSave" UriSource="/Panama;component/Resources/Images/Image.Save.64.png"/>
     <BitmapImage x:Key="ImageSearch" UriSource="/Panama;component/Resources/Images/Image.Search.48.png"/>
     <BitmapImage x:Key="ImageStatistics" UriSource="/Panama;component/Resources/Images/Image.Statistics.48.png"/>
     <BitmapImage x:Key="ImageSubStatus1" UriSource="/Panama;component/Resources/Images/Image.Check.48.png"/>
     <BitmapImage x:Key="ImageSubStatus255" UriSource="/Panama;component/Resources/Images/Image.Accepted.48.png"/>
-    <BitmapImage x:Key="ImageSubmission" UriSource="/Panama;component/Resources/Images/Image.Send.48.png"/>
+    <BitmapImage x:Key="ImageSubmission" UriSource="/Panama;component/Resources/Images/Image.Send.64.png"/>
     <BitmapImage x:Key="ImageTable" UriSource="/Panama;component/Resources/Images/Image.Table.48.png"/>
     <BitmapImage x:Key="ImageTag" UriSource="/Panama;component/Resources/Images/Image.Tag.48.png"/>
-    <BitmapImage x:Key="ImageTitle" UriSource="/Panama;component/Resources/Images/Image.Book.48.png"/>
+    <BitmapImage x:Key="ImageTitle" UriSource="/Panama;component/Resources/Images/Image.Book.64.png"/>
     <BitmapImage x:Key="ImageTool" UriSource="/Panama;component/Resources/Images/Image.Tool.48.png"/>
     <BitmapImage x:Key="ImageToolConvert" UriSource="/Panama;component/Resources/Images/Image.Convert.48.png"/>
     <BitmapImage x:Key="ImageToolExport" UriSource="/Panama;component/Resources/Images/Image.Tool.Export.48.png"/>

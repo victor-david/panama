@@ -714,4 +714,7 @@ The application cannot continue.</value>
   <data name="CommandBrowseToUrlOrClick" xml:space="preserve">
     <value>Browse to this url (or double click the row)</value>
   </data>
+  <data name="CaptionIconsDesigned1" xml:space="preserve">
+    <value>Icons designed by Linear Color SEO (Freepik) from Flaticon</value>
+  </data>
 </root>

@@ -275,7 +275,7 @@ namespace Restless.App.Panama.ViewModel
             if (row != null)
             {
                 string fileName = Paths.Title.WithRoot(row.Values[SysProps.System.ItemPathDisplay].ToString());
-                if (Restless.Tools.Win32.FileOperations.SendToRecycle(fileName))
+                if (Restless.Tools.Utility.FileOperations.SendToRecycle(fileName))
                 {
                     resultsView.Remove(row);
                 }

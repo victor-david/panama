@@ -110,9 +110,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Xceed.Wpf.Toolkit, Version=3.4.17280.14430, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xceed.Wpf.Toolkit.3.4.17280.14430\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -691,7 +688,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Information.48.png" />
-    <Resource Include="Resources\Images\Image.Config.48.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Restless.Tools.Library\Source\Restless.Tools.Library.OfficeAutomation\Restless.Tools.Library.OfficeAutomation.csproj">
@@ -708,16 +704,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Image.Book.48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Image.Publisher.48.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\Image.Close.48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Image.Save.48.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Calendar.48.png" />
@@ -733,9 +720,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Undo.48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Image.Send.48.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Chevron.Left.48.png" />
@@ -826,6 +810,15 @@
     <None Include="DevelopmentRoot.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Book.64.png" />
+    <Resource Include="Resources\Images\Image.Config.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Publisher.64.png" />
+    <Resource Include="Resources\Images\Image.Save.64.png" />
+    <Resource Include="Resources\Images\Image.Send.64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

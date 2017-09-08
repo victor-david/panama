@@ -35,15 +35,17 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
-    <!--<Style TargetType="Button" x:Key="ToolBarToggleButton" BasedOn="{StaticResource ToolBarButton}">
-        <Setter Property="Width" Value="24" />
-        <Setter Property="Height" Value="24" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="Content" Value="{Binding ToggleIcon}"/>
-        <Setter Property="Command" Value="{Binding ToggleCommand}" />
-    </Style>-->
 
+    <Style TargetType="Button" x:Key="MainMenuButton" BasedOn="{StaticResource ToolBarButton}">
+        <Setter Property="Foreground" Value="DarkBlue" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFEEEEEE"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style TargetType="MenuItem">
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -53,7 +55,7 @@
     </Style>
     
     <DataTemplate x:Key="ICMenuItemTemplate">
-        <Button ToolTip="{Binding TooltipText}" Command="{Binding Path=Command}" Margin="1,2" MinWidth="132" Height="{Binding Path=ButtonSize}" Cursor="Hand">
+        <Button Style="{StaticResource MainMenuButton}" ToolTip="{Binding TooltipText}" Command="{Binding Path=Command}" Margin="1,2" MinWidth="132" Height="{Binding Path=ButtonSize}" Cursor="Hand">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{Binding Path=Icon}" Height="{Binding Path=ImageSize}">
                     <Image.Style>
@@ -75,7 +77,7 @@
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="4,0"/>
+                    <StackPanel Orientation="Horizontal" Margin="4"/>
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>

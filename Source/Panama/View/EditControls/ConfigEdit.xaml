@@ -37,7 +37,7 @@
                 </StackPanel>
 
                 <!-- Color edit. Only displays when the config type is color -->
-                <xc:ColorCanvas Visibility="{Binding ColorTypeVisibility}" SelectedColor="{Binding SelectedRow[value]}"/>
+                <!--<xc:ColorCanvas Visibility="{Binding ColorTypeVisibility}" SelectedColor="{Binding SelectedRow[value]}"/>-->
 
                 <!-- Path edit. Only displays when the config type is path or mapi -->
                 <StackPanel Margin="8,2" Visibility="{Binding PathTypeVisibility}">

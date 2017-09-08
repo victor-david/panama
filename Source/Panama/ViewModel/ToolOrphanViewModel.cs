@@ -31,8 +31,6 @@ namespace Restless.App.Panama.ViewModel
     public class ToolOrphanViewModel : DataGridPreviewViewModel
     {
         #region Private
-        private bool isPreviewMode;
-        private string previewText;
         #endregion
 
         /************************************************************************/
