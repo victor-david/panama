@@ -24,11 +24,12 @@
     <BitmapImage x:Key="ImageChevronRight" UriSource="/Panama;component/Resources/Images/Image.Chevron.Right.48.png"/>
     <BitmapImage x:Key="ImageClose" UriSource="/Panama;component/Resources/Images/Image.Close.48.png"/>
     <BitmapImage x:Key="ImageConfig" UriSource="/Panama;component/Resources/Images/Image.Config.64.png"/>
-    <BitmapImage x:Key="ImageDatabase" UriSource="/Panama;component/Resources/Images/Image.Database.48.png"/>
+    <BitmapImage x:Key="ImageDatabase" UriSource="/Panama;component/Resources/Images/Image.Database.64.png"/>
     <BitmapImage x:Key="ImageDelete" UriSource="/Panama;component/Resources/Images/Image.Delete.48.png"/>
     <BitmapImage x:Key="ImageDotBlue" UriSource="/Panama;component/Resources/Images/Image.Dot.Blue.32.png"/>
     <BitmapImage x:Key="ImageDotGreen" UriSource="/Panama;component/Resources/Images/Image.Dot.Green.32.png"/>
     <BitmapImage x:Key="ImageDotRed" UriSource="/Panama;component/Resources/Images/Image.Dot.Red.32.png"/>
+    <BitmapImage x:Key="ImageExit" UriSource="/Panama;component/Resources/Images/Image.Exit.64.png"/>
     
     <BitmapImage x:Key="ImageFileType0" UriSource="/Panama;component/Resources/Images/Image.FileType.Unknown.48.png"/>
     <!-- Type 1 is Word (.doc / .docx) -->
@@ -52,28 +53,29 @@
 
     <BitmapImage x:Key="ImageFilter" UriSource="/Panama;component/Resources/Images/Image.Filter.48.png"/>
     <BitmapImage x:Key="ImageFolder" UriSource="/Panama;component/Resources/Images/Image.Folder.48.png"/>
-    <BitmapImage x:Key="ImageInformation" UriSource="/Panama;component/Resources/Images/Image.Information.48.png"/>
+    <BitmapImage x:Key="ImageInformation" UriSource="/Panama;component/Resources/Images/Image.Information.64.png"/>
     <BitmapImage x:Key="ImageMoney" UriSource="/Panama;component/Resources/Images/Image.Money.48.png"/>
-    <BitmapImage x:Key="ImageNote" UriSource="/Panama;component/Resources/Images/Image.Note.48.png"/>
+    <BitmapImage x:Key="ImageNote" UriSource="/Panama;component/Resources/Images/Image.Note.64.png"/>
     <BitmapImage x:Key="ImageOpenFile" UriSource="/Panama;component/Resources/Images/Image.OpenFile.48.png"/>
     <BitmapImage x:Key="ImageOrphan" UriSource="/Panama;component/Resources/Images/Image.Orphan.48.png"/>
+    <BitmapImage x:Key="ImagePassword" UriSource="/Panama;component/Resources/Images/Image.Password.64.png"/>
     <BitmapImage x:Key="ImagePublisher" UriSource="/Panama;component/Resources/Images/Image.Publisher.64.png"/>
     <BitmapImage x:Key="ImageReference" UriSource="/Panama;component/Resources/Images/Image.Reference.48.png"/>
     <BitmapImage x:Key="ImageRefresh" UriSource="/Panama;component/Resources/Images/Image.Refresh.48.png"/>
     <BitmapImage x:Key="ImageSave" UriSource="/Panama;component/Resources/Images/Image.Save.64.png"/>
-    <BitmapImage x:Key="ImageSearch" UriSource="/Panama;component/Resources/Images/Image.Search.48.png"/>
-    <BitmapImage x:Key="ImageStatistics" UriSource="/Panama;component/Resources/Images/Image.Statistics.48.png"/>
+    <BitmapImage x:Key="ImageSearch" UriSource="/Panama;component/Resources/Images/Image.Search.64.png"/>
+    <BitmapImage x:Key="ImageStatistics" UriSource="/Panama;component/Resources/Images/Image.Statistics.64.png"/>
     <BitmapImage x:Key="ImageSubStatus1" UriSource="/Panama;component/Resources/Images/Image.Check.48.png"/>
     <BitmapImage x:Key="ImageSubStatus255" UriSource="/Panama;component/Resources/Images/Image.Accepted.48.png"/>
     <BitmapImage x:Key="ImageSubmission" UriSource="/Panama;component/Resources/Images/Image.Send.64.png"/>
     <BitmapImage x:Key="ImageTable" UriSource="/Panama;component/Resources/Images/Image.Table.48.png"/>
-    <BitmapImage x:Key="ImageTag" UriSource="/Panama;component/Resources/Images/Image.Tag.48.png"/>
+    <BitmapImage x:Key="ImageTag" UriSource="/Panama;component/Resources/Images/Image.Tag.64.png"/>
     <BitmapImage x:Key="ImageTitle" UriSource="/Panama;component/Resources/Images/Image.Book.64.png"/>
     <BitmapImage x:Key="ImageTool" UriSource="/Panama;component/Resources/Images/Image.Tool.48.png"/>
     <BitmapImage x:Key="ImageToolConvert" UriSource="/Panama;component/Resources/Images/Image.Convert.48.png"/>
-    <BitmapImage x:Key="ImageToolExport" UriSource="/Panama;component/Resources/Images/Image.Tool.Export.48.png"/>
-    <BitmapImage x:Key="ImageToolMeta" UriSource="/Panama;component/Resources/Images/Image.Refresh.48.png"/>
-    <BitmapImage x:Key="ImageToolTitleList" UriSource="/Panama;component/Resources/Images/Image.FileType.Text.48.png"/>
+    <BitmapImage x:Key="ImageToolExport" UriSource="/Panama;component/Resources/Images/Image.Tool.Export.64.png"/>
+    <BitmapImage x:Key="ImageToolMeta" UriSource="/Panama;component/Resources/Images/Image.Refresh.64.png"/>
+    <BitmapImage x:Key="ImageToolTitleList" UriSource="/Panama;component/Resources/Images/Image.List.64.png"/>
     <BitmapImage x:Key="ImageUndo" UriSource="/Panama;component/Resources/Images/Image.Undo.48.png"/>
     <BitmapImage x:Key="ImageUser" UriSource="/Panama;component/Resources/Images/Image.User.48.png"/>
 
@@ -104,13 +106,13 @@
     <Image x:Key="ImageCheckMenu" x:Shared="False" Source="{StaticResource ImageCheck}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageCloseMenu" x:Shared="False" Source="{StaticResource ImageClose}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageConfigMenu" Source="{StaticResource ImageConfig}" Style="{StaticResource MenuItemImage}"/>
-    <Image x:Key="ImageCredentialMenu" Source="{StaticResource ImageTable}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageCredentialMenu" Source="{StaticResource ImagePassword}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageDatabaseMenu" Source="{StaticResource ImageDatabase}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageDeleteMenu" x:Shared="False"  Source="{StaticResource ImageDelete}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageDotGreenMenu" x:Shared="False"  Source="{StaticResource ImageDotGreen}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageFilterMenu" Source="{StaticResource ImageFilter}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageInformationMenu" Source="{StaticResource ImageInformation}" Style="{StaticResource MenuItemImage}"/>
-    <Image x:Key="ImageLinkMenu" Source="{StaticResource ImageArrowRight}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageLinkMenu" Source="{StaticResource ImageExit}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageNoteMenu" Source="{StaticResource ImageNote}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageOpenFileMenu" Source="{StaticResource ImageOpenFile}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageOpenWordMenu" Source="{StaticResource ImageFileType1}" Style="{StaticResource MenuItemImage}"/>

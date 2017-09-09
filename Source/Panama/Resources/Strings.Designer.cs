@@ -83,7 +83,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Icons designed by Linear Color SEO (Freepik) from Flaticon.
+        ///   Looks up a localized string similar to Icons designed by Linear Color SEO (Freepik), Smashicons, Swifticons, and Maxim Basinski from Flaticon.
         /// </summary>
         public static string CaptionIconsDesigned1 {
             get {

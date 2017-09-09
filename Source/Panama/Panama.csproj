@@ -684,12 +684,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Image.Database.48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Image.Information.48.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Restless.Tools.Library\Source\Restless.Tools.Library.OfficeAutomation\Restless.Tools.Library.OfficeAutomation.csproj">
       <Project>{6DB76CAD-D35A-4BDF-9A01-DD0DB96C4019}</Project>
       <Name>Restless.Tools.Library.OfficeAutomation</Name>
@@ -751,19 +745,10 @@
     <Resource Include="Resources\Images\Image.Arrow.Up.48.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Image.Tag.48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Image.Refresh.48.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\Image.Accepted.48.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Filter.48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Image.Note.48.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon.Main.ico" />
@@ -778,12 +763,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Money.48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Image.Tool.Export.48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Image.Search.48.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Orphan.48.png" />
@@ -801,9 +780,6 @@
     <Resource Include="Resources\Images\Image.Convert.48.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Image.Statistics.48.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\Image.Table.48.png" />
   </ItemGroup>
   <ItemGroup>
@@ -819,6 +795,37 @@
     <Resource Include="Resources\Images\Image.Publisher.64.png" />
     <Resource Include="Resources\Images\Image.Save.64.png" />
     <Resource Include="Resources\Images\Image.Send.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Information.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Note.64.png" />
+    <Resource Include="Resources\Images\Image.Search.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Refresh.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Database.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Tag.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Statistics.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Tool.Export.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.List.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Exit.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Password.64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
