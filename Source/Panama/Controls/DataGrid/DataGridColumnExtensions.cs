@@ -56,6 +56,36 @@ namespace Restless.App.Panama.Controls
             return col;
         }
 
+        /// <summary>
+        /// Sets the column's ElementStyle property to the specified style.
+        /// </summary>
+        /// <param name="col">The column.</param>
+        /// <param name="style">The style to set.</param>
+        /// <returns>The column</returns>
+        public static DataGridBoundColumn AddCellStyle(this DataGridBoundColumn col, Style style)
+        {
+            if (style != null)
+            {
+                col.ElementStyle = style;
+            }
+            return col;
+        }
+
+        /// <summary>
+        /// Sets the column's HeaderStyle property to the specified style.
+        /// </summary>
+        /// <param name="col">The column.</param>
+        /// <param name="style">The style to set.</param>
+        /// <returns>The column.</returns>
+        public static DataGridBoundColumn AddHeaderStyle(this DataGridBoundColumn col, Style style)
+        {
+
+            if (style != null && style.TargetType == typeof(DataGridColumnHeader))
+            {
+                col.HeaderStyle = style;
+            }
+            return col;
+        }
 
         /// <summary>
         /// Makes the column fixed width, unable to resize

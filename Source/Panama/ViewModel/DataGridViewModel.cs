@@ -174,12 +174,19 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Protected properties
+        /// <summary>
+        /// Gets the style resource that aligns a data cell to the right.
+        /// </summary>
+        protected Style NumericRightCell
+        {
+            get { return (Style)ResourceHelper.Get("TextBlockRight"); }
+        }
         #endregion
 
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+#pragma warning disable 1591
         protected DataGridViewModel()
         {
             Table = DatabaseController.Instance.GetTable<T>();

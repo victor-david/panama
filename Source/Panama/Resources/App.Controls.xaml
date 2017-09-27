@@ -127,4 +127,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style TargetType="TextBlock" x:Key="TextBlockRight">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
 </ResourceDictionary>

@@ -30,11 +30,11 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
                             <Label>Fee</Label>
-                            <TextBox Text="{Binding SelectedRow[fee]}"/>
+                            <TextBox Text="{Binding SelectedRow[fee], StringFormat=N2}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <Label>Award</Label>
-                            <TextBox Text="{Binding SelectedRow[award]}"/>
+                            <TextBox Text="{Binding SelectedRow[award], StringFormat=N2}"/>
                         </StackPanel>
                     </Grid>
                     <Label DockPanel.Dock="Top">Notes</Label>
