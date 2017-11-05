@@ -31,7 +31,11 @@ namespace Restless.App.Panama.Database.Tables
                 /// </summary>
                 public const string Id = "id";
                 /// <summary>
-                /// The name of the entry id column. Holds the path tp the message.
+                /// Protocol column. Holds the protocol used to access the message.
+                /// </summary>
+                public const string Protocol = "protocol";
+                /// <summary>
+                /// The name of the entry id column. Holds the path to the message.
                 /// </summary>
                 public const string EntryId = "entryid";
                 /// <summary>
@@ -110,6 +114,27 @@ namespace Restless.App.Panama.Database.Tables
                 /// </summary>
                 public const string ToSubmissionMessageAttachment = "SubMessageToAttach";
             }
+
+            /// <summary>
+            /// Provides static values
+            /// </summary>
+            public static class Values
+            {
+                /// <summary>
+                /// Provides static values used for <see cref="Columns.Protocol"/>.
+                /// </summary>
+                public static class Protocol
+                {
+                    /// <summary>
+                    /// Protocol identifier for messages stored directly in the database.
+                    /// </summary>
+                    public const string Database = "db:";
+                    /// <summary>
+                    /// Protocol identifier for messages stored externally in MAPI store.
+                    /// </summary>
+                    public const string Mapi = "mapi:";
+                }
+            }
         }
 
         /// <summary>
@@ -147,6 +172,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="batchId">The batch id from the <see cref="SubmissionBatchTable"/> that owns this message.</param>
         /// <param name="subject">The message subject.</param>
+        /// <param name="protocol">The protocol used to access this message</param>
         /// <param name="url">The url to the message. This is a MAPI reference to the Outlook data store.</param>
         /// <param name="received">The date / time the message was received.</param>
         /// <param name="sent">The date / time the message was sent.</param>
@@ -154,7 +180,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="toAddress">The email address of the message recipient.</param>
         /// <param name="fromName">The name of the message sender.</param>
         /// <param name="fromAddress">The email address of the message sender.</param>
-        public void Add(Int64 batchId, string subject, string url, object received, object sent, string toName, string toAddress, string fromName, string fromAddress)
+        public void Add(Int64 batchId, string subject, string protocol, string url, object received, object sent, string toName, string toAddress, string fromName, string fromAddress)
         {
             DataRow row = NewRow();
             if (String.IsNullOrEmpty(subject))
@@ -165,6 +191,7 @@ namespace Restless.App.Panama.Database.Tables
             row[Defs.Columns.Body] = DBNull.Value;
             row[Defs.Columns.BodyFormat] = 0;
             row[Defs.Columns.Display] = subject;
+            row[Defs.Columns.Protocol] = protocol;
             row[Defs.Columns.EntryId] = url; //
             row[Defs.Columns.Outgoing] = false; // needs work
             row[Defs.Columns.Received] = received; // This is a DateTime

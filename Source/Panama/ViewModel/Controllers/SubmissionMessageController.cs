@@ -103,12 +103,12 @@ namespace Restless.App.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
-            OnPropertyChanged("MessageText");
+            OnPropertyChanged(nameof(MessageText));
             IsMapiMessage = false;
             if (SelectedRow != null)
             {
-                string entryId = SelectedRow[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
-                IsMapiMessage = entryId.StartsWith("mapi://");
+                string protocol = SelectedRow[SubmissionMessageTable.Defs.Columns.Protocol].ToString();
+                IsMapiMessage = protocol == SubmissionMessageTable.Defs.Values.Protocol.Mapi;
             }
         }
 
@@ -132,13 +132,13 @@ namespace Restless.App.Panama.ViewModel
         /// </remarks>
         protected override void RunOpenRowCommand(object item)
         {
-            DataRowView view = item as DataRowView;
-            if (view != null)
+            if (item is DataRowView view)
             {
                 string entryId = view.Row[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
-                if (entryId.StartsWith("mapi://"))
+                if (IsMapiMessage)
                 {
-                    OpenHelper.OpenFile(entryId);
+                    string url = $"{SubmissionMessageTable.Defs.Values.Protocol.Mapi}{Config.FolderMapi}{entryId}";
+                    OpenHelper.OpenFile(url);
                 }
             }
         }
@@ -157,22 +157,23 @@ namespace Restless.App.Panama.ViewModel
             var ops = new MessageSelectOptions(MessageSelectMode.Message, Config.Instance.FolderMapi);
             var w = WindowFactory.MessageSelect.Create(Strings.CaptionSelectSubmissionMessage, ops);
             w.ShowDialog();
-            var vm = w.GetValue(WindowViewModel.ViewModelProperty) as MessageSelectWindowViewModel;
 
-            if (vm != null)
+            if (w.GetValue(WindowViewModel.ViewModelProperty) is MessageSelectWindowViewModel vm)
             {
                 if (vm.SelectedItems != null && Owner.SelectedPrimaryKey != null)
                 {
-                    
+                    string header = $"{SubmissionMessageTable.Defs.Values.Protocol.Mapi}{Config.FolderMapi}";
                     Int64 batchId = (Int64)Owner.SelectedPrimaryKey;
                     var table = DatabaseController.Instance.GetTable<SubmissionMessageTable>();
                     foreach (var item in vm.SelectedItems)
                     {
+                        string url = item.Values[SysProps.System.ItemUrl].ToString().Substring(header.Length);
                         table.Add
                             (
                                 batchId,
                                 item.Values[SysProps.System.Subject].ToString(),
-                                item.Values[SysProps.System.ItemUrl].ToString(),
+                                SubmissionMessageTable.Defs.Values.Protocol.Mapi,
+                                url,
                                 item.Values[SysProps.System.Message.DateReceived],
                                 item.Values[SysProps.System.Message.DateSent],
                                 item.Values[SysProps.System.Message.ToName].ToString(),
