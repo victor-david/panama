@@ -1,26 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Converters;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Resources;
-using Restless.App.Panama.Controls;
-
-using Restless.Tools.Utility;
-using System.IO;
+﻿using Restless.App.Panama.Resources;
 using Restless.Tools.Threading;
-using System.Text;
-using Restless.App.Panama.Tools;
+using Restless.Tools.Utility;
+using System;
+using System.ComponentModel;
+using System.IO;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -44,8 +27,7 @@ namespace Restless.App.Panama.ViewModel
             get { return text; }
             set
             {
-                text = value;
-                OnPropertyChanged("Text");
+                SetProperty(ref text, value);
             }
         }
         /// <summary>

@@ -106,12 +106,12 @@ namespace Restless.App.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
-            OnPropertyChanged("BooleanTypeVisibility");
-            OnPropertyChanged("StringTypeVisibility");
-            OnPropertyChanged("MultiStringTypeVisibility");
-            OnPropertyChanged("ColorTypeVisibility");
-            OnPropertyChanged("PathTypeVisibility");
-            OnPropertyChanged("ObjectTypeVisibility");
+            OnPropertyChanged(nameof(BooleanTypeVisibility));
+            OnPropertyChanged(nameof(StringTypeVisibility));
+            OnPropertyChanged(nameof(MultiStringTypeVisibility));
+            OnPropertyChanged(nameof(ColorTypeVisibility));
+            OnPropertyChanged(nameof(PathTypeVisibility));
+            OnPropertyChanged(nameof(ObjectTypeVisibility));
         }
         #endregion
 
@@ -132,27 +132,6 @@ namespace Restless.App.Panama.ViewModel
             }
             return Visibility.Collapsed;
         }
-
-        //private void RunPathPickerCommand(object o)
-        //{
-        //    using (var dialog = new CommonOpenFileDialog())
-        //    {
-        //        dialog.IsFolderPicker = true;
-
-        //        string dir = SelectedRow[ConfigTable.Defs.Columns.Value].ToString();
-        //        //dir = dir.Replace(@"\\", @"\");
-        //        if (System.IO.Directory.Exists(dir))
-        //        {
-        //            dialog.InitialDirectory = dir;
-        //        }
-        //        CommonFileDialogResult result = dialog.ShowDialog();
-        //        if (result == CommonFileDialogResult.Ok)
-        //        {
-        //            SelectedRow[ConfigTable.Defs.Columns.Value] = dialog.FileName;
-        //            OnPropertyChanged("SelectedRow");
-        //        }
-        //    }
-        //}
 
         private void RunFolderSelectCommand(object o)
         {
@@ -178,7 +157,7 @@ namespace Restless.App.Panama.ViewModel
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
                     SelectedRow[ConfigTable.Defs.Columns.Value] = dialog.FileName;
-                    OnPropertyChanged("SelectedRow");
+                    OnPropertyChanged(nameof(SelectedRow));
                 }
             }
         }
@@ -198,7 +177,7 @@ namespace Restless.App.Panama.ViewModel
                     string url = result.Values[SysProps.System.ItemUrl].ToString();
                     // remove "mapi:" from string
                     SelectedRow[ConfigTable.Defs.Columns.Value] = url.Remove(0, 5);
-                    OnPropertyChanged("SelectedRow");
+                    OnPropertyChanged(nameof(SelectedRow));
                 }
             }
         }

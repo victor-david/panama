@@ -181,8 +181,7 @@ namespace Restless.App.Panama.ViewModel
             get { return isOpenXml; }
             private set
             {
-                isOpenXml = value;
-                OnPropertyChanged("IsOpenXml");
+                SetProperty(ref isOpenXml, value);
             }
         }
 
@@ -194,8 +193,7 @@ namespace Restless.App.Panama.ViewModel
             get { return previewText; }
             private set
             {
-                previewText = value;
-                OnPropertyChanged("PreviewText");
+                SetProperty(ref previewText, value);
             }
         }
         #endregion
@@ -243,7 +241,7 @@ namespace Restless.App.Panama.ViewModel
             RawCommands.Add("TitleFilter", (o) =>
                 {
                     filterIsVisible = !filterIsVisible;
-                    OnPropertyChanged("TitleFilterVisibility");
+                    OnPropertyChanged(nameof(TitleFilterVisibility));
                 });
 
             /* This command is used from this model and from the Filters controller */
@@ -390,7 +388,7 @@ namespace Restless.App.Panama.ViewModel
                             {
                                 SelectedRow[TitleTable.Defs.Columns.Title] = title;
                                 // the grid updates automatcially, but this is needed to update the text box.
-                                OnPropertyChanged("SelectedRow");
+                                OnPropertyChanged(nameof(SelectedRow));
                             }
                         });
                 }
@@ -438,9 +436,9 @@ namespace Restless.App.Panama.ViewModel
 
         private void OnWrittenPropertiesChanged()
         {
-            OnPropertyChanged("WrittenHeader");
-            OnPropertyChanged("WrittenDate");
-            OnPropertyChanged("WrittenDisplayDate");
+            OnPropertyChanged(nameof(WrittenHeader));
+            OnPropertyChanged(nameof(WrittenDate));
+            OnPropertyChanged(nameof(WrittenDisplayDate));
         }
 
         private void AddViewSourceSortDescriptions()

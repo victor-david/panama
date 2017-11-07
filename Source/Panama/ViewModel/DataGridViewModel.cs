@@ -157,7 +157,7 @@ namespace Restless.App.Panama.ViewModel
                 {
                     DataView.RowFilter = null;
                 }
-                OnPropertyChanged("FilterText");
+                OnPropertyChanged();
             }
         }
 
@@ -235,8 +235,8 @@ namespace Restless.App.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
-            OnPropertyChanged("SelectedRow");
-            OnPropertyChanged("EditVisibility");
+            OnPropertyChanged(nameof(SelectedRow));
+            OnPropertyChanged(nameof(EditVisibility));
         }
 
         /// <summary>
@@ -379,7 +379,7 @@ namespace Restless.App.Panama.ViewModel
         private void RunClearFilterCommand(object o)
         {
             FilterText = null;
-            OnPropertyChanged("FilterText");
+            OnPropertyChanged(nameof(FilterText));
         }
 
         private bool CanRunClearFilterCommand(object o)
@@ -389,7 +389,7 @@ namespace Restless.App.Panama.ViewModel
 
         private void DataViewListChanged(object sender, ListChangedEventArgs e)
         {
-            OnPropertyChanged("SourceCount");
+            OnPropertyChanged(nameof(SourceCount));
             OnDataViewListChanged(e);
         }
         #endregion

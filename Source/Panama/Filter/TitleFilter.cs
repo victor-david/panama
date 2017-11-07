@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Restless.Tools.Utility;
+using System;
 using System.Linq;
-using System.Text;
-using Restless.Tools.Utility;
-using System.Windows.Threading;
 
 namespace Restless.App.Panama.Filter
 {
@@ -59,10 +56,11 @@ namespace Restless.App.Panama.Filter
         {
             get { return everSubmitted; }
             set 
-            { 
-                everSubmitted = value;
-                OnPropertyChanged("EverSubmitted");
-                OnChanged();
+            {
+                if (SetProperty(ref everSubmitted, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -74,9 +72,10 @@ namespace Restless.App.Panama.Filter
             get { return published; }
             set
             {
-                published = value;
-                OnPropertyChanged("Published");
-                OnChanged();
+                if (SetProperty(ref published, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -88,9 +87,10 @@ namespace Restless.App.Panama.Filter
             get { return ready; }
             set
             {
-                ready = value;
-                OnPropertyChanged("Ready");
-                OnChanged();
+                if (SetProperty(ref ready, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -102,9 +102,10 @@ namespace Restless.App.Panama.Filter
             get { return submitted; }
             set
             {
-                submitted = value;
-                OnPropertyChanged("Submitted");
-                OnChanged();
+                if (SetProperty(ref submitted, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -117,9 +118,10 @@ namespace Restless.App.Panama.Filter
             get { return folder; }
             set
             {
-                folder = value;
-                OnPropertyChanged("Folder");
-                OnChanged();
+                if (SetProperty(ref folder, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -138,9 +140,10 @@ namespace Restless.App.Panama.Filter
             get { return wordCount; }
             set
             {
-                wordCount = value;
-                OnPropertyChanged("WordCount");
-                OnChanged();
+                if (SetProperty(ref wordCount, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -152,9 +155,10 @@ namespace Restless.App.Panama.Filter
             get { return tagCombine; }
             set
             {
-                tagCombine = value;
-                OnPropertyChanged("TagCombine");
-                OnChanged();
+                if (SetProperty(ref tagCombine, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -212,7 +216,7 @@ namespace Restless.App.Panama.Filter
         protected override void OnChanged()
         {
             base.OnChanged();
-            OnPropertyChanged("IsTagFilterActive");
+            OnPropertyChanged(nameof(IsTagFilterActive));
         }
         #endregion
     }

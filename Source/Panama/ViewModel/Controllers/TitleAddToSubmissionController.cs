@@ -42,15 +42,9 @@ namespace Restless.App.Panama.ViewModel
             get { return visible; }
             private set
             {
-                visible = value;
-                OnPropertyChanged("Visible");
+                SetProperty(ref visible, value);
             }
         }
-
-        //public int Count
-        //{
-        //    get { return  Source.Count; }
-        //}
         #endregion
 
         /************************************************************************/

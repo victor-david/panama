@@ -10,7 +10,7 @@ namespace Restless.App.Panama.ViewModel
     /// Represents the base class for all view models in the application. 
     /// Provides support for property change notifications. This class must be inherited.
     /// </summary>
-    public abstract class ViewModelBase : NotifyPropertyChangedBase, IDisposable
+    public abstract class ViewModelBase : BindableBase, IDisposable
     {
         #region Private Vars
         //private string notificationMessage;

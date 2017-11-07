@@ -34,9 +34,7 @@ namespace Restless.App.Panama.ViewModel
             get { return previewMode; }
             private set
             {
-                previewMode = value;
-                System.Diagnostics.Debug.WriteLine(previewMode.ToString());
-                OnPropertyChanged("PreviewMode");
+                SetProperty(ref previewMode, value);
             }
         }
 
@@ -48,11 +46,13 @@ namespace Restless.App.Panama.ViewModel
             get { return isPreviewActive; }
             private set
             {
-                isPreviewActive = value;
-                OnPropertyChanged("IsPreviewActive");
-                OnPropertyChanged("PreviewActiveIcon");
-                OnIsPreviewActiveChanged();
-                PerformPreviewIf();
+                if (SetProperty(ref isPreviewActive, value))
+                {
+                    OnPropertyChanged(nameof(PreviewActiveIcon));
+                    OnIsPreviewActiveChanged();
+                    PerformPreviewIf();
+                }
+            
             }
         }
 
@@ -76,8 +76,7 @@ namespace Restless.App.Panama.ViewModel
             get { return previewText; }
             protected set
             {
-                previewText = value;
-                OnPropertyChanged("PreviewText");
+                SetProperty(ref previewText, value);
             }
         }
 
@@ -89,8 +88,7 @@ namespace Restless.App.Panama.ViewModel
             get { return previewImageSource; }
             protected set
             {
-                previewImageSource = value;
-                OnPropertyChanged("PreviewImageSource");
+                SetProperty(ref previewImageSource, value);
             }
         }
 
@@ -102,13 +100,13 @@ namespace Restless.App.Panama.ViewModel
             get { return previewImageWidth; }
             protected set
             {
-                previewImageWidth = value;
-                OnPropertyChanged("PreviewImageWidth");
+                SetProperty(ref previewImageWidth, value);
             }
         }
         #endregion
 
         /************************************************************************/
+
         #region Constructor
 #pragma warning disable 1591
         public DataGridPreviewViewModel()

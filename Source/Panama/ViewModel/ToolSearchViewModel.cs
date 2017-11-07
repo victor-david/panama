@@ -1,27 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.Windows.Media;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.OpenXml;
 using Restless.Tools.Search;
-using Restless.Tools.Threading;
 using Restless.Tools.Utility;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.IO;
+using System.Windows;
+using System.Windows.Controls;
 using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
 
 namespace Restless.App.Panama.ViewModel
@@ -50,8 +41,7 @@ namespace Restless.App.Panama.ViewModel
             get { return foundHeader; }
             private set
             {
-                foundHeader = value;
-                OnPropertyChanged("FoundHeader");
+                SetProperty(ref foundHeader, value);
             }
         }
 
@@ -72,8 +62,7 @@ namespace Restless.App.Panama.ViewModel
             get { return isEmptyResultSet; }
             private set
             {
-                isEmptyResultSet = value;
-                OnPropertyChanged("IsEmptyResultSet");
+                SetProperty(ref isEmptyResultSet, value);
             }
         }
         #endregion

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Restless.Tools.Utility;
 
 namespace Restless.App.Panama.Filter
 {
     /// <summary>
     /// Represents the base class for filters. This class must be inherited.
     /// </summary>
-    public abstract class FilterBase : NotifyPropertyChangedBase
+    public abstract class FilterBase : BindableBase
     {
         #region Private
         private string text;
@@ -43,9 +39,10 @@ namespace Restless.App.Panama.Filter
             get { return text; }
             set
             {
-                text = value;
-                OnPropertyChanged("Text");
-                OnChanged();
+                if (SetProperty(ref text, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -58,9 +55,10 @@ namespace Restless.App.Panama.Filter
             get { return id; }
             set
             {
-                id = value;
-                OnPropertyChanged("Id");
-                OnChanged();
+                if (SetProperty(ref id, value))
+                {
+                    OnChanged();
+                }
             }
         }
         #endregion
@@ -142,13 +140,8 @@ namespace Restless.App.Panama.Filter
         {
             if (!IsChangedEventSuspended)
             {
-                var handler = Changed;
-                if (handler != null)
-                {
-                    handler(this, EventArgs.Empty);
-                }
-
-                OnPropertyChanged("IsAnyFilterActive");
+                Changed?.Invoke(this, EventArgs.Empty);
+                OnPropertyChanged(nameof(IsAnyFilterActive));
             }
         }
         #endregion

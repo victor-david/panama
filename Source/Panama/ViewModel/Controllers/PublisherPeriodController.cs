@@ -45,8 +45,7 @@ namespace Restless.App.Panama.ViewModel
             get { return addControlVisibility; }
             private set
             {
-                addControlVisibility = value;
-                OnPropertyChanged("AddControlVisibility");
+                SetProperty(ref addControlVisibility, value);
             }
         }
 
@@ -58,8 +57,7 @@ namespace Restless.App.Panama.ViewModel
             get { return notesVisibility; }
             private set
             {
-                notesVisibility = value;
-                OnPropertyChanged("NotesVisibility");
+                SetProperty(ref notesVisibility, value);
             }
         }
 
@@ -71,8 +69,10 @@ namespace Restless.App.Panama.ViewModel
             get { return addStart; }
             set
             {
-                addStart = value;
-                UpdateSelectedDisplay();
+                if (SetProperty(ref addStart, value))
+                {
+                    UpdateSelectedDisplay();
+                }
             }
         }
 
@@ -84,8 +84,10 @@ namespace Restless.App.Panama.ViewModel
             get { return addEnd; }
             set
             {
-                addEnd = value;
-                UpdateSelectedDisplay();
+                if (SetProperty(ref addEnd, value))
+                {
+                    UpdateSelectedDisplay();
+                }
             }
         }
 
@@ -180,7 +182,7 @@ namespace Restless.App.Panama.ViewModel
         private void UpdateSelectedDisplay()
         {
             SelectedDisplay = String.Format("Period: {0} - {1}", AddStart.ToString("MMMM dd"), AddEnd.ToString("MMMM dd"));
-            OnPropertyChanged("SelectedDisplay");
+            OnPropertyChanged(nameof(SelectedDisplay));
         }
 
         private void RunAddSubmissionPeriodCommand(object o)

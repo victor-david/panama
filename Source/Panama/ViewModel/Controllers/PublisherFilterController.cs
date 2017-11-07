@@ -162,8 +162,8 @@ namespace Restless.App.Panama.ViewModel
             }
 
             Owner.DataView.RowFilter = filter.ToString();
-            OnPropertyChanged("Description");
-            OnPropertyChanged("RecordCountText");
+            OnPropertyChanged(nameof(Description));
+            OnPropertyChanged(nameof(RecordCountText));
         }
 
         private void Append(string filterExpression, string filterDescription, int linesToAppend = 0)

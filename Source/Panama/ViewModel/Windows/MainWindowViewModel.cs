@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Controls;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Threading;
 using Restless.Tools.Utility;
-using Restless.App.Panama.Configuration;
-using System.Windows.Media;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -64,8 +59,7 @@ namespace Restless.App.Panama.ViewModel
             }
             private set
             {
-                notificationMessage = value;
-                OnPropertyChanged("NotificationMessage");
+                SetProperty(ref notificationMessage, value);
                 System.Media.SystemSounds.Asterisk.Play();
             }
         }

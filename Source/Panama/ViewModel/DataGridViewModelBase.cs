@@ -65,9 +65,8 @@ namespace Restless.App.Panama.ViewModel
             get { return selectedItem; }
             set
             {
-                selectedItem = value;
+                SetProperty(ref selectedItem, value);
                 OnSelectedItemChanged();
-                OnPropertyChanged("SelectedItem");
             }
         }
         #endregion

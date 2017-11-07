@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Restless.Tools.Utility;
-
-namespace Restless.App.Panama.Filter
+﻿namespace Restless.App.Panama.Filter
 {
     /// <summary>
     /// Represents the various filtering options that can be applied to the publisher list.
@@ -46,10 +40,11 @@ namespace Restless.App.Panama.Filter
         {
             get { return inPeriod; }
             set 
-            { 
-                inPeriod = value;
-                OnPropertyChanged("InPeriod");
-                OnChanged();
+            {
+                if (SetProperty(ref inPeriod, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -61,9 +56,10 @@ namespace Restless.App.Panama.Filter
             get { return simultaneous; }
             set
             {
-                simultaneous = value;
-                OnPropertyChanged("Simultaneous");
-                OnChanged();
+                if (SetProperty(ref simultaneous, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -75,9 +71,10 @@ namespace Restless.App.Panama.Filter
             get { return paying; }
             set
             {
-                paying = value;
-                OnPropertyChanged("Paying");
-                OnChanged();
+                if (SetProperty(ref paying, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -89,9 +86,10 @@ namespace Restless.App.Panama.Filter
             get { return followup; }
             set
             {
-                followup = value;
-                OnPropertyChanged("Followup");
-                OnChanged();
+                if (SetProperty(ref followup, value))
+                {
+                    OnChanged();
+                }
             }
         }
 
@@ -104,9 +102,10 @@ namespace Restless.App.Panama.Filter
             get { return goner; }
             set
             {
-                goner = value;
-                OnPropertyChanged("Goner");
-                OnChanged();
+                if (SetProperty(ref goner, value))
+                {
+                    OnChanged();
+                }
             }
         }
         #endregion

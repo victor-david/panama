@@ -113,7 +113,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="e">The list changed event args</param>
         protected override void OnDataViewListChanged(ListChangedEventArgs e)
         {
-            OnPropertyChanged("Header");
+            OnPropertyChanged(nameof(Header));
         }
 
         /// <summary>

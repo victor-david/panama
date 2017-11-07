@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using Restless.App.Panama.Controls;
+﻿using Restless.App.Panama.Controls;
+using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
-using System.Collections.ObjectModel;
-using Restless.App.Panama.Database;
+using System;
 using System.Data;
-using Restless.App.Panama.Converters;
+using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -38,8 +32,7 @@ namespace Restless.App.Panama.ViewModel
             get { return operationMessage; }
             private set
             {
-                operationMessage = value;
-                OnPropertyChanged("OperationMessage");
+                SetProperty(ref operationMessage, value);
             }
 
         }

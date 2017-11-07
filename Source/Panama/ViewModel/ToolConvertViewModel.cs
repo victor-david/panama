@@ -60,8 +60,7 @@ namespace Restless.App.Panama.ViewModel
             get { return foundHeader; }
             private set
             {
-                foundHeader = value;
-                OnPropertyChanged("FoundHeader");
+                SetProperty(ref foundHeader, value);
             }
         }
 
@@ -73,8 +72,7 @@ namespace Restless.App.Panama.ViewModel
             get { return selectedFolder; }
             set
             {
-                selectedFolder = value;
-                OnPropertyChanged("SelectedFolder");
+                SetProperty(ref selectedFolder, value);
             }
         }
 
@@ -86,8 +84,7 @@ namespace Restless.App.Panama.ViewModel
             get { return isReadyToRun; }
             private set
             {
-                isReadyToRun = value;
-                OnPropertyChanged("IsReadyToRun");
+                SetProperty(ref isReadyToRun, value);
             }
         }
 
@@ -99,8 +96,7 @@ namespace Restless.App.Panama.ViewModel
             get { return isRunning; }
             private set
             {
-                isRunning = value;
-                OnPropertyChanged("IsRunning");
+                SetProperty(ref isRunning, value);
             }
         }
         #endregion

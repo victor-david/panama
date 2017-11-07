@@ -40,8 +40,7 @@ namespace Restless.App.Panama.ViewModel
             get { return isMapiMessage; }
             private set
             {
-                isMapiMessage = value;
-                OnPropertyChanged("IsMapiMessage");
+                SetProperty(ref isMapiMessage, value);
             }
         }
 

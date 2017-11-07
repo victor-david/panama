@@ -112,7 +112,7 @@ namespace Restless.App.Panama.ViewModel
                 ICommand cmd = new RelayCommand((o) => { RunTagRemoveCommand(tagId); }, (o) => CanRunTagRemoveCommand(tagId));
                 Current.Add(new TagCommandViewModel(tagId, tagCache[tagId].Name, tagCache[tagId].Description, cmd));
             }
-            OnPropertyChanged("HasZeroTags");
+            OnPropertyChanged(nameof(HasZeroTags));
         }
         #endregion
 

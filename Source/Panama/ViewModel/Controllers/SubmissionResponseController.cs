@@ -188,11 +188,11 @@ namespace Restless.App.Panama.ViewModel
         #region Private methods
         private void OnResponsePropertiesChanged()
         {
-            OnPropertyChanged("HaveResponseDate");
-            OnPropertyChanged("ResponseDate");
-            OnPropertyChanged("DisplayDate");
-            OnPropertyChanged("Header");
-            OnPropertyChanged("ResponseType");
+            OnPropertyChanged(nameof(HaveResponseDate));
+            OnPropertyChanged(nameof(ResponseDate));
+            OnPropertyChanged(nameof(DisplayDate));
+            OnPropertyChanged(nameof(Header));
+            OnPropertyChanged(nameof(ResponseType));
         }
 
         private void RunClearResponseCommand(object o)

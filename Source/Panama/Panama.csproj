@@ -152,6 +152,7 @@
     <Compile Include="Converters\StringToCleanStringOptions.cs" />
     <Compile Include="Converters\SubtractionConverter.cs" />
     <Compile Include="Other\ApplicationInfo.cs" />
+    <Compile Include="Other\BindableBase.cs" />
     <Compile Include="Other\PreviewMode.cs" />
     <Compile Include="Other\TitleVersionRenameItem.cs" />
     <Compile Include="Other\DocumentPreviewer.cs" />

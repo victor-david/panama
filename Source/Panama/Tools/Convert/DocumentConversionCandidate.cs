@@ -138,9 +138,9 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         public void SignalPropertyUpdates()
         {
-            OnPropertyChanged("Info");
-            OnPropertyChanged("Result");
-            OnPropertyChanged("IsConverted");
+            OnPropertyChanged(nameof(Info));
+            OnPropertyChanged(nameof(Result));
+            OnPropertyChanged(nameof(IsConverted));
         }
         #endregion
 

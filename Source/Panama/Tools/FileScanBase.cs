@@ -10,7 +10,7 @@ namespace Restless.App.Panama.Tools
     /// <summary>
     /// Represents the base class for a tool that scans files. This class must be inherited.
     /// </summary>
-    public abstract class FileScanBase : NotifyPropertyChangedBase
+    public abstract class FileScanBase : BindableBase
     {
         #region Private
         private bool isRunning;
@@ -29,8 +29,7 @@ namespace Restless.App.Panama.Tools
             get { return isRunning; }
             protected set
             {
-                isRunning = value;
-                OnPropertyChanged("IsRunning");
+                SetProperty(ref isRunning, value);
             }
         }
 
@@ -42,8 +41,7 @@ namespace Restless.App.Panama.Tools
             get { return totalCount; }
             protected set
             {
-                totalCount = value;
-                OnPropertyChanged("TotalCount");
+                SetProperty(ref totalCount, value);
             }
         }
 
@@ -55,9 +53,10 @@ namespace Restless.App.Panama.Tools
             get { return scanCount; }
             protected set
             {
-                scanCount = value;
-                OnPropertyChanged("ScanCount");
-                OnScanCountChanged();
+                if (SetProperty(ref scanCount, value))
+                {
+                    OnScanCountChanged();
+                }
             }
         }
         #endregion

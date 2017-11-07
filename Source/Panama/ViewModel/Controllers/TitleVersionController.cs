@@ -44,8 +44,7 @@ namespace Restless.App.Panama.ViewModel
             get { return isOpenXml; }
             private set
             {
-                isOpenXml = value;
-                OnPropertyChanged("IsOpenXml");
+                SetProperty(ref isOpenXml, value);
             }
         }
 
@@ -57,8 +56,7 @@ namespace Restless.App.Panama.ViewModel
             get { return properties; }
             private set
             {
-                properties = value;
-                OnPropertyChanged("Properties");
+                SetProperty(ref properties, value);
             }
         }
 
@@ -139,7 +137,7 @@ namespace Restless.App.Panama.ViewModel
         {
             base.OnSelectedItemChanged();
             PrepareForOpenXml();
-            OnPropertyChanged("VersionFileName");
+            OnPropertyChanged(nameof(VersionFileName));
         }
 
         /// <summary>
@@ -210,7 +208,7 @@ namespace Restless.App.Panama.ViewModel
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
                         DatabaseController.Instance.GetTable<TitleVersionTable>().ReplaceVersion(titleId, version, Paths.Title.WithoutRoot(dialog.FileName));
-                        OnPropertyChanged("VersionFileName");
+                        OnPropertyChanged(nameof(VersionFileName));
                     }
                 }
             }

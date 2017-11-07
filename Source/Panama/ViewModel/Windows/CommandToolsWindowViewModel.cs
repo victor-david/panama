@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using Restless.Tools.Utility;
+﻿using Restless.App.Panama.Tools;
 using Restless.Tools.Threading;
-using Restless.App.Panama.Tools;
+using Restless.Tools.Utility;
+using System;
+using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -39,8 +36,7 @@ namespace Restless.App.Panama.ViewModel
             get { return isCompleted; }
             private set
             {
-                isCompleted = value;
-                OnPropertyChanged("IsCompleted");
+                SetProperty(ref isCompleted, value);
             }
         }
         #endregion
@@ -118,7 +114,7 @@ namespace Restless.App.Panama.ViewModel
         {
             Status += text;
             if (newLine) Status += Environment.NewLine;
-            OnPropertyChanged("Status");
+            OnPropertyChanged(nameof(Status));
         }
         #endregion
     }

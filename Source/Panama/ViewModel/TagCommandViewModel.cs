@@ -55,8 +55,7 @@ namespace Restless.App.Panama.ViewModel
             get { return foreground; }
             set
             {
-                foreground = value;
-                OnPropertyChanged("Foreground");
+                SetProperty(ref foreground, value);
             }
         }
         #endregion

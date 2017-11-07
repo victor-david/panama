@@ -127,9 +127,9 @@ namespace Restless.App.Panama.ViewModel
         #region Private methods
         private void OnSubmittedPropertiesChanged()
         {
-            OnPropertyChanged("SubmittedDate");
-            OnPropertyChanged("DisplayDate");
-            OnPropertyChanged("Header");
+            OnPropertyChanged(nameof(SubmittedDate));
+            OnPropertyChanged(nameof(DisplayDate));
+            OnPropertyChanged(nameof(Header));
         }
         #endregion
 

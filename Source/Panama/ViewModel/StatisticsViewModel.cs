@@ -94,8 +94,7 @@ namespace Restless.App.Panama.ViewModel
             get { return haveFolderView; }
             private set
             {
-                haveFolderView = value;
-                OnPropertyChanged("HaveFolderView");
+                SetProperty(ref haveFolderView, value);
             }
         }
 
@@ -107,9 +106,9 @@ namespace Restless.App.Panama.ViewModel
             get { return isFolderViewLoaded; }
             private set
             {
-                isFolderViewLoaded = value;
+                SetProperty(ref isFolderViewLoaded, value);
                 if (isFolderViewLoaded) CreateTreeViewItems();
-                OnPropertyChanged("IsFolderViewLoaded");
+                OnPropertyChanged();
             }
         }
         #endregion

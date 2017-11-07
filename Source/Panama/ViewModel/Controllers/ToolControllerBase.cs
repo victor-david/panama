@@ -13,7 +13,7 @@ namespace Restless.App.Panama.ViewModel
     /// Represents the base class for a tool controller. This class must be inherited.
     /// </summary>
     /// <typeparam name="VM">The view model uses this controller and becomes its owner.</typeparam>
-    public abstract class ToolControllerBase<VM> : NotifyPropertyChangedBase  where VM : WorkspaceViewModel
+    public abstract class ToolControllerBase<VM> : BindableBase  where VM : WorkspaceViewModel
     {
         #region Private
         private string updatedHeader;
@@ -66,8 +66,7 @@ namespace Restless.App.Panama.ViewModel
             get { return updatedHeader; }
             protected set
             {
-                updatedHeader = value;
-                OnPropertyChanged("UpdatedHeader");
+                SetProperty(ref updatedHeader, value);
             }
         }
 
@@ -80,8 +79,7 @@ namespace Restless.App.Panama.ViewModel
             get { return notFoundHeader; }
             protected set
             {
-                notFoundHeader = value;
-                OnPropertyChanged("NotFoundHeader");
+                SetProperty(ref notFoundHeader, value);
             }
         }
         #endregion
