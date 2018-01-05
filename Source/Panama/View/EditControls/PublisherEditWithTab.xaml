@@ -56,13 +56,14 @@
                     <!-- titles -->
                     <Label DockPanel.Dock="Top">All titles</Label>
                    
-                    <con:DataGridExtended x:Name="grid"  DockPanel.Dock="Top" 
-                              Style="{StaticResource DataGridEdit}" 
-                              MaxHeight="{x:Static sys:Double.PositiveInfinity}" 
-                              ItemsSource="{Binding Path=Titles.MainSource.View}" 
-                              SelectedItem="{Binding Titles.SelectedItem}"
-                              SortingCommand="{Binding Titles.RawCommands[GridSorting]}"
-                              con:DataGridColumns.Columns="{Binding Titles.Columns}">
+                    <con:DataGridExtended 
+                        x:Name="grid"  DockPanel.Dock="Top" 
+                        Style="{StaticResource DataGridEdit}" 
+                        MaxHeight="{x:Static sys:Double.PositiveInfinity}" 
+                        ItemsSource="{Binding Path=Titles.MainSource.View}"
+                        SelectedItem="{Binding Titles.SelectedItem}"
+                        CanUserSortColumns="False"
+                        con:DataGridColumns.Columns="{Binding Titles.Columns}">
                         <DataGrid.ContextMenu>
                             <ContextMenu ItemsSource="{Binding Titles.MenuItems}"/>
                         </DataGrid.ContextMenu>                        

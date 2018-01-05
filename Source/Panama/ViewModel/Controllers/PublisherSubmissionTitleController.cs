@@ -1,26 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
+﻿using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
-using System.Windows;
+using System;
 using System.ComponentModel;
+using System.Data;
 using System.Windows.Data;
-using System.Windows.Controls;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -50,24 +35,13 @@ namespace Restless.App.Panama.ViewModel
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
             DataView.RowFilter = String.Format("{0}=-1", SubmissionTable.Defs.Columns.Joined.PublisherId);
             DataView.Sort = String.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
-            //SortDirection = ListSortDirection.Ascending;
             Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
-            var col = Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted).MakeDate();
-            Columns.SetDefaultSort(col, ListSortDirection.Descending);
-            SortItemSource(col);
+            Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted).MakeDate();
             Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);
             Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written).MakeDate();
-            RawCommands.Add("GridSorting", (o) => { SortItemSource(o as DataGridBoundColumn); });
-
             RawCommands.Add("GoToTitleRecord", RunGoToTitleRecordCommand);
             MenuItems.AddItem("Go to title record for this item", RawCommands["GoToTitleRecord"], "ImageBrowseToUrlMenu");
-
-            //SortItemSource(SubmissionTable.Defs.Columns.Joined.Submitted);
-            //MainSource.GroupDescriptions.Add(new PropertyGroupDescription(SubmissionTable.Defs.Columns.Joined.Submitted, new DateToFormattedDateConverter()));
-            //MainSource.GroupDescriptions.Add(new PropertyGroupDescription(SubmissionTable.Defs.Columns.Joined.Publisher));
-
-            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Submitted, ListSortDirection.Descending));
-
+            AddViewSourceSortDescriptions();
         }
         #endregion
 
@@ -90,29 +64,22 @@ namespace Restless.App.Panama.ViewModel
             DataView.RowFilter = String.Format("{0}={1}", SubmissionTable.Defs.Columns.Joined.PublisherId, publisherId);
         }
         #endregion
-        
+
         /************************************************************************/
 
         #region Private methods
-        /// <summary>
-        /// Groups and sorts the item source
-        /// </summary>
-        /// <param name="col">The column. This acts as a secondary sort.</param>
-        private void SortItemSource(DataGridBoundColumn col)
+
+        private void AddViewSourceSortDescriptions()
         {
-            //col.SortDirection = (col.SortDirection == ListSortDirection.Ascending) ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            if (col.SortDirection == null)
-            {
-                col.SortDirection = ListSortDirection.Ascending;
-            }
-            using (MainSource.DeferRefresh())
-            {
-                MainSource.GroupDescriptions.Clear();
-                MainSource.SortDescriptions.Clear();
-                MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Submitted, ListSortDirection.Descending));
-                MainSource.SortDescriptions.Add(new SortDescription(((System.Windows.Data.Binding)col.Binding).Path.Path, (ListSortDirection)col.SortDirection));
-                MainSource.GroupDescriptions.Add(new PropertyGroupDescription(SubmissionTable.Defs.Columns.Joined.Submitted, new DateToFormattedDateConverter()));
-            }
+            MainSource.SortDescriptions.Clear();
+            MainSource.GroupDescriptions.Clear();
+            // BUG: If grouped, and the first clicked parent has zero children, all the columns are scrunched together,
+            // and clicking on another parent (with children) does not change the columns.
+            // If not grouped, still scrunched if the first clicked parent has no children, but subsequent clicks
+            // on parents that do have children restore the columns.
+            // MainSource.GroupDescriptions.Add(new PropertyGroupDescription(SubmissionTable.Defs.Columns.Joined.Submitted, new DateToFormattedDateConverter()));
+            MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Submitted, ListSortDirection.Descending));
+            MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Title, ListSortDirection.Ascending));
         }
 
         private void RunGoToTitleRecordCommand(object o)
