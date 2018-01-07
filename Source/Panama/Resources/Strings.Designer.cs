@@ -1095,6 +1095,24 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data.
+        /// </summary>
+        public static string HeaderData {
+            get {
+                return ResourceManager.GetString("HeaderData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dates.
+        /// </summary>
+        public static string HeaderDates {
+            get {
+                return ResourceManager.GetString("HeaderDates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Documents.
         /// </summary>
         public static string HeaderDocuments {
@@ -1109,6 +1127,15 @@ namespace Restless.App.Panama.Resources {
         public static string HeaderMessages {
             get {
                 return ResourceManager.GetString("HeaderMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
+        public static string HeaderPreview {
+            get {
+                return ResourceManager.GetString("HeaderPreview", resourceCulture);
             }
         }
         

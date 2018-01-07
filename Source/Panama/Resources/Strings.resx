@@ -717,4 +717,13 @@ The application cannot continue.</value>
   <data name="CaptionIconsDesigned1" xml:space="preserve">
     <value>Icons designed by Linear Color SEO (Freepik), Smashicons, Swifticons, and Maxim Basinski from Flaticon</value>
   </data>
+  <data name="HeaderData" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="HeaderDates" xml:space="preserve">
+    <value>Dates</value>
+  </data>
+  <data name="HeaderPreview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
 </root>

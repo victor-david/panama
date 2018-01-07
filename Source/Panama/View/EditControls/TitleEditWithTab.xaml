@@ -7,6 +7,7 @@
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     mc:Ignorable="d" 
     d:DesignHeight="500" d:DesignWidth="350">
     <Control.Resources>
@@ -14,7 +15,7 @@
     </Control.Resources>
     <con:TabControlExtended SelectedIndex="{Binding SelectedTabIndex,Mode=OneWayToSource}">
         <TabControl.Items>
-            <TabItem Header="Title data">
+            <TabItem Header="{x:Static r:Strings.HeaderData}">
                 <StackPanel>
                     <StackPanel Style="{StaticResource StackPanelCommandHolder}">
                         <Label>Title</Label>
@@ -66,7 +67,7 @@
             <TabItem Header="{Binding Published.Header}">
                 <view:TitleEditPublished/>
             </TabItem>
-            <TabItem Header="Preview">
+            <TabItem Header="{x:Static r:Strings.HeaderPreview}">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockMessage}" Margin="0,2">Text of the latest version of this title</TextBlock>
                     <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockError}" Margin="8" VerticalAlignment="Top" Visibility="{Binding IsOpenXml,Converter={cv:BooleanToVisibilityConverter},ConverterParameter={StaticResource BooleanFalseToVisibility}}">
