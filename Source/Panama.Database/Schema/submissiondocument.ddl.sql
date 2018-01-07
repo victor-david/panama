@@ -1,9 +1,9 @@
 CREATE TABLE "submissiondocument" (
   "id" INTEGER PRIMARY KEY NOT NULL, 
   "submissionbatchid" INTEGER NOT NULL, 
-  "title" VARCHAR(255) NOT NULL, 
+  "title" TEXT NOT NULL, 
   "doctype" INTEGER NOT NULL, 
-  "docid" VARCHAR(255), 
+  "docid" TEXT, 
   "updated" TIMESTAMP NOT NULL,
   "size" INTEGER NOT NULL DEFAULT 0
 );
