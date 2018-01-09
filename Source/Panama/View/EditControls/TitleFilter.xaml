@@ -9,9 +9,6 @@
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="488" d:DesignWidth="515">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <StackPanel>
         <HeaderedContentControl Header="Main Filters">
             <StackPanel>
@@ -74,7 +71,7 @@
                         <RadioButton GroupName="TagCombine" IsChecked="{Binding Config.TitleFilter.TagCombine,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterTagCombineAndNot}}">And Not</RadioButton>
                     </StackPanel>
                 </GroupBox>
-                <ItemsControl Style="{StaticResource ICTagItems}" ItemsSource="{Binding Filters.Available}" />
+                <ItemsControl Style="{StaticResource ItemsControlTag}" ItemsSource="{Binding Filters.Available}" />
             </StackPanel>
         </HeaderedContentControl>
         <StackPanel Style="{StaticResource StackPanelCommandHolder}" Margin="0,6">

@@ -10,9 +10,6 @@
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     mc:Ignorable="d" 
     d:DesignHeight="500" d:DesignWidth="350">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <con:TabControlExtended SelectedIndex="{Binding SelectedTabIndex,Mode=OneWayToSource}">
         <TabControl.Items>
             <TabItem Header="{x:Static r:Strings.HeaderData}">
@@ -37,12 +34,12 @@
                     <Expander Header="Current Tags" IsExpanded="True">
                         <StackPanel>
                             <Label Visibility="{Binding Tags.HasZeroTags,Converter={cv:BooleanToVisibilityConverter}}">(none)</Label>
-                            <ItemsControl Style="{StaticResource ICTagItems}" ItemsSource="{Binding Tags.Current}" />
+                            <ItemsControl Style="{StaticResource ItemsControlTag}" ItemsSource="{Binding Tags.Current}" />
                         </StackPanel>
                     </Expander>
 
                     <Expander Header="Available Tags" IsExpanded="True">
-                        <ItemsControl Style="{StaticResource ICTagItems}" ItemsSource="{Binding Tags.Available}" />
+                        <ItemsControl Style="{StaticResource ItemsControlTag}" ItemsSource="{Binding Tags.Available}" />
                     </Expander>
                 </StackPanel>
             </TabItem>

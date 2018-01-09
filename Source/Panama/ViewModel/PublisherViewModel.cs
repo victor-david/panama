@@ -257,10 +257,7 @@ namespace Restless.App.Panama.ViewModel
                     DatabaseController.Instance.GetTable<SubmissionBatchTable>().CreateSubmission(pubId);
                     MainViewModel.CreateNotificationMessage(Strings.ResultSubmissionCreated);
                     MainViewModel.NotifyWorkspaceOnRecordAdded<SubmissionViewModel>();
-                    if (Config.Instance.AutoSwitchToSubmission)
-                    {
-                        MainViewModel.SwitchToWorkspace<SubmissionViewModel>();
-                    }
+                    MainViewModel.SwitchToWorkspace<SubmissionViewModel>();
                 }
             }
         }

@@ -7,9 +7,6 @@
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="511">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="192"/>

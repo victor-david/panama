@@ -9,9 +9,6 @@
     xmlns:xc="http://schemas.xceed.com/wpf/xaml/toolkit"
     mc:Ignorable="d"
     d:DesignWidth="862" d:DesignHeight="313">
-    <Control.Resources>
-        <ResourceDictionary Source="../Resources/Merged.xaml" />
-    </Control.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*" />
@@ -21,8 +18,13 @@
             <RowDefinition Height="{StaticResource GridRowHeightTool}" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <!-- Section selector -->
+        <!--<ItemsControl Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ItemsControlSubSelection}" ItemsSource="{Binding Sections}"/>-->
+
+
         <!-- Tool bar specific to this view -->
-        <ItemsControl HorizontalAlignment="Right" Style="{StaticResource ICMenuItems}" ItemsSource="{Binding Path=VisualCommands}"/>
+        <ItemsControl HorizontalAlignment="Right" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>
         <!-- Main data grid to display the tabular data  -->
         <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
             <DataGrid.RowStyle>

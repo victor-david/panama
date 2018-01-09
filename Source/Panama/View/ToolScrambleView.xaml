@@ -9,9 +9,6 @@
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
-    <Control.Resources>
-        <ResourceDictionary Source="../Resources/Merged.xaml" />
-    </Control.Resources>
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationScramble}"/>
         <StackPanel DockPanel.Dock="Top" Style="{StaticResource StackPanelCommandHolder}">

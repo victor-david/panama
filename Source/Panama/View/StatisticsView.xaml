@@ -10,9 +10,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="460">
-    <Control.Resources>
-        <ResourceDictionary Source="../Resources/Merged.xaml" />
-    </Control.Resources>
     <UniformGrid Columns="2" Rows="1">
         <UniformGrid.Resources>
             <Style TargetType="Label">

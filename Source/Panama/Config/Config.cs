@@ -4,6 +4,7 @@ using System.Data;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
@@ -31,28 +32,73 @@ namespace Restless.App.Panama.Configuration
         
         #region Public fields
         /// <summary>
-        /// Gets the default width for the main window, 1420
+        /// Gets default settings for the main window
         /// </summary>
-        public const int MainWindowDefaultWidth = 1420;
+        public static class MainWindow
+        {
+            /// <summary>
+            /// Gets the default width for the main window.
+            /// </summary>
+            public const int DefaultWidth = 1420;
 
-        /// <summary>
-        /// Gets the default width for the height window, 840
-        /// </summary>
-        public const int MainWindowDefaultHeight = 840;
+            /// <summary>
+            /// Gets the default height for the main window.
+            /// </summary>
+            public const int DefaultHeight = 860;
 
+            /// <summary>
+            /// Gets the minimum width for the main window.
+            /// </summary>
+            public const int MinWidth = 840;
+
+            /// <summary>
+            /// Gets the minimum height for the main window.
+            /// </summary>
+            public const int MinHeight = 500;
+        }
         #endregion
 
         /************************************************************************/
 
         #region Public properties
+
         /// <summary>
-        /// Gets a value that indicates if we should automatically switch to the submssion tab when creating a new submssion
+        /// Gets or sets the date format for the application.
         /// </summary>
-        public bool AutoSwitchToSubmission
+        public string DateFormat
         {
-            get { return GetBool("AutoSwitchToSubmission"); }
+            get => GetItem("MMM dd, yyyy");
+            set => SetItem(value);
         }
-        
+
+
+        /// <summary>
+        /// Gets or sets the width of the main window
+        /// </summary>
+        public int MainWindowWidth
+        {
+            get => GetItem(MainWindow.DefaultWidth);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the height of the main window
+        /// </summary>
+        public int MainWindowHeight
+        {
+            get => GetItem(MainWindow.DefaultHeight);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the state of the main window
+        /// </summary>
+        public WindowState MainWindowState
+        {
+            get => GetItem(WindowState.Normal);
+            set => SetItem(value);
+        }
+
         /// <summary>
         /// Gets the color used to show a publisher in a submission period.
         /// </summary>
@@ -78,19 +124,11 @@ namespace Restless.App.Panama.Configuration
         }
 
         /// <summary>
-        /// Gets the date format for the application.
-        /// </summary>
-        public string DateFormat
-        {
-            get { return GetString("DateFormat"); }
-        }
-
-        /// <summary>
         /// Gets the folder for the export operation.
         /// </summary>
         public string FolderExport
         {
-            get { return GetString("FolderExport"); }
+            get => GetItem(null);
         }
 
         /// <summary>
@@ -98,7 +136,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderMapi
         {
-            get { return GetString("FolderMapi"); }
+            get => GetItem(null);
         }
 
         /// <summary>
@@ -106,7 +144,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderSubmissionDocument
         {
-            get { return GetString(ConfigTable.Defs.FieldIds.FolderSubmissionDocument); }
+            get => GetItem(null);
         }
 
         /// <summary>
@@ -114,7 +152,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderSubmissionMessageAttachment
         {
-            get { return GetString(ConfigTable.Defs.FieldIds.FolderSubmissionMessageAttachment); }
+            get => GetItem(null);
         }
 
         /// <summary>
@@ -122,7 +160,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderTitleVersion
         {
-            get { return GetString("FolderTitle"); }
+            get => GetItem(null);
         }
 
         /// <summary>
@@ -130,7 +168,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderTitleRoot
         {
-            get { return GetString(ConfigTable.Defs.FieldIds.FolderTitleRoot); }
+            get => GetItem(null);
         }
 
         /// <summary>
@@ -208,7 +246,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public bool SyncDocumentInternalDates
         {
-            get { return GetBool("SyncDocumentInternalDates"); }
+            get => GetItem(true);
         }
 
         /// <summary>
@@ -228,39 +266,6 @@ namespace Restless.App.Panama.Configuration
             get;
             private set;
         }
-
-
-        /// <summary>
-        /// Gets or sets the width of the main window
-        /// </summary>
-        public int MainWindowWidth
-        {
-            get { return GetInteger("MainWindowWidth"); }
-            set { SetRowValue("MainWindowWidth", value.ToString()); }
-        }
-
-        /// <summary>
-        /// Gets or sets the height of the main window
-        /// </summary>
-        public int MainWindowHeight
-        {
-            get { return GetInteger("MainWindowHeight"); }
-            set { SetRowValue("MainWindowHeight", value.ToString()); }
-        }
-
-        /// <summary>
-        /// Gets or sets the state of the main window
-        /// </summary>
-        public WindowState MainWindowState
-        {
-            get { return (WindowState)GetInteger("MainWindowState"); }
-            set 
-            {
-                int stateValue = (int)value;
-                SetRowValue("MainWindowState", stateValue.ToString()); 
-            }
-        }
-
         #endregion
 
         /************************************************************************/
@@ -301,13 +306,106 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public void SaveFilterObjects()
         {
-            SetRowValue("TitleFilter", TitleFilter.Serialize<TitleFilter>());
-            SetRowValue("PublisherFilter", PublisherFilter.Serialize<PublisherFilter>());
+            SetRowValue("TitleFilter", TitleFilter.Serialize());
+            SetRowValue("PublisherFilter", PublisherFilter.Serialize());
         }
         #endregion
 
         /************************************************************************/
-        
+
+
+
+
+        #region Private methods
+
+        private string GetItem(string defaultValue, [CallerMemberName] string id = null)
+        {
+            return GetValueFromRow(id, defaultValue);
+        }
+
+        private int GetItem(int defaultValue, [CallerMemberName] string id = null)
+        {
+            if (int.TryParse(GetValueFromRow(id, defaultValue), out int val))
+            {
+                return val;
+            }
+            return 0;
+        }
+
+        private Int64 GetItem(Int64 defaultValue, [CallerMemberName] string id = null)
+        {
+            if (Int64.TryParse(GetValueFromRow(id, defaultValue), out Int64 val))
+            {
+                return val;
+            }
+            return 0;
+        }
+
+        private bool GetItem(bool defaultValue, [CallerMemberName] string id = null)
+        {
+            string val = GetValueFromRow(id, defaultValue);
+            return (val.ToLower() == "true");
+        }
+
+        private WindowState GetItem(WindowState defaultValue, [CallerMemberName] string id = null)
+        {
+            int val = GetItem((int)defaultValue, id);
+            return (WindowState)val;
+        }
+
+        private void SetItem(string value, [CallerMemberName] string id = null)
+        {
+            SetRowValueIf(id, value);
+        }
+
+        private void SetItem(int value, [CallerMemberName] string id = null)
+        {
+            SetRowValueIf(id, value.ToString());
+        }
+
+        private void SetItem(Int64 value, [CallerMemberName] string id = null)
+        {
+            SetRowValueIf(id, value.ToString());
+        }
+
+        private void SetItem(bool value, [CallerMemberName] string id = null)
+        {
+            SetRowValueIf(id, value.ToString());
+        }
+
+        private void SetItem(WindowState value, [CallerMemberName] string id = null)
+        {
+            SetRowValueIf(id, ((int)value).ToString());
+        }
+
+        private string GetValueFromRow(string id, object defaultValue)
+        {
+            DataRow row = GetRow(id, defaultValue);
+            return row[ConfigTable.Defs.Columns.Value].ToString();
+        }
+
+        private DataRow GetRow(string id, object defaultValue = null)
+        {
+            return table.GetConfigurationRow(id, defaultValue);
+        }
+
+        private void SetRowValueIf(string id, string value)
+        {
+            DataRow row = GetRow(id);
+            string currentValue = row[ConfigTable.Defs.Columns.Value].ToString();
+            if (currentValue != value)
+            {
+                row[ConfigTable.Defs.Columns.Value] = value;
+            }
+        }
+        #endregion
+
+
+
+
+
+
+
         #region Private methods
 
         private string GetString(string id)

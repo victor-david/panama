@@ -12,8 +12,8 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Resources/WorkspaceTemplateMapping.xaml" />
-                <ResourceDictionary Source="../../Resources/Main.xaml" />
+                <ResourceDictionary Source="../../Resources/Dictionary/PageTemplate.xaml" />
+                <ResourceDictionary Source="../../Resources/Dictionary/Main.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -60,8 +60,8 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <!-- ItemsControl to hold the main toolbar button -->
-        <ItemsControl DockPanel.Dock="Top" Style="{StaticResource ICMenuItems}" ItemsSource="{Binding Path=VisualCommands}"/>
+        <!-- ItemsControl to hold the main toolbar buttons -->
+        <ItemsControl DockPanel.Dock="Top" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>
         <Border DockPanel.Dock="Top" Style="{StaticResource MainBorderSeparator}" />
 
         <Grid Margin="4" DockPanel.Dock="Top">

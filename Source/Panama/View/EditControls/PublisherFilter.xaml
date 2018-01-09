@@ -10,9 +10,6 @@
     
     mc:Ignorable="d" 
     d:DesignHeight="488" d:DesignWidth="515">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <StackPanel>
         <HeaderedContentControl Header="Filters">
             <StackPanel>

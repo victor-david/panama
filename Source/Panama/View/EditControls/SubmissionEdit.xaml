@@ -8,9 +8,6 @@
     
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="450">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>    
     <Border>
         <StackPanel>
             <Expander Header="Submission Data" IsExpanded="True">

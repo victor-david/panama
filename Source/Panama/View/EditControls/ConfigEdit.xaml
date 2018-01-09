@@ -8,9 +8,6 @@
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"    
     mc:Ignorable="d" 
     d:DesignHeight="800" d:DesignWidth="350">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <Border>
         <Grid>
             <Grid.RowDefinitions>

@@ -23,53 +23,53 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Properties
-        /// <summary>
-        /// Gets a visibility value that determines if the boolean edit control is visible.
-        /// </summary>
-        public Visibility BooleanTypeVisibility
-        {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Boolean); }
-        }
+        ///// <summary>
+        ///// Gets a visibility value that determines if the boolean edit control is visible.
+        ///// </summary>
+        //public Visibility BooleanTypeVisibility
+        //{
+        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Boolean); }
+        //}
 
-        /// <summary>
-        /// Gets a visibility value that determines if the string edit control is visible.
-        /// </summary>
-        public Visibility StringTypeVisibility
-        {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.String); }
-        }
+        ///// <summary>
+        ///// Gets a visibility value that determines if the string edit control is visible.
+        ///// </summary>
+        //public Visibility StringTypeVisibility
+        //{
+        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.String); }
+        //}
 
-        /// <summary>
-        /// Gets a visibility value that determines if the string edit control is visible.
-        /// </summary>
-        public Visibility MultiStringTypeVisibility
-        {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.MultiString); }
-        }
+        ///// <summary>
+        ///// Gets a visibility value that determines if the string edit control is visible.
+        ///// </summary>
+        //public Visibility MultiStringTypeVisibility
+        //{
+        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.MultiString); }
+        //}
 
-        /// <summary>
-        /// Gets a visibility value that determines if the color edit control is visible.
-        /// </summary>
-        public Visibility ColorTypeVisibility
-        {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Color); }
-        }
+        ///// <summary>
+        ///// Gets a visibility value that determines if the color edit control is visible.
+        ///// </summary>
+        //public Visibility ColorTypeVisibility
+        //{
+        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Color); }
+        //}
 
-        /// <summary>
-        /// Gets a visibility value that determines if the path edit control is visible.
-        /// </summary>
-        public Visibility PathTypeVisibility
-        {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Path, ConfigTable.Defs.Types.Mapi); }
-        }
+        ///// <summary>
+        ///// Gets a visibility value that determines if the path edit control is visible.
+        ///// </summary>
+        //public Visibility PathTypeVisibility
+        //{
+        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Path, ConfigTable.Defs.Types.Mapi); }
+        //}
 
-        /// <summary>
-        /// Gets a visibility value that determines if the object view control is visible.
-        /// </summary>
-        public Visibility ObjectTypeVisibility
-        {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Object); }
-        }
+        ///// <summary>
+        ///// Gets a visibility value that determines if the object view control is visible.
+        ///// </summary>
+        //public Visibility ObjectTypeVisibility
+        //{
+        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Object); }
+        //}
         #endregion
 
         /************************************************************************/
@@ -84,10 +84,10 @@ namespace Restless.App.Panama.ViewModel
             RawCommands.Add("Revert",RunRevertCommand, CanRunApplyOrRevertCommand);
             RawCommands.Add("Path", RunFolderSelectCommand);
             Columns.SetDefaultSort(Columns.Create("Id", ConfigTable.Defs.Columns.Id), ListSortDirection.Ascending);
-            Columns.Create("Description", ConfigTable.Defs.Columns.Description).MakeFlexWidth(2);
+            // Columns.Create("Description", ConfigTable.Defs.Columns.Description).MakeFlexWidth(2);
             Columns.Create("Value", ConfigTable.Defs.Columns.Value).MakeSingleLine();
 #if !DEBUG
-            DataView.RowFilter = String.Format("{0}=1", ConfigTable.Defs.Columns.Edit);
+            // DataView.RowFilter = String.Format("{0}=1", ConfigTable.Defs.Columns.Edit);
 #endif
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandApplyConfig, Strings.CommandApplyConfigTooltip, RawCommands["Apply"], ResourceHelper.Get("ImageSave"), VisualCommandImageSize, VisualCommandFontSize));
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandRevertConfig, Strings.CommandRevertConfigTooltip, RawCommands["Revert"], ResourceHelper.Get("ImageUndo"), VisualCommandImageSize, VisualCommandFontSize));
@@ -106,46 +106,46 @@ namespace Restless.App.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
-            OnPropertyChanged(nameof(BooleanTypeVisibility));
-            OnPropertyChanged(nameof(StringTypeVisibility));
-            OnPropertyChanged(nameof(MultiStringTypeVisibility));
-            OnPropertyChanged(nameof(ColorTypeVisibility));
-            OnPropertyChanged(nameof(PathTypeVisibility));
-            OnPropertyChanged(nameof(ObjectTypeVisibility));
+            //OnPropertyChanged(nameof(BooleanTypeVisibility));
+            //OnPropertyChanged(nameof(StringTypeVisibility));
+            //OnPropertyChanged(nameof(MultiStringTypeVisibility));
+            //OnPropertyChanged(nameof(ColorTypeVisibility));
+            //OnPropertyChanged(nameof(PathTypeVisibility));
+            //OnPropertyChanged(nameof(ObjectTypeVisibility));
         }
         #endregion
 
         /************************************************************************/
 
         #region Private Methods
-        private Visibility GetVisibilityForTypes(params string[] types)
-        {
-            if (SelectedRow != null)
-            {
-                foreach (string type in types)
-                {
-                    if (SelectedRow[ConfigTable.Defs.Columns.Type].ToString() == type)
-                    {
-                        return Visibility.Visible;
-                    }
-                }
-            }
-            return Visibility.Collapsed;
-        }
+        //private Visibility GetVisibilityForTypes(params string[] types)
+        //{
+        //    if (SelectedRow != null)
+        //    {
+        //        foreach (string type in types)
+        //        {
+        //            if (SelectedRow[ConfigTable.Defs.Columns.Type].ToString() == type)
+        //            {
+        //                return Visibility.Visible;
+        //            }
+        //        }
+        //    }
+        //    return Visibility.Collapsed;
+        //}
 
         private void RunFolderSelectCommand(object o)
         {
             if (SelectedRow != null)
             {
-                switch (SelectedRow[ConfigTable.Defs.Columns.Type].ToString())
-                {
-                    case ConfigTable.Defs.Types.Path:
-                        SelectFolder();
-                        break;
-                    case ConfigTable.Defs.Types.Mapi:
-                        SelectMapiFolder();
-                        break;
-                }
+                //switch (SelectedRow[ConfigTable.Defs.Columns.Type].ToString())
+                //{
+                //    case ConfigTable.Defs.Types.Path:
+                //        SelectFolder();
+                //        break;
+                //    case ConfigTable.Defs.Types.Mapi:
+                //        SelectMapiFolder();
+                //        break;
+                //}
             }
         }
 

@@ -9,9 +9,6 @@
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="542">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <con:TabControlExtended>
         <TabControl.Items>
             <TabItem Header="Data">

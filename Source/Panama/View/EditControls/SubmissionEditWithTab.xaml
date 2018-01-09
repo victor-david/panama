@@ -10,9 +10,6 @@
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="498">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <con:TabControlExtended>
         <TabControl.Items>
             <!-- Main data: flags, fees, notes -->

@@ -5,6 +5,11 @@
     xmlns:filter="clr-namespace:Restless.App.Panama.Filter"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters">
 
+    <!-- Base control size definitions -->
+    <sys:Double x:Key="ControlFontSize">13</sys:Double>
+    <sys:Double x:Key="MinControlHeight">26</sys:Double>
+    <sys:Double x:Key="MinButtonWidth">94</sys:Double>
+
     <!-- This must be at least 6 more than MinControlHeight to account for control margins, 3 each side (have it at 8 more ) -->
     <GridLength x:Key="MinGridRowHeightDef">32</GridLength>
     <!-- Height of a grid row for a tab's toolbar -->

@@ -9,9 +9,6 @@
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     mc:Ignorable="d" 
     d:DesignHeight="500" d:DesignWidth="350">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <Border>
         <StackPanel>
             <Expander Header="Title Data" IsExpanded="True">
@@ -30,12 +27,12 @@
                     <Expander Header="Current Tags" IsExpanded="True">
                         <StackPanel>
                             <Label Visibility="{Binding Tags.HasZeroTags,Converter={cv:BooleanToVisibilityConverter}}">(none)</Label>
-                            <ItemsControl Style="{StaticResource ICTagItems}" ItemsSource="{Binding Tags.Current}" />
+                            <ItemsControl Style="{StaticResource ItemsControlTag}" ItemsSource="{Binding Tags.Current}" />
                         </StackPanel>
                     </Expander>
 
                     <Expander Header="Available Tags" IsExpanded="False">
-                        <ItemsControl Style="{StaticResource ICTagItems}" ItemsSource="{Binding Tags.Available}" />
+                        <ItemsControl Style="{StaticResource ItemsControlTag}" ItemsSource="{Binding Tags.Available}" />
                     </Expander>
                 </StackPanel>
             </Expander>

@@ -83,11 +83,8 @@ namespace Restless.App.Panama
             else
             {
                 Window main = WindowFactory.Main.Create();
-                main.Width = Config.MainWindowDefaultWidth;
-                main.Height = Config.MainWindowDefaultHeight;
-                main.MinWidth = 640;
-                main.MinHeight = 400;
-
+                main.MinWidth = Config.MainWindow.MinWidth;
+                main.MinHeight = Config.MainWindow.MinHeight;
                 main.Width = Config.Instance.MainWindowWidth;
                 main.Height = Config.Instance.MainWindowHeight;
                 main.WindowState = Config.Instance.MainWindowState;
