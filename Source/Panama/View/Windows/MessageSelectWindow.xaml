@@ -35,7 +35,7 @@
             con:DataGridColumns.Columns="{Binding Columns}">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
-                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.RawCommands[OpenItem]}"/>
+                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenItem]}"/>
                 </Style>
             </DataGrid.RowStyle>
         </con:DataGridExtended>
@@ -59,8 +59,8 @@
             <TextBlock Text="{Binding SelectedItem.Values[System.ItemType]}"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Style="{StaticResource StackPanelCommandHolder}">
-            <Button Command="{Binding RawCommands[Select]}">Select</Button>
-            <Button Command="{Binding RawCommands[Cancel]}">Cancel</Button>
+            <Button Command="{Binding Commands[Select]}">Select</Button>
+            <Button Command="{Binding Commands[Cancel]}">Cancel</Button>
         </StackPanel>
 
 

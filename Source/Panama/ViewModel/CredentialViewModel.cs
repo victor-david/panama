@@ -59,13 +59,13 @@ namespace Restless.App.Panama.ViewModel
             AddViewSourceSortDescriptions();
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddCredential, Strings.CommandAddCredentialTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
-            RawCommands.Add("CopyLoginId", (o) =>
+            Commands.Add("CopyLoginId", (o) =>
                 {
                     CopyCredentialPart(CredentialTable.Defs.Columns.LoginId);
                 },
                 CanRunCommandIfRowSelected);
 
-            RawCommands.Add("CopyPassword", (o) =>
+            Commands.Add("CopyPassword", (o) =>
             {
                 CopyCredentialPart(CredentialTable.Defs.Columns.Password);
             },
@@ -73,8 +73,8 @@ namespace Restless.App.Panama.ViewModel
 
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandCopyLoginId, RawCommands["CopyLoginId"]);
-            MenuItems.AddItem(Strings.CommandCopyPassword, RawCommands["CopyPassword"]);
+            MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
+            MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
 
             MenuItems.AddItem(Strings.CommandDeleteCredential, DeleteCommand, "ImageDeleteMenu");
             FilterPrompt = Strings.FilterPromptCredential;

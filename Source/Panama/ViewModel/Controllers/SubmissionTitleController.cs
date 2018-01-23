@@ -56,10 +56,10 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written).MakeDate();
             AddViewSourceSortDescriptions();
 
-            RawCommands.Add("MoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
-            RawCommands.Add("MoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
+            Commands.Add("MoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
+            Commands.Add("MoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
 
-            RawCommands.Add("SetStatusAccepted", (o) =>
+            Commands.Add("SetStatusAccepted", (o) =>
             {
                 SelectedRow[SubmissionTable.Defs.Columns.Status] = SubmissionTable.Defs.Values.StatusAccepted;
             }, (o) =>
@@ -70,7 +70,7 @@ namespace Restless.App.Panama.ViewModel
                     (Int64)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.ResponseType] == ResponseTable.Defs.Values.ResponseAccepted;
             });
 
-            RawCommands.Add("SetStatusWithdrawn", (o) =>
+            Commands.Add("SetStatusWithdrawn", (o) =>
             {
                 SelectedRow[SubmissionTable.Defs.Columns.Status] = SubmissionTable.Defs.Values.StatusWithdrawn;
             }, (o) =>
@@ -78,7 +78,7 @@ namespace Restless.App.Panama.ViewModel
                 return SelectedRow != null;
             });
 
-            RawCommands.Add("ResetStatus", (o) =>
+            Commands.Add("ResetStatus", (o) =>
             {
                 SelectedRow[SubmissionTable.Defs.Columns.Status] = SubmissionTable.Defs.Values.StatusNotSpecified;
             }, (o) =>
@@ -86,7 +86,7 @@ namespace Restless.App.Panama.ViewModel
                 return SelectedRow != null;
             });
 
-            RawCommands.Add("RemoveFromSubmission", (o) =>
+            Commands.Add("RemoveFromSubmission", (o) =>
             {
                 if (Messages.ShowYesNo(Strings.ConfirmationRemoveTitleFromSubmission))
                 {
@@ -101,7 +101,7 @@ namespace Restless.App.Panama.ViewModel
                     !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
             });
 
-            RawCommands.Add("CopyToClipboard", RunCopyToClipboardCommand, (o) => { return SourceCount > 0; });
+            Commands.Add("CopyToClipboard", RunCopyToClipboardCommand, (o) => { return SourceCount > 0; });
 
             HeaderPreface = Strings.HeaderTitles;
         }

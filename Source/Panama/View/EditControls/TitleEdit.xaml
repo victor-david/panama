@@ -44,7 +44,7 @@
                 <DataGrid Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Submissions.DataView}" con:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
             </Expander>
             <Label>
-                <Hyperlink Command="{Binding RawCommands[AddTitleToSubmission]}">Add this title to a submission</Hyperlink>
+                <Hyperlink Command="{Binding Commands[AddTitleToSubmission]}">Add this title to a submission</Hyperlink>
             </Label>
             <!-- Control to add title to submission -->
             <view:TitleEditAddToSubmission/>

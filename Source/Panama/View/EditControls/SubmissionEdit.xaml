@@ -75,11 +75,11 @@
                     </DataGrid.RowStyle>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Accepted" Command="{Binding RawCommands[SetStatusAccepted]}" Icon="{StaticResource ImageSubStatus255Menu}" />
-                            <MenuItem Header="Withdrawn" Command="{Binding RawCommands[SetStatusWithdrawn]}" Icon="{StaticResource ImageSubStatus1Menu}"/>
+                            <MenuItem Header="Accepted" Command="{Binding Commands[SetStatusAccepted]}" Icon="{StaticResource ImageSubStatus255Menu}" />
+                            <MenuItem Header="Withdrawn" Command="{Binding Commands[SetStatusWithdrawn]}" Icon="{StaticResource ImageSubStatus1Menu}"/>
                             <Separator/>
-                            <MenuItem Header="Reset status" Command="{Binding RawCommands[ResetStatus]}" />
-                            <MenuItem Header="Remove this title from the submission" Command="{Binding RawCommands[RemoveFromSubmission]}" Icon="{StaticResource ImageCloseMenu}"/>
+                            <MenuItem Header="Reset status" Command="{Binding Commands[ResetStatus]}" />
+                            <MenuItem Header="Remove this title from the submission" Command="{Binding Commands[RemoveFromSubmission]}" Icon="{StaticResource ImageCloseMenu}"/>
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
@@ -93,8 +93,8 @@
                     </DataGrid.RowStyle>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Add a document" Command="{Binding RawCommands[AddDocToSubmission]}" Icon="{StaticResource ImageAddDocumentMenu}" />
-                            <MenuItem Header="Remove this document from the submission" Command="{Binding RawCommands[RemoveDocFromSubmission]}" Icon="{StaticResource ImageCloseMenu}"/>
+                            <MenuItem Header="Add a document" Command="{Binding Commands[AddDocToSubmission]}" Icon="{StaticResource ImageAddDocumentMenu}" />
+                            <MenuItem Header="Remove this document from the submission" Command="{Binding Commands[RemoveDocFromSubmission]}" Icon="{StaticResource ImageCloseMenu}"/>
                             
                         </ContextMenu>
                     </DataGrid.ContextMenu>

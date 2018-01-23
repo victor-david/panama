@@ -65,12 +65,12 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Date", SubmissionBatchTable.Defs.Columns.Submitted).MakeDate();
             Columns.Create("Publisher", SubmissionBatchTable.Defs.Columns.Joined.Publisher);
 
-            Owner.RawCommands.Add("AddTitleToSubmission", (o) => 
+            Owner.Commands.Add("AddTitleToSubmission", (o) => 
             {
                 Visible = true;
             });
 
-            Owner.RawCommands.Add("AddTitleToSubmissionConfirm", (o) =>
+            Owner.Commands.Add("AddTitleToSubmissionConfirm", (o) =>
             {
                 Int64 titleId = (Int64)Owner.SelectedPrimaryKey;
                 Int64 batchId = (Int64)SelectedPrimaryKey;
@@ -84,7 +84,7 @@ namespace Restless.App.Panama.ViewModel
                 return SelectedRow != null; 
             });
 
-            Owner.RawCommands.Add("AddTitleToSubmissionCancel", (o) =>
+            Owner.Commands.Add("AddTitleToSubmissionCancel", (o) =>
             {
                 Visible = false;
                 SelectedItem = null;

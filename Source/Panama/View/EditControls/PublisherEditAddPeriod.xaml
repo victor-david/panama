@@ -25,10 +25,10 @@
         <con:CalendarExtended Grid.Column="2" Grid.Row="1" SelectedDate="{Binding Periods.AddEnd}" DisplayDate="{Binding Periods.AddEnd, Mode=OneTime}"/>
         <ToolBarTray Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
             <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                <Button Command="{Binding RawCommands[PeriodAddConfirm]}" Content="Add period" ToolTip="Add the specified submission period"/>
-                <Button Command="{Binding RawCommands[PeriodAddConfirmAllYear]}" Content="All year" ToolTip="Add a submission period that includes the entire year"/>
+                <Button Command="{Binding Commands[PeriodAddConfirm]}" Content="Add period" ToolTip="Add the specified submission period"/>
+                <Button Command="{Binding Commands[PeriodAddConfirmAllYear]}" Content="All year" ToolTip="Add a submission period that includes the entire year"/>
                 <Separator/>
-                <Button Command="{Binding RawCommands[PeriodAddCancel]}" Content="Cancel" ToolTip="Cancel this operation. Do not add a submission period"/>
+                <Button Command="{Binding Commands[PeriodAddCancel]}" Content="Cancel" ToolTip="Cancel this operation. Do not add a submission period"/>
             </ToolBar>
         </ToolBarTray>
         <TextBlock Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource TextBlockError}" Text="{Binding Periods.SelectedDisplay}"/>

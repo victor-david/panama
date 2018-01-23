@@ -15,9 +15,9 @@
         <StackPanel DockPanel.Dock="Top" Style="{StaticResource StackPanelCommandHolder}">
             <Label>Folder</Label>
             <TextBox Text="{Binding SelectedFolder}" Width="232" IsReadOnly="True"/>
-            <Button Command="{Binding RawCommands[SelectFolder]}" Content="Select" />
-            <Button Command="{Binding RawCommands[Convert]}" Content="Convert" IsEnabled="{Binding IsReadyToRun}" />
-            <Button Command="{Binding RawCommands[Cancel]}" Content="Cancel" IsEnabled="{Binding IsRunning}" />         
+            <Button Command="{Binding Commands[SelectFolder]}" Content="Select" />
+            <Button Command="{Binding Commands[Convert]}" Content="Convert" IsEnabled="{Binding IsReadyToRun}" />
+            <Button Command="{Binding Commands[Cancel]}" Content="Cancel" IsEnabled="{Binding IsRunning}" />         
         </StackPanel>
 
         <HeaderedContentControl DockPanel.Dock="Top"  Style="{StaticResource HCCTool}" Header="{Binding FoundHeader}" Margin="4">

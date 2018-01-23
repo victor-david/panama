@@ -50,7 +50,7 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount).MakeFixedWidth(FixedWidth.MediumNumeric)
                 .AddSort(null,PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
-            RawCommands.Add("Select", RunSelectCommand, CanRunCommandIfRowSelected);
+            Commands.Add("Select", RunSelectCommand, CanRunCommandIfRowSelected);
             FilterPrompt = Strings.FilterPromptPublisher;
             SelectedPublisherId = -1;
         }

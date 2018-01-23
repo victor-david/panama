@@ -39,8 +39,8 @@
                     </StackPanel>
                     <ToolBarTray>
                         <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                            <Button Command="{Binding RawCommands[PeriodAddShow]}" Content="Add" ToolTip="Add a submission period"/>
-                            <Button Command="{Binding RawCommands[PeriodRemove]}" Content="Remove" ToolTip="Remove the selected submission period"/>
+                            <Button Command="{Binding Commands[PeriodAddShow]}" Content="Add" ToolTip="Add a submission period"/>
+                            <Button Command="{Binding Commands[PeriodRemove]}" Content="Remove" ToolTip="Remove the selected submission period"/>
                         </ToolBar>
                     </ToolBarTray>
                     <view:PublisherEditAddPeriod Visibility="{Binding Periods.AddControlVisibility}"/>
@@ -90,9 +90,9 @@
 
                     <ToolBarTray>
                         <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                            <Button Command="{Binding RawCommands[CopyLoginId]}">Copy login id to clipboard</Button>
+                            <Button Command="{Binding Commands[CopyLoginId]}">Copy login id to clipboard</Button>
                             <Separator/>
-                            <Button Command="{Binding RawCommands[CopyPassword]}">Copy password to clipboard</Button>
+                            <Button Command="{Binding Commands[CopyPassword]}">Copy password to clipboard</Button>
                         </ToolBar>
                     </ToolBarTray>
                 </StackPanel>

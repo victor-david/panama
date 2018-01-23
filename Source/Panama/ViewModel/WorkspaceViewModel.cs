@@ -61,10 +61,10 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a dictionary of raw commands. Unlike <see cref="VisualCommands"/>, these are necessarily related to  a visual representation
+        /// Gets a dictionary of commands. Unlike <see cref="VisualCommands"/>, these are necessarily related to  a visual representation
         /// These can be added ad-hoc and bound to a control with: Command="{Binding RawCommands[name]}"
         /// </summary>
-        public RawCommandDictionary RawCommands
+        public CommandDictionary Commands
         {
             get;
             private set;
@@ -101,7 +101,7 @@ namespace Restless.App.Panama.ViewModel
         protected WorkspaceViewModel()
         {
             VisualCommands = new List<VisualCommandViewModel>();
-            RawCommands = new RawCommandDictionary();
+            Commands = new CommandDictionary();
             CloseCommand = new RelayCommand((o)=>
             {
                 OnClosing(new CancelEventArgs());

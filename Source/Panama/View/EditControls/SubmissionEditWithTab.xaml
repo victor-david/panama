@@ -80,16 +80,16 @@
                     </DataGrid>
                     <ToolBarTray>
                         <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                            <Button Command="{Binding Titles.RawCommands[MoveUp]}" Content="{StaticResource ImageArrowUpTool}" ToolTip="Move up"/>
-                            <Button Command="{Binding Titles.RawCommands[MoveDown]}" Content="{StaticResource ImageArrowDownTool}" ToolTip="Move down"/>
+                            <Button Command="{Binding Titles.Commands[MoveUp]}" Content="{StaticResource ImageArrowUpTool}" ToolTip="Move up"/>
+                            <Button Command="{Binding Titles.Commands[MoveDown]}" Content="{StaticResource ImageArrowDownTool}" ToolTip="Move down"/>
                             <Separator/>
-                            <Button Command="{Binding Titles.RawCommands[SetStatusAccepted]}" Content="Accepted" ToolTip="Set the status of the selected title to accepted"/>
-                            <Button Command="{Binding Titles.RawCommands[SetStatusWithdrawn]}" Content="Withdrawn" ToolTip="Set the status of the selected title to withdrawn"/>
-                            <Button Command="{Binding Titles.RawCommands[ResetStatus]}" Content="Reset" ToolTip="Reset the status of the selected title"/>
+                            <Button Command="{Binding Titles.Commands[SetStatusAccepted]}" Content="Accepted" ToolTip="Set the status of the selected title to accepted"/>
+                            <Button Command="{Binding Titles.Commands[SetStatusWithdrawn]}" Content="Withdrawn" ToolTip="Set the status of the selected title to withdrawn"/>
+                            <Button Command="{Binding Titles.Commands[ResetStatus]}" Content="Reset" ToolTip="Reset the status of the selected title"/>
                             <Separator/>
-                            <Button Command="{Binding Titles.RawCommands[RemoveFromSubmission]}" Content="Remove" ToolTip="Remove the selected title from the submission (does not affect the file system)"/>
+                            <Button Command="{Binding Titles.Commands[RemoveFromSubmission]}" Content="Remove" ToolTip="Remove the selected title from the submission (does not affect the file system)"/>
                             <Separator/>
-                            <Button Command="{Binding Titles.RawCommands[CopyToClipboard]}" Content="Copy" ToolTip="Copy the list of titles to the clipboard"/>
+                            <Button Command="{Binding Titles.Commands[CopyToClipboard]}" Content="Copy" ToolTip="Copy the list of titles to the clipboard"/>
                         </ToolBar>
                     </ToolBarTray>
                 </StackPanel>
@@ -106,9 +106,9 @@
                     </DataGrid>
                     <ToolBarTray DockPanel.Dock="Top">
                         <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                            <Button Command="{Binding RawCommands[DocumentAdd]}" Content="Create" ToolTip="Create a document to associate with this submission"/>
-                            <Button Command="{Binding RawCommands[DocumentReplace]}" Content="Replace" ToolTip="Replace the selected document with another file"/>
-                            <Button Command="{Binding RawCommands[DocumentRemove]}" Content="Remove" ToolTip="Remove the selected document (does not affect the file system)"/>
+                            <Button Command="{Binding Commands[DocumentAdd]}" Content="Create" ToolTip="Create a document to associate with this submission"/>
+                            <Button Command="{Binding Commands[DocumentReplace]}" Content="Replace" ToolTip="Replace the selected document with another file"/>
+                            <Button Command="{Binding Commands[DocumentRemove]}" Content="Remove" ToolTip="Remove the selected document (does not affect the file system)"/>
                         </ToolBar>
                     </ToolBarTray>
                     <DockPanel DockPanel.Dock="Top" Margin="0,8" Visibility="{Binding Documents.EditVisibility}">
@@ -138,8 +138,8 @@
                     </DataGrid>
                     <ToolBarTray DockPanel.Dock="Top">
                         <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                            <Button Command="{Binding RawCommands[SelectMessage]}" Content="Add"/>
-                            <Button Command="{Binding RawCommands[RemoveMessage]}" Content="Remove"/>
+                            <Button Command="{Binding Commands[SelectMessage]}" Content="Add"/>
+                            <Button Command="{Binding Commands[RemoveMessage]}" Content="Remove"/>
                         </ToolBar>
                     </ToolBarTray>
 

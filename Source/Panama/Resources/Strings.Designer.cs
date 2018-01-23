@@ -1149,6 +1149,42 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Colors.
+        /// </summary>
+        public static string HeaderSettingsColor {
+            get {
+                return ResourceManager.GetString("HeaderSettingsColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder.
+        /// </summary>
+        public static string HeaderSettingsFolder {
+            get {
+                return ResourceManager.GetString("HeaderSettingsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string HeaderSettingsGeneral {
+            get {
+                return ResourceManager.GetString("HeaderSettingsGeneral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date Format.
+        /// </summary>
+        public static string HeaderSettingsSectionDate {
+            get {
+                return ResourceManager.GetString("HeaderSettingsSectionDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submissions.
         /// </summary>
         public static string HeaderSubmissions {

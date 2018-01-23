@@ -127,7 +127,16 @@
         </Setter>
     </Style>
 
-
+    <Style TargetType="ItemsControl" x:Key="SelectTypeSingle">
+        <Setter Property="Margin" Value="12,6,12,12"/>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <RadioButton GroupName="SelectionType" Content="{Binding Name}" IsChecked="{Binding IsSelected}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 
 </ResourceDictionary>

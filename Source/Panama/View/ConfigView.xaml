@@ -6,27 +6,40 @@
     xmlns:view="clr-namespace:Restless.App.Panama.View"    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cv="clr-namespace:Restless.Tools.Converters;assembly=Restless.Tools.Library"
+    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     xmlns:xc="http://schemas.xceed.com/wpf/xaml/toolkit"
     mc:Ignorable="d"
     d:DesignWidth="862" d:DesignHeight="313">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource GridRowHeightTool}" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!-- Section selector -->
-        <!--<ItemsControl Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ItemsControlSubSelection}" ItemsSource="{Binding Sections}"/>-->
+        <ItemsControl Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ItemsControlSubSelection}" ItemsSource="{Binding Sections}"/>
 
-
+        <DockPanel Grid.Row="1">
+            <!-- Section 1. General -->
+            <GroupBox
+                    DockPanel.Dock="Top"
+                    Header="{x:Static r:Strings.HeaderSettingsSectionDate}"
+                    Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64One}}">
+                <StackPanel>
+                    <ItemsControl Style="{StaticResource SelectTypeSingle}" ItemsSource="{Binding Path=DateFormats}" />
+                    <TextBox Margin="36,-16,36,0" Text="{Binding Config.DateFormat,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding DateFormats[3].IsSelected}"/>
+                </StackPanel>
+            </GroupBox>
+        </DockPanel>
         <!-- Tool bar specific to this view -->
-        <ItemsControl HorizontalAlignment="Right" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>
+        <!--<ItemsControl HorizontalAlignment="Right" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>-->
         <!-- Main data grid to display the tabular data  -->
-        <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
+        <!--<DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
@@ -36,9 +49,9 @@
                     </Style.Triggers>
                 </Style>
             </DataGrid.RowStyle>
-        </DataGrid>
+        </DataGrid>-->
         <!-- Nested editing control on the right -->
-        <view:ConfigEdit Grid.Row="1" Grid.Column="1" Visibility="{Binding EditVisibility}"/>        
+        <!--<view:ConfigEdit Grid.Row="1" Grid.Column="1" Visibility="{Binding EditVisibility}"/>-->        
     </Grid>
     <!-- end main grid-->
 </UserControl>

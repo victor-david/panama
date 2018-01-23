@@ -40,13 +40,13 @@ namespace Restless.App.Panama.ViewModel
             :base(owner)
         {
             CreateType = SubmissionDocumentCreateType.None;
-            RawCommands.Add("CreateDocx", (o) =>
+            Commands.Add("CreateDocx", (o) =>
                 {
                     CreateType = SubmissionDocumentCreateType.CreateDocX;
                     CloseCommand.Execute(null);
                 });
 
-            RawCommands.Add("CreatePlaceholder", (o) =>
+            Commands.Add("CreatePlaceholder", (o) =>
             {
                 CreateType = SubmissionDocumentCreateType.CreatePlaceholder;
                 CloseCommand.Execute(null);

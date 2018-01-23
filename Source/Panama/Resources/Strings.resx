@@ -726,4 +726,16 @@ The application cannot continue.</value>
   <data name="HeaderPreview" xml:space="preserve">
     <value>Preview</value>
   </data>
+  <data name="HeaderSettingsColor" xml:space="preserve">
+    <value>Colors</value>
+  </data>
+  <data name="HeaderSettingsFolder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="HeaderSettingsGeneral" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="HeaderSettingsSectionDate" xml:space="preserve">
+    <value>Date Format</value>
+  </data>
 </root>

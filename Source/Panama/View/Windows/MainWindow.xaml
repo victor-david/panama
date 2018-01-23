@@ -21,42 +21,42 @@
         <DockPanel DockPanel.Dock="Top" KeyboardNavigation.TabNavigation="None">
             <Menu KeyboardNavigation.TabNavigation="Cycle">
                 <MenuItem Header="_File">
-                    <MenuItem Header="Save" Icon="{StaticResource ImageSaveMenu}" Command="{Binding RawCommands[Save]}" />
-                    <MenuItem Header="Close all tabs" Command="{Binding RawCommands[CloseAll]}"/>
+                    <MenuItem Header="Save" Icon="{StaticResource ImageSaveMenu}" Command="{Binding Commands[Save]}" />
+                    <MenuItem Header="Close all tabs" Command="{Binding Commands[CloseAll]}"/>
                     <Separator />
-                    <MenuItem Header="E_xit" Icon="{StaticResource ImageCloseMenu}" Command="{Binding RawCommands[Close]}" />
+                    <MenuItem Header="E_xit" Icon="{StaticResource ImageCloseMenu}" Command="{Binding Commands[Close]}" />
                 </MenuItem>
                 <MenuItem Header="_Settings">
-                    <MenuItem Header="Authors" Icon="{StaticResource ImageUserMenu}" Command="{Binding RawCommands[Author]}" />
-                    <MenuItem Header="Tags" Icon="{StaticResource ImageTagMenu}" Command="{Binding RawCommands[Tag]}"/>
-                    <MenuItem Header="Credentials" Icon="{StaticResource ImageCredentialMenu}" Command="{Binding RawCommands[Credential]}"/>
+                    <MenuItem Header="Authors" Icon="{StaticResource ImageUserMenu}" Command="{Binding Commands[Author]}" />
+                    <MenuItem Header="Tags" Icon="{StaticResource ImageTagMenu}" Command="{Binding Commands[Tag]}"/>
+                    <MenuItem Header="Credentials" Icon="{StaticResource ImageCredentialMenu}" Command="{Binding Commands[Credential]}"/>
                     <Separator />
-                    <MenuItem Header="Settings" Icon="{StaticResource ImageConfigMenu}" Command="{Binding RawCommands[Config]}" />
+                    <MenuItem Header="Settings" Icon="{StaticResource ImageConfigMenu}" Command="{Binding Commands[Config]}" />
                 </MenuItem>
                 <MenuItem Header="_Other">
-                    <MenuItem Header="Notes" Icon="{StaticResource ImageNoteMenu}" Command="{Binding RawCommands[Note]}"/>
-                    <MenuItem Header="Links" Icon="{StaticResource ImageLinkMenu}" Command="{Binding RawCommands[Link]}"/>
+                    <MenuItem Header="Notes" Icon="{StaticResource ImageNoteMenu}" Command="{Binding Commands[Note]}"/>
+                    <MenuItem Header="Links" Icon="{StaticResource ImageLinkMenu}" Command="{Binding Commands[Link]}"/>
                     <Separator/>
-                    <MenuItem Header="Statistics" Icon="{StaticResource ImageStatisticsMenu}" Command="{Binding RawCommands[Statistics]}"/>
-                    <MenuItem Header="Table Info" Icon="{StaticResource ImageDatabaseMenu}" Command="{Binding RawCommands[Table]}"/>
+                    <MenuItem Header="Statistics" Icon="{StaticResource ImageStatisticsMenu}" Command="{Binding Commands[Statistics]}"/>
+                    <MenuItem Header="Table Info" Icon="{StaticResource ImageDatabaseMenu}" Command="{Binding Commands[Table]}"/>
                 </MenuItem>
                 <MenuItem Header="_Tools">
-                    <MenuItem Header="Update Meta" Icon="{StaticResource ImageToolMetaMenu}" Command="{Binding RawCommands[ToolMeta]}"/>
-                    <MenuItem Header="Export" Icon="{StaticResource ImageToolExportMenu}" Command="{Binding RawCommands[ToolExport]}"/>
-                    <MenuItem Header="Title List" Icon="{StaticResource ImageToolTitleListMenu}" Command="{Binding RawCommands[ToolTitleList]}"/>
+                    <MenuItem Header="Update Meta" Icon="{StaticResource ImageToolMetaMenu}" Command="{Binding Commands[ToolMeta]}"/>
+                    <MenuItem Header="Export" Icon="{StaticResource ImageToolExportMenu}" Command="{Binding Commands[ToolExport]}"/>
+                    <MenuItem Header="Title List" Icon="{StaticResource ImageToolTitleListMenu}" Command="{Binding Commands[ToolTitleList]}"/>
                     <Separator/>
-                    <MenuItem Header="Find Orphans" Icon="{StaticResource ImageToolOrphanMenu}" Command="{Binding RawCommands[ToolOrphan]}"/>
-                    <MenuItem Header="Search" Icon="{StaticResource ImageToolSearchMenu}" Command="{Binding RawCommands[ToolSearch]}"/>
-                    <MenuItem Header="Convert" Icon="{StaticResource ImageToolConvertMenu}" Command="{Binding RawCommands[ToolConvert]}"/>
+                    <MenuItem Header="Find Orphans" Icon="{StaticResource ImageToolOrphanMenu}" Command="{Binding Commands[ToolOrphan]}"/>
+                    <MenuItem Header="Search" Icon="{StaticResource ImageToolSearchMenu}" Command="{Binding Commands[ToolSearch]}"/>
+                    <MenuItem Header="Convert" Icon="{StaticResource ImageToolConvertMenu}" Command="{Binding Commands[ToolConvert]}"/>
                     <Separator/>
-                    <MenuItem Header="Scramble" Command="{Binding RawCommands[ToolScramble]}"/>
+                    <MenuItem Header="Scramble" Command="{Binding Commands[ToolScramble]}"/>
                     <Separator/>
-                    <MenuItem Header="Reset window" Icon="{StaticResource ImageUndoMenu}" Command="{Binding RawCommands[ResetWindow]}" ToolTip="Reset the main window size to default"/>
+                    <MenuItem Header="Reset window" Icon="{StaticResource ImageUndoMenu}" Command="{Binding Commands[ResetWindow]}" ToolTip="Reset the main window size to default"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
-                    <MenuItem Header="Reference" Icon="{StaticResource ImageReferenceMenu}" Command="{Binding RawCommands[Reference]}"/>
+                    <MenuItem Header="Reference" Icon="{StaticResource ImageReferenceMenu}" Command="{Binding Commands[Reference]}"/>
                     <Separator/>
-                    <MenuItem Header="About" Icon="{StaticResource ImageInformationMenu}" Command="{Binding RawCommands[About]}"/>
+                    <MenuItem Header="About" Icon="{StaticResource ImageInformationMenu}" Command="{Binding Commands[About]}"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

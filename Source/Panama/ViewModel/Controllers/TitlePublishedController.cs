@@ -50,8 +50,8 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Added", PublishedTable.Defs.Columns.Added).MakeDate();
             Columns.Create("Publisher", PublishedTable.Defs.Columns.Joined.Publisher);
             Columns.Create("Url",  PublishedTable.Defs.Columns.Url);
-            Owner.RawCommands.Add("PublishedAdd", RunAddPublishedCommand);
-            Owner.RawCommands.Add("PublishedRemove", RunRemovePublishedCommand, (o) => { return SelectedRow != null; });
+            Owner.Commands.Add("PublishedAdd", RunAddPublishedCommand);
+            Owner.Commands.Add("PublishedRemove", RunRemovePublishedCommand, (o) => { return SelectedRow != null; });
             HeaderPreface = Strings.HeaderPublished;
         }
         #endregion

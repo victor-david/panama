@@ -12,8 +12,8 @@
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationScramble}"/>
         <StackPanel DockPanel.Dock="Top" Style="{StaticResource StackPanelCommandHolder}">
-            <Button Command="{Binding RawCommands[Paste]}" Content="Paste"/>
-            <Button Command="{Binding RawCommands[Begin]}" Content="Scramble"/>
+            <Button Command="{Binding Commands[Paste]}" Content="Paste"/>
+            <Button Command="{Binding Commands[Begin]}" Content="Scramble"/>
             <CheckBox IsChecked="{Binding ScrambleWords}">Scramble words</CheckBox>
         </StackPanel>
         

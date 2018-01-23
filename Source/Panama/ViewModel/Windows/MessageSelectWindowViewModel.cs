@@ -94,10 +94,10 @@ namespace Restless.App.Panama.ViewModel
                     break;
             }
 
-            RawCommands.Add("Select", RunSelectCommand, CanRunCommandIfRowSelected);
-            RawCommands.Add("Cancel", (o) => { Owner.Close(); });
+            Commands.Add("Select", RunSelectCommand, CanRunCommandIfRowSelected);
+            Commands.Add("Cancel", (o) => { Owner.Close(); });
 
-            RawCommands.Add("OpenItem", RunOpenItemCommand, CanRunCommandIfRowSelected);
+            Commands.Add("OpenItem", RunOpenItemCommand, CanRunCommandIfRowSelected);
             FilterPrompt = "need a prompt"; // Strings.FilterPromptPublisher; MAPI/IPM.Note MAPI.Ipm.Note.Read
 
             RunSearch(options);

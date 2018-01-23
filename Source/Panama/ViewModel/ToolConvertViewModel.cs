@@ -130,9 +130,9 @@ namespace Restless.App.Panama.ViewModel
             Columns.SetDefaultSort(Columns.Create("File name", "Info.FullName").MakeFlexWidth(2.0), ListSortDirection.Ascending);
             Columns.Create("Message", "Result.Message");
             
-            RawCommands.Add("SelectFolder", RunSelectFolderCommand, CanRunSelectFolderCommand);
-            RawCommands.Add("Convert", RunConvertCommand);
-            RawCommands.Add("Cancel", RunCancelCommand);
+            Commands.Add("SelectFolder", RunSelectFolderCommand, CanRunSelectFolderCommand);
+            Commands.Add("Convert", RunConvertCommand);
+            Commands.Add("Cancel", RunCancelCommand);
             UpdateFoundHeader();
         }
 

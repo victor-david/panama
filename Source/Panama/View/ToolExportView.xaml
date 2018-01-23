@@ -8,7 +8,7 @@
     d:DesignHeight="300" d:DesignWidth="600">
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{Binding Export.HeaderText,Mode=OneTime}"/>
-        <Button DockPanel.Dock="Top" Width="120" HorizontalAlignment="Left" Command="{Binding RawCommands[Begin]}" Content="Begin">
+        <Button DockPanel.Dock="Top" Width="120" HorizontalAlignment="Left" Command="{Binding Commands[Begin]}" Content="Begin">
             <Button.IsEnabled>
                 <MultiBinding Converter="{StaticResource BooleanToBooleanMultiConverter}" ConverterParameter="{StaticResource True}">
                     <Binding Path="Export.Scanner.IsRunning" />

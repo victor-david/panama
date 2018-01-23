@@ -18,11 +18,39 @@ namespace Restless.App.Panama.ViewModel
     public class ConfigViewModel : DataGridViewModel<ConfigTable>
     {
         #region Private
+        private Int64 selectedSection;
         #endregion
 
         /************************************************************************/
 
         #region Properties
+        /// <summary>
+        /// Gets the sections list.
+        /// </summary>
+        public GeneralOptionList Sections
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the selected section.
+        /// </summary>
+        public Int64 SelectedSection
+        {
+            get => selectedSection;
+            private set => SetProperty(ref selectedSection, value);
+        }
+
+        /// <summary>
+        /// Gets the list of available date formats
+        /// </summary>
+        public GeneralOptionList DateFormats
+        {
+            get;
+            private set;
+        }
+
         ///// <summary>
         ///// Gets a visibility value that determines if the boolean edit control is visible.
         ///// </summary>
@@ -75,23 +103,27 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+#pragma warning disable 1591
         public ConfigViewModel()
         {
             DisplayName = Strings.CommandConfig;
             MaxCreatable = 1;
-            RawCommands.Add("Apply",RunApplyCommand, CanRunApplyOrRevertCommand);
-            RawCommands.Add("Revert",RunRevertCommand, CanRunApplyOrRevertCommand);
-            RawCommands.Add("Path", RunFolderSelectCommand);
+            Commands.Add("SwitchSection", RunSwitchSection);
+            //Commands.Add("Apply",RunApplyCommand, CanRunApplyOrRevertCommand);
+            //Commands.Add("Revert",RunRevertCommand, CanRunApplyOrRevertCommand);
+            Commands.Add("Path", RunFolderSelectCommand);
             Columns.SetDefaultSort(Columns.Create("Id", ConfigTable.Defs.Columns.Id), ListSortDirection.Ascending);
             // Columns.Create("Description", ConfigTable.Defs.Columns.Description).MakeFlexWidth(2);
             Columns.Create("Value", ConfigTable.Defs.Columns.Value).MakeSingleLine();
 #if !DEBUG
             // DataView.RowFilter = String.Format("{0}=1", ConfigTable.Defs.Columns.Edit);
 #endif
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandApplyConfig, Strings.CommandApplyConfigTooltip, RawCommands["Apply"], ResourceHelper.Get("ImageSave"), VisualCommandImageSize, VisualCommandFontSize));
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandRevertConfig, Strings.CommandRevertConfigTooltip, RawCommands["Revert"], ResourceHelper.Get("ImageUndo"), VisualCommandImageSize, VisualCommandFontSize));
+            //VisualCommands.Add(new VisualCommandViewModel(Strings.CommandApplyConfig, Strings.CommandApplyConfigTooltip, Commands["Apply"], ResourceHelper.Get("ImageSave"), VisualCommandImageSize, VisualCommandFontSize));
+            //VisualCommands.Add(new VisualCommandViewModel(Strings.CommandRevertConfig, Strings.CommandRevertConfigTooltip, Commands["Revert"], ResourceHelper.Get("ImageUndo"), VisualCommandImageSize, VisualCommandFontSize));
             DeleteCommand.Supported = CommandSupported.NoWithException;
+
+            InitializeSections();
+            InitializeDateFormatOptions();
 
         }
         #pragma warning restore 1591
@@ -118,6 +150,77 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
+
+        private void InitializeSections()
+        {
+            Sections = new GeneralOptionList
+            {
+                new GeneralOption() { IntValue = 1, Value = Strings.HeaderSettingsGeneral, Command = Commands["SwitchSection"], CommandParm = 1 },
+                new GeneralOption() { IntValue = 2, Value = Strings.HeaderSettingsFolder, Command = Commands["SwitchSection"], CommandParm = 2 },
+                new GeneralOption() { IntValue = 3, Value = Strings.HeaderSettingsColor, Command = Commands["SwitchSection"], CommandParm = 3 }
+            };
+            //Sections.Add(new GeneralOption() { IntValue = 5, Value = Strings.HeaderSettingsCurrency, Command = RawCommands["SwitchSection"], CommandParm = 5 });
+            //Sections.Add(new GeneralOption() { IntValue = 6, Value = Strings.HeaderSettingsCategoryChart, Command = RawCommands["SwitchSection"], CommandParm = 6 });
+            RunSwitchSection(Config.SelectedConfigSection);
+            OnPropertyChanged(nameof(Sections));
+        }
+
+
+
+        private void InitializeDateFormatOptions()
+        {
+            DateFormats = new GeneralOptionList();
+            DateFormats.AddObservable(new GeneralOption() { Value = "MM-dd-yy" });
+            DateFormats[0].Name = DateTime.Now.ToString(DateFormats[0].Value);
+            DateFormats[0].IsSelected = Config.DateFormat == DateFormats[0].Value;
+
+            DateFormats.AddObservable(new GeneralOption() { Value = "MMM dd, yyyy" });
+            DateFormats[1].Name = DateTime.Now.ToString(DateFormats[1].Value);
+            DateFormats[1].IsSelected = Config.DateFormat == DateFormats[1].Value;
+
+            DateFormats.AddObservable(new GeneralOption() { Value = "dd-MMM-yyyy" });
+            DateFormats[2].Name = DateTime.Now.ToString(DateFormats[2].Value);
+            DateFormats[2].IsSelected = Config.DateFormat == DateFormats[2].Value;
+
+            DateFormats.AddObservable(new GeneralOption() { Value = Config.DateFormat });
+            DateFormats[3].Name = "Other";
+            DateFormats[3].IsSelected = !DateFormats[0].IsSelected && !DateFormats[1].IsSelected && !DateFormats[2].IsSelected;
+
+            DateFormats.IsSelectedChanged += (s, e) =>
+            {
+                var op = (GeneralOption)s;
+                if (op.IsSelected)
+                {
+                    // op 3 binds directly to Config.DateFormat
+                    if (op.Index != 3)
+                    {
+                        Config.DateFormat = op.Value;
+                    }
+                }
+            };
+        }
+
+
+
+
+
+
+
+
+
+
+        private void RunSwitchSection(object parm)
+        {
+            int selected = (int)parm;
+            foreach (var section in Sections)
+            {
+                section.IsSelected = (section.IntValue == selected);
+            }
+            SelectedSection = selected;
+            Config.SelectedConfigSection = selected;
+        }
+
+
         //private Visibility GetVisibilityForTypes(params string[] types)
         //{
         //    if (SelectedRow != null)

@@ -21,7 +21,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="0" Style="{StaticResource StackPanelCommandHolder}">
-                <Button Width="120" HorizontalAlignment="Left" Command="{Binding RawCommands[Begin]}" Content="Begin">
+                <Button Width="120" HorizontalAlignment="Left" Command="{Binding Commands[Begin]}" Content="Begin">
                     <Button.IsEnabled>
                         <MultiBinding Converter="{StaticResource BooleanToBooleanMultiConverter}" ConverterParameter="{StaticResource True}">
                             <Binding Path="Controller.Scanner.IsRunning" />
@@ -34,7 +34,7 @@
                 Grid.Column="1"
                 Style="{StaticResource ToolBarButton}"
                 HorizontalAlignment="Left"
-                Command="{Binding RawCommands[TogglePreview]}"
+                Command="{Binding Commands[TogglePreview]}"
                 Content="{Binding PreviewActiveIcon}" />
         </Grid>
         <Grid DockPanel.Dock="Top">
@@ -55,7 +55,7 @@
                     </DataGrid.ContextMenu>
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
-                            <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.RawCommands[OpenFile]}"/>
+                            <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenFile]}"/>
                         </Style>
                     </DataGrid.RowStyle>
                 </DataGrid>

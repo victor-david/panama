@@ -99,22 +99,22 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("File", TitleVersionTable.Defs.Columns.FileName);
             Columns.Create("Note", TitleVersionTable.Defs.Columns.Note);
             //Owner.RawCommands.Add("VersionAddByCopy", RunAddVersionByCopyCommand, (o) => { return SelectedRow != null; });
-            RawCommands.Add("VersionAddByFile", RunAddVersionByFileCommand);
-            RawCommands.Add("VersionReplace", RunReplaceVersionCommand, (o) => { return SelectedRow != null; });
-            RawCommands.Add("VersionRemove", RunRemoveVersionCommand, (o) => { return SelectedRow != null; });
-            RawCommands.Add("VersionMoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
-            RawCommands.Add("VersionMoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
-            RawCommands.Add("VersionSync", RunSyncCommand, (o) => { return SourceCount > 0 ; });
-            RawCommands.Add("ContextMenuOpening", RunContextMenuOpeningCommand);
-            RawCommands.Add("SaveProperty", RunSavePropertyCommand, CanRunSavePropertyCommand);
+            Commands.Add("VersionAddByFile", RunAddVersionByFileCommand);
+            Commands.Add("VersionReplace", RunReplaceVersionCommand, (o) => { return SelectedRow != null; });
+            Commands.Add("VersionRemove", RunRemoveVersionCommand, (o) => { return SelectedRow != null; });
+            Commands.Add("VersionMoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
+            Commands.Add("VersionMoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
+            Commands.Add("VersionSync", RunSyncCommand, (o) => { return SourceCount > 0 ; });
+            Commands.Add("ContextMenuOpening", RunContextMenuOpeningCommand);
+            Commands.Add("SaveProperty", RunSavePropertyCommand, CanRunSavePropertyCommand);
 
             foreach (DataRow row in DatabaseController.Instance.GetTable<LanguageTable>().Rows)
             {
                 string langId = row[LanguageTable.Defs.Columns.Id].ToString();
                 string langName = row[LanguageTable.Defs.Columns.Name].ToString();
                 string commandId = String.Format("SetLang{0}", langId);
-                RawCommands.Add(commandId, (o) => { SetLanguage(langId); }, CanRunCommandIfRowSelected);
-                MenuItems.AddItem(String.Format("Set language to {0} ({1})", langName, langId), RawCommands[commandId], null, langId);
+                Commands.Add(commandId, (o) => { SetLanguage(langId); }, CanRunCommandIfRowSelected);
+                MenuItems.AddItem(String.Format("Set language to {0} ({1})", langName, langId), Commands[commandId], null, langId);
             }
 
             HeaderPreface = Strings.HeaderVersions;

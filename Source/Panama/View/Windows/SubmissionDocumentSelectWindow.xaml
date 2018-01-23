@@ -47,8 +47,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Button Grid.Column="0" Command="{Binding RawCommands[CreateDocx]}">Create .docx</Button>
-            <Button Grid.Column="1" Command="{Binding RawCommands[CreatePlaceholder]}">Create placeholder</Button>
+            <Button Grid.Column="0" Command="{Binding Commands[CreateDocx]}">Create .docx</Button>
+            <Button Grid.Column="1" Command="{Binding Commands[CreatePlaceholder]}">Create placeholder</Button>
             <Button Grid.Column="2" Command="{Binding CloseCommand}">Cancel</Button>
         </Grid>
     </DockPanel>

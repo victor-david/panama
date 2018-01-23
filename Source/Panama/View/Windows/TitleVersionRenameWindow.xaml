@@ -26,8 +26,8 @@
             SelectedItem="{Binding SelectedItem}"
             con:DataGridColumns.Columns="{Binding Columns}"/>
         <StackPanel Grid.Column="0" Grid.Row="1" Style="{StaticResource StackPanelCommandHolder}">
-            <Button Command="{Binding RawCommands[Rename]}">Rename</Button>
-            <Button Command="{Binding RawCommands[Close]}">Close</Button>
+            <Button Command="{Binding Commands[Rename]}">Rename</Button>
+            <Button Command="{Binding Commands[Close]}">Close</Button>
             <TextBlock Style="{StaticResource TextBlockError}" Text="{Binding OperationMessage}"/>
         </StackPanel>
         

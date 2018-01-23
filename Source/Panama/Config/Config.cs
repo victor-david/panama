@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Dynamic;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows;
-using System.Windows.Media;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Database;
+﻿using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Filter;
 using Restless.Tools.Utility;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Media;
 
 namespace Restless.App.Panama.Configuration
 {
@@ -61,6 +57,14 @@ namespace Restless.App.Panama.Configuration
         /************************************************************************/
 
         #region Public properties
+        /// <summary>
+        /// Gets or sets the selected configuration section.
+        /// </summary>
+        public int SelectedConfigSection
+        {
+            get => GetItem(1);
+            set => SetItem(value);
+        }
 
         /// <summary>
         /// Gets or sets the date format for the application.

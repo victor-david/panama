@@ -17,7 +17,7 @@
                     <StackPanel Style="{StaticResource StackPanelCommandHolder}">
                         <Label>Title</Label>
                         <Label>
-                            <Hyperlink Command="{Binding RawCommands[ExtractTitle]}">Extract from latest version</Hyperlink>
+                            <Hyperlink Command="{Binding Commands[ExtractTitle]}">Extract from latest version</Hyperlink>
                         </Label>
                     </StackPanel>
                     <TextBox Text="{Binding SelectedRow[title]}" />
@@ -55,7 +55,7 @@
                         CanUserSortColumns="False"
                         CanUserReorderColumns="False" />
                     <Label>
-                        <Hyperlink Command="{Binding RawCommands[AddTitleToSubmission]}">Add this title to a submission</Hyperlink>
+                        <Hyperlink Command="{Binding Commands[AddTitleToSubmission]}">Add this title to a submission</Hyperlink>
                     </Label>
                     <!-- Control to add title to submission -->
                     <view:TitleEditAddToSubmission/>

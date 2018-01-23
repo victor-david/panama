@@ -16,8 +16,8 @@
             <DataGrid Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Submissions.Available.DataView}" SelectedItem="{Binding Submissions.Available.SelectedItem}" con:DataGridColumns.Columns="{Binding Submissions.Available.Columns}"/>
             <!-- StackPanel to hold our Confirm and Cancel buttons -->
             <StackPanel Style="{StaticResource StackPanelCommandHolder}">
-                <Button Command="{Binding RawCommands[AddTitleToSubmissionConfirm]}">Add</Button>
-                <Button Command="{Binding RawCommands[AddTitleToSubmissionCancel]}">Cancel</Button>
+                <Button Command="{Binding Commands[AddTitleToSubmissionConfirm]}">Add</Button>
+                <Button Command="{Binding Commands[AddTitleToSubmissionCancel]}">Cancel</Button>
             </StackPanel>
         </StackPanel>
         <!-- Binds to AvailableCount. When zero, will be visible b/c converter uses R parameter-->

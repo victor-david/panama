@@ -109,15 +109,15 @@ namespace Restless.App.Panama.ViewModel
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
             AddViewSourceSortDescriptions();
             
-            RawCommands.Add("AddSubmission", RunAddSubmissionCommand, CanRunCommandIfRowSelected);
+            Commands.Add("AddSubmission", RunAddSubmissionCommand, CanRunCommandIfRowSelected);
             /* This command is used from this model and from the Filters controller */
-            RawCommands.Add("ClearFilter", (o) => { Filters.ClearAll(); }, (o) => { return Config.PublisherFilter.IsAnyFilterActive; });
+            Commands.Add("ClearFilter", (o) => { Filters.ClearAll(); }, (o) => { return Config.PublisherFilter.IsAnyFilterActive; });
 
-            RawCommands.Add("CopyLoginId", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.LoginId); }, CanCopyCredential);
-            RawCommands.Add("CopyPassword", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.Password); }, CanCopyCredential);
+            Commands.Add("CopyLoginId", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.LoginId); }, CanCopyCredential);
+            Commands.Add("CopyPassword", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.Password); }, CanCopyCredential);
 
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddPublisher, Strings.CommandAddPublisherTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, RawCommands["ClearFilter"], ResourceHelper.Get("ImageFilter"), VisualCommandImageSize, VisualCommandFontSize));
+            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], ResourceHelper.Get("ImageFilter"), VisualCommandImageSize, VisualCommandFontSize));
 
             Periods = new PublisherPeriodController(this);
             Submissions = new PublisherSubmissionController(this);
@@ -126,11 +126,11 @@ namespace Restless.App.Panama.ViewModel
             Credentials = DatabaseController.Instance.GetTable<CredentialTable>().GetCredentialList();
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandCreateSubmission, RawCommands["AddSubmission"], "ImageSubmissionMenu");
+            MenuItems.AddItem(Strings.CommandCreateSubmission, Commands["AddSubmission"], "ImageSubmissionMenu");
             MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand, "ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandCopyLoginId, RawCommands["CopyLoginId"]);
-            MenuItems.AddItem(Strings.CommandCopyPassword, RawCommands["CopyPassword"]);
+            MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
+            MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandDeletePublisher, DeleteCommand, "ImageDeleteMenu");
 

@@ -43,19 +43,13 @@ namespace Restless.App.Panama
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
-            
-              bool save = true;
-#if DEBUG
-              save = false;
-#endif
-              Config.Instance.SaveFilterObjects();
-              DatabaseController.Instance.Shutdown(saveTables: save);
-
+            Config.Instance.SaveFilterObjects();
+            DatabaseController.Instance.Shutdown(saveTables: true);
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Private methods
         /// <summary>
         /// Called from OnStartup(e) separately so we can catch an assembly missing.

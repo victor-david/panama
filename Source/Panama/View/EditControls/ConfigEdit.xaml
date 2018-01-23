@@ -40,7 +40,7 @@
                 <StackPanel Margin="8,2" Visibility="{Binding PathTypeVisibility}">
                     <TextBlock Style="{StaticResource TextBlockMessage}" Margin="0" Text="{Binding SelectedRow[value]}"/>
                     <Label Margin="-4,4">
-                        <Hyperlink Command="{Binding RawCommands[Path]}">Change</Hyperlink>
+                        <Hyperlink Command="{Binding Commands[Path]}">Change</Hyperlink>
                     </Label>
                 </StackPanel>
                 

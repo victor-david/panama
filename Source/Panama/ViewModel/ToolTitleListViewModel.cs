@@ -50,8 +50,8 @@ namespace Restless.App.Panama.ViewModel
             MaxCreatable = 1;
             Creator = new ToolTitleListController(this);
             Creator.Scanner.Completed += ScannerCompleted;
-            RawCommands.Add("Begin", (o) => { Creator.Run(); });
-            RawCommands.Add("OpenFile", (o) => { OpenHelper.OpenFile(Creator.TitleListFileName); });
+            Commands.Add("Begin", (o) => { Creator.Run(); });
+            Commands.Add("OpenFile", (o) => { OpenHelper.OpenFile(Creator.TitleListFileName); });
         }
         #pragma warning restore 1591
         #endregion

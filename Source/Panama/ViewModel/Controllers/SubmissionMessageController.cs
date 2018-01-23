@@ -83,8 +83,8 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Subject", SubmissionMessageTable.Defs.Columns.Display);
             HeaderPreface = Strings.HeaderMessages;
             converter = new StringToCleanStringConverter();
-            Owner.RawCommands.Add("SelectMessage", RunSelectMessageCommand);
-            Owner.RawCommands.Add("RemoveMessage", RunRemoveMessageCommand, (o) => SelectedItem != null);
+            Owner.Commands.Add("SelectMessage", RunSelectMessageCommand);
+            Owner.Commands.Add("RemoveMessage", RunRemoveMessageCommand, (o) => SelectedItem != null);
         }
         #endregion
 

@@ -95,14 +95,14 @@ namespace Restless.App.Panama.ViewModel
 
             documentTypeTable = DatabaseController.Instance.GetTable<DocumentTypeTable>();
 
-            Owner.RawCommands.Add("DocumentAdd", RunAddDocumentCommand, (o) =>
+            Owner.Commands.Add("DocumentAdd", RunAddDocumentCommand, (o) =>
                 {
                     return
                         Owner.SelectedRow != null &&
                         !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
                 });
 
-            Owner.RawCommands.Add("DocumentReplace", RunReplaceDocumentCommand, (o) =>
+            Owner.Commands.Add("DocumentReplace", RunReplaceDocumentCommand, (o) =>
             {
                 return
                     SelectedRow != null &&
@@ -110,7 +110,7 @@ namespace Restless.App.Panama.ViewModel
                     !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
             });
 
-            Owner.RawCommands.Add("DocumentRemove", RunRemoveDocumentCommand, (o) =>
+            Owner.Commands.Add("DocumentRemove", RunRemoveDocumentCommand, (o) =>
                 {
                     return
                         SelectedRow != null &&

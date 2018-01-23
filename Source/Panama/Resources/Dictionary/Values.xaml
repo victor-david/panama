@@ -22,6 +22,35 @@
     <sys:Int32 x:Key="Integer1">1</sys:Int32>
     <sys:Int32 x:Key="Integer2">2</sys:Int32>
 
+
+    <sys:Int32 x:Key="Int32Zero">0</sys:Int32>
+    <sys:Int32 x:Key="Int32One">1</sys:Int32>
+    <sys:Int32 x:Key="Int32Two">2</sys:Int32>
+    <sys:Int32 x:Key="Int32Three">3</sys:Int32>
+    <sys:Int32 x:Key="Int32Four">4</sys:Int32>
+    <sys:Int32 x:Key="Int32Five">5</sys:Int32>
+    <sys:Int32 x:Key="Int32Six">6</sys:Int32>
+    <sys:Int32 x:Key="Int32Seven">7</sys:Int32>
+    <sys:Int32 x:Key="Int32Eight">8</sys:Int32>
+    <sys:Int32 x:Key="Int32Nine">9</sys:Int32>
+
+    <sys:Int64 x:Key="Int64Zero">0</sys:Int64>
+    <sys:Int64 x:Key="Int64One">1</sys:Int64>
+    <sys:Int64 x:Key="Int64Two">2</sys:Int64>
+    <sys:Int64 x:Key="Int64Three">3</sys:Int64>
+    <sys:Int64 x:Key="Int64Four">4</sys:Int64>
+    <sys:Int64 x:Key="Int64Five">5</sys:Int64>
+    <sys:Int64 x:Key="Int64Six">6</sys:Int64>
+    <sys:Int64 x:Key="Int64Seven">7</sys:Int64>
+    <sys:Int64 x:Key="Int64Eight">8</sys:Int64>
+    <sys:Int64 x:Key="Int64Nine">9</sys:Int64>
+
+
+
+
+
+
+
     <!-- Same as above, can use with a bit more readability -->
     <sys:Int32 x:Key="IntegerNo">0</sys:Int32>
     <sys:Int32 x:Key="IntegerYes">1</sys:Int32>

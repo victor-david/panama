@@ -52,8 +52,8 @@ namespace Restless.App.Panama.ViewModel
         {
             DisplayName = Strings.CommandToolScramble;
             MaxCreatable = 1;
-            RawCommands.Add("Paste", Paste);
-            RawCommands.Add("Begin", Scramble);
+            Commands.Add("Paste", Paste);
+            Commands.Add("Begin", Scramble);
             rand = new Random();
         }
         #pragma warning restore 1591

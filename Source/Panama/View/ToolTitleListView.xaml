@@ -11,7 +11,7 @@
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationTitleList}"/>
         <DockPanel DockPanel.Dock="Top">
-            <Button DockPanel.Dock="Left" Width="120" HorizontalAlignment="Left" Command="{Binding RawCommands[Begin]}" Content="Begin">
+            <Button DockPanel.Dock="Left" Width="120" HorizontalAlignment="Left" Command="{Binding Commands[Begin]}" Content="Begin">
                 <Button.IsEnabled>
                     <MultiBinding Converter="{StaticResource BooleanToBooleanMultiConverter}" ConverterParameter="{StaticResource True}">
                         <Binding Path="Creator.Scanner.IsRunning" />
@@ -19,7 +19,7 @@
                 </Button.IsEnabled>
             </Button>
             <Label DockPanel.Dock="Right" HorizontalAlignment="Right">
-                <Hyperlink Command="{Binding RawCommands[OpenFile]}">Open file</Hyperlink>
+                <Hyperlink Command="{Binding Commands[OpenFile]}">Open file</Hyperlink>
             </Label>
         </DockPanel>
         <TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Text="{Binding Text, Mode=OneWay}"/>

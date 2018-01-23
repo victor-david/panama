@@ -101,12 +101,12 @@ namespace Restless.App.Panama.ViewModel
 
             AddViewSourceSortDescriptions();
 
-            RawCommands.Add("FilterToPublisher", RunFilterToPublisherCommand, CanRunCommandIfRowSelected);
-            RawCommands.Add("GridSorting", (o) => { SortItemSource(o as DataGridBoundColumn); });
+            Commands.Add("FilterToPublisher", RunFilterToPublisherCommand, CanRunCommandIfRowSelected);
+            Commands.Add("GridSorting", (o) => { SortItemSource(o as DataGridBoundColumn); });
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandBrowseToPublisherUrl, OpenRowCommand, "ImageBrowseToUrlMenu");
-            MenuItems.AddItem(Strings.CommandFilterToPublisher, RawCommands["FilterToPublisher"], "ImageFilterMenu");
+            MenuItems.AddItem(Strings.CommandFilterToPublisher, Commands["FilterToPublisher"], "ImageFilterMenu");
 
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandDeleteSubmission, DeleteCommand, "ImageDeleteMenu");

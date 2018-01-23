@@ -153,6 +153,7 @@
     <Compile Include="Converters\SubtractionConverter.cs" />
     <Compile Include="Other\ApplicationInfo.cs" />
     <Compile Include="Other\BindableBase.cs" />
+    <Compile Include="Other\GeneralOption.cs" />
     <Compile Include="Other\PreviewMode.cs" />
     <Compile Include="Other\TitleVersionRenameItem.cs" />
     <Compile Include="Other\DocumentPreviewer.cs" />
@@ -199,7 +200,7 @@
     <Compile Include="Controls\DataGrid\DataGridColumnCollection.cs" />
     <Compile Include="Controls\DataGrid\DataGridColumnExtensions.cs" />
     <Compile Include="Collections\MenuItemCollection.cs" />
-    <Compile Include="Collections\RawCommandDictionary.cs" />
+    <Compile Include="Collections\CommandDictionary.cs" />
     <Compile Include="Converters\DatesToDayDiffConverter.cs" />
     <Compile Include="Converters\ValueToBooleanConverter.cs" />
     <Compile Include="Converters\TriggerToBrushConverter.cs" />
