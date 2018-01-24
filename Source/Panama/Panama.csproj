@@ -110,6 +110,24 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -121,8 +139,18 @@
     <Compile Include="Config\Config.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\ConfigEdit\ColorEdit.xaml.cs">
+      <DependentUpon>ColorEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConfigEdit\FolderEdit.xaml.cs">
+      <DependentUpon>FolderEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConfigEdit\FolderEditType.cs" />
     <Compile Include="Controls\GridRowDisplay\GridRowDisplay.xaml.cs">
       <DependentUpon>GridRowDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConfigEdit\YesNoEdit.xaml.cs">
+      <DependentUpon>YesNoEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\PreviewModeToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -362,9 +390,6 @@
     <Compile Include="View\SubmissionView.xaml.cs">
       <DependentUpon>SubmissionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditControls\ConfigEdit.xaml.cs">
-      <DependentUpon>ConfigEdit.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\EditControls\PublisherEdit.xaml.cs">
       <DependentUpon>PublisherEdit.xaml</DependentUpon>
     </Compile>
@@ -389,9 +414,21 @@
     <Compile Include="View\Windows\WorkspaceWindow.xaml.cs">
       <DependentUpon>WorkspaceWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\ConfigEdit\ColorEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ConfigEdit\FolderEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\GridRowDisplay\GridRowDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ConfigEdit\YesNoEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Dictionary\Converters.xaml">
       <SubType>Designer</SubType>
@@ -608,10 +645,6 @@
     <Page Include="View\SubmissionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\EditControls\ConfigEdit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditControls\PublisherEdit.xaml">
       <SubType>Designer</SubType>

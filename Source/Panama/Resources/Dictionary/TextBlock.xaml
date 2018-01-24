@@ -23,6 +23,14 @@
         <Setter Property="Margin" Value="8,8" />
     </Style>
 
+
+    <Style TargetType="TextBlock" x:Key="TextBlockFolderTitle" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#FF808080" />
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Margin" Value="2" />
+    </Style>
+
     <Style TargetType="TextBlock" x:Key="TextBlockFilterDescription" BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="Foreground" Value="{StaticResource LabelBrush}" />
         <Setter Property="TextWrapping" Value="Wrap"/>

@@ -35,6 +35,26 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="TextBox" x:Key="TextBoxFolderName" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="8"/>
+        <!-- need to override triggers in base TextBox style -->
+        <Style.Triggers>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource TextBoxForegoundBrush}" />
+                <Setter Property="Background" Value="{StaticResource TextBoxBackgroundBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+
+
+
     <!--STYLES INVOLVED IN CREATING INPUT HINT -->
 
     <!-- Style for text box that receives a hint from a TextBlock behind it -->

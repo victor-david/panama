@@ -3,7 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:filter="clr-namespace:Restless.App.Panama.Filter"
-    xmlns:cv="clr-namespace:Restless.App.Panama.Converters">
+    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls">
 
     <!-- Base control size definitions -->
     <sys:Double x:Key="ControlFontSize">13</sys:Double>
@@ -21,7 +22,6 @@
     <sys:Int32 x:Key="Integer0">0</sys:Int32>
     <sys:Int32 x:Key="Integer1">1</sys:Int32>
     <sys:Int32 x:Key="Integer2">2</sys:Int32>
-
 
     <sys:Int32 x:Key="Int32Zero">0</sys:Int32>
     <sys:Int32 x:Key="Int32One">1</sys:Int32>
@@ -44,13 +44,7 @@
     <sys:Int64 x:Key="Int64Seven">7</sys:Int64>
     <sys:Int64 x:Key="Int64Eight">8</sys:Int64>
     <sys:Int64 x:Key="Int64Nine">9</sys:Int64>
-
-
-
-
-
-
-
+    
     <!-- Same as above, can use with a bit more readability -->
     <sys:Int32 x:Key="IntegerNo">0</sys:Int32>
     <sys:Int32 x:Key="IntegerYes">1</sys:Int32>
@@ -68,6 +62,9 @@
     <filter:TagFilterCombine x:Key="FilterTagCombineAnd">And</filter:TagFilterCombine>
     <filter:TagFilterCombine x:Key="FilterTagCombineAndNot">AndNot</filter:TagFilterCombine>
 
+    <con:FolderEditType x:Key="FolderEditTypeFileSystem">FileSystem</con:FolderEditType>
+    <con:FolderEditType x:Key="FolderEditTypeMapi">Mapi</con:FolderEditType>
+    
     <cv:BooleanToVisibilityConverterOptions x:Key="BooleanTrueToVisibility">TrueToVisibility</cv:BooleanToVisibilityConverterOptions>
     <cv:BooleanToVisibilityConverterOptions x:Key="BooleanFalseToVisibility">FalseToVisibility</cv:BooleanToVisibilityConverterOptions>
     

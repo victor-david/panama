@@ -15,13 +15,11 @@ namespace Restless.App.Panama.Configuration
     /// <summary>
     /// Provides configuration services for the application.
     /// </summary>
-    public class Config
+    public sealed class Config : BindableBase
     {
         #region Private
         private static Config instance;
         private ConfigTable table;
-        // private DataRowCacheDictionary rowCache;
-        private Dictionary<string, DataRow> rowCache;
         #endregion
 
         /************************************************************************/
@@ -75,7 +73,6 @@ namespace Restless.App.Panama.Configuration
             set => SetItem(value);
         }
 
-
         /// <summary>
         /// Gets or sets the width of the main window
         /// </summary>
@@ -104,19 +101,30 @@ namespace Restless.App.Panama.Configuration
         }
 
         /// <summary>
-        /// Gets the color used to show a publisher in a submission period.
+        /// Gets or sets the row height used in various data grids.
         /// </summary>
-        public Color ColorPeriodPublisher
+        public int DataGridRowHeight
         {
-            get { return GetColor("ColorPeriodPublisher"); }
+            get => GetItem(24);
+            set => SetItem(value);
         }
 
         /// <summary>
-        /// Gets the published title color.
+        /// Gets or sets the color used to show a publisher in a submission period.
+        /// </summary>
+        public Color ColorPeriodPublisher
+        {
+            get => GetColor(Colors.Red);
+            set => SetColor(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the published title color.
         /// </summary>
         public Color ColorPublishedTitle
         {
-            get { return GetColor("ColorPublishedTitle"); }
+            get => GetColor(Colors.Green);
+            set => SetColor(value);
         }
         
         /// <summary>
@@ -124,55 +132,63 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public Color ColorSubmittedTitle
         {
-            get { return GetColor("ColorSubmittedTitle"); }
+            get => GetColor(Colors.Red);
+            set => SetColor(value);
         }
 
         /// <summary>
-        /// Gets the folder for the export operation.
+        /// Gets or sets the folder for the export operation.
         /// </summary>
         public string FolderExport
         {
             get => GetItem(null);
+            set => SetItem(value);
         }
 
         /// <summary>
-        /// Gets the folder for the MAPI operations.
+        /// Gets or sets the folder for the MAPI operations.
         /// </summary>
         public string FolderMapi
         {
             get => GetItem(null);
+            set => SetItem(value);
         }
 
         /// <summary>
-        /// Gets the folder for submission documents.
+        /// Gets or sets the folder for submission documents.
         /// </summary>
         public string FolderSubmissionDocument
         {
             get => GetItem(null);
+            set => SetItem(value);
         }
 
         /// <summary>
-        /// Gets the folder for submission documents.
+        /// Gets or sets the folder for submission documents.
         /// </summary>
+        
         public string FolderSubmissionMessageAttachment
         {
             get => GetItem(null);
+            set => SetItem(value);
         }
 
         /// <summary>
-        /// Gets the default folder for selecting a title version document.
+        /// Gets or sets the default folder for selecting a title version document.
         /// </summary>
         public string FolderTitleVersion
         {
             get => GetItem(null);
+            set => SetItem(value);
         }
 
         /// <summary>
-        /// Gets the folder title root.
+        /// Gets or sets the folder title root.
         /// </summary>
         public string FolderTitleRoot
         {
             get => GetItem(null);
+            set => SetItem(value);
         }
 
         /// <summary>
@@ -183,8 +199,8 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnTable
         {
-            get { return GetGridLength("LeftColumnTable"); }
-            set { SetRowValue("LeftColumnTable", value.Value.ToString()); }
+            get => GetGridLength(600);
+            set => SetGridLength(value);
         }
 
         /// <summary>
@@ -195,8 +211,8 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnTitle
         {
-            get { return GetGridLength("LeftColumnTitle"); }
-            set { SetRowValue("LeftColumnTitle", value.Value.ToString());}
+            get => GetGridLength(600);
+            set => SetGridLength(value);
         }
 
         /// <summary>
@@ -207,8 +223,8 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnPublisher
         {
-            get { return GetGridLength("LeftColumnPublisher"); }
-            set { SetRowValue("LeftColumnPublisher", value.Value.ToString()); }
+            get => GetGridLength(600);
+            set => SetGridLength(value);
         }
 
         /// <summary>
@@ -219,8 +235,8 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnSubmission
         {
-            get { return GetGridLength("LeftColumnSubmission"); }
-            set { SetRowValue("LeftColumnSubmission", value.Value.ToString()); }
+            get => GetGridLength(600);
+            set => SetGridLength(value);
         }
 
         /// <summary>
@@ -232,15 +248,69 @@ namespace Restless.App.Panama.Configuration
             {
                 var ops = new SubmissionDocumentOptions()
                 {
-                    Company = GetString("SubDocumentCompany"),
-                    Text = GetString("SubDocumentText"),
-                    Header = GetString("SubDocumentHeader"),
-                    Footer = GetString("SubDocumentFooter"),
-                    HeaderPageNumbers = GetBool("SubDocumentHeaderPages"),
-                    FooterPageNumbers= GetBool("SubDocumentFooterPages")
+                    Company = SubmissionDocCompany,
+                    Header = SubmissionDocHeader,
+                    Footer = SubmissionDocFooter,
+                    Text = SubmissionDocBody,
+                    HeaderPageNumbers = SubmissionDocHeaderPages,
+                    FooterPageNumbers = SubmissionDocFooterPages
                 };
                 return ops;
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the company name to place into a new submission document.
+        /// </summary>
+        public string SubmissionDocCompany
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the header text to place into a new submission document.
+        /// </summary>
+        public string SubmissionDocHeader
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets a value that indicates if page numbers will be included in the header.
+        /// </summary>
+        public bool SubmissionDocHeaderPages
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the footer text to place into a new submission document.
+        /// </summary>
+        public string SubmissionDocFooter
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets a value that indicates if page numbers will be included in the footer.
+        /// </summary>
+        public bool SubmissionDocFooterPages
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the body text to place into a new submission document.
+        /// </summary>
+        public string SubmissionDocBody
+        {
+            get => GetItem(null);
+            set => SetItem(value);
         }
 
         /// <summary>
@@ -293,10 +363,8 @@ namespace Restless.App.Panama.Configuration
         private Config()
         {
             table = DatabaseController.Instance.GetTable<ConfigTable>();
-            rowCache = new Dictionary<string, DataRow>();
-            TitleFilter = GetRowValue("TitleFilter").Deserialize<TitleFilter>();
-            PublisherFilter = GetRowValue("PublisherFilter").Deserialize<PublisherFilter>();
-            //table.AddConfigValueIf("SyncDocumentInternalDates", "During a meta-data update operation, updates document internal dates (created, modified) to be consistent with the title written date and the file system modified date, respectively. This only works on Open Xml documents.", "bool", "0", true);
+            TitleFilter = GetValueFromRow(nameof(TitleFilter), null).Deserialize<TitleFilter>();
+            PublisherFilter = GetValueFromRow(nameof(PublisherFilter), null).Deserialize<PublisherFilter>();
         }
 
         #endregion
@@ -310,15 +378,12 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public void SaveFilterObjects()
         {
-            SetRowValue("TitleFilter", TitleFilter.Serialize());
-            SetRowValue("PublisherFilter", PublisherFilter.Serialize());
+            SetItem(TitleFilter.Serialize(), nameof(TitleFilter));
+            SetItem(PublisherFilter.Serialize(), nameof(PublisherFilter));
         }
         #endregion
 
         /************************************************************************/
-
-
-
 
         #region Private methods
 
@@ -345,6 +410,15 @@ namespace Restless.App.Panama.Configuration
             return 0;
         }
 
+        private double GetItem(double defaultValue, [CallerMemberName] string id = null)
+        {
+            if (double.TryParse(GetValueFromRow(id, defaultValue), out double val))
+            {
+                return val;
+            }
+            return 0;
+        }
+
         private bool GetItem(bool defaultValue, [CallerMemberName] string id = null)
         {
             string val = GetValueFromRow(id, defaultValue);
@@ -357,6 +431,21 @@ namespace Restless.App.Panama.Configuration
             return (WindowState)val;
         }
 
+        private GridLength GetGridLength(double defaultValue, [CallerMemberName] string id = null)
+        {
+            double value = GetItem(defaultValue, id);
+            return new GridLength(value, GridUnitType.Pixel);
+        }
+
+
+        private Color GetColor(Color defaultValue, [CallerMemberName] string id = null)
+        {
+            Color color = new Color();
+            string value = GetValueFromRow(id, defaultValue);
+            Execution.TryCatchSwallow(() => color = (Color)ColorConverter.ConvertFromString(value));
+            return color;
+        }
+        
         private void SetItem(string value, [CallerMemberName] string id = null)
         {
             SetRowValueIf(id, value);
@@ -382,6 +471,20 @@ namespace Restless.App.Panama.Configuration
             SetRowValueIf(id, ((int)value).ToString());
         }
 
+        private void SetGridLength(GridLength value, [CallerMemberName] string id = null)
+        {
+            if (value != null)
+            {
+                SetRowValueIf(id, value.Value.ToString());
+            }
+        }
+
+        private void SetColor(Color value, [CallerMemberName] string id = null)
+        {
+            SetItem(value.ToString(), id);
+            OnPropertyChanged(id);
+        }
+
         private string GetValueFromRow(string id, object defaultValue)
         {
             DataRow row = GetRow(id, defaultValue);
@@ -401,100 +504,6 @@ namespace Restless.App.Panama.Configuration
             {
                 row[ConfigTable.Defs.Columns.Value] = value;
             }
-        }
-        #endregion
-
-
-
-
-
-
-
-        #region Private methods
-
-        private string GetString(string id)
-        {
-            return GetRowValue(id);
-        }
-
-        private bool GetBool(string id)
-        {
-            string value = GetRowValue(id);
-            return (value == "1") ? true : false;
-        }
-
-        private Color GetColor(string id)
-        {
-            Color color = new Color();
-            string value = GetRowValue(id);
-            Execution.TryCatchSwallow(() => color = (Color)ColorConverter.ConvertFromString(value));
-            return color;
-        }
-
-        private GridLength GetGridLength(string id)
-        {
-            int value = GetInteger(id);
-            return new GridLength(value, GridUnitType.Pixel);
-        }
-
-        private int GetInteger(string id)
-        {
-            string value = GetRowValue(id);
-            int val;
-            int.TryParse(value, out val);
-            return val;
-        }
-
-        private string GetRowValue(string id)
-        {
-            DataRow row = GetRowFromCache(id);
-            return row[ConfigTable.Defs.Columns.Value].ToString();
-        }
-
-        /// <summary>
-        /// Sets a value on the ConfigTable.Defs.Columns.Value column of a config row
-        /// </summary>
-        /// <param name="id">The row id</param>
-        /// <param name="value">The value</param>
-        private void SetRowValue(string id, string value)
-        {
-            //SetRowValue(id, ConfigTable.Defs.Columns.Value, value);
-            DataRow row = GetRowFromCache(id);
-            if (row[ConfigTable.Defs.Columns.Value].ToString() != value)
-            {
-                row[ConfigTable.Defs.Columns.Value] = value;
-            }
-        }
-
-        /// <summary>
-        /// Sets a value on the specified column of a config row.
-        /// </summary>
-        /// <param name="id">The row id</param>
-        /// <param name="columnName">The column name</param>
-        /// <param name="value">The value</param>
-        private void SetRowValue(string id, string columnName, object value)
-        {
-            DataRow row = GetRowFromCache(id);
-            if (row[columnName].ToString() != value.ToString())
-            {
-                row[columnName] = value;
-            }
-        }
-
-        private DataRow GetRowFromCache(string id)
-        {
-            if (rowCache.ContainsKey(id))
-            {
-                return rowCache[id];
-            }
-            DataRow[] rows = table.Select(String.Format("{0}='{1}'", ConfigTable.Defs.Columns.Id, id));
-            if (rows.Length == 1)
-            {
-                rowCache.Add(id, rows[0]);
-                return rowCache[id];
-            }
-
-            throw new IndexOutOfRangeException();
         }
         #endregion
     }

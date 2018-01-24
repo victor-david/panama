@@ -10,7 +10,7 @@
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     xmlns:xc="http://schemas.xceed.com/wpf/xaml/toolkit"
     mc:Ignorable="d"
-    d:DesignWidth="862" d:DesignHeight="313">
+    d:DesignWidth="862" d:DesignHeight="900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -26,32 +26,65 @@
 
         <DockPanel Grid.Row="1">
             <!-- Section 1. General -->
-            <GroupBox
-                    DockPanel.Dock="Top"
-                    Header="{x:Static r:Strings.HeaderSettingsSectionDate}"
-                    Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64One}}">
-                <StackPanel>
-                    <ItemsControl Style="{StaticResource SelectTypeSingle}" ItemsSource="{Binding Path=DateFormats}" />
-                    <TextBox Margin="36,-16,36,0" Text="{Binding Config.DateFormat,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding DateFormats[3].IsSelected}"/>
-                </StackPanel>
-            </GroupBox>
+            <StackPanel 
+                DockPanel.Dock="Top"
+                Margin="20,10"
+                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64One}}">
+
+                <GroupBox Header="{x:Static r:Strings.HeaderSettingsDateFormat}">
+                    <StackPanel>
+                        <ItemsControl Style="{StaticResource SelectTypeSingle}" ItemsSource="{Binding Path=DateFormats}" />
+                        <TextBox Margin="36,-16,36,0" Text="{Binding Config.DateFormat,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding DateFormats[3].IsSelected}"/>
+                    </StackPanel>
+                </GroupBox>
+                <TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.ConfigRowHeight}"/>
+                <!-- 24 is the defined MinRowHeight in Controls.xaml -->
+                <Slider Margin="2,4" Minimum="24" Maximum="42" TickPlacement="BottomRight" TickFrequency="1" Value="{Binding Path=Config.DataGridRowHeight}"/>
+            </StackPanel>
+
+            <!-- Section 2. Folders -->
+            <StackPanel
+                DockPanel.Dock="Top"
+                Margin="20,10"
+                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Two}}">
+                <con:FolderEdit Title="Title Root" Folder="{Binding Config.FolderTitleRoot}"/>
+                <con:FolderEdit Title="Title Version" Folder="{Binding Config.FolderTitleVersion}"/>
+                <con:FolderEdit Title="Submission Documents" Folder="{Binding Config.FolderSubmissionDocument}"/>
+                <con:FolderEdit Title="Submission Message Attachments" Folder="{Binding Config.FolderSubmissionMessageAttachment}"/>
+                <con:FolderEdit Title="Export" Folder="{Binding Config.FolderExport}"/>
+                <con:FolderEdit Title="Mapi Messages" Folder="{Binding Config.FolderMapi}" EditType="Mapi"/>
+            </StackPanel>
+            
+            <!-- Section 3. Colors -->
+            <DockPanel 
+                DockPanel.Dock="Top"
+                Margin="20,10"
+                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Three}}">
+                <con:ColorEdit DockPanel.Dock="Top" Title="Published Title" SelectedColor="{Binding Config.ColorPublishedTitle}"/>
+                <con:ColorEdit DockPanel.Dock="Top" Title="Submitted Title" SelectedColor="{Binding Config.ColorSubmittedTitle}" />
+                <con:ColorEdit DockPanel.Dock="Top" Title="Publisher In Submission Period" SelectedColor="{Binding Config.ColorPeriodPublisher}"/>
+                <Button DockPanel.Dock="Top" Content="Reset" Width="80" HorizontalAlignment="Left" Command="{Binding Commands[ResetColors]}"/>
+            </DockPanel>
+            
+            <!-- Section 4. Submission -->
+            <DockPanel
+                DockPanel.Dock="Top"
+                Margin="20,10"
+                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Four}}">
+                <Label DockPanel.Dock="Top" Content="Company"/>
+                <TextBox DockPanel.Dock="Top" Text="{Binding Config.SubmissionDocCompany}"/>
+                <Label DockPanel.Dock="Top" Content="Header"/>
+                <TextBox DockPanel.Dock="Top" Text="{Binding Config.SubmissionDocHeader}"/>
+                <con:YesNoEdit DockPanel.Dock="Top" Header="Include Page # in Header" IsYes="{Binding Config.SubmissionDocHeaderPages}" GroupName="HeaderPages"/>
+                <Label DockPanel.Dock="Top" Content="Footer"/>
+                <TextBox DockPanel.Dock="Top" Text="{Binding Config.SubmissionDocFooter}"/>
+                <con:YesNoEdit DockPanel.Dock="Top" Header="Include Page # in Footer" IsYes="{Binding Config.SubmissionDocFooterPages}" GroupName="FooterPages"/>
+                <Label DockPanel.Dock="Top" Content="Document Text"/>
+                <TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Text="{Binding Config.SubmissionDocBody}"/>
+                
+            </DockPanel>            
+            
         </DockPanel>
-        <!-- Tool bar specific to this view -->
-        <!--<ItemsControl HorizontalAlignment="Right" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>-->
-        <!-- Main data grid to display the tabular data  -->
-        <!--<DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding edit}" Value="False">
-                            <Setter Property="Foreground" Value="DarkRed"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
-        </DataGrid>-->
-        <!-- Nested editing control on the right -->
-        <!--<view:ConfigEdit Grid.Row="1" Grid.Column="1" Visibility="{Binding EditVisibility}"/>-->        
     </Grid>
     <!-- end main grid-->
 </UserControl>

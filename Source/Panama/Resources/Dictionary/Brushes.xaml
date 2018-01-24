@@ -92,7 +92,9 @@
     <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF" />
     <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#DDD" />
-
+    <SolidColorBrush x:Key="TextBoxForegoundBrush" Color="Blue"/>
+    <SolidColorBrush x:Key="TextBoxBackgroundBrush" Color="#FFF8F8DF"/>
+    
     <!-- Border Brushes -->
     <LinearGradientBrush x:Key="NormalBorderBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientBrush.GradientStops>

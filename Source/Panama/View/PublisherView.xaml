@@ -36,7 +36,13 @@
         </Grid>
 
         <!-- Main data grid to display the tabular data  -->
-        <con:DataGridExtended x:Name="grid" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
+        <con:DataGridExtended 
+            x:Name="grid" 
+            Grid.Row="1" Grid.Column="0" 
+            RowHeight="{Binding Config.DataGridRowHeight}"
+            ItemsSource="{Binding Path=MainSource.View}" 
+            SelectedItem="{Binding SelectedItem}"
+            con:DataGridColumns.Columns="{Binding Columns}">
             <DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding MenuItems}"/>
             </DataGrid.ContextMenu>

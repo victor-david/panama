@@ -726,16 +726,25 @@ The application cannot continue.</value>
   <data name="HeaderPreview" xml:space="preserve">
     <value>Preview</value>
   </data>
-  <data name="HeaderSettingsColor" xml:space="preserve">
+  <data name="HeaderSettingsSectionColor" xml:space="preserve">
     <value>Colors</value>
   </data>
-  <data name="HeaderSettingsFolder" xml:space="preserve">
-    <value>Folder</value>
+  <data name="HeaderSettingsSectionFolder" xml:space="preserve">
+    <value>Folders</value>
   </data>
-  <data name="HeaderSettingsGeneral" xml:space="preserve">
+  <data name="HeaderSettingsSectionGeneral" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="HeaderSettingsSectionDate" xml:space="preserve">
+  <data name="HeaderSettingsDateFormat" xml:space="preserve">
     <value>Date Format</value>
+  </data>
+  <data name="HeaderSettingsFolder" xml:space="preserve">
+    <value>Folders</value>
+  </data>
+  <data name="HeaderSettingsSectionSubmission" xml:space="preserve">
+    <value>Submission</value>
+  </data>
+  <data name="ConfigRowHeight" xml:space="preserve">
+    <value>Row height</value>
   </data>
 </root>

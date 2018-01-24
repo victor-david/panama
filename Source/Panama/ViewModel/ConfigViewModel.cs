@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Collections;
 using Restless.App.Panama.Controls;
@@ -15,10 +17,14 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for application settings.
     /// </summary>
-    public class ConfigViewModel : DataGridViewModel<ConfigTable>
+    public class ConfigViewModel : WorkspaceViewModel // DataGridViewModel<ConfigTable>
     {
         #region Private
         private Int64 selectedSection;
+        //private Color colorPeriodPublisher;
+        //private Color colorPublishedTitle;
+        //private Color colorSubmittedTitle;
+        private Color myColor;
         #endregion
 
         /************************************************************************/
@@ -51,100 +57,62 @@ namespace Restless.App.Panama.ViewModel
             private set;
         }
 
-        ///// <summary>
-        ///// Gets a visibility value that determines if the boolean edit control is visible.
-        ///// </summary>
-        //public Visibility BooleanTypeVisibility
+        public Color MyColor
+        {
+            get => myColor;
+            set
+            {
+                myColor = value;
+                Debug.WriteLine(value.ToString());
+            }
+        }
+        //public Color ColorPeriodPublisher
         //{
-        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Boolean); }
+        //    get => colorPeriodPublisher;
+        //    set
+        //    {
+        //        if (SetProperty(ref colorPeriodPublisher, value))
+        //        {
+        //            Config.ColorPeriodPublisher = value;
+        //        }
+        //    }
         //}
 
-        ///// <summary>
-        ///// Gets a visibility value that determines if the string edit control is visible.
-        ///// </summary>
-        //public Visibility StringTypeVisibility
+        //public Color ColorPublishedTitle
         //{
-        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.String); }
+        //    get => colorPublishedTitle;
+        //    set
+        //    {
+        //        if (SetProperty(ref colorPublishedTitle, value))
+        //        {
+        //            Config.ColorPublishedTitle = value;
+        //        }
+        //    }
         //}
 
-        ///// <summary>
-        ///// Gets a visibility value that determines if the string edit control is visible.
-        ///// </summary>
-        //public Visibility MultiStringTypeVisibility
-        //{
-        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.MultiString); }
-        //}
-
-        ///// <summary>
-        ///// Gets a visibility value that determines if the color edit control is visible.
-        ///// </summary>
-        //public Visibility ColorTypeVisibility
-        //{
-        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Color); }
-        //}
-
-        ///// <summary>
-        ///// Gets a visibility value that determines if the path edit control is visible.
-        ///// </summary>
-        //public Visibility PathTypeVisibility
-        //{
-        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Path, ConfigTable.Defs.Types.Mapi); }
-        //}
-
-        ///// <summary>
-        ///// Gets a visibility value that determines if the object view control is visible.
-        ///// </summary>
-        //public Visibility ObjectTypeVisibility
-        //{
-        //    get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Object); }
-        //}
         #endregion
 
         /************************************************************************/
 
         #region Constructor
-#pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigViewModel"/> class.
+        /// </summary>
         public ConfigViewModel()
         {
             DisplayName = Strings.CommandConfig;
             MaxCreatable = 1;
             Commands.Add("SwitchSection", RunSwitchSection);
-            //Commands.Add("Apply",RunApplyCommand, CanRunApplyOrRevertCommand);
-            //Commands.Add("Revert",RunRevertCommand, CanRunApplyOrRevertCommand);
-            Commands.Add("Path", RunFolderSelectCommand);
-            Columns.SetDefaultSort(Columns.Create("Id", ConfigTable.Defs.Columns.Id), ListSortDirection.Ascending);
-            // Columns.Create("Description", ConfigTable.Defs.Columns.Description).MakeFlexWidth(2);
-            Columns.Create("Value", ConfigTable.Defs.Columns.Value).MakeSingleLine();
-#if !DEBUG
-            // DataView.RowFilter = String.Format("{0}=1", ConfigTable.Defs.Columns.Edit);
-#endif
-            //VisualCommands.Add(new VisualCommandViewModel(Strings.CommandApplyConfig, Strings.CommandApplyConfigTooltip, Commands["Apply"], ResourceHelper.Get("ImageSave"), VisualCommandImageSize, VisualCommandFontSize));
-            //VisualCommands.Add(new VisualCommandViewModel(Strings.CommandRevertConfig, Strings.CommandRevertConfigTooltip, Commands["Revert"], ResourceHelper.Get("ImageUndo"), VisualCommandImageSize, VisualCommandFontSize));
-            DeleteCommand.Supported = CommandSupported.NoWithException;
-
+            Commands.Add("ResetColors", RunResetColorSelections);
             InitializeSections();
             InitializeDateFormatOptions();
-
+            InitializeColors();
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
 
         #region Protected Methods
-        /// <summary>
-        /// Called when the selected item on the associated data grid has changed.
-        /// </summary>
-        protected override void OnSelectedItemChanged()
-        {
-            base.OnSelectedItemChanged();
-            //OnPropertyChanged(nameof(BooleanTypeVisibility));
-            //OnPropertyChanged(nameof(StringTypeVisibility));
-            //OnPropertyChanged(nameof(MultiStringTypeVisibility));
-            //OnPropertyChanged(nameof(ColorTypeVisibility));
-            //OnPropertyChanged(nameof(PathTypeVisibility));
-            //OnPropertyChanged(nameof(ObjectTypeVisibility));
-        }
         #endregion
 
         /************************************************************************/
@@ -155,17 +123,14 @@ namespace Restless.App.Panama.ViewModel
         {
             Sections = new GeneralOptionList
             {
-                new GeneralOption() { IntValue = 1, Value = Strings.HeaderSettingsGeneral, Command = Commands["SwitchSection"], CommandParm = 1 },
-                new GeneralOption() { IntValue = 2, Value = Strings.HeaderSettingsFolder, Command = Commands["SwitchSection"], CommandParm = 2 },
-                new GeneralOption() { IntValue = 3, Value = Strings.HeaderSettingsColor, Command = Commands["SwitchSection"], CommandParm = 3 }
+                new GeneralOption() { IntValue = 1, Value = Strings.HeaderSettingsSectionGeneral, Command = Commands["SwitchSection"], CommandParm = 1 },
+                new GeneralOption() { IntValue = 2, Value = Strings.HeaderSettingsSectionFolder, Command = Commands["SwitchSection"], CommandParm = 2 },
+                new GeneralOption() { IntValue = 3, Value = Strings.HeaderSettingsSectionColor, Command = Commands["SwitchSection"], CommandParm = 3 },
+                new GeneralOption() { IntValue = 4, Value = Strings.HeaderSettingsSectionSubmission, Command = Commands["SwitchSection"], CommandParm = 4 }
             };
-            //Sections.Add(new GeneralOption() { IntValue = 5, Value = Strings.HeaderSettingsCurrency, Command = RawCommands["SwitchSection"], CommandParm = 5 });
-            //Sections.Add(new GeneralOption() { IntValue = 6, Value = Strings.HeaderSettingsCategoryChart, Command = RawCommands["SwitchSection"], CommandParm = 6 });
             RunSwitchSection(Config.SelectedConfigSection);
             OnPropertyChanged(nameof(Sections));
         }
-
-
 
         private void InitializeDateFormatOptions()
         {
@@ -200,14 +165,13 @@ namespace Restless.App.Panama.ViewModel
             };
         }
 
+        private void InitializeColors()
+        {
+            //ColorPeriodPublisher = Config.ColorPeriodPublisher;
+            //ColorPublishedTitle = Config.ColorPublishedTitle;
+            MyColor = Colors.Red;
 
-
-
-
-
-
-
-
+        }
 
         private void RunSwitchSection(object parm)
         {
@@ -221,87 +185,12 @@ namespace Restless.App.Panama.ViewModel
         }
 
 
-        //private Visibility GetVisibilityForTypes(params string[] types)
-        //{
-        //    if (SelectedRow != null)
-        //    {
-        //        foreach (string type in types)
-        //        {
-        //            if (SelectedRow[ConfigTable.Defs.Columns.Type].ToString() == type)
-        //            {
-        //                return Visibility.Visible;
-        //            }
-        //        }
-        //    }
-        //    return Visibility.Collapsed;
-        //}
-
-        private void RunFolderSelectCommand(object o)
+        private void RunResetColorSelections(object parm)
         {
-            if (SelectedRow != null)
-            {
-                //switch (SelectedRow[ConfigTable.Defs.Columns.Type].ToString())
-                //{
-                //    case ConfigTable.Defs.Types.Path:
-                //        SelectFolder();
-                //        break;
-                //    case ConfigTable.Defs.Types.Mapi:
-                //        SelectMapiFolder();
-                //        break;
-                //}
-            }
+            Config.ColorPeriodPublisher = (Color)ColorConverter.ConvertFromString("#74C1FFC1");
+            Config.ColorPublishedTitle = (Color)ColorConverter.ConvertFromString("#FFD0FFC9");
+            Config.ColorSubmittedTitle = (Color)ColorConverter.ConvertFromString("#FFFF0000");
         }
-
-        private void SelectFolder()
-        {
-            string dir = SelectedRow[ConfigTable.Defs.Columns.Value].ToString();
-            using (var dialog = CommonDialogFactory.Create(dir, "Select a directory", true))
-            {
-                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-                {
-                    SelectedRow[ConfigTable.Defs.Columns.Value] = dialog.FileName;
-                    OnPropertyChanged(nameof(SelectedRow));
-                }
-            }
-        }
-
-        private void SelectMapiFolder()
-        {
-            MessageSelectOptions ops = new MessageSelectOptions(MessageSelectMode.Folder, null);
-            var w = WindowFactory.MessageSelect.Create(Strings.CaptionSelectMapiFolder, ops);
-            w.ShowDialog();
-            var vm = w.GetValue(WindowViewModel.ViewModelProperty) as MessageSelectWindowViewModel;
-
-            if (vm != null && vm.SelectedItems != null)
-            {
-                var result = vm.SelectedItems[0] as WindowsSearchResult;
-                if (result!= null)
-                {
-                    string url = result.Values[SysProps.System.ItemUrl].ToString();
-                    // remove "mapi:" from string
-                    SelectedRow[ConfigTable.Defs.Columns.Value] = url.Remove(0, 5);
-                    OnPropertyChanged(nameof(SelectedRow));
-                }
-            }
-        }
-
-        private void RunApplyCommand(object o)
-        {
-            Table.Save();
-        }
-
-        private void RunRevertCommand(object o)
-        {
-            Table.RejectChanges();
-            OnSelectedItemChanged();
-        }
-
-        private bool CanRunApplyOrRevertCommand(object o)
-        {
-            var t = Table.GetChanges(System.Data.DataRowState.Modified);
-            return (t != null);
-        }
-
         #endregion
     }
 }

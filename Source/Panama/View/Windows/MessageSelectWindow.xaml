@@ -8,9 +8,9 @@
     Height="600" Width="1060" ShowInTaskbar="False" 
     WindowStartupLocation="CenterOwner">
 
-    <Window.Resources>
+    <!--<Window.Resources>
         <ResourceDictionary Source="../../Resources/Windows.xaml" />
-    </Window.Resources>
+    </Window.Resources>-->
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -58,7 +58,7 @@
             <Label>Type</Label>
             <TextBlock Text="{Binding SelectedItem.Values[System.ItemType]}"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Style="{StaticResource StackPanelCommandHolder}">
+        <StackPanel Grid.Row="1" Style="{StaticResource StackPanelCommandHolder}" Margin="4,0">
             <Button Command="{Binding Commands[Select]}">Select</Button>
             <Button Command="{Binding Commands[Cancel]}">Cancel</Button>
         </StackPanel>
