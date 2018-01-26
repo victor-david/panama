@@ -228,15 +228,6 @@ namespace Restless.App.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets the SQL needed to populate this table with its default values.
-        /// </summary>
-        /// <returns>A SQL string to insert the default data.</returns>
-        protected override string GetPopulateSql()
-        {
-            return Resources.Data.Config;
-        }
-
-        /// <summary>
         /// Sets extended properties on certain columns. See the base implemntation <see cref="TableBase.SetColumnProperties"/> for more information.
         /// </summary>
         protected override void SetColumnProperties()

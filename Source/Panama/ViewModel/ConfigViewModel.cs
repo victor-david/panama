@@ -187,9 +187,7 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunResetColorSelections(object parm)
         {
-            Config.ColorPeriodPublisher = (Color)ColorConverter.ConvertFromString("#74C1FFC1");
-            Config.ColorPublishedTitle = (Color)ColorConverter.ConvertFromString("#FFD0FFC9");
-            Config.ColorSubmittedTitle = (Color)ColorConverter.ConvertFromString("#FFFF0000");
+            Config.ResetColors();
         }
         #endregion
     }

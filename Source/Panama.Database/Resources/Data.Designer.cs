@@ -19,7 +19,7 @@ namespace Restless.App.Panama.Database.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Data {
@@ -66,18 +66,6 @@ namespace Restless.App.Panama.Database.Resources {
         internal static string Author {
             get {
                 return ResourceManager.GetString("Author", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to INSERT INTO &quot;config&quot;  VALUES (&apos;AutoSwitchToSubmission&apos;, &apos;Create if necessary and switch to the submission tab when creating a submission&apos;, &apos;bool&apos;, &apos;1&apos;, 1);
-        ///INSERT INTO &quot;config&quot;  VALUES (&apos;ColorPeriodPublisher&apos;, &apos;Color used to show publishers in submission period&apos;, &apos;color&apos;, &apos;#FF008000&apos;, 1);
-        ///INSERT INTO &quot;config&quot;  VALUES (&apos;ColorPublishedTitle&apos;, &apos;Color used to show published titles&apos;, &apos;color&apos;, &apos;#FF00FF00&apos;, 1);
-        ///INSERT INTO &quot;config&quot;  VALUES (&apos;ColorSubmittedTitle&apos;, &apos;Color used to show submitted titles&apos;, &apos;color&apos;,  [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string Config {
-            get {
-                return ResourceManager.GetString("Config", resourceCulture);
             }
         }
         

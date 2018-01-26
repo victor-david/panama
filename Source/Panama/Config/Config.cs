@@ -23,8 +23,56 @@ namespace Restless.App.Panama.Configuration
         #endregion
 
         /************************************************************************/
-        
+
         #region Public fields
+
+        /// <summary>
+        /// Provides static default values for properties
+        /// </summary>
+        public static class Default
+        {
+            /// <summary>
+            /// Gets the default folder for title root, versions, etc.
+            /// </summary>
+            public const string Folder = @"C:\";
+
+            /// <summary>
+            /// Gets the default value for data grid row height.
+            /// </summary>
+            public const int DataGridRowHeight = 24;
+
+            /// <summary>
+            /// Gets the default value for grid splitter.
+            /// </summary>
+            public const double SplitterWidth = 684;
+
+            /// <summary>
+            /// Gets the default value for a submission document footer.
+            /// </summary>
+            public const string DocumentFooter = "Submissions to [publisher] - [author] - [month], [year]";
+
+            /// <summary>
+            /// Provides static default values for colors.
+            /// </summary>
+            public static class Color
+            {
+                /// <summary>
+                /// Gets the default color for a publisher that is within its submission period.
+                /// </summary>
+                public const string PeriodPublisher = "#FFF5F5DC";
+
+                /// <summary>
+                /// Gets the default color for a title that is published.
+                /// </summary>
+                public const string PublishedTitle = "#FFD0FFC9";
+
+                /// <summary>
+                /// Gets the default color for a title that is currently submitted.
+                /// </summary>
+                public const string SubmittedTitle = "#FFDC143C";
+            }
+        }
+
         /// <summary>
         /// Gets default settings for the main window
         /// </summary>
@@ -105,7 +153,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public int DataGridRowHeight
         {
-            get => GetItem(24);
+            get => GetItem(Default.DataGridRowHeight);
             set => SetItem(value);
         }
 
@@ -114,7 +162,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public Color ColorPeriodPublisher
         {
-            get => GetColor(Colors.Red);
+            get => GetColor(Default.Color.PeriodPublisher);
             set => SetColor(value);
         }
 
@@ -123,7 +171,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public Color ColorPublishedTitle
         {
-            get => GetColor(Colors.Green);
+            get => GetColor(Default.Color.PublishedTitle);
             set => SetColor(value);
         }
         
@@ -132,7 +180,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public Color ColorSubmittedTitle
         {
-            get => GetColor(Colors.Red);
+            get => GetColor(Default.Color.SubmittedTitle);
             set => SetColor(value);
         }
 
@@ -141,7 +189,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderExport
         {
-            get => GetItem(null);
+            get => GetItem(Default.Folder);
             set => SetItem(value);
         }
 
@@ -159,7 +207,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderSubmissionDocument
         {
-            get => GetItem(null);
+            get => GetItem(Default.Folder);
             set => SetItem(value);
         }
 
@@ -169,7 +217,7 @@ namespace Restless.App.Panama.Configuration
         
         public string FolderSubmissionMessageAttachment
         {
-            get => GetItem(null);
+            get => GetItem(Default.Folder);
             set => SetItem(value);
         }
 
@@ -178,7 +226,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderTitleVersion
         {
-            get => GetItem(null);
+            get => GetItem(Default.Folder);
             set => SetItem(value);
         }
 
@@ -187,7 +235,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderTitleRoot
         {
-            get => GetItem(null);
+            get => GetItem(Default.Folder);
             set => SetItem(value);
         }
 
@@ -199,7 +247,7 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnTable
         {
-            get => GetGridLength(600);
+            get => GetGridLength(Default.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -211,7 +259,7 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnTitle
         {
-            get => GetGridLength(600);
+            get => GetGridLength(Default.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -223,7 +271,7 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnPublisher
         {
-            get => GetGridLength(600);
+            get => GetGridLength(Default.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -235,7 +283,7 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnSubmission
         {
-            get => GetGridLength(600);
+            get => GetGridLength(Default.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -291,7 +339,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string SubmissionDocFooter
         {
-            get => GetItem(null);
+            get => GetItem(Default.DocumentFooter);
             set => SetItem(value);
         }
 
@@ -370,8 +418,18 @@ namespace Restless.App.Panama.Configuration
         #endregion
 
         /************************************************************************/
-        
+
         #region Public methods
+        /// <summary>
+        /// Resets the configuration colors.
+        /// </summary>
+        public void ResetColors()
+        {
+            ColorPeriodPublisher = (Color)ColorConverter.ConvertFromString(Default.Color.PeriodPublisher);
+            ColorPublishedTitle = (Color)ColorConverter.ConvertFromString(Default.Color.PublishedTitle);
+            ColorSubmittedTitle = (Color)ColorConverter.ConvertFromString(Default.Color.SubmittedTitle);
+        }
+
         /// <summary>
         /// Saves the filter objects by serializing them into their rows.
         /// This method is called at shutdown.
@@ -437,15 +495,15 @@ namespace Restless.App.Panama.Configuration
             return new GridLength(value, GridUnitType.Pixel);
         }
 
-
-        private Color GetColor(Color defaultValue, [CallerMemberName] string id = null)
+        private Color GetColor(string defaultValue, [CallerMemberName] string id = null)
         {
             Color color = new Color();
             string value = GetValueFromRow(id, defaultValue);
             Execution.TryCatchSwallow(() => color = (Color)ColorConverter.ConvertFromString(value));
             return color;
         }
-        
+
+
         private void SetItem(string value, [CallerMemberName] string id = null)
         {
             SetRowValueIf(id, value);

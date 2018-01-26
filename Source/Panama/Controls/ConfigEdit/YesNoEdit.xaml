@@ -7,10 +7,19 @@
     mc:Ignorable="d" 
     Name="PART_Control"
     d:DesignHeight="60" d:DesignWidth="300">
-    <GroupBox Header="{Binding Header, ElementName=PART_Control}">
-        <StackPanel Orientation="Horizontal">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Style="{StaticResource TextBlockLabel}" Text="{Binding Header, ElementName=PART_Control}"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
             <RadioButton GroupName="{Binding GroupName, ElementName=PART_Control}" Content="Yes" IsChecked="{Binding IsYes,ElementName=PART_Control}" />
             <RadioButton GroupName="{Binding GroupName, ElementName=PART_Control}" Content="No" IsChecked="{Binding IsNo, ElementName=PART_Control, Mode=OneWay}" />
         </StackPanel>
-    </GroupBox>
+
+    </Grid>
 </UserControl>

@@ -18,8 +18,8 @@
         </Grid.RowDefinitions>
 
         <TextBlock 
-            Grid.Column="0" Grid.Row="0" 
-            Style="{StaticResource TextBlockFolderTitle}"
+            Grid.Column="0" Grid.Row="0"
+            Style="{StaticResource TextBlockLabel}"
             Text="{Binding Title, ElementName=PART_Control}"/>
         <TextBox 
             Grid.Column="0" Grid.Row="1"

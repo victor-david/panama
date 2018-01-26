@@ -40,7 +40,7 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="TextWrapping" Value="NoWrap" />
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="8"/>
+        <Setter Property="Margin" Value="0,2"/>
         <!-- need to override triggers in base TextBox style -->
         <Style.Triggers>
             <Trigger Property="IsReadOnly" Value="True">

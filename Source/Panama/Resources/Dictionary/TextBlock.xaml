@@ -15,7 +15,16 @@
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="Margin" Value="3,8" />
     </Style>
+    
+    <Style TargetType="TextBlock" x:Key="TextBlockLabel" BasedOn="{StaticResource TextBlockMessage}">
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="Margin" Value="0" />
+    </Style>
 
+    <Style TargetType="TextBlock" x:Key="TextBlockSepLabel" BasedOn="{StaticResource TextBlockLabel}">
+        <Setter Property="Margin" Value="0,20,0,0" />
+    </Style>
+    
     <Style TargetType="TextBlock" x:Key="TextBlockConfigDesc" BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="#FF808080" />
