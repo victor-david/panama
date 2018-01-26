@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
@@ -21,10 +23,7 @@ namespace Restless.App.Panama.ViewModel
     {
         #region Private
         private Int64 selectedSection;
-        //private Color colorPeriodPublisher;
-        //private Color colorPublishedTitle;
-        //private Color colorSubmittedTitle;
-        private Color myColor;
+        private ObservableCollection<SampleTitle> sampleTitles;
         #endregion
 
         /************************************************************************/
@@ -57,39 +56,14 @@ namespace Restless.App.Panama.ViewModel
             private set;
         }
 
-        public Color MyColor
+        /// <summary>
+        /// Gets the list of sample titles used to preview color selections.
+        /// </summary>
+        public ObservableCollection<SampleTitle> SampleTitles
         {
-            get => myColor;
-            set
-            {
-                myColor = value;
-                Debug.WriteLine(value.ToString());
-            }
+            get => sampleTitles;
+            private set => SetProperty(ref sampleTitles, value);
         }
-        //public Color ColorPeriodPublisher
-        //{
-        //    get => colorPeriodPublisher;
-        //    set
-        //    {
-        //        if (SetProperty(ref colorPeriodPublisher, value))
-        //        {
-        //            Config.ColorPeriodPublisher = value;
-        //        }
-        //    }
-        //}
-
-        //public Color ColorPublishedTitle
-        //{
-        //    get => colorPublishedTitle;
-        //    set
-        //    {
-        //        if (SetProperty(ref colorPublishedTitle, value))
-        //        {
-        //            Config.ColorPublishedTitle = value;
-        //        }
-        //    }
-        //}
-
         #endregion
 
         /************************************************************************/
@@ -104,9 +78,11 @@ namespace Restless.App.Panama.ViewModel
             MaxCreatable = 1;
             Commands.Add("SwitchSection", RunSwitchSection);
             Commands.Add("ResetColors", RunResetColorSelections);
+            Commands.Add("ColorChanged", RunSelectedColorChanged);
             InitializeSections();
             InitializeDateFormatOptions();
-            InitializeColors();
+            InitializeSampleTitles();
+            InitializeSamplePublications();
         }
         #endregion
 
@@ -134,43 +110,43 @@ namespace Restless.App.Panama.ViewModel
 
         private void InitializeDateFormatOptions()
         {
+            string[] formats = {"MM-dd-yy", "MMM dd, yyyy", "dd-MMM-yyyy", "dd-MM-yy", "dd-MM-yyyy" };
             DateFormats = new GeneralOptionList();
-            DateFormats.AddObservable(new GeneralOption() { Value = "MM-dd-yy" });
-            DateFormats[0].Name = DateTime.Now.ToString(DateFormats[0].Value);
-            DateFormats[0].IsSelected = Config.DateFormat == DateFormats[0].Value;
-
-            DateFormats.AddObservable(new GeneralOption() { Value = "MMM dd, yyyy" });
-            DateFormats[1].Name = DateTime.Now.ToString(DateFormats[1].Value);
-            DateFormats[1].IsSelected = Config.DateFormat == DateFormats[1].Value;
-
-            DateFormats.AddObservable(new GeneralOption() { Value = "dd-MMM-yyyy" });
-            DateFormats[2].Name = DateTime.Now.ToString(DateFormats[2].Value);
-            DateFormats[2].IsSelected = Config.DateFormat == DateFormats[2].Value;
-
-            DateFormats.AddObservable(new GeneralOption() { Value = Config.DateFormat });
-            DateFormats[3].Name = "Other";
-            DateFormats[3].IsSelected = !DateFormats[0].IsSelected && !DateFormats[1].IsSelected && !DateFormats[2].IsSelected;
+            foreach (string format in formats)
+            {
+                DateFormats.AddObservable(new GeneralOption()
+                {
+                    Value = format,
+                    Name = DateTime.Now.ToString(format),
+                    IsSelected = Config.DateFormat == format
+                });
+            }
 
             DateFormats.IsSelectedChanged += (s, e) =>
             {
                 var op = (GeneralOption)s;
                 if (op.IsSelected)
                 {
-                    // op 3 binds directly to Config.DateFormat
-                    if (op.Index != 3)
-                    {
-                        Config.DateFormat = op.Value;
-                    }
+                    Config.DateFormat = op.Value;
                 }
+                InitializeSampleTitles();
             };
         }
 
-        private void InitializeColors()
+        private void InitializeSampleTitles()
         {
-            //ColorPeriodPublisher = Config.ColorPeriodPublisher;
-            //ColorPublishedTitle = Config.ColorPublishedTitle;
-            MyColor = Colors.Red;
+            SampleTitles = new ObservableCollection<SampleTitle>()
+            {
+                new SampleTitle(1, "Title #1", DateTime.Now.AddDays(-10), DateTime.Now.AddDays(-10), false, false),
+                new SampleTitle(2, "Title #2 (published)", DateTime.Now.AddDays(-20), DateTime.Now.AddDays(-17),true, false),
+                new SampleTitle(3, "Title #3", DateTime.Now.AddDays(-30), DateTime.Now.AddDays(-30), false, false),
+                new SampleTitle(4, "Title #4 (submitted)", DateTime.Now.AddDays(-40), DateTime.Now.AddDays(-7), false, true),
+                new SampleTitle(5, "Title #5", DateTime.Now.AddDays(-50), DateTime.Now.AddDays(-20), false, false),
+            };
+        }
 
+        private void InitializeSamplePublications()
+        {
         }
 
         private void RunSwitchSection(object parm)
@@ -188,6 +164,66 @@ namespace Restless.App.Panama.ViewModel
         private void RunResetColorSelections(object parm)
         {
             Config.ResetColors();
+        }
+
+        private void RunSelectedColorChanged(object parm)
+        {
+            InitializeSampleTitles();
+        }
+
+
+        #endregion
+
+        /************************************************************************/
+
+        #region Helper classes (used for color samples)
+        public class SampleTitle : BindableBase
+        {
+            public Int64 Id
+            {
+                get;
+                private set;
+            }
+
+            public string Title
+            {
+                get;
+                private set;
+            }
+
+            public DateTime Written
+            {
+                get;
+                private set;
+            }
+
+            public DateTime Updated
+            {
+                get;
+                private set;
+            }
+
+            public bool IsPublished
+            {
+                get;
+                private set;
+            }
+
+            public bool IsSubmitted
+            {
+                get;
+                private set;
+            }
+
+            public SampleTitle(Int64 id, string title, DateTime written, DateTime updated, bool isPublished, bool isSubmitted)
+            {
+                Id = id;
+                Title = title;
+                Written = written;
+                Updated = updated;
+                IsPublished = isPublished;
+                IsSubmitted = isSubmitted;
+            }
         }
         #endregion
     }

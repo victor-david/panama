@@ -282,6 +282,12 @@
     <Compile Include="View\CredentialView.xaml.cs">
       <DependentUpon>CredentialView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditControls\ConfigEditColor.xaml.cs">
+      <DependentUpon>ConfigEditColor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\ConfigEditColorPreview.xaml.cs">
+      <DependentUpon>ConfigEditColorPreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditControls\CredentialEdit.xaml.cs">
       <DependentUpon>CredentialEdit.xaml</DependentUpon>
     </Compile>
@@ -510,6 +516,14 @@
     <Page Include="View\CredentialView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\ConfigEditColor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditControls\ConfigEditColorPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditControls\CredentialEdit.xaml">
       <Generator>MSBuild:Compile</Generator>

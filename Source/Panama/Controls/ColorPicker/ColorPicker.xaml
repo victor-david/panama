@@ -7,26 +7,18 @@
     xmlns:local="clr-namespace:Restless.App.Panama.Controls"
     mc:Ignorable="d" 
     Name="PART_Control"
-    d:DesignHeight="100" d:DesignWidth="300">
+    MinHeight="24" MaxHeight="64"
+    d:DesignHeight="40" d:DesignWidth="280">
     <Control.Resources>
         <ResourceDictionary Source="Generic.xaml"/>
     </Control.Resources>
-    <Grid Margin="0,4">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1.5*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="{Binding Title, ElementName=PART_Control}"/>
+    <Grid>
         <ToggleButton 
             x:Name="PART_ColorPickerToggleButton"
             Grid.Column="1" 
             Style="{StaticResource ColorPickerToggleButtonStyle}"
             BorderBrush="LightGray"
             Background="{Binding SelectedColor, ElementName=PART_Control,Converter={local:ColorToBrushConverter}}" />
-
 
         <Popup 
             x:Name="PART_ColorPickerPalettePopup" 
@@ -52,27 +44,6 @@
                         Style="{StaticResource ColorListStyle}" />
                 </StackPanel>
             </Border>
-
         </Popup>
-
-
-
-
-
-
-
-
     </Grid>
-    <!--<Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Rectangle Fill="LightCoral"/>
-        <ToggleButton Grid.Column="1" Style="{StaticResource ColorPickerToggleButtonStyle}" />
-
-    </Grid>-->
 </UserControl>

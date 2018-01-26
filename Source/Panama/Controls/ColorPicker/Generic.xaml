@@ -5,6 +5,8 @@
     xmlns:local="clr-namespace:Restless.App.Panama.Controls">
 
     <Geometry x:Key="DownArrowGeometry">M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z</Geometry>
+    <sys:Double x:Key="ColorPickerMinHeight">24</sys:Double>
+    <sys:Double x:Key="ColorPickerMaxHeight">64</sys:Double>
 
     <!-- Simple solid color brushes -->
     <SolidColorBrush x:Key="ButtonHover" Color="#C2E0FF" />
@@ -74,7 +76,6 @@
     <!-- Color Picker Toggle Button -->
     <Style x:Key="ColorPickerToggleButtonStyle" TargetType="ToggleButton">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="MinWidth" Value="148"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -84,7 +85,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="{TemplateBinding Height}"/>
                         </Grid.RowDefinitions>
 
                         <Border 
@@ -164,12 +165,6 @@
                             <Setter TargetName="_outerBorder" Property="BorderBrush" Value="#FFFF0000" />
                             <Setter TargetName="_innerBorder" Property="BorderBrush" Value="#FFFFFF00" />
                         </Trigger>
-                        <!--<DataTrigger Binding="{Binding DisplayColorAndName, RelativeSource={RelativeSource AncestorType={x:Type local:ColorPicker}}}"
-                               Value="False">
-                            <Setter Property="ToolTip"
-                             Value="{x:Static sys:String.Empty}"
-                             TargetName="mainGrid" />
-                        </DataTrigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -209,38 +204,9 @@
         <Setter Property="SelectionMode" Value="Single" />
     </Style>
 
-
-
     <Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="Gray"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Margin" Value="0,2"/>
     </Style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ResourceDictionary>

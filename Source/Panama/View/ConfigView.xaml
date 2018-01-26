@@ -39,14 +39,14 @@
             <StackPanel 
                 DockPanel.Dock="Top"
                 Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64One}}">
-
+                
+                <!-- Date Format -->
                 <TextBlock Style="{StaticResource TextBlockLabel}" Text="{x:Static r:Strings.HeaderSettingsDateFormat}"/>
                 <ItemsControl Style="{StaticResource SelectTypeSingle}" ItemsSource="{Binding Path=DateFormats}" />
-                <TextBox Margin="36,-16,36,0" Text="{Binding Config.DateFormat,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding DateFormats[3].IsSelected}"/>
-                
+
+                <!-- DataGrid Row Height -->
                 <TextBlock Style="{StaticResource TextBlockSepLabel}" Text="{x:Static r:Strings.ConfigRowHeight}"/>
-                <!-- 24 is the defined MinRowHeight in Controls.xaml -->
-                <Slider Margin="2,4" Minimum="24" Maximum="42" TickPlacement="BottomRight" TickFrequency="1" Value="{Binding Path=Config.DataGridRowHeight}"/>
+                <Slider Margin="2,4" Minimum="{StaticResource DataGridMinRowHeight}" Maximum="{StaticResource DataGridMaxRowHeight}" TickPlacement="BottomRight" TickFrequency="1" Value="{Binding Path=Config.DataGridRowHeight}"/>
             </StackPanel>
 
             <!-- Section 2. Folders -->
@@ -62,15 +62,11 @@
             </StackPanel>
             
             <!-- Section 3. Colors -->
-            <DockPanel 
+            <view:ConfigEditColor 
                 DockPanel.Dock="Top"
-                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Three}}">
-                <con:ColorPicker DockPanel.Dock="Top" Title="Published Title" SelectedColor="{Binding Config.ColorPublishedTitle}"/>
-                <con:ColorPicker DockPanel.Dock="Top" Title="Submitted Title" SelectedColor="{Binding Config.ColorSubmittedTitle}" />
-                <con:ColorPicker DockPanel.Dock="Top" Title="Submission Period" SelectedColor="{Binding Config.ColorPeriodPublisher}"/>
-                <Button DockPanel.Dock="Top" Content="Reset" MinHeight="21" Height="21" Width="78" Margin="0,4" HorizontalAlignment="Left" Command="{Binding Commands[ResetColors]}"/>
-            </DockPanel>
-            
+                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Three}}"/>
+
+
             <!-- Section 4. Submission -->
             <DockPanel
                 DockPanel.Dock="Top"
@@ -89,6 +85,10 @@
             </DockPanel>            
             
         </DockPanel>
+        <view:ConfigEditColorPreview 
+            Grid.Column="1" Grid.Row="1"
+            Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Three}}"/>
+            
     </Grid>
     <!-- end main grid-->
 </UserControl>

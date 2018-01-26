@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Restless.App.Panama.Controls
@@ -11,6 +12,8 @@ namespace Restless.App.Panama.Controls
     /// </summary>
     public partial class ColorPicker : UserControl
     {
+
+
         #region Public Properties
         /// <summary>
         /// Gets or sets the selected color used for this control
@@ -31,35 +34,23 @@ namespace Restless.App.Panama.Controls
             );
 
         /// <summary>
-        /// Gets or sets the title for this control
+        /// Gets or sets a command to run when <see cref="SelectedColor"/> changes.
         /// </summary>
-        public string Title
+        public ICommand SelectedColorChangedCommand
         {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get { return (ICommand)GetValue(SelectedColorChangedCommandProperty); }
+            set { SetValue(SelectedColorChangedCommandProperty, value); }
         }
 
         /// <summary>
-        /// Dependency property definition for the <see cref="Title"/> property
+        /// Dependency property definition for the <see cref="SelectedColorChangedCommand"/> property
         /// </summary>
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register
+        public static readonly DependencyProperty SelectedColorChangedCommandProperty = DependencyProperty.Register
             (
-                nameof(Title), typeof(string), typeof(ColorPicker), new PropertyMetadata(null)
+                nameof(SelectedColorChangedCommand), typeof(ICommand), typeof(ColorPicker), new PropertyMetadata(null)
             );
-
-        public double MaxDropDownWidth
-        {
-            get { return (double)GetValue(MaxDropDownWidthProperty); }
-            set { SetValue(MaxDropDownWidthProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for MaxDropDownWidth.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MaxDropDownWidthProperty = DependencyProperty.Register
-            (
-                nameof(MaxDropDownWidth), typeof(double), typeof(ColorPicker), new PropertyMetadata(214d)
-            );
-
        
+
         public ObservableCollection<ColorItem> AvailableColors
         {
             get { return (ObservableCollection<ColorItem>)GetValue(AvailableColorsProperty); }
@@ -71,8 +62,6 @@ namespace Restless.App.Panama.Controls
                 nameof(AvailableColors), typeof(ObservableCollection<ColorItem>), typeof(ColorPicker), new UIPropertyMetadata(CreateAvailableColors())
             );
 
-
-
         public bool IsOpen
         {
             get { return (bool)GetValue(IsOpenProperty); }
@@ -83,8 +72,6 @@ namespace Restless.App.Panama.Controls
             (
                 nameof(IsOpen), typeof(bool), typeof(ColorPicker), new UIPropertyMetadata(false)
             );
-
-
         #endregion
 
         /************************************************************************/
@@ -106,9 +93,12 @@ namespace Restless.App.Panama.Controls
 
         private static void OnSelectedColorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ColorPicker control)
+            if (d is ColorPicker control && control.SelectedColorChangedCommand != null)
             {
-
+                if (control.SelectedColorChangedCommand.CanExecute(e.NewValue))
+                {
+                    control.SelectedColorChangedCommand.Execute(e.NewValue);
+                }
             }
         }
 

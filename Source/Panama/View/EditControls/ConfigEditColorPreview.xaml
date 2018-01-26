@@ -1,0 +1,41 @@
+﻿<UserControl 
+    x:Class="Restless.App.Panama.View.ConfigEditColorPreview"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    xmlns:local="clr-namespace:Restless.App.Panama.View"
+    mc:Ignorable="d" 
+    d:DesignHeight="140" d:DesignWidth="600">
+    <StackPanel>
+        <DataGrid 
+            x:Name="DataGridSampleTitles"
+            CanUserReorderColumns="False"
+            CanUserSortColumns="False"
+            ItemsSource="{Binding SampleTitles}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="42"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="4*"/>
+                <DataGridTextColumn Header="Written" Binding="{Binding Written, Converter={cv:DateToFormattedDateConverter}}" Width="100" />
+                <DataGridTextColumn Header="Updated" Binding="{Binding Updated, Converter={cv:DateToFormattedDateConverter}}" Width="100" />
+            </DataGrid.Columns>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsPublished}" Value="True">
+                            <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPublished}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsSubmitted}" Value="True">
+                            <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionSubmitted}}" />
+                        </DataTrigger>                        
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+
+
+
+        </DataGrid>
+    </StackPanel>
+</UserControl>

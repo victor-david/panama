@@ -69,7 +69,7 @@ namespace Restless.App.Panama.Configuration
                 /// <summary>
                 /// Gets the default color for a title that is currently submitted.
                 /// </summary>
-                public const string SubmittedTitle = "#FFDC143C";
+                public const string SubmittedTitle = "#FF2E8B57";
             }
         }
 

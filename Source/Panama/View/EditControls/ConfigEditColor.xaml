@@ -1,0 +1,48 @@
+﻿<UserControl 
+    x:Class="Restless.App.Panama.View.ConfigEditColor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:local="clr-namespace:Restless.App.Panama.View"
+    mc:Ignorable="d" 
+    d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockLabel}">
+                <Setter Property="Margin" Value="0,3"/>
+            </Style>
+            <Style TargetType="con:ColorPicker">
+                <Setter Property="Width" Value="180"/>
+                <Setter Property="Height" Value="26"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Margin" Value="0,0,0,8"/>
+                <Setter Property="SelectedColorChangedCommand" Value="{Binding Commands[ColorChanged]}"/>
+            </Style>
+            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                <Setter Property="MinHeight" Value="21"/>
+                <Setter Property="Height" Value="21"/>
+                <Setter Property="Width" Value="120"/>
+                <Setter Property="Margin" Value="0,4"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
+        </Grid.Resources>
+        <TextBlock Grid.Row="0" Text="Published Title"/>
+        <con:ColorPicker Grid.Row="1" SelectedColor="{Binding Config.ColorPublishedTitle}"/>
+        <TextBlock Grid.Row="2" Text="Submitted Title"/>
+        <con:ColorPicker Grid.Row="3" SelectedColor="{Binding Config.ColorSubmittedTitle}" />
+        <TextBlock Grid.Row="4" Text="In Submission Period"/>
+        <con:ColorPicker Grid.Row="5" SelectedColor="{Binding Config.ColorPeriodPublisher}"/>
+        <Button Grid.Row="6" Content="Reset" Command="{Binding Commands[ResetColors]}"/>
+    </Grid>
+</UserControl>
