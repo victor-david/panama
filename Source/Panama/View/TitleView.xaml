@@ -53,6 +53,9 @@
                         <DataTrigger Binding="{Binding CalcIsPublished}" Value="True">
                             <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPublished}}" />
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding CalcIsSubmitted}" Value="True">
+                            <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionSubmitted}}" />
+                        </DataTrigger>                        
                     </Style.Triggers>
                     <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.OpenRowCommand}"/>
                 </Style>
