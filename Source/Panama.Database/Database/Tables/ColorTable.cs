@@ -33,14 +33,14 @@ namespace Restless.App.Panama.Database.Tables
                 public const string Id = "id";
 
                 /// <summary>
-                /// The name of the value column.
+                /// The name of the foreground column. Holds the foreground color.
                 /// </summary>
-                public const string Value = "value";
+                public const string Foreground = "foreground";
 
                 /// <summary>
-                /// The name of the enabled column.
+                /// The name of the background column. Holds the background color.
                 /// </summary>
-                public const string Enabled = "enabled";
+                public const string Background = "background";
             }
         }
 
@@ -80,25 +80,25 @@ namespace Restless.App.Panama.Database.Tables
         /// Gets the configuration row with the specified id. Adds a row first, if it doesn't already exist.
         /// </summary>
         /// <param name="id">The unique id</param>
-        /// <param name="defaultColor">The initial value</param>
+        /// <param name="defaultForeColor">The initial value for the foreground color.</param>
+        /// <param name="defaultBackColor">The initial value for the background color.</param>
         /// <returns>The data row</returns>
         /// <remarks>
-        /// If the configuration value specified by <paramref name="id"/> does not already exist, this method first creates it.
+        /// If the color configuration value specified by <paramref name="id"/> does not already exist, this method first creates it.
         /// </remarks>
-        public DataRow GetConfigurationRow(string id, object defaultColor, bool defaultEnabled)
+        public DataRow GetConfigurationRow(string id, object defaultForeColor, object defaultBackColor)
         {
             Validations.ValidateNullEmpty(id, "id");
+            Validations.ValidateNull(defaultForeColor, "DefaultForeColor");
+            Validations.ValidateNull(defaultBackColor, "DefaultBackColor");
+
             DataRow[] rows = Select(String.Format("{0}='{1}'", Defs.Columns.Id, id));
             if (rows.Length == 1) return rows[0];
 
             DataRow row = NewRow();
             row[Defs.Columns.Id] = id;
-            if (defaultColor == null)
-                row[Defs.Columns.Value] = DBNull.Value;
-            else
-                row[Defs.Columns.Value] = defaultColor;
-
-            row[Defs.Columns.Enabled] = defaultEnabled;
+            row[Defs.Columns.Foreground] = defaultForeColor;
+            row[Defs.Columns.Background] = defaultBackColor;
             Rows.Add(row);
             Save();
             return row;

@@ -117,7 +117,7 @@ namespace Restless.App.Panama.Controls
 
         private static ObservableCollection<ColorItem> CreateStandardColors()
         {
-            ObservableCollection<ColorItem> standardColors = new ObservableCollection<ColorItem>
+            ObservableCollection<ColorItem> collection = new ObservableCollection<ColorItem>
             {
                 new ColorItem(Colors.Transparent, "Transparent"),
                 new ColorItem(Colors.White, "White"),
@@ -130,26 +130,32 @@ namespace Restless.App.Panama.Controls
                 new ColorItem(Colors.Orange, "Orange"),
                 new ColorItem(Colors.Purple, "Purple")
             };
-            return standardColors;
+            return collection;
         }
 
         private static ObservableCollection<ColorItem> CreateAvailableColors()
         {
-            ObservableCollection<ColorItem> standardColors = new ObservableCollection<ColorItem>();
+            ObservableCollection<ColorItem> collection = new ObservableCollection<ColorItem>();
 
             foreach (var item in ColorUtilities.KnownColors)
             {
-                if (!String.Equals(item.Key, "Transparent"))
+                //if (!String.Equals(item.Key, "Transparent"))
                 {
                     var colorItem = new ColorItem(item.Value, item.Key);
-                    if (!standardColors.Contains(colorItem))
+                    if (!collection.Contains(colorItem))
                     {
-                        standardColors.Add(colorItem);
+                        collection.Add(colorItem);
                     }
                 }
             }
 
-            return standardColors;
+            //foreach (ColorItem item in CreateStandardColors())
+            //{
+            //    if (!collection.Contains(item))
+            //    collection.Add(item);
+            //}
+
+            return collection;
         }
 
         private static void OnColorSortingModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

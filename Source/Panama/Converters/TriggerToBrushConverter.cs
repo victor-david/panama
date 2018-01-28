@@ -43,14 +43,26 @@ namespace Restless.App.Panama.Converters
             {
                 switch (key)
                 {
-                    case TriggerToBrushOptions.Published:
-                        return Config.Instance.Colors.TitlePublishedBack.GetBrush();
-                    case TriggerToBrushOptions.Submitted:
-                        return Config.Instance.Colors.TitleSubmittedBack.GetBrush();
-                    case TriggerToBrushOptions.Period:
-                        return Config.Instance.Colors.PublisherPeriodBack.GetBrush();
-                    case TriggerToBrushOptions.Goner:
-                        return Config.Instance.Colors.PublisherGonerFore.GetBrush();
+                    case TriggerToBrushOptions.TitlePublishedFore:
+                        return Config.Instance.Colors.TitlePublished.GetBrush(ConfigColor.ColorType.Foreground);
+                    case TriggerToBrushOptions.TitlePublishedBack:
+                        return Config.Instance.Colors.TitlePublished.GetBrush(ConfigColor.ColorType.Background);
+
+                    case TriggerToBrushOptions.TitleSubmittedFore:
+                        return Config.Instance.Colors.TitleSubmitted.GetBrush(ConfigColor.ColorType.Foreground);
+                    case TriggerToBrushOptions.TitleSubmittedBack:
+                        return Config.Instance.Colors.TitleSubmitted.GetBrush(ConfigColor.ColorType.Background);
+
+                    case TriggerToBrushOptions.PublisherPeriodFore:
+                        return Config.Instance.Colors.PublisherPeriod.GetBrush(ConfigColor.ColorType.Foreground);
+                    case TriggerToBrushOptions.PublisherPeriodBack:
+                        return Config.Instance.Colors.PublisherPeriod.GetBrush(ConfigColor.ColorType.Background);
+
+                    case TriggerToBrushOptions.PublisherGonerFore:
+                        return Config.Instance.Colors.PublisherGoner.GetBrush(ConfigColor.ColorType.Foreground);
+                    case TriggerToBrushOptions.PublisherGonerBack:
+                        return Config.Instance.Colors.PublisherGoner.GetBrush(ConfigColor.ColorType.Background);
+
                     default:
                         return new SolidColorBrush(Colors.LightGray);
                 }

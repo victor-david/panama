@@ -73,6 +73,14 @@
         </DrawingBrush.Drawing>
     </DrawingBrush>
 
+    <Style x:Key="TextBlockNotUsed" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+    </Style>
+    
     <!-- Color Picker Toggle Button -->
     <Style x:Key="ColorPickerToggleButtonStyle" TargetType="ToggleButton">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -88,11 +96,14 @@
                             <RowDefinition Height="{TemplateBinding Height}"/>
                         </Grid.RowDefinitions>
 
+                        <!--<Border SnapsToDevicePixels="True" Background="{StaticResource CheckerBrush}" />-->
+
                         <Border 
                             SnapsToDevicePixels="True" 
                             BorderBrush="{StaticResource ToggleButtonBorderBrush}"
                             BorderThickness="1,1,0,1"
-                            Padding="2,3">
+                            Background="{StaticResource CheckerBrush}"
+                            Padding="0">
                             <Border Background="{TemplateBinding Background}" Margin="0" Padding="0"/>
                         </Border>
 

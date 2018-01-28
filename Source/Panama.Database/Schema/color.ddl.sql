@@ -1,6 +1,6 @@
 CREATE TABLE "color" (
   "id" TEXT NOT NULL,
-  "value" TEXT,
-  "enabled" BOOLEAN NOT NULL DEFAULT 1,
+  "foreground" TEXT NOT NULL,
+  "background" TEXT NOT NULL,
   PRIMARY KEY ("id")
 );

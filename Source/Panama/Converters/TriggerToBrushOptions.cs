@@ -20,24 +20,45 @@ namespace Restless.App.Panama.Converters
         None,
 
         /// <summary>
-        /// Specifies that the returned brush is created from user option <see cref="Config.ColorPublishedTitle"/>.
+        /// Specifies that the returned brush is created from the foreground color of user option <see cref="Config.Colors.TitlePublished"/>.
         /// </summary>
-        Published,
+        TitlePublishedFore,
 
         /// <summary>
-        /// Specifies that the returned brush is created from user option <see cref="Config.ColorSubmittedTitle"/>.
+        /// Specifies that the returned brush is created from the background color of user option <see cref="Config.Colors.TitlePublished"/>.
         /// </summary>
-        Submitted,
+        TitlePublishedBack,
 
         /// <summary>
-        /// Specifies that the returned brush is created from user option <see cref="Config.ColorPeriodPublisher"/>.
+        /// Specifies that the returned brush is created from the foreground color user option <see cref="Config.Colors.TitleSubmitted"/>.
         /// </summary>
-        Period,
+        TitleSubmittedFore,
 
         /// <summary>
-        /// Specifies that the returned brush is created from user option <see cref="Config.ColorGonerPublisher"/>.
+        /// Specifies that the returned brush is created from the background color user option <see cref="Config.Colors.TitleSubmitted"/>.
         /// </summary>
-        Goner,
+        TitleSubmittedBack,
+
+
+        /// <summary>
+        /// Specifies that the returned brush is created from the foreground color user option <see cref="Config.Colors.PublisherPeriod"/>.
+        /// </summary>
+        PublisherPeriodFore,
+
+        /// <summary>
+        /// Specifies that the returned brush is created from the background color user option <see cref="Config.Colors.PublisherPeriod"/>.
+        /// </summary>
+        PublisherPeriodBack,
+
+        /// <summary>
+        /// Specifies that the returned brush is created from the foreground color of user option <see cref="Config.Colors.PublisherGoner"/>.
+        /// </summary>
+        PublisherGonerFore,
+
+        /// <summary>
+        /// Specifies that the returned brush is created from the background color of user option <see cref="Config.Colors.PublisherGoner"/>.
+        /// </summary>
+        PublisherGonerBack,
 
     }
 }

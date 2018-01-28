@@ -33,21 +33,41 @@
         <Style.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitlePublishedBack.IsEnabled,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitlePublished.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
                     <Condition Binding="{Binding CalcIsPublished}" Value="True"/>
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPublished}}" />
+                    <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionTitlePublishedBack}}" />
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
 
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSubmittedBack.IsEnabled,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitlePublished.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding CalcIsPublished}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Foreground" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionTitlePublishedFore}}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSubmitted.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
                     <Condition Binding="{Binding CalcIsSubmitted}" Value="True"/>
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionSubmitted}}" />
+                    <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionTitleSubmittedBack}}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSubmitted.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding CalcIsSubmitted}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Foreground" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionTitleSubmittedFore}}" />
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
         </Style.Triggers>
@@ -58,23 +78,43 @@
         <Style.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherPeriodBack.IsEnabled,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherPeriod.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
                     <Condition Binding="{Binding CalcInPeriod}" Value="True"/>
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPeriod}}" />
+                    <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPublisherPeriodBack}}" />
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
 
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherGonerFore.IsEnabled,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherPeriod.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding CalcInPeriod}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Foreground" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPublisherPeriodFore}}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherGoner.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
                     <Condition Binding="{Binding goner}" Value="True"/>
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionGoner}}" />
+                    <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPublisherGonerBack}}" />
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>            
+            
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherGoner.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding goner}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Foreground" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPublisherGonerFore}}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
         </Style.Triggers>
     </Style>
 

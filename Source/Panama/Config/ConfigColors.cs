@@ -28,25 +28,52 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public static class Default
         {
-            /// <summary>
-            /// Gets the default foreground color for a publisher that is marked as a goner.
-            /// </summary>
-            public static Color PublisherGonerFore = SystemColors.Gray;
+            public static class Foreground
+            {
+                /// <summary>
+                /// Gets the default foreground color for a publisher that is marked as a goner.
+                /// </summary>
+                public static Color PublisherGoner = SystemColors.Gray;
 
-            /// <summary>
-            /// Gets the default background color for a publisher that is within its submission period.
-            /// </summary>
-            public static Color PublisherPeriodBack = SystemColors.Beige;
+                /// <summary>
+                /// Gets the default foreground color for a publisher that is within its submission period.
+                /// </summary>
+                public static Color PublisherPeriod = SystemColors.Transparent;
 
-            /// <summary>
-            /// Gets the default background color for a title that is published.
-            /// </summary>
-            public static Color TitlePublishedBack = SystemColors.PaleGreen;
+                /// <summary>
+                /// Gets the default foreground color for a title that is published.
+                /// </summary>
+                public static Color TitlePublished = SystemColors.Transparent;
 
-            /// <summary>
-            /// Gets the default background color for a title that is currently submitted.
-            /// </summary>
-            public static Color TitleSubmittedBack = SystemColors.SeaGreen;
+                /// <summary>
+                /// Gets the default foreground color for a title that is currently submitted.
+                /// </summary>
+                public static Color TitleSubmitted = SystemColors.White;
+            }
+
+            public static class Background
+            {
+                /// <summary>
+                /// Gets the default background color for a publisher that is marked as a goner.
+                /// </summary>
+                public static Color PublisherGoner = SystemColors.Transparent;
+
+                /// <summary>
+                /// Gets the default background color for a publisher that is within its submission period.
+                /// </summary>
+                public static Color PublisherPeriod = SystemColors.Beige;
+
+                /// <summary>
+                /// Gets the default background color for a title that is published.
+                /// </summary>
+                public static Color TitlePublished = SystemColors.PaleGreen;
+
+                /// <summary>
+                /// Gets the default background color for a title that is currently submitted.
+                /// </summary>
+                public static Color TitleSubmitted = SystemColors.SeaGreen;
+
+            }
         }
         #endregion
 
@@ -54,36 +81,36 @@ namespace Restless.App.Panama.Configuration
 
         #region Public properties
         /// <summary>
-        /// Get the color object used for foreground display of a publisher that has been flagged as a goner.
+        /// Get the color object used to display a publisher that has been flagged as a goner.
         /// </summary>
-        public ConfigColor PublisherGonerFore
+        public ConfigColor PublisherGoner
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// Get the color object used for background display of a publisher that is within its submission period.
+        /// Get the color object used to display a publisher that is within its submission period.
         /// </summary>
-        public ConfigColor PublisherPeriodBack
+        public ConfigColor PublisherPeriod
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// Get the color object used for background display of a title that has been published.
+        /// Get the color object used to display a title that has been published.
         /// </summary>
-        public ConfigColor TitlePublishedBack
+        public ConfigColor TitlePublished
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// Get the color object used for background display of a title that is currently submitted.
+        /// Get the color object used to display a title that is currently submitted.
         /// </summary>
-        public ConfigColor TitleSubmittedBack
+        public ConfigColor TitleSubmitted
         {
             get;
             private set;
@@ -98,10 +125,10 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         internal ConfigColors()
         {
-            PublisherGonerFore = new ConfigColor(nameof(PublisherGonerFore), Default.PublisherGonerFore, true);
-            PublisherPeriodBack = new ConfigColor(nameof(PublisherPeriodBack), Default.PublisherPeriodBack, true);
-            TitlePublishedBack = new ConfigColor(nameof(TitlePublishedBack), Default.TitlePublishedBack, true);
-            TitleSubmittedBack = new ConfigColor(nameof(TitleSubmittedBack), Default.TitleSubmittedBack, true);
+            PublisherGoner = new ConfigColor(nameof(PublisherGoner), Default.Foreground.PublisherGoner, Default.Background.PublisherGoner);
+            PublisherPeriod = new ConfigColor(nameof(PublisherPeriod), Default.Foreground.PublisherPeriod, Default.Background.PublisherPeriod);
+            TitlePublished = new ConfigColor(nameof(TitlePublished), Default.Foreground.TitlePublished, Default.Background.TitlePublished);
+            TitleSubmitted = new ConfigColor(nameof(TitleSubmitted), Default.Foreground.TitleSubmitted, Default.Background.TitleSubmitted);
         }
         #endregion
 
@@ -113,10 +140,10 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public void Reset()
         {
-            PublisherGonerFore.ResetToDefault();
-            PublisherPeriodBack.ResetToDefault();
-            TitlePublishedBack.ResetToDefault();
-            TitleSubmittedBack.ResetToDefault();
+            PublisherGoner.ResetToDefault();
+            PublisherPeriod.ResetToDefault();
+            TitlePublished.ResetToDefault();
+            TitleSubmitted.ResetToDefault();
         }
         #endregion
 

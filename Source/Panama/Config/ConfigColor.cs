@@ -13,7 +13,7 @@ using SystemColors = System.Windows.Media.Colors;
 namespace Restless.App.Panama.Configuration
 {
     /// <summary>
-    /// Represents a single configuration color.
+    /// Represents the foreground and background colors for a single configuration color item.
     /// </summary>
     public class ConfigColor : BindableBase
     {
@@ -21,30 +21,66 @@ namespace Restless.App.Panama.Configuration
         private ColorTable colorTable;
         private DataRow colorRow;
         private string id;
-        private Color defaultColor;
-        private bool defaultEnabled;
+        private Color defaultFore;
+        private Color defaultBack;
+        #endregion
+
+        /************************************************************************/
+
+        #region ColorType enumeration
+        /// <summary>
+        /// Provides an enumeration that describes the color types.
+        /// </summary>
+        public enum ColorType
+        {
+            /// <summary>
+            /// Specifies operation for the foreground color.
+            /// </summary>
+            Foreground,
+            /// <summary>
+            /// Specifies operation for the background color.
+            /// </summary>
+            Background
+        }
         #endregion
 
         /************************************************************************/
 
         #region Public Properties
         /// <summary>
-        /// Gets or sets the color.
+        /// Gets or sets the foreground color.
         /// </summary>
-        public Color Color
+        public Color Foreground
         {
-            get => GetColor();
-            set => SetColor(value);
+            get => GetColor(ColorType.Foreground);
+            set => SetColor(ColorType.Foreground, value);
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates if <see cref="Color"/> is enabled for use.
+        /// Gets or sets the background color.
         /// </summary>
-        public bool IsEnabled
+        public Color Background
         {
-            get => GetIsEnabled();
-            set => SetIsEnabled(value);
+            get => GetColor(ColorType.Background);
+            set => SetColor(ColorType.Background, value);
         }
+
+        /// <summary>
+        /// Gets a boolean value that indicates if <see cref="Foreground"/> has its alpha channel set to a value greater than zero.
+        /// </summary>
+        public bool HasForeground
+        {
+            get => Foreground.A > 0;
+        }
+
+        /// <summary>
+        /// Gets a boolean value that indicates if <see cref="Background"/> has its alpha channel set to a value greater than zero.
+        /// </summary>
+        public bool HasBackground
+        {
+            get => Background.A > 0;
+        }
+
         #endregion
 
         /************************************************************************/
@@ -54,14 +90,15 @@ namespace Restless.App.Panama.Configuration
         /// Initializes a new instance of the <see cref="ConfigColor"/> class.
         /// </summary>
         /// <param name="id">The id associated with this color.</param>
-        /// <param name="defaultColor">The default value associated with this color.</param>
-        public ConfigColor(string id, Color defaultColor, bool defaultEnabled)
+        /// <param name="defaultFore">The default value for the foreground color.</param>
+        /// <param name="defaultBack">The default value for the background color.</param>
+        public ConfigColor(string id, Color defaultFore, Color defaultBack)
         {
             this.id = id ?? throw new ArgumentNullException();
-            this.defaultColor = defaultColor;
-            this.defaultEnabled = defaultEnabled;
+            this.defaultFore = defaultFore;
+            this.defaultBack = defaultBack;
             colorTable = DatabaseController.Instance.GetTable<ColorTable>();
-            colorRow = colorTable.GetConfigurationRow(id, defaultColor, defaultEnabled);
+            colorRow = colorTable.GetConfigurationRow(id, defaultFore, defaultBack);
         }
         #endregion
 
@@ -73,34 +110,33 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public void ResetToDefault()
         {
-            Color = defaultColor;
-            IsEnabled = defaultEnabled;
+            Foreground = defaultFore;
+            Background = defaultBack;
         }
 
         /// <summary>
         /// Get the brush according to the specified Color.
         /// </summary>
         /// <returns>The brush, or null if <see cref="HasValue"/> is false.</returns>
-        public SolidColorBrush GetBrush()
+        public SolidColorBrush GetBrush(ColorType colorType)
         {
-            if (IsEnabled)
+            if (colorType == ColorType.Foreground)
             {
-                return new SolidColorBrush(Color);
+                return new SolidColorBrush(Foreground);
             }
-            return null;
+            else
+            {
+                return new SolidColorBrush(Background);
+            }
         }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
-        private Color GetColor()
+        private Color GetColor(ColorType colorType)
         {
-            string value = colorRow[ColorTable.Defs.Columns.Value].ToString();
-            if (String.IsNullOrEmpty(value))
-            {
-                return SystemColors.Transparent;
-            }
+            string value = GetColorStringFromRow(colorType);
             try
             {
                 return (Color)ColorConverter.ConvertFromString(value);
@@ -111,29 +147,32 @@ namespace Restless.App.Panama.Configuration
             }
         }
 
-        private void SetColor(Color value)
+        private void SetColor(ColorType colorType, Color value)
         {
-            if (value != GetColor())
+            if (value != GetColor(colorType))
             {
-                colorRow[ColorTable.Defs.Columns.Value] = value.ToString();
-                //OnPropertyChanged(id);
-                OnPropertyChanged(nameof(Color));
+                if (colorType == ColorType.Foreground)
+                {
+                    colorRow[ColorTable.Defs.Columns.Foreground] = value.ToString();
+                    OnPropertyChanged(nameof(Foreground));
+                    OnPropertyChanged(nameof(HasForeground));
+                }
+                else
+                {
+                    colorRow[ColorTable.Defs.Columns.Background] = value.ToString();
+                    OnPropertyChanged(nameof(Background));
+                    OnPropertyChanged(nameof(HasBackground));
+                }
             }
         }
 
-        private bool GetIsEnabled()
+        private string GetColorStringFromRow(ColorType colorType)
         {
-            return (bool)colorRow[ColorTable.Defs.Columns.Enabled];
-        }
+            if (colorType == ColorType.Foreground)
+                return colorRow[ColorTable.Defs.Columns.Foreground].ToString();
+            else
+                return colorRow[ColorTable.Defs.Columns.Background].ToString();
 
-        private void SetIsEnabled(bool value)
-        {
-            if (value != GetIsEnabled())
-            {
-                colorRow[ColorTable.Defs.Columns.Enabled] = value;
-                //OnPropertyChanged(id);
-                OnPropertyChanged(nameof(IsEnabled));
-            }
         }
         #endregion
     }

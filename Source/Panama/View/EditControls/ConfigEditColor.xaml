@@ -7,11 +7,15 @@
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
     xmlns:local="clr-namespace:Restless.App.Panama.View"
     mc:Ignorable="d" 
-    d:DesignHeight="300" d:DesignWidth="300">
+    d:DesignHeight="300" d:DesignWidth="600">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -23,13 +27,13 @@
         </Grid.RowDefinitions>
         <Grid.Resources>
             <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockLabel}">
-                <Setter Property="Margin" Value="0,3"/>
+                <Setter Property="Margin" Value="0,3,6,3"/>
             </Style>
             <Style TargetType="con:ColorPicker">
-                <Setter Property="Width" Value="180"/>
+                <Setter Property="Width" Value="160"/>
                 <Setter Property="Height" Value="26"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="Margin" Value="0,0,0,8"/>
+                <Setter Property="Margin" Value="0,0,6,8"/>
                 <Setter Property="SelectedColorChangedCommand" Value="{Binding Commands[ColorChanged]}"/>
             </Style>
             <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
@@ -39,16 +43,32 @@
                 <Setter Property="Margin" Value="0,4"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
             </Style>
+            <Style TargetType="Separator">
+                <Setter Property="Margin" Value="0,2,0,8"/>
+            </Style>
         </Grid.Resources>
-        <TextBlock Grid.Row="0" Text="Published Title"/>
-        <con:ColorPicker Grid.Row="1" SelectedColor="{Binding Config.Colors.TitlePublishedBack.Color}" ColorSortingMode="{Binding ColorSortingMode}"/>
-        <TextBlock Grid.Row="2" Text="Submitted Title"/>
-        <con:ColorPicker Grid.Row="3" SelectedColor="{Binding Config.Colors.TitleSubmittedBack.Color}" ColorSortingMode="{Binding ColorSortingMode}"/>
-        <TextBlock Grid.Row="4" Text="In Submission Period"/>
-        <con:ColorPicker Grid.Row="5" SelectedColor="{Binding Config.Colors.PublisherPeriodBack.Color}" ColorSortingMode="{Binding ColorSortingMode}"/>
-        <TextBlock Grid.Row="6" Text="Goner"/>
-        <con:ColorPicker Grid.Row="7" SelectedColor="{Binding Config.Colors.PublisherGonerFore.Color}" ColorSortingMode="{Binding ColorSortingMode}"/>
-        <Button Grid.Row="8" Content="Reset" Command="{Binding Commands[ResetColors]}"/>
-        <ItemsControl Grid.Row="9" Style="{StaticResource ItemsControlSubSelection}" ItemsSource="{Binding ColorSortingModes}"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Foreground" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="Background" HorizontalAlignment="Center"/>
+        <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"/>
+
+
+        <TextBlock Grid.Row="2" Text="Published Title"/>
+        <con:ColorPicker Grid.Row="2" Grid.Column="1" SelectedColor="{Binding Config.Colors.TitlePublished.Foreground}" ColorSortingMode="{Binding ColorSortingMode}"/>
+        <con:ColorPicker Grid.Row="2" Grid.Column="2" SelectedColor="{Binding Config.Colors.TitlePublished.Background}" ColorSortingMode="{Binding ColorSortingMode}"/>
+        
+        <TextBlock Grid.Row="3" Text="Submitted Title"/>
+        <con:ColorPicker Grid.Row="3" Grid.Column="1" SelectedColor="{Binding Config.Colors.TitleSubmitted.Foreground}" ColorSortingMode="{Binding ColorSortingMode}"/>
+        <con:ColorPicker Grid.Row="3" Grid.Column="2" SelectedColor="{Binding Config.Colors.TitleSubmitted.Background}" ColorSortingMode="{Binding ColorSortingMode}"/>
+        
+        <TextBlock Grid.Row="4" Text="Submission Period"/>
+        <con:ColorPicker Grid.Row="4" Grid.Column="1" SelectedColor="{Binding Config.Colors.PublisherPeriod.Foreground}" ColorSortingMode="{Binding ColorSortingMode}"/>
+        <con:ColorPicker Grid.Row="4" Grid.Column="2" SelectedColor="{Binding Config.Colors.PublisherPeriod.Background}" ColorSortingMode="{Binding ColorSortingMode}"/>
+        
+        <TextBlock Grid.Row="5" Text="Goner"/>
+        <con:ColorPicker Grid.Row="5" Grid.Column="1" SelectedColor="{Binding Config.Colors.PublisherGoner.Foreground}" ColorSortingMode="{Binding ColorSortingMode}"/>
+        <con:ColorPicker Grid.Row="5" Grid.Column="2" SelectedColor="{Binding Config.Colors.PublisherGoner.Background}" ColorSortingMode="{Binding ColorSortingMode}"/>
+        
+        <Button Grid.Row="6" Content="Reset" Command="{Binding Commands[ResetColors]}"/>
+        <ItemsControl Grid.Row="7" Grid.ColumnSpan="3" Style="{StaticResource ItemsControlSubSelection}" ItemsSource="{Binding ColorSortingModes}"/>
     </Grid>
 </UserControl>
