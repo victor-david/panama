@@ -2,11 +2,82 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    xmlns:vm="clr-namespace:Restless.App.Panama.ViewModel"
     xmlns:con="clr-namespace:Restless.App.Panama.Controls">
 
     <sys:Double x:Key="DataGridMinRowHeight">24</sys:Double>
     <sys:Double x:Key="DataGridMaxRowHeight">42</sys:Double>
+
+    <SolidColorBrush x:Key="DataGridAlternationBrushSolid" Color="#FFCBE4EC"/>
     
+    <!-- Brush used for the data grid alternation -->
+    <LinearGradientBrush x:Key="DataGridAlternationBrush" StartPoint="0.00,1.00" EndPoint="1.00,0.01">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#FFD6D6D5" Offset="0.069"/>
+                <GradientStop Color="#FFF4F4FA" Offset="1.000"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
+        <!--<Style.Triggers>
+            <Trigger Property="AlternationIndex" Value="1">
+                <Setter Property="Background" Value="{StaticResource DataGridAlternationBrush}" />
+            </Trigger>
+        </Style.Triggers>-->
+    </Style>
+
+    <Style x:Key="TitleDataGridRowStyle" TargetType="DataGridRow">
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitlePublishedBack.IsEnabled,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding CalcIsPublished}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPublished}}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSubmittedBack.IsEnabled,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding CalcIsSubmitted}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionSubmitted}}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+        </Style.Triggers>
+        <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=TitleDataGrid, Path=DataContext.OpenRowCommand}"/>
+    </Style>
+
+    <Style x:Key="PublisherDataGridRowStyle" TargetType="DataGridRow">
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherPeriodBack.IsEnabled,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding CalcInPeriod}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPeriod}}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherGonerFore.IsEnabled,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
+                    <Condition Binding="{Binding goner}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Foreground" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionGoner}}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>            
+        </Style.Triggers>
+    </Style>
+
     <!-- Defines a style to use for all DataGrid elements -->
     <Style TargetType="DataGrid" BasedOn="{StaticResource BaseControl}">
         <Setter Property="FontSize" Value="11"/>
@@ -22,6 +93,7 @@
         <Setter Property="SelectionMode" Value="Single" />
         <Setter Property="SelectionUnit" Value="FullRow" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="AlternationCount" Value="2"/>
         <Setter Property="ColumnHeaderStyle">
             <Setter.Value>
                 <Style TargetType="DataGridColumnHeader">
@@ -44,18 +116,9 @@
                 </Style>
             </Setter.Value>
         </Setter>
-        <Setter Property="AlternatingRowBackground">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.00,1.00" EndPoint="1.00,0.01">
-                    <GradientBrush.GradientStops>
-                        <GradientStopCollection>
-                            <GradientStop Color="#FFD6D6D5" Offset="0.069"/>
-                            <GradientStop Color="#FFF4F4FA" Offset="1.000"/>
-                        </GradientStopCollection>
-                    </GradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <!--<Setter Property="RowStyle" Value="{StaticResource DataGridRowStyle}"/>-->
+        <Setter Property="AlternatingRowBackground" Value="{StaticResource DataGridAlternationBrushSolid}"/>
+
         <Style.Resources>
             <!-- This enables the selected row to retain a highlight when the data grid loses focus. Has a problem with .Net 4.0 -->
             <!--<SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightSalmon"/>-->

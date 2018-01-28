@@ -26,7 +26,7 @@
             VerticalAlignment="Bottom" 
             HorizontalAlignment="Right"
             PlacementTarget="{Binding ElementName=PART_ColorPickerToggleButton}"
-            IsOpen="{Binding ElementName=PART_ColorPickerToggleButton, Path=IsChecked}" 
+            IsOpen="{Binding ElementName=PART_ColorPickerToggleButton, Path=IsChecked, Mode=OneWay}" 
             StaysOpen="False" 
             AllowsTransparency="True" 
             Focusable="False" 

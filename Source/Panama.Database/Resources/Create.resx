@@ -125,6 +125,15 @@
 )</value>
     <comment>ddl for author table</comment>
   </data>
+  <data name="Color" xml:space="preserve">
+    <value>CREATE TABLE "color" (
+  "id" TEXT NOT NULL,
+  "value" TEXT,
+  "enabled" BOOLEAN NOT NULL DEFAULT 1,
+  PRIMARY KEY ("id")
+);</value>
+    <comment>ddl for configuration color table</comment>
+  </data>
   <data name="Config" xml:space="preserve">
     <value>CREATE TABLE "config" (
   "id" TEXT NOT NULL, 

@@ -42,23 +42,11 @@
             RowHeight="{Binding Config.DataGridRowHeight}"
             ItemsSource="{Binding Path=MainSource.View}" 
             SelectedItem="{Binding SelectedItem}"
-            con:DataGridColumns.Columns="{Binding Columns}">
+            con:DataGridColumns.Columns="{Binding Columns}"
+            RowStyle="{StaticResource PublisherDataGridRowStyle}">
             <DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding MenuItems}"/>
             </DataGrid.ContextMenu>
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding CalcInPeriod}" Value="True">
-                            <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPeriod}}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding goner}" Value="True">
-                            <Setter Property="Foreground" Value="#FF808080"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.OpenRowCommand}"/>
-                </Style>
-            </DataGrid.RowStyle>
         </con:DataGridExtended>
 
         <!-- Splitter -->

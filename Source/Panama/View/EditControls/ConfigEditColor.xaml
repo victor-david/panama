@@ -17,6 +17,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.Resources>
             <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockLabel}">
@@ -38,11 +41,14 @@
             </Style>
         </Grid.Resources>
         <TextBlock Grid.Row="0" Text="Published Title"/>
-        <con:ColorPicker Grid.Row="1" SelectedColor="{Binding Config.ColorPublishedTitle}"/>
+        <con:ColorPicker Grid.Row="1" SelectedColor="{Binding Config.Colors.TitlePublishedBack.Color}" ColorSortingMode="{Binding ColorSortingMode}"/>
         <TextBlock Grid.Row="2" Text="Submitted Title"/>
-        <con:ColorPicker Grid.Row="3" SelectedColor="{Binding Config.ColorSubmittedTitle}" />
+        <con:ColorPicker Grid.Row="3" SelectedColor="{Binding Config.Colors.TitleSubmittedBack.Color}" ColorSortingMode="{Binding ColorSortingMode}"/>
         <TextBlock Grid.Row="4" Text="In Submission Period"/>
-        <con:ColorPicker Grid.Row="5" SelectedColor="{Binding Config.ColorPeriodPublisher}"/>
-        <Button Grid.Row="6" Content="Reset" Command="{Binding Commands[ResetColors]}"/>
+        <con:ColorPicker Grid.Row="5" SelectedColor="{Binding Config.Colors.PublisherPeriodBack.Color}" ColorSortingMode="{Binding ColorSortingMode}"/>
+        <TextBlock Grid.Row="6" Text="Goner"/>
+        <con:ColorPicker Grid.Row="7" SelectedColor="{Binding Config.Colors.PublisherGonerFore.Color}" ColorSortingMode="{Binding ColorSortingMode}"/>
+        <Button Grid.Row="8" Content="Reset" Command="{Binding Commands[ResetColors]}"/>
+        <ItemsControl Grid.Row="9" Style="{StaticResource ItemsControlSubSelection}" ItemsSource="{Binding ColorSortingModes}"/>
     </Grid>
 </UserControl>

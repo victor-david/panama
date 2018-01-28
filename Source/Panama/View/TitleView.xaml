@@ -38,28 +38,16 @@
 
         <!-- Main data grid to display the tabular data -->
         <con:DataGridExtended 
-            x:Name="grid"
+            x:Name="TitleDataGrid"
             Grid.Row="1" Grid.Column="0"
             RowHeight="{Binding Config.DataGridRowHeight}"
             ItemsSource="{Binding Path=MainSource.View}"
             SelectedItem="{Binding SelectedItem}"
-            con:DataGridColumns.Columns="{Binding Columns}">
+            con:DataGridColumns.Columns="{Binding Columns}"
+            RowStyle="{StaticResource TitleDataGridRowStyle}">
             <DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding MenuItems}"/>
             </DataGrid.ContextMenu>
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding CalcIsPublished}" Value="True">
-                            <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPublished}}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding CalcIsSubmitted}" Value="True">
-                            <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionSubmitted}}" />
-                        </DataTrigger>                        
-                    </Style.Triggers>
-                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.OpenRowCommand}"/>
-                </Style>
-            </DataGrid.RowStyle>
         </con:DataGridExtended>
         
         <!-- Splitter -->

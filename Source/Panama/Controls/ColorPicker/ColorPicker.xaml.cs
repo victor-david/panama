@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -12,11 +13,9 @@ namespace Restless.App.Panama.Controls
     /// </summary>
     public partial class ColorPicker : UserControl
     {
-
-
         #region Public Properties
         /// <summary>
-        /// Gets or sets the selected color used for this control
+        /// Gets or sets the selected color used for this control.
         /// </summary>
         public Color SelectedColor
         {
@@ -25,12 +24,12 @@ namespace Restless.App.Panama.Controls
         }
 
         /// <summary>
-        /// Dependency property definition for the <see cref="SelectedColor"/> property
+        /// Dependency property definition for the <see cref="SelectedColor"/> property.
         /// </summary>
         public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register
             (
                 nameof(SelectedColor), typeof(Color), typeof(ColorPicker), 
-                new FrameworkPropertyMetadata(Colors.Black, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedColorPropertyChanged)
+                new FrameworkPropertyMetadata(Colors.Transparent, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedColorPropertyChanged)
             );
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace Restless.App.Panama.Controls
         }
 
         /// <summary>
-        /// Dependency property definition for the <see cref="SelectedColorChangedCommand"/> property
+        /// Dependency property definition for the <see cref="SelectedColorChangedCommand"/> property.
         /// </summary>
         public static readonly DependencyProperty SelectedColorChangedCommandProperty = DependencyProperty.Register
             (
@@ -51,27 +50,41 @@ namespace Restless.App.Panama.Controls
             );
        
 
+        /// <summary>
+        /// Gets or sets the collection of available colors.
+        /// </summary>
         public ObservableCollection<ColorItem> AvailableColors
         {
             get { return (ObservableCollection<ColorItem>)GetValue(AvailableColorsProperty); }
             set { SetValue(AvailableColorsProperty, value); }
         }
 
+        /// <summary>
+        /// Dependency property definition for the <see cref="AvailableColors"/> property.
+        /// </summary>
         public static readonly DependencyProperty AvailableColorsProperty = DependencyProperty.Register
             (
                 nameof(AvailableColors), typeof(ObservableCollection<ColorItem>), typeof(ColorPicker), new UIPropertyMetadata(CreateAvailableColors())
             );
 
-        public bool IsOpen
+        /// <summary>
+        /// Gets or sets the mode to use when sorting the <see cref="AvailableColors"/> collection.
+        /// </summary>
+        public ColorSortingMode ColorSortingMode
         {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
+            get { return (ColorSortingMode)GetValue(ColorSortingModeProperty); }
+            set { SetValue(ColorSortingModeProperty, value); }
         }
 
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register
+        /// <summary>
+        /// Dependency property definition for the <see cref="ColorSortingMode"/> property.
+        /// </summary>
+        public static readonly DependencyProperty ColorSortingModeProperty = DependencyProperty.Register
             (
-                nameof(IsOpen), typeof(bool), typeof(ColorPicker), new UIPropertyMetadata(false)
+                nameof(ColorSortingMode), typeof(ColorSortingMode), typeof(ColorPicker), 
+                new UIPropertyMetadata(ColorSortingMode.Alpha, OnColorSortingModeChanged)
             );
+
         #endregion
 
         /************************************************************************/
@@ -139,9 +152,27 @@ namespace Restless.App.Panama.Controls
             return standardColors;
         }
 
+        private static void OnColorSortingModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ColorPicker control)
+            {
+                control.OnColorSortingModeChanged();
+            }
+        }
+
+        private void OnColorSortingModeChanged()
+        {
+            ListCollectionView lcv = (ListCollectionView)(CollectionViewSource.GetDefaultView(AvailableColors));
+            if (lcv != null)
+            {
+                lcv.CustomSort = (ColorSortingMode == ColorSortingMode.HSB)
+                                  ? new ColorSorter()
+                                  : null;
+            }
+        }
+
         private void CloseColorPicker()
         {
-            IsOpen = false;
             PART_ColorPickerToggleButton.IsChecked = false;
             ReleaseMouseCapture();
         }

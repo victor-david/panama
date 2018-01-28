@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -38,18 +39,23 @@ namespace Restless.App.Panama.Converters
         /// </remarks>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            TriggerToBrushOptions key = (parameter is TriggerToBrushOptions) ? (TriggerToBrushOptions)parameter : TriggerToBrushOptions.None;
-            switch (key)
+            if (parameter is TriggerToBrushOptions key)
             {
-                case TriggerToBrushOptions.Published:
-                    return new SolidColorBrush(Config.Instance.ColorPublishedTitle);
-                case TriggerToBrushOptions.Submitted:
-                    return new SolidColorBrush(Config.Instance.ColorSubmittedTitle);
-                case TriggerToBrushOptions.Period:
-                    return new SolidColorBrush(Config.Instance.ColorPeriodPublisher);
-                default:
-                    return new SolidColorBrush(Colors.LightGray);
+                switch (key)
+                {
+                    case TriggerToBrushOptions.Published:
+                        return Config.Instance.Colors.TitlePublishedBack.GetBrush();
+                    case TriggerToBrushOptions.Submitted:
+                        return Config.Instance.Colors.TitleSubmittedBack.GetBrush();
+                    case TriggerToBrushOptions.Period:
+                        return Config.Instance.Colors.PublisherPeriodBack.GetBrush();
+                    case TriggerToBrushOptions.Goner:
+                        return Config.Instance.Colors.PublisherGonerFore.GetBrush();
+                    default:
+                        return new SolidColorBrush(Colors.LightGray);
+                }
             }
+            return new SolidColorBrush(Colors.Black);
         }
 
         /// <summary>

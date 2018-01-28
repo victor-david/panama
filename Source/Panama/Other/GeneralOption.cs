@@ -45,6 +45,15 @@ namespace Restless.App.Panama
         }
 
         /// <summary>
+        /// Gets or sets an arbitrary object value associated with this option.
+        /// </summary>
+        public object ObjectValue
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets a boolean value that indicates if this option is selected.
         /// </summary>
         public bool IsSelected

@@ -32,7 +32,12 @@ namespace Restless.App.Panama.Converters
         /// <summary>
         /// Specifies that the returned brush is created from user option <see cref="Config.ColorPeriodPublisher"/>.
         /// </summary>
-        Period
+        Period,
+
+        /// <summary>
+        /// Specifies that the returned brush is created from user option <see cref="Config.ColorGonerPublisher"/>.
+        /// </summary>
+        Goner,
 
     }
 }

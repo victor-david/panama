@@ -121,7 +121,11 @@
     <Compile Include="Config\Config.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Config\ConfigColor.cs" />
+    <Compile Include="Config\ConfigColors.cs" />
     <Compile Include="Controls\ColorPicker\ColorItem.cs" />
+    <Compile Include="Controls\ColorPicker\ColorSorter.cs" />
+    <Compile Include="Controls\ColorPicker\ColorSortingMode.cs" />
     <Compile Include="Controls\ColorPicker\ColorToBrushConverter.cs" />
     <Compile Include="Controls\ColorPicker\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>

@@ -9,10 +9,13 @@
     mc:Ignorable="d" 
     d:DesignHeight="140" d:DesignWidth="600">
     <StackPanel>
+        <!-- Titles -->
+        <TextBlock Style="{StaticResource TextBlockLabel}" Text="Titles"/>
         <DataGrid 
-            x:Name="DataGridSampleTitles"
+            x:Name="TitleDataGrid"
             CanUserReorderColumns="False"
             CanUserSortColumns="False"
+            RowStyle="{StaticResource TitleDataGridRowStyle}"
             ItemsSource="{Binding SampleTitles}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="42"/>
@@ -20,22 +23,22 @@
                 <DataGridTextColumn Header="Written" Binding="{Binding Written, Converter={cv:DateToFormattedDateConverter}}" Width="100" />
                 <DataGridTextColumn Header="Updated" Binding="{Binding Updated, Converter={cv:DateToFormattedDateConverter}}" Width="100" />
             </DataGrid.Columns>
-
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsPublished}" Value="True">
-                            <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionPublished}}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsSubmitted}" Value="True">
-                            <Setter Property="Background" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionSubmitted}}" />
-                        </DataTrigger>                        
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
-
-
-
+        </DataGrid>
+        
+        <!-- Publications -->
+        <TextBlock Style="{StaticResource TextBlockLabel}" Text="Publishers"/>
+        <DataGrid 
+            x:Name="DataGridSamplePubs"
+            CanUserReorderColumns="False"
+            CanUserSortColumns="False"
+            RowStyle="{StaticResource PublisherDataGridRowStyle}"
+            ItemsSource="{Binding SamplePublishers}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="42"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Added" Binding="{Binding Added, Converter={cv:DateToFormattedDateConverter}}" Width="100" />
+                <DataGridTextColumn Header="Last Sub" Binding="{Binding LastSub, Converter={cv:DateToFormattedDateConverter}}" Width="100" />
+            </DataGrid.Columns>
         </DataGrid>
     </StackPanel>
 </UserControl>

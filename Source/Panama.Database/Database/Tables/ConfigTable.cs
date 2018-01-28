@@ -163,56 +163,6 @@ namespace Restless.App.Panama.Database.Tables
             Save();
             return row;
         }
-
-        ///// <summary>
-        ///// Adds a configuration value to the table if the id doesn't already exist.
-        ///// </summary>
-        ///// <param name="id">The unique id</param>
-        ///// <param name="description">The description </param>
-        ///// <param name="type">The type. Use ConfigTable.Defs.Types</param>
-        ///// <param name="value">The initial value</param>
-        ///// <param name="edit">true if this can be edited by the user; false to be a behind-the-scenes value</param>
-        ///// <remarks>
-        ///// If the configuration value specified by <paramref name="id"/> already exists, this method does nothing.
-        ///// </remarks>
-        //public void AddConfigValueIf(string id, string description, string type, string value, bool edit)
-        //{
-        //    Validations.ValidateNullEmpty(id, "id");
-        //    Validations.ValidateNullEmpty(description, "description");
-        //    Validations.ValidateNullEmpty(type, "type");
-
-        //    DataRow[] rows = Select(String.Format("{0}='{1}'", Defs.Columns.Id, id));
-        //    if (rows.Length == 0)
-        //    {
-        //        DataRow row = NewRow();
-        //        row[Defs.Columns.Id] = id;
-        //        row[Defs.Columns.Description] = description;
-        //        row[Defs.Columns.Type] = type;
-        //        if (String.IsNullOrEmpty(value))
-        //            row[Defs.Columns.Value] = DBNull.Value;
-        //        else
-        //            row[Defs.Columns.Value] = value;
-        //        row[Defs.Columns.Edit] = edit;
-        //        Rows.Add(row);
-        //        Save();
-        //    }
-        //}
-
-        /// <summary>
-        /// Removes the specified configuration item if it exists
-        /// </summary>
-        /// <param name="id">The id of the configuration item to remove.</param>
-        public void RemoveConfigValueIf(string id)
-        {
-            IsDeleteRestricted = false;
-            DataRow[] rows = Select(String.Format("{0}='{1}'", Defs.Columns.Id, id));
-            if (rows.Length == 1)
-            {
-                rows[0].Delete();
-                Save();
-            }
-            IsDeleteRestricted = true;
-        }
         #endregion
 
         /************************************************************************/
@@ -255,48 +205,6 @@ namespace Restless.App.Panama.Database.Tables
             throw new IndexOutOfRangeException();
         }
         #endregion
-
-        /************************************************************************/
-
-        #region ITableImport and IColumnRowImporter implementation (commented out)
-        //public bool PerformImport()
-        //{
-        //    return DatabaseImporter.Instance.ImportTable(this, this, null);
-        //}
-
-        //public string GetColumnName(string origColName)
-        //{
-        //    switch (origColName)
-        //    {
-        //        case "config_id": return Defs.Columns.Id;
-        //        case "config_desc": return Defs.Columns.Description;
-        //        case "config_type": return Defs.Columns.Type;
-        //        case "config_value": return Defs.Columns.Value;
-        //        default: return origColName;
-        //    }            
-        //}
-        
-        //public bool IncludeColumn(string origColName)
-        //{
-        //    return true;
-        //}
-
-        //public bool GetRowConfirmation(System.Data.DataRow row)
-        //{
-        //    string id = row[0].ToString();
-        //    if (id.StartsWith("outlook.") || id.Contains(".datagrid.") || id.Contains(".flush."))
-        //    {
-        //        return false;
-        //    }
-        //    if (id.StartsWith("color."))
-        //    {
-        //        row[2] = "color";
-        //    }
-        //    return true;
-        //}
-        #endregion 
-
-
-
+  
     }
 }

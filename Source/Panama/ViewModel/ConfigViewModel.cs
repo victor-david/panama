@@ -19,11 +19,14 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for application settings.
     /// </summary>
-    public class ConfigViewModel : WorkspaceViewModel // DataGridViewModel<ConfigTable>
+    public class ConfigViewModel : WorkspaceViewModel
     {
         #region Private
         private Int64 selectedSection;
         private ObservableCollection<SampleTitle> sampleTitles;
+        private ObservableCollection<SamplePublisher> samplePublishers;
+
+        private ColorSortingMode colorSortingMode;
         #endregion
 
         /************************************************************************/
@@ -64,6 +67,48 @@ namespace Restless.App.Panama.ViewModel
             get => sampleTitles;
             private set => SetProperty(ref sampleTitles, value);
         }
+
+        /// <summary>
+        /// Gets the list of sample titles used to preview color selections.
+        /// </summary>
+        public ObservableCollection<SamplePublisher> SamplePublishers
+        {
+            get => samplePublishers;
+            private set => SetProperty(ref samplePublishers, value);
+        }
+
+        /// <summary>
+        /// Gets a list of modes that may be used to sort the color palette.
+        /// </summary>
+        public GeneralOptionList ColorSortingModes
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets or sets the mode used to sort the color pallete.
+        /// </summary>
+        public ColorSortingMode ColorSortingMode
+        {
+            get => colorSortingMode;
+            set
+            {
+                if (SetProperty(ref colorSortingMode, value))
+                {
+                    Config.ColorSortingMode = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// This property satisfies a common binding requirement, but does nothing.
+        /// </summary>
+        public ICommand OpenRowCommand
+        {
+            get;
+            private set;
+        }
         #endregion
 
         /************************************************************************/
@@ -77,12 +122,14 @@ namespace Restless.App.Panama.ViewModel
             DisplayName = Strings.CommandConfig;
             MaxCreatable = 1;
             Commands.Add("SwitchSection", RunSwitchSection);
+            Commands.Add("SwitchColorMode", RunSwitchColorMode);
             Commands.Add("ResetColors", RunResetColorSelections);
             Commands.Add("ColorChanged", RunSelectedColorChanged);
             InitializeSections();
             InitializeDateFormatOptions();
             InitializeSampleTitles();
             InitializeSamplePublications();
+            InitializeColorSettings();
         }
         #endregion
 
@@ -97,7 +144,7 @@ namespace Restless.App.Panama.ViewModel
 
         private void InitializeSections()
         {
-            Sections = new GeneralOptionList
+            Sections = new GeneralOptionList()
             {
                 new GeneralOption() { IntValue = 1, Value = Strings.HeaderSettingsSectionGeneral, Command = Commands["SwitchSection"], CommandParm = 1 },
                 new GeneralOption() { IntValue = 2, Value = Strings.HeaderSettingsSectionFolder, Command = Commands["SwitchSection"], CommandParm = 2 },
@@ -133,6 +180,18 @@ namespace Restless.App.Panama.ViewModel
             };
         }
 
+        private void InitializeColorSettings()
+        {
+            ColorSortingMode = Config.ColorSortingMode;
+            ColorSortingModes = new GeneralOptionList()
+            {
+                new GeneralOption() { Value="Alpha", Command = Commands["SwitchColorMode"], CommandParm= ColorSortingMode.Alpha },
+                new GeneralOption() { Value="HSB", Command = Commands["SwitchColorMode"], CommandParm= ColorSortingMode.HSB }
+
+            };
+            RunSwitchColorMode(Config.ColorSortingMode);
+        }
+
         private void InitializeSampleTitles()
         {
             SampleTitles = new ObservableCollection<SampleTitle>()
@@ -147,6 +206,14 @@ namespace Restless.App.Panama.ViewModel
 
         private void InitializeSamplePublications()
         {
+            SamplePublishers = new ObservableCollection<SamplePublisher>()
+            {
+                new SamplePublisher(1, "Publisher #1", DateTime.Now.AddDays(-60), DateTime.Now.AddDays(-10), false, false),
+                new SamplePublisher(2, "Publisher #2 (in period)", DateTime.Now.AddDays(-90), DateTime.Now.AddDays(-80), true, false),
+                new SamplePublisher(3, "Publisher #3", DateTime.Now.AddDays(-110), DateTime.Now.AddDays(-90), false, false),
+                new SamplePublisher(4, "Publisher #4 (goner)", DateTime.Now.AddDays(-150), DateTime.Now.AddDays(-148), false, true),
+                new SamplePublisher(5, "Publisher #5", DateTime.Now.AddDays(-160), DateTime.Now.AddDays(-5), false, false),
+            };
         }
 
         private void RunSwitchSection(object parm)
@@ -160,69 +227,186 @@ namespace Restless.App.Panama.ViewModel
             Config.SelectedConfigSection = selected;
         }
 
+        private void RunSwitchColorMode(object parm)
+        {
+            ColorSortingMode selected = (ColorSortingMode)parm;
+            foreach (var item in ColorSortingModes)
+            {
+                item.IsSelected = ((ColorSortingMode)item.CommandParm == selected);
+            }
+            ColorSortingMode = selected;
+        }
 
         private void RunResetColorSelections(object parm)
         {
-            Config.ResetColors();
+            Config.Colors.Reset();
         }
 
         private void RunSelectedColorChanged(object parm)
         {
             InitializeSampleTitles();
+            InitializeSamplePublications();
         }
-
-
         #endregion
 
         /************************************************************************/
 
         #region Helper classes (used for color samples)
-        public class SampleTitle : BindableBase
+        /// <summary>
+        /// Represents a sample title. Used to display configuration colors.
+        /// </summary>
+        public class SampleTitle
         {
+            /// <summary>
+            /// Gets the id of the sample title.
+            /// </summary>
             public Int64 Id
             {
                 get;
                 private set;
             }
 
+            /// <summary>
+            /// Gets the title.
+            /// </summary>
             public string Title
             {
                 get;
                 private set;
             }
 
+            /// <summary>
+            /// Gets the date written.
+            /// </summary>
             public DateTime Written
             {
                 get;
                 private set;
             }
 
+            /// <summary>
+            /// Gets the date updated.
+            /// </summary>
             public DateTime Updated
             {
                 get;
                 private set;
             }
 
-            public bool IsPublished
+            /// <summary>
+            /// Gets a value that indicates if the title is published.
+            /// </summary>
+            public bool CalcIsPublished
             {
                 get;
                 private set;
             }
 
-            public bool IsSubmitted
+            /// <summary>
+            /// Gets a value that indicates if the title is submitted.
+            /// </summary>
+            public bool CalcIsSubmitted
             {
                 get;
                 private set;
             }
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="SampleTitle"/> class.
+            /// </summary>
+            /// <param name="id">The sample id.</param>
+            /// <param name="title">The title.</param>
+            /// <param name="written">The date the title was written.</param>
+            /// <param name="updated">The date the title was updated.</param>
+            /// <param name="isPublished">A boolean value that indicates if the title is published.</param>
+            /// <param name="isSubmitted">A boolean value that indicates if the title is submitted.</param>
             public SampleTitle(Int64 id, string title, DateTime written, DateTime updated, bool isPublished, bool isSubmitted)
             {
                 Id = id;
                 Title = title;
                 Written = written;
                 Updated = updated;
-                IsPublished = isPublished;
-                IsSubmitted = isSubmitted;
+                CalcIsPublished = isPublished;
+                CalcIsSubmitted = isSubmitted;
+            }
+        }
+
+        /// <summary>
+        /// Represents a sample publisher. Used to display configuration colors.
+        /// </summary>
+        public class SamplePublisher
+        {
+            /// <summary>
+            /// Gets the id of the sample publisher.
+            /// </summary>
+            public Int64 Id
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Gets the name of the publisher.
+            /// </summary>
+            public string Name
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Gets the date this publisher was added.
+            /// </summary>
+            public DateTime Added
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Get the last submission date to this publisher.
+            /// </summary>
+            public DateTime LastSub
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Gets a value that indicates if the publisher is within their submission period.
+            /// </summary>
+            public bool CalcInPeriod
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Gets a value that indicates if the publisher has been flagged as a goner.
+            /// </summary>
+            public bool goner
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="SamplePublisher"/> class.
+            /// </summary>
+            /// <param name="id">The sample id.</param>
+            /// <param name="name">The name of the publisher.</param>
+            /// <param name="added">The date added.</param>
+            /// <param name="lastSub">The last submission date.</param>
+            /// <param name="isInPeriod">A boolean value that indicates if the publisher is within their submission period.</param>
+            /// <param name="isGoner">A boolean value that indicates if the publisher has been flagged as a goner.</param>
+            public SamplePublisher(Int64 id, string name, DateTime added, DateTime lastSub, bool isInPeriod, bool isGoner)
+            {
+                Id = id;
+                Name = name;
+                Added = added;
+                LastSub = lastSub;
+                CalcInPeriod = isInPeriod;
+                goner = isGoner;
             }
         }
         #endregion

@@ -1,4 +1,5 @@
-﻿using Restless.App.Panama.Database;
+﻿using Restless.App.Panama.Controls;
+using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Filter;
 using Restless.Tools.Utility;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
+using SystemColors = System.Windows.Media.Colors;
 
 namespace Restless.App.Panama.Configuration
 {
@@ -25,7 +27,6 @@ namespace Restless.App.Panama.Configuration
         /************************************************************************/
 
         #region Public fields
-
         /// <summary>
         /// Provides static default values for properties
         /// </summary>
@@ -51,26 +52,31 @@ namespace Restless.App.Panama.Configuration
             /// </summary>
             public const string DocumentFooter = "Submissions to [publisher] - [author] - [month], [year]";
 
-            /// <summary>
-            /// Provides static default values for colors.
-            /// </summary>
-            public static class Color
-            {
-                /// <summary>
-                /// Gets the default color for a publisher that is within its submission period.
-                /// </summary>
-                public const string PeriodPublisher = "#FFF5F5DC";
+            ///// <summary>
+            ///// Provides static default values for colors.
+            ///// </summary>
+            //public static class Colors
+            //{
+            //    /// <summary>
+            //    /// Gets the default color for a publisher that is marked as a goner.
+            //    /// </summary>
+            //    public static Color? GonerPublisher = SystemColors.Gray;
 
-                /// <summary>
-                /// Gets the default color for a title that is published.
-                /// </summary>
-                public const string PublishedTitle = "#FFD0FFC9";
+            //    /// <summary>
+            //    /// Gets the default color for a publisher that is within its submission period.
+            //    /// </summary>
+            //    public static Color? PeriodPublisher = SystemColors.Beige;
 
-                /// <summary>
-                /// Gets the default color for a title that is currently submitted.
-                /// </summary>
-                public const string SubmittedTitle = "#FF2E8B57";
-            }
+            //    /// <summary>
+            //    /// Gets the default color for a title that is published.
+            //    /// </summary>
+            //    public static Color? PublishedTitle = SystemColors.PaleGreen;
+
+            //    /// <summary>
+            //    /// Gets the default color for a title that is currently submitted.
+            //    /// </summary>
+            //    public static Color? SubmittedTitle = SystemColors.SeaGreen;
+            //}
         }
 
         /// <summary>
@@ -157,32 +163,66 @@ namespace Restless.App.Panama.Configuration
             set => SetItem(value);
         }
 
-        /// <summary>
-        /// Gets or sets the color used to show a publisher in a submission period.
-        /// </summary>
-        public Color ColorPeriodPublisher
+
+        public ConfigColors Colors
         {
-            get => GetColor(Default.Color.PeriodPublisher);
-            set => SetColor(value);
+            get;
+            private set;
         }
 
-        /// <summary>
-        /// Gets or sets the published title color.
-        /// </summary>
-        public Color ColorPublishedTitle
-        {
-            get => GetColor(Default.Color.PublishedTitle);
-            set => SetColor(value);
-        }
+        ///// <summary>
+        ///// Gets the color object used to show a publisher marked as goner.
+        ///// </summary>
+        //public ConfigColor ColorGonerPublisher
+        //{
+        //    get;
+        //    private set;
+        //}
+
+        ///// <summary>
+        ///// Gets the color object used to show a publisher in a submission period.
+        ///// </summary>
+        //public ConfigColor ColorPeriodPublisher
+        //{
+        //    get;
+        //    private set;
+        //}
+
+        ///// <summary>
+        ///// Gets the color object used to show a published title.
+        ///// </summary>
+        //public ConfigColor ColorPublishedTitle
+        //{
+        //    get;
+        //    private set;
+        //}
         
+        ///// <summary>
+        ///// Gets the color object used to show a submitted title.
+        ///// </summary>
+        //public ConfigColor ColorSubmittedTitle
+        //{
+        //    get;
+        //    private set;
+        //}
+
         /// <summary>
-        /// Gets the submitted title color.
+        /// Gets or sets the mode used to sort the color pallete.
         /// </summary>
-        public Color ColorSubmittedTitle
+        public ColorSortingMode ColorSortingMode
         {
-            get => GetColor(Default.Color.SubmittedTitle);
-            set => SetColor(value);
+            get
+            {
+                Enum.TryParse(GetItem(ColorSortingMode.Alpha.ToString()), out ColorSortingMode mode);
+                return mode;
+            }
+            set
+            {
+                SetItem(value.ToString());
+            }
         }
+
+
 
         /// <summary>
         /// Gets or sets the folder for the export operation.
@@ -413,6 +453,12 @@ namespace Restless.App.Panama.Configuration
             table = DatabaseController.Instance.GetTable<ConfigTable>();
             TitleFilter = GetValueFromRow(nameof(TitleFilter), null).Deserialize<TitleFilter>();
             PublisherFilter = GetValueFromRow(nameof(PublisherFilter), null).Deserialize<PublisherFilter>();
+            //ColorGonerPublisher = new ConfigColor(this, nameof(ColorGonerPublisher), Default.Colors.GonerPublisher);
+            //ColorPeriodPublisher = new ConfigColor(this, nameof(ColorPeriodPublisher), Default.Colors.PeriodPublisher);
+            //ColorPublishedTitle = new ConfigColor(this, nameof(ColorPublishedTitle), Default.Colors.PublishedTitle);
+            //ColorSubmittedTitle = new ConfigColor(this, nameof(ColorSubmittedTitle), Default.Colors.SubmittedTitle);
+            Colors = new ConfigColors();
+
         }
 
         #endregion
@@ -420,15 +466,16 @@ namespace Restless.App.Panama.Configuration
         /************************************************************************/
 
         #region Public methods
-        /// <summary>
-        /// Resets the configuration colors.
-        /// </summary>
-        public void ResetColors()
-        {
-            ColorPeriodPublisher = (Color)ColorConverter.ConvertFromString(Default.Color.PeriodPublisher);
-            ColorPublishedTitle = (Color)ColorConverter.ConvertFromString(Default.Color.PublishedTitle);
-            ColorSubmittedTitle = (Color)ColorConverter.ConvertFromString(Default.Color.SubmittedTitle);
-        }
+        ///// <summary>
+        ///// Resets the configuration colors.
+        ///// </summary>
+        //public void ResetColors()
+        //{
+        //    ColorGonerPublisher.ResetToDefault();
+        //    ColorPeriodPublisher.ResetToDefault();
+        //    ColorPublishedTitle.ResetToDefault();
+        //    ColorSubmittedTitle.ResetToDefault();
+        //}
 
         /// <summary>
         /// Saves the filter objects by serializing them into their rows.
@@ -495,14 +542,22 @@ namespace Restless.App.Panama.Configuration
             return new GridLength(value, GridUnitType.Pixel);
         }
 
-        private Color GetColor(string defaultValue, [CallerMemberName] string id = null)
-        {
-            Color color = new Color();
-            string value = GetValueFromRow(id, defaultValue);
-            Execution.TryCatchSwallow(() => color = (Color)ColorConverter.ConvertFromString(value));
-            return color;
-        }
-
+        //private Color? GetColor(Color? defaultValue, [CallerMemberName] string id = null)
+        //{
+        //    string value = GetValueFromRow(id, defaultValue);
+        //    if (String.IsNullOrEmpty(value))
+        //    {
+        //        return null;
+        //    }
+        //    try
+        //    {
+        //        return (Color)ColorConverter.ConvertFromString(value);
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
+        //}
 
         private void SetItem(string value, [CallerMemberName] string id = null)
         {
@@ -537,11 +592,18 @@ namespace Restless.App.Panama.Configuration
             }
         }
 
-        private void SetColor(Color value, [CallerMemberName] string id = null)
-        {
-            SetItem(value.ToString(), id);
-            OnPropertyChanged(id);
-        }
+        //private void SetColor(Color? value, [CallerMemberName] string id = null)
+        //{
+        //    if (value.HasValue)
+        //    {
+        //        SetItem(value.ToString(), id);
+        //    }
+        //    else
+        //    {
+        //        SetItem(null, id);
+        //    }
+        //    OnPropertyChanged(id);
+        //}
 
         private string GetValueFromRow(string id, object defaultValue)
         {
@@ -563,6 +625,72 @@ namespace Restless.App.Panama.Configuration
                 row[ConfigTable.Defs.Columns.Value] = value;
             }
         }
+        #endregion
+
+        /************************************************************************/
+
+        #region ConfigColor class
+        ///// <summary>
+        ///// Represents a single configuration color.
+        ///// </summary>
+        //public class ConfigColor
+        //{
+        //    private Config owner;
+        //    private string id;
+        //    private Color? defaultValue;
+
+        //    /// <summary>
+        //    /// Gets or sets the color.
+        //    /// </summary>
+        //    public Color? Color
+        //    {
+        //        get => owner.GetColor(defaultValue, id);
+        //        set => owner.SetColor(value, id);
+        //    }
+
+        //    /// <summary>
+        //    /// Gets a boolean value that indicates if <see cref="Color"/> contains a color value.
+        //    /// </summary>
+        //    public bool HasValue
+        //    {
+        //        get => Color != null && Color.HasValue;
+        //    }
+
+        //    /// <summary>
+        //    /// 
+        //    /// </summary>
+        //    /// <param name="owner">The owner</param>
+        //    /// <param name="id">The id associated with this color.</param>
+        //    /// <param name="defaultValue">The default value associated with this color.</param>
+        //    public ConfigColor(Config owner, string id, Color? defaultValue)
+        //    {
+        //        this.owner = owner ?? throw new ArgumentNullException();
+        //        this.id = id ?? throw new ArgumentNullException();
+        //        this.defaultValue = defaultValue;
+        //    }
+
+        //    /// <summary>
+        //    /// Resets this configuration color to ts default value.
+        //    /// </summary>
+        //    public void ResetToDefault()
+        //    {
+        //        Color = defaultValue;
+        //    }
+
+        //    /// <summary>
+        //    /// Get the brush according to the specified Color.
+        //    /// </summary>
+        //    /// <returns>The brush, or null if <see cref="HasValue"/> is false.</returns>
+        //    public SolidColorBrush GetBrush()
+        //    {
+        //        if (HasValue)
+        //        {
+        //            return new SolidColorBrush(Color.Value);
+        //        }
+        //        return null;
+        //    }
+        //}
+
         #endregion
     }
 }
