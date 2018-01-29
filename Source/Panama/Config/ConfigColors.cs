@@ -28,8 +28,16 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public static class Default
         {
+            /// <summary>
+            /// Provides static values for default foreground colors.
+            /// </summary>
             public static class Foreground
             {
+                /// <summary>
+                /// Gets the default foreground color for an alternating data grid row..
+                /// </summary>
+                public static Color DataGridAlternation = SystemColors.Transparent;
+
                 /// <summary>
                 /// Gets the default foreground color for a publisher that is marked as a goner.
                 /// </summary>
@@ -51,8 +59,16 @@ namespace Restless.App.Panama.Configuration
                 public static Color TitleSubmitted = SystemColors.White;
             }
 
+            /// <summary>
+            /// Provides static values for default background colors.
+            /// </summary>
             public static class Background
             {
+                /// <summary>
+                /// Gets the default background color for an alternating data grid row..
+                /// </summary>
+                public static Color DataGridAlternation = SystemColors.LightSteelBlue;
+
                 /// <summary>
                 /// Gets the default background color for a publisher that is marked as a goner.
                 /// </summary>
@@ -80,6 +96,15 @@ namespace Restless.App.Panama.Configuration
         /************************************************************************/
 
         #region Public properties
+        /// <summary>
+        /// Get the color object used to display alternation rows in data grids.
+        /// </summary>
+        public ConfigColor DataGridAlternation
+        {
+            get;
+            private set;
+        }
+
         /// <summary>
         /// Get the color object used to display a publisher that has been flagged as a goner.
         /// </summary>
@@ -125,6 +150,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         internal ConfigColors()
         {
+            DataGridAlternation = new ConfigColor(nameof(DataGridAlternation), Default.Foreground.DataGridAlternation, Default.Background.DataGridAlternation);
             PublisherGoner = new ConfigColor(nameof(PublisherGoner), Default.Foreground.PublisherGoner, Default.Background.PublisherGoner);
             PublisherPeriod = new ConfigColor(nameof(PublisherPeriod), Default.Foreground.PublisherPeriod, Default.Background.PublisherPeriod);
             TitlePublished = new ConfigColor(nameof(TitlePublished), Default.Foreground.TitlePublished, Default.Background.TitlePublished);
@@ -140,6 +166,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public void Reset()
         {
+            DataGridAlternation.ResetToDefault();
             PublisherGoner.ResetToDefault();
             PublisherPeriod.ResetToDefault();
             TitlePublished.ResetToDefault();

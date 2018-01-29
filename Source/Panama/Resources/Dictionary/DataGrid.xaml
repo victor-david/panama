@@ -156,9 +156,12 @@
                 </Style>
             </Setter.Value>
         </Setter>
-        <!--<Setter Property="RowStyle" Value="{StaticResource DataGridRowStyle}"/>-->
-        <Setter Property="AlternatingRowBackground" Value="{StaticResource DataGridAlternationBrushSolid}"/>
 
+        <!--<Setter Property="AlternatingRowBackground" Value="{StaticResource DataGridAlternationBrushSolid}"/>-->
+
+
+        <Setter Property="AlternatingRowBackground" Value="{Binding Converter={cv:TriggerToBrushConverter}, ConverterParameter={StaticResource BrushOptionDataGridAlternation}}"/>
+        
         <Style.Resources>
             <!-- This enables the selected row to retain a highlight when the data grid loses focus. Has a problem with .Net 4.0 -->
             <!--<SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightSalmon"/>-->

@@ -72,6 +72,7 @@
     <cv:BooleanToVisibilityMultiConverterOptions x:Key="BooleanVisibilityOneTrueAndTwoTrue">OneTrueAndTwoTrue</cv:BooleanToVisibilityMultiConverterOptions>
     <cv:BooleanToVisibilityMultiConverterOptions x:Key="BooleanVisibilityOneFalseOrTwoTrue">OneFalseOrTwoTrue</cv:BooleanToVisibilityMultiConverterOptions>
 
+    <cv:TriggerToBrushOptions x:Key="BrushOptionDataGridAlternation">DataGridAlternation</cv:TriggerToBrushOptions>
     <cv:TriggerToBrushOptions x:Key="BrushOptionTitlePublishedFore">TitlePublishedFore</cv:TriggerToBrushOptions>
     <cv:TriggerToBrushOptions x:Key="BrushOptionTitlePublishedBack">TitlePublishedBack</cv:TriggerToBrushOptions>
     <cv:TriggerToBrushOptions x:Key="BrushOptionTitleSubmittedFore">TitleSubmittedFore</cv:TriggerToBrushOptions>

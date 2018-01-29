@@ -43,6 +43,9 @@ namespace Restless.App.Panama.Converters
             {
                 switch (key)
                 {
+                    case TriggerToBrushOptions.DataGridAlternation:
+                        return Config.Instance.Colors.DataGridAlternation.GetBrush(ConfigColor.ColorType.Background);
+
                     case TriggerToBrushOptions.TitlePublishedFore:
                         return Config.Instance.Colors.TitlePublished.GetBrush(ConfigColor.ColorType.Foreground);
                     case TriggerToBrushOptions.TitlePublishedBack:

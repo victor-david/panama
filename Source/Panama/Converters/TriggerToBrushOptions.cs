@@ -20,6 +20,11 @@ namespace Restless.App.Panama.Converters
         None,
 
         /// <summary>
+        /// Specifies that the returned brush is created from the background color of user option <see cref="Config.Colors.DataGridAlternation"/>.
+        /// </summary>
+        DataGridAlternation,
+
+        /// <summary>
         /// Specifies that the returned brush is created from the foreground color of user option <see cref="Config.Colors.TitlePublished"/>.
         /// </summary>
         TitlePublishedFore,
