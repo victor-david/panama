@@ -37,13 +37,18 @@
 
         <!-- Main data grid to display the tabular data  -->
         <con:DataGridExtended 
-            x:Name="grid" 
+            x:Name="PublisherDataGrid" 
             Grid.Row="1" Grid.Column="0" 
             RowHeight="{Binding Config.DataGridRowHeight}"
             ItemsSource="{Binding Path=MainSource.View}" 
             SelectedItem="{Binding SelectedItem}"
-            con:DataGridColumns.Columns="{Binding Columns}"
-            RowStyle="{StaticResource PublisherDataGridRowStyle}">
+            con:DataGridColumns.Columns="{Binding Columns}">
+            <DataGrid.RowStyle>
+                <!-- Base style contains all the triggers -->
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource PublisherDataGridRowStyle}">
+                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=PublisherDataGrid, Path=DataContext.OpenRowCommand}"/>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding MenuItems}"/>
             </DataGrid.ContextMenu>

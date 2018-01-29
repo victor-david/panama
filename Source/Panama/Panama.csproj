@@ -147,7 +147,6 @@
     <Compile Include="Converters\BooleanToVisibilityMultiConverterOptions.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverterOptions.cs" />
     <Compile Include="Converters\StringToMaskedStringConverter.cs" />
-    <Compile Include="Converters\TriggerToBrushOptions.cs" />
     <Compile Include="Filter\FilterBase.cs" />
     <Compile Include="Filter\PublisherFilter.cs" />
     <Compile Include="Filter\FilterState.cs" />
@@ -220,7 +219,6 @@
     <Compile Include="Collections\CommandDictionary.cs" />
     <Compile Include="Converters\DatesToDayDiffConverter.cs" />
     <Compile Include="Converters\ValueToBooleanConverter.cs" />
-    <Compile Include="Converters\TriggerToBrushConverter.cs" />
     <Compile Include="Converters\IntegerToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityMultiConverter.cs" />
     <Compile Include="Converters\ValueToDebugConverter.cs" />

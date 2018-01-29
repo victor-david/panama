@@ -776,11 +776,29 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data Grid.
+        /// </summary>
+        public static string ConfigDataGrid {
+            get {
+                return ResourceManager.GetString("ConfigDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Row alternation.
+        /// </summary>
+        public static string ConfigDataGridRowAlternation {
+            get {
+                return ResourceManager.GetString("ConfigDataGridRowAlternation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Row height.
         /// </summary>
-        public static string ConfigRowHeight {
+        public static string ConfigDataGridRowHeight {
             get {
-                return ResourceManager.GetString("ConfigRowHeight", resourceCulture);
+                return ResourceManager.GetString("ConfigDataGridRowHeight", resourceCulture);
             }
         }
         
@@ -1637,6 +1655,33 @@ namespace Restless.App.Panama.Resources {
         public static string TextWritten {
             get {
                 return ResourceManager.GetString("TextWritten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display drop down colors in alphabetical order.
+        /// </summary>
+        public static string TooltipColorAlpha {
+            get {
+                return ResourceManager.GetString("TooltipColorAlpha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display drop down colors in order of hue, saturation and brightness.
+        /// </summary>
+        public static string TooltipColorHSB {
+            get {
+                return ResourceManager.GetString("TooltipColorHSB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset all colors to their default values.
+        /// </summary>
+        public static string TooltipColorReset {
+            get {
+                return ResourceManager.GetString("TooltipColorReset", resourceCulture);
             }
         }
         

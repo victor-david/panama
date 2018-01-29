@@ -367,8 +367,8 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunResetWindowCommand(object o)
         {
-            Owner.Width = Config.MainWindow.DefaultWidth;
-            Owner.Height = Config.MainWindow.DefaultHeight;
+            Owner.Width = Config.Default.MainWindow.Width;
+            Owner.Height = Config.Default.MainWindow.Height;
             Owner.Top = (SystemParameters.WorkArea.Height / 2) - (Owner.Height / 2);
             Owner.Left = (SystemParameters.WorkArea.Width / 2) - (Owner.Width / 2);
             Owner.WindowState = WindowState.Normal;

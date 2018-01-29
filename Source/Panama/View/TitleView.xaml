@@ -43,8 +43,14 @@
             RowHeight="{Binding Config.DataGridRowHeight}"
             ItemsSource="{Binding Path=MainSource.View}"
             SelectedItem="{Binding SelectedItem}"
-            con:DataGridColumns.Columns="{Binding Columns}"
-            RowStyle="{StaticResource TitleDataGridRowStyle}">
+            con:DataGridColumns.Columns="{Binding Columns}">
+            <DataGrid.RowStyle>
+                <!-- Base style contains all the triggers -->
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource TitleDataGridRowStyle}">
+                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=TitleDataGrid, Path=DataContext.OpenRowCommand}"/>
+                </Style>
+            </DataGrid.RowStyle>
+
             <DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding MenuItems}"/>
             </DataGrid.ContextMenu>

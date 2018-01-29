@@ -66,6 +66,22 @@ namespace Restless.App.Panama.Configuration
         }
 
         /// <summary>
+        /// Gets the foreground brush.
+        /// </summary>
+        public Brush ForegroundBrush
+        {
+            get => new SolidColorBrush(Foreground);
+        }
+
+        /// <summary>
+        /// Gets the background brush.
+        /// </summary>
+        public Brush BackgroundBrush
+        {
+            get =>  new SolidColorBrush(Background);
+        }
+
+        /// <summary>
         /// Gets a boolean value that indicates if <see cref="Foreground"/> has its alpha channel set to a value greater than zero.
         /// </summary>
         public bool HasForeground
@@ -80,7 +96,6 @@ namespace Restless.App.Panama.Configuration
         {
             get => Background.A > 0;
         }
-
         #endregion
 
         /************************************************************************/
@@ -113,22 +128,6 @@ namespace Restless.App.Panama.Configuration
             Foreground = defaultFore;
             Background = defaultBack;
         }
-
-        /// <summary>
-        /// Get the brush according to the specified Color.
-        /// </summary>
-        /// <returns>The brush, or null if <see cref="HasValue"/> is false.</returns>
-        public SolidColorBrush GetBrush(ColorType colorType)
-        {
-            if (colorType == ColorType.Foreground)
-            {
-                return new SolidColorBrush(Foreground);
-            }
-            else
-            {
-                return new SolidColorBrush(Background);
-            }
-        }
         #endregion
 
         /************************************************************************/
@@ -155,12 +154,14 @@ namespace Restless.App.Panama.Configuration
                 {
                     colorRow[ColorTable.Defs.Columns.Foreground] = value.ToString();
                     OnPropertyChanged(nameof(Foreground));
+                    OnPropertyChanged(nameof(ForegroundBrush));
                     OnPropertyChanged(nameof(HasForeground));
                 }
                 else
                 {
                     colorRow[ColorTable.Defs.Columns.Background] = value.ToString();
                     OnPropertyChanged(nameof(Background));
+                    OnPropertyChanged(nameof(BackgroundBrush));
                     OnPropertyChanged(nameof(HasBackground));
                 }
             }

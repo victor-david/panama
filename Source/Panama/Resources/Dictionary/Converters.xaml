@@ -21,6 +21,5 @@
     
     <!--<c:StringToBooleanConverter x:Key="StringToBooleanConverter" />-->
     <!--<c:TextInputToVisibilityConverter x:Key="TextInputToVisibilityConverter" />-->
-    <!--<c:TriggerToBrushConverter x:Key="TriggerToBrushConverter" />-->
     <c:ValueToDebugConverter x:Key="ValueToDebugConverter"/>
 </ResourceDictionary>

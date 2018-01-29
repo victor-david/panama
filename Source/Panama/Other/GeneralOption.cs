@@ -8,6 +8,10 @@ namespace Restless.App.Panama
     /// <summary>
     /// Represents a general purpose helper class that can be used when binding.
     /// </summary>
+    /// <remarks>
+    /// This class provide various properties that may be used in a variety of ways
+    /// for binding purposes.
+    /// </remarks>
     public class GeneralOption
     {
         #region Private
@@ -117,7 +121,6 @@ namespace Restless.App.Panama
         }
         #endregion
     }
-
 
     /// <summary>
     /// Represents a list of <see cref="GeneralOption"/> objects.

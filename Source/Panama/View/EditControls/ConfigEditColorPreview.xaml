@@ -12,7 +12,6 @@
         <!-- Titles -->
         <TextBlock Style="{StaticResource TextBlockLabel}" Text="Titles"/>
         <DataGrid 
-            x:Name="TitleDataGrid"
             CanUserReorderColumns="False"
             CanUserSortColumns="False"
             RowStyle="{StaticResource TitleDataGridRowStyle}"
@@ -28,7 +27,6 @@
         <!-- Publications -->
         <TextBlock Style="{StaticResource TextBlockLabel}" Text="Publishers"/>
         <DataGrid 
-            x:Name="DataGridSamplePubs"
             CanUserReorderColumns="False"
             CanUserSortColumns="False"
             RowStyle="{StaticResource PublisherDataGridRowStyle}"

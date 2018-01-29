@@ -72,17 +72,6 @@
     <cv:BooleanToVisibilityMultiConverterOptions x:Key="BooleanVisibilityOneTrueAndTwoTrue">OneTrueAndTwoTrue</cv:BooleanToVisibilityMultiConverterOptions>
     <cv:BooleanToVisibilityMultiConverterOptions x:Key="BooleanVisibilityOneFalseOrTwoTrue">OneFalseOrTwoTrue</cv:BooleanToVisibilityMultiConverterOptions>
 
-    <cv:TriggerToBrushOptions x:Key="BrushOptionDataGridAlternation">DataGridAlternation</cv:TriggerToBrushOptions>
-    <cv:TriggerToBrushOptions x:Key="BrushOptionTitlePublishedFore">TitlePublishedFore</cv:TriggerToBrushOptions>
-    <cv:TriggerToBrushOptions x:Key="BrushOptionTitlePublishedBack">TitlePublishedBack</cv:TriggerToBrushOptions>
-    <cv:TriggerToBrushOptions x:Key="BrushOptionTitleSubmittedFore">TitleSubmittedFore</cv:TriggerToBrushOptions>
-    <cv:TriggerToBrushOptions x:Key="BrushOptionTitleSubmittedBack">TitleSubmittedBack</cv:TriggerToBrushOptions>
-    <cv:TriggerToBrushOptions x:Key="BrushOptionPublisherPeriodFore">PublisherPeriodFore</cv:TriggerToBrushOptions>
-    <cv:TriggerToBrushOptions x:Key="BrushOptionPublisherPeriodBack">PublisherPeriodBack</cv:TriggerToBrushOptions>
-    <cv:TriggerToBrushOptions x:Key="BrushOptionPublisherGonerFore">PublisherGonerFore</cv:TriggerToBrushOptions>
-    <cv:TriggerToBrushOptions x:Key="BrushOptionPublisherGonerBack">PublisherGonerBack</cv:TriggerToBrushOptions>
-
-
     <cv:PreviewModeToVisibilityConverterOptions x:Key="PreviewModeTextToVisibility">TextToVisibility</cv:PreviewModeToVisibilityConverterOptions>
     <cv:PreviewModeToVisibilityConverterOptions x:Key="PreviewModeImageToVisibility">ImageToVisibility</cv:PreviewModeToVisibilityConverterOptions>
     <cv:PreviewModeToVisibilityConverterOptions x:Key="PreviewModeUnsupportedToVisibility">UnsupportedToVisibility</cv:PreviewModeToVisibilityConverterOptions>

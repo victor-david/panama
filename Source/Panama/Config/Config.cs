@@ -33,76 +33,90 @@ namespace Restless.App.Panama.Configuration
         public static class Default
         {
             /// <summary>
-            /// Gets the default folder for title root, versions, etc.
+            /// Provides default property values for DataGrid
             /// </summary>
-            public const string Folder = @"C:\";
+            public static class DataGrid
+            {
+                /// <summary>
+                /// Gets the default value for data grid row height.
+                /// </summary>
+                public const int RowHeight = 24;
+
+                /// <summary>
+                /// Gets the default value for data grid alternation count;
+                /// </summary>
+                public const int AlternationCount = 2;
+
+                /// <summary>
+                /// Gets the minimum value for data grid row height.
+                /// </summary>
+                public const int MinRowHeight = 24;
+
+                /// <summary>
+                /// Gets the maximum value for data grid row height.
+                /// </summary>
+                public const int MaxRowHeight = 42;
+
+                /// <summary>
+                /// Gets the minimum value for data grid alternation count.
+                /// </summary>
+                public const int MinAlternationCount = 2;
+
+                /// <summary>
+                /// Gets the maximum value for data grid alternation count.
+                /// </summary>
+                public const int MaxAlternationCount = 5;
+
+            }
 
             /// <summary>
-            /// Gets the default value for data grid row height.
+            /// Gets default settings for the main window
             /// </summary>
-            public const int DataGridRowHeight = 24;
+            public static class MainWindow
+            {
+                /// <summary>
+                /// Gets the default width for the main window.
+                /// </summary>
+                public const int Width = 1420;
+
+                /// <summary>
+                /// Gets the default height for the main window.
+                /// </summary>
+                public const int Height = 860;
+
+                /// <summary>
+                /// Gets the minimum width for the main window.
+                /// </summary>
+                public const int MinWidth = 840;
+
+                /// <summary>
+                /// Gets the minimum height for the main window.
+                /// </summary>
+                public const int MinHeight = 760;
+            }
 
             /// <summary>
-            /// Gets the default value for grid splitter.
+            /// Provides default property values for miscellaneous properties.
             /// </summary>
-            public const double SplitterWidth = 684;
+            public static class Other
+            {
+                /// <summary>
+                /// Gets the default folder for title root, versions, etc.
+                /// </summary>
+                public const string Folder = @"C:\";
 
-            /// <summary>
-            /// Gets the default value for a submission document footer.
-            /// </summary>
-            public const string DocumentFooter = "Submissions to [publisher] - [author] - [month], [year]";
 
-            ///// <summary>
-            ///// Provides static default values for colors.
-            ///// </summary>
-            //public static class Colors
-            //{
-            //    /// <summary>
-            //    /// Gets the default color for a publisher that is marked as a goner.
-            //    /// </summary>
-            //    public static Color? GonerPublisher = SystemColors.Gray;
+                /// <summary>
+                /// Gets the default value for grid splitter.
+                /// </summary>
+                public const double SplitterWidth = 684;
 
-            //    /// <summary>
-            //    /// Gets the default color for a publisher that is within its submission period.
-            //    /// </summary>
-            //    public static Color? PeriodPublisher = SystemColors.Beige;
+                /// <summary>
+                /// Gets the default value for a submission document footer.
+                /// </summary>
+                public const string DocumentFooter = "Submissions to [publisher] - [author] - [month], [year]";
+            }
 
-            //    /// <summary>
-            //    /// Gets the default color for a title that is published.
-            //    /// </summary>
-            //    public static Color? PublishedTitle = SystemColors.PaleGreen;
-
-            //    /// <summary>
-            //    /// Gets the default color for a title that is currently submitted.
-            //    /// </summary>
-            //    public static Color? SubmittedTitle = SystemColors.SeaGreen;
-            //}
-        }
-
-        /// <summary>
-        /// Gets default settings for the main window
-        /// </summary>
-        public static class MainWindow
-        {
-            /// <summary>
-            /// Gets the default width for the main window.
-            /// </summary>
-            public const int DefaultWidth = 1420;
-
-            /// <summary>
-            /// Gets the default height for the main window.
-            /// </summary>
-            public const int DefaultHeight = 860;
-
-            /// <summary>
-            /// Gets the minimum width for the main window.
-            /// </summary>
-            public const int MinWidth = 840;
-
-            /// <summary>
-            /// Gets the minimum height for the main window.
-            /// </summary>
-            public const int MinHeight = 500;
         }
         #endregion
 
@@ -132,7 +146,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public int MainWindowWidth
         {
-            get => GetItem(MainWindow.DefaultWidth);
+            get => GetItem(Default.MainWindow.Width);
             set => SetItem(value);
         }
 
@@ -141,7 +155,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public int MainWindowHeight
         {
-            get => GetItem(MainWindow.DefaultHeight);
+            get => GetItem(Default.MainWindow.Height);
             set => SetItem(value);
         }
 
@@ -154,12 +168,23 @@ namespace Restless.App.Panama.Configuration
             set => SetItem(value);
         }
 
+
+        public int DataGridAlternationCount
+        {
+            get => GetItem(Default.DataGrid.AlternationCount);
+            set
+            {
+                SetItem(value);
+                OnPropertyChanged();
+            }
+        }
+
         /// <summary>
         /// Gets or sets the row height used in various data grids.
         /// </summary>
         public int DataGridRowHeight
         {
-            get => GetItem(Default.DataGridRowHeight);
+            get => GetItem(Default.DataGrid.RowHeight);
             set => SetItem(value);
         }
 
@@ -229,7 +254,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderExport
         {
-            get => GetItem(Default.Folder);
+            get => GetItem(Default.Other.Folder);
             set => SetItem(value);
         }
 
@@ -247,7 +272,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderSubmissionDocument
         {
-            get => GetItem(Default.Folder);
+            get => GetItem(Default.Other.Folder);
             set => SetItem(value);
         }
 
@@ -257,7 +282,7 @@ namespace Restless.App.Panama.Configuration
         
         public string FolderSubmissionMessageAttachment
         {
-            get => GetItem(Default.Folder);
+            get => GetItem(Default.Other.Folder);
             set => SetItem(value);
         }
 
@@ -266,7 +291,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderTitleVersion
         {
-            get => GetItem(Default.Folder);
+            get => GetItem(Default.Other.Folder);
             set => SetItem(value);
         }
 
@@ -275,7 +300,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string FolderTitleRoot
         {
-            get => GetItem(Default.Folder);
+            get => GetItem(Default.Other.Folder);
             set => SetItem(value);
         }
 
@@ -287,7 +312,7 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnTable
         {
-            get => GetGridLength(Default.SplitterWidth);
+            get => GetGridLength(Default.Other.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -299,7 +324,7 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnTitle
         {
-            get => GetGridLength(Default.SplitterWidth);
+            get => GetGridLength(Default.Other.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -311,7 +336,7 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnPublisher
         {
-            get => GetGridLength(Default.SplitterWidth);
+            get => GetGridLength(Default.Other.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -323,7 +348,7 @@ namespace Restless.App.Panama.Configuration
         /// </remarks>
         public GridLength LeftColumnSubmission
         {
-            get => GetGridLength(Default.SplitterWidth);
+            get => GetGridLength(Default.Other.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -379,7 +404,7 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public string SubmissionDocFooter
         {
-            get => GetItem(Default.DocumentFooter);
+            get => GetItem(Default.Other.DocumentFooter);
             set => SetItem(value);
         }
 

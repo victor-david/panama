@@ -744,7 +744,22 @@ The application cannot continue.</value>
   <data name="HeaderSettingsSectionSubmission" xml:space="preserve">
     <value>Submission</value>
   </data>
-  <data name="ConfigRowHeight" xml:space="preserve">
+  <data name="ConfigDataGridRowHeight" xml:space="preserve">
     <value>Row height</value>
+  </data>
+  <data name="TooltipColorAlpha" xml:space="preserve">
+    <value>Display drop down colors in alphabetical order</value>
+  </data>
+  <data name="TooltipColorHSB" xml:space="preserve">
+    <value>Display drop down colors in order of hue, saturation and brightness</value>
+  </data>
+  <data name="TooltipColorReset" xml:space="preserve">
+    <value>Reset all colors to their default values</value>
+  </data>
+  <data name="ConfigDataGridRowAlternation" xml:space="preserve">
+    <value>Row alternation</value>
+  </data>
+  <data name="ConfigDataGrid" xml:space="preserve">
+    <value>Data Grid</value>
   </data>
 </root>

@@ -81,8 +81,8 @@
                 <DataTemplate>
                     <Border Name="PART_BORDER">
                         <Label>
-                            <Hyperlink Command="{Binding Command}" CommandParameter="{Binding CommandParm}">
-                                <TextBlock Name="PART_VALUE" Text="{Binding Value}"/>
+                            <Hyperlink Command="{Binding Command}" CommandParameter="{Binding CommandParm}" ToolTip="{Binding Value}">
+                                <TextBlock Name="PART_VALUE" Text="{Binding Name}"/>
                             </Hyperlink>
                         </Label>
                     </Border>

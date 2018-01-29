@@ -34,7 +34,7 @@ namespace Restless.App.Panama.Configuration
             public static class Foreground
             {
                 /// <summary>
-                /// Gets the default foreground color for an alternating data grid row..
+                /// Gets the default foreground color for an alternating data grid row.
                 /// </summary>
                 public static Color DataGridAlternation = SystemColors.Transparent;
 
@@ -46,7 +46,7 @@ namespace Restless.App.Panama.Configuration
                 /// <summary>
                 /// Gets the default foreground color for a publisher that is within its submission period.
                 /// </summary>
-                public static Color PublisherPeriod = SystemColors.Transparent;
+                public static Color PublisherPeriod = SystemColors.Blue;
 
                 /// <summary>
                 /// Gets the default foreground color for a title that is published.
@@ -65,9 +65,12 @@ namespace Restless.App.Panama.Configuration
             public static class Background
             {
                 /// <summary>
-                /// Gets the default background color for an alternating data grid row..
+                /// Gets the default background color for an alternating data grid row.
                 /// </summary>
-                public static Color DataGridAlternation = SystemColors.LightSteelBlue;
+                public static Color DataGridAlternation = (Color)ColorConverter.ConvertFromString("#FFCBE4EC");
+
+                // #FFCBE4EC
+                // #FFE3EBEE
 
                 /// <summary>
                 /// Gets the default background color for a publisher that is marked as a goner.
@@ -77,7 +80,7 @@ namespace Restless.App.Panama.Configuration
                 /// <summary>
                 /// Gets the default background color for a publisher that is within its submission period.
                 /// </summary>
-                public static Color PublisherPeriod = SystemColors.Beige;
+                public static Color PublisherPeriod = SystemColors.Transparent;
 
                 /// <summary>
                 /// Gets the default background color for a title that is published.

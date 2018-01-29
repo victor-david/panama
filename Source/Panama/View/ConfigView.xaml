@@ -44,9 +44,41 @@
                 <TextBlock Style="{StaticResource TextBlockLabel}" Text="{x:Static r:Strings.HeaderSettingsDateFormat}"/>
                 <ItemsControl Style="{StaticResource SelectTypeSingle}" ItemsSource="{Binding Path=DateFormats}" />
 
-                <!-- DataGrid Row Height -->
-                <TextBlock Style="{StaticResource TextBlockSepLabel}" Text="{x:Static r:Strings.ConfigRowHeight}"/>
-                <Slider Margin="2,4" Minimum="{StaticResource DataGridMinRowHeight}" Maximum="{StaticResource DataGridMaxRowHeight}" TickPlacement="BottomRight" TickFrequency="1" Value="{Binding Path=Config.DataGridRowHeight}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Style="{StaticResource TextBlockSepLabel}" Text="{x:Static r:Strings.ConfigDataGrid}"/>
+
+                    <!-- DataGrid Row Height -->
+                    <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockSepLabel}" Text="{x:Static r:Strings.ConfigDataGridRowHeight}"/>
+                    <ComboBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding DataGridRowHeight}" SelectedItem="{Binding Config.DataGridRowHeight}" />
+                    
+                    
+                    <!-- DataGrid Row Alternation -->
+                    <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBlockSepLabel}" Text="{x:Static r:Strings.ConfigDataGridRowAlternation}"/>
+                    <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding DataGridAlternation}" SelectedItem="{Binding Config.DataGridAlternationCount}" />
+
+                </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
             </StackPanel>
 
             <!-- Section 2. Folders -->

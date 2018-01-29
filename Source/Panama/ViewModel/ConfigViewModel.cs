@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -13,6 +14,7 @@ using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Search;
 using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
+using ConfigDefault = Restless.App.Panama.Configuration.Config.Default;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -101,10 +103,13 @@ namespace Restless.App.Panama.ViewModel
             }
         }
 
-        /// <summary>
-        /// This property satisfies a common binding requirement, but does nothing.
-        /// </summary>
-        public ICommand OpenRowCommand
+        public IEnumerable<int> DataGridRowHeight
+        {
+            get;
+            private set;
+        }
+
+        public IEnumerable<int> DataGridAlternation
         {
             get;
             private set;
@@ -130,6 +135,7 @@ namespace Restless.App.Panama.ViewModel
             InitializeSampleTitles();
             InitializeSamplePublications();
             InitializeColorSettings();
+            InitializeRanges();
         }
         #endregion
 
@@ -146,10 +152,10 @@ namespace Restless.App.Panama.ViewModel
         {
             Sections = new GeneralOptionList()
             {
-                new GeneralOption() { IntValue = 1, Value = Strings.HeaderSettingsSectionGeneral, Command = Commands["SwitchSection"], CommandParm = 1 },
-                new GeneralOption() { IntValue = 2, Value = Strings.HeaderSettingsSectionFolder, Command = Commands["SwitchSection"], CommandParm = 2 },
-                new GeneralOption() { IntValue = 3, Value = Strings.HeaderSettingsSectionColor, Command = Commands["SwitchSection"], CommandParm = 3 },
-                new GeneralOption() { IntValue = 4, Value = Strings.HeaderSettingsSectionSubmission, Command = Commands["SwitchSection"], CommandParm = 4 }
+                new GeneralOption() { IntValue = 1, Name = Strings.HeaderSettingsSectionGeneral, Command = Commands["SwitchSection"], CommandParm = 1 },
+                new GeneralOption() { IntValue = 2, Name = Strings.HeaderSettingsSectionFolder, Command = Commands["SwitchSection"], CommandParm = 2 },
+                new GeneralOption() { IntValue = 3, Name = Strings.HeaderSettingsSectionColor, Command = Commands["SwitchSection"], CommandParm = 3 },
+                new GeneralOption() { IntValue = 4, Name = Strings.HeaderSettingsSectionSubmission, Command = Commands["SwitchSection"], CommandParm = 4 }
             };
             RunSwitchSection(Config.SelectedConfigSection);
             OnPropertyChanged(nameof(Sections));
@@ -185,8 +191,16 @@ namespace Restless.App.Panama.ViewModel
             ColorSortingMode = Config.ColorSortingMode;
             ColorSortingModes = new GeneralOptionList()
             {
-                new GeneralOption() { Value="Alpha", Command = Commands["SwitchColorMode"], CommandParm= ColorSortingMode.Alpha },
-                new GeneralOption() { Value="HSB", Command = Commands["SwitchColorMode"], CommandParm= ColorSortingMode.HSB }
+                new GeneralOption()
+                {
+                    Name = "Alpha", Value = Strings.TooltipColorAlpha,
+                    Command = Commands["SwitchColorMode"], CommandParm = ColorSortingMode.Alpha
+                },
+                new GeneralOption()
+                {
+                    Name = "HSB", Value = Strings.TooltipColorHSB,
+                    Command = Commands["SwitchColorMode"], CommandParm= ColorSortingMode.HSB
+                }
 
             };
             RunSwitchColorMode(Config.ColorSortingMode);
@@ -214,6 +228,12 @@ namespace Restless.App.Panama.ViewModel
                 new SamplePublisher(4, "Publisher #4 (goner)", DateTime.Now.AddDays(-150), DateTime.Now.AddDays(-148), false, true),
                 new SamplePublisher(5, "Publisher #5", DateTime.Now.AddDays(-160), DateTime.Now.AddDays(-5), false, false),
             };
+        }
+
+        private void InitializeRanges()
+        {
+            DataGridRowHeight = Enumerable.Range(ConfigDefault.DataGrid.MinRowHeight, ConfigDefault.DataGrid.MaxRowHeight - ConfigDefault.DataGrid.MinRowHeight + 1);
+            DataGridAlternation = Enumerable.Range(ConfigDefault.DataGrid.MinAlternationCount, ConfigDefault.DataGrid.MaxAlternationCount - ConfigDefault.DataGrid.MinAlternationCount + 1);
         }
 
         private void RunSwitchSection(object parm)
