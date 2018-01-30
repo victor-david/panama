@@ -7,9 +7,6 @@
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="554">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <StackPanel>
         <DataGrid x:Name="grid" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Published.DataView}" SelectedItem="{Binding Published.SelectedItem}" con:DataGridColumns.Columns="{Binding Published.Columns}">
             <DataGrid.RowStyle>
@@ -20,8 +17,8 @@
         </DataGrid>
         <ToolBarTray>
             <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                <Button Command="{Binding RawCommands[PublishedAdd]}" Content="Add" ToolTip="Add a published entry"/>
-                <Button Command="{Binding RawCommands[PublishedRemove]}" Content="Remove" ToolTip="Remove the selected entry"/>
+                <Button Command="{Binding Commands[PublishedAdd]}" Content="Add" ToolTip="Add a published entry"/>
+                <Button Command="{Binding Commands[PublishedRemove]}" Content="Remove" ToolTip="Remove the selected entry"/>
             </ToolBar>
         </ToolBarTray>
         <StackPanel Margin="0,8" Visibility="{Binding Published.EditVisibility}">

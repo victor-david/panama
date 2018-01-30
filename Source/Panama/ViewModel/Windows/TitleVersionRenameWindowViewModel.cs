@@ -55,8 +55,8 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Old name", TitleVersionRenameItem.Properties.OriginalNameDisplay);
             Columns.Create("New name", TitleVersionRenameItem.Properties.NewNameDisplay);
             Columns.Create("Status", TitleVersionRenameItem.Properties.Status);
-            RawCommands.Add("Rename", RunRenameCommand, CanRunRenameCommand);
-            RawCommands.Add("Close", RunCloseCommand);
+            Commands.Add("Rename", RunRenameCommand, CanRunRenameCommand);
+            Commands.Add("Close", RunCloseCommand);
             PopulateRenameItems(titleId);
         }
         #endregion

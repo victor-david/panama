@@ -57,13 +57,13 @@ namespace Restless.App.Panama.ViewModel
             Controller = new ToolOrphanFinderController(this);
             MainSource.Source = Controller.NotFound;
 
-            RawCommands.Add("Begin", (o) => { Controller.Run(); });
+            Commands.Add("Begin", (o) => { Controller.Run(); });
             Columns.Create("Modified", "LastModified").MakeDate();
             Columns.SetDefaultSort(Columns.Create("File", "FileName"), ListSortDirection.Ascending);
             AddViewSourceSortDescriptions();
             // RawCommands["DeleteFile"] is created by ToolOrphanFinderController - it handles
             // file deletion and the removal of the corresponding item of its ObservableCollection
-            MenuItems.AddItem("Delete this file", RawCommands["DeleteFile"], "ImageDeleteMenu");
+            MenuItems.AddItem("Delete this file", Commands["DeleteFile"], "ImageDeleteMenu");
             
         }
 #pragma warning restore 1591

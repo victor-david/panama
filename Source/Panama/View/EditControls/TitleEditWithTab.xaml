@@ -7,19 +7,17 @@
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     mc:Ignorable="d" 
     d:DesignHeight="500" d:DesignWidth="350">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <con:TabControlExtended SelectedIndex="{Binding SelectedTabIndex,Mode=OneWayToSource}">
         <TabControl.Items>
-            <TabItem Header="Title data">
+            <TabItem Header="{x:Static r:Strings.HeaderData}">
                 <StackPanel>
                     <StackPanel Style="{StaticResource StackPanelCommandHolder}">
                         <Label>Title</Label>
                         <Label>
-                            <Hyperlink Command="{Binding RawCommands[ExtractTitle]}">Extract from latest version</Hyperlink>
+                            <Hyperlink Command="{Binding Commands[ExtractTitle]}">Extract from latest version</Hyperlink>
                         </Label>
                     </StackPanel>
                     <TextBox Text="{Binding SelectedRow[title]}" />
@@ -36,12 +34,12 @@
                     <Expander Header="Current Tags" IsExpanded="True">
                         <StackPanel>
                             <Label Visibility="{Binding Tags.HasZeroTags,Converter={cv:BooleanToVisibilityConverter}}">(none)</Label>
-                            <ItemsControl Style="{StaticResource ICTagItems}" ItemsSource="{Binding Tags.Current}" />
+                            <ItemsControl Style="{StaticResource ItemsControlTag}" ItemsSource="{Binding Tags.Current}" />
                         </StackPanel>
                     </Expander>
 
                     <Expander Header="Available Tags" IsExpanded="True">
-                        <ItemsControl Style="{StaticResource ICTagItems}" ItemsSource="{Binding Tags.Available}" />
+                        <ItemsControl Style="{StaticResource ItemsControlTag}" ItemsSource="{Binding Tags.Available}" />
                     </Expander>
                 </StackPanel>
             </TabItem>
@@ -57,7 +55,7 @@
                         CanUserSortColumns="False"
                         CanUserReorderColumns="False" />
                     <Label>
-                        <Hyperlink Command="{Binding RawCommands[AddTitleToSubmission]}">Add this title to a submission</Hyperlink>
+                        <Hyperlink Command="{Binding Commands[AddTitleToSubmission]}">Add this title to a submission</Hyperlink>
                     </Label>
                     <!-- Control to add title to submission -->
                     <view:TitleEditAddToSubmission/>
@@ -66,7 +64,7 @@
             <TabItem Header="{Binding Published.Header}">
                 <view:TitleEditPublished/>
             </TabItem>
-            <TabItem Header="Preview">
+            <TabItem Header="{x:Static r:Strings.HeaderPreview}">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockMessage}" Margin="0,2">Text of the latest version of this title</TextBlock>
                     <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockError}" Margin="8" VerticalAlignment="Top" Visibility="{Binding IsOpenXml,Converter={cv:BooleanToVisibilityConverter},ConverterParameter={StaticResource BooleanFalseToVisibility}}">

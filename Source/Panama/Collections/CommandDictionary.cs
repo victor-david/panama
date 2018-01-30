@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Restless.Tools.Utility;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Restless.Tools.Utility;
 
 namespace Restless.App.Panama.Collections
 {
@@ -10,10 +8,10 @@ namespace Restless.App.Panama.Collections
     /// Represents a dictionary of commands.
     /// </summary>
     /// <remarks>
-    /// A RawCommandDictionary collection is used by the various view models and associated controllers
+    /// A CommandDictionary collection is used by the various view models and associated controllers
     /// to create commands without the need to declare a separate property for each one.
     /// </remarks>
-    public class RawCommandDictionary
+    public class CommandDictionary
     {
         #region Private
         private Dictionary<string, RelayCommand> storage;
@@ -45,7 +43,7 @@ namespace Restless.App.Panama.Collections
 
         #region Constructor
         #pragma warning disable 1591
-        public RawCommandDictionary()
+        public CommandDictionary()
         {
             storage = new Dictionary<string, RelayCommand>();
         }

@@ -10,9 +10,6 @@
     
     mc:Ignorable="d" 
     d:DesignHeight="488" d:DesignWidth="515">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <StackPanel>
         <HeaderedContentControl Header="Filters">
             <StackPanel>
@@ -60,7 +57,7 @@
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Style="{StaticResource StackPanelCommandHolder}">
-                        <Button Grid.Column="1" Content="Clear all" Command="{Binding RawCommands[ClearFilter]}"/>
+                        <Button Grid.Column="1" Content="Clear all" Command="{Binding Commands[ClearFilter]}"/>
                     </StackPanel>
                 </UniformGrid>
             </StackPanel>

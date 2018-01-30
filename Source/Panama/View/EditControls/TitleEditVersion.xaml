@@ -9,9 +9,6 @@
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="554">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <StackPanel>
         <con:DataGridExtended 
             x:Name="grid" 
@@ -21,7 +18,7 @@
             ItemsSource="{Binding Path=Versions.DataView}"
             SelectedItem="{Binding Versions.SelectedItem}"
             con:DataGridColumns.Columns="{Binding Versions.Columns}" 
-            ContextMenuOpeningCommand="{Binding Versions.RawCommands[ContextMenuOpening]}"  >
+            ContextMenuOpeningCommand="{Binding Versions.Commands[ContextMenuOpening]}"  >
             <DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Versions.MenuItems}"  />
             </DataGrid.ContextMenu>            
@@ -33,14 +30,14 @@
         </con:DataGridExtended>
         <ToolBarTray>
             <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                <Button Command="{Binding Versions.RawCommands[VersionMoveUp]}" Content="{StaticResource ImageArrowUpTool}" ToolTip="Move the selected version up"/>
-                <Button Command="{Binding Versions.RawCommands[VersionMoveDown]}" Content="{StaticResource ImageArrowDownTool}" ToolTip="Move the selected version down"/>
+                <Button Command="{Binding Versions.Commands[VersionMoveUp]}" Content="{StaticResource ImageArrowUpTool}" ToolTip="Move the selected version up"/>
+                <Button Command="{Binding Versions.Commands[VersionMoveDown]}" Content="{StaticResource ImageArrowDownTool}" ToolTip="Move the selected version down"/>
                 <Separator/>
-                <Button Command="{Binding Versions.RawCommands[VersionAddByFile]}" ToolTip="Add a version by selecting an existing file">File</Button>
-                <Button Command="{Binding Versions.RawCommands[VersionReplace]}" ToolTip="Replace the selected version with another file">Replace</Button>
-                <Button Command="{Binding Versions.RawCommands[VersionRemove]}" ToolTip="Remove the selected version (does not affect the file system)">Remove</Button>
+                <Button Command="{Binding Versions.Commands[VersionAddByFile]}" ToolTip="Add a version by selecting an existing file">File</Button>
+                <Button Command="{Binding Versions.Commands[VersionReplace]}" ToolTip="Replace the selected version with another file">Replace</Button>
+                <Button Command="{Binding Versions.Commands[VersionRemove]}" ToolTip="Remove the selected version (does not affect the file system)">Remove</Button>
                 <Separator/>
-                <Button Command="{Binding Versions.RawCommands[VersionSync]}" ToolTip="Rename the version files in accordance with title, language id and version #">Sync</Button>
+                <Button Command="{Binding Versions.Commands[VersionSync]}" ToolTip="Rename the version files in accordance with title, language id and version #">Sync</Button>
             </ToolBar>
         </ToolBarTray>
         <StackPanel Margin="0,8" Visibility="{Binding Versions.EditVisibility}">
@@ -65,7 +62,7 @@
                             <Label>Company</Label>
                             <TextBox Text="{Binding Versions.Properties.Core.Subject}"/>
                             <TextBox Text="{Binding Versions.Properties.Extended.Company}"/>
-                            <Button Width="124" HorizontalAlignment="Left" Command="{Binding Versions.RawCommands[SaveProperty]}">Save</Button>
+                            <Button Width="124" HorizontalAlignment="Left" Command="{Binding Versions.Commands[SaveProperty]}">Save</Button>
                         </UniformGrid>
                         <TextBlock Style="{StaticResource TextBlockMessage}" Margin="16,6" Text="{x:Static r:Strings.HeaderVersionProperties}"/>
                     </StackPanel>

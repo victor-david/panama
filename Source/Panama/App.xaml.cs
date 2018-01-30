@@ -43,19 +43,13 @@ namespace Restless.App.Panama
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
-            
-              bool save = true;
-#if DEBUG
-              save = false;
-#endif
-              Config.Instance.SaveFilterObjects();
-              DatabaseController.Instance.Shutdown(saveTables: save);
-
+            Config.Instance.SaveFilterObjects();
+            DatabaseController.Instance.Shutdown(saveTables: true);
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Private methods
         /// <summary>
         /// Called from OnStartup(e) separately so we can catch an assembly missing.
@@ -83,11 +77,8 @@ namespace Restless.App.Panama
             else
             {
                 Window main = WindowFactory.Main.Create();
-                main.Width = Config.MainWindowDefaultWidth;
-                main.Height = Config.MainWindowDefaultHeight;
-                main.MinWidth = 640;
-                main.MinHeight = 400;
-
+                main.MinWidth = Config.Default.MainWindow.MinWidth;
+                main.MinHeight = Config.Default.MainWindow.MinHeight;
                 main.Width = Config.Instance.MainWindowWidth;
                 main.Height = Config.Instance.MainWindowHeight;
                 main.WindowState = Config.Instance.MainWindowState;

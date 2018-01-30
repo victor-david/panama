@@ -69,8 +69,8 @@ namespace Restless.App.Panama.ViewModel
                 });
             };
 
-            Owner.RawCommands.Add("OpenFile", RunOpenFileCommand);
-            Owner.RawCommands.Add("DeleteFile", RunDeleteFileCommand, (o) => { return Owner.SelectedItem != null; });
+            Owner.Commands.Add("OpenFile", RunOpenFileCommand);
+            Owner.Commands.Add("DeleteFile", RunDeleteFileCommand, (o) => { return Owner.SelectedItem != null; });
             UpdateNotFoundHeader();
         }
         #endregion

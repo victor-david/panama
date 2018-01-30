@@ -39,8 +39,8 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted).MakeDate();
             Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);
             Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written).MakeDate();
-            RawCommands.Add("GoToTitleRecord", RunGoToTitleRecordCommand);
-            MenuItems.AddItem("Go to title record for this item", RawCommands["GoToTitleRecord"], "ImageBrowseToUrlMenu");
+            Commands.Add("GoToTitleRecord", RunGoToTitleRecordCommand);
+            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"], "ImageBrowseToUrlMenu");
             AddViewSourceSortDescriptions();
         }
         #endregion

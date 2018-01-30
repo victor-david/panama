@@ -8,9 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="500">
-    <Control.Resources>
-        <ResourceDictionary Source="../Resources/Merged.xaml" />
-    </Control.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*" />
@@ -27,7 +24,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <view:SimpleRowFilter Grid.Column="0" HorizontalAlignment="Left" />
-            <ItemsControl Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource ICMenuItems}" ItemsSource="{Binding Path=VisualCommands}"/>
+            <ItemsControl Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>
         </Grid>
         <!-- Main data grid to display the tabular data  -->
         <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">

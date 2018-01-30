@@ -6,17 +6,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"    
     mc:Ignorable="d" 
-    d:DesignHeight="100" d:DesignWidth="320">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>    
+    d:DesignHeight="32" d:DesignWidth="350">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" VerticalAlignment="Center" Margin="0,0,2,0">Filter</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" VerticalAlignment="Center" Margin="0">Filter</Label>
         <!-- This is just a fake Textbox so we can have the background color -->
         <TextBox Grid.Column="1" Style="{StaticResource TextBoxWithHintBack}" Width="212" />
         <!-- TextBlock has a transparent background. With its own background, it doesn't fills up the whole area -->

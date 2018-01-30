@@ -120,18 +120,24 @@
   <data name="Author" xml:space="preserve">
     <value>CREATE TABLE "author" (
   "id" INTEGER PRIMARY KEY NOT NULL, 
-  "name" VARCHAR(80) NOT NULL,
+  "name" TEXT NOT NULL,
   "isdefault" BOOLEAN DEFAULT 0
-);</value>
+)</value>
     <comment>ddl for author table</comment>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>CREATE TABLE "color" (
+  "id" TEXT NOT NULL,
+  "foreground" TEXT NOT NULL,
+  "background" TEXT NOT NULL,
+  PRIMARY KEY ("id")
+);</value>
+    <comment>ddl for configuration color table</comment>
   </data>
   <data name="Config" xml:space="preserve">
     <value>CREATE TABLE "config" (
   "id" TEXT NOT NULL, 
-  "description" TEXT NOT NULL, 
-  "type" TEXT NOT NULL, 
   "value" TEXT, 
-  "edit" BOOLEAN DEFAULT 1, 
   PRIMARY KEY ("id")
 );</value>
     <comment>ddl for config table</comment>
@@ -139,9 +145,9 @@
   <data name="Credential" xml:space="preserve">
     <value>CREATE TABLE "credential" (
   "id" INTEGER PRIMARY KEY NOT NULL, 
-  "name" VARCHAR(32) NOT NULL, 
-  "loginid" VARCHAR(48) NOT NULL, 
-  "password" VARCHAR(32) NOT NULL 
+  "name" TEXT NOT NULL, 
+  "loginid" TEXT NOT NULL, 
+  "password" TEXT NOT NULL 
 );</value>
     <comment>ddl for credential table</comment>
   </data>
@@ -157,8 +163,8 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>CREATE TABLE "language" (
-  "id" VARCHAR(8) NOT NULL, 
-  "name" VARCHAR(20) NOT NULL, 
+  "id" TEXT NOT NULL, 
+  "name" TEXT NOT NULL, 
   PRIMARY KEY ("id")
 );</value>
     <comment>ddl for language table</comment>
@@ -166,9 +172,9 @@
   <data name="Link" xml:space="preserve">
     <value>CREATE TABLE "link" (
   "id" INTEGER PRIMARY KEY NOT NULL,
-  "name" VARCHAR(160) NOT NULL, 
-  "url" VARCHAR(255) NOT NULL, 
-  "notes" VARCHAR(255), 
+  "name" TEXT NOT NULL, 
+  "url" TEXT NOT NULL, 
+  "notes" TEXT, 
   "credentialid" INTEGER NOT NULL DEFAULT 0, 
   "added" TIMESTAMP NOT NULL
 );
@@ -181,7 +187,7 @@ CREATE INDEX "link_credentialid" ON "link" ("credentialid");</value>
   "titleid" INTEGER NOT NULL,
   "publisherid" INTEGER NOT NULL DEFAULT 0,
   "added" TIMESTAMP NOT NULL,
-  "url" VARCHAR(255),
+  "url" TEXT,
   "notes" TEXT
 );
 CREATE INDEX "published_publisherid" ON "published" ("publisherid");
@@ -216,8 +222,8 @@ CREATE INDEX "publisher_credentialid" ON "publisher" ("credentialid");</value>
   <data name="Response" xml:space="preserve">
     <value>CREATE TABLE "response" (
   "id" INTEGER PRIMARY KEY NOT NULL, 
-  "name" VARCHAR(24), 
-  "description" VARCHAR(255) 
+  "name" TEXT, 
+  "description" TEXT 
 );</value>
     <comment>ddl for response table</comment>
   </data>
@@ -244,8 +250,8 @@ CREATE UNIQUE INDEX "submission_batchid_titleid" ON "submission" ("titleid" ,"su
     <value>CREATE TABLE "submissionbatch" (
   "id" INTEGER PRIMARY KEY NOT NULL, 
   "publisherid" INTEGER, 
-  "fee" INTEGER, 
-  "award" INTEGER, 
+  "fee" NUMERIC, 
+  "award" NUMERIC, 
   "online" BOOLEAN NOT NULL DEFAULT '0', 
   "contest" BOOLEAN NOT NULL DEFAULT '0', 
   "locked" BOOLEAN NOT NULL DEFAULT '0', 
@@ -260,9 +266,9 @@ CREATE UNIQUE INDEX "submission_batchid_titleid" ON "submission" ("titleid" ,"su
     <value>CREATE TABLE "submissiondocument" (
   "id" INTEGER PRIMARY KEY NOT NULL, 
   "submissionbatchid" INTEGER NOT NULL, 
-  "title" VARCHAR(255) NOT NULL, 
+  "title" TEXT NOT NULL, 
   "doctype" INTEGER NOT NULL, 
-  "docid" VARCHAR(255), 
+  "docid" TEXT, 
   "updated" TIMESTAMP NOT NULL,
   "size" INTEGER NOT NULL DEFAULT 0
 );</value>
@@ -291,8 +297,8 @@ CREATE UNIQUE INDEX "submission_batchid_titleid" ON "submission" ("titleid" ,"su
     <value>CREATE TABLE "submissionmessageattachment" (
   "id" INTEGER PRIMARY KEY NOT NULL, 
   "messageid" INTEGER NOT NULL, 
-  "display" VARCHAR(255) NOT NULL, 
-  "filename" VARCHAR(255) NOT NULL, 
+  "display" TEXT NOT NULL, 
+  "filename" TEXT NOT NULL, 
   "filesize" INTEGER NOT NULL, 
   "type" INTEGER NOT NULL DEFAULT 0 
 );
@@ -312,16 +318,16 @@ CREATE INDEX "submissionmessageattachment_messageid" ON "submissionmessageattach
   <data name="Tag" xml:space="preserve">
     <value>CREATE TABLE "tag" (
   "id" INTEGER PRIMARY KEY NOT NULL, 
-  "tag" VARCHAR(16) NOT NULL, 
-  "description" VARCHAR(80) NOT NULL, 
-  "usagecount" INTEGER NOT NULL DEFAULT 0 
+  "tag" TEXT NOT NULL, 
+  "description" TEXT NOT NULL, 
+  "usagecount" INTEGER NOT NULL DEFAULT 0
 );</value>
     <comment>ddl for tag table</comment>
   </data>
   <data name="Title" xml:space="preserve">
     <value>CREATE TABLE "title" (
   "id" INTEGER PRIMARY KEY NOT NULL, 
-  "title" VARCHAR(128) NOT NULL, 
+  "title" TEXT NOT NULL, 
   "written" TIMESTAMP NOT NULL, 
   "authorid" INTEGER NOT NULL DEFAULT 1, 
   "ready" BOOLEAN DEFAULT 0 
@@ -356,7 +362,7 @@ CREATE INDEX "titleversion_titleid" ON "titleversion" ("titleid");</value>
   <data name="UserNote" xml:space="preserve">
     <value>CREATE TABLE "usernote" (
   "id" INTEGER PRIMARY KEY NOT NULL, 
-  "title" VARCHAR(128) NOT NULL, 
+  "title" TEXT NOT NULL, 
   "created" TIMESTAMP NOT NULL, 
   "note" TEXT 
 );</value>

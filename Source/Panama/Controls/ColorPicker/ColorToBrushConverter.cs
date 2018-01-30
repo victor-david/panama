@@ -2,19 +2,17 @@
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Resources;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.App.Panama.Controls
 {
     /// <summary>
-    /// Provides a <see cref="SolidColorBrush"/> object according to the passed parameter.
+    /// Provides a converter that accepts a Color value and returns a SolidColorBrush.
     /// </summary>
-    public class TriggerToBrushConverter : MarkupExtension, IValueConverter
+    public class ColorToBrushConverter : MarkupExtension, IValueConverter
     {
         #region Constructor
         #pragma warning disable 1591
-        public TriggerToBrushConverter()
+        public ColorToBrushConverter()
         {
             // prevents the designer that's referencing this converter directly from going stupid every time you type a character
         }
@@ -25,31 +23,20 @@ namespace Restless.App.Panama.Converters
 
         #region Public methods
         /// <summary>
-        /// Provides a <see cref="SolidColorBrush"/> object according to the passed parameter.
+        /// Converts a Color value to a SolidColorBrush.
         /// </summary>
-        /// <param name="value">Not used.</param>
+        /// <param name="value">The Color value</param>
         /// <param name="targetType">Not used.</param>
-        /// <param name="parameter">A value from the <see cref="TriggerToBrushOptions"/> enumeration.</param>
+        /// <param name="parameter">Not used.</param>
         /// <param name="culture">Not used.</param>
-        /// <returns>A <see cref="SolidColorBrush"/> object.</returns>
-        /// <remarks>
-        /// This is not a converter in the usual sense. It is used from inside a trigger; we already know the value that
-        /// causes the trigger to activate. Based on the parameter passed here, we supply a brush which is based on user preference.
-        /// </remarks>
+        /// <returns>A SolidColorBrush</returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            TriggerToBrushOptions key = (parameter is TriggerToBrushOptions) ? (TriggerToBrushOptions)parameter : TriggerToBrushOptions.None;
-            switch (key)
+            if (value is Color color)
             {
-                case TriggerToBrushOptions.Published:
-                    return new SolidColorBrush(Config.Instance.ColorPublishedTitle);
-                case TriggerToBrushOptions.Submitted:
-                    return new SolidColorBrush(Config.Instance.ColorSubmittedTitle);
-                case TriggerToBrushOptions.Period:
-                    return new SolidColorBrush(Config.Instance.ColorPeriodPublisher);
-                default:
-                    return new SolidColorBrush(Colors.LightGray);
+                return new SolidColorBrush(color);
             }
+            return new SolidColorBrush(Colors.Black);
         }
 
         /// <summary>
@@ -75,6 +62,5 @@ namespace Restless.App.Panama.Converters
             return this;
         }
         #endregion
-
     }
 }

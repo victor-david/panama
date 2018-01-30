@@ -54,7 +54,7 @@ namespace Restless.App.Panama.ViewModel
         {
             this.ops = ops;
             DisplayName = String.Format("{0} {1} Command Tools", ApplicationInfo.Instance.Assembly.Title, ApplicationInfo.Instance.Assembly.VersionMajor);
-            RawCommands.Add("Close", (o) => { Owner.Close(); });
+            Commands.Add("Close", (o) => { Owner.Close(); });
             Status = String.Empty;
             AddToStatus("Performing requested operations", true);
             IsCompleted = false;

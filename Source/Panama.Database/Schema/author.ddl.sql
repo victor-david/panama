@@ -1,5 +1,5 @@
 CREATE TABLE "author" (
   "id" INTEGER PRIMARY KEY NOT NULL, 
-  "name" VARCHAR(80) NOT NULL,
+  "name" TEXT NOT NULL,
   "isdefault" BOOLEAN DEFAULT 0
 );

@@ -9,10 +9,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
-    <Control.Resources>
-        <ResourceDictionary Source="../Resources/Merged.xaml" />
-    </Control.Resources>
-    
     <Grid>
         <Grid.ColumnDefinitions>
             <!-- MaxWidth binds to a value relative to the width of the grid. Converter parm is the desired min width of right column -->
@@ -25,13 +21,14 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!-- Controls specific to this view (no commands) -->
-        <!--<ItemsControl Style="{StaticResource ICMenuItems}" ItemsSource="{Binding Path=VisualCommands}"/>-->
+        <!--<ItemsControl Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>-->
         <view:SimpleRowFilter />
 
-        <!-- Main data grid to display the tabular data              SortingCommand="{Binding RawCommands[GridSorting]}"-->
+        <!-- Main data grid to display the tabular data -->
         <con:DataGridExtended 
             x:Name="grid"
             Grid.Row="1" Grid.Column="0"
+            RowHeight="{Binding Config.DataGridRowHeight}"
             ItemsSource="{Binding Path=MainSource.View}"
             SelectedItem="{Binding SelectedItem}"
 

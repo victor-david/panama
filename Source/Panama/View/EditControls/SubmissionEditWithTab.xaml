@@ -5,17 +5,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:vw="clr-namespace:Restless.App.Panama.View"
+    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="498">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <con:TabControlExtended>
         <TabControl.Items>
             <!-- Main data: flags, fees, notes -->
-            <TabItem Header="Data">
+            <TabItem Header="{x:Static r:Strings.HeaderData}">
                 <DockPanel>
                     <Label DockPanel.Dock="Top">Flags</Label>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="8,0">
@@ -42,7 +40,7 @@
                 </DockPanel>
             </TabItem>
             <!-- Submitted and response dates  -->
-            <TabItem Header="Dates">
+            <TabItem Header="{x:Static r:Strings.HeaderDates}">
                 <StackPanel>
                     <Expander Header="{Binding Submitted.Header}" IsExpanded="False">
                         <con:CalendarExtended SelectedDate="{Binding Submitted.SubmittedDate}" DisplayDate="{Binding Submitted.DisplayDate,Mode=OneWay}" HorizontalAlignment="Left"/>
@@ -82,42 +80,51 @@
                     </DataGrid>
                     <ToolBarTray>
                         <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                            <Button Command="{Binding Titles.RawCommands[MoveUp]}" Content="{StaticResource ImageArrowUpTool}" ToolTip="Move up"/>
-                            <Button Command="{Binding Titles.RawCommands[MoveDown]}" Content="{StaticResource ImageArrowDownTool}" ToolTip="Move down"/>
+                            <Button Command="{Binding Titles.Commands[MoveUp]}" Content="{StaticResource ImageArrowUpTool}" ToolTip="Move up"/>
+                            <Button Command="{Binding Titles.Commands[MoveDown]}" Content="{StaticResource ImageArrowDownTool}" ToolTip="Move down"/>
                             <Separator/>
-                            <Button Command="{Binding Titles.RawCommands[SetStatusAccepted]}" Content="Accepted" ToolTip="Set the status of the selected title to accepted"/>
-                            <Button Command="{Binding Titles.RawCommands[SetStatusWithdrawn]}" Content="Withdrawn" ToolTip="Set the status of the selected title to withdrawn"/>
-                            <Button Command="{Binding Titles.RawCommands[ResetStatus]}" Content="Reset" ToolTip="Reset the status of the selected title"/>
+                            <Button Command="{Binding Titles.Commands[SetStatusAccepted]}" Content="Accepted" ToolTip="Set the status of the selected title to accepted"/>
+                            <Button Command="{Binding Titles.Commands[SetStatusWithdrawn]}" Content="Withdrawn" ToolTip="Set the status of the selected title to withdrawn"/>
+                            <Button Command="{Binding Titles.Commands[ResetStatus]}" Content="Reset" ToolTip="Reset the status of the selected title"/>
                             <Separator/>
-                            <Button Command="{Binding Titles.RawCommands[RemoveFromSubmission]}" Content="Remove" ToolTip="Remove the selected title from the submission (does not affect the file system)"/>
+                            <Button Command="{Binding Titles.Commands[RemoveFromSubmission]}" Content="Remove" ToolTip="Remove the selected title from the submission (does not affect the file system)"/>
                             <Separator/>
-                            <Button Command="{Binding Titles.RawCommands[CopyToClipboard]}" Content="Copy" ToolTip="Copy the list of titles to the clipboard"/>
+                            <Button Command="{Binding Titles.Commands[CopyToClipboard]}" Content="Copy" ToolTip="Copy the list of titles to the clipboard"/>
                         </ToolBar>
                     </ToolBarTray>
                 </StackPanel>
             </TabItem>
             <!-- Documents -->
             <TabItem Header="{Binding Documents.Header}">
-                <StackPanel>
-                    <DataGrid x:Name="grid2" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Documents.DataView}" SelectedItem="{Binding Documents.SelectedItem}" con:DataGridColumns.Columns="{Binding Documents.Columns}">
+                <DockPanel>
+                    <DataGrid DockPanel.Dock="Top" x:Name="grid2" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Documents.DataView}" SelectedItem="{Binding Documents.SelectedItem}" con:DataGridColumns.Columns="{Binding Documents.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
                                 <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid2, Path=DataContext.Documents.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
                     </DataGrid>
-                    <ToolBarTray>
+                    <ToolBarTray DockPanel.Dock="Top">
                         <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                            <Button Command="{Binding RawCommands[DocumentAdd]}" Content="Create" ToolTip="Create a document to associate with this submission"/>
-                            <Button Command="{Binding RawCommands[DocumentReplace]}" Content="Replace" ToolTip="Replace the selected document with another file"/>
-                            <Button Command="{Binding RawCommands[DocumentRemove]}" Content="Remove" ToolTip="Remove the selected document (does not affect the file system)"/>
+                            <Button Command="{Binding Commands[DocumentAdd]}" Content="Create" ToolTip="Create a document to associate with this submission"/>
+                            <Button Command="{Binding Commands[DocumentReplace]}" Content="Replace" ToolTip="Replace the selected document with another file"/>
+                            <Button Command="{Binding Commands[DocumentRemove]}" Content="Remove" ToolTip="Remove the selected document (does not affect the file system)"/>
                         </ToolBar>
                     </ToolBarTray>
-                    <StackPanel Margin="0,8" Visibility="{Binding Documents.EditVisibility}">
-                        <Label>Document title</Label>
-                        <TextBox Text="{Binding Documents.SelectedRow[title]}"/>
-                    </StackPanel>
-                </StackPanel>
+                    <DockPanel DockPanel.Dock="Top" Margin="0,8" Visibility="{Binding Documents.EditVisibility}">
+                        <Label DockPanel.Dock="Top">Document title</Label>
+                        <TextBox DockPanel.Dock="Top" Text="{Binding Documents.SelectedRow[title]}"/>
+                        <Expander DockPanel.Dock="Top" Header="{x:Static r:Strings.HeaderPreview}" IsExpanded="{Binding Documents.IsPreviewMode}">
+                            <DockPanel VerticalAlignment="Stretch">
+                                <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockError}" Margin="8" VerticalAlignment="Top" Visibility="{Binding Documents.IsOpenXml,Converter={cv:BooleanToVisibilityConverter},ConverterParameter={StaticResource BooleanFalseToVisibility}}">
+                        The text for this document cannot be displayed. Only Open Xml documents are supported.
+                                </TextBlock>
+                                <TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Margin="4,8" Text="{Binding Documents.PreviewText,Mode=OneWay}" Visibility="{Binding Documents.IsOpenXml,Converter={cv:BooleanToVisibilityConverter}}"/>
+                            </DockPanel>
+                            <!--<TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Margin="4,8" Text="{Binding Documents.PreviewText,Mode=OneWay}" Visibility="{Binding Documents.IsOpenXml,Converter={cv:BooleanToVisibilityConverter}}"/>-->
+                        </Expander>
+                    </DockPanel>
+                </DockPanel>
             </TabItem>
             <!-- Messages -->
             <TabItem Header="{Binding Messages.Header}">
@@ -131,8 +138,8 @@
                     </DataGrid>
                     <ToolBarTray DockPanel.Dock="Top">
                         <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                            <Button Command="{Binding RawCommands[SelectMessage]}" Content="Add"/>
-                            <Button Command="{Binding RawCommands[RemoveMessage]}" Content="Remove"/>
+                            <Button Command="{Binding Commands[SelectMessage]}" Content="Add"/>
+                            <Button Command="{Binding Commands[RemoveMessage]}" Content="Remove"/>
                         </ToolBar>
                     </ToolBarTray>
 

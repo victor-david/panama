@@ -776,6 +776,33 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data Grid.
+        /// </summary>
+        public static string ConfigDataGrid {
+            get {
+                return ResourceManager.GetString("ConfigDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Row alternation.
+        /// </summary>
+        public static string ConfigDataGridRowAlternation {
+            get {
+                return ResourceManager.GetString("ConfigDataGridRowAlternation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Row height.
+        /// </summary>
+        public static string ConfigDataGridRowHeight {
+            get {
+                return ResourceManager.GetString("ConfigDataGridRowHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Success. All eligible version files renamed..
         /// </summary>
         public static string ConfirmationAllVersionFilesRenamed {
@@ -1095,6 +1122,24 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data.
+        /// </summary>
+        public static string HeaderData {
+            get {
+                return ResourceManager.GetString("HeaderData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dates.
+        /// </summary>
+        public static string HeaderDates {
+            get {
+                return ResourceManager.GetString("HeaderDates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Documents.
         /// </summary>
         public static string HeaderDocuments {
@@ -1113,11 +1158,74 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
+        public static string HeaderPreview {
+            get {
+                return ResourceManager.GetString("HeaderPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Published.
         /// </summary>
         public static string HeaderPublished {
             get {
                 return ResourceManager.GetString("HeaderPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date Format.
+        /// </summary>
+        public static string HeaderSettingsDateFormat {
+            get {
+                return ResourceManager.GetString("HeaderSettingsDateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folders.
+        /// </summary>
+        public static string HeaderSettingsFolder {
+            get {
+                return ResourceManager.GetString("HeaderSettingsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colors.
+        /// </summary>
+        public static string HeaderSettingsSectionColor {
+            get {
+                return ResourceManager.GetString("HeaderSettingsSectionColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folders.
+        /// </summary>
+        public static string HeaderSettingsSectionFolder {
+            get {
+                return ResourceManager.GetString("HeaderSettingsSectionFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string HeaderSettingsSectionGeneral {
+            get {
+                return ResourceManager.GetString("HeaderSettingsSectionGeneral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission.
+        /// </summary>
+        public static string HeaderSettingsSectionSubmission {
+            get {
+                return ResourceManager.GetString("HeaderSettingsSectionSubmission", resourceCulture);
             }
         }
         
@@ -1547,6 +1655,33 @@ namespace Restless.App.Panama.Resources {
         public static string TextWritten {
             get {
                 return ResourceManager.GetString("TextWritten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display drop down colors in alphabetical order.
+        /// </summary>
+        public static string TooltipColorAlpha {
+            get {
+                return ResourceManager.GetString("TooltipColorAlpha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display drop down colors in order of hue, saturation and brightness.
+        /// </summary>
+        public static string TooltipColorHSB {
+            get {
+                return ResourceManager.GetString("TooltipColorHSB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset all colors to their default values.
+        /// </summary>
+        public static string TooltipColorReset {
+            get {
+                return ResourceManager.GetString("TooltipColorReset", resourceCulture);
             }
         }
         

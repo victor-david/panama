@@ -238,18 +238,18 @@ namespace Restless.App.Panama.ViewModel
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
             AddViewSourceSortDescriptions();
-            RawCommands.Add("TitleFilter", (o) =>
+            Commands.Add("TitleFilter", (o) =>
                 {
                     filterIsVisible = !filterIsVisible;
                     OnPropertyChanged(nameof(TitleFilterVisibility));
                 });
 
             /* This command is used from this model and from the Filters controller */
-            RawCommands.Add("ClearFilter", (o) => { Filters.ClearAll(); }, (o) => { return Config.TitleFilter.IsAnyFilterActive; });
-            RawCommands.Add("ExtractTitle", RunExtractTitle, CanRunExtractTitle);
+            Commands.Add("ClearFilter", (o) => { Filters.ClearAll(); }, (o) => { return Config.TitleFilter.IsAnyFilterActive; });
+            Commands.Add("ExtractTitle", RunExtractTitle, CanRunExtractTitle);
 
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddTitle, Strings.CommandAddTitleTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, RawCommands["ClearFilter"], ResourceHelper.Get("ImageFilter"), VisualCommandImageSize, VisualCommandFontSize));
+            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], ResourceHelper.Get("ImageFilter"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandOpenTitleOrDoubleClick, OpenRowCommand, "ImageOpenWordMenu");

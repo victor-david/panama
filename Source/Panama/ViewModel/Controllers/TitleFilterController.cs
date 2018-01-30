@@ -104,9 +104,9 @@ namespace Restless.App.Panama.ViewModel
             filter = new StringBuilder(512);
             filterDesc = new StringBuilder(512);
 
-            RawCommands.Add("SelectFolder", RunSelectFolderCommand);
-            RawCommands.Add("ClearFolder", RunClearFolderCommand, CanRunClearFolderCommand);
-            RawCommands.Add("ClearFilterTags", (o) => { ClearTags(); }, (o) => { return Config.TitleFilter.IsTagFilterActive; });
+            Commands.Add("SelectFolder", RunSelectFolderCommand);
+            Commands.Add("ClearFolder", RunClearFolderCommand, CanRunClearFolderCommand);
+            Commands.Add("ClearFilterTags", (o) => { ClearTags(); }, (o) => { return Config.TitleFilter.IsTagFilterActive; });
             Config.TitleFilter.Changed += TitleFilterChanged;
         }
         #endregion

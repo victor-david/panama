@@ -1,0 +1,30 @@
+﻿<UserControl 
+    x:Class="Restless.App.Panama.Controls.FolderEdit"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d" 
+    Name="PART_Control"
+    d:DesignHeight="70" d:DesignWidth="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock 
+            Grid.Column="0" Grid.Row="0"
+            Style="{StaticResource TextBlockLabel}"
+            Text="{Binding Title, ElementName=PART_Control}"/>
+        <TextBox 
+            Grid.Column="0" Grid.Row="1"
+            Style="{StaticResource TextBoxFolderName}"
+            Text="{Binding Folder, ElementName=PART_Control}"/>
+        <Button Grid.Column="1" Grid.Row="1" MinWidth="92" Margin="8" VerticalAlignment="Center" Click="ButtonChangeClick">Change</Button>
+    </Grid>
+</UserControl>

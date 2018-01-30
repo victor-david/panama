@@ -99,6 +99,12 @@ namespace Restless.App.Panama.Database.Tables
                     public const string CurrentSubCount = "CalcCurrSubCount";
 
                     /// <summary>
+                    /// The name of the is-submitted. This calculated column
+                    /// holds a boolean value that indicates if the title is currently submitted.
+                    /// </summary>
+                    public const string IsSubmitted = "CalcIsSubmitted";
+
+                    /// <summary>
                     /// The name of the published count column. This calculated column
                     /// holds the number of times a title has been published, as per the <see cref="PublishedTable"/>.
                     /// </summary>
@@ -106,7 +112,7 @@ namespace Restless.App.Panama.Database.Tables
 
                     /// <summary>
                     /// The name of the is-published column. This calculated column
-                    /// holds a boolean value that indicates if a title has aby related records in the <see cref="PublishedTable"/>.
+                    /// holds a boolean value that indicates if a title has any related records in the <see cref="PublishedTable"/>.
                     /// </summary>
                     public const string IsPublished = "CalcIsPublished";
                 }
@@ -223,6 +229,9 @@ namespace Restless.App.Panama.Database.Tables
 
             expr = String.Format("Sum(Child({0}).{1})", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Calculated.CurrentSubCount);
             CreateExpressionColumn<Int64>(Defs.Columns.Calculated.CurrentSubCount, expr);
+
+            expr = String.Format("Sum(Child({0}).{1}) > 0", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Calculated.CurrentSubCount);
+            CreateExpressionColumn<bool>(Defs.Columns.Calculated.IsSubmitted, expr);
 
             CreateActionExpressionColumn<DateTime>
                 (

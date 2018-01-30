@@ -1,0 +1,61 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Defines a style to use for HeaderedContentControl Border elements -->
+    <Style TargetType="Border" x:Key="HCCHeaderBorder">
+        <Setter Property="BorderBrush" Value="DarkGray" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Background" Value="{StaticResource HeaderBrush}"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="HCCContentBorder">
+        <Setter Property="BorderBrush" Value="DarkGray" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Margin" Value="3" />
+        <Setter Property="Padding" Value="3" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="HCCHeaderText" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Foreground" Value="#FF604040"/>
+    </Style>
+
+    <!-- Defines a style to use on HeaderedContentControl elements. -->
+    <Style TargetType="HeaderedContentControl">
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Border Style="{StaticResource HCCHeaderBorder}">
+                        <TextBlock Style="{StaticResource HCCHeaderText}" Text="{TemplateBinding Content}" />
+                    </Border>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="HeaderedContentControl">
+                    <Border Style="{StaticResource HCCContentBorder}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <DockPanel>
+                            <ContentPresenter DockPanel.Dock="Top"  ContentSource="Header" />
+                            <ContentPresenter ContentSource="Content" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="HeaderedContentControl" x:Key="HCCTool" BasedOn="{StaticResource {x:Type HeaderedContentControl}}">
+        <Setter Property="Margin" Value="4"/>
+        <Style.Resources>
+            <Style TargetType="DataGrid" BasedOn="{StaticResource {x:Type DataGrid}}">
+                <Setter Property="AutoGenerateColumns" Value="False"/>
+                <Setter Property="Margin" Value="0,3"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+</ResourceDictionary>

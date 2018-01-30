@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace Restless.App.Panama.Converters
 {
     /// <summary>
     /// Provides a converter that accepts a <see cref="DateTime"/> object and returns a formatted string.
     /// </summary>
-    public class DateToFormattedDateConverter : IValueConverter
+    public class DateToFormattedDateConverter : MarkupExtension, IValueConverter
     {
         #region Public methods
         /// <summary>
@@ -40,6 +41,16 @@ namespace Restless.App.Panama.Converters
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets the object that is set as the value of the target property for this markup extension. 
+        /// </summary>
+        /// <param name="serviceProvider">Object that can provide services for the markup extension.</param>
+        /// <returns>This object.</returns>
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
         }
         #endregion
     }

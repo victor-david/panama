@@ -17,6 +17,7 @@ using Restless.App.Panama.Resources;
 using Restless.Tools.Database.SQLite;
 using Restless.Tools.Utility;
 using Restless.App.Panama.View;
+using Restless.Tools.OpenXml;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -27,11 +28,45 @@ namespace Restless.App.Panama.ViewModel
     {
         #region Private
         private DocumentTypeTable documentTypeTable;
+        private bool isPreviewMode;
+        private bool isOpenXml;
+        private string previewText;
+        private string selectedFileName;
         #endregion
 
         /************************************************************************/
 
         #region Public properties
+        /// <summary>
+        /// Gets or sets a value that indicates if the controller is in document preview mode.
+        /// </summary>
+        public bool IsPreviewMode
+        {
+            get => isPreviewMode;
+            set
+            {
+                isPreviewMode = value;
+                DisplayPreviewIf();
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates if the selected document is Open Xml.
+        /// </summary>
+        public bool IsOpenXml
+        {
+            get => isOpenXml;
+            private set => SetProperty(ref isOpenXml, value);
+        }
+
+        /// <summary>
+        /// Gets the preview text for the selected document.
+        /// </summary>
+        public string PreviewText
+        {
+            get => previewText;
+            private set => SetProperty(ref previewText, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -60,14 +95,14 @@ namespace Restless.App.Panama.ViewModel
 
             documentTypeTable = DatabaseController.Instance.GetTable<DocumentTypeTable>();
 
-            Owner.RawCommands.Add("DocumentAdd", RunAddDocumentCommand, (o) =>
+            Owner.Commands.Add("DocumentAdd", RunAddDocumentCommand, (o) =>
                 {
                     return
                         Owner.SelectedRow != null &&
                         !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
                 });
 
-            Owner.RawCommands.Add("DocumentReplace", RunReplaceDocumentCommand, (o) =>
+            Owner.Commands.Add("DocumentReplace", RunReplaceDocumentCommand, (o) =>
             {
                 return
                     SelectedRow != null &&
@@ -75,7 +110,7 @@ namespace Restless.App.Panama.ViewModel
                     !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
             });
 
-            Owner.RawCommands.Add("DocumentRemove", RunRemoveDocumentCommand, (o) =>
+            Owner.Commands.Add("DocumentRemove", RunRemoveDocumentCommand, (o) =>
                 {
                     return
                         SelectedRow != null &&
@@ -106,13 +141,28 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
+        /// Called when the selected grid item changes
+        /// </summary>
+        protected override void OnSelectedItemChanged()
+        {
+            base.OnSelectedItemChanged();
+            IsOpenXml = false;
+            var row = SelectedRow;
+            if (row != null)
+            {
+                selectedFileName = row[SubmissionDocumentTable.Defs.Columns.DocId].ToString();
+                IsOpenXml = documentTypeTable.GetDocTypeFromFileName(selectedFileName) == DocumentTypeTable.Defs.Values.WordOpenXmlFileType;
+                DisplayPreviewIf();
+            }
+        }
+
+        /// <summary>
         /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the selected document.
         /// </summary>
         /// <param name="item">The <see cref="DataRowView"/> object of the selected row.</param>
         protected override void RunOpenRowCommand(object item)
         {
-            DataRowView view = item as DataRowView;
-            if (view != null)
+            if (item is DataRowView view)
             {
                 string docid = view.Row[SubmissionDocumentTable.Defs.Columns.DocId].ToString();
                 if (String.IsNullOrEmpty(docid))
@@ -139,6 +189,20 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
+
+        private void DisplayPreviewIf()
+        {
+            if (IsOpenXml && IsPreviewMode)
+            {
+                string fileName = Paths.SubmissionDocument.WithRoot(selectedFileName);
+                Execution.TryCatch(() =>
+                {
+                    PreviewText = OpenXmlDocument.Reader.GetText(fileName);
+                }, 
+                (ex) => { MainViewModel.CreateNotificationMessage(ex.Message); });
+            }
+        }
+
         private void RunAddDocumentCommand(object o)
         {
             if (!Directory.Exists(Config.Instance.FolderSubmissionDocument))
@@ -153,8 +217,7 @@ namespace Restless.App.Panama.ViewModel
             var select = WindowFactory.SubmissionDocumentSelect.Create();
             select.ShowDialog();
 
-            var vm = select.GetValue(WindowViewModel.ViewModelProperty) as SubmissionDocumentSelectWindowViewModel;
-            if (vm != null)
+            if (select.GetValue(WindowViewModel.ViewModelProperty) is SubmissionDocumentSelectWindowViewModel vm)
             {
                 switch (vm.CreateType)
                 {

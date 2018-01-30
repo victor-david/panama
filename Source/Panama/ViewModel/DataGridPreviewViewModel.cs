@@ -113,7 +113,7 @@ namespace Restless.App.Panama.ViewModel
         {
             IsPreviewActive = false;
             PreviewMode = PreviewMode.None;
-            RawCommands.Add("TogglePreview", (o) => 
+            Commands.Add("TogglePreview", (o) => 
             {
                 IsPreviewActive = !IsPreviewActive;
             });

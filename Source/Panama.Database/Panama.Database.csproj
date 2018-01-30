@@ -100,6 +100,9 @@
   <ItemGroup>
     <Compile Include="Database\IColumnRowImporter.cs" />
     <Compile Include="Database\DatabaseImporter.cs" />
+    <Compile Include="Database\Tables\ColorTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
     <Compile Include="Database\Tables\DummyTable.cs">
       <SubType>foo</SubType>
     </Compile>
@@ -191,8 +194,8 @@
   <ItemGroup>
     <Content Include="Schema\author.ddl.sql" />
     <Content Include="Schema\author.import.sql" />
+    <Content Include="Schema\color.ddl.sql" />
     <Content Include="Schema\config.ddl.sql" />
-    <Content Include="Schema\config.import.sql" />
     <Content Include="Schema\documenttype.import.sql" />
     <Content Include="Schema\documenttype.ddl.sql" />
     <Content Include="Schema\credential.ddl.sql" />

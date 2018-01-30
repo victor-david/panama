@@ -6,12 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="600">
-    <Control.Resources>
-        <ResourceDictionary Source="../Resources/Merged.xaml" />
-    </Control.Resources>
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{Binding Export.HeaderText,Mode=OneTime}"/>
-        <Button DockPanel.Dock="Top" Width="120" HorizontalAlignment="Left" Command="{Binding RawCommands[Begin]}" Content="Begin">
+        <Button DockPanel.Dock="Top" Width="120" HorizontalAlignment="Left" Command="{Binding Commands[Begin]}" Content="Begin">
             <Button.IsEnabled>
                 <MultiBinding Converter="{StaticResource BooleanToBooleanMultiConverter}" ConverterParameter="{StaticResource True}">
                     <Binding Path="Export.Scanner.IsRunning" />

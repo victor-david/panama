@@ -50,7 +50,7 @@ namespace Restless.App.Panama.ViewModel
         {
             DisplayName = Strings.CommandToolExport;
             MaxCreatable = 1;
-            RawCommands.Add("Begin", (o) =>
+            Commands.Add("Begin", (o) =>
             {
                 Export.Run();
             });

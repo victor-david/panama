@@ -105,16 +105,16 @@ namespace Restless.App.Panama.ViewModel
             previewColumns.Add(Columns.Create("Comment", WindowsSearchResult.GetBindingReference(SysProps.System.Comment)));
             previewColumns.Add(Columns.Create("Company", WindowsSearchResult.GetBindingReference(SysProps.System.Company)));
 
-            RawCommands.Add("Begin", RunSearchCommand);
-            RawCommands.Add("OpenItem", RunOpenItemCommand, CanRunCommandIfRowSelected);
-            RawCommands.Add("GoToTitleRecord", RunGoToTitleRecordCommand, CanRunGoToTitleRecordCommand);
-            RawCommands.Add("DeleteItem", RunDeleteItemCommand, CanRunDeleteItemCommand);
+            Commands.Add("Begin", RunSearchCommand);
+            Commands.Add("OpenItem", RunOpenItemCommand, CanRunCommandIfRowSelected);
+            Commands.Add("GoToTitleRecord", RunGoToTitleRecordCommand, CanRunGoToTitleRecordCommand);
+            Commands.Add("DeleteItem", RunDeleteItemCommand, CanRunDeleteItemCommand);
             //RawCommands.Add("TogglePreview", (o) => { IsPreviewMode = !IsPreviewMode; });
 
-            MenuItems.AddItem(Strings.CommandOpenItemOrDoubleClick, RawCommands["OpenItem"], "ImageOpenFileMenu");
-            MenuItems.AddItem("Go to title record for this item", RawCommands["GoToTitleRecord"], "ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.CommandOpenItemOrDoubleClick, Commands["OpenItem"], "ImageOpenFileMenu");
+            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"], "ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem("Delete this item", RawCommands["DeleteItem"], "ImageDeleteMenu");
+            MenuItems.AddItem("Delete this item", Commands["DeleteItem"], "ImageDeleteMenu");
             UpdateFoundHeader();
             // init the search provider
             provider = new WindowsFileSearch();

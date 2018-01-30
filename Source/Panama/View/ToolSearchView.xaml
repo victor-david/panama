@@ -10,9 +10,6 @@
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="600">
-    <Control.Resources>
-        <ResourceDictionary Source="../Resources/Merged.xaml" />
-    </Control.Resources>
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationSearch}"/>
         <Grid DockPanel.Dock="Top">
@@ -26,13 +23,13 @@
             <StackPanel Grid.Column="0" DockPanel.Dock="Top" Style="{StaticResource StackPanelCommandHolder}">
                 <Label>Search text</Label>
                 <TextBox Text="{Binding SearchText}"/>
-                <Button Command="{Binding RawCommands[Begin]}" Content="Search" VerticalAlignment="Center"/>
+                <Button Command="{Binding Commands[Begin]}" Content="Search" VerticalAlignment="Center"/>
             </StackPanel>
             <Button
                 Grid.Column="1"
                 Style="{StaticResource ToolBarButton}"
                 HorizontalAlignment="Left"
-                Command="{Binding RawCommands[TogglePreview]}"
+                Command="{Binding Commands[TogglePreview]}"
                 Content="{Binding PreviewActiveIcon}" />
         </Grid>
         <Grid DockPanel.Dock="Top">
@@ -55,7 +52,7 @@
                         </DataGrid.ContextMenu>
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
-                                <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.RawCommands[OpenItem]}"/>
+                                <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenItem]}"/>
                             </Style>
                         </DataGrid.RowStyle>
                     </DataGrid>

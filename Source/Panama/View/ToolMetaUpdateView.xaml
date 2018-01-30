@@ -7,12 +7,9 @@
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="900">
-    <Control.Resources>
-        <ResourceDictionary Source="../Resources/Merged.xaml" />
-    </Control.Resources>
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationMetaUpdate}"/>
-        <Button DockPanel.Dock="Top" Width="120" HorizontalAlignment="Left" Command="{Binding RawCommands[Begin]}" Content="Begin">
+        <Button DockPanel.Dock="Top" Width="120" HorizontalAlignment="Left" Command="{Binding Commands[Begin]}" Content="Begin">
             <Button.IsEnabled>
                 <MultiBinding Converter="{StaticResource BooleanToBooleanMultiConverter}" ConverterParameter="{StaticResource True}">
                     <Binding Path="Versions.Scanner.IsRunning" />

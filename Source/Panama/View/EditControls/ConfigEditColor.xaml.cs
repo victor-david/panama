@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,15 +16,13 @@ using System.Windows.Shapes;
 namespace Restless.App.Panama.View
 {
     /// <summary>
-    /// Interaction logic for ConfigEdit.xaml
+    /// Interaction logic for ConfigEditColor.xaml
     /// </summary>
-    public partial class ConfigEdit : UserControl
+    public partial class ConfigEditColor : UserControl
     {
-        #pragma warning disable 1591
-        public ConfigEdit()
+        public ConfigEditColor()
         {
             InitializeComponent();
         }
-        #pragma warning restore 1591
     }
 }

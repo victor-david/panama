@@ -19,7 +19,7 @@ namespace Restless.App.Panama.Database.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Create {
@@ -63,9 +63,9 @@ namespace Restless.App.Panama.Database.Resources {
         /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE &quot;author&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
-        ///  &quot;name&quot; VARCHAR(80) NOT NULL,
+        ///  &quot;name&quot; TEXT NOT NULL,
         ///  &quot;isdefault&quot; BOOLEAN DEFAULT 0
-        ///);.
+        ///).
         /// </summary>
         internal static string Author {
             get {
@@ -74,12 +74,23 @@ namespace Restless.App.Panama.Database.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE &quot;color&quot; (
+        ///  &quot;id&quot; TEXT NOT NULL,
+        ///  &quot;foreground&quot; TEXT NOT NULL,
+        ///  &quot;background&quot; TEXT NOT NULL,
+        ///  PRIMARY KEY (&quot;id&quot;)
+        ///);.
+        /// </summary>
+        internal static string Color {
+            get {
+                return ResourceManager.GetString("Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE &quot;config&quot; (
         ///  &quot;id&quot; TEXT NOT NULL, 
-        ///  &quot;description&quot; TEXT NOT NULL, 
-        ///  &quot;type&quot; TEXT NOT NULL, 
         ///  &quot;value&quot; TEXT, 
-        ///  &quot;edit&quot; BOOLEAN DEFAULT 1, 
         ///  PRIMARY KEY (&quot;id&quot;)
         ///);.
         /// </summary>
@@ -92,9 +103,9 @@ namespace Restless.App.Panama.Database.Resources {
         /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE &quot;credential&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
-        ///  &quot;name&quot; VARCHAR(32) NOT NULL, 
-        ///  &quot;loginid&quot; VARCHAR(48) NOT NULL, 
-        ///  &quot;password&quot; VARCHAR(32) NOT NULL 
+        ///  &quot;name&quot; TEXT NOT NULL, 
+        ///  &quot;loginid&quot; TEXT NOT NULL, 
+        ///  &quot;password&quot; TEXT NOT NULL 
         ///);.
         /// </summary>
         internal static string Credential {
@@ -120,8 +131,8 @@ namespace Restless.App.Panama.Database.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE &quot;language&quot; (
-        ///  &quot;id&quot; VARCHAR(8) NOT NULL, 
-        ///  &quot;name&quot; VARCHAR(20) NOT NULL, 
+        ///  &quot;id&quot; TEXT NOT NULL, 
+        ///  &quot;name&quot; TEXT NOT NULL, 
         ///  PRIMARY KEY (&quot;id&quot;)
         ///);.
         /// </summary>
@@ -134,9 +145,9 @@ namespace Restless.App.Panama.Database.Resources {
         /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE &quot;link&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL,
-        ///  &quot;name&quot; VARCHAR(160) NOT NULL, 
-        ///  &quot;url&quot; VARCHAR(255) NOT NULL, 
-        ///  &quot;notes&quot; VARCHAR(255), 
+        ///  &quot;name&quot; TEXT NOT NULL, 
+        ///  &quot;url&quot; TEXT NOT NULL, 
+        ///  &quot;notes&quot; TEXT, 
         ///  &quot;credentialid&quot; INTEGER NOT NULL DEFAULT 0, 
         ///  &quot;added&quot; TIMESTAMP NOT NULL
         ///);
@@ -154,7 +165,7 @@ namespace Restless.App.Panama.Database.Resources {
         ///  &quot;titleid&quot; INTEGER NOT NULL,
         ///  &quot;publisherid&quot; INTEGER NOT NULL DEFAULT 0,
         ///  &quot;added&quot; TIMESTAMP NOT NULL,
-        ///  &quot;url&quot; VARCHAR(255),
+        ///  &quot;url&quot; TEXT,
         ///  &quot;notes&quot; TEXT
         ///);
         ///CREATE INDEX &quot;published_publisherid&quot; ON &quot;published&quot; (&quot;publisherid&quot;);
@@ -196,8 +207,8 @@ namespace Restless.App.Panama.Database.Resources {
         /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE &quot;response&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
-        ///  &quot;name&quot; VARCHAR(24), 
-        ///  &quot;description&quot; VARCHAR(255) 
+        ///  &quot;name&quot; TEXT, 
+        ///  &quot;description&quot; TEXT 
         ///);.
         /// </summary>
         internal static string Response {
@@ -239,8 +250,8 @@ namespace Restless.App.Panama.Database.Resources {
         ///   Looks up a localized string similar to CREATE TABLE &quot;submissionbatch&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
         ///  &quot;publisherid&quot; INTEGER, 
-        ///  &quot;fee&quot; INTEGER, 
-        ///  &quot;award&quot; INTEGER, 
+        ///  &quot;fee&quot; NUMERIC, 
+        ///  &quot;award&quot; NUMERIC, 
         ///  &quot;online&quot; BOOLEAN NOT NULL DEFAULT &apos;0&apos;, 
         ///  &quot;contest&quot; BOOLEAN NOT NULL DEFAULT &apos;0&apos;, 
         ///  &quot;locked&quot; BOOLEAN NOT NULL DEFAULT &apos;0&apos;, 
@@ -260,9 +271,9 @@ namespace Restless.App.Panama.Database.Resources {
         ///   Looks up a localized string similar to CREATE TABLE &quot;submissiondocument&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
         ///  &quot;submissionbatchid&quot; INTEGER NOT NULL, 
-        ///  &quot;title&quot; VARCHAR(255) NOT NULL, 
+        ///  &quot;title&quot; TEXT NOT NULL, 
         ///  &quot;doctype&quot; INTEGER NOT NULL, 
-        ///  &quot;docid&quot; VARCHAR(255), 
+        ///  &quot;docid&quot; TEXT, 
         ///  &quot;updated&quot; TIMESTAMP NOT NULL,
         ///  &quot;size&quot; INTEGER NOT NULL DEFAULT 0
         ///);.
@@ -301,8 +312,8 @@ namespace Restless.App.Panama.Database.Resources {
         ///   Looks up a localized string similar to CREATE TABLE &quot;submissionmessageattachment&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
         ///  &quot;messageid&quot; INTEGER NOT NULL, 
-        ///  &quot;display&quot; VARCHAR(255) NOT NULL, 
-        ///  &quot;filename&quot; VARCHAR(255) NOT NULL, 
+        ///  &quot;display&quot; TEXT NOT NULL, 
+        ///  &quot;filename&quot; TEXT NOT NULL, 
         ///  &quot;filesize&quot; INTEGER NOT NULL, 
         ///  &quot;type&quot; INTEGER NOT NULL DEFAULT 0 
         ///);
@@ -332,9 +343,9 @@ namespace Restless.App.Panama.Database.Resources {
         /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE &quot;tag&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
-        ///  &quot;tag&quot; VARCHAR(16) NOT NULL, 
-        ///  &quot;description&quot; VARCHAR(80) NOT NULL, 
-        ///  &quot;usagecount&quot; INTEGER NOT NULL DEFAULT 0 
+        ///  &quot;tag&quot; TEXT NOT NULL, 
+        ///  &quot;description&quot; TEXT NOT NULL, 
+        ///  &quot;usagecount&quot; INTEGER NOT NULL DEFAULT 0
         ///);.
         /// </summary>
         internal static string Tag {
@@ -346,7 +357,7 @@ namespace Restless.App.Panama.Database.Resources {
         /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE &quot;title&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
-        ///  &quot;title&quot; VARCHAR(128) NOT NULL, 
+        ///  &quot;title&quot; TEXT NOT NULL, 
         ///  &quot;written&quot; TIMESTAMP NOT NULL, 
         ///  &quot;authorid&quot; INTEGER NOT NULL DEFAULT 1, 
         ///  &quot;ready&quot; BOOLEAN DEFAULT 0 
@@ -396,7 +407,7 @@ namespace Restless.App.Panama.Database.Resources {
         /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE &quot;usernote&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
-        ///  &quot;title&quot; VARCHAR(128) NOT NULL, 
+        ///  &quot;title&quot; TEXT NOT NULL, 
         ///  &quot;created&quot; TIMESTAMP NOT NULL, 
         ///  &quot;note&quot; TEXT 
         ///);.

@@ -121,8 +121,25 @@
     <Compile Include="Config\Config.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Config\ConfigColor.cs" />
+    <Compile Include="Config\ConfigColors.cs" />
+    <Compile Include="Controls\ColorPicker\ColorItem.cs" />
+    <Compile Include="Controls\ColorPicker\ColorSorter.cs" />
+    <Compile Include="Controls\ColorPicker\ColorSortingMode.cs" />
+    <Compile Include="Controls\ColorPicker\ColorToBrushConverter.cs" />
+    <Compile Include="Controls\ColorPicker\ColorPicker.xaml.cs">
+      <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ColorPicker\ColorUtilities.cs" />
+    <Compile Include="Controls\ConfigEdit\FolderEdit.xaml.cs">
+      <DependentUpon>FolderEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConfigEdit\FolderEditType.cs" />
     <Compile Include="Controls\GridRowDisplay\GridRowDisplay.xaml.cs">
       <DependentUpon>GridRowDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConfigEdit\YesNoEdit.xaml.cs">
+      <DependentUpon>YesNoEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\PreviewModeToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -130,7 +147,6 @@
     <Compile Include="Converters\BooleanToVisibilityMultiConverterOptions.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverterOptions.cs" />
     <Compile Include="Converters\StringToMaskedStringConverter.cs" />
-    <Compile Include="Converters\TriggerToBrushOptions.cs" />
     <Compile Include="Filter\FilterBase.cs" />
     <Compile Include="Filter\PublisherFilter.cs" />
     <Compile Include="Filter\FilterState.cs" />
@@ -153,6 +169,7 @@
     <Compile Include="Converters\SubtractionConverter.cs" />
     <Compile Include="Other\ApplicationInfo.cs" />
     <Compile Include="Other\BindableBase.cs" />
+    <Compile Include="Other\GeneralOption.cs" />
     <Compile Include="Other\PreviewMode.cs" />
     <Compile Include="Other\TitleVersionRenameItem.cs" />
     <Compile Include="Other\DocumentPreviewer.cs" />
@@ -199,10 +216,9 @@
     <Compile Include="Controls\DataGrid\DataGridColumnCollection.cs" />
     <Compile Include="Controls\DataGrid\DataGridColumnExtensions.cs" />
     <Compile Include="Collections\MenuItemCollection.cs" />
-    <Compile Include="Collections\RawCommandDictionary.cs" />
+    <Compile Include="Collections\CommandDictionary.cs" />
     <Compile Include="Converters\DatesToDayDiffConverter.cs" />
     <Compile Include="Converters\ValueToBooleanConverter.cs" />
-    <Compile Include="Converters\TriggerToBrushConverter.cs" />
     <Compile Include="Converters\IntegerToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityMultiConverter.cs" />
     <Compile Include="Converters\ValueToDebugConverter.cs" />
@@ -267,6 +283,12 @@
     </Compile>
     <Compile Include="View\CredentialView.xaml.cs">
       <DependentUpon>CredentialView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\ConfigEditColor.xaml.cs">
+      <DependentUpon>ConfigEditColor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\ConfigEditColorPreview.xaml.cs">
+      <DependentUpon>ConfigEditColorPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditControls\CredentialEdit.xaml.cs">
       <DependentUpon>CredentialEdit.xaml</DependentUpon>
@@ -361,9 +383,6 @@
     <Compile Include="View\SubmissionView.xaml.cs">
       <DependentUpon>SubmissionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditControls\ConfigEdit.xaml.cs">
-      <DependentUpon>ConfigEdit.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\EditControls\PublisherEdit.xaml.cs">
       <DependentUpon>PublisherEdit.xaml</DependentUpon>
     </Compile>
@@ -388,57 +407,105 @@
     <Compile Include="View\Windows\WorkspaceWindow.xaml.cs">
       <DependentUpon>WorkspaceWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\ColorPicker\ColorPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ColorPicker\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ConfigEdit\FolderEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\GridRowDisplay\GridRowDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\Converters.xaml">
+    <Page Include="Controls\ConfigEdit\YesNoEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Controls.2.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\WorkspaceTemplateMapping.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\Windows.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\Values.xaml">
+    <Page Include="Resources\Dictionary\Converters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\App.Brushes.xaml">
+    <Page Include="Resources\Dictionary\Border.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Controls.1.xaml">
+    <Page Include="Resources\Dictionary\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\App.Images.xaml">
+    <Page Include="Resources\Dictionary\ControlDefault.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Main.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\Merged.xaml">
+    <Page Include="Resources\Dictionary\DataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Templates.xaml">
+    <Page Include="Resources\Dictionary\Grid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\App.Controls.xaml">
+    <Page Include="Resources\Dictionary\HeaderedContentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\HeaderedItemsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\ItemsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\ListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\StackPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\Tab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\TextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\ToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\PageTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Dictionary\Values.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\Brushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dictionary\Main.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\AuthorView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -451,6 +518,14 @@
     <Page Include="View\CredentialView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\ConfigEditColor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditControls\ConfigEditColorPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditControls\CredentialEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -575,10 +650,6 @@
     <Page Include="View\SubmissionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\EditControls\ConfigEdit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditControls\PublisherEdit.xaml">
       <SubType>Designer</SubType>

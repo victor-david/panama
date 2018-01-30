@@ -119,19 +119,19 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Start", SubmissionPeriodTable.Defs.Columns.Start).MakeDate("MMMM dd");
             Columns.Create("End", SubmissionPeriodTable.Defs.Columns.End).MakeDate("MMMM dd");
             Columns.Create("Note", SubmissionPeriodTable.Defs.Columns.Notes);
-            Owner.RawCommands.Add("PeriodAddShow", (o) => 
+            Owner.Commands.Add("PeriodAddShow", (o) => 
                 {
                     SetAddControlVisibility(true);
                     SetNotesVisibility(false);
                 },
                 (o) => { return AddControlVisibility != Visibility.Visible; }
             );
-            Owner.RawCommands.Add("PeriodRemove", RunRemoveSubmissionPeriodCommand, (o) => 
+            Owner.Commands.Add("PeriodRemove", RunRemoveSubmissionPeriodCommand, (o) => 
                 { return SelectedRow != null && AddControlVisibility != Visibility.Visible; });
-            Owner.RawCommands.Add("PeriodAddConfirm", RunAddSubmissionPeriodCommand);
-            Owner.RawCommands.Add("PeriodAddConfirmAllYear", RunAddSubmissionPeriodAllYearCommand);
+            Owner.Commands.Add("PeriodAddConfirm", RunAddSubmissionPeriodCommand);
+            Owner.Commands.Add("PeriodAddConfirmAllYear", RunAddSubmissionPeriodAllYearCommand);
 
-            Owner.RawCommands.Add("PeriodAddCancel", (o) => 
+            Owner.Commands.Add("PeriodAddCancel", (o) => 
             { 
                 SetAddControlVisibility(false);
                 SetNotesVisibility(SelectedItem != null);

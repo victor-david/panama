@@ -9,9 +9,6 @@
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="488" d:DesignWidth="515">
-    <Control.Resources>
-        <ResourceDictionary Source="../../Resources/Merged.xaml" />
-    </Control.Resources>
     <StackPanel>
         <HeaderedContentControl Header="Main Filters">
             <StackPanel>
@@ -20,8 +17,8 @@
                 <Label>Location</Label>
                 <StackPanel Style="{StaticResource StackPanelCommandHolder}">
                     <TextBox Text="{Binding Config.TitleFilter.Folder}" IsReadOnly="True" Width="300" Margin="6,1" />
-                    <Button Command="{Binding Filters.RawCommands[SelectFolder]}">Select</Button>
-                    <Button Command="{Binding Filters.RawCommands[ClearFolder]}">Clear</Button>
+                    <Button Command="{Binding Filters.Commands[SelectFolder]}">Select</Button>
+                    <Button Command="{Binding Filters.Commands[ClearFolder]}">Clear</Button>
                 </StackPanel>
                 <UniformGrid Rows="2" Columns="2"> 
                     <StackPanel>
@@ -74,13 +71,13 @@
                         <RadioButton GroupName="TagCombine" IsChecked="{Binding Config.TitleFilter.TagCombine,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterTagCombineAndNot}}">And Not</RadioButton>
                     </StackPanel>
                 </GroupBox>
-                <ItemsControl Style="{StaticResource ICTagItems}" ItemsSource="{Binding Filters.Available}" />
+                <ItemsControl Style="{StaticResource ItemsControlTag}" ItemsSource="{Binding Filters.Available}" />
             </StackPanel>
         </HeaderedContentControl>
         <StackPanel Style="{StaticResource StackPanelCommandHolder}" Margin="0,6">
-            <Button Content="Clear tags" Command="{Binding Filters.RawCommands[ClearFilterTags]}"/>
+            <Button Content="Clear tags" Command="{Binding Filters.Commands[ClearFilterTags]}"/>
             <!-- This command is defined in the owner because it is also used by another button -->
-            <Button Content="Clear all" Command="{Binding RawCommands[ClearFilter]}"/>
+            <Button Content="Clear all" Command="{Binding Commands[ClearFilter]}"/>
         </StackPanel>
         <HeaderedContentControl Header="Current filter">
             <TextBlock Style="{StaticResource TextBlockFilterDescription}" Text="{Binding Filters.Description}" />

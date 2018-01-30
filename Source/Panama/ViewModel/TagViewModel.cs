@@ -42,12 +42,12 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Description", TagTable.Defs.Columns.Description).MakeFlexWidth(2.5);
             Columns.Create("Usage", TagTable.Defs.Columns.UsageCount).MakeFixedWidth(FixedWidth.MediumNumeric);
             AddViewSourceSortDescriptions();
-            RawCommands.Add("RefreshTagUsage", (o) =>
+            Commands.Add("RefreshTagUsage", (o) =>
                 {
                     DatabaseController.Instance.GetTable<TagTable>().RefreshTagUsage();
                 });
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddTag, Strings.CommandAddTagTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandRefreshTagUsage, Strings.CommandRefreshTagUsageTooltip, RawCommands["RefreshTagUsage"], ResourceHelper.Get("ImageRefresh"), VisualCommandImageSize, VisualCommandFontSize));
+            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandRefreshTagUsage, Strings.CommandRefreshTagUsageTooltip, Commands["RefreshTagUsage"], ResourceHelper.Get("ImageRefresh"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandDeleteTag, DeleteCommand, "ImageDeleteMenu");

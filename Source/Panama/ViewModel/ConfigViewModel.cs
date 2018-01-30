@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Collections;
 using Restless.App.Panama.Controls;
@@ -9,196 +14,421 @@ using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Search;
 using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
+using ConfigDefault = Restless.App.Panama.Configuration.Config.Default;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
     /// Provides the logic that is used for application settings.
     /// </summary>
-    public class ConfigViewModel : DataGridViewModel<ConfigTable>
+    public class ConfigViewModel : WorkspaceViewModel
     {
         #region Private
+        private Int64 selectedSection;
+        private ObservableCollection<SampleTitle> sampleTitles;
+        private ObservableCollection<SamplePublisher> samplePublishers;
+
+        private ColorSortingMode colorSortingMode;
         #endregion
 
         /************************************************************************/
 
         #region Properties
         /// <summary>
-        /// Gets a visibility value that determines if the boolean edit control is visible.
+        /// Gets the sections list.
         /// </summary>
-        public Visibility BooleanTypeVisibility
+        public GeneralOptionList Sections
         {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Boolean); }
+            get;
+            private set;
         }
 
         /// <summary>
-        /// Gets a visibility value that determines if the string edit control is visible.
+        /// Gets the selected section.
         /// </summary>
-        public Visibility StringTypeVisibility
+        public Int64 SelectedSection
         {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.String); }
+            get => selectedSection;
+            private set => SetProperty(ref selectedSection, value);
         }
 
         /// <summary>
-        /// Gets a visibility value that determines if the string edit control is visible.
+        /// Gets the list of available date formats
         /// </summary>
-        public Visibility MultiStringTypeVisibility
+        public GeneralOptionList DateFormats
         {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.MultiString); }
+            get;
+            private set;
         }
 
         /// <summary>
-        /// Gets a visibility value that determines if the color edit control is visible.
+        /// Gets the list of sample titles used to preview color selections.
         /// </summary>
-        public Visibility ColorTypeVisibility
+        public ObservableCollection<SampleTitle> SampleTitles
         {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Color); }
+            get => sampleTitles;
+            private set => SetProperty(ref sampleTitles, value);
         }
 
         /// <summary>
-        /// Gets a visibility value that determines if the path edit control is visible.
+        /// Gets the list of sample titles used to preview color selections.
         /// </summary>
-        public Visibility PathTypeVisibility
+        public ObservableCollection<SamplePublisher> SamplePublishers
         {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Path, ConfigTable.Defs.Types.Mapi); }
+            get => samplePublishers;
+            private set => SetProperty(ref samplePublishers, value);
         }
 
         /// <summary>
-        /// Gets a visibility value that determines if the object view control is visible.
+        /// Gets a list of modes that may be used to sort the color palette.
         /// </summary>
-        public Visibility ObjectTypeVisibility
+        public GeneralOptionList ColorSortingModes
         {
-            get { return GetVisibilityForTypes(ConfigTable.Defs.Types.Object); }
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets or sets the mode used to sort the color pallete.
+        /// </summary>
+        public ColorSortingMode ColorSortingMode
+        {
+            get => colorSortingMode;
+            set
+            {
+                if (SetProperty(ref colorSortingMode, value))
+                {
+                    Config.ColorSortingMode = value;
+                }
+            }
+        }
+
+        public IEnumerable<int> DataGridRowHeight
+        {
+            get;
+            private set;
+        }
+
+        public IEnumerable<int> DataGridAlternation
+        {
+            get;
+            private set;
         }
         #endregion
 
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigViewModel"/> class.
+        /// </summary>
         public ConfigViewModel()
         {
             DisplayName = Strings.CommandConfig;
             MaxCreatable = 1;
-            RawCommands.Add("Apply",RunApplyCommand, CanRunApplyOrRevertCommand);
-            RawCommands.Add("Revert",RunRevertCommand, CanRunApplyOrRevertCommand);
-            RawCommands.Add("Path", RunFolderSelectCommand);
-            Columns.SetDefaultSort(Columns.Create("Id", ConfigTable.Defs.Columns.Id), ListSortDirection.Ascending);
-            Columns.Create("Description", ConfigTable.Defs.Columns.Description).MakeFlexWidth(2);
-            Columns.Create("Value", ConfigTable.Defs.Columns.Value).MakeSingleLine();
-#if !DEBUG
-            DataView.RowFilter = String.Format("{0}=1", ConfigTable.Defs.Columns.Edit);
-#endif
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandApplyConfig, Strings.CommandApplyConfigTooltip, RawCommands["Apply"], ResourceHelper.Get("ImageSave"), VisualCommandImageSize, VisualCommandFontSize));
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandRevertConfig, Strings.CommandRevertConfigTooltip, RawCommands["Revert"], ResourceHelper.Get("ImageUndo"), VisualCommandImageSize, VisualCommandFontSize));
-            DeleteCommand.Supported = CommandSupported.NoWithException;
-
+            Commands.Add("SwitchSection", RunSwitchSection);
+            Commands.Add("SwitchColorMode", RunSwitchColorMode);
+            Commands.Add("ResetColors", RunResetColorSelections);
+            Commands.Add("ColorChanged", RunSelectedColorChanged);
+            InitializeSections();
+            InitializeDateFormatOptions();
+            InitializeSampleTitles();
+            InitializeSamplePublications();
+            InitializeColorSettings();
+            InitializeRanges();
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
 
         #region Protected Methods
-        /// <summary>
-        /// Called when the selected item on the associated data grid has changed.
-        /// </summary>
-        protected override void OnSelectedItemChanged()
-        {
-            base.OnSelectedItemChanged();
-            OnPropertyChanged(nameof(BooleanTypeVisibility));
-            OnPropertyChanged(nameof(StringTypeVisibility));
-            OnPropertyChanged(nameof(MultiStringTypeVisibility));
-            OnPropertyChanged(nameof(ColorTypeVisibility));
-            OnPropertyChanged(nameof(PathTypeVisibility));
-            OnPropertyChanged(nameof(ObjectTypeVisibility));
-        }
         #endregion
 
         /************************************************************************/
 
         #region Private Methods
-        private Visibility GetVisibilityForTypes(params string[] types)
+
+        private void InitializeSections()
         {
-            if (SelectedRow != null)
+            Sections = new GeneralOptionList()
             {
-                foreach (string type in types)
-                {
-                    if (SelectedRow[ConfigTable.Defs.Columns.Type].ToString() == type)
-                    {
-                        return Visibility.Visible;
-                    }
-                }
-            }
-            return Visibility.Collapsed;
+                new GeneralOption() { IntValue = 1, Name = Strings.HeaderSettingsSectionGeneral, Command = Commands["SwitchSection"], CommandParm = 1 },
+                new GeneralOption() { IntValue = 2, Name = Strings.HeaderSettingsSectionFolder, Command = Commands["SwitchSection"], CommandParm = 2 },
+                new GeneralOption() { IntValue = 3, Name = Strings.HeaderSettingsSectionColor, Command = Commands["SwitchSection"], CommandParm = 3 },
+                new GeneralOption() { IntValue = 4, Name = Strings.HeaderSettingsSectionSubmission, Command = Commands["SwitchSection"], CommandParm = 4 }
+            };
+            RunSwitchSection(Config.SelectedConfigSection);
+            OnPropertyChanged(nameof(Sections));
         }
 
-        private void RunFolderSelectCommand(object o)
+        private void InitializeDateFormatOptions()
         {
-            if (SelectedRow != null)
+            string[] formats = {"MM-dd-yy", "MMM dd, yyyy", "dd-MMM-yyyy", "dd-MM-yy", "dd-MM-yyyy" };
+            DateFormats = new GeneralOptionList();
+            foreach (string format in formats)
             {
-                switch (SelectedRow[ConfigTable.Defs.Columns.Type].ToString())
+                DateFormats.AddObservable(new GeneralOption()
                 {
-                    case ConfigTable.Defs.Types.Path:
-                        SelectFolder();
-                        break;
-                    case ConfigTable.Defs.Types.Mapi:
-                        SelectMapiFolder();
-                        break;
-                }
+                    Value = format,
+                    Name = DateTime.Now.ToString(format),
+                    IsSelected = Config.DateFormat == format
+                });
             }
-        }
 
-        private void SelectFolder()
-        {
-            string dir = SelectedRow[ConfigTable.Defs.Columns.Value].ToString();
-            using (var dialog = CommonDialogFactory.Create(dir, "Select a directory", true))
+            DateFormats.IsSelectedChanged += (s, e) =>
             {
-                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                var op = (GeneralOption)s;
+                if (op.IsSelected)
                 {
-                    SelectedRow[ConfigTable.Defs.Columns.Value] = dialog.FileName;
-                    OnPropertyChanged(nameof(SelectedRow));
+                    Config.DateFormat = op.Value;
                 }
-            }
+                InitializeSampleTitles();
+            };
         }
 
-        private void SelectMapiFolder()
+        private void InitializeColorSettings()
         {
-            MessageSelectOptions ops = new MessageSelectOptions(MessageSelectMode.Folder, null);
-            var w = WindowFactory.MessageSelect.Create(Strings.CaptionSelectMapiFolder, ops);
-            w.ShowDialog();
-            var vm = w.GetValue(WindowViewModel.ViewModelProperty) as MessageSelectWindowViewModel;
-
-            if (vm != null && vm.SelectedItems != null)
+            ColorSortingMode = Config.ColorSortingMode;
+            ColorSortingModes = new GeneralOptionList()
             {
-                var result = vm.SelectedItems[0] as WindowsSearchResult;
-                if (result!= null)
+                new GeneralOption()
                 {
-                    string url = result.Values[SysProps.System.ItemUrl].ToString();
-                    // remove "mapi:" from string
-                    SelectedRow[ConfigTable.Defs.Columns.Value] = url.Remove(0, 5);
-                    OnPropertyChanged(nameof(SelectedRow));
+                    Name = "Alpha", Value = Strings.TooltipColorAlpha,
+                    Command = Commands["SwitchColorMode"], CommandParm = ColorSortingMode.Alpha
+                },
+                new GeneralOption()
+                {
+                    Name = "HSB", Value = Strings.TooltipColorHSB,
+                    Command = Commands["SwitchColorMode"], CommandParm= ColorSortingMode.HSB
                 }
+
+            };
+            RunSwitchColorMode(Config.ColorSortingMode);
+        }
+
+        private void InitializeSampleTitles()
+        {
+            SampleTitles = new ObservableCollection<SampleTitle>()
+            {
+                new SampleTitle(1, "Title #1", DateTime.Now.AddDays(-10), DateTime.Now.AddDays(-10), false, false),
+                new SampleTitle(2, "Title #2 (published)", DateTime.Now.AddDays(-20), DateTime.Now.AddDays(-17),true, false),
+                new SampleTitle(3, "Title #3", DateTime.Now.AddDays(-30), DateTime.Now.AddDays(-30), false, false),
+                new SampleTitle(4, "Title #4 (submitted)", DateTime.Now.AddDays(-40), DateTime.Now.AddDays(-7), false, true),
+                new SampleTitle(5, "Title #5", DateTime.Now.AddDays(-50), DateTime.Now.AddDays(-20), false, false),
+            };
+        }
+
+        private void InitializeSamplePublications()
+        {
+            SamplePublishers = new ObservableCollection<SamplePublisher>()
+            {
+                new SamplePublisher(1, "Publisher #1", DateTime.Now.AddDays(-60), DateTime.Now.AddDays(-10), false, false),
+                new SamplePublisher(2, "Publisher #2 (in period)", DateTime.Now.AddDays(-90), DateTime.Now.AddDays(-80), true, false),
+                new SamplePublisher(3, "Publisher #3", DateTime.Now.AddDays(-110), DateTime.Now.AddDays(-90), false, false),
+                new SamplePublisher(4, "Publisher #4 (goner)", DateTime.Now.AddDays(-150), DateTime.Now.AddDays(-148), false, true),
+                new SamplePublisher(5, "Publisher #5", DateTime.Now.AddDays(-160), DateTime.Now.AddDays(-5), false, false),
+            };
+        }
+
+        private void InitializeRanges()
+        {
+            DataGridRowHeight = Enumerable.Range(ConfigDefault.DataGrid.MinRowHeight, ConfigDefault.DataGrid.MaxRowHeight - ConfigDefault.DataGrid.MinRowHeight + 1);
+            DataGridAlternation = Enumerable.Range(ConfigDefault.DataGrid.MinAlternationCount, ConfigDefault.DataGrid.MaxAlternationCount - ConfigDefault.DataGrid.MinAlternationCount + 1);
+        }
+
+        private void RunSwitchSection(object parm)
+        {
+            int selected = (int)parm;
+            foreach (var section in Sections)
+            {
+                section.IsSelected = (section.IntValue == selected);
+            }
+            SelectedSection = selected;
+            Config.SelectedConfigSection = selected;
+        }
+
+        private void RunSwitchColorMode(object parm)
+        {
+            ColorSortingMode selected = (ColorSortingMode)parm;
+            foreach (var item in ColorSortingModes)
+            {
+                item.IsSelected = ((ColorSortingMode)item.CommandParm == selected);
+            }
+            ColorSortingMode = selected;
+        }
+
+        private void RunResetColorSelections(object parm)
+        {
+            Config.Colors.Reset();
+        }
+
+        private void RunSelectedColorChanged(object parm)
+        {
+            InitializeSampleTitles();
+            InitializeSamplePublications();
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Helper classes (used for color samples)
+        /// <summary>
+        /// Represents a sample title. Used to display configuration colors.
+        /// </summary>
+        public class SampleTitle
+        {
+            /// <summary>
+            /// Gets the id of the sample title.
+            /// </summary>
+            public Int64 Id
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Gets the title.
+            /// </summary>
+            public string Title
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Gets the date written.
+            /// </summary>
+            public DateTime Written
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Gets the date updated.
+            /// </summary>
+            public DateTime Updated
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Gets a value that indicates if the title is published.
+            /// </summary>
+            public bool CalcIsPublished
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Gets a value that indicates if the title is submitted.
+            /// </summary>
+            public bool CalcIsSubmitted
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="SampleTitle"/> class.
+            /// </summary>
+            /// <param name="id">The sample id.</param>
+            /// <param name="title">The title.</param>
+            /// <param name="written">The date the title was written.</param>
+            /// <param name="updated">The date the title was updated.</param>
+            /// <param name="isPublished">A boolean value that indicates if the title is published.</param>
+            /// <param name="isSubmitted">A boolean value that indicates if the title is submitted.</param>
+            public SampleTitle(Int64 id, string title, DateTime written, DateTime updated, bool isPublished, bool isSubmitted)
+            {
+                Id = id;
+                Title = title;
+                Written = written;
+                Updated = updated;
+                CalcIsPublished = isPublished;
+                CalcIsSubmitted = isSubmitted;
             }
         }
 
-        private void RunApplyCommand(object o)
+        /// <summary>
+        /// Represents a sample publisher. Used to display configuration colors.
+        /// </summary>
+        public class SamplePublisher
         {
-            Table.Save();
-        }
+            /// <summary>
+            /// Gets the id of the sample publisher.
+            /// </summary>
+            public Int64 Id
+            {
+                get;
+                private set;
+            }
 
-        private void RunRevertCommand(object o)
-        {
-            Table.RejectChanges();
-            OnSelectedItemChanged();
-        }
+            /// <summary>
+            /// Gets the name of the publisher.
+            /// </summary>
+            public string Name
+            {
+                get;
+                private set;
+            }
 
-        private bool CanRunApplyOrRevertCommand(object o)
-        {
-            var t = Table.GetChanges(System.Data.DataRowState.Modified);
-            return (t != null);
-        }
+            /// <summary>
+            /// Gets the date this publisher was added.
+            /// </summary>
+            public DateTime Added
+            {
+                get;
+                private set;
+            }
 
+            /// <summary>
+            /// Get the last submission date to this publisher.
+            /// </summary>
+            public DateTime LastSub
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Gets a value that indicates if the publisher is within their submission period.
+            /// </summary>
+            public bool CalcInPeriod
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Gets a value that indicates if the publisher has been flagged as a goner.
+            /// </summary>
+            public bool goner
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="SamplePublisher"/> class.
+            /// </summary>
+            /// <param name="id">The sample id.</param>
+            /// <param name="name">The name of the publisher.</param>
+            /// <param name="added">The date added.</param>
+            /// <param name="lastSub">The last submission date.</param>
+            /// <param name="isInPeriod">A boolean value that indicates if the publisher is within their submission period.</param>
+            /// <param name="isGoner">A boolean value that indicates if the publisher has been flagged as a goner.</param>
+            public SamplePublisher(Int64 id, string name, DateTime added, DateTime lastSub, bool isInPeriod, bool isGoner)
+            {
+                Id = id;
+                Name = name;
+                Added = added;
+                LastSub = lastSub;
+                CalcInPeriod = isInPeriod;
+                goner = isGoner;
+            }
+        }
         #endregion
     }
 }
