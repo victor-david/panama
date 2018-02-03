@@ -7,10 +7,6 @@
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     Height="600" Width="1060" ShowInTaskbar="False" 
     WindowStartupLocation="CenterOwner">
-
-    <!--<Window.Resources>
-        <ResourceDictionary Source="../../Resources/Windows.xaml" />
-    </Window.Resources>-->
     
     <Grid>
         <Grid.ColumnDefinitions>

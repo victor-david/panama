@@ -6,10 +6,6 @@
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
     Height="280" Width="960" ShowInTaskbar="False" ResizeMode="NoResize"
     WindowStartupLocation="CenterOwner">
-
-    <Window.Resources>
-        <ResourceDictionary Source="../../Resources/Windows.xaml" />
-    </Window.Resources>
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,7 +24,7 @@
         <StackPanel Grid.Column="0" Grid.Row="1" Style="{StaticResource StackPanelCommandHolder}">
             <Button Command="{Binding Commands[Rename]}">Rename</Button>
             <Button Command="{Binding Commands[Close]}">Close</Button>
-            <TextBlock Style="{StaticResource TextBlockError}" Text="{Binding OperationMessage}"/>
+            <TextBlock Style="{StaticResource TextBlockError}" VerticalAlignment="Center" Text="{Binding OperationMessage}"/>
         </StackPanel>
         
         

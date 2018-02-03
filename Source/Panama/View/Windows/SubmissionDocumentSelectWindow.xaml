@@ -3,9 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Create submission document" Height="212" Width="418" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
-    <Window.Resources>
-        <ResourceDictionary Source="../../Resources/Windows.xaml" />
-    </Window.Resources>    
+  
     <DockPanel>
         <DockPanel.Resources>
             <Style TargetType="TextBlock">

@@ -5,6 +5,7 @@
     <Style TargetType="StackPanel" x:Key="StackPanelCommandHolder">
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="4,2"/>
         <Style.Resources>
             <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                 <Setter Property="Margin" Value="2"/>

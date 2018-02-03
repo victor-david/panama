@@ -4,9 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     Title="{Binding DisplayName,Mode=OneTime}" Height="250" Width="690" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <ResourceDictionary Source="../../Resources/Windows.xaml" />
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />

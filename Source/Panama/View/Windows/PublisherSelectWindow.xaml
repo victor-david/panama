@@ -6,10 +6,6 @@
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
     Height="440" Width="520" ShowInTaskbar="False" ResizeMode="NoResize"
     WindowStartupLocation="CenterOwner">
-
-    <Window.Resources>
-        <ResourceDictionary Source="../../Resources/Windows.xaml" />
-    </Window.Resources>
     
     <Grid>
         <Grid.ColumnDefinitions>
