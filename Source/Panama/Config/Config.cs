@@ -195,42 +195,6 @@ namespace Restless.App.Panama.Configuration
             private set;
         }
 
-        ///// <summary>
-        ///// Gets the color object used to show a publisher marked as goner.
-        ///// </summary>
-        //public ConfigColor ColorGonerPublisher
-        //{
-        //    get;
-        //    private set;
-        //}
-
-        ///// <summary>
-        ///// Gets the color object used to show a publisher in a submission period.
-        ///// </summary>
-        //public ConfigColor ColorPeriodPublisher
-        //{
-        //    get;
-        //    private set;
-        //}
-
-        ///// <summary>
-        ///// Gets the color object used to show a published title.
-        ///// </summary>
-        //public ConfigColor ColorPublishedTitle
-        //{
-        //    get;
-        //    private set;
-        //}
-        
-        ///// <summary>
-        ///// Gets the color object used to show a submitted title.
-        ///// </summary>
-        //public ConfigColor ColorSubmittedTitle
-        //{
-        //    get;
-        //    private set;
-        //}
-
         /// <summary>
         /// Gets or sets the mode used to sort the color pallete.
         /// </summary>
@@ -246,8 +210,6 @@ namespace Restless.App.Panama.Configuration
                 SetItem(value.ToString());
             }
         }
-
-
 
         /// <summary>
         /// Gets or sets the folder for the export operation.
@@ -452,6 +414,18 @@ namespace Restless.App.Panama.Configuration
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// Gets or sets the filter value used on the submission tab.
+        /// This value is matched against either the name of the publisher
+        /// or the name of the response type. When this value starts with "-",
+        /// it filters for submissions that are active (no response date)
+        /// </summary>
+        public string SubmissionFilter
+        {
+            get => GetItem(null);
+            set => SetItem(value);
         }
         #endregion
 

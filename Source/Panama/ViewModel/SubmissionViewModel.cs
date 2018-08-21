@@ -117,6 +117,7 @@ namespace Restless.App.Panama.ViewModel
             Response = new SubmissionResponseController(this);
             Submitted = new SubmissionSubmittedController(this);
             FilterPrompt = Strings.FilterPromptSubmission;
+            FilterText = Config.SubmissionFilter;
             AddCommand.Supported = CommandSupported.NoWithException;
         }
         #pragma warning restore 1591
@@ -139,15 +140,34 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Protected Methods
+
+
         /// <summary>
         /// Called when the filter text has changed to set the filter on the underlying data.
         /// </summary>
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = String.Format("{0} LIKE '%{1}%' OR {2} LIKE '%{3}%'", 
-                SubmissionBatchTable.Defs.Columns.Joined.Publisher, text,
-                SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName, text);
+            string filter = String.Empty;
+            if (text.StartsWith("-"))
+            {
+                filter = $"{SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName} IS NULL";
+            }
+            else
+            {
+                filter = $"{SubmissionBatchTable.Defs.Columns.Joined.Publisher} LIKE '%{text}%' OR {SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName} LIKE '%{text}%'";
+            }
+            DataView.RowFilter = filter;
+            // Note: save FilterText, not text. When applied again, it will be sanitized.
+            Config.SubmissionFilter = FilterText;
+        }
+
+        /// <summary>
+        /// Called when the filter text is cleared.
+        /// </summary>
+        protected override void OnFilterTextCleared()
+        {
+            Config.SubmissionFilter = null;
         }
 
         /// <summary>

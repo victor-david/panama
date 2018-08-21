@@ -145,7 +145,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public string FilterText
         {
-            get { return filterText; }
+            get => filterText;
             set
             {
                 filterText = value;
@@ -156,6 +156,7 @@ namespace Restless.App.Panama.ViewModel
                 else
                 {
                     DataView.RowFilter = null;
+                    OnFilterTextCleared();
                 }
                 OnPropertyChanged();
             }
@@ -245,6 +246,14 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         /// <param name="text">The filter text as it should be applied to the row filter. This value has been cleaned by the FilterText setter</param>
         protected virtual void OnFilterTextChanged(string text)
+        {
+        }
+
+        /// <summary>
+        /// Override in a derived class to perform actions when the filter text is cleared.
+        /// The base implementation does nothing.
+        /// </summary>
+        protected virtual void OnFilterTextCleared()
         {
         }
 
