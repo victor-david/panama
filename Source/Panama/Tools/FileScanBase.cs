@@ -26,11 +26,8 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         public bool IsRunning
         {
-            get { return isRunning; }
-            protected set
-            {
-                SetProperty(ref isRunning, value);
-            }
+            get => isRunning; 
+            protected set => SetProperty(ref isRunning, value);
         }
 
         /// <summary>
@@ -38,11 +35,8 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         public int TotalCount
         {
-            get { return totalCount; }
-            protected set
-            {
-                SetProperty(ref totalCount, value);
-            }
+            get => totalCount;
+            protected set => SetProperty(ref totalCount, value);
         }
 
         /// <summary>
@@ -50,7 +44,7 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         public int ScanCount
         {
-            get { return scanCount; }
+            get => scanCount;
             protected set
             {
                 if (SetProperty(ref scanCount, value))
@@ -148,11 +142,7 @@ namespace Restless.App.Panama.Tools
         /// <param name="item">The item</param>
         protected void OnUpdated(FileScanDisplayObject item)
         {
-            var handler = Updated;
-            if (handler != null)
-            {
-                handler(this, new FileScanEventArgs(item));
-            }
+            Updated?.Invoke(this, new FileScanEventArgs(item));
         }
 
         /// <summary>
@@ -161,11 +151,7 @@ namespace Restless.App.Panama.Tools
         /// <param name="item">The item</param>
         protected void OnNotFound(FileScanDisplayObject item)
         {
-            var handler = NotFound;
-            if (handler != null)
-            {
-                handler(this, new FileScanEventArgs(item));
-            }
+            NotFound?.Invoke(this, new FileScanEventArgs(item));
         }
 
         /// <summary>
@@ -173,11 +159,7 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         protected void OnScanCountChanged()
         {
-            var handler = ScanCountChanged;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            ScanCountChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -185,11 +167,7 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         protected void OnCompleted()
         {
-            var handler = Completed;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            Completed?.Invoke(this, EventArgs.Empty);
         }
         #endregion
     }

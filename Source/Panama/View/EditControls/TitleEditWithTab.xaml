@@ -13,7 +13,7 @@
     <con:TabControlExtended SelectedIndex="{Binding SelectedTabIndex,Mode=OneWayToSource}">
         <TabControl.Items>
             <TabItem Header="{x:Static r:Strings.HeaderData}">
-                <StackPanel>
+                <StackPanel Margin="4">
                     <StackPanel Style="{StaticResource StackPanelCommandHolder}">
                         <Label>Title</Label>
                         <Label>
@@ -44,10 +44,10 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="{Binding Versions.Header}">
-                <view:TitleEditVersion Margin="-3,-3,0,-3" />
+                <view:TitleEditVersion Margin="2,4" />
             </TabItem>
             <TabItem Header="{Binding Submissions.Header}">
-                <StackPanel>
+                <StackPanel Margin="2,4">
                     <DataGrid 
                         Style="{StaticResource DataGridEdit}" 
                         ItemsSource="{Binding Path=Submissions.DataView}" 
@@ -62,10 +62,10 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="{Binding Published.Header}">
-                <view:TitleEditPublished/>
+                <view:TitleEditPublished Margin="2,4"/>
             </TabItem>
             <TabItem Header="{x:Static r:Strings.HeaderPreview}">
-                <DockPanel>
+                <DockPanel Margin="4">
                     <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockMessage}" Margin="0,2">Text of the latest version of this title</TextBlock>
                     <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockError}" Margin="8" VerticalAlignment="Top" Visibility="{Binding IsOpenXml,Converter={cv:BooleanToVisibilityConverter},ConverterParameter={StaticResource BooleanFalseToVisibility}}">
                         The text for the latest version of this title cannot be displayed. Only Open Xml documents are supported.
