@@ -14,8 +14,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public string GroupName
         {
-            get { return (string)GetValue(GroupNameProperty); }
-            set { SetValue(GroupNameProperty, value); }
+            get => (string)GetValue(GroupNameProperty);
+            set => SetValue(GroupNameProperty, value);
         }
 
         /// <summary>
@@ -31,8 +31,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public string Header
         {
-            get { return (string)GetValue(HeaderProperty); }
-            set { SetValue(HeaderProperty, value); }
+            get => (string)GetValue(HeaderProperty);
+            set => SetValue(HeaderProperty, value);
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public bool IsYes
         {
-            get { return (bool)GetValue(IsYesProperty); }
-            set { SetValue(IsYesProperty, value); }
+            get => (bool)GetValue(IsYesProperty);
+            set => SetValue(IsYesProperty, value);
         }
 
         /// <summary>
@@ -60,6 +60,9 @@ namespace Restless.App.Panama.Controls
                 "IsYes", typeof(bool), typeof(YesNoEdit), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
             );
 
+        /// <summary>
+        /// Gets a boolean value that indicates if the current value of the control is no.
+        /// </summary>
         public bool IsNo
         {
             get => !IsYes;

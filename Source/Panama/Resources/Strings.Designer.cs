@@ -1695,11 +1695,29 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Publisher is currently in one of its submission periods.
+        /// </summary>
+        public static string TooltipPublisherInPeriod {
+            get {
+                return ResourceManager.GetString("TooltipPublisherInPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The date that the last submission was created for this publisher.
         /// </summary>
         public static string TooltipPublisherLastSubmission {
             get {
                 return ResourceManager.GetString("TooltipPublisherLastSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publisher is a paying market.
+        /// </summary>
+        public static string TooltipPublisherPay {
+            get {
+                return ResourceManager.GetString("TooltipPublisherPay", resourceCulture);
             }
         }
         

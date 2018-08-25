@@ -92,8 +92,8 @@ namespace Restless.App.Panama.ViewModel
             DisplayName = Strings.CommandPublisher;
             MaxCreatable = 1;
             Columns.Create("Id", PublishedTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
-            Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod);
-            Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Paying, "ImageMoney");
+            Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod).AddToolTip(Strings.TooltipPublisherInPeriod);
+            Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Paying, "ImageMoney").AddToolTip(Strings.TooltipPublisherPay);
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
             Columns.Create("Url", PublisherTable.Defs.Columns.Url);
             Columns.SetDefaultSort(Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate()

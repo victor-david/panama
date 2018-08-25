@@ -115,6 +115,9 @@ namespace Restless.App.Panama
         /************************************************************************/
 
         #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeneralOption"/> class.
+        /// </summary>
         public GeneralOption()
         {
 

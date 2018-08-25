@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="542">
@@ -48,39 +49,74 @@
             </TabItem>
             <TabItem Header="Submissions">
                 <DockPanel>
-                    <Label DockPanel.Dock="Top">All batches</Label>
-                    <DataGrid DockPanel.Dock="Top" Style="{StaticResource DataGridEdit}" Height="160" ItemsSource="{Binding Path=Submissions.DataView}" SelectedItem="{Binding Submissions.SelectedItem}" con:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
-                    <!-- titles -->
-                    <Label DockPanel.Dock="Top">All titles</Label>
-                   
-                    <con:DataGridExtended 
-                        x:Name="grid"  DockPanel.Dock="Top" 
-                        Style="{StaticResource DataGridEdit}" 
-                        MaxHeight="{x:Static sys:Double.PositiveInfinity}" 
-                        ItemsSource="{Binding Path=Titles.MainSource.View}"
-                        SelectedItem="{Binding Titles.SelectedItem}"
-                        CanUserSortColumns="False"
-                        con:DataGridColumns.Columns="{Binding Titles.Columns}">
-                        <DataGrid.ContextMenu>
-                            <ContextMenu ItemsSource="{Binding Titles.MenuItems}"/>
-                        </DataGrid.ContextMenu>                        
-                        <DataGrid.RowStyle>
-                            <Style TargetType="DataGridRow">
-                                <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Titles.OpenRowCommand}"/>
-                            </Style>
-                        </DataGrid.RowStyle>
-                        <DataGrid.GroupStyle>
-                            <GroupStyle>
-                                <GroupStyle.HeaderTemplate>
-                                    <DataTemplate>
-                                        <Border Style="{StaticResource HCCHeaderBorder}">
-                                            <TextBlock Style="{StaticResource HCCHeaderText}" Text="{Binding Path=Name}" />
-                                        </Border>
-                                    </DataTemplate>
-                                </GroupStyle.HeaderTemplate>
-                            </GroupStyle>
-                        </DataGrid.GroupStyle>
-                    </con:DataGridExtended>
+                    <TextBlock 
+                        DockPanel.Dock="Top"
+                        Margin="0,24"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource TextBlockError}"
+                        Text="No submissions to this publisher"
+                        Visibility="{Binding Submissions.DataViewCount,Converter={cv:IntegerToVisibilityConverter},ConverterParameter={StaticResource Int32One}}"
+                        />
+                    <!-- submission batches -->
+                    <DockPanel 
+                        DockPanel.Dock="Top"
+                        Visibility="{Binding Submissions.DataViewCount,Converter={cv:IntegerToVisibilityConverter}}"
+                        >
+                        <TextBlock 
+                            DockPanel.Dock="Top" 
+                            Style="{StaticResource TextBlockLabel}" 
+                            Margin="4"
+                            Text="All batches"/>
+                            <DataGrid 
+                            DockPanel.Dock="Top" 
+                            Style="{StaticResource DataGridEdit}" 
+                            Height="160" 
+                            ItemsSource="{Binding Path=Submissions.DataView}" 
+                            SelectedItem="{Binding Submissions.SelectedItem}" 
+                            con:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
+                    </DockPanel>
+                    
+                    <!-- submission titles -->
+                    <DockPanel 
+                        DockPanel.Dock="Top"
+                        Visibility="{Binding Titles.DataViewCount,Converter={cv:IntegerToVisibilityConverter}}">
+
+                        <TextBlock 
+                            DockPanel.Dock="Top" 
+                            Style="{StaticResource TextBlockLabel}"
+                            Margin="4"
+                            Text="All titles"/>
+
+                        <con:DataGridExtended 
+                            x:Name="grid"  
+                            DockPanel.Dock="Top" 
+                            Style="{StaticResource DataGridEdit}" 
+                            MaxHeight="{x:Static sys:Double.PositiveInfinity}" 
+                            ItemsSource="{Binding Path=Titles.MainSource.View}"
+                            SelectedItem="{Binding Titles.SelectedItem}"
+                            CanUserSortColumns="False"
+                            con:DataGridColumns.Columns="{Binding Titles.Columns}">
+                            <DataGrid.ContextMenu>
+                                <ContextMenu ItemsSource="{Binding Titles.MenuItems}"/>
+                            </DataGrid.ContextMenu>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Titles.OpenRowCommand}"/>
+                                </Style>
+                            </DataGrid.RowStyle>
+                            <DataGrid.GroupStyle>
+                                <GroupStyle>
+                                    <GroupStyle.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Border Style="{StaticResource HCCHeaderBorder}">
+                                                <TextBlock Style="{StaticResource HCCHeaderText}" Text="{Binding Path=Name}" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </GroupStyle.HeaderTemplate>
+                                </GroupStyle>
+                            </DataGrid.GroupStyle>
+                        </con:DataGridExtended>
+                    </DockPanel>
                 </DockPanel>
             </TabItem>
             <TabItem Header="Credentials">

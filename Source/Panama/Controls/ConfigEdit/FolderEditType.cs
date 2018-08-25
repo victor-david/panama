@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Restless.App.Panama.Controls
 {
+    /// <summary>
+    /// Provide an enumeration that decribes the type of editable folder
+    /// </summary>
     public enum FolderEditType
     {
         /// <summary>

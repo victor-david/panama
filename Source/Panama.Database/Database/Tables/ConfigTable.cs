@@ -39,7 +39,7 @@ namespace Restless.App.Panama.Database.Tables
             }
 
             /// <summary>
-            /// Provides static names of values contained in the <see cref="Columns.Type"/> column.
+            /// Provides static names of values used to describe the configuration type.
             /// </summary>
             public static class Types
             {

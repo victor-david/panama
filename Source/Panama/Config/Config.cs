@@ -168,7 +168,9 @@ namespace Restless.App.Panama.Configuration
             set => SetItem(value);
         }
 
-
+        /// <summary>
+        /// Gets or sets the alternation count for data grids.
+        /// </summary>
         public int DataGridAlternationCount
         {
             get => GetItem(Default.DataGrid.AlternationCount);
@@ -188,7 +190,9 @@ namespace Restless.App.Panama.Configuration
             set => SetItem(value);
         }
 
-
+        /// <summary>
+        /// Gets the set of configuration colors.
+        /// </summary>
         public ConfigColors Colors
         {
             get;

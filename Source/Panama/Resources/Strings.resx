@@ -762,4 +762,10 @@ The application cannot continue.</value>
   <data name="ConfigDataGrid" xml:space="preserve">
     <value>Data Grid</value>
   </data>
+  <data name="TooltipPublisherInPeriod" xml:space="preserve">
+    <value>Publisher is currently in one of its submission periods</value>
+  </data>
+  <data name="TooltipPublisherPay" xml:space="preserve">
+    <value>Publisher is a paying market</value>
+  </data>
 </root>

@@ -28,11 +28,20 @@ namespace Restless.App.Panama.ViewModel
     public class PublisherSubmissionController : PublisherController
     {
         #region Private
+        private int dataViewCount;
         #endregion
 
         /************************************************************************/
-        
+
         #region Public properties
+        /// <summary>
+        /// Gets the count of rows in the data view. The view binds to this property
+        /// </summary>
+        public int DataViewCount
+        {
+            get => dataViewCount;
+            private set => SetProperty(ref dataViewCount, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -73,6 +82,7 @@ namespace Restless.App.Panama.ViewModel
         {
             Int64 publisherId = GetOwnerSelectedPrimaryId();
             DataView.RowFilter = String.Format("{0}={1}", SubmissionBatchTable.Defs.Columns.PublisherId, publisherId);
+            DataViewCount = DataView.Count;
         }
         #endregion
         

@@ -103,12 +103,18 @@ namespace Restless.App.Panama.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets the range of values used to set the data grid view row height.
+        /// </summary>
         public IEnumerable<int> DataGridRowHeight
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the range of values used to set the data grid view alternation count.
+        /// </summary>
         public IEnumerable<int> DataGridAlternation
         {
             get;

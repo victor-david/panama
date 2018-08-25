@@ -15,11 +15,20 @@ namespace Restless.App.Panama.ViewModel
     public class PublisherSubmissionTitleController : PublisherController
     {
         #region Private
+        private int dataViewCount;
         #endregion
 
         /************************************************************************/
-        
+
         #region Public properties
+        /// <summary>
+        /// Gets the count of rows in the data view. The view binds to this property
+        /// </summary>
+        public int DataViewCount
+        {
+            get => dataViewCount;
+            private set => SetProperty(ref dataViewCount, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -36,9 +45,10 @@ namespace Restless.App.Panama.ViewModel
             DataView.RowFilter = String.Format("{0}=-1", SubmissionTable.Defs.Columns.Joined.PublisherId);
             DataView.Sort = String.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
             Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
-            Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted).MakeDate();
+            //Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted).MakeDate();
             Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);
             Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written).MakeDate();
+            //AddDataGridViewColumns();
             Commands.Add("GoToTitleRecord", RunGoToTitleRecordCommand);
             MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"], "ImageBrowseToUrlMenu");
             AddViewSourceSortDescriptions();
@@ -62,6 +72,7 @@ namespace Restless.App.Panama.ViewModel
         {
             Int64 publisherId = GetOwnerSelectedPrimaryId();
             DataView.RowFilter = String.Format("{0}={1}", SubmissionTable.Defs.Columns.Joined.PublisherId, publisherId);
+            DataViewCount = DataView.Count;
         }
         #endregion
 
@@ -77,7 +88,10 @@ namespace Restless.App.Panama.ViewModel
             // and clicking on another parent (with children) does not change the columns.
             // If not grouped, still scrunched if the first clicked parent has no children, but subsequent clicks
             // on parents that do have children restore the columns.
-            // MainSource.GroupDescriptions.Add(new PropertyGroupDescription(SubmissionTable.Defs.Columns.Joined.Submitted, new DateToFormattedDateConverter()));
+            // UPDATE 2018-08-25:
+            //   Workaround implemented. By binding the visibility of the data grid to the child count (0=hidden, otherwise visible)
+            //   the columns display as they should.
+            MainSource.GroupDescriptions.Add(new PropertyGroupDescription(SubmissionTable.Defs.Columns.Joined.Submitted, new DateToFormattedDateConverter()));
             MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Submitted, ListSortDirection.Descending));
             MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Title, ListSortDirection.Ascending));
         }

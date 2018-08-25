@@ -5,13 +5,14 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Data;
+using System.Windows.Markup;
 
 namespace Restless.App.Panama.Converters
 {
     /// <summary>
     /// Provides a converter that accepts an integer value and returns a <see cref="Visibility"/> value.
     /// </summary>
-    public class IntegerToVisibilityConverter : IValueConverter
+    public class IntegerToVisibilityConverter : MarkupExtension, IValueConverter
     {
         #region Public methods
         /// <summary>
@@ -53,6 +54,17 @@ namespace Restless.App.Panama.Converters
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+
+        /// <summary>
+        /// Gets the object that is set as the value of the target property for this markup extension. 
+        /// </summary>
+        /// <param name="serviceProvider">Object that can provide services for the markup extension.</param>
+        /// <returns>This object.</returns>
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
         }
         #endregion
     } 

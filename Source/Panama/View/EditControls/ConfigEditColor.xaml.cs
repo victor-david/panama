@@ -20,6 +20,9 @@ namespace Restless.App.Panama.View
     /// </summary>
     public partial class ConfigEditColor : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigEditColor"/> class.
+        /// </summary>
         public ConfigEditColor()
         {
             InitializeComponent();
