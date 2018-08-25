@@ -290,11 +290,14 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void RunAddCommand()
         {
-            Table.AddDefaultRow();
-            Table.Save();
-            FilterText = null;
-            AddViewSourceSortDescriptions();
-            Columns.RestoreDefaultSort();
+            if (Messages.ShowYesNo(Strings.ConfirmationAddTitle))
+            {
+                Table.AddDefaultRow();
+                Table.Save();
+                Filters.ClearAll();
+                AddViewSourceSortDescriptions();
+                Columns.RestoreDefaultSort();
+            }
         }
 
         /// <summary>

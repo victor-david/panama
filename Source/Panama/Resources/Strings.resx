@@ -768,4 +768,9 @@ The application cannot continue.</value>
   <data name="TooltipPublisherPay" xml:space="preserve">
     <value>Publisher is a paying market</value>
   </data>
+  <data name="ConfirmationAddTitle" xml:space="preserve">
+    <value>This operation will add a new title record. If any title filters are in effect, they will be removed so that the new title displays in the list. 
+
+Do you want to continue?</value>
+  </data>
 </root>
