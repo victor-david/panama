@@ -773,4 +773,9 @@ The application cannot continue.</value>
 
 Do you want to continue?</value>
   </data>
+  <data name="ConfirmationAddPublisher" xml:space="preserve">
+    <value>This operation will add a new publisher record. If any publisher filters are in effect, they will be removed so that the new publisher displays in the list. 
+
+Do you want to continue?</value>
+  </data>
 </root>
