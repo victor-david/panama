@@ -899,6 +899,12 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Password.64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Filter.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Add.64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

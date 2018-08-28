@@ -27,7 +27,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <!--<view:SimpleRowFilter Grid.Column="0" HorizontalAlignment="Left" />-->
             <StackPanel Orientation="Horizontal">
                 <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding Filters.RecordCountText}"/>
                 <TextBlock Style="{StaticResource TextBlockMessage}" Visibility="{Binding Config.PublisherFilter.IsAnyFilterActive,Converter={cv:BooleanToVisibilityConverter}}"> - Row filter is in effect</TextBlock>
@@ -36,34 +35,37 @@
         </Grid>
 
         <!-- Main data grid to display the tabular data  -->
-        <con:DataGridExtended 
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
+            <con:DataGridExtended 
             x:Name="PublisherDataGrid" 
             Grid.Row="1" Grid.Column="0" 
             RowHeight="{Binding Config.DataGridRowHeight}"
             ItemsSource="{Binding Path=MainSource.View}" 
             SelectedItem="{Binding SelectedItem}"
             con:DataGridColumns.Columns="{Binding Columns}">
-            <DataGrid.RowStyle>
-                <!-- Base style contains all the triggers -->
-                <Style TargetType="DataGridRow" BasedOn="{StaticResource PublisherDataGridRowStyle}">
-                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=PublisherDataGrid, Path=DataContext.OpenRowCommand}"/>
-                </Style>
-            </DataGrid.RowStyle>
-            <DataGrid.ContextMenu>
-                <ContextMenu ItemsSource="{Binding MenuItems}"/>
-            </DataGrid.ContextMenu>
-        </con:DataGridExtended>
-
+                <DataGrid.RowStyle>
+                    <!-- Base style contains all the triggers -->
+                    <Style TargetType="DataGridRow" BasedOn="{StaticResource PublisherDataGridRowStyle}">
+                        <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=PublisherDataGrid, Path=DataContext.OpenRowCommand}"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                </DataGrid.ContextMenu>
+            </con:DataGridExtended>
+        </Border>
         <!-- Splitter -->
         <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource GridSplitterVertical}" />
 
-        <DockPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Margin="0,0,0,3">
-            <Expander DockPanel.Dock="Top" Header="Row Filter Options" IsExpanded="False">
-                <view:PublisherFilter Margin="4,12,4,0"/>
-            </Expander>
-            <!-- Nested editing control on the right -->
-            <view:PublisherEditWithTab DockPanel.Dock="Top" Margin="4,7,4,3" Visibility="{Binding EditVisibility}"/>
-        </DockPanel>
+        <ItemsControl Grid.Column="2" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=FilterCommands}"/>
+
+        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderGridContainer}">
+            <DockPanel>
+                <view:PublisherFilter DockPanel.Dock="Top" Visibility="{Binding FilterVisibility}"/>
+                <view:PublisherEditWithTab DockPanel.Dock="Top" Visibility="{Binding EditVisibility}"/>
+            </DockPanel>
+        </Border>
+
     </Grid>
     <!-- end main grid-->
 </UserControl>

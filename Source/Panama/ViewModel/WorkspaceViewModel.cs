@@ -51,10 +51,20 @@ namespace Restless.App.Panama.ViewModel
             get;
             protected set;
         }
+
         /// <summary>
         /// Returns a list of commands that the UI can display and execute.
         /// </summary>
         public List<VisualCommandViewModel> VisualCommands
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Returns a list of filter commands that the UI can display and execute.
+        /// </summary>
+        public List<VisualCommandViewModel> FilterCommands
         {
             get;
             private set;
@@ -91,7 +101,7 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Provides the standard font size for a visual command.
         /// </summary>
-        protected const double VisualCommandFontSize = 10.5;
+        protected const double VisualCommandFontSize = 11;
         #endregion
 
         /************************************************************************/
@@ -101,6 +111,8 @@ namespace Restless.App.Panama.ViewModel
         protected WorkspaceViewModel()
         {
             VisualCommands = new List<VisualCommandViewModel>();
+            FilterCommands = new List<VisualCommandViewModel>();
+
             Commands = new CommandDictionary();
             CloseCommand = new RelayCommand((o)=>
             {

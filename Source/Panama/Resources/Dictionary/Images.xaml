@@ -12,7 +12,7 @@
 
     <!-- Images -->
     <BitmapImage x:Key="ImageAccepted" UriSource="/Panama;component/Resources/Images/Image.Accepted.48.png"/>
-    <BitmapImage x:Key="ImageAdd" UriSource="/Panama;component/Resources/Images/Image.Add.48.png"/>
+    <BitmapImage x:Key="ImageAdd" UriSource="/Panama;component/Resources/Images/Image.Add.64.png"/>
     <BitmapImage x:Key="ImageArrowDown" UriSource="/Panama;component/Resources/Images/Image.Arrow.Down.48.png"/>
     <BitmapImage x:Key="ImageArrowLeft" UriSource="/Panama;component/Resources/Images/Image.Arrow.Left.48.png"/>
     <BitmapImage x:Key="ImageArrowRight" UriSource="/Panama;component/Resources/Images/Image.Arrow.Right.48.png"/>
@@ -51,7 +51,7 @@
     <!-- Type 9 is Html -->
     <BitmapImage x:Key="ImageFileType9" UriSource="/Panama;component/Resources/Images/Image.FileType.Html.48.png"/>
 
-    <BitmapImage x:Key="ImageFilter" UriSource="/Panama;component/Resources/Images/Image.Filter.48.png"/>
+    <BitmapImage x:Key="ImageFilter" UriSource="/Panama;component/Resources/Images/Image.Filter.64.png"/>
     <BitmapImage x:Key="ImageFolder" UriSource="/Panama;component/Resources/Images/Image.Folder.48.png"/>
     <BitmapImage x:Key="ImageInformation" UriSource="/Panama;component/Resources/Images/Image.Information.64.png"/>
     <BitmapImage x:Key="ImageMoney" UriSource="/Panama;component/Resources/Images/Image.Money.48.png"/>

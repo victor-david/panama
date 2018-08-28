@@ -126,6 +126,30 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
+        /// Sets the filter options to ready only.
+        /// </summary>
+        public void SetToReady()
+        {
+            ClearAndApplyAction(()=> Config.TitleFilter.Ready = FilterState.Yes);
+        }
+
+        /// <summary>
+        /// Sets the filter options to submitted only.
+        /// </summary>
+        public void SetToSubmitted()
+        {
+            ClearAndApplyAction(() => Config.TitleFilter.Submitted = FilterState.Yes);
+        }
+
+        /// <summary>
+        /// Sets the filter options to submitted only.
+        /// </summary>
+        public void SetToPublished()
+        {
+            ClearAndApplyAction(() => Config.TitleFilter.Published = FilterState.Yes);
+        }
+
+        /// <summary>
         /// Clears the tags portion of the filters.
         /// </summary>
         public void ClearTags()
@@ -143,11 +167,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public void ClearAll()
         {
-            applyFilterPaused = true;
-            Config.Instance.TitleFilter.Reset();
-            ClearTags();
-            applyFilterPaused = false;
-            Apply();
+            ClearAndApplyAction(null);
         }
         #endregion
 
@@ -176,6 +196,16 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
+
+        private void ClearAndApplyAction(Action action)
+        {
+            applyFilterPaused = true;
+            Config.Instance.TitleFilter.Reset();
+            ClearTags();
+            action?.Invoke();
+            applyFilterPaused = false;
+            Apply();
+        }
 
         /// <summary>
         /// Initializes the list of available tags

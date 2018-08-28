@@ -37,35 +37,39 @@
         </Grid>
 
         <!-- Main data grid to display the tabular data -->
-        <con:DataGridExtended 
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
+            <con:DataGridExtended 
             x:Name="TitleDataGrid"
             Grid.Row="1" Grid.Column="0"
             RowHeight="{Binding Config.DataGridRowHeight}"
             ItemsSource="{Binding Path=MainSource.View}"
             SelectedItem="{Binding SelectedItem}"
             con:DataGridColumns.Columns="{Binding Columns}">
-            <DataGrid.RowStyle>
-                <!-- Base style contains all the triggers -->
-                <Style TargetType="DataGridRow" BasedOn="{StaticResource TitleDataGridRowStyle}">
-                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=TitleDataGrid, Path=DataContext.OpenRowCommand}"/>
-                </Style>
-            </DataGrid.RowStyle>
+                <DataGrid.RowStyle>
+                    <!-- Base style contains all the triggers -->
+                    <Style TargetType="DataGridRow" BasedOn="{StaticResource TitleDataGridRowStyle}">
+                        <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=TitleDataGrid, Path=DataContext.OpenRowCommand}"/>
+                    </Style>
+                </DataGrid.RowStyle>
 
-            <DataGrid.ContextMenu>
-                <ContextMenu ItemsSource="{Binding MenuItems}"/>
-            </DataGrid.ContextMenu>
-        </con:DataGridExtended>
-        
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                </DataGrid.ContextMenu>
+            </con:DataGridExtended>
+        </Border>
+
         <!-- Splitter -->
         <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource GridSplitterVertical}" />
 
+        <ItemsControl Grid.Column="2" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=FilterCommands}"/>
 
-        <DockPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
-            <Expander DockPanel.Dock="Top" Header="Row Filter Options" IsExpanded="False">
-                <view:TitleFilter Margin="4,6"/>
-            </Expander>
-            <view:TitleEditWithTab DockPanel.Dock="Top" Margin="4,7,4,6" Visibility="{Binding EditVisibility}"/>
-        </DockPanel>
+        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderGridContainer}">
+            <DockPanel>
+                <view:TitleFilter DockPanel.Dock="Top" Visibility="{Binding FilterVisibility}"/>
+                <view:TitleEditWithTab DockPanel.Dock="Top" Visibility="{Binding EditVisibility}"/>
+            </DockPanel>
+
+        </Border>
 
     </Grid>
     <!-- end main grid-->

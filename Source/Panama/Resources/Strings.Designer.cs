@@ -506,6 +506,24 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        public static string CommandFilterAdvanced {
+            get {
+                return ResourceManager.GetString("CommandFilterAdvanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display / hide the advanced filters.
+        /// </summary>
+        public static string CommandFilterAdvancedTooltip {
+            get {
+                return ResourceManager.GetString("CommandFilterAdvancedTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter list to display only submissions to this publisher.
         /// </summary>
         public static string CommandFilterToPublisher {
@@ -547,6 +565,60 @@ namespace Restless.App.Panama.Resources {
         public static string CommandPublisher {
             get {
                 return ResourceManager.GetString("CommandPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow Up.
+        /// </summary>
+        public static string CommandPublisherFilterFollowup {
+            get {
+                return ResourceManager.GetString("CommandPublisherFilterFollowup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter title list to display only publishers that are flagged for follow up.
+        /// </summary>
+        public static string CommandPublisherFilterFollowupTooltip {
+            get {
+                return ResourceManager.GetString("CommandPublisherFilterFollowupTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In Period.
+        /// </summary>
+        public static string CommandPublisherFilterInPeriod {
+            get {
+                return ResourceManager.GetString("CommandPublisherFilterInPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter title list to display only publishers that are currently within a submission period.
+        /// </summary>
+        public static string CommandPublisherFilterInPeriodTooltip {
+            get {
+                return ResourceManager.GetString("CommandPublisherFilterInPeriodTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paying.
+        /// </summary>
+        public static string CommandPublisherFilterPaying {
+            get {
+                return ResourceManager.GetString("CommandPublisherFilterPaying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter title list to display only publishers that are a paying market.
+        /// </summary>
+        public static string CommandPublisherFilterPayingTooltip {
+            get {
+                return ResourceManager.GetString("CommandPublisherFilterPayingTooltip", resourceCulture);
             }
         }
         
@@ -673,6 +745,60 @@ namespace Restless.App.Panama.Resources {
         public static string CommandTitleFilter {
             get {
                 return ResourceManager.GetString("CommandTitleFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published.
+        /// </summary>
+        public static string CommandTitleFilterPublished {
+            get {
+                return ResourceManager.GetString("CommandTitleFilterPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter title list to display only titles that are published.
+        /// </summary>
+        public static string CommandTitleFilterPublishedTooltip {
+            get {
+                return ResourceManager.GetString("CommandTitleFilterPublishedTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        public static string CommandTitleFilterReady {
+            get {
+                return ResourceManager.GetString("CommandTitleFilterReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter title list to display only titles marked ready.
+        /// </summary>
+        public static string CommandTitleFilterReadyTooltip {
+            get {
+                return ResourceManager.GetString("CommandTitleFilterReadyTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submitted.
+        /// </summary>
+        public static string CommandTitleFilterSubmitted {
+            get {
+                return ResourceManager.GetString("CommandTitleFilterSubmitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter title list to display only titles that are currently submitted.
+        /// </summary>
+        public static string CommandTitleFilterSubmittedTooltip {
+            get {
+                return ResourceManager.GetString("CommandTitleFilterSubmittedTooltip", resourceCulture);
             }
         }
         

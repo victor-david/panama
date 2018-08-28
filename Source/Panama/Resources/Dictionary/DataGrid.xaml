@@ -114,7 +114,7 @@
     <!-- Defines a style to use for all DataGrid elements -->
     <Style TargetType="DataGrid" BasedOn="{StaticResource BaseControl}">
         <Setter Property="FontSize" Value="11"/>
-        <Setter Property="Margin" Value="6" />
+        <Setter Property="Margin" Value="0" />
         <Setter Property="ColumnWidth" Value="*" />
         <Setter Property="MinRowHeight" Value="{StaticResource DataGridMinRowHeight}" />
         <Setter Property="Background" Value="White" />

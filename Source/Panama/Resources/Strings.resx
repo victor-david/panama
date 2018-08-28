@@ -778,4 +778,46 @@ Do you want to continue?</value>
 
 Do you want to continue?</value>
   </data>
+  <data name="CommandFilterAdvanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="CommandFilterAdvancedTooltip" xml:space="preserve">
+    <value>Display / hide the advanced filters</value>
+  </data>
+  <data name="CommandTitleFilterPublished" xml:space="preserve">
+    <value>Published</value>
+  </data>
+  <data name="CommandTitleFilterPublishedTooltip" xml:space="preserve">
+    <value>Filter title list to display only titles that are published</value>
+  </data>
+  <data name="CommandTitleFilterReady" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="CommandTitleFilterReadyTooltip" xml:space="preserve">
+    <value>Filter title list to display only titles marked ready</value>
+  </data>
+  <data name="CommandTitleFilterSubmitted" xml:space="preserve">
+    <value>Submitted</value>
+  </data>
+  <data name="CommandTitleFilterSubmittedTooltip" xml:space="preserve">
+    <value>Filter title list to display only titles that are currently submitted</value>
+  </data>
+  <data name="CommandPublisherFilterFollowup" xml:space="preserve">
+    <value>Follow Up</value>
+  </data>
+  <data name="CommandPublisherFilterFollowupTooltip" xml:space="preserve">
+    <value>Filter title list to display only publishers that are flagged for follow up</value>
+  </data>
+  <data name="CommandPublisherFilterInPeriod" xml:space="preserve">
+    <value>In Period</value>
+  </data>
+  <data name="CommandPublisherFilterInPeriodTooltip" xml:space="preserve">
+    <value>Filter title list to display only publishers that are currently within a submission period</value>
+  </data>
+  <data name="CommandPublisherFilterPaying" xml:space="preserve">
+    <value>Paying</value>
+  </data>
+  <data name="CommandPublisherFilterPayingTooltip" xml:space="preserve">
+    <value>Filter title list to display only publishers that are a paying market</value>
+  </data>
 </root>

@@ -13,7 +13,8 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <TabPanel x:Name="HeaderPanel" Margin="2,5,0,0" VerticalAlignment="Stretch" Panel.ZIndex="1" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="Transparent" />
+                        <!-- Margin="2,5,0,0"-->
+                        <TabPanel x:Name="HeaderPanel" Margin="2,2,0,0" VerticalAlignment="Stretch" Panel.ZIndex="1" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="Transparent" />
 
                         <Border x:Name="ContentPanel" Grid.Row="1" Grid.Column="0"
                                 Background="{TemplateBinding Background}"

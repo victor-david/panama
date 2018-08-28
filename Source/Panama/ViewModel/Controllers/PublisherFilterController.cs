@@ -93,14 +93,35 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
+        /// Sets the filter options to in period only.
+        /// </summary>
+        public void SetToInPeriod()
+        {
+            ClearAndApplyAction(() => Config.PublisherFilter.InPeriod = FilterState.Yes);
+        }
+
+        /// <summary>
+        /// Sets the filter options to paying only.
+        /// </summary>
+        public void SetToPaying()
+        {
+            ClearAndApplyAction(() => Config.PublisherFilter.Paying = FilterState.Yes);
+        }
+
+        /// <summary>
+        /// Sets the filter options to followup only.
+        /// </summary>
+        public void SetToFollowup()
+        {
+            ClearAndApplyAction(() => Config.PublisherFilter.Followup = FilterState.Yes);
+        }
+
+        /// <summary>
         /// Clears all filter options
         /// </summary>
         public void ClearAll()
         {
-            applyFilterPaused = true;
-            Config.Instance.PublisherFilter.Reset();
-            applyFilterPaused = false;
-            Apply();
+            ClearAndApplyAction(null);
         }
         #endregion
 
@@ -118,6 +139,15 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
+
+        private void ClearAndApplyAction(Action action)
+        {
+            applyFilterPaused = true;
+            Config.Instance.PublisherFilter.Reset();
+            action?.Invoke();
+            applyFilterPaused = false;
+            Apply();
+        }
 
         private void ApplyPrivate()
         {

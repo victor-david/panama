@@ -29,7 +29,7 @@ namespace Restless.App.Panama.ViewModel
     public class TitleViewModel : DataGridViewModel<TitleTable>
     {
         #region Private
-        private bool filterIsVisible;
+        private bool isFilterVisible;
         private string previewText;
         private const int PreviewTabIndex = 4;
         private bool autoPreview;
@@ -87,12 +87,9 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Gets a visibility value that determines if the title filter is visible.
         /// </summary>
-        public Visibility TitleFilterVisibility
+        public Visibility FilterVisibility
         {
-            get
-            {
-                return (filterIsVisible) ? Visibility.Visible : Visibility.Collapsed;
-            }
+            get => (isFilterVisible) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         /// <summary>
@@ -178,11 +175,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public bool IsOpenXml
         {
-            get { return isOpenXml; }
-            private set
-            {
-                SetProperty(ref isOpenXml, value);
-            }
+            get => isOpenXml;
+            private set => SetProperty(ref isOpenXml, value);
         }
 
         /// <summary>
@@ -190,11 +184,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public string PreviewText
         {
-            get { return previewText; }
-            private set
-            {
-                SetProperty(ref previewText, value);
-            }
+            get => previewText;
+            private set => SetProperty(ref previewText, value);
         }
         #endregion
 
@@ -238,18 +229,26 @@ namespace Restless.App.Panama.ViewModel
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
             AddViewSourceSortDescriptions();
-            Commands.Add("TitleFilter", (o) =>
-                {
-                    filterIsVisible = !filterIsVisible;
-                    OnPropertyChanged(nameof(TitleFilterVisibility));
-                });
 
             /* This command is used from this model and from the Filters controller */
-            Commands.Add("ClearFilter", (o) => { Filters.ClearAll(); }, (o) => { return Config.TitleFilter.IsAnyFilterActive; });
+            Commands.Add("ClearFilter", (o) => Filters.ClearAll(), (o) => Config.TitleFilter.IsAnyFilterActive);
+            Commands.Add("ReadyFilter", (o) => Filters.SetToReady());
+            Commands.Add("SubmittedFilter", (o) => Filters.SetToSubmitted());
+            Commands.Add("PublishedFilter", (o) => Filters.SetToPublished());
+            Commands.Add("AdvancedFilter", (o) => 
+            {
+                isFilterVisible = !isFilterVisible;
+                OnPropertyChanged(nameof(FilterVisibility));
+            });
+
             Commands.Add("ExtractTitle", RunExtractTitle, CanRunExtractTitle);
 
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddTitle, Strings.CommandAddTitleTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], ResourceHelper.Get("ImageFilter"), VisualCommandImageSize, VisualCommandFontSize));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], ResourceHelper.Get("ImageFilter"), VisualCommandImageSize, VisualCommandFontSize));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterReady, Strings.CommandTitleFilterReadyTooltip, Commands["ReadyFilter"]));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterSubmitted, Strings.CommandTitleFilterSubmittedTooltip, Commands["SubmittedFilter"]));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterPublished, Strings.CommandTitleFilterPublishedTooltip, Commands["PublishedFilter"]));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandFilterAdvanced, Strings.CommandFilterAdvancedTooltip, Commands["AdvancedFilter"]));
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandOpenTitleOrDoubleClick, OpenRowCommand, "ImageOpenWordMenu");
@@ -261,7 +260,6 @@ namespace Restless.App.Panama.ViewModel
             Published = new TitlePublishedController(this);
             Tags = new TitleTagController(this);
 
-            //FilterPrompt = Strings.FilterPromptTitle;
             Filters = new TitleFilterController(this);
             Filters.Apply();
         }
@@ -371,8 +369,9 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Private Methods
+
         private void RunExtractTitle(object o)
         {
             if (SelectedPrimaryKey != null)
