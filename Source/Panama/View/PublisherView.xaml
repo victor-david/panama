@@ -62,7 +62,7 @@
                 <view:PublisherFilter Margin="4,12,4,0"/>
             </Expander>
             <!-- Nested editing control on the right -->
-            <view:PublisherEditWithTab DockPanel.Dock="Top" Margin="0,4,0,0" Visibility="{Binding EditVisibility}"/>
+            <view:PublisherEditWithTab DockPanel.Dock="Top" Margin="4,7,4,3" Visibility="{Binding EditVisibility}"/>
         </DockPanel>
     </Grid>
     <!-- end main grid-->

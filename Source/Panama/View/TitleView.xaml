@@ -64,7 +64,7 @@
             <Expander DockPanel.Dock="Top" Header="Row Filter Options" IsExpanded="False">
                 <view:TitleFilter Margin="4,6"/>
             </Expander>
-            <view:TitleEditWithTab DockPanel.Dock="Top" Margin="6,6" Visibility="{Binding EditVisibility}"/>
+            <view:TitleEditWithTab DockPanel.Dock="Top" Margin="4,7,4,6" Visibility="{Binding EditVisibility}"/>
         </DockPanel>
 
     </Grid>
