@@ -116,7 +116,9 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StatisticsViewModel"/> class.
+        /// </summary>
         public StatisticsViewModel()
         {
             DisplayName = Strings.CommandStatistics;
@@ -133,7 +135,6 @@ namespace Restless.App.Panama.ViewModel
                 InitFolderView();
             }
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -200,28 +201,8 @@ namespace Restless.App.Panama.ViewModel
             // add the header item
             rootItem.Items.Add(headerItem);
 
-            // This can create recursive tree items. TODO: Fix display. They don't lay out very well.
+            // This can create recursive tree items.
             AddTreeViewItem(rootItem, rootStat);
-
-            // This just does the top level.
-            //foreach (var child in rootStat.Children)
-            //{
-            //    var display = new GridRowDisplay()
-            //    {
-            //        Columns = 6,
-            //        Header = Paths.Title.WithoutRoot(child.Folder),
-            //        HeaderWidth = FileHeaderWidth,
-            //        ValueWidth = FileValueWidth,
-            //    };
-
-
-            //    display.SetValues(child.Total, child.Docx, child.Doc, child.Pdf, child.Txt, child.Other);
-            //    var item = new TreeViewItem()
-            //    {
-            //        Header = display
-            //    };
-            //    rootItem.Items.Add(item);
-            //}
 
             FolderView.Add(rootItem);
         }

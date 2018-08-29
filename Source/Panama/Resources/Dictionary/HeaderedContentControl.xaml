@@ -19,7 +19,7 @@
 
     <Style TargetType="TextBlock" x:Key="HCCHeaderText" BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="11"/>
-        <Setter Property="Foreground" Value="#FF604040"/>
+        <Setter Property="Foreground" Value="Black"/>
     </Style>
 
     <!-- Defines a style to use on HeaderedContentControl elements. -->

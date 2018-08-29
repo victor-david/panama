@@ -26,8 +26,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public string Header
         {
-            get { return (string)GetValue(HeaderProperty); }
-            set { SetValue(HeaderProperty, value); }
+            get => (string)GetValue(HeaderProperty);
+            set => SetValue(HeaderProperty, value);
         }
 
         /// <summary>
@@ -44,8 +44,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public int HeaderWidth
         {
-            get { return (int)GetValue(HeaderWidthProperty); }
-            set { SetValue(HeaderWidthProperty, value); }
+            get => (int)GetValue(HeaderWidthProperty);
+            set => SetValue(HeaderWidthProperty, value);
         }
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public Brush HeaderForeground
         {
-            get { return (Brush)GetValue(HeaderForegroundProperty); }
-            set { SetValue(HeaderForegroundProperty, value); }
+            get => (Brush)GetValue(HeaderForegroundProperty);
+            set => SetValue(HeaderForegroundProperty, value);
         }
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public double HeaderFontSize
         {
-            get { return (double)GetValue(HeaderFontSizeProperty); }
-            set { SetValue(HeaderFontSizeProperty, value); }
+            get => (double)GetValue(HeaderFontSizeProperty);
+            set => SetValue(HeaderFontSizeProperty, value);
         }
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public object Value
         {
-            get { return GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get => GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
         /// <summary>
@@ -113,8 +113,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public int DisplayLevel
         {
-            get { return (int)GetValue(DisplayLevelProperty); }
-            set { SetValue(DisplayLevelProperty, value); }
+            get => (int)GetValue(DisplayLevelProperty);
+            set => SetValue(DisplayLevelProperty, value);
         }
 
         /// <summary>
@@ -129,41 +129,24 @@ namespace Restless.App.Panama.Controls
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KeyValueDisplay"/> class.
+        /// </summary>
         public KeyValueDisplay()
         {
             InitializeComponent();
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
 
 
         #region Private methods
-        //private static void HeaderForegroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        //{
-        //    KeyValueDisplay obj = d as KeyValueDisplay;
-        //    if (obj != null)
-        //    {
-        //        obj.HeaderControl.Foreground = (Brush)e.NewValue;
-        //    }
-        //}
-
-        //private static void HeaderFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        //{
-        //    KeyValueDisplay obj = d as KeyValueDisplay;
-        //    if (obj != null)
-        //    {
-        //        obj.HeaderControl.FontSize = (double)e.NewValue;
-        //    }
-        //}
 
         private static void DisplayLevelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             int factor = 12;
-            KeyValueDisplay obj = d as KeyValueDisplay;
-            if (obj != null)
+            if (d is KeyValueDisplay obj)
             {
                 int displayLevel = (int)e.NewValue;
                 Thickness margin = new Thickness(obj.Margin.Left + (displayLevel * factor), obj.Margin.Top, obj.Margin.Right, obj.Margin.Bottom);

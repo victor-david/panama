@@ -29,18 +29,23 @@
         </Grid>
         
         <!-- Main data grid to display the tabular data  -->
-        <DataGrid x:Name="grid" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
-            <DataGrid.ContextMenu>
-                <ContextMenu ItemsSource="{Binding MenuItems}"/>
-            </DataGrid.ContextMenu>
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.OpenRowCommand}"/>
-                </Style>
-            </DataGrid.RowStyle>            
-        </DataGrid>
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
+            <DataGrid x:Name="grid" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                </DataGrid.ContextMenu>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.OpenRowCommand}"/>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </Border>
+        
         <!-- Nested editing control on the right -->
-        <view:LinkEdit Grid.Row="1" Grid.Column="1" Visibility="{Binding EditVisibility}"/>
+        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderGridContainer}">
+            <view:LinkEdit Visibility="{Binding EditVisibility}"/>
+        </Border>
     </Grid>
     <!-- end main grid-->
 </UserControl>

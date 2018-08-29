@@ -15,6 +15,7 @@
             Foreground="{Binding HeaderForeground,ElementName=PART_Control}"
             Width="{Binding HeaderWidth,ElementName=PART_Control}"
             FontSize="{Binding HeaderFontSize,ElementName=PART_Control}"
-            Content="{Binding Header,ElementName=PART_Control}"/>
+            Content="{Binding Header,ElementName=PART_Control}"
+            VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

@@ -33,7 +33,9 @@
         </Grid>
 
         <!-- Main data grid to display the tabular data  -->
-        <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}"/>
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
+            <DataGrid ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}"/>
+        </Border>
 
         <!-- Splitter -->
         <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource GridSplitterVertical}" />
@@ -42,7 +44,9 @@
 
 
         <!-- Nested editing control on the right -->
-        <view:TableDetail Grid.Row="1" Grid.Column="2" Visibility="{Binding EditVisibility}"/>
+        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderGridContainer}">
+            <view:TableDetail Visibility="{Binding EditVisibility}"/>
+        </Border>
     </Grid>
     <!-- end main grid-->
 </UserControl>

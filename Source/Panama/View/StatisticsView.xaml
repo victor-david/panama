@@ -53,7 +53,7 @@
             </StackPanel>
         </HeaderedContentControl>
         <HeaderedContentControl Header="Folders">
-            <DockPanel Margin="2.10">
+            <DockPanel Margin="2,10">
                 <DockPanel DockPanel.Dock="Top" Visibility="{Binding HaveFolderView,Converter={cv:BooleanToVisibilityConverter}}">
                     <TreeView 
                         DockPanel.Dock="Top"

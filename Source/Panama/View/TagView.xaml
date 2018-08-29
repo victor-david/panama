@@ -28,13 +28,18 @@
         </Grid>
 
         <!-- Main data grid to display the tabular data  -->
-        <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
-            <DataGrid.ContextMenu>
-                <ContextMenu ItemsSource="{Binding MenuItems}"/>
-            </DataGrid.ContextMenu>
-        </DataGrid>
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
+            <DataGrid ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </Border>
+        
         <!-- Nested editing control on the right -->
-        <view:TagEdit Grid.Row="1" Grid.Column="1" Visibility="{Binding EditVisibility}"/>
+        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderGridContainer}">
+            <view:TagEdit Visibility="{Binding EditVisibility}"/>
+        </Border>
     </Grid>
     <!-- end main grid-->
 </UserControl>

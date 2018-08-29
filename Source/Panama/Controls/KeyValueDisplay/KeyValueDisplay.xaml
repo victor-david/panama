@@ -12,7 +12,8 @@
             Foreground="{Binding HeaderForeground,ElementName=UC}"
             Width="{Binding HeaderWidth,ElementName=UC}"
             FontSize="{Binding HeaderFontSize,ElementName=UC}"
-            Content="{Binding Header,ElementName=UC}"/>
-        <TextBlock Text="{Binding Value,ElementName=UC}" FontSize="11"/>
+            Content="{Binding Header,ElementName=UC}"
+            VerticalAlignment="Center"/>
+        <TextBlock Text="{Binding Value,ElementName=UC}" FontSize="11" VerticalAlignment="Center"/>
     </StackPanel>
 </UserControl>

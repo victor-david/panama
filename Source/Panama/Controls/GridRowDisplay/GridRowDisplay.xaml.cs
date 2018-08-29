@@ -26,14 +26,16 @@ namespace Restless.App.Panama.Controls
         private static string ControlName = "PART_Control";
         #endregion
 
+        /************************************************************************/
+
         #region Public properties
         /// <summary>
         /// Gets or sets the number of value columns this control has.
         /// </summary>
         public int Columns
         {
-            get { return (int)GetValue(ColumnsProperty); }
-            set { SetValue(ColumnsProperty, value); }
+            get => (int)GetValue(ColumnsProperty);
+            set => SetValue(ColumnsProperty, value);
         }
 
         /// <summary>
@@ -43,15 +45,14 @@ namespace Restless.App.Panama.Controls
             (
                 "Columns", typeof(int), typeof(GridRowDisplay), new UIPropertyMetadata(0, ColumnChanged, CoerceColumnValue)
             );
-       
 
         /// <summary>
         /// Gets or sets the control header.
         /// </summary>
         public string Header
         {
-            get { return (string)GetValue(HeaderProperty); }
-            set { SetValue(HeaderProperty, value); }
+            get => (string)GetValue(HeaderProperty);
+            set => SetValue(HeaderProperty, value);
         }
 
         /// <summary>
@@ -61,15 +62,14 @@ namespace Restless.App.Panama.Controls
             (
                 "Header", typeof(string), typeof(GridRowDisplay), new UIPropertyMetadata(null)
             );
-
         
         /// <summary>
         /// Gets or sets the width of <see cref="Header"/>.
         /// </summary>
         public double HeaderWidth
         {
-            get { return (double)GetValue(HeaderWidthProperty); }
-            set { SetValue(HeaderWidthProperty, value); }
+            get => (double)GetValue(HeaderWidthProperty);
+            set => SetValue(HeaderWidthProperty, value);
         }
 
         /// <summary>
@@ -80,14 +80,13 @@ namespace Restless.App.Panama.Controls
                 "HeaderWidth", typeof(double), typeof(GridRowDisplay), new UIPropertyMetadata(120.0)
             );
 
-
         /// <summary>
         /// Gets or sets the foregound of <see cref="Header"/>.
         /// </summary>
         public Brush HeaderForeground
         {
-            get { return (Brush)GetValue(HeaderForegroundProperty); }
-            set { SetValue(HeaderForegroundProperty, value); }
+            get => (Brush)GetValue(HeaderForegroundProperty);
+            set => SetValue(HeaderForegroundProperty, value);
         }
 
         /// <summary>
@@ -103,8 +102,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public double HeaderFontSize
         {
-            get { return (double)GetValue(HeaderFontSizeProperty); }
-            set { SetValue(HeaderFontSizeProperty, value); }
+            get => (double)GetValue(HeaderFontSizeProperty);
+            set => SetValue(HeaderFontSizeProperty, value);
         }
 
         /// <summary>
@@ -120,8 +119,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public double ValueWidth
         {
-            get { return (double)GetValue(ValueWidthProperty); }
-            set { SetValue(ValueWidthProperty, value); }
+            get => (double)GetValue(ValueWidthProperty);
+            set => SetValue(ValueWidthProperty, value);
         }
 
         /// <summary>
@@ -137,8 +136,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public Brush ValueForeground
         {
-            get { return (Brush)GetValue(ValueForegroundProperty); }
-            set { SetValue(ValueForegroundProperty, value); }
+            get => (Brush)GetValue(ValueForegroundProperty);
+            set => SetValue(ValueForegroundProperty, value);
         }
 
         /// <summary>
@@ -154,8 +153,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public double ValueFontSize
         {
-            get { return (double)GetValue(ValueFontSizeProperty); }
-            set { SetValue(ValueFontSizeProperty, value); }
+            get => (double)GetValue(ValueFontSizeProperty);
+            set => SetValue(ValueFontSizeProperty, value);
         }
 
         /// <summary>
@@ -171,7 +170,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public ObservableCollection<object> Values
         {
-            get { return (ObservableCollection<object>)GetValue(ValuesProperty); }
+            get => (ObservableCollection<object>)GetValue(ValuesProperty);
         }
 
         /// <summary>
@@ -192,8 +191,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public object Value
         {
-            get { return GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get => GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
         /// <summary>
@@ -209,7 +208,9 @@ namespace Restless.App.Panama.Controls
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GridRowDisplay"/> class.
+        /// </summary>
         public GridRowDisplay()
         {
             InitializeComponent();
@@ -218,7 +219,6 @@ namespace Restless.App.Panama.Controls
             SetValue(ValuesKey, collection);
             Columns = 1;
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -293,29 +293,35 @@ namespace Restless.App.Panama.Controls
             // add children
             for (int col = 1; col <= g.Columns; col++)
             {
-                TextBlock tb = new TextBlock();
+                TextBlock tb = new TextBlock
+                {
+                    VerticalAlignment = VerticalAlignment.Center
+                };
 
                 tb.SetValue(Grid.ColumnProperty, col);
                 g.PART_Grid.Children.Add(tb);
 
                 // Set the binding on the foregound and the font size.
                 // The values themselves are handled by the event handler on Values.CollectionChanged.
-                var bfore = new System.Windows.Data.Binding(ValueForegroundProperty.Name);
-                bfore.Mode = BindingMode.OneWay;
-                bfore.ElementName = ControlName;
+                var bfore = new Binding(ValueForegroundProperty.Name)
+                {
+                    Mode = BindingMode.OneWay,
+                    ElementName = ControlName
+                };
                 tb.SetBinding(TextBlock.ForegroundProperty, bfore);
 
-                var bfont = new System.Windows.Data.Binding(ValueFontSizeProperty.Name);
-                bfont.Mode = BindingMode.OneWay;
-                bfont.ElementName = ControlName;
+                var bfont = new Binding(ValueFontSizeProperty.Name)
+                {
+                    Mode = BindingMode.OneWay,
+                    ElementName = ControlName
+                };
                 tb.SetBinding(TextBlock.FontSizeProperty, bfont);
             }
         }
 
         private static void ValueWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            GridRowDisplay g = d as GridRowDisplay;
-            if (g == null) return;
+            if (!(d is GridRowDisplay g)) return;
             // adjust column definitions for each value column 
             for (int col = 1; col <= g.Columns; col++)
             {
@@ -325,8 +331,7 @@ namespace Restless.App.Panama.Controls
 
         private static void ValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            GridRowDisplay g = d as GridRowDisplay;
-            if (g == null) return;
+            if (!(d is GridRowDisplay g)) return;
             g.Values[0] = e.NewValue;
         }
         #endregion
@@ -338,7 +343,7 @@ namespace Restless.App.Panama.Controls
         {
             if (e.Action == NotifyCollectionChangedAction.Replace)
             {
-                ((TextBlock)this.PART_Grid.Children[e.NewStartingIndex + 1]).Text = e.NewItems[0].ToString();
+                ((TextBlock)PART_Grid.Children[e.NewStartingIndex + 1]).Text = e.NewItems[0].ToString();
             }
         }
         #endregion

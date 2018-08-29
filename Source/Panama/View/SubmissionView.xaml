@@ -25,24 +25,26 @@
         <view:SimpleRowFilter />
 
         <!-- Main data grid to display the tabular data -->
-        <con:DataGridExtended 
-            x:Name="grid"
-            Grid.Row="1" Grid.Column="0"
-            RowHeight="{Binding Config.DataGridRowHeight}"
-            ItemsSource="{Binding Path=MainSource.View}"
-            SelectedItem="{Binding SelectedItem}"
-
-            con:DataGridColumns.Columns="{Binding Columns}">
-            <DataGrid.ContextMenu>
-                <ContextMenu ItemsSource="{Binding MenuItems}"/>
-            </DataGrid.ContextMenu>
-        </con:DataGridExtended>
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
+            <con:DataGridExtended 
+                x:Name="grid"
+                RowHeight="{Binding Config.DataGridRowHeight}"
+                ItemsSource="{Binding Path=MainSource.View}"
+                SelectedItem="{Binding SelectedItem}"
+                con:DataGridColumns.Columns="{Binding Columns}">
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                </DataGrid.ContextMenu>
+            </con:DataGridExtended>
+        </Border>
 
         <!-- Splitter -->
         <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource GridSplitterVertical}" />
 
         <!-- Nested editing control on the right -->
-        <view:SubmissionEditWithTab Grid.Row="1" Grid.Column="2" Margin="4,3,4,6" Visibility="{Binding EditVisibility}"/>
+        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderGridContainer}">
+            <view:SubmissionEditWithTab Visibility="{Binding EditVisibility}"/>
+        </Border>
 
     </Grid>
     <!-- end main grid-->
