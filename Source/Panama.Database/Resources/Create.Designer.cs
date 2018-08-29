@@ -360,7 +360,8 @@ namespace Restless.App.Panama.Database.Resources {
         ///  &quot;title&quot; TEXT NOT NULL, 
         ///  &quot;written&quot; TIMESTAMP NOT NULL, 
         ///  &quot;authorid&quot; INTEGER NOT NULL DEFAULT 1, 
-        ///  &quot;ready&quot; BOOLEAN DEFAULT 0 
+        ///  &quot;ready&quot; BOOLEAN DEFAULT 0,
+        ///  &quot;notes&quot; TEXT
         ///);.
         /// </summary>
         internal static string Title {

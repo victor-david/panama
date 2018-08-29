@@ -52,6 +52,11 @@ namespace Restless.App.Panama.Database.Tables
                 public const string Ready = "ready";
 
                 /// <summary>
+                /// The name of the notes column. 
+                /// </summary>
+                public const string Notes = "notes";
+
+                /// <summary>
                 /// Provides static column names for columns that are calculated from other values.
                 /// </summary>
                 public static class Calculated
@@ -150,18 +155,19 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return Defs.Columns.Id; }
+            get => Defs.Columns.Id;
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TitleTable"/> class.
+        /// </summary>
         public TitleTable() : base(DatabaseController.Instance, Defs.TableName)
         {
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -373,7 +379,7 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public Int64 Id
             {
-                get { return GetInt64(Defs.Columns.Id); }
+                get => GetInt64(Defs.Columns.Id);
             }
 
             /// <summary>
@@ -381,9 +387,10 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public string Title
             {
-                get { return GetString(Defs.Columns.Title); }
-                set { SetValue(Defs.Columns.Title, value); }
+                get => GetString(Defs.Columns.Title);
+                set => SetValue(Defs.Columns.Title, value);
             }
+
             /// <summary>
             /// Gets or sets the written date/time value for this row object.
             /// The return value is expressed as UTC, but since this comes from
@@ -392,8 +399,8 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public DateTime Written
             {
-                get { return GetDateTime(Defs.Columns.Written); }
-                set { SetValue(Defs.Columns.Written, value); }
+                get => GetDateTime(Defs.Columns.Written);
+                set => SetValue(Defs.Columns.Written, value);
             }
 
             /// <summary>
@@ -401,8 +408,17 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public Int64 AuthorId
             {
-                get { return GetInt64(Defs.Columns.AuthorId); }
-                set { SetValue(Defs.Columns.AuthorId, value); }
+                get => GetInt64(Defs.Columns.AuthorId);
+                set => SetValue(Defs.Columns.AuthorId, value);
+            }
+
+            /// <summary>
+            /// Gets or sets the notes for this row object.
+            /// </summary>
+            public string Notes
+            {
+                get => GetString(Defs.Columns.Notes);
+                set => SetValue(Defs.Columns.Notes, value);
             }
             #endregion
 

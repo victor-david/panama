@@ -13,35 +13,39 @@
     <con:TabControlExtended SelectedIndex="{Binding SelectedTabIndex,Mode=OneWayToSource}">
         <TabControl.Items>
             <TabItem Header="{x:Static r:Strings.HeaderData}">
-                <StackPanel Margin="4">
-                    <StackPanel Style="{StaticResource StackPanelCommandHolder}">
+                <DockPanel Margin="6,4">
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                         <Label>Title</Label>
-                        <Label>
+                        <Label Margin="8,0" FontSize="11">
                             <Hyperlink Command="{Binding Commands[ExtractTitle]}">Extract from latest version</Hyperlink>
                         </Label>
                     </StackPanel>
-                    <TextBox Text="{Binding SelectedRow[title]}" />
+                    <TextBox DockPanel.Dock="Top" Text="{Binding SelectedRow[title]}" />
                     
                     <!-- Don't need a stack panel for one item, but we'll leave it in case we have more -->
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="4">
                         <CheckBox IsChecked="{Binding SelectedRow[ready]}">Ready</CheckBox>
                     </StackPanel>
 
-                    <Expander Header="{Binding WrittenHeader}" IsExpanded="False">
+                    <Expander DockPanel.Dock="Top" Header="{Binding WrittenHeader}" IsExpanded="False">
                         <con:CalendarExtended SelectedDate="{Binding WrittenDate}" DisplayDate="{Binding WrittenDisplayDate,Mode=OneWay}" HorizontalAlignment="Left" />
                     </Expander>
 
-                    <Expander Header="Current Tags" IsExpanded="True">
+                    <Expander DockPanel.Dock="Top" Header="Current Tags" IsExpanded="True">
                         <StackPanel>
                             <Label Visibility="{Binding Tags.HasZeroTags,Converter={cv:BooleanToVisibilityConverter}}">(none)</Label>
                             <ItemsControl Style="{StaticResource ItemsControlTag}" ItemsSource="{Binding Tags.Current}" />
                         </StackPanel>
                     </Expander>
 
-                    <Expander Header="Available Tags" IsExpanded="True">
+                    <Expander DockPanel.Dock="Top" Header="Available Tags" IsExpanded="True">
                         <ItemsControl Style="{StaticResource ItemsControlTag}" ItemsSource="{Binding Tags.Available}" />
                     </Expander>
-                </StackPanel>
+                    
+                    <Expander DockPanel.Dock="Top" Header="Notes" IsExpanded="True">
+                        <TextBox Style="{StaticResource TextBoxMultiFull}" Text="{Binding SelectedRow[notes]}"/>
+                    </Expander>
+                </DockPanel>
             </TabItem>
             <TabItem Header="{Binding Versions.Header}">
                 <view:TitleEditVersion Margin="2,4" />

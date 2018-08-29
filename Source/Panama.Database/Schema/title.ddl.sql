@@ -3,5 +3,6 @@ CREATE TABLE "title" (
   "title" TEXT NOT NULL, 
   "written" TIMESTAMP NOT NULL, 
   "authorid" INTEGER NOT NULL DEFAULT 1, 
-  "ready" BOOLEAN DEFAULT 0 
+  "ready" BOOLEAN DEFAULT 0,
+  "notes" TEXT
 );
