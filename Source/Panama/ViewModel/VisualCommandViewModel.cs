@@ -10,6 +10,14 @@ namespace Restless.App.Panama.ViewModel
     /// </summary>
     public class VisualCommandViewModel : ViewModelBase
     {
+        private object icon;
+
+        #region Public Fields
+        public const double DefaultImageSize = 32.0;
+        public const double DefaultFontSize = 11.5;
+        public const double DefaultMinWidth = 132.0;
+        #endregion
+
         #region Public Properties
         /// <summary>
         /// Gets the image size associated with this instance.
@@ -21,11 +29,19 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
+        /// Gets the minimum width for the visual command
+        /// </summary>
+        public double MinWidth
+        {
+            get;
+        }
+
+        /// <summary>
         /// Gets the calculated button size
         /// </summary>
         public double ButtonSize
         {
-            get { return ImageSize + 8.0; }
+            get => ImageSize + 8.0;
         }
 
         /// <summary>
@@ -38,12 +54,12 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets the icon object associated with the command.
+        /// Gets or sets the icon object associated with the command.
         /// </summary>
         public object Icon
         {
-            get;
-            private set;
+            get => icon;
+            set => SetProperty(ref icon, value);
         }
 
         /// <summary>
@@ -77,7 +93,12 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="icon">The icon associated with the visual command.</param>
         /// <param name="imageSize">The icon's image size. This is both height and width. The default is 32.0</param>
         /// <param name="fontSize">The font size for <paramref name="displayName"/>. The default is 11.5</param>
-        public VisualCommandViewModel(string displayName, string toolTipText, ICommand command, object icon, double imageSize = 32.0, double fontSize = 11.5)
+        /// <param name="minWidth">The button mimimum width. Default is 132.0</param>
+        public VisualCommandViewModel
+            (
+                string displayName, string toolTipText, ICommand command, object icon,
+                double imageSize = DefaultImageSize, double fontSize = DefaultFontSize, double minWidth = DefaultMinWidth
+            )
         {
             Validations.ValidateNull(command, "CommandViewModel.Command");
             DisplayName = displayName;
@@ -85,6 +106,7 @@ namespace Restless.App.Panama.ViewModel
             Command = command;
             ImageSize = imageSize;
             FontSize = fontSize;
+            MinWidth = minWidth;
             Icon = icon; 
         }
 
@@ -94,8 +116,8 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="displayName">The display name associated with this command.</param>
         /// <param name="toolTipText">The tooltip text. Not all visuals may use this.</param>
         /// <param name="command">The command to excute.</param>
-        public VisualCommandViewModel(string displayName, string toolTipText, ICommand command)
-            : this(displayName, toolTipText, command, null)
+        public VisualCommandViewModel(string displayName, string toolTipText, ICommand command, double minWidth)
+            : this(displayName, toolTipText, command, null, DefaultImageSize, DefaultFontSize, minWidth)
         {
         }
         #endregion

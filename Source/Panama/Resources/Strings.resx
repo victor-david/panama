@@ -806,18 +806,24 @@ Do you want to continue?</value>
     <value>Follow Up</value>
   </data>
   <data name="CommandPublisherFilterFollowupTooltip" xml:space="preserve">
-    <value>Filter title list to display only publishers that are flagged for follow up</value>
+    <value>Filter title list to display only publishers that are active and flagged for follow up</value>
   </data>
   <data name="CommandPublisherFilterInPeriod" xml:space="preserve">
     <value>In Period</value>
   </data>
   <data name="CommandPublisherFilterInPeriodTooltip" xml:space="preserve">
-    <value>Filter title list to display only publishers that are currently within a submission period</value>
+    <value>Filter title list to display only publishers that are active and currently within a submission period</value>
   </data>
   <data name="CommandPublisherFilterPaying" xml:space="preserve">
     <value>Paying</value>
   </data>
   <data name="CommandPublisherFilterPayingTooltip" xml:space="preserve">
-    <value>Filter title list to display only publishers that are a paying market</value>
+    <value>Filter title list to display only publishers that are active and are a paying market</value>
+  </data>
+  <data name="CommandPublisherFilterActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="CommandPublisherFilterActiveTooltip" xml:space="preserve">
+    <value>Filter title list to display only publishers that are active, i.e. not flagged as a goner</value>
   </data>
 </root>

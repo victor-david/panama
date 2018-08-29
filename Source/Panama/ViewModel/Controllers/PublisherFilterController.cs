@@ -93,11 +93,23 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
+        /// Sets the filter options to in active only.
+        /// </summary>
+        public void SetToActive()
+        {
+            ClearAndApplyAction(() => Config.PublisherFilter.Goner = FilterState.No);
+        }
+
+        /// <summary>
         /// Sets the filter options to in period only.
         /// </summary>
         public void SetToInPeriod()
         {
-            ClearAndApplyAction(() => Config.PublisherFilter.InPeriod = FilterState.Yes);
+            ClearAndApplyAction(() =>
+            {
+                Config.PublisherFilter.InPeriod = FilterState.Yes;
+                Config.PublisherFilter.Goner = FilterState.No;
+            });
         }
 
         /// <summary>
@@ -105,7 +117,11 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public void SetToPaying()
         {
-            ClearAndApplyAction(() => Config.PublisherFilter.Paying = FilterState.Yes);
+            ClearAndApplyAction(() =>
+            {
+                Config.PublisherFilter.Paying = FilterState.Yes;
+                Config.PublisherFilter.Goner = FilterState.No;
+            });
         }
 
         /// <summary>
@@ -113,7 +129,11 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public void SetToFollowup()
         {
-            ClearAndApplyAction(() => Config.PublisherFilter.Followup = FilterState.Yes);
+            ClearAndApplyAction(() =>
+            {
+                Config.PublisherFilter.Followup = FilterState.Yes;
+                Config.PublisherFilter.Goner = FilterState.No;
+            });
         }
 
         /// <summary>

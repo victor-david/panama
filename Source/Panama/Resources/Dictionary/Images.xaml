@@ -20,8 +20,10 @@
     <BitmapImage x:Key="ImageBrowseToUrl" UriSource="/Panama;component/Resources/Images/Image.Arrow.Right.48.png"/>
     <BitmapImage x:Key="ImageCalendar" UriSource="/Panama;component/Resources/Images/Image.Calendar.48.png"/>
     <BitmapImage x:Key="ImageCheck" UriSource="/Panama;component/Resources/Images/Image.Check.48.png"/>
-    <BitmapImage x:Key="ImageChevronLeft" UriSource="/Panama;component/Resources/Images/Image.Chevron.Left.48.png"/>
-    <BitmapImage x:Key="ImageChevronRight" UriSource="/Panama;component/Resources/Images/Image.Chevron.Right.48.png"/>
+    <BitmapImage x:Key="ImageChevronDown" UriSource="/Panama;component/Resources/Images/Image.Chevron.Down.64.png"/>
+    <BitmapImage x:Key="ImageChevronLeft" UriSource="/Panama;component/Resources/Images/Image.Chevron.Left.64.png"/>
+    <BitmapImage x:Key="ImageChevronRight" UriSource="/Panama;component/Resources/Images/Image.Chevron.Right.64.png"/>
+    <BitmapImage x:Key="ImageChevronUp" UriSource="/Panama;component/Resources/Images/Image.Chevron.Up.64.png"/>
     <BitmapImage x:Key="ImageClose" UriSource="/Panama;component/Resources/Images/Image.Close.48.png"/>
     <BitmapImage x:Key="ImageConfig" UriSource="/Panama;component/Resources/Images/Image.Config.64.png"/>
     <BitmapImage x:Key="ImageDatabase" UriSource="/Panama;component/Resources/Images/Image.Database.64.png"/>

@@ -3,9 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <DataTemplate x:Key="ItemsControlMenuItemTemplate">
-        <Button Style="{StaticResource MainMenuButton}" ToolTip="{Binding TooltipText}" Command="{Binding Path=Command}" Margin="1,2" MinWidth="132" Height="{Binding Path=ButtonSize}" Cursor="Hand">
+        <Button Style="{StaticResource MainMenuButton}" ToolTip="{Binding TooltipText}" Command="{Binding Path=Command}" Margin="1,2" MinWidth="{Binding MinWidth}" Height="{Binding Path=ButtonSize}" Cursor="Hand">
             <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding Path=Icon}" Height="{Binding Path=ImageSize}">
+                <Image Source="{Binding Path=Icon}" Height="{Binding Path=ImageSize}" VerticalAlignment="Center">
                     <Image.Style>
                         <Style TargetType="Image">
                             <Style.Triggers>

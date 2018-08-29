@@ -905,6 +905,16 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Add.64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Chevron.Down.48.png" />
+    <Resource Include="Resources\Images\Image.Chevron.Up.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Chevron.Down.64.png" />
+    <Resource Include="Resources\Images\Image.Chevron.Left.64.png" />
+    <Resource Include="Resources\Images\Image.Chevron.Right.64.png" />
+    <Resource Include="Resources\Images\Image.Chevron.Up.64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

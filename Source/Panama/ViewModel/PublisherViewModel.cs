@@ -23,6 +23,7 @@ namespace Restless.App.Panama.ViewModel
     {
         #region Private
         private bool isFilterVisible;
+        private VisualCommandViewModel advFilter;
         #endregion
 
         /************************************************************************/
@@ -122,12 +123,14 @@ namespace Restless.App.Panama.ViewModel
 
             /* This command is used from this model and from the Filters controller */
             Commands.Add("ClearFilter", (o) => Filters.ClearAll(), (o) => Config.PublisherFilter.IsAnyFilterActive);
+            Commands.Add("ActiveFilter", (o) => Filters.SetToActive());
             Commands.Add("InPeriodFilter", (o) => Filters.SetToInPeriod());
             Commands.Add("PayingFilter", (o) => Filters.SetToPaying());
             Commands.Add("FollowupFilter", (o) => Filters.SetToFollowup());
             Commands.Add("AdvancedFilter", (o) =>
             {
                 isFilterVisible = !isFilterVisible;
+                advFilter.Icon = (isFilterVisible) ? ResourceHelper.Get("ImageChevronUp") : ResourceHelper.Get("ImageChevronDown");
                 OnPropertyChanged(nameof(FilterVisibility));
             });
 
@@ -135,12 +138,18 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("CopyLoginId", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.LoginId); }, CanCopyCredential);
             Commands.Add("CopyPassword", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.Password); }, CanCopyCredential);
 
+
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddPublisher, Strings.CommandAddPublisherTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], ResourceHelper.Get("ImageFilter"), VisualCommandImageSize, VisualCommandFontSize));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterInPeriod, Strings.CommandPublisherFilterInPeriodTooltip, Commands["InPeriodFilter"]));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterPaying, Strings.CommandPublisherFilterPayingTooltip, Commands["PayingFilter"]));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterFollowup, Strings.CommandPublisherFilterFollowupTooltip, Commands["FollowupFilter"]));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandFilterAdvanced, Strings.CommandFilterAdvancedTooltip, Commands["AdvancedFilter"]));
+
+            double minWidth = 80.0;
+            double imgSize = 20.0;
+            advFilter = new VisualCommandViewModel(Strings.CommandFilterAdvanced, Strings.CommandFilterAdvancedTooltip, Commands["AdvancedFilter"], ResourceHelper.Get("ImageChevronDown"), imgSize, VisualCommandFontSize, 100.0);
+            FilterCommands.Add(advFilter);
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterActive, Strings.CommandPublisherFilterActiveTooltip, Commands["ActiveFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterInPeriod, Strings.CommandPublisherFilterInPeriodTooltip, Commands["InPeriodFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterPaying, Strings.CommandPublisherFilterPayingTooltip, Commands["PayingFilter"],null, imgSize, VisualCommandFontSize,  minWidth));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterFollowup, Strings.CommandPublisherFilterFollowupTooltip, Commands["FollowupFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             Periods = new PublisherPeriodController(this);
             Submissions = new PublisherSubmissionController(this);

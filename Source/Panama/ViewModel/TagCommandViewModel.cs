@@ -71,7 +71,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="tagDescription">The description of the tag.</param>
         /// <param name="command">The command associated with the selection of this tag.</param>
         public TagCommandViewModel(Int64 tagId, string tagName, string tagDescription, ICommand command)
-            :base(tagName, tagDescription, command)
+            :base(tagName, tagDescription, command, DefaultMinWidth)
         {
             TagId = tagId;
             ResetDefaultForeground();
