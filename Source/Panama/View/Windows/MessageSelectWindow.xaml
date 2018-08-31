@@ -21,43 +21,50 @@
         <!--<view:SimpleRowFilter Grid.Row="0"/>-->
         <!-- Main data grid to display the tabular data  -->
 
-        <con:DataGridExtended 
-            x:Name="grid" Grid.Column="0" 
-            Grid.ColumnSpan="{Binding IsMessageSelectMode,Mode=OneTime,Converter={cv:BooleanToIntegerConverter},ConverterParameter={StaticResource Integer1}}"
-            SelectionMode="{Binding IsMessageSelectMode, Converter={cv:BooleanToSelectionModeConverter}}"
-            SelectedItemsList="{Binding SelectedDataGridItems, Mode=OneWayToSource}"
-            ItemsSource="{Binding Path=MainSource.View}"
-            SelectedItem="{Binding SelectedItem}" 
-            con:DataGridColumns.Columns="{Binding Columns}">
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenItem]}"/>
-                </Style>
-            </DataGrid.RowStyle>
-        </con:DataGridExtended>
-        <StackPanel Grid.Column="1" Visibility="{Binding IsMessageSelectMode, Mode=OneTime, Converter={cv:BooleanToVisibilityConverter}}">
-            <StackPanel.Resources>
-                <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockMessage}">
-                    <Setter Property="Margin" Value="8,0"/>
-                </Style>
-            </StackPanel.Resources>
-            <Label>Date</Label>
-            <TextBlock Text="{Binding SelectedItem.Values[System.Message.DateReceived]}"/>
-            <Label>Subject</Label>
-            <TextBlock Text="{Binding SelectedItem.Values[System.Subject]}"/>
-            <Label>From</Label>
-            <TextBlock Text="{Binding SelectedItem.Values[System.Message.FromName]}"/>
-            <TextBlock Text="{Binding SelectedItem.Values[System.Message.FromAddress]}"/>
-            <Label>To</Label>
-            <TextBlock Text="{Binding SelectedItem.Values[System.Message.ToName]}"/>
-            <TextBlock Text="{Binding SelectedItem.Values[System.Message.ToAddress]}"/>
-            <Label>Type</Label>
-            <TextBlock Text="{Binding SelectedItem.Values[System.ItemType]}"/>
-        </StackPanel>
+        <Border Style="{StaticResource BorderGridContainer}">
+            <con:DataGridExtended 
+                x:Name="grid"
+                Grid.ColumnSpan="{Binding IsMessageSelectMode,Mode=OneTime,Converter={cv:BooleanToIntegerConverter},ConverterParameter={StaticResource Integer1}}"
+                SelectionMode="{Binding IsMessageSelectMode, Converter={cv:BooleanToSelectionModeConverter}}"
+                SelectedItemsList="{Binding SelectedDataGridItems, Mode=OneWayToSource}"
+                ItemsSource="{Binding Path=MainSource.View}"
+                SelectedItem="{Binding SelectedItem}" 
+                con:DataGridColumns.Columns="{Binding Columns}">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenItem]}"/>
+                    </Style>
+                </DataGrid.RowStyle>
+            </con:DataGridExtended>
+        </Border>
+        <Border Grid.Column="1" Style="{StaticResource BorderGridContainer}">
+            <StackPanel Visibility="{Binding IsMessageSelectMode, Mode=OneTime, Converter={cv:BooleanToVisibilityConverter}}">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockMessage}">
+                        <Setter Property="Margin" Value="8,0"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Label>Date</Label>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Message.DateReceived]}"/>
+                <Label>Subject</Label>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Subject]}"/>
+                <Label>From</Label>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Message.FromName]}"/>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Message.FromAddress]}"/>
+                <Label>To</Label>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Message.ToName]}"/>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Message.ToAddress]}"/>
+                <Label>Type</Label>
+                <TextBlock Text="{Binding SelectedItem.Values[System.ItemType]}"/>
+            </StackPanel>
+        </Border>
+
         <StackPanel Grid.Row="1" Style="{StaticResource StackPanelCommandHolder}" Margin="4,0">
             <Button Command="{Binding Commands[Select]}">Select</Button>
             <Button Command="{Binding Commands[Cancel]}">Cancel</Button>
         </StackPanel>
+
+
 
 
     </Grid>

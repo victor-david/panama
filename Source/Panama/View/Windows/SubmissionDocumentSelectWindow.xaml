@@ -9,11 +9,11 @@
             <Style TargetType="TextBlock">
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="Foreground" Value="#FF000066" />
-                <Setter Property="Margin" Value="3,8" />
+                <Setter Property="Margin" Value="6,8" />
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Height" Value="30"/>
-                <Setter Property="Margin" Value="4"/>
+                <Setter Property="Margin" Value="6"/>
                 <Setter Property="Foreground" Value="DarkBlue"/>
             </Style>
         </DockPanel.Resources>
