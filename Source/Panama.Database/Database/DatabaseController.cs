@@ -75,6 +75,7 @@ namespace Restless.App.Panama.Database
         {
             Validations.ValidateNullEmpty(installationFolder, "Init.InstallationFolder");
             base.CreateAndOpen(GetDatabaseFileName(installationFolder, fileName));
+            CreateAndRegisterTable<AlertTable>();
             CreateAndRegisterTable<AuthorTable>();
             CreateAndRegisterTable<ColorTable>();
             CreateAndRegisterTable<ConfigTable>();

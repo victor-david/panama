@@ -34,21 +34,21 @@
                     <MenuItem Header="Settings" Icon="{StaticResource ImageConfigMenu}" Command="{Binding Commands[Config]}" />
                 </MenuItem>
                 <MenuItem Header="_Other">
+                    <MenuItem Header="Alerts" Icon="{StaticResource ImageCalendarMenu}" Command="{Binding Commands[Alert]}"/>
                     <MenuItem Header="Notes" Icon="{StaticResource ImageNoteMenu}" Command="{Binding Commands[Note]}"/>
                     <MenuItem Header="Links" Icon="{StaticResource ImageLinkMenu}" Command="{Binding Commands[Link]}"/>
                     <Separator/>
                     <MenuItem Header="Statistics" Icon="{StaticResource ImageStatisticsMenu}" Command="{Binding Commands[Statistics]}"/>
-                    <MenuItem Header="Table Info" Icon="{StaticResource ImageDatabaseMenu}" Command="{Binding Commands[Table]}"/>
                 </MenuItem>
                 <MenuItem Header="_Tools">
                     <MenuItem Header="Update Meta" Icon="{StaticResource ImageToolMetaMenu}" Command="{Binding Commands[ToolMeta]}"/>
                     <MenuItem Header="Export" Icon="{StaticResource ImageToolExportMenu}" Command="{Binding Commands[ToolExport]}"/>
                     <MenuItem Header="Title List" Icon="{StaticResource ImageToolTitleListMenu}" Command="{Binding Commands[ToolTitleList]}"/>
+                    <MenuItem Header="Table Info" Icon="{StaticResource ImageDatabaseMenu}" Command="{Binding Commands[Table]}"/>
                     <Separator/>
                     <MenuItem Header="Find Orphans" Icon="{StaticResource ImageToolOrphanMenu}" Command="{Binding Commands[ToolOrphan]}"/>
                     <MenuItem Header="Search" Icon="{StaticResource ImageToolSearchMenu}" Command="{Binding Commands[ToolSearch]}"/>
                     <MenuItem Header="Convert" Icon="{StaticResource ImageToolConvertMenu}" Command="{Binding Commands[ToolConvert]}"/>
-                    <Separator/>
                     <MenuItem Header="Scramble" Command="{Binding Commands[ToolScramble]}"/>
                     <Separator/>
                     <MenuItem Header="Reset window" Icon="{StaticResource ImageUndoMenu}" Command="{Binding Commands[ResetWindow]}" ToolTip="Reset the main window size to default"/>

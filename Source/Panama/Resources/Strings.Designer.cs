@@ -146,6 +146,24 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add alert.
+        /// </summary>
+        public static string CommandAddAlert {
+            get {
+                return ResourceManager.GetString("CommandAddAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a new alert with default value.
+        /// </summary>
+        public static string CommandAddAlertTooltip {
+            get {
+                return ResourceManager.GetString("CommandAddAlertTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add author.
         /// </summary>
         public static string CommandAddAuthor {
@@ -299,6 +317,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alerts.
+        /// </summary>
+        public static string CommandAlert {
+            get {
+                return ResourceManager.GetString("CommandAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply.
         /// </summary>
         public static string CommandApplyConfig {
@@ -421,6 +448,15 @@ namespace Restless.App.Panama.Resources {
         public static string CommandCredential {
             get {
                 return ResourceManager.GetString("CommandCredential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this alert.
+        /// </summary>
+        public static string CommandDeleteAlert {
+            get {
+                return ResourceManager.GetString("CommandDeleteAlert", resourceCulture);
             }
         }
         
@@ -1000,6 +1036,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete this alert?.
+        /// </summary>
+        public static string ConfirmationDeleteAlert {
+            get {
+                return ResourceManager.GetString("ConfirmationDeleteAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete this author?.
         /// </summary>
         public static string ConfirmationDeleteAuthor {
@@ -1158,6 +1203,15 @@ namespace Restless.App.Panama.Resources {
         public static string ConfirmationTitleSubmittedPreviouslyToPublisher {
             get {
                 return ResourceManager.GetString("ConfirmationTitleSubmittedPreviouslyToPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alert title.
+        /// </summary>
+        public static string FilterPromptAlert {
+            get {
+                return ResourceManager.GetString("FilterPromptAlert", resourceCulture);
             }
         }
         

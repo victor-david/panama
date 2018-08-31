@@ -108,6 +108,9 @@
     </Compile>
     <Compile Include="Database\Tables\PublisherTableStats.cs" />
     <Compile Include="Database\Tables\SubmissionBatchTableStats.cs" />
+    <Compile Include="Database\Tables\AlertTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
     <Compile Include="Database\Tables\TitleVersionTableStats.cs" />
     <Compile Include="Database\Tables\ConfigTable.cs">
       <SubType>foo</SubType>
@@ -215,6 +218,7 @@
     <Content Include="Schema\submissionmessageattachment.ddl.sql" />
     <Content Include="Schema\submissionperiod.ddl.sql" />
     <Content Include="Schema\tag.ddl.sql" />
+    <Content Include="Schema\alert.ddl.sql" />
     <Content Include="Schema\title.ddl.sql" />
     <Content Include="Schema\titletag.ddl.sql" />
     <Content Include="Schema\titleversion.ddl.sql" />

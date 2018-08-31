@@ -7,9 +7,14 @@
     xmlns:con="clr-namespace:Restless.App.Panama.Controls">
     
     <!-- Template to apply a AuthorView to an instance of the AuthorViewModel class shown in the main window  -->
+    <DataTemplate DataType="{x:Type vm:AlertViewModel}">
+        <vw:AlertView />
+    </DataTemplate>
+    
+    <!-- Template to apply a AuthorView to an instance of the AuthorViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:AuthorViewModel}">
         <vw:AuthorView />
-    </DataTemplate>
+    </DataTemplate>    
     
     <!-- Template to apply a ConfigView to an instance of the ConfigViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:ConfigViewModel}">

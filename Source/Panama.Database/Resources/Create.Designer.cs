@@ -61,6 +61,20 @@ namespace Restless.App.Panama.Database.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE &quot;alert&quot; (
+        ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
+        ///  &quot;title&quot; TEXT NOT NULL, 
+        ///  &quot;date&quot; TIMESTAMP NOT NULL,
+        ///  &quot;enabled&quot; BOOLEAN DEFAULT 0
+        ///);.
+        /// </summary>
+        internal static string Alert {
+            get {
+                return ResourceManager.GetString("Alert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE &quot;author&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
         ///  &quot;name&quot; TEXT NOT NULL,

@@ -257,7 +257,9 @@
     <Compile Include="ViewModel\ToolSearchViewModel.cs" />
     <Compile Include="ViewModel\ToolOrphanViewModel.cs" />
     <Compile Include="ViewModel\ToolExportViewModel.cs" />
+    <Compile Include="ViewModel\AlertViewModel.cs" />
     <Compile Include="ViewModel\UserNoteViewModel.cs" />
+    <Compile Include="ViewModel\Windows\AlertWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\AboutWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\CommandToolsWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\TitleVersionRenameWindowViewModel.cs" />
@@ -296,6 +298,9 @@
     <Compile Include="View\EditControls\ToolPreview.xaml.cs">
       <DependentUpon>ToolPreview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditControls\AlertEdit.xaml.cs">
+      <DependentUpon>AlertEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
     </Compile>
@@ -325,6 +330,9 @@
     </Compile>
     <Compile Include="View\EditControls\UserNoteEdit.xaml.cs">
       <DependentUpon>UserNoteEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AlertView.xaml.cs">
+      <DependentUpon>AlertView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserNoteView.xaml.cs">
       <DependentUpon>UserNoteView.xaml</DependentUpon>
@@ -388,6 +396,9 @@
     </Compile>
     <Compile Include="View\EditControls\TitleEdit.xaml.cs">
       <DependentUpon>TitleEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\AlertWindow.xaml.cs">
+      <DependentUpon>AlertWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\CommandToolsWindow.xaml.cs">
       <DependentUpon>CommandToolsWindow.xaml</DependentUpon>
@@ -535,6 +546,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\EditControls\AlertEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\StatisticsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -572,6 +587,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\EditControls\UserNoteEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AlertView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -658,6 +677,10 @@
     <Page Include="View\EditControls\TitleEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\AlertWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Windows\AboutWindow.xaml">
       <SubType>Designer</SubType>

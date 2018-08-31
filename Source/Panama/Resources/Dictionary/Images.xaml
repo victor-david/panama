@@ -17,7 +17,7 @@
     <BitmapImage x:Key="ImageArrowLeft" UriSource="/Panama;component/Resources/Images/Image.Arrow.Left.48.png"/>
     <BitmapImage x:Key="ImageArrowRight" UriSource="/Panama;component/Resources/Images/Image.Arrow.Right.48.png"/>
     <BitmapImage x:Key="ImageArrowUp" UriSource="/Panama;component/Resources/Images/Image.Arrow.Up.48.png"/>
-    <BitmapImage x:Key="ImageBrowseToUrl" UriSource="/Panama;component/Resources/Images/Image.Arrow.Right.48.png"/>
+    <BitmapImage x:Key="ImageBrowseToUrl" UriSource="/Panama;component/Resources/Images/Image.Chevron.Right.64.png"/>
     <BitmapImage x:Key="ImageCalendar" UriSource="/Panama;component/Resources/Images/Image.Calendar.48.png"/>
     <BitmapImage x:Key="ImageCheck" UriSource="/Panama;component/Resources/Images/Image.Check.48.png"/>
     <BitmapImage x:Key="ImageChevronDown" UriSource="/Panama;component/Resources/Images/Image.Chevron.Down.64.png"/>
@@ -82,8 +82,8 @@
     <BitmapImage x:Key="ImageUser" UriSource="/Panama;component/Resources/Images/Image.User.48.png"/>
 
     <Style TargetType="Image" x:Key="MenuItemImage">
-        <Setter Property="Height" Value="24" />
-        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Width" Value="20" />
     </Style>
 
     <Style TargetType="Image" x:Key="ToolBarImage">
@@ -105,6 +105,7 @@
     <!-- x:Shared="False" allows an image to be used multiple times-->
     <Image x:Key="ImageAddDocumentMenu" Source="{StaticResource ImageFileType1}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageBrowseToUrlMenu" x:Shared="False"  Source="{StaticResource ImageBrowseToUrl}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageCalendarMenu" x:Shared="False" Source="{StaticResource ImageCalendar}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageCheckMenu" x:Shared="False" Source="{StaticResource ImageCheck}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageCloseMenu" x:Shared="False" Source="{StaticResource ImageClose}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageConfigMenu" Source="{StaticResource ImageConfig}" Style="{StaticResource MenuItemImage}"/>

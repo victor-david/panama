@@ -66,8 +66,6 @@ namespace Restless.App.Panama.ViewModel
         }
         #endregion
 
-
-
         /************************************************************************/
 
         #region Constructor

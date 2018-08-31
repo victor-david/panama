@@ -5,6 +5,7 @@ using Restless.App.Panama.Database;
 using Restless.App.Panama.ViewModel;
 using Restless.Tools.Utility;
 using Restless.App.Panama.Resources;
+using Restless.App.Panama.Database.Tables;
 
 namespace Restless.App.Panama
 {
@@ -83,6 +84,17 @@ namespace Restless.App.Panama
                 main.Height = Config.Instance.MainWindowHeight;
                 main.WindowState = Config.Instance.MainWindowState;
                 main.Show();
+                DisplayAlertsIf();
+            }
+        }
+
+        private void DisplayAlertsIf()
+        {
+            var alerts = DatabaseController.Instance.GetTable<AlertTable>().GetReadyAlerts();
+            if (alerts.Count > 0)
+            {
+                Window alert = WindowFactory.Alert.Create(alerts);
+                alert.Show();
             }
         }
         #endregion

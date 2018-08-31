@@ -826,4 +826,22 @@ Do you want to continue?</value>
   <data name="CommandPublisherFilterActiveTooltip" xml:space="preserve">
     <value>Filter title list to display only publishers that are active, i.e. not flagged as a goner</value>
   </data>
+  <data name="CommandAddAlert" xml:space="preserve">
+    <value>Add alert</value>
+  </data>
+  <data name="CommandAddAlertTooltip" xml:space="preserve">
+    <value>Add a new alert with default value</value>
+  </data>
+  <data name="CommandDeleteAlert" xml:space="preserve">
+    <value>Delete this alert</value>
+  </data>
+  <data name="ConfirmationDeleteAlert" xml:space="preserve">
+    <value>Delete this alert?</value>
+  </data>
+  <data name="FilterPromptAlert" xml:space="preserve">
+    <value>Alert title</value>
+  </data>
+  <data name="CommandAlert" xml:space="preserve">
+    <value>Alerts</value>
+  </data>
 </root>

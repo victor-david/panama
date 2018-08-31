@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.View;
 using Restless.App.Panama.ViewModel;
 
@@ -157,6 +159,7 @@ namespace Restless.App.Panama
 
         /************************************************************************/
 
+        
         #region TitleVersionRename
         /// <summary>
         /// Provides static methods for creating a title version rename window.
@@ -170,8 +173,10 @@ namespace Restless.App.Panama
             /// <returns>The window</returns>
             public static TitleVersionRenameWindow Create(Int64 titleId)
             {
-                var window = new TitleVersionRenameWindow();
-                window.Title = Restless.App.Panama.Resources.Strings.WindowTitleVersionRename;
+                var window = new TitleVersionRenameWindow
+                {
+                    Title = Restless.App.Panama.Resources.Strings.WindowTitleVersionRename
+                };
                 TextOptions.SetTextFormattingMode(window);
                 window.Owner = Application.Current.MainWindow;
                 var viewModel = new TitleVersionRenameWindowViewModel(window, titleId);
@@ -180,6 +185,28 @@ namespace Restless.App.Panama
         }
         #endregion
 
+        /************************************************************************/
+
+        #region Alert
+        /// <summary>
+        /// Provides static methods for creating the application's Alert window.
+        /// </summary>
+        public static class Alert
+        {
+            /// <summary>
+            /// Creates an instance of AlertWindow and its corresponding view model.
+            /// </summary>
+            /// <returns>The window</returns>
+            public static AlertWindow Create(ObservableCollection<AlertTable.RowObject> alerts)
+            {
+                var window = new AlertWindow();
+                TextOptions.SetTextFormattingMode(window);
+                window.Owner = Application.Current.MainWindow;
+                var viewModel = new AlertWindowViewModel(window, alerts);
+                return window;
+            }
+        }
+        #endregion
         /************************************************************************/
 
         #region Workspace
