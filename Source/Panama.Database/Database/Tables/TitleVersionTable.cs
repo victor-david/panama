@@ -91,27 +91,19 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return Defs.Columns.Id; }
+            get => Defs.Columns.Id;
         }
-
-        ///// <summary>
-        ///// Gets the statistics object. This return value is recreated
-        ///// every time the property is accessed
-        ///// </summary>
-        //public TitleVersionTableStats Stats
-        //{
-        //    get { return new TitleVersionTableStats(this); }
-        //}
         #endregion
 
         /************************************************************************/
-        
+
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TitleVersionTable"/> class.
+        /// </summary>
         public TitleVersionTable() : base(DatabaseController.Instance, Defs.TableName)
         {
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -152,7 +144,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <returns>An array of DataRow objects</returns>
         public DataRow[] GetAllVersions(Int64 titleId)
         {
-            return Select(String.Format("{0}={1}", Defs.Columns.TitleId, titleId), String.Format("{0} ASC", Defs.Columns.Version));
+            return Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC");
         }
 
         /// <summary>
@@ -164,7 +156,7 @@ namespace Restless.App.Panama.Database.Tables
         {
             // TODO: It's possible to have two titles that point to the same file for one of their versions.
             fileName = fileName.Replace("'", "''");
-            DataRow[] rows = Select(String.Format("{0}='{1}'", Defs.Columns.FileName, fileName));
+            DataRow[] rows = Select($"{Defs.Columns.FileName}='{fileName}'");
             if (rows.Length > 0)
             {
                 return rows[0];
@@ -354,7 +346,7 @@ namespace Restless.App.Panama.Database.Tables
         private DataRow GetFirstOrLastVersion(Int64 titleId, bool getFirst)
         {
             string order = (getFirst) ? "ASC" : "DESC";
-            DataRow[] rows = Select(String.Format("{0}={1}", Defs.Columns.TitleId, titleId), String.Format("{0} {1}", Defs.Columns.Version, order));
+            DataRow[] rows = Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} {order}");
             if (rows.Length > 0)
             {
                 return rows[0];
@@ -371,53 +363,15 @@ namespace Restless.App.Panama.Database.Tables
         /// <returns>A DataRow object with the specified version for the title, or null if it doesn't exist.</returns>
         private DataRow GetVersion(Int64 titleId, Int64 version)
         {
-            DataRow[] rows = Select(String.Format("{0}={1} AND {2}={3}", Defs.Columns.TitleId, titleId, Defs.Columns.Version, version));
+            DataRow[] rows = Select($"{Defs.Columns.TitleId}={titleId} AND {Defs.Columns.Version}={version}");
             if (rows.Length == 1)
             {
                 return rows[0];
             }
             return null;
         }
-
-
-
         #endregion
 
-        /************************************************************************/
-
-        #region ITableImport and IColumnRowImporter implementation (commented out)
-        //public bool PerformImport()
-        //{
-        //    return DatabaseImporter.Instance.ImportTable(this, this, "title_version");
-        //}
-
-        //public string GetColumnName(string origColName)
-        //{
-        //    switch (origColName)
-        //    {
-        //        case "documentid": return Defs.Columns.Id;
-        //        case "document_type": return Defs.Columns.DocType;
-        //        case "vnote": return Defs.Columns.Note;
-        //        case "lang_id": return Defs.Columns.LangId;
-        //        default: return origColName;
-        //    }
-        //}
-
-        //public bool GetRowConfirmation(System.Data.DataRow row)
-        //{
-        //    return true;
-        //}
-
-        //public bool IncludeColumn(string origColName)
-        //{
-        //    if (origColName == "ready" || origColName == "time_min" || origColName == "time_sec" || origColName == "date_timed")
-        //    {
-        //        return false;
-        //    }
-        //    return true;
-        //}
-        #endregion
-        
         /************************************************************************/
         
         #region Row Object
@@ -432,7 +386,7 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public Int64 Id
             {
-                get { return GetInt64(Defs.Columns.Id); }
+                get => GetInt64(Defs.Columns.Id);
             }
 
             /// <summary>
@@ -440,7 +394,7 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public Int64 TitleId
             {
-                get { return GetInt64(Defs.Columns.TitleId); }
+                get => GetInt64(Defs.Columns.TitleId);
             }
 
             /// <summary>
@@ -448,8 +402,8 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public Int64 DocType
             {
-                get { return GetInt64(Defs.Columns.DocType); }
-                set { SetValue(Defs.Columns.DocType, value); }
+                get => GetInt64(Defs.Columns.DocType);
+                set => SetValue(Defs.Columns.DocType, value);
             }
 
             /// <summary>
@@ -457,8 +411,8 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public string FileName
             {
-                get { return GetString(Defs.Columns.FileName); }
-                set { SetValue(Defs.Columns.FileName, value); }
+                get => GetString(Defs.Columns.FileName);
+                set => SetValue(Defs.Columns.FileName, value);
             }
 
             /// <summary>
@@ -466,8 +420,8 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public string Note
             {
-                get { return GetString(Defs.Columns.Note); }
-                set { SetValue(Defs.Columns.Note, value); }
+                get => GetString(Defs.Columns.Note);
+                set => SetValue(Defs.Columns.Note, value);
             }
 
             /// <summary>
@@ -475,8 +429,8 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public DateTime Updated
             {
-                get { return GetDateTime(Defs.Columns.Updated); }
-                set { SetValue(Defs.Columns.Updated, value); }
+                get => GetDateTime(Defs.Columns.Updated);
+                set => SetValue(Defs.Columns.Updated, value);
             }
 
             /// <summary>
@@ -484,8 +438,8 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public Int64 Size
             {
-                get { return GetInt64(Defs.Columns.Size); }
-                set { SetValue(Defs.Columns.Size, value); }
+                get => GetInt64(Defs.Columns.Size);
+                set => SetValue(Defs.Columns.Size, value);
             }
 
             /// <summary>
@@ -493,8 +447,8 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public Int64 Version
             {
-                get { return GetInt64(Defs.Columns.Version); }
-                set { SetValue(Defs.Columns.Version, value); }
+                get => GetInt64(Defs.Columns.Version);
+                set => SetValue(Defs.Columns.Version, value);
             }
 
             /// <summary>
@@ -502,8 +456,8 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public Int64 WordCount
             {
-                get { return GetInt64(Defs.Columns.WordCount); }
-                set { SetValue(Defs.Columns.WordCount, value); }
+                get => GetInt64(Defs.Columns.WordCount);
+                set => SetValue(Defs.Columns.WordCount, value);
             }
 
             /// <summary>
@@ -545,7 +499,6 @@ namespace Restless.App.Panama.Database.Tables
             #endregion
         }
         #endregion
-
 
     }
 }
