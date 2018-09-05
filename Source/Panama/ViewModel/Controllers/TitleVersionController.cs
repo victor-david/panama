@@ -20,6 +20,7 @@ using Restless.Tools.Utility;
 using System.Windows.Controls;
 using Restless.Tools.OpenXml;
 using System.ComponentModel;
+using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -92,7 +93,11 @@ namespace Restless.App.Panama.ViewModel
             DataView.RowFilter = String.Format("{0}=-1", TitleVersionTable.Defs.Columns.TitleId);
             DataView.Sort = String.Format("{0}, {1} DESC", TitleVersionTable.Defs.Columns.TitleId, TitleVersionTable.Defs.Columns.Version);
             Columns.CreateImage<IntegerToImageConverter>("T", TitleVersionTable.Defs.Columns.DocType, "ImageFileType", 20.0);
-            Columns.SetDefaultSort(Columns.Create("V", TitleVersionTable.Defs.Columns.Version).MakeFixedWidth(FixedWidth.Standard), ListSortDirection.Descending);
+            Style s1 = (Style)ResourceHelper.Get("DataGridHeaderCenter");
+            Style s2 = (Style)ResourceHelper.Get("TextBlockCenter");
+
+            var col = Columns.Create("V", TitleVersionTable.Defs.Columns.Version).AddHeaderStyle(s1).AddCellStyle(s2).MakeFixedWidth(FixedWidth.Standard);
+            Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.Create("Updated", TitleVersionTable.Defs.Columns.Updated).MakeDate();
             Columns.Create("WC", TitleVersionTable.Defs.Columns.WordCount).MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Lang", TitleVersionTable.Defs.Columns.LangId).MakeFixedWidth(FixedWidth.ShortString);

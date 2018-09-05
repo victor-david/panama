@@ -47,6 +47,10 @@
         <Setter Property="Margin" Value="3,6" />
     </Style>
 
+    <Style TargetType="TextBlock" x:Key="TextBlockCenter">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    
     <Style TargetType="TextBlock" x:Key="TextBlockRight">
         <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>

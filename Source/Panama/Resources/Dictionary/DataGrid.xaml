@@ -129,13 +129,13 @@
         <Setter Property="AlternationCount" Value="{Binding Config.DataGridAlternationCount}"/>
         <Setter Property="AlternatingRowBackground" Value="{Binding Config.Colors.DataGridAlternation.BackgroundBrush}"/>
         <!--<Setter Property="RowStyle" Value="{StaticResource DataGridRowStyle}"/>-->
-        <Setter Property="ColumnHeaderStyle">
+        <!--<Setter Property="ColumnHeaderStyle">
             <Setter.Value>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Foreground" Value="Blue"/>
                 </Style>
             </Setter.Value>
-        </Setter>
+        </Setter>-->
         <Setter Property="CellStyle">
             <Setter.Value>
                 <Style TargetType="DataGridCell">
@@ -177,6 +177,14 @@
                 <ContextMenu Visibility="Collapsed" IsEnabled="False"/>
             </Setter.Value>
         </Setter>
+        <Setter Property="Foreground" Value="DarkBlue"/>
     </Style>
 
+    <!-- This style exists to have a named style same as default style (above). Used when dynamically adding a style -->
+    <Style TargetType="DataGridColumnHeader" x:Key="DataGridHeaderDefault" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+    </Style>
+
+    <Style TargetType="DataGridColumnHeader" x:Key="DataGridHeaderCenter" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
 </ResourceDictionary>

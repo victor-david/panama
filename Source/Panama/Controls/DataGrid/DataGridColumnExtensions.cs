@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Converters;
+using Restless.App.Panama.Resources;
 
 namespace Restless.App.Panama.Controls
 {
@@ -147,23 +148,12 @@ namespace Restless.App.Panama.Controls
             {
                 if (col.HeaderStyle == null)
                 {
-                    col.HeaderStyle = new Style();
+                    col.HeaderStyle = new Style(typeof(DataGridColumnHeader), (Style)ResourceHelper.Get("DataGridHeaderDefault"));
                 }
                 col.HeaderStyle.Setters.Add(new Setter(ToolTipService.ToolTipProperty, toolTip));
             }
             return col;
         }
-
-        //public static DataGridColumn AddToolTip(this DataGridColumn col, string toolTip)
-        //{
-        //    var col2 = col as DataGridBoundColumn;
-        //    if (col2 != null)
-        //    {
-        //        col2.AddToolTip(toolTip);
-        //    }
-            
-        //    return col;
-        //}
 
         /// <summary>
         /// Adds a sort specification to the column
