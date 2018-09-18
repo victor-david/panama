@@ -167,8 +167,13 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedRow != null)
             {
-                Clipboard.SetText(SelectedRow[columnName].ToString());
-                MainViewModel.CreateNotificationMessage(String.Format("{0} copied to clipboard", columnName));
+                // Once in a while the Clipboard.SetText() method throws an exception.
+                // It's rare, but catch it if it happens so it's not unhandled.
+                Execution.TryCatch(() =>
+                {
+                    Clipboard.SetText(SelectedRow[columnName].ToString());
+                    MainViewModel.CreateNotificationMessage(String.Format("{0} copied to clipboard", columnName));
+                });
             }
         }
         #endregion

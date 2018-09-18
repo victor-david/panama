@@ -74,21 +74,28 @@ namespace Restless.App.Panama.ViewModel
         #region Private Methods
         private void Paste(object o)
         {
-            if (Clipboard.ContainsText())
+            Execution.TryCatch(() =>
             {
-                Text = Clipboard.GetText();
+                if (Clipboard.ContainsText())
+                {
+                    Text = Clipboard.GetText();
+                }
+            }, (e) =>
+            {
+                MainViewModel.CreateNotificationMessage(e.Message);
             }
+            );
         }
 
         private void Scramble(object o)
         {
             Execution.TryCatch(() =>
-                {
-                    Text = Scrambled().ToString();
-                }, (e) =>
-                    {
-                        MainViewModel.CreateNotificationMessage(e.Message);
-                    });
+            {
+                Text = Scrambled().ToString();
+            }, (e) =>
+            {
+                MainViewModel.CreateNotificationMessage(e.Message);
+            });
         }
 
         private StringBuilder Scrambled()

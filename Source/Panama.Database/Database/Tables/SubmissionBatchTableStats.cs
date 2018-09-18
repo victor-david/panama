@@ -71,7 +71,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <summary>
         /// Gets the total fees.
         /// </summary>
-        public Int64 TotalFees
+        public Decimal TotalFees
         {
             get;
             private set;
@@ -118,10 +118,9 @@ namespace Restless.App.Panama.Database.Tables
                 if (respType == ResponseTable.Defs.Values.NoResponse) ActiveCount++;
                     else if   (respType == ResponseTable.Defs.Values.ResponseAccepted) AcceptedCount++;
                         else RejectedCount++ ;
-                if (row[SubmissionBatchTable.Defs.Columns.Response] is DateTime)
+                if (row[SubmissionBatchTable.Defs.Columns.Response] is DateTime response)
                 {
                     DateTime submitted = (DateTime)row[SubmissionBatchTable.Defs.Columns.Submitted];
-                    DateTime response = (DateTime)row[SubmissionBatchTable.Defs.Columns.Response];
                     TimeSpan span = response - submitted;
                     if (span.TotalDays > MaximumDays) MaximumDays = (int)span.TotalDays;
                     if (span.TotalDays < MinimumDays) MinimumDays = (int)span.TotalDays;
@@ -129,9 +128,9 @@ namespace Restless.App.Panama.Database.Tables
                     respondedSubs++;
                 }
 
-                if (row[SubmissionBatchTable.Defs.Columns.Fee] is Int64)
+                if (row[SubmissionBatchTable.Defs.Columns.Fee] is Decimal fees)
                 {
-                    TotalFees += (Int64)row[SubmissionBatchTable.Defs.Columns.Fee];
+                    TotalFees += fees;
                 }
             }
             // this would only happen if there were no submissions with a response.

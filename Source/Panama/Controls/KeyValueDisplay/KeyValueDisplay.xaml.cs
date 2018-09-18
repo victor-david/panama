@@ -93,9 +93,9 @@ namespace Restless.App.Panama.Controls
         /// <summary>
         /// Gets or sets the display value.
         /// </summary>
-        public object Value
+        public string Value
         {
-            get => GetValue(ValueProperty);
+            get => (string)GetValue(ValueProperty);
             set => SetValue(ValueProperty, value);
         }
 
@@ -104,7 +104,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register
             (
-                "Value", typeof(object), typeof(KeyValueDisplay), new UIPropertyMetadata(null)
+                "Value", typeof(string), typeof(KeyValueDisplay), new UIPropertyMetadata(null)
             );
 
         /// <summary>

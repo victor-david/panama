@@ -36,7 +36,7 @@
                 <con:KeyValueDisplay Header="Active" Value="{Binding Submission.ActiveCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValueDisplay Header="Accepted" Value="{Binding Submission.AcceptedCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValueDisplay Header="Rejected" Value="{Binding Submission.RejectedCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Fees" Value="{Binding Submission.TotalFees,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValueDisplay Header="Fees" Value="{Binding Submission.TotalFees,Mode=OneTime,StringFormat=N2}" DisplayLevel="1"/>
                 <Separator/>
                 <con:KeyValueDisplay Header="Publisher" HeaderFontSize="11.5" HeaderForeground="#FFCC0000" />
                 <con:KeyValueDisplay Header="Total" Value="{Binding Publisher.RowCount,Mode=OneTime}" DisplayLevel="1"/>
