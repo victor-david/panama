@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
 using Restless.Tools.Threading;
 using Restless.Tools.Utility;
+using System;
+using System.IO;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -33,15 +25,15 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public override int TaskId
         {
-            get { return AppTaskId.OrphanFind; }
+            get => AppTaskId.OrphanFind;
         }
 
         /// <summary>
         /// Gets the scanner object for this controller.
         /// </summary>
-        public override Tools.FileScanBase Scanner
+        public override FileScanBase Scanner
         {
-            get { return scanner; }
+            get => scanner;
         }
         #endregion
 
@@ -58,7 +50,7 @@ namespace Restless.App.Panama.ViewModel
             scanner = new OrphanFinder();
             scanner.Updated += (s, e) =>
             {
-                TaskManager.Instance.DispatchTask(() => { AddToUpdated(e.Target); });
+                TaskManager.Instance.DispatchTask(() => AddToUpdated(e.Target));
             };
             scanner.NotFound += (s, e) =>
             {
@@ -70,7 +62,7 @@ namespace Restless.App.Panama.ViewModel
             };
 
             Owner.Commands.Add("OpenFile", RunOpenFileCommand);
-            Owner.Commands.Add("DeleteFile", RunDeleteFileCommand, (o) => { return Owner.SelectedItem != null; });
+            Owner.Commands.Add("DeleteFile", RunDeleteFileCommand, (o) => Owner.SelectedItem != null);
             UpdateNotFoundHeader();
         }
         #endregion
@@ -104,8 +96,7 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunOpenFileCommand(object o)
         {
-            var row = Owner.SelectedItem as FileScanDisplayObject;
-            if (row != null)
+            if (Owner.SelectedItem is FileScanDisplayObject row)
             {
                 OpenHelper.OpenFile(Paths.Title.WithRoot(row.FileName));
             }
@@ -113,10 +104,9 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunDeleteFileCommand(object o)
         {
-            var row = Owner.SelectedItem as FileScanDisplayObject;
-            if (row != null)
+            if (Owner.SelectedItem is FileScanDisplayObject row)
             {
-                if (Restless.Tools.Utility.FileOperations.SendToRecycle(Paths.Title.WithRoot(row.FileName)))
+                if (FileOperations.SendToRecycle(Paths.Title.WithRoot(row.FileName)))
                 {
                     RemoveFromNotFound(row);
                 }

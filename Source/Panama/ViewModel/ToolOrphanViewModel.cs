@@ -1,27 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Converters;
+﻿using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Controls;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.App.Panama.Controls;
-
-using Restless.Tools.Utility;
-using System.IO;
-using Restless.Tools.Threading;
-using System.Text;
 using Restless.App.Panama.Tools;
-using System.Windows.Media.Imaging;
+using Restless.Tools.Threading;
+using Restless.Tools.Utility;
+using System.ComponentModel;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -49,7 +34,9 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToolOrphanViewModel"/> class.
+        /// </summary>
         public ToolOrphanViewModel()
         {
             DisplayName = Strings.CommandToolOrphan;
@@ -57,16 +44,18 @@ namespace Restless.App.Panama.ViewModel
             Controller = new ToolOrphanFinderController(this);
             MainSource.Source = Controller.NotFound;
 
-            Commands.Add("Begin", (o) => { Controller.Run(); });
+            Commands.Add("Begin", (o) => Controller.Run());
             Columns.Create("Modified", "LastModified").MakeDate();
             Columns.SetDefaultSort(Columns.Create("File", "FileName"), ListSortDirection.Ascending);
             AddViewSourceSortDescriptions();
-            // RawCommands["DeleteFile"] is created by ToolOrphanFinderController - it handles
+            Commands.Add("CreateTitle", RunCreateTitleCommand, (p)=> SelectedItem != null);
+            MenuItems.AddItem("Create a title entry from this file", Commands["CreateTitle"]);
+            MenuItems.AddSeparator();
+
+            // Commands["DeleteFile"] is created by ToolOrphanFinderController - it handles
             // file deletion and the removal of the corresponding item of its ObservableCollection
             MenuItems.AddItem("Delete this file", Commands["DeleteFile"], "ImageDeleteMenu");
-            
         }
-#pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -78,8 +67,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="selectedItem">The currently selected grid item.</param>
         protected override void OnPreview(object selectedItem)
         {
-            var item = selectedItem as FileScanDisplayObject;
-            if (item != null)
+            if (selectedItem is FileScanDisplayObject item)
             {
                 string fileName = Paths.Title.WithRoot(item.FileName);
                 PerformPreview(fileName);
@@ -93,8 +81,7 @@ namespace Restless.App.Panama.ViewModel
         /// <returns>The preview mode</returns>
         protected override PreviewMode GetPreviewMode(object selectedItem)
         {
-            var item = selectedItem as FileScanDisplayObject;
-            if (item != null)
+            if (selectedItem is FileScanDisplayObject item)
             {
                 return DocumentPreviewer.GetPreviewMode(item.FileName);
             }
@@ -124,6 +111,26 @@ namespace Restless.App.Panama.ViewModel
         {
             MainSource.SortDescriptions.Clear();
             MainSource.SortDescriptions.Add(new SortDescription("FileName", ListSortDirection.Ascending));
+        }
+
+        private void RunCreateTitleCommand(object parm)
+        {
+            if (SelectedItem is FileScanDisplayObject file && Messages.ShowYesNo(Strings.ConfirmationCreateTitleFromOrphan))
+            {
+                var title = DatabaseController.Instance.GetTable<TitleTable>();
+                var ver = DatabaseController.Instance.GetTable<TitleVersionTable>();
+                var row = new TitleTable.RowObject(title.AddDefaultRow())
+                {
+                    Title = "Title created from orphaned file",
+                    Written = file.LastModified,
+                    Notes = $"This entry was created from orphaned file {file.FileName}"
+                };
+
+                ver.AddVersion(row.Id, Paths.Title.WithoutRoot(file.FileName));
+                ver.Save();
+                title.Save();
+                Controller.NotFound.Remove(file);
+            }
         }
         #endregion
     }

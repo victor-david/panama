@@ -48,36 +48,29 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="172"/>
+                        <ColumnDefinition Width="172"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Style="{StaticResource TextBlockSepLabel}" Text="{x:Static r:Strings.ConfigDataGrid}"/>
+                    <!--<TextBlock Style="{StaticResource TextBlockSepLabel}" Text="{x:Static r:Strings.ConfigDataGrid}"/>-->
 
                     <!-- DataGrid Row Height -->
-                    <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockSepLabel}" Text="{x:Static r:Strings.ConfigDataGridRowHeight}"/>
-                    <ComboBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding DataGridRowHeight}" SelectedItem="{Binding Config.DataGridRowHeight}" />
+                    <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockLabel}" Margin="4,0" Text="{x:Static r:Strings.ConfigDataGridRowHeight}"/>
+                    <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding DataGridRowHeight}" SelectedItem="{Binding Config.DataGridRowHeight}" />
                     
                     
                     <!-- DataGrid Row Alternation -->
-                    <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBlockSepLabel}" Text="{x:Static r:Strings.ConfigDataGridRowAlternation}"/>
-                    <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding DataGridAlternation}" SelectedItem="{Binding Config.DataGridAlternationCount}" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Margin="4,0" Text="{x:Static r:Strings.ConfigDataGridRowAlternation}"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding DataGridAlternation}" SelectedItem="{Binding Config.DataGridAlternationCount}" />
 
                 </Grid>
 
 
-
-
-
-
-
-
-
-
-
+                <TextBlock Style="{StaticResource TextBlockSepLabel}" TextWrapping="Wrap" Text="{x:Static r:Strings.ConfigOrphanExclusion}"/>
+                <TextBox Text="{Binding Config.OrphanExclusions}" Margin="0,4"/>
 
             </StackPanel>
 

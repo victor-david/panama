@@ -58,15 +58,32 @@ namespace Restless.App.Panama.Tools
             }
 
             TotalCount = files.Count;
+            string[] exclusions = Config.Instance.OrphanExclusions.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string file in files)
             {
                 ScanCount++;
-                string searchFile = Paths.Title.WithoutRoot(file);
-                if (!versions.VersionWithFileExists(searchFile))
+                int excludeCount = 0;
+                string path = Path.GetDirectoryName(file).ToLower();
+                
+                foreach (string ex in exclusions)
                 {
-                    var item = new FileScanDisplayObject(searchFile, File.GetLastWriteTimeUtc(file));
-                    OnNotFound(item);
+                    if (path.Contains(ex.Trim().ToLower()))
+                    {
+                        excludeCount++;
+                    }
+                }
+
+                if (excludeCount == 0)
+                {
+                    string searchFile = Paths.Title.WithoutRoot(file);
+
+
+                    if (!versions.VersionWithFileExists(searchFile))
+                    {
+                        var item = new FileScanDisplayObject(searchFile, File.GetLastWriteTimeUtc(file));
+                        OnNotFound(item);
+                    }
                 }
             }
         }

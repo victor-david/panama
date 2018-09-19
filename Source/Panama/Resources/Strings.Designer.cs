@@ -965,7 +965,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Row alternation.
+        ///   Looks up a localized string similar to Data grid row alternation.
         /// </summary>
         public static string ConfigDataGridRowAlternation {
             get {
@@ -974,11 +974,20 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Row height.
+        ///   Looks up a localized string similar to Data grid row height.
         /// </summary>
         public static string ConfigDataGridRowHeight {
             get {
                 return ResourceManager.GetString("ConfigDataGridRowHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orphan exclusions. This value specifies folder exclusions used during orphan detection. Values are separated by semi-colon and if found within a folder name indicate that the folder is ignored..
+        /// </summary>
+        public static string ConfigOrphanExclusion {
+            get {
+                return ResourceManager.GetString("ConfigOrphanExclusion", resourceCulture);
             }
         }
         
@@ -1032,6 +1041,17 @@ namespace Restless.App.Panama.Resources {
         public static string ConfirmationCreateSubmissionDocument {
             get {
                 return ResourceManager.GetString("ConfirmationCreateSubmissionDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string ConfirmationCreateTitleFromOrphan {
+            get {
+                return ResourceManager.GetString("ConfirmationCreateTitleFromOrphan", resourceCulture);
             }
         }
         
@@ -1540,7 +1560,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation searches all files beneath the title root directory to find those files that are not associated with a title entry..
+        ///   Looks up a localized string similar to This operation searches all files beneath the title root directory to find those files that are not associated with a title entry. The submission document folder and title export folder are automatically excluded from the search if they exist beneath title root. You can exclude other folders in configuration..
         /// </summary>
         public static string HeaderToolOperationOrphan {
             get {

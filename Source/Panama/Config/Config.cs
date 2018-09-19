@@ -19,8 +19,8 @@ namespace Restless.App.Panama.Configuration
     /// </summary>
     public sealed class Config : BindableBase
     {
+
         #region Private
-        private static Config instance;
         private ConfigTable table;
         #endregion
 
@@ -431,6 +431,17 @@ namespace Restless.App.Panama.Configuration
             get => GetItem(null);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets a value that specifies folder exclusions used during orphan detection.
+        /// Values are separated by semi-colon and if found within a folder name indicate that
+        /// the folder is not considered when looking for orphans.
+        /// </summary>
+        public string OrphanExclusions
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/
@@ -439,47 +450,28 @@ namespace Restless.App.Panama.Configuration
         /// <summary>
         /// Gets the singleton instance of this class
         /// </summary>
-        public static Config Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new Config();
-                }
-                return instance;
-            }
-        }
+        public static Config Instance { get; } = new Config();
 
         private Config()
         {
             table = DatabaseController.Instance.GetTable<ConfigTable>();
             TitleFilter = GetValueFromRow(nameof(TitleFilter), null).Deserialize<TitleFilter>();
             PublisherFilter = GetValueFromRow(nameof(PublisherFilter), null).Deserialize<PublisherFilter>();
-            //ColorGonerPublisher = new ConfigColor(this, nameof(ColorGonerPublisher), Default.Colors.GonerPublisher);
-            //ColorPeriodPublisher = new ConfigColor(this, nameof(ColorPeriodPublisher), Default.Colors.PeriodPublisher);
-            //ColorPublishedTitle = new ConfigColor(this, nameof(ColorPublishedTitle), Default.Colors.PublishedTitle);
-            //ColorSubmittedTitle = new ConfigColor(this, nameof(ColorSubmittedTitle), Default.Colors.SubmittedTitle);
             Colors = new ConfigColors();
-
         }
 
+        /// <summary>
+        /// Static constructor. Tells C# compiler not to mark type as beforefieldinit.
+        /// </summary>
+        static Config()
+        {
+            // not sure if this is still needed in .NET 4.x
+        }
         #endregion
 
         /************************************************************************/
 
         #region Public methods
-        ///// <summary>
-        ///// Resets the configuration colors.
-        ///// </summary>
-        //public void ResetColors()
-        //{
-        //    ColorGonerPublisher.ResetToDefault();
-        //    ColorPeriodPublisher.ResetToDefault();
-        //    ColorPublishedTitle.ResetToDefault();
-        //    ColorSubmittedTitle.ResetToDefault();
-        //}
-
         /// <summary>
         /// Saves the filter objects by serializing them into their rows.
         /// This method is called at shutdown.
@@ -628,72 +620,6 @@ namespace Restless.App.Panama.Configuration
                 row[ConfigTable.Defs.Columns.Value] = value;
             }
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region ConfigColor class
-        ///// <summary>
-        ///// Represents a single configuration color.
-        ///// </summary>
-        //public class ConfigColor
-        //{
-        //    private Config owner;
-        //    private string id;
-        //    private Color? defaultValue;
-
-        //    /// <summary>
-        //    /// Gets or sets the color.
-        //    /// </summary>
-        //    public Color? Color
-        //    {
-        //        get => owner.GetColor(defaultValue, id);
-        //        set => owner.SetColor(value, id);
-        //    }
-
-        //    /// <summary>
-        //    /// Gets a boolean value that indicates if <see cref="Color"/> contains a color value.
-        //    /// </summary>
-        //    public bool HasValue
-        //    {
-        //        get => Color != null && Color.HasValue;
-        //    }
-
-        //    /// <summary>
-        //    /// 
-        //    /// </summary>
-        //    /// <param name="owner">The owner</param>
-        //    /// <param name="id">The id associated with this color.</param>
-        //    /// <param name="defaultValue">The default value associated with this color.</param>
-        //    public ConfigColor(Config owner, string id, Color? defaultValue)
-        //    {
-        //        this.owner = owner ?? throw new ArgumentNullException();
-        //        this.id = id ?? throw new ArgumentNullException();
-        //        this.defaultValue = defaultValue;
-        //    }
-
-        //    /// <summary>
-        //    /// Resets this configuration color to ts default value.
-        //    /// </summary>
-        //    public void ResetToDefault()
-        //    {
-        //        Color = defaultValue;
-        //    }
-
-        //    /// <summary>
-        //    /// Get the brush according to the specified Color.
-        //    /// </summary>
-        //    /// <returns>The brush, or null if <see cref="HasValue"/> is false.</returns>
-        //    public SolidColorBrush GetBrush()
-        //    {
-        //        if (HasValue)
-        //        {
-        //            return new SolidColorBrush(Color.Value);
-        //        }
-        //        return null;
-        //    }
-        //}
-
         #endregion
     }
 }
