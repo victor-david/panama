@@ -372,6 +372,7 @@ namespace Restless.App.Panama.Database.Resources {
         ///   Looks up a localized string similar to CREATE TABLE &quot;title&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL, 
         ///  &quot;title&quot; TEXT NOT NULL, 
+        ///  &quot;created&quot; TIMESTAMP NOT NULL, 
         ///  &quot;written&quot; TIMESTAMP NOT NULL, 
         ///  &quot;authorid&quot; INTEGER NOT NULL DEFAULT 1, 
         ///  &quot;ready&quot; BOOLEAN DEFAULT 0,

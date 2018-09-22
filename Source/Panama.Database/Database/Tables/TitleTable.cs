@@ -37,6 +37,11 @@ namespace Restless.App.Panama.Database.Tables
                 public const string Title = "title";
 
                 /// <summary>
+                /// The name of the created column. Holds the date that the title record was created.
+                /// </summary>
+                public const string Created = "created";
+
+                /// <summary>
                 /// The name of the written column. Holds the date that the title was written.
                 /// </summary>
                 public const string Written = "written";
@@ -287,7 +292,6 @@ namespace Restless.App.Panama.Database.Tables
             AcceptChanges();
         }
 
-
         /// <summary>
         /// Populates a new row with default (starter) values
         /// </summary>
@@ -295,6 +299,7 @@ namespace Restless.App.Panama.Database.Tables
         protected override void PopulateDefaultRow(System.Data.DataRow row)
         {
             row[Defs.Columns.Title] = "(new title)";
+            row[Defs.Columns.Created] = DateTime.UtcNow;
             row[Defs.Columns.Written] = DateTime.UtcNow;
             row[Defs.Columns.AuthorId] = 1;
             row[Defs.Columns.Ready] = 0;
@@ -337,36 +342,6 @@ namespace Restless.App.Panama.Database.Tables
 
         /************************************************************************/
 
-        #region ITableImport and IColumnRowImporter implementation (commented out)
-        //public bool PerformImport()
-        //{
-        //    //Controller.
-        //    return DatabaseImporter.Instance.ImportTable(this, this);
-        //}
-
-        //public string GetColumnName(string origColName)
-        //{
-        //    switch (origColName)
-        //    {
-        //        case "titleid": return Defs.Columns.Id;
-        //        case "date_write": return Defs.Columns.Written;
-        //        default: return origColName;
-        //    }
-        //}
-
-        //public bool IncludeColumn(string origColName)
-        //{
-        //    return (origColName != "classid" && origColName != "submission_count");
-        //}
-
-        //public bool GetRowConfirmation(System.Data.DataRow row)
-        //{
-        //    return true;
-        //}
-        #endregion
-
-        /************************************************************************/
-
         #region Row Object
         /// <summary>
         /// Encapsulates a single row from the <see cref="TitleTable"/>.
@@ -389,6 +364,14 @@ namespace Restless.App.Panama.Database.Tables
             {
                 get => GetString(Defs.Columns.Title);
                 set => SetValue(Defs.Columns.Title, value);
+            }
+
+            /// <summary>
+            /// Gets the created date/time value for this row object.
+            /// </summary>
+            public DateTime Created
+            {
+                get => GetDateTime(Defs.Columns.Created);
             }
 
             /// <summary>
