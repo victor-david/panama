@@ -22,7 +22,11 @@
         </Grid.RowDefinitions>
         <!-- Controls specific to this view (no commands) -->
         <!--<ItemsControl Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>-->
-        <view:SimpleRowFilter />
+        <StackPanel Orientation="Horizontal">
+            <view:SimpleRowFilter />
+            <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding SourceCount}"/>
+            <TextBlock Style="{StaticResource TextBlockMessage}" Text="records"/>
+        </StackPanel>
 
         <!-- Main data grid to display the tabular data -->
         <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">

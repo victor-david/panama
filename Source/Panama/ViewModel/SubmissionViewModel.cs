@@ -78,7 +78,9 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubmissionViewModel"/> class.
+        /// </summary>
         public SubmissionViewModel()
         {
             DisplayName = Strings.CommandSubmission;
@@ -120,7 +122,6 @@ namespace Restless.App.Panama.ViewModel
             FilterText = Config.SubmissionFilter;
             AddCommand.Supported = CommandSupported.NoWithException;
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -140,8 +141,6 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Protected Methods
-
-
         /// <summary>
         /// Called when the filter text has changed to set the filter on the underlying data.
         /// </summary>

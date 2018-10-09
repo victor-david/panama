@@ -187,11 +187,13 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-#pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataGridViewModel{T}"/> class.
+        /// </summary>
         protected DataGridViewModel()
         {
             Table = DatabaseController.Instance.GetTable<T>();
-            DataView = new System.Data.DataView(Table);
+            DataView = new DataView(Table);
             DataView.ListChanged += new ListChangedEventHandler(DataViewListChanged);
             MainSource.Source = DataView;
             AddCommand = new RelayCommand(RunAddCommand, CanRunAddCommand);
@@ -199,7 +201,6 @@ namespace Restless.App.Panama.ViewModel
             ClearFilterCommand = new RelayCommand(RunClearFilterCommand, CanRunClearFilterCommand);
             OpenRowCommand = new RelayCommand(RunOpenRowCommand, CanRunOpenRowCommand);
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
