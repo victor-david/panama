@@ -86,16 +86,19 @@ namespace Restless.App.Panama.ViewModel
             DisplayName = Strings.CommandSubmission;
             MaxCreatable = 1;
             Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
-            Columns.CreateImage<BooleanToImageConverter>("O", SubmissionBatchTable.Defs.Columns.Online);
-            Columns.CreateImage<BooleanToImageConverter>("C", SubmissionBatchTable.Defs.Columns.Contest);
-            Columns.CreateImage<BooleanToImageConverter>("L", SubmissionBatchTable.Defs.Columns.Locked);
+            Columns.CreateImage<BooleanToImageConverter>("O", SubmissionBatchTable.Defs.Columns.Online)
+                .AddToolTip(Strings.TooltipSubmissionOnline);
+            Columns.CreateImage<BooleanToImageConverter>("C", SubmissionBatchTable.Defs.Columns.Contest)
+                .AddToolTip(Strings.TooltipSubmissionContest);
+            Columns.CreateImage<BooleanToImageConverter>("L", SubmissionBatchTable.Defs.Columns.Locked)
+                .AddToolTip(Strings.TooltipSubmissionLocked);
             var col = Columns.Create("Submitted", SubmissionBatchTable.Defs.Columns.Submitted)
                 .MakeDate()
                 .AddSort(SubmissionBatchTable.Defs.Columns.Calculated.Submitted, SubmissionBatchTable.Defs.Columns.Submitted, DataGridColumnSortBehavior.FollowPrimary);
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.Create("Response", SubmissionBatchTable.Defs.Columns.Response).MakeDate();
             Columns.Create("Type", SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName).MakeFixedWidth(FixedWidth.MediumString);
-            Columns.Create<DatesToDayDiffConverter>("Days", SubmissionBatchTable.Defs.Columns.Submitted, SubmissionBatchTable.Defs.Columns.Response).MakeFixedWidth(FixedWidth.MediumNumeric);
+            Columns.Create<DatesToDayDiffConverter>("Days", SubmissionBatchTable.Defs.Columns.Submitted, SubmissionBatchTable.Defs.Columns.Response).MakeCentered().MakeFixedWidth(FixedWidth.MediumNumeric);
             Columns.Create("Publisher", SubmissionBatchTable.Defs.Columns.Joined.Publisher);
             Columns.Create("Fee", SubmissionBatchTable.Defs.Columns.Fee).MakeNumeric("N2", FixedWidth.MediumNumeric);
             Columns.Create("Award", SubmissionBatchTable.Defs.Columns.Award).MakeNumeric("N0", FixedWidth.MediumNumeric);

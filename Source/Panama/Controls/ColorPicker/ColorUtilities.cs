@@ -36,7 +36,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         /// <param name="stringToFormat">The string to format</param>
         /// <param name="isUsingAlphaChannel">true if using alpha channel; otherwise, false</param>
-        /// <returns></returns>
+        /// <returns>A format string for the color.</returns>
         public static string FormatColorString(string stringToFormat, bool isUsingAlphaChannel)
         {
             if (!isUsingAlphaChannel && (stringToFormat.Length == 9))

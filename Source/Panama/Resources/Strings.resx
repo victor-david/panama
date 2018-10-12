@@ -852,4 +852,16 @@ Do you want to continue?</value>
   <data name="ConfigOrphanExclusion" xml:space="preserve">
     <value>Orphan exclusions. This value specifies folder exclusions used during orphan detection. Values are separated by semi-colon and if found within a folder name indicate that the folder is ignored.</value>
   </data>
+  <data name="TooltipSubmissionContest" xml:space="preserve">
+    <value>Submission is for a contest</value>
+  </data>
+  <data name="TooltipSubmissionLocked" xml:space="preserve">
+    <value>Submission is locked</value>
+  </data>
+  <data name="TooltipSubmissionOnline" xml:space="preserve">
+    <value>Submission is online</value>
+  </data>
+  <data name="TooltipTitleReady" xml:space="preserve">
+    <value>Title is flagged as ready</value>
+  </data>
 </root>

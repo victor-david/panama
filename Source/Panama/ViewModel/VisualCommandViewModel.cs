@@ -13,8 +13,17 @@ namespace Restless.App.Panama.ViewModel
         private object icon;
 
         #region Public Fields
+        /// <summary>
+        /// The default image size. Represents both height and width.
+        /// </summary>
         public const double DefaultImageSize = 32.0;
+        /// <summary>
+        /// The default font size for the text that accompanies the image.
+        /// </summary>
         public const double DefaultFontSize = 11.5;
+        /// <summary>
+        /// The default minimum width.
+        /// </summary>
         public const double DefaultMinWidth = 132.0;
         #endregion
 
@@ -93,7 +102,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="icon">The icon associated with the visual command.</param>
         /// <param name="imageSize">The icon's image size. This is both height and width. The default is 32.0</param>
         /// <param name="fontSize">The font size for <paramref name="displayName"/>. The default is 11.5</param>
-        /// <param name="minWidth">The button mimimum width. Default is 132.0</param>
+        /// <param name="minWidth">The button mimimum width. Default is <see cref="DefaultMinWidth"/></param>
         public VisualCommandViewModel
             (
                 string displayName, string toolTipText, ICommand command, object icon,
@@ -116,12 +125,11 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="displayName">The display name associated with this command.</param>
         /// <param name="toolTipText">The tooltip text. Not all visuals may use this.</param>
         /// <param name="command">The command to excute.</param>
+        /// <param name="minWidth">The button mimimum width. Default is <see cref="DefaultMinWidth"/></param>        /// 
         public VisualCommandViewModel(string displayName, string toolTipText, ICommand command, double minWidth)
             : this(displayName, toolTipText, command, null, DefaultImageSize, DefaultFontSize, minWidth)
         {
         }
         #endregion
-
-
     }
 }

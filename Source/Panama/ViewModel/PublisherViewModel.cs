@@ -110,13 +110,18 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Url", PublisherTable.Defs.Columns.Url);
             Columns.SetDefaultSort(Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate()
                 .AddToolTip(Strings.TooltipPublisherAdded), ListSortDirection.Descending);
-            Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub).MakeDate()
+            Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub)
+                .MakeDate()
                 .AddToolTip(Strings.TooltipPublisherLastSubmission)
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
-            Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount).MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.Standard)
                 .AddToolTip(Strings.TooltipPublisherSubmissionCount)
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
-            Columns.Create("PC", PublisherTable.Defs.Columns.Calculated.SubPeriodCount).MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("PC", PublisherTable.Defs.Columns.Calculated.SubPeriodCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.Standard)
                 .AddToolTip(Strings.TooltipPublisherSubmissionPeriodCount)
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
             AddViewSourceSortDescriptions();

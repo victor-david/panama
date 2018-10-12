@@ -189,7 +189,7 @@ namespace Restless.App.Panama.ViewModel
             DisplayName = Strings.CommandTitle;
             MaxCreatable = 1;
             Columns.Create("Id", TitleTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
-            Columns.CreateImage<BooleanToImageConverter>("R", TitleTable.Defs.Columns.Ready);
+            Columns.CreateImage<BooleanToImageConverter>("R", TitleTable.Defs.Columns.Ready).AddToolTip(Strings.TooltipTitleReady);
             Columns.Create("Title", TitleTable.Defs.Columns.Title).MakeFlexWidth(4);
             Columns.SetDefaultSort(Columns.Create("Written", TitleTable.Defs.Columns.Written).MakeDate(), ListSortDirection.Descending);
 
@@ -199,23 +199,23 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("WC", TitleTable.Defs.Columns.Calculated.LastestVersionWordCount).MakeFixedWidth(FixedWidth.Standard)
                 .AddToolTip(Strings.TooltipTitleWordCount);
 
-            Columns.Create("SC", TitleTable.Defs.Columns.Calculated.SubCount).MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("SC", TitleTable.Defs.Columns.Calculated.SubCount).MakeCentered().MakeFixedWidth(FixedWidth.Standard)
                 .AddToolTip(Strings.TooltipTitleSubmissionCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("CS", TitleTable.Defs.Columns.Calculated.CurrentSubCount).MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("CS", TitleTable.Defs.Columns.Calculated.CurrentSubCount).MakeCentered().MakeFixedWidth(FixedWidth.Standard)
                 .AddToolTip(Strings.TooltipTitleCurrentSubmissionCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("VC", TitleTable.Defs.Columns.Calculated.VersionCount).MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("VC", TitleTable.Defs.Columns.Calculated.VersionCount).MakeCentered().MakeFixedWidth(FixedWidth.Standard)
                 .AddToolTip(Strings.TooltipTitleVersionCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("TC", TitleTable.Defs.Columns.Calculated.TagCount).MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("TC", TitleTable.Defs.Columns.Calculated.TagCount).MakeCentered().MakeFixedWidth(FixedWidth.Standard)
                 .AddToolTip(Strings.TooltipTitleTagCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("PC", TitleTable.Defs.Columns.Calculated.PublishedCount).MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("PC", TitleTable.Defs.Columns.Calculated.PublishedCount).MakeCentered().MakeFixedWidth(FixedWidth.Standard)
                 .AddToolTip(Strings.TooltipTitlePublishedCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 

@@ -32,7 +32,9 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TagViewModel"/> class.
+        /// </summary>
         public TagViewModel()
         {
             DisplayName = Strings.CommandTag;
@@ -40,7 +42,9 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Id", TagTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.SetDefaultSort(Columns.Create("Tag", TagTable.Defs.Columns.Tag), ListSortDirection.Ascending);
             Columns.Create("Description", TagTable.Defs.Columns.Description).MakeFlexWidth(2.5);
-            Columns.Create("Usage", TagTable.Defs.Columns.UsageCount).MakeFixedWidth(FixedWidth.MediumNumeric);
+            Columns.Create("Usage", TagTable.Defs.Columns.UsageCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.MediumNumeric);
             AddViewSourceSortDescriptions();
             Commands.Add("RefreshTagUsage", (o) =>
                 {
@@ -55,7 +59,6 @@ namespace Restless.App.Panama.ViewModel
 
             AddCommand.Supported = CommandSupported.Yes;
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/

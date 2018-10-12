@@ -1980,6 +1980,33 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Submission is for a contest.
+        /// </summary>
+        public static string TooltipSubmissionContest {
+            get {
+                return ResourceManager.GetString("TooltipSubmissionContest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission is locked.
+        /// </summary>
+        public static string TooltipSubmissionLocked {
+            get {
+                return ResourceManager.GetString("TooltipSubmissionLocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission is online.
+        /// </summary>
+        public static string TooltipSubmissionOnline {
+            get {
+                return ResourceManager.GetString("TooltipSubmissionOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current submission count - the number of submissions that are still open for this title.
         /// </summary>
         public static string TooltipTitleCurrentSubmissionCount {
@@ -1994,6 +2021,15 @@ namespace Restless.App.Panama.Resources {
         public static string TooltipTitlePublishedCount {
             get {
                 return ResourceManager.GetString("TooltipTitlePublishedCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title is flagged as ready.
+        /// </summary>
+        public static string TooltipTitleReady {
+            get {
+                return ResourceManager.GetString("TooltipTitleReady", resourceCulture);
             }
         }
         

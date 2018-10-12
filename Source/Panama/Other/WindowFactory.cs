@@ -196,6 +196,7 @@ namespace Restless.App.Panama
             /// <summary>
             /// Creates an instance of AlertWindow and its corresponding view model.
             /// </summary>
+            /// <param name="alerts">The list of alerts to display.</param>
             /// <returns>The window</returns>
             public static AlertWindow Create(ObservableCollection<AlertTable.RowObject> alerts)
             {

@@ -90,7 +90,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <summary>
         /// Gets a list of alerts that are currently ready, i.e with a date that falls on or before the current date.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An Observable collection of <see cref="RowObject"/> items that contains all active alerts.</returns>
         public ObservableCollection<RowObject> GetReadyAlerts()
         {
             ObservableCollection<RowObject> result = new ObservableCollection<RowObject>();

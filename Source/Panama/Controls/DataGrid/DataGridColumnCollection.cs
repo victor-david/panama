@@ -35,10 +35,14 @@ namespace Restless.App.Panama.Controls
         {
             Validations.ValidateNullEmpty(header, "CreateColumn.Header");
             Validations.ValidateNullEmpty(bindingName, "CreateColumn.BindingName");
-            DataGridTextColumn col = new DataGridTextColumn();
-            col.Header = header;
-            col.Binding = new System.Windows.Data.Binding(bindingName);
-            col.Binding.TargetNullValue = "--";
+            DataGridTextColumn col = new DataGridTextColumn
+            {
+                Header = MakeTextBlockHeader(header),
+                Binding = new Binding(bindingName)
+                {
+                    TargetNullValue = "--"
+                }
+            };
             Add(col);
             return col;
         }
@@ -53,11 +57,15 @@ namespace Restless.App.Panama.Controls
         /// <returns>The newly created column.</returns>
         public DataGridBoundColumn Create<T>(string header, params string[] bindingNames) where T: IMultiValueConverter, new()
         {
-            DataGridTextColumn col = new DataGridTextColumn();
-            col.Header = header;
+            DataGridTextColumn col = new DataGridTextColumn
+            {
+                Header = MakeTextBlockHeader(header)
+            };
 
-            MultiBinding multiBinding = new MultiBinding();
-            multiBinding.Converter = new T();
+            MultiBinding multiBinding = new MultiBinding
+            {
+                Converter = new T()
+            };
             foreach (string name in bindingNames)
             {
                 multiBinding.Bindings.Add(new Binding(name));
@@ -80,16 +88,20 @@ namespace Restless.App.Panama.Controls
         /// <returns>The newly created column.</returns>
         public DataGridTemplateColumn CreateImage<T>(string header, string bindingName, object converterParm = null, double imageXY = 12.0, bool isVisible = true) where T : IValueConverter, new()
         {
-            DataGridTemplateColumn col = new DataGridTemplateColumn();
-            col.Header = header;
-            col.CanUserResize = false;
-            col.Width = new DataGridLength(imageXY * 1.55, DataGridLengthUnitType.Pixel);
+            DataGridTemplateColumn col = new DataGridTemplateColumn
+            {
+                Header = MakeTextBlockHeader(header),
+                CanUserResize = false,
+                Width = new DataGridLength(imageXY * 1.55, DataGridLengthUnitType.Pixel)
+            };
 
             FrameworkElementFactory factory = new FrameworkElementFactory(typeof(Image));
-            Binding binding = new Binding(bindingName);
-            binding.Mode = BindingMode.OneWay;
-            binding.Converter = new T();
-            binding.ConverterParameter = converterParm;
+            Binding binding = new Binding(bindingName)
+            {
+                Mode = BindingMode.OneWay,
+                Converter = new T(),
+                ConverterParameter = converterParm
+            };
             factory.SetValue(Image.SourceProperty, binding);
             factory.SetValue(Image.WidthProperty, imageXY);
             factory.SetValue(Image.HeightProperty, imageXY);
@@ -132,6 +144,15 @@ namespace Restless.App.Panama.Controls
         /************************************************************************/
 
         #region Private Methods
+
+        private TextBlock MakeTextBlockHeader(string text)
+        {
+            return new TextBlock()
+            {
+                Text = text
+            };
+        }
+
         private void ClearColumnSortDirections()
         {
             foreach (var c in this)

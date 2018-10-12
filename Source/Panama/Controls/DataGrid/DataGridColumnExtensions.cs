@@ -89,6 +89,22 @@ namespace Restless.App.Panama.Controls
         }
 
         /// <summary>
+        /// Makes the column header and the cell style centered.
+        /// </summary>
+        /// <param name="col">The column.</param>
+        /// <returns>The column.</returns>
+        /// <remarks>
+        /// For this method to work, two styles must be available.
+        /// See <see cref="ResourceHelper.StyleDataGridHeaderCenter"/> and <see cref="ResourceHelper.StyleTextBlockCenter"/>.
+        /// </remarks>
+        public static DataGridBoundColumn MakeCentered(this DataGridBoundColumn col)
+        {
+            Style s1 = (Style)ResourceHelper.Get(ResourceHelper.StyleDataGridHeaderCenter);
+            Style s2 = (Style)ResourceHelper.Get(ResourceHelper.StyleTextBlockCenter);
+            return col.AddHeaderStyle(s1).AddCellStyle(s2);
+        }
+
+        /// <summary>
         /// Makes the column fixed width, unable to resize
         /// </summary>
         /// <param name="col">The column</param>
@@ -134,7 +150,7 @@ namespace Restless.App.Panama.Controls
             ((System.Windows.Data.Binding)col.Binding).Converter = new StringToMaskedStringConverter();
             return col;
         }
-        
+
 
         /// <summary>
         /// Adds the specified tooltip text to the column's header
@@ -142,15 +158,45 @@ namespace Restless.App.Panama.Controls
         /// <param name="col">The column</param>
         /// <param name="toolTip">The text of the tool tip</param>
         /// <returns>The column</returns>
+        /// <remarks>
+        /// <para>
+        ///   This method attempts to add a tool tip to the column header.
+        ///   If the column header is a TextBlock object, it sets the ToolTip property
+        ///   of the TextBlock to the specified text.
+        /// </para>
+        /// <para>
+        ///   Otherwise, it attempts to add the tooltip via the HeaderStyle property of the column.
+        ///   If HeaderStyle is null, it first adds the DataGridHeaderDefault style. It then 
+        ///   checks the Setters property of the style to see if a new Setter may be added. If so, it adds
+        ///   a ToolTipService.ToolTipProperty property setter with the specified text.
+        /// </para>
+        /// <para>
+        ///   If the HeaderStyle property has already been set (for instance, via a previous call to
+        ///   <see cref="MakeCentered(DataGridBoundColumn)"/>, the HeaderStyle.Setters collection is sealed.
+        ///   Under these conditions, this method does not set the tooltip text and no error is thrown.
+        /// </para>
+        /// </remarks>
         public static DataGridColumn AddToolTip(this DataGridColumn col, string toolTip)
         {
             if (!String.IsNullOrEmpty(toolTip))
             {
-                if (col.HeaderStyle == null)
+                if (col.Header is TextBlock textBlock)
                 {
-                    col.HeaderStyle = new Style(typeof(DataGridColumnHeader), (Style)ResourceHelper.Get("DataGridHeaderDefault"));
+                    textBlock.ToolTip = toolTip;
                 }
-                col.HeaderStyle.Setters.Add(new Setter(ToolTipService.ToolTipProperty, toolTip));
+                else
+                {
+                    var obj = col.Header;
+                    if (col.HeaderStyle == null)
+                    {
+                        col.HeaderStyle = new Style(typeof(DataGridColumnHeader), (Style)ResourceHelper.Get("DataGridHeaderDefault"));
+                    }
+
+                    if (!col.HeaderStyle.Setters.IsSealed)
+                    {
+                        col.HeaderStyle.Setters.Add(new Setter(ToolTipService.ToolTipProperty, toolTip));
+                    }
+                }
             }
             return col;
         }
