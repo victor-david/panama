@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
+﻿using Restless.App.Panama.Controls;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
 using Restless.Tools.Utility;
+using System;
+using System.Data;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -48,10 +36,11 @@ namespace Restless.App.Panama.ViewModel
             DataView.RowFilter = String.Format("{0}=-1", PublishedTable.Defs.Columns.TitleId);
             DataView.Sort = String.Format("{0} DESC", PublishedTable.Defs.Columns.Added);
             Columns.Create("Added", PublishedTable.Defs.Columns.Added).MakeDate();
+            Columns.Create("Published", PublishedTable.Defs.Columns.Published).MakeDate();
             Columns.Create("Publisher", PublishedTable.Defs.Columns.Joined.Publisher);
             Columns.Create("Url",  PublishedTable.Defs.Columns.Url);
             Owner.Commands.Add("PublishedAdd", RunAddPublishedCommand);
-            Owner.Commands.Add("PublishedRemove", RunRemovePublishedCommand, (o) => { return SelectedRow != null; });
+            Owner.Commands.Add("PublishedRemove", RunRemovePublishedCommand, (o) => SelectedRow != null);
             HeaderPreface = Strings.HeaderPublished;
         }
         #endregion

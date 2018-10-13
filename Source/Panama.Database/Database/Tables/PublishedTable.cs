@@ -47,6 +47,11 @@ namespace Restless.App.Panama.Database.Tables
                 public const string Added = "added";
 
                 /// <summary>
+                /// The name of the published column. This column holds the date that the corresponding title was published.
+                /// </summary>
+                public const string Published = "published";
+
+                /// <summary>
                 /// The name of the url column. This column holds the url to the published title.
                 /// </summary>
                 public const string Url = "url";
@@ -74,18 +79,19 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return Defs.Columns.Id; }
+            get => Defs.Columns.Id;
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PublishedTable"/> class.
+        /// </summary>
         public PublishedTable() : base(DatabaseController.Instance, Defs.TableName)
         {
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -144,37 +150,5 @@ namespace Restless.App.Panama.Database.Tables
             CreateChildToParentColumn(Defs.Columns.Joined.Publisher, PublisherTable.Defs.Relations.ToPublished, PublisherTable.Defs.Columns.Name);
         }
         #endregion
-
-        /************************************************************************/
-
-        #region ITableImport and IColumnRowImporter implementation (commented out)
-        //public bool PerformImport()
-        //{
-        //    return DatabaseImporter.Instance.ImportTable(this, this);
-        //}
-
-        //public string GetColumnName(string origColName)
-        //{
-        //    switch (origColName)
-        //    {
-        //        case "publicationid": return Defs.Columns.PublisherId;
-        //        case "date_add": return Defs.Columns.Added;
-        //        default: return origColName;
-        //    }
-        //}
-
-        //public bool IncludeColumn(string origColName)
-        //{
-        //    return true;
-        //}
-
-        //public bool GetRowConfirmation(System.Data.DataRow row)
-        //{
-        //    return true;
-        //}
-        #endregion
-
-
-
     }
 }

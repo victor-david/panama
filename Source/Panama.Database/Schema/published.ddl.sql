@@ -3,6 +3,7 @@ CREATE TABLE "published" (
   "titleid" INTEGER NOT NULL,
   "publisherid" INTEGER NOT NULL DEFAULT 0,
   "added" TIMESTAMP NOT NULL,
+  "published" TIMESTAMP,
   "url" TEXT,
   "notes" TEXT
 );

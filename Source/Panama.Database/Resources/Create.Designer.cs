@@ -179,6 +179,7 @@ namespace Restless.App.Panama.Database.Resources {
         ///  &quot;titleid&quot; INTEGER NOT NULL,
         ///  &quot;publisherid&quot; INTEGER NOT NULL DEFAULT 0,
         ///  &quot;added&quot; TIMESTAMP NOT NULL,
+        ///  &quot;published&quot; TIMESTAMP,
         ///  &quot;url&quot; TEXT,
         ///  &quot;notes&quot; TEXT
         ///);
