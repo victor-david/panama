@@ -7,7 +7,7 @@
     {
         #region Private
         private FilterState inPeriod;
-        private FilterState simultaneous;
+        private FilterState exclusive;
         private FilterState paying;
         private FilterState followup;
         private FilterState goner;
@@ -26,7 +26,7 @@
                 return
                     base.IsAnyFilterActive || 
                     InPeriod != FilterState.Either ||
-                    Simultaneous != FilterState.Either ||
+                    Exclusive != FilterState.Either ||
                     Paying != FilterState.Either ||
                     Followup != FilterState.Either ||
                     Goner != FilterState.Either;
@@ -38,7 +38,7 @@
         /// </summary>
         public FilterState InPeriod
         {
-            get { return inPeriod; }
+            get => inPeriod;
             set 
             {
                 if (SetProperty(ref inPeriod, value))
@@ -51,12 +51,12 @@
         /// <summary>
         /// Gets or sets the filter's simultaneous option. 
         /// </summary>
-        public FilterState Simultaneous
+        public FilterState Exclusive
         {
-            get { return simultaneous; }
+            get => exclusive;
             set
             {
-                if (SetProperty(ref simultaneous, value))
+                if (SetProperty(ref exclusive, value))
                 {
                     OnChanged();
                 }
@@ -68,7 +68,7 @@
         /// </summary>
         public FilterState Paying
         {
-            get { return paying; }
+            get => paying;
             set
             {
                 if (SetProperty(ref paying, value))
@@ -83,7 +83,7 @@
         /// </summary>
         public FilterState Followup
         {
-            get { return followup; }
+            get => followup;
             set
             {
                 if (SetProperty(ref followup, value))
@@ -99,7 +99,7 @@
         /// </summary>
         public FilterState Goner
         {
-            get { return goner; }
+            get => goner;
             set
             {
                 if (SetProperty(ref goner, value))
@@ -131,7 +131,7 @@
         {
             IsChangedEventSuspended = true;
             InPeriod = FilterState.Either;
-            Simultaneous = FilterState.Either;
+            Exclusive = FilterState.Either;
             Paying = FilterState.Either;
             Followup = FilterState.Either;
             Goner = FilterState.Either;

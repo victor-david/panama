@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace Restless.App.Panama.Controls
 {
@@ -13,13 +11,15 @@ namespace Restless.App.Panama.Controls
     /// </summary>
     public class CalendarExtended : Calendar
     {
-
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CalendarExtended"/> class.
+        /// </summary>
         public CalendarExtended()
         {
-            HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            HorizontalAlignment = HorizontalAlignment.Left;
         }
-        #pragma warning restore 1591
+
+        /************************************************************************/
 
         #region Protected methods
         /// <summary>
@@ -33,6 +33,26 @@ namespace Restless.App.Panama.Controls
             if (Mouse.Captured is CalendarItem)
             {
                 Mouse.Capture(null);
+            }
+        }
+
+        /// <summary>
+        /// Called when the selected date or dates change.
+        /// </summary>
+        /// <param name="e">The event args.</param>
+        protected override void OnSelectedDatesChanged(SelectionChangedEventArgs e)
+        {
+            base.OnSelectedDatesChanged(e);
+            if (SelectionMode == CalendarSelectionMode.SingleDate)
+            {
+                if (e.AddedItems.Count == 0)
+                {
+                    DisplayDate = DateTime.UtcNow;
+                }
+                else
+                {
+                    DisplayDate = (DateTime)e.AddedItems[0];
+                }
             }
         }
         #endregion

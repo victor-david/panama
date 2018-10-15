@@ -13,7 +13,7 @@ CREATE TABLE "publisher" (
   "credentialid" INTEGER NOT NULL DEFAULT 0,
   "notes" TEXT,
   "added" TIMESTAMP NOT NULL DEFAULT 0,
-  "simultaneous" BOOLEAN NOT NULL DEFAULT 0,
+  "exclusive" BOOLEAN NOT NULL DEFAULT 0,
   "paying" BOOLEAN NOT NULL DEFAULT 0,
   "followup" BOOLEAN NOT NULL DEFAULT 0,
   "goner" BOOLEAN NOT NULL DEFAULT 0

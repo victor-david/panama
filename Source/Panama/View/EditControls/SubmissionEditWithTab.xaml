@@ -43,26 +43,26 @@
             <TabItem Header="{x:Static r:Strings.HeaderDates}">
                 <StackPanel>
                     <Expander Header="{Binding Submitted.Header}" IsExpanded="False">
-                        <con:CalendarExtended SelectedDate="{Binding Submitted.SubmittedDate}" DisplayDate="{Binding Submitted.DisplayDate,Mode=OneWay}" HorizontalAlignment="Left"/>
+                        <con:CalendarExtended SelectedDate="{Binding Submitted.SubmittedDate}" />
                     </Expander>
 
                     <Expander Header="{Binding Response.Header}" IsExpanded="False">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="260"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Column="0">
                                 <Label>Date</Label>
-                                <con:CalendarExtended SelectedDate="{Binding Response.ResponseDate}" DisplayDate="{Binding Response.DisplayDate,Mode=OneWay}"/>
+                                <con:CalendarExtended SelectedDate="{Binding Response.ResponseDate}" />
                             </StackPanel>
                             <StackPanel Grid.Column="1">
                                 <Label>Type</Label>
                                 <ListBox IsEnabled="{Binding Response.HaveResponseDate}" ItemsSource="{Binding Response.DataView}" SelectedValue="{Binding Response.ResponseType}" SelectedValuePath="id" DisplayMemberPath="name"></ListBox>
-                                <Button Content="Clear Response Date" Command="{Binding Response.ClearResponseCommand}"/>
+                                <Button Content="Clear" Command="{Binding Response.ClearResponseCommand}" Width="100" HorizontalAlignment="Left"/>
                             </StackPanel>
                         </Grid>
                     </Expander>

@@ -1935,6 +1935,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Publisher wants an exclusive submission, i.e. does not accept simultaneous.
+        /// </summary>
+        public static string TooltipPublisherExclusive {
+            get {
+                return ResourceManager.GetString("TooltipPublisherExclusive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Publisher is currently in one of its submission periods.
         /// </summary>
         public static string TooltipPublisherInPeriod {

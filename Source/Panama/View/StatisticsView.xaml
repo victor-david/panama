@@ -43,7 +43,7 @@
                 <con:KeyValueDisplay Header="In Period" Value="{Binding Publisher.InSubmissionPeriodCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValueDisplay Header="Followup" Value="{Binding Publisher.FollowupCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValueDisplay Header="Paying" Value="{Binding Publisher.PayingCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Simultaneous" Value="{Binding Publisher.SimultaneousCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValueDisplay Header="Exclusive" Value="{Binding Publisher.ExclusiveCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValueDisplay Header="Goner" Value="{Binding Publisher.GonerCount,Mode=OneTime}" DisplayLevel="1"/>
                 <Separator/>
                 <con:KeyValueDisplay Header="Submission replies (days)" HeaderFontSize="11.5" HeaderWidth="200" HeaderForeground="#FFCC0000"/>

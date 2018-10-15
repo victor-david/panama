@@ -31,6 +31,7 @@
     <BitmapImage x:Key="ImageDotBlue" UriSource="/Panama;component/Resources/Images/Image.Dot.Blue.32.png"/>
     <BitmapImage x:Key="ImageDotGreen" UriSource="/Panama;component/Resources/Images/Image.Dot.Green.32.png"/>
     <BitmapImage x:Key="ImageDotRed" UriSource="/Panama;component/Resources/Images/Image.Dot.Red.32.png"/>
+    <BitmapImage x:Key="ImageExclamation" UriSource="/Panama;component/Resources/Images/Image.Exclamation.64.png"/>
     <BitmapImage x:Key="ImageExit" UriSource="/Panama;component/Resources/Images/Image.Exit.64.png"/>
     
     <BitmapImage x:Key="ImageFileType0" UriSource="/Panama;component/Resources/Images/Image.FileType.Unknown.48.png"/>

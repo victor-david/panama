@@ -73,9 +73,9 @@ namespace Restless.App.Panama.Database.Tables
                 public const string Options = "options";
 
                 /// <summary>
-                /// The name of the simultaneous column, whether the publisher accepts simultaneous submissions.
+                /// The name of the exclusive, whether non-zero, the publisher does not accept simultaneous submissions.
                 /// </summary>
-                public const string Simultaneous = "simultaneous";
+                public const string Exclusive = "exclusive";
 
                 /// <summary>
                 /// The name of the paying column, whether the publisher pays its contributors.
@@ -168,19 +168,20 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return Defs.Columns.Id; }
+            get => Defs.Columns.Id;
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PublisherTable"/> class.
+        /// </summary>
         public PublisherTable() : base(DatabaseController.Instance, Defs.TableName)
         {
             saveBeforeUpdateInPeriod = true;
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -278,7 +279,7 @@ namespace Restless.App.Panama.Database.Tables
             row[Defs.Columns.Name] = "(new publisher)";
             row[Defs.Columns.Options] = 0;
             row[Defs.Columns.Paying] = false;
-            row[Defs.Columns.Simultaneous] = false;
+            row[Defs.Columns.Exclusive] = false;
         }
         #endregion
 
@@ -359,45 +360,6 @@ namespace Restless.App.Panama.Database.Tables
             }
             return (DateTime.Compare(now, start) >= 0 && DateTime.Compare(now, end) <= 0);
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region ITableImport and IColumnRowImporter implementation (commented out)
-        //public bool PerformImport()
-        //{
-        //    return DatabaseImporter.Instance.ImportTable(this, this, "publication");
-        //}
-
-        //public string GetColumnName(string origColName)
-        //{
-        //    switch (origColName)
-        //    {
-        //        case "publicationid": return Defs.Columns.Id;
-        //        case "pubname": return Defs.Columns.Name;
-        //        case "website": return Defs.Columns.Url;
-        //        case "submission_count": return Defs.Columns.SubCount;
-        //        case "last_submission_date": return Defs.Columns.LastSub;
-        //        case "credential_id": return Defs.Columns.CredentialId;
-        //        case "date_added": return Defs.Columns.Added;
-        //        default: return origColName;
-        //    }
-        //}
-
-        //public bool IncludeColumn(string origColName)
-        //{
-        //    return true;
-        //}
-
-        //public bool GetRowConfirmation(DataRow row)
-        //{
-        //    string noteStr = row[Defs.Columns.Notes].ToString();
-        //    if (String.IsNullOrEmpty(noteStr) || noteStr.StartsWith(@"{\rtf1\"))
-        //    {
-        //        row[Defs.Columns.Notes] = DBNull.Value;
-        //    }
-        //    return true;
-        //}
         #endregion
     }
 }

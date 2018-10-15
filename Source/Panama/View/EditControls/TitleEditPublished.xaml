@@ -5,6 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:view="clr-namespace:Restless.App.Panama.View"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="554">
     <StackPanel>
@@ -17,15 +18,10 @@
         </DataGrid>
         <ToolBarTray>
             <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                <Button Command="{Binding Commands[PublishedAdd]}" Content="Add" ToolTip="Add a published entry"/>
-                <Button Command="{Binding Commands[PublishedRemove]}" Content="Remove" ToolTip="Remove the selected entry"/>
+                <Button Command="{Binding Published.Commands[PublishedAdd]}" Content="Add" ToolTip="Add a published entry"/>
+                <Button Command="{Binding Published.Commands[PublishedRemove]}" Content="Remove" ToolTip="Remove the selected entry"/>
             </ToolBar>
         </ToolBarTray>
-        <StackPanel Margin="0,8" Visibility="{Binding Published.EditVisibility}">
-            <Label>Url</Label>
-            <TextBox Text="{Binding Published.SelectedRow[url]}" />
-            <Label>Notes</Label>
-            <TextBox Style="{StaticResource TextBoxMulti}" Text="{Binding Published.SelectedRow[notes]}"/>
-        </StackPanel>
+        <view:PublishedEdit Visibility="{Binding Published.EditVisibility}"/>
     </StackPanel>
 </UserControl>

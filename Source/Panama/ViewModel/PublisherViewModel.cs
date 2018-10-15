@@ -1,18 +1,14 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Controls;
+using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
-using System.Windows.Media;
-using Restless.App.Panama.Converters;
-using System.Collections.ObjectModel;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -105,7 +101,9 @@ namespace Restless.App.Panama.ViewModel
             MaxCreatable = 1;
             Columns.Create("Id", PublishedTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod).AddToolTip(Strings.TooltipPublisherInPeriod);
+            Columns.CreateImage<BooleanToImageConverter>("E", PublisherTable.Defs.Columns.Exclusive, "ImageExclamation").AddToolTip(Strings.TooltipPublisherExclusive);
             Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Paying, "ImageMoney").AddToolTip(Strings.TooltipPublisherPay);
+
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
             Columns.Create("Url", PublisherTable.Defs.Columns.Url);
             Columns.SetDefaultSort(Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate()

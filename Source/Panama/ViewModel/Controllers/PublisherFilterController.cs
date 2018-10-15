@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using System.Windows.Media;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Database;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Resources;
 using Restless.App.Panama.Filter;
+using Restless.App.Panama.Resources;
+using Restless.Tools.Utility;
+using System;
+using System.Text;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -187,10 +177,10 @@ namespace Restless.App.Panama.ViewModel
                 Append(String.Format("{0}={1}", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod, (byte)f.InPeriod), (f.InPeriod == FilterState.No ? "not in submission period" : "in submission period"));
             }
 
-            if (f.Simultaneous != FilterState.Either)
+            if (f.Exclusive != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(String.Format("{0}={1}", PublisherTable.Defs.Columns.Simultaneous, (byte)f.Simultaneous), (f.Simultaneous == FilterState.No ? "not simultaneous" : "simultaneous"));
+                Append(String.Format("{0}={1}", PublisherTable.Defs.Columns.Exclusive, (byte)f.Exclusive), (f.Exclusive == FilterState.No ? "simultaneous" : "exclusive (no simultaneous)"));
             }
 
             if (f.Paying != FilterState.Either)

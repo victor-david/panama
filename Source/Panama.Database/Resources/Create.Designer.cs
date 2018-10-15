@@ -208,10 +208,10 @@ namespace Restless.App.Panama.Database.Resources {
         ///  &quot;credentialid&quot; INTEGER NOT NULL DEFAULT 0,
         ///  &quot;notes&quot; TEXT,
         ///  &quot;added&quot; TIMESTAMP NOT NULL DEFAULT 0,
-        ///  &quot;simultaneous&quot; BOOLEAN NOT NULL DEFAULT 0,
+        ///  &quot;exclusive&quot; BOOLEAN NOT NULL DEFAULT 0,
         ///  &quot;paying&quot; BOOLEAN NOT NULL DEFAULT 0,
         ///  &quot;followup&quot; BOOLEAN NOT NULL DEFAULT 0,
-        ///  &quot;goner [rest of string was truncated]&quot;;.
+        ///  &quot;goner&quot; B [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Publisher {
             get {

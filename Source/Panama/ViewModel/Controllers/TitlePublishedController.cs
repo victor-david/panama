@@ -17,9 +17,50 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
-        #region Public properties
 
+        #region Public properties
+        /// <summary>
+        /// Gets or sets the published date.
+        /// </summary>
+        public object PublishedDate
+        {
+            get
+            {
+                if (SelectedRow != null)
+                {
+                    if (SelectedRow[PublishedTable.Defs.Columns.Published] is DateTime dt)
+                    {
+                        return dt;
+                    }
+                }
+                return null;
+            }
+            set
+            {
+                if (SelectedRow != null)
+                {
+                    if (value == null) value = DBNull.Value;
+                    SelectedRow[PublishedTable.Defs.Columns.Published] = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        ///// <summary>
+        ///// Gets the published display date. Used to bind to the edit view.
+        ///// Can't bind directly to the data row because if it's null, calendar shows January, 0001
+        ///// </summary>
+        //public DateTime PublishedDisplayDate
+        //{
+        //    get
+        //    {
+        //        if (SelectedRow != null && SelectedRow[PublishedTable.Defs.Columns.Published] is DateTime dt)
+        //        {
+        //            return dt;
+        //        }
+        //        return DateTime.UtcNow;
+        //    }
+        //}
         #endregion
 
         /************************************************************************/
@@ -39,8 +80,9 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Published", PublishedTable.Defs.Columns.Published).MakeDate();
             Columns.Create("Publisher", PublishedTable.Defs.Columns.Joined.Publisher);
             Columns.Create("Url",  PublishedTable.Defs.Columns.Url);
-            Owner.Commands.Add("PublishedAdd", RunAddPublishedCommand);
-            Owner.Commands.Add("PublishedRemove", RunRemovePublishedCommand, (o) => SelectedRow != null);
+            Commands.Add("PublishedAdd", RunAddPublishedCommand);
+            Commands.Add("PublishedRemove", RunRemovePublishedCommand, (o) => SelectedRow != null);
+            Commands.Add("ClearPublishedDate", (o) => PublishedDate = null);
             HeaderPreface = Strings.HeaderPublished;
         }
         #endregion
@@ -61,7 +103,16 @@ namespace Restless.App.Panama.ViewModel
         protected override void OnUpdate()
         {
             Int64 titleId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = String.Format("{0}={1}", PublishedTable.Defs.Columns.TitleId, titleId);
+            DataView.RowFilter = $"{PublishedTable.Defs.Columns.TitleId}={titleId}";
+        }
+
+        /// <summary>
+        /// Called when the selected item changes
+        /// </summary>
+        protected override void OnSelectedItemChanged()
+        {
+            base.OnSelectedItemChanged();
+            OnPropertyChanged(nameof(PublishedDate));
         }
 
         /// <summary>

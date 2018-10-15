@@ -864,4 +864,7 @@ Do you want to continue?</value>
   <data name="TooltipTitleReady" xml:space="preserve">
     <value>Title is flagged as ready</value>
   </data>
+  <data name="TooltipPublisherExclusive" xml:space="preserve">
+    <value>Publisher wants an exclusive submission, i.e. does not accept simultaneous</value>
+  </data>
 </root>

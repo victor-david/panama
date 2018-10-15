@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Converters;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
+using System;
+using System.Data;
+using System.Windows.Input;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -73,24 +64,6 @@ namespace Restless.App.Panama.ViewModel
                     }
                     OnResponsePropertiesChanged();
                 }
-            }
-        }
-
-        /// <summary>
-        /// Gets the response date display name. Used to bind to the edit view
-        /// Can't bind directly DisplayDate="{Binding  SelectedRow[response]}"
-        /// because when there isn't yet a response date, the calendar shows January, 0001
-        /// </summary>
-        public DateTime DisplayDate
-        {
-            get
-            {
-                DateTime displayDate = DateTime.UtcNow;
-                if (Owner.SelectedRow != null && Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response] != DBNull.Value)
-                {
-                    displayDate = (DateTime)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response];
-                }
-                return displayDate;
             }
         }
 
@@ -190,7 +163,6 @@ namespace Restless.App.Panama.ViewModel
         {
             OnPropertyChanged(nameof(HaveResponseDate));
             OnPropertyChanged(nameof(ResponseDate));
-            OnPropertyChanged(nameof(DisplayDate));
             OnPropertyChanged(nameof(Header));
             OnPropertyChanged(nameof(ResponseType));
         }
@@ -205,6 +177,5 @@ namespace Restless.App.Panama.ViewModel
             return (Owner.SelectedRow != null && Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response] != DBNull.Value);
         }
         #endregion
-
     }
 }

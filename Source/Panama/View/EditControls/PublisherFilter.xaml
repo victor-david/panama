@@ -25,11 +25,11 @@
                         </StackPanel>
                     </StackPanel>
                     <StackPanel>
-                        <Label>Simultaneous</Label>
+                        <Label>Exclusive (no simultaneous)</Label>
                         <StackPanel Orientation="Horizontal">
-                            <RadioButton GroupName="Sim" IsChecked="{Binding Config.PublisherFilter.Simultaneous,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateYes}}">Yes</RadioButton>
-                            <RadioButton GroupName="Sim" IsChecked="{Binding Config.PublisherFilter.Simultaneous,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateNo}}">No</RadioButton>
-                            <RadioButton GroupName="Sim" IsChecked="{Binding Config.PublisherFilter.Simultaneous,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateEither}}">Either</RadioButton>
+                            <RadioButton GroupName="Sim" IsChecked="{Binding Config.PublisherFilter.Exclusive,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateYes}}">Yes</RadioButton>
+                            <RadioButton GroupName="Sim" IsChecked="{Binding Config.PublisherFilter.Exclusive,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateNo}}">No</RadioButton>
+                            <RadioButton GroupName="Sim" IsChecked="{Binding Config.PublisherFilter.Exclusive,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateEither}}">Either</RadioButton>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel>

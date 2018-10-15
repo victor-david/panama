@@ -22,7 +22,7 @@
                     <TextBox DockPanel.Dock="Top" Text="{Binding SelectedRow[email]}" />
                     <Label DockPanel.Dock="Top">Flags</Label>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="8,0">
-                        <CheckBox IsChecked="{Binding SelectedRow[simultaneous]}">Simultaneous</CheckBox>
+                        <CheckBox IsChecked="{Binding SelectedRow[exclusive]}">Exclusive (no simultaneous)</CheckBox>
                         <CheckBox IsChecked="{Binding SelectedRow[paying]}">Paying</CheckBox>
                         <CheckBox IsChecked="{Binding SelectedRow[followup]}">Follow up</CheckBox>
                         <CheckBox IsChecked="{Binding SelectedRow[goner]}">Goner</CheckBox>

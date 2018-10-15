@@ -32,9 +32,9 @@ namespace Restless.App.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets the count of publishers with a simultaneous status.
+        /// Gets the count of publishers that don't take simultaneous submissions.
         /// </summary>
-        public int SimultaneousCount
+        public int ExclusiveCount
         {
             get;
             private set;
@@ -85,14 +85,14 @@ namespace Restless.App.Panama.Database.Tables
             FollowupCount = 0;
             GonerCount = 0;
             PayingCount = 0;
-            SimultaneousCount = 0;
+            ExclusiveCount = 0;
             InSubmissionPeriodCount = 0;
             foreach (DataRow row in Table.Rows)
             {
                 if ((bool)row[PublisherTable.Defs.Columns.Followup]) FollowupCount++;
                 if ((bool)row[PublisherTable.Defs.Columns.Goner]) GonerCount++;
                 if ((bool)row[PublisherTable.Defs.Columns.Paying]) PayingCount++;
-                if ((bool)row[PublisherTable.Defs.Columns.Simultaneous]) SimultaneousCount++;
+                if ((bool)row[PublisherTable.Defs.Columns.Exclusive]) ExclusiveCount++;
                 if ((bool)row[PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod]) InSubmissionPeriodCount++;
             }
         }
