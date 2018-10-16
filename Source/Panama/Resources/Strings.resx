@@ -867,4 +867,7 @@ Do you want to continue?</value>
   <data name="TooltipPublisherExclusive" xml:space="preserve">
     <value>Publisher wants an exclusive submission, i.e. does not accept simultaneous</value>
   </data>
+  <data name="ConfirmationTitleSubmittedToExclusivePublisher" xml:space="preserve">
+    <value>This title is currently submitted to a publisher that does not accept simultaneous submissions. Do you want to continue and submit the title to another publisher?</value>
+  </data>
 </root>

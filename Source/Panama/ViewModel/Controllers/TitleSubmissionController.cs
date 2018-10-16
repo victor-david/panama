@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Controls;
+﻿using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
+using System;
 using System.ComponentModel;
+using System.Data;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -55,11 +45,14 @@ namespace Restless.App.Panama.ViewModel
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
             DataView.RowFilter = String.Format("{0}=-1", SubmissionTable.Defs.Columns.TitleId);
             DataView.Sort = String.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
-            Columns.Create("Id", SubmissionTable.Defs.Columns.BatchId).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", SubmissionTable.Defs.Columns.BatchId)
+                .MakeFixedWidth(FixedWidth.Standard);
             Columns.CreateImage<IntegerToImageConverter>("S", SubmissionTable.Defs.Columns.Status, "ImageSubStatus")
                 .AddToolTip("Submission status of this title");
             Columns.SetDefaultSort(Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted)
                 .MakeDate(), ListSortDirection.Descending);
+            Columns.CreateImage<BooleanToImageConverter>("E", SubmissionTable.Defs.Columns.Joined.PublisherExclusive, "ImageExclamation")
+                .AddToolTip(Strings.TooltipPublisherExclusive);
             Columns.Create("Publisher", SubmissionTable.Defs.Columns.Joined.Publisher);
             Columns.Create("Batch Response", SubmissionTable.Defs.Columns.Joined.ResponseTypeName);
             AddViewSourceSortDescriptions();

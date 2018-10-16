@@ -98,6 +98,11 @@ namespace Restless.App.Panama.Database.Tables
                     public const string Publisher = "JoinToJoinPublisher";
 
                     /// <summary>
+                    /// The name of the publisher exclusive column.
+                    /// </summary>
+                    public const string PublisherExclusive = "JoinToJoinPubExclusive";
+
+                    /// <summary>
                     /// The name of the column that holds the name of the response for the submission batch.
                     /// </summary>
                     public const string ResponseTypeName = "JoinToJoinReponseName";
@@ -123,12 +128,12 @@ namespace Restless.App.Panama.Database.Tables
                 /// <summary>
                 /// The value used when <see cref="Defs.Columns.Status"/> is unspecified.
                 /// </summary>
-                public const Int64 StatusNotSpecified = 0;
+                public const long StatusNotSpecified = 0;
 
                 /// <summary>
                 /// The value used when <see cref="Defs.Columns.Status"/> is withdrawn.
                 /// </summary>
-                public const Int64 StatusWithdrawn = 1;
+                public const long StatusWithdrawn = 1;
 
                 /// <summary>
                 /// The value used when <see cref="Defs.Columns.Status"/> is accepted.
@@ -138,7 +143,7 @@ namespace Restless.App.Panama.Database.Tables
                 /// It doesn't have to, but for a bit more ease of clarity when viewing
                 /// the table data directly during troubleshooting ,etc.
                 /// </remarks>
-                public const Int64 StatusAccepted = ResponseTable.Defs.Values.ResponseAccepted;
+                public const long StatusAccepted = ResponseTable.Defs.Values.ResponseAccepted;
             }
         }
 
@@ -147,18 +152,19 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return Defs.Columns.Id; }
+            get => Defs.Columns.Id;
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubmissionTable"/> class.
+        /// </summary>
         public SubmissionTable() : base(DatabaseController.Instance, Defs.TableName)
         {
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -187,7 +193,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="batchId">The id of the submission batch</param>
         /// <param name="titleId">The title id</param>
-        public void AddSubmission(Int64 batchId, Int64 titleId)
+        public void AddSubmission(long batchId, long titleId)
         {
             if (!SubmissionExists(batchId, titleId))
             {
@@ -208,9 +214,9 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="batchId">The submission batch id.</param>
         /// <param name="titleId">The title id.</param>
         /// <returns>true if exists; otherwise, false.</returns>
-        public bool SubmissionExists(Int64 batchId, Int64 titleId)
+        public bool SubmissionExists(long batchId, long titleId)
         {
-            DataRow[] rows = Select(String.Format("{0}={1} AND {2}={3}", Defs.Columns.BatchId, batchId, Defs.Columns.TitleId, titleId));
+            DataRow[] rows = Select(string.Format("{0}={1} AND {2}={3}", Defs.Columns.BatchId, batchId, Defs.Columns.TitleId, titleId));
             return (rows.Length > 0);
         }
 
@@ -223,7 +229,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <remarks>
         /// <paramref name="newOrdering"/> must be one more or one less than <paramref name="ordering"/>. If not, this method does nothing.
         /// </remarks>
-        public void ChangeSubmissionOrdering(Int64 batchId, Int64 ordering, Int64 newOrdering)
+        public void ChangeSubmissionOrdering(long batchId, long ordering, long newOrdering)
         {
             // Make sure we're only changing by 1.
             if (Math.Abs(newOrdering - ordering) != 1)
@@ -234,11 +240,11 @@ namespace Restless.App.Panama.Database.Tables
             DataRow orderingRow = null;
             DataRow newOrderingRow = null;
 
-            DataRow[] rows = Select(String.Format("{0}={1}", Defs.Columns.BatchId, batchId));
+            DataRow[] rows = Select(string.Format("{0}={1}", Defs.Columns.BatchId, batchId));
 
             foreach (DataRow row in rows)
             {
-                Int64 rowOrdering = (Int64)row[Defs.Columns.Ordering];
+                long rowOrdering = (long)row[Defs.Columns.Ordering];
                 if (rowOrdering == ordering) orderingRow = row;
                 if (rowOrdering == newOrdering) newOrderingRow = row;
             }
@@ -281,11 +287,28 @@ namespace Restless.App.Panama.Database.Tables
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Submitted, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Submitted);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.SubmittedCalc, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Calculated.Submitted);
 
-            CreateExpressionColumn<Int64>(Defs.Columns.Calculated.CurrentSubCount, String.Format("IIF(Parent({0}).{1} IS NULL, 1, 0)", SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Response));
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.CurrentSubCount, string.Format("IIF(Parent({0}).{1} IS NULL, 1, 0)", SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Response));
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Response, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Response);
             CreateChildToParentColumn(Defs.Columns.Joined.PublisherId, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.PublisherId);
             CreateChildToParentColumn(Defs.Columns.Joined.Publisher, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Joined.Publisher);
+            CreateChildToParentColumn<bool>(Defs.Columns.Joined.PublisherExclusive, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Joined.PublisherExclusive);
             CreateChildToParentColumn(Defs.Columns.Joined.ResponseTypeName, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Internal methods
+        /// <summary>
+        /// Checks if the specified title exists within the specified batch.
+        /// </summary>
+        /// <param name="batchId">The submission batch id</param>
+        /// <param name="titleId">The title id</param>
+        /// <returns>true if the title is part of the batch;otherwise, false.</returns>
+        internal bool TitleExistsInBatch(long batchId, long titleId)
+        {
+            DataRow[] rows = Select($"{Defs.Columns.BatchId}={batchId} AND {Defs.Columns.TitleId}={titleId}");
+            return rows.Length > 0;
         }
         #endregion
 
@@ -297,45 +320,16 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="batchId">The batch id.</param>
         /// <returns>The next ordering value.</returns>
-        private Int64 NextOrdering(Int64 batchId)
+        private long NextOrdering(long batchId)
         {
-            DataRow[] rows = Select(String.Format("{0}={1}", Defs.Columns.BatchId, batchId), String.Format("{0} DESC", Defs.Columns.Ordering));
+            DataRow[] rows = Select(string.Format("{0}={1}", Defs.Columns.BatchId, batchId), string.Format("{0} DESC", Defs.Columns.Ordering));
             if (rows.Length > 0)
             {
-                Int64 lastOrdering = (Int64)rows[0][Defs.Columns.Ordering];
+                long lastOrdering = (long)rows[0][Defs.Columns.Ordering];
                 return lastOrdering + 1;
             }
             return 1;
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region ITableImport and IColumnRowImporter implementation (commented out)
-        //public bool PerformImport()
-        //{
-        //    return DatabaseImporter.Instance.ImportTable(this, this);
-        //}
-
-        //public string GetColumnName(string origColName)
-        //{
-        //    switch (origColName)
-        //    {
-        //        case "submissionid": return Defs.Columns.Id;
-        //        case "date_add": return Defs.Columns.Added;
-        //        default: return origColName;
-        //    }
-        //}
-
-        //public bool IncludeColumn(string origColName)
-        //{
-        //    return true;
-        //}
-
-        //public bool GetRowConfirmation(System.Data.DataRow row)
-        //{
-        //    return true;
-        //}
         #endregion
     }
 }

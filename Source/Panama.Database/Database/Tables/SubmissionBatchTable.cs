@@ -100,6 +100,11 @@ namespace Restless.App.Panama.Database.Tables
                     public const string PublisherUrl = "JoinPubUrl";
 
                     /// <summary>
+                    /// The name of the publisher exclusive column. This column gets its value from the <see cref="PublisherTable"/>.
+                    /// </summary>
+                    public const string PublisherExclusive = "JoinPubExclusive";
+
+                    /// <summary>
                     /// The name of the response type column. This column gets its value from the <see cref="ResponseTable"/>.
                     /// </summary>
                     public const string ResponseTypeName = "JoinRespTypeName";
@@ -145,7 +150,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return Defs.Columns.Id; }
+            get => Defs.Columns.Id;
         }
         #endregion
 
@@ -167,7 +172,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override void Load()
         {
-            Load(null, String.Format("{0} DESC", Defs.Columns.Submitted));
+            Load(null, $"{Defs.Columns.Submitted} DESC");
         }
 
         /// <summary>
@@ -175,9 +180,9 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="publisherId">The publisher id</param>
         /// <returns>The number of open submission</returns>
-        public int OpenSubmissionCount(Int64 publisherId)
+        public int OpenSubmissionCount(long publisherId)
         {
-            return Select(String.Format("{0}={1} AND {2} IS NULL", Defs.Columns.PublisherId, publisherId, Defs.Columns.Response)).Length;
+            return Select($"{Defs.Columns.PublisherId}={publisherId} AND {Defs.Columns.Response} IS NULL").Length;
         }
 
         /// <summary>
@@ -187,22 +192,43 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="publisherId">The publisher id</param>
         /// <param name="excludedBatchId">The submission batch id to exclude when calculating the count.</param>
         /// <returns>The count of times the title has been submitted to the publisher, excluding those of the specified submission batch.</returns>
-        public int GetTitleToPublisherCount(Int64 titleId, Int64 publisherId, Int64 excludedBatchId)
+        public int GetTitleToPublisherCount(long titleId, long publisherId, long excludedBatchId)
         {
             int count = 0;
-            DataRow[] batchRows = Select(String.Format("{0}={1} AND {2} <> {3}", Defs.Columns.PublisherId, publisherId, Defs.Columns.Id, excludedBatchId));
+            DataRow[] batchRows = Select($"{Defs.Columns.PublisherId}={publisherId} AND {Defs.Columns.Id} <> {excludedBatchId}");
             foreach (DataRow batchRow in batchRows)
             {
                 DataRow[] submissionRows = batchRow.GetChildRows(Defs.Relations.ToSubmission);
                 foreach (DataRow submissionRow in submissionRows)
                 {
-                    if ((Int64)submissionRow[SubmissionTable.Defs.Columns.TitleId] == titleId)
+                    if ((long)submissionRow[SubmissionTable.Defs.Columns.TitleId] == titleId)
                     {
                         count++;
                     }
                 }
             }
-            //System.Diagnostics.Debugger.Break();
+            return count;
+        }
+
+        /// <summary>
+        /// Gets the number of times that the specified title is currently submitted to a publisher flagged as exclusive (does not accept simultaneous submissions)
+        /// </summary>
+        /// <param name="titleId">The title id</param>
+        /// <param name="excludePublisherId">The publisher id to exclude. This is usually the publication the title is potentially being submitted to.</param>
+        /// <returns>The count. Normally (unless the user decides to submit a title that is currently out to an exclusive publisher), this is zero or one.</returns>
+        public int GetExclusiveCount(long titleId, long excludePublisherId)
+        {
+            SubmissionTable sub = DatabaseController.Instance.GetTable<SubmissionTable>();
+            int count = 0;
+            DataRow[] active = Select($"{Defs.Columns.PublisherId}<>{excludePublisherId} AND {Defs.Columns.Response} IS NULL AND {Defs.Columns.Joined.PublisherExclusive}=1");
+            foreach(DataRow row in active)
+            {
+                long batchId = (long)row[Defs.Columns.Id];
+                if (sub.TitleExistsInBatch(batchId, titleId))
+                {
+                    count++;
+                }
+            }
             return count;
         }
 
@@ -210,7 +236,7 @@ namespace Restless.App.Panama.Database.Tables
         /// Creates a submission
         /// </summary>
         /// <param name="publisherId">The publisher id</param>
-        public void CreateSubmission(Int64 publisherId)
+        public void CreateSubmission(long publisherId)
         {
             DataRow row = NewRow();
             row[Defs.Columns.PublisherId] = publisherId;
@@ -261,6 +287,7 @@ namespace Restless.App.Panama.Database.Tables
         {
             CreateChildToParentColumn(Defs.Columns.Joined.Publisher, PublisherTable.Defs.Relations.ToSubmissionBatch, PublisherTable.Defs.Columns.Name);
             CreateChildToParentColumn(Defs.Columns.Joined.PublisherUrl, PublisherTable.Defs.Relations.ToSubmissionBatch, PublisherTable.Defs.Columns.Url);
+            CreateChildToParentColumn<bool>(Defs.Columns.Joined.PublisherExclusive, PublisherTable.Defs.Relations.ToSubmissionBatch, PublisherTable.Defs.Columns.Exclusive);
             CreateChildToParentColumn(Defs.Columns.Joined.ResponseTypeName, ResponseTable.Defs.Relations.ToSubmissionBatch, ResponseTable.Defs.Columns.Name);
             CreateActionExpressionColumn<DateTime>
                 (

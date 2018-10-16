@@ -23,16 +23,16 @@
                     </StackPanel>
                     <Grid DockPanel.Dock="Top">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
                             <Label>Fee</Label>
-                            <TextBox Text="{Binding SelectedRow[fee], StringFormat=N2}"/>
+                            <TextBox Text="{Binding SelectedRow[fee], StringFormat=N2, TargetNullValue=''}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <Label>Award</Label>
-                            <TextBox Text="{Binding SelectedRow[award], StringFormat=N2}"/>
+                            <TextBox Text="{Binding SelectedRow[award], StringFormat=N2, TargetNullValue=''}"/>
                         </StackPanel>
                     </Grid>
                     <Label DockPanel.Dock="Top">Notes</Label>

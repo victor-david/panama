@@ -1227,6 +1227,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This title is currently submitted to a publisher that does not accept simultaneous submissions. Do you want to continue and submit the title to another publisher?.
+        /// </summary>
+        public static string ConfirmationTitleSubmittedToExclusivePublisher {
+            get {
+                return ResourceManager.GetString("ConfirmationTitleSubmittedToExclusivePublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alert title.
         /// </summary>
         public static string FilterPromptAlert {

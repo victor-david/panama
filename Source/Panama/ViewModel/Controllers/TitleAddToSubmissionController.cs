@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Controls;
+﻿using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
 using Restless.Tools.Utility;
+using System;
+using System.Data;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -63,6 +54,10 @@ namespace Restless.App.Panama.ViewModel
 
             Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Date", SubmissionBatchTable.Defs.Columns.Submitted).MakeDate();
+
+            Columns.CreateImage<BooleanToImageConverter>("E", SubmissionBatchTable.Defs.Columns.Joined.PublisherExclusive, "ImageExclamation")
+                .AddToolTip(Strings.TooltipPublisherExclusive);
+
             Columns.Create("Publisher", SubmissionBatchTable.Defs.Columns.Joined.Publisher);
 
             Owner.Commands.Add("AddTitleToSubmission", (o) => 
@@ -110,18 +105,40 @@ namespace Restless.App.Panama.ViewModel
             Visible = false; 
         }
         #endregion
-        
+
         /************************************************************************/
 
         #region Private methods
+        /// <summary>
+        /// Confirms that the title should be added to the submission.
+        /// </summary>
+        /// <param name="titleId">The title id</param>
+        /// <param name="publisherId">The publisher id</param>
+        /// <param name="batchId">The batch id</param>
+        /// <returns>true if confirmed</returns>
         private bool ConfirmAddTitleToSubmission(Int64 titleId, Int64 publisherId, Int64 batchId)
         {
+            if (!CheckSimultaneousSubmission(titleId, publisherId))
+            {
+                return false;
+            }
+
             int count = DatabaseController.Instance.GetTable<SubmissionBatchTable>().GetTitleToPublisherCount(titleId, publisherId, batchId);
             if (count > 0)
             {
                 return Messages.ShowYesNo(Strings.ConfirmationTitleSubmittedPreviouslyToPublisher);
             }
 
+            return true;
+        }
+
+        private bool CheckSimultaneousSubmission(Int64 titleId, Int64 publisherId)
+        {
+            int count = DatabaseController.Instance.GetTable<SubmissionBatchTable>().GetExclusiveCount(titleId, publisherId);
+            if (count > 0)
+            {
+                return Messages.ShowYesNo(Strings.ConfirmationTitleSubmittedToExclusivePublisher);
+            }
             return true;
         }
         #endregion
