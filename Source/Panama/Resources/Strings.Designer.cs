@@ -758,6 +758,60 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string CommandSubmissionFilterActive {
+            get {
+                return ResourceManager.GetString("CommandSubmissionFilterActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter submission list to display only submissions that are active, i.e. have not yet received a response.
+        /// </summary>
+        public static string CommandSubmissionFilterActiveTooltip {
+            get {
+                return ResourceManager.GetString("CommandSubmissionFilterActiveTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Personal.
+        /// </summary>
+        public static string CommandSubmissionFilterPersonalNote {
+            get {
+                return ResourceManager.GetString("CommandSubmissionFilterPersonalNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter submission list to display submissions with a response type of Personal Note.
+        /// </summary>
+        public static string CommandSubmissionFilterPersonalNoteTooltip {
+            get {
+                return ResourceManager.GetString("CommandSubmissionFilterPersonalNoteTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try Again.
+        /// </summary>
+        public static string CommandSubmissionFilterTryAgain {
+            get {
+                return ResourceManager.GetString("CommandSubmissionFilterTryAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter submission list to display submissions with a response type of Try Again.
+        /// </summary>
+        public static string CommandSubmissionFilterTryAgainTooltip {
+            get {
+                return ResourceManager.GetString("CommandSubmissionFilterTryAgainTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add, view and modify submission information.
         /// </summary>
         public static string CommandSubmissionTooltip {

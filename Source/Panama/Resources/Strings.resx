@@ -870,4 +870,22 @@ Do you want to continue?</value>
   <data name="ConfirmationTitleSubmittedToExclusivePublisher" xml:space="preserve">
     <value>This title is currently submitted to a publisher that does not accept simultaneous submissions. Do you want to continue and submit the title to another publisher?</value>
   </data>
+  <data name="CommandSubmissionFilterActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="CommandSubmissionFilterActiveTooltip" xml:space="preserve">
+    <value>Filter submission list to display only submissions that are active, i.e. have not yet received a response</value>
+  </data>
+  <data name="CommandSubmissionFilterPersonalNote" xml:space="preserve">
+    <value>Personal</value>
+  </data>
+  <data name="CommandSubmissionFilterPersonalNoteTooltip" xml:space="preserve">
+    <value>Filter submission list to display submissions with a response type of Personal Note</value>
+  </data>
+  <data name="CommandSubmissionFilterTryAgain" xml:space="preserve">
+    <value>Try Again</value>
+  </data>
+  <data name="CommandSubmissionFilterTryAgainTooltip" xml:space="preserve">
+    <value>Filter submission list to display submissions with a response type of Try Again</value>
+  </data>
 </root>

@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.IO;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
-using System.Windows.Controls;
+using System;
+using System.ComponentModel;
+using System.Data;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -24,11 +17,21 @@ namespace Restless.App.Panama.ViewModel
     public class SubmissionViewModel : DataGridViewModel<SubmissionBatchTable>
     {
         #region Private
+        private string submissionHeader;
         #endregion
 
         /************************************************************************/
 
         #region Properties
+        /// <summary>
+        /// Gets the header text for the submission.
+        /// </summary>
+        public string SubmissionHeader
+        {
+            get => submissionHeader;
+            private set => SetProperty(ref submissionHeader, value);
+        }
+
         /// <summary>
         /// Gets the controller that handles submission titles.
         /// </summary>
@@ -107,7 +110,17 @@ namespace Restless.App.Panama.ViewModel
             AddViewSourceSortDescriptions();
 
             Commands.Add("FilterToPublisher", RunFilterToPublisherCommand, CanRunCommandIfRowSelected);
-            Commands.Add("GridSorting", (o) => { SortItemSource(o as DataGridBoundColumn); });
+            Commands.Add("ActiveFilter", (o) => { FilterText = "--"; });
+            Commands.Add("TryAgainFilter", (o) => { FilterText = "Try Again"; });
+            Commands.Add("PersonalNoteFilter", (o) => { FilterText = "Personal Note"; });
+            Commands.Add("ClearFilter", (o) => { FilterText = null; });
+
+            double minWidth = 80.0;
+            double imgSize = 20.0;
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterActive, Strings.CommandSubmissionFilterActiveTooltip, Commands["ActiveFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterTryAgain, Strings.CommandSubmissionFilterTryAgainTooltip, Commands["TryAgainFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterPersonalNote, Strings.CommandSubmissionFilterPersonalNoteTooltip, Commands["PersonalNoteFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandBrowseToPublisherUrl, OpenRowCommand, "ImageBrowseToUrlMenu");
@@ -138,6 +151,24 @@ namespace Restless.App.Panama.ViewModel
         {
             AddViewSourceSortDescriptions();
             Columns.RestoreDefaultSort();
+        }
+
+        /// <summary>
+        /// Sets the <see cref="SubmissionHeader"/> property.
+        /// </summary>
+        /// <remarks>
+        /// This method is called when the selected row changes or when the <see cref="Submitted"/> controller
+        /// updates its submitted date.
+        /// </remarks>
+        public void SetSubmissionHeader()
+        {
+            string header = null;
+            if (SelectedRow != null)
+            {
+                string dateStr = ((DateTime)SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted]).ToString(Config.Instance.DateFormat);
+                header = $"{dateStr} to {SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.Publisher]}";
+            }
+            SubmissionHeader = header;
         }
         #endregion
 
@@ -178,6 +209,7 @@ namespace Restless.App.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
+            SetSubmissionHeader();
             Titles.Update();
             Documents.Update();
             Messages.Update();
@@ -236,14 +268,8 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Private Methods
-
-        private void SortItemSource(DataGridBoundColumn col)
-        {
-            //if (col
-        }
-
         private void RunFilterToPublisherCommand(object o)
         {
             FilterText = SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.Publisher].ToString();

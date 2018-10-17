@@ -45,6 +45,8 @@
         <!-- Splitter -->
         <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource GridSplitterVertical}" />
 
+        <ItemsControl Grid.Column="2" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=FilterCommands}"/>
+
         <!-- Nested editing control on the right -->
         <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderGridContainer}">
             <view:SubmissionEditWithTab Visibility="{Binding EditVisibility}"/>

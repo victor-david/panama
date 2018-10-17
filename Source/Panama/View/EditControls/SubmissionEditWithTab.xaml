@@ -14,30 +14,32 @@
         <TabControl.Items>
             <!-- Main data: flags, fees, notes -->
             <TabItem Header="{x:Static r:Strings.HeaderData}">
-                <DockPanel>
-                    <Label DockPanel.Dock="Top">Flags</Label>
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="8,0">
-                        <CheckBox IsChecked="{Binding SelectedRow[online]}">Online</CheckBox>
-                        <CheckBox IsChecked="{Binding SelectedRow[contest]}">Contest</CheckBox>
-                        <CheckBox IsChecked="{Binding SelectedRow[locked]}">Locked</CheckBox>
-                    </StackPanel>
-                    <Grid DockPanel.Dock="Top">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            <Label>Fee</Label>
-                            <TextBox Text="{Binding SelectedRow[fee], StringFormat=N2, TargetNullValue=''}"/>
+                <HeaderedContentControl Header="{Binding SubmissionHeader}">
+                    <DockPanel>
+                        <Label DockPanel.Dock="Top">Flags</Label>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="8,0">
+                            <CheckBox IsChecked="{Binding SelectedRow[online]}">Online</CheckBox>
+                            <CheckBox IsChecked="{Binding SelectedRow[contest]}">Contest</CheckBox>
+                            <CheckBox IsChecked="{Binding SelectedRow[locked]}">Locked</CheckBox>
                         </StackPanel>
-                        <StackPanel Grid.Column="1">
-                            <Label>Award</Label>
-                            <TextBox Text="{Binding SelectedRow[award], StringFormat=N2, TargetNullValue=''}"/>
-                        </StackPanel>
-                    </Grid>
-                    <Label DockPanel.Dock="Top">Notes</Label>
-                    <TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Text="{Binding SelectedRow[notes]}" />
-                </DockPanel>
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Label>Fee</Label>
+                                <TextBox Text="{Binding SelectedRow[fee], StringFormat=N2, TargetNullValue=''}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <Label>Award</Label>
+                                <TextBox Text="{Binding SelectedRow[award], StringFormat=N2, TargetNullValue=''}"/>
+                            </StackPanel>
+                        </Grid>
+                        <Label DockPanel.Dock="Top">Notes</Label>
+                        <TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Text="{Binding SelectedRow[notes]}" />
+                    </DockPanel>
+                </HeaderedContentControl>
             </TabItem>
             <!-- Submitted and response dates  -->
             <TabItem Header="{x:Static r:Strings.HeaderDates}">
