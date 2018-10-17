@@ -46,7 +46,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         /// <param name="owner">The window that owns this view model.</param>
         /// <param name="titleId">The title id for the versions to rename.</param>
-        public TitleVersionRenameWindowViewModel(Window owner, Int64 titleId)
+        public TitleVersionRenameWindowViewModel(Window owner, long titleId)
             :base(owner)
         {
             renameView = new TitleVersionRenameItemCollection();
@@ -69,9 +69,9 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
         
         #region Private methods
-        private void PopulateRenameItems(Int64 titleId)
+        private void PopulateRenameItems(long titleId)
         {
-            DataRow[] titles = DatabaseController.Instance.GetTable<TitleTable>().Select(String.Format("{0}={1}", TitleTable.Defs.Columns.Id, titleId));
+            DataRow[] titles = DatabaseController.Instance.GetTable<TitleTable>().Select(string.Format("{0}={1}", TitleTable.Defs.Columns.Id, titleId));
             if (titles.Length != 1)
             {
                 throw new InvalidOperationException(Strings.InvalidOpTitleDoesNotExist);

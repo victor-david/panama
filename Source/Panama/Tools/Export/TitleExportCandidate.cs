@@ -57,7 +57,7 @@ namespace Restless.App.Panama.Tools
         /// the status of the export candidate. It sets the <see cref="Status"/> property to one of the
         /// values from the <see cref="TitleExportStatus"/> enumeration.
         /// </remarks>
-        public TitleExportCandidate(string title, Int64 version, string originalPath, string exportPath)
+        public TitleExportCandidate(string title, long version, string originalPath, string exportPath)
             :base(title, version, Paths.Title.WithoutRoot(originalPath))
         {
             Validations.ValidateNullEmpty(originalPath, "ExportCandidate.OriginalPath");

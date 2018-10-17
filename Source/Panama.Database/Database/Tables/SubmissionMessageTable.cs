@@ -164,7 +164,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override void Load()
         {
-            Load(null, String.Format("{0} DESC",Defs. Columns.Id));
+            Load(null, string.Format("{0} DESC",Defs. Columns.Id));
         }
 
         /// <summary>
@@ -180,10 +180,10 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="toAddress">The email address of the message recipient.</param>
         /// <param name="fromName">The name of the message sender.</param>
         /// <param name="fromAddress">The email address of the message sender.</param>
-        public void Add(Int64 batchId, string subject, string protocol, string url, object received, object sent, string toName, string toAddress, string fromName, string fromAddress)
+        public void Add(long batchId, string subject, string protocol, string url, object received, object sent, string toName, string toAddress, string fromName, string fromAddress)
         {
             DataRow row = NewRow();
-            if (String.IsNullOrEmpty(subject))
+            if (string.IsNullOrEmpty(subject))
             {
                 subject = "(no subject)";
             }
@@ -239,8 +239,8 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         protected override void UseDataRelations()
         {
-            CreateExpressionColumn<string>(Defs.Columns.Calculated.SenderFull, String.Format("{0}+' ('+{1}+')'", Defs.Columns.SenderName, Defs.Columns.SenderEmail));
-            CreateExpressionColumn<string>(Defs.Columns.Calculated.RecipientFull, String.Format("{0}+' ('+{1}+')'", Defs.Columns.RecipientName, Defs.Columns.RecipientEmail));
+            CreateExpressionColumn<string>(Defs.Columns.Calculated.SenderFull, string.Format("{0}+' ('+{1}+')'", Defs.Columns.SenderName, Defs.Columns.SenderEmail));
+            CreateExpressionColumn<string>(Defs.Columns.Calculated.RecipientFull, string.Format("{0}+' ('+{1}+')'", Defs.Columns.RecipientName, Defs.Columns.RecipientEmail));
         }
         #endregion
 

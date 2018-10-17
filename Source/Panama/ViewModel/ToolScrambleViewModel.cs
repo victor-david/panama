@@ -101,7 +101,7 @@ namespace Restless.App.Panama.ViewModel
         private StringBuilder Scrambled()
         {
             StringBuilder result = new StringBuilder(1024);
-            if (Text == null) Text = String.Empty;
+            if (Text == null) Text = string.Empty;
             string[] lines = Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
             int lineCount = lines.Length;
             Validations.ValidateInvalidOperation(lineCount < 4, Strings.InvalidOpNotEnoughTextToScramble);
@@ -154,7 +154,7 @@ namespace Restless.App.Panama.ViewModel
                 used.Add(wordIdx);
             }
 
-            string result = String.Empty;
+            string result = string.Empty;
             foreach (int idx in used)
             {
                 result += words[idx] + " ";

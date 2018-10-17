@@ -150,7 +150,7 @@ namespace Restless.App.Panama.Database.Tables
         public DataRow GetConfigurationRow(string id, object value)
         {
             Validations.ValidateNullEmpty(id, "id");
-            DataRow[] rows = Select(String.Format("{0}='{1}'", Defs.Columns.Id, id));
+            DataRow[] rows = Select(string.Format("{0}='{1}'", Defs.Columns.Id, id));
             if (rows.Length == 1) return rows[0];
 
             DataRow row = NewRow();
@@ -196,7 +196,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <returns>The value</returns>
         internal string GetRowValue(string id)
         {
-            DataRow[] rows = Select(String.Format("{0}='{1}'", Defs.Columns.Id, id));
+            DataRow[] rows = Select(string.Format("{0}='{1}'", Defs.Columns.Id, id));
             if (rows.Length == 1)
             {
                 return rows[0][Defs.Columns.Value].ToString();

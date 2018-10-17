@@ -51,7 +51,7 @@ namespace Restless.App.Panama.ViewModel
                 {
                     dateStr = ((DateTime)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted]).ToString(Config.Instance.DateFormat);
                 }
-                return String.Format("{0}: {1}", Strings.TextSubmitted, dateStr);
+                return string.Format("{0}: {1}", Strings.TextSubmitted, dateStr);
             }
         }
         #endregion

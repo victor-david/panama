@@ -50,7 +50,7 @@ namespace Restless.App.Panama.ViewModel
         {
             get 
             {
-                return String.Format("{0} ({1})", HeaderPreface, SourceCount);
+                return string.Format("{0} ({1})", HeaderPreface, SourceCount);
             }
 
         }
@@ -125,17 +125,17 @@ namespace Restless.App.Panama.ViewModel
         /// Gets the primary id from the selected row of this controller's owner.
         /// </summary>
         /// <returns>The Int64 primary id from the selected row of this controller's owner, or Int64.MinValue if none.</returns>
-        protected Int64 GetOwnerSelectedPrimaryId()
+        protected long GetOwnerSelectedPrimaryId()
         {
             if (Owner.SelectedRow != null)
             {
                 object pk = Owner.SelectedPrimaryKey;
-                if (pk is Int64)
+                if (pk is long)
                 {
-                    return (Int64)pk;
+                    return (long)pk;
                 }
             }
-            return Int64.MinValue;
+            return long.MinValue;
         }
 
         /// <summary>

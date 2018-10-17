@@ -42,8 +42,8 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
-            DataView.RowFilter = String.Format("{0}=-1", SubmissionTable.Defs.Columns.Joined.PublisherId);
-            DataView.Sort = String.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
+            DataView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.Joined.PublisherId);
+            DataView.Sort = string.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
             Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             //Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted).MakeDate();
             Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);
@@ -70,8 +70,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            Int64 publisherId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = String.Format("{0}={1}", SubmissionTable.Defs.Columns.Joined.PublisherId, publisherId);
+            long publisherId = GetOwnerSelectedPrimaryId();
+            DataView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.Joined.PublisherId, publisherId);
             DataViewCount = DataView.Count;
         }
         #endregion
@@ -100,7 +100,7 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedRow != null)
             {
-                Int64 titleId = (Int64)SelectedRow[SubmissionTable.Defs.Columns.TitleId];
+                long titleId = (long)SelectedRow[SubmissionTable.Defs.Columns.TitleId];
                 var ws = Owner.MainViewModel.SwitchToWorkspace<TitleViewModel>();
                 if (ws != null)
                 {

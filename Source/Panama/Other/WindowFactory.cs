@@ -171,7 +171,7 @@ namespace Restless.App.Panama
             /// </summary>
             /// <param name="titleId">The title id for the versions to rename.</param>
             /// <returns>The window</returns>
-            public static TitleVersionRenameWindow Create(Int64 titleId)
+            public static TitleVersionRenameWindow Create(long titleId)
             {
                 var window = new TitleVersionRenameWindow
                 {

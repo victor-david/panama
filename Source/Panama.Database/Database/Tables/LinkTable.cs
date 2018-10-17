@@ -93,9 +93,9 @@ namespace Restless.App.Panama.Database.Tables
         /// Clears the credential id of all links with the specified credential id.
         /// </summary>
         /// <param name="id">The credential id.</param>
-        public void ClearCredential(Int64 id)
+        public void ClearCredential(long id)
         {
-            DataRow[] rows = Select(String.Format("{0}={1}", Defs.Columns.CredentialId, id));
+            DataRow[] rows = Select(string.Format("{0}={1}", Defs.Columns.CredentialId, id));
             foreach (DataRow row in rows)
             {
                 row[Defs.Columns.CredentialId] = 0;
@@ -131,7 +131,7 @@ namespace Restless.App.Panama.Database.Tables
         protected override void PopulateDefaultRow(System.Data.DataRow row)
         {
             row[Defs.Columns.Name] = "(new link)";
-            row[Defs.Columns.Url] = String.Empty;
+            row[Defs.Columns.Url] = string.Empty;
             row[Defs.Columns.Notes] = DBNull.Value;
             row[Defs.Columns.CredentialId] = 0;
             row[Defs.Columns.Added] = DateTime.UtcNow;

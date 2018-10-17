@@ -46,8 +46,8 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
-            DataView.RowFilter = String.Format("{0}=-1", SubmissionTable.Defs.Columns.BatchId);
-            DataView.Sort = String.Format("{0},{1}", SubmissionTable.Defs.Columns.Ordering, SubmissionTable.Defs.Columns.Joined.Title);
+            DataView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.BatchId);
+            DataView.Sort = string.Format("{0},{1}", SubmissionTable.Defs.Columns.Ordering, SubmissionTable.Defs.Columns.Joined.Title);
 
             Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.SetDefaultSort(Columns.Create("O", SubmissionTable.Defs.Columns.Ordering).MakeFixedWidth(FixedWidth.Standard).AddToolTip("Ordering"), ListSortDirection.Ascending);
@@ -67,7 +67,7 @@ namespace Restless.App.Panama.ViewModel
                 return 
                     SelectedRow != null &&  
                     Owner.SelectedRow != null &&
-                    (Int64)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.ResponseType] == ResponseTable.Defs.Values.ResponseAccepted;
+                    (long)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.ResponseType] == ResponseTable.Defs.Values.ResponseAccepted;
             });
 
             Commands.Add("SetStatusWithdrawn", (o) =>
@@ -121,8 +121,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            Int64 id = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = String.Format("{0}={1}", SubmissionTable.Defs.Columns.BatchId, id);
+            long id = GetOwnerSelectedPrimaryId();
+            DataView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.BatchId, id);
         }
         #endregion
 
@@ -141,23 +141,23 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedRow != null && Owner.SelectedRow != null)
             {
-                Int64 batchId = (Int64)Owner.SelectedPrimaryKey;
-                Int64 ordering = (Int64)SelectedRow[SubmissionTable.Defs.Columns.Ordering];
+                long batchId = (long)Owner.SelectedPrimaryKey;
+                long ordering = (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering];
                 DatabaseController.Instance.GetTable<SubmissionTable>().ChangeSubmissionOrdering(batchId, ordering, ordering - 1);
             }
         }
         
         private bool CanRunMoveUpCommand(object o)
         {
-            return SelectedRow != null && (Int64)SelectedRow[SubmissionTable.Defs.Columns.Ordering] > 1;
+            return SelectedRow != null && (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering] > 1;
         }
 
         private void RunMoveDownCommand(object o)
         {
             if (SelectedRow != null && Owner.SelectedRow != null)
             {
-                Int64 batchId = (Int64)Owner.SelectedPrimaryKey;
-                Int64 ordering = (Int64)SelectedRow[SubmissionTable.Defs.Columns.Ordering];
+                long batchId = (long)Owner.SelectedPrimaryKey;
+                long ordering = (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering];
                 DatabaseController.Instance.GetTable<SubmissionTable>().ChangeSubmissionOrdering(batchId, ordering, ordering + 1);
             }
         }

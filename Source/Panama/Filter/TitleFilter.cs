@@ -35,7 +35,7 @@ namespace Restless.App.Panama.Filter
                     Published != FilterState.Either ||
                     Ready != FilterState.Either ||
                     Submitted != FilterState.Either ||
-                    !String.IsNullOrEmpty(Folder) ||
+                    !string.IsNullOrEmpty(Folder) ||
                     WordCount != 0 ||
                     Tags.Count > 0;
             }

@@ -115,7 +115,7 @@ namespace Restless.App.Panama.Database
 
         private string GetDatabaseFileName(string root, string databaseFileName)
         {
-            if (String.IsNullOrWhiteSpace(databaseFileName))
+            if (string.IsNullOrWhiteSpace(databaseFileName))
             {
                 // Note: DefaultDbFileName (a constant) is different in DEBUG and RELEASE modes
                 databaseFileName = DefaultDbFileName;

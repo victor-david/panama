@@ -113,8 +113,8 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionPeriodTable>());
-            DataView.RowFilter = String.Format("{0}=-1", SubmissionPeriodTable.Defs.Columns.PublisherId);
-            DataView.Sort = String.Format("{0} ASC", SubmissionPeriodTable.Defs.Columns.Start);
+            DataView.RowFilter = string.Format("{0}=-1", SubmissionPeriodTable.Defs.Columns.PublisherId);
+            DataView.Sort = string.Format("{0} ASC", SubmissionPeriodTable.Defs.Columns.Start);
             Columns.Create("Id", SubmissionPeriodTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Start", SubmissionPeriodTable.Defs.Columns.Start).MakeDate("MMMM dd");
             Columns.Create("End", SubmissionPeriodTable.Defs.Columns.End).MakeDate("MMMM dd");
@@ -169,8 +169,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            Int64 publisherId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = String.Format("{0}={1}", SubmissionPeriodTable.Defs.Columns.PublisherId, publisherId);
+            long publisherId = GetOwnerSelectedPrimaryId();
+            DataView.RowFilter = string.Format("{0}={1}", SubmissionPeriodTable.Defs.Columns.PublisherId, publisherId);
             SetAddControlVisibility(false);
             SetNotesVisibility(SelectedItem != null);
         }
@@ -181,7 +181,7 @@ namespace Restless.App.Panama.ViewModel
         #region Private methods
         private void UpdateSelectedDisplay()
         {
-            SelectedDisplay = String.Format("Period: {0} - {1}", AddStart.ToString("MMMM dd"), AddEnd.ToString("MMMM dd"));
+            SelectedDisplay = string.Format("Period: {0} - {1}", AddStart.ToString("MMMM dd"), AddEnd.ToString("MMMM dd"));
             OnPropertyChanged(nameof(SelectedDisplay));
         }
 
@@ -201,7 +201,7 @@ namespace Restless.App.Panama.ViewModel
         {
             if (Owner.SelectedPrimaryKey != null)
             {
-                Int64 publisherId = (Int64)Owner.SelectedPrimaryKey;
+                long publisherId = (long)Owner.SelectedPrimaryKey;
                 DatabaseController.Instance.GetTable<SubmissionPeriodTable>().AddSubmissionPeriod(publisherId, start, end);
                 SetAddControlVisibility(false);
                 SetNotesVisibility(SelectedItem != null);

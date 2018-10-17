@@ -66,17 +66,17 @@ namespace Restless.App.Panama.Database.Tables
                 /// <summary>
                 /// The value used when a submission has not yet received a response.
                 /// </summary>
-                public const Int64 NoResponse = 0;
+                public const long NoResponse = 0;
 
                 /// <summary>
                 /// The value used when the response is of an unspecified type.
                 /// </summary>
-                public const Int64 ResponseNotSpecified = 1;
+                public const long ResponseNotSpecified = 1;
 
                 /// <summary>
                 /// The value used when the response is an acceptance.
                 /// </summary>
-                public const Int64 ResponseAccepted = 255;
+                public const long ResponseAccepted = 255;
 
             }
         }

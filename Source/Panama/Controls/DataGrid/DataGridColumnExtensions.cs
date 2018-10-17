@@ -30,7 +30,7 @@ namespace Restless.App.Panama.Controls
         /// <returns>The column</returns>
         public static DataGridBoundColumn MakeDate(this DataGridBoundColumn col, string dateFormat = null, int width = DefaultWidth)
         {
-            if (String.IsNullOrEmpty(dateFormat))
+            if (string.IsNullOrEmpty(dateFormat))
             {
                 dateFormat = Config.Instance.DateFormat;
             }
@@ -48,7 +48,7 @@ namespace Restless.App.Panama.Controls
         /// <returns>The column</returns>
         public static DataGridBoundColumn MakeNumeric(this DataGridBoundColumn col, string numericFormat = null, int width = DefaultWidth)
         {
-            if (String.IsNullOrEmpty(numericFormat))
+            if (string.IsNullOrEmpty(numericFormat))
             {
                 numericFormat = "N0";
             }
@@ -178,7 +178,7 @@ namespace Restless.App.Panama.Controls
         /// </remarks>
         public static DataGridColumn AddToolTip(this DataGridColumn col, string toolTip)
         {
-            if (!String.IsNullOrEmpty(toolTip))
+            if (!string.IsNullOrEmpty(toolTip))
             {
                 if (col.Header is TextBlock textBlock)
                 {

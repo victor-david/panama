@@ -79,20 +79,20 @@ namespace Restless.App.Panama.ViewModel
                 {
                     dateStr = ((DateTime)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response]).ToString(Config.Instance.DateFormat);
                 }
-                return String.Format("{0}: {1}", Strings.TextResponse, dateStr);
+                return string.Format("{0}: {1}", Strings.TextResponse, dateStr);
             }
         }
 
         /// <summary>
         /// Gets or sets the response type
         /// </summary>
-        public Int64 ResponseType
+        public long ResponseType
         {
             get
             {
                 if (Owner.SelectedRow != null)
                 {
-                    return (Int64)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.ResponseType];
+                    return (long)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.ResponseType];
                 }
                 return ResponseTable.Defs.Values.NoResponse;
             }
@@ -133,7 +133,7 @@ namespace Restless.App.Panama.ViewModel
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<ResponseTable>());
             DataView.Sort = ResponseTable.Defs.Columns.Id;
-            DataView.RowFilter = String.Format("{0} <> {1}", ResponseTable.Defs.Columns.Id, ResponseTable.Defs.Values.NoResponse);
+            DataView.RowFilter = string.Format("{0} <> {1}", ResponseTable.Defs.Columns.Id, ResponseTable.Defs.Values.NoResponse);
             ClearResponseCommand = new RelayCommand(RunClearResponseCommand, CanClearResponseCommandRun);
         }
         #endregion

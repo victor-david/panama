@@ -42,7 +42,7 @@ namespace Restless.App.Panama
         /// <summary>
         /// Gets or sets an integer value associated with this option.
         /// </summary>
-        public Int64 IntValue
+        public long IntValue
         {
             get;
             set;
@@ -178,7 +178,7 @@ namespace Restless.App.Panama
         /// </summary>
         /// <param name="intValue">The value to check.</param>
         /// <returns>true or false.</returns>
-        public bool Contains(Int64 intValue)
+        public bool Contains(long intValue)
         {
             foreach (GeneralOption op in this)
             {

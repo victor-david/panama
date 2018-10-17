@@ -69,19 +69,19 @@ namespace Restless.App.Panama.Tools
 
             List<string> lines = new List<string>();
 
-            DataRow[] titleRows = titleTable.Select(null, String.Format("{0} DESC", TitleTable.Defs.Columns.Written));
+            DataRow[] titleRows = titleTable.Select(null, string.Format("{0} DESC", TitleTable.Defs.Columns.Written));
             TotalCount = titleRows.Length;
 
             foreach (DataRow titleRow in titleRows)
             {
                 DateTime written = (DateTime)titleRow[TitleTable.Defs.Columns.Written];
-                lines.Add(String.Format("{0} - {1}", written.ToString(Config.Instance.DateFormat), titleRow[TitleTable.Defs.Columns.Title].ToString()));
+                lines.Add(string.Format("{0} - {1}", written.ToString(Config.Instance.DateFormat), titleRow[TitleTable.Defs.Columns.Title].ToString()));
 
                 DataRow[] titleVersionRows = titleRow.GetChildRows(TitleTable.Defs.Relations.ToVersion);
                 foreach (DataRow titleVersionRow in titleVersionRows)
                 {
                     lines.Add(
-                        String.Format("  v{0}. {1} {2} {3}", 
+                        string.Format("  v{0}. {1} {2} {3}", 
                             titleVersionRow[TitleVersionTable.Defs.Columns.Version], 
                             titleVersionRow[TitleVersionTable.Defs.Columns.LangId], 
                             titleVersionRow[TitleVersionTable.Defs.Columns.FileName],

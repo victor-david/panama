@@ -54,11 +54,11 @@ namespace Restless.App.Panama.ViewModel
             get
             {
                 string exportFolder = Config.Instance.FolderExport;
-                if (String.IsNullOrEmpty(exportFolder))
+                if (string.IsNullOrEmpty(exportFolder))
                 {
                     exportFolder = "(not set)";
                 }
-                return String.Format(Strings.HeaderToolOperationExport, exportFolder);
+                return string.Format(Strings.HeaderToolOperationExport, exportFolder);
             }
         }
         #endregion
@@ -94,7 +94,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public override void Run()
         {
-            if (String.IsNullOrEmpty(Config.Instance.FolderExport) || !Directory.Exists(Config.Instance.FolderExport))
+            if (string.IsNullOrEmpty(Config.Instance.FolderExport) || !Directory.Exists(Config.Instance.FolderExport))
             {
                 Messages.ShowError(Strings.InvalidOpExportFolderNotSet);
                 return;

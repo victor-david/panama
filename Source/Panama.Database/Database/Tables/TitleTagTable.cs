@@ -84,7 +84,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="tagId">The tag id to add</param>
         /// <param name="titleId">The title id</param>
-        public void Add(Int64 tagId, Int64 titleId)
+        public void Add(long tagId, long titleId)
         {
             if (!TagExists(tagId, titleId))
             {
@@ -100,7 +100,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="tagId">The tag id to add</param>
         /// <param name="titleId">The title id</param>
-        public void Remove(Int64 tagId, Int64 titleId)
+        public void Remove(long tagId, long titleId)
         {
             DataRow row = GetTitleTagRow(tagId, titleId);
             if (row != null)
@@ -115,7 +115,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="tagId">The tag id</param>
         /// <param name="titleId">The title id</param>
         /// <returns>true if the tag exists for the title; otherwise, false.</returns>
-        public bool TagExists(Int64 tagId, Int64 titleId)
+        public bool TagExists(long tagId, long titleId)
         {
             DataRow row = GetTitleTagRow(tagId, titleId);
             return row != null;
@@ -126,13 +126,13 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="tagId">The tag id</param>
         /// <returns>A string ready for filter use.</returns>
-        public string GetTitleIdsForTag(Int64 tagId)
+        public string GetTitleIdsForTag(long tagId)
         {
             Integer64List ids = new Integer64List();
-            DataRow[] rows = Select(String.Format("{0}={1}", Defs.Columns.TagId, tagId));
+            DataRow[] rows = Select(string.Format("{0}={1}", Defs.Columns.TagId, tagId));
             foreach (DataRow row in rows)
             {
-                ids.Add((Int64)row[Defs.Columns.TitleId]);
+                ids.Add((long)row[Defs.Columns.TitleId]);
             }
             return ids.ToString(Integer64List.DefaultDelimter, Integer64List.ToStringDisposition.AddNegativeOneEvenIfEmpty);
         }
@@ -175,9 +175,9 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="tagId">The tag id</param>
         /// <param name="titleId">The title id</param>
         /// <returns>The row, or null if it doesn't exist</returns>
-        private DataRow GetTitleTagRow(Int64 tagId, Int64 titleId)
+        private DataRow GetTitleTagRow(long tagId, long titleId)
         {
-            DataRow[] rows = Select(String.Format("{0}={1} AND {2}={3}", Defs.Columns.TagId, tagId, Defs.Columns.TitleId, titleId));
+            DataRow[] rows = Select(string.Format("{0}={1} AND {2}={3}", Defs.Columns.TagId, tagId, Defs.Columns.TitleId, titleId));
             if (rows.Length == 1)
             {
                 return rows[0];

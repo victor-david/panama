@@ -18,7 +18,7 @@ namespace Restless.App.Panama.Collections
         /// </summary>
         /// <param name="tagId">The tag id</param>
         /// <returns>The TagCommandViewModel with the specified id, or null if not found.</returns>
-        public TagCommandViewModel GetItem(Int64 tagId)
+        public TagCommandViewModel GetItem(long tagId)
         {
             foreach (TagCommandViewModel vm in this)
             {

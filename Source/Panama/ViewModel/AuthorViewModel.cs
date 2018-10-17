@@ -58,7 +58,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = String.Format("{0} LIKE '%{1}%'", AuthorTable.Defs.Columns.Name, text);
+            DataView.RowFilter = string.Format("{0} LIKE '%{1}%'", AuthorTable.Defs.Columns.Name, text);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Restless.App.Panama.ViewModel
             int childRowCount = SelectedRow.GetChildRows(AuthorTable.Defs.Relations.ToTitle).Length;
             if (childRowCount > 0)
             {
-                Messages.ShowError(String.Format(Strings.InvalidOpCannotDeleteAuthor, childRowCount));
+                Messages.ShowError(string.Format(Strings.InvalidOpCannotDeleteAuthor, childRowCount));
                 return;
             }
             if (Messages.ShowYesNo(Strings.ConfirmationDeleteAuthor))

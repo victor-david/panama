@@ -49,8 +49,8 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionBatchTable>());
-            DataView.RowFilter = String.Format("{0} IS NULL AND {1}=0", SubmissionBatchTable.Defs.Columns.Response, SubmissionBatchTable.Defs.Columns.Locked);
-            DataView.Sort = String.Format("{0} DESC", SubmissionBatchTable.Defs.Columns.Submitted);
+            DataView.RowFilter = string.Format("{0} IS NULL AND {1}=0", SubmissionBatchTable.Defs.Columns.Response, SubmissionBatchTable.Defs.Columns.Locked);
+            DataView.Sort = string.Format("{0} DESC", SubmissionBatchTable.Defs.Columns.Submitted);
 
             Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Date", SubmissionBatchTable.Defs.Columns.Submitted).MakeDate();
@@ -67,9 +67,9 @@ namespace Restless.App.Panama.ViewModel
 
             Owner.Commands.Add("AddTitleToSubmissionConfirm", (o) =>
             {
-                Int64 titleId = (Int64)Owner.SelectedPrimaryKey;
-                Int64 batchId = (Int64)SelectedPrimaryKey;
-                Int64 pubId = (Int64)SelectedRow[SubmissionBatchTable.Defs.Columns.PublisherId];
+                long titleId = (long)Owner.SelectedPrimaryKey;
+                long batchId = (long)SelectedPrimaryKey;
+                long pubId = (long)SelectedRow[SubmissionBatchTable.Defs.Columns.PublisherId];
                 if (ConfirmAddTitleToSubmission(titleId, pubId, batchId))
                 {
                     DatabaseController.Instance.GetTable<SubmissionTable>().AddSubmission(batchId, titleId);
@@ -116,7 +116,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="publisherId">The publisher id</param>
         /// <param name="batchId">The batch id</param>
         /// <returns>true if confirmed</returns>
-        private bool ConfirmAddTitleToSubmission(Int64 titleId, Int64 publisherId, Int64 batchId)
+        private bool ConfirmAddTitleToSubmission(long titleId, long publisherId, long batchId)
         {
             if (!CheckSimultaneousSubmission(titleId, publisherId))
             {
@@ -132,7 +132,7 @@ namespace Restless.App.Panama.ViewModel
             return true;
         }
 
-        private bool CheckSimultaneousSubmission(Int64 titleId, Int64 publisherId)
+        private bool CheckSimultaneousSubmission(long titleId, long publisherId)
         {
             int count = DatabaseController.Instance.GetTable<SubmissionBatchTable>().GetExclusiveCount(titleId, publisherId);
             if (count > 0)

@@ -74,8 +74,8 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<PublishedTable>());
-            DataView.RowFilter = String.Format("{0}=-1", PublishedTable.Defs.Columns.TitleId);
-            DataView.Sort = String.Format("{0} DESC", PublishedTable.Defs.Columns.Added);
+            DataView.RowFilter = string.Format("{0}=-1", PublishedTable.Defs.Columns.TitleId);
+            DataView.Sort = string.Format("{0} DESC", PublishedTable.Defs.Columns.Added);
             Columns.Create("Added", PublishedTable.Defs.Columns.Added).MakeDate();
             Columns.Create("Published", PublishedTable.Defs.Columns.Published).MakeDate();
             Columns.Create("Publisher", PublishedTable.Defs.Columns.Joined.Publisher);
@@ -102,7 +102,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            Int64 titleId = GetOwnerSelectedPrimaryId();
+            long titleId = GetOwnerSelectedPrimaryId();
             DataView.RowFilter = $"{PublishedTable.Defs.Columns.TitleId}={titleId}";
         }
 
@@ -125,7 +125,7 @@ namespace Restless.App.Panama.ViewModel
             if (view != null)
             {
                 string url = view.Row[PublishedTable.Defs.Columns.Url].ToString();
-                if (!String.IsNullOrEmpty(url))
+                if (!string.IsNullOrEmpty(url))
                 {
                     OpenHelper.OpenWebSite(null, url);
                 }
@@ -145,10 +145,10 @@ namespace Restless.App.Panama.ViewModel
             {
                 Execution.TryCatch(() =>
                     {
-                        Int64 publisherId = vm.SelectedPublisherId;
+                        long publisherId = vm.SelectedPublisherId;
                         if (publisherId > 0)
                         {
-                            Int64 titleId = (Int64)Owner.SelectedPrimaryKey;
+                            long titleId = (long)Owner.SelectedPrimaryKey;
                             DatabaseController.Instance.GetTable<PublishedTable>().Add(titleId, publisherId);
                         }
                     });

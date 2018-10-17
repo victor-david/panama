@@ -194,7 +194,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = String.Format("{0} LIKE '%{1}%'", PublisherTable.Defs.Columns.Name, text);
+            DataView.RowFilter = string.Format("{0} LIKE '%{1}%'", PublisherTable.Defs.Columns.Name, text);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Restless.App.Panama.ViewModel
             return 
                 (
                     base.CanRunOpenRowCommand(item) && 
-                    !String.IsNullOrEmpty(SelectedRow[PublisherTable.Defs.Columns.Url].ToString())
+                    !string.IsNullOrEmpty(SelectedRow[PublisherTable.Defs.Columns.Url].ToString())
                 );
         }
 
@@ -257,7 +257,7 @@ namespace Restless.App.Panama.ViewModel
             int childRowCount = SelectedRow.GetChildRows(PublisherTable.Defs.Relations.ToSubmissionBatch).Length;
             if (childRowCount > 0)
             {
-                Messages.ShowError(String.Format(Strings.InvalidOpCannotDeletePublisher, childRowCount));
+                Messages.ShowError(string.Format(Strings.InvalidOpCannotDeletePublisher, childRowCount));
                 return;
             }
             if (Messages.ShowYesNo(Strings.ConfirmationDeletePublisher))
@@ -284,10 +284,10 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedRow != null)
             {
-                Int64 pubId = (Int64)SelectedRow[PublisherTable.Defs.Columns.Id];
+                long pubId = (long)SelectedRow[PublisherTable.Defs.Columns.Id];
                 string pubName = SelectedRow[PublisherTable.Defs.Columns.Name].ToString();
                 int openCount = DatabaseController.Instance.GetTable<SubmissionBatchTable>().OpenSubmissionCount(pubId);
-                string msg = (openCount == 0) ? String.Format(Strings.FormatStringCreateSubmission, pubName) : String.Format(Strings.FormatStringCreateSubmissionOpen, pubName);
+                string msg = (openCount == 0) ? string.Format(Strings.FormatStringCreateSubmission, pubName) : string.Format(Strings.FormatStringCreateSubmissionOpen, pubName);
                 if (Messages.ShowYesNo(msg))
                 {
                     DatabaseController.Instance.GetTable<SubmissionBatchTable>().CreateSubmission(pubId);
@@ -314,7 +314,7 @@ namespace Restless.App.Panama.ViewModel
             if (SelectedCredential != null && SelectedCredential.Id != 0)
             {
                 Clipboard.SetText(SelectedCredential.Row[columnName].ToString());
-                MainViewModel.CreateNotificationMessage(String.Format("{0} copied to clipboard", columnName));
+                MainViewModel.CreateNotificationMessage(string.Format("{0} copied to clipboard", columnName));
             }
         }
         #endregion

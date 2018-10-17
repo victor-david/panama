@@ -60,13 +60,13 @@ namespace Restless.App.Panama.Tools
         /// <summary>
         /// Gets the title id associated with the version, if <see cref="IsVersion"/> is true; otherwise, null;
         /// </summary>
-        public Int64? TitleId
+        public long? TitleId
         {
             get
             {
                 if (versionRow != null)
                 {
-                    return (Int64)versionRow[TitleVersionTable.Defs.Columns.TitleId];
+                    return (long)versionRow[TitleVersionTable.Defs.Columns.TitleId];
                 }
                 return null;
             }

@@ -129,7 +129,7 @@ namespace Restless.App.Panama.ViewModel
             Publisher = new PublisherTableStats(DatabaseController.Instance.GetTable<PublisherTable>());
             FolderView = new ObservableCollection<TreeViewItem>();
             IsFolderViewLoaded = false;
-            HaveFolderView = (!String.IsNullOrEmpty(Config.FolderTitleRoot) && Directory.Exists(Config.FolderTitleRoot));
+            HaveFolderView = (!string.IsNullOrEmpty(Config.FolderTitleRoot) && Directory.Exists(Config.FolderTitleRoot));
             if (HaveFolderView)
             {
                 InitFolderView();
@@ -183,7 +183,7 @@ namespace Restless.App.Panama.ViewModel
         private void CreateTreeViewItems()
         {
             TreeViewItem rootItem = new TreeViewItem();
-            rootItem.Header = String.Format("Title root: {0}", Config.FolderTitleRoot);
+            rootItem.Header = string.Format("Title root: {0}", Config.FolderTitleRoot);
             rootItem.IsExpanded = true;
 
             // Make a header item that displays the file types

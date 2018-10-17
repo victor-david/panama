@@ -27,7 +27,7 @@ namespace Restless.App.Panama.Converters
         {
             int count = 12;
             if (parameter is int) count = (int)parameter;
-            return new String('*', count);
+            return new string('*', count);
         }
 
 

@@ -29,7 +29,7 @@ namespace Restless.App.Panama.Collections
             item.Tag = tag;
             item.HorizontalContentAlignment = HorizontalAlignment.Left;
             item.VerticalContentAlignment = VerticalAlignment.Center;
-            if (!String.IsNullOrEmpty(imageResource))
+            if (!string.IsNullOrEmpty(imageResource))
             {
                 item.Icon = Application.Current.TryFindResource(imageResource);
             }

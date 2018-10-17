@@ -78,7 +78,7 @@ namespace Restless.App.Panama
         /// <summary>
         /// Gets the version.
         /// </summary>
-        public Int64 Version
+        public long Version
         {
             get;
             private set;
@@ -143,7 +143,7 @@ namespace Restless.App.Panama
             Validations.ValidateNullEmpty(title, "VersionRenameItem.Title");
             this.row = row;
 
-            Version = (Int64)row[TitleVersionTable.Defs.Columns.Version];
+            Version = (long)row[TitleVersionTable.Defs.Columns.Version];
             string rowFileName = row[TitleVersionTable.Defs.Columns.FileName].ToString();
 
             OriginalName = Paths.Title.WithRoot(rowFileName);
@@ -155,7 +155,7 @@ namespace Restless.App.Panama
              * The Title Of This Piece_v3.es-mx.docx
              */
             string newNameWithoutPath =
-                String.Format("{0}_v{1}.{2}{3}",
+                string.Format("{0}_v{1}.{2}{3}",
                     Restless.Tools.Utility.Format.ValidFileName(title),
                     Version,
                     row[TitleVersionTable.Defs.Columns.LangId],

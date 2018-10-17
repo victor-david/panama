@@ -501,9 +501,9 @@ namespace Restless.App.Panama.Configuration
             return 0;
         }
 
-        private Int64 GetItem(Int64 defaultValue, [CallerMemberName] string id = null)
+        private long GetItem(long defaultValue, [CallerMemberName] string id = null)
         {
-            if (Int64.TryParse(GetValueFromRow(id, defaultValue), out Int64 val))
+            if (long.TryParse(GetValueFromRow(id, defaultValue), out long val))
             {
                 return val;
             }
@@ -564,7 +564,7 @@ namespace Restless.App.Panama.Configuration
             SetRowValueIf(id, value.ToString());
         }
 
-        private void SetItem(Int64 value, [CallerMemberName] string id = null)
+        private void SetItem(long value, [CallerMemberName] string id = null)
         {
             SetRowValueIf(id, value.ToString());
         }

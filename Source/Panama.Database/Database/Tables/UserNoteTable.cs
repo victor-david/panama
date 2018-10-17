@@ -74,7 +74,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override void Load()
         {
-            Load(null, String.Format("{0} ASC",Defs. Columns.Title));
+            Load(null, string.Format("{0} ASC",Defs. Columns.Title));
         }
         #endregion
 

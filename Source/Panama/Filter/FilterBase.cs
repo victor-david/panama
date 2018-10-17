@@ -9,7 +9,7 @@ namespace Restless.App.Panama.Filter
     {
         #region Private
         private string text;
-        private Int64? id;
+        private long? id;
         #endregion
 
         /************************************************************************/
@@ -26,7 +26,7 @@ namespace Restless.App.Panama.Filter
         {
             get
             {
-                return !String.IsNullOrEmpty(Text) || Id != null;
+                return !string.IsNullOrEmpty(Text) || Id != null;
             }
         }
 
@@ -50,7 +50,7 @@ namespace Restless.App.Panama.Filter
         /// Gets or sets the filter's id option.
         /// How this is applied depends upon the class that extends <see cref="FilterBase"/>.
         /// </summary>
-        public Int64? Id
+        public long? Id
         {
             get { return id; }
             set

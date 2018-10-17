@@ -98,14 +98,14 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="batchId">The batch id</param>
         /// <param name="docId">The doc id, may be null to create a placeholder row</param>
-        public void AddEntry(Int64 batchId, string docId)
+        public void AddEntry(long batchId, string docId)
         {
             DataRow row = NewRow();
             row[Defs.Columns.BatchId] = batchId;
             row[Defs.Columns.Title] = "(new document)";
 
             object rowDocId = DBNull.Value;
-            if (!String.IsNullOrEmpty(docId))
+            if (!string.IsNullOrEmpty(docId))
             {
                 rowDocId = docId;
             }
@@ -120,7 +120,7 @@ namespace Restless.App.Panama.Database.Tables
         /// Adds a document entry as a placeholder.
         /// </summary>
         /// <param name="batchId">The batch id.</param>
-        public void AddEntry(Int64 batchId)
+        public void AddEntry(long batchId)
         {
             AddEntry(batchId, null);
         }

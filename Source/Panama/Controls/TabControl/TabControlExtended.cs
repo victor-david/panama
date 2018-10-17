@@ -478,8 +478,8 @@ namespace Restless.App.Panama.Controls
         [StructLayout(LayoutKind.Sequential)]
         internal struct Win32Point
         {
-            public Int32 X;
-            public Int32 Y;
+            public int X;
+            public int Y;
         };
         #endregion
 

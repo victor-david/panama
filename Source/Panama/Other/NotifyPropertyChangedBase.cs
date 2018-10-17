@@ -61,7 +61,7 @@ namespace Restless.App.Panama
             // public, instance property on this object.
             if (TypeDescriptor.GetProperties(this)[propertyName] == null)
             {
-                string msg = String.Format("Invalid property name: {0}", propertyName);
+                string msg = string.Format("Invalid property name: {0}", propertyName);
 
                 if (ThrowOnInvalidPropertyName)
                 {

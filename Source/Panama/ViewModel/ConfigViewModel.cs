@@ -24,7 +24,7 @@ namespace Restless.App.Panama.ViewModel
     public class ConfigViewModel : WorkspaceViewModel
     {
         #region Private
-        private Int64 selectedSection;
+        private long selectedSection;
         private ObservableCollection<SampleTitle> sampleTitles;
         private ObservableCollection<SamplePublisher> samplePublishers;
 
@@ -46,7 +46,7 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Gets the selected section.
         /// </summary>
-        public Int64 SelectedSection
+        public long SelectedSection
         {
             get => selectedSection;
             private set => SetProperty(ref selectedSection, value);
@@ -286,7 +286,7 @@ namespace Restless.App.Panama.ViewModel
             /// <summary>
             /// Gets the id of the sample title.
             /// </summary>
-            public Int64 Id
+            public long Id
             {
                 get;
                 private set;
@@ -346,7 +346,7 @@ namespace Restless.App.Panama.ViewModel
             /// <param name="updated">The date the title was updated.</param>
             /// <param name="isPublished">A boolean value that indicates if the title is published.</param>
             /// <param name="isSubmitted">A boolean value that indicates if the title is submitted.</param>
-            public SampleTitle(Int64 id, string title, DateTime written, DateTime updated, bool isPublished, bool isSubmitted)
+            public SampleTitle(long id, string title, DateTime written, DateTime updated, bool isPublished, bool isSubmitted)
             {
                 Id = id;
                 Title = title;
@@ -365,7 +365,7 @@ namespace Restless.App.Panama.ViewModel
             /// <summary>
             /// Gets the id of the sample publisher.
             /// </summary>
-            public Int64 Id
+            public long Id
             {
                 get;
                 private set;
@@ -425,7 +425,7 @@ namespace Restless.App.Panama.ViewModel
             /// <param name="lastSub">The last submission date.</param>
             /// <param name="isInPeriod">A boolean value that indicates if the publisher is within their submission period.</param>
             /// <param name="isGoner">A boolean value that indicates if the publisher has been flagged as a goner.</param>
-            public SamplePublisher(Int64 id, string name, DateTime added, DateTime lastSub, bool isInPeriod, bool isGoner)
+            public SamplePublisher(long id, string name, DateTime added, DateTime lastSub, bool isInPeriod, bool isGoner)
             {
                 Id = id;
                 Name = name;

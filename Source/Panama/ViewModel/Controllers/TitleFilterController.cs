@@ -217,7 +217,7 @@ namespace Restless.App.Panama.ViewModel
             var tagTable = DatabaseController.Instance.GetTable<TagTable>();
             foreach (DataRow row in tagTable.Rows)
             {
-                Int64 tagId = (Int64)row[TagTable.Defs.Columns.Id];
+                long tagId = (long)row[TagTable.Defs.Columns.Id];
                 ICommand cmd = new RelayCommand((o) => { RunToggleTagCommand(tagId); });
                 Available.Add(new TagCommandViewModel(tagId, row[TagTable.Defs.Columns.Tag].ToString(), row[TagTable.Defs.Columns.Description].ToString(), cmd));
             }
@@ -228,10 +228,10 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         private void InitSelected()
         {
-            List<Int64> bads = new List<long>();
+            List<long> bads = new List<long>();
             //filterTags.AddValuesFromDelimitedString(Owner.Config.TitleFilter.Tags);
             /* Tags may have been deleted since we last saved the list */
-            foreach (Int64 tagId in Config.TitleFilter.Tags)
+            foreach (long tagId in Config.TitleFilter.Tags)
             {
                 if (Available.GetItem(tagId) == null)
                 {
@@ -239,12 +239,12 @@ namespace Restless.App.Panama.ViewModel
                 }
             }
 
-            foreach (Int64 tagId in bads)
+            foreach (long tagId in bads)
             {
                 Config.TitleFilter.Tags.Remove(tagId);
             }
 
-            foreach (Int64 tagId in Config.TitleFilter.Tags)
+            foreach (long tagId in Config.TitleFilter.Tags)
             {
                 var item = Available.GetItem(tagId);
                 if (item != null)
@@ -260,26 +260,26 @@ namespace Restless.App.Panama.ViewModel
             filter.Clear();
             filterDesc.Clear();
             var f = Config.TitleFilter;
-            if (!String.IsNullOrEmpty(f.Text))
+            if (!string.IsNullOrEmpty(f.Text))
             {
                 Append(
-                    String.Format("{0} LIKE '%{1}%'", TitleTable.Defs.Columns.Title, f.Text.Replace("'", "''")), 
-                    String.Format("Title contains {0}", f.Text), 2);
+                    string.Format("{0} LIKE '%{1}%'", TitleTable.Defs.Columns.Title, f.Text.Replace("'", "''")),
+                    string.Format("Title contains {0}", f.Text), 2);
             }
 
-            if (!String.IsNullOrEmpty(f.Folder))
+            if (!string.IsNullOrEmpty(f.Folder))
 
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
                 Append(
-                    String.Format("{0} LIKE '%{1}%'", TitleTable.Defs.Columns.Calculated.LastestVersionPath, f.Folder.Replace("'", "''")),
-                    String.Format("Folder contains {0}", f.Folder), 2);
+                    string.Format("{0} LIKE '%{1}%'", TitleTable.Defs.Columns.Calculated.LastestVersionPath, f.Folder.Replace("'", "''")),
+                    string.Format("Folder contains {0}", f.Folder), 2);
             }
 
             if (f.Ready != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(String.Format("{0}={1}", TitleTable.Defs.Columns.Ready, (byte)f.Ready), (f.Ready == FilterState.No ? "not ready" : "ready"));
+                Append(string.Format("{0}={1}", TitleTable.Defs.Columns.Ready, (byte)f.Ready), (f.Ready == FilterState.No ? "not ready" : "ready"));
             }
 
             if (f.Submitted != FilterState.Either)
@@ -288,11 +288,11 @@ namespace Restless.App.Panama.ViewModel
 
                 if (f.Submitted == FilterState.No)
                 {
-                    Append(String.Format("ISNULL({0},0) = 0", TitleTable.Defs.Columns.Calculated.CurrentSubCount), "not currently submitted");
+                    Append(string.Format("ISNULL({0},0) = 0", TitleTable.Defs.Columns.Calculated.CurrentSubCount), "not currently submitted");
                 }
                 else
                 {
-                    Append(String.Format("{0} > 0", TitleTable.Defs.Columns.Calculated.CurrentSubCount), "currently submitted");
+                    Append(string.Format("{0} > 0", TitleTable.Defs.Columns.Calculated.CurrentSubCount), "currently submitted");
                 }
             }
 
@@ -301,18 +301,18 @@ namespace Restless.App.Panama.ViewModel
                 if (filter.Length > 0) Append(" AND ", " and ");
                 if (f.EverSubmitted == FilterState.No)
                 {
-                    Append(String.Format("{0}=0", TitleTable.Defs.Columns.Calculated.SubCount), "not ever submitted");
+                    Append(string.Format("{0}=0", TitleTable.Defs.Columns.Calculated.SubCount), "not ever submitted");
                 }
                 else
                 {
-                    Append(String.Format("{0}>0", TitleTable.Defs.Columns.Calculated.SubCount), "ever submitted");
+                    Append(string.Format("{0}>0", TitleTable.Defs.Columns.Calculated.SubCount), "ever submitted");
                 }
             }
 
             if (f.Published != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(String.Format("{0}={1}", TitleTable.Defs.Columns.Calculated.IsPublished, (byte)f.Published), (f.Published == FilterState.No ? "not published" : "published"));
+                Append(string.Format("{0}={1}", TitleTable.Defs.Columns.Calculated.IsPublished, (byte)f.Published), (f.Published == FilterState.No ? "not published" : "published"));
             }
 
             if (f.WordCount != 0)
@@ -321,13 +321,13 @@ namespace Restless.App.Panama.ViewModel
                 if (filter.Length > 0) Append(" AND ", " and ");
                 if (f.WordCount > 0)
                 {
-                    Append(String.Format("{0}>{1}", TitleTable.Defs.Columns.Calculated.LastestVersionWordCount, wordCount), String.Format("Word count > {0}", wordCount));
-                    WordCountText = String.Format("Greater than {0}", wordCount);
+                    Append(string.Format("{0}>{1}", TitleTable.Defs.Columns.Calculated.LastestVersionWordCount, wordCount), string.Format("Word count > {0}", wordCount));
+                    WordCountText = string.Format("Greater than {0}", wordCount);
                 }
                 if (f.WordCount < 0)
                 {
-                    Append(String.Format("{0}<{1} AND {0} <> 0", TitleTable.Defs.Columns.Calculated.LastestVersionWordCount, wordCount), String.Format("Word count < {0}", wordCount));
-                    WordCountText = String.Format("Less than {0} (but not zero)", wordCount);
+                    Append(string.Format("{0}<{1} AND {0} <> 0", TitleTable.Defs.Columns.Calculated.LastestVersionWordCount, wordCount), string.Format("Word count < {0}", wordCount));
+                    WordCountText = string.Format("Less than {0} (but not zero)", wordCount);
                 }
             }
             else
@@ -338,26 +338,26 @@ namespace Restless.App.Panama.ViewModel
             if (f.Id != null)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(String.Format("{0}={1}", TitleTable.Defs.Columns.Id, f.Id), String.Format("Title id equals {0}", f.Id));
+                Append(string.Format("{0}={1}", TitleTable.Defs.Columns.Id, f.Id), string.Format("Title id equals {0}", f.Id));
             }
 
             if (f.IsTagFilterActive)
             {
                 if (filter.Length > 0)
                 {
-                    Append(String.Empty, String.Empty, 2);
+                    Append(string.Empty, string.Empty, 2);
                 }
-                Append(String.Empty, "With tags: ");
+                Append(string.Empty, "With tags: ");
                 bool tagsOnly = true;
                 if (filter.Length > 0)
                 {
-                    Append(" AND (", String.Empty);
+                    Append(" AND (", string.Empty);
                     tagsOnly = false;
                 }
 
                 for (int k = 0; k < f.Tags.Count; k++ )
                 {
-                    Int64 tagId = f.Tags[k];
+                    long tagId = f.Tags[k];
                     string titleIds = titleTagTable.GetTitleIdsForTag(tagId);
                     if (k > 0)
                     {
@@ -376,7 +376,7 @@ namespace Restless.App.Panama.ViewModel
                     }
                     var tagItem = Available.GetItem(tagId);
                     string tagName = (tagItem != null) ? tagItem.TagName : "???";
-                    Append(String.Format("{0} IN ({1})", TitleTable.Defs.Columns.Id, titleIds), tagName);
+                    Append(string.Format("{0} IN ({1})", TitleTable.Defs.Columns.Id, titleIds), tagName);
                 }
                 if (!tagsOnly)
                 {
@@ -404,7 +404,7 @@ namespace Restless.App.Panama.ViewModel
             trimNextFilterDesc = linesToAppend > 0;
         }
 
-        private void RunToggleTagCommand(Int64 tagId)
+        private void RunToggleTagCommand(long tagId)
         {
             var item = Available.GetItem(tagId);
             if (item != null)
@@ -441,7 +441,7 @@ namespace Restless.App.Panama.ViewModel
 
         private bool CanRunClearFolderCommand(object o)
         {
-            return !String.IsNullOrEmpty(Config.Instance.TitleFilter.Folder);
+            return !string.IsNullOrEmpty(Config.Instance.TitleFilter.Folder);
         }
 
         private void TitleFilterChanged(object sender, EventArgs e)

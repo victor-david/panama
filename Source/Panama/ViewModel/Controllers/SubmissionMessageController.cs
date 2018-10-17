@@ -76,8 +76,8 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionMessageTable>());
-            DataView.RowFilter = String.Format("{0}=-1", SubmissionMessageTable.Defs.Columns.BatchId);
-            DataView.Sort = String.Format("{0} DESC", SubmissionMessageTable.Defs.Columns.Received);
+            DataView.RowFilter = string.Format("{0}=-1", SubmissionMessageTable.Defs.Columns.BatchId);
+            DataView.Sort = string.Format("{0} DESC", SubmissionMessageTable.Defs.Columns.Received);
             //Columns.Create("BT", SubmissionMessageTable.Defs.Columns.BodyFormat).MakeFixedWidth(FixedWidth.MediumNumeric);
             Columns.SetDefaultSort(Columns.Create("Date", SubmissionMessageTable.Defs.Columns.Received).MakeDate(), ListSortDirection.Descending);
             Columns.Create("Subject", SubmissionMessageTable.Defs.Columns.Display);
@@ -117,8 +117,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            Int64 id = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = String.Format("{0}={1}", SubmissionMessageTable.Defs.Columns.BatchId, id);
+            long id = GetOwnerSelectedPrimaryId();
+            DataView.RowFilter = string.Format("{0}={1}", SubmissionMessageTable.Defs.Columns.BatchId, id);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Restless.App.Panama.ViewModel
         #region Private methods
         private void RunSelectMessageCommand(object o)
         {
-            if (String.IsNullOrEmpty(Config.Instance.FolderMapi))
+            if (string.IsNullOrEmpty(Config.Instance.FolderMapi))
             {
                 Messages.ShowError(Strings.InvalidOpMapiFolderNotSet);
                 return;
@@ -162,7 +162,7 @@ namespace Restless.App.Panama.ViewModel
                 if (vm.SelectedItems != null && Owner.SelectedPrimaryKey != null)
                 {
                     string header = $"{SubmissionMessageTable.Defs.Values.Protocol.Mapi}{Config.FolderMapi}";
-                    Int64 batchId = (Int64)Owner.SelectedPrimaryKey;
+                    long batchId = (long)Owner.SelectedPrimaryKey;
                     var table = DatabaseController.Instance.GetTable<SubmissionMessageTable>();
                     foreach (var item in vm.SelectedItems)
                     {

@@ -184,12 +184,12 @@ namespace Restless.App.Panama.ViewModel
         #region Private Methods
         private void UpdateFoundHeader()
         {
-            FoundHeader = String.Format(Strings.HeaderToolOperationSearchFoundFormat, resultsView.Count);
+            FoundHeader = string.Format(Strings.HeaderToolOperationSearchFoundFormat, resultsView.Count);
         }
 
         private void RunSearchCommand(object o)
         {
-            if (!String.IsNullOrEmpty(SearchText))
+            if (!string.IsNullOrEmpty(SearchText))
             {
                 Execution.TryCatch(() =>
                     {
@@ -293,7 +293,7 @@ namespace Restless.App.Panama.ViewModel
                 private set;
             }
 
-            public Int64? TitleId
+            public long? TitleId
             {
                 get;
                 private set;
@@ -305,7 +305,7 @@ namespace Restless.App.Panama.ViewModel
                 IsVersion = (versionRow != null);
                 if (versionRow != null)
                 {
-                    TitleId = (Int64)versionRow[TitleVersionTable.Defs.Columns.TitleId];
+                    TitleId = (long)versionRow[TitleVersionTable.Defs.Columns.TitleId];
                 }
             }
         }

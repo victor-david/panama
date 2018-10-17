@@ -75,7 +75,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = String.Format("{0} LIKE '%{1}%'", TagTable.Defs.Columns.Tag, text);
+            DataView.RowFilter = string.Format("{0} LIKE '%{1}%'", TagTable.Defs.Columns.Tag, text);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Restless.App.Panama.ViewModel
             int childRowCount = SelectedRow.GetChildRows(TagTable.Defs.Relations.ToTitleTag).Length;
             if (childRowCount > 0)
             {
-                Messages.ShowError(String.Format(Strings.InvalidOpCannotDeleteTag, childRowCount));
+                Messages.ShowError(string.Format(Strings.InvalidOpCannotDeleteTag, childRowCount));
                 return;
             }
             if (Messages.ShowYesNo(Strings.ConfirmationDeleteTag))

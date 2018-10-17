@@ -76,7 +76,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public override void Run()
         {
-            if (String.IsNullOrEmpty(Config.Instance.FolderTitleRoot) || !Directory.Exists(Config.Instance.FolderTitleRoot))
+            if (string.IsNullOrEmpty(Config.Instance.FolderTitleRoot) || !Directory.Exists(Config.Instance.FolderTitleRoot))
             {
                 Messages.ShowError(Strings.InvalidOpTitleRootFolderNotSet);
                 return;
@@ -91,7 +91,7 @@ namespace Restless.App.Panama.ViewModel
         #region Private methods
         private void UpdateNotFoundHeader()
         {
-            NotFoundHeader = String.Format(Strings.HeaderToolOperationOrphanNotFoundFormat, NotFound.Count);
+            NotFoundHeader = string.Format(Strings.HeaderToolOperationOrphanNotFoundFormat, NotFound.Count);
         }
 
         private void RunOpenFileCommand(object o)

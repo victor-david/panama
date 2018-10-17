@@ -164,41 +164,41 @@ namespace Restless.App.Panama.ViewModel
             filter.Clear();
             filterDesc.Clear();
             var f = Config.Instance.PublisherFilter;
-            if (!String.IsNullOrEmpty(f.Text))
+            if (!string.IsNullOrEmpty(f.Text))
             {
                 Append(
-                    String.Format("{0} LIKE '%{1}%'", PublisherTable.Defs.Columns.Name, f.Text.Replace("'", "''")), 
-                    String.Format("Name contains {0}", f.Text), 2);
+                    string.Format("{0} LIKE '%{1}%'", PublisherTable.Defs.Columns.Name, f.Text.Replace("'", "''")),
+                    string.Format("Name contains {0}", f.Text), 2);
             }
             
             if (f.InPeriod != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(String.Format("{0}={1}", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod, (byte)f.InPeriod), (f.InPeriod == FilterState.No ? "not in submission period" : "in submission period"));
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod, (byte)f.InPeriod), (f.InPeriod == FilterState.No ? "not in submission period" : "in submission period"));
             }
 
             if (f.Exclusive != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(String.Format("{0}={1}", PublisherTable.Defs.Columns.Exclusive, (byte)f.Exclusive), (f.Exclusive == FilterState.No ? "simultaneous" : "exclusive (no simultaneous)"));
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Exclusive, (byte)f.Exclusive), (f.Exclusive == FilterState.No ? "simultaneous" : "exclusive (no simultaneous)"));
             }
 
             if (f.Paying != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(String.Format("{0}={1}", PublisherTable.Defs.Columns.Paying, (byte)f.Paying), (f.Paying == FilterState.No ? "not paying" : "paying"));
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Paying, (byte)f.Paying), (f.Paying == FilterState.No ? "not paying" : "paying"));
             }
 
             if (f.Followup != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(String.Format("{0}={1}", PublisherTable.Defs.Columns.Followup, (byte)f.Followup), (f.Followup == FilterState.No ? "not followup" : "followup"));
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Followup, (byte)f.Followup), (f.Followup == FilterState.No ? "not followup" : "followup"));
             }
 
             if (f.Goner != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(String.Format("{0}={1}", PublisherTable.Defs.Columns.Goner, (byte)f.Goner), (f.Goner == FilterState.No ? "not a goner" : "a goner"));
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Goner, (byte)f.Goner), (f.Goner == FilterState.No ? "not a goner" : "a goner"));
             }
 
             Owner.DataView.RowFilter = filter.ToString();

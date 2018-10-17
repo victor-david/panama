@@ -1,6 +1,5 @@
 ﻿using Restless.Tools.Database.SQLite;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 
@@ -84,7 +83,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override void Load()
         {
-            Load(null, String.Format("{0} DESC",Defs. Columns.Date));
+            Load(null, string.Format("{0} DESC",Defs. Columns.Date));
         }
 
         /// <summary>
@@ -159,7 +158,7 @@ namespace Restless.App.Panama.Database.Tables
             /// <summary>
             /// Gets the id for this row object.
             /// </summary>
-            public Int64 Id
+            public long Id
             {
                 get => GetInt64(Defs.Columns.Id);
             }
@@ -206,7 +205,7 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public bool HasUrl
             {
-                get => !String.IsNullOrEmpty(Url);
+                get => !string.IsNullOrEmpty(Url);
             }
             #endregion
 

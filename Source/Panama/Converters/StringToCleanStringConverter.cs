@@ -65,7 +65,7 @@ namespace Restless.App.Panama.Converters
                     value = value.Substring(0, startStyle) + value.Substring(endStyle + 8);
                 }
 
-                value = Regex.Replace(value, "<.*?>", String.Empty);
+                value = Regex.Replace(value, "<.*?>", string.Empty);
             }
 
             if (options.HasFlag(StringToCleanStringOptions.TrimInterior))

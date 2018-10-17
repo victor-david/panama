@@ -150,7 +150,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            string filter = String.Empty;
+            string filter = string.Empty;
             if (text.StartsWith("-"))
             {
                 filter = $"{SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName} IS NULL";
@@ -208,7 +208,7 @@ namespace Restless.App.Panama.ViewModel
             return
                 (
                     base.CanRunOpenRowCommand(item) &&
-                    !String.IsNullOrEmpty(SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.PublisherUrl].ToString())
+                    !string.IsNullOrEmpty(SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.PublisherUrl].ToString())
                 );
         }
 

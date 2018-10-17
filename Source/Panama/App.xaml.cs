@@ -32,7 +32,7 @@ namespace Restless.App.Panama
 
             catch (Exception ex)
             {
-                MessageBox.Show(String.Format(Strings.ApplicationFatalExceptionFormat, ex.Message), Strings.CaptionFatalError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(Strings.ApplicationFatalExceptionFormat, ex.Message), Strings.CaptionFatalError, MessageBoxButton.OK, MessageBoxImage.Error);
                 Environment.Exit(0);
             }
         }

@@ -108,7 +108,7 @@ namespace Restless.App.Panama.ViewModel
 
         private void OpenUrl(object parm)
         {
-            if (SelectedAlert != null && !String.IsNullOrEmpty(SelectedAlert.Url))
+            if (SelectedAlert != null && !string.IsNullOrEmpty(SelectedAlert.Url))
             {
                 OpenHelper.OpenWebSite(null, SelectedAlert.Url);
             }

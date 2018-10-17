@@ -24,7 +24,7 @@ namespace Restless.App.Panama.Tools
         /// <summary>
         /// Gets the version
         /// </summary>
-        public Int64 Version
+        public long Version
         {
             get;
             private set;
@@ -58,7 +58,7 @@ namespace Restless.App.Panama.Tools
         /// <param name="title">The title</param>
         /// <param name="version">The version number</param>
         /// <param name="filename">The file name</param>
-        public FileScanDisplayObject(string title, Int64 version, string filename)
+        public FileScanDisplayObject(string title, long version, string filename)
         {
             Validations.ValidateNullEmpty(title, "FileScanDisplayObject.Title");
             Validations.ValidateNullEmpty(filename, "FileScanDisplayObject.FileName");

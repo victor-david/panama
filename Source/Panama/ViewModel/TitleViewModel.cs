@@ -95,7 +95,7 @@ namespace Restless.App.Panama.ViewModel
                 {
                     dateStr = ((DateTime)SelectedRow[TitleTable.Defs.Columns.Written]).ToString(Config.Instance.DateFormat);
                 }
-                return String.Format("{0}: {1}", Strings.TextWritten, dateStr);
+                return string.Format("{0}: {1}", Strings.TextWritten, dateStr);
             }
         }
 
@@ -315,7 +315,7 @@ namespace Restless.App.Panama.ViewModel
             int childRowCount = SelectedRow.GetChildRows(TitleTable.Defs.Relations.ToSubmission).Length;
             if (childRowCount > 0)
             {
-                Messages.ShowError(String.Format(Strings.InvalidOpCannotDeleteTitle, childRowCount));
+                Messages.ShowError(string.Format(Strings.InvalidOpCannotDeleteTitle, childRowCount));
                 return;
             }
             if (Messages.ShowYesNo(Strings.ConfirmationDeleteTitle))
@@ -342,7 +342,7 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedPrimaryKey != null)
             {
-                Int64 titleId = (Int64)SelectedPrimaryKey;
+                long titleId = (long)SelectedPrimaryKey;
                 DataRow row = DatabaseController.Instance.GetTable<TitleVersionTable>().GetLastVersion(titleId);
                 if (row != null)
                 {
@@ -372,7 +372,7 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedPrimaryKey != null)
             {
-                Int64 titleId = (Int64)SelectedPrimaryKey;
+                long titleId = (long)SelectedPrimaryKey;
                 DataRow version = DatabaseController.Instance.GetTable<TitleVersionTable>().GetLastVersion(titleId);
                 if (version != null)
                 {
@@ -381,8 +381,8 @@ namespace Restless.App.Panama.ViewModel
                             string fileName = Paths.Title.WithRoot(version[TitleVersionTable.Defs.Columns.FileName].ToString());
                             var props = OpenXmlDocument.Reader.GetProperties(fileName);
                             string title = (props != null) ? props.Core.Title : null;
-                            if (String.IsNullOrWhiteSpace(title)) title = "(no title)";
-                            if (Messages.ShowYesNo(String.Format(Strings.ConfirmationApplyExtractedTitleFormat, title)))
+                            if (string.IsNullOrWhiteSpace(title)) title = "(no title)";
+                            if (Messages.ShowYesNo(string.Format(Strings.ConfirmationApplyExtractedTitleFormat, title)))
                             {
                                 SelectedRow[TitleTable.Defs.Columns.Title] = title;
                                 // the grid updates automatcially, but this is needed to update the text box.
@@ -397,11 +397,11 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedPrimaryKey != null)
             {
-                Int64 titleId = (Int64)SelectedPrimaryKey;
+                long titleId = (long)SelectedPrimaryKey;
                 DataRow version = DatabaseController.Instance.GetTable<TitleVersionTable>().GetLastVersion(titleId);
                 if (version != null)
                 {
-                    return (Int64)version[TitleVersionTable.Defs.Columns.DocType] == DocumentTypeTable.Defs.Values.WordOpenXmlFileType;
+                    return (long)version[TitleVersionTable.Defs.Columns.DocType] == DocumentTypeTable.Defs.Values.WordOpenXmlFileType;
                 }
             }
             return false;
@@ -414,12 +414,12 @@ namespace Restless.App.Panama.ViewModel
 
             if (autoPreview && SelectedPrimaryKey != null)
             {
-                Int64 titleId = (Int64)SelectedPrimaryKey;
+                long titleId = (long)SelectedPrimaryKey;
                 DataRow row = DatabaseController.Instance.GetTable<TitleVersionTable>().GetLastVersion(titleId);
                 if (row != null)
                 {
                     string fileName = Paths.Title.WithRoot(row[TitleVersionTable.Defs.Columns.FileName].ToString());
-                    Int64 docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
+                    long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
                     if (docType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType)
                     {
                         IsOpenXml = true;

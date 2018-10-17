@@ -149,7 +149,7 @@ namespace Restless.App.Panama.ViewModel
             set
             {
                 filterText = value;
-                if (!String.IsNullOrEmpty(filterText))
+                if (!string.IsNullOrEmpty(filterText))
                 {
                     OnFilterTextChanged(filterText.Replace("'","''"));
                 }
@@ -339,7 +339,7 @@ namespace Restless.App.Panama.ViewModel
             Validations.ValidateNull(notFound, "OpenFileRow.NotFound");
 
             string file = row[fileColumnName].ToString();
-            if (!Path.IsPathRooted(file) && !String.IsNullOrWhiteSpace(pathRoot))
+            if (!Path.IsPathRooted(file) && !string.IsNullOrWhiteSpace(pathRoot))
             {
                 file = Path.Combine(pathRoot, file);
             }
@@ -394,7 +394,7 @@ namespace Restless.App.Panama.ViewModel
 
         private bool CanRunClearFilterCommand(object o)
         {
-            return !String.IsNullOrEmpty(FilterText);
+            return !string.IsNullOrEmpty(FilterText);
         }
 
         private void DataViewListChanged(object sender, ListChangedEventArgs e)

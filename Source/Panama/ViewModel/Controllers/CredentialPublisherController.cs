@@ -43,7 +43,7 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<PublisherTable>());
-            DataView.RowFilter = String.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, -1);
+            DataView.RowFilter = string.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, -1);
             Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.SetDefaultSort(Columns.Create("Publisher", PublisherTable.Defs.Columns.Name), ListSortDirection.Ascending);
             Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate();
@@ -67,8 +67,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            Int64 credentialId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = String.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, credentialId);
+            long credentialId = GetOwnerSelectedPrimaryId();
+            DataView.RowFilter = string.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, credentialId);
         }
         #endregion
 

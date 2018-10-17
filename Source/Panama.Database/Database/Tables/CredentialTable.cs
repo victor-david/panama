@@ -179,7 +179,7 @@ namespace Restless.App.Panama.Database.Tables
             /// <summary>
             /// Gets the id for this row object.
             /// </summary>
-            public Int64 Id
+            public long Id
             {
                 get { return GetInt64(Defs.Columns.Id); }
             }
@@ -233,12 +233,12 @@ namespace Restless.App.Panama.Database.Tables
             /// <returns>A string with the name and login id concatenated.</returns>
             public override string ToString()
             {
-                string loginId = String.Empty;
+                string loginId = string.Empty;
                 if (Id > 0)
                 {
-                    loginId = String.Format(" ({0})", LoginId);
+                    loginId = string.Format(" ({0})", LoginId);
                 }
-                return String.Format("{0}{1}", Name, loginId);
+                return string.Format("{0}{1}", Name, loginId);
             }
             #endregion
         }

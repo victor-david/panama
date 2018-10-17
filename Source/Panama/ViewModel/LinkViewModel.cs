@@ -68,7 +68,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = String.Format("{0} LIKE '%{1}%' OR {2} LIKE '%{3}%'", LinkTable.Defs.Columns.Name, text, LinkTable.Defs.Columns.Notes, text);
+            DataView.RowFilter = string.Format("{0} LIKE '%{1}%' OR {2} LIKE '%{3}%'", LinkTable.Defs.Columns.Name, text, LinkTable.Defs.Columns.Notes, text);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Restless.App.Panama.ViewModel
         {
             return 
                 base.CanRunOpenRowCommand(item) &&
-                !String.IsNullOrWhiteSpace(SelectedRow[LinkTable.Defs.Columns.Url].ToString());
+                !string.IsNullOrWhiteSpace(SelectedRow[LinkTable.Defs.Columns.Url].ToString());
         }
         #endregion
 

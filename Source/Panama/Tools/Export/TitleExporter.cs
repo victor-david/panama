@@ -93,11 +93,11 @@ namespace Restless.App.Panama.Tools
         {
             candidates.Clear();
 
-            DataRow[] titleRows = DatabaseController.Instance.GetTable<TitleTable>().Select(null, String.Format("{0} DESC", TitleTable.Defs.Columns.Written));
+            DataRow[] titleRows = DatabaseController.Instance.GetTable<TitleTable>().Select(null, string.Format("{0} DESC", TitleTable.Defs.Columns.Written));
 
             foreach (DataRow titleRow in titleRows)
             {
-                Int64 titleId = (Int64)titleRow[TitleTable.Defs.Columns.Id];
+                long titleId = (long)titleRow[TitleTable.Defs.Columns.Id];
                 string title = titleRow[TitleTable.Defs.Columns.Title].ToString();
                 DateTime written = (DateTime)titleRow[TitleTable.Defs.Columns.Written];
 
@@ -105,8 +105,8 @@ namespace Restless.App.Panama.Tools
                 foreach (DataRow versionRow in versionRows)
                 {
                     DateTime versionDate = (DateTime)versionRow[TitleVersionTable.Defs.Columns.Updated];
-                    Int64 versionSize = (Int64)versionRow[TitleVersionTable.Defs.Columns.Size];
-                    Int64 version = (Int64)versionRow[TitleVersionTable.Defs.Columns.Version];
+                    long versionSize = (long)versionRow[TitleVersionTable.Defs.Columns.Size];
+                    long version = (long)versionRow[TitleVersionTable.Defs.Columns.Version];
                     string language = versionRow[TitleVersionTable.Defs.Columns.LangId].ToString();
                     string versionFile = versionRow[TitleVersionTable.Defs.Columns.FileName].ToString();
 
@@ -114,7 +114,7 @@ namespace Restless.App.Panama.Tools
                     // yyyy-MM-dd_Title_Ver.Lang.ext
                     // 2011-05-24_Title_v1.en-us.docx
                     string exportFileName =
-                        String.Format("{0}_{1}_v{2}.{3}{4}",
+                        string.Format("{0}_{1}_v{2}.{3}{4}",
                             written.ToString("yyyy-MM-dd"),
                             Format.ValidFileName(title),
                             version, language,
@@ -166,7 +166,7 @@ namespace Restless.App.Panama.Tools
             if (updated > 0 || removed > 0 || !File.Exists(readMeFile)) 
             {
                 AssemblyInfo a = new AssemblyInfo(AssemblyInfoType.Entry);
-                File.WriteAllText(readMeFile, String.Format(Strings.FormatTextExport, a.Title, DateTime.UtcNow.ToString("R")));
+                File.WriteAllText(readMeFile, string.Format(Strings.FormatTextExport, a.Title, DateTime.UtcNow.ToString("R")));
             }
         }
         #endregion

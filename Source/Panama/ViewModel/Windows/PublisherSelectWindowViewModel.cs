@@ -25,7 +25,7 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Gets the selected publisher id, or -1 if none selected.
         /// </summary>
-        public Int64 SelectedPublisherId
+        public long SelectedPublisherId
         {
             get;
             private set;
@@ -65,7 +65,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = String.Format("{0} LIKE '%{1}%'", PublisherTable.Defs.Columns.Name, text);
+            DataView.RowFilter = string.Format("{0} LIKE '%{1}%'", PublisherTable.Defs.Columns.Name, text);
         }
 
         #endregion
@@ -77,7 +77,7 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedPrimaryKey != null)
             {
-                SelectedPublisherId = (Int64)SelectedPrimaryKey;
+                SelectedPublisherId = (long)SelectedPrimaryKey;
             }
             Owner.Close();
         }

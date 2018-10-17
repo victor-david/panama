@@ -183,7 +183,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override void Load()
         {
-            Load(null, String.Format("{0} DESC",Defs. Columns.Written));
+            Load(null, string.Format("{0} DESC",Defs. Columns.Written));
         }
         #endregion
 
@@ -223,25 +223,25 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         protected override void UseDataRelations()
         {
-            string expr = String.Format("Count(Child({0}).{1})", Defs.Relations.ToVersion, TitleVersionTable.Defs.Columns.Id);
-            CreateExpressionColumn<Int64>(Defs.Columns.Calculated.VersionCount, expr);
+            string expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToVersion, TitleVersionTable.Defs.Columns.Id);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.VersionCount, expr);
 
-            expr = String.Format("Count(Child({0}).{1})", Defs.Relations.ToTitleTag, TitleTagTable.Defs.Columns.TagId);
-            CreateExpressionColumn<Int64>(Defs.Columns.Calculated.TagCount, expr);
+            expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToTitleTag, TitleTagTable.Defs.Columns.TagId);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.TagCount, expr);
 
-            expr = String.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Id);
-            CreateExpressionColumn<Int64>(Defs.Columns.Calculated.SubCount, expr);
+            expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Id);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.SubCount, expr);
 
-            expr = String.Format("Count(Child({0}).{1})", Defs.Relations.ToPublished, PublishedTable.Defs.Columns.Id);
-            CreateExpressionColumn<Int64>(Defs.Columns.Calculated.PublishedCount, expr);
+            expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToPublished, PublishedTable.Defs.Columns.Id);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.PublishedCount, expr);
 
-            expr = String.Format("Count(Child({0}).{1}) > 0", Defs.Relations.ToPublished, PublishedTable.Defs.Columns.Id);
+            expr = string.Format("Count(Child({0}).{1}) > 0", Defs.Relations.ToPublished, PublishedTable.Defs.Columns.Id);
             CreateExpressionColumn<bool>(Defs.Columns.Calculated.IsPublished, expr);
 
-            expr = String.Format("Sum(Child({0}).{1})", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Calculated.CurrentSubCount);
-            CreateExpressionColumn<Int64>(Defs.Columns.Calculated.CurrentSubCount, expr);
+            expr = string.Format("Sum(Child({0}).{1})", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Calculated.CurrentSubCount);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.CurrentSubCount, expr);
 
-            expr = String.Format("Sum(Child({0}).{1}) > 0", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Calculated.CurrentSubCount);
+            expr = string.Format("Sum(Child({0}).{1}) > 0", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Calculated.CurrentSubCount);
             CreateExpressionColumn<bool>(Defs.Columns.Calculated.IsSubmitted, expr);
 
             CreateActionExpressionColumn<DateTime>
@@ -253,7 +253,7 @@ namespace Restless.App.Panama.Database.Tables
                     TitleVersionTable.Defs.Columns.Version
                 );
 
-            CreateActionExpressionColumn<Int64>
+            CreateActionExpressionColumn<long>
                 (
                     Defs.Columns.Calculated.LastestVersionWordCount,
                     Controller.GetTable<TitleVersionTable>(),
@@ -279,7 +279,7 @@ namespace Restless.App.Panama.Database.Tables
             var versions = Controller.GetTable<TitleVersionTable>();
             foreach (DataRow row in Rows)
             {
-                Int64 titleId = (Int64)row[Defs.Columns.Id];
+                long titleId = (long)row[Defs.Columns.Id];
                 DataRow versionRow = versions.GetLastVersion(titleId);
                 if (versionRow != null)
                 {
@@ -327,8 +327,8 @@ namespace Restless.App.Panama.Database.Tables
 
         private void UpdateFromLatestVersionCalculated(DataRowChangeEventArgs e, string titleColumn, string titleVersionColumn)
         {
-            Int64 titleId = (Int64)e.Row[TitleVersionTable.Defs.Columns.TitleId];
-            DataRow[] titleRows = Select(String.Format("{0}={1}", Defs.Columns.Id, titleId));
+            long titleId = (long)e.Row[TitleVersionTable.Defs.Columns.TitleId];
+            DataRow[] titleRows = Select(string.Format("{0}={1}", Defs.Columns.Id, titleId));
             if (titleRows.Length == 1)
             {
                 DataRow versionRow = Controller.GetTable<TitleVersionTable>().GetLastVersion(titleId);
@@ -352,7 +352,7 @@ namespace Restless.App.Panama.Database.Tables
             /// <summary>
             /// Gets the id for this row object.
             /// </summary>
-            public Int64 Id
+            public long Id
             {
                 get => GetInt64(Defs.Columns.Id);
             }
@@ -389,7 +389,7 @@ namespace Restless.App.Panama.Database.Tables
             /// <summary>
             /// Gets or sets the author id for this row object.
             /// </summary>
-            public Int64 AuthorId
+            public long AuthorId
             {
                 get => GetInt64(Defs.Columns.AuthorId);
                 set => SetValue(Defs.Columns.AuthorId, value);

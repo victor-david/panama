@@ -90,8 +90,8 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<TitleVersionTable>());
-            DataView.RowFilter = String.Format("{0}=-1", TitleVersionTable.Defs.Columns.TitleId);
-            DataView.Sort = String.Format("{0}, {1} DESC", TitleVersionTable.Defs.Columns.TitleId, TitleVersionTable.Defs.Columns.Version);
+            DataView.RowFilter = string.Format("{0}=-1", TitleVersionTable.Defs.Columns.TitleId);
+            DataView.Sort = string.Format("{0}, {1} DESC", TitleVersionTable.Defs.Columns.TitleId, TitleVersionTable.Defs.Columns.Version);
             Columns.CreateImage<IntegerToImageConverter>("T", TitleVersionTable.Defs.Columns.DocType, "ImageFileType", 20.0);
             var col = Columns.Create("V", TitleVersionTable.Defs.Columns.Version).MakeCentered().MakeFixedWidth(FixedWidth.Standard);
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
@@ -114,9 +114,9 @@ namespace Restless.App.Panama.ViewModel
             {
                 string langId = row[LanguageTable.Defs.Columns.Id].ToString();
                 string langName = row[LanguageTable.Defs.Columns.Name].ToString();
-                string commandId = String.Format("SetLang{0}", langId);
+                string commandId = string.Format("SetLang{0}", langId);
                 Commands.Add(commandId, (o) => { SetLanguage(langId); }, CanRunCommandIfRowSelected);
-                MenuItems.AddItem(String.Format("Set language to {0} ({1})", langName, langId), Commands[commandId], null, langId);
+                MenuItems.AddItem(string.Format("Set language to {0} ({1})", langName, langId), Commands[commandId], null, langId);
             }
 
             HeaderPreface = Strings.HeaderVersions;
@@ -148,8 +148,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            Int64 titleId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = String.Format("{0}={1}", TitleVersionTable.Defs.Columns.TitleId, titleId);
+            long titleId = GetOwnerSelectedPrimaryId();
+            DataView.RowFilter = string.Format("{0}={1}", TitleVersionTable.Defs.Columns.TitleId, titleId);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Restless.App.Panama.ViewModel
             {
                 OpenFileRow(view.Row, TitleVersionTable.Defs.Columns.FileName, Config.Instance.FolderTitleRoot, (f) =>
                     {
-                        Messages.ShowError(String.Format(Strings.FormatStringFileNotFound, f, "FolderTitleRoot"));
+                        Messages.ShowError(string.Format(Strings.FormatStringFileNotFound, f, "FolderTitleRoot"));
                     });
             }
         }
@@ -177,7 +177,7 @@ namespace Restless.App.Panama.ViewModel
 
             if (Owner.SelectedRow != null)
             {
-                Int64 titleId = (Int64)Owner.SelectedRow[TitleTable.Defs.Columns.Id];
+                long titleId = (long)Owner.SelectedRow[TitleTable.Defs.Columns.Id];
                 using (var dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Strings.CaptionSelectTitleVersionAddByFile))
                 {
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
@@ -192,8 +192,8 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedRow != null && Messages.ShowYesNo(Strings.ConfirmationRemoveTitleVersion))
             {
-                Int64 titleId = (Int64)SelectedRow[TitleVersionTable.Defs.Columns.TitleId];
-                Int64 version = (Int64)SelectedRow[TitleVersionTable.Defs.Columns.Version];
+                long titleId = (long)SelectedRow[TitleVersionTable.Defs.Columns.TitleId];
+                long version = (long)SelectedRow[TitleVersionTable.Defs.Columns.Version];
                 DatabaseController.Instance.GetTable<TitleVersionTable>().RemoveVersion(titleId, version);
                 DatabaseController.Instance.GetTable<TitleVersionTable>().Save();
             }
@@ -203,8 +203,8 @@ namespace Restless.App.Panama.ViewModel
         {
             if (Owner.SelectedRow != null && SelectedRow != null)
             {
-                Int64 titleId = (Int64)Owner.SelectedRow[TitleTable.Defs.Columns.Id];
-                Int64 version = (Int64)SelectedRow[TitleVersionTable.Defs.Columns.Version];
+                long titleId = (long)Owner.SelectedRow[TitleTable.Defs.Columns.Id];
+                long version = (long)SelectedRow[TitleVersionTable.Defs.Columns.Version];
                 using (var dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Strings.CaptionSelectTitleVersionReplaceByFile))
                 {
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
@@ -219,8 +219,8 @@ namespace Restless.App.Panama.ViewModel
         private void RunMoveUpCommand(object o)
         {
             /* move up means increasing the version number */
-            Int64 titleId = (Int64)SelectedRow[TitleVersionTable.Defs.Columns.TitleId];
-            Int64 version = (Int64)SelectedRow[TitleVersionTable.Defs.Columns.Version];
+            long titleId = (long)SelectedRow[TitleVersionTable.Defs.Columns.TitleId];
+            long version = (long)SelectedRow[TitleVersionTable.Defs.Columns.Version];
             DatabaseController.Instance.GetTable<TitleVersionTable>().ChangeVersionNumber(titleId, version, version + 1);
 
         }
@@ -228,8 +228,8 @@ namespace Restless.App.Panama.ViewModel
         private void RunMoveDownCommand(object o)
         {
             /* move down means decreasing the version number */
-            Int64 titleId = (Int64)SelectedRow[TitleVersionTable.Defs.Columns.TitleId];
-            Int64 version = (Int64)SelectedRow[TitleVersionTable.Defs.Columns.Version];
+            long titleId = (long)SelectedRow[TitleVersionTable.Defs.Columns.TitleId];
+            long version = (long)SelectedRow[TitleVersionTable.Defs.Columns.Version];
             DatabaseController.Instance.GetTable<TitleVersionTable>().ChangeVersionNumber(titleId, version, version - 1);
         }
 
@@ -237,21 +237,21 @@ namespace Restless.App.Panama.ViewModel
         {
             return
                 SelectedRow != null &&
-                (Int64)SelectedRow[TitleVersionTable.Defs.Columns.Version] != SourceCount;
+                (long)SelectedRow[TitleVersionTable.Defs.Columns.Version] != SourceCount;
         }
 
         private bool CanRunMoveDownCommand(object o)
         {
             return
                 SelectedRow != null &&
-                (Int64)SelectedRow[TitleVersionTable.Defs.Columns.Version] != 1;
+                (long)SelectedRow[TitleVersionTable.Defs.Columns.Version] != 1;
         }
 
         private void RunSyncCommand(object o)
         {
             if (Owner.SelectedPrimaryKey != null)
             {
-                Int64 titleId = (Int64)Owner.SelectedPrimaryKey;
+                long titleId = (long)Owner.SelectedPrimaryKey;
                 var window = WindowFactory.TitleVersionRename.Create(titleId);
                 window.ShowDialog();
             }
@@ -304,7 +304,7 @@ namespace Restless.App.Panama.ViewModel
             if (SelectedRow != null)
             {
                 string fileName = Paths.Title.WithRoot(SelectedRow[TitleVersionTable.Defs.Columns.FileName].ToString());
-                Int64 docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
+                long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
                 if (docType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType)
                 {
                     IsOpenXml = true;

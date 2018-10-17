@@ -98,12 +98,12 @@ namespace Restless.App.Panama.ViewModel
         #region Private methods
         private void UpdateFoundHeader()
         {
-            UpdatedHeader = String.Format(Strings.HeaderToolOperationMetaSubmissionUpdatedFormat, Updated.Count);
+            UpdatedHeader = string.Format(Strings.HeaderToolOperationMetaSubmissionUpdatedFormat, Updated.Count);
         }
 
         private void UpdateNotFoundHeader()
         {
-            NotFoundHeader = String.Format(Strings.HeaderToolOperationMetaSubmissionNotFoundFormat, NotFound.Count);
+            NotFoundHeader = string.Format(Strings.HeaderToolOperationMetaSubmissionNotFoundFormat, NotFound.Count);
         }
         #endregion
 

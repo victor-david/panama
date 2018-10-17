@@ -97,7 +97,7 @@ namespace Restless.App.Panama.Database.Tables
                 CreateColumns();
             }
             Rows.Clear();
-            Int64 id = 100;
+            long id = 100;
             foreach (DataTable table in Controller.DataSet.Tables)
             {
                 if (table.TableName != Defs.TableName)
@@ -128,13 +128,13 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         private void CreateColumns()
         {
-            Columns.Add(new DataColumn(Defs.Columns.Id, typeof(Int64)));
+            Columns.Add(new DataColumn(Defs.Columns.Id, typeof(long)));
             Columns.Add(new DataColumn(Defs.Columns.Name, typeof(string)));
-            Columns.Add(new DataColumn(Defs.Columns.ColumnCount, typeof(Int64)));
-            Columns.Add(new DataColumn(Defs.Columns.RowCount, typeof(Int64)));
-            Columns.Add(new DataColumn(Defs.Columns.ParentRelationCount, typeof(Int64)));
-            Columns.Add(new DataColumn(Defs.Columns.ChildRelationCount, typeof(Int64)));
-            Columns.Add(new DataColumn(Defs.Columns.ConstraintCount, typeof(Int64)));
+            Columns.Add(new DataColumn(Defs.Columns.ColumnCount, typeof(long)));
+            Columns.Add(new DataColumn(Defs.Columns.RowCount, typeof(long)));
+            Columns.Add(new DataColumn(Defs.Columns.ParentRelationCount, typeof(long)));
+            Columns.Add(new DataColumn(Defs.Columns.ChildRelationCount, typeof(long)));
+            Columns.Add(new DataColumn(Defs.Columns.ConstraintCount, typeof(long)));
         }
     }
 }

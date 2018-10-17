@@ -62,37 +62,37 @@ namespace Restless.App.Panama.Database.Tables
                 /// <summary>
                 /// The value of the <see cref="Columns.Id"/> column that represents an unknown document file type.
                 /// </summary>
-                public const Int64 UnknownFileType = 0;
+                public const long UnknownFileType = 0;
 
                 /// <summary>
                 /// The value of the <see cref="Columns.Id"/> column that represents a Word OpenXml document.
                 /// </summary>
-                public const Int64 WordOpenXmlFileType = 1;
+                public const long WordOpenXmlFileType = 1;
 
                 /// <summary>
                 /// The value of the <see cref="Columns.Id"/> column that represents an older Word document (.doc or .rtf)
                 /// </summary>
-                public const Int64 WordOlderFileType = 2;
+                public const long WordOlderFileType = 2;
 
                 /// <summary>
                 /// The value of the <see cref="Columns.Id"/> column that represents a PDF document.
                 /// </summary>
-                public const Int64 PdfFileType = 3;
+                public const long PdfFileType = 3;
 
                 /// <summary>
                 /// The value of the <see cref="Columns.Id"/> column that represents a plain text document.
                 /// </summary>
-                public const Int64 TextFileType = 4;
+                public const long TextFileType = 4;
 
                 /// <summary>
                 /// The value of the <see cref="Columns.Id"/> column that represents an Html document.
                 /// </summary>
-                public const Int64 HtmlFileType = 9;
+                public const long HtmlFileType = 9;
 
                 /// <summary>
                 /// The value of the <see cref="Columns.Id"/> column that represents an image document.
                 /// </summary>
-                public const Int64 ImageFileType = 10;
+                public const long ImageFileType = 10;
 
             }
 
@@ -132,9 +132,9 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="id">The doc type id</param>
         /// <returns>true if supported; otherwise, false.</returns>
-        public bool IsDocTypeSupported(Int64 id)
+        public bool IsDocTypeSupported(long id)
         {
-            DataRow[] rows = Select(String.Format("{0}={1}", Defs.Columns.Id, id));
+            DataRow[] rows = Select(string.Format("{0}={1}", Defs.Columns.Id, id));
             if (rows.Length == 1)
             {
                 return (bool)rows[0][Defs.Columns.Supported];
@@ -148,7 +148,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <returns>An array of <see cref="DataRow"/> objects that contains the supported document types.</returns>
         public DataRow[] GetSupportedDocTypes()
         {
-            return Select(String.Format("{0}=1", Defs.Columns.Supported), Defs.Columns.Ordering);
+            return Select(string.Format("{0}=1", Defs.Columns.Supported), Defs.Columns.Ordering);
         }
 
         /// <summary>
@@ -156,12 +156,12 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="filename">The file name</param>
         /// <returns>The corresponding document type id, or Defs.Values.UnknownFileType if unable to determine the type</returns>
-        public Int64 GetDocTypeFromFileName(string filename)
+        public long GetDocTypeFromFileName(string filename)
         {
-            if (!String.IsNullOrEmpty(filename))
+            if (!string.IsNullOrEmpty(filename))
             {
                 string fileExt = System.IO.Path.GetExtension(filename).ToLower();
-                if (!String.IsNullOrEmpty(fileExt))
+                if (!string.IsNullOrEmpty(fileExt))
                 {
                     foreach (DataRow row in GetSupportedDocTypes())
                     {
@@ -170,7 +170,7 @@ namespace Restless.App.Panama.Database.Tables
                         {
                             if (ext == fileExt)
                             {
-                                return (Int64)row[Defs.Columns.Id];
+                                return (long)row[Defs.Columns.Id];
                             }
                         }
                     }

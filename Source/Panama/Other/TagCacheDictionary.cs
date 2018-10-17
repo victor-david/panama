@@ -14,7 +14,7 @@ namespace Restless.App.Panama
     public class TagCacheDictionary
     {
         #region Private
-        private Dictionary<Int64, TagCache> cache;
+        private Dictionary<long, TagCache> cache;
         private TagCache unknown;
         #endregion
 
@@ -26,7 +26,7 @@ namespace Restless.App.Panama
         /// </summary>
         /// <param name="tagId">The tag id</param>
         /// <returns>The TagCache object, or the unknowm TagCache object if <paramref name="tagId"/> doesn't exist</returns>
-        public TagCache this[Int64 tagId]
+        public TagCache this[long tagId]
         {
             get
             {
@@ -58,7 +58,7 @@ namespace Restless.App.Panama
         /// </summary>
         /// <param name="tagId">The tag id</param>
         /// <param name="item">The item</param>
-        public void Add(Int64 tagId, TagCache item)
+        public void Add(long tagId, TagCache item)
         {
             Validations.ValidateNull(item, "Add.Item");
             cache.Add(tagId, item);
@@ -71,7 +71,7 @@ namespace Restless.App.Panama
         public void Add(DataRow tagRow)
         {
             Validations.ValidateNull(tagRow, "Add.TagRow");
-            Int64 tagId = (Int64)tagRow[TagTable.Defs.Columns.Id];
+            long tagId = (long)tagRow[TagTable.Defs.Columns.Id];
             string tagName = tagRow[TagTable.Defs.Columns.Tag].ToString();
             string tagDesc = tagRow[TagTable.Defs.Columns.Description].ToString();
             Add(tagId, new TagCache(tagId, tagName, tagDesc));

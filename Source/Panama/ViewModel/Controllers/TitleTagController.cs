@@ -85,7 +85,7 @@ namespace Restless.App.Panama.ViewModel
             var tagTable = DatabaseController.Instance.GetTable<TagTable>();
             foreach (DataRow row in tagTable.Rows)
             {
-                Int64 tagId = (Int64)row[TagTable.Defs.Columns.Id];
+                long tagId = (long)row[TagTable.Defs.Columns.Id];
                 ICommand cmd = new RelayCommand((o) => { RunTagAddCommand(tagId); }, (o) => CanRunTagAddCommand(tagId));
                 Available.Add(new TagCommandViewModel(tagId, row[TagTable.Defs.Columns.Tag].ToString(), row[TagTable.Defs.Columns.Description].ToString(), cmd));
                 tagCache.Add(row);
@@ -102,13 +102,13 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            Int64 titleId = GetOwnerSelectedPrimaryId();
+            long titleId = GetOwnerSelectedPrimaryId();
             Current.Clear();
-            titleTagTable.DefaultView.RowFilter = String.Format("{0}={1}", TitleTagTable.Defs.Columns.TitleId, titleId);
+            titleTagTable.DefaultView.RowFilter = string.Format("{0}={1}", TitleTagTable.Defs.Columns.TitleId, titleId);
             titleTagTable.DefaultView.Sort = TitleTagTable.Defs.Columns.Joined.TagName;
             foreach (DataRowView dataRowView in titleTagTable.DefaultView)
             {
-                Int64 tagId = (Int64)dataRowView[TitleTagTable.Defs.Columns.TagId];
+                long tagId = (long)dataRowView[TitleTagTable.Defs.Columns.TagId];
                 ICommand cmd = new RelayCommand((o) => { RunTagRemoveCommand(tagId); }, (o) => CanRunTagRemoveCommand(tagId));
                 Current.Add(new TagCommandViewModel(tagId, tagCache[tagId].Name, tagCache[tagId].Description, cmd));
             }
@@ -120,10 +120,10 @@ namespace Restless.App.Panama.ViewModel
 
         #region Private methods
 
-        private void RunTagAddCommand(Int64 tagId)
+        private void RunTagAddCommand(long tagId)
         {
-            Int64 titleId = GetOwnerSelectedPrimaryId();
-            if (titleId != Int64.MinValue)
+            long titleId = GetOwnerSelectedPrimaryId();
+            if (titleId != long.MinValue)
             {
                 titleTagTable.Add(tagId, titleId);
                 titleTagTable.Save();
@@ -131,16 +131,16 @@ namespace Restless.App.Panama.ViewModel
             }
         }
 
-        private bool CanRunTagAddCommand(Int64 tagId)
+        private bool CanRunTagAddCommand(long tagId)
         {
-            Int64 titleId = GetOwnerSelectedPrimaryId();
+            long titleId = GetOwnerSelectedPrimaryId();
             return !titleTagTable.TagExists(tagId, titleId);
         }
 
-        private void RunTagRemoveCommand(Int64 tagId)
+        private void RunTagRemoveCommand(long tagId)
         {
-            Int64 titleId = GetOwnerSelectedPrimaryId();
-            if (titleId != Int64.MinValue)
+            long titleId = GetOwnerSelectedPrimaryId();
+            if (titleId != long.MinValue)
             {
                 titleTagTable.Remove(tagId, titleId);
                 titleTagTable.Save();
@@ -152,7 +152,7 @@ namespace Restless.App.Panama.ViewModel
             }
         }
 
-        private bool CanRunTagRemoveCommand(Int64 tagId)
+        private bool CanRunTagRemoveCommand(long tagId)
         {
             return true;
         }

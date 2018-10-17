@@ -92,7 +92,7 @@ namespace Restless.App.Panama.Database.Tables
             Validations.ValidateNull(defaultForeColor, "DefaultForeColor");
             Validations.ValidateNull(defaultBackColor, "DefaultBackColor");
 
-            DataRow[] rows = Select(String.Format("{0}='{1}'", Defs.Columns.Id, id));
+            DataRow[] rows = Select(string.Format("{0}='{1}'", Defs.Columns.Id, id));
             if (rows.Length == 1) return rows[0];
 
             DataRow row = NewRow();

@@ -55,8 +55,8 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionBatchTable>());
-            DataView.RowFilter = String.Format("{0}=-1", SubmissionBatchTable.Defs.Columns.PublisherId);
-            DataView.Sort = String.Format("{0} DESC", SubmissionBatchTable.Defs.Columns.Submitted);
+            DataView.RowFilter = string.Format("{0}=-1", SubmissionBatchTable.Defs.Columns.PublisherId);
+            DataView.Sort = string.Format("{0} DESC", SubmissionBatchTable.Defs.Columns.Submitted);
             Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.SetDefaultSort(Columns.Create("Submitted", SubmissionBatchTable.Defs.Columns.Submitted).MakeDate(), ListSortDirection.Descending);
             Columns.Create("Response", SubmissionBatchTable.Defs.Columns.Response).MakeDate();
@@ -80,8 +80,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            Int64 publisherId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = String.Format("{0}={1}", SubmissionBatchTable.Defs.Columns.PublisherId, publisherId);
+            long publisherId = GetOwnerSelectedPrimaryId();
+            DataView.RowFilter = string.Format("{0}={1}", SubmissionBatchTable.Defs.Columns.PublisherId, publisherId);
             DataViewCount = DataView.Count;
         }
         #endregion

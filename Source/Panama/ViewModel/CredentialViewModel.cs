@@ -104,7 +104,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = String.Format("{0} LIKE '%{1}%'", CredentialTable.Defs.Columns.Name, text);
+            DataView.RowFilter = string.Format("{0} LIKE '%{1}%'", CredentialTable.Defs.Columns.Name, text);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Restless.App.Panama.ViewModel
         {
             if (Messages.ShowYesNo(Strings.ConfirmationDeleteCredential))
             {
-                Int64 credId = (Int64)SelectedPrimaryKey;
+                long credId = (long)SelectedPrimaryKey;
                 DatabaseController.Instance.GetTable<PublisherTable>().ClearCredential(credId);
                 DatabaseController.Instance.GetTable<LinkTable>().ClearCredential(credId);
                 SelectedRow.Delete();
@@ -172,7 +172,7 @@ namespace Restless.App.Panama.ViewModel
                 Execution.TryCatch(() =>
                 {
                     Clipboard.SetText(SelectedRow[columnName].ToString());
-                    MainViewModel.CreateNotificationMessage(String.Format("{0} copied to clipboard", columnName));
+                    MainViewModel.CreateNotificationMessage(string.Format("{0} copied to clipboard", columnName));
                 });
             }
         }

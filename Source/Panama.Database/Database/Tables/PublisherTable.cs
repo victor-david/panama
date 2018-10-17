@@ -192,16 +192,16 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override void Load()
         {
-            Load(null, String.Format("{0} DESC", Defs.Columns.Added));
+            Load(null, string.Format("{0} DESC", Defs.Columns.Added));
         }
 
         /// <summary>
         /// Clears the credential id of all publishers with the specified credential id.
         /// </summary>
         /// <param name="id">The credential id.</param>
-        public void ClearCredential(Int64 id)
+        public void ClearCredential(long id)
         {
-            DataRow[] rows = Select(String.Format("{0}={1}", Defs.Columns.CredentialId, id));
+            DataRow[] rows = Select(string.Format("{0}={1}", Defs.Columns.CredentialId, id));
             foreach (DataRow row in rows)
             {
                 row[Defs.Columns.CredentialId] = 0;
@@ -245,14 +245,14 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         protected override void UseDataRelations()
         {
-            string expr = String.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmissionBatch, SubmissionBatchTable.Defs.Columns.Id);
-            CreateExpressionColumn<Int64>(Defs.Columns.Calculated.SubCount, expr);
+            string expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmissionBatch, SubmissionBatchTable.Defs.Columns.Id);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.SubCount, expr);
 
-            expr = String.Format("Max(Child({0}).{1})", Defs.Relations.ToSubmissionBatch, SubmissionBatchTable.Defs.Columns.Submitted);
+            expr = string.Format("Max(Child({0}).{1})", Defs.Relations.ToSubmissionBatch, SubmissionBatchTable.Defs.Columns.Submitted);
             CreateExpressionColumn<DateTime>(Defs.Columns.Calculated.LastSub, expr);
 
-            expr = String.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmissionPeriod, SubmissionPeriodTable.Defs.Columns.Id);
-            CreateExpressionColumn<Int64>(Defs.Columns.Calculated.SubPeriodCount, expr);
+            expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmissionPeriod, SubmissionPeriodTable.Defs.Columns.Id);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.SubPeriodCount, expr);
         }
 
         /// <summary>

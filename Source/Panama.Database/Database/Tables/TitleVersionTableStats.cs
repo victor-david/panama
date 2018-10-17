@@ -111,14 +111,14 @@ namespace Restless.App.Panama.Database.Tables
             Dictionary<string, int> files = new Dictionary<string, int>();
             foreach (DataRow row in Table.Rows)
             {
-                Int64 docType = (Int64)row[TitleVersionTable.Defs.Columns.DocType];
+                long docType = (long)row[TitleVersionTable.Defs.Columns.DocType];
                 if (docType == DocumentTypeTable.Defs.Values.HtmlFileType) HtmlCount++;
                 if (docType == DocumentTypeTable.Defs.Values.PdfFileType) PdfCount++;
                 if (docType == DocumentTypeTable.Defs.Values.TextFileType) TextCount++ ;
                 if (docType == DocumentTypeTable.Defs.Values.UnknownFileType) UnknownCount++;
                 if (docType == DocumentTypeTable.Defs.Values.WordOlderFileType) Word2007Count++;
                 if (docType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType) WordOpenXmlCount++;
-                Int64 titleId = (Int64)row[TitleVersionTable.Defs.Columns.TitleId];
+                long titleId = (long)row[TitleVersionTable.Defs.Columns.TitleId];
                 string fileName = row[TitleVersionTable.Defs.Columns.FileName].ToString();
                 if (!files.ContainsKey(fileName))
                 {

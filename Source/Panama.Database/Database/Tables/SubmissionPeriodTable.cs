@@ -100,7 +100,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="publisherId">The publisher id</param>
         /// <param name="start">The start date of the submission period</param>
         /// <param name="end">The end date of the submission period</param>
-        public void AddSubmissionPeriod(Int64 publisherId, DateTime start, DateTime end)
+        public void AddSubmissionPeriod(long publisherId, DateTime start, DateTime end)
         {
             DataRow row = NewRow();
             row[Defs.Columns.PublisherId] = publisherId;

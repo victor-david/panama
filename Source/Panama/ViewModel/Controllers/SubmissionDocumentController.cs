@@ -85,7 +85,7 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionDocumentTable>());
-            DataView.RowFilter = String.Format("{0}=-1", SubmissionDocumentTable.Defs.Columns.BatchId);
+            DataView.RowFilter = string.Format("{0}=-1", SubmissionDocumentTable.Defs.Columns.BatchId);
             DataView.Sort = SubmissionDocumentTable.Defs.Columns.Title;
 
             Columns.CreateImage<IntegerToImageConverter>("T", SubmissionDocumentTable.Defs.Columns.DocType, "ImageFileType", 20.0);
@@ -136,8 +136,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            Int64 id = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = String.Format("{0}={1}", SubmissionDocumentTable.Defs.Columns.BatchId, id);
+            long id = GetOwnerSelectedPrimaryId();
+            DataView.RowFilter = string.Format("{0}={1}", SubmissionDocumentTable.Defs.Columns.BatchId, id);
         }
 
         /// <summary>
@@ -165,13 +165,13 @@ namespace Restless.App.Panama.ViewModel
             if (item is DataRowView view)
             {
                 string docid = view.Row[SubmissionDocumentTable.Defs.Columns.DocId].ToString();
-                if (String.IsNullOrEmpty(docid))
+                if (string.IsNullOrEmpty(docid))
                 {
                     Messages.ShowError(Strings.InvalidOpNoDocumentId);
                     return;
                 }
 
-                Int64 docType = (Int64)view.Row[SubmissionDocumentTable.Defs.Columns.DocType];
+                long docType = (long)view.Row[SubmissionDocumentTable.Defs.Columns.DocType];
                 if (!documentTypeTable.IsDocTypeSupported(docType))
                 {
                     Messages.ShowError(Strings.InvalidOpDocumentTypeNotSupported);
@@ -180,7 +180,7 @@ namespace Restless.App.Panama.ViewModel
 
                 OpenFileRow(view.Row, SubmissionDocumentTable.Defs.Columns.DocId, Config.Instance.FolderSubmissionDocument, (f) =>
                     {
-                        Messages.ShowError(String.Format(Strings.FormatStringFileNotFound, f, "FolderSubmissionDocument"));
+                        Messages.ShowError(string.Format(Strings.FormatStringFileNotFound, f, "FolderSubmissionDocument"));
                     });
             }
         }
@@ -211,7 +211,7 @@ namespace Restless.App.Panama.ViewModel
                 return;
             }
 
-            Int64 batchId = (Int64)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Id];
+            long batchId = (long)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Id];
             string publisher = Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.Publisher].ToString();
 
             var select = WindowFactory.SubmissionDocumentSelect.Create();
@@ -229,15 +229,15 @@ namespace Restless.App.Panama.ViewModel
                             var ai = new AssemblyInfo(AssemblyInfoType.Entry);
                             var xml = new Restless.Tools.OpenXml.OpenXmlDocumentCreator()
                             {
-                                Filename = String.Format("{0}.docx", Path.Combine(Config.Instance.FolderSubmissionDocument, Format.MakeFileName(publisher))),
+                                Filename = string.Format("{0}.docx", Path.Combine(Config.Instance.FolderSubmissionDocument, Format.MakeFileName(publisher))),
                                 HeaderText = ProcessPlaceholders(ops.Header),
                                 FooterText = ProcessPlaceholders(ops.Footer),
                                 HeaderPageNumbers = ops.HeaderPageNumbers,
                                 FooterPageNumbers = ops.FooterPageNumbers,
                                 Paragraphs = GetParagraphs(ProcessPlaceholders(ops.Text)),
                                 Author = DatabaseController.Instance.GetTable<AuthorTable>().GetDefaultAuthorName(),
-                                Description = String.Format("Created by {0} {1}", ai.Title, ai.Version),
-                                Title = String.Format("Submissions to {0}", publisher),
+                                Description = string.Format("Created by {0} {1}", ai.Title, ai.Version),
+                                Title = string.Format("Submissions to {0}", publisher),
                                 Company = ops.Company
                             };
                             xml.Create();

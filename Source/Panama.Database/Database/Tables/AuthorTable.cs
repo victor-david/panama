@@ -88,12 +88,12 @@ namespace Restless.App.Panama.Database.Tables
         /// <returns>The author name, or an empty string if none marked as default.</returns>
         public string GetDefaultAuthorName()
         {
-            DataRow[] rows = Select(String.Format("{0}=1", Defs.Columns.IsDefault), Defs.Columns.Id);
+            DataRow[] rows = Select(string.Format("{0}=1", Defs.Columns.IsDefault), Defs.Columns.Id);
             if (rows.Length > 0)
             {
                 return rows[0][Defs.Columns.Name].ToString();
             }
-            return String.Empty;
+            return string.Empty;
         }
         #endregion
 

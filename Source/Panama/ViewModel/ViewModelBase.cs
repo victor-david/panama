@@ -47,7 +47,7 @@ namespace Restless.App.Panama.ViewModel
         {
             get
             {
-                return !String.IsNullOrEmpty(tabDisplayName) ? tabDisplayName : DisplayName;
+                return !string.IsNullOrEmpty(tabDisplayName) ? tabDisplayName : DisplayName;
             }
             protected set
             {

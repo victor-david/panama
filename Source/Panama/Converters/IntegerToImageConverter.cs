@@ -40,10 +40,10 @@ namespace Restless.App.Panama.Converters
         {
             ImageSource result = null;
 
-            if (value is Int64)
+            if (value is long)
             {
-                string resourcePreface = (parameter is string) ? parameter.ToString() : String.Empty;
-                result = (ImageSource)ResourceHelper.Get(String.Format("{0}{1}", resourcePreface, value));
+                string resourcePreface = (parameter is string) ? parameter.ToString() : string.Empty;
+                result = (ImageSource)ResourceHelper.Get(string.Format("{0}{1}", resourcePreface, value));
             }
             return result;
         }

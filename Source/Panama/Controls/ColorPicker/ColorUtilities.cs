@@ -25,7 +25,7 @@ namespace Restless.App.Panama.Controls
         {
             string colorName = KnownColors.Where(kvp => kvp.Value.Equals(color)).Select(kvp => kvp.Key).FirstOrDefault();
 
-            if (String.IsNullOrEmpty(colorName))
+            if (string.IsNullOrEmpty(colorName))
                 colorName = color.ToString();
 
             return colorName;

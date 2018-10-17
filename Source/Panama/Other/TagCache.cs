@@ -14,7 +14,7 @@ namespace Restless.App.Panama
         /// <summary>
         /// Gets the tag id
         /// </summary>
-        public Int64 Id
+        public long Id
         {
             get;
             private set;
@@ -48,7 +48,7 @@ namespace Restless.App.Panama
         /// <param name="id">The tag id.</param>
         /// <param name="name">The tag name.</param>
         /// <param name="description">The tag description.</param>
-        public TagCache(Int64 id, string name, string description)
+        public TagCache(long id, string name, string description)
         {
             Id = id;
             Name = name;

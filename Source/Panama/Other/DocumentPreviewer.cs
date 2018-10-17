@@ -25,7 +25,7 @@ namespace Restless.App.Panama
         public static PreviewMode GetPreviewMode(string fileName)
         {
             Validations.ValidateNullEmpty(fileName, "Preview.FileName");
-            Int64 docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
+            long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
             switch (docType)
             {
                 case DocumentTypeTable.Defs.Values.WordOpenXmlFileType:
@@ -46,7 +46,7 @@ namespace Restless.App.Panama
         public static string GetText(string fileName)
         {
             Validations.ValidateNullEmpty(fileName, "Preview.FileName");
-            Int64 docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
+            long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
             switch (docType)
             {
                 case DocumentTypeTable.Defs.Values.WordOpenXmlFileType:

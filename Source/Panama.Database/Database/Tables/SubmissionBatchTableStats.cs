@@ -71,7 +71,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <summary>
         /// Gets the total fees.
         /// </summary>
-        public Decimal TotalFees
+        public decimal TotalFees
         {
             get;
             private set;
@@ -114,7 +114,7 @@ namespace Restless.App.Panama.Database.Tables
 
             foreach (DataRow row in Table.Rows)
             {
-                Int64 respType = (Int64)row[SubmissionBatchTable.Defs.Columns.ResponseType];
+                long respType = (long)row[SubmissionBatchTable.Defs.Columns.ResponseType];
                 if (respType == ResponseTable.Defs.Values.NoResponse) ActiveCount++;
                     else if   (respType == ResponseTable.Defs.Values.ResponseAccepted) AcceptedCount++;
                         else RejectedCount++ ;
@@ -128,7 +128,7 @@ namespace Restless.App.Panama.Database.Tables
                     respondedSubs++;
                 }
 
-                if (row[SubmissionBatchTable.Defs.Columns.Fee] is Decimal fees)
+                if (row[SubmissionBatchTable.Defs.Columns.Fee] is decimal fees)
                 {
                     TotalFees += fees;
                 }

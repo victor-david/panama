@@ -37,7 +37,7 @@ namespace Restless.App.Panama.Tools
             
             DatabaseController.Instance.Execution.NonQuery("VACUUM");
 
-            DataRow[] titleRows = DatabaseController.Instance.GetTable<TitleTable>().Select(null, String.Format("{0} DESC", TitleTable.Defs.Columns.Written));
+            DataRow[] titleRows = DatabaseController.Instance.GetTable<TitleTable>().Select(null, string.Format("{0} DESC", TitleTable.Defs.Columns.Written));
             TotalCount = titleRows.Length;
 
             foreach (DataRow titleRow in titleRows)
@@ -53,7 +53,7 @@ namespace Restless.App.Panama.Tools
 
                     if (verObj.Info.Exists)
                     {
-                        Int64 foundWordCount = 0;
+                        long foundWordCount = 0;
                         if (verObj.DocType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType)
                         {
                             foundWordCount = OpenXmlDocument.Reader.TryGetWordCount(verObj.Info.FullName);

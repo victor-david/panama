@@ -110,7 +110,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="titleId">The title id</param>
         /// <param name="publisherId">The publisher id</param>
-        public void Add(Int64 titleId, Int64 publisherId)
+        public void Add(long titleId, long publisherId)
         {
             DataRow row = NewRow();
             row[Defs.Columns.TitleId] = titleId;

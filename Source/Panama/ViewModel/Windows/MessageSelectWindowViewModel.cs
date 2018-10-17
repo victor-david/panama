@@ -117,7 +117,7 @@ namespace Restless.App.Panama.ViewModel
         {
             resultsView.Clear();
             var provider = new WindowsMapiSearch();
-            if (!String.IsNullOrEmpty(options.Scope))
+            if (!string.IsNullOrEmpty(options.Scope))
             {
                 provider.Scopes.Add(options.Scope);
             }

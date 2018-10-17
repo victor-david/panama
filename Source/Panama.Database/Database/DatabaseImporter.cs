@@ -88,7 +88,7 @@ namespace Restless.App.Panama.Database
 
             Validations.ValidateNull(importer, "ImportTable.Importer");
             // if no name passed, use same name as destination
-            if (String.IsNullOrEmpty(sourceName))
+            if (string.IsNullOrEmpty(sourceName))
             {
                 sourceName = dest.TableName;
             }
@@ -99,7 +99,7 @@ namespace Restless.App.Panama.Database
 
             using (var temp = new DataTable(sourceName))
             {
-                string sql = String.Format("SELECT * FROM [{0}]", temp.TableName);
+                string sql = string.Format("SELECT * FROM [{0}]", temp.TableName);
                 var adapter = new System.Data.OleDb.OleDbDataAdapter(sql, connection);
                 adapter.Fill(temp);
 

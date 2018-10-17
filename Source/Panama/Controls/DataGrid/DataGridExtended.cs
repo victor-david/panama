@@ -188,7 +188,7 @@ namespace Restless.App.Panama.Controls
                 ListSortDirection primaryDirection = (e.Column.SortDirection == ListSortDirection.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending;
 
                 string primaryPath = e.Column.SortMemberPath;
-                if (!String.IsNullOrEmpty(colSort.Column1))
+                if (!string.IsNullOrEmpty(colSort.Column1))
                 {
                     primaryPath = colSort.Column1;
                 }

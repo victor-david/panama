@@ -98,7 +98,7 @@ namespace Restless.App.Panama.Database.Tables
             {
                 DataRow[] childRows = row.GetChildRows(Defs.Relations.ToTitleTag);
 
-                if (childRows.LongLength != (Int64)row[Defs.Columns.UsageCount])
+                if (childRows.LongLength != (long)row[Defs.Columns.UsageCount])
                 {
                     row[Defs.Columns.UsageCount] = childRows.LongLength;
                 }

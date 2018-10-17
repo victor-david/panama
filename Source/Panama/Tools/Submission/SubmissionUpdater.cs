@@ -39,12 +39,12 @@ namespace Restless.App.Panama.Tools
             foreach (DataRow row in rows)
             {
                 ScanCount++;
-                Int64 docType = (Int64)row[SubmissionDocumentTable.Defs.Columns.DocType];
+                long docType = (long)row[SubmissionDocumentTable.Defs.Columns.DocType];
                 if (DatabaseController.Instance.GetTable<DocumentTypeTable>().IsDocTypeSupported(docType))
                 {
                     string title = row[SubmissionDocumentTable.Defs.Columns.Title].ToString();
                     DateTime subDocDate = (DateTime)row[SubmissionDocumentTable.Defs.Columns.Updated];
-                    Int64 subDocSize = (Int64)row[SubmissionDocumentTable.Defs.Columns.Size];
+                    long subDocSize = (long)row[SubmissionDocumentTable.Defs.Columns.Size];
                     string rowName = row[SubmissionDocumentTable.Defs.Columns.DocId].ToString();
                     string filename = Paths.SubmissionDocument.WithRoot(rowName);
                     var info = new FileInfo(filename);

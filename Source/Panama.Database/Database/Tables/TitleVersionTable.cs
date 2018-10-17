@@ -122,7 +122,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="titleId">The title id</param>
         /// <returns>The data row that contains the first version, or null if titleid has no versions</returns>
-        public DataRow GetFirstVersion(Int64 titleId)
+        public DataRow GetFirstVersion(long titleId)
         {
             return GetFirstOrLastVersion(titleId, true);
         }
@@ -132,7 +132,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="titleId">The title id</param>
         /// <returns>The data row that contains the last version, or null if titleid has no versions</returns>
-        public DataRow GetLastVersion(Int64 titleId)
+        public DataRow GetLastVersion(long titleId)
         {
             return GetFirstOrLastVersion(titleId, false);
         }
@@ -142,7 +142,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="titleId">The title id</param>
         /// <returns>An array of DataRow objects</returns>
-        public DataRow[] GetAllVersions(Int64 titleId)
+        public DataRow[] GetAllVersions(long titleId)
         {
             return Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC");
         }
@@ -179,14 +179,14 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="titleId">The title id</param>
         /// <param name="filename">The file name (should be stripped of title root)</param>
-        public void AddVersion(Int64 titleId, string filename)
+        public void AddVersion(long titleId, string filename)
         {
             Validations.ValidateNullEmpty(filename, "AddVersion.Filename");
-            Int64 version = 1;
+            long version = 1;
             DataRow lastVersionRow = GetLastVersion(titleId);
             if (lastVersionRow != null)
             {
-                version = (Int64)lastVersionRow[Defs.Columns.Version];
+                version = (long)lastVersionRow[Defs.Columns.Version];
                 version++;
             }
 
@@ -206,7 +206,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="titleId">The title id</param>
         /// <param name="version">The version number that's receiving the replacement</param>
         /// <param name="filename">The file name (should be stripped of title root)</param>
-        public void ReplaceVersion(Int64 titleId, Int64 version, string filename)
+        public void ReplaceVersion(long titleId, long version, string filename)
         {
             Validations.ValidateNullEmpty(filename, "ReplaceVersion.Filename");
             DataRow row = GetVersion(titleId, version);
@@ -227,7 +227,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <remarks>
         /// <paramref name="newVersion"/> must be one more or one less than <paramref name="version"/>. If not, this method does nothing.
         /// </remarks>
-        public void ChangeVersionNumber(Int64 titleId, Int64 version, Int64 newVersion)
+        public void ChangeVersionNumber(long titleId, long version, long newVersion)
         {
             // Make sure we're only changing by 1.
             if (Math.Abs(newVersion - version) != 1)
@@ -242,7 +242,7 @@ namespace Restless.App.Panama.Database.Tables
 
             foreach (DataRow row in rows)
             {
-                Int64 rowVersion = (Int64)row[Defs.Columns.Version];
+                long rowVersion = (long)row[Defs.Columns.Version];
                 if (rowVersion == version) versionRow = row;
                 if (rowVersion == newVersion) newVersionRow = row;
             }
@@ -259,18 +259,18 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="titleId">The title id</param>
         /// <param name="version">The version to remove</param>
-        public void RemoveVersion(Int64 titleId, Int64 version)
+        public void RemoveVersion(long titleId, long version)
         {
             DataRow[] rows = GetAllVersions(titleId);
             foreach (DataRow row in rows)
             {
-                Int64 rowVersion = (Int64)row[Defs.Columns.Version];
+                long rowVersion = (long)row[Defs.Columns.Version];
                 if (rowVersion == version) row.Delete();
             }
 
             rows = GetAllVersions(titleId);
 
-            Int64 versionRenumber = 1;
+            long versionRenumber = 1;
             foreach (DataRow row in rows)
             {
                 row[Defs.Columns.Version] = versionRenumber;
@@ -343,7 +343,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="titleId">The title id</param>
         /// <param name="getFirst">true to get the first version, false to get the last version</param>
         /// <returns>A DataRow object with the specified first or last version; null if the title has no versions.</returns>
-        private DataRow GetFirstOrLastVersion(Int64 titleId, bool getFirst)
+        private DataRow GetFirstOrLastVersion(long titleId, bool getFirst)
         {
             string order = (getFirst) ? "ASC" : "DESC";
             DataRow[] rows = Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} {order}");
@@ -361,7 +361,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="titleId">The title id</param>
         /// <param name="version">The version number to get</param>
         /// <returns>A DataRow object with the specified version for the title, or null if it doesn't exist.</returns>
-        private DataRow GetVersion(Int64 titleId, Int64 version)
+        private DataRow GetVersion(long titleId, long version)
         {
             DataRow[] rows = Select($"{Defs.Columns.TitleId}={titleId} AND {Defs.Columns.Version}={version}");
             if (rows.Length == 1)
@@ -384,7 +384,7 @@ namespace Restless.App.Panama.Database.Tables
             /// <summary>
             /// Gets the id for this row object.
             /// </summary>
-            public Int64 Id
+            public long Id
             {
                 get => GetInt64(Defs.Columns.Id);
             }
@@ -392,7 +392,7 @@ namespace Restless.App.Panama.Database.Tables
             /// <summary>
             /// Gets the title id for this row object.
             /// </summary>
-            public Int64 TitleId
+            public long TitleId
             {
                 get => GetInt64(Defs.Columns.TitleId);
             }
@@ -400,7 +400,7 @@ namespace Restless.App.Panama.Database.Tables
             /// <summary>
             /// Gets or sets the document type for this row object.
             /// </summary>
-            public Int64 DocType
+            public long DocType
             {
                 get => GetInt64(Defs.Columns.DocType);
                 set => SetValue(Defs.Columns.DocType, value);
@@ -436,7 +436,7 @@ namespace Restless.App.Panama.Database.Tables
             /// <summary>
             /// Gets or sets the size for this row object.
             /// </summary>
-            public Int64 Size
+            public long Size
             {
                 get => GetInt64(Defs.Columns.Size);
                 set => SetValue(Defs.Columns.Size, value);
@@ -445,7 +445,7 @@ namespace Restless.App.Panama.Database.Tables
             /// <summary>
             /// Gets or sets the version for this row object.
             /// </summary>
-            public Int64 Version
+            public long Version
             {
                 get => GetInt64(Defs.Columns.Version);
                 set => SetValue(Defs.Columns.Version, value);
@@ -454,7 +454,7 @@ namespace Restless.App.Panama.Database.Tables
             /// <summary>
             /// Gets or sets the word count for this row object.
             /// </summary>
-            public Int64 WordCount
+            public long WordCount
             {
                 get => GetInt64(Defs.Columns.WordCount);
                 set => SetValue(Defs.Columns.WordCount, value);

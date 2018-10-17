@@ -80,7 +80,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override void Load()
         {
-            Load(null, String.Format("{0} DESC",Defs. Columns.Id));
+            Load(null, string.Format("{0} DESC",Defs. Columns.Id));
         }
         #endregion
 

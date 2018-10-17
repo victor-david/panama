@@ -164,7 +164,7 @@ namespace Restless.App.Panama.ViewModel
         #region Private Methods
         private void UpdateFoundHeader()
         {
-            FoundHeader = String.Format(Strings.HeaderToolOperationConvertFoundFormat, Converter.Items.Count, Converter.ConvertedCount);
+            FoundHeader = string.Format(Strings.HeaderToolOperationConvertFoundFormat, Converter.Items.Count, Converter.ConvertedCount);
         }
 
         private void RunSelectFolderCommand(object o)
