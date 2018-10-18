@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Database.Tables;
+using Restless.Tools.Utility;
 using System.Data;
 using System.IO;
-using Restless.Tools.Utility;
-using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Configuration;
 
 namespace Restless.App.Panama
 {
@@ -14,10 +10,10 @@ namespace Restless.App.Panama
     /// Represents a single title version item for which to rename its associated file
     /// to be consistent with the title, version, and language that belongs to the version.
     /// </summary>
-    public class TitleVersionRenameItem : NotifyPropertyChangedBase
+    public class TitleVersionRenameItem : BindableBase
     {
         #region Private
-        private DataRow row;
+        private readonly DataRow row;
         private string status;
         #endregion
 
@@ -32,22 +28,22 @@ namespace Restless.App.Panama
             /// <summary>
             /// The name of the <see cref="TitleVersionRenameItem.Status"/> property.
             /// </summary>
-            public const string Status = "Status";
+            public const string Status = nameof(Status);
 
             /// <summary>
             /// The name of the <see cref="TitleVersionRenameItem.Version"/> property.
             /// </summary>
-            public const string Version = "Version";
+            public const string Version = nameof(Version);
 
             /// <summary>
             /// The name of the <see cref="TitleVersionRenameItem.OriginalNameDisplay"/> property.
             /// </summary>
-            public const string OriginalNameDisplay = "OriginalNameDisplay";
+            public const string OriginalNameDisplay = nameof(OriginalNameDisplay);
 
             /// <summary>
             /// The name of the <see cref="TitleVersionRenameItem.NewNameDisplay"/> property.
             /// </summary>
-            public const string NewNameDisplay = "NewNameDisplay";
+            public const string NewNameDisplay = nameof(NewNameDisplay);
         }
         #endregion
 
@@ -59,12 +55,8 @@ namespace Restless.App.Panama
         /// </summary>
         public string Status
         {
-            get { return status; }
-            private set
-            {
-                status = value;
-                OnPropertyChanged(Properties.Status);
-            }
+            get => status;
+            private set => SetProperty(ref status, value);
         }
 
         /// <summary>
@@ -72,7 +64,7 @@ namespace Restless.App.Panama
         /// </summary>
         public bool Same
         {
-            get { return OriginalName == NewName; }
+            get => OriginalName == NewName;
         }
 
         /// <summary>
@@ -107,7 +99,7 @@ namespace Restless.App.Panama
         /// </summary>
         public bool OriginalExists
         {
-            get { return File.Exists(OriginalName); }
+            get => File.Exists(OriginalName);
         }
 
         /// <summary>
@@ -135,8 +127,8 @@ namespace Restless.App.Panama
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleVersionRenameItem"/> class.
         /// </summary>
-        /// <param name="row"></param>
-        /// <param name="title"></param>
+        /// <param name="row">The data row</param>
+        /// <param name="title">The title</param>
         public TitleVersionRenameItem(DataRow row, string title)
         {
             Validations.ValidateDataRow(row, TitleVersionTable.Defs.TableName);
@@ -156,7 +148,7 @@ namespace Restless.App.Panama
              */
             string newNameWithoutPath =
                 string.Format("{0}_v{1}.{2}{3}",
-                    Restless.Tools.Utility.Format.ValidFileName(title),
+                    Format.ValidFileName(title),
                     Version,
                     row[TitleVersionTable.Defs.Columns.LangId],
                     Path.GetExtension(OriginalName));

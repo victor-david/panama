@@ -173,7 +173,6 @@
     <Compile Include="Other\PreviewMode.cs" />
     <Compile Include="Other\TitleVersionRenameItem.cs" />
     <Compile Include="Other\DocumentPreviewer.cs" />
-    <Compile Include="Other\NotifyPropertyChangedBase.cs" />
     <Compile Include="Other\CommonDialogFactory.cs" />
     <Compile Include="Config\RegistrySettings.cs" />
     <Compile Include="Other\MessageSelectMode.cs" />

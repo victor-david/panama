@@ -1,43 +1,33 @@
 ﻿#if DOCX
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Threading;
-using Restless.Tools.Utility;
 using Restless.Tools.OfficeAutomation;
+using Restless.Tools.Utility;
+using System.Data;
+using System.IO;
 
 namespace Restless.App.Panama.Tools
 {
     /// <summary>
     /// Represents a single candidate for the file conversion operation.
     /// </summary>
-    public class DocumentConversionCandidate  : NotifyPropertyChangedBase
+    public class DocumentConversionCandidate  : BindableBase
     {
         #region Private
-        private FileInfo info;
-        private DataRow versionRow;
+        private readonly DataRow versionRow;
         #endregion
 
         /************************************************************************/
-        
+
         #region Public properties
         /// <summary>
         /// Gets the file info for this conversion candidate.
         /// </summary>
         public FileInfo Info
         {
-            get { return info; }
-            private set
-            {
-                info = value;
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -45,7 +35,7 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         public bool IsVersion
         {
-            get { return versionRow != null; }
+            get => versionRow != null;
         }
 
         /// <summary>
@@ -77,10 +67,7 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         public bool IsConverted
         {
-            get
-            {
-                return Result != null && Result.Success;
-            }
+            get => Result != null && Result.Success;
         }
 
         /// <summary>
