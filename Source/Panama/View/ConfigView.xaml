@@ -10,7 +10,7 @@
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     xmlns:xc="http://schemas.xceed.com/wpf/xaml/toolkit"
     mc:Ignorable="d"
-    d:DesignWidth="862" d:DesignHeight="900">
+    d:DesignWidth="862" d:DesignHeight="1900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -55,8 +55,6 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <!--<TextBlock Style="{StaticResource TextBlockSepLabel}" Text="{x:Static r:Strings.ConfigDataGrid}"/>-->
-
                     <!-- DataGrid Row Height -->
                     <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockLabel}" Margin="4,0" Text="{x:Static r:Strings.ConfigDataGridRowHeight}"/>
                     <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding DataGridRowHeight}" SelectedItem="{Binding Config.DataGridRowHeight}" />
@@ -78,12 +76,12 @@
             <StackPanel
                 DockPanel.Dock="Top"
                 Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Two}}">
-                <con:FolderEdit Title="Title Root" Folder="{Binding Config.FolderTitleRoot}"/>
-                <con:FolderEdit Title="Title Version" Folder="{Binding Config.FolderTitleVersion}"/>
-                <con:FolderEdit Title="Submission Documents" Folder="{Binding Config.FolderSubmissionDocument}"/>
-                <con:FolderEdit Title="Submission Message Attachments" Folder="{Binding Config.FolderSubmissionMessageAttachment}"/>
-                <con:FolderEdit Title="Export" Folder="{Binding Config.FolderExport}"/>
-                <con:FolderEdit Title="Mapi Messages" Folder="{Binding Config.FolderMapi}" EditType="Mapi"/>
+                <con:PathSelector Title="Title Root" PathName="{Binding Config.FolderTitleRoot}"/>
+                <con:PathSelector Title="Title Version" PathName="{Binding Config.FolderTitleVersion}"/>
+                <con:PathSelector Title="Submission Documents" PathName="{Binding Config.FolderSubmissionDocument}"/>
+                <con:PathSelector Title="Submission Message Attachments" PathName="{Binding Config.FolderSubmissionMessageAttachment}"/>
+                <con:PathSelector Title="Export" PathName="{Binding Config.FolderExport}"/>
+                <con:PathSelector Title="Mapi Messages" PathName="{Binding Config.FolderMapi}" SelectorType="Mapi"/>
             </StackPanel>
             
             <!-- Section 3. Colors -->
@@ -93,22 +91,12 @@
 
 
             <!-- Section 4. Submission -->
-            <DockPanel
+            <view:ConfigEditSubmission
                 DockPanel.Dock="Top"
-                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Four}}">
-                <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockLabel}" Text="Company"/>
-                <TextBox DockPanel.Dock="Top" Text="{Binding Config.SubmissionDocCompany}" Margin="0,4"/>
-                <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockLabel}" Text="Header"/>
-                <TextBox DockPanel.Dock="Top" Text="{Binding Config.SubmissionDocHeader}" Margin="0,4"/>
-                <con:YesNoEdit DockPanel.Dock="Top" Header="Include Page # in Header" IsYes="{Binding Config.SubmissionDocHeaderPages}" GroupName="HeaderPages"/>
-                <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockLabel}" Text="Footer"/>
-                <TextBox DockPanel.Dock="Top" Text="{Binding Config.SubmissionDocFooter}" Margin="0,4"/>
-                <con:YesNoEdit DockPanel.Dock="Top" Header="Include Page # in Footer" IsYes="{Binding Config.SubmissionDocFooterPages}" GroupName="FooterPages"/>
-                <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockLabel}" Text="Document Text"/>
-                <TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Margin="0,4" Text="{Binding Config.SubmissionDocBody}"/>
-                
-            </DockPanel>            
-            
+                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Four}}"/>
+
+
+
         </DockPanel>
         <view:ConfigEditColorPreview 
             Grid.Column="1" Grid.Row="1"

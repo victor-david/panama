@@ -136,6 +136,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("SwitchColorMode", RunSwitchColorMode);
             Commands.Add("ResetColors", RunResetColorSelections);
             Commands.Add("ColorChanged", RunSelectedColorChanged);
+            Commands.Add("ChangeTemplateFile", RunChangeTemplateFile);
             InitializeSections();
             InitializeDateFormatOptions();
             InitializeSampleTitles();
@@ -272,6 +273,17 @@ namespace Restless.App.Panama.ViewModel
         {
             InitializeSampleTitles();
             InitializeSamplePublications();
+        }
+
+        private void RunChangeTemplateFile(object parm)
+        {
+            using (var dialog = CommonDialogFactory.Create(Config.TemplateFile, "Select a template file", false))
+            {
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    Config.TemplateFile = dialog.FileName;
+                }
+            }
         }
         #endregion
 

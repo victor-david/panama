@@ -227,9 +227,10 @@ namespace Restless.App.Panama.ViewModel
                             var ops = Config.Instance.SubmissionDocOptions;
 
                             var ai = new AssemblyInfo(AssemblyInfoType.Entry);
-                            var xml = new Restless.Tools.OpenXml.OpenXmlDocumentCreator()
+                            var xml = new OpenXmlDocumentCreator()
                             {
                                 Filename = string.Format("{0}.docx", Path.Combine(Config.Instance.FolderSubmissionDocument, Format.MakeFileName(publisher))),
+                                TemplateFile = Config.TemplateFile,
                                 HeaderText = ProcessPlaceholders(ops.Header),
                                 FooterText = ProcessPlaceholders(ops.Footer),
                                 HeaderPageNumbers = ops.HeaderPageNumbers,

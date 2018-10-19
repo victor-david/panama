@@ -131,10 +131,10 @@
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ColorPicker\ColorUtilities.cs" />
-    <Compile Include="Controls\ConfigEdit\FolderEdit.xaml.cs">
-      <DependentUpon>FolderEdit.xaml</DependentUpon>
+    <Compile Include="Controls\ConfigEdit\PathSelector.xaml.cs">
+      <DependentUpon>PathSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ConfigEdit\FolderEditType.cs" />
+    <Compile Include="Controls\ConfigEdit\PathSelectorType.cs" />
     <Compile Include="Controls\GridRowDisplay\GridRowDisplay.xaml.cs">
       <DependentUpon>GridRowDisplay.xaml</DependentUpon>
     </Compile>
@@ -294,6 +294,9 @@
     <Compile Include="View\EditControls\CredentialEdit.xaml.cs">
       <DependentUpon>CredentialEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditControls\ConfigEditSubmission.xaml.cs">
+      <DependentUpon>ConfigEditSubmission.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditControls\PublishedEdit.xaml.cs">
       <DependentUpon>PublishedEdit.xaml</DependentUpon>
     </Compile>
@@ -428,7 +431,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ConfigEdit\FolderEdit.xaml">
+    <Page Include="Controls\ConfigEdit\PathSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -541,6 +544,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditControls\CredentialEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\ConfigEditSubmission.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

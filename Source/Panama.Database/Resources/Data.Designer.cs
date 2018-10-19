@@ -71,9 +71,9 @@ namespace Restless.App.Panama.Database.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to INSERT INTO &quot;documenttype&quot; (&quot;id&quot;, &quot;name&quot;, &quot;extensions&quot;, &quot;ordering&quot;, &quot;supported&quot;) VALUES (0, &apos;Unknown&apos;, NULL, 100, 0);
-        ///INSERT INTO &quot;documenttype&quot; (&quot;id&quot;, &quot;name&quot;, &quot;extensions&quot;, &quot;ordering&quot;, &quot;supported&quot;) VALUES (1, &apos;Word Document (OpenXml)&apos;, &apos;.docx&apos;, 1, 1);
+        ///INSERT INTO &quot;documenttype&quot; (&quot;id&quot;, &quot;name&quot;, &quot;extensions&quot;, &quot;ordering&quot;, &quot;supported&quot;) VALUES (1, &apos;Word Document (OpenXml)&apos;, &apos;.docx;.dotm&apos;, 1, 1);
         ///INSERT INTO &quot;documenttype&quot; (&quot;id&quot;, &quot;name&quot;, &quot;extensions&quot;, &quot;ordering&quot;, &quot;supported&quot;) VALUES (2, &apos;Word Document (Old)&apos;, &apos;.doc;.rtf&apos;, 2, 1);
-        ///INSERT INTO &quot;documenttype&quot; (&quot;id&quot;, &quot;name&quot;, &quot;extensions&quot;, &quot;ordering&quot;, &quot;supported&quot;) VALUES (3, &apos;Pdf Document&apos;, &apos;.pdf&apos;, 3, 1) [rest of string was truncated]&quot;;.
+        ///INSERT INTO &quot;documenttype&quot; (&quot;id&quot;, &quot;name&quot;, &quot;extensions&quot;, &quot;ordering&quot;, &quot;supported&quot;) VALUES (3, &apos;Pdf Document&apos;, &apos;.pdf&apos;, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DocumentType {
             get {

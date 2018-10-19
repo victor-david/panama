@@ -62,8 +62,8 @@
     <filter:TagFilterCombine x:Key="FilterTagCombineAnd">And</filter:TagFilterCombine>
     <filter:TagFilterCombine x:Key="FilterTagCombineAndNot">AndNot</filter:TagFilterCombine>
 
-    <con:FolderEditType x:Key="FolderEditTypeFileSystem">FileSystem</con:FolderEditType>
-    <con:FolderEditType x:Key="FolderEditTypeMapi">Mapi</con:FolderEditType>
+    <con:PathSelectorType x:Key="FolderEditTypeFileSystem">FileSystem</con:PathSelectorType>
+    <con:PathSelectorType x:Key="FolderEditTypeMapi">Mapi</con:PathSelectorType>
     
     <cv:BooleanToVisibilityConverterOptions x:Key="BooleanTrueToVisibility">TrueToVisibility</cv:BooleanToVisibilityConverterOptions>
     <cv:BooleanToVisibilityConverterOptions x:Key="BooleanFalseToVisibility">FalseToVisibility</cv:BooleanToVisibilityConverterOptions>

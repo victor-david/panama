@@ -271,6 +271,16 @@ namespace Restless.App.Panama.Configuration
         }
 
         /// <summary>
+        /// Gets or sets the template file that is used when creating a new submission document.
+        /// Styles from this document are copied into the new document.
+        /// </summary>
+        public string TemplateFile
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets or sets the grid splitter location for the table grid
         /// </summary>
         /// <remarks>
