@@ -614,7 +614,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only publishers that are active, i.e. not flagged as a goner.
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active, i.e. not flagged as a goner.
         /// </summary>
         public static string CommandPublisherFilterActiveTooltip {
             get {
@@ -632,11 +632,29 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only publishers that are active and flagged for follow up.
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and flagged for follow up.
         /// </summary>
         public static string CommandPublisherFilterFollowupTooltip {
             get {
                 return ResourceManager.GetString("CommandPublisherFilterFollowupTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string CommandPublisherFilterHaveSub {
+            get {
+                return ResourceManager.GetString("CommandPublisherFilterHaveSub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that currently have an open submission.
+        /// </summary>
+        public static string CommandPublisherFilterHaveSubTooltip {
+            get {
+                return ResourceManager.GetString("CommandPublisherFilterHaveSubTooltip", resourceCulture);
             }
         }
         
@@ -650,7 +668,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only publishers that are active and currently within a submission period.
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and currently within a submission period.
         /// </summary>
         public static string CommandPublisherFilterInPeriodTooltip {
             get {
@@ -668,7 +686,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only publishers that are active and are a paying market.
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and are a paying market.
         /// </summary>
         public static string CommandPublisherFilterPayingTooltip {
             get {
@@ -2003,6 +2021,15 @@ namespace Restless.App.Panama.Resources {
         public static string TooltipPublisherExclusive {
             get {
                 return ResourceManager.GetString("TooltipPublisherExclusive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publisher currently has at least one submission that is active.
+        /// </summary>
+        public static string TooltipPublisherHasActive {
+            get {
+                return ResourceManager.GetString("TooltipPublisherHasActive", resourceCulture);
             }
         }
         

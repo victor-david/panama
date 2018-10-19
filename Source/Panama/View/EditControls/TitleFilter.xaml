@@ -4,8 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:em="clr-namespace:Restless.App.Panama"
-    xmlns:vw="clr-namespace:Restless.App.Panama.View"
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="488" d:DesignWidth="515">
@@ -20,39 +19,11 @@
                     <Button Command="{Binding Filters.Commands[SelectFolder]}">Select</Button>
                     <Button Command="{Binding Filters.Commands[ClearFolder]}">Clear</Button>
                 </StackPanel>
-                <UniformGrid Rows="2" Columns="2"> 
-                    <StackPanel>
-                        <Label>Ready</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton GroupName="Ready" IsChecked="{Binding Config.TitleFilter.Ready,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateYes}}">Yes</RadioButton>
-                            <RadioButton GroupName="Ready" IsChecked="{Binding Config.TitleFilter.Ready,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateNo}}">No</RadioButton>
-                            <RadioButton GroupName="Ready" IsChecked="{Binding Config.TitleFilter.Ready,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateEither}}">Either</RadioButton>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel>
-                        <Label>Currently submitted</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton GroupName="CurrentlySubmitted" IsChecked="{Binding Config.TitleFilter.Submitted,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateYes}}">Yes</RadioButton>
-                            <RadioButton GroupName="CurrentlySubmitted" IsChecked="{Binding Config.TitleFilter.Submitted,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateNo}}">No</RadioButton>
-                            <RadioButton GroupName="CurrentlySubmitted" IsChecked="{Binding Config.TitleFilter.Submitted,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateEither}}">Either</RadioButton>
-                        </StackPanel>                        
-                    </StackPanel>
-                    <StackPanel>
-                        <Label>Ever submitted</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton GroupName="EverSubmitted" IsChecked="{Binding Config.TitleFilter.EverSubmitted,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateYes}}">Yes</RadioButton>
-                            <RadioButton GroupName="EverSubmitted" IsChecked="{Binding Config.TitleFilter.EverSubmitted,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateNo}}">No</RadioButton>
-                            <RadioButton GroupName="EverSubmitted" IsChecked="{Binding Config.TitleFilter.EverSubmitted,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateEither}}">Either</RadioButton>
-                        </StackPanel>                        
-                    </StackPanel>
-                    <StackPanel>
-                        <Label>Published</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton GroupName="Published" IsChecked="{Binding Config.TitleFilter.Published,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateYes}}">Yes</RadioButton>
-                            <RadioButton GroupName="Published" IsChecked="{Binding Config.TitleFilter.Published,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateNo}}">No</RadioButton>
-                            <RadioButton GroupName="Published" IsChecked="{Binding Config.TitleFilter.Published,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateEither}}">Either</RadioButton>
-                        </StackPanel>
-                    </StackPanel>
+                <UniformGrid Rows="2" Columns="2" Margin="4">
+                    <con:FilterState Id="F1" Title="Ready" State="{Binding Config.TitleFilter.Ready}" />
+                    <con:FilterState Id="F2" Title="Currently Submitted" State="{Binding Config.TitleFilter.Submitted}" />
+                    <con:FilterState Id="F3" Title="Ever Submitted" State="{Binding Config.TitleFilter.EverSubmitted}" />
+                    <con:FilterState Id="F4" Title="Published" State="{Binding Config.TitleFilter.Published}" />
                 </UniformGrid>
                 <StackPanel Style="{StaticResource StackPanelCommandHolder}">
                     <Label>Word count</Label>

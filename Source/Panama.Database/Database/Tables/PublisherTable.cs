@@ -11,7 +11,7 @@ namespace Restless.App.Panama.Database.Tables
     public class PublisherTable : TableBase
     {
         #region Private
-        private bool saveBeforeUpdateInPeriod;
+        private bool isInitializing;
         #endregion
         
         /************************************************************************/
@@ -138,6 +138,13 @@ namespace Restless.App.Panama.Database.Tables
                     /// any one of the defined submssion periods for the publisher.
                     /// </summary>
                     public const string InSubmissionPeriod = "CalcInPeriod";
+
+                    /// <summary>
+                    /// The name of the active submission column. This calculated column
+                    /// holds a boolean value that indicates if the publisher has at least one
+                    /// submission that is currently active, i.e. has not yet received a response.
+                    /// </summary>
+                    public const string HaveActiveSubmission = "CalcActiveSub";
                 }
             }
 
@@ -180,7 +187,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public PublisherTable() : base(DatabaseController.Instance, Defs.TableName)
         {
-            saveBeforeUpdateInPeriod = true;
+            isInitializing = true;
         }
         #endregion
 
@@ -260,10 +267,22 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         protected override void OnInitializationComplete()
         {
-            DataColumn col = new DataColumn(Defs.Columns.Calculated.InSubmissionPeriod, typeof(bool));
-            Columns.Add(col);
-            SetColumnProperty(col, DataColumnPropertyKey.ExcludeFromInsert, DataColumnPropertyKey.ExcludeFromUpdate);
-            UpdateInPeriod();
+            DataColumn col1 = new DataColumn(Defs.Columns.Calculated.InSubmissionPeriod, typeof(bool));
+            Columns.Add(col1);
+            SetColumnProperty(col1, DataColumnPropertyKey.ExcludeFromInsert, DataColumnPropertyKey.ExcludeFromUpdate);
+            // UpdateInPeriod();
+
+            DataColumn col2 = new DataColumn(Defs.Columns.Calculated.HaveActiveSubmission, typeof(bool));
+            Columns.Add(col2);
+            SetColumnProperty(col2, DataColumnPropertyKey.ExcludeFromInsert, DataColumnPropertyKey.ExcludeFromUpdate);
+
+            foreach (DataRow row in Rows)
+            {
+                UpdateInPeriod(row);
+                UpdateHaveActive(row);
+            }
+
+            isInitializing = false;
         }
 
         /// <summary>
@@ -287,7 +306,7 @@ namespace Restless.App.Panama.Database.Tables
         
         #region Internal methods
         /// <summary>
-        /// Updates the specified publisher data row, setting tis calculated InSubmissionPeriod column.
+        /// Updates the specified publisher data row, setting its calculated <see cref="Defs.Columns.Calculated.InSubmissionPeriod"/> column.
         /// </summary>
         /// <param name="row">The publisher data row</param>
         /// <remarks>
@@ -299,14 +318,14 @@ namespace Restless.App.Panama.Database.Tables
         {
             if (row != null && row.Table.TableName == TableName)
             {
-                // When initializing, this method is called from private method UpdateInPeriod() 
-                // for every row in the table. At this time, saveBeforeUpdateInPeriod is false.
-                // Later, this method is called from SubmissionPeriodTable to update when
-                // a period is added or deleted. At that point, saveBeforeUpdateInPeriod is true
-                // because we don't want any other pending changes on the row to be lost
-                // with row.AcceptChanges()
-                 
-                if (saveBeforeUpdateInPeriod) Save();
+                 // When initializing, this method is called from OnInitializationComplete()
+                 // for every row in the table. At this time, isInitializing is true.
+                 // Later, this method is called from SubmissionPeriodTable to update when
+                 // a period is added or deleted. At that point, isInitializing is false
+                 // and therefore we save the table first because we don't want any other pending 
+                 // changes on the row to be lost with row.AcceptChanges()
+                if (!isInitializing) Save();
+
                 row[Defs.Columns.Calculated.InSubmissionPeriod] = false;
                 DataRow[] childRows = row.GetChildRows(Defs.Relations.ToSubmissionPeriod);
                 bool inPeriod = false;
@@ -321,23 +340,36 @@ namespace Restless.App.Panama.Database.Tables
                 row.AcceptChanges();
             }
         }
+
+        /// <summary>
+        /// Updates the specified publisher data row, setting its calculated <see cref="Defs.Columns.Calculated.HaveActiveSubmission"/> column.
+        /// </summary>
+        /// <param name="row">The publisher data row</param>
+        internal void UpdateHaveActive(DataRow row)
+        {
+            if (row != null && row.Table.TableName == TableName)
+            {
+                // See comment on UpdateInPeriod(). Same idea.
+                if (!isInitializing) Save();
+                bool haveActive = false;
+                DataRow[] rows = row.GetChildRows(Defs.Relations.ToSubmissionBatch);
+                foreach(DataRow child in rows)
+                {
+                    if (child[SubmissionBatchTable.Defs.Columns.Response] == DBNull.Value)
+                    {
+                        haveActive = true;
+                    }
+                }
+
+                row[Defs.Columns.Calculated.HaveActiveSubmission] = haveActive;
+                row.AcceptChanges();
+            }
+        }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
-        /// <summary>
-        /// Updates all rows
-        /// </summary>
-        private void UpdateInPeriod()
-        {
-            saveBeforeUpdateInPeriod = false;
-            foreach (DataRow row in Rows)
-            {
-                UpdateInPeriod(row);
-            }
-            saveBeforeUpdateInPeriod = true;
-        }
 
         private bool IsInPeriod(DateTime start, DateTime end)
         {
@@ -359,6 +391,11 @@ namespace Restless.App.Panama.Database.Tables
                 end = end.AddYears(1);
             }
             return (DateTime.Compare(now, start) >= 0 && DateTime.Compare(now, end) <= 0);
+        }
+
+        private void UpdateHaveActive()
+        {
+
         }
         #endregion
     }

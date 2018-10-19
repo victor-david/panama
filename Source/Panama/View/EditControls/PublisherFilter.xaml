@@ -4,10 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:em="clr-namespace:Restless.App.Panama"
-    xmlns:vw="clr-namespace:Restless.App.Panama.View"
-    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
-    
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
     mc:Ignorable="d" 
     d:DesignHeight="488" d:DesignWidth="515">
     <StackPanel>
@@ -15,50 +12,13 @@
             <StackPanel>
                 <Label>Publisher</Label>
                 <TextBox Text="{Binding Config.PublisherFilter.Text,UpdateSourceTrigger=PropertyChanged}"/>
-                <UniformGrid Rows="3" Columns="2">
-                    <StackPanel>
-                        <Label>In submission period</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton GroupName="InPeriod" IsChecked="{Binding Config.PublisherFilter.InPeriod,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateYes}}">Yes</RadioButton>
-                            <RadioButton GroupName="InPeriod" IsChecked="{Binding Config.PublisherFilter.InPeriod,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateNo}}">No</RadioButton>
-                            <RadioButton GroupName="InPeriod" IsChecked="{Binding Config.PublisherFilter.InPeriod,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateEither}}">Either</RadioButton>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel>
-                        <Label>Exclusive (no simultaneous)</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton GroupName="Sim" IsChecked="{Binding Config.PublisherFilter.Exclusive,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateYes}}">Yes</RadioButton>
-                            <RadioButton GroupName="Sim" IsChecked="{Binding Config.PublisherFilter.Exclusive,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateNo}}">No</RadioButton>
-                            <RadioButton GroupName="Sim" IsChecked="{Binding Config.PublisherFilter.Exclusive,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateEither}}">Either</RadioButton>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel>
-                        <Label>Paying</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton GroupName="Paying" IsChecked="{Binding Config.PublisherFilter.Paying,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateYes}}">Yes</RadioButton>
-                            <RadioButton GroupName="Paying" IsChecked="{Binding Config.PublisherFilter.Paying,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateNo}}">No</RadioButton>
-                            <RadioButton GroupName="Paying" IsChecked="{Binding Config.PublisherFilter.Paying,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateEither}}">Either</RadioButton>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel>
-                        <Label>Follow up</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton GroupName="Followup" IsChecked="{Binding Config.PublisherFilter.Followup,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateYes}}">Yes</RadioButton>
-                            <RadioButton GroupName="Followup" IsChecked="{Binding Config.PublisherFilter.Followup,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateNo}}">No</RadioButton>
-                            <RadioButton GroupName="Followup" IsChecked="{Binding Config.PublisherFilter.Followup,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateEither}}">Either</RadioButton>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel>
-                        <Label>Goner</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton GroupName="Goner" IsChecked="{Binding Config.PublisherFilter.Goner,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateYes}}">Yes</RadioButton>
-                            <RadioButton GroupName="Goner" IsChecked="{Binding Config.PublisherFilter.Goner,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateNo}}">No</RadioButton>
-                            <RadioButton GroupName="Goner" IsChecked="{Binding Config.PublisherFilter.Goner,Converter={cv:ValueToBooleanConverter},ConverterParameter={StaticResource FilterStateEither}}">Either</RadioButton>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel Style="{StaticResource StackPanelCommandHolder}">
-                        <Button Grid.Column="1" Content="Clear all" Command="{Binding Commands[ClearFilter]}"/>
-                    </StackPanel>
+                <UniformGrid Rows="3" Columns="2" Margin="4">
+                    <con:FilterState Id="F1" Title="In Submission Period" State="{Binding Config.PublisherFilter.InPeriod}"/>
+                    <con:FilterState Id="F2" Title="Exclusive (no simultaneous)" State="{Binding Config.PublisherFilter.Exclusive}"/>
+                    <con:FilterState Id="F3" Title="Paying" State="{Binding Config.PublisherFilter.Paying}"/>
+                    <con:FilterState Id="F4" Title="Follow Up" State="{Binding Config.PublisherFilter.Followup}"/>
+                    <con:FilterState Id="F5" Title="Active Submission" State="{Binding Config.PublisherFilter.HaveSubmission}"/>
+                    <con:FilterState Id="F6" Title="Goner" State="{Binding Config.PublisherFilter.Goner}"/>
                 </UniformGrid>
             </StackPanel>
         </HeaderedContentControl>

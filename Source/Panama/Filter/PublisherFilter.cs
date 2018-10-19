@@ -11,6 +11,7 @@
         private FilterState paying;
         private FilterState followup;
         private FilterState goner;
+        private FilterState haveSubmission;
         #endregion
 
         /************************************************************************/
@@ -21,16 +22,13 @@
         /// </summary>
         public override bool IsAnyFilterActive
         {
-            get
-            {
-                return
-                    base.IsAnyFilterActive || 
-                    InPeriod != FilterState.Either ||
-                    Exclusive != FilterState.Either ||
-                    Paying != FilterState.Either ||
-                    Followup != FilterState.Either ||
-                    Goner != FilterState.Either;
-            }
+            get => base.IsAnyFilterActive || 
+                   InPeriod != FilterState.Either ||
+                   Exclusive != FilterState.Either ||
+                   Paying != FilterState.Either ||
+                   Followup != FilterState.Either ||
+                   Goner != FilterState.Either ||
+                   HaveSubmission != FilterState.Either;
         }
 
         /// <summary>
@@ -108,17 +106,33 @@
                 }
             }
         }
+
+        /// <summary>
+        /// Gets or sets the filter's have submission option. 
+        /// </summary>
+        public FilterState HaveSubmission
+        {
+            get => haveSubmission;
+            set
+            {
+                if (SetProperty(ref haveSubmission, value))
+                {
+                    OnChanged();
+                }
+            }
+        }
         #endregion
 
         /************************************************************************/
-        
+
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PublisherFilter"/> class.
+        /// </summary>
         public PublisherFilter()
         {
             Reset();
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -135,6 +149,7 @@
             Paying = FilterState.Either;
             Followup = FilterState.Either;
             Goner = FilterState.Either;
+            HaveSubmission = FilterState.Either;
             base.Reset();
             IsChangedEventSuspended = false;
             OnChanged();

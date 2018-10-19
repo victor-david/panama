@@ -252,8 +252,8 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedRow != null && Restless.Tools.Utility.Messages.ShowYesNo(Strings.ConfirmationDeleteSubmission))
             {
-                SelectedRow.Delete();
-                DatabaseController.Instance.Save();
+                // Call the DeleteSubmission() method to delete and perform other cleanup.
+                DatabaseController.Instance.GetTable<SubmissionBatchTable>().DeleteSubmission(SelectedRow);
             }
         }
 

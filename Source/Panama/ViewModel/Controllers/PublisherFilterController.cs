@@ -83,11 +83,19 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
-        /// Sets the filter options to in active only.
+        /// Sets the filter options to active (not a goner) only.
         /// </summary>
         public void SetToActive()
         {
             ClearAndApplyAction(() => Config.PublisherFilter.Goner = FilterState.No);
+        }
+
+        /// <summary>
+        /// Sets the filter options to have submission only.
+        /// </summary>
+        public void SetToHaveSubmission()
+        {
+            ClearAndApplyAction(() => Config.PublisherFilter.HaveSubmission = FilterState.Yes);
         }
 
         /// <summary>
@@ -174,36 +182,49 @@ namespace Restless.App.Panama.ViewModel
             if (f.InPeriod != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod, (byte)f.InPeriod), (f.InPeriod == FilterState.No ? "not in submission period" : "in submission period"));
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod, (byte)f.InPeriod), FilterDescText(f.InPeriod, "in submission period"));
             }
 
             if (f.Exclusive != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Exclusive, (byte)f.Exclusive), (f.Exclusive == FilterState.No ? "simultaneous" : "exclusive (no simultaneous)"));
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Exclusive, (byte)f.Exclusive), FilterDescText(f.Exclusive, "exclusive (no simultaneous)", "simultaneous"));
             }
 
             if (f.Paying != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Paying, (byte)f.Paying), (f.Paying == FilterState.No ? "not paying" : "paying"));
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Paying, (byte)f.Paying), FilterDescText(f.Paying, "paying"));
             }
 
             if (f.Followup != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Followup, (byte)f.Followup), (f.Followup == FilterState.No ? "not followup" : "followup"));
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Followup, (byte)f.Followup), FilterDescText(f.Followup, "followup"));
             }
 
             if (f.Goner != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Goner, (byte)f.Goner), (f.Goner == FilterState.No ? "not a goner" : "a goner"));
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Goner, (byte)f.Goner), FilterDescText(f.Goner, "a goner"));
+            }
+
+            if (f.HaveSubmission != FilterState.Either)
+            {
+                if (filter.Length > 0) Append(" AND ", " and ");
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission, (byte)f.HaveSubmission), FilterDescText(f.HaveSubmission, "have active submssion"));
             }
 
             Owner.DataView.RowFilter = filter.ToString();
             OnPropertyChanged(nameof(Description));
             OnPropertyChanged(nameof(RecordCountText));
+        }
+
+
+        private string FilterDescText(FilterState state, string yesText, string noText = null)
+        {
+            if (string.IsNullOrEmpty(noText)) noText = $"not {yesText}";
+            return state == FilterState.Yes ? yesText : noText;
         }
 
         private void Append(string filterExpression, string filterDescription, int linesToAppend = 0)

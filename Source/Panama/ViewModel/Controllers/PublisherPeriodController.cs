@@ -212,7 +212,7 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedRow != null && Messages.ShowYesNo(Strings.ConfirmationRemoveSubmissionPeriod))
             {
-                DatabaseController.Instance.GetTable<SubmissionPeriodTable>().RemoveSubmissionPeriod(SelectedRow);
+                DatabaseController.Instance.GetTable<SubmissionPeriodTable>().DeleteSubmissionPeriod(SelectedRow);
             }
         }
 

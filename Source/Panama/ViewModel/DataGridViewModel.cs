@@ -83,6 +83,15 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
+        /// Gets a boolean value that indicates if <see cref="SelectedRow"/> is accessible.
+        /// Returns true if the selected row is not null, is not detached, and is not deleted; otherwise, false.
+        /// </summary>
+        public bool IsSelectedRowAccessible
+        {
+            get => SelectedRow != null && SelectedRow.RowState != DataRowState.Deleted && SelectedRow.RowState != DataRowState.Detached;
+        }
+
+        /// <summary>
         /// Gets the primary key value of the selected row, or null if none 
         /// (no selected row or no primary key column on the table)
         /// </summary>
@@ -180,7 +189,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected Style NumericRightCell
         {
-            get { return (Style)ResourceHelper.Get("TextBlockRight"); }
+            get => (Style)ResourceHelper.Get("TextBlockRight");
         }
         #endregion
 

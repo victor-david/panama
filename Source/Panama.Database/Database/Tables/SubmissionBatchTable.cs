@@ -246,7 +246,31 @@ namespace Restless.App.Panama.Database.Tables
             row[Defs.Columns.Submitted] = DateTime.UtcNow;
             row[Defs.Columns.ResponseType] = ResponseTable.Defs.Values.NoResponse;
             Rows.Add(row);
+            DataRow parentRow = row.GetParentRow(PublisherTable.Defs.Relations.ToSubmissionBatch);
+            Controller.GetTable<PublisherTable>().UpdateHaveActive(parentRow);
             Save();
+        }
+
+        /// <summary>
+        /// Deletes the specified submission.
+        /// </summary>
+        /// <param name="row">The data row</param>
+        /// <remarks>
+        /// This method deletes the specified row and updates the parent publisher table
+        /// to reflect the changed status of active submissions. You should call this method
+        /// rather than deleting the row directly in order to update the parent.
+        /// </remarks>
+        public void DeleteSubmission(DataRow row)
+        {
+            if (row != null && row.Table.TableName == TableName)
+            {
+                DataRow parentRow = row.GetParentRow(PublisherTable.Defs.Relations.ToSubmissionBatch);
+                row.Delete();
+                /* Update the parent publisher record */
+                Controller.GetTable<PublisherTable>().UpdateHaveActive(parentRow);
+                /* Save all. A submission delete affects other tables */
+                Controller.Save();
+            }
         }
         #endregion
 
@@ -309,28 +333,29 @@ namespace Restless.App.Panama.Database.Tables
                 UpdateCalculatedSubmitted(row);
             }
             AcceptChanges();
+        }
 
-            //foreach (DataRow row in Rows)
-            //{
-            //    DataRow[] subRows = row.GetChildRows(Defs.Relations.ToSubmission);
-            //    Int64 ordering = 1;
-            //    foreach (DataRow subRow in subRows)
-            //    {
-            //        subRow[SubmissionTable.Defs.Columns.Ordering] = ordering;
-            //        ordering++;
-            //    }
-            //}
-
-
+        /// <summary>
+        /// Called when a column changes in order to sync publisher.
+        /// </summary>
+        /// <param name="e">The event args.</param>
+        protected override void OnColumnChanged(DataColumnChangeEventArgs e)
+        {
+            base.OnColumnChanged(e);
+            if (e.Column.ColumnName == Defs.Columns.Response)
+            {
+                /* Get the publisher parent row and update it */
+                DataRow parentRow = e.Row.GetParentRow(PublisherTable.Defs.Relations.ToSubmissionBatch);
+                Controller.GetTable<PublisherTable>().UpdateHaveActive(parentRow);
+            }
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Private methods
         private void UpdateCalculatedSubmitted(ActionDataColumn col, DataRowChangeEventArgs e)
         {
-            
             UpdateCalculatedSubmitted(e.Row);
         }
 
@@ -349,35 +374,5 @@ namespace Restless.App.Panama.Database.Tables
         }
         #endregion
 
-        /************************************************************************/
-
-        #region ITableImport and IColumnRowImporter implementation (commented out)
-        //public bool PerformImport()
-        //{
-        //    return DatabaseImporter.Instance.ImportTable(this, this, "submission_batch");
-        //}
-
-        //public string GetColumnName(string origColName)
-        //{
-        //    switch (origColName)
-        //    {
-        //        case "publicationid": return Defs.Columns.PublisherId;
-        //        case "date_submitted": return Defs.Columns.Submitted;
-        //        case "date_response": return Defs.Columns.Response;
-        //        case "response_type": return Defs.Columns.ResponseType;
-        //        default: return origColName;
-        //    }
-        //}
-
-        //public bool IncludeColumn(string origColName)
-        //{
-        //    return (origColName != "idate_response");
-        //}
-
-        //public bool GetRowConfirmation(System.Data.DataRow row)
-        //{
-        //    return true;
-        //}
-        #endregion
     }
 }

@@ -108,6 +108,10 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Url", PublisherTable.Defs.Columns.Url);
             Columns.SetDefaultSort(Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate()
                 .AddToolTip(Strings.TooltipPublisherAdded), ListSortDirection.Descending);
+
+            Columns.CreateImage<BooleanToImageConverter>("A", PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission, "ImageExclamation")
+                .AddToolTip(Strings.TooltipPublisherHasActive);
+
             Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipPublisherLastSubmission)
@@ -117,16 +121,13 @@ namespace Restless.App.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.Standard)
                 .AddToolTip(Strings.TooltipPublisherSubmissionCount)
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
-            Columns.Create("PC", PublisherTable.Defs.Columns.Calculated.SubPeriodCount)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.Standard)
-                .AddToolTip(Strings.TooltipPublisherSubmissionPeriodCount)
-                .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+
             AddViewSourceSortDescriptions();
 
             /* This command is used from this model and from the Filters controller */
             Commands.Add("ClearFilter", (o) => Filters.ClearAll(), (o) => Config.PublisherFilter.IsAnyFilterActive);
             Commands.Add("ActiveFilter", (o) => Filters.SetToActive());
+            Commands.Add("HaveSubFilter", (o) => Filters.SetToHaveSubmission());
             Commands.Add("InPeriodFilter", (o) => Filters.SetToInPeriod());
             Commands.Add("PayingFilter", (o) => Filters.SetToPaying());
             Commands.Add("FollowupFilter", (o) => Filters.SetToFollowup());
@@ -149,6 +150,7 @@ namespace Restless.App.Panama.ViewModel
             advFilter = new VisualCommandViewModel(Strings.CommandFilterAdvanced, Strings.CommandFilterAdvancedTooltip, Commands["AdvancedFilter"], ResourceHelper.Get("ImageChevronDown"), imgSize, VisualCommandFontSize, 100.0);
             FilterCommands.Add(advFilter);
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterActive, Strings.CommandPublisherFilterActiveTooltip, Commands["ActiveFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterHaveSub, Strings.CommandPublisherFilterHaveSubTooltip, Commands["HaveSubFilter"], null, imgSize, VisualCommandFontSize, minWidth));
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterInPeriod, Strings.CommandPublisherFilterInPeriodTooltip, Commands["InPeriodFilter"], null, imgSize, VisualCommandFontSize, minWidth));
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterPaying, Strings.CommandPublisherFilterPayingTooltip, Commands["PayingFilter"],null, imgSize, VisualCommandFontSize,  minWidth));
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterFollowup, Strings.CommandPublisherFilterFollowupTooltip, Commands["FollowupFilter"], null, imgSize, VisualCommandFontSize, minWidth));

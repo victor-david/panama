@@ -23,7 +23,7 @@ namespace Restless.App.Panama.ViewModel
         {
             get
             {
-                if (Owner.SelectedRow != null)
+                if (Owner.IsSelectedRowAccessible)
                 {
                     return Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted];
                 }
@@ -31,7 +31,7 @@ namespace Restless.App.Panama.ViewModel
             }
             set
             {
-                if (Owner.SelectedRow != null)
+                if (Owner.IsSelectedRowAccessible)
                 {
                     Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted] = value;
                     OnSubmittedPropertiesChanged();
@@ -47,7 +47,7 @@ namespace Restless.App.Panama.ViewModel
             get
             {
                 string dateStr = Strings.TextNone;
-                if (Owner.SelectedRow != null && Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted] != DBNull.Value)
+                if (Owner.IsSelectedRowAccessible && Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted] != DBNull.Value)
                 {
                     dateStr = ((DateTime)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted]).ToString(Config.Instance.DateFormat);
                 }

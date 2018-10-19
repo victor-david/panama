@@ -135,6 +135,9 @@
       <DependentUpon>PathSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ConfigEdit\PathSelectorType.cs" />
+    <Compile Include="Controls\FilterState\FilterState.xaml.cs">
+      <DependentUpon>FilterState.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GridRowDisplay\GridRowDisplay.xaml.cs">
       <DependentUpon>GridRowDisplay.xaml</DependentUpon>
     </Compile>
@@ -432,6 +435,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ConfigEdit\PathSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FilterState\FilterState.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

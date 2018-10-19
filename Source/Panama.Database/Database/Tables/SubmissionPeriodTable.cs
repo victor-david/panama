@@ -122,14 +122,15 @@ namespace Restless.App.Panama.Database.Tables
         /// to reflect the changed set of submission periods. You should call this method
         /// rather than deleting the row directly in order to update the parent.
         /// </remarks>
-        public void RemoveSubmissionPeriod(DataRow row)
+        public void DeleteSubmissionPeriod(DataRow row)
         {
             if (row != null && row.Table.TableName == TableName)
             {
                 DataRow parentRow = row.GetParentRow(PublisherTable.Defs.Relations.ToSubmissionPeriod);
                 row.Delete();
                 /* Update the parent publisher record */
-                //Controller.GetTable<PublisherTable>().UpdateInPeriod(parentRow);
+                Controller.GetTable<PublisherTable>().UpdateInPeriod(parentRow);
+                Save();
             }
         }
         #endregion

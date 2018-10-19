@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Restless.App.Panama.Filter
+﻿namespace Restless.App.Panama.Filter
 {
     /// <summary>
     /// Provides the enumeration values that describe the state of a filter.

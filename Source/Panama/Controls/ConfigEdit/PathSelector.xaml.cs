@@ -79,7 +79,7 @@ namespace Restless.App.Panama.Controls
 
         /// <summary>
         /// Dependency property definition for the <see cref="ClearEnabled"/> property.
-        /// </summary
+        /// </summary>
         public static readonly DependencyProperty ClearEnabledProperty = DependencyProperty.Register
             (
                 nameof(ClearEnabled), typeof(bool), typeof(PathSelector), new PropertyMetadata(false, ClearEnabledPropertyChanged)
