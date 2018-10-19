@@ -1,26 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Collections;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
-using System.Windows.Controls;
 using Restless.Tools.OpenXml;
+using Restless.Tools.Utility;
 using System.ComponentModel;
-using System.Windows;
+using System.Data;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -98,7 +88,7 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Updated", TitleVersionTable.Defs.Columns.Updated).MakeDate();
             Columns.Create("WC", TitleVersionTable.Defs.Columns.WordCount).MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Lang", TitleVersionTable.Defs.Columns.LangId).MakeFixedWidth(FixedWidth.ShortString);
-            Columns.Create("File", TitleVersionTable.Defs.Columns.FileName);
+            Columns.Create("File", TitleVersionTable.Defs.Columns.FileName).MakeFlexWidth(1.65);
             Columns.Create("Note", TitleVersionTable.Defs.Columns.Note);
             //Owner.RawCommands.Add("VersionAddByCopy", RunAddVersionByCopyCommand, (o) => { return SelectedRow != null; });
             Commands.Add("VersionAddByFile", RunAddVersionByFileCommand);

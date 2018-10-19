@@ -20,9 +20,9 @@
              <HeaderedContentControl Style="{StaticResource HCCTool}" Header="Documents (updated or new in the export folder)">
                 <DataGrid ItemsSource="{Binding Path=Export.Updated}">
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ver" Width="40" Binding="{Binding Version}" HeaderStyle="{StaticResource DataGridHeaderCenter}" ElementStyle="{StaticResource TextBlockCenter}"/>
                         <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
-                        <DataGridTextColumn Header="Version" Width="60" Binding="{Binding Version}"/>
-                        <DataGridTextColumn Header="File" Width="2.5*" Binding="{Binding FileName}"/>
+                        <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </HeaderedContentControl>

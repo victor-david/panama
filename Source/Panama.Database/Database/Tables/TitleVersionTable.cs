@@ -114,7 +114,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override void Load()
         {
-            Load(null, Defs.Columns.TitleId);
+            Load(null, $"{Defs.Columns.TitleId},{Defs.Columns.Version}");
         }
         
         /// <summary>

@@ -26,9 +26,9 @@
             <HeaderedContentControl Style="{StaticResource HCCTool}" Header="{Binding Versions.UpdatedHeader,Mode=OneWay}">
                 <DataGrid ItemsSource="{Binding Path=Versions.Updated}">
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ver" Width="40" Binding="{Binding Version}" HeaderStyle="{StaticResource DataGridHeaderCenter}" ElementStyle="{StaticResource TextBlockCenter}" />
                         <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
-                        <DataGridTextColumn Header="Version" Width="60" Binding="{Binding Version}"/>
-                        <DataGridTextColumn Header="File" Width="2.5*" Binding="{Binding FileName}"/>
+                        <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </HeaderedContentControl>
@@ -38,7 +38,7 @@
                 <DataGrid ItemsSource="{Binding Path=SubDocs.Updated}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
-                        <DataGridTextColumn Header="File" Width="2.5*" Binding="{Binding FileName}"/>
+                        <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </HeaderedContentControl>
@@ -47,9 +47,9 @@
             <HeaderedContentControl Style="{StaticResource HCCTool}" Header="{Binding Versions.NotFoundHeader,Mode=OneWay}">
                 <DataGrid Grid.ColumnSpan="2" ItemsSource="{Binding Path=Versions.NotFound}">
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ver" Width="40" Binding="{Binding Version}" HeaderStyle="{StaticResource DataGridHeaderCenter}" ElementStyle="{StaticResource TextBlockCenter}"/>
                         <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
-                        <DataGridTextColumn Header="Version" Width="60" Binding="{Binding Version}"/>
-                        <DataGridTextColumn Header="File" Width="2.5*" Binding="{Binding FileName}"/>
+                        <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </HeaderedContentControl>
@@ -59,7 +59,7 @@
                 <DataGrid ItemsSource="{Binding Path=SubDocs.NotFound}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
-                        <DataGridTextColumn Header="File" Width="2.5*" Binding="{Binding FileName}"/>
+                        <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </HeaderedContentControl>
