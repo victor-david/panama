@@ -1,0 +1,62 @@
+﻿<Window 
+    x:Class="Restless.App.Panama.View.MessageFileSelectWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:Restless.App.Panama.View"
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    Height="600" Width="1060" ShowInTaskbar="False" 
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!-- Main data grid to display the tabular data  -->
+        <Border Style="{StaticResource BorderGridContainer}">
+            <con:DataGridExtended 
+                x:Name="grid"
+                SelectionMode="Extended"
+                SelectedItemsList="{Binding SelectedDataGridItems, Mode=OneWayToSource}"
+                ItemsSource="{Binding Path=MainSource.View}"
+                SelectedItem="{Binding SelectedItem}" 
+                con:DataGridColumns.Columns="{Binding Columns}">
+            </con:DataGridExtended>
+        </Border>
+        <!--<Border Grid.Column="1" Style="{StaticResource BorderGridContainer}">
+            <StackPanel Visibility="{Binding IsMessageSelectMode, Mode=OneTime, Converter={cv:BooleanToVisibilityConverter}}">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockMessage}">
+                        <Setter Property="Margin" Value="8,0"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Label>Date</Label>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Message.DateReceived]}"/>
+                <Label>Subject</Label>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Subject]}"/>
+                <Label>From</Label>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Message.FromName]}"/>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Message.FromAddress]}"/>
+                <Label>To</Label>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Message.ToName]}"/>
+                <TextBlock Text="{Binding SelectedItem.Values[System.Message.ToAddress]}"/>
+                <Label>Type</Label>
+                <TextBlock Text="{Binding SelectedItem.Values[System.ItemType]}"/>
+            </StackPanel>
+        </Border>-->
+
+        <StackPanel Grid.Row="1" Style="{StaticResource StackPanelCommandHolder}" Margin="4">
+            <Button Command="{Binding Commands[Select]}">Select</Button>
+            <Button Command="{Binding Commands[Cancel]}">Cancel</Button>
+        </StackPanel>
+
+
+
+
+    </Grid>
+</Window>

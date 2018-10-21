@@ -243,9 +243,17 @@ namespace Restless.App.Panama.Configuration
         }
 
         /// <summary>
+        /// Gets or sets the folder for submission message files.
+        /// </summary>
+        public string FolderSubmissionMessage
+        {
+            get => GetItem(Default.Other.Folder);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets or sets the folder for submission documents.
         /// </summary>
-        
         public string FolderSubmissionMessageAttachment
         {
             get => GetItem(Default.Other.Folder);

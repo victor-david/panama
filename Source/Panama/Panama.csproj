@@ -91,6 +91,9 @@
     <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="MimeKitLite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKitLite.2.0.6\lib\net45\MimeKitLite.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -99,6 +102,7 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -172,6 +176,7 @@
     <Compile Include="Converters\SubtractionConverter.cs" />
     <Compile Include="Other\ApplicationInfo.cs" />
     <Compile Include="Other\BindableBase.cs" />
+    <Compile Include="Other\CDOParser.cs" />
     <Compile Include="Other\GeneralOption.cs" />
     <Compile Include="Other\PreviewMode.cs" />
     <Compile Include="Other\TitleVersionRenameItem.cs" />
@@ -264,6 +269,7 @@
     <Compile Include="ViewModel\Windows\AlertWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\AboutWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\CommandToolsWindowViewModel.cs" />
+    <Compile Include="ViewModel\Windows\MessageFileSelectWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\TitleVersionRenameWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\MessageSelectWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\SubmissionDocumentCreateType.cs" />
@@ -410,6 +416,9 @@
     </Compile>
     <Compile Include="View\Windows\CommandToolsWindow.xaml.cs">
       <DependentUpon>CommandToolsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\MessageFileSelectWindow.xaml.cs">
+      <DependentUpon>MessageFileSelectWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\TitleVersionRenameWindow.xaml.cs">
       <DependentUpon>TitleVersionRenameWindow.xaml</DependentUpon>
@@ -719,6 +728,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Windows\CommandToolsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\MessageFileSelectWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

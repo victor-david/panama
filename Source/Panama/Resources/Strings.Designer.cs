@@ -1236,7 +1236,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Getting ready to remove this message. If this message is a direct link to the Outlook message store, the message remains there unless you delete it directly. Do you want to continue?.
+        ///   Looks up a localized string similar to Getting ready to remove this message. This does not delete any external files or resources, only the database entry. Do you want to continue?.
         /// </summary>
         public static string ConfirmationRemoveSubmissionMessage {
             get {
@@ -1881,6 +1881,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The folder for submission messages has not been set or doesn&apos;t exist. Fix the configuration setting and try again..
+        /// </summary>
+        public static string InvalidOpSubmissionMessageFolderNotSet {
+            get {
+                return ResourceManager.GetString("InvalidOpSubmissionMessageFolderNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified title record does not exist.
         /// </summary>
         public static string InvalidOpTitleDoesNotExist {
@@ -2003,6 +2012,24 @@ namespace Restless.App.Panama.Resources {
         public static string TooltipColorReset {
             get {
                 return ResourceManager.GetString("TooltipColorReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured parsing the message file..
+        /// </summary>
+        public static string TooltipMessageError {
+            get {
+                return ResourceManager.GetString("TooltipMessageError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The message file is in use, i.e. it has been selected as an entry for a submission message.
+        /// </summary>
+        public static string TooltipMessageInUse {
+            get {
+                return ResourceManager.GetString("TooltipMessageInUse", resourceCulture);
             }
         }
         

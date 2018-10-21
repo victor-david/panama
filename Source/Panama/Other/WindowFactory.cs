@@ -86,7 +86,6 @@ namespace Restless.App.Panama
         /************************************************************************/
         
         #region MessageSelect
-
         /// <summary>
         /// Provides static methods for creating a message select window.
         /// </summary>
@@ -100,8 +99,10 @@ namespace Restless.App.Panama
             /// <returns>The window</returns>
             public static MessageSelectWindow Create(string title, MessageSelectOptions options)
             {
-                var window = new MessageSelectWindow();
-                window.Title = title;
+                var window = new MessageSelectWindow
+                {
+                    Title = title
+                };
                 TextOptions.SetTextFormattingMode(window);
                 window.Owner = Application.Current.MainWindow;
                 var viewModel = new MessageSelectWindowViewModel(window, options);
@@ -110,8 +111,36 @@ namespace Restless.App.Panama
         }
         #endregion
 
+        #region MessageSelect
+        /// <summary>
+        /// Provides static methods for creating a message file select window.
+        /// </summary>
+        public static class MessageFileSelect
+        {
+            /// <summary>
+            /// Creates an instance of MessageSelectWindow and its corresponding view model.
+            /// </summary>
+            /// <param name="title">The title of the window.</param>
+            /// <param name="folder">The name of the folder in which to look for messages.</param>
+            /// <returns>The window</returns>
+            public static MessageFileSelectWindow Create(string title, string folder)
+            {
+                var window = new MessageFileSelectWindow
+                {
+                    Title = title
+                };
+                TextOptions.SetTextFormattingMode(window);
+                window.Owner = Application.Current.MainWindow;
+                var viewModel = new MessageFileSelectWindowViewModel(window, folder);
+                return window;
+            }
+        }
+        #endregion
+
+
+
         /************************************************************************/
-        
+
         #region SubmissionDocumentSelect
         /// <summary>
         /// Provides static methods for creating a submission document selection window.

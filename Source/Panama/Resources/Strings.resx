@@ -570,7 +570,7 @@ Last exported: {1}</value>
     <value>Search</value>
   </data>
   <data name="ConfirmationRemoveSubmissionMessage" xml:space="preserve">
-    <value>Getting ready to remove this message. If this message is a direct link to the Outlook message store, the message remains there unless you delete it directly. Do you want to continue?</value>
+    <value>Getting ready to remove this message. This does not delete any external files or resources, only the database entry. Do you want to continue?</value>
   </data>
   <data name="InvalidOpMapiFolderNotSet" xml:space="preserve">
     <value>The Outlook folder  from which to select submission messages hasn't been set. Fix the configuration and try again.</value>
@@ -896,5 +896,14 @@ Do you want to continue?</value>
   </data>
   <data name="CommandPublisherFilterHaveSubTooltip" xml:space="preserve">
     <value>Filter publisher list to display only publishers that currently have an open submission</value>
+  </data>
+  <data name="InvalidOpSubmissionMessageFolderNotSet" xml:space="preserve">
+    <value>The folder for submission messages has not been set or doesn't exist. Fix the configuration setting and try again.</value>
+  </data>
+  <data name="TooltipMessageError" xml:space="preserve">
+    <value>An error occured parsing the message file.</value>
+  </data>
+  <data name="TooltipMessageInUse" xml:space="preserve">
+    <value>The message file is in use, i.e. it has been selected as an entry for a submission message</value>
   </data>
 </root>

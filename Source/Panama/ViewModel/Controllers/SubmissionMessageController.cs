@@ -16,6 +16,7 @@ using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemPropert
 using Restless.Tools.Utility;
 using System.Windows;
 using Restless.App.Panama.Configuration;
+using System.IO;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -37,11 +38,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public bool IsMapiMessage
         {
-            get { return isMapiMessage; }
-            private set
-            {
-                SetProperty(ref isMapiMessage, value);
-            }
+            get => isMapiMessage;
+            private set => SetProperty(ref isMapiMessage, value);
         }
 
         /// <summary>
@@ -77,9 +75,9 @@ namespace Restless.App.Panama.ViewModel
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionMessageTable>());
             DataView.RowFilter = string.Format("{0}=-1", SubmissionMessageTable.Defs.Columns.BatchId);
-            DataView.Sort = string.Format("{0} DESC", SubmissionMessageTable.Defs.Columns.Received);
-            //Columns.Create("BT", SubmissionMessageTable.Defs.Columns.BodyFormat).MakeFixedWidth(FixedWidth.MediumNumeric);
-            Columns.SetDefaultSort(Columns.Create("Date", SubmissionMessageTable.Defs.Columns.Received).MakeDate(), ListSortDirection.Descending);
+            DataView.Sort = $"{SubmissionMessageTable.Defs.Columns.MessageDate} DESC";
+            Columns.SetDefaultSort(Columns.Create("Date", SubmissionMessageTable.Defs.Columns.MessageDate).MakeDate(), ListSortDirection.Descending);
+            Columns.Create("Type", SubmissionMessageTable.Defs.Columns.Protocol).MakeFixedWidth(FixedWidth.ShortString);
             Columns.Create("Subject", SubmissionMessageTable.Defs.Columns.Display);
             HeaderPreface = Strings.HeaderMessages;
             converter = new StringToCleanStringConverter();
@@ -148,38 +146,33 @@ namespace Restless.App.Panama.ViewModel
         #region Private methods
         private void RunSelectMessageCommand(object o)
         {
-            if (string.IsNullOrEmpty(Config.Instance.FolderMapi))
+            string folder = Config.Instance.FolderSubmissionMessage;
+            if (string.IsNullOrEmpty(folder) || !Directory.Exists(folder))
             {
-                Messages.ShowError(Strings.InvalidOpMapiFolderNotSet);
+                Messages.ShowError(Strings.InvalidOpSubmissionMessageFolderNotSet);
                 return;
             }
-            var ops = new MessageSelectOptions(MessageSelectMode.Message, Config.Instance.FolderMapi);
-            var w = WindowFactory.MessageSelect.Create(Strings.CaptionSelectSubmissionMessage, ops);
+
+            var w = WindowFactory.MessageFileSelect.Create(Strings.CaptionSelectSubmissionMessage, folder);
             w.ShowDialog();
 
-            if (w.GetValue(WindowViewModel.ViewModelProperty) is MessageSelectWindowViewModel vm)
+            if (w.GetValue(WindowViewModel.ViewModelProperty) is MessageFileSelectWindowViewModel vm)
             {
                 if (vm.SelectedItems != null && Owner.SelectedPrimaryKey != null)
                 {
-                    string header = $"{SubmissionMessageTable.Defs.Values.Protocol.Mapi}{Config.FolderMapi}";
                     long batchId = (long)Owner.SelectedPrimaryKey;
                     var table = DatabaseController.Instance.GetTable<SubmissionMessageTable>();
-                    foreach (var item in vm.SelectedItems)
+
+                    foreach (var item in vm.SelectedItems.Where((m)=>!m.IsError))
                     {
-                        string url = item.Values[SysProps.System.ItemUrl].ToString().Substring(header.Length);
                         table.Add
-                            (
-                                batchId,
-                                item.Values[SysProps.System.Subject].ToString(),
-                                SubmissionMessageTable.Defs.Values.Protocol.Mapi,
-                                url,
-                                item.Values[SysProps.System.Message.DateReceived],
-                                item.Values[SysProps.System.Message.DateSent],
-                                item.Values[SysProps.System.Message.ToName].ToString(),
-                                item.Values[SysProps.System.Message.ToAddress].ToString(),
-                                item.Values[SysProps.System.Message.FromName].ToString(),
-                                item.Values[SysProps.System.Message.FromAddress].ToString()
-                            );
+                        (
+                             batchId,
+                             item.Subject,
+                             SubmissionMessageTable.Defs.Values.Protocol.FileSystem, Path.GetFileName(item.File),
+                             item.MessageId, item.MessageDate,
+                             item.ToName, item.ToEmail,
+                             item.FromName, item.FromEmail);
                     }
                 }
             }
