@@ -176,7 +176,6 @@
     <Compile Include="Converters\SubtractionConverter.cs" />
     <Compile Include="Other\ApplicationInfo.cs" />
     <Compile Include="Other\BindableBase.cs" />
-    <Compile Include="Other\CDOParser.cs" />
     <Compile Include="Other\GeneralOption.cs" />
     <Compile Include="Other\PreviewMode.cs" />
     <Compile Include="Other\TitleVersionRenameItem.cs" />
