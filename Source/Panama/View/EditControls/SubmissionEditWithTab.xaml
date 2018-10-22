@@ -4,10 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:vw="clr-namespace:Restless.App.Panama.View"
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
-    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    xmlns:cv="clr-namespace:Restless.Tools.Converters;assembly=Restless.Tools.Library"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="498">
     <con:TabControlExtended>
@@ -63,8 +62,17 @@
                             </StackPanel>
                             <StackPanel Grid.Column="1">
                                 <Label>Type</Label>
-                                <ListBox IsEnabled="{Binding Response.HaveResponseDate}" ItemsSource="{Binding Response.DataView}" SelectedValue="{Binding Response.ResponseType}" SelectedValuePath="id" DisplayMemberPath="name"></ListBox>
-                                <Button Content="Clear" Command="{Binding Response.ClearResponseCommand}" Width="100" HorizontalAlignment="Left"/>
+                                <ListBox 
+                                    IsEnabled="{Binding Response.HaveResponseDate}"
+                                    ItemsSource="{Binding Response.DataView}"
+                                    SelectedValue="{Binding Response.ResponseType}"
+                                    SelectedValuePath="id"
+                                    DisplayMemberPath="name"/>
+                                <Button
+                                    Width="100"
+                                    HorizontalAlignment="Left"
+                                    Content="Clear"
+                                    Command="{Binding Response.ClearResponseCommand}"/>
                             </StackPanel>
                         </Grid>
                     </Expander>
@@ -118,60 +126,103 @@
                         <TextBox DockPanel.Dock="Top" Text="{Binding Documents.SelectedRow[title]}"/>
                         <Expander DockPanel.Dock="Top" Header="{x:Static r:Strings.HeaderPreview}" IsExpanded="{Binding Documents.IsPreviewMode}">
                             <DockPanel VerticalAlignment="Stretch">
-                                <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockError}" Margin="8" VerticalAlignment="Top" Visibility="{Binding Documents.IsOpenXml,Converter={cv:BooleanToVisibilityConverter},ConverterParameter={StaticResource BooleanFalseToVisibility}}">
+                                <TextBlock
+                                    DockPanel.Dock="Top" 
+                                    VerticalAlignment="Top"
+                                    Margin="8"
+                                    Style="{StaticResource TextBlockError}"
+                                    Visibility="{Binding Documents.IsOpenXml,Converter={cv:BooleanToInverseVisibilityConverter}}">
                         The text for this document cannot be displayed. Only Open Xml documents are supported.
                                 </TextBlock>
-                                <TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Margin="4,8" Text="{Binding Documents.PreviewText,Mode=OneWay}" Visibility="{Binding Documents.IsOpenXml,Converter={cv:BooleanToVisibilityConverter}}"/>
+                                <TextBox 
+                                    DockPanel.Dock="Top" 
+                                    Margin="4,8"
+                                    Style="{StaticResource TextBoxMultiFull}"
+                                    Text="{Binding Documents.PreviewText,Mode=OneWay}"
+                                    Visibility="{Binding Documents.IsOpenXml,Converter={cv:BooleanToVisibilityConverter}}"/>
                             </DockPanel>
-                            <!--<TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Margin="4,8" Text="{Binding Documents.PreviewText,Mode=OneWay}" Visibility="{Binding Documents.IsOpenXml,Converter={cv:BooleanToVisibilityConverter}}"/>-->
                         </Expander>
                     </DockPanel>
                 </DockPanel>
             </TabItem>
             <!-- Messages -->
             <TabItem Header="{Binding Messages.Header}">
-                <DockPanel>
-                    <DataGrid DockPanel.Dock="Top" x:Name="grid3" Style="{StaticResource DataGridEdit}" Height="120" ItemsSource="{Binding Path=Messages.DataView}" SelectedItem="{Binding Messages.SelectedItem}" con:DataGridColumns.Columns="{Binding Messages.Columns}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <DataGrid
+                        x:Name="grid3"
+                        MaxHeight="260"
+                        Style="{StaticResource DataGridEdit}" 
+                        ItemsSource="{Binding Path=Messages.DataView}"
+                        SelectedItem="{Binding Messages.SelectedItem}"
+                        con:DataGridColumns.Columns="{Binding Messages.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
                                 <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid3, Path=DataContext.Messages.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
                     </DataGrid>
-                    <ToolBarTray DockPanel.Dock="Top">
+                    <ToolBarTray Grid.Row="1" >
                         <ToolBar Style="{StaticResource ToolBarCommandHolder}">
                             <Button Command="{Binding Commands[SelectMessage]}" Content="Add"/>
                             <Button Command="{Binding Commands[RemoveMessage]}" Content="Remove"/>
                         </ToolBar>
                     </ToolBarTray>
-
+                    
                     <!-- Message display / edit controls -->
-                    <DockPanel DockPanel.Dock="Top" Margin="0,8" Visibility="{Binding Messages.EditVisibility, Mode=OneWay}">
-                        <Label DockPanel.Dock="Top">Subject</Label>
-                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockMessage}" Text="{Binding Messages.SelectedRow[subject]}" />
-                        <Label DockPanel.Dock="Top">Display subject</Label>
-                        <TextBox DockPanel.Dock="Top" Text="{Binding Messages.SelectedRow[display]}" />
-                        <Label DockPanel.Dock="Top">Sender</Label>
-                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockMessage}" Text="{Binding Messages.SelectedRow[SenderFull]}" />
-                        <Label DockPanel.Dock="Top">Recipient</Label>
-                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockMessage}" Text="{Binding Messages.SelectedRow[RecipientFull]}" />
-                        <Label DockPanel.Dock="Top">Message</Label>
-                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextBlockError}" Visibility="{Binding Messages.IsMapiMessage, Converter={cv:BooleanToVisibilityConverter}, Mode=OneWay}">
-                            The message contents can't be displayed here. This message is a direct reference to the item stored in the Outlook message store.
-                            Double click the row to open the message
-                        </TextBlock>
-                        <TextBox 
-                            DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" 
-                            Visibility="{Binding Messages.IsMapiMessage, Converter={cv:BooleanToVisibilityConverter}, ConverterParameter={StaticResource BooleanFalseToVisibility}, Mode=OneWay}" 
-                            Text="{Binding Messages.MessageText, Mode=OneWay}" />
-                    </DockPanel>
-
-
-                </DockPanel>
+                    <Grid Grid.Row="2" Margin="6,4" Visibility="{Binding Messages.EditVisibility, Mode=OneWay}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockMessage}">
+                                <Setter Property="Margin" Value="4,2"/>
+                            </Style>
+                        </Grid.Resources>
+                        <!-- Message Date-->
+                        <TextBlock Text="Date"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Messages.SelectedRow[messagedate]}"/>
+                        <!-- From -->
+                        <TextBlock Grid.Row="1" Text="From"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Messages.From}"/>
+                        <!-- To -->
+                        <TextBlock Grid.Row="2" Text="To"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Messages.To}"/>
+                        <!-- Message Id-->
+                        <TextBlock Grid.Row="3" Text="Id"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Messages.SelectedRow[messageid]}"/>
+                        <!-- Message Subject -->
+                        <TextBlock Grid.Row="4" Text="Subject"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Messages.SelectedRow[subject]}"/>
+                        <!-- Message Display Subject (editable) -->
+                        <TextBlock Grid.Row="5" Grid.ColumnSpan="2" Margin="4,12,0,2" Style="{StaticResource TextBlockLabel}" Text="Display Subject"/>
+                        <TextBox Grid.Row="6" Grid.ColumnSpan="2" Text="{Binding Messages.SelectedRow[display]}" />
+                        <!-- Message Text-->
+                        <TextBlock Grid.Row="7" Grid.ColumnSpan="2" Text="Message"/>
+                        <ScrollViewer 
+                            Grid.Row="8" Grid.ColumnSpan="2"
+                            VerticalScrollBarVisibility="Auto">
+                            <TextBlock Text="{Binding Messages.MessageText}"/>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
             </TabItem>
-
-
-
         </TabControl.Items>
     </con:TabControlExtended>
 </UserControl>

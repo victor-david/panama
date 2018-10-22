@@ -4,13 +4,9 @@ using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Filter;
 using Restless.Tools.Utility;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Media;
-using SystemColors = System.Windows.Media.Colors;
 
 namespace Restless.App.Panama.Configuration
 {
@@ -447,6 +443,24 @@ namespace Restless.App.Panama.Configuration
         public string SubmissionFilter
         {
             get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the display filter value for submission messages.
+        /// </summary>
+        /// <remarks>
+        /// The values correspond to the following:
+        /// 0 = display all
+        /// 1 = display only unassigned
+        /// 7 = display last 7 days
+        /// 14 = display last 14 days
+        /// 21 = display last 21 days
+        /// 30 = display last 30 days
+        /// </remarks>
+        public int SubmissionMessageDisplay
+        {
+            get => GetItem(0);
             set => SetItem(value);
         }
 

@@ -1769,6 +1769,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The message contents can&apos;t be displayed here. This message is a direct reference to the item stored in the Outlook message store. Double click the row to open the message..
+        /// </summary>
+        public static string InvalidOpCannotDisplayMapi {
+            get {
+                return ResourceManager.GetString("InvalidOpCannotDisplayMapi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This command is not supported.
         /// </summary>
         public static string InvalidOpCommandNotSupported {

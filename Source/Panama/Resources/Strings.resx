@@ -906,4 +906,7 @@ Do you want to continue?</value>
   <data name="TooltipMessageInUse" xml:space="preserve">
     <value>The message file is in use, i.e. it has been selected as an entry for a submission message</value>
   </data>
+  <data name="InvalidOpCannotDisplayMapi" xml:space="preserve">
+    <value>The message contents can't be displayed here. This message is a direct reference to the item stored in the Outlook message store. Double click the row to open the message.</value>
+  </data>
 </root>
