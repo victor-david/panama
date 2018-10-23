@@ -8,3 +8,5 @@ INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported")
 INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (7, 'Outlook Folder (Direct Reference)', NULL, 100, 0);
 INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (8, 'Audio', '.mp3', 6, 1);
 INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (9, 'Html', '.html;.htm', 5, 1);
+INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (10, 'Images', '.jpg;.jpeg;.png', 7, 1);
+INSERT INTO "documenttype" ("id", "name", "extensions", "ordering", "supported") VALUES (11, 'Executable', '.exe', 9, 1);

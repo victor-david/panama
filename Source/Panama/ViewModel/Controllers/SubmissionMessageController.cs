@@ -76,8 +76,13 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Subject", SubmissionMessageTable.Defs.Columns.Display);
             HeaderPreface = Strings.HeaderMessages;
             messageTextConverter = new StringToCleanStringConverter();
-            Owner.Commands.Add("SelectMessage", RunSelectMessageCommand);
-            Owner.Commands.Add("RemoveMessage", RunRemoveMessageCommand, (o) => SelectedItem != null);
+            Commands.Add("AddMessage", RunAddMessageCommand);
+            Commands.Add("RemoveMessage", RunRemoveMessageCommand, (o) => IsSelectedRowAccessible);
+            Commands.Add("ViewMessageFile", RunViewMessageFileCommand, CanRunViewMessageFileCommand);
+
+            MenuItems.AddItem("View message file", Commands["ViewMessageFile"]);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem("Remove", Commands["RemoveMessage"], "ImageDeleteMenu");
         }
         #endregion
 
@@ -141,7 +146,7 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
-        private void RunSelectMessageCommand(object o)
+        private void RunAddMessageCommand(object o)
         {
             string folder = Config.Instance.FolderSubmissionMessage;
             if (string.IsNullOrEmpty(folder) || !Directory.Exists(folder))
@@ -160,14 +165,14 @@ namespace Restless.App.Panama.ViewModel
                     long batchId = (long)Owner.SelectedPrimaryKey;
                     var table = DatabaseController.Instance.GetTable<SubmissionMessageTable>();
 
-                    foreach (var item in vm.SelectedItems.Where((m)=>!m.IsError))
+                    foreach (MimeKitMessage item in vm.SelectedItems.Where((m)=>!m.IsError))
                     {
                         table.Add
                         (
                              batchId,
                              item.Subject,
                              SubmissionMessageTable.Defs.Values.Protocol.FileSystem, Path.GetFileName(item.File),
-                             item.MessageId, item.MessageDate,
+                             item.MessageId, item.MessageDateUtc,
                              item.ToName, item.ToEmail,
                              item.FromName, item.FromEmail);
                     }
@@ -182,6 +187,28 @@ namespace Restless.App.Panama.ViewModel
                 SelectedRow.Delete();
                 DatabaseController.Instance.GetTable<SubmissionMessageTable>().Save();
             }
+        }
+
+        private void RunViewMessageFileCommand(object parm)
+        {
+            if (string.IsNullOrEmpty(Config.TextViewerFile))
+            {
+                Messages.ShowError(Strings.InvalidOpTextViewerNotSet);
+                return;
+            }
+            string file = Path.Combine(Config.FolderSubmissionMessage, SelectedRow[SubmissionMessageTable.Defs.Columns.EntryId].ToString());
+            OpenHelper.OpenFile(Config.TextViewerFile, file);
+
+        }
+
+        private bool CanRunViewMessageFileCommand(object parm)
+        {
+            if (IsSelectedRowAccessible)
+            {
+                return
+                    SelectedRow[SubmissionMessageTable.Defs.Columns.Protocol].ToString() == SubmissionMessageTable.Defs.Values.Protocol.FileSystem;
+            }
+            return false;
         }
 
         private string GetAddress(string nameCol, string emailCol)
@@ -212,7 +239,12 @@ namespace Restless.App.Panama.ViewModel
                     case SubmissionMessageTable.Defs.Values.Protocol.FileSystem:
                         string file = SelectedRow[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
                         var msg = new MimeKitMessage(Path.Combine(Config.FolderSubmissionMessage, file));
-                        return messageTextConverter.Convert(msg.MessageText, StringToCleanStringOptions.RemoveHtml);
+                        if (msg.TextFormat == MimeKitMessage.MessageTextFormat.Unknown)
+                        {
+                            return "Message has unknown message format";
+                        }
+                        StringToCleanStringOptions ops = (msg.TextFormat == MimeKitMessage.MessageTextFormat.Text) ? StringToCleanStringOptions.None : StringToCleanStringOptions.All;
+                        return messageTextConverter.Convert(msg.MessageText, ops);
                 }
             }
             return null;

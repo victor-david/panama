@@ -67,6 +67,23 @@ namespace Restless.App.Panama.Controls
                 nameof(SelectorType), typeof(PathSelectorType), typeof(PathSelector), new PropertyMetadata(PathSelectorType.FileSystemFolder)
             );
 
+        /// <summary>
+        /// Gets or sets a value that determines which file types are included in the dialog selector.
+        /// The default is zero which includes all file types.
+        /// </summary>
+        public long SelectorFileType
+        {
+            get => (long)GetValue(SelectorFileTypeProperty);
+            set => SetValue(SelectorFileTypeProperty, value);
+        }
+
+        /// <summary>
+        /// Dependency property definition for the <see cref="SelectorFileType"/> property.
+        /// </summary>
+        public static readonly DependencyProperty SelectorFileTypeProperty = DependencyProperty.Register
+            (
+                nameof(SelectorFileType), typeof(long), typeof(PathSelector), new PropertyMetadata(default(long))
+            );
 
         /// <summary>
         /// Gets or sets a boolean value that determines if the clear functionality is enabled.
@@ -137,7 +154,7 @@ namespace Restless.App.Panama.Controls
                 }
             }
 
-            using (var dialog = CommonDialogFactory.Create(initialDir, title, SelectorType == PathSelectorType.FileSystemFolder))
+            using (var dialog = CommonDialogFactory.Create(initialDir, title, SelectorType == PathSelectorType.FileSystemFolder, SelectorFileType))
             {
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {

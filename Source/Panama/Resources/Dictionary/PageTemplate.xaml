@@ -70,8 +70,13 @@
     <DataTemplate DataType="{x:Type vm:ToolExportViewModel}">
         <vw:ToolExportView />
     </DataTemplate>
-
-    <!-- Template to apply a ToolMetaUpdatetView to an instance of the ToolMetaUpdateModel class shown in the main window  -->
+    
+    <!-- Template to apply a ToolMessageSyncView to an instance of the ToolMessageSyncViewModel class shown in the main window  -->
+    <DataTemplate DataType="{x:Type vm:ToolMessageSyncViewModel}">
+        <vw:ToolMessageSyncView />
+    </DataTemplate>
+    
+    <!-- Template to apply a ToolMetaUpdateView to an instance of the ToolMetaUpdateViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:ToolMetaUpdateViewModel}">
         <vw:ToolMetaUpdateView />
     </DataTemplate>

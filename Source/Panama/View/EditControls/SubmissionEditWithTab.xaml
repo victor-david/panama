@@ -165,17 +165,21 @@
                                 <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid3, Path=DataContext.Messages.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu ItemsSource="{Binding Messages.MenuItems}"/>
+                        </DataGrid.ContextMenu>
                     </DataGrid>
                     <ToolBarTray Grid.Row="1" >
                         <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                            <Button Command="{Binding Commands[SelectMessage]}" Content="Add"/>
-                            <Button Command="{Binding Commands[RemoveMessage]}" Content="Remove"/>
+                            <Button Command="{Binding Messages.Commands[AddMessage]}" Content="Add"/>
+                            <Button Command="{Binding Messages.Commands[RemoveMessage]}" Content="Remove"/>
                         </ToolBar>
                     </ToolBarTray>
                     
                     <!-- Message display / edit controls -->
                     <Grid Grid.Row="2" Margin="6,4" Visibility="{Binding Messages.EditVisibility, Mode=OneWay}">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -194,29 +198,37 @@
                             <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockMessage}">
                                 <Setter Property="Margin" Value="4,2"/>
                             </Style>
+                            <Style x:Key="TL" TargetType="TextBlock" BasedOn="{StaticResource TextBlockMessage}">
+                                <Setter Property="Margin" Value="4,2"/>
+                                <Setter Property="Foreground" Value="DarkBlue"/>
+                            </Style>
                         </Grid.Resources>
+                        <!-- -->
+                        <TextBlock Style="{StaticResource TL}" Text="Entry Id"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Messages.SelectedRow[entryid]}"/>
+
                         <!-- Message Date-->
-                        <TextBlock Text="Date"/>
-                        <TextBlock Grid.Column="1" Text="{Binding Messages.SelectedRow[messagedate]}"/>
+                        <TextBlock Grid.Row="1" Style="{StaticResource TL}" Text="Date"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Messages.SelectedRow[messagedate]}"/>
                         <!-- From -->
-                        <TextBlock Grid.Row="1" Text="From"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Messages.From}"/>
+                        <TextBlock Grid.Row="2" Style="{StaticResource TL}" Text="From"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Messages.From}"/>
                         <!-- To -->
-                        <TextBlock Grid.Row="2" Text="To"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Messages.To}"/>
+                        <TextBlock Grid.Row="3" Style="{StaticResource TL}" Text="To"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Messages.To}"/>
                         <!-- Message Id-->
-                        <TextBlock Grid.Row="3" Text="Id"/>
-                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Messages.SelectedRow[messageid]}"/>
+                        <TextBlock Grid.Row="4" Style="{StaticResource TL}" Text="Id"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Messages.SelectedRow[messageid]}"/>
                         <!-- Message Subject -->
-                        <TextBlock Grid.Row="4" Text="Subject"/>
-                        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Messages.SelectedRow[subject]}"/>
+                        <TextBlock Grid.Row="5" Style="{StaticResource TL}" Text="Subject"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Messages.SelectedRow[subject]}"/>
                         <!-- Message Display Subject (editable) -->
-                        <TextBlock Grid.Row="5" Grid.ColumnSpan="2" Margin="4,12,0,2" Style="{StaticResource TextBlockLabel}" Text="Display Subject"/>
-                        <TextBox Grid.Row="6" Grid.ColumnSpan="2" Text="{Binding Messages.SelectedRow[display]}" />
+                        <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Margin="4,12,0,2" Style="{StaticResource TL}" Text="Display Subject"/>
+                        <TextBox Grid.Row="7" Grid.ColumnSpan="2" Text="{Binding Messages.SelectedRow[display]}" />
                         <!-- Message Text-->
-                        <TextBlock Grid.Row="7" Grid.ColumnSpan="2" Text="Message"/>
+                        <TextBlock Grid.Row="8" Grid.ColumnSpan="2" Style="{StaticResource TL}" Text="Message"/>
                         <ScrollViewer 
-                            Grid.Row="8" Grid.ColumnSpan="2"
+                            Grid.Row="9" Grid.ColumnSpan="2"
                             VerticalScrollBarVisibility="Auto">
                             <TextBlock Text="{Binding Messages.MessageText}"/>
                         </ScrollViewer>

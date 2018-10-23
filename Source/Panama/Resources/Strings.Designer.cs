@@ -974,6 +974,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message Sync.
+        /// </summary>
+        public static string CommandToolMessageSync {
+            get {
+                return ResourceManager.GetString("CommandToolMessageSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
         public static string CommandToolMeta {
@@ -1596,6 +1605,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject..
+        /// </summary>
+        public static string HeaderToolOperationMessageSync {
+            get {
+                return ResourceManager.GetString("HeaderToolOperationMessageSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submission documents (not found) - {0}.
         /// </summary>
         public static string HeaderToolOperationMetaSubmissionNotFoundFormat {
@@ -1895,6 +1913,15 @@ namespace Restless.App.Panama.Resources {
         public static string InvalidOpSubmissionMessageFolderNotSet {
             get {
                 return ResourceManager.GetString("InvalidOpSubmissionMessageFolderNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The external text viewer application has not been set. Fix the configuration setting and try again..
+        /// </summary>
+        public static string InvalidOpTextViewerNotSet {
+            get {
+                return ResourceManager.GetString("InvalidOpTextViewerNotSet", resourceCulture);
             }
         }
         

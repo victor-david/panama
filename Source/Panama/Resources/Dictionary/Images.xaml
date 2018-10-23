@@ -77,6 +77,7 @@
     <BitmapImage x:Key="ImageTool" UriSource="/Panama;component/Resources/Images/Image.Tool.48.png"/>
     <BitmapImage x:Key="ImageToolConvert" UriSource="/Panama;component/Resources/Images/Image.Convert.48.png"/>
     <BitmapImage x:Key="ImageToolExport" UriSource="/Panama;component/Resources/Images/Image.Tool.Export.64.png"/>
+    <BitmapImage x:Key="ImageToolMessageSync" UriSource="/Panama;component/Resources/Images/Image.Sync.64.png"/>
     <BitmapImage x:Key="ImageToolMeta" UriSource="/Panama;component/Resources/Images/Image.Refresh.64.png"/>
     <BitmapImage x:Key="ImageToolTitleList" UriSource="/Panama;component/Resources/Images/Image.List.64.png"/>
     <BitmapImage x:Key="ImageUndo" UriSource="/Panama;component/Resources/Images/Image.Undo.48.png"/>
@@ -133,6 +134,7 @@
     <Image x:Key="ImageToolMenu" Source="{StaticResource ImageTool}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageToolConvertMenu" Source="{StaticResource ImageToolConvert}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageToolExportMenu" Source="{StaticResource ImageToolExport}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageToolMessageSyncMenu" Source="{StaticResource ImageToolMessageSync}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageToolMetaMenu" Source="{StaticResource ImageToolMeta}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageToolOrphanMenu" Source="{StaticResource ImageOrphan}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageToolSearchMenu" Source="{StaticResource ImageSearch}" Style="{StaticResource MenuItemImage}"/>

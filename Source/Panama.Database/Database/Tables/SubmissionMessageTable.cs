@@ -154,7 +154,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return Defs.Columns.Id; }
+            get => Defs.Columns.Id;
         }
         #endregion
 
@@ -185,14 +185,18 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="batchId">The batch id from the <see cref="SubmissionBatchTable"/> that owns this message.</param>
         /// <param name="subject">The message subject.</param>
         /// <param name="protocol">The protocol used to access this message</param>
-        /// <param name="url">The url to the message. This is a MAPI reference to the Outlook data store.</param>
+        /// <param name="entryId">
+        /// The entry id for the message.
+        /// For an Outlook message, this is a MAPI reference to the Outlook data store.
+        /// For an external .eml file, it's the name of the file without the path portion.
+        /// </param>
         /// <param name="messageDate">The date / time of the message.</param>
         /// <param name="messageId">The message id</param>
         /// <param name="toName">The name of the message recipient.</param>
         /// <param name="toAddress">The email address of the message recipient.</param>
         /// <param name="fromName">The name of the message sender.</param>
         /// <param name="fromAddress">The email address of the message sender.</param>
-        public void Add(long batchId, string subject, string protocol, string url, string messageId, DateTime messageDate, string toName, string toAddress, string fromName, string fromAddress)
+        public void Add(long batchId, string subject, string protocol, string entryId, string messageId, DateTime messageDate, string toName, string toAddress, string fromName, string fromAddress)
         {
             DataRow row = NewRow();
             if (string.IsNullOrEmpty(subject))
@@ -204,7 +208,7 @@ namespace Restless.App.Panama.Database.Tables
             row[Defs.Columns.BodyFormat] = 0;
             row[Defs.Columns.Display] = subject;
             row[Defs.Columns.Protocol] = protocol;
-            row[Defs.Columns.EntryId] = url;
+            row[Defs.Columns.EntryId] = entryId;
             row[Defs.Columns.MessageId] = messageId;
             row[Defs.Columns.RecipientEmail] = toAddress;
             row[Defs.Columns.RecipientName] = toName;
@@ -266,22 +270,6 @@ namespace Restless.App.Panama.Database.Tables
             CreateExpressionColumn<string>(Defs.Columns.Calculated.SenderFull, string.Format("{0}+' ('+{1}+')'", Defs.Columns.SenderName, Defs.Columns.SenderEmail));
             CreateExpressionColumn<string>(Defs.Columns.Calculated.RecipientFull, string.Format("{0}+' ('+{1}+')'", Defs.Columns.RecipientName, Defs.Columns.RecipientEmail));
         }
-        //protected override void OnInitializationComplete()
-        //{
-        //    foreach (DataRow row in Rows)
-        //    {
-        //        long id = (long)row[Defs.Columns.Id];
-        //        if (id >= 398)
-        //        {
-        //            // reversed
-        //            string sname = row[Defs.Columns.SenderEmail].ToString();
-        //            string semail = row[Defs.Columns.SenderName].ToString();
-        //            row[Defs.Columns.SenderName] = sname;
-        //            row[Defs.Columns.SenderEmail] = semail;
-        //        }
-        //    }
-        //    Save();
-        //}
         #endregion
 
         /************************************************************************/

@@ -909,4 +909,13 @@ Do you want to continue?</value>
   <data name="InvalidOpCannotDisplayMapi" xml:space="preserve">
     <value>The message contents can't be displayed here. This message is a direct reference to the item stored in the Outlook message store. Double click the row to open the message.</value>
   </data>
+  <data name="InvalidOpTextViewerNotSet" xml:space="preserve">
+    <value>The external text viewer application has not been set. Fix the configuration setting and try again.</value>
+  </data>
+  <data name="CommandToolMessageSync" xml:space="preserve">
+    <value>Message Sync</value>
+  </data>
+  <data name="HeaderToolOperationMessageSync" xml:space="preserve">
+    <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
+  </data>
 </root>

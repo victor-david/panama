@@ -58,6 +58,7 @@
         <con:PathSelector 
             Grid.Row="6" Grid.ColumnSpan="2"
             SelectorType="FileSystemFile"
+            SelectorFileType="{StaticResource DocTypeWordOpenXmlFileType}"
             Title="Template File"
             ClearEnabled="True"
             PathName="{Binding Config.TemplateFile}"/>

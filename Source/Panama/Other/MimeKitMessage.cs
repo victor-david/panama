@@ -10,6 +10,25 @@ namespace Restless.App.Panama
     /// </summary>
     public class MimeKitMessage
     {
+        /// <summary>
+        /// Provides an enumeration that describes the type of content held by <see cref="MessageText"/>.
+        /// </summary>
+        public enum MessageTextFormat
+        {
+            /// <summary>
+            /// Unknown
+            /// </summary>
+            Unknown,
+            /// <summary>
+            /// Plain text
+            /// </summary>
+            Text,
+            /// <summary>
+            /// Html
+            /// </summary>
+            Html
+        }
+
         #region Public properties
         /// <summary>
         /// Gets the file name for this message.
@@ -28,9 +47,9 @@ namespace Restless.App.Panama
         }
 
         /// <summary>
-        /// Gets the message date
+        /// Gets the UTC message date.
         /// </summary>
-        public DateTime MessageDate
+        public DateTime MessageDateUtc
         {
             get;
         }
@@ -84,6 +103,14 @@ namespace Restless.App.Panama
         }
 
         /// <summary>
+        /// Gets the format of <see cref="MessageText"/>.
+        /// </summary>
+        public MessageTextFormat TextFormat
+        {
+            get;
+        }
+
+        /// <summary>
         /// Gets a boolean value that indicates if the parse failed.
         /// </summary>
         public bool IsError
@@ -123,7 +150,7 @@ namespace Restless.App.Panama
                 File = file;
                 var msg = MimeKit.MimeMessage.Load(file);
                 MessageId = msg.MessageId;
-                MessageDate = msg.Date.UtcDateTime;
+                MessageDateUtc = msg.Date.UtcDateTime;
 
                 var from = ExtractAddress(msg.From);
                 FromName = from.Item1;
@@ -139,7 +166,18 @@ namespace Restless.App.Panama
                     Subject = "(no subject)";
                 }
 
-                MessageText = msg.TextBody;
+                TextFormat = MessageTextFormat.Unknown;
+                if (!string.IsNullOrEmpty(msg.TextBody))
+                {
+                    MessageText = msg.TextBody;
+                    TextFormat = MessageTextFormat.Text;
+                }
+                else if (!string.IsNullOrEmpty(msg.HtmlBody))
+                {
+                    MessageText = msg.HtmlBody;
+                    TextFormat = MessageTextFormat.Html;
+                }
+
                 IsError = false;
                 InUse = DatabaseController.Instance.GetTable<SubmissionMessageTable>().MessageInUse(SubmissionMessageTable.Defs.Values.Protocol.FileSystem, Path.GetFileName(File));
             }
@@ -147,6 +185,7 @@ namespace Restless.App.Panama
             {
                 ParseException = ex;
                 IsError = true;
+                TextFormat = MessageTextFormat.Unknown;
             }
         }
         #endregion

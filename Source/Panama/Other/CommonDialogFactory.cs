@@ -21,8 +21,9 @@ namespace Restless.App.Panama
         /// <param name="initialDir">The initial directory for the dialog</param>
         /// <param name="title">The title</param>
         /// <param name="isFolderPicker">true if this dialog is to select a folder only.</param>
-        /// <returns>A CommonOpenFileDialog object with all supported document types are added to the filter collection.</returns>
-        public static CommonOpenFileDialog Create(string initialDir, string title, bool isFolderPicker = false)
+        /// <param name="selectorFileType">A value that indicates which type of file may be selected. The default (zero) allows all types.</param>
+        /// <returns>A CommonOpenFileDialog object.</returns>
+        public static CommonOpenFileDialog Create(string initialDir, string title, bool isFolderPicker = false, long selectorFileType = 0)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog() 
             { 
@@ -35,7 +36,11 @@ namespace Restless.App.Panama
             {
                 foreach (DataRow row in DatabaseController.Instance.GetTable<DocumentTypeTable>().GetSupportedDocTypes())
                 {
-                    dialog.Filters.Add(new CommonFileDialogFilter(row[DocumentTypeTable.Defs.Columns.Name].ToString(), row[DocumentTypeTable.Defs.Columns.Extensions].ToString()));
+                    long id = (long)row[DocumentTypeTable.Defs.Columns.Id];
+                    if (selectorFileType == 0 || selectorFileType == id)
+                    {
+                        dialog.Filters.Add(new CommonFileDialogFilter(row[DocumentTypeTable.Defs.Columns.Name].ToString(), row[DocumentTypeTable.Defs.Columns.Extensions].ToString()));
+                    }
                 }
             }
             return dialog;

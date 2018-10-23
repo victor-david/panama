@@ -65,8 +65,17 @@
                     <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding DataGridAlternation}" SelectedItem="{Binding Config.DataGridAlternationCount}" />
 
                 </Grid>
+                
+                <!-- Text Viewer-->
+                <con:PathSelector 
+                    Margin="0,8,0,0"
+                    SelectorType="FileSystemFile"
+                    SelectorFileType="{StaticResource DocTypeExecutable}"
+                    Title="Text Viewer"
+                    ClearEnabled="True"
+                    PathName="{Binding Config.TextViewerFile}"/>
 
-
+                <!-- Orphan Exclusions -->
                 <TextBlock Style="{StaticResource TextBlockSepLabel}" TextWrapping="Wrap" Text="{x:Static r:Strings.ConfigOrphanExclusion}"/>
                 <TextBox Text="{Binding Config.OrphanExclusions}" Margin="0,4"/>
 

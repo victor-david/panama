@@ -91,7 +91,7 @@ namespace Restless.App.Panama.ViewModel
             MainSource.Source = resultsView;
             MainSource.Filter += MainSourceFilter;
 
-            MainSource.SortDescriptions.Add(new SortDescription(nameof(MimeKitMessage.MessageDate), ListSortDirection.Descending));
+            MainSource.SortDescriptions.Add(new SortDescription(nameof(MimeKitMessage.MessageDateUtc), ListSortDirection.Descending));
 
             Columns.CreateImage<BooleanToImageConverter>("E", nameof(MimeKitMessage.IsError), "ImageExclamation")
                 .AddToolTip(Strings.TooltipMessageError);
@@ -99,7 +99,7 @@ namespace Restless.App.Panama.ViewModel
             Columns.CreateImage<BooleanToImageConverter>("U", nameof(MimeKitMessage.InUse))
                 .AddToolTip(Strings.TooltipMessageInUse);
 
-            var dateCol = Columns.Create("Date", nameof(MimeKitMessage.MessageDate)).MakeDate();
+            var dateCol = Columns.Create("Date", nameof(MimeKitMessage.MessageDateUtc)).MakeDate();
             Columns.Create("From", nameof(MimeKitMessage.FromName));
             Columns.Create("Subject", nameof(MimeKitMessage.Subject));
             Columns.SetDefaultSort(dateCol, ListSortDirection.Descending);
@@ -159,7 +159,7 @@ namespace Restless.App.Panama.ViewModel
                             e.Accepted = !m.InUse;
                             break;
                         default:
-                            e.Accepted = DateTime.Compare(DateTime.UtcNow, m.MessageDate.AddDays(DisplayFilterSelection.Item1)) < 0;
+                            e.Accepted = DateTime.Compare(DateTime.UtcNow, m.MessageDateUtc.AddDays(DisplayFilterSelection.Item1)) < 0;
                             break;
 
                     }

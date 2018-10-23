@@ -275,6 +275,15 @@ namespace Restless.App.Panama.Configuration
         }
 
         /// <summary>
+        /// Gets or sets the plain text viewer file.
+        /// </summary>
+        public string TextViewerFile
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets or sets the template file that is used when creating a new submission document.
         /// Styles from this document are copied into the new document.
         /// </summary>
