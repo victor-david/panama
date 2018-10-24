@@ -118,7 +118,7 @@
     <Image x:Key="ImageFilterMenu" Source="{StaticResource ImageFilter}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageInformationMenu" Source="{StaticResource ImageInformation}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageLinkMenu" Source="{StaticResource ImageExit}" Style="{StaticResource MenuItemImage}"/>
-    <Image x:Key="ImageNoteMenu" Source="{StaticResource ImageNote}" Style="{StaticResource MenuItemImage}"/>
+    <Image x:Key="ImageNoteMenu" x:Shared="False" Source="{StaticResource ImageNote}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageOpenFileMenu" Source="{StaticResource ImageOpenFile}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImageOpenWordMenu" Source="{StaticResource ImageFileType1}" Style="{StaticResource MenuItemImage}"/>
     <Image x:Key="ImagePublisherMenu" Source="{StaticResource ImagePublisher}" Style="{StaticResource MenuItemImage}"/>

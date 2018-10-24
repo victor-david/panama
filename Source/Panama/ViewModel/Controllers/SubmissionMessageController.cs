@@ -24,15 +24,6 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Public properties
-        ///// <summary>
-        ///// Gets a boolean value that indicates if the selected message is a Mapi message.
-        ///// </summary>
-        //public bool IsMapiMessage
-        //{
-        //    get => isMapiMessage;
-        //    private set => SetProperty(ref isMapiMessage, value);
-        //}
-
         /// <summary>
         /// Gets the message text (cleaned up)
         /// </summary>
@@ -41,11 +32,17 @@ namespace Restless.App.Panama.ViewModel
             get => GetMessageText();
         }
 
+        /// <summary>
+        /// Gets a string representation of the message sender.
+        /// </summary>
         public string From
         {
             get => GetAddress(SubmissionMessageTable.Defs.Columns.SenderName, SubmissionMessageTable.Defs.Columns.SenderEmail);
         }
 
+        /// <summary>
+        /// Gets a string representation of the message recipient.
+        /// </summary>
         public string To
         {
             get => GetAddress(SubmissionMessageTable.Defs.Columns.RecipientName, SubmissionMessageTable.Defs.Columns.RecipientEmail);
@@ -80,7 +77,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("RemoveMessage", RunRemoveMessageCommand, (o) => IsSelectedRowAccessible);
             Commands.Add("ViewMessageFile", RunViewMessageFileCommand, CanRunViewMessageFileCommand);
 
-            MenuItems.AddItem("View message file", Commands["ViewMessageFile"]);
+            MenuItems.AddItem("View message file", Commands["ViewMessageFile"], "ImageNoteMenu");
             MenuItems.AddSeparator();
             MenuItems.AddItem("Remove", Commands["RemoveMessage"], "ImageDeleteMenu");
         }

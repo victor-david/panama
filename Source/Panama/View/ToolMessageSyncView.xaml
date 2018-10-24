@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
+    xmlns:cv="clr-namespace:Restless.Tools.Converters;assembly=Restless.Tools.Library"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
     <Grid>
@@ -15,6 +16,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
@@ -24,23 +26,31 @@
             </Style>
         </Grid.Resources>
         <TextBlock 
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             Style="{StaticResource TextBlockMessage}"
             Text="{x:Static r:Strings.HeaderToolOperationMessageSync}"/>
         <Button 
             Grid.Row="1"
             Command="{Binding Commands[Begin]}"
+            IsEnabled="{Binding InProgress, Converter={cv:BooleanToInverseBooleanConverter}}"
             Content="Begin"/>
 
-        <TextBlock Grid.Row="1" Grid.Column="1">
-            <Run Text="{Binding ScanCount,Mode=OneWay}"/>
+        <ProgressBar
+            Grid.Row="1" Grid.Column="1"
+            Height="26"
+            Minimum="0" Maximum="{Binding TotalCount}"
+            Value="{Binding TotalScanCount, Mode=OneWay}"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="2">
+            <Run Text="{Binding MessageScanCount,Mode=OneWay}"/>
             <Run Text="message files scanned."/>
             <Run Text="{Binding ProcessCount,Mode=OneWay}"/>
             <Run Text="message file synchronized."/>
             <Run Text="{Binding ErrorCount,Mode=OneWay}"/>
             <Run Text="errors."/>
         </TextBlock>
-        <ScrollViewer Grid.Row="2" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+
+        <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
             <TextBlock VerticalAlignment="Top" Text="{Binding Output, Mode=OneWay}" />
         </ScrollViewer>
     </Grid>

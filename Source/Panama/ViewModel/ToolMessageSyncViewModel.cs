@@ -1,14 +1,11 @@
 ﻿using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Threading;
 using Restless.Tools.Utility;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -19,7 +16,9 @@ namespace Restless.App.Panama.ViewModel
     {
         #region Private
         private bool inProgress;
-        private int scanCount;
+        private int totalCount;
+        private int totalScanCount;
+        private int messageScanCount;
         private int processCount;
         private int errorCount;
         private string output;
@@ -36,13 +35,32 @@ namespace Restless.App.Panama.ViewModel
             get => inProgress;
             private set => SetProperty(ref inProgress, value);
         }
+
         /// <summary>
-        /// Gets the scan count.
+        /// Gets the total count.
         /// </summary>
-        public int ScanCount
+        public int TotalCount
         {
-            get => scanCount;
-            private set => SetProperty(ref scanCount, value);
+            get => totalCount;
+            private set => SetProperty(ref totalCount, value);
+        }
+
+        /// <summary>
+        /// Gets the total count of submission message rows scanned.
+        /// </summary>
+        public int TotalScanCount
+        {
+            get => totalScanCount;
+            private set => SetProperty(ref totalScanCount, value);
+        }
+
+        /// <summary>
+        /// Gets the message scan count, i.e. entries that are for an external .eml file
+        /// </summary>
+        public int MessageScanCount
+        {
+            get => messageScanCount;
+            private set => SetProperty(ref messageScanCount, value);
         }
 
         /// <summary>
@@ -83,7 +101,7 @@ namespace Restless.App.Panama.ViewModel
         {
             DisplayName = Strings.CommandToolMessageSync;
             MaxCreatable = 1;
-            Commands.Add("Begin", PerformSync, (o) => !InProgress);
+            Commands.Add("Begin", PerformSync);
             ResetCounters();
         }
         #endregion
@@ -105,72 +123,83 @@ namespace Restless.App.Panama.ViewModel
         {
             InProgress = true;
             ResetCounters();
-
             var table = DatabaseController.Instance.GetTable<SubmissionMessageTable>();
-            foreach (DataRow row in table.Rows)
+            TotalCount = table.Rows.Count;
+
+            TaskManager.Instance.ExecuteTask(1, (token) =>
             {
-                string protocol = row[SubmissionMessageTable.Defs.Columns.Protocol].ToString();
-                string entryId = row[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
-                if (protocol == SubmissionMessageTable.Defs.Values.Protocol.FileSystem)
+                foreach (DataRow row in table.Rows)
                 {
-                    ScanCount++;
-                    string fileName = Path.Combine(Config.FolderSubmissionMessage, entryId);
-                    var msg = new MimeKitMessage(fileName);
-                    if (!msg.IsError)
+                    TaskManager.Instance.DispatchTask(() => TotalScanCount++);
+                    string protocol = row[SubmissionMessageTable.Defs.Columns.Protocol].ToString();
+                    string entryId = row[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
+                    if (protocol == SubmissionMessageTable.Defs.Values.Protocol.FileSystem)
                     {
-                        // set the subject. Normally it's already okay, but there's some entries where 
-                        // it came from an Outlook extraction and the subject was edited.
-                        row[SubmissionMessageTable.Defs.Columns.Subject] = msg.Subject;
+                        TaskManager.Instance.DispatchTask(() => MessageScanCount++);
 
-                        string cleanSubject = GetCleanStr(msg.Subject);
-                        string cleanSender = GetCleanStr(msg.FromName, msg.FromName == msg.FromEmail);
-
-                        // MessageDate_Subject.ext
-                        // 2018-10-22_17.21.09_Subject.eml
-                        string newFileName =
-                            string.Format("{0}_{1}_{2}{3}",
-                                msg.MessageDateUtc.ToString("yyyy-MM-dd_HH.mm.ss"),
-                                Format.ValidFileName(cleanSender),
-                                Format.ValidFileName(cleanSubject),
-                                Path.GetExtension(fileName));
-
-                        if (entryId != newFileName)
+                        string fileName = Path.Combine(Config.FolderSubmissionMessage, entryId);
+                        var msg = new MimeKitMessage(fileName);
+                        if (!msg.IsError)
                         {
-                            AppendOutput($"Update {entryId} to {newFileName}");
-                            string newFileNameFull = Path.Combine(Config.FolderSubmissionMessage, newFileName);
-                            try
+                            // set the subject. Normally it's already okay, but there's some entries where 
+                            // it came from an Outlook extraction and the subject was edited.
+                            row[SubmissionMessageTable.Defs.Columns.Subject] = msg.Subject;
+
+                            string cleanSubject = GetCleanStr(msg.Subject);
+                            string cleanSender = GetCleanStr(msg.FromName, msg.FromName == msg.FromEmail);
+
+                            // MessageDate_Subject.ext
+                            // 2018-10-22_17.21.09_Subject.eml
+                            string newFileName =
+                                string.Format("{0}_{1}_{2}{3}",
+                                    msg.MessageDateUtc.ToString("yyyy-MM-dd_HH.mm.ss"),
+                                    Format.ValidFileName(cleanSender),
+                                    Format.ValidFileName(cleanSubject),
+                                    Path.GetExtension(fileName));
+
+                            if (entryId != newFileName)
                             {
-                                File.Move(fileName, newFileNameFull);
-                                row[SubmissionMessageTable.Defs.Columns.EntryId] = newFileName;
-                                ProcessCount++;
-                            }
-                            catch (Exception ex)
-                            {
-                                AppendOutput(ex.Message);
-                                ErrorCount++;
+                                AppendOutput($"Update {entryId} to {newFileName}");
+                                string newFileNameFull = Path.Combine(Config.FolderSubmissionMessage, newFileName);
+                                try
+                                {
+                                    File.Move(fileName, newFileNameFull);
+                                    row[SubmissionMessageTable.Defs.Columns.EntryId] = newFileName;
+                                    TaskManager.Instance.DispatchTask(() => ProcessCount++);
+                                }
+                                catch (Exception ex)
+                                {
+                                    AppendOutput(ex.Message);
+                                    TaskManager.Instance.DispatchTask(() => ErrorCount++);
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        AppendOutput(msg.ParseException.Message);
-                        ErrorCount++;
+                        else
+                        {
+                            AppendOutput(msg.ParseException.Message);
+                            TaskManager.Instance.DispatchTask(() => ErrorCount++);
+                        }
                     }
                 }
-            }
-            table.Save();
-            InProgress = false;
+                table.Save();
+                TaskManager.Instance.DispatchTask(() => InProgress = false);
+
+            }, null, null, false);
         }
 
         private void ResetCounters()
         {
-            ScanCount = ProcessCount = ErrorCount = 0;
+            TotalScanCount = MessageScanCount = ProcessCount = ErrorCount = 0;
+            // TotalCount is set once the start button is clicked.
+            // Before that, if it's set to zero (same as minimum), the progress bar displays as indeterminate.
+            // Setting it to non-zero prevents that.
+            TotalCount = 10;
             Output = string.Empty;
         }
 
         private void AppendOutput(string str)
         {
-            Output += str + Environment.NewLine;
+            TaskManager.Instance.DispatchTask(() => Output += str + Environment.NewLine);
         }
 
         private string GetCleanStr(string str, bool allowDot = false)
