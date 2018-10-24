@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using Restless.App.Panama.Collections;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
-using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
 using Restless.Tools.Utility;
-using System.Windows;
-using Restless.App.Panama.Configuration;
+using System.ComponentModel;
+using System.Data;
+using System.IO;
+using System.Linq;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -25,38 +18,34 @@ namespace Restless.App.Panama.ViewModel
     public class SubmissionMessageController : SubmissionController
     {
         #region Private
-        private StringToCleanStringConverter converter;
-        private bool isMapiMessage;
+        private StringToCleanStringConverter messageTextConverter;
         #endregion
 
         /************************************************************************/
 
         #region Public properties
         /// <summary>
-        /// Gets a boolean value that indicates if the selected message is a Mapi message.
-        /// </summary>
-        public bool IsMapiMessage
-        {
-            get { return isMapiMessage; }
-            private set
-            {
-                SetProperty(ref isMapiMessage, value);
-            }
-        }
-
-        /// <summary>
         /// Gets the message text (cleaned up)
         /// </summary>
         public string MessageText
         {
-            get
-            {
-                if (SelectedRow != null)
-                {
-                    return converter.Convert(SelectedRow[SubmissionMessageTable.Defs.Columns.Body].ToString(), StringToCleanStringOptions.All);
-                }
-                return null;
-            }
+            get => GetMessageText();
+        }
+
+        /// <summary>
+        /// Gets a string representation of the message sender.
+        /// </summary>
+        public string From
+        {
+            get => GetAddress(SubmissionMessageTable.Defs.Columns.SenderName, SubmissionMessageTable.Defs.Columns.SenderEmail);
+        }
+
+        /// <summary>
+        /// Gets a string representation of the message recipient.
+        /// </summary>
+        public string To
+        {
+            get => GetAddress(SubmissionMessageTable.Defs.Columns.RecipientName, SubmissionMessageTable.Defs.Columns.RecipientEmail);
         }
         #endregion
 
@@ -77,14 +66,20 @@ namespace Restless.App.Panama.ViewModel
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionMessageTable>());
             DataView.RowFilter = string.Format("{0}=-1", SubmissionMessageTable.Defs.Columns.BatchId);
-            DataView.Sort = string.Format("{0} DESC", SubmissionMessageTable.Defs.Columns.Received);
-            //Columns.Create("BT", SubmissionMessageTable.Defs.Columns.BodyFormat).MakeFixedWidth(FixedWidth.MediumNumeric);
-            Columns.SetDefaultSort(Columns.Create("Date", SubmissionMessageTable.Defs.Columns.Received).MakeDate(), ListSortDirection.Descending);
+            DataView.Sort = $"{SubmissionMessageTable.Defs.Columns.MessageDate} DESC";
+            Columns.Create("Id", SubmissionMessageTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.SetDefaultSort(Columns.Create("Date", SubmissionMessageTable.Defs.Columns.MessageDate).MakeDate(), ListSortDirection.Descending);
+            Columns.Create("Type", SubmissionMessageTable.Defs.Columns.Protocol).MakeFixedWidth(FixedWidth.ShortString);
             Columns.Create("Subject", SubmissionMessageTable.Defs.Columns.Display);
             HeaderPreface = Strings.HeaderMessages;
-            converter = new StringToCleanStringConverter();
-            Owner.Commands.Add("SelectMessage", RunSelectMessageCommand);
-            Owner.Commands.Add("RemoveMessage", RunRemoveMessageCommand, (o) => SelectedItem != null);
+            messageTextConverter = new StringToCleanStringConverter();
+            Commands.Add("AddMessage", RunAddMessageCommand);
+            Commands.Add("RemoveMessage", RunRemoveMessageCommand, (o) => IsSelectedRowAccessible);
+            Commands.Add("ViewMessageFile", RunViewMessageFileCommand, CanRunViewMessageFileCommand);
+
+            MenuItems.AddItem("View message file", Commands["ViewMessageFile"], "ImageNoteMenu");
+            MenuItems.AddSeparator();
+            MenuItems.AddItem("Remove", Commands["RemoveMessage"], "ImageDeleteMenu");
         }
         #endregion
 
@@ -102,13 +97,9 @@ namespace Restless.App.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
+            OnPropertyChanged(nameof(From));
+            OnPropertyChanged(nameof(To));
             OnPropertyChanged(nameof(MessageText));
-            IsMapiMessage = false;
-            if (SelectedRow != null)
-            {
-                string protocol = SelectedRow[SubmissionMessageTable.Defs.Columns.Protocol].ToString();
-                IsMapiMessage = protocol == SubmissionMessageTable.Defs.Values.Protocol.Mapi;
-            }
         }
 
         /// <summary>
@@ -126,18 +117,24 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         /// <param name="item">The <see cref="DataRowView"/> object of the selected row.</param>
         /// <remarks>
-        /// This method only opens a message if it is a mapi reference. Other messages are stored in the
-        /// <see cref="SubmissionMessageTable"/> directly, and are displayed in a text box.
+        /// This method only opens a message if it is a mapi reference or a file system reference. 
+        /// Other messages (older) are stored in the <see cref="SubmissionMessageTable"/> directly.
         /// </remarks>
         protected override void RunOpenRowCommand(object item)
         {
             if (item is DataRowView view)
             {
+                string protocol = view.Row[SubmissionMessageTable.Defs.Columns.Protocol].ToString();
                 string entryId = view.Row[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
-                if (IsMapiMessage)
+                switch (protocol)
                 {
-                    string url = $"{SubmissionMessageTable.Defs.Values.Protocol.Mapi}{Config.FolderMapi}{entryId}";
-                    OpenHelper.OpenFile(url);
+                    case SubmissionMessageTable.Defs.Values.Protocol.Mapi:
+                        string url = $"{SubmissionMessageTable.Defs.Values.Protocol.Mapi}{Config.FolderMapi}{entryId}";
+                        OpenHelper.OpenFile(url);
+                        break;
+                    case SubmissionMessageTable.Defs.Values.Protocol.FileSystem:
+                        OpenHelper.OpenFile(Path.Combine(Config.FolderSubmissionMessage, entryId));
+                        break;
                 }
             }
         }
@@ -146,40 +143,35 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
-        private void RunSelectMessageCommand(object o)
+        private void RunAddMessageCommand(object o)
         {
-            if (string.IsNullOrEmpty(Config.Instance.FolderMapi))
+            string folder = Config.Instance.FolderSubmissionMessage;
+            if (string.IsNullOrEmpty(folder) || !Directory.Exists(folder))
             {
-                Messages.ShowError(Strings.InvalidOpMapiFolderNotSet);
+                Messages.ShowError(Strings.InvalidOpSubmissionMessageFolderNotSet);
                 return;
             }
-            var ops = new MessageSelectOptions(MessageSelectMode.Message, Config.Instance.FolderMapi);
-            var w = WindowFactory.MessageSelect.Create(Strings.CaptionSelectSubmissionMessage, ops);
+
+            var w = WindowFactory.MessageFileSelect.Create(Strings.CaptionSelectSubmissionMessage, folder);
             w.ShowDialog();
 
-            if (w.GetValue(WindowViewModel.ViewModelProperty) is MessageSelectWindowViewModel vm)
+            if (w.GetValue(WindowViewModel.ViewModelProperty) is MessageFileSelectWindowViewModel vm)
             {
                 if (vm.SelectedItems != null && Owner.SelectedPrimaryKey != null)
                 {
-                    string header = $"{SubmissionMessageTable.Defs.Values.Protocol.Mapi}{Config.FolderMapi}";
                     long batchId = (long)Owner.SelectedPrimaryKey;
                     var table = DatabaseController.Instance.GetTable<SubmissionMessageTable>();
-                    foreach (var item in vm.SelectedItems)
+
+                    foreach (MimeKitMessage item in vm.SelectedItems.Where((m)=>!m.IsError))
                     {
-                        string url = item.Values[SysProps.System.ItemUrl].ToString().Substring(header.Length);
                         table.Add
-                            (
-                                batchId,
-                                item.Values[SysProps.System.Subject].ToString(),
-                                SubmissionMessageTable.Defs.Values.Protocol.Mapi,
-                                url,
-                                item.Values[SysProps.System.Message.DateReceived],
-                                item.Values[SysProps.System.Message.DateSent],
-                                item.Values[SysProps.System.Message.ToName].ToString(),
-                                item.Values[SysProps.System.Message.ToAddress].ToString(),
-                                item.Values[SysProps.System.Message.FromName].ToString(),
-                                item.Values[SysProps.System.Message.FromAddress].ToString()
-                            );
+                        (
+                             batchId,
+                             item.Subject,
+                             SubmissionMessageTable.Defs.Values.Protocol.FileSystem, Path.GetFileName(item.File),
+                             item.MessageId, item.MessageDateUtc,
+                             item.ToName, item.ToEmail,
+                             item.FromName, item.FromEmail);
                     }
                 }
             }
@@ -192,6 +184,67 @@ namespace Restless.App.Panama.ViewModel
                 SelectedRow.Delete();
                 DatabaseController.Instance.GetTable<SubmissionMessageTable>().Save();
             }
+        }
+
+        private void RunViewMessageFileCommand(object parm)
+        {
+            if (string.IsNullOrEmpty(Config.TextViewerFile))
+            {
+                Messages.ShowError(Strings.InvalidOpTextViewerNotSet);
+                return;
+            }
+            string file = Path.Combine(Config.FolderSubmissionMessage, SelectedRow[SubmissionMessageTable.Defs.Columns.EntryId].ToString());
+            OpenHelper.OpenFile(Config.TextViewerFile, file);
+
+        }
+
+        private bool CanRunViewMessageFileCommand(object parm)
+        {
+            if (IsSelectedRowAccessible)
+            {
+                return
+                    SelectedRow[SubmissionMessageTable.Defs.Columns.Protocol].ToString() == SubmissionMessageTable.Defs.Values.Protocol.FileSystem;
+            }
+            return false;
+        }
+
+        private string GetAddress(string nameCol, string emailCol)
+        {
+            if (IsSelectedRowAccessible)
+            {
+                string name = SelectedRow[nameCol].ToString();
+                string email = SelectedRow[emailCol].ToString();
+                if (string.IsNullOrEmpty(name) || name == email)
+                {
+                    return $"<{email}>";
+                }
+                return $"{name} <{email}>";
+            }
+            return null;
+        }
+
+        private string GetMessageText()
+        {
+            if (IsSelectedRowAccessible)
+            {
+                switch (SelectedRow[SubmissionMessageTable.Defs.Columns.Protocol].ToString())
+                {
+                    case SubmissionMessageTable.Defs.Values.Protocol.Database:
+                        return messageTextConverter.Convert(SelectedRow[SubmissionMessageTable.Defs.Columns.Body].ToString(), StringToCleanStringOptions.RemoveHtml);
+                    case SubmissionMessageTable.Defs.Values.Protocol.Mapi:
+                        return Strings.InvalidOpCannotDisplayMapi;
+                    case SubmissionMessageTable.Defs.Values.Protocol.FileSystem:
+                        string file = SelectedRow[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
+                        var msg = new MimeKitMessage(Path.Combine(Config.FolderSubmissionMessage, file));
+                        if (msg.TextFormat == MimeKitMessage.MessageTextFormat.Unknown)
+                        {
+                            return "Message has unknown message format";
+                        }
+                        StringToCleanStringOptions ops = (msg.TextFormat == MimeKitMessage.MessageTextFormat.Text) ? StringToCleanStringOptions.None : StringToCleanStringOptions.All;
+                        return messageTextConverter.Convert(msg.MessageText, ops);
+                }
+            }
+            return null;
         }
         #endregion
 

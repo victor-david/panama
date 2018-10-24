@@ -110,6 +110,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("Title", (o) => CreateIf<TitleViewModel>());
             Commands.Add("ToolConvert", (o) => CreateIf<ToolConvertViewModel>(), CanRunToolConvertCommand);
             Commands.Add("ToolExport", (o) => CreateIf<ToolExportViewModel>());
+            Commands.Add("ToolMessageSync", (o) => CreateIf<ToolMessageSyncViewModel>());
             Commands.Add("ToolMeta", (o) => CreateIf<ToolMetaUpdateViewModel>());
             Commands.Add("ToolOrphan", (o) => CreateIf<ToolOrphanViewModel>());
             Commands.Add("ToolScramble", (o) => CreateIf<ToolScrambleViewModel>());

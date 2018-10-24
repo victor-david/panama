@@ -61,14 +61,13 @@ namespace Restless.App.Panama.Controls
                 new FrameworkPropertyMetadata(Filter.FilterState.Either, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
             );
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FilterState"/> class.
+        /// </summary>
         public FilterState()
         {
             InitializeComponent();
         }
-
-
-
 
         /************************************************************************/
 

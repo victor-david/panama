@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Data;
-using System.Windows;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Windows.Data;
 
 namespace Restless.App.Panama.Converters
 {
@@ -32,14 +27,14 @@ namespace Restless.App.Panama.Converters
         /// </remarks>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is string)
+            if (value is string str)
             {
-                value = ((string)value).Trim();
-                if (parameter is StringToCleanStringOptions)
+                str = str.Trim();
+                if (parameter is StringToCleanStringOptions ops)
                 {
-                    return Convert((string)value, (StringToCleanStringOptions)parameter);
+                    return Convert(str, ops);
                 }
-                return ((string)value).Replace(Environment.NewLine, ".");
+                return str.Replace(Environment.NewLine, ".");
             }
             return value;
         }
@@ -47,37 +42,37 @@ namespace Restless.App.Panama.Converters
         /// <summary>
         /// Cleans up the string according to the specified options.
         /// </summary>
-        /// <param name="value">The string value</param>
+        /// <param name="str">The string value</param>
         /// <param name="options">Options</param>
         /// <returns>The cleaned string</returns>
         /// <remarks>
         /// This method is more convienent for calling directly from code
         /// </remarks>
-        public string Convert(string value, StringToCleanStringOptions options)
+        public string Convert(string str, StringToCleanStringOptions options)
         {
 
             if (options.HasFlag(StringToCleanStringOptions.RemoveHtml))
             {
-                int startStyle = value.IndexOf("<style");
-                int endStyle = value.IndexOf("</style>");
+                int startStyle = str.IndexOf("<style");
+                int endStyle = str.IndexOf("</style>");
                 if (startStyle != -1 && endStyle != -1)
                 {
-                    value = value.Substring(0, startStyle) + value.Substring(endStyle + 8);
+                    str = str.Substring(0, startStyle) + str.Substring(endStyle + 8);
                 }
 
-                value = Regex.Replace(value, "<.*?>", string.Empty);
+                str = Regex.Replace(str, "<.*?>", string.Empty);
+                // str = StripTagsCharArray(str);
             }
 
             if (options.HasFlag(StringToCleanStringOptions.TrimInterior))
             {
-
                 // this replaces all double white space with a single space
                 // str = Regex.Replace(str, @"\s+", " ");
                 // this replaces are double white space with the same type of white space.
-                value = Regex.Replace(value, @"(\s)\s+", "$1");
+                str = Regex.Replace(str, @"(\s)\s+", "$1");
             }
 
-            return value;
+            return str.Trim();
         }
 
         /// <summary>
@@ -91,6 +86,37 @@ namespace Restless.App.Panama.Converters
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+        private string StripTagsCharArray(string source)
+        {
+            char[] array = new char[source.Length];
+            int arrayIndex = 0;
+            bool inside = false;
+            for (int i = 0; i < source.Length; i++)
+            {
+                char let = source[i];
+                if (let == '<')
+                {
+                    inside = true;
+                    continue;
+                }
+                if (let == '>')
+                {
+                    inside = false;
+                    continue;
+                }
+                if (!inside)
+                {
+                    array[arrayIndex] = let;
+                    arrayIndex++;
+                }
+            }
+            return new string(array, 0, arrayIndex);
         }
         #endregion
     }

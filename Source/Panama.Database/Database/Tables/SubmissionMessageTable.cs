@@ -39,13 +39,21 @@ namespace Restless.App.Panama.Database.Tables
                 /// </summary>
                 public const string EntryId = "entryid";
                 /// <summary>
+                /// The message id.
+                /// </summary>
+                public const string MessageId = "messageid";
+                /// <summary>
+                /// The message date.
+                /// </summary>
+                public const string MessageDate = "messagedate";
+                /// <summary>
                 /// The name of the batch id column.
                 /// </summary>
                 public const string BatchId = "submissionbatchid";
-                /// <summary>
-                /// The name of the outgoing column.
-                /// </summary>
-                public const string Outgoing = "outgoing";
+                ///// <summary>
+                ///// The name of the outgoing column.
+                ///// </summary>
+                //public const string Outgoing = "outgoing";
                 /// <summary>
                 /// The name of the sender name column.
                 /// </summary>
@@ -70,14 +78,14 @@ namespace Restless.App.Panama.Database.Tables
                 /// The name of the display column.
                 /// </summary>
                 public const string Display = "display";
-                /// <summary>
-                /// The name of the sent column.
-                /// </summary>
-                public const string Sent = "sent";
-                /// <summary>
-                /// The name of the received column.
-                /// </summary>
-                public const string Received = "received";
+                ///// <summary>
+                ///// The name of the sent column.
+                ///// </summary>
+                //public const string Sent = "sent";
+                ///// <summary>
+                ///// The name of the received column.
+                ///// </summary>
+                //public const string Received = "received";
                 /// <summary>
                 /// The name of the body format column.
                 /// </summary>
@@ -133,6 +141,10 @@ namespace Restless.App.Panama.Database.Tables
                     /// Protocol identifier for messages stored externally in MAPI store.
                     /// </summary>
                     public const string Mapi = "mapi:";
+                    /// <summary>
+                    /// Protocol identifier for messages stored externaly in the file system.
+                    /// </summary>
+                    public const string FileSystem = "file:";
                 }
             }
         }
@@ -142,7 +154,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return Defs.Columns.Id; }
+            get => Defs.Columns.Id;
         }
         #endregion
 
@@ -173,14 +185,18 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="batchId">The batch id from the <see cref="SubmissionBatchTable"/> that owns this message.</param>
         /// <param name="subject">The message subject.</param>
         /// <param name="protocol">The protocol used to access this message</param>
-        /// <param name="url">The url to the message. This is a MAPI reference to the Outlook data store.</param>
-        /// <param name="received">The date / time the message was received.</param>
-        /// <param name="sent">The date / time the message was sent.</param>
+        /// <param name="entryId">
+        /// The entry id for the message.
+        /// For an Outlook message, this is a MAPI reference to the Outlook data store.
+        /// For an external .eml file, it's the name of the file without the path portion.
+        /// </param>
+        /// <param name="messageDate">The date / time of the message.</param>
+        /// <param name="messageId">The message id</param>
         /// <param name="toName">The name of the message recipient.</param>
         /// <param name="toAddress">The email address of the message recipient.</param>
         /// <param name="fromName">The name of the message sender.</param>
         /// <param name="fromAddress">The email address of the message sender.</param>
-        public void Add(long batchId, string subject, string protocol, string url, object received, object sent, string toName, string toAddress, string fromName, string fromAddress)
+        public void Add(long batchId, string subject, string protocol, string entryId, string messageId, DateTime messageDate, string toName, string toAddress, string fromName, string fromAddress)
         {
             DataRow row = NewRow();
             if (string.IsNullOrEmpty(subject))
@@ -192,17 +208,29 @@ namespace Restless.App.Panama.Database.Tables
             row[Defs.Columns.BodyFormat] = 0;
             row[Defs.Columns.Display] = subject;
             row[Defs.Columns.Protocol] = protocol;
-            row[Defs.Columns.EntryId] = url; //
-            row[Defs.Columns.Outgoing] = false; // needs work
-            row[Defs.Columns.Received] = received; // This is a DateTime
+            row[Defs.Columns.EntryId] = entryId;
+            row[Defs.Columns.MessageId] = messageId;
             row[Defs.Columns.RecipientEmail] = toAddress;
             row[Defs.Columns.RecipientName] = toName;
-            row[Defs.Columns.SenderEmail] = fromName;
-            row[Defs.Columns.SenderName] = fromAddress; //
-            row[Defs.Columns.Sent] = sent; // This is a DateTime
+            row[Defs.Columns.SenderEmail] = fromAddress;
+            row[Defs.Columns.SenderName] = fromName;
+            row[Defs.Columns.MessageDate] = messageDate;
             row[Defs.Columns.Subject] = subject;
             Rows.Add(row);
             Save();
+        }
+
+        /// <summary>
+        /// Gets a boolean value that indicates if the specified protocol and entry id is currently in use.
+        /// </summary>
+        /// <param name="protocol">The protocol specifier</param>
+        /// <param name="entryId">The entry id</param>
+        /// <returns>true if protocol / entryid is in use; otherwise, false.</returns>
+        public bool MessageInUse(string protocol, string entryId)
+        {
+            entryId = entryId.Replace("'", "''");
+            DataRow[] rows = Select($"{Defs.Columns.Protocol}='{protocol}' AND {Defs.Columns.EntryId}='{entryId}'");
+            return rows.Length > 0;
         }
         #endregion
 

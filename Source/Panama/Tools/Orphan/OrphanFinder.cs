@@ -50,6 +50,7 @@ namespace Restless.App.Panama.Tools
             {
                 if (dir != Config.Instance.FolderSubmissionDocument && 
                     dir != Config.Instance.FolderExport && 
+                    dir != Config.Instance.FolderSubmissionMessage &&
                     dir != Config.Instance.FolderSubmissionMessageAttachment &&
                     !dir.StartsWith(appDir))
                 {

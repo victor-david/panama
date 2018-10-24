@@ -974,6 +974,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message Sync.
+        /// </summary>
+        public static string CommandToolMessageSync {
+            get {
+                return ResourceManager.GetString("CommandToolMessageSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
         public static string CommandToolMeta {
@@ -1236,7 +1245,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Getting ready to remove this message. If this message is a direct link to the Outlook message store, the message remains there unless you delete it directly. Do you want to continue?.
+        ///   Looks up a localized string similar to Getting ready to remove this message. This does not delete any external files or resources, only the database entry. Do you want to continue?.
         /// </summary>
         public static string ConfirmationRemoveSubmissionMessage {
             get {
@@ -1596,6 +1605,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject..
+        /// </summary>
+        public static string HeaderToolOperationMessageSync {
+            get {
+                return ResourceManager.GetString("HeaderToolOperationMessageSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submission documents (not found) - {0}.
         /// </summary>
         public static string HeaderToolOperationMetaSubmissionNotFoundFormat {
@@ -1769,6 +1787,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The message contents can&apos;t be displayed here. This message is a direct reference to the item stored in the Outlook message store. Double click the row to open the message..
+        /// </summary>
+        public static string InvalidOpCannotDisplayMapi {
+            get {
+                return ResourceManager.GetString("InvalidOpCannotDisplayMapi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This command is not supported.
         /// </summary>
         public static string InvalidOpCommandNotSupported {
@@ -1877,6 +1904,24 @@ namespace Restless.App.Panama.Resources {
         public static string InvalidOpSubmissionDocumentFolderNotSet {
             get {
                 return ResourceManager.GetString("InvalidOpSubmissionDocumentFolderNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The folder for submission messages has not been set or doesn&apos;t exist. Fix the configuration setting and try again..
+        /// </summary>
+        public static string InvalidOpSubmissionMessageFolderNotSet {
+            get {
+                return ResourceManager.GetString("InvalidOpSubmissionMessageFolderNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The external text viewer application has not been set. Fix the configuration setting and try again..
+        /// </summary>
+        public static string InvalidOpTextViewerNotSet {
+            get {
+                return ResourceManager.GetString("InvalidOpTextViewerNotSet", resourceCulture);
             }
         }
         
@@ -2003,6 +2048,24 @@ namespace Restless.App.Panama.Resources {
         public static string TooltipColorReset {
             get {
                 return ResourceManager.GetString("TooltipColorReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured parsing the message file..
+        /// </summary>
+        public static string TooltipMessageError {
+            get {
+                return ResourceManager.GetString("TooltipMessageError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The message file is in use, i.e. it has been selected as an entry for a submission message.
+        /// </summary>
+        public static string TooltipMessageInUse {
+            get {
+                return ResourceManager.GetString("TooltipMessageInUse", resourceCulture);
             }
         }
         

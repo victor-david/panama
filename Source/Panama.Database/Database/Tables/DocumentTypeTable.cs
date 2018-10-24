@@ -94,26 +94,31 @@ namespace Restless.App.Panama.Database.Tables
                 /// </summary>
                 public const long ImageFileType = 10;
 
+                /// <summary>
+                /// The value of the <see cref="Columns.Id"/> column that represents an executable file.
+                /// </summary>
+                public const long ExecutableFileType = 11;
             }
-
         }
+
         /// <summary>
         /// Gets the column name of the primary key.
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return Defs.Columns.Id; }
+            get => Defs.Columns.Id;
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DocumentTypeTable"/> class.
+        /// </summary>
         public DocumentTypeTable() : base(DatabaseController.Instance, Defs.TableName)
         {
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/

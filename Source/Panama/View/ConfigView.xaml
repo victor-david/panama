@@ -65,8 +65,17 @@
                     <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding DataGridAlternation}" SelectedItem="{Binding Config.DataGridAlternationCount}" />
 
                 </Grid>
+                
+                <!-- Text Viewer-->
+                <con:PathSelector 
+                    Margin="0,8,0,0"
+                    SelectorType="FileSystemFile"
+                    SelectorFileType="{StaticResource DocTypeExecutable}"
+                    Title="Text Viewer"
+                    ClearEnabled="True"
+                    PathName="{Binding Config.TextViewerFile}"/>
 
-
+                <!-- Orphan Exclusions -->
                 <TextBlock Style="{StaticResource TextBlockSepLabel}" TextWrapping="Wrap" Text="{x:Static r:Strings.ConfigOrphanExclusion}"/>
                 <TextBox Text="{Binding Config.OrphanExclusions}" Margin="0,4"/>
 
@@ -79,6 +88,7 @@
                 <con:PathSelector Title="Title Root" PathName="{Binding Config.FolderTitleRoot}"/>
                 <con:PathSelector Title="Title Version" PathName="{Binding Config.FolderTitleVersion}"/>
                 <con:PathSelector Title="Submission Documents" PathName="{Binding Config.FolderSubmissionDocument}"/>
+                <con:PathSelector Title="Submission Messages" PathName="{Binding Config.FolderSubmissionMessage}"/>
                 <con:PathSelector Title="Submission Message Attachments" PathName="{Binding Config.FolderSubmissionMessageAttachment}"/>
                 <con:PathSelector Title="Export" PathName="{Binding Config.FolderExport}"/>
                 <con:PathSelector Title="Mapi Messages" PathName="{Binding Config.FolderMapi}" SelectorType="Mapi"/>
