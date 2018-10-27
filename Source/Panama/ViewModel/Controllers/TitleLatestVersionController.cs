@@ -41,14 +41,13 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="item">The <see cref="DataRowView"/> object of the selected row.</param>
         protected override void RunOpenRowCommand(object item)
         {
-            DataRowView view = item as DataRowView;
-            if (view != null)
+            if (item is DataRowView view)
             {
                 long titleId = (long)view.Row[SubmissionTable.Defs.Columns.TitleId];
-                DataRow row = DatabaseController.Instance.GetTable<TitleVersionTable>().GetLastVersion(titleId);
-                if (row != null)
+                var verInfo = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionInfo(titleId);
+                if (verInfo.Versions.Count > 0)
                 {
-                    OpenFileRow(row, TitleVersionTable.Defs.Columns.FileName, Config.Instance.FolderTitleRoot, (f) =>
+                    OpenFileRow(verInfo.Versions[0].Row, TitleVersionTable.Defs.Columns.FileName, Config.Instance.FolderTitleRoot, (f) =>
                     {
                         Messages.ShowError(string.Format(Strings.FormatStringFileNotFound, f, "FolderTitleRoot"));
                     });

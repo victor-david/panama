@@ -280,13 +280,13 @@ namespace Restless.App.Panama.Database.Tables
             foreach (DataRow row in Rows)
             {
                 long titleId = (long)row[Defs.Columns.Id];
-                DataRow versionRow = versions.GetLastVersion(titleId);
-                if (versionRow != null)
+                var verInfo = versions.GetVersionInfo(titleId);
+                if (verInfo.Versions.Count > 0)
                 {
-                    row[Defs.Columns.Calculated.LastestVersionWordCount] = versionRow[TitleVersionTable.Defs.Columns.WordCount];
-                    row[Defs.Columns.Calculated.LastestVersionDate] = versionRow[TitleVersionTable.Defs.Columns.Updated];
-                    row[Defs.Columns.Calculated.LastestVersionPath] = versionRow[TitleVersionTable.Defs.Columns.FileName];
-
+                    // verInfo.Versions[0].
+                    row[Defs.Columns.Calculated.LastestVersionWordCount] = verInfo.Versions[0].WordCount;
+                    row[Defs.Columns.Calculated.LastestVersionDate] = verInfo.Versions[0].Updated;
+                    row[Defs.Columns.Calculated.LastestVersionPath] = verInfo.Versions[0].FileName;
                 }
             }
             AcceptChanges();
@@ -328,13 +328,13 @@ namespace Restless.App.Panama.Database.Tables
         private void UpdateFromLatestVersionCalculated(DataRowChangeEventArgs e, string titleColumn, string titleVersionColumn)
         {
             long titleId = (long)e.Row[TitleVersionTable.Defs.Columns.TitleId];
-            DataRow[] titleRows = Select(string.Format("{0}={1}", Defs.Columns.Id, titleId));
+            DataRow[] titleRows = Select($"{Defs.Columns.Id}={titleId}");
             if (titleRows.Length == 1)
             {
-                DataRow versionRow = Controller.GetTable<TitleVersionTable>().GetLastVersion(titleId);
-                if (versionRow != null)
+                var verInfo = Controller.GetTable<TitleVersionTable>().GetVersionInfo(titleId);
+                if (verInfo.Versions.Count > 0)
                 {
-                    titleRows[0][titleColumn] = versionRow[titleVersionColumn];
+                    titleRows[0][titleColumn] = verInfo.Versions[0].Row[titleVersionColumn];
                 }
             }
         }

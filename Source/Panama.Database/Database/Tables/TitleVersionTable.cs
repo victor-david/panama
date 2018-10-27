@@ -2,8 +2,11 @@
 using Restless.Tools.OpenXml;
 using Restless.Tools.Utility;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Text;
+using System.Linq;
 
 namespace Restless.App.Panama.Database.Tables
 {
@@ -75,6 +78,11 @@ namespace Restless.App.Panama.Database.Tables
                 public const string Version = "version";
 
                 /// <summary>
+                /// The name of the revision column
+                /// </summary>
+                public const string Revision = "revision";
+
+                /// <summary>
                 /// The name of the language id column
                 /// </summary>
                 public const string LangId = "langid";
@@ -83,6 +91,17 @@ namespace Restless.App.Panama.Database.Tables
                 /// The name of the word count column
                 /// </summary>
                 public const string WordCount = "wordcount";
+            }
+
+            /// <summary>
+            /// Provides static values associated with title versions.
+            /// </summary>
+            public static class Values
+            {
+                /// <summary>
+                /// Represents the numerical value for revision A.
+                /// </summary>
+                public const long RevisionA = 65;
             }
         }
 
@@ -118,23 +137,14 @@ namespace Restless.App.Panama.Database.Tables
         }
         
         /// <summary>
-        /// Gets the first version of the specified title
+        /// Gets a <see cref="TitleVersionInfo"/> object that describes version information
+        /// for the specified title.
         /// </summary>
         /// <param name="titleId">The title id</param>
-        /// <returns>The data row that contains the first version, or null if titleid has no versions</returns>
-        public DataRow GetFirstVersion(long titleId)
+        /// <returns>A <see cref="TitleVersionInfo"/> object that describes version information for <paramref name="titleId"/>.</returns>
+        public TitleVersionInfo GetVersionInfo(long titleId)
         {
-            return GetFirstOrLastVersion(titleId, true);
-        }
-
-        /// <summary>
-        /// Gets the last version of the specified title
-        /// </summary>
-        /// <param name="titleId">The title id</param>
-        /// <returns>The data row that contains the last version, or null if titleid has no versions</returns>
-        public DataRow GetLastVersion(long titleId)
-        {
-            return GetFirstOrLastVersion(titleId, false);
+            return new TitleVersionInfo(this, titleId);
         }
 
         /// <summary>
@@ -144,7 +154,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <returns>An array of DataRow objects</returns>
         public DataRow[] GetAllVersions(long titleId)
         {
-            return Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC");
+            return Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC");
         }
 
         /// <summary>
@@ -182,99 +192,171 @@ namespace Restless.App.Panama.Database.Tables
         public void AddVersion(long titleId, string filename)
         {
             Validations.ValidateNullEmpty(filename, "AddVersion.Filename");
-            long version = 1;
-            DataRow lastVersionRow = GetLastVersion(titleId);
-            if (lastVersionRow != null)
-            {
-                version = (long)lastVersionRow[Defs.Columns.Version];
-                version++;
-            }
+
+            var verInfo = GetVersionInfo(titleId);
+            long version = verInfo.VersionCount + 1;
 
             DataRow row = NewRow();
             row[Defs.Columns.TitleId] = titleId;
             // OnColumnChanged(e) method will update the associated fields: Updated, Size, and DocType
             row[Defs.Columns.FileName] = filename;
             row[Defs.Columns.Version] = version;
+            row[Defs.Columns.Revision] = Defs.Values.RevisionA;
             row[Defs.Columns.LangId] = LanguageTable.Defs.Values.DefaultLanguageId;
             Rows.Add(row);
             Save();
         }
 
         /// <summary>
-        /// Replaces the file specification for the specified title and version
+        /// Moves the version specified by <paramref name="current"/> up.
         /// </summary>
-        /// <param name="titleId">The title id</param>
-        /// <param name="version">The version number that's receiving the replacement</param>
-        /// <param name="filename">The file name (should be stripped of title root)</param>
-        public void ReplaceVersion(long titleId, long version, string filename)
+        /// <param name="current">The current version to move.</param>
+        /// <remarks>
+        /// See remarks for <see cref="MoveVersionDown(RowObject)"/> for more info.
+        /// </remarks>
+        public void MoveVersionUp(RowObject current)
         {
-            Validations.ValidateNullEmpty(filename, "ReplaceVersion.Filename");
-            DataRow row = GetVersion(titleId, version);
-            if (row != null)
+            Validations.ValidateNull(current, nameof(current));
+            TitleVersionInfo verInfo = GetVersionInfo(current.TitleId);
+            if (!verInfo.IsLatest(current))
             {
-                // OnColumnChanged(e) method will update the associated fields: Updated, Size, and DocType
-                row[Defs.Columns.FileName] = filename;
-                Save();
+                var prev = verInfo.GetPrevious(current);
+                if (current.Version == prev.Version)
+                {
+                    // same version number, swap current revison with prev revision.
+                    long temp = current.Revision;
+                    current.Revision = prev.Revision;
+                    prev.Revision = temp;
+                }
+                else
+                {
+                    // Crossing a version boundary. 
+                    //  1. Change revisions of CURRENT by decreasing all by 1 
+                    //  2. Set version of CURRENT to the version of PREV
+                    //  3. Set revision of CURRENT to the highest revision of PREV + 1.
+                    //  4. if revision of CURRENT was A, then adjust all versions
+                    //     because the version that CURRENT had no longer exists.
+                    bool adjustVersions = current.Revision == Defs.Values.RevisionA;
+                    verInfo.ChangeRevisions(current.Version, -1);
+                    current.Version = prev.Version;
+                    current.Revision = verInfo.GetLastRevision(prev.Version) + 1;
+                    if (adjustVersions)
+                    {
+                        verInfo.RenumberAllVersions();
+                    }
+                }
             }
         }
 
         /// <summary>
-        /// Changes the version for the specified title
+        /// Moves the version specified by <paramref name="current"/> down.
         /// </summary>
-        /// <param name="titleId">The title id</param>
-        /// <param name="version">The current version</param>
-        /// <param name="newVersion">The new vesion (must be one less or one more than version)</param>
+        /// <param name="current">The current version to move.</param>
         /// <remarks>
-        /// <paramref name="newVersion"/> must be one more or one less than <paramref name="version"/>. If not, this method does nothing.
+        /// <para>"Down" is defined in relation to the standard order of versions and revisions. Example:</para>
+        /// <list type="bullet">
+        /// <item>2A</item>
+        /// <item>2B</item>
+        /// <item>2C</item>
+        /// <item>1A</item>
+        /// <item>1B</item>
+        /// </list>
+        /// <para>
+        /// In the above example, to move item 2B (version 2, revision B) down means
+        /// swapping its position with item 2C. Moving 2C down means moving that entry
+        /// into version 1A, turning the current 1A into 1B and the current 1B into 1C.
+        /// </para>
         /// </remarks>
-        public void ChangeVersionNumber(long titleId, long version, long newVersion)
+        public void MoveVersionDown(RowObject current)
         {
-            // Make sure we're only changing by 1.
-            if (Math.Abs(newVersion - version) != 1)
+            Validations.ValidateNull(current, nameof(current));
+            TitleVersionInfo verInfo = GetVersionInfo(current.TitleId);
+            if (!verInfo.IsEarliest(current))
             {
-                return;
-            }
+                var next = verInfo.GetNext(current);
+                if (current.Version == next.Version)
+                {
+                    // same version number, swap current revison with next revision.
+                    long temp = current.Revision;
+                    current.Revision = next.Revision;
+                    next.Revision = temp;
+                }
+                else
+                {
+                    // Crossing a version boundary. 
+                    //  1. Change revisions of NEXT by increasing all by 1, leaving room for rev A.
+                    //  2. Set version of CURRENT to the version of NEXT
+                    //  3. Set revision of CURRENT to A.
+                    //  4. if revision of CURRENT was A, then adjust all versions
+                    //     because the version that CURRENT had no longer exists.
+                    bool adjustVersions = current.Revision == Defs.Values.RevisionA;
+                    verInfo.ChangeRevisions(next.Version, 1);
+                    current.Version = next.Version;
+                    current.Revision = Defs.Values.RevisionA;
+                    if (adjustVersions)
+                    {
+                        verInfo.RenumberAllVersions();
+                    }
 
-            DataRow versionRow = null;
-            DataRow newVersionRow = null;
-
-            DataRow[] rows = GetAllVersions(titleId);
-
-            foreach (DataRow row in rows)
-            {
-                long rowVersion = (long)row[Defs.Columns.Version];
-                if (rowVersion == version) versionRow = row;
-                if (rowVersion == newVersion) newVersionRow = row;
-            }
-
-            if (versionRow != null && newVersionRow != null)
-            {
-                versionRow[Defs.Columns.Version] = newVersion;
-                newVersionRow[Defs.Columns.Version] = version;
+                }
             }
         }
 
         /// <summary>
         /// Removes the specified version from the specified title and renumbers the remaining versions.
         /// </summary>
-        /// <param name="titleId">The title id</param>
-        /// <param name="version">The version to remove</param>
-        public void RemoveVersion(long titleId, long version)
+        /// <param name="current"></param>
+        public void RemoveVersion(RowObject current) //  long titleId, long version)
         {
-            DataRow[] rows = GetAllVersions(titleId);
-            foreach (DataRow row in rows)
-            {
-                long rowVersion = (long)row[Defs.Columns.Version];
-                if (rowVersion == version) row.Delete();
-            }
+            Validations.ValidateNull(current, nameof(current));
 
-            rows = GetAllVersions(titleId);
+            long titleId = current.TitleId;
+            current.Row.Delete();
+            var verInfo = GetVersionInfo(titleId);
 
-            long versionRenumber = 1;
-            foreach (DataRow row in rows)
+            verInfo.RenumberAllVersions();
+            verInfo.RenumberAllRevisions();
+
+
+            //DataRow[] rows = GetAllVersions(titleId);
+            //foreach (DataRow row in rows)
+            //{
+            //    long rowVersion = (long)row[Defs.Columns.Version];
+            //    if (rowVersion == version) row.Delete();
+            //}
+
+            //rows = GetAllVersions(titleId);
+
+            //long versionRenumber = 1;
+            //foreach (DataRow row in rows)
+            //{
+            //    row[Defs.Columns.Version] = versionRenumber;
+            //    versionRenumber++;
+            //}
+        }
+
+        /// <summary>
+        /// Converts the specified <see cref="RowObject"/> to its own version.
+        /// </summary>
+        /// <param name="current">The row object to convert to its own version</param>
+        /// <remarks>
+        /// This method creates a new version from <paramref name="current"/> that is
+        /// one higher than the current number of versions associated with the title
+        /// and changes the revision to <see cref="Defs.Values.RevisionA"/>. If the
+        /// number of revisions associated with <paramref name="current"/> is not
+        /// greater than 1 (i.e. the version has only a single revision), this
+        /// method does nothing.
+        /// </remarks>
+        public void ConvertToVersion(RowObject current)
+        {
+            Validations.ValidateNull(current, nameof(current));
+            var verInfo = GetVersionInfo(current.TitleId);
+            if (verInfo.GetRevisionCount(current.Version) > 1)
             {
-                row[Defs.Columns.Version] = versionRenumber;
-                versionRenumber++;
+                long ver = current.Version;
+                current.Version = verInfo.VersionCount + 1;
+                current.Revision = Defs.Values.RevisionA;
+                verInfo.RenumberAllRevisions(ver, true);
             }
         }
         #endregion
@@ -337,22 +419,22 @@ namespace Restless.App.Panama.Database.Tables
 
         #region Private methods
 
-        /// <summary>
-        /// Gets the first or last version for the specified title
-        /// </summary>
-        /// <param name="titleId">The title id</param>
-        /// <param name="getFirst">true to get the first version, false to get the last version</param>
-        /// <returns>A DataRow object with the specified first or last version; null if the title has no versions.</returns>
-        private DataRow GetFirstOrLastVersion(long titleId, bool getFirst)
-        {
-            string order = (getFirst) ? "ASC" : "DESC";
-            DataRow[] rows = Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} {order}");
-            if (rows.Length > 0)
-            {
-                return rows[0];
-            }
-            return null;
-        }
+        ///// <summary>
+        ///// Gets the first or last version for the specified title
+        ///// </summary>
+        ///// <param name="titleId">The title id</param>
+        ///// <param name="getFirst">true to get the first version, false to get the last version</param>
+        ///// <returns>A DataRow object with the specified first or last version; null if the title has no versions.</returns>
+        //private DataRow GetFirstOrLastVersion(long titleId, bool getFirst)
+        //{
+        //    string order = (getFirst) ? "ASC" : "DESC";
+        //    DataRow[] rows = Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} {order}");
+        //    if (rows.Length > 0)
+        //    {
+        //        return rows[0];
+        //    }
+        //    return null;
+        //}
 
 
         /// <summary>
@@ -373,7 +455,302 @@ namespace Restless.App.Panama.Database.Tables
         #endregion
 
         /************************************************************************/
-        
+
+        #region TitleVersionInfo (nested class)
+        /// <summary>
+        /// Provides version information for a specified title
+        /// </summary>
+        public class TitleVersionInfo
+        {
+            #region Private
+            /// <summary>
+            /// Maps a dictionary of version numbers to a list of revision ids.
+            /// </summary>
+            private readonly Dictionary<long, List<long>> versionMap;
+            private readonly TitleVersionTable owner;
+            private readonly long titleId;
+            #endregion
+
+            /************************************************************************/
+
+            #region Public properties
+            /// <summary>
+            /// Gets a list of <see cref="RowObject"/> for the title associated
+            /// with this instance.
+            /// </summary>
+            public List<RowObject> Versions
+            {
+                get;
+            }
+
+            /// <summary>
+            /// Gets the total number of versions. If no version carries multiple revisions,
+            /// this value is the same as <see cref="Versions"/>.Count. Otherwise, it is less.
+            /// </summary>
+            public int VersionCount
+            {
+                get => versionMap.Count;
+            }
+            #endregion
+
+            /************************************************************************/
+
+            #region Constructor (internal)
+            /// <summary>
+            /// Initializes a new instance of the <see cref="TitleVersionInfo"/> class.
+            /// </summary>
+            /// <param name="owner">The title version table that owns this instance.</param>
+            /// <param name="titleId">The title id to get the version information for.</param>
+            internal TitleVersionInfo(TitleVersionTable owner, long titleId)
+            {
+                Versions = new List<RowObject>();
+                versionMap = new Dictionary<long, List<long>>();
+                this.owner = owner;
+                this.titleId = titleId;
+                BuildVersionsAndMap();
+            }
+            #endregion
+
+            /************************************************************************/
+
+            #region Public methods
+            /// <summary>
+            /// Gets a boolean value that indicates if the specified <see cref="RowObject"/>
+            /// represents the latest version / revision, i.e. HighestVersion.RevA
+            /// </summary>
+            /// <param name="row">The row object</param>
+            /// <returns>true if <paramref name="row"/> represents HighestVersion.RevA; otherwise, false</returns>
+            public bool IsLatest(RowObject row)
+            {
+                Validations.ValidateNull(row, nameof(row));
+                return row.Version == VersionCount && row.Revision == Defs.Values.RevisionA;
+            }
+
+            /// <summary>
+            /// Gets a boolean value that indicates if the specified <see cref="RowObject"/>
+            /// represents the earliest version / revision, i.e. Ver1.Rev[MaxRev]
+            /// </summary>
+            /// <param name="row">The row object</param>
+            /// <returns>true if <paramref name="row"/> represents Ver1.Rev[MaxRev]; otherwise, false</returns>
+            public bool IsEarliest(RowObject row)
+            {
+                Validations.ValidateNull(row, nameof(row));
+                if (row.Version == 1)
+                {
+                    int lastIdx = versionMap[1].Count - 1;
+                    return row.Revision == versionMap[1][lastIdx];
+                }
+                return false;
+            }
+
+            /// <summary>
+            /// Gets the number of revisions for the specified version.
+            /// </summary>
+            /// <param name="version">The version to check.</param>
+            /// <returns>The number of revisions for <paramref name="version"/>.</returns>
+            public int GetRevisionCount(long version)
+            {
+                if (versionMap.ContainsKey(version))
+                {
+                    return versionMap[version].Count;
+                }
+                throw new IndexOutOfRangeException("Invalid index");
+            }
+
+            /// <summary>
+            /// Returns a string representation of this object.
+            /// </summary>
+            /// <returns>A string representation of this object.</returns>
+            public override string ToString()
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine($"Rows:{Versions.Count} Versions:{VersionCount}");
+
+                foreach (var ver in versionMap)
+                {
+                    sb.Append($"{ver.Key} ");
+                    foreach (long rev in ver.Value)
+                    {
+                        sb.Append((char)rev);
+                    }
+                    sb.AppendLine();
+                }
+                return sb.ToString();
+            }
+            #endregion
+
+            /************************************************************************/
+
+            #region Internal methods
+            /// <summary>
+            /// Get the <see cref="RowObject"/> that comes before the specified row object.
+            /// </summary>
+            /// <param name="rowObj">The row object.</param>
+            /// <returns>The previous row object.</returns>
+            /// <remarks>
+            /// Previous is based upon the ordering of <see cref="Versions"/>. They are
+            /// fetched from the data in descending order of version, ascending order of revision.
+            /// 3A
+            /// 3B - version 3 has 2 revisions.
+            /// 2A
+            /// 2B
+            /// 2C - version 2 has 3 revisions.
+            /// 1A - version 1 has 1 revision.
+            /// </remarks>
+            internal RowObject GetPrevious(RowObject rowObj)
+            {
+                return GetNeededRowObject(rowObj, -1);
+            }
+
+            /// <summary>
+            /// Get the <see cref="RowObject"/> that comes after the specified row object.
+            /// </summary>
+            /// <param name="rowObj">The row object.</param>
+            /// <returns>The next row object.</returns>
+            /// <remarks>
+            /// See remarks on <see cref="GetPrevious(RowObject)"/>.
+            /// </remarks>
+            internal RowObject GetNext(RowObject rowObj)
+            {
+                return GetNeededRowObject(rowObj, 1);
+            }
+
+            /// <summary>
+            /// Changes all revisions for the specified version by the amount specified.
+            /// </summary>
+            /// <param name="version">The version</param>
+            /// <param name="offset">The amount to change the revisions. 1 or -1</param>
+            internal void ChangeRevisions(long version, int offset)
+            {
+                foreach (var row in Versions)
+                {
+                    if (row.Version == version)
+                    {
+                        row.Revision += offset;
+                    }
+                }
+            }
+            
+
+            /// <summary>
+            /// Gets the last (highest numbered) revision for the specified version.
+            /// </summary>
+            /// <param name="version">The version</param>
+            /// <returns>The last revision number for <paramref name="version"/>.</returns>
+            internal long GetLastRevision(long version)
+            {
+                if (versionMap.ContainsKey(version))
+                {
+                    if (versionMap[version].Count > 0)
+                    {
+                        int lastIdx = versionMap[version].Count - 1;
+                        return versionMap[version][lastIdx];
+                    }
+                }
+                throw new IndexOutOfRangeException("Invalid index");
+            }
+
+            /// <summary>
+            /// Renumbers all revisions for all versions.
+            /// </summary>
+            internal void RenumberAllRevisions()
+            {
+                foreach (var kp in versionMap)
+                {
+                    RenumberAllRevisions(kp.Key, false);
+                }
+                BuildVersionsAndMap();
+            }
+
+            /// <summary>
+            /// Renumbers all revisions of the specified version.
+            /// </summary>
+            /// <param name="version">The version to renumber the revisions for.</param>
+            /// <param name="rebuildMap">true to rebuild the version map after renumbering; otherwise, false.</param>
+            internal void RenumberAllRevisions(long version, bool rebuildMap)
+            {
+                long rev = Defs.Values.RevisionA;
+                foreach (var row in Versions.Where((r) => r.Version == version))
+                {
+                    row.Revision = rev++;
+                }
+                if (rebuildMap)
+                {
+                    BuildVersionsAndMap();
+                }
+            }
+
+            /// <summary>
+            /// Renumbers all versions.
+            /// </summary>
+            internal void RenumberAllVersions()
+            {
+                long version = 0;
+                DataRow[] rows = owner.Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC");
+                foreach (DataRow row in rows)
+                {
+                    RowObject rowObj = new RowObject(row);
+                    if (rowObj.Revision == Defs.Values.RevisionA)
+                    {
+                        version++;
+                    }
+                    rowObj.Version = version;
+                }
+                BuildVersionsAndMap();
+
+            }
+            #endregion
+
+            /************************************************************************/
+
+            #region Private methods
+            private void BuildVersionsAndMap()
+            {
+                Versions.Clear();
+                versionMap.Clear();
+
+                DataRow[] rows = owner.Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} DESC, {Defs.Columns.Revision} ASC");
+
+                long lastVer = -1;
+
+                foreach (DataRow row in rows)
+                {
+                    RowObject rowObj = new RowObject(row);
+                    Versions.Add(rowObj);
+
+                    if (rowObj.Version != lastVer)
+                    {
+                        lastVer = rowObj.Version;
+                        versionMap.Add(lastVer, new List<long>());
+                        versionMap[lastVer].Add(rowObj.Revision);
+                    }
+                    else
+                    {
+                        versionMap[lastVer].Add(rowObj.Revision);
+                    }
+                }
+            }
+
+            private RowObject GetNeededRowObject(RowObject rowObj, int offset)
+            {
+                int idxNeeded = -1;
+                foreach (RowObject row in Versions)
+                {
+                    if (row.Version == rowObj.Version && row.Revision == rowObj.Revision)
+                    {
+                        idxNeeded = Versions.IndexOf(row) + offset;
+                        break;
+                    }
+                }
+                Validations.ValidateArgument(idxNeeded < 0 || idxNeeded > Versions.Count - 1, "Invalid index");
+                return Versions[idxNeeded];
+            }
+            #endregion
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region Row Object
         /// <summary>
         /// Encapsulates a single row from the <see cref="TitleVersionTable"/>.
@@ -443,12 +820,21 @@ namespace Restless.App.Panama.Database.Tables
             }
 
             /// <summary>
-            /// Gets or sets the version for this row object.
+            /// Gets the version for this row object.
             /// </summary>
             public long Version
             {
                 get => GetInt64(Defs.Columns.Version);
-                set => SetValue(Defs.Columns.Version, value);
+                internal set => SetValue(Defs.Columns.Version, value);
+            }
+
+            /// <summary>
+            /// Gets the revision
+            /// </summary>
+            public long Revision
+            {
+                get => GetInt64(Defs.Columns.Revision);
+                internal set => SetValue(Defs.Columns.Revision, value);
             }
 
             /// <summary>

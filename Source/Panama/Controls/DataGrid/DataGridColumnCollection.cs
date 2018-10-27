@@ -33,8 +33,8 @@ namespace Restless.App.Panama.Controls
         /// <returns>The newly created column</returns>
         public DataGridBoundColumn Create(string header, string bindingName)
         {
-            Validations.ValidateNullEmpty(header, "CreateColumn.Header");
-            Validations.ValidateNullEmpty(bindingName, "CreateColumn.BindingName");
+            Validations.ValidateNullEmpty(header, nameof(header));
+            Validations.ValidateNullEmpty(bindingName, nameof(bindingName));
             DataGridTextColumn col = new DataGridTextColumn
             {
                 Header = MakeTextBlockHeader(header),
@@ -47,6 +47,29 @@ namespace Restless.App.Panama.Controls
             return col;
         }
 
+        /// <summary>
+        /// Creates a text column that uses a IValueConverter to get its values
+        /// </summary>
+        /// <typeparam name="T">The converter type</typeparam>
+        /// <param name="header">The header for the column</param>
+        /// <param name="bindingName">The name that the column should bind to.</param>
+        /// <returns>The newly created column.</returns>
+        public DataGridBoundColumn Create<T>(string header, string bindingName) where T: IValueConverter, new()
+        {
+            Validations.ValidateNullEmpty(header, nameof(header));
+            Validations.ValidateNullEmpty(bindingName, nameof(bindingName));
+            DataGridTextColumn col = new DataGridTextColumn
+            {
+                Header = MakeTextBlockHeader(header),
+                Binding = new Binding(bindingName)
+                {
+                    Converter = new T(),
+                    TargetNullValue = "--",
+                }
+            };
+            Add(col);
+            return col;
+        }
 
         /// <summary>
         /// Creates a text column that uses a IMultiValueConverter to get its values

@@ -148,6 +148,7 @@
     <Compile Include="Controls\ConfigEdit\YesNoEdit.xaml.cs">
       <DependentUpon>YesNoEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\IntegerToCharConverter.cs" />
     <Compile Include="Converters\PreviewModeToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\PreviewModeToVisibilityConverterOptions.cs" />

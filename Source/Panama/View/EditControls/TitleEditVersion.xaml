@@ -5,20 +5,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="554">
     <StackPanel>
+        <TextBlock 
+            Margin="4,24"
+            Style="{StaticResource TextBlockError}"
+            Text="No versions have been created for this title. Use the File button to add a version."
+            Visibility="{Binding Versions.DataViewCount,Converter={cv:IntegerToVisibilityConverter},ConverterParameter={StaticResource Int32One}}" />
         <con:DataGridExtended 
             x:Name="grid" 
             Style="{StaticResource DataGridEdit}"
+            MaxHeight="{x:Static sys:Double.PositiveInfinity}" 
             CanUserSortColumns="False"
             CanUserReorderColumns="False"
-            ItemsSource="{Binding Path=Versions.DataView}"
+            ItemsSource="{Binding Path=Versions.MainSource.View}"
             SelectedItem="{Binding Versions.SelectedItem}"
             con:DataGridColumns.Columns="{Binding Versions.Columns}" 
-            ContextMenuOpeningCommand="{Binding Versions.Commands[ContextMenuOpening]}"  >
+            ContextMenuOpeningCommand="{Binding Versions.Commands[ContextMenuOpening]}"
+            Visibility="{Binding Versions.DataViewCount,Converter={cv:IntegerToVisibilityConverter}}">
             <DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Versions.MenuItems}"  />
             </DataGrid.ContextMenu>            
@@ -27,6 +35,20 @@
                     <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Versions.OpenRowCommand}"/>
                 </Style>
             </DataGrid.RowStyle>
+            <DataGrid.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="4,2,0,4" Margin="0,2" Background="#FFB3DAB8">
+                                <TextBlock Style="{StaticResource HCCHeaderText}">
+                                    <Run Text="Version"/>
+                                    <Run Text="{Binding Path=Name,Mode=OneWay}"/>
+                                </TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
         </con:DataGridExtended>
         <ToolBarTray>
             <ToolBar Style="{StaticResource ToolBarCommandHolder}">

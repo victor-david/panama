@@ -73,7 +73,22 @@ namespace Restless.App.Panama
         public long Version
         {
             get;
-            private set;
+        }
+
+        /// <summary>
+        /// Gets the revision.
+        /// </summary>
+        public long Revision
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the revision character.
+        /// </summary>
+        public char RevisionChar
+        {
+            get => (char)Revision;
         }
 
         /// <summary>
@@ -82,7 +97,7 @@ namespace Restless.App.Panama
         public string OriginalName
         {
             get;
-            private set;
+            //private set;
         }
 
         /// <summary>
@@ -91,7 +106,7 @@ namespace Restless.App.Panama
         public string OriginalNameDisplay
         {
             get;
-            private set;
+            //private set;
         }
 
         /// <summary>
@@ -108,7 +123,6 @@ namespace Restless.App.Panama
         public string NewName
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -117,7 +131,6 @@ namespace Restless.App.Panama
         public string NewNameDisplay
         {
             get;
-            private set;
         }
         #endregion
 
@@ -136,6 +149,8 @@ namespace Restless.App.Panama
             this.row = row;
 
             Version = (long)row[TitleVersionTable.Defs.Columns.Version];
+            Revision = (long)row[TitleVersionTable.Defs.Columns.Revision];
+
             string rowFileName = row[TitleVersionTable.Defs.Columns.FileName].ToString();
 
             OriginalName = Paths.Title.WithRoot(rowFileName);
@@ -147,9 +162,10 @@ namespace Restless.App.Panama
              * The Title Of This Piece_v3.es-mx.docx
              */
             string newNameWithoutPath =
-                string.Format("{0}_v{1}.{2}{3}",
+                string.Format("{0}_v{1}.{2}.{3}{4}",
                     Format.ValidFileName(title),
                     Version,
+                    RevisionChar,
                     row[TitleVersionTable.Defs.Columns.LangId],
                     Path.GetExtension(OriginalName));
 
