@@ -9,64 +9,69 @@
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
-    d:DesignHeight="300" d:DesignWidth="600">
-    <DockPanel>
-        <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationSearch}"/>
-        <Grid DockPanel.Dock="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.5*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Column="0" DockPanel.Dock="Top" Style="{StaticResource StackPanelCommandHolder}">
-                <Label>Search text</Label>
-                <TextBox Text="{Binding SearchText}"/>
-                <Button Command="{Binding Commands[Begin]}" Content="Search" VerticalAlignment="Center"/>
-            </StackPanel>
-            <Button
-                Grid.Column="1"
-                Style="{StaticResource ToolBarButton}"
-                HorizontalAlignment="Left"
-                Command="{Binding Commands[TogglePreview]}"
-                Content="{Binding PreviewActiveIcon}" />
-        </Grid>
-        <Grid DockPanel.Dock="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.5*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <HeaderedContentControl 
-                Grid.Column="0" 
-                Grid.ColumnSpan="{Binding IsPreviewActive, Converter={cv:BooleanToIntegerConverter}, ConverterParameter={StaticResource Integer1}}"
-                Style="{StaticResource HCCTool}"
-                Header="{Binding FoundHeader}" Margin="4">
-                <Grid>
-                    <DataGrid x:Name="grid" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
-                        <DataGrid.ContextMenu>
-                            <ContextMenu ItemsSource="{Binding MenuItems}"/>
-                        </DataGrid.ContextMenu>
-                        <DataGrid.RowStyle>
-                            <Style TargetType="DataGridRow">
-                                <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenItem]}"/>
-                            </Style>
-                        </DataGrid.RowStyle>
-                    </DataGrid>
-                    <TextBlock 
-                        Style="{StaticResource TextBlockError}"
-                        FontSize="12"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Text="Search returned no results" 
-                        Visibility="{Binding IsEmptyResultSet,Converter={cv:BooleanToVisibilityConverter}}"
-                        />
-                </Grid>
-            </HeaderedContentControl>
-            <view:ToolPreview Grid.Column="1"/>
-        </Grid>
-    </DockPanel>
+    d:DesignHeight="250" d:DesignWidth="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Tool explanation text -->
+        <TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationSearch}"/>
+
+        <!-- Tool bar -->
+        <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">
+            <ToolBar Style="{StaticResource ToolBarCommandHolder}">
+                <!-- Prompt -->
+                <TextBlock Style="{StaticResource TextBlockMessage}" VerticalAlignment="Center" Text="Search text"/>
+                <!-- Search text-->
+                <TextBox Width="180" Text="{Binding SearchText}"/>
+                <!-- Tool start button -->
+                <Button Width="70" Command="{Binding Commands[Begin]}" Content="Begin"/>
+                <!-- Separator -->
+                <Separator/>
+                <!-- Toggle preview button -->
+                <Button Width="70" Command="{Binding Commands[TogglePreview]}" Content="{Binding PreviewActiveIcon}" />
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- Main grid for results -->
+        <HeaderedContentControl
+             Grid.Row="2" 
+             Grid.ColumnSpan="{Binding IsPreviewActive, Converter={cv:BooleanToIntegerConverter}, ConverterParameter={StaticResource Integer1}}"
+             Style="{StaticResource HCCTool}"
+             Header="{Binding FoundHeader}" Margin="4">
+            <Grid>
+                <DataGrid x:Name="grid" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
+                    <DataGrid.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                    </DataGrid.ContextMenu>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenItem]}"/>
+                        </Style>
+                    </DataGrid.RowStyle>
+                </DataGrid>
+                <TextBlock 
+                    Style="{StaticResource TextBlockError}"
+                    FontSize="12"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="Search returned no results" 
+                    Visibility="{Binding IsEmptyResultSet,Converter={cv:BooleanToVisibilityConverter}}"/>
+            </Grid>
+        </HeaderedContentControl>
+
+        <!-- Preview -->
+        <view:ToolPreview 
+            Grid.Row="2"
+            Grid.Column="1"
+            Visibility="{Binding IsPreviewActive, Converter={cv:BooleanToVisibilityConverter}}"/>
+    </Grid>
 </UserControl>

@@ -15,35 +15,31 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-
         </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
         <!-- Tool explanation text -->
-        <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationOrphan}"/>
+        <TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationOrphan}"/>
 
         <!-- Tool bar -->
-        <ToolBarTray Grid.Row="1" Margin="0,5">
+        <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">
             <ToolBar Style="{StaticResource ToolBarCommandHolder}">
                 <!-- Tool start button -->
-                <Button Width="70" DockPanel.Dock="Left" Command="{Binding Commands[Begin]}" Content="Begin">
+                <Button Width="70" Command="{Binding Commands[Begin]}" Content="Begin">
                     <Button.IsEnabled>
                         <MultiBinding Converter="{StaticResource BooleanToBooleanMultiConverter}" ConverterParameter="{StaticResource True}">
                             <Binding Path="Controller.Scanner.IsRunning" />
                         </MultiBinding>
                     </Button.IsEnabled>
                 </Button>
-
+                <!-- Separator -->
                 <Separator/>
-
                 <!-- Toggle preview button -->
-                <Button
-                    Width="70"
-                    Command="{Binding Commands[TogglePreview]}"
-                    Content="{Binding PreviewActiveIcon}" />
+                <Button Width="70" Command="{Binding Commands[TogglePreview]}" Content="{Binding PreviewActiveIcon}" />
             </ToolBar>
         </ToolBarTray>
 

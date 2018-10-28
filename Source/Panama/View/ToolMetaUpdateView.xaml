@@ -25,10 +25,8 @@
         <!-- Tool bar -->
         <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">
             <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                
-                
                 <!-- Tool start button -->
-                <Button Grid.Row="1" Width="70" Command="{Binding Commands[Begin]}" Content="Begin">
+                <Button Width="70" Command="{Binding Commands[Begin]}" Content="Begin">
                     <Button.IsEnabled>
                         <MultiBinding Converter="{StaticResource BooleanToBooleanMultiConverter}" ConverterParameter="{StaticResource True}">
                             <Binding Path="Versions.Scanner.IsRunning" />
@@ -36,14 +34,12 @@
                         </MultiBinding>
                     </Button.IsEnabled>
                 </Button>
-
+                <!-- Separator -->
                 <Separator/>
-
-                <ProgressBar Height="18" Width="360" Margin="5,0" Minimum="0" Maximum="{Binding Versions.Scanner.TotalCount}" Value="{Binding Versions.Scanner.ScanCount, Mode=OneWay}"/>
-
+                <!-- Progress bar -->
+                <ProgressBar Width="360" Minimum="0" Maximum="{Binding Versions.Scanner.TotalCount}" Value="{Binding Versions.Scanner.ScanCount, Mode=OneWay}"/>
                 <!-- Progress bar (submission docs) -->
                 <!--<ProgressBar Height="18" Width="320" Margin="5,0" Minimum="0" Maximum="{Binding SubDocs.Scanner.TotalCount}" Value="{Binding SubDocs.Scanner.ScanCount,Mode=OneWay}"/>-->
-
             </ToolBar>
         </ToolBarTray>
         

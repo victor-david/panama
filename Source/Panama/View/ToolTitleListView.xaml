@@ -33,6 +33,7 @@
                         </MultiBinding>
                     </Button.IsEnabled>
                 </Button>
+                <!-- Separator -->
                 <Separator/>
                 <!-- View file button -->
                 <Button Width="70" Command="{Binding Commands[OpenFile]}" Content="Open File"/>

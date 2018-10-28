@@ -34,24 +34,19 @@
         <ToolBarTray Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5">
             <ToolBar Style="{StaticResource ToolBarCommandHolder}">
                 <!-- Tool start button -->
-
-                <Button 
+                <Button
                     Width="70"
                     Command="{Binding Commands[Begin]}"
                     IsEnabled="{Binding InProgress, Converter={cv:BooleanToInverseBooleanConverter}}"
                     Content="Begin"/>
-
-
+                <!-- Separator -->
                 <Separator/>
-
                 <!-- Progress bar -->
                 <ProgressBar
-                    Height="18"
                     Width="200"
-                    Margin="5,0"
                     Minimum="0" Maximum="{Binding TotalCount}"
                     Value="{Binding TotalScanCount, Mode=OneWay}"/>
-
+                <!-- Summary message -->
                 <TextBlock>
                     <Run Text="{Binding MessageScanCount,Mode=OneWay}"/>
                     <Run Text="message files scanned."/>
@@ -60,7 +55,6 @@
                     <Run Text="{Binding ErrorCount,Mode=OneWay}"/>
                     <Run Text="errors."/>
                 </TextBlock>
-
             </ToolBar>
         </ToolBarTray>
 

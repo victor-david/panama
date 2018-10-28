@@ -31,11 +31,10 @@
                         </MultiBinding>
                     </Button.IsEnabled>
                 </Button>
-
+                <!-- Separator -->
                 <Separator/>
-                
                 <!-- Progress bar -->
-                <ProgressBar Height="18" Width="360" Margin="5,0" Minimum="0" Maximum="{Binding Export.Scanner.TotalCount}" Value="{Binding Export.Scanner.ScanCount,Mode=OneWay}"/>
+                <ProgressBar Width="360" Minimum="0" Maximum="{Binding Export.Scanner.TotalCount}" Value="{Binding Export.Scanner.ScanCount,Mode=OneWay}"/>
             </ToolBar>
         </ToolBarTray>
        
