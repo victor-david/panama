@@ -1,5 +1,6 @@
 ﻿using Restless.Tools.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Restless.App.Panama.Database.Tables
@@ -184,6 +185,35 @@ namespace Restless.App.Panama.Database.Tables
         public override void Load()
         {
             Load(null, string.Format("{0} DESC",Defs. Columns.Written));
+        }
+
+        /// <summary>
+        /// Provides an enumerable that gets all titles in order of written DESC.
+        /// </summary>
+        /// <returns>A <see cref="RowObject"/></returns>
+        public IEnumerable<RowObject> GetAllTitles()
+        {
+            DataRow[] rows = Select(null, $"{Defs.Columns.Written} DESC");
+            foreach (DataRow row in rows)
+            {
+                yield return new RowObject(row);
+            }
+            yield break;
+        }
+
+        /// <summary>
+        /// Gets a single <see cref="RowObject"/> as specified by its id.
+        /// </summary>
+        /// <param name="id">The id of the record to get.</param>
+        /// <returns>A <see cref="RowObject"/> for <paramref name="id"/>, or null if not found</returns>
+        public RowObject GetSingleRecord(long id)
+        {
+            DataRow[] rows = Select($"{Defs.Columns.Id}={id}");
+            if (rows.Length==1)
+            {
+                return new RowObject(rows[0]);
+            }
+            return null;
         }
         #endregion
 

@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -28,6 +29,8 @@ namespace Restless.App.Panama.ViewModel
         private TitleVersionTable versionTable;
         private TitleVersionTable.TitleVersionInfo verInfo;
         private TitleVersionTable.RowObject selectedRowObj;
+        private DataGridColumn versionColumn;
+        private string toggleGroupText;
         #endregion
 
         /************************************************************************/
@@ -47,6 +50,15 @@ namespace Restless.App.Panama.ViewModel
                 }
                 return $"{HeaderPreface} ({verInfo.VersionCount}/{verInfo.Versions.Count})";
             }
+        }
+
+        /// <summary>
+        /// Gets the text to display on the toggle group button.
+        /// </summary>
+        public string ToggleGroupText
+        {
+            get => toggleGroupText;
+            private set => SetProperty(ref toggleGroupText, value);
         }
 
         /// <summary>
@@ -108,9 +120,13 @@ namespace Restless.App.Panama.ViewModel
             DataView.Sort = $"{TitleVersionTable.Defs.Columns.TitleId}, {TitleVersionTable.Defs.Columns.Version} DESC, {TitleVersionTable.Defs.Columns.Revision} ASC";
             Columns.CreateImage<IntegerToImageConverter>("T", TitleVersionTable.Defs.Columns.DocType, "ImageFileType", 20.0);
 
+            versionColumn = Columns.Create("V", TitleVersionTable.Defs.Columns.Version)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.Standard);
+            
             Columns.Create<IntegerToCharConverter>("Rev", TitleVersionTable.Defs.Columns.Revision)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.ShortString);
+                .MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Updated", TitleVersionTable.Defs.Columns.Updated).MakeDate();
             Columns.Create("WC", TitleVersionTable.Defs.Columns.WordCount).MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Lang", TitleVersionTable.Defs.Columns.LangId).MakeFixedWidth(FixedWidth.ShortString);
@@ -128,6 +144,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("VersionSync", RunSyncCommand, (o) => { return SourceCount > 0 ; });
             Commands.Add("ContextMenuOpening", RunContextMenuOpeningCommand);
             Commands.Add("SaveProperty", RunSavePropertyCommand, CanRunSavePropertyCommand);
+            Commands.Add("ToggleGroup", RunToggleGroupCommand);
 
             //MenuItems.AddItem("Make this a revision of the version above", Commands["ConvertToRevision"]);
             MenuItems.AddItem("Make this a separate version", Commands["ConvertToVersion"]);
@@ -143,6 +160,7 @@ namespace Restless.App.Panama.ViewModel
             }
 
             HeaderPreface = Strings.HeaderVersions;
+            SetToggleGroupProperties();
             AddViewSourceSortDescriptions();
         }
         #endregion
@@ -220,7 +238,10 @@ namespace Restless.App.Panama.ViewModel
             // UPDATE 2018-08-25:
             //   Workaround implemented. By binding the visibility of the data grid to the child count (0=hidden, otherwise visible)
             //   the columns display as they should.
-            MainSource.GroupDescriptions.Add(new PropertyGroupDescription(TitleVersionTable.Defs.Columns.Version)); // , new DateToFormattedDateConverter()));
+            if (Config.GroupTitleVersion)
+            {
+                MainSource.GroupDescriptions.Add(new PropertyGroupDescription(TitleVersionTable.Defs.Columns.Version));
+            }
             MainSource.SortDescriptions.Add(new SortDescription(TitleVersionTable.Defs.Columns.Version, ListSortDirection.Descending));
             MainSource.SortDescriptions.Add(new SortDescription(TitleVersionTable.Defs.Columns.Revision, ListSortDirection.Ascending));
         }
@@ -372,6 +393,20 @@ namespace Restless.App.Panama.ViewModel
         private bool CanRunSavePropertyCommand(object o)
         {
             return IsOpenXml && Properties != null;
+        }
+
+        private void RunToggleGroupCommand(object parm)
+        {
+            Config.GroupTitleVersion = !Config.GroupTitleVersion;
+            SetToggleGroupProperties();
+            AddViewSourceSortDescriptions();
+            
+        }
+
+        private void SetToggleGroupProperties()
+        {
+            ToggleGroupText = Config.GroupTitleVersion ? "Ungroup" : "Group";
+            versionColumn.Visibility = (Config.GroupTitleVersion) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void PrepareForOpenXml()

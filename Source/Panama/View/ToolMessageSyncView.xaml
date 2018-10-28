@@ -15,8 +15,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="1.25*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
@@ -25,32 +24,47 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
         </Grid.Resources>
+
+        <!-- Tool explanation text -->
         <TextBlock 
-            Grid.ColumnSpan="3"
             Style="{StaticResource TextBlockMessage}"
             Text="{x:Static r:Strings.HeaderToolOperationMessageSync}"/>
-        <Button 
-            Grid.Row="1"
-            Command="{Binding Commands[Begin]}"
-            IsEnabled="{Binding InProgress, Converter={cv:BooleanToInverseBooleanConverter}}"
-            Content="Begin"/>
 
-        <ProgressBar
-            Grid.Row="1" Grid.Column="1"
-            Height="26"
-            Minimum="0" Maximum="{Binding TotalCount}"
-            Value="{Binding TotalScanCount, Mode=OneWay}"/>
+        <!-- Tool bar -->
+        <ToolBarTray Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5">
+            <ToolBar Style="{StaticResource ToolBarCommandHolder}">
+                <!-- Tool start button -->
 
-        <TextBlock Grid.Row="1" Grid.Column="2">
-            <Run Text="{Binding MessageScanCount,Mode=OneWay}"/>
-            <Run Text="message files scanned."/>
-            <Run Text="{Binding ProcessCount,Mode=OneWay}"/>
-            <Run Text="message file synchronized."/>
-            <Run Text="{Binding ErrorCount,Mode=OneWay}"/>
-            <Run Text="errors."/>
-        </TextBlock>
+                <Button 
+                    Width="70"
+                    Command="{Binding Commands[Begin]}"
+                    IsEnabled="{Binding InProgress, Converter={cv:BooleanToInverseBooleanConverter}}"
+                    Content="Begin"/>
 
-        <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
+
+                <Separator/>
+
+                <!-- Progress bar -->
+                <ProgressBar
+                    Height="18"
+                    Width="200"
+                    Margin="5,0"
+                    Minimum="0" Maximum="{Binding TotalCount}"
+                    Value="{Binding TotalScanCount, Mode=OneWay}"/>
+
+                <TextBlock>
+                    <Run Text="{Binding MessageScanCount,Mode=OneWay}"/>
+                    <Run Text="message files scanned."/>
+                    <Run Text="{Binding ProcessCount,Mode=OneWay}"/>
+                    <Run Text="message file synchronized."/>
+                    <Run Text="{Binding ErrorCount,Mode=OneWay}"/>
+                    <Run Text="errors."/>
+                </TextBlock>
+
+            </ToolBar>
+        </ToolBarTray>
+
+        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2" Margin="6" VerticalScrollBarVisibility="Auto">
             <TextBlock VerticalAlignment="Top" Text="{Binding Output, Mode=OneWay}" />
         </ScrollViewer>
     </Grid>

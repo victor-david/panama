@@ -7,62 +7,87 @@
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="900">
-    <DockPanel>
-        <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationMetaUpdate}"/>
-        <Button DockPanel.Dock="Top" Width="120" HorizontalAlignment="Left" Command="{Binding Commands[Begin]}" Content="Begin">
-            <Button.IsEnabled>
-                <MultiBinding Converter="{StaticResource BooleanToBooleanMultiConverter}" ConverterParameter="{StaticResource True}">
-                    <Binding Path="Versions.Scanner.IsRunning" />
-                    <Binding Path="SubDocs.Scanner.IsRunning" />
-                </MultiBinding>
-            </Button.IsEnabled>
-        </Button>
-        <UniformGrid DockPanel.Dock="Top" Columns="2" Rows="1">
-            <ProgressBar Height="30" Margin="4,10" Minimum="0" Maximum="{Binding Versions.Scanner.TotalCount}" Value="{Binding Versions.Scanner.ScanCount, Mode=OneWay}"/>
-            <ProgressBar Height="30" Margin="4,10" Minimum="0" Maximum="{Binding SubDocs.Scanner.TotalCount}" Value="{Binding SubDocs.Scanner.ScanCount,Mode=OneWay}"/>
-        </UniformGrid>
-        <UniformGrid DockPanel.Dock="Top" Columns="2" Rows="2">
-            <!-- Titles (updated) -->
-            <HeaderedContentControl Style="{StaticResource HCCTool}" Header="{Binding Versions.UpdatedHeader,Mode=OneWay}">
-                <DataGrid ItemsSource="{Binding Path=Versions.Updated}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Ver" Width="40" Binding="{Binding Version}" HeaderStyle="{StaticResource DataGridHeaderCenter}" ElementStyle="{StaticResource TextBlockCenter}" />
-                        <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
-                        <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </HeaderedContentControl>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Tool explanation text -->
+        <TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationMetaUpdate}"/>
 
-            <!-- Submission documents (updated) -->
-            <HeaderedContentControl Style="{StaticResource HCCTool}" Header="{Binding SubDocs.UpdatedHeader,Mode=OneWay}">
-                <DataGrid ItemsSource="{Binding Path=SubDocs.Updated}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
-                        <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </HeaderedContentControl>
+        <!-- Tool bar -->
+        <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">
+            <ToolBar Style="{StaticResource ToolBarCommandHolder}">
+                
+                
+                <!-- Tool start button -->
+                <Button Grid.Row="1" Width="70" Command="{Binding Commands[Begin]}" Content="Begin">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource BooleanToBooleanMultiConverter}" ConverterParameter="{StaticResource True}">
+                            <Binding Path="Versions.Scanner.IsRunning" />
+                            <Binding Path="SubDocs.Scanner.IsRunning" />
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
 
-            <!-- Titles (not found) -->
-            <HeaderedContentControl Style="{StaticResource HCCTool}" Header="{Binding Versions.NotFoundHeader,Mode=OneWay}">
-                <DataGrid Grid.ColumnSpan="2" ItemsSource="{Binding Path=Versions.NotFound}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Ver" Width="40" Binding="{Binding Version}" HeaderStyle="{StaticResource DataGridHeaderCenter}" ElementStyle="{StaticResource TextBlockCenter}"/>
-                        <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
-                        <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </HeaderedContentControl>
+                <Separator/>
 
-            <!-- Submission doc (not found) -->
-            <HeaderedContentControl Style="{StaticResource HCCTool}" Header="{Binding SubDocs.NotFoundHeader,Mode=OneWay}">
-                <DataGrid ItemsSource="{Binding Path=SubDocs.NotFound}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
-                        <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </HeaderedContentControl>
-        </UniformGrid>
-    </DockPanel>
+                <ProgressBar Height="18" Width="360" Margin="5,0" Minimum="0" Maximum="{Binding Versions.Scanner.TotalCount}" Value="{Binding Versions.Scanner.ScanCount, Mode=OneWay}"/>
+
+                <!-- Progress bar (submission docs) -->
+                <!--<ProgressBar Height="18" Width="320" Margin="5,0" Minimum="0" Maximum="{Binding SubDocs.Scanner.TotalCount}" Value="{Binding SubDocs.Scanner.ScanCount,Mode=OneWay}"/>-->
+
+            </ToolBar>
+        </ToolBarTray>
+        
+        <!-- Titles (updated) [top left] -->
+        <HeaderedContentControl Grid.Row="2" Style="{StaticResource HCCTool}" Header="{Binding Versions.UpdatedHeader,Mode=OneWay}">
+            <DataGrid ItemsSource="{Binding Path=Versions.Updated}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ver" Width="40" Binding="{Binding Version}" HeaderStyle="{StaticResource DataGridHeaderCenter}" ElementStyle="{StaticResource TextBlockCenter}" />
+                    <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
+                    <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </HeaderedContentControl>
+        
+         <!-- Titles (not found) [bottom left] -->
+        <HeaderedContentControl Grid.Row="3" Style="{StaticResource HCCTool}" Header="{Binding Versions.NotFoundHeader,Mode=OneWay}">
+            <DataGrid Grid.ColumnSpan="2" ItemsSource="{Binding Path=Versions.NotFound}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ver" Width="40" Binding="{Binding Version}" HeaderStyle="{StaticResource DataGridHeaderCenter}" ElementStyle="{StaticResource TextBlockCenter}"/>
+                    <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
+                    <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </HeaderedContentControl>       
+
+        <!-- Submission documents (updated) [top right] -->
+        <HeaderedContentControl Grid.Row="2" Grid.Column="1" Style="{StaticResource HCCTool}" Header="{Binding SubDocs.UpdatedHeader,Mode=OneWay}">
+            <DataGrid ItemsSource="{Binding Path=SubDocs.Updated}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
+                    <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </HeaderedContentControl>
+
+        <!-- Submission doc (not found) [bottom right] -->
+        <HeaderedContentControl Grid.Row="3" Grid.Column="1" Style="{StaticResource HCCTool}" Header="{Binding SubDocs.NotFoundHeader,Mode=OneWay}">
+            <DataGrid ItemsSource="{Binding Path=SubDocs.NotFound}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}"/>
+                    <DataGridTextColumn Header="File" Width="1.5*" Binding="{Binding FileName}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </HeaderedContentControl>
+
+    </Grid>
 </UserControl>

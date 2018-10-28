@@ -60,6 +60,8 @@
                 <Button Command="{Binding Versions.Commands[VersionRemove]}" ToolTip="Remove the selected version (does not affect the file system)">Remove</Button>
                 <Separator/>
                 <Button Command="{Binding Versions.Commands[VersionSync]}" ToolTip="Rename the version files in accordance with title, language id and version #">Sync</Button>
+                <Separator/>
+                <Button Command="{Binding Versions.Commands[ToggleGroup]}" Content="{Binding Versions.ToggleGroupText}" ToolTip="Group or ungroup title versions"/>
             </ToolBar>
         </ToolBarTray>
         <StackPanel Margin="0,8" Visibility="{Binding Versions.EditVisibility}">

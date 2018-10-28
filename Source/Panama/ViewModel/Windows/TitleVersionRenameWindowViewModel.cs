@@ -1,4 +1,5 @@
 ﻿using Restless.App.Panama.Controls;
+using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -51,7 +52,14 @@ namespace Restless.App.Panama.ViewModel
         {
             renameView = new TitleVersionRenameItemCollection();
             MainSource.Source = renameView;
-            Columns.Create("Ver", TitleVersionRenameItem.Properties.Version).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Ver", TitleVersionRenameItem.Properties.Version)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.Standard);
+
+            Columns.Create<IntegerToCharConverter>("Rev", TitleVersionRenameItem.Properties.RevisionChar)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.Standard);
+
             Columns.Create("Old name", TitleVersionRenameItem.Properties.OriginalNameDisplay);
             Columns.Create("New name", TitleVersionRenameItem.Properties.NewNameDisplay);
             Columns.Create("Status", TitleVersionRenameItem.Properties.Status);
@@ -71,18 +79,15 @@ namespace Restless.App.Panama.ViewModel
         #region Private methods
         private void PopulateRenameItems(long titleId)
         {
-            DataRow[] titles = DatabaseController.Instance.GetTable<TitleTable>().Select(string.Format("{0}={1}", TitleTable.Defs.Columns.Id, titleId));
-            if (titles.Length != 1)
+            var title  = DatabaseController.Instance.GetTable<TitleTable>().GetSingleRecord(titleId);
+            if (title == null)
             {
                 throw new InvalidOperationException(Strings.InvalidOpTitleDoesNotExist);
             }
 
-            string title = titles[0][TitleTable.Defs.Columns.Title].ToString();
-
-            DataRow[] versions = DatabaseController.Instance.GetTable<TitleVersionTable>().GetAllVersions(titleId);
-            foreach (DataRow row in versions)
+            foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().GetAllVersions(titleId))
             {
-                renameView.Add(new TitleVersionRenameItem(row, title));
+                renameView.Add(new TitleVersionRenameItem(ver, title.Title));
             }
 
             if (renameView.Count == 0)

@@ -1596,7 +1596,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted. Files are exported to: {0}.
+        ///   Looks up a localized string similar to This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted. Files are exported to: {0}.
         /// </summary>
         public static string HeaderToolOperationExport {
             get {

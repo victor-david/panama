@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Restless.Tools.Utility;
-using System.IO;
-using System.Data;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Threading;
+using Restless.Tools.Utility;
+using System;
+using System.IO;
 
 namespace Restless.App.Panama.Tools
 {
@@ -81,46 +76,27 @@ namespace Restless.App.Panama.Tools
         /************************************************************************/
 
         #region Private Methods
-        //private void CreateExportDirectory()
-        //{
-        //    if (!Directory.Exists(exportDirectory))
-        //    {
-        //        Directory.CreateDirectory(exportDirectory);
-        //    }
-        //}
 
         private void PopulateCandidates()
         {
             candidates.Clear();
 
-            DataRow[] titleRows = DatabaseController.Instance.GetTable<TitleTable>().Select(null, string.Format("{0} DESC", TitleTable.Defs.Columns.Written));
-
-            foreach (DataRow titleRow in titleRows)
+            foreach (var title in DatabaseController.Instance.GetTable<TitleTable>().GetAllTitles())
             {
-                long titleId = (long)titleRow[TitleTable.Defs.Columns.Id];
-                string title = titleRow[TitleTable.Defs.Columns.Title].ToString();
-                DateTime written = (DateTime)titleRow[TitleTable.Defs.Columns.Written];
-
-                DataRow[] versionRows = DatabaseController.Instance.GetTable<TitleVersionTable>().GetAllVersions(titleId);
-                foreach (DataRow versionRow in versionRows)
+                foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().GetAllVersions(title.Id))
                 {
-                    DateTime versionDate = (DateTime)versionRow[TitleVersionTable.Defs.Columns.Updated];
-                    long versionSize = (long)versionRow[TitleVersionTable.Defs.Columns.Size];
-                    long version = (long)versionRow[TitleVersionTable.Defs.Columns.Version];
-                    string language = versionRow[TitleVersionTable.Defs.Columns.LangId].ToString();
-                    string versionFile = versionRow[TitleVersionTable.Defs.Columns.FileName].ToString();
-
-                    // DateWritten_Title_Ver.Lang.ext
-                    // yyyy-MM-dd_Title_Ver.Lang.ext
-                    // 2011-05-24_Title_v1.en-us.docx
+                    // DateWritten_Title_vVer.Rev.Lang.ext
+                    // Ex: 2011-05-24_Title_v1.A.en-us.docx
                     string exportFileName =
-                        string.Format("{0}_{1}_v{2}.{3}{4}",
-                            written.ToString("yyyy-MM-dd"),
-                            Format.ValidFileName(title),
-                            version, language,
-                            Path.GetExtension(versionFile));
-                    candidates.Add(new TitleExportCandidate(title, version, Paths.Title.WithRoot(versionFile), Path.Combine(exportDirectory, exportFileName)));
+                        string.Format("{0}_{1}_v{2}.{3}.{4}{5}",
+                            title.Written.ToString("yyyy-MM-dd"),
+                            Format.ValidFileName(title.Title),
+                            ver.Version, (char)ver.Revision,
+                            ver.LanguageId,
+                            Path.GetExtension(ver.FileName));
+                    candidates.Add(new TitleExportCandidate(ver.Version, ver.Revision, title.Title, Paths.Title.WithRoot(ver.FileName), Path.Combine(exportDirectory, exportFileName)));
                 }
+                
             }
             TotalCount = candidates.Count;
         }
@@ -133,11 +109,10 @@ namespace Restless.App.Panama.Tools
                 if (candidate.Status == TitleExportStatus.OriginalIsNewer || candidate.Status == TitleExportStatus.ExportFileDoesNotExist)
                 {
                     File.Copy(candidate.OriginalPath, candidate.ExportPath, true);
-                    var item = new FileScanDisplayObject(candidate.Title, candidate.Version, Paths.Export.WithoutRoot(candidate.ExportPath));
+                    var item = new FileScanDisplayObject(candidate.Version, candidate.Revision, candidate.Title, Paths.Export.WithoutRoot(candidate.ExportPath));
                     OnUpdated(item);
                     updated++;
                 }
-                //System.Threading.Thread.Sleep(1);
             }
         }
 

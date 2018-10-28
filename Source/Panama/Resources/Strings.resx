@@ -442,7 +442,7 @@ does not exist. Correct this by selecting the correct file and then try again.</
     <value>Select a submission document</value>
   </data>
   <data name="HeaderToolOperationExport" xml:space="preserve">
-    <value>This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted. Files are exported to: {0}</value>
+    <value>This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted. Files are exported to: {0}</value>
   </data>
   <data name="HeaderToolOperationMetaUpdate" xml:space="preserve">
     <value>This operation first compacts the database file, and then verfies that all files associated with title versions and submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count.</value>

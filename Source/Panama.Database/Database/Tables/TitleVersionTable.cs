@@ -148,13 +148,19 @@ namespace Restless.App.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets all versions for the specified title in ascending order of version
+        /// Provides an enumerable that gets all versions for the specified title
+        /// in order of version ASC, revision ASC.
         /// </summary>
-        /// <param name="titleId">The title id</param>
-        /// <returns>An array of DataRow objects</returns>
-        public DataRow[] GetAllVersions(long titleId)
+        /// <param name="titleId">The title id to get all versions for.</param>
+        /// <returns>A <see cref="RowObject"/></returns>
+        public IEnumerable<RowObject> GetAllVersions(long titleId)
         {
-            return Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC");
+            DataRow[] rows = Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC");
+            foreach (DataRow row in rows)
+            {
+                yield return new RowObject(row);
+            }
+            yield break;
         }
 
         /// <summary>
@@ -305,8 +311,8 @@ namespace Restless.App.Panama.Database.Tables
         /// <summary>
         /// Removes the specified version from the specified title and renumbers the remaining versions.
         /// </summary>
-        /// <param name="current"></param>
-        public void RemoveVersion(RowObject current) //  long titleId, long version)
+        /// <param name="current">The row object to remove</param>
+        public void RemoveVersion(RowObject current)
         {
             Validations.ValidateNull(current, nameof(current));
 
@@ -316,23 +322,6 @@ namespace Restless.App.Panama.Database.Tables
 
             verInfo.RenumberAllVersions();
             verInfo.RenumberAllRevisions();
-
-
-            //DataRow[] rows = GetAllVersions(titleId);
-            //foreach (DataRow row in rows)
-            //{
-            //    long rowVersion = (long)row[Defs.Columns.Version];
-            //    if (rowVersion == version) row.Delete();
-            //}
-
-            //rows = GetAllVersions(titleId);
-
-            //long versionRenumber = 1;
-            //foreach (DataRow row in rows)
-            //{
-            //    row[Defs.Columns.Version] = versionRenumber;
-            //    versionRenumber++;
-            //}
         }
 
         /// <summary>
@@ -835,6 +824,15 @@ namespace Restless.App.Panama.Database.Tables
             {
                 get => GetInt64(Defs.Columns.Revision);
                 internal set => SetValue(Defs.Columns.Revision, value);
+            }
+
+            /// <summary>
+            /// Gets or sets the language id.
+            /// </summary>
+            public string LanguageId
+            {
+                get => GetString(Defs.Columns.LangId);
+                set => SetValue(Defs.Columns.LangId, value);
             }
 
             /// <summary>

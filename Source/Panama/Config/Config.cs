@@ -483,6 +483,15 @@ namespace Restless.App.Panama.Configuration
             get => GetItem(null);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets a value that indicates if title versions are grouped
+        /// </summary>
+        public bool GroupTitleVersion
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/
