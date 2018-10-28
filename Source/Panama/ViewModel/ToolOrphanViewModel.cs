@@ -45,13 +45,13 @@ namespace Restless.App.Panama.ViewModel
             MainSource.Source = Controller.NotFound;
 
             Commands.Add("Begin", (o) => Controller.Run());
-            Columns.Create("Modified", "LastModified").MakeDate();
-            Columns.SetDefaultSort(Columns.Create("File", "FileName"), ListSortDirection.Ascending);
+            Columns.Create("Modified", nameof(FileScanDisplayObject.LastModified)).MakeDate();
+            Columns.Create("Size", nameof(FileScanDisplayObject.Size)).MakeNumeric(null, FixedWidth.LongerNumeric);
+            Columns.SetDefaultSort(Columns.Create("File", nameof(FileScanDisplayObject.FileName)), ListSortDirection.Ascending);
             AddViewSourceSortDescriptions();
             Commands.Add("CreateTitle", RunCreateTitleCommand, (p)=> SelectedItem != null);
             MenuItems.AddItem("Create a title entry from this file", Commands["CreateTitle"]);
             MenuItems.AddSeparator();
-
             // Commands["DeleteFile"] is created by ToolOrphanFinderController - it handles
             // file deletion and the removal of the corresponding item of its ObservableCollection
             MenuItems.AddItem("Delete this file", Commands["DeleteFile"], "ImageDeleteMenu");

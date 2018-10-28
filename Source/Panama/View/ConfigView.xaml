@@ -89,9 +89,9 @@
                 <con:PathSelector Title="Title Version" PathName="{Binding Config.FolderTitleVersion}"/>
                 <con:PathSelector Title="Submission Documents" PathName="{Binding Config.FolderSubmissionDocument}"/>
                 <con:PathSelector Title="Submission Messages" PathName="{Binding Config.FolderSubmissionMessage}"/>
-                <con:PathSelector Title="Submission Message Attachments" PathName="{Binding Config.FolderSubmissionMessageAttachment}"/>
+                <!--<con:PathSelector Title="Submission Message Attachments" PathName="{Binding Config.FolderSubmissionMessageAttachment}"/>-->
                 <con:PathSelector Title="Export" PathName="{Binding Config.FolderExport}"/>
-                <con:PathSelector Title="Mapi Messages" PathName="{Binding Config.FolderMapi}" SelectorType="Mapi"/>
+                <!--<con:PathSelector Title="Mapi Messages" PathName="{Binding Config.FolderMapi}" SelectorType="Mapi"/>-->
             </StackPanel>
             
             <!-- Section 3. Colors -->

@@ -79,10 +79,12 @@ namespace Restless.App.Panama.Tools
                 {
                     string searchFile = Paths.Title.WithoutRoot(file);
 
-
                     if (!versions.VersionWithFileExists(searchFile))
                     {
-                        var item = new FileScanDisplayObject(searchFile, File.GetLastWriteTimeUtc(file));
+                        var info = new FileInfo(file);
+                        
+
+                        var item = new FileScanDisplayObject(searchFile, info.Length, info.LastWriteTimeUtc);
                         OnNotFound(item);
                     }
                 }

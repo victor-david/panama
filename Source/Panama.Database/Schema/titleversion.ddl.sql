@@ -7,7 +7,7 @@ CREATE TABLE "titleversion" (
   "updated" TIMESTAMP NOT NULL, 
   "size" INTEGER NOT NULL DEFAULT 0,
   "version" INTEGER NOT NULL DEFAULT 0,
-  "revision" TEXT NOT NULL,
+  "revision" INTEGER NOT NULL DEFAULT 65,
   "langid" TEXT NOT NULL,
   "wordcount" INTEGER NOT NULL DEFAULT 0
 );

@@ -409,12 +409,12 @@ namespace Restless.App.Panama.Database.Resources {
         ///  &quot;updated&quot; TIMESTAMP NOT NULL, 
         ///  &quot;size&quot; INTEGER NOT NULL DEFAULT 0,
         ///  &quot;version&quot; INTEGER NOT NULL DEFAULT 0,
-        ///  &quot;revision&quot; TEXT NOT NULL,
+        ///  &quot;revision&quot; INTEGER NOT NULL DEFAULT 65,
         ///  &quot;langid&quot; TEXT NOT NULL,
         ///  &quot;wordcount&quot; INTEGER NOT NULL DEFAULT 0
         ///);
         ///CREATE INDEX &quot;titleversion_langid&quot; ON &quot;titleversion&quot; (&quot;langid&quot;);
-        ///CREATE INDEX &quot;titleversion_tit [rest of string was truncated]&quot;;.
+        ///CREATE INDEX &quot;ti [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string TitleVersion {
             get {

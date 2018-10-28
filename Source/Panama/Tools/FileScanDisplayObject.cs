@@ -37,6 +37,14 @@ namespace Restless.App.Panama.Tools
         }
 
         /// <summary>
+        /// Gets the size of the file in bytes.
+        /// </summary>
+        public long Size
+        {
+            get;
+        }
+
+        /// <summary>
         /// Gets the file name. This is typically an unrooted name, but not required.
         /// </summary>
         public string FileName
@@ -63,17 +71,31 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         /// <param name="version">The version number</param>
         /// <param name="revision">The revision number.</param>
+        /// <param name="size">The size of the file</param>
         /// <param name="title">The title</param>
         /// <param name="filename">The file name</param>
-        public FileScanDisplayObject(long version, long revision, string title, string filename)
+        public FileScanDisplayObject(long version, long revision, long size, string title, string filename)
         {
             Validations.ValidateNullEmpty(title, "FileScanDisplayObject.Title");
             Validations.ValidateNullEmpty(filename, "FileScanDisplayObject.FileName");
 
             Version = version;
             Revision = revision;
+            Size = size;
             Title = title;
             FileName = filename;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileScanDisplayObject"/> class.
+        /// </summary>
+        /// <param name="version">The version number</param>
+        /// <param name="revision">The revision number.</param>
+        /// <param name="title">The title</param>
+        /// <param name="filename">The file name</param>
+        public FileScanDisplayObject(long version, long revision, string title, string filename)
+            :this(version, revision, 0, title, filename)
+        {
         }
 
         /// <summary>
@@ -92,9 +114,10 @@ namespace Restless.App.Panama.Tools
         /// setting title to 'n/a',  and version / revision numbers to zero.
         /// </summary>
         /// <param name="filename">The file name</param>
+        /// <param name="size">The file size</param>
         /// <param name="lastModified">The last modified of the file</param>
-        public FileScanDisplayObject(string filename, DateTime lastModified)
-            : this(0, 0, "n/a", filename)
+        public FileScanDisplayObject(string filename, long size, DateTime lastModified)
+            : this(0, 0, size, "n/a", filename)
         {
             LastModified = lastModified;
         }

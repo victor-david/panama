@@ -33,35 +33,31 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         protected override void ExecuteTask()
         {
-            DataRow[] rows = DatabaseController.Instance.GetTable<SubmissionDocumentTable>().Select(null, SubmissionDocumentTable.Defs.Columns.Id);
-            TotalCount = rows.Length;
+            var submissionEnumerator = DatabaseController.Instance.GetTable<SubmissionDocumentTable>().GetAllSubmissionDocuments();
 
-            foreach (DataRow row in rows)
+            TotalCount = submissionEnumerator.Count();
+
+            foreach (var row in submissionEnumerator)
             {
                 ScanCount++;
-                long docType = (long)row[SubmissionDocumentTable.Defs.Columns.DocType];
-                if (DatabaseController.Instance.GetTable<DocumentTypeTable>().IsDocTypeSupported(docType))
+                if (DatabaseController.Instance.GetTable<DocumentTypeTable>().IsDocTypeSupported(row.DocType))
                 {
-                    string title = row[SubmissionDocumentTable.Defs.Columns.Title].ToString();
-                    DateTime subDocDate = (DateTime)row[SubmissionDocumentTable.Defs.Columns.Updated];
-                    long subDocSize = (long)row[SubmissionDocumentTable.Defs.Columns.Size];
-                    string rowName = row[SubmissionDocumentTable.Defs.Columns.DocId].ToString();
-                    string filename = Paths.SubmissionDocument.WithRoot(rowName);
+                    string filename = Paths.SubmissionDocument.WithRoot(row.DocumentId);
                     var info = new FileInfo(filename);
                     if (info.Exists)
                     {
-                        if (subDocDate != info.LastWriteTimeUtc || subDocSize != info.Length)
+                        if (row.Updated != info.LastWriteTimeUtc || row.Size != info.Length)
                         {
-                            row[SubmissionDocumentTable.Defs.Columns.Updated] = info.LastWriteTimeUtc;
-                            row[SubmissionDocumentTable.Defs.Columns.Size] = info.Length;
+                            row.Updated = info.LastWriteTimeUtc;
+                            row.Size = info.Length;
                             DatabaseController.Instance.GetTable<SubmissionDocumentTable>().Save();
-                            var item = new FileScanDisplayObject(title, rowName);
+                            var item = new FileScanDisplayObject(row.Title, row.DocumentId);
                             OnUpdated(item);
                         }
                     }
                     else
                     {
-                        var item = new FileScanDisplayObject(title, rowName);
+                        var item = new FileScanDisplayObject(row.Title, row.DocumentId);
                         OnNotFound(item);
                     }
                 }
