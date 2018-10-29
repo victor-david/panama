@@ -648,7 +648,7 @@ When you save properties here however, the document's file  modification date is
     <value>Convert</value>
   </data>
   <data name="HeaderToolOperationConvert" xml:space="preserve">
-    <value>This operation converts all .doc files in the specified folder to Open Xml (.docx ) files. If the converted file belongs to a title version, the version record will be updated to reflect the change. If a corresponding .docx file exists in the folder (for example, Report.doc and Report.docx), the .docx file will be overwritten. After the conversion, the .doc file will be sent to the recycle bin.</value>
+    <value>This operation converts all .doc files in the specified folder to Open Xml (.docx ) files. If the converted file belongs to a title version, the version record will be updated to reflect the change. If a corresponding .docx file exists in the folder (for example, Report.doc and Report.docx), the .docx file will be overwritten. After the conversion, the .doc file will be deleted.</value>
   </data>
   <data name="HeaderToolOperationConvertFoundFormat" xml:space="preserve">
     <value>{0} eligible files, {1} converted</value>

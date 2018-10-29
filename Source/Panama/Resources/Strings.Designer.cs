@@ -1578,7 +1578,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation converts all .doc files in the specified folder to Open Xml (.docx ) files. If the converted file belongs to a title version, the version record will be updated to reflect the change. If a corresponding .docx file exists in the folder (for example, Report.doc and Report.docx), the .docx file will be overwritten. After the conversion, the .doc file will be sent to the recycle bin..
+        ///   Looks up a localized string similar to This operation converts all .doc files in the specified folder to Open Xml (.docx ) files. If the converted file belongs to a title version, the version record will be updated to reflect the change. If a corresponding .docx file exists in the folder (for example, Report.doc and Report.docx), the .docx file will be overwritten. After the conversion, the .doc file will be deleted..
         /// </summary>
         public static string HeaderToolOperationConvert {
             get {

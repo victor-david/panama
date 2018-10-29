@@ -49,7 +49,6 @@ namespace Restless.App.Panama.ViewModel
         public DocumentConverter Converter
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -57,11 +56,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public string FoundHeader
         {
-            get { return foundHeader; }
-            private set
-            {
-                SetProperty(ref foundHeader, value);
-            }
+            get => foundHeader;
+            private set => SetProperty(ref foundHeader, value);
         }
 
         /// <summary>
@@ -69,11 +65,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public string SelectedFolder
         {
-            get { return selectedFolder; }
-            set
-            {
-                SetProperty(ref selectedFolder, value);
-            }
+            get => selectedFolder;
+            set => SetProperty(ref selectedFolder, value);
         }
 
         /// <summary>
@@ -81,11 +74,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public bool IsReadyToRun
         {
-            get { return isReadyToRun; }
-            private set
-            {
-                SetProperty(ref isReadyToRun, value);
-            }
+            get => isReadyToRun;
+            private set => SetProperty(ref isReadyToRun, value);
         }
 
         /// <summary>
@@ -93,18 +83,17 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public bool IsRunning
         {
-            get { return isRunning; }
-            private set
-            {
-                SetProperty(ref isRunning, value);
-            }
+            get => isRunning;
+            private set => SetProperty(ref isRunning, value);
         }
         #endregion
 
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToolConvertViewModel"/> class.
+        /// </summary>
         public ToolConvertViewModel()
         {
             DisplayName = Strings.CommandToolConvert;
@@ -113,10 +102,6 @@ namespace Restless.App.Panama.ViewModel
             Converter.ItemCompleted += ConverterItemCompleted;
             Converter.ConversionCompleted += ConverterConversionCompleted;
 
-            //versionTable = DatabaseController.Instance.GetTable<TitleVersionTable>();
-            //submissionDocumentTable = DatabaseController.Instance.GetTable<SubmissionDocumentTable>();
-
-            // resultsView = new ObservableCollection<FileConvertItem>();
             MainSource.Source = Converter.Items;
 
             Columns.CreateImage<BooleanToImageConverter>("V", "IsVersion");
@@ -135,9 +120,6 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("Cancel", RunCancelCommand);
             UpdateFoundHeader();
         }
-
-
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/

@@ -29,7 +29,7 @@
         <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">
             <ToolBar Style="{StaticResource ToolBarCommandHolder}">
                 <!-- Prompt -->
-                <TextBlock Style="{StaticResource TextBlockMessage}" VerticalAlignment="Center" Text="Search text"/>
+                <TextBlock Text="Search text"/>
                 <!-- Search text-->
                 <TextBox Width="180" Text="{Binding SearchText}"/>
                 <!-- Tool start button -->

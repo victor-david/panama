@@ -1,12 +1,9 @@
 ﻿#if DOCX
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using Restless.Tools.Utility;
-using System.IO;
 using Restless.Tools.Threading;
+using Restless.Tools.Utility;
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
 
 namespace Restless.App.Panama.Tools
 {
@@ -61,12 +58,13 @@ namespace Restless.App.Panama.Tools
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DocumentConverter"/> class.
+        /// </summary>
         public DocumentConverter()
         {
             Items = new ObservableCollection<DocumentConversionCandidate>();
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/

@@ -6,23 +6,40 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"
-    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
-    d:DesignHeight="300" d:DesignWidth="600">
-    <DockPanel>
-        <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationConvert}"/>
+    d:DesignHeight="250" d:DesignWidth="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel DockPanel.Dock="Top" Style="{StaticResource StackPanelCommandHolder}">
-            <Label>Folder</Label>
-            <TextBox Text="{Binding SelectedFolder}" Width="232" IsReadOnly="True"/>
-            <Button Command="{Binding Commands[SelectFolder]}" Content="Select" />
-            <Button Command="{Binding Commands[Convert]}" Content="Convert" IsEnabled="{Binding IsReadyToRun}" />
-            <Button Command="{Binding Commands[Cancel]}" Content="Cancel" IsEnabled="{Binding IsRunning}" />         
-        </StackPanel>
+        <!-- Tool explanation text -->
+        <TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationConvert}"/>
 
-        <HeaderedContentControl DockPanel.Dock="Top"  Style="{StaticResource HCCTool}" Header="{Binding FoundHeader}" Margin="4">
-            <DataGrid ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
-            </DataGrid>
+        <!-- Tool bar -->
+        <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">
+            <ToolBar Style="{StaticResource ToolBarCommandHolder}">
+                <!-- Folder to be converted -->
+                <TextBlock Text="Folder"/>
+                <TextBox Text="{Binding SelectedFolder}" Width="280" IsReadOnly="True"/>
+                <!-- Select folder button -->
+                <Button Width="70" Command="{Binding Commands[SelectFolder]}" Content="Select" />
+                <!-- Begin conversion button -->
+                <Button Width="70" Command="{Binding Commands[Convert]}" Content="Convert" IsEnabled="{Binding IsReadyToRun}" />
+                <!-- Cancel conversion button -->
+                <Button Width="70" Command="{Binding Commands[Cancel]}" Content="Cancel" IsEnabled="{Binding IsRunning}" />
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- Grid to show conversion candidates and progress as they are converted -->
+        <HeaderedContentControl Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource HCCTool}" Header="{Binding FoundHeader}" Margin="4">
+            <DataGrid ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}"/>
         </HeaderedContentControl>
-    </DockPanel>
+    </Grid>
 </UserControl>
