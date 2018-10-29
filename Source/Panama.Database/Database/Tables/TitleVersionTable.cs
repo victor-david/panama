@@ -303,7 +303,6 @@ namespace Restless.App.Panama.Database.Tables
                     {
                         verInfo.RenumberAllVersions();
                     }
-
                 }
             }
         }
@@ -526,8 +525,12 @@ namespace Restless.App.Panama.Database.Tables
                 Validations.ValidateNull(row, nameof(row));
                 if (row.Version == 1)
                 {
-                    int lastIdx = versionMap[1].Count - 1;
-                    return row.Revision == versionMap[1][lastIdx];
+                    if (versionMap.ContainsKey(1))
+                    {
+                        int lastIdx = versionMap[1].Count - 1;
+                        return row.Revision == versionMap[1][lastIdx];
+                    }
+                    throw new IndexOutOfRangeException($"IsEarliest-Invalid index 1", new Exception(ToString()));
                 }
                 return false;
             }
@@ -543,7 +546,7 @@ namespace Restless.App.Panama.Database.Tables
                 {
                     return versionMap[version].Count;
                 }
-                throw new IndexOutOfRangeException("Invalid index");
+                throw new IndexOutOfRangeException($"GetRevisionCount-Invalid index {version}", new Exception(ToString()));
             }
 
             /// <summary>
@@ -553,7 +556,7 @@ namespace Restless.App.Panama.Database.Tables
             public override string ToString()
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine($"Rows:{Versions.Count} Versions:{VersionCount}");
+                sb.AppendLine($"Title: {titleId} Rows:{Versions.Count} Versions:{VersionCount}");
 
                 foreach (var ver in versionMap)
                 {
@@ -619,7 +622,6 @@ namespace Restless.App.Panama.Database.Tables
                     }
                 }
             }
-            
 
             /// <summary>
             /// Gets the last (highest numbered) revision for the specified version.
@@ -636,7 +638,7 @@ namespace Restless.App.Panama.Database.Tables
                         return versionMap[version][lastIdx];
                     }
                 }
-                throw new IndexOutOfRangeException("Invalid index");
+                throw new IndexOutOfRangeException($"GetLastRevision-Invalid index {version}", new Exception(ToString()));
             }
 
             /// <summary>
@@ -686,7 +688,6 @@ namespace Restless.App.Panama.Database.Tables
                     rowObj.Version = version;
                 }
                 BuildVersionsAndMap();
-
             }
             #endregion
 
@@ -731,7 +732,10 @@ namespace Restless.App.Panama.Database.Tables
                         break;
                     }
                 }
-                Validations.ValidateArgument(idxNeeded < 0 || idxNeeded > Versions.Count - 1, "Invalid index");
+                if (idxNeeded < 0 || idxNeeded > Versions.Count - 1)
+                {
+                    throw new IndexOutOfRangeException($"GetNeededRowObject-Invalid index {idxNeeded}", new Exception(ToString()));
+                }
                 return Versions[idxNeeded];
             }
             #endregion

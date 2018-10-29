@@ -9,7 +9,6 @@ using Restless.Tools.OpenXml;
 using Restless.Tools.Utility;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -224,7 +223,6 @@ namespace Restless.App.Panama.ViewModel
         private void UpdateVersionInfo()
         {
             verInfo = versionTable.GetVersionInfo(GetOwnerSelectedPrimaryId());
-            Debug.WriteLine(verInfo.ToString());
         }
 
         private void AddViewSourceSortDescriptions()
@@ -373,9 +371,9 @@ namespace Restless.App.Panama.ViewModel
 
         private void SetLanguage(string langId)
         {
-            if (SelectedRow != null)
+            if (selectedRowObj != null)
             {
-                SelectedRow[TitleVersionTable.Defs.Columns.LangId] = langId;
+                selectedRowObj.LanguageId = langId;
             }
         }
 
