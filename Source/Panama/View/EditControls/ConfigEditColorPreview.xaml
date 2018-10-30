@@ -5,12 +5,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
-    xmlns:local="clr-namespace:Restless.App.Panama.View"
     mc:Ignorable="d" 
     d:DesignHeight="140" d:DesignWidth="600">
     <StackPanel>
         <!-- Titles -->
-        <TextBlock Style="{StaticResource TextBlockLabel}" Text="Titles"/>
+        <TextBlock Text="Titles" Style="{StaticResource TextBlockLabel}" Margin="0,2"/>
         <DataGrid 
             CanUserReorderColumns="False"
             CanUserSortColumns="False"
@@ -23,9 +22,9 @@
                 <DataGridTextColumn Header="Updated" Binding="{Binding Updated, Converter={cv:DateToFormattedDateConverter}}" Width="100" />
             </DataGrid.Columns>
         </DataGrid>
-        
+
         <!-- Publications -->
-        <TextBlock Style="{StaticResource TextBlockLabel}" Text="Publishers"/>
+        <TextBlock Text="Publishers" Style="{StaticResource TextBlockLabel}" Margin="0,16,0,2"/>
         <DataGrid 
             CanUserReorderColumns="False"
             CanUserSortColumns="False"

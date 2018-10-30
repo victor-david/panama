@@ -121,6 +121,7 @@ namespace Restless.App.Panama.ViewModel
             provider.Scopes.Add(Config.Instance.FolderTitleRoot);
             provider.ExcludedScopes.Add(Config.Instance.FolderExport);
             provider.ExcludedScopes.Add(Config.Instance.FolderSubmissionDocument);
+            provider.ExcludedScopes.Add(Config.Instance.FolderSubmissionMessage);
             provider.ExcludedScopes.Add(Config.Instance.FolderSubmissionMessageAttachment);
             IsEmptyResultSet = false;
         }

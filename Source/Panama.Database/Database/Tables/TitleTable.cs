@@ -1,5 +1,6 @@
 ﻿using Restless.Tools.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Restless.App.Panama.Database.Tables
@@ -185,6 +186,35 @@ namespace Restless.App.Panama.Database.Tables
         {
             Load(null, string.Format("{0} DESC",Defs. Columns.Written));
         }
+
+        /// <summary>
+        /// Provides an enumerable that gets all titles in order of written DESC.
+        /// </summary>
+        /// <returns>A <see cref="RowObject"/></returns>
+        public IEnumerable<RowObject> GetAllTitles()
+        {
+            DataRow[] rows = Select(null, $"{Defs.Columns.Written} DESC");
+            foreach (DataRow row in rows)
+            {
+                yield return new RowObject(row);
+            }
+            yield break;
+        }
+
+        /// <summary>
+        /// Gets a single <see cref="RowObject"/> as specified by its id.
+        /// </summary>
+        /// <param name="id">The id of the record to get.</param>
+        /// <returns>A <see cref="RowObject"/> for <paramref name="id"/>, or null if not found</returns>
+        public RowObject GetSingleRecord(long id)
+        {
+            DataRow[] rows = Select($"{Defs.Columns.Id}={id}");
+            if (rows.Length==1)
+            {
+                return new RowObject(rows[0]);
+            }
+            return null;
+        }
         #endregion
 
         /************************************************************************/
@@ -280,13 +310,13 @@ namespace Restless.App.Panama.Database.Tables
             foreach (DataRow row in Rows)
             {
                 long titleId = (long)row[Defs.Columns.Id];
-                DataRow versionRow = versions.GetLastVersion(titleId);
-                if (versionRow != null)
+                var verInfo = versions.GetVersionInfo(titleId);
+                if (verInfo.Versions.Count > 0)
                 {
-                    row[Defs.Columns.Calculated.LastestVersionWordCount] = versionRow[TitleVersionTable.Defs.Columns.WordCount];
-                    row[Defs.Columns.Calculated.LastestVersionDate] = versionRow[TitleVersionTable.Defs.Columns.Updated];
-                    row[Defs.Columns.Calculated.LastestVersionPath] = versionRow[TitleVersionTable.Defs.Columns.FileName];
-
+                    // verInfo.Versions[0].
+                    row[Defs.Columns.Calculated.LastestVersionWordCount] = verInfo.Versions[0].WordCount;
+                    row[Defs.Columns.Calculated.LastestVersionDate] = verInfo.Versions[0].Updated;
+                    row[Defs.Columns.Calculated.LastestVersionPath] = verInfo.Versions[0].FileName;
                 }
             }
             AcceptChanges();
@@ -328,13 +358,13 @@ namespace Restless.App.Panama.Database.Tables
         private void UpdateFromLatestVersionCalculated(DataRowChangeEventArgs e, string titleColumn, string titleVersionColumn)
         {
             long titleId = (long)e.Row[TitleVersionTable.Defs.Columns.TitleId];
-            DataRow[] titleRows = Select(string.Format("{0}={1}", Defs.Columns.Id, titleId));
+            DataRow[] titleRows = Select($"{Defs.Columns.Id}={titleId}");
             if (titleRows.Length == 1)
             {
-                DataRow versionRow = Controller.GetTable<TitleVersionTable>().GetLastVersion(titleId);
-                if (versionRow != null)
+                var verInfo = Controller.GetTable<TitleVersionTable>().GetVersionInfo(titleId);
+                if (verInfo.Versions.Count > 0)
                 {
-                    titleRows[0][titleColumn] = versionRow[titleVersionColumn];
+                    titleRows[0][titleColumn] = verInfo.Versions[0].Row[titleVersionColumn];
                 }
             }
         }

@@ -48,8 +48,9 @@ namespace Restless.App.Panama.Tools
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleExportCandidate"/> class
         /// </summary>
-        /// <param name="title">The title</param>
         /// <param name="version">The version number.</param>
+        /// <param name="revision">The revision number,</param>
+        /// <param name="title">The title</param>
         /// <param name="originalPath">The full path to the original file</param>
         /// <param name="exportPath">The full path to the proposed export file.</param>
         /// <remarks>
@@ -57,8 +58,8 @@ namespace Restless.App.Panama.Tools
         /// the status of the export candidate. It sets the <see cref="Status"/> property to one of the
         /// values from the <see cref="TitleExportStatus"/> enumeration.
         /// </remarks>
-        public TitleExportCandidate(string title, long version, string originalPath, string exportPath)
-            :base(title, version, Paths.Title.WithoutRoot(originalPath))
+        public TitleExportCandidate(long version, long revision, string title, string originalPath, string exportPath)
+            :base(version, revision, title, Paths.Title.WithoutRoot(originalPath))
         {
             Validations.ValidateNullEmpty(originalPath, "ExportCandidate.OriginalPath");
             Validations.ValidateNullEmpty(exportPath, "ExportCandidate.ExportPath");

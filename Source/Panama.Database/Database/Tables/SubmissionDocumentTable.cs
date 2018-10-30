@@ -1,5 +1,6 @@
 ﻿using Restless.Tools.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 
@@ -68,7 +69,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return Defs.Columns.Id; }
+            get => Defs.Columns.Id;
         }
         #endregion
 
@@ -124,6 +125,20 @@ namespace Restless.App.Panama.Database.Tables
         {
             AddEntry(batchId, null);
         }
+
+        /// <summary>
+        /// Provides an enumerable that gets all submission documents in order of id ASC.
+        /// </summary>
+        /// <returns>A <see cref="RowObject"/></returns>
+        public IEnumerable<RowObject> GetAllSubmissionDocuments()
+        {
+            DataRow[] rows = Select(null, $"{Defs.Columns.Id} ASC");
+            foreach (DataRow row in rows)
+            {
+                yield return new RowObject(row);
+            }
+            yield break;
+        }
         #endregion
 
         /************************************************************************/
@@ -174,42 +189,87 @@ namespace Restless.App.Panama.Database.Tables
 
         /************************************************************************/
 
-        #region ITableImport and IColumnRowImporter implementation (commented out)
-        //public bool PerformImport()
-        //{
-        //    return DatabaseImporter.Instance.ImportTable(this, this, "submission_document");
-        //}
+        #region Row Object
+        /// <summary>
+        /// Encapsulates a single row from the <see cref="SubmissionDocumentTable"/>.
+        /// </summary>
+        public class RowObject : RowObjectBase<SubmissionDocumentTable>
+        {
+            #region Public properties
+            /// <summary>
+            /// Gets the id for this row object.
+            /// </summary>
+            public long Id
+            {
+                get => GetInt64(Defs.Columns.Id);
+            }
 
-        //public string GetColumnName(string origColName)
-        //{
-        //    switch (origColName)
-        //    {
-        //        case "document_id": return Defs.Columns.DocId;
-        //        case "document_type": return Defs.Columns.DocType;
-        //        default: return origColName;
-        //    }
-        //}
+            /// <summary>
+            /// Gets the batch id for this row object.
+            /// </summary>
+            public long BatchId
+            {
+                get => GetInt64(Defs.Columns.BatchId);
+            }
 
-        //public bool GetRowConfirmation(System.Data.DataRow row)
-        //{
-        //    //string docId = row["document_id"].ToString();
-        //    //string hard = @"d:\writing\title_manager\documents\";
-        //    //if (docId.ToLower().StartsWith(hard))
-        //    //{
-        //    //    row["document_id"] = docId.Substring(hard.Length);
-        //    //}
-        //    return true;
-        //}
-        //// Tor House Foundation_2008-03-02-19-04-10-421.doc
+            /// <summary>
+            /// Gets or sets the title for this row object.
+            /// </summary>
+            public string Title
+            {
+                get => GetString(Defs.Columns.Title);
+                set => SetValue(Defs.Columns.Title, value);
+            }
 
-        //public bool IncludeColumn(string origColName)
-        //{
-        //    return true;
-        //}
+            /// <summary>
+            /// Gets the document type for this row object.
+            /// </summary>
+            public long DocType
+            {
+                get => GetInt64(Defs.Columns.DocType);
+            }
 
+            /// <summary>
+            /// Gets or sets the document id (usually a file name) for this row object.
+            /// </summary>
+            public string DocumentId
+            {
+                get => GetString(Defs.Columns.DocId);
+                set => SetValue(Defs.Columns.DocId, value);
+            }
+
+            /// <summary>
+            /// Gets or sets the updated date for this row object.
+            /// </summary>
+            public DateTime Updated
+            {
+                get => GetDateTime(Defs.Columns.Updated);
+                set => SetValue(Defs.Columns.Updated, value);
+            }
+
+            /// <summary>
+            /// Gets or sets the file size.
+            /// </summary>
+            public long Size
+            {
+                get => GetInt64(Defs.Columns.Size);
+                set => SetValue(Defs.Columns.Size, value);
+            }
+            #endregion
+
+            /************************************************************************/
+
+            #region Constructor
+            /// <summary>
+            /// Initializes a new instance of the <see cref="RowObject"/> class.
+            /// </summary>
+            /// <param name="row">The data row</param>
+            public RowObject(DataRow row)
+                : base(row)
+            {
+            }
+            #endregion
+        }
         #endregion
-
-
-
     }
 }

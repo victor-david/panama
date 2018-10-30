@@ -13,7 +13,7 @@ namespace Restless.App.Panama
     public class TitleVersionRenameItem : BindableBase
     {
         #region Private
-        private readonly DataRow row;
+        private readonly TitleVersionTable.RowObject ver;
         private string status;
         #endregion
 
@@ -34,6 +34,11 @@ namespace Restless.App.Panama
             /// The name of the <see cref="TitleVersionRenameItem.Version"/> property.
             /// </summary>
             public const string Version = nameof(Version);
+
+            /// <summary>
+            /// The name of the <see cref="TitleVersionRenameItem.RevisionChar"/> property.
+            /// </summary>
+            public const string RevisionChar = nameof(RevisionChar);
 
             /// <summary>
             /// The name of the <see cref="TitleVersionRenameItem.OriginalNameDisplay"/> property.
@@ -72,8 +77,23 @@ namespace Restless.App.Panama
         /// </summary>
         public long Version
         {
-            get;
-            private set;
+            get => ver.Version;
+        }
+
+        /// <summary>
+        /// Gets the revision.
+        /// </summary>
+        public long Revision
+        {
+            get => ver.Revision;
+        }
+
+        /// <summary>
+        /// Gets the revision character.
+        /// </summary>
+        public char RevisionChar
+        {
+            get => (char)ver.Revision;
         }
 
         /// <summary>
@@ -82,7 +102,7 @@ namespace Restless.App.Panama
         public string OriginalName
         {
             get;
-            private set;
+            //private set;
         }
 
         /// <summary>
@@ -91,7 +111,7 @@ namespace Restless.App.Panama
         public string OriginalNameDisplay
         {
             get;
-            private set;
+            //private set;
         }
 
         /// <summary>
@@ -108,7 +128,6 @@ namespace Restless.App.Panama
         public string NewName
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -117,7 +136,6 @@ namespace Restless.App.Panama
         public string NewNameDisplay
         {
             get;
-            private set;
         }
         #endregion
 
@@ -127,30 +145,28 @@ namespace Restless.App.Panama
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleVersionRenameItem"/> class.
         /// </summary>
-        /// <param name="row">The data row</param>
+        /// <param name="ver">The title version row object</param>
         /// <param name="title">The title</param>
-        public TitleVersionRenameItem(DataRow row, string title)
+        public TitleVersionRenameItem(TitleVersionTable.RowObject ver, string title)
         {
-            Validations.ValidateDataRow(row, TitleVersionTable.Defs.TableName);
+            Validations.ValidateNull(ver, nameof(ver));
             Validations.ValidateNullEmpty(title, "VersionRenameItem.Title");
-            this.row = row;
+            this.ver = ver;
 
-            Version = (long)row[TitleVersionTable.Defs.Columns.Version];
-            string rowFileName = row[TitleVersionTable.Defs.Columns.FileName].ToString();
-
-            OriginalName = Paths.Title.WithRoot(rowFileName);
+            OriginalName = Paths.Title.WithRoot(ver.FileName);
             OriginalNameDisplay = Path.GetFileName(OriginalName);
 
             /*
              * Examples of new file name
-             * The Title Of This Piece_v3.en-us.docx
-             * The Title Of This Piece_v3.es-mx.docx
+             * The Title Of This Piece_v3.A.en-us.docx
+             * The Title Of This Piece_v3.B.es-mx.docx
              */
             string newNameWithoutPath =
-                string.Format("{0}_v{1}.{2}{3}",
+                string.Format("{0}_v{1}.{2}.{3}{4}",
                     Format.ValidFileName(title),
                     Version,
-                    row[TitleVersionTable.Defs.Columns.LangId],
+                    RevisionChar,
+                    ver.LanguageId,
                     Path.GetExtension(OriginalName));
 
             NewName = Path.Combine(Path.GetDirectoryName(OriginalName), newNameWithoutPath);
@@ -180,7 +196,7 @@ namespace Restless.App.Panama
             if (!Same && OriginalExists)
             {
                 File.Move(OriginalName, NewName);
-                row[TitleVersionTable.Defs.Columns.FileName] = Paths.Title.WithoutRoot(NewName);
+                ver.FileName = Paths.Title.WithoutRoot(NewName);
                 Status = "Rename successful";
             }
         }

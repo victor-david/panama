@@ -5,6 +5,9 @@
     <Style TargetType="ToolBar" x:Key="ToolBarCommandHolder">
         <Setter Property="Height" Value="38"/>
         <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToolBarTray}}}"/>
+        <Setter Property="Background" Value="{StaticResource LightBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DarkBrush}"/>
         <Style.Resources>
             <Style x:Key="{x:Static ToolBar.ButtonStyleKey}" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                 <Setter Property="Margin" Value="5,0"/>
@@ -16,6 +19,14 @@
                         <Setter Property="Opacity" Value="0.45" />
                     </Trigger>
                 </Style.Triggers>
+            </Style>
+            <Style TargetType="ProgressBar">
+                <Setter Property="Height" Value="16"/>
+                <Setter Property="Margin" Value="6,0"/>
+            </Style>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockMessage}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="4,0"/>
             </Style>
         </Style.Resources>
     </Style>

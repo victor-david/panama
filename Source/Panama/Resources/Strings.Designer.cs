@@ -1578,7 +1578,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation converts all .doc files in the specified folder to Open Xml (.docx ) files. If the converted file belongs to a title version, the version record will be updated to reflect the change. If a corresponding .docx file exists in the folder (for example, Report.doc and Report.docx), the .docx file will be overwritten. After the conversion, the .doc file will be sent to the recycle bin..
+        ///   Looks up a localized string similar to This operation converts all .doc files in the specified folder to Open Xml (.docx ) files. If the converted file belongs to a title version, the version record will be updated to reflect the change. If a corresponding .docx file exists in the folder (for example, Report.doc and Report.docx), the .docx file will be overwritten. After the conversion, the .doc file will be deleted..
         /// </summary>
         public static string HeaderToolOperationConvert {
             get {
@@ -1596,7 +1596,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted. Files are exported to: {0}.
+        ///   Looks up a localized string similar to This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted. Files are exported to: {0}.
         /// </summary>
         public static string HeaderToolOperationExport {
             get {

@@ -7,10 +7,7 @@
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="500" d:DesignWidth="350">
-    <HeaderedContentControl
-        Grid.Column="1" Header="Preview" 
-        Visibility="{Binding IsPreviewActive, 
-        Converter={cv:BooleanToVisibilityConverter}}">
+    <HeaderedContentControl Header="Preview" Style="{StaticResource HCCTool}">
         <DockPanel>
             <TextBlock
                 DockPanel.Dock="Top"

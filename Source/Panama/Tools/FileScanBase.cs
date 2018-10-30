@@ -130,7 +130,6 @@ namespace Restless.App.Panama.Tools
         /************************************************************************/
 
         #region Protected methods
-
         /// <summary>
         /// When implemented in a derived class, performs its operation.
         /// </summary>

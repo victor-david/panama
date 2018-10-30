@@ -3,10 +3,9 @@ using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
-using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
+using System.Linq;
 
 namespace Restless.App.Panama.Tools
 {
@@ -18,6 +17,7 @@ namespace Restless.App.Panama.Tools
         #region Private
         private string outputDirectory;
         private TitleTable titleTable;
+        private TitleVersionTable titleVersionTable;
         #endregion
 
         /************************************************************************/
@@ -42,13 +42,14 @@ namespace Restless.App.Panama.Tools
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="TitleExporter"/> class.
+        /// Initializes a new instance of the <see cref="TitleLister"/> class.
         /// </summary>
         /// <param name="outputDirectory">The directory in which to write the title list.</param>
         public TitleLister(string outputDirectory)
         {
             this.outputDirectory = outputDirectory;
             titleTable = DatabaseController.Instance.GetTable<TitleTable>();
+            titleVersionTable = DatabaseController.Instance.GetTable<TitleVersionTable>();
             TitleListFileName = Path.Combine(outputDirectory, ListFile);
         }
         #endregion
@@ -66,28 +67,21 @@ namespace Restless.App.Panama.Tools
 
             List<string> lines = new List<string>();
 
-            DataRow[] titleRows = titleTable.Select(null, string.Format("{0} DESC", TitleTable.Defs.Columns.Written));
-            TotalCount = titleRows.Length;
+            var titleEnumerator = titleTable.GetAllTitles();
+            TotalCount = titleEnumerator.Count();
 
-            foreach (DataRow titleRow in titleRows)
+            foreach (var title in titleEnumerator)
             {
-                DateTime written = (DateTime)titleRow[TitleTable.Defs.Columns.Written];
-                lines.Add(string.Format("{0} - {1}", written.ToString(Config.Instance.DateFormat), titleRow[TitleTable.Defs.Columns.Title].ToString()));
+                lines.Add(string.Format("{0} - {1}", title.Written.ToString(Config.Instance.DateFormat), title.Title));
 
-                DataRow[] titleVersionRows = titleRow.GetChildRows(TitleTable.Defs.Relations.ToVersion);
-                foreach (DataRow titleVersionRow in titleVersionRows)
+                foreach (var ver in titleVersionTable.GetAllVersions(title.Id))
                 {
-                    lines.Add(
-                        string.Format("  v{0}. {1} {2} {3}", 
-                            titleVersionRow[TitleVersionTable.Defs.Columns.Version], 
-                            titleVersionRow[TitleVersionTable.Defs.Columns.LangId], 
-                            titleVersionRow[TitleVersionTable.Defs.Columns.FileName],
-                            titleVersionRow[TitleVersionTable.Defs.Columns.Note]));
+                    string note = !string.IsNullOrEmpty(ver.Note) ? $"[{ver.Note}]" : string.Empty;
+                    lines.Add($"  v{ver.Version}.{(char)ver.Revision} {ver.LanguageId} {ver.FileName}   {note}".Trim());
                 }
 
                 lines.Add("----------------------------------------------------------------------------------------------------");
                 ScanCount++;
-                //System.Threading.Thread.Sleep(1);
             }
 
             File.WriteAllLines(TitleListFileName, lines);

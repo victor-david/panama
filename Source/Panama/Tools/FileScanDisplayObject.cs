@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Restless.Tools.Utility;
+﻿using Restless.Tools.Utility;
+using System;
 
 namespace Restless.App.Panama.Tools
 {
@@ -22,12 +19,29 @@ namespace Restless.App.Panama.Tools
         }
 
         /// <summary>
-        /// Gets the version
+        /// Gets the version number. 
+        /// Some consumers of this class set this to zero.
         /// </summary>
         public long Version
         {
             get;
-            private set;
+        }
+
+        /// <summary>
+        /// Gets the revision number.
+        /// Some consumers of this class set this to zero.
+        /// </summary>
+        public long Revision
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the size of the file in bytes.
+        /// </summary>
+        public long Size
+        {
+            get;
         }
 
         /// <summary>
@@ -48,43 +62,62 @@ namespace Restless.App.Panama.Tools
             private set;
         }
         #endregion
-        
+
         /************************************************************************/
 
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="FileScanDisplayObject"/> class.
         /// </summary>
-        /// <param name="title">The title</param>
         /// <param name="version">The version number</param>
+        /// <param name="revision">The revision number.</param>
+        /// <param name="size">The size of the file</param>
+        /// <param name="title">The title</param>
         /// <param name="filename">The file name</param>
-        public FileScanDisplayObject(string title, long version, string filename)
+        public FileScanDisplayObject(long version, long revision, long size, string title, string filename)
         {
             Validations.ValidateNullEmpty(title, "FileScanDisplayObject.Title");
             Validations.ValidateNullEmpty(filename, "FileScanDisplayObject.FileName");
 
-            Title = title;
             Version = version;
+            Revision = revision;
+            Size = size;
+            Title = title;
             FileName = filename;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileScanDisplayObject"/> class, setting the version number to zero.
+        /// Initializes a new instance of the <see cref="FileScanDisplayObject"/> class.
         /// </summary>
+        /// <param name="version">The version number</param>
+        /// <param name="revision">The revision number.</param>
         /// <param name="title">The title</param>
         /// <param name="filename">The file name</param>
-        public FileScanDisplayObject(string title, string filename)
-            : this(title, 0, filename)
+        public FileScanDisplayObject(long version, long revision, string title, string filename)
+            :this(version, revision, 0, title, filename)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileScanDisplayObject"/> class, setting title to 'n/a', and version number to zero.
+        /// Initializes a new instance of the <see cref="FileScanDisplayObject"/> class,
+        /// setting version number and revision number to zero.
+        /// </summary>
+        /// <param name="title">The title</param>
+        /// <param name="filename">The file name</param>
+        public FileScanDisplayObject(string title, string filename)
+            : this(0, 0, title, filename)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileScanDisplayObject"/> class,
+        /// setting title to 'n/a',  and version / revision numbers to zero.
         /// </summary>
         /// <param name="filename">The file name</param>
+        /// <param name="size">The file size</param>
         /// <param name="lastModified">The last modified of the file</param>
-        public FileScanDisplayObject(string filename, DateTime lastModified)
-            : this("n/a", 0, filename)
+        public FileScanDisplayObject(string filename, long size, DateTime lastModified)
+            : this(0, 0, size, "n/a", filename)
         {
             LastModified = lastModified;
         }

@@ -33,68 +33,65 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         protected override void ExecuteTask()
         {
-            //HashSet<string> processedPaths = new HashSet<string>();
-            
             DatabaseController.Instance.Execution.NonQuery("VACUUM");
 
-            DataRow[] titleRows = DatabaseController.Instance.GetTable<TitleTable>().Select(null, string.Format("{0} DESC", TitleTable.Defs.Columns.Written));
-            TotalCount = titleRows.Length;
+            var titleEnumerator = DatabaseController.Instance.GetTable<TitleTable>().GetAllTitles();
+            TotalCount = titleEnumerator.Count();
 
-            foreach (DataRow titleRow in titleRows)
+            foreach (var title in titleEnumerator)
             {
                 ScanCount++;
-                var titleObj = new TitleTable.RowObject(titleRow);
 
-                DataRow[] versionRows = DatabaseController.Instance.GetTable<TitleVersionTable>().GetAllVersions(titleObj.Id);
-                foreach (DataRow versionRow in versionRows)
+                foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().GetAllVersions(title.Id))
                 {
-                    var verObj = new TitleVersionTable.RowObject(versionRow);
-                    verObj.SetFileInfo(Paths.Title.WithRoot(verObj.FileName));
+                    // var verObj = new TitleVersionTable.RowObject(ver);
+                    ver.SetFileInfo(Paths.Title.WithRoot(ver.FileName));
 
-                    if (verObj.Info.Exists)
+                    if (ver.Info.Exists)
                     {
                         long foundWordCount = 0;
-                        if (verObj.DocType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType)
+                        if (ver.DocType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType)
                         {
-                            foundWordCount = OpenXmlDocument.Reader.TryGetWordCount(verObj.Info.FullName);
+                            foundWordCount = OpenXmlDocument.Reader.TryGetWordCount(ver.Info.FullName);
                             if (Config.Instance.SyncDocumentInternalDates)
                             {
-                                var props = OpenXmlDocument.Reader.GetProperties(verObj.Info.FullName);
+                                var props = OpenXmlDocument.Reader.GetProperties(ver.Info.FullName);
                                 // we can't use LastWriteTimeUtc here because props.Core.Modified converts it
                                 // back to a local time. If we use Utc, it means that docs would update every time we run update
                                 // because props.Core.Modified is never equal to verObj.Info.LastWriteTimeUtc.
                                 //
                                 // titleObj.WrittenUtc comes from the database. The DateTime.Kind property is not stored, therefore
                                 // we don't know for sure if it's local or utc. With new entries / changes to Written, we store Utc. 
-                                if (props.Core.Created != titleObj.Written.ToLocalTime() || props.Core.Modified != verObj.Info.LastWriteTime)
+                                if (props.Core.Created != title.Written.ToLocalTime() || props.Core.Modified != ver.Info.LastWriteTime)
                                 {
-                                    props.Core.Created = titleObj.Written.ToLocalTime();
+                                    props.Core.Created = title.Written.ToLocalTime();
                                     // we need to add the same number of seconds that props.Save() does.
-                                    props.Core.Modified = verObj.Info.LastWriteTime.AddSeconds(OpenXmlDocument.SecondsToAdd);
+                                    props.Core.Modified = ver.Info.LastWriteTime.AddSeconds(OpenXmlDocument.SecondsToAdd);
                                     props.Save();
                                     // we need to obtain the file info again to reflect the new modified date
-                                    verObj.SetFileInfo(Paths.Title.WithRoot(verObj.FileName));
+                                    ver.SetFileInfo(Paths.Title.WithRoot(ver.FileName));
                                 }
 
                             }
                         }
-                        if (verObj.Updated != verObj.Info.LastWriteTimeUtc || verObj.Size != verObj.Info.Length || verObj.WordCount != foundWordCount)
+                        if (ver.Updated != ver.Info.LastWriteTimeUtc || ver.Size != ver.Info.Length || ver.WordCount != foundWordCount)
                         {
-                            verObj.Updated = verObj.Info.LastWriteTimeUtc; ;
-                            verObj.Size = verObj.Info.Length; ;
-                            verObj.WordCount = foundWordCount;
+                            ver.Updated = ver.Info.LastWriteTimeUtc; ;
+                            ver.Size = ver.Info.Length; ;
+                            ver.WordCount = foundWordCount;
                             DatabaseController.Instance.GetTable<TitleVersionTable>().Save();
-                            var item = new FileScanDisplayObject(titleObj.Title, verObj.Version, verObj.FileName);
+                            var item = new FileScanDisplayObject(ver.Version, ver.Revision, title.Title, ver.FileName);
                             OnUpdated(item);
                         }
                     }
                     else
                     {
-                        var item = new FileScanDisplayObject(titleObj.Title, verObj.Version, verObj.FileName);
+                        var item = new FileScanDisplayObject(ver.Version, ver.Revision, title.Title, ver.FileName);
                         OnNotFound(item);
                     }
                 }
             }
+            
         }
         #endregion
     }
