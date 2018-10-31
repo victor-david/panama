@@ -85,7 +85,7 @@ namespace Restless.App.Panama.ViewModel
                 throw new InvalidOperationException(Strings.InvalidOpTitleDoesNotExist);
             }
 
-            foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().GetAllVersions(titleId))
+            foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(titleId))
             {
                 renameView.Add(new TitleVersionRenameItem(ver, title.Title));
             }

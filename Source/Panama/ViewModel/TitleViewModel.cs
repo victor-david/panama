@@ -190,6 +190,8 @@ namespace Restless.App.Panama.ViewModel
             MaxCreatable = 1;
             Columns.Create("Id", TitleTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.CreateImage<BooleanToImageConverter>("R", TitleTable.Defs.Columns.Ready).AddToolTip(Strings.TooltipTitleReady);
+            Columns.CreateImage<BooleanToImageConverter>("Q", TitleTable.Defs.Columns.QuickFlag, "ImageExclamation").AddToolTip(Strings.TooltipTitleQuickFlag);
+
             Columns.Create("Title", TitleTable.Defs.Columns.Title).MakeFlexWidth(4);
             Columns.SetDefaultSort(Columns.Create("Written", TitleTable.Defs.Columns.Written).MakeDate(), ListSortDirection.Descending);
 
@@ -224,6 +226,7 @@ namespace Restless.App.Panama.ViewModel
             /* This command is used from this model and from the Filters controller */
             Commands.Add("ClearFilter", (o) => Filters.ClearAll(), (o) => Config.TitleFilter.IsAnyFilterActive);
             Commands.Add("ReadyFilter", (o) => Filters.SetToReady());
+            Commands.Add("FlaggedFilter", (o) => Filters.SetToFlagged());
             Commands.Add("SubmittedFilter", (o) => Filters.SetToSubmitted());
             Commands.Add("PublishedFilter", (o) => Filters.SetToPublished());
             Commands.Add("AdvancedFilter", (o) => 
@@ -234,7 +237,10 @@ namespace Restless.App.Panama.ViewModel
             });
 
             Commands.Add("ExtractTitle", RunExtractTitle, CanRunExtractTitle);
-            
+            Commands.Add("ToggleFlag", RunToggleTitleFlagCommand, (p) => IsSelectedRowAccessible);
+            Commands.Add("ClearFlags", RunClearTitleFlagsCommand);
+
+            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandClearTitleFlags, Strings.CommandClearTitleFlagsTooltip, Commands["ClearFlags"], ResourceHelper.Get("ImageRemove"), VisualCommandImageSize, VisualCommandFontSize));
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddTitle, Strings.CommandAddTitleTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
             double minWidth = 80.0;
@@ -242,12 +248,15 @@ namespace Restless.App.Panama.ViewModel
             advFilter = new VisualCommandViewModel(Strings.CommandFilterAdvanced, Strings.CommandFilterAdvancedTooltip, Commands["AdvancedFilter"], ResourceHelper.Get("ImageChevronDown"), imgSize, VisualCommandFontSize, 100.0);
             FilterCommands.Add(advFilter);
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterReady, Strings.CommandTitleFilterReadyTooltip, Commands["ReadyFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterFlagged, Strings.CommandTitleFilterFlaggedTooltip, Commands["FlaggedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterSubmitted, Strings.CommandTitleFilterSubmittedTooltip, Commands["SubmittedFilter"], null, imgSize, VisualCommandFontSize,  minWidth));
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterPublished, Strings.CommandTitleFilterPublishedTooltip, Commands["PublishedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandOpenTitleOrDoubleClick, OpenRowCommand, "ImageOpenWordMenu");
+            MenuItems.AddItem(Strings.CommandFlagTitle, Commands["ToggleFlag"], "ImageExclamationMenu");
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandDeleteTitle, DeleteCommand, "ImageDeleteMenu");
 
@@ -405,6 +414,26 @@ namespace Restless.App.Panama.ViewModel
                 }
             }
             return false;
+        }
+
+        private void RunToggleTitleFlagCommand(object parm)
+        {
+            if (IsSelectedRowAccessible)
+            {
+                var obj = new TitleTable.RowObject(SelectedRow);
+                obj.QuickFlag = !obj.QuickFlag;
+            }
+        }
+
+        private void RunClearTitleFlagsCommand(object parm)
+        {
+            if (Messages.ShowYesNo(Strings.ConfirmationClearTitleFlags))
+            {
+                foreach (var title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
+                {
+                    title.QuickFlag = false;
+                }
+            }
         }
 
         private void PrepareForOpenXml()

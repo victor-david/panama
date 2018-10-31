@@ -986,6 +986,13 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Sync.64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Remove.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Flag.Blue.64.png" />
+    <Resource Include="Resources\Images\Image.Flag.Red.64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

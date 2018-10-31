@@ -81,9 +81,9 @@ namespace Restless.App.Panama.Tools
         {
             candidates.Clear();
 
-            foreach (var title in DatabaseController.Instance.GetTable<TitleTable>().GetAllTitles())
+            foreach (var title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
             {
-                foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().GetAllVersions(title.Id))
+                foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(title.Id))
                 {
                     // DateWritten_Title_vVer.Rev.Lang.ext
                     // Ex: 2011-05-24_Title_v1.A.en-us.docx

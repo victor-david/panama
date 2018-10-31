@@ -19,11 +19,12 @@
                     <Button Command="{Binding Filters.Commands[SelectFolder]}">Select</Button>
                     <Button Command="{Binding Filters.Commands[ClearFolder]}">Clear</Button>
                 </StackPanel>
-                <UniformGrid Rows="2" Columns="2" Margin="4">
+                <UniformGrid Rows="3" Columns="2" Margin="4">
                     <con:FilterState Id="F1" Title="Ready" State="{Binding Config.TitleFilter.Ready}" />
-                    <con:FilterState Id="F2" Title="Currently Submitted" State="{Binding Config.TitleFilter.Submitted}" />
-                    <con:FilterState Id="F3" Title="Ever Submitted" State="{Binding Config.TitleFilter.EverSubmitted}" />
-                    <con:FilterState Id="F4" Title="Published" State="{Binding Config.TitleFilter.Published}" />
+                    <con:FilterState Id="F2" Title="Flagged" State="{Binding Config.TitleFilter.Flagged}" />
+                    <con:FilterState Id="F3" Title="Currently Submitted" State="{Binding Config.TitleFilter.Submitted}" />
+                    <con:FilterState Id="F4" Title="Ever Submitted" State="{Binding Config.TitleFilter.EverSubmitted}" />
+                    <con:FilterState Id="F5" Title="Published" State="{Binding Config.TitleFilter.Published}" />
                 </UniformGrid>
                 <StackPanel Style="{StaticResource StackPanelCommandHolder}">
                     <Label>Word count</Label>

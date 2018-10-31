@@ -134,6 +134,14 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
+        /// Sets the filter options to ready only.
+        /// </summary>
+        public void SetToFlagged()
+        {
+            ClearAndApplyAction(() => Config.TitleFilter.Flagged = FilterState.Yes);
+        }
+
+        /// <summary>
         /// Sets the filter options to submitted only.
         /// </summary>
         public void SetToSubmitted()
@@ -280,6 +288,12 @@ namespace Restless.App.Panama.ViewModel
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
                 Append(string.Format("{0}={1}", TitleTable.Defs.Columns.Ready, (byte)f.Ready), (f.Ready == FilterState.No ? "not ready" : "ready"));
+            }
+
+            if (f.Flagged != FilterState.Either)
+            {
+                if (filter.Length > 0) Append(" AND ", " and ");
+                Append(string.Format("{0}={1}", TitleTable.Defs.Columns.QuickFlag, (byte)f.Flagged), (f.Flagged == FilterState.No ? "not flagged" : "flagged"));
             }
 
             if (f.Submitted != FilterState.Either)

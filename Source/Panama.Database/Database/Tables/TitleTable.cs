@@ -58,6 +58,11 @@ namespace Restless.App.Panama.Database.Tables
                 public const string Ready = "ready";
 
                 /// <summary>
+                /// The name of the quick flag column. 
+                /// </summary>
+                public const string QuickFlag = "qflag";
+
+                /// <summary>
                 /// The name of the notes column. 
                 /// </summary>
                 public const string Notes = "notes";
@@ -191,7 +196,7 @@ namespace Restless.App.Panama.Database.Tables
         /// Provides an enumerable that gets all titles in order of written DESC.
         /// </summary>
         /// <returns>A <see cref="RowObject"/></returns>
-        public IEnumerable<RowObject> GetAllTitles()
+        public IEnumerable<RowObject> EnumerateTitles()
         {
             DataRow[] rows = Select(null, $"{Defs.Columns.Written} DESC");
             foreach (DataRow row in rows)
@@ -326,13 +331,14 @@ namespace Restless.App.Panama.Database.Tables
         /// Populates a new row with default (starter) values
         /// </summary>
         /// <param name="row">The freshly created DataRow to poulate</param>
-        protected override void PopulateDefaultRow(System.Data.DataRow row)
+        protected override void PopulateDefaultRow(DataRow row)
         {
             row[Defs.Columns.Title] = "(new title)";
             row[Defs.Columns.Created] = DateTime.UtcNow;
             row[Defs.Columns.Written] = DateTime.UtcNow;
             row[Defs.Columns.AuthorId] = 1;
-            row[Defs.Columns.Ready] = 0;
+            row[Defs.Columns.Ready] = false;
+            row[Defs.Columns.QuickFlag] = false;
         }
         #endregion
 
@@ -423,6 +429,24 @@ namespace Restless.App.Panama.Database.Tables
             {
                 get => GetInt64(Defs.Columns.AuthorId);
                 set => SetValue(Defs.Columns.AuthorId, value);
+            }
+
+            /// <summary>
+            /// Gets or sets the ready flag.
+            /// </summary>
+            public bool Ready
+            {
+                get => GetBoolean(Defs.Columns.Ready);
+                set => SetValue(Defs.Columns.Ready, value);
+            }
+
+            /// <summary>
+            /// Gets or sets the quick tag flag.
+            /// </summary>
+            public bool QuickFlag
+            {
+                get => GetBoolean(Defs.Columns.QuickFlag);
+                set => SetValue(Defs.Columns.QuickFlag, value);
             }
 
             /// <summary>

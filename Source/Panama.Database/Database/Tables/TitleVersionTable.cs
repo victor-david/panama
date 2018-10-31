@@ -153,7 +153,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         /// <param name="titleId">The title id to get all versions for.</param>
         /// <returns>A <see cref="RowObject"/></returns>
-        public IEnumerable<RowObject> GetAllVersions(long titleId)
+        public IEnumerable<RowObject> EnumerateVersions(long titleId)
         {
             DataRow[] rows = Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC");
             foreach (DataRow row in rows)

@@ -33,7 +33,7 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         protected override void ExecuteTask()
         {
-            var submissionEnumerator = DatabaseController.Instance.GetTable<SubmissionDocumentTable>().GetAllSubmissionDocuments();
+            var submissionEnumerator = DatabaseController.Instance.GetTable<SubmissionDocumentTable>().EnumerateSubmissionDocuments();
 
             TotalCount = submissionEnumerator.Count();
 

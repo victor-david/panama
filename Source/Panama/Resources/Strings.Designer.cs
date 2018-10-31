@@ -398,6 +398,24 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Flags.
+        /// </summary>
+        public static string CommandClearTitleFlags {
+            get {
+                return ResourceManager.GetString("CommandClearTitleFlags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear flag from all titles.
+        /// </summary>
+        public static string CommandClearTitleFlagsTooltip {
+            get {
+                return ResourceManager.GetString("CommandClearTitleFlagsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string CommandConfig {
@@ -565,6 +583,15 @@ namespace Restless.App.Panama.Resources {
         public static string CommandFilterToPublisher {
             get {
                 return ResourceManager.GetString("CommandFilterToPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle flag for this title.
+        /// </summary>
+        public static string CommandFlagTitle {
+            get {
+                return ResourceManager.GetString("CommandFlagTitle", resourceCulture);
             }
         }
         
@@ -875,6 +902,24 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flagged.
+        /// </summary>
+        public static string CommandTitleFilterFlagged {
+            get {
+                return ResourceManager.GetString("CommandTitleFilterFlagged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter title list to display only titles that are flagged.
+        /// </summary>
+        public static string CommandTitleFilterFlaggedTooltip {
+            get {
+                return ResourceManager.GetString("CommandTitleFilterFlaggedTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Published.
         /// </summary>
         public static string CommandTitleFilterPublished {
@@ -1113,6 +1158,15 @@ namespace Restless.App.Panama.Resources {
         public static string ConfirmationApplyExtractedTitleFormat {
             get {
                 return ResourceManager.GetString("ConfirmationApplyExtractedTitleFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation will clear the quick flag from all titles. Do you want to continue?.
+        /// </summary>
+        public static string ConfirmationClearTitleFlags {
+            get {
+                return ResourceManager.GetString("ConfirmationClearTitleFlags", resourceCulture);
             }
         }
         
@@ -2183,6 +2237,15 @@ namespace Restless.App.Panama.Resources {
         public static string TooltipTitlePublishedCount {
             get {
                 return ResourceManager.GetString("TooltipTitlePublishedCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title is flagged.
+        /// </summary>
+        public static string TooltipTitleQuickFlag {
+            get {
+                return ResourceManager.GetString("TooltipTitleQuickFlag", resourceCulture);
             }
         }
         

@@ -130,7 +130,7 @@ namespace Restless.App.Panama.Database.Tables
         /// Provides an enumerable that gets all submission documents in order of id ASC.
         /// </summary>
         /// <returns>A <see cref="RowObject"/></returns>
-        public IEnumerable<RowObject> GetAllSubmissionDocuments()
+        public IEnumerable<RowObject> EnumerateSubmissionDocuments()
         {
             DataRow[] rows = Select(null, $"{Defs.Columns.Id} ASC");
             foreach (DataRow row in rows)

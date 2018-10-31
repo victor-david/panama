@@ -13,6 +13,7 @@ namespace Restless.App.Panama.Filter
         private FilterState everSubmitted;
         private FilterState published;
         private FilterState ready;
+        private FilterState flagged;
         private FilterState submitted;
         private TagFilterCombine tagCombine;
         private int wordCount;
@@ -34,6 +35,7 @@ namespace Restless.App.Panama.Filter
                     EverSubmitted != FilterState.Either ||
                     Published != FilterState.Either ||
                     Ready != FilterState.Either ||
+                    Flagged != FilterState.Either ||
                     Submitted != FilterState.Either ||
                     !string.IsNullOrEmpty(Folder) ||
                     WordCount != 0 ||
@@ -46,7 +48,7 @@ namespace Restless.App.Panama.Filter
         /// </summary>
         public bool IsTagFilterActive
         {
-            get { return Tags.Count > 0; }
+            get => Tags.Count > 0;
         }
 
         /// <summary>
@@ -54,7 +56,7 @@ namespace Restless.App.Panama.Filter
         /// </summary>
         public FilterState EverSubmitted
         {
-            get { return everSubmitted; }
+            get => everSubmitted;
             set 
             {
                 if (SetProperty(ref everSubmitted, value))
@@ -69,7 +71,7 @@ namespace Restless.App.Panama.Filter
         /// </summary>
         public FilterState Published
         {
-            get { return published; }
+            get => published;
             set
             {
                 if (SetProperty(ref published, value))
@@ -84,10 +86,25 @@ namespace Restless.App.Panama.Filter
         /// </summary>
         public FilterState Ready
         {
-            get { return ready; }
+            get => ready;
             set
             {
                 if (SetProperty(ref ready, value))
+                {
+                    OnChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the filter's ready option. 
+        /// </summary>
+        public FilterState Flagged
+        {
+            get => flagged;
+            set
+            {
+                if (SetProperty(ref flagged, value))
                 {
                     OnChanged();
                 }
@@ -99,7 +116,7 @@ namespace Restless.App.Panama.Filter
         /// </summary>
         public FilterState Submitted
         {
-            get { return submitted; }
+            get => submitted;
             set
             {
                 if (SetProperty(ref submitted, value))
@@ -115,7 +132,7 @@ namespace Restless.App.Panama.Filter
         /// </summary>
         public string Folder
         {
-            get { return folder; }
+            get => folder;
             set
             {
                 if (SetProperty(ref folder, value))
@@ -137,7 +154,7 @@ namespace Restless.App.Panama.Filter
         /// </remarks>
         public int WordCount
         {
-            get { return wordCount; }
+            get => wordCount;
             set
             {
                 if (SetProperty(ref wordCount, value))
@@ -152,7 +169,7 @@ namespace Restless.App.Panama.Filter
         /// </summary>
         public TagFilterCombine TagCombine
         {
-            get { return tagCombine; }
+            get => tagCombine;
             set
             {
                 if (SetProperty(ref tagCombine, value))
@@ -197,6 +214,7 @@ namespace Restless.App.Panama.Filter
             EverSubmitted = FilterState.Either;
             Published = FilterState.Either;
             Ready = FilterState.Either;
+            Flagged = FilterState.Either;
             Submitted = FilterState.Either;
             TagCombine = TagFilterCombine.And;
             Folder = null;

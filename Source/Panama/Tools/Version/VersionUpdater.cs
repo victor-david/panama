@@ -35,14 +35,14 @@ namespace Restless.App.Panama.Tools
         {
             DatabaseController.Instance.Execution.NonQuery("VACUUM");
 
-            var titleEnumerator = DatabaseController.Instance.GetTable<TitleTable>().GetAllTitles();
+            var titleEnumerator = DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles();
             TotalCount = titleEnumerator.Count();
 
             foreach (var title in titleEnumerator)
             {
                 ScanCount++;
 
-                foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().GetAllVersions(title.Id))
+                foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(title.Id))
                 {
                     // var verObj = new TitleVersionTable.RowObject(ver);
                     ver.SetFileInfo(Paths.Title.WithRoot(ver.FileName));

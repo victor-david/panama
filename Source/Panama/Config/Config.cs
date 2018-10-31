@@ -83,7 +83,7 @@ namespace Restless.App.Panama.Configuration
                 /// <summary>
                 /// Gets the minimum width for the main window.
                 /// </summary>
-                public const int MinWidth = 840;
+                public const int MinWidth = 960;
 
                 /// <summary>
                 /// Gets the minimum height for the main window.

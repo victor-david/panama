@@ -918,4 +918,25 @@ Do you want to continue?</value>
   <data name="HeaderToolOperationMessageSync" xml:space="preserve">
     <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
   </data>
+  <data name="CommandClearTitleFlags" xml:space="preserve">
+    <value>Clear Flags</value>
+  </data>
+  <data name="CommandClearTitleFlagsTooltip" xml:space="preserve">
+    <value>Clear flag from all titles</value>
+  </data>
+  <data name="CommandFlagTitle" xml:space="preserve">
+    <value>Toggle flag for this title</value>
+  </data>
+  <data name="CommandTitleFilterFlagged" xml:space="preserve">
+    <value>Flagged</value>
+  </data>
+  <data name="CommandTitleFilterFlaggedTooltip" xml:space="preserve">
+    <value>Filter title list to display only titles that are flagged</value>
+  </data>
+  <data name="ConfirmationClearTitleFlags" xml:space="preserve">
+    <value>This operation will clear the quick flag from all titles. Do you want to continue?</value>
+  </data>
+  <data name="TooltipTitleQuickFlag" xml:space="preserve">
+    <value>Title is flagged</value>
+  </data>
 </root>

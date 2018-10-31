@@ -67,14 +67,14 @@ namespace Restless.App.Panama.Tools
 
             List<string> lines = new List<string>();
 
-            var titleEnumerator = titleTable.GetAllTitles();
+            var titleEnumerator = titleTable.EnumerateTitles();
             TotalCount = titleEnumerator.Count();
 
             foreach (var title in titleEnumerator)
             {
                 lines.Add(string.Format("{0} - {1}", title.Written.ToString(Config.Instance.DateFormat), title.Title));
 
-                foreach (var ver in titleVersionTable.GetAllVersions(title.Id))
+                foreach (var ver in titleVersionTable.EnumerateVersions(title.Id))
                 {
                     string note = !string.IsNullOrEmpty(ver.Note) ? $"[{ver.Note}]" : string.Empty;
                     lines.Add($"  v{ver.Version}.{(char)ver.Revision} {ver.LanguageId} {ver.FileName}   {note}".Trim());

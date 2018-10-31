@@ -376,7 +376,8 @@ namespace Restless.App.Panama.Database.Resources {
         ///  &quot;created&quot; TIMESTAMP NOT NULL, 
         ///  &quot;written&quot; TIMESTAMP NOT NULL, 
         ///  &quot;authorid&quot; INTEGER NOT NULL DEFAULT 1, 
-        ///  &quot;ready&quot; BOOLEAN DEFAULT 0,
+        ///  &quot;ready&quot; BOOLEAN NOT NULL DEFAULT 0,
+        ///  &quot;qflag&quot; BOOLEAN NOT NULL DEFAULT 0,
         ///  &quot;notes&quot; TEXT
         ///);.
         /// </summary>
