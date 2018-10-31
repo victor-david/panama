@@ -111,6 +111,7 @@
     <Compile Include="Database\Tables\AlertTable.cs">
       <SubType>foo</SubType>
     </Compile>
+    <Compile Include="Database\Tables\TitleVersionController.cs" />
     <Compile Include="Database\Tables\TitleVersionTableStats.cs" />
     <Compile Include="Database\Tables\ConfigTable.cs">
       <SubType>foo</SubType>

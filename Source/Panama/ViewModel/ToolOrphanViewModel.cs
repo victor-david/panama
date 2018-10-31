@@ -126,7 +126,9 @@ namespace Restless.App.Panama.ViewModel
                     Notes = $"This entry was created from orphaned file {file.FileName}"
                 };
 
-                ver.AddVersion(row.Id, Paths.Title.WithoutRoot(file.FileName));
+                // Get a version controller and add a version
+                ver.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(file.FileName));
+
                 ver.Save();
                 title.Save();
                 Controller.NotFound.Remove(file);

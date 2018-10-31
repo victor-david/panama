@@ -352,11 +352,11 @@ namespace Restless.App.Panama.ViewModel
             if (SelectedPrimaryKey != null)
             {
                 long titleId = (long)SelectedPrimaryKey;
-                var verInfo = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionInfo(titleId);
+                var verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
 
-                if (verInfo.Versions.Count > 0)
+                if (verController.Versions.Count > 0)
                 {
-                    OpenHelper.OpenFile(Paths.Title.WithRoot(verInfo.Versions[0].FileName));
+                    OpenHelper.OpenFile(Paths.Title.WithRoot(verController.Versions[0].FileName));
                 }
             }
         }
@@ -382,12 +382,12 @@ namespace Restless.App.Panama.ViewModel
             if (SelectedPrimaryKey != null)
             {
                 long titleId = (long)SelectedPrimaryKey;
-                var verInfo = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionInfo(titleId);
-                if (verInfo.Versions.Count > 0)
+                var verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                if (verController.Versions.Count > 0)
                 {
                     Execution.TryCatch(() =>
                         {
-                            string fileName = Paths.Title.WithRoot(verInfo.Versions[0].FileName);
+                            string fileName = Paths.Title.WithRoot(verController.Versions[0].FileName);
                             var props = OpenXmlDocument.Reader.GetProperties(fileName);
                             string title = props?.Core.Title;
                             if (string.IsNullOrWhiteSpace(title)) title = "(no title)";
@@ -407,10 +407,10 @@ namespace Restless.App.Panama.ViewModel
             if (SelectedPrimaryKey != null)
             {
                 long titleId = (long)SelectedPrimaryKey;
-                var verInfo = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionInfo(titleId);
-                if (verInfo.Versions.Count > 0)
+                var verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                if (verController.Versions.Count > 0)
                 {
-                    return verInfo.Versions[0].DocType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType;
+                    return verController.Versions[0].DocType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType;
                 }
             }
             return false;
@@ -444,11 +444,10 @@ namespace Restless.App.Panama.ViewModel
             if (autoPreview && SelectedPrimaryKey != null)
             {
                 long titleId = (long)SelectedPrimaryKey;
-                var verInfo = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionInfo(titleId);
-                // DataRow row = DatabaseController.Instance.GetTable<TitleVersionTable>().GetLastVersion(titleId);
-                if (verInfo.Versions.Count > 0)
+                var verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                if (verController.Versions.Count > 0)
                 {
-                    string fileName = Paths.Title.WithRoot(verInfo.Versions[0].FileName);
+                    string fileName = Paths.Title.WithRoot(verController.Versions[0].FileName);
                     long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
                     if (docType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType)
                     {

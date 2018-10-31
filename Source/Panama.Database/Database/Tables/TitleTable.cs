@@ -315,13 +315,12 @@ namespace Restless.App.Panama.Database.Tables
             foreach (DataRow row in Rows)
             {
                 long titleId = (long)row[Defs.Columns.Id];
-                var verInfo = versions.GetVersionInfo(titleId);
-                if (verInfo.Versions.Count > 0)
+                var verController = versions.GetVersionController(titleId);
+                if (verController.Versions.Count > 0)
                 {
-                    // verInfo.Versions[0].
-                    row[Defs.Columns.Calculated.LastestVersionWordCount] = verInfo.Versions[0].WordCount;
-                    row[Defs.Columns.Calculated.LastestVersionDate] = verInfo.Versions[0].Updated;
-                    row[Defs.Columns.Calculated.LastestVersionPath] = verInfo.Versions[0].FileName;
+                    row[Defs.Columns.Calculated.LastestVersionWordCount] = verController.Versions[0].WordCount;
+                    row[Defs.Columns.Calculated.LastestVersionDate] = verController.Versions[0].Updated;
+                    row[Defs.Columns.Calculated.LastestVersionPath] = verController.Versions[0].FileName;
                 }
             }
             AcceptChanges();
@@ -367,10 +366,10 @@ namespace Restless.App.Panama.Database.Tables
             DataRow[] titleRows = Select($"{Defs.Columns.Id}={titleId}");
             if (titleRows.Length == 1)
             {
-                var verInfo = Controller.GetTable<TitleVersionTable>().GetVersionInfo(titleId);
-                if (verInfo.Versions.Count > 0)
+                var verController = Controller.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                if (verController.Versions.Count > 0)
                 {
-                    titleRows[0][titleColumn] = verInfo.Versions[0].Row[titleVersionColumn];
+                    titleRows[0][titleColumn] = verController.Versions[0].Row[titleVersionColumn];
                 }
             }
         }

@@ -44,10 +44,10 @@ namespace Restless.App.Panama.ViewModel
             if (item is DataRowView view)
             {
                 long titleId = (long)view.Row[SubmissionTable.Defs.Columns.TitleId];
-                var verInfo = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionInfo(titleId);
-                if (verInfo.Versions.Count > 0)
+                var verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                if (verController.Versions.Count > 0)
                 {
-                    OpenFileRow(verInfo.Versions[0].Row, TitleVersionTable.Defs.Columns.FileName, Config.Instance.FolderTitleRoot, (f) =>
+                    OpenFileRow(verController.Versions[0].Row, TitleVersionTable.Defs.Columns.FileName, Config.Instance.FolderTitleRoot, (f) =>
                     {
                         Messages.ShowError(string.Format(Strings.FormatStringFileNotFound, f, "FolderTitleRoot"));
                     });

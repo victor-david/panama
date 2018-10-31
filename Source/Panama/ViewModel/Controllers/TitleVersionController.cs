@@ -26,7 +26,7 @@ namespace Restless.App.Panama.ViewModel
         private PropertiesAdapter properties;
         private int dataViewCount;
         private TitleVersionTable versionTable;
-        private TitleVersionTable.TitleVersionInfo verInfo;
+        private Database.Tables.TitleVersionController verController;
         private TitleVersionTable.RowObject selectedRowObj;
         private DataGridColumn versionColumn;
         private string toggleGroupText;
@@ -42,12 +42,12 @@ namespace Restless.App.Panama.ViewModel
         {
             get
             {
-                if (verInfo == null) return HeaderPreface;
-                if (verInfo.VersionCount == verInfo.Versions.Count)
+                if (verController == null) return HeaderPreface;
+                if (verController.VersionCount == verController.Versions.Count)
                 {
-                    return $"{HeaderPreface} ({verInfo.VersionCount})";
+                    return $"{HeaderPreface} ({verController.VersionCount})";
                 }
-                return $"{HeaderPreface} ({verInfo.VersionCount}/{verInfo.Versions.Count})";
+                return $"{HeaderPreface} ({verController.VersionCount}/{verController.Versions.Count})";
             }
         }
 
@@ -197,7 +197,7 @@ namespace Restless.App.Panama.ViewModel
             long titleId = GetOwnerSelectedPrimaryId();
             DataView.RowFilter = $"{TitleVersionTable.Defs.Columns.TitleId}={titleId}";
             DataViewCount = DataView.Count;
-            UpdateVersionInfo();
+            verController = versionTable.GetVersionController(titleId);
             OnPropertyChanged(nameof(Header));
         }
 
@@ -220,10 +220,6 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
-        private void UpdateVersionInfo()
-        {
-            verInfo = versionTable.GetVersionInfo(GetOwnerSelectedPrimaryId());
-        }
 
         private void AddViewSourceSortDescriptions()
         {
@@ -246,28 +242,25 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunConvertToVersionCommand(object parm)
         {
-            if (selectedRowObj != null)
+            if (CanRunVersionCommand())
             {
-                versionTable.ConvertToVersion(selectedRowObj);
+                verController.ConvertToVersion(selectedRowObj);
                 AddViewSourceSortDescriptions();
-                UpdateVersionInfo();
                 OnPropertyChanged(nameof(Header));
             }
         }
 
         private bool CanRunConvertToVersionCommand(object parm)
         {
-            return 
-                selectedRowObj != null && 
-                verInfo != null &&
-                verInfo.GetRevisionCount(selectedRowObj.Version) > 1;
+            return
+                CanRunVersionCommand() && 
+                verController.GetRevisionCount(selectedRowObj.Version) > 1;
         }
 
         private void RunAddVersionByFileCommand(object o)
         {
-            if (Owner.IsSelectedRowAccessible)
+            if (verController != null)
             {
-                long titleId = (long)Owner.SelectedRow[TitleTable.Defs.Columns.Id];
                 using (var dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Strings.CaptionSelectTitleVersionAddByFile))
                 {
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
@@ -275,7 +268,7 @@ namespace Restless.App.Panama.ViewModel
                         string fileName = Paths.Title.WithoutRoot(dialog.FileName);
                         // TODO - check if fileName already belongs to this title.
                         // If so, don't add it.
-                        versionTable.AddVersion(titleId, fileName);
+                        verController.Add(fileName);
                         OnUpdate();
                     }
                 }
@@ -284,9 +277,9 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunRemoveVersionCommand(object o)
         {
-            if (selectedRowObj != null && Messages.ShowYesNo(Strings.ConfirmationRemoveTitleVersion))
+            if (CanRunVersionCommand() && Messages.ShowYesNo(Strings.ConfirmationRemoveTitleVersion))
             {
-                versionTable.RemoveVersion(selectedRowObj);
+                verController.Remove(selectedRowObj);
                 versionTable.Save();
                 OnUpdate();
             }
@@ -313,34 +306,41 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunMoveUpCommand(object o)
         {
-            if (selectedRowObj != null)
+            if (CanRunVersionCommand())
             {
-                versionTable.MoveVersionUp(selectedRowObj);
+                verController.MoveUp(selectedRowObj);
                 AddViewSourceSortDescriptions();
-                UpdateVersionInfo();
                 OnPropertyChanged(nameof(Header));
             }
         }
 
         private void RunMoveDownCommand(object o)
         {
-            if (selectedRowObj != null)
+            if (CanRunVersionCommand())
             {
-                versionTable.MoveVersionDown(selectedRowObj);
+                verController.MoveDown(selectedRowObj);
                 AddViewSourceSortDescriptions();
-                UpdateVersionInfo();
                 OnPropertyChanged(nameof(Header));
             }
         }
 
         private bool CanRunMoveUpCommand(object o)
         {
-            return selectedRowObj != null && verInfo != null && !verInfo.IsLatest(selectedRowObj);
+            return CanRunVersionCommand() && !verController.IsLatest(selectedRowObj);
         }
 
         private bool CanRunMoveDownCommand(object o)
         {
-            return selectedRowObj != null && verInfo != null && !verInfo.IsEarliest(selectedRowObj);
+            return CanRunVersionCommand() && !verController.IsEarliest(selectedRowObj);
+        }
+
+        /// <summary>
+        /// Returns true if selectedRowObject != null and verController != null.
+        /// </summary>
+        /// <returns>true if selectedRowObject != null and verController != null</returns>
+        private bool CanRunVersionCommand()
+        {
+            return selectedRowObj != null && verController != null;
         }
 
         private void RunSyncCommand(object o)
