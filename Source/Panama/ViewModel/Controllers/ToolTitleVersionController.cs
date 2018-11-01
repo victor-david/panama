@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
+﻿using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
 using Restless.Tools.Threading;
-using Restless.App.Panama.Resources;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -21,7 +10,7 @@ namespace Restless.App.Panama.ViewModel
     public class ToolTitleVersionController : ToolControllerBase<ToolMetaUpdateViewModel>
     {
         #region Private
-        private VersionUpdater scanner;
+        private readonly VersionUpdater scanner;
         #endregion
         
         /************************************************************************/
@@ -32,7 +21,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public override int TaskId
         {
-            get { return AppTaskId.TitleVersionScan; }
+            get => AppTaskId.TitleVersionScan;
         }
 
         /// <summary>
@@ -40,7 +29,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public override FileScanBase Scanner
         {
-            get { return scanner; }
+            get => scanner;
         }
         #endregion
 

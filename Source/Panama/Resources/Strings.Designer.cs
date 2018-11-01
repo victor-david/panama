@@ -1805,6 +1805,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This file has already been added to this title. Please choose a different file..
+        /// </summary>
+        public static string InvalidOpCannotAddVersionFile {
+            get {
+                return ResourceManager.GetString("InvalidOpCannotAddVersionFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This author cannot be deleted. He or she is participating in {0} titles. .
         /// </summary>
         public static string InvalidOpCannotDeleteAuthor {

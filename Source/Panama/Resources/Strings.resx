@@ -939,4 +939,8 @@ Do you want to continue?</value>
   <data name="TooltipTitleQuickFlag" xml:space="preserve">
     <value>Title is flagged</value>
   </data>
+  <data name="InvalidOpCannotAddVersionFile" xml:space="preserve">
+    <value>This file has already been added to this title. Please choose a different file.</value>
+    <comment>Used when a file can't be added or replaced as a version file because it is already included</comment>
+  </data>
 </root>

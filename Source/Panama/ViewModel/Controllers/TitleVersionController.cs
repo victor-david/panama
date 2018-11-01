@@ -10,6 +10,7 @@ using Restless.Tools.Utility;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,6 +23,7 @@ namespace Restless.App.Panama.ViewModel
     public class TitleVersionController : TitleController
     {
         #region Private
+        private long currentOwnerTitleId;
         private bool isOpenXml;
         private PropertiesAdapter properties;
         private int dataViewCount;
@@ -113,6 +115,7 @@ namespace Restless.App.Panama.ViewModel
         public TitleVersionController(TitleViewModel owner)
             : base(owner)
         {
+            currentOwnerTitleId = -1;
             versionTable = DatabaseController.Instance.GetTable<TitleVersionTable>();
             AssignDataViewFrom(versionTable);
             DataView.RowFilter = $"{TitleVersionTable.Defs.Columns.TitleId}=-1";
@@ -132,15 +135,13 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("File", TitleVersionTable.Defs.Columns.FileName).MakeFlexWidth(1.65);
             Columns.Create("Note", TitleVersionTable.Defs.Columns.Note);
 
-            //Commands.Add("ConvertToRevision", RunConvertToRevisionCommand, CanRunConvertToRevisionCommand);
             Commands.Add("ConvertToVersion", RunConvertToVersionCommand, CanRunConvertToVersionCommand);
-
             Commands.Add("VersionAddByFile", RunAddVersionByFileCommand);
-            Commands.Add("VersionReplace", RunReplaceVersionCommand, (o) => { return SelectedRow != null; });
-            Commands.Add("VersionRemove", RunRemoveVersionCommand, (o) => { return SelectedRow != null; });
+            Commands.Add("VersionReplace", RunReplaceVersionCommand, (o) => IsSelectedRowAccessible);
+            Commands.Add("VersionRemove", RunRemoveVersionCommand, (o) => IsSelectedRowAccessible);
             Commands.Add("VersionMoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
             Commands.Add("VersionMoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
-            Commands.Add("VersionSync", RunSyncCommand, (o) => { return SourceCount > 0 ; });
+            Commands.Add("VersionSync", RunSyncCommand, (o) => SourceCount > 0 );
             Commands.Add("ContextMenuOpening", RunContextMenuOpeningCommand);
             Commands.Add("SaveProperty", RunSavePropertyCommand, CanRunSavePropertyCommand);
             Commands.Add("ToggleGroup", RunToggleGroupCommand);
@@ -194,10 +195,10 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            long titleId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = $"{TitleVersionTable.Defs.Columns.TitleId}={titleId}";
+            currentOwnerTitleId = GetOwnerSelectedPrimaryId();
+            DataView.RowFilter = $"{TitleVersionTable.Defs.Columns.TitleId}={currentOwnerTitleId}";
             DataViewCount = DataView.Count;
-            verController = versionTable.GetVersionController(titleId);
+            verController = versionTable.GetVersionController(currentOwnerTitleId);
             OnPropertyChanged(nameof(Header));
         }
 
@@ -266,10 +267,11 @@ namespace Restless.App.Panama.ViewModel
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
                         string fileName = Paths.Title.WithoutRoot(dialog.FileName);
-                        // TODO - check if fileName already belongs to this title.
-                        // If so, don't add it.
-                        verController.Add(fileName);
-                        OnUpdate();
+                        if (CanAddFileToTitle(fileName))
+                        {
+                            verController.Add(fileName);
+                            OnUpdate();
+                        }
                     }
                 }
             }
@@ -294,14 +296,39 @@ namespace Restless.App.Panama.ViewModel
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
                         string fileName = Paths.Title.WithoutRoot(dialog.FileName);
-                        // TODO - check if fileName already belongs to this title.
-                        // If so, don't change to it.
-                        selectedRowObj.FileName = fileName;
-                        OnPropertyChanged(nameof(VersionFileName));
+                        if (CanAddFileToTitle(fileName))
+                        {
+                            selectedRowObj.FileName = fileName;
+                            OnPropertyChanged(nameof(VersionFileName));
+                        }
                     }
                 }
 
             }
+        }
+
+        /// <summary>
+        /// Checks to see if <paramref name="fileName"/> already belongs to the title.
+        /// If so, displays a message and returns false.
+        /// </summary>
+        /// <param name="fileName">The file name to check.</param>
+        /// <returns>true if <paramref name="fileName"/> does not already belong to </returns>
+        private bool CanAddFileToTitle(string fileName)
+        {
+            var verList = versionTable.GetVersionsWithFile(fileName);
+            foreach (var ver in verList)
+            {
+                if (ver.TitleId == currentOwnerTitleId)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine(fileName);
+                    sb.AppendLine();
+                    sb.Append(Strings.InvalidOpCannotAddVersionFile);
+                    Messages.ShowError(sb.ToString());
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void RunMoveUpCommand(object o)
