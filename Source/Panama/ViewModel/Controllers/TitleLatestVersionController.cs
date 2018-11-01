@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using Restless.App.Panama.Configuration;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Database.SQLite;
 using Restless.Tools.Utility;
+using System.Data;
 
 namespace Restless.App.Panama.ViewModel
 {

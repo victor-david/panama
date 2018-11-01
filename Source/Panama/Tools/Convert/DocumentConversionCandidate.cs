@@ -4,7 +4,7 @@ using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.Tools.OfficeAutomation;
 using Restless.Tools.Utility;
-using System.Data;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Restless.App.Panama.Tools
@@ -15,7 +15,7 @@ namespace Restless.App.Panama.Tools
     public class DocumentConversionCandidate  : BindableBase
     {
         #region Private
-        private readonly DataRow versionRow;
+        private readonly List<TitleVersionTable.RowObject> versions;
         #endregion
 
         /************************************************************************/
@@ -31,11 +31,11 @@ namespace Restless.App.Panama.Tools
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates if this candidate belongs to a file version.
+        /// Gets a boolean value that indicates if this candidate belongs to a file version or versions.
         /// </summary>
         public bool IsVersion
         {
-            get => versionRow != null;
+            get => versions.Count > 0;
         }
 
         /// <summary>
@@ -47,20 +47,20 @@ namespace Restless.App.Panama.Tools
             private set;
         }
 
-        /// <summary>
-        /// Gets the title id associated with the version, if <see cref="IsVersion"/> is true; otherwise, null;
-        /// </summary>
-        public long? TitleId
-        {
-            get
-            {
-                if (versionRow != null)
-                {
-                    return (long)versionRow[TitleVersionTable.Defs.Columns.TitleId];
-                }
-                return null;
-            }
-        }
+        ///// <summary>
+        ///// Gets the title id associated with the version, if <see cref="IsVersion"/> is true; otherwise, null;
+        ///// </summary>
+        //public long? TitleId
+        //{
+        //    get
+        //    {
+        //        if (versionRow != null)
+        //        {
+        //            return (long)versionRow[TitleVersionTable.Defs.Columns.TitleId];
+        //        }
+        //        return null;
+        //    }
+        //}
 
         /// <summary>
         /// Gets a boolean value that indicates if this item has been converted.
@@ -92,7 +92,7 @@ namespace Restless.App.Panama.Tools
         {
             Validations.ValidateNullEmpty(fileName, "FileConversionCandidate.FileName");
             Info = new FileInfo(fileName);
-            versionRow = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionWithFile(Paths.Title.WithoutRoot(fileName));
+            versions = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionsWithFile(Paths.Title.WithoutRoot(fileName));
         }
         #endregion
 
@@ -111,7 +111,10 @@ namespace Restless.App.Panama.Tools
                 {
                     if (IsVersion)
                     {
-                        versionRow[TitleVersionTable.Defs.Columns.FileName] = Paths.Title.WithoutRoot(Result.ConvertedInfo.FullName);
+                        foreach (var ver in versions)
+                        {
+                            ver.FileName = Paths.Title.WithoutRoot(Result.ConvertedInfo.FullName);
+                        }
                         DatabaseController.Instance.GetTable<TitleVersionTable>().Save();
                     }
                     Info = Result.ConvertedInfo;

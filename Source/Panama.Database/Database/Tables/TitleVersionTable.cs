@@ -167,24 +167,23 @@ namespace Restless.App.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets the DataRow object that contains the specified file name, or null if none.
+        /// Gets a list of <see cref="RowObject"/> that contain the specified file name.
         /// </summary>
         /// <param name="fileName">The file name (should be non-rooted)</param>
-        /// <returns>The first DataRow found, or null if none found.</returns>
-        public DataRow GetVersionWithFile(string fileName)
+        /// <returns>
+        /// A list of <see cref="RowObject"/> that contain the file name.
+        /// The list may be empty.
+        /// </returns>
+        public List<RowObject> GetVersionsWithFile(string fileName)
         {
-            // TODO: It's possible to have two titles that point to the same file for one of their versions.
+            List<RowObject> result = new List<RowObject>();
             fileName = fileName.Replace("'", "''");
             DataRow[] rows = Select($"{Defs.Columns.FileName}='{fileName}'");
-            if (rows.Length > 1)
+            foreach (DataRow row in rows)
             {
-                System.Diagnostics.Debugger.Break();
+                result.Add(new RowObject(row));
             }
-            if (rows.Length > 0)
-            {
-                return rows[0];
-            }
-            return null;
+            return result;
         }
 
         /// <summary>
@@ -194,7 +193,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <returns>true if a record containing the title exists; otherwise, false.</returns>
         public bool VersionWithFileExists(string fileName)
         {
-            return (GetVersionWithFile(fileName) != null);
+            return GetVersionsWithFile(fileName) != null;
         }
         #endregion
 

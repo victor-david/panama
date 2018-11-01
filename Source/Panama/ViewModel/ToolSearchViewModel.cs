@@ -6,10 +6,8 @@ using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Search;
 using Restless.Tools.Utility;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -81,7 +79,6 @@ namespace Restless.App.Panama.ViewModel
             MainSource.Source = resultsView;
 
             Columns.CreateImage<BooleanToImageConverter>("V", "Extended.IsVersion");
-            Columns.Create("Id", "Extended.TitleId").MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Type", WindowsSearchResult.GetBindingReference(SysProps.System.ItemType)).MakeFixedWidth(FixedWidth.ShortString);
             Columns.Create("Size", WindowsSearchResult.GetBindingReference(SysProps.System.Size)).MakeNumeric(null, FixedWidth.LongerNumeric);
             Columns.Create("Modified", WindowsSearchResult.GetBindingReference(SysProps.System.DateModified)).MakeDate()
@@ -201,7 +198,7 @@ namespace Restless.App.Panama.ViewModel
                         foreach (var result in results)
                         {
                             result.SetItemPathDisplay(Paths.Title.WithoutRoot(result.Values[SysProps.System.ItemPathDisplay].ToString()));
-                            result.Extended = new ExtendedSearchResult(versions.GetVersionWithFile(result.Values[SysProps.System.ItemPathDisplay].ToString()));
+                            result.Extended = new ExtendedSearchResult(versions.GetVersionsWithFile(result.Values[SysProps.System.ItemPathDisplay].ToString()));
                             resultsView.Add(result);
                         }
                         UpdateFoundHeader();
@@ -212,8 +209,7 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunOpenItemCommand(object o)
         {
-            var row = SelectedItem as WindowsSearchResult;
-            if (row != null)
+            if (SelectedItem is WindowsSearchResult row)
             {
                 OpenHelper.OpenFile(row.Values[SysProps.System.ItemUrl].ToString());
             }
@@ -221,11 +217,9 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunGoToTitleRecordCommand(object o)
         {
-            var row = SelectedItem as WindowsSearchResult;
-            if (row != null)
+            if (SelectedItem is WindowsSearchResult row)
             {
-                var extended = row.Extended as ExtendedSearchResult;
-                if (extended != null && extended.TitleId != null)
+                if (row.Extended is ExtendedSearchResult extended && extended.IsVersion)
                 {
                     var ws = MainViewModel.SwitchToWorkspace<TitleViewModel>();
                     if (ws != null)
@@ -234,7 +228,7 @@ namespace Restless.App.Panama.ViewModel
                         ws.Filters.ClearAll();
 
                         // assigning the property applies the filter
-                        ws.Config.TitleFilter.Id = extended.TitleId;
+                        ws.Config.TitleFilter.Id = extended.Versions[0].TitleId;
                         if (ws.DataView.Count == 1)
                         {
                             /* This method uses a funky work around */
@@ -249,11 +243,9 @@ namespace Restless.App.Panama.ViewModel
 
         private bool CanRunGoToTitleRecordCommand(object o)
         {
-            var row = SelectedItem as WindowsSearchResult;
-            if (row != null)
+            if (SelectedItem is WindowsSearchResult row)
             {
-                var extended = row.Extended as ExtendedSearchResult;
-                return (extended != null && extended.TitleId != null);
+                return (row.Extended is ExtendedSearchResult extended && extended.IsVersion);
             }
             return false;
         }
@@ -261,11 +253,10 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunDeleteItemCommand(object o)
         {
-            var row = SelectedItem as WindowsSearchResult;
-            if (row != null)
+            if (SelectedItem is WindowsSearchResult row)
             {
                 string fileName = Paths.Title.WithRoot(row.Values[SysProps.System.ItemPathDisplay].ToString());
-                if (Restless.Tools.Utility.FileOperations.SendToRecycle(fileName))
+                if (FileOperations.SendToRecycle(fileName))
                 {
                     resultsView.Remove(row);
                 }
@@ -274,11 +265,9 @@ namespace Restless.App.Panama.ViewModel
 
         private bool CanRunDeleteItemCommand(object o)
         {
-            var row = SelectedItem as WindowsSearchResult;
-            if (row != null)
+            if (SelectedItem is WindowsSearchResult row)
             {
-                var extended = row.Extended as ExtendedSearchResult;
-                return (extended != null && extended.TitleId == null);
+                return (row.Extended is ExtendedSearchResult extended && !extended.IsVersion);
             }
             return false;
         }
@@ -286,29 +275,24 @@ namespace Restless.App.Panama.ViewModel
 
         #endregion
 
+        #region Private helper class
         private class ExtendedSearchResult
         {
+            public List<TitleVersionTable.RowObject> Versions
+            {
+                get;
+            }
+
             public bool IsVersion
             {
-                get;
-                private set;
+                get => Versions.Count > 0;
             }
 
-            public long? TitleId
+            public ExtendedSearchResult(List<TitleVersionTable.RowObject> versions)
             {
-                get;
-                private set;
-            }
-
-            public ExtendedSearchResult(DataRow versionRow)
-            {
-                TitleId = null;
-                IsVersion = (versionRow != null);
-                if (versionRow != null)
-                {
-                    TitleId = (long)versionRow[TitleVersionTable.Defs.Columns.TitleId];
-                }
+                Versions = versions;
             }
         }
+        #endregion
     }
 }
