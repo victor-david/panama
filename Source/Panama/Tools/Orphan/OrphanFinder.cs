@@ -82,8 +82,6 @@ namespace Restless.App.Panama.Tools
                     if (!versions.VersionWithFileExists(searchFile))
                     {
                         var info = new FileInfo(file);
-                        
-
                         var item = new FileScanDisplayObject(searchFile, info.Length, info.LastWriteTimeUtc);
                         OnNotFound(item);
                     }

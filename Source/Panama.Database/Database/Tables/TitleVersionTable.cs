@@ -193,7 +193,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <returns>true if a record containing the title exists; otherwise, false.</returns>
         public bool VersionWithFileExists(string fileName)
         {
-            return GetVersionsWithFile(fileName) != null;
+            return GetVersionsWithFile(fileName).Count > 0;
         }
         #endregion
 
