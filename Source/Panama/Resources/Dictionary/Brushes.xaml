@@ -142,8 +142,8 @@
     <SolidColorBrush x:Key="LightColorBrush" Color="#DDD" />
 
     <!-- Some colors to stay consistent -->
-    <SolidColorBrush x:Key="LabelBrush" Color="#FF0D5102"/>
-
+    <SolidColorBrush x:Key="LabelBrush" Color="#FF021F51"/>
+    
     <!-- Defines the color used to highlight grid rows -->
     <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF79ABBB"/>
     
