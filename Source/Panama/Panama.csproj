@@ -876,12 +876,6 @@
     <Resource Include="Resources\Images\Image.FileType.Html.48.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Image.Arrow.Down.48.png" />
-    <Resource Include="Resources\Images\Image.Arrow.Left.48.png" />
-    <Resource Include="Resources\Images\Image.Arrow.Right.48.png" />
-    <Resource Include="Resources\Images\Image.Arrow.Up.48.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\Image.Accepted.48.png" />
   </ItemGroup>
   <ItemGroup>
@@ -992,6 +986,14 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Flag.Blue.64.png" />
     <Resource Include="Resources\Images\Image.Flag.Red.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Arrow.Down.64.png" />
+    <Resource Include="Resources\Images\Image.Arrow.Up.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Image.Arrow.Left.64.png" />
+    <Resource Include="Resources\Images\Image.Arrow.Right.64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

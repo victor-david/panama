@@ -13,10 +13,10 @@
     <!-- Images -->
     <BitmapImage x:Key="ImageAccepted" UriSource="/Panama;component/Resources/Images/Image.Accepted.48.png"/>
     <BitmapImage x:Key="ImageAdd" UriSource="/Panama;component/Resources/Images/Image.Add.64.png"/>
-    <BitmapImage x:Key="ImageArrowDown" UriSource="/Panama;component/Resources/Images/Image.Arrow.Down.48.png"/>
-    <BitmapImage x:Key="ImageArrowLeft" UriSource="/Panama;component/Resources/Images/Image.Arrow.Left.48.png"/>
-    <BitmapImage x:Key="ImageArrowRight" UriSource="/Panama;component/Resources/Images/Image.Arrow.Right.48.png"/>
-    <BitmapImage x:Key="ImageArrowUp" UriSource="/Panama;component/Resources/Images/Image.Arrow.Up.48.png"/>
+    <BitmapImage x:Key="ImageArrowDown" UriSource="/Panama;component/Resources/Images/Image.Arrow.Down.64.png"/>
+    <BitmapImage x:Key="ImageArrowLeft" UriSource="/Panama;component/Resources/Images/Image.Arrow.Left.64.png"/>
+    <BitmapImage x:Key="ImageArrowRight" UriSource="/Panama;component/Resources/Images/Image.Arrow.Right.64.png"/>
+    <BitmapImage x:Key="ImageArrowUp" UriSource="/Panama;component/Resources/Images/Image.Arrow.Up.64.png"/>
     <BitmapImage x:Key="ImageBrowseToUrl" UriSource="/Panama;component/Resources/Images/Image.Chevron.Right.64.png"/>
     <BitmapImage x:Key="ImageCalendar" UriSource="/Panama;component/Resources/Images/Image.Calendar.48.png"/>
     <BitmapImage x:Key="ImageCheck" UriSource="/Panama;component/Resources/Images/Image.Check.48.png"/>
