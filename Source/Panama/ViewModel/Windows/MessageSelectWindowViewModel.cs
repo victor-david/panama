@@ -1,18 +1,13 @@
-﻿using System;
+﻿using Restless.App.Panama.Controls;
+using Restless.App.Panama.Database.Tables;
+using Restless.Tools.Search;
+using Restless.Tools.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Resources;
-using Restless.Tools.Search;
-using Restless.Tools.Utility;
 using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
 
 namespace Restless.App.Panama.ViewModel
@@ -94,10 +89,10 @@ namespace Restless.App.Panama.ViewModel
                     break;
             }
 
-            Commands.Add("Select", RunSelectCommand, CanRunCommandIfRowSelected);
+            Commands.Add("Select", RunSelectCommand, (o) => IsSelectedRowAccessible);
             Commands.Add("Cancel", (o) => { Owner.Close(); });
 
-            Commands.Add("OpenItem", RunOpenItemCommand, CanRunCommandIfRowSelected);
+            Commands.Add("OpenItem", RunOpenItemCommand, (o) => IsSelectedRowAccessible);
             FilterPrompt = "need a prompt"; // Strings.FilterPromptPublisher; MAPI/IPM.Note MAPI.Ipm.Note.Read
 
             RunSearch(options);

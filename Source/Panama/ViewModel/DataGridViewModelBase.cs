@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
+﻿using Restless.App.Panama.Collections;
 using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
-using System.Diagnostics;
 using Restless.Tools.Threading;
+using System.Windows.Data;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -36,7 +23,6 @@ namespace Restless.App.Panama.ViewModel
         public DataGridColumnCollection Columns
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -45,7 +31,6 @@ namespace Restless.App.Panama.ViewModel
         public MenuItemCollection MenuItems
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -54,7 +39,6 @@ namespace Restless.App.Panama.ViewModel
         public CollectionViewSource MainSource
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -62,7 +46,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public object SelectedItem
         {
-            get { return selectedItem; }
+            get => selectedItem;
             set
             {
                 SetProperty(ref selectedItem, value);
@@ -74,27 +58,21 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Protected properties
-        ///// <summary>
-        ///// Provides the standard image size for a command
-        ///// </summary>
-        //protected const double VisualCommandImageSize = 20.0;
-        ///// <summary>
-        ///// Font size for a command
-        ///// </summary>
-        //protected const double VisualCommandFontSize = 10.5;
         #endregion
 
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataGridViewModelBase"/> class.
+        /// </summary>
         protected DataGridViewModelBase()
         {
             Columns = new DataGridColumnCollection();
             MainSource = new CollectionViewSource();
             MenuItems = new MenuItemCollection();
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -138,16 +116,6 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected virtual void OnSelectedItemChanged()
         {
-        }
-
-        /// <summary>
-        /// Returns true if a row is currently selected
-        /// </summary>
-        /// <param name="o">Not used, satisfies command interface</param>
-        /// <returns>true if a row is currently selected; otherwise, false.</returns>
-        protected bool CanRunCommandIfRowSelected(object o)
-        {
-            return (SelectedItem != null);
         }
         #endregion
 

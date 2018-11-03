@@ -81,25 +81,25 @@ namespace Restless.App.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets a list of available credentials, including the virtual one that specifies "no credential".
+        /// Provides an enumerable that gets all credentials in order of name ASC.
         /// </summary>
-        /// <returns>The list.</returns>
-        public List<CredentialTable.RowObject> GetCredentialList()
+        /// <returns>A <see cref="RowObject"/></returns>
+        public IEnumerable<RowObject> EnumerateCredentials()
         {
-            List<CredentialTable.RowObject> result = new List<CredentialTable.RowObject>();
             DataRow zeroRow = NewRow();
             zeroRow[Defs.Columns.Id] = 0;
             zeroRow[Defs.Columns.Name] = "None";
             zeroRow[Defs.Columns.LoginId] = "***";
             zeroRow[Defs.Columns.Password] = "***";
 
-            result.Add(new RowObject(zeroRow));
-            DataRow[] rows = Select(null, Defs.Columns.Name);
+            yield return new RowObject(zeroRow);
+
+            DataRow[] rows = Select(null, $"{Defs.Columns.Name} ASC");
             foreach (DataRow row in rows)
             {
-                result.Add(new RowObject(row));
+                yield return new RowObject(row);
             }
-            return result;
+            yield break;
         }
         #endregion
 
@@ -134,38 +134,6 @@ namespace Restless.App.Panama.Database.Tables
             row[Defs.Columns.Password] = "(new password)";
         }
         #endregion
-
-        /************************************************************************/
-
-        #region ITableImport and IColumnRowImporter implementation (commented out)
-        //public bool PerformImport()
-        //{
-        //    return DatabaseImporter.Instance.ImportTable(this, this);
-        //}
-
-        //public string GetColumnName(string origColName)
-        //{
-        //    switch (origColName)
-        //    {
-        //        case "credential_id": return Defs.Columns.Id;
-        //        case "credential_name": return Defs.Columns.Name;
-        //        case "login_name": return Defs.Columns.LoginId;
-        //        case "login_password": return Defs.Columns.Password;
-        //        default: return origColName;
-        //    }
-        //}
-
-        //public bool IncludeColumn(string origColName)
-        //{
-        //    return true;
-        //}
-
-        //public bool GetRowConfirmation(System.Data.DataRow row)
-        //{
-        //    return true;
-        //}
-        #endregion
-
 
         /************************************************************************/
 
@@ -243,13 +211,6 @@ namespace Restless.App.Panama.Database.Tables
             #endregion
         }
         #endregion
-
-
-
-
-
-
-
 
     }
 }

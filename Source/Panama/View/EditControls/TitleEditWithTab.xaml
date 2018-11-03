@@ -21,11 +21,26 @@
                         </Label>
                     </StackPanel>
                     <TextBox DockPanel.Dock="Top" Text="{Binding SelectedRow[title]}" />
-                    
-                    <!-- Don't need a stack panel for one item, but we'll leave it in case we have more -->
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="4">
+                    <Grid DockPanel.Dock="Top" Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
                         <CheckBox IsChecked="{Binding SelectedRow[ready]}">Ready</CheckBox>
-                    </StackPanel>
+                        <StackPanel
+                            Grid.Column="1"
+                            Visibility="{Binding Config.IsTitleAuthorVisible, Converter={cv:BooleanToVisibilityConverter}}">
+                            
+                            <Label Grid.Column="1" Content="Author"/>
+                            <ComboBox
+                                ItemsSource="{Binding Authors}"
+                                SelectedValue="{Binding SelectedRow[authorid]}"
+                                SelectedValuePath="Id"/>
+                        </StackPanel>
+                    </Grid>
 
                     <Expander DockPanel.Dock="Top" Header="{Binding WrittenHeader}" IsExpanded="False">
                         <con:CalendarExtended SelectedDate="{Binding WrittenDate}" DisplayDate="{Binding WrittenDisplayDate,Mode=OneWay}" HorizontalAlignment="Left" />

@@ -3,7 +3,6 @@ using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
-using System;
 using System.ComponentModel;
 
 namespace Restless.App.Panama.ViewModel
@@ -83,7 +82,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void RunDeleteCommand()
         {
-            if (SelectedRow != null && Messages.ShowYesNo(Strings.ConfirmationDeleteAlert))
+            if (IsSelectedRowAccessible && Messages.ShowYesNo(Strings.ConfirmationDeleteAlert))
             {
                 SelectedRow.Delete();
                 Table.Save();
@@ -96,7 +95,7 @@ namespace Restless.App.Panama.ViewModel
         /// <returns>true if a row is selected; otherwise, false.</returns>
         protected override bool CanRunDeleteCommand()
         {
-            return CanRunCommandIfRowSelected(null);
+            return IsSelectedRowAccessible;
         }
         #endregion
 

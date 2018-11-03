@@ -103,7 +103,7 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("From", nameof(MimeKitMessage.FromName));
             Columns.Create("Subject", nameof(MimeKitMessage.Subject));
             Columns.SetDefaultSort(dateCol, ListSortDirection.Descending);
-            Commands.Add("Select", RunSelectCommand, CanRunCommandIfRowSelected);
+            Commands.Add("Select", RunSelectCommand, (o) => IsSelectedRowAccessible);
             Commands.Add("Cancel", (o) => Owner.Close());
             InitDisplayFilter();
             GetResults();

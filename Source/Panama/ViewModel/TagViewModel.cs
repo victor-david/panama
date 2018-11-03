@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.IO;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
+﻿using Restless.App.Panama.Controls;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
+using System.ComponentModel;
+using System.Data;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -123,7 +115,7 @@ namespace Restless.App.Panama.ViewModel
         /// <returns>true if a row is selected; otherwise, false.</returns>
         protected override bool CanRunDeleteCommand()
         {
-            return CanRunCommandIfRowSelected(null);
+            return IsSelectedRowAccessible;
         }
         #endregion
 

@@ -103,7 +103,7 @@ namespace Restless.App.Panama.ViewModel
             previewColumns.Add(Columns.Create("Company", WindowsSearchResult.GetBindingReference(SysProps.System.Company)));
 
             Commands.Add("Begin", RunSearchCommand);
-            Commands.Add("OpenItem", RunOpenItemCommand, CanRunCommandIfRowSelected);
+            Commands.Add("OpenItem", RunOpenItemCommand, (o)=> SelectedItem != null);
             Commands.Add("GoToTitleRecord", RunGoToTitleRecordCommand, CanRunGoToTitleRecordCommand);
             Commands.Add("DeleteItem", RunDeleteItemCommand, CanRunDeleteItemCommand);
             //RawCommands.Add("TogglePreview", (o) => { IsPreviewMode = !IsPreviewMode; });

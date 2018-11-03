@@ -335,7 +335,7 @@ namespace Restless.App.Panama.Database.Tables
             row[Defs.Columns.Title] = "(new title)";
             row[Defs.Columns.Created] = DateTime.UtcNow;
             row[Defs.Columns.Written] = DateTime.UtcNow;
-            row[Defs.Columns.AuthorId] = 1;
+            row[Defs.Columns.AuthorId] = Controller.GetTable<AuthorTable>().GetDefaultAuthorId();
             row[Defs.Columns.Ready] = false;
             row[Defs.Columns.QuickFlag] = false;
         }

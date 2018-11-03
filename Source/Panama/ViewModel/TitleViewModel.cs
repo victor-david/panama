@@ -7,6 +7,7 @@ using Restless.App.Panama.Resources;
 using Restless.Tools.OpenXml;
 using Restless.Tools.Utility;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows;
@@ -73,6 +74,23 @@ namespace Restless.App.Panama.ViewModel
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// Gets an enumerable of <see cref="AuthorTable.RowObject"/> items. The UI binds to this list.
+        /// </summary>
+        public IEnumerable<AuthorTable.RowObject> Authors
+        {
+            get => DatabaseController.Instance.GetTable<AuthorTable>().EnumerateAuthors();
+        }
+
+        /// <summary>
+        /// Gets or sets the selected author item.
+        /// </summary>
+        public AuthorTable.RowObject SelectedAuthor
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -337,10 +355,10 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Called when the framework checks to see if Delete command can execute
         /// </summary>
-        /// <returns>true if a row is selected; otherwise, false.</returns>
+        /// <returns>true if a row is accessible; otherwise, false.</returns>
         protected override bool CanRunDeleteCommand()
         {
-            return CanRunCommandIfRowSelected(null);
+            return IsSelectedRowAccessible;
         }
 
         /// <summary>

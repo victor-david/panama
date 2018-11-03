@@ -492,6 +492,19 @@ namespace Restless.App.Panama.Configuration
             get => GetItem(true);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets a value that indicates if title author is visible.
+        /// </summary>
+        /// <remarks>
+        /// If only one author is used, this configuration item can be set to false
+        /// since there's no need to see / edit the title author.
+        /// </remarks>
+        public bool IsTitleAuthorVisible
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/
@@ -587,23 +600,6 @@ namespace Restless.App.Panama.Configuration
             return new GridLength(value, GridUnitType.Pixel);
         }
 
-        //private Color? GetColor(Color? defaultValue, [CallerMemberName] string id = null)
-        //{
-        //    string value = GetValueFromRow(id, defaultValue);
-        //    if (String.IsNullOrEmpty(value))
-        //    {
-        //        return null;
-        //    }
-        //    try
-        //    {
-        //        return (Color)ColorConverter.ConvertFromString(value);
-        //    }
-        //    catch
-        //    {
-        //        return null;
-        //    }
-        //}
-
         private void SetItem(string value, [CallerMemberName] string id = null)
         {
             SetRowValueIf(id, value);
@@ -637,19 +633,6 @@ namespace Restless.App.Panama.Configuration
             }
         }
 
-        //private void SetColor(Color? value, [CallerMemberName] string id = null)
-        //{
-        //    if (value.HasValue)
-        //    {
-        //        SetItem(value.ToString(), id);
-        //    }
-        //    else
-        //    {
-        //        SetItem(null, id);
-        //    }
-        //    OnPropertyChanged(id);
-        //}
-
         private string GetValueFromRow(string id, object defaultValue)
         {
             DataRow row = GetRow(id, defaultValue);
@@ -668,6 +651,7 @@ namespace Restless.App.Panama.Configuration
             if (currentValue != value)
             {
                 row[ConfigTable.Defs.Columns.Value] = value;
+                OnPropertyChanged(id);
             }
         }
         #endregion

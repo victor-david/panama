@@ -48,11 +48,11 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="172"/>
                         <ColumnDefinition Width="172"/>
-                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
                     <!-- DataGrid Row Height -->
@@ -63,6 +63,11 @@
                     <!-- DataGrid Row Alternation -->
                     <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Margin="4,0" Text="{x:Static r:Strings.ConfigDataGridRowAlternation}"/>
                     <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding DataGridAlternation}" SelectedItem="{Binding Config.DataGridAlternationCount}" />
+
+                    <CheckBox 
+                        Grid.Row="2" Grid.ColumnSpan="2"
+                        Margin="2,8,0,0"
+                        IsChecked="{Binding Config.IsTitleAuthorVisible}" Content="Title author is visible"/>
 
                 </Grid>
                 

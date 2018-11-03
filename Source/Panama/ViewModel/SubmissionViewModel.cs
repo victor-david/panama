@@ -109,7 +109,7 @@ namespace Restless.App.Panama.ViewModel
 
             AddViewSourceSortDescriptions();
 
-            Commands.Add("FilterToPublisher", RunFilterToPublisherCommand, CanRunCommandIfRowSelected);
+            Commands.Add("FilterToPublisher", RunFilterToPublisherCommand, (o) => IsSelectedRowAccessible);
             Commands.Add("ActiveFilter", (o) => { FilterText = "--"; });
             Commands.Add("TryAgainFilter", (o) => { FilterText = "Try Again"; });
             Commands.Add("PersonalNoteFilter", (o) => { FilterText = "Personal Note"; });
@@ -238,19 +238,16 @@ namespace Restless.App.Panama.ViewModel
         protected override bool CanRunOpenRowCommand(object item)
         {
             return
-                (
                     base.CanRunOpenRowCommand(item) &&
-                    !string.IsNullOrEmpty(SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.PublisherUrl].ToString())
-                );
+                    !string.IsNullOrEmpty(SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.PublisherUrl].ToString());
         }
-
 
         /// <summary>
         /// Runs the delete command to delete a record from the data table
         /// </summary>
         protected override void RunDeleteCommand()
         {
-            if (SelectedRow != null && Restless.Tools.Utility.Messages.ShowYesNo(Strings.ConfirmationDeleteSubmission))
+            if (CanRunDeleteCommand() && Restless.Tools.Utility.Messages.ShowYesNo(Strings.ConfirmationDeleteSubmission))
             {
                 // Call the DeleteSubmission() method to delete and perform other cleanup.
                 DatabaseController.Instance.GetTable<SubmissionBatchTable>().DeleteSubmission(SelectedRow);
@@ -263,7 +260,7 @@ namespace Restless.App.Panama.ViewModel
         /// <returns>true if a row is selected and the submission is unlocked; otherwise, false.</returns>
         protected override bool CanRunDeleteCommand()
         {
-            return CanRunCommandIfRowSelected(null) && !(bool)SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
+            return IsSelectedRowAccessible && !(bool)SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
         }
         #endregion
 

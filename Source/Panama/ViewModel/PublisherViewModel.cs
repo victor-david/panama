@@ -5,7 +5,6 @@ using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
@@ -71,12 +70,11 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a list of of <see cref="CredentialTable.RowObject"/> items. The UI binds to this list.
+        /// Gets an enumerable of <see cref="CredentialTable.RowObject"/> items. The UI binds to this list.
         /// </summary>
-        public List<CredentialTable.RowObject> Credentials
+        public IEnumerable<CredentialTable.RowObject> Credentials
         {
-            get;
-            private set;
+            get => DatabaseController.Instance.GetTable<CredentialTable>().EnumerateCredentials();
         }
 
         /// <summary>
@@ -138,7 +136,7 @@ namespace Restless.App.Panama.ViewModel
                 OnPropertyChanged(nameof(FilterVisibility));
             });
 
-            Commands.Add("AddSubmission", RunAddSubmissionCommand, CanRunCommandIfRowSelected);
+            Commands.Add("AddSubmission", RunAddSubmissionCommand, (o) => IsSelectedRowAccessible);
             Commands.Add("CopyLoginId", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.LoginId); }, CanCopyCredential);
             Commands.Add("CopyPassword", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.Password); }, CanCopyCredential);
 
@@ -160,7 +158,7 @@ namespace Restless.App.Panama.ViewModel
             Submissions = new PublisherSubmissionController(this);
             Titles = new PublisherSubmissionTitleController(this);
 
-            Credentials = DatabaseController.Instance.GetTable<CredentialTable>().GetCredentialList();
+            // Credentials = DatabaseController.Instance.GetTable<CredentialTable>().GetCredentialList();
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandCreateSubmission, Commands["AddSubmission"], "ImageSubmissionMenu");
@@ -256,16 +254,19 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void RunDeleteCommand()
         {
-            int childRowCount = SelectedRow.GetChildRows(PublisherTable.Defs.Relations.ToSubmissionBatch).Length;
-            if (childRowCount > 0)
+            if (IsSelectedRowAccessible)
             {
-                Messages.ShowError(string.Format(Strings.InvalidOpCannotDeletePublisher, childRowCount));
-                return;
-            }
-            if (Messages.ShowYesNo(Strings.ConfirmationDeletePublisher))
-            {
-                SelectedRow.Delete();
-                Table.Save();
+                int childRowCount = SelectedRow.GetChildRows(PublisherTable.Defs.Relations.ToSubmissionBatch).Length;
+                if (childRowCount > 0)
+                {
+                    Messages.ShowError(string.Format(Strings.InvalidOpCannotDeletePublisher, childRowCount));
+                    return;
+                }
+                if (Messages.ShowYesNo(Strings.ConfirmationDeletePublisher))
+                {
+                    SelectedRow.Delete();
+                    Table.Save();
+                }
             }
         }
 
@@ -275,7 +276,7 @@ namespace Restless.App.Panama.ViewModel
         /// <returns>true if a row is selected; otherwise, false.</returns> 
         protected override bool CanRunDeleteCommand()
         {
-            return CanRunCommandIfRowSelected(null);
+            return IsSelectedRowAccessible;
         }
         #endregion
 

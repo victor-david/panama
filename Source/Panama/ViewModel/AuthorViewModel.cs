@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Controls;
+﻿using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
+using System.ComponentModel;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -29,7 +23,9 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthorViewModel"/> class.
+        /// </summary>
         public AuthorViewModel()
         {
             DisplayName = Strings.CommandAuthor;
@@ -45,8 +41,6 @@ namespace Restless.App.Panama.ViewModel
 
             FilterPrompt = Strings.FilterPromptAuthor;
         }
-        #pragma warning restore 1591
-
         #endregion
 
         /************************************************************************/
@@ -58,7 +52,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = string.Format("{0} LIKE '%{1}%'", AuthorTable.Defs.Columns.Name, text);
+            DataView.RowFilter = $"{AuthorTable.Defs.Columns.Name} LIKE '%{text}%'";
         }
 
         /// <summary>
@@ -66,11 +60,14 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void RunAddCommand()
         {
-            Table.AddDefaultRow();
-            Table.Save();
-            FilterText = null;
-            AddViewSourceSortDescriptions();
-            Columns.RestoreDefaultSort();
+            if (Messages.ShowYesNo(Strings.ConfirmationAddAuthor))
+            {
+                Table.AddDefaultRow();
+                Table.Save();
+                FilterText = null;
+                AddViewSourceSortDescriptions();
+                Columns.RestoreDefaultSort();
+            }
         }
 
         /// <summary>
@@ -87,16 +84,19 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void RunDeleteCommand()
         {
-            int childRowCount = SelectedRow.GetChildRows(AuthorTable.Defs.Relations.ToTitle).Length;
-            if (childRowCount > 0)
+            if (CanRunDeleteCommand())
             {
-                Messages.ShowError(string.Format(Strings.InvalidOpCannotDeleteAuthor, childRowCount));
-                return;
-            }
-            if (Messages.ShowYesNo(Strings.ConfirmationDeleteAuthor))
-            {
-                SelectedRow.Delete();
-                Table.Save();
+                int childRowCount = SelectedRow.GetChildRows(AuthorTable.Defs.Relations.ToTitle).Length;
+                if (childRowCount > 0)
+                {
+                    Messages.ShowError(string.Format(Strings.InvalidOpCannotDeleteAuthor, childRowCount));
+                    return;
+                }
+                if (Messages.ShowYesNo(Strings.ConfirmationDeleteAuthor))
+                {
+                    SelectedRow.Delete();
+                    Table.Save();
+                }
             }
         }
 
@@ -106,7 +106,8 @@ namespace Restless.App.Panama.ViewModel
         /// <returns>true if a row is selected; otherwise, false.</returns>
         protected override bool CanRunDeleteCommand()
         {
-            return CanRunCommandIfRowSelected(null);
+            // Can delete if the row is accesible and its not the system inserted author.
+            return IsSelectedRowAccessible && (long)SelectedPrimaryKey != 1;
         }
         #endregion
 

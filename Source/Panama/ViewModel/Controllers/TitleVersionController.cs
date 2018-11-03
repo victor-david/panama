@@ -155,7 +155,7 @@ namespace Restless.App.Panama.ViewModel
                 string langId = row[LanguageTable.Defs.Columns.Id].ToString();
                 string langName = row[LanguageTable.Defs.Columns.Name].ToString();
                 string commandId = string.Format("SetLang{0}", langId);
-                Commands.Add(commandId, (o) => { SetLanguage(langId); }, CanRunCommandIfRowSelected);
+                Commands.Add(commandId, (o) => SetLanguage(langId),  (o)=> IsSelectedRowAccessible);
                 MenuItems.AddItem(string.Format("Set language to {0} ({1})", langName, langId), Commands[commandId], null, langId);
             }
 

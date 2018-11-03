@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using Restless.App.Panama.Controls;
+﻿using Restless.App.Panama.Controls;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Utility;
+using System.ComponentModel;
+using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -50,7 +45,7 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount).MakeFixedWidth(FixedWidth.MediumNumeric)
                 .AddSort(null,PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Commands.Add("Select", RunSelectCommand, CanRunCommandIfRowSelected);
+            Commands.Add("Select", RunSelectCommand, (o) => IsSelectedRowAccessible);
             FilterPrompt = Strings.FilterPromptPublisher;
             SelectedPublisherId = -1;
         }

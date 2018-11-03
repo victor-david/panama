@@ -1118,6 +1118,17 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation will add a new author record. If any filters are in effect, they will be removed so that the new author displays in the list. 
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string ConfirmationAddAuthor {
+            get {
+                return ResourceManager.GetString("ConfirmationAddAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation will add a new publisher record. If any publisher filters are in effect, they will be removed so that the new publisher displays in the list. 
         ///
         ///Do you want to continue?.

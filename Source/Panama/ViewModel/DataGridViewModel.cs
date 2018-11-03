@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
-using Restless.App.Panama.Database;
+﻿using Restless.App.Panama.Database;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Database.SQLite;
 using Restless.Tools.Utility;
+using System;
+using System.ComponentModel;
+using System.Data;
 using System.IO;
-using System.Diagnostics;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -99,7 +92,7 @@ namespace Restless.App.Panama.ViewModel
         {
             get
             {
-                if (SelectedRow != null && Table.PrimaryKeyName != null)
+                if (IsSelectedRowAccessible && Table.PrimaryKeyName != null)
                 {
                     return SelectedRow[Table.PrimaryKeyName];
                 }
@@ -315,14 +308,14 @@ namespace Restless.App.Panama.ViewModel
         /// Runs the command predicate to check if the open row command can execute.
         /// </summary>
         /// <param name="item">The object passed to the command method.</param>
-        /// <returns>The base implememtation returns true if a row is selected; otherwise, false.</returns>
+        /// <returns>The base implememtation returns true if <see cref="IsSelectedRowAccessible"/> is true; otherwise, false.</returns>
         /// <remarks>
-        /// The base implementation returns true if a row is currently selected; otherwise, false. 
+        /// The base implementation returns true if <see cref="IsSelectedRowAccessible"/> is true; otherwise, false. 
         /// If you need different logic, override this method.
         /// </remarks>
         protected virtual bool CanRunOpenRowCommand(object item)
         {
-            return CanRunCommandIfRowSelected(item);
+            return IsSelectedRowAccessible;
         }
 
         /// <summary>

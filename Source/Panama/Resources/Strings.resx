@@ -943,4 +943,9 @@ Do you want to continue?</value>
     <value>This file has already been added to this title. Please choose a different file.</value>
     <comment>Used when a file can't be added or replaced as a version file because it is already included</comment>
   </data>
+  <data name="ConfirmationAddAuthor" xml:space="preserve">
+    <value>This operation will add a new author record. If any filters are in effect, they will be removed so that the new author displays in the list. 
+
+Do you want to continue?</value>
+  </data>
 </root>
