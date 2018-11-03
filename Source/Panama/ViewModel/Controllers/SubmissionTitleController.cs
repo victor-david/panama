@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
+﻿using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
 using Restless.Tools.Utility;
+using System.ComponentModel;
+using System.Data;
+using System.Text;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -136,10 +129,9 @@ namespace Restless.App.Panama.ViewModel
             MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Title, ListSortDirection.Ascending));
         }
 
-
         private void RunMoveUpCommand(object o)
         {
-            if (SelectedRow != null && Owner.SelectedRow != null)
+            if (CanRunMoveUpCommand(null))
             {
                 long batchId = (long)Owner.SelectedPrimaryKey;
                 long ordering = (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering];
@@ -149,12 +141,14 @@ namespace Restless.App.Panama.ViewModel
         
         private bool CanRunMoveUpCommand(object o)
         {
-            return SelectedRow != null && (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering] > 1;
+            return
+                CanRunMoveCommandBase() &&
+                (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering] > 1;
         }
 
         private void RunMoveDownCommand(object o)
         {
-            if (SelectedRow != null && Owner.SelectedRow != null)
+            if (CanRunMoveDownCommand(null))
             {
                 long batchId = (long)Owner.SelectedPrimaryKey;
                 long ordering = (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering];
@@ -164,7 +158,17 @@ namespace Restless.App.Panama.ViewModel
 
         private bool CanRunMoveDownCommand(object o)
         {
-            return SelectedRow != null;
+            return
+                CanRunMoveCommandBase() &&
+                (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering] < DatabaseController.Instance.GetTable<SubmissionTable>().GetHighestOrdering((long)Owner.SelectedPrimaryKey);
+        }
+
+        private bool CanRunMoveCommandBase()
+        {
+            return
+                Owner.IsSelectedRowAccessible &&
+                !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked] &&
+                IsSelectedRowAccessible;
         }
 
         private void RunCopyToClipboardCommand(object o)

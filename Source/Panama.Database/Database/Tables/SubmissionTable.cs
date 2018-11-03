@@ -221,6 +221,21 @@ namespace Restless.App.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Gets the highest numbered ordering value for the specified submission batch.
+        /// </summary>
+        /// <param name="batchId">The batch to check.</param>
+        /// <returns>The highest numbered ordering for <paramref name="batchId"/>.</returns>
+        public long GetHighestOrdering(long batchId)
+        {
+            DataRow[] rows = Select($"{Defs.Columns.BatchId}={batchId}", $"{Defs.Columns.Ordering} DESC");
+            if (rows.Length > 0)
+            {
+                return (long)rows[0][Defs.Columns.Ordering];
+            }
+            return 0;
+        }
+
+        /// <summary>
         /// Changes the submission ordering for the specified submission batch
         /// </summary>
         /// <param name="batchId">The batchid</param>
