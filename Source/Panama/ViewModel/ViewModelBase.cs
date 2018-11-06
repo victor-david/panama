@@ -1,8 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using Restless.Tools.Threading;
-using System.Threading;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -13,18 +9,18 @@ namespace Restless.App.Panama.ViewModel
     public abstract class ViewModelBase : BindableBase, IDisposable
     {
         #region Private Vars
-        //private string notificationMessage;
         private string tabDisplayName;
         #endregion
 
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewModelBase"/> class.
+        /// </summary>
         protected ViewModelBase()
         {
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -45,14 +41,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public string TabDisplayName
         {
-            get
-            {
-                return !string.IsNullOrEmpty(tabDisplayName) ? tabDisplayName : DisplayName;
-            }
-            protected set
-            {
-                tabDisplayName = value;
-            }
+            get => !string.IsNullOrEmpty(tabDisplayName) ? tabDisplayName : DisplayName;
+            protected set => tabDisplayName = value;
         }
         #endregion
 
@@ -76,7 +66,7 @@ namespace Restless.App.Panama.ViewModel
         {
         }
 
-#if DEBUG
+#if DEBUG && VBASE
         /// <summary>
         /// Useful for ensuring that ViewModel objects are properly garbage collected.
         /// </summary>
