@@ -16,9 +16,10 @@
                 <DockPanel Margin="6,4">
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                         <Label>Title</Label>
-                        <Label Margin="8,0" FontSize="11">
-                            <Hyperlink Command="{Binding Commands[ExtractTitle]}">Extract from latest version</Hyperlink>
-                        </Label>
+                        <con:LinkedTextBlock
+                            Margin="6,6,0,0"
+                            Text="Extract from latest version"
+                            Command="{Binding Commands[ExtractTitle]}"/>
                     </StackPanel>
                     <TextBox DockPanel.Dock="Top" Text="{Binding SelectedRow[title]}" />
                     <Grid DockPanel.Dock="Top" Margin="4">
@@ -73,9 +74,10 @@
                         con:DataGridColumns.Columns="{Binding Submissions.Columns}"
                         CanUserSortColumns="False"
                         CanUserReorderColumns="False" />
-                    <Label>
-                        <Hyperlink Command="{Binding Commands[AddTitleToSubmission]}">Add this title to a submission</Hyperlink>
-                    </Label>
+                    <con:LinkedTextBlock
+                        Margin="6"
+                        Text="Add this title to a submission"
+                        Command="{Binding Commands[AddTitleToSubmission]}"/>
                     <!-- Control to add title to submission -->
                     <view:TitleEditAddToSubmission/>
                 </StackPanel>

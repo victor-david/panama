@@ -148,6 +148,7 @@
     <Compile Include="Controls\ConfigEdit\YesNoEdit.xaml.cs">
       <DependentUpon>YesNoEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LinkedTextBlock\LinkedTextBlock.cs" />
     <Compile Include="Converters\IntegerToCharConverter.cs" />
     <Compile Include="Converters\PreviewModeToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -412,9 +413,6 @@
     </Compile>
     <Compile Include="View\EditControls\PublisherEdit.xaml.cs">
       <DependentUpon>PublisherEdit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\EditControls\TitleEdit.xaml.cs">
-      <DependentUpon>TitleEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\AlertWindow.xaml.cs">
       <DependentUpon>AlertWindow.xaml</DependentUpon>
@@ -709,10 +707,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\EditControls\PublisherEdit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\EditControls\TitleEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

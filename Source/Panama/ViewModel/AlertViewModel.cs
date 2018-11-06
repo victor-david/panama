@@ -37,6 +37,8 @@ namespace Restless.App.Panama.ViewModel
             AddViewSourceSortDescriptions();
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddAlert, Strings.CommandAddAlertTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
+            Commands.Add("Browse", RunBrowseCommand, CanRunBrowseCommand);
+
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandDeleteAlert, DeleteCommand, "ImageDeleteMenu");
 
@@ -106,6 +108,21 @@ namespace Restless.App.Panama.ViewModel
         {
             MainSource.SortDescriptions.Clear();
             MainSource.SortDescriptions.Add(new SortDescription(AlertTable.Defs.Columns.Date, ListSortDirection.Ascending));
+        }
+
+        private void RunBrowseCommand(object parm)
+        {
+            if (CanRunBrowseCommand(parm))
+            {
+                OpenHelper.OpenWebSite(null, SelectedRow[AlertTable.Defs.Columns.Url].ToString());
+            }
+        }
+
+        private bool CanRunBrowseCommand(object parm)
+        {
+            return
+                IsSelectedRowAccessible &&
+                !string.IsNullOrEmpty(SelectedRow[AlertTable.Defs.Columns.Url].ToString());
         }
         #endregion
     }

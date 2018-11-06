@@ -20,7 +20,14 @@
 
         <Label>Title</Label>
         <TextBox Grid.Row="1" Text="{Binding SelectedRow[title]}" />
-        <Label Grid.Row="2">Url</Label>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Label>Url</Label>
+            <con:LinkedTextBlock
+                Margin="6,6,0,0"
+                Text="Browse"
+                Command="{Binding Commands[Browse]}"/>
+        </StackPanel>
+        
         <TextBox Grid.Row="3" Text="{Binding SelectedRow[url]}" />        
         <Label Grid.Row="4">Alert Date</Label>
         <con:CalendarExtended
