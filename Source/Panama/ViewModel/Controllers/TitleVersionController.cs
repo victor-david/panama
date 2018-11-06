@@ -195,6 +195,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
+            selectedRowObj = null;
             currentOwnerTitleId = GetOwnerSelectedPrimaryId();
             DataView.RowFilter = $"{TitleVersionTable.Defs.Columns.TitleId}={currentOwnerTitleId}";
             DataViewCount = DataView.Count;
@@ -362,12 +363,18 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
-        /// Returns true if selectedRowObject != null and verController != null.
+        /// Checks basic requirements for running a version command.
         /// </summary>
-        /// <returns>true if selectedRowObject != null and verController != null</returns>
+        /// <returns>
+        /// true if selectedRowObject != null and verController != null
+        /// and their title ids match.
+        /// </returns>
         private bool CanRunVersionCommand()
         {
-            return selectedRowObj != null && verController != null;
+            return
+                selectedRowObj != null &&
+                verController != null &&
+                selectedRowObj.TitleId == verController.TitleId;
         }
 
         private void RunSyncCommand(object o)
@@ -425,7 +432,6 @@ namespace Restless.App.Panama.ViewModel
             Config.GroupTitleVersion = !Config.GroupTitleVersion;
             SetToggleGroupProperties();
             AddViewSourceSortDescriptions();
-            
         }
 
         private void SetToggleGroupProperties()

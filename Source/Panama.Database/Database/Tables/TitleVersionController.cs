@@ -33,12 +33,19 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         private readonly Dictionary<long, List<long>> versionMap;
         private readonly TitleVersionTable owner;
-        private readonly long titleId;
         #endregion
 
         /************************************************************************/
 
         #region Public properties
+        /// <summary>
+        /// Gets the title id that is associated with this instance.
+        /// </summary>
+        public long TitleId
+        {
+            get;
+        }
+
         /// <summary>
         /// Gets a list of <see cref="RowObject"/> for the title associated
         /// with this instance.
@@ -71,7 +78,7 @@ namespace Restless.App.Panama.Database.Tables
             Versions = new List<RowObject>();
             versionMap = new Dictionary<long, List<long>>();
             this.owner = owner;
-            this.titleId = titleId;
+            TitleId = titleId;
             BuildVersionsAndMap();
         }
         #endregion
@@ -87,7 +94,7 @@ namespace Restless.App.Panama.Database.Tables
         {
             Validations.ValidateNullEmpty(fileName, "AddVersion.Filename");
             DataRow row = owner.NewRow();
-            row[Defs.Columns.TitleId] = titleId;
+            row[Defs.Columns.TitleId] = TitleId;
             // OnColumnChanged(e) method will update the associated fields: Updated, Size, and DocType
             row[Defs.Columns.FileName] = fileName;
             row[Defs.Columns.Version] = VersionCount + 1;
@@ -288,7 +295,7 @@ namespace Restless.App.Panama.Database.Tables
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"Title: {titleId} Rows:{Versions.Count} Versions:{VersionCount}");
+            sb.AppendLine($"Title: {TitleId} Rows:{Versions.Count} Versions:{VersionCount}");
 
             foreach (var ver in versionMap)
             {
@@ -427,7 +434,7 @@ namespace Restless.App.Panama.Database.Tables
         private void RenumberAllVersions()
         {
             long version = 0;
-            DataRow[] rows = owner.Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC");
+            DataRow[] rows = owner.Select($"{Defs.Columns.TitleId}={TitleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC");
             foreach (DataRow row in rows)
             {
                 RowObject rowObj = new RowObject(row);
@@ -445,7 +452,7 @@ namespace Restless.App.Panama.Database.Tables
             Versions.Clear();
             versionMap.Clear();
 
-            DataRow[] rows = owner.Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} DESC, {Defs.Columns.Revision} ASC");
+            DataRow[] rows = owner.Select($"{Defs.Columns.TitleId}={TitleId}", $"{Defs.Columns.Version} DESC, {Defs.Columns.Revision} ASC");
 
             long lastVer = -1;
 
