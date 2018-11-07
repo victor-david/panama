@@ -2,9 +2,10 @@
     x:Class="Restless.App.Panama.View.AboutWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     Title="About" 
-    Height="480" Width="532" 
+    Height="440" Width="586" 
     ResizeMode="NoResize" 
     ShowInTaskbar="False" 
     WindowStartupLocation="CenterScreen">
@@ -21,27 +22,36 @@
                 <Setter Property="Margin" Value="4"/>
                 <Setter Property="TextWrapping" Value="Wrap"/>
             </Style>
+            <Style TargetType="con:KeyValueDisplay">
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="HeaderFontSize" Value="13"/>
+                <Setter Property="HeaderWidth" Value="84"/>
+                <Setter Property="HeaderForeground" Value="DarkBlue"/>
+                <Setter Property="HeaderVerticalAlignment" Value="Top"/>
+                <Setter Property="ValueFontSize" Value="13"/>
+                <Setter Property="ValueForeground" Value="#FF818181"/>
+                <Setter Property="ValueVerticalAlignment" Value="Top"/>
+            </Style>
         </Grid.Resources>
         <StackPanel Grid.Column="0">
-            <TextBlock>
-                <TextBlock.Text>
+
+            <con:KeyValueDisplay Header="Product">
+                <con:KeyValueDisplay.Value>
                     <MultiBinding StringFormat="{}{0} {1}" Mode="OneTime">
                         <Binding Path="AppInfo.Assembly.Title" />
-                        <Binding Path="AppInfo.Assembly.Version" />
+                        <Binding Path="AppInfo.Assembly.VersionMajor" />
                     </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-            <TextBlock Text="{Binding Path=AppInfo.Assembly.Company, Mode=OneTime}" />
-            <TextBlock Text="{Binding Path=AppInfo.Assembly.Copyright, Mode=OneTime}" />
-            <TextBlock Text="{Binding Path=AppInfo.Assembly.Description, Mode=OneTime}" />
-            <TextBlock>Framework</TextBlock>
-            <TextBlock Margin="18,0" Text="{Binding Path=AppInfo.Assembly.FrameworkVersion, Mode=OneTime}" />
-            <TextBlock>Executable</TextBlock>
-            <TextBlock Margin="18,0" Text="{Binding Path=AppInfo.Assembly.Location, Mode=OneTime}" />
-            <TextBlock>64 Bit</TextBlock>
-            <TextBlock Margin="18,0" Text="{Binding Path=AppInfo.Is64Bit, Mode=OneTime}" />
-            <TextBlock>Database</TextBlock>
-            <TextBlock  Margin="18,0" Text="{Binding Path=AppInfo.DatabaseFileName, Mode=OneTime}" />
+                </con:KeyValueDisplay.Value>
+            </con:KeyValueDisplay>
+            
+            <con:KeyValueDisplay Header="Build Date" Value="{Binding AppInfo.BuildDate, Mode=OneTime}"/>
+            <con:KeyValueDisplay Header="Company" Value="{Binding AppInfo.Assembly.Company, Mode=OneTime}"/>
+            <con:KeyValueDisplay Header="Copyright" Value="{Binding AppInfo.Assembly.Copyright, Mode=OneTime}"/>
+            <con:KeyValueDisplay Header="Description" Value="{Binding AppInfo.Assembly.Description, Mode=OneTime}"/>
+            <con:KeyValueDisplay Header="Framework" Value="{Binding AppInfo.Assembly.FrameworkVersion, Mode=OneTime}"/>
+            <con:KeyValueDisplay Header="Executable" Value="{Binding AppInfo.Assembly.Location, Mode=OneTime}"/>
+            <con:KeyValueDisplay Header="64 Bit" Value="{Binding AppInfo.Is64Bit, Mode=OneTime}"/>
+            <con:KeyValueDisplay Header="Database" Value="{Binding AppInfo.DatabaseFileName, Mode=OneTime}"/>
             
             <Grid Margin="16,20">
                 <Grid.ColumnDefinitions>

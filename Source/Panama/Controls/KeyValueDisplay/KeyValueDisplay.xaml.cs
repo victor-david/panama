@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Diagnostics;
 
 namespace Restless.App.Panama.Controls
 {
@@ -35,7 +24,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register
             (
-                "Header", typeof(string), typeof(KeyValueDisplay), new UIPropertyMetadata(null)
+                nameof(Header), typeof(string), typeof(KeyValueDisplay), new UIPropertyMetadata(null)
             );
 
 
@@ -53,7 +42,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty HeaderWidthProperty = DependencyProperty.Register
             (
-                "HeaderWidth", typeof(int), typeof(KeyValueDisplay), new UIPropertyMetadata(120)
+                nameof(HeaderWidth), typeof(int), typeof(KeyValueDisplay), new UIPropertyMetadata(120)
             );
 
         /// <summary>
@@ -70,7 +59,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty HeaderForegroundProperty = DependencyProperty.Register
             (
-                "HeaderForeground", typeof(Brush), typeof(KeyValueDisplay), new UIPropertyMetadata(new SolidColorBrush(Colors.Black))
+                nameof(HeaderForeground), typeof(Brush), typeof(KeyValueDisplay), new UIPropertyMetadata(new SolidColorBrush(Colors.Black))
             );
 
         /// <summary>
@@ -87,7 +76,24 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty HeaderFontSizeProperty = DependencyProperty.Register
             (
-                "HeaderFontSize", typeof(double), typeof(KeyValueDisplay), new UIPropertyMetadata(11.0)
+                nameof(HeaderFontSize), typeof(double), typeof(KeyValueDisplay), new UIPropertyMetadata(11.0)
+            );
+
+        /// <summary>
+        /// Gets or sets the vertical alignment for the header
+        /// </summary>
+        public VerticalAlignment HeaderVerticalAlignment
+        {
+            get => (VerticalAlignment)GetValue(HeaderVerticalAlignmentProperty);
+            set => SetValue(HeaderVerticalAlignmentProperty, value);
+        }
+
+        /// <summary>
+        /// Defines a dependency property that describes the vertical alignment of the header.
+        /// </summary>
+        public static readonly DependencyProperty HeaderVerticalAlignmentProperty = DependencyProperty.Register
+            (
+                nameof(HeaderVerticalAlignment), typeof(VerticalAlignment), typeof(KeyValueDisplay), new PropertyMetadata(VerticalAlignment.Center)
             );
         
         /// <summary>
@@ -104,7 +110,58 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register
             (
-                "Value", typeof(string), typeof(KeyValueDisplay), new UIPropertyMetadata(null)
+                nameof(Value), typeof(string), typeof(KeyValueDisplay), new UIPropertyMetadata(null)
+            );
+
+        /// <summary>
+        /// Gets or sets the foregound of <see cref="Value"/>.
+        /// </summary>
+        public Brush ValueForeground
+        {
+            get => (Brush)GetValue(ValueForegroundProperty);
+            set => SetValue(ValueForegroundProperty, value);
+        }
+
+        /// <summary>
+        /// Defines a dependency property that describes the foreground of <see cref="Value"/>.
+        /// </summary>
+        public static readonly DependencyProperty ValueForegroundProperty = DependencyProperty.Register
+            (
+                nameof(ValueForeground), typeof(Brush), typeof(KeyValueDisplay), new UIPropertyMetadata(new SolidColorBrush(Colors.Black))
+            );
+
+        /// <summary>
+        /// Gets or sets the font size of <see cref="Value"/>.
+        /// </summary>
+        public double ValueFontSize
+        {
+            get => (double)GetValue(ValueFontSizeProperty);
+            set => SetValue(ValueFontSizeProperty, value);
+        }
+
+        /// <summary>
+        /// Defines a dependency property for the value font size.
+        /// </summary>
+        public static readonly DependencyProperty ValueFontSizeProperty = DependencyProperty.Register
+            (
+                nameof(ValueFontSize), typeof(double), typeof(KeyValueDisplay), new PropertyMetadata(11.0)
+            );
+
+        /// <summary>
+        /// Gets or sets the vertical alignment for the value
+        /// </summary>
+        public VerticalAlignment ValueVerticalAlignment
+        {
+            get => (VerticalAlignment)GetValue(ValueVerticalAlignmentProperty);
+            set => SetValue(ValueVerticalAlignmentProperty, value);
+        }
+
+        /// <summary>
+        /// Defines a dependency property that describes the vertical alignment of the value.
+        /// </summary>
+        public static readonly DependencyProperty ValueVerticalAlignmentProperty = DependencyProperty.Register
+            (
+                nameof(ValueVerticalAlignment), typeof(VerticalAlignment), typeof(KeyValueDisplay), new PropertyMetadata(VerticalAlignment.Center)
             );
 
         /// <summary>
@@ -122,7 +179,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty DisplayLevelProperty = DependencyProperty.Register
             (
-                "DisplayLevel", typeof(int), typeof(KeyValueDisplay), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender, DisplayLevelChanged)
+                nameof(DisplayLevel), typeof(int), typeof(KeyValueDisplay), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender, DisplayLevelChanged)
             );
         #endregion
 
@@ -135,6 +192,7 @@ namespace Restless.App.Panama.Controls
         public KeyValueDisplay()
         {
             InitializeComponent();
+            VerticalContentAlignment = VerticalAlignment.Center;
         }
         #endregion
 

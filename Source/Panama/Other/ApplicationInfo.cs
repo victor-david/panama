@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Restless.App.Panama.Database;
 using Restless.Tools.Utility;
-using Restless.App.Panama.Database;
+using System;
 using System.IO;
 
 namespace Restless.App.Panama
@@ -14,7 +11,6 @@ namespace Restless.App.Panama
     public sealed class ApplicationInfo
     {
         #region Private
-        private static ApplicationInfo instance = new ApplicationInfo();
         private const string DefaultRootFileName = "DevelopmentRoot.txt";
         private const string DefaultRootEntry = "DevelopmentRoot=";
         #endregion
@@ -25,13 +21,7 @@ namespace Restless.App.Panama
         /// <summary>
         /// Gets the singleton instance of this class.
         /// </summary>
-        public static ApplicationInfo Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static ApplicationInfo Instance { get; } = new ApplicationInfo();
 
         /// <summary>
         /// Gets the assembly information object.
@@ -40,6 +30,19 @@ namespace Restless.App.Panama
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// Gets the build date for the assembly.
+        /// </summary>
+        public DateTime BuildDate
+        {
+            get
+            {
+                var version = Assembly.VersionRaw;
+                DateTime buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
+                return buildDate;
+            }
         }
 
         /// <summary>
@@ -66,10 +69,7 @@ namespace Restless.App.Panama
         /// </summary>
         public string ReferenceFileName
         {
-            get
-            {
-                return Path.Combine(RootFolder, "Panama.Reference.chm");
-            }
+            get => Path.Combine(RootFolder, "Panama.Reference.chm");
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Restless.App.Panama
         /// </summary>
         public string DatabaseFileName
         {
-            get { return DatabaseController.Instance.DatabaseFileName; }
+            get => DatabaseController.Instance.DatabaseFileName;
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Restless.App.Panama
         /// </summary>
         public bool DatabaseImportEnabled
         {
-            get { return DatabaseImporter.Instance.IsEnabled; }
+            get => DatabaseImporter.Instance.IsEnabled;
         }
 
         /// <summary>
@@ -93,9 +93,8 @@ namespace Restless.App.Panama
         /// </summary>
         public bool Is64Bit
         {
-            get { return Environment.Is64BitProcess; }
+            get => Environment.Is64BitProcess;
         }
-
         #endregion
 
         /************************************************************************/
@@ -105,6 +104,7 @@ namespace Restless.App.Panama
         private ApplicationInfo()
         {
             Assembly = new AssemblyInfo(AssemblyInfoType.Entry);
+
             RootFolder = Path.GetDirectoryName(Assembly.Location);
             string loc = RootFolder.ToLower();
             if (
