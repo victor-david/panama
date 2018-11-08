@@ -67,9 +67,9 @@ namespace Restless.App.Panama.ViewModel
         {
             get
             {
-                if (SelectedItem != null)
+                if (SelectedItem is DataRowView view)
                 {
-                    return ((DataRowView)SelectedItem).Row;
+                    return view.Row;
                 }
                 return null;
             }
