@@ -28,6 +28,18 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="4,0"/>
             </Style>
+
+            <Style TargetType="CheckBox" x:Key="{x:Static ToolBar.CheckBoxStyleKey}" BasedOn="{StaticResource {x:Static ToolBar.CheckBoxStyleKey}}">
+                <Setter Property="Margin" Value="5,0"/>
+                <Setter Property="Foreground" Value="#FF0000DD"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="False">
+                        <Setter Property="Foreground" Value="DarkGray"/>
+                    </Trigger>
+                </Style.Triggers>
+
+            </Style>
         </Style.Resources>
     </Style>
     

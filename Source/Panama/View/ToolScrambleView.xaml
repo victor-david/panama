@@ -9,15 +9,54 @@
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
-    <DockPanel>
-        <TextBlock DockPanel.Dock="Top"  Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationScramble}"/>
-        <StackPanel DockPanel.Dock="Top" Style="{StaticResource StackPanelCommandHolder}">
-            <Button Command="{Binding Commands[Paste]}" Content="Paste"/>
-            <Button Command="{Binding Commands[Begin]}" Content="Scramble"/>
-            <CheckBox IsChecked="{Binding ScrambleWords}">Scramble words</CheckBox>
-        </StackPanel>
-        
-        <TextBox DockPanel.Dock="Top" Style="{StaticResource TextBoxMultiFull}" Margin="0,12,0,0" Text="{Binding Text}"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.25*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
-    </DockPanel>
+        <!-- Tool explanation text -->
+        <TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationScramble}"/>
+        
+        <!-- Tool bar -->
+        <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">
+            <ToolBar Style="{StaticResource ToolBarCommandHolder}">
+                <!-- Paste text button -->
+                <Button 
+                    Width="70"
+                    Command="{Binding Commands[Paste]}"
+                    Content="Paste"
+                    ToolTip="{x:Static r:Strings.TooltipScramblePaste}"/>
+
+                <!-- Start scramble button -->
+                <Button
+                    Width="70"
+                    Command="{Binding Commands[Begin]}"
+                    Content="Scramble"
+                    ToolTip="{x:Static r:Strings.TooltipScrambleBegin}"/>
+                
+                <!-- Separator -->
+                <Separator/>
+                
+                <!-- Scramble words -->
+                <CheckBox
+                    Width="70"
+                    IsChecked="{Binding ScrambleWords}"
+                    Content="Words"
+                    ToolTip="{x:Static r:Strings.TooltipScrambleWord}"/>
+            </ToolBar>
+        </ToolBarTray>
+        
+        <TextBox 
+            Grid.Row="2" Grid.ColumnSpan="2"
+            Style="{StaticResource TextBoxMultiFull}" 
+            Margin="0,12,0,0"
+            Text="{Binding Text}"/>
+
+    </Grid>
 </UserControl>

@@ -1742,7 +1742,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation enables to scramble lines of text, and optionaly the words within the lines. Paste text to begin..
+        ///   Looks up a localized string similar to This operation enables you to scramble lines of text, and optionally the words within the lines. Paste text to begin..
         /// </summary>
         public static string HeaderToolOperationScramble {
             get {
@@ -2212,6 +2212,33 @@ namespace Restless.App.Panama.Resources {
         public static string TooltipPublisherSubmissionPeriodCount {
             get {
                 return ResourceManager.GetString("TooltipPublisherSubmissionPeriodCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scramble the text in the text area.
+        /// </summary>
+        public static string TooltipScrambleBegin {
+            get {
+                return ResourceManager.GetString("TooltipScrambleBegin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste text from the clipboard into the text area to be scrambled.
+        /// </summary>
+        public static string TooltipScramblePaste {
+            get {
+                return ResourceManager.GetString("TooltipScramblePaste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When activated, words within the lines will be scrambled.
+        /// </summary>
+        public static string TooltipScrambleWord {
+            get {
+                return ResourceManager.GetString("TooltipScrambleWord", resourceCulture);
             }
         }
         

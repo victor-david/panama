@@ -606,7 +606,7 @@ Last exported: {1}</value>
     <value>Scramble</value>
   </data>
   <data name="HeaderToolOperationScramble" xml:space="preserve">
-    <value>This operation enables to scramble lines of text, and optionaly the words within the lines. Paste text to begin.</value>
+    <value>This operation enables you to scramble lines of text, and optionally the words within the lines. Paste text to begin.</value>
   </data>
   <data name="InvalidOpNotEnoughTextToScramble" xml:space="preserve">
     <value>Not enough text to scramble. Paste some more text and try again.</value>
@@ -947,5 +947,14 @@ Do you want to continue?</value>
     <value>This operation will add a new author record. If any filters are in effect, they will be removed so that the new author displays in the list. 
 
 Do you want to continue?</value>
+  </data>
+  <data name="TooltipScrambleBegin" xml:space="preserve">
+    <value>Scramble the text in the text area</value>
+  </data>
+  <data name="TooltipScramblePaste" xml:space="preserve">
+    <value>Paste text from the clipboard into the text area to be scrambled</value>
+  </data>
+  <data name="TooltipScrambleWord" xml:space="preserve">
+    <value>When activated, words within the lines will be scrambled</value>
   </data>
 </root>
