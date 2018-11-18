@@ -30,11 +30,11 @@
         
         <TextBox Grid.Row="3" Text="{Binding SelectedRow[url]}" />        
         <Label Grid.Row="4">Alert Date</Label>
+        <!-- DisplayDate="{Binding SelectedRow[date],Mode=OneWay}" -->
         <con:CalendarExtended
             Grid.Row="5"
-            SelectedDate="{Binding SelectedRow[date]}"
-            DisplayDate="{Binding SelectedRow[date],Mode=OneWay}"
-            Margin="6,0"/>
+            Margin="6,0"
+            SelectedDateUtc="{Binding SelectedRow[date]}"/>
 
          <CheckBox Grid.Row="6" Margin="6" IsChecked="{Binding SelectedRow[enabled]}">Enabled</CheckBox>
     </Grid>

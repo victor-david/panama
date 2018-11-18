@@ -1,24 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
+﻿using Restless.App.Panama.Controls;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
-using System.Windows;
 using System.ComponentModel;
+using System.Data;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -58,7 +42,8 @@ namespace Restless.App.Panama.ViewModel
             DataView.RowFilter = string.Format("{0}=-1", SubmissionBatchTable.Defs.Columns.PublisherId);
             DataView.Sort = string.Format("{0} DESC", SubmissionBatchTable.Defs.Columns.Submitted);
             Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
-            Columns.SetDefaultSort(Columns.Create("Submitted", SubmissionBatchTable.Defs.Columns.Submitted).MakeDate(), ListSortDirection.Descending);
+            var col = Columns.Create("Submitted", SubmissionBatchTable.Defs.Columns.Submitted).MakeDate();
+            Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.Create("Response", SubmissionBatchTable.Defs.Columns.Response).MakeDate();
             Columns.Create("Type", SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName).MakeFixedWidth(FixedWidth.MediumString);
             Columns.Create("Note", SubmissionBatchTable.Defs.Columns.Notes).MakeSingleLine();

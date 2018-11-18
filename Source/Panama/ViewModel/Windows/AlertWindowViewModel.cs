@@ -1,14 +1,13 @@
 ﻿using Restless.App.Panama.Collections;
 using Restless.App.Panama.Controls;
+using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Input;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -76,7 +75,8 @@ namespace Restless.App.Panama.ViewModel
         {
             Alerts = alerts ?? throw new ArgumentNullException(nameof(alerts));
             Columns = new DataGridColumnCollection();
-            Columns.SetDefaultSort(Columns.Create("Date", nameof(AlertTable.RowObject.Date)).MakeDate(), ListSortDirection.Ascending);
+            var col = Columns.Create("Date", nameof(AlertTable.RowObject.Date)).MakeDate();
+            Columns.SetDefaultSort(col, ListSortDirection.Ascending);
             Columns.Create("Title", nameof(AlertTable.RowObject.Title));
             Columns.Create("Url", nameof(AlertTable.RowObject.Url));
 

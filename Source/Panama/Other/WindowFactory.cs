@@ -89,6 +89,7 @@ namespace Restless.App.Panama
         /// <summary>
         /// Provides static methods for creating a message select window.
         /// </summary>
+        [Obsolete("Use MessageFileSelect instead")]
         public static class MessageSelect
         {
             /// <summary>
@@ -110,6 +111,8 @@ namespace Restless.App.Panama
             }
         }
         #endregion
+        
+        /************************************************************************/
 
         #region MessageSelect
         /// <summary>

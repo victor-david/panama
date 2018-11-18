@@ -44,7 +44,7 @@
             <TabItem Header="{x:Static r:Strings.HeaderDates}">
                 <StackPanel>
                     <Expander Header="{Binding Submitted.Header}" IsExpanded="False">
-                        <con:CalendarExtended SelectedDate="{Binding Submitted.SubmittedDate}" />
+                        <con:CalendarExtended SelectedDateUtc="{Binding Submitted.SubmittedDate}" />
                     </Expander>
 
                     <Expander Header="{Binding Response.Header}" IsExpanded="False">
@@ -58,7 +58,7 @@
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Column="0">
                                 <Label>Date</Label>
-                                <con:CalendarExtended SelectedDate="{Binding Response.ResponseDate}" />
+                                <con:CalendarExtended SelectedDateUtc="{Binding Response.ResponseDate}" />
                             </StackPanel>
                             <StackPanel Grid.Column="1">
                                 <Label>Type</Label>

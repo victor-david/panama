@@ -17,7 +17,7 @@ namespace Restless.App.Panama.ViewModel
 
         #region Public properties
         /// <summary>
-        /// Gets or sets the submitted date
+        /// Gets or sets the submitted date. The UI binds to this property.
         /// </summary>
         public object SubmittedDate
         {
@@ -47,9 +47,9 @@ namespace Restless.App.Panama.ViewModel
             get
             {
                 string dateStr = Strings.TextNone;
-                if (Owner.IsSelectedRowAccessible && Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted] != DBNull.Value)
+                if (Owner.IsSelectedRowAccessible && Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted] is DateTime dt)
                 {
-                    dateStr = ((DateTime)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted]).ToString(Config.Instance.DateFormat);
+                    dateStr = dt.ToLocalTime().ToString(Config.Instance.DateFormat);
                 }
                 return $"{Strings.TextSubmitted}: {dateStr}";
             }

@@ -109,14 +109,13 @@ namespace Restless.App.Panama.ViewModel
             get
             {
                 string dateStr = Strings.TextNone;
-                if (SelectedRow != null && SelectedRow[TitleTable.Defs.Columns.Written] != DBNull.Value)
+                if (IsSelectedRowAccessible && SelectedRow[TitleTable.Defs.Columns.Written] is DateTime dt)
                 {
-                    dateStr = ((DateTime)SelectedRow[TitleTable.Defs.Columns.Written]).ToString(Config.Instance.DateFormat);
+                    dateStr = dt.ToLocalTime().ToString(Config.Instance.DateFormat);
                 }
-                return string.Format("{0}: {1}", Strings.TextWritten, dateStr);
+                return $"{Strings.TextWritten}: {dateStr}";
             }
         }
-
         /// <summary>
         /// Gets or sets the written date.
         /// </summary>
@@ -124,7 +123,7 @@ namespace Restless.App.Panama.ViewModel
         {
             get
             {
-                if (SelectedRow != null)
+                if (IsSelectedRowAccessible)
                 {
                     return SelectedRow[TitleTable.Defs.Columns.Written];
                 }
@@ -132,7 +131,7 @@ namespace Restless.App.Panama.ViewModel
             }
             set
             {
-                if (SelectedRow != null)
+                if (IsSelectedRowAccessible)
                 {
                     if (value != null)
                     {
@@ -141,30 +140,11 @@ namespace Restless.App.Panama.ViewModel
                     else
                     {
                         SelectedRow[TitleTable.Defs.Columns.Written] = DBNull.Value;
-                     }
+                    }
                     OnWrittenPropertiesChanged();
                 }
             }
         }
-
-        /// <summary>
-        /// Gets the response date display name. Used to bind to the edit view
-        /// Can't bind directly DisplayDate="{Binding SelectedRow[response]}"
-        /// because when there isn't yet a response date, the calendar shows January, 0001
-        /// </summary>
-        public DateTime WrittenDisplayDate
-        {
-            get
-            {
-                DateTime displayDate = DateTime.UtcNow;
-                if (SelectedRow != null && SelectedRow[TitleTable.Defs.Columns.Written] != DBNull.Value)
-                {
-                    displayDate = (DateTime)SelectedRow[TitleTable.Defs.Columns.Written];
-                }
-                return displayDate;
-            }
-        }
-
 
         /// <summary>
         /// Sets the selected tab index. This property is bound to the UI, Mode=OneWayToSource.
@@ -201,7 +181,9 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TitleViewModel"/> class.
+        /// </summary>
         public TitleViewModel()
         {
             DisplayName = Strings.CommandTitle;
@@ -211,9 +193,13 @@ namespace Restless.App.Panama.ViewModel
             Columns.CreateImage<BooleanToImageConverter>("Q", TitleTable.Defs.Columns.QuickFlag, "ImageExclamation").AddToolTip(Strings.TooltipTitleQuickFlag);
 
             Columns.Create("Title", TitleTable.Defs.Columns.Title).MakeFlexWidth(4);
-            Columns.SetDefaultSort(Columns.Create("Written", TitleTable.Defs.Columns.Written).MakeDate(), ListSortDirection.Descending);
 
-            Columns.Create("Updated", TitleTable.Defs.Columns.Calculated.LastestVersionDate).MakeDate()
+            var col = Columns.Create("Written", TitleTable.Defs.Columns.Written).MakeDate();
+
+            Columns.SetDefaultSort(col, ListSortDirection.Descending);
+
+            Columns.Create("Updated", TitleTable.Defs.Columns.Calculated.LastestVersionDate)
+                .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
 
             Columns.Create("WC", TitleTable.Defs.Columns.Calculated.LastestVersionWordCount).MakeFixedWidth(FixedWidth.Standard)
@@ -286,7 +272,6 @@ namespace Restless.App.Panama.ViewModel
             Filters = new TitleFilterController(this);
             Filters.Apply();
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -483,7 +468,6 @@ namespace Restless.App.Panama.ViewModel
         {
             OnPropertyChanged(nameof(WrittenHeader));
             OnPropertyChanged(nameof(WrittenDate));
-            OnPropertyChanged(nameof(WrittenDisplayDate));
         }
 
         private void AddViewSourceSortDescriptions()

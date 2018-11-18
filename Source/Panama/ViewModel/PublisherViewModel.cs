@@ -104,9 +104,12 @@ namespace Restless.App.Panama.ViewModel
 
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
             Columns.Create("Url", PublisherTable.Defs.Columns.Url);
-            Columns.SetDefaultSort(Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate()
-                .AddToolTip(Strings.TooltipPublisherAdded), ListSortDirection.Descending);
 
+            var col = Columns.Create("Added", PublisherTable.Defs.Columns.Added)
+                .MakeDate()
+                .AddToolTip(Strings.TooltipPublisherAdded);
+
+            Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.CreateImage<BooleanToImageConverter>("A", PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission, "ImageExclamation")
                 .AddToolTip(Strings.TooltipPublisherHasActive);
 

@@ -149,6 +149,7 @@
       <DependentUpon>YesNoEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LinkedTextBlock\LinkedTextBlock.cs" />
+    <Compile Include="Converters\DateUtcToLocalConverter.cs" />
     <Compile Include="Converters\IntegerToCharConverter.cs" />
     <Compile Include="Converters\PreviewModeToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -398,9 +399,6 @@
     </Compile>
     <Compile Include="View\EditControls\SimpleRowFilter.xaml.cs">
       <DependentUpon>SimpleRowFilter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\EditControls\SubmissionEdit.xaml.cs">
-      <DependentUpon>SubmissionEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditControls\TitleEditAddToSubmission.xaml.cs">
       <DependentUpon>TitleEditAddToSubmission.xaml</DependentUpon>
@@ -689,10 +687,6 @@
     <Page Include="View\EditControls\SimpleRowFilter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\EditControls\SubmissionEdit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\EditControls\TitleEditAddToSubmission.xaml">
       <SubType>Designer</SubType>

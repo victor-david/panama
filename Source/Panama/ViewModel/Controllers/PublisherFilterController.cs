@@ -212,7 +212,7 @@ namespace Restless.App.Panama.ViewModel
             if (f.HaveSubmission != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission, (byte)f.HaveSubmission), FilterDescText(f.HaveSubmission, "have active submssion"));
+                Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission, (byte)f.HaveSubmission), FilterDescText(f.HaveSubmission, "have active submission"));
             }
 
             Owner.DataView.RowFilter = filter.ToString();

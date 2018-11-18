@@ -336,14 +336,32 @@ namespace Restless.App.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Called when a column changes in order to sync publisher.
+        /// Called when a data column is changing its value.
         /// </summary>
         /// <param name="e">The event args.</param>
-        protected override void OnColumnChanged(DataColumnChangeEventArgs e)
+        /// <remarks>
+        /// This method checks for changes to the <see cref="Defs.Columns.Response"/> column
+        /// in order to auto manage the corresponding <see cref="Defs.Columns.ResponseType"/> column,
+        /// and to sync the associated publisher's virtual <see cref="PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission"/> column.
+        /// </remarks>
+        protected override void OnColumnChanging(DataColumnChangeEventArgs e)
         {
-            base.OnColumnChanged(e);
+            base.OnColumnChanging(e);
             if (e.Column.ColumnName == Defs.Columns.Response)
             {
+                if (e.ProposedValue is DateTime)
+                {
+                    // If current response date is null, set response type to not specified
+                    if (e.Row[e.Column] == DBNull.Value)
+                    {
+                        e.Row[Defs.Columns.ResponseType] = ResponseTable.Defs.Values.ResponseNotSpecified;
+                    }
+                }
+                else
+                {
+                    e.Row[Defs.Columns.ResponseType] = ResponseTable.Defs.Values.NoResponse;
+                }
+
                 /* Get the publisher parent row and update it */
                 DataRow parentRow = e.Row.GetParentRow(PublisherTable.Defs.Relations.ToSubmissionBatch);
                 Controller.GetTable<PublisherTable>().UpdateHaveActive(parentRow);

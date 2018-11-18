@@ -163,9 +163,9 @@ namespace Restless.App.Panama.ViewModel
         public void SetSubmissionHeader()
         {
             string header = null;
-            if (SelectedRow != null)
+            if (SelectedRow != null && SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted] is DateTime dt)
             {
-                string dateStr = ((DateTime)SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted]).ToString(Config.Instance.DateFormat);
+                string dateStr = dt.ToLocalTime().ToString(Config.Instance.DateFormat);
                 header = $"{dateStr} to {SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.Publisher]}";
             }
             SubmissionHeader = header;

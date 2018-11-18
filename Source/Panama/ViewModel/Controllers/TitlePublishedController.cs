@@ -45,22 +45,6 @@ namespace Restless.App.Panama.ViewModel
                 }
             }
         }
-
-        ///// <summary>
-        ///// Gets the published display date. Used to bind to the edit view.
-        ///// Can't bind directly to the data row because if it's null, calendar shows January, 0001
-        ///// </summary>
-        //public DateTime PublishedDisplayDate
-        //{
-        //    get
-        //    {
-        //        if (SelectedRow != null && SelectedRow[PublishedTable.Defs.Columns.Published] is DateTime dt)
-        //        {
-        //            return dt;
-        //        }
-        //        return DateTime.UtcNow;
-        //    }
-        //}
         #endregion
 
         /************************************************************************/

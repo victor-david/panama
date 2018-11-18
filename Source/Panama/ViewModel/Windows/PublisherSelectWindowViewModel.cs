@@ -3,6 +3,7 @@ using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using System.ComponentModel;
 using System.Windows;
+using Restless.App.Panama.Converters;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -39,7 +40,8 @@ namespace Restless.App.Panama.ViewModel
         {
             Columns.Create("Id", PublishedTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
-            Columns.SetDefaultSort(Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate(), ListSortDirection.Descending);
+            var col = Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate();
+            Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub).MakeDate()
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
             Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount).MakeFixedWidth(FixedWidth.MediumNumeric)

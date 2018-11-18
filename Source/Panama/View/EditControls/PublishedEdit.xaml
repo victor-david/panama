@@ -18,9 +18,7 @@
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
             <Label>Published Date</Label>
-            <con:CalendarExtended 
-                Grid.Row="1"
-                SelectedDate="{Binding Published.PublishedDate}"/>
+            <con:CalendarExtended Grid.Row="1" SelectedDateUtc="{Binding Published.PublishedDate}"/>
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <Button Command="{Binding Published.Commands[ClearPublishedDate]}">Clear</Button>
             </StackPanel>

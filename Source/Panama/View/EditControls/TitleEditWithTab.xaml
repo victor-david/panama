@@ -44,7 +44,7 @@
                     </Grid>
 
                     <Expander DockPanel.Dock="Top" Header="{Binding WrittenHeader}" IsExpanded="False">
-                        <con:CalendarExtended SelectedDate="{Binding WrittenDate}" DisplayDate="{Binding WrittenDisplayDate,Mode=OneWay}" HorizontalAlignment="Left" />
+                        <con:CalendarExtended SelectedDateUtc="{Binding WrittenDate}" />
                     </Expander>
 
                     <Expander DockPanel.Dock="Top" Header="Current Tags" IsExpanded="True">

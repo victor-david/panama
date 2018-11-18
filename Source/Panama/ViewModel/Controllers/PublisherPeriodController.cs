@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
+﻿using Restless.App.Panama.Controls;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
 using Restless.Tools.Utility;
+using System;
+using System.Data;
 using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
@@ -29,7 +17,6 @@ namespace Restless.App.Panama.ViewModel
         #region Private
         private Visibility addControlVisibility;
         private Visibility notesVisibility;
-
         private DateTime addStart;
         private DateTime addEnd;
         #endregion
@@ -42,11 +29,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public Visibility AddControlVisibility
         {
-            get { return addControlVisibility; }
-            private set
-            {
-                SetProperty(ref addControlVisibility, value);
-            }
+            get => addControlVisibility;
+            private set => SetProperty(ref addControlVisibility, value);
         }
 
         /// <summary>
@@ -54,11 +38,8 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public Visibility NotesVisibility
         {
-            get { return notesVisibility; }
-            private set
-            {
-                SetProperty(ref notesVisibility, value);
-            }
+            get => notesVisibility;
+            private set => SetProperty(ref notesVisibility, value);
         }
 
         /// <summary>
@@ -66,7 +47,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public DateTime AddStart
         {
-            get { return addStart; }
+            get => addStart;
             set
             {
                 if (SetProperty(ref addStart, value))
@@ -81,7 +62,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public DateTime AddEnd
         {
-            get { return addEnd; }
+            get => addEnd;
             set
             {
                 if (SetProperty(ref addEnd, value))
@@ -116,8 +97,8 @@ namespace Restless.App.Panama.ViewModel
             DataView.RowFilter = string.Format("{0}=-1", SubmissionPeriodTable.Defs.Columns.PublisherId);
             DataView.Sort = string.Format("{0} ASC", SubmissionPeriodTable.Defs.Columns.Start);
             Columns.Create("Id", SubmissionPeriodTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
-            Columns.Create("Start", SubmissionPeriodTable.Defs.Columns.Start).MakeDate("MMMM dd");
-            Columns.Create("End", SubmissionPeriodTable.Defs.Columns.End).MakeDate("MMMM dd");
+            Columns.Create("Start", SubmissionPeriodTable.Defs.Columns.Start).MakeDate("MMMM dd", toLocal:false);
+            Columns.Create("End", SubmissionPeriodTable.Defs.Columns.End).MakeDate("MMMM dd", toLocal:false);
             Columns.Create("Note", SubmissionPeriodTable.Defs.Columns.Notes);
             Owner.Commands.Add("PeriodAddShow", (o) => 
                 {
@@ -138,9 +119,9 @@ namespace Restless.App.Panama.ViewModel
             });
             AddControlVisibility = Visibility.Collapsed;
             NotesVisibility = Visibility.Collapsed;
-            AddStart = new DateTime(DateTime.UtcNow.Year, 1, 1);
-            AddEnd = new DateTime(DateTime.UtcNow.Year, 12, 31);
 
+            AddStart = new DateTime(DateTime.Now.Year, 1, 1);
+            AddEnd = new DateTime(DateTime.Now.Year, 12, 31);
         }
         #endregion
 
@@ -192,8 +173,8 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunAddSubmissionPeriodAllYearCommand(object o)
         {
-            DateTime start = new DateTime(DateTime.UtcNow.Year, 1, 1);
-            DateTime end = new DateTime(DateTime.UtcNow.Year, 12, 31);
+            DateTime start = new DateTime(DateTime.Now.Year, 1, 1);
+            DateTime end = new DateTime(DateTime.Now.Year, 12, 31);
             AddSubmissionPeriod(start, end);
         }
 

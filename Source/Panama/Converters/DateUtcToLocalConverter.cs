@@ -5,24 +5,24 @@ using System.Windows.Markup;
 namespace Restless.App.Panama.Converters
 {
     /// <summary>
-    /// Provides a converter that accepts a <see cref="DateTime"/> object and returns a formatted string.
+    /// Provides a converter that accepts a <see cref="DateTime"/> object and returns its local date/time value.
     /// </summary>
-    public class DateToFormattedDateConverter : MarkupExtension, IValueConverter
+    public class DateUtcToLocalConverter : MarkupExtension, IValueConverter
     {
         #region Public methods
         /// <summary>
-        /// Converts a <see cref="DateTime"/> object to a formatted string.
+        /// Converts a <see cref="DateTime"/> object its local date/time value.
         /// </summary>
         /// <param name="value">The <see cref="DateTime"/> object.</param>
         /// <param name="targetType">Not used.</param>
         /// <param name="parameter">Not used.</param>
         /// <param name="culture">Not used.</param>
-        /// <returns>A date formatted string according to the application's <see cref="Configuration.Config.DateFormat"/> property.</returns>
+        /// <returns><paramref name="value"/> converted to its local date/time.</returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value is DateTime dt)
             {
-                return dt.ToString(Configuration.Config.Instance.DateFormat);
+                return dt.ToLocalTime();
             }
             return value;
         }

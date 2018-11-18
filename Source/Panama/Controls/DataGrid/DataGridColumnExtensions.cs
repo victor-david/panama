@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Converters;
+using Restless.App.Panama.Resources;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Converters;
-using Restless.App.Panama.Resources;
+using DataBinding = System.Windows.Data.Binding;
 
 namespace Restless.App.Panama.Controls
 {
@@ -27,9 +24,15 @@ namespace Restless.App.Panama.Controls
         /// <param name="col">The column.</param>
         /// <param name="dateFormat">The desired date format. Null (the default) uses the application default format</param>
         /// <param name="width">The desired width. Default is <see cref="DefaultWidth"/>.</param>
+        /// <param name="toLocal">If true (the default), adds a converter to display the bound date as local date/time</param>
         /// <returns>The column</returns>
-        public static DataGridBoundColumn MakeDate(this DataGridBoundColumn col, string dateFormat = null, int width = DefaultWidth)
+        public static DataGridBoundColumn MakeDate(this DataGridBoundColumn col, string dateFormat = null, int width = DefaultWidth, bool toLocal = true)
         {
+            if (toLocal)
+            {
+                ((DataBinding)col.Binding).Converter = new DateUtcToLocalConverter();
+                col.Binding.TargetNullValue = "--";
+            }
             if (string.IsNullOrEmpty(dateFormat))
             {
                 dateFormat = Config.Instance.DateFormat;
@@ -136,7 +139,7 @@ namespace Restless.App.Panama.Controls
         /// <returns>The column</returns>
         public static DataGridBoundColumn MakeSingleLine(this DataGridBoundColumn col)
         {
-            ((System.Windows.Data.Binding)col.Binding).Converter = new StringToCleanStringConverter();
+            ((DataBinding)col.Binding).Converter = new StringToCleanStringConverter();
             return col;
         }
 
@@ -147,7 +150,7 @@ namespace Restless.App.Panama.Controls
         /// <returns>The column</returns>
         public static DataGridBoundColumn MakeMasked(this DataGridBoundColumn col)
         {
-            ((System.Windows.Data.Binding)col.Binding).Converter = new StringToMaskedStringConverter();
+            ((DataBinding)col.Binding).Converter = new StringToMaskedStringConverter();
             return col;
         }
 
@@ -218,9 +221,5 @@ namespace Restless.App.Panama.Controls
             col.SetValue(DataGridExtended.CustomSortProperty, new DataGridColumnSortSpec(column1, column2, behavior));
             return col;
         }
-
-        //private static DataGridColumn AddToolTipPrivate()
-        //{
-        //}
     }
 }

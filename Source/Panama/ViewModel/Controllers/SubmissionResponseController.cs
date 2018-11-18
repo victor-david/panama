@@ -25,42 +25,33 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public bool HaveResponseDate
         {
-            get
-            {
-                return (Owner.SelectedRow != null && Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response] != DBNull.Value);
-            }
+            get => Owner.IsSelectedRowAccessible && Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response] != DBNull.Value;
         }
 
         /// <summary>
-        /// Gets or sets the response date
+        /// Gets or sets the response date. The UI binds to this property.
         /// </summary>
-        public object ResponseDate
+        public DateTime? ResponseDate
         {
             get
             {
-                if (Owner.SelectedRow != null)
+                if (Owner.IsSelectedRowAccessible && Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response] is DateTime dt)
                 {
-                    return Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response];
+                    return dt;
                 }
                 return null;
             }
             set
             {
-                if (Owner.SelectedRow != null)
+                if (Owner.IsSelectedRowAccessible)
                 {
-                    if (value != null)
+                    if (value.HasValue)
                     {
-                        object prevResponseDate = Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response];
                         Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response] = value;
-                        if (prevResponseDate == DBNull.Value)
-                        {
-                            ResponseType = ResponseTable.Defs.Values.ResponseNotSpecified;
-                        }
                     }
                     else
                     {
                         Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response] = DBNull.Value;
-                        ResponseType = ResponseTable.Defs.Values.NoResponse;
                     }
                     OnResponsePropertiesChanged();
                 }
@@ -75,11 +66,11 @@ namespace Restless.App.Panama.ViewModel
             get
             {
                 string dateStr = Strings.TextNone;
-                if (Owner.SelectedRow != null && Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response] != DBNull.Value)
+                if (Owner.IsSelectedRowAccessible && Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response] is DateTime dt)
                 {
-                    dateStr = ((DateTime)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Response]).ToString(Config.Instance.DateFormat);
+                    dateStr = dt.ToLocalTime().ToString(Config.Instance.DateFormat);
                 }
-                return string.Format("{0}: {1}", Strings.TextResponse, dateStr);
+                return $"{Strings.TextResponse}: {dateStr}";
             }
         }
 

@@ -2,6 +2,7 @@
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.ViewModel;
 using Restless.Tools.Search;
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -163,6 +164,7 @@ namespace Restless.App.Panama.Controls
             }
         }
 
+        [Obsolete("Mapi selection is deprecated")]
         private void SelectMapiFolder()
         {
             MessageSelectOptions ops = new MessageSelectOptions(MessageSelectMode.Folder, null);
