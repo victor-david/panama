@@ -1,9 +1,7 @@
 ﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Threading;
 using Restless.Tools.Utility;
-using System;
 using System.IO;
 
 namespace Restless.App.Panama.ViewModel

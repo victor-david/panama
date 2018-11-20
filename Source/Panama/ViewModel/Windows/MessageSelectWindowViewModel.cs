@@ -1,7 +1,7 @@
 ﻿using Restless.App.Panama.Controls;
 using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Search;
 using Restless.Tools.Utility;
+using Restless.Tools.Utility.Search;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

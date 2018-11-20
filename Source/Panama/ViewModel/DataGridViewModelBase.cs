@@ -1,6 +1,6 @@
 ﻿using Restless.App.Panama.Collections;
 using Restless.App.Panama.Controls;
-using Restless.Tools.Threading;
+using Restless.Tools.Utility;
 using System.Windows.Data;
 
 namespace Restless.App.Panama.ViewModel

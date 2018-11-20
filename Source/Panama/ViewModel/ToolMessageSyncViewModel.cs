@@ -1,7 +1,6 @@
 ﻿using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Threading;
 using Restless.Tools.Utility;
 using System;
 using System.Data;

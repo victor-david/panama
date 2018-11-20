@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Restless.App.Panama.Configuration;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Threading;
-using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Restless.App.Panama.Tools
 {

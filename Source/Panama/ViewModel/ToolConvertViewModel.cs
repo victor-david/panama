@@ -1,28 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.Windows.Media;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Collections;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Threading;
 using Restless.Tools.Utility;
+using System;
+using System.ComponentModel;
 
 namespace Restless.App.Panama.ViewModel
 {

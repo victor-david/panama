@@ -1,7 +1,7 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.ViewModel;
-using Restless.Tools.Search;
+using Restless.Tools.Utility.Search;
 using System;
 using System.IO;
 using System.Windows;

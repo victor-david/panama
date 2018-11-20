@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows;
-using Restless.App.Panama.Configuration;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Database;
+using Restless.App.Panama.Database.Tables;
+using Restless.App.Panama.Resources;
 using Restless.App.Panama.ViewModel;
 using Restless.Tools.Utility;
-using Restless.App.Panama.Resources;
-using Restless.App.Panama.Database.Tables;
+using System;
+using System.Windows;
 
 namespace Restless.App.Panama
 {

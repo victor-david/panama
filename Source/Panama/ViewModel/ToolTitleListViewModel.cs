@@ -1,5 +1,4 @@
 ﻿using Restless.App.Panama.Resources;
-using Restless.Tools.Threading;
 using Restless.Tools.Utility;
 using System;
 using System.ComponentModel;

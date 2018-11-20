@@ -1,11 +1,8 @@
-﻿using System;
-using System.Windows.Input;
-using System.Collections.ObjectModel;
+﻿using Restless.App.Panama.Collections;
+using Restless.Tools.Utility;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Restless.App.Panama.Collections;
-using Restless.Tools.Utility;
-using Restless.Tools.Controls.DragDrop;
+using System.Windows.Input;
 
 namespace Restless.App.Panama.ViewModel
 {
