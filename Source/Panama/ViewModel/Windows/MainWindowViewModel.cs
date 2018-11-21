@@ -124,7 +124,7 @@ namespace Restless.App.Panama.ViewModel
             AppInfo = ApplicationInfo.Instance;
             DisplayName = TabDisplayName = string.Format("{0} {1}", AppInfo.Assembly.Title, AppInfo.Assembly.VersionMajor);
 #if DEBUG
-            DisplayName = TabDisplayName = String.Format("{0} {1} (DEBUG)", AppInfo.Assembly.Title, AppInfo.Assembly.VersionMajor);
+            DisplayName = TabDisplayName = string.Format("{0} {1} (DEBUG)", AppInfo.Assembly.Title, AppInfo.Assembly.VersionMajor);
 #endif
         }
         #endregion

@@ -2,9 +2,9 @@
     x:Class="Restless.App.Panama.View.StatisticsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:view="clr-namespace:Restless.App.Panama.View"
-    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
-    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
+    xmlns:conl="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:cv="clr-namespace:Restless.Tools.Converters;assembly=Restless.Tools.Utility"
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -16,40 +16,46 @@
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="Foreground" Value="#FF707070"/>
             </Style>
+            <Style TargetType="con:KeyValue">
+                <Setter Property="Margin" Value="0,2"/>
+                <Setter Property="HeaderFontSize" Value="12"/>
+                <Setter Property="HeaderForeground" Value="#FF707070"/>
+                <Setter Property="ValueForeground" Value="DarkBlue"/>
+            </Style>
         </UniformGrid.Resources>
         <HeaderedContentControl Header="Basic Stats">
             <StackPanel Orientation="Vertical">
-                <con:GridRowDisplay Header="Titles" HeaderFontSize="11.5" HeaderForeground="#FFCC0000" Columns="50"/>
-                <con:KeyValueDisplay Header="Total" Value="{Binding Title.RowCount,Mode=OneTime}" DisplayLevel="1"/>
+                <conl:GridRowDisplay Header="Titles" HeaderFontSize="11.5" HeaderForeground="#FFCC0000" Columns="50"/>
+                <con:KeyValue Header="Total" Value="{Binding Title.RowCount,Mode=OneTime}" DisplayLevel="1"/>
                 <Separator/>
-                <con:KeyValueDisplay Header="Versions" HeaderFontSize="11.5" HeaderForeground="#FFCC0000" />
-                <con:KeyValueDisplay Header="Total" Value="{Binding Version.RowCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header=".docx" Value="{Binding Version.WordOpenXmlCount,Mode=OneTime}" DisplayLevel="1" />
-                <con:KeyValueDisplay Header=".doc" Value="{Binding Version.Word2007Count,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header=".pdf" Value="{Binding Version.PdfCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header=".txt" Value="{Binding Version.TextCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header=".html" Value="{Binding Version.HtmlCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="shared" Value="{Binding Version.SharedCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="Versions" HeaderFontSize="11.5" HeaderForeground="#FFCC0000" />
+                <con:KeyValue Header="Total" Value="{Binding Version.RowCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header=".docx" Value="{Binding Version.WordOpenXmlCount,Mode=OneTime}" DisplayLevel="1" />
+                <con:KeyValue Header=".doc" Value="{Binding Version.Word2007Count,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header=".pdf" Value="{Binding Version.PdfCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header=".txt" Value="{Binding Version.TextCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header=".html" Value="{Binding Version.HtmlCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="shared" Value="{Binding Version.SharedCount,Mode=OneTime}" DisplayLevel="1"/>
                 <Separator/>
-                <con:KeyValueDisplay Header="Submissions" HeaderFontSize="11.5" HeaderForeground="#FFCC0000"/>
-                <con:KeyValueDisplay Header="Total" Value="{Binding Submission.RowCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Active" Value="{Binding Submission.ActiveCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Accepted" Value="{Binding Submission.AcceptedCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Rejected" Value="{Binding Submission.RejectedCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Fees" Value="{Binding Submission.TotalFees,Mode=OneTime,StringFormat=N2}" DisplayLevel="1"/>
+                <con:KeyValue Header="Submissions" HeaderFontSize="11.5" HeaderForeground="#FFCC0000"/>
+                <con:KeyValue Header="Total" Value="{Binding Submission.RowCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="Active" Value="{Binding Submission.ActiveCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="Accepted" Value="{Binding Submission.AcceptedCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="Rejected" Value="{Binding Submission.RejectedCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="Fees" Value="{Binding Submission.TotalFees,Mode=OneTime,StringFormat=N2}" DisplayLevel="1"/>
                 <Separator/>
-                <con:KeyValueDisplay Header="Publisher" HeaderFontSize="11.5" HeaderForeground="#FFCC0000" />
-                <con:KeyValueDisplay Header="Total" Value="{Binding Publisher.RowCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="In Period" Value="{Binding Publisher.InSubmissionPeriodCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Followup" Value="{Binding Publisher.FollowupCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Paying" Value="{Binding Publisher.PayingCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Exclusive" Value="{Binding Publisher.ExclusiveCount,Mode=OneTime}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Goner" Value="{Binding Publisher.GonerCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="Publisher" HeaderFontSize="11.5" HeaderForeground="#FFCC0000" />
+                <con:KeyValue Header="Total" Value="{Binding Publisher.RowCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="In Period" Value="{Binding Publisher.InSubmissionPeriodCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="Followup" Value="{Binding Publisher.FollowupCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="Paying" Value="{Binding Publisher.PayingCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="Exclusive" Value="{Binding Publisher.ExclusiveCount,Mode=OneTime}" DisplayLevel="1"/>
+                <con:KeyValue Header="Goner" Value="{Binding Publisher.GonerCount,Mode=OneTime}" DisplayLevel="1"/>
                 <Separator/>
-                <con:KeyValueDisplay Header="Submission replies (days)" HeaderFontSize="11.5" HeaderWidth="200" HeaderForeground="#FFCC0000"/>
-                <con:KeyValueDisplay Header="Minimum" Value="{Binding Submission.MinimumDays}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Maximum" Value="{Binding Submission.MaximumDays}" DisplayLevel="1"/>
-                <con:KeyValueDisplay Header="Average" Value="{Binding Submission.AverageDays}" DisplayLevel="1"/>
+                <con:KeyValue Header="Submission replies (days)" HeaderFontSize="11.5" HeaderWidth="200" HeaderForeground="#FFCC0000"/>
+                <con:KeyValue Header="Minimum" Value="{Binding Submission.MinimumDays}" DisplayLevel="1"/>
+                <con:KeyValue Header="Maximum" Value="{Binding Submission.MaximumDays}" DisplayLevel="1"/>
+                <con:KeyValue Header="Average" Value="{Binding Submission.AverageDays}" DisplayLevel="1"/>
             </StackPanel>
         </HeaderedContentControl>
         <HeaderedContentControl Header="Folders">
@@ -62,7 +68,7 @@
                         ItemsSource="{Binding FolderView}"
                         Visibility="{Binding IsFolderViewLoaded,Converter={cv:BooleanToVisibilityConverter}}"/>
                     
-                    <StackPanel DockPanel.Dock="Top" Visibility="{Binding IsFolderViewLoaded,Converter={cv:BooleanToVisibilityConverter},ConverterParameter={StaticResource BooleanFalseToVisibility}}">
+                    <StackPanel DockPanel.Dock="Top" Visibility="{Binding IsFolderViewLoaded,Converter={cv:BooleanToInverseVisibilityConverter}}">
                         <TextBlock Style="{StaticResource TextBlockMessage}">Loading...</TextBlock>
                         <ProgressBar Height="18" HorizontalAlignment="Stretch" IsIndeterminate="True" />
                     </StackPanel>
@@ -70,7 +76,7 @@
                 <TextBlock 
                     DockPanel.Dock="Top"
                     Style="{StaticResource TextBlockError}"
-                    Visibility="{Binding HaveFolderView,Converter={cv:BooleanToVisibilityConverter},ConverterParameter={StaticResource BooleanFalseToVisibility}}"
+                    Visibility="{Binding HaveFolderView,Converter={cv:BooleanToInverseVisibilityConverter}}"
                     Text="{x:Static r:Strings.InvalidOpTitleRootFolderNotSet}"/>
             </DockPanel>
         </HeaderedContentControl>

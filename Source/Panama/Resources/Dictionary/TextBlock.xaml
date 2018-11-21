@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:con="clr-namespace:Restless.App.Panama.Controls">
+    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls">
 
     <Style TargetType="TextBlock" x:Key="TextBlockError" BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="11.5"/>

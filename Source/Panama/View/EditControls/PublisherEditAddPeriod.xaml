@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="511">
     <Grid>
@@ -21,8 +21,8 @@
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom">Period Start</Label>
         <Label Grid.Column="2" Grid.Row="0" VerticalAlignment="Bottom">Period End</Label>
-        <con:CalendarExtended Grid.Column="0" Grid.Row="1" SelectedDateUtc="{Binding Periods.AddStart}" IsUtcMode="False" />
-        <con:CalendarExtended Grid.Column="2" Grid.Row="1" SelectedDateUtc="{Binding Periods.AddEnd}"  IsUtcMode="False"/>
+        <con:RestlessCalendar Grid.Column="0" Grid.Row="1" SelectedDateUtc="{Binding Periods.AddStart}" IsUtcMode="False" />
+        <con:RestlessCalendar Grid.Column="2" Grid.Row="1" SelectedDateUtc="{Binding Periods.AddEnd}"  IsUtcMode="False"/>
         <ToolBarTray Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
             <ToolBar Style="{StaticResource ToolBarCommandHolder}">
                 <Button Command="{Binding Commands[PeriodAddConfirm]}" Content="Add period" ToolTip="Add the specified submission period"/>

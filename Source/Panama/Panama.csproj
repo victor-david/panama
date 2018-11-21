@@ -164,7 +164,6 @@
     <Compile Include="Controls\ConfigEdit\YesNoEdit.xaml.cs">
       <DependentUpon>YesNoEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LinkedTextBlock\LinkedTextBlock.cs" />
     <Compile Include="Converters\DateUtcToLocalConverter.cs" />
     <Compile Include="Converters\IntegerToCharConverter.cs" />
     <Compile Include="Converters\PreviewModeToVisibilityConverter.cs" />
@@ -182,7 +181,6 @@
     </Compile>
     <Compile Include="Filter\TagFilterCombine.cs" />
     <Compile Include="Filter\TitleFilter.cs" />
-    <Compile Include="Controls\Calendar\CalendarExtended.cs" />
     <Compile Include="Controls\DataGrid\DataGridColumnSortSpec.cs" />
     <Compile Include="Controls\DataGrid\DataGridCustomSortBehavior.cs" />
     <Compile Include="Controls\DataGrid\DataGridExtended.cs" />
@@ -307,9 +305,6 @@
     <Compile Include="ViewModel\Windows\WindowViewModel.cs" />
     <Compile Include="View\AuthorView.xaml.cs">
       <DependentUpon>AuthorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\KeyValueDisplay\KeyValueDisplay.xaml.cs">
-      <DependentUpon>KeyValueDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CredentialView.xaml.cs">
       <DependentUpon>CredentialView.xaml</DependentUpon>
@@ -559,10 +554,6 @@
     <Page Include="View\AuthorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\KeyValueDisplay\KeyValueDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CredentialView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -822,7 +813,6 @@
     </EmbeddedResource>
     <AppDesigner Include="Properties\" />
     <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Close.48.png" />
@@ -895,6 +885,7 @@
     <Resource Include="Resources\Images\Image.Reference.48.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="ProjectNotes.txt" />
   </ItemGroup>
   <ItemGroup>
