@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using Restless.App.Panama.Tools;
+using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
-using Restless.App.Panama.Tools;
+using System.Collections.ObjectModel;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -13,7 +9,7 @@ namespace Restless.App.Panama.ViewModel
     /// Represents the base class for a tool controller. This class must be inherited.
     /// </summary>
     /// <typeparam name="VM">The view model uses this controller and becomes its owner.</typeparam>
-    public abstract class ToolControllerBase<VM> : BindableBase  where VM : WorkspaceViewModel
+    public abstract class ToolControllerBase<VM> : ObservableObject  where VM : ApplicationViewModel
     {
         #region Private
         private string updatedHeader;

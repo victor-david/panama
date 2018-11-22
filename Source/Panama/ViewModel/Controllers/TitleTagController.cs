@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 using System.Data;
 using System.Collections.ObjectModel;
+using Restless.Tools.Mvvm;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -86,7 +87,7 @@ namespace Restless.App.Panama.ViewModel
             foreach (DataRow row in tagTable.Rows)
             {
                 long tagId = (long)row[TagTable.Defs.Columns.Id];
-                ICommand cmd = new RelayCommand((o) => { RunTagAddCommand(tagId); }, (o) => CanRunTagAddCommand(tagId));
+                ICommand cmd = RelayCommand.Create((o) => { RunTagAddCommand(tagId); }, (o) => CanRunTagAddCommand(tagId));
                 Available.Add(new TagCommandViewModel(tagId, row[TagTable.Defs.Columns.Tag].ToString(), row[TagTable.Defs.Columns.Description].ToString(), cmd));
                 tagCache.Add(row);
             }
@@ -109,7 +110,7 @@ namespace Restless.App.Panama.ViewModel
             foreach (DataRowView dataRowView in titleTagTable.DefaultView)
             {
                 long tagId = (long)dataRowView[TitleTagTable.Defs.Columns.TagId];
-                ICommand cmd = new RelayCommand((o) => { RunTagRemoveCommand(tagId); }, (o) => CanRunTagRemoveCommand(tagId));
+                ICommand cmd = RelayCommand.Create((o) => { RunTagRemoveCommand(tagId); }, (o) => CanRunTagRemoveCommand(tagId));
                 Current.Add(new TagCommandViewModel(tagId, tagCache[tagId].Name, tagCache[tagId].Description, cmd));
             }
             OnPropertyChanged(nameof(HasZeroTags));

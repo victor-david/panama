@@ -37,8 +37,12 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public CredentialViewModel()
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CredentialViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public CredentialViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandCredential;
             MaxCreatable = 1;

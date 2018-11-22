@@ -26,7 +26,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthorViewModel"/> class.
         /// </summary>
-        public AuthorViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public AuthorViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandAuthor;
             MaxCreatable = 1;

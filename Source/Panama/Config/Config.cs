@@ -2,6 +2,7 @@
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Filter;
+using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
 using System;
 using System.Data;
@@ -13,7 +14,7 @@ namespace Restless.App.Panama.Configuration
     /// <summary>
     /// Provides configuration services for the application.
     /// </summary>
-    public sealed class Config : BindableBase
+    public sealed class Config : ObservableObject
     {
 
         #region Private

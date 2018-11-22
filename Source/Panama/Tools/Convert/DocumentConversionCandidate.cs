@@ -2,6 +2,7 @@
 using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
+using Restless.Tools.Mvvm;
 using Restless.Tools.OfficeAutomation;
 using Restless.Tools.Utility;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Restless.App.Panama.Tools
     /// <summary>
     /// Represents a single candidate for the file conversion operation.
     /// </summary>
-    public class DocumentConversionCandidate  : BindableBase
+    public class DocumentConversionCandidate  : ObservableObject
     {
         #region Private
         private readonly List<TitleVersionTable.RowObject> versions;

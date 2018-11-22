@@ -1,5 +1,4 @@
 ﻿using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -37,7 +36,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolOrphanViewModel"/> class.
         /// </summary>
-        public ToolOrphanViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public ToolOrphanViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandToolOrphan;
             MaxCreatable = 1;

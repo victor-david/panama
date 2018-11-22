@@ -1,6 +1,7 @@
 ﻿using Restless.App.Panama.Database;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Database.SQLite;
+using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
 using System;
 using System.ComponentModel;
@@ -192,16 +193,17 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="DataGridViewModel{T}"/> class.
         /// </summary>
-        protected DataGridViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        protected DataGridViewModel(ApplicationViewModel owner) : base(owner)
         {
             Table = DatabaseController.Instance.GetTable<T>();
             DataView = new DataView(Table);
             DataView.ListChanged += new ListChangedEventHandler(DataViewListChanged);
             MainSource.Source = DataView;
-            AddCommand = new RelayCommand(RunAddCommand, CanRunAddCommand);
-            DeleteCommand = new RelayCommand(RunDeleteCommand, CanRunDeleteCommand);
-            ClearFilterCommand = new RelayCommand(RunClearFilterCommand, CanRunClearFilterCommand);
-            OpenRowCommand = new RelayCommand(RunOpenRowCommand, CanRunOpenRowCommand);
+            AddCommand = RelayCommand.Create(RunAddCommand, CanRunAddCommand);
+            DeleteCommand = RelayCommand.Create(RunDeleteCommand, CanRunDeleteCommand);
+            ClearFilterCommand = RelayCommand.Create(RunClearFilterCommand, CanRunClearFilterCommand);
+            OpenRowCommand = RelayCommand.Create(RunOpenRowCommand, CanRunOpenRowCommand);
         }
         #endregion
 
@@ -356,11 +358,11 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Called when this object is disposing to perform cleanup operations.
         /// </summary>
-        protected override void OnDispose()
-        {
-            DataView.ListChanged -= DataViewListChanged;
-            base.OnDispose();
-        }
+        //protected override void OnDispose()
+        //{
+        //    DataView.ListChanged -= DataViewListChanged;
+        //    base.OnDispose();
+        //}
         #endregion
 
         /************************************************************************/

@@ -1,9 +1,4 @@
 ﻿using Restless.Tools.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace Restless.App.Panama.ViewModel
@@ -108,8 +103,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-#pragma warning disable 1591
-        public DataGridPreviewViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataGridPreviewViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public DataGridPreviewViewModel(ApplicationViewModel owner) : base(owner)
         {
             IsPreviewActive = false;
             PreviewMode = PreviewMode.None;
@@ -118,7 +116,6 @@ namespace Restless.App.Panama.ViewModel
                 IsPreviewActive = !IsPreviewActive;
             });
         }
-#pragma warning restore 1591
         #endregion
 
         /************************************************************************/

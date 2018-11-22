@@ -23,8 +23,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public LinkViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LinkViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public LinkViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandLink;
             MaxCreatable = 1;

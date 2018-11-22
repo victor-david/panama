@@ -1,5 +1,4 @@
-﻿using Restless.App.Panama.Controls;
-using Restless.App.Panama.Database.Tables;
+﻿using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Controls;
 using Restless.Tools.Utility;
@@ -23,8 +22,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public UserNoteViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserNoteViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public UserNoteViewModel(ApplicationViewModel owner) : base (owner)
         {
             DisplayName = Strings.CommandUserNote;
             MaxCreatable = 1;
@@ -39,9 +41,6 @@ namespace Restless.App.Panama.ViewModel
 
             FilterPrompt = Strings.FilterPromptUserNote;
         }
-        #pragma warning restore 1591
-
-
         #endregion
 
         /************************************************************************/

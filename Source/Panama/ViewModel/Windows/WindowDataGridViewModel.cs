@@ -30,7 +30,7 @@ namespace Restless.App.Panama.ViewModel
         /// Initializes a new instance of the <see cref="WindowDataGridViewModel{T}"/> class.
         /// </summary>
         /// <param name="owner">The window that owns this instance.</param>
-        public WindowDataGridViewModel(Window owner)
+        public WindowDataGridViewModel(Window owner) : base(null)
         {
             Validations.ValidateNull(owner, "Owner");
             Owner = owner;

@@ -254,7 +254,7 @@ namespace Restless.App.Panama
             /// <param name="title">The title of the window.</param>
             /// <param name="viewModel">The view model to associate with the window.</param>
             /// <returns>The window</returns>
-            public static WorkspaceWindow Create(string title, WorkspaceViewModel viewModel)
+            public static WorkspaceWindow Create(string title, ApplicationViewModel viewModel)
             {
                 var window = new WorkspaceWindow();
                 window.Title = title;

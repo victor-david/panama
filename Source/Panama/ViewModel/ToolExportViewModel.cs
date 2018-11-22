@@ -7,7 +7,7 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for the title export tool.
     /// </summary>
-    public class ToolExportViewModel : WorkspaceViewModel
+    public class ToolExportViewModel : ApplicationViewModel
     {
         #region Private
         #endregion
@@ -28,8 +28,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public ToolExportViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToolExportViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public ToolExportViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandToolExport;
             MaxCreatable = 1;
@@ -39,7 +42,6 @@ namespace Restless.App.Panama.ViewModel
             });
             Export = new ToolExportTitleController(this);
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/

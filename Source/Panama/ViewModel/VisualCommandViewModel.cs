@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows.Input;
-using System.Windows.Controls;
+﻿using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
+using System.Windows.Input;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -107,7 +106,7 @@ namespace Restless.App.Panama.ViewModel
             (
                 string displayName, string toolTipText, ICommand command, object icon,
                 double imageSize = DefaultImageSize, double fontSize = DefaultFontSize, double minWidth = DefaultMinWidth
-            )
+            ) : base(null)
         {
             Validations.ValidateNull(command, "CommandViewModel.Command");
             DisplayName = displayName;

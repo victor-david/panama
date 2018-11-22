@@ -11,7 +11,7 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for the scramble tool.
     /// </summary>
-    public class ToolScrambleViewModel : WorkspaceViewModel
+    public class ToolScrambleViewModel : ApplicationViewModel
     {
         #region Private
         private string text;
@@ -47,8 +47,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public ToolScrambleViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToolScrambleViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public ToolScrambleViewModel(ApplicationViewModel owner) : base (owner)
         {
             DisplayName = Strings.CommandToolScramble;
             MaxCreatable = 1;
@@ -56,7 +59,6 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("Begin", Scramble);
             rand = new Random();
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/

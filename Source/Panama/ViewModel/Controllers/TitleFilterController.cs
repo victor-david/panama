@@ -4,6 +4,7 @@ using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Filter;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
 using System;
 using System.Collections.Generic;
@@ -186,7 +187,7 @@ namespace Restless.App.Panama.ViewModel
 
         /// <summary>
         /// Called when this controller is closing.
-        /// The owner triggers this event by calling the Excecute method of its controller's <see cref="WorkspaceViewModel.CloseCommand"/>.
+        /// The owner triggers this event by calling the Excecute method of its controller's <see cref="ApplicationViewModel.CloseCommand"/>.
         /// </summary>
         /// <param name="e">The event args</param>
         protected override void OnClosing(CancelEventArgs e)
@@ -221,7 +222,7 @@ namespace Restless.App.Panama.ViewModel
             foreach (DataRow row in tagTable.Rows)
             {
                 long tagId = (long)row[TagTable.Defs.Columns.Id];
-                ICommand cmd = new RelayCommand((o) => { RunToggleTagCommand(tagId); });
+                ICommand cmd = RelayCommand.Create((o) => { RunToggleTagCommand(tagId); });
                 Available.Add(new TagCommandViewModel(tagId, row[TagTable.Defs.Columns.Tag].ToString(), row[TagTable.Defs.Columns.Description].ToString(), cmd));
             }
         }

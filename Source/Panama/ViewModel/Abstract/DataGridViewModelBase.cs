@@ -8,7 +8,7 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Extends WorkspaceViewModel to provide base functionality for views that use DataGrid. This class must be interited.
     /// </summary>
-    public abstract class DataGridViewModelBase: WorkspaceViewModel
+    public abstract class DataGridViewModelBase: ApplicationViewModel
     {
         #region Private Vars
         private object selectedItem;
@@ -63,11 +63,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DataGridViewModelBase"/> class.
         /// </summary>
-        protected DataGridViewModelBase()
+        /// <param name="owner">The VM that owns this view model.</param>
+        protected DataGridViewModelBase(ApplicationViewModel owner) : base (owner)
         {
             Columns = new DataGridColumnCollection();
             MainSource = new CollectionViewSource();

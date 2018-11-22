@@ -11,7 +11,7 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for application settings.
     /// </summary>
-    public class ConfigViewModel : WorkspaceViewModel
+    public class ConfigViewModel : ApplicationViewModel
     {
         #region Private
         private long selectedSection;
@@ -118,7 +118,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfigViewModel"/> class.
         /// </summary>
-        public ConfigViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public ConfigViewModel(ApplicationViewModel owner) : base (owner)
         {
             DisplayName = Strings.CommandConfig;
             MaxCreatable = 1;

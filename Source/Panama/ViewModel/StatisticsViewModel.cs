@@ -17,7 +17,7 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used to display application statistcs.
     /// </summary>
-    public class StatisticsViewModel : WorkspaceViewModel
+    public class StatisticsViewModel : ApplicationViewModel
     {
         #region Private
         private const int FileHeaderWidth = 216;
@@ -110,7 +110,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="StatisticsViewModel"/> class.
         /// </summary>
-        public StatisticsViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public StatisticsViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandStatistics;
             MaxCreatable = 1;

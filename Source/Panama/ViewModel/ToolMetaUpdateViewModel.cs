@@ -7,7 +7,7 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for the meta-data update tool.
     /// </summary>
-    public class ToolMetaUpdateViewModel : WorkspaceViewModel
+    public class ToolMetaUpdateViewModel : ApplicationViewModel
     {
         #region Private
         #endregion
@@ -37,8 +37,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public ToolMetaUpdateViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToolMetaUpdateViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public ToolMetaUpdateViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandToolMeta;
             MaxCreatable = 1;

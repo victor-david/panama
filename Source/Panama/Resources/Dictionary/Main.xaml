@@ -44,7 +44,7 @@
                 VerticalAlignment="Top"
                 Style="{StaticResource ToolBarButton}">
             </Button>
-            <ContentPresenter Content="{Binding Path=TabDisplayName}" />
+            <ContentPresenter Content="{Binding Path=DisplayName}" />
         </DockPanel>
     </DataTemplate>
 

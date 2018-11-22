@@ -4,6 +4,7 @@ using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Controls;
+using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
 using System;
 using System.ComponentModel;
@@ -84,7 +85,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmissionViewModel"/> class.
         /// </summary>
-        public SubmissionViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public SubmissionViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandSubmission;
             MaxCreatable = 1;

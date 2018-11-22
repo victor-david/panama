@@ -1,4 +1,5 @@
-﻿using Restless.Tools.Utility;
+﻿using Restless.Tools.Mvvm;
+using Restless.Tools.Utility;
 using System;
 
 namespace Restless.App.Panama.Tools
@@ -6,7 +7,7 @@ namespace Restless.App.Panama.Tools
     /// <summary>
     /// Represents the base class for a tool that scans files. This class must be inherited.
     /// </summary>
-    public abstract class FileScanBase : BindableBase
+    public abstract class FileScanBase : ObservableObject
     {
         #region Private
         private bool isRunning;
