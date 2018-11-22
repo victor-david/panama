@@ -1,5 +1,5 @@
 ﻿using Restless.App.Panama.Collections;
-using Restless.App.Panama.Controls;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System.Windows.Data;
 

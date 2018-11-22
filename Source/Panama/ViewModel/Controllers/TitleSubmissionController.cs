@@ -1,9 +1,8 @@
-﻿using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
+﻿using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using System;
+using Restless.Tools.Controls;
 using System.ComponentModel;
 using System.Data;
 

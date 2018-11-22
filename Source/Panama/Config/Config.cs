@@ -134,7 +134,11 @@ namespace Restless.App.Panama.Configuration
         public string DateFormat
         {
             get => GetItem("MMM dd, yyyy");
-            set => SetItem(value);
+            set
+            {
+                SetItem(value);
+                Restless.Tools.Controls.DataGridColumnExtensions.DefaultDateFormat = value;
+            }
         }
 
         /// <summary>
@@ -521,6 +525,8 @@ namespace Restless.App.Panama.Configuration
             TitleFilter = GetValueFromRow(nameof(TitleFilter), null).Deserialize<TitleFilter>();
             PublisherFilter = GetValueFromRow(nameof(PublisherFilter), null).Deserialize<PublisherFilter>();
             Colors = new ConfigColors();
+            // This is applied at when config is first created and when the DateFormat property is changed by the user in settings.
+            Restless.Tools.Controls.DataGridColumnExtensions.DefaultDateFormat = DateFormat;
         }
 
         /// <summary>

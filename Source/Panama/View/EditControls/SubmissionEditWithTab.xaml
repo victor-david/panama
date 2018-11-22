@@ -85,7 +85,7 @@
                     <DataGrid x:Name="grid1" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Titles.DataView}" SelectedItem="{Binding Titles.SelectedItem}" con:DataGridColumns.Columns="{Binding Titles.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
-                                <Setter Property="conl:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid1, Path=DataContext.Titles.OpenRowCommand}"/>
+                                <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid1, Path=DataContext.Titles.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
                     </DataGrid>
@@ -111,7 +111,7 @@
                     <DataGrid DockPanel.Dock="Top" x:Name="grid2" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Documents.DataView}" SelectedItem="{Binding Documents.SelectedItem}" con:DataGridColumns.Columns="{Binding Documents.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
-                                <Setter Property="conl:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid2, Path=DataContext.Documents.OpenRowCommand}"/>
+                                <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid2, Path=DataContext.Documents.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
                     </DataGrid>
@@ -163,7 +163,7 @@
                         con:DataGridColumns.Columns="{Binding Messages.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
-                                <Setter Property="conl:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid3, Path=DataContext.Messages.OpenRowCommand}"/>
+                                <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid3, Path=DataContext.Messages.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
                         <DataGrid.ContextMenu>

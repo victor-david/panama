@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="554">
@@ -12,7 +12,7 @@
         <DataGrid x:Name="grid" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Published.DataView}" SelectedItem="{Binding Published.SelectedItem}" con:DataGridColumns.Columns="{Binding Published.Columns}">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
-                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Published.OpenRowCommand}"/>
+                    <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Published.OpenRowCommand}"/>
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>

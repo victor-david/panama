@@ -4,6 +4,7 @@ using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System;
 using System.ComponentModel;

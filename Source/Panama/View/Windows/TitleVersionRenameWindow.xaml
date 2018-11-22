@@ -2,8 +2,7 @@
     x:Class="Restless.App.Panama.View.TitleVersionRenameWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:view="clr-namespace:Restless.App.Panama.View"
-    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
     Height="330" Width="1060" ShowInTaskbar="False" ResizeMode="NoResize"
     WindowStartupLocation="CenterOwner">
     
@@ -16,7 +15,7 @@
             <RowDefinition Height="{StaticResource GridRowHeightTool}" />
         </Grid.RowDefinitions>
         <!-- Main data grid to display the tabular data  -->
-        <con:DataGridExtended 
+        <con:RestlessDataGrid 
             Grid.Column="0" Grid.Row="0" 
             ItemsSource="{Binding Path=MainSource.View}"
             SelectedItem="{Binding SelectedItem}"

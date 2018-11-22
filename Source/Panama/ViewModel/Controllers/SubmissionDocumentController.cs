@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Collections;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
-using Restless.App.Panama.View;
+using Restless.Tools.Controls;
 using Restless.Tools.OpenXml;
+using Restless.Tools.Utility;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.IO;
 
 namespace Restless.App.Panama.ViewModel
 {

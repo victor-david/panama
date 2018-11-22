@@ -181,9 +181,6 @@
     </Compile>
     <Compile Include="Filter\TagFilterCombine.cs" />
     <Compile Include="Filter\TitleFilter.cs" />
-    <Compile Include="Controls\DataGrid\DataGridColumnSortSpec.cs" />
-    <Compile Include="Controls\DataGrid\DataGridCustomSortBehavior.cs" />
-    <Compile Include="Controls\DataGrid\DataGridExtended.cs" />
     <Compile Include="Controls\TabControl\TabItemDragDrop.cs" />
     <Compile Include="Converters\BooleanToBooleanMultiConverter.cs" />
     <Compile Include="Converters\BooleanToIntegerConverter.cs" />
@@ -237,8 +234,6 @@
     <Compile Include="ViewModel\Controllers\ToolSubmissionDocumentController.cs" />
     <Compile Include="ViewModel\Controllers\ToolTitleVersionController.cs" />
     <Compile Include="Controls\TabControl\TabControlExtended.cs" />
-    <Compile Include="Controls\DataGrid\DataGridColumnCollection.cs" />
-    <Compile Include="Controls\DataGrid\DataGridColumnExtensions.cs" />
     <Compile Include="Collections\MenuItemCollection.cs" />
     <Compile Include="Collections\CommandDictionary.cs" />
     <Compile Include="Converters\DatesToDayDiffConverter.cs" />
@@ -761,7 +756,6 @@
     <Compile Include="Converters\BooleanToTextWrappingConverter.cs" />
     <Compile Include="Converters\StringToDateConverter.cs" />
     <Compile Include="Other\AppTaskId.cs" />
-    <Compile Include="Controls\DataGrid\DataGridColumns.cs" />
     <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
     <Compile Include="ViewModel\VisualCommandViewModel.cs" />
     <Compile Include="ViewModel\DataGridViewModel.cs" />
