@@ -11,24 +11,31 @@
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="460">
     <UniformGrid Columns="2" Rows="1">
-        <UniformGrid.Resources>
-            <Style TargetType="Label">
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="Foreground" Value="#FF707070"/>
-            </Style>
-            <Style TargetType="con:KeyValue">
-                <Setter Property="Margin" Value="0,2"/>
-                <Setter Property="HeaderFontSize" Value="12"/>
-                <Setter Property="HeaderForeground" Value="#FF707070"/>
-                <Setter Property="ValueForeground" Value="DarkBlue"/>
-            </Style>
-        </UniformGrid.Resources>
+        <!-- Basic stats (left) -->
         <HeaderedContentControl Header="Basic Stats">
-            <StackPanel Orientation="Vertical">
-                <conl:GridRowDisplay Header="Titles" HeaderFontSize="11.5" HeaderForeground="#FFCC0000" Columns="50"/>
+            <StackPanel Margin="0,4" >
+                <StackPanel.Resources>
+                    <Style TargetType="con:KeyValue">
+                        <Setter Property="Margin" Value="0,4"/>
+                        <Setter Property="HeaderFontSize" Value="12"/>
+                        <Setter Property="HeaderForeground" Value="#FF707070"/>
+                        <Setter Property="ValueForeground" Value="DarkBlue"/>
+                    </Style>
+
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="#FFCC0000"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="Margin" Value="0,2"/>
+                    </Style>
+                    
+                    <Style TargetType="Separator">
+                        <Setter Property="Margin" Value="0,4"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Text="Titles"/>
                 <con:KeyValue Header="Total" Value="{Binding Title.RowCount,Mode=OneTime}" DisplayLevel="1"/>
                 <Separator/>
-                <con:KeyValue Header="Versions" HeaderFontSize="11.5" HeaderForeground="#FFCC0000" />
+                <TextBlock Text="Versions"/>
                 <con:KeyValue Header="Total" Value="{Binding Version.RowCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValue Header=".docx" Value="{Binding Version.WordOpenXmlCount,Mode=OneTime}" DisplayLevel="1" />
                 <con:KeyValue Header=".doc" Value="{Binding Version.Word2007Count,Mode=OneTime}" DisplayLevel="1"/>
@@ -37,14 +44,14 @@
                 <con:KeyValue Header=".html" Value="{Binding Version.HtmlCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValue Header="shared" Value="{Binding Version.SharedCount,Mode=OneTime}" DisplayLevel="1"/>
                 <Separator/>
-                <con:KeyValue Header="Submissions" HeaderFontSize="11.5" HeaderForeground="#FFCC0000"/>
+                <TextBlock Text="Submissions"/>
                 <con:KeyValue Header="Total" Value="{Binding Submission.RowCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValue Header="Active" Value="{Binding Submission.ActiveCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValue Header="Accepted" Value="{Binding Submission.AcceptedCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValue Header="Rejected" Value="{Binding Submission.RejectedCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValue Header="Fees" Value="{Binding Submission.TotalFees,Mode=OneTime,StringFormat=N2}" DisplayLevel="1"/>
                 <Separator/>
-                <con:KeyValue Header="Publisher" HeaderFontSize="11.5" HeaderForeground="#FFCC0000" />
+                <TextBlock Text="Publisher"/>
                 <con:KeyValue Header="Total" Value="{Binding Publisher.RowCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValue Header="In Period" Value="{Binding Publisher.InSubmissionPeriodCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValue Header="Followup" Value="{Binding Publisher.FollowupCount,Mode=OneTime}" DisplayLevel="1"/>
@@ -52,12 +59,14 @@
                 <con:KeyValue Header="Exclusive" Value="{Binding Publisher.ExclusiveCount,Mode=OneTime}" DisplayLevel="1"/>
                 <con:KeyValue Header="Goner" Value="{Binding Publisher.GonerCount,Mode=OneTime}" DisplayLevel="1"/>
                 <Separator/>
-                <con:KeyValue Header="Submission replies (days)" HeaderFontSize="11.5" HeaderWidth="200" HeaderForeground="#FFCC0000"/>
+                <TextBlock Text="Submission replies (days)"/>
                 <con:KeyValue Header="Minimum" Value="{Binding Submission.MinimumDays}" DisplayLevel="1"/>
                 <con:KeyValue Header="Maximum" Value="{Binding Submission.MaximumDays}" DisplayLevel="1"/>
                 <con:KeyValue Header="Average" Value="{Binding Submission.AverageDays}" DisplayLevel="1"/>
             </StackPanel>
         </HeaderedContentControl>
+        
+        <!-- File type stats (right) -->
         <HeaderedContentControl Header="Folders">
             <DockPanel Margin="2,10">
                 <DockPanel DockPanel.Dock="Top" Visibility="{Binding HaveFolderView,Converter={cv:BooleanToVisibilityConverter}}">
