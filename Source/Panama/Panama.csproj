@@ -185,7 +185,6 @@
     </Compile>
     <Compile Include="Filter\TagFilterCombine.cs" />
     <Compile Include="Filter\TitleFilter.cs" />
-    <Compile Include="Controls\TabControl\TabItemDragDrop.cs" />
     <Compile Include="Converters\BooleanToBooleanMultiConverter.cs" />
     <Compile Include="Converters\BooleanToIntegerConverter.cs" />
     <Compile Include="Converters\BooleanToSelectionModeConverter.cs" />
@@ -234,7 +233,6 @@
     <Compile Include="ViewModel\Controllers\ToolExportTitleController.cs" />
     <Compile Include="ViewModel\Controllers\ToolSubmissionDocumentController.cs" />
     <Compile Include="ViewModel\Controllers\ToolTitleVersionController.cs" />
-    <Compile Include="Controls\TabControl\TabControlExtended.cs" />
     <Compile Include="Collections\MenuItemCollection.cs" />
     <Compile Include="Converters\DatesToDayDiffConverter.cs" />
     <Compile Include="Converters\ValueToBooleanConverter.cs" />

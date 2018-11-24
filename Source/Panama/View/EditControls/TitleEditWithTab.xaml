@@ -5,13 +5,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
-    xmlns:conl="clr-namespace:Restless.App.Panama.Controls"
     xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     mc:Ignorable="d" 
     d:DesignHeight="500" d:DesignWidth="350">
-    <conl:TabControlExtended SelectedIndex="{Binding SelectedTabIndex,Mode=OneWayToSource}">
+    <con:RestlessTabControl SelectedIndex="{Binding SelectedTabIndex,Mode=OneWayToSource}">
         <TabControl.Items>
             <TabItem Header="{x:Static r:Strings.HeaderData}">
                 <DockPanel Margin="6,4">
@@ -96,5 +95,5 @@
                 </DockPanel>
             </TabItem>
         </TabControl.Items>
-    </conl:TabControlExtended>
+    </con:RestlessTabControl>
 </UserControl>

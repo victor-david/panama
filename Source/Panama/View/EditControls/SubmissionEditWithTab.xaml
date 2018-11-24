@@ -6,11 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
     xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
-    xmlns:conl="clr-namespace:Restless.App.Panama.Controls"
     xmlns:cv="clr-namespace:Restless.Tools.Converters;assembly=Restless.Tools.Utility"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="498">
-    <conl:TabControlExtended>
+    <con:RestlessTabControl>
         <TabControl.Items>
             <!-- Main data: flags, fees, notes -->
             <TabItem Header="{x:Static r:Strings.HeaderData}">
@@ -237,5 +236,5 @@
                 </Grid>
             </TabItem>
         </TabControl.Items>
-    </conl:TabControlExtended>
+    </con:RestlessTabControl>
 </UserControl>

@@ -9,7 +9,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace Restless.App.Panama.ViewModel
@@ -21,7 +20,6 @@ namespace Restless.App.Panama.ViewModel
     {
         #region Private
         private string notificationMessage;
-        private TabItem tornItem;
         #endregion
 
         /************************************************************************/
@@ -61,20 +59,6 @@ namespace Restless.App.Panama.ViewModel
                 System.Media.SystemSounds.Asterisk.Play();
             }
         }
-
-        ///// <summary>
-        ///// Gets or sets the torm item.
-        ///// </summary>
-        //public TabItem TornItem
-        //{
-        //    get { return tornItem; }
-        //    set
-        //    {
-        //        tornItem = value;
-        //        TearWorkspace(tornItem);
-                
-        //    }
-        //}
         #endregion
 
         /************************************************************************/
@@ -128,11 +112,11 @@ namespace Restless.App.Panama.ViewModel
             DisplayName = string.Format("{0} {1} (DEBUG)", AppInfo.Assembly.Title, AppInfo.Assembly.VersionMajor);
 #endif
         }
-#endregion
+        #endregion
 
         /************************************************************************/
         
-#region Public methods
+        #region Public methods
         /// <summary>
         /// Creates a notification message that displays on the main status bar
         /// </summary>
@@ -183,11 +167,11 @@ namespace Restless.App.Panama.ViewModel
             return null;
 
         }
-#endregion
+        #endregion
 
         /************************************************************************/
 
-#region Private methods (VM creation / management)
+        #region Private methods (VM creation / management)
 
         private void Create<T>() where T : ApplicationViewModel
         {
@@ -216,29 +200,6 @@ namespace Restless.App.Panama.ViewModel
                 }
             }
         }
-
-        ///// <summary>
-        ///// Navigates to the workspace of the specified type.
-        ///// </summary>
-        ///// <typeparam name="T">The workspace type</typeparam>
-        //public void NavigateTo<T>() where T : ApplicationViewModel
-        //{
-        //    ApplicationViewModel target = null;
-        //    foreach (var viewModel in Pages)
-        //    {
-        //        if (viewModel is T)
-        //        {
-        //            target = viewModel;
-        //            break;
-        //        }
-        //    }
-        //    if (target == null)
-        //    {
-        //        target = (T)Activator.CreateInstance(typeof(T), this);
-        //        Pages.Add(target);
-        //    }
-        //    SelectedViewModel = target;
-        //}
 
         private bool CanCreate<T>() where T : ApplicationViewModel
         {
@@ -287,50 +248,11 @@ namespace Restless.App.Panama.ViewModel
                 foreach (ApplicationViewModel workspace in e.OldItems)
                     workspace.Closing -= OnWorkspaceClosing;
         }
-
-        ///// <summary>
-        ///// This is no longer used. TabControlExtended can detect ItemsSource as an ObservableCollection and move the items.
-        ///// If needed (for instance, for additional functionality), you can bind to the TabControlExtended.ReorderTabsCommand instead.
-        ///// That takes priority and the command execution passes an instance of TabItemDragDrop.
-        ///// </summary>
-        ///// <param name="dropItems">The drag / drop items.</param>
-        //private void MoveWorkspaces(TabItemDragDrop dropItems)
-        //{
-        //    if (dropItems != null)
-        //    {
-        //        var source = dropItems.Source.Content as ApplicationViewModel;
-        //        var target = dropItems.Target.Content as ApplicationViewModel;
-        //        if (source != null && target != null)
-        //        {
-        //            int sourceIdx = Workspaces.IndexOf(source);
-        //            int targetIdx = Workspaces.IndexOf(target);
-        //            if (sourceIdx != -1 && targetIdx != -1)
-        //            {
-        //                Workspaces.Move(sourceIdx, targetIdx);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private void TearWorkspace(TabItem tornItem)
-        //{
-        //    if (tornItem != null)
-        //    {
-        //        var workspace = tornItem.Content as WorkspaceViewModel;
-        //        if (workspace != null)
-        //        {
-        //            var w = WindowFactory.Workspace.Create(workspace.TabDisplayName, workspace);
-        //            w.Show();
-        //            workspace.CloseCommand.Execute(null);
-        //        }
-        //    }
-        //}
-
-#endregion
+        #endregion
 
         /************************************************************************/
 
-#region Private methods (other)
+        #region Private methods (other)
 
         private void OnWorkspaceClosing(object sender, CancelEventArgs e)
         {
@@ -374,9 +296,6 @@ namespace Restless.App.Panama.ViewModel
             NotificationMessage = "All data successfully saved to the database";
         }
 
-
-
-
         private void MainWindowClosing(object sender, CancelEventArgs e)
         {
             e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
@@ -414,6 +333,6 @@ namespace Restless.App.Panama.ViewModel
             return false;
 #endif
         }
-#endregion
+        #endregion
     }
 }

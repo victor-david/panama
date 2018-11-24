@@ -2,7 +2,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:con="clr-namespace:Restless.App.Panama.Controls">
+    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls">
     
     <!-- Style for border separator -->
     <Style TargetType="Border" x:Key="MainBorderSeparator">
@@ -50,14 +50,14 @@
 
     <!-- This template explains how to render the 'Workspace' content area in the main window.  -->
     <DataTemplate x:Key="WorkspacesTemplate">
-        <con:TabControlExtended
+        <con:RestlessTabControl
             Margin="4"
+            Background="White"
             AllowTabReorder="True"
-            AllowTabTear="False"
             Focusable="False" 
             IsSynchronizedWithCurrentItem="True"
-            TornItem="{Binding MainViewModel.TornItem, Mode=OneWayToSource}"
-            ItemsSource="{Binding}" ItemTemplate="{StaticResource ClosableTabItemTemplate}" />
+            ItemsSource="{Binding}"
+            ItemTemplate="{StaticResource ClosableTabItemTemplate}" />
     </DataTemplate>
    
 </ResourceDictionary>

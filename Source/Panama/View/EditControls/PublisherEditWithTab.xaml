@@ -6,12 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
-    xmlns:conl="clr-namespace:Restless.App.Panama.Controls"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="542">
-    <conl:TabControlExtended>
+    <con:RestlessTabControl>
         <TabControl.Items>
             <TabItem Header="Data">
                 <DockPanel>
@@ -135,5 +134,5 @@
                 </StackPanel>
             </TabItem>
         </TabControl.Items>
-    </conl:TabControlExtended>
+    </con:RestlessTabControl>
 </UserControl>
