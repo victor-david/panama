@@ -240,13 +240,21 @@ namespace Restless.App.Panama.ViewModel
 
         private void OnWorkspacesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.NewItems != null && e.NewItems.Count != 0)
-                foreach (ApplicationViewModel workspace in e.NewItems)
+            if (e.NewItems != null)
+            {
+                foreach (var workspace in e.NewItems.OfType<ApplicationViewModel>())
+                {
                     workspace.Closing += OnWorkspaceClosing;
+                }
+            }
 
-            if (e.OldItems != null && e.OldItems.Count != 0)
-                foreach (ApplicationViewModel workspace in e.OldItems)
+            if (e.OldItems != null)
+            {
+                foreach (var workspace in e.OldItems.OfType<ApplicationViewModel>())
+                {
                     workspace.Closing -= OnWorkspaceClosing;
+                }
+            }
         }
         #endregion
 
@@ -256,9 +264,8 @@ namespace Restless.App.Panama.ViewModel
 
         private void OnWorkspaceClosing(object sender, CancelEventArgs e)
         {
-            if (!e.Cancel)
+            if (!e.Cancel && sender is ApplicationViewModel workspace)
             {
-                ApplicationViewModel workspace = sender as ApplicationViewModel;
                 workspace.Dispose();
                 Workspaces.Remove(workspace);
             }

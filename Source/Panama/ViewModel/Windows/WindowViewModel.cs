@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Restless.Tools.Utility;
 using System.Windows;
-using Restless.Tools.Utility;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -16,7 +12,7 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Gets the window that owns this view model
         /// </summary>
-        protected Window Owner
+        protected new Window Owner
         {
             get;
             private set;
@@ -40,11 +36,7 @@ namespace Restless.App.Panama.ViewModel
             (
                 "ViewModel", typeof(ApplicationViewModel), typeof(WindowViewModel)
             );
-        #endregion
 
-        /************************************************************************/
-
-        #region
         /// <summary>
         /// Gets the <see cref="ViewModelProperty"/> for the specified element.
         /// </summary>
@@ -78,7 +70,7 @@ namespace Restless.App.Panama.ViewModel
             Validations.ValidateNull(owner, "Owner");
             Owner = owner;
             Owner.DataContext = this;
-            Owner.SetValue(WindowViewModel.ViewModelProperty, this);
+            Owner.SetValue(ViewModelProperty, this);
         }
         #endregion
     }

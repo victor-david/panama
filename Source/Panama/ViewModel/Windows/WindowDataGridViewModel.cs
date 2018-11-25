@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using Restless.Tools.Database.SQLite;
 using Restless.Tools.Utility;
-using Restless.Tools.Database.SQLite;
+using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -17,7 +13,7 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Gets the window that owns this view model
         /// </summary>
-        protected Window Owner
+        protected new Window Owner
         {
             get;
             private set;

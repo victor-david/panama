@@ -59,7 +59,7 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Gets the ViewModel that owns this controller.
         /// </summary>
-        protected VM Owner
+        protected new VM Owner
         {
             get;
             private set;
@@ -83,13 +83,13 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Public methods
-        /// <summary>
-        /// Causes the controller to update.
-        /// </summary>
-        public void Update()
-        {
-            OnUpdate();
-        }
+        ///// <summary>
+        ///// Causes the controller to update.
+        ///// </summary>
+        //public void Update()
+        //{
+        //    OnUpdate();
+        //}
         #endregion
 
         /************************************************************************/
@@ -103,11 +103,6 @@ namespace Restless.App.Panama.ViewModel
         {
             OnPropertyChanged(nameof(Header));
         }
-
-        /// <summary>
-        /// Called when this controller needs to update, usually in response to a row change on the data grid
-        /// </summary>
-        protected abstract void OnUpdate();
 
         /// <summary>
         /// Gets the primary id from the selected row of this controller's owner.

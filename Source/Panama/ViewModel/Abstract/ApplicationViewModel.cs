@@ -110,7 +110,6 @@ namespace Restless.App.Panama.ViewModel
             });
             MaxCreatable = 1;
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -153,13 +152,8 @@ namespace Restless.App.Panama.ViewModel
         {
             if (!e.Cancel)
             {
-                CancelEventHandler handler = Closing;
-                if (handler != null)
-                {
-                    handler(this, e);
-                }
+                Closing?.Invoke(this, e);
             }
-
         }
         #endregion
     }

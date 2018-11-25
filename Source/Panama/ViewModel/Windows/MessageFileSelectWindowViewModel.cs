@@ -27,7 +27,6 @@ namespace Restless.App.Panama.ViewModel
         private Tuple<int,string> displayFilterSelection;
         #endregion
 
-
         /************************************************************************/
 
         #region Public properties
