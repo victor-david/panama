@@ -103,7 +103,8 @@ namespace Restless.App.Panama.ViewModel
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.Create("Response", SubmissionBatchTable.Defs.Columns.Response).MakeDate();
             Columns.Create("Type", SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName).MakeFixedWidth(FixedWidth.MediumString);
-            Columns.Create<DatesToDayDiffConverter>("Days", SubmissionBatchTable.Defs.Columns.Submitted, SubmissionBatchTable.Defs.Columns.Response).MakeCentered().MakeFixedWidth(FixedWidth.MediumNumeric);
+            // string.Empty because VS gets confused and tries to connect to the wromg overload
+            Columns.Create<DatesToDayDiffConverter>("Days", SubmissionBatchTable.Defs.Columns.Submitted, SubmissionBatchTable.Defs.Columns.Response, string.Empty).MakeCentered().MakeFixedWidth(FixedWidth.MediumNumeric);
             Columns.Create("Publisher", SubmissionBatchTable.Defs.Columns.Joined.Publisher);
             Columns.Create("Fee", SubmissionBatchTable.Defs.Columns.Fee).MakeNumeric("N2", FixedWidth.MediumNumeric);
             Columns.Create("Award", SubmissionBatchTable.Defs.Columns.Award).MakeNumeric("N0", FixedWidth.MediumNumeric);

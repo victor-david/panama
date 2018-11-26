@@ -78,8 +78,8 @@ namespace Restless.App.Panama
             else
             {
                 // These are applied one time only. They don't change.
-                Restless.Tools.Controls.DataGridColumnExtensions.StyleDataGridHeaderCenter = ResourceHelper.StyleDataGridHeaderCenter;
-                Restless.Tools.Controls.DataGridColumnExtensions.StyleTextBlockCenter = ResourceHelper.StyleTextBlockCenter;
+                Restless.Tools.Controls.Default.Style.DataGridHeaderCenter = ResourceHelper.StyleDataGridHeaderCenter;
+                Restless.Tools.Controls.Default.Style.TextBlockCenter = ResourceHelper.StyleTextBlockCenter;
 
                 Window main = WindowFactory.Main.Create();
                 main.MinWidth = Config.Default.MainWindow.MinWidth;
