@@ -145,6 +145,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("ContextMenuOpening", RunContextMenuOpeningCommand);
             Commands.Add("SaveProperty", RunSavePropertyCommand, CanRunSavePropertyCommand);
             Commands.Add("ToggleGroup", RunToggleGroupCommand);
+            Commands.Add("SetLanguage", RunSetLanguageCommand, (o) => IsSelectedRowAccessible);
 
             //MenuItems.AddItem("Make this a revision of the version above", Commands["ConvertToRevision"]);
             MenuItems.AddItem("Make this a separate version", Commands["ConvertToVersion"]);
@@ -154,9 +155,8 @@ namespace Restless.App.Panama.ViewModel
             {
                 string langId = row[LanguageTable.Defs.Columns.Id].ToString();
                 string langName = row[LanguageTable.Defs.Columns.Name].ToString();
-                string commandId = string.Format("SetLang{0}", langId);
-                Commands.Add(commandId, (o) => SetLanguage(langId),  (o)=> IsSelectedRowAccessible);
-                MenuItems.AddItem(string.Format("Set language to {0} ({1})", langName, langId), Commands[commandId], null, langId);
+
+                MenuItems.AddItem($"Set language to {langName} ({langId})", Commands["SetLanguage"]).AddCommandParm(langId).AddTag(langId);
             }
 
             HeaderPreface = Strings.HeaderVersions;
@@ -403,9 +403,9 @@ namespace Restless.App.Panama.ViewModel
             }
         }
 
-        private void SetLanguage(string langId)
+        private void RunSetLanguageCommand(object parm)
         {
-            if (selectedRowObj != null)
+            if (selectedRowObj != null && parm is string langId)
             {
                 selectedRowObj.LanguageId = langId;
             }

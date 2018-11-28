@@ -37,7 +37,7 @@ namespace Restless.App.Panama.ViewModel
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddUserNote, Strings.CommandAddUserNoteTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandDeleteUserNote, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteUserNote, DeleteCommand).AddImageResource("ImageDeleteMenu");
 
             FilterPrompt = Strings.FilterPromptUserNote;
         }

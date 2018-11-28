@@ -233,7 +233,6 @@
     <Compile Include="ViewModel\Controllers\ToolExportTitleController.cs" />
     <Compile Include="ViewModel\Controllers\ToolSubmissionDocumentController.cs" />
     <Compile Include="ViewModel\Controllers\ToolTitleVersionController.cs" />
-    <Compile Include="Collections\MenuItemCollection.cs" />
     <Compile Include="Converters\DatesToDayDiffConverter.cs" />
     <Compile Include="Converters\ValueToBooleanConverter.cs" />
     <Compile Include="Converters\IntegerToVisibilityConverter.cs" />

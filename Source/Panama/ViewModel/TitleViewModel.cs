@@ -260,10 +260,10 @@ namespace Restless.App.Panama.ViewModel
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandOpenTitleOrDoubleClick, OpenRowCommand, "ImageOpenWordMenu");
-            MenuItems.AddItem(Strings.CommandFlagTitle, Commands["ToggleFlag"], "ImageExclamationMenu");
+            MenuItems.AddItem(Strings.CommandOpenTitleOrDoubleClick, OpenRowCommand).AddImageResource("ImageOpenWordMenu");
+            MenuItems.AddItem(Strings.CommandFlagTitle, Commands["ToggleFlag"]).AddImageResource("ImageExclamationMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteTitle, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteTitle, DeleteCommand).AddImageResource("ImageDeleteMenu");
 
             Versions = new TitleVersionController(this);
             Submissions = new TitleSubmissionController(this);

@@ -111,10 +111,10 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("DeleteItem", RunDeleteItemCommand, CanRunDeleteItemCommand);
             //RawCommands.Add("TogglePreview", (o) => { IsPreviewMode = !IsPreviewMode; });
 
-            MenuItems.AddItem(Strings.CommandOpenItemOrDoubleClick, Commands["OpenItem"], "ImageOpenFileMenu");
-            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"], "ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.CommandOpenItemOrDoubleClick, Commands["OpenItem"]).AddImageResource("ImageOpenFileMenu");
+            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"]).AddImageResource("ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem("Delete this item", Commands["DeleteItem"], "ImageDeleteMenu");
+            MenuItems.AddItem("Delete this item", Commands["DeleteItem"]).AddImageResource("ImageDeleteMenu");
             UpdateFoundHeader();
             // init the search provider
             provider = new WindowsFileSearch();

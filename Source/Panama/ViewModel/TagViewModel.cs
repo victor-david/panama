@@ -48,7 +48,7 @@ namespace Restless.App.Panama.ViewModel
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandRefreshTagUsage, Strings.CommandRefreshTagUsageTooltip, Commands["RefreshTagUsage"], ResourceHelper.Get("ImageRefresh"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandDeleteTag, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteTag, DeleteCommand).AddImageResource("ImageDeleteMenu");
             FilterPrompt = Strings.FilterPromptTag;
 
             AddCommand.Supported = CommandSupported.Yes;

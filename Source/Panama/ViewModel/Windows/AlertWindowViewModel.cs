@@ -88,7 +88,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("Dismiss", Dismiss, IsAlertSelected);
 
             MenuItems = new MenuItemCollection();
-            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, Commands["OpenUrl"], "ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, Commands["OpenUrl"]).AddImageResource("ImageBrowseToUrlMenu");
         }
         #endregion
 

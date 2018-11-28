@@ -77,9 +77,9 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("RemoveMessage", RunRemoveMessageCommand, (o) => IsSelectedRowAccessible);
             Commands.Add("ViewMessageFile", RunViewMessageFileCommand, CanRunViewMessageFileCommand);
 
-            MenuItems.AddItem("View message file", Commands["ViewMessageFile"], "ImageNoteMenu");
+            MenuItems.AddItem("View message file", Commands["ViewMessageFile"]).AddImageResource("ImageNoteMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem("Remove", Commands["RemoveMessage"], "ImageDeleteMenu");
+            MenuItems.AddItem("Remove", Commands["RemoveMessage"]).AddImageResource("ImageDeleteMenu");
         }
         #endregion
 

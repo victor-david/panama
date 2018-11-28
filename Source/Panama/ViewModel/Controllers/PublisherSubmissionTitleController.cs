@@ -49,7 +49,7 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written).MakeDate();
             //AddDataGridViewColumns();
             Commands.Add("GoToTitleRecord", RunGoToTitleRecordCommand);
-            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"], "ImageBrowseToUrlMenu");
+            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"]).AddImageResource("ImageBrowseToUrlMenu");
             AddViewSourceSortDescriptions();
         }
         #endregion

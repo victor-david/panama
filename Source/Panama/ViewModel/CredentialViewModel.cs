@@ -73,7 +73,7 @@ namespace Restless.App.Panama.ViewModel
             MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
             MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
 
-            MenuItems.AddItem(Strings.CommandDeleteCredential, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteCredential, DeleteCommand).AddImageResource("ImageDeleteMenu");
             FilterPrompt = Strings.FilterPromptCredential;
         }
         #pragma warning restore 1591

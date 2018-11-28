@@ -40,9 +40,9 @@ namespace Restless.App.Panama.ViewModel
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddLink, Strings.CommandAddLinkTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, OpenRowCommand, "ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteLink, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteLink, DeleteCommand).AddImageResource("ImageDeleteMenu");
             FilterPrompt = Strings.FilterPromptLink;
         }
         #pragma warning restore 1591

@@ -54,7 +54,7 @@ namespace Restless.App.Panama.ViewModel
             MenuItems.AddSeparator();
             // Commands["DeleteFile"] is created by ToolOrphanFinderController - it handles
             // file deletion and the removal of the corresponding item of its ObservableCollection
-            MenuItems.AddItem("Delete this file", Commands["DeleteFile"], "ImageDeleteMenu");
+            MenuItems.AddItem("Delete this file", Commands["DeleteFile"]).AddImageResource("ImageDeleteMenu");
         }
         #endregion
 

@@ -41,7 +41,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("Browse", RunBrowseCommand, CanRunBrowseCommand);
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandDeleteAlert, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteAlert, DeleteCommand).AddImageResource("ImageDeleteMenu");
 
             FilterPrompt = Strings.FilterPromptAlert;
         }

@@ -165,13 +165,13 @@ namespace Restless.App.Panama.ViewModel
             // Credentials = DatabaseController.Instance.GetTable<CredentialTable>().GetCredentialList();
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandCreateSubmission, Commands["AddSubmission"], "ImageSubmissionMenu");
-            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand, "ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.CommandCreateSubmission, Commands["AddSubmission"]).AddImageResource("ImageSubmissionMenu");
+            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
             MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeletePublisher, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeletePublisher, DeleteCommand).AddImageResource("ImageDeleteMenu");
 
             Filters = new PublisherFilterController(this);
             Filters.Apply();
