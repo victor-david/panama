@@ -2,10 +2,10 @@
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Filter;
-using Restless.Tools.Mvvm;
+using Restless.Tools.Database.SQLite;
 using Restless.Tools.Utility;
 using System;
-using System.Data;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
@@ -14,11 +14,31 @@ namespace Restless.App.Panama.Configuration
     /// <summary>
     /// Provides configuration services for the application.
     /// </summary>
-    public sealed class Config : ObservableObject
+    public sealed class Config : KeyValueTableBase, INotifyPropertyChanged
     {
+        #region Static singleton access and constructor
+        /// <summary>
+        /// Gets the singleton instance of this class
+        /// </summary>
+        public static Config Instance { get; } = new Config();
 
-        #region Private
-        private ConfigTable table;
+        private Config() : base(DatabaseController.Instance.GetTable<ConfigTable>())
+
+        {
+            TitleFilter = GetItem(null, nameof(TitleFilter)).Deserialize<TitleFilter>();
+            PublisherFilter = GetItem(null, nameof(PublisherFilter)).Deserialize<PublisherFilter>();
+            Colors = new ConfigColors();
+            // This is applied at when config is first created and when the DateFormat property is changed by the user in settings.
+            Restless.Tools.Controls.Default.Format.Date = DateFormat;
+        }
+
+        /// <summary>
+        /// Static constructor. Tells C# compiler not to mark type as beforefieldinit.
+        /// </summary>
+        static Config()
+        {
+            // not sure if this is still needed in .NET 4.x
+        }
         #endregion
 
         /************************************************************************/
@@ -165,8 +185,8 @@ namespace Restless.App.Panama.Configuration
         /// </summary>
         public WindowState MainWindowState
         {
-            get => GetItem(WindowState.Normal);
-            set => SetItem(value);
+            get => (WindowState)GetItem((int)WindowState.Normal);
+            set => SetItem((int)value);
         }
 
         /// <summary>
@@ -175,11 +195,7 @@ namespace Restless.App.Panama.Configuration
         public int DataGridAlternationCount
         {
             get => GetItem(Default.DataGrid.AlternationCount);
-            set
-            {
-                SetItem(value);
-                OnPropertyChanged();
-            }
+            set => SetItem(value);
         }
 
         /// <summary>
@@ -514,29 +530,11 @@ namespace Restless.App.Panama.Configuration
 
         /************************************************************************/
 
-        #region Static singleton access and constructor
+        #region INotifyPropertyChanged
         /// <summary>
-        /// Gets the singleton instance of this class
+        /// Occurs when a property changes
         /// </summary>
-        public static Config Instance { get; } = new Config();
-
-        private Config()
-        {
-            table = DatabaseController.Instance.GetTable<ConfigTable>();
-            TitleFilter = GetValueFromRow(nameof(TitleFilter), null).Deserialize<TitleFilter>();
-            PublisherFilter = GetValueFromRow(nameof(PublisherFilter), null).Deserialize<PublisherFilter>();
-            Colors = new ConfigColors();
-            // This is applied at when config is first created and when the DateFormat property is changed by the user in settings.
-            Restless.Tools.Controls.Default.Format.Date = DateFormat;
-        }
-
-        /// <summary>
-        /// Static constructor. Tells C# compiler not to mark type as beforefieldinit.
-        /// </summary>
-        static Config()
-        {
-            // not sure if this is still needed in .NET 4.x
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         /************************************************************************/
@@ -555,110 +553,37 @@ namespace Restless.App.Panama.Configuration
 
         /************************************************************************/
 
+        #region Protected methods
+        /// <summary>
+        /// Called when the base class has changed a value on the data row.
+        /// </summary>
+        /// <param name="propertyId"></param>
+        protected override void OnRowValueChanged(string propertyId)
+        {
+            switch (propertyId)
+            {
+                case nameof(DataGridAlternationCount):
+                case nameof(IsTitleAuthorVisible):
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
+                    break;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region Private methods
-
-        private string GetItem(string defaultValue, [CallerMemberName] string id = null)
-        {
-            return GetValueFromRow(id, defaultValue);
-        }
-
-        private int GetItem(int defaultValue, [CallerMemberName] string id = null)
-        {
-            if (int.TryParse(GetValueFromRow(id, defaultValue), out int val))
-            {
-                return val;
-            }
-            return 0;
-        }
-
-        private long GetItem(long defaultValue, [CallerMemberName] string id = null)
-        {
-            if (long.TryParse(GetValueFromRow(id, defaultValue), out long val))
-            {
-                return val;
-            }
-            return 0;
-        }
-
-        private double GetItem(double defaultValue, [CallerMemberName] string id = null)
-        {
-            if (double.TryParse(GetValueFromRow(id, defaultValue), out double val))
-            {
-                return val;
-            }
-            return 0;
-        }
-
-        private bool GetItem(bool defaultValue, [CallerMemberName] string id = null)
-        {
-            string val = GetValueFromRow(id, defaultValue);
-            return (val.ToLower() == "true");
-        }
-
-        private WindowState GetItem(WindowState defaultValue, [CallerMemberName] string id = null)
-        {
-            int val = GetItem((int)defaultValue, id);
-            return (WindowState)val;
-        }
-
         private GridLength GetGridLength(double defaultValue, [CallerMemberName] string id = null)
         {
             double value = GetItem(defaultValue, id);
             return new GridLength(value, GridUnitType.Pixel);
         }
 
-        private void SetItem(string value, [CallerMemberName] string id = null)
-        {
-            SetRowValueIf(id, value);
-        }
-
-        private void SetItem(int value, [CallerMemberName] string id = null)
-        {
-            SetRowValueIf(id, value.ToString());
-        }
-
-        private void SetItem(long value, [CallerMemberName] string id = null)
-        {
-            SetRowValueIf(id, value.ToString());
-        }
-
-        private void SetItem(bool value, [CallerMemberName] string id = null)
-        {
-            SetRowValueIf(id, value.ToString());
-        }
-
-        private void SetItem(WindowState value, [CallerMemberName] string id = null)
-        {
-            SetRowValueIf(id, ((int)value).ToString());
-        }
-
         private void SetGridLength(GridLength value, [CallerMemberName] string id = null)
         {
             if (value != null)
             {
-                SetRowValueIf(id, value.Value.ToString());
-            }
-        }
-
-        private string GetValueFromRow(string id, object defaultValue)
-        {
-            DataRow row = GetRow(id, defaultValue);
-            return row[ConfigTable.Defs.Columns.Value].ToString();
-        }
-
-        private DataRow GetRow(string id, object defaultValue = null)
-        {
-            return table.GetConfigurationRow(id, defaultValue);
-        }
-
-        private void SetRowValueIf(string id, string value)
-        {
-            DataRow row = GetRow(id);
-            string currentValue = row[ConfigTable.Defs.Columns.Value].ToString();
-            if (currentValue != value)
-            {
-                row[ConfigTable.Defs.Columns.Value] = value;
-                OnPropertyChanged(id);
+                SetItem(value.Value, id);
             }
         }
         #endregion
