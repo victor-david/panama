@@ -1,5 +1,4 @@
 ﻿#if DOCX
-using Restless.Tools.Threading;
 using Restless.Tools.Utility;
 using System;
 using System.Collections.ObjectModel;

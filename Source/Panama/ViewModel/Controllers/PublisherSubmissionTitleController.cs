@@ -1,8 +1,7 @@
-﻿using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
+﻿using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
-using System;
+using Restless.Tools.Controls;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Data;
@@ -50,7 +49,7 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written).MakeDate();
             //AddDataGridViewColumns();
             Commands.Add("GoToTitleRecord", RunGoToTitleRecordCommand);
-            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"], "ImageBrowseToUrlMenu");
+            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"]).AddImageResource("ImageBrowseToUrlMenu");
             AddViewSourceSortDescriptions();
         }
         #endregion

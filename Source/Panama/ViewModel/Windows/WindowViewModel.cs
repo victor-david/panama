@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Restless.Tools.Utility;
 using System.Windows;
-using Restless.Tools.Utility;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
     /// Represents the base view model that is associated with a Window. This class must be inherited.
     /// </summary>
-    public abstract class WindowViewModel : WorkspaceViewModel
+    public abstract class WindowViewModel : ApplicationViewModel
     {
         #region Public properties
         /// <summary>
         /// Gets the window that owns this view model
         /// </summary>
-        protected Window Owner
+        protected new Window Owner
         {
             get;
             private set;
@@ -28,7 +24,7 @@ namespace Restless.App.Panama.ViewModel
         #region Static dependency property declarations
         /// <summary>
         /// Declares an attached dependency property that enables an object
-        /// that derives from <see cref="WorkspaceViewModel"/> to be associated with the window.
+        /// that derives from <see cref="ApplicationViewModel"/> to be associated with the window.
         /// </summary>
         /// <AttachedPropertyComments>
         /// <summary>
@@ -38,21 +34,17 @@ namespace Restless.App.Panama.ViewModel
         public static readonly DependencyProperty ViewModelProperty =
             DependencyProperty.RegisterAttached
             (
-                "ViewModel", typeof(WorkspaceViewModel), typeof(WindowViewModel)
+                "ViewModel", typeof(ApplicationViewModel), typeof(WindowViewModel)
             );
-        #endregion
 
-        /************************************************************************/
-
-        #region
         /// <summary>
         /// Gets the <see cref="ViewModelProperty"/> for the specified element.
         /// </summary>
         /// <param name="obj">The dependency object to get the property for.</param>
         /// <returns>The attached property, or null if none.</returns>
-        public static WorkspaceViewModel GetViewModel(DependencyObject obj)
+        public static ApplicationViewModel GetViewModel(DependencyObject obj)
         {
-            return (WorkspaceViewModel)obj.GetValue(ViewModelProperty);
+            return (ApplicationViewModel)obj.GetValue(ViewModelProperty);
         }
 
         /// <summary>
@@ -60,7 +52,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         /// <param name="obj">The dependency object to set the property on.</param>
         /// <param name="value">The property to set.</param>
-        public static void SetViewModel(DependencyObject obj, WorkspaceViewModel value)
+        public static void SetViewModel(DependencyObject obj, ApplicationViewModel value)
         {
             obj.SetValue(ViewModelProperty, value);
         }
@@ -73,12 +65,12 @@ namespace Restless.App.Panama.ViewModel
         /// Initializes a new instance of the <see cref="WindowViewModel"/> class.
         /// </summary>
         /// <param name="owner">The window that owns this instance.</param>
-        public WindowViewModel(Window owner)
+        public WindowViewModel(Window owner) : base(null)
         {
             Validations.ValidateNull(owner, "Owner");
             Owner = owner;
             Owner.DataContext = this;
-            Owner.SetValue(WindowViewModel.ViewModelProperty, this);
+            Owner.SetValue(ViewModelProperty, this);
         }
         #endregion
     }

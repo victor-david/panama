@@ -1,11 +1,11 @@
 ﻿using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Search;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
+using Restless.Tools.Utility.Search;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -68,8 +68,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public ToolSearchViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToolSearchViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public ToolSearchViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandToolSearch;
             MaxCreatable = 3;
@@ -108,10 +111,10 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("DeleteItem", RunDeleteItemCommand, CanRunDeleteItemCommand);
             //RawCommands.Add("TogglePreview", (o) => { IsPreviewMode = !IsPreviewMode; });
 
-            MenuItems.AddItem(Strings.CommandOpenItemOrDoubleClick, Commands["OpenItem"], "ImageOpenFileMenu");
-            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"], "ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.CommandOpenItemOrDoubleClick, Commands["OpenItem"]).AddImageResource("ImageOpenFileMenu");
+            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"]).AddImageResource("ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem("Delete this item", Commands["DeleteItem"], "ImageDeleteMenu");
+            MenuItems.AddItem("Delete this item", Commands["DeleteItem"]).AddImageResource("ImageDeleteMenu");
             UpdateFoundHeader();
             // init the search provider
             provider = new WindowsFileSearch();

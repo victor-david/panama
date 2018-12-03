@@ -5,11 +5,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
-    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
-    xmlns:cv="clr-namespace:Restless.Tools.Converters;assembly=Restless.Tools.Library"
+    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
+    xmlns:cv="clr-namespace:Restless.Tools.Converters;assembly=Restless.Tools.Utility"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="498">
-    <con:TabControlExtended>
+    <con:RestlessTabControl>
         <TabControl.Items>
             <!-- Main data: flags, fees, notes -->
             <TabItem Header="{x:Static r:Strings.HeaderData}">
@@ -44,7 +44,7 @@
             <TabItem Header="{x:Static r:Strings.HeaderDates}">
                 <StackPanel>
                     <Expander Header="{Binding Submitted.Header}" IsExpanded="False">
-                        <con:CalendarExtended SelectedDateUtc="{Binding Submitted.SubmittedDate}" />
+                        <con:RestlessCalendar SelectedDateUtc="{Binding Submitted.SubmittedDate}" />
                     </Expander>
 
                     <Expander Header="{Binding Response.Header}" IsExpanded="False">
@@ -58,7 +58,7 @@
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Column="0">
                                 <Label>Date</Label>
-                                <con:CalendarExtended SelectedDateUtc="{Binding Response.ResponseDate}" />
+                                <con:RestlessCalendar SelectedDateUtc="{Binding Response.ResponseDate}" />
                             </StackPanel>
                             <StackPanel Grid.Column="1">
                                 <Label>Type</Label>
@@ -84,7 +84,7 @@
                     <DataGrid x:Name="grid1" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Titles.DataView}" SelectedItem="{Binding Titles.SelectedItem}" con:DataGridColumns.Columns="{Binding Titles.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
-                                <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid1, Path=DataContext.Titles.OpenRowCommand}"/>
+                                <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid1, Path=DataContext.Titles.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
                     </DataGrid>
@@ -110,7 +110,7 @@
                     <DataGrid DockPanel.Dock="Top" x:Name="grid2" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Documents.DataView}" SelectedItem="{Binding Documents.SelectedItem}" con:DataGridColumns.Columns="{Binding Documents.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
-                                <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid2, Path=DataContext.Documents.OpenRowCommand}"/>
+                                <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid2, Path=DataContext.Documents.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
                     </DataGrid>
@@ -162,7 +162,7 @@
                         con:DataGridColumns.Columns="{Binding Messages.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
-                                <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid3, Path=DataContext.Messages.OpenRowCommand}"/>
+                                <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid3, Path=DataContext.Messages.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
                         <DataGrid.ContextMenu>
@@ -236,5 +236,5 @@
                 </Grid>
             </TabItem>
         </TabControl.Items>
-    </con:TabControlExtended>
+    </con:RestlessTabControl>
 </UserControl>

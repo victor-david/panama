@@ -1,9 +1,9 @@
 ﻿using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System.ComponentModel;
 using System.Data;
@@ -77,9 +77,9 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("RemoveMessage", RunRemoveMessageCommand, (o) => IsSelectedRowAccessible);
             Commands.Add("ViewMessageFile", RunViewMessageFileCommand, CanRunViewMessageFileCommand);
 
-            MenuItems.AddItem("View message file", Commands["ViewMessageFile"], "ImageNoteMenu");
+            MenuItems.AddItem("View message file", Commands["ViewMessageFile"]).AddImageResource("ImageNoteMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem("Remove", Commands["RemoveMessage"], "ImageDeleteMenu");
+            MenuItems.AddItem("Remove", Commands["RemoveMessage"]).AddImageResource("ImageDeleteMenu");
         }
         #endregion
 

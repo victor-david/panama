@@ -2,6 +2,7 @@
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Mvvm;
 using System;
 using System.Data;
 using System.Windows.Input;
@@ -125,7 +126,7 @@ namespace Restless.App.Panama.ViewModel
             AssignDataViewFrom(DatabaseController.Instance.GetTable<ResponseTable>());
             DataView.Sort = ResponseTable.Defs.Columns.Id;
             DataView.RowFilter = string.Format("{0} <> {1}", ResponseTable.Defs.Columns.Id, ResponseTable.Defs.Values.NoResponse);
-            ClearResponseCommand = new RelayCommand(RunClearResponseCommand, CanClearResponseCommandRun);
+            ClearResponseCommand = RelayCommand.Create(RunClearResponseCommand, CanClearResponseCommandRun);
         }
         #endregion
 

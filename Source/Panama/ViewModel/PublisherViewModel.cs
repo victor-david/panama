@@ -1,9 +1,9 @@
 ﻿using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -93,7 +93,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="PublisherViewModel"/> class.
         /// </summary>
-        public PublisherViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public PublisherViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandPublisher;
             MaxCreatable = 1;
@@ -164,13 +165,13 @@ namespace Restless.App.Panama.ViewModel
             // Credentials = DatabaseController.Instance.GetTable<CredentialTable>().GetCredentialList();
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandCreateSubmission, Commands["AddSubmission"], "ImageSubmissionMenu");
-            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand, "ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.CommandCreateSubmission, Commands["AddSubmission"]).AddImageResource("ImageSubmissionMenu");
+            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
             MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeletePublisher, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeletePublisher, DeleteCommand).AddImageResource("ImageDeleteMenu");
 
             Filters = new PublisherFilterController(this);
             Filters.Apply();

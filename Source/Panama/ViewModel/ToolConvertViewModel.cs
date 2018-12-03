@@ -1,37 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.Windows.Media;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Collections;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Threading;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
+using System;
+using System.ComponentModel;
 
 namespace Restless.App.Panama.ViewModel
 {
+#if DOCX
     /// <summary>
     /// Provides the logic that is used for the .doc to .docx file conversion tool.
     /// </summary>
     public class ToolConvertViewModel : DataGridViewModelBase
     {
-#if DOCX
+
         #region Private
         private string selectedFolder;
         private bool isReadyToRun;
@@ -42,7 +27,6 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Properties
-
         /// <summary>
         /// Gets the document converter object.
         /// </summary>
@@ -94,7 +78,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolConvertViewModel"/> class.
         /// </summary>
-        public ToolConvertViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public ToolConvertViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandToolConvert;
             MaxCreatable = 1;
@@ -142,7 +127,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Private Methods
         private void UpdateFoundHeader()
         {
@@ -200,6 +185,26 @@ namespace Restless.App.Panama.ViewModel
             IsReadyToRun = Converter.ConvertedCount < Converter.Items.Count;
         }
         #endregion
-#endif
+
     }
+#else
+    /// <summary>
+    /// A placeholder class used when document conversion is not supported
+    /// </summary>
+    public class ToolConvertViewModel : ApplicationViewModel
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToolConvertViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        /// <remarks>
+        /// This class is not used when document conversion is off. 
+        /// It exists to satisfy requirements in other parts of the app
+        /// but is never activated.
+        /// </remarks>
+        public ToolConvertViewModel(ApplicationViewModel owner) : base (owner)
+        {
+        }
+    }
+#endif
 }

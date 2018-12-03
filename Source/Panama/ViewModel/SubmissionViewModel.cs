@@ -1,9 +1,10 @@
 ﻿using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
+using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
 using System;
 using System.ComponentModel;
@@ -84,7 +85,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmissionViewModel"/> class.
         /// </summary>
-        public SubmissionViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public SubmissionViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandSubmission;
             MaxCreatable = 1;
@@ -101,7 +103,8 @@ namespace Restless.App.Panama.ViewModel
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.Create("Response", SubmissionBatchTable.Defs.Columns.Response).MakeDate();
             Columns.Create("Type", SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName).MakeFixedWidth(FixedWidth.MediumString);
-            Columns.Create<DatesToDayDiffConverter>("Days", SubmissionBatchTable.Defs.Columns.Submitted, SubmissionBatchTable.Defs.Columns.Response).MakeCentered().MakeFixedWidth(FixedWidth.MediumNumeric);
+            // string.Empty because VS gets confused and tries to connect to the wromg overload
+            Columns.Create<DatesToDayDiffConverter>("Days", SubmissionBatchTable.Defs.Columns.Submitted, SubmissionBatchTable.Defs.Columns.Response, string.Empty).MakeCentered().MakeFixedWidth(FixedWidth.MediumNumeric);
             Columns.Create("Publisher", SubmissionBatchTable.Defs.Columns.Joined.Publisher);
             Columns.Create("Fee", SubmissionBatchTable.Defs.Columns.Fee).MakeNumeric("N2", FixedWidth.MediumNumeric);
             Columns.Create("Award", SubmissionBatchTable.Defs.Columns.Award).MakeNumeric("N0", FixedWidth.MediumNumeric);
@@ -123,11 +126,11 @@ namespace Restless.App.Panama.ViewModel
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrl, OpenRowCommand, "ImageBrowseToUrlMenu");
-            MenuItems.AddItem(Strings.CommandFilterToPublisher, Commands["FilterToPublisher"], "ImageFilterMenu");
+            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrl, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.CommandFilterToPublisher, Commands["FilterToPublisher"]).AddImageResource("ImageFilterMenu");
 
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteSubmission, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteSubmission, DeleteCommand).AddImageResource("ImageDeleteMenu");
 
             Titles = new SubmissionTitleController(this);
             Documents = new SubmissionDocumentController(this);

@@ -1,7 +1,7 @@
 ﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Database.Tables;
+using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
-using System.Data;
 using System.IO;
 
 namespace Restless.App.Panama
@@ -10,7 +10,7 @@ namespace Restless.App.Panama
     /// Represents a single title version item for which to rename its associated file
     /// to be consistent with the title, version, and language that belongs to the version.
     /// </summary>
-    public class TitleVersionRenameItem : BindableBase
+    public class TitleVersionRenameItem : ObservableObject
     {
         #region Private
         private readonly TitleVersionTable.RowObject ver;

@@ -1,7 +1,7 @@
-﻿using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
+﻿using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System.ComponentModel;
 
@@ -26,7 +26,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="AlertViewModel"/> class
         /// </summary>
-        public AlertViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public AlertViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandAlert;
             MaxCreatable = 1;
@@ -40,7 +41,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("Browse", RunBrowseCommand, CanRunBrowseCommand);
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandDeleteAlert, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteAlert, DeleteCommand).AddImageResource("ImageDeleteMenu");
 
             FilterPrompt = Strings.FilterPromptAlert;
         }

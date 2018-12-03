@@ -1,7 +1,6 @@
 ﻿using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Threading;
 using Restless.Tools.Utility;
 using System;
 using System.Data;
@@ -12,7 +11,7 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for the submission message sync tool.
     /// </summary>
-    public class ToolMessageSyncViewModel : WorkspaceViewModel
+    public class ToolMessageSyncViewModel : ApplicationViewModel
     {
         #region Private
         private bool inProgress;
@@ -97,7 +96,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolMessageSyncViewModel"/> class.
         /// </summary>
-        public ToolMessageSyncViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public ToolMessageSyncViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandToolMessageSync;
             MaxCreatable = 1;

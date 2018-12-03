@@ -1,7 +1,7 @@
-﻿using Restless.App.Panama.Controls;
-using Restless.App.Panama.Database;
+﻿using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System.ComponentModel;
 using System.Data;
@@ -37,8 +37,12 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public CredentialViewModel()
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CredentialViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public CredentialViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandCredential;
             MaxCreatable = 1;
@@ -69,7 +73,7 @@ namespace Restless.App.Panama.ViewModel
             MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
             MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
 
-            MenuItems.AddItem(Strings.CommandDeleteCredential, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteCredential, DeleteCommand).AddImageResource("ImageDeleteMenu");
             FilterPrompt = Strings.FilterPromptCredential;
         }
         #pragma warning restore 1591

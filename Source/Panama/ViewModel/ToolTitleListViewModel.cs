@@ -1,5 +1,4 @@
 ﻿using Restless.App.Panama.Resources;
-using Restless.Tools.Threading;
 using Restless.Tools.Utility;
 using System;
 using System.ComponentModel;
@@ -43,8 +42,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public ToolTitleListViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToolTitleListViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public ToolTitleListViewModel(ApplicationViewModel owner) : base (owner)
         {
             DisplayName = Strings.CommandToolTitleList;
             MaxCreatable = 1;
@@ -53,7 +55,6 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("Begin", (o) => { Creator.Run(); });
             Commands.Add("OpenFile", (o) => { OpenHelper.OpenFile(Creator.TitleListFileName); });
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/

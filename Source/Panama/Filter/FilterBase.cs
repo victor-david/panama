@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Restless.Tools.Mvvm;
+using System;
 
 namespace Restless.App.Panama.Filter
 {
     /// <summary>
     /// Represents the base class for filters. This class must be inherited.
     /// </summary>
-    public abstract class FilterBase : BindableBase
+    public abstract class FilterBase : ObservableObject
     {
         #region Private
         private string text;

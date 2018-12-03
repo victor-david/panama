@@ -1,9 +1,9 @@
 ﻿using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
 using Restless.Tools.OpenXml;
 using Restless.Tools.Utility;
 using System;
@@ -184,7 +184,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleViewModel"/> class.
         /// </summary>
-        public TitleViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public TitleViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandTitle;
             MaxCreatable = 1;
@@ -259,10 +260,10 @@ namespace Restless.App.Panama.ViewModel
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandOpenTitleOrDoubleClick, OpenRowCommand, "ImageOpenWordMenu");
-            MenuItems.AddItem(Strings.CommandFlagTitle, Commands["ToggleFlag"], "ImageExclamationMenu");
+            MenuItems.AddItem(Strings.CommandOpenTitleOrDoubleClick, OpenRowCommand).AddImageResource("ImageOpenWordMenu");
+            MenuItems.AddItem(Strings.CommandFlagTitle, Commands["ToggleFlag"]).AddImageResource("ImageExclamationMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteTitle, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteTitle, DeleteCommand).AddImageResource("ImageDeleteMenu");
 
             Versions = new TitleVersionController(this);
             Submissions = new TitleSubmissionController(this);

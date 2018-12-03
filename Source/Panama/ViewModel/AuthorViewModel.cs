@@ -1,7 +1,7 @@
-﻿using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
+﻿using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System.ComponentModel;
 
@@ -26,7 +26,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthorViewModel"/> class.
         /// </summary>
-        public AuthorViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public AuthorViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandAuthor;
             MaxCreatable = 1;
@@ -37,7 +38,7 @@ namespace Restless.App.Panama.ViewModel
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddAuthor, Strings.CommandAddAuthorTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandDeleteAuthor, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteAuthor, DeleteCommand).AddImageResource("ImageDeleteMenu");
 
             FilterPrompt = Strings.FilterPromptAuthor;
         }

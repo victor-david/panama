@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Restless.App.Panama.Database.Tables;
+using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
+using Restless.Tools.Mvvm;
 using System.ComponentModel;
 using System.Data;
-using System.IO;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Resources;
-using Restless.Tools.Utility;
-using Restless.App.Panama.Configuration;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -77,8 +67,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public TableViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TableViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public TableViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandTable;
             MaxCreatable = 1;
@@ -99,8 +92,6 @@ namespace Restless.App.Panama.ViewModel
             Table.LoadTableData();
             DeleteCommand.Supported = CommandSupported.NoWithException;
         }
-        #pragma warning restore 1591
-
         #endregion
 
         /************************************************************************/

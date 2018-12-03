@@ -1,12 +1,8 @@
 ﻿using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
+using Restless.Tools.Mvvm;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using SystemColors = System.Windows.Media.Colors;
 
@@ -15,7 +11,7 @@ namespace Restless.App.Panama.Configuration
     /// <summary>
     /// Represents the foreground and background colors for a single configuration color item.
     /// </summary>
-    public class ConfigColor : BindableBase
+    public class ConfigColor : ObservableObject
     {
         #region Private
         private ColorTable colorTable;

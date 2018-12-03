@@ -5,12 +5,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="542">
-    <con:TabControlExtended>
+    <con:RestlessTabControl>
         <TabControl.Items>
             <TabItem Header="Data">
                 <DockPanel>
@@ -87,7 +87,7 @@
                             Margin="4"
                             Text="All titles"/>
 
-                        <con:DataGridExtended 
+                        <con:RestlessDataGrid 
                             x:Name="grid"  
                             DockPanel.Dock="Top" 
                             Style="{StaticResource DataGridEdit}" 
@@ -101,7 +101,7 @@
                             </DataGrid.ContextMenu>
                             <DataGrid.RowStyle>
                                 <Style TargetType="DataGridRow">
-                                    <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Titles.OpenRowCommand}"/>
+                                    <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Titles.OpenRowCommand}"/>
                                 </Style>
                             </DataGrid.RowStyle>
                             <DataGrid.GroupStyle>
@@ -115,7 +115,7 @@
                                     </GroupStyle.HeaderTemplate>
                                 </GroupStyle>
                             </DataGrid.GroupStyle>
-                        </con:DataGridExtended>
+                        </con:RestlessDataGrid>
                     </DockPanel>
                 </DockPanel>
             </TabItem>
@@ -134,5 +134,5 @@
                 </StackPanel>
             </TabItem>
         </TabControl.Items>
-    </con:TabControlExtended>
+    </con:RestlessTabControl>
 </UserControl>

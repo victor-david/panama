@@ -43,6 +43,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputPath>bin\Release\</OutputPath>
     <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Release\Panama.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -76,32 +77,55 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>DOCX</DefineConstants>
-    <DocumentationFile>bin\x86\Release\Panama.XML</DocumentationFile>
+    <DocumentationFile>bin\x64\Release\Panama.XML</DocumentationFile>
     <PlatformTarget>x64</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.8.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.8.1\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+      <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
     <Reference Include="MimeKitLite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
       <HintPath>..\packages\MimeKitLite.2.0.6\lib\net45\MimeKitLite.dll</HintPath>
     </Reference>
+    <Reference Include="Restless.Tools.Controls, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Restless.Tools.Controls.1.3.0\lib\net452\Restless.Tools.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Restless.Tools.Database, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Restless.Tools.Database.1.3.0\lib\net452\Restless.Tools.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Restless.Tools.Mvvm, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Restless.Tools.Mvvm.1.3.0\lib\net452\Restless.Tools.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Restless.Tools.OfficeAutomation, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Restless.Tools.OfficeAutomation.1.3.0\lib\net452\Restless.Tools.OfficeAutomation.dll</HintPath>
+    </Reference>
+    <Reference Include="Restless.Tools.OpenXml, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Restless.Tools.OpenXml.1.3.0\lib\net452\Restless.Tools.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Restless.Tools.Utility, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Restless.Tools.Utility.1.3.0\lib\net452\Restless.Tools.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Core.1.0.105.2\lib\net451\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.109.2\lib\net451\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -148,7 +172,6 @@
     <Compile Include="Controls\ConfigEdit\YesNoEdit.xaml.cs">
       <DependentUpon>YesNoEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LinkedTextBlock\LinkedTextBlock.cs" />
     <Compile Include="Converters\DateUtcToLocalConverter.cs" />
     <Compile Include="Converters\IntegerToCharConverter.cs" />
     <Compile Include="Converters\PreviewModeToVisibilityConverter.cs" />
@@ -166,11 +189,6 @@
     </Compile>
     <Compile Include="Filter\TagFilterCombine.cs" />
     <Compile Include="Filter\TitleFilter.cs" />
-    <Compile Include="Controls\Calendar\CalendarExtended.cs" />
-    <Compile Include="Controls\DataGrid\DataGridColumnSortSpec.cs" />
-    <Compile Include="Controls\DataGrid\DataGridCustomSortBehavior.cs" />
-    <Compile Include="Controls\DataGrid\DataGridExtended.cs" />
-    <Compile Include="Controls\TabControl\TabItemDragDrop.cs" />
     <Compile Include="Converters\BooleanToBooleanMultiConverter.cs" />
     <Compile Include="Converters\BooleanToIntegerConverter.cs" />
     <Compile Include="Converters\BooleanToSelectionModeConverter.cs" />
@@ -178,7 +196,6 @@
     <Compile Include="Converters\StringToCleanStringOptions.cs" />
     <Compile Include="Converters\SubtractionConverter.cs" />
     <Compile Include="Other\ApplicationInfo.cs" />
-    <Compile Include="Other\BindableBase.cs" />
     <Compile Include="Other\GeneralOption.cs" />
     <Compile Include="Other\MimeKitMessage.cs" />
     <Compile Include="Other\PreviewMode.cs" />
@@ -189,8 +206,6 @@
     <Compile Include="Other\MessageSelectMode.cs" />
     <Compile Include="Other\FixedWidth.cs" />
     <Compile Include="Other\MessageSelectOptions.cs" />
-    <Compile Include="Other\RelayCommand.cs" />
-    <Compile Include="Other\CommandSupported.cs" />
     <Compile Include="Other\TitleVersionRenameItemCollection.cs" />
     <Compile Include="Other\WindowFactory.cs" />
     <Compile Include="Startup\StartupOptions.cs" />
@@ -222,11 +237,6 @@
     <Compile Include="ViewModel\Controllers\ToolExportTitleController.cs" />
     <Compile Include="ViewModel\Controllers\ToolSubmissionDocumentController.cs" />
     <Compile Include="ViewModel\Controllers\ToolTitleVersionController.cs" />
-    <Compile Include="Controls\TabControl\TabControlExtended.cs" />
-    <Compile Include="Controls\DataGrid\DataGridColumnCollection.cs" />
-    <Compile Include="Controls\DataGrid\DataGridColumnExtensions.cs" />
-    <Compile Include="Collections\MenuItemCollection.cs" />
-    <Compile Include="Collections\CommandDictionary.cs" />
     <Compile Include="Converters\DatesToDayDiffConverter.cs" />
     <Compile Include="Converters\ValueToBooleanConverter.cs" />
     <Compile Include="Converters\IntegerToVisibilityConverter.cs" />
@@ -258,13 +268,13 @@
     <Compile Include="ViewModel\Controllers\TitleVersionController.cs" />
     <Compile Include="ViewModel\Controllers\ToolControllerBase.cs" />
     <Compile Include="ViewModel\CredentialViewModel.cs" />
-    <Compile Include="ViewModel\DataGridPreviewViewModel.cs" />
+    <Compile Include="ViewModel\Abstract\DataGridPreviewViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="ViewModel\ToolConvertViewModel.cs" />
     <Compile Include="ViewModel\ToolMessageSyncViewModel.cs" />
     <Compile Include="ViewModel\ToolScrambleViewModel.cs" />
     <Compile Include="ViewModel\ToolTitleListViewModel.cs" />
-    <Compile Include="ViewModel\DataGridViewModelBase.cs" />
+    <Compile Include="ViewModel\Abstract\DataGridViewModelBase.cs" />
     <Compile Include="ViewModel\ToolSearchViewModel.cs" />
     <Compile Include="ViewModel\ToolOrphanViewModel.cs" />
     <Compile Include="ViewModel\ToolExportViewModel.cs" />
@@ -291,9 +301,6 @@
     <Compile Include="ViewModel\Windows\WindowViewModel.cs" />
     <Compile Include="View\AuthorView.xaml.cs">
       <DependentUpon>AuthorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\KeyValueDisplay\KeyValueDisplay.xaml.cs">
-      <DependentUpon>KeyValueDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CredentialView.xaml.cs">
       <DependentUpon>CredentialView.xaml</DependentUpon>
@@ -544,10 +551,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\KeyValueDisplay\KeyValueDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\CredentialView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -754,16 +757,14 @@
     <Compile Include="Converters\BooleanToTextWrappingConverter.cs" />
     <Compile Include="Converters\StringToDateConverter.cs" />
     <Compile Include="Other\AppTaskId.cs" />
-    <Compile Include="Controls\DataGrid\DataGridColumns.cs" />
     <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
     <Compile Include="ViewModel\VisualCommandViewModel.cs" />
-    <Compile Include="ViewModel\DataGridViewModel.cs" />
+    <Compile Include="ViewModel\Abstract\DataGridViewModel.cs" />
     <Compile Include="ViewModel\PublisherViewModel.cs" />
     <Compile Include="ViewModel\ConfigViewModel.cs" />
     <Compile Include="ViewModel\TitleViewModel.cs" />
     <Compile Include="ViewModel\Windows\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="ViewModel\WorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\Abstract\ApplicationViewModel.cs" />
     <Compile Include="View\PublisherView.xaml.cs">
       <DependentUpon>PublisherView.xaml</DependentUpon>
     </Compile>
@@ -806,21 +807,6 @@
     </EmbeddedResource>
     <AppDesigner Include="Properties\" />
     <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Restless.Tools.Library\Source\Restless.Tools.Library.OfficeAutomation\Restless.Tools.Library.OfficeAutomation.csproj">
-      <Project>{6DB76CAD-D35A-4BDF-9A01-DD0DB96C4019}</Project>
-      <Name>Restless.Tools.Library.OfficeAutomation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Restless.Tools.Library\Source\Restless.Tools.Library\Restless.Tools.Library.csproj">
-      <Project>{9A112D3A-717C-4387-A831-F0077C6CC437}</Project>
-      <Name>Restless.Tools.Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Panama.Database\Panama.Database.csproj">
-      <Project>{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}</Project>
-      <Name>Panama.Database</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Image.Close.48.png" />
@@ -893,6 +879,7 @@
     <Resource Include="Resources\Images\Image.Reference.48.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="ProjectNotes.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -983,6 +970,12 @@
     <Resource Include="Resources\Images\Image.Arrow.Left.64.png" />
     <Resource Include="Resources\Images\Image.Arrow.Right.64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Panama.Database\Panama.Database.csproj">
+      <Project>{587b3abc-de8b-45e6-9255-0921d6d4cf8d}</Project>
+      <Name>Panama.Database</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
@@ -992,12 +985,12 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets')" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.2\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.109.2\build\net451\System.Data.SQLite.Core.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

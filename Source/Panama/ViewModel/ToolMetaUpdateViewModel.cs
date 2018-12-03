@@ -1,30 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Converters;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Resources;
+﻿using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
-using System.IO;
-using Restless.Tools.Threading;
-using System.Text;
+using System.ComponentModel;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
     /// Provides the logic that is used for the meta-data update tool.
     /// </summary>
-    public class ToolMetaUpdateViewModel : WorkspaceViewModel
+    public class ToolMetaUpdateViewModel : ApplicationViewModel
     {
         #region Private
         #endregion
@@ -54,8 +37,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public ToolMetaUpdateViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToolMetaUpdateViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public ToolMetaUpdateViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandToolMeta;
             MaxCreatable = 1;

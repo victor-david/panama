@@ -1,32 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.IO;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.Windows.Media;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Threading;
-using Restless.Tools.Utility;
 using Restless.App.Panama.Tools;
+using Restless.Tools.Database.SQLite;
+using Restless.Tools.Utility;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
     /// Provides the logic that is used to display application statistcs.
     /// </summary>
-    public class StatisticsViewModel : WorkspaceViewModel
+    public class StatisticsViewModel : ApplicationViewModel
     {
         #region Private
         private const int FileHeaderWidth = 216;
@@ -119,7 +110,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="StatisticsViewModel"/> class.
         /// </summary>
-        public StatisticsViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public StatisticsViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandStatistics;
             MaxCreatable = 1;

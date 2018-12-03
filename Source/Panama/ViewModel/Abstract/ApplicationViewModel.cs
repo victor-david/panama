@@ -1,18 +1,16 @@
-﻿using System;
-using System.Windows.Input;
-using System.Collections.ObjectModel;
+﻿using Restless.App.Panama.Collections;
+using Restless.Tools.Mvvm;
+using Restless.Tools.Utility;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Restless.App.Panama.Collections;
-using Restless.Tools.Utility;
-using Restless.Tools.Controls.DragDrop;
+using System.Windows.Input;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
     /// Provides the Close command and properties that are common to all view models. This class must be interited.
     /// </summary>
-    public abstract class WorkspaceViewModel : ViewModelBase
+    public abstract class ApplicationViewModel : ViewModelBase
     {
         #region Private Vars
         private MainWindowViewModel mainViewModel;
@@ -71,23 +69,13 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a dictionary of commands. Unlike <see cref="VisualCommands"/>, these are necessarily related to  a visual representation
-        /// These can be added ad-hoc and bound to a control with: Command="{Binding RawCommands[name]}"
-        /// </summary>
-        public CommandDictionary Commands
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// Gets the singleton instance of the configuration object. 
         /// Although derived classes can access the singleton instance directly,
         /// this enables easy binding to certain configuration properties
         /// </summary>
         public Restless.App.Panama.Configuration.Config Config
         {
-            get { return Restless.App.Panama.Configuration.Config.Instance; }
+            get => Restless.App.Panama.Configuration.Config.Instance;
         }
         #endregion
 
@@ -105,22 +93,23 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Constructor
-        #pragma warning disable 1591
-        protected WorkspaceViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        protected ApplicationViewModel(ApplicationViewModel owner) : base(owner)
         {
             VisualCommands = new List<VisualCommandViewModel>();
             FilterCommands = new List<VisualCommandViewModel>();
 
-            Commands = new CommandDictionary();
-            CloseCommand = new RelayCommand((o)=>
+            CloseCommand = RelayCommand.Create((o)=>
             {
                 OnClosing(new CancelEventArgs());
             });
             MaxCreatable = 1;
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -163,13 +152,8 @@ namespace Restless.App.Panama.ViewModel
         {
             if (!e.Cancel)
             {
-                CancelEventHandler handler = Closing;
-                if (handler != null)
-                {
-                    handler(this, e);
-                }
+                Closing?.Invoke(this, e);
             }
-
         }
         #endregion
     }

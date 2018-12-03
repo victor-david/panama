@@ -1,8 +1,7 @@
 ﻿using Restless.App.Panama.Collections;
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System;
 using System.Collections.ObjectModel;
@@ -89,7 +88,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("Dismiss", Dismiss, IsAlertSelected);
 
             MenuItems = new MenuItemCollection();
-            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, Commands["OpenUrl"], "ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, Commands["OpenUrl"]).AddImageResource("ImageBrowseToUrlMenu");
         }
         #endregion
 

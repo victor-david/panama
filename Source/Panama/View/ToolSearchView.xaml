@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:r="clr-namespace:Restless.App.Panama.Resources"
-    xmlns:con="clr-namespace:Restless.App.Panama.Controls"
+    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
@@ -54,7 +54,7 @@
                     </DataGrid.ContextMenu>
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
-                            <Setter Property="con:DataGridExtended.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenItem]}"/>
+                            <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenItem]}"/>
                         </Style>
                     </DataGrid.RowStyle>
                 </DataGrid>

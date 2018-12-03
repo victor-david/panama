@@ -1,6 +1,6 @@
 ﻿using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Threading;
+using Restless.Tools.Utility;
 
 namespace Restless.App.Panama.ViewModel
 {

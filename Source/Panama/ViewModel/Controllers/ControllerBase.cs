@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Input;
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
+﻿using Restless.App.Panama.Database.Tables;
 using Restless.Tools.Database.SQLite;
 using Restless.Tools.Utility;
+using System.ComponentModel;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -71,7 +59,7 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Gets the ViewModel that owns this controller.
         /// </summary>
-        protected VM Owner
+        protected new VM Owner
         {
             get;
             private set;
@@ -84,8 +72,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ControllerBase{VM,T}"/> class.
         /// </summary>
-        /// <param name="owner"></param>
-        protected ControllerBase(VM owner)
+        /// <param name="owner">The VM that owns this view model.</param>
+        protected ControllerBase(VM owner) : base(owner)
         {
             Validations.ValidateNull(owner, "ControllerBase.Owner");
             Owner = owner;
@@ -95,13 +83,13 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Public methods
-        /// <summary>
-        /// Causes the controller to update.
-        /// </summary>
-        public void Update()
-        {
-            OnUpdate();
-        }
+        ///// <summary>
+        ///// Causes the controller to update.
+        ///// </summary>
+        //public void Update()
+        //{
+        //    OnUpdate();
+        //}
         #endregion
 
         /************************************************************************/
@@ -115,11 +103,6 @@ namespace Restless.App.Panama.ViewModel
         {
             OnPropertyChanged(nameof(Header));
         }
-
-        /// <summary>
-        /// Called when this controller needs to update, usually in response to a row change on the data grid
-        /// </summary>
-        protected abstract void OnUpdate();
 
         /// <summary>
         /// Gets the primary id from the selected row of this controller's owner.

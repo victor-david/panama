@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows;
-using Restless.App.Panama.Configuration;
+﻿using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Database;
+using Restless.App.Panama.Database.Tables;
+using Restless.App.Panama.Resources;
 using Restless.App.Panama.ViewModel;
 using Restless.Tools.Utility;
-using Restless.App.Panama.Resources;
-using Restless.App.Panama.Database.Tables;
+using System;
+using System.Windows;
 
 namespace Restless.App.Panama
 {
@@ -77,6 +77,10 @@ namespace Restless.App.Panama
             }
             else
             {
+                // These are applied one time only. They don't change.
+                Restless.Tools.Controls.Default.Style.DataGridHeaderCenter = ResourceHelper.StyleDataGridHeaderCenter;
+                Restless.Tools.Controls.Default.Style.TextBlockCenter = ResourceHelper.StyleTextBlockCenter;
+
                 Window main = WindowFactory.Main.Create();
                 main.MinWidth = Config.Default.MainWindow.MinWidth;
                 main.MinHeight = Config.Default.MainWindow.MinHeight;

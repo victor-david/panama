@@ -1,7 +1,8 @@
-﻿using Restless.App.Panama.Controls;
-using Restless.App.Panama.Database;
+﻿using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
+using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
 using System.ComponentModel;
 using System.Data;
@@ -27,7 +28,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="TagViewModel"/> class.
         /// </summary>
-        public TagViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public TagViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandTag;
             MaxCreatable = 1;
@@ -46,7 +48,7 @@ namespace Restless.App.Panama.ViewModel
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandRefreshTagUsage, Strings.CommandRefreshTagUsageTooltip, Commands["RefreshTagUsage"], ResourceHelper.Get("ImageRefresh"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandDeleteTag, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteTag, DeleteCommand).AddImageResource("ImageDeleteMenu");
             FilterPrompt = Strings.FilterPromptTag;
 
             AddCommand.Supported = CommandSupported.Yes;

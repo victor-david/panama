@@ -1,7 +1,7 @@
-﻿using Restless.App.Panama.Controls;
-using Restless.App.Panama.Converters;
+﻿using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System;
 using System.Collections;
@@ -26,7 +26,6 @@ namespace Restless.App.Panama.ViewModel
         private IList selectedDataGridItems;
         private Tuple<int,string> displayFilterSelection;
         #endregion
-
 
         /************************************************************************/
 

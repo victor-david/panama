@@ -1,10 +1,9 @@
 ﻿using Restless.App.Panama.Configuration;
-using Restless.App.Panama.Controls;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Threading;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System.ComponentModel;
 
@@ -37,7 +36,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolOrphanViewModel"/> class.
         /// </summary>
-        public ToolOrphanViewModel()
+        /// <param name="owner">The VM that owns this view model.</param>
+        public ToolOrphanViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandToolOrphan;
             MaxCreatable = 1;
@@ -54,7 +54,7 @@ namespace Restless.App.Panama.ViewModel
             MenuItems.AddSeparator();
             // Commands["DeleteFile"] is created by ToolOrphanFinderController - it handles
             // file deletion and the removal of the corresponding item of its ObservableCollection
-            MenuItems.AddItem("Delete this file", Commands["DeleteFile"], "ImageDeleteMenu");
+            MenuItems.AddItem("Delete this file", Commands["DeleteFile"]).AddImageResource("ImageDeleteMenu");
         }
         #endregion
 

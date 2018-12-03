@@ -137,32 +137,6 @@ namespace Restless.App.Panama.Database.Tables
         {
             Load(null, Defs.Columns.Id);
         }
-
-        /// <summary>
-        /// Gets the configuration row with the specified id. Adds a row first, if it doesn't already exist.
-        /// </summary>
-        /// <param name="id">The unique id</param>
-        /// <param name="value">The initial value</param>
-        /// <returns>The data row</returns>
-        /// <remarks>
-        /// If the configuration value specified by <paramref name="id"/> does not already exist, this method first creates it.
-        /// </remarks>
-        public DataRow GetConfigurationRow(string id, object value)
-        {
-            Validations.ValidateNullEmpty(id, "id");
-            DataRow[] rows = Select(string.Format("{0}='{1}'", Defs.Columns.Id, id));
-            if (rows.Length == 1) return rows[0];
-
-            DataRow row = NewRow();
-            row[Defs.Columns.Id] = id;
-            if (value == null)
-                row[Defs.Columns.Value] = DBNull.Value;
-            else
-                row[Defs.Columns.Value] = value;
-            Rows.Add(row);
-            Save();
-            return row;
-        }
         #endregion
 
         /************************************************************************/

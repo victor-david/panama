@@ -1,6 +1,6 @@
-﻿using Restless.App.Panama.Controls;
-using Restless.App.Panama.Database.Tables;
+﻿using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System.ComponentModel;
 using System.Data;
@@ -23,8 +23,11 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
-        public LinkViewModel()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LinkViewModel"/> class.
+        /// </summary>
+        /// <param name="owner">The VM that owns this view model.</param>
+        public LinkViewModel(ApplicationViewModel owner) : base(owner)
         {
             DisplayName = Strings.CommandLink;
             MaxCreatable = 1;
@@ -37,9 +40,9 @@ namespace Restless.App.Panama.ViewModel
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddLink, Strings.CommandAddLinkTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, OpenRowCommand, "ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteLink, DeleteCommand, "ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeleteLink, DeleteCommand).AddImageResource("ImageDeleteMenu");
             FilterPrompt = Strings.FilterPromptLink;
         }
         #pragma warning restore 1591
