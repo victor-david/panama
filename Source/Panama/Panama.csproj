@@ -100,22 +100,22 @@
       <HintPath>..\packages\MimeKitLite.2.0.6\lib\net45\MimeKitLite.dll</HintPath>
     </Reference>
     <Reference Include="Restless.Tools.Controls, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Restless.Tools.Controls.1.3.0\lib\net452\Restless.Tools.Controls.dll</HintPath>
+      <HintPath>..\packages\Restless.Tools.Controls.1.3.0\lib\net45\Restless.Tools.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Restless.Tools.Database, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Restless.Tools.Database.1.3.0\lib\net452\Restless.Tools.Database.dll</HintPath>
+      <HintPath>..\packages\Restless.Tools.Database.1.3.0\lib\net45\Restless.Tools.Database.dll</HintPath>
     </Reference>
     <Reference Include="Restless.Tools.Mvvm, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Restless.Tools.Mvvm.1.3.0\lib\net452\Restless.Tools.Mvvm.dll</HintPath>
+      <HintPath>..\packages\Restless.Tools.Mvvm.1.3.0\lib\net45\Restless.Tools.Mvvm.dll</HintPath>
     </Reference>
     <Reference Include="Restless.Tools.OfficeAutomation, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Restless.Tools.OfficeAutomation.1.3.0\lib\net452\Restless.Tools.OfficeAutomation.dll</HintPath>
+      <HintPath>..\packages\Restless.Tools.OfficeAutomation.1.3.0\lib\net45\Restless.Tools.OfficeAutomation.dll</HintPath>
     </Reference>
     <Reference Include="Restless.Tools.OpenXml, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Restless.Tools.OpenXml.1.3.0\lib\net452\Restless.Tools.OpenXml.dll</HintPath>
+      <HintPath>..\packages\Restless.Tools.OpenXml.1.3.0\lib\net45\Restless.Tools.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="Restless.Tools.Utility, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Restless.Tools.Utility.1.3.0\lib\net452\Restless.Tools.Utility.dll</HintPath>
+      <HintPath>..\packages\Restless.Tools.Utility.1.3.0\lib\net45\Restless.Tools.Utility.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
