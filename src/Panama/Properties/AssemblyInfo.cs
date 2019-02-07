@@ -16,7 +16,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Restless Animal Development")]
 [assembly: AssemblyProduct("Panama ∑en")]
-[assembly: AssemblyCopyright("Copyright © 2017 Restless Animal Development")]
+[assembly: AssemblyCopyright("Copyright © 2019 Restless Animal Development - Licensed under GNU General Public License v3.0")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
