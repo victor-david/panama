@@ -1,8 +1,7 @@
+.vs/
 *.suo
 obj/
 bin/
 Help/
 packages/
-Panama.xlsx
-.vs/
-docs/
+_docs/
