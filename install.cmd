@@ -5,7 +5,7 @@ rem If you have Sandcastle Help File Builder installed, you can use Panama.shfbp
 rem to build a .chm file and it will be copied to your destination directory as well.
 setlocal
 set ROOT=%~dp0
-set BIN=%ROOT%Source\Panama\bin\x64\release
+set BIN=%ROOT%src\Panama\bin\x64\release
 rem Change the destination path as needed and use this file to install.
 set DEST=D:\Writing\Panama
 if exist "%BIN%\Panama.exe" (
