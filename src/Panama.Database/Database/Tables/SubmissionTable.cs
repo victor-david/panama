@@ -242,39 +242,29 @@ namespace Restless.App.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Changes the submission ordering for the specified submission batch
+        /// Changes the ordering of the specified row by moving it up.
         /// </summary>
-        /// <param name="batchId">The batchid</param>
-        /// <param name="ordering">The current ordering</param>
-        /// <param name="newOrdering">The new ordering (must be one less or one more than ordering)</param>
-        /// <remarks>
-        /// <paramref name="newOrdering"/> must be one more or one less than <paramref name="ordering"/>. If not, this method does nothing.
-        /// </remarks>
-        public void ChangeSubmissionOrdering(long batchId, long ordering, long newOrdering)
+        /// <param name="rowToMove">The row to move up.</param>
+        public void MoveSubmissionUp(DataRow rowToMove)
         {
-            // Make sure we're only changing by 1.
-            if (Math.Abs(newOrdering - ordering) != 1)
-            {
-                return;
-            }
+            if (rowToMove == null) throw new ArgumentNullException(nameof(rowToMove));
+            long batchId = (long)rowToMove[Defs.Columns.BatchId];
+            EnsureCorrectOrdering(batchId);
+            long ordering = (long)rowToMove[Defs.Columns.Ordering];
+            ChangeSubmissionOrdering(batchId, ordering, ordering - 1);
+        }
 
-            DataRow orderingRow = null;
-            DataRow newOrderingRow = null;
-
-            DataRow[] rows = Select(string.Format("{0}={1}", Defs.Columns.BatchId, batchId));
-
-            foreach (DataRow row in rows)
-            {
-                long rowOrdering = (long)row[Defs.Columns.Ordering];
-                if (rowOrdering == ordering) orderingRow = row;
-                if (rowOrdering == newOrdering) newOrderingRow = row;
-            }
-
-            if (orderingRow != null && newOrderingRow != null)
-            {
-                orderingRow[Defs.Columns.Ordering] = newOrdering;
-                newOrderingRow[Defs.Columns.Ordering] = ordering;
-            }
+        /// <summary>
+        /// Changes the ordering of the specified row by moving it down.
+        /// </summary>
+        /// <param name="rowToMove">The row to move up.</param>
+        public void MoveSubmissionDown(DataRow rowToMove)
+        {
+            if (rowToMove == null) throw new ArgumentNullException(nameof(rowToMove));
+            long batchId = (long)rowToMove[Defs.Columns.BatchId];
+            EnsureCorrectOrdering(batchId);
+            long ordering = (long)rowToMove[Defs.Columns.Ordering];
+            ChangeSubmissionOrdering(batchId, ordering, ordering + 1);
         }
         #endregion
 
@@ -350,6 +340,39 @@ namespace Restless.App.Panama.Database.Tables
                 return lastOrdering + 1;
             }
             return 1;
+        }
+
+        private DataRow[] GetDataRowsByBatch(long batchId)
+        {
+            return Select($"{Defs.Columns.BatchId}={batchId}", Defs.Columns.Ordering);
+        }
+
+        private void EnsureCorrectOrdering(long batchId)
+        {
+            long ordering = 1;
+            foreach (DataRow row in GetDataRowsByBatch(batchId))
+            {
+                row[Defs.Columns.Ordering] = ordering++;
+            }
+        }
+
+        private void ChangeSubmissionOrdering(long batchId, long ordering, long newOrdering)
+        {
+            DataRow orderingRow = null;
+            DataRow newOrderingRow = null;
+
+            foreach (DataRow row in GetDataRowsByBatch(batchId))
+            {
+                long rowOrdering = (long)row[Defs.Columns.Ordering];
+                if (rowOrdering == ordering) orderingRow = row;
+                if (rowOrdering == newOrdering) newOrderingRow = row;
+            }
+
+            if (orderingRow != null && newOrderingRow != null)
+            {
+                orderingRow[Defs.Columns.Ordering] = newOrdering;
+                newOrderingRow[Defs.Columns.Ordering] = ordering;
+            }
         }
         #endregion
     }

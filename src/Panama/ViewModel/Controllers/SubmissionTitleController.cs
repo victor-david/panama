@@ -49,7 +49,8 @@ namespace Restless.App.Panama.ViewModel
             DataView.Sort = string.Format("{0},{1}", SubmissionTable.Defs.Columns.Ordering, SubmissionTable.Defs.Columns.Joined.Title);
 
             Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
-            Columns.SetDefaultSort(Columns.Create("O", SubmissionTable.Defs.Columns.Ordering).MakeFixedWidth(FixedWidth.Standard).AddToolTip("Ordering"), ListSortDirection.Ascending);
+            Columns.Create("O", SubmissionTable.Defs.Columns.Ordering).MakeCentered().MakeFixedWidth(FixedWidth.Standard).AddToolTip("Ordering");
+                
             Columns.CreateImage<IntegerToImageConverter>("S", SubmissionTable.Defs.Columns.Status, "ImageSubStatus").AddToolTip("Submission status of this title");
             Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);
             Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written).MakeDate();
@@ -63,8 +64,8 @@ namespace Restless.App.Panama.ViewModel
                 SelectedRow[SubmissionTable.Defs.Columns.Status] = SubmissionTable.Defs.Values.StatusAccepted;
             }, (o) =>
             {
-                return 
-                    SelectedRow != null &&  
+                return
+                    SelectedRow != null &&
                     Owner.SelectedRow != null &&
                     (long)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.ResponseType] == ResponseTable.Defs.Values.ResponseAccepted;
             });
@@ -139,12 +140,10 @@ namespace Restless.App.Panama.ViewModel
         {
             if (CanRunMoveUpCommand(null))
             {
-                long batchId = (long)Owner.SelectedPrimaryKey;
-                long ordering = (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering];
-                DatabaseController.Instance.GetTable<SubmissionTable>().ChangeSubmissionOrdering(batchId, ordering, ordering - 1);
+                DatabaseController.Instance.GetTable<SubmissionTable>().MoveSubmissionUp(SelectedRow);
             }
         }
-        
+
         private bool CanRunMoveUpCommand(object o)
         {
             return
@@ -156,9 +155,7 @@ namespace Restless.App.Panama.ViewModel
         {
             if (CanRunMoveDownCommand(null))
             {
-                long batchId = (long)Owner.SelectedPrimaryKey;
-                long ordering = (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering];
-                DatabaseController.Instance.GetTable<SubmissionTable>().ChangeSubmissionOrdering(batchId, ordering, ordering + 1);
+                DatabaseController.Instance.GetTable<SubmissionTable>().MoveSubmissionDown(SelectedRow);
             }
         }
 

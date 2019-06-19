@@ -81,7 +81,13 @@
             <!-- Titles -->
             <TabItem Header="{Binding Titles.Header}">
                 <StackPanel>
-                    <DataGrid x:Name="grid1" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Titles.DataView}" SelectedItem="{Binding Titles.SelectedItem}" con:DataGridColumns.Columns="{Binding Titles.Columns}">
+                    <DataGrid 
+                        x:Name="grid1" 
+                        Style="{StaticResource DataGridEdit}"
+                        CanUserSortColumns="False"
+                        ItemsSource="{Binding Path=Titles.DataView}"
+                        SelectedItem="{Binding Titles.SelectedItem}"
+                        con:DataGridColumns.Columns="{Binding Titles.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
                                 <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid1, Path=DataContext.Titles.OpenRowCommand}"/>
