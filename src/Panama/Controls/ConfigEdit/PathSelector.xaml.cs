@@ -136,7 +136,7 @@ namespace Restless.App.Panama.Controls
                     SelectFileSystem();
                     break;
                 case PathSelectorType.Mapi:
-                    SelectMapiFolder();
+                    //SelectMapiFolder();
                     break;
             }
         }
