@@ -38,7 +38,6 @@ namespace Restless.App.Panama.ViewModel
         public ObservableCollection<ApplicationViewModel> Workspaces
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -47,7 +46,6 @@ namespace Restless.App.Panama.ViewModel
         public ApplicationInfo AppInfo
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -55,13 +53,13 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public string NotificationMessage
         {
-            get
-            {
-                return notificationMessage;
-            }
+            get => notificationMessage;
             private set
             {
                 SetProperty(ref notificationMessage, value);
+                // Set backing store to null. Fixes a small problem where the same message 
+                // won't display twice in a row because the property hasn't changed.
+                notificationMessage = null;
                 System.Media.SystemSounds.Asterisk.Play();
             }
         }
@@ -113,9 +111,9 @@ namespace Restless.App.Panama.ViewModel
             Workspaces.CollectionChanged += OnWorkspacesChanged;
             AppInfo = ApplicationInfo.Instance;
             // 
-            DisplayName = string.Format("{0} {1}", AppInfo.Assembly.Title, AppInfo.Assembly.VersionMajor);
+            DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor}";
 #if DEBUG
-            DisplayName = string.Format("{0} {1} (DEBUG)", AppInfo.Assembly.Title, AppInfo.Assembly.VersionMajor);
+            DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor} (DEBUG)";
 #endif
         }
         #endregion
