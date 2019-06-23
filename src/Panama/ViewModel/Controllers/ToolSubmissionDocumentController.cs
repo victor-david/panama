@@ -74,7 +74,6 @@ namespace Restless.App.Panama.ViewModel
         }
         #endregion
 
-
         /************************************************************************/
 
         #region Public methods

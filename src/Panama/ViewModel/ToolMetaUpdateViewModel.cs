@@ -60,7 +60,6 @@ namespace Restless.App.Panama.ViewModel
             Versions = new ToolTitleVersionController(this);
             SubDocs = new ToolSubmissionDocumentController(this);
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -72,16 +71,13 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="e">The event arguments</param>
         protected override void OnClosing(CancelEventArgs e)
         {
-            e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
-                {
-                    MainWindowViewModel.Instance.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
-                }, null);
+            SetCancelIfTasksInProgress(e);
             base.OnClosing(e);
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Private Methods
         #endregion
     }

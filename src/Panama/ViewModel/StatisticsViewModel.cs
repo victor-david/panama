@@ -149,16 +149,13 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="e">The event arguments</param>
         protected override void OnClosing(CancelEventArgs e)
         {
-            e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
-            {
-                MainWindowViewModel.Instance.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
-            }, null);
+            SetCancelIfTasksInProgress(e);
             base.OnClosing(e);
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Private Methods
         /// <summary>
         /// Scan folders on a background thread and creates the folder statistics.
@@ -204,7 +201,7 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
-        /// Adds the items recursively. 
+        /// Adds the items recursively.
         /// </summary>
         /// <param name="treeItem"></param>
         /// <param name="statItem"></param>

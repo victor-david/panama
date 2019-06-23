@@ -35,12 +35,16 @@ namespace Restless.App.Panama.Tools
         public const string ListFile = "TitleList.txt";
 
         /// <summary>
+        /// Gets the name of this file scanner tool.
+        /// </summary>
+        public override string ScannerName => "Title Lister";
+
+        /// <summary>
         /// Gets the full path to the file that holds the list of titles.
         /// </summary>
         public string TitleListFileName
         {
             get;
-            private set;
         }
         #endregion
 

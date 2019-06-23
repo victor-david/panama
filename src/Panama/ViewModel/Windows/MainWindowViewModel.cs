@@ -49,7 +49,7 @@ namespace Restless.App.Panama.ViewModel
             private set
             {
                 SetProperty(ref notificationMessage, value);
-                // Set backing store to null. Fixes a small problem where the same message 
+                // Set backing store to null. Fixes a small problem where the same message
                 // won't display twice in a row because the property hasn't changed.
                 notificationMessage = null;
                 System.Media.SystemSounds.Asterisk.Play();
@@ -101,10 +101,10 @@ namespace Restless.App.Panama.ViewModel
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandTitle, Strings.CommandTitleTooltip, Commands["Title"], ResourceHelper.Get("ImageTitle")));
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandPublisher, Strings.CommandPublisherTooltip, Commands["Publisher"], ResourceHelper.Get("ImagePublisher")));
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandSubmission, Strings.CommandSubmissionTooltip, Commands["Submission"], ResourceHelper.Get("ImageSubmission")));
-                
+
             Workspaces = new ObservableCollection<ApplicationViewModel>();
             Workspaces.CollectionChanged += OnWorkspacesChanged;
-            // 
+            //
             DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor}";
 #if DEBUG
             DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor} (DEBUG)";
@@ -113,7 +113,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Public methods
         /// <summary>
         /// Creates a notification message that displays on the main status bar
@@ -146,7 +146,7 @@ namespace Restless.App.Panama.ViewModel
             // The reason we don't use CreateIf<T>() directly (which would work)
             // is to avoid the possibility that a VM allows more than one instance.
             // We want to go the first one. If there isn't a first one, we'll create.
-             
+
             var ws = GetFirstWorkspace<T>();
             if (ws != null)
             {
@@ -176,11 +176,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="e">Event args.</param>
         protected override void OnWindowClosing(CancelEventArgs e)
         {
-            e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
-            {
-                NotificationMessage = Strings.NotificationCannotExitTasksAreRunning;
-                System.Media.SystemSounds.Beep.Play();
-            }, null);
+            SetCancelIfTasksInProgress(e);
 
             if (!e.Cancel)
             {

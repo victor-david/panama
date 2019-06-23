@@ -26,8 +26,8 @@ namespace Restless.App.Panama.Tools
     /// </remarks>
     public class TitleExporter : FileScanBase
     {
-        #region Private Vars
-        private string exportDirectory;
+        #region Private
+        private readonly string exportDirectory;
         private TitleExportTitleList candidates;
         private int updated;
         private int removed;
@@ -44,7 +44,11 @@ namespace Restless.App.Panama.Tools
 
         /************************************************************************/
 
-        #region Public Properties
+        #region Public properties
+        /// <summary>
+        /// Gets the name of this file scanner tool.
+        /// </summary>
+        public override string ScannerName => "Title Exporter";
         #endregion
 
         /************************************************************************/

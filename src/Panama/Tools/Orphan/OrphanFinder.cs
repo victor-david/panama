@@ -19,11 +19,6 @@ namespace Restless.App.Panama.Tools
     /// </summary>
     public class OrphanFinder : FileScanBase
     {
-        #region Private
-        #endregion
-
-        /************************************************************************/
-
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="OrphanFinder"/> class.
@@ -31,7 +26,15 @@ namespace Restless.App.Panama.Tools
         public OrphanFinder()
         {
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Public properties
+        /// <summary>
+        /// Gets the name of this file scanner tool.
+        /// </summary>
+        public override string ScannerName => "Orphan Finder";
         #endregion
 
         /************************************************************************/

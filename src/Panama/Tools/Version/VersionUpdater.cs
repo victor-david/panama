@@ -18,13 +18,22 @@ namespace Restless.App.Panama.Tools
     public class VersionUpdater : FileScanBase
     {
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VersionUpdater"/> class.
+        /// </summary>
         public VersionUpdater()
         {
         }
-        #pragma warning restore 1591
         #endregion
 
+        /************************************************************************/
+
+        #region Public properties
+        /// <summary>
+        /// Gets the name of this file scanner tool.
+        /// </summary>
+        public override string ScannerName => "Title Version Updater";
+        #endregion
         /************************************************************************/
 
         #region Protected methods

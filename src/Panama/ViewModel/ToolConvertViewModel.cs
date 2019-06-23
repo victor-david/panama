@@ -100,12 +100,12 @@ namespace Restless.App.Panama.ViewModel
             Columns.CreateImage<BooleanToImageConverter>("S", "IsSubmissionDoc");
             Columns.CreateImage<BooleanToImageConverter>("C", "Result.Success");
             //Columns.Create("Id", "TitleId").MakeFixedWidth(FixedWidth.Standard);
-            
+
             Columns.Create("Created", "Info.CreationTimeUtc").MakeDate();
             Columns.Create("Modified", "Info.LastWriteTimeUtc").MakeDate();
             Columns.SetDefaultSort(Columns.Create("File name", "Info.FullName").MakeFlexWidth(2.0), ListSortDirection.Ascending);
             Columns.Create("Message", "Result.Message");
-            
+
             Commands.Add("SelectFolder", RunSelectFolderCommand, CanRunSelectFolderCommand);
             Commands.Add("Convert", RunConvertCommand);
             Commands.Add("Cancel", RunCancelCommand);
@@ -122,10 +122,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="e">The event arguments</param>
         protected override void OnClosing(CancelEventArgs e)
         {
-            e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
-            {
-                MainWindowViewModel.Instance.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
-            }, null);
+            SetCancelIfTasksInProgress(e);
             base.OnClosing(e);
         }
         #endregion
@@ -202,7 +199,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         /// <param name="owner">The VM that owns this view model.</param>
         /// <remarks>
-        /// This class is not used when document conversion is off. 
+        /// This class is not used when document conversion is off.
         /// It exists to satisfy requirements in other parts of the app
         /// but is never activated.
         /// </remarks>

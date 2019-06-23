@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Resources;
 using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
 using System.Collections.Generic;
@@ -18,25 +19,11 @@ namespace Restless.App.Panama.ViewModel
     public abstract class ApplicationViewModel : ViewModelBase
     {
         #region Private Vars
-        //private MainWindowViewModel mainViewModel;
         #endregion
 
         /************************************************************************/
 
         #region Public properties
-        ///// <summary>
-        ///// Gets or sets the owner of this view model. Once set, this property cannot be changed.
-        ///// </summary>
-        //public MainWindowViewModel MainViewModel
-        //{
-        //    get { return mainViewModel; }
-        //    set
-        //    {
-        //        Validations.ValidateInvalidOperation(mainViewModel != null, "This property may only be set once");
-        //        mainViewModel = value;
-        //    }
-        //}
-
         /// <summary>
         /// Gets the maximum number of workspaces that may be created. -1 means unlimited. The default is 1.
         /// </summary>
@@ -74,7 +61,7 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets the singleton instance of the configuration object. 
+        /// Gets the singleton instance of the configuration object.
         /// Although derived classes can access the singleton instance directly,
         /// this enables easy binding to certain configuration properties
         /// </summary>
@@ -85,7 +72,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Protected properties
         /// <summary>
         /// Provides the standard image size for a visual command.
@@ -126,7 +113,7 @@ namespace Restless.App.Panama.ViewModel
         public event CancelEventHandler Closing;
 
         #endregion
-        
+
         /************************************************************************/
 
         #region Public methods
@@ -149,6 +136,19 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Protected methods
+        /// <summary>
+        /// If tasks are running, sets e.Cancel to true and displays "tasks are running" message.
+        /// If tasks are not running, sets e.Cancel to false.
+        /// </summary>
+        /// <param name="e">The cancel event args.</param>
+        protected void SetCancelIfTasksInProgress(CancelEventArgs e)
+        {
+            e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
+            {
+                MainWindowViewModel.Instance.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
+            }, null);
+        }
+
         /// <summary>
         /// Raises the Closing event.
         /// </summary>

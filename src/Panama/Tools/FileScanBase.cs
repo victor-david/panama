@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.ViewModel;
 using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
 using System;
@@ -56,6 +57,11 @@ namespace Restless.App.Panama.Tools
                 }
             }
         }
+
+        /// <summary>
+        /// Gets the name of this file scanner tool.
+        /// </summary>
+        public abstract string ScannerName { get; }
         #endregion
 
         /************************************************************************/
@@ -86,7 +92,9 @@ namespace Restless.App.Panama.Tools
                     ExecuteTask();
                     OnCompleted();
                     IsRunning = false;
-                }, null, null, false);
+                }, null, null, false)
+                .ContinueWith((t)=> MainWindowViewModel.Instance.CreateNotificationMessage($"{ScannerName} complete"),
+                TaskManager.Instance.MainScheduler);
         }
 
         /// <summary>
@@ -94,6 +102,7 @@ namespace Restless.App.Panama.Tools
         /// </summary>
         /// <remarks>
         /// Unlike <see cref="Execute(int)"/>, this method does not start a background thread.
+        /// This method is used by the stand-alone tools.
         /// </remarks>
         public void Execute()
         {

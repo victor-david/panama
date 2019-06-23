@@ -18,12 +18,21 @@ namespace Restless.App.Panama.Tools
     public class SubmissionUpdater : FileScanBase
     {
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubmissionUpdater"/> class.
+        /// </summary>
         public SubmissionUpdater()
         {
         }
-        #pragma warning restore 1591
+        #endregion
 
+        /************************************************************************/
+
+        #region Public properties
+        /// <summary>
+        /// Gets the name of this file scanner tool.
+        /// </summary>
+        public override string ScannerName => "Submission Document Updater";
         #endregion
 
         /************************************************************************/
