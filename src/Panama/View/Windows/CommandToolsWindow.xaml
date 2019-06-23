@@ -20,6 +20,6 @@
 
         <!--<TextBlock VerticalAlignment="Top" Text="{Binding Status, Mode=OneWay}"/>-->
         <TextBlock VerticalAlignment="Top" FontSize="14" Foreground="DarkRed" Text="{Binding Status, Mode=OneWay}"/>
-        <Button Grid.Row="1" Width="120" Height="22" Command="{Binding Commands[Close]}" Content="Close" IsEnabled="{Binding IsCompleted}"/>
+        <Button Grid.Row="1" Width="120" Height="22" Command="{Binding CloseWindowCommand}" Content="Close" IsEnabled="{Binding IsCompleted}"/>
     </Grid>
 </Window>

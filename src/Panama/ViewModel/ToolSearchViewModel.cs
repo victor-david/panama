@@ -230,7 +230,7 @@ namespace Restless.App.Panama.ViewModel
             {
                 if (row.Extended is ExtendedSearchResult extended && extended.IsVersion)
                 {
-                    var ws = MainViewModel.SwitchToWorkspace<TitleViewModel>();
+                    var ws = MainWindowViewModel.Instance.SwitchToWorkspace<TitleViewModel>();
                     if (ws != null)
                     {
                         // in case the VM was already open with a filter applied.

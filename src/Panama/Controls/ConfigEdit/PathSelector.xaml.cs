@@ -174,10 +174,10 @@ namespace Restless.App.Panama.Controls
         private void SelectMapiFolder()
         {
             MessageSelectOptions ops = new MessageSelectOptions(MessageSelectMode.Folder, null);
-            var w = WindowFactory.MessageSelect.Create(Strings.CaptionSelectMapiFolder, ops);
-            w.ShowDialog();
+            var window = WindowFactory.MessageSelect.Create(Strings.CaptionSelectMapiFolder, ops);
+            window.ShowDialog();
 
-            if (w.GetValue(WindowViewModel.ViewModelProperty) is MessageSelectWindowViewModel vm && vm.SelectedItems != null)
+            if (window.DataContext is MessageSelectWindowViewModel vm && vm.SelectedItems != null)
             {
                 if (vm.SelectedItems[0] is WindowsSearchResult result)
                 {

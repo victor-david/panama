@@ -74,9 +74,7 @@ namespace Restless.App.Panama.ViewModel
         {
             e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
                 {
-                    MainViewModel.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
-                    System.Media.SystemSounds.Beep.Play();
-
+                    MainWindowViewModel.Instance.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
                 }, null);
             base.OnClosing(e);
         }

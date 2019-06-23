@@ -8,17 +8,17 @@ using Restless.App.Panama.Converters;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.App.Panama.View;
 using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System;
-using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
-    /// Provides the display and selection logic for the <see cref="View.TitleVersionRenameWindow"/>.
+    /// Provides the display and selection logic for the <see cref="TitleVersionRenameWindow"/>.
     /// </summary>
-    public class TitleVersionRenameWindowViewModel : WindowDataGridViewModel<DummyTable>
+    public class TitleVersionRenameWindowViewModel : WindowViewModel
     {
         #region Private
         private TitleVersionRenameItemCollection renameView;
@@ -50,10 +50,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleVersionRenameWindowViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The window that owns this view model.</param>
         /// <param name="titleId">The title id for the versions to rename.</param>
-        public TitleVersionRenameWindowViewModel(Window owner, long titleId)
-            :base(owner)
+        public TitleVersionRenameWindowViewModel(long titleId)
         {
             renameView = new TitleVersionRenameItemCollection();
             MainSource.Source = renameView;
@@ -69,7 +67,6 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("New name", TitleVersionRenameItem.Properties.NewNameDisplay);
             Columns.Create("Status", TitleVersionRenameItem.Properties.Status);
             Commands.Add("Rename", RunRenameCommand, CanRunRenameCommand);
-            Commands.Add("Close", RunCloseCommand);
             PopulateRenameItems(titleId);
         }
         #endregion
@@ -132,11 +129,6 @@ namespace Restless.App.Panama.ViewModel
         private bool CanRunRenameCommand(object o)
         {
             return canRename;
-        }
-
-        private void RunCloseCommand(object o)
-        {
-            Owner.Close();
         }
         #endregion
     }

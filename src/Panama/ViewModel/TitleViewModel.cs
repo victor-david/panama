@@ -465,7 +465,7 @@ namespace Restless.App.Panama.ViewModel
                         Execution.TryCatch(() =>
                         {
                             PreviewText = OpenXmlDocument.Reader.GetText(fileName);
-                        }, (ex) => { MainViewModel.CreateNotificationMessage(ex.Message); });
+                        }, (ex) => MainWindowViewModel.Instance.CreateNotificationMessage(ex.Message));
                     }
                 }
             }

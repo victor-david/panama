@@ -198,7 +198,7 @@ namespace Restless.App.Panama.ViewModel
                 {
                     PreviewText = OpenXmlDocument.Reader.GetText(fileName);
                 }, 
-                (ex) => { MainViewModel.CreateNotificationMessage(ex.Message); });
+                (ex) => MainWindowViewModel.Instance.CreateNotificationMessage(ex.Message));
             }
         }
 
@@ -213,10 +213,10 @@ namespace Restless.App.Panama.ViewModel
             long batchId = (long)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Id];
             string publisher = Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.Publisher].ToString();
 
-            var select = WindowFactory.SubmissionDocumentSelect.Create();
-            select.ShowDialog();
+            var window = WindowFactory.SubmissionDocumentSelect.Create();
+            window.ShowDialog();
 
-            if (select.GetValue(WindowViewModel.ViewModelProperty) is SubmissionDocumentSelectWindowViewModel vm)
+            if (window.DataContext is SubmissionDocumentSelectWindowViewModel vm)
             {
                 switch (vm.CreateType)
                 {

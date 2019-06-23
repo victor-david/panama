@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.View;
 using Restless.App.Panama.ViewModel;
@@ -33,9 +34,15 @@ namespace Restless.App.Panama
             /// <returns>The window</returns>
             public static MainWindow Create()
             {
-                var window = new MainWindow();
-                TextOptions.SetTextFormattingMode(window);
-                var viewModel = new MainWindowViewModel(window);
+                var window = new MainWindow()
+                {
+                    Owner = null, // this is a top level window
+                    MinWidth = Configuration.Config.Default.MainWindow.MinWidth,
+                    MinHeight = Configuration.Config.Default.MainWindow.MinHeight,
+                    DataContext = MainWindowViewModel.Instance,
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
                 return window;
             }
         }
@@ -55,10 +62,13 @@ namespace Restless.App.Panama
             /// <returns>The window</returns>
             public static AboutWindow Create()
             {
-                var window = new AboutWindow();
-                TextOptions.SetTextFormattingMode(window);
-                window.Owner = Application.Current.MainWindow;
-                var viewModel = new AboutWindowViewModel(window);
+                var window = new AboutWindow()
+                {
+                    Owner = Application.Current.MainWindow,
+                    DataContext = new AboutWindowViewModel(),
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
                 return window;
             }
         }
@@ -79,11 +89,14 @@ namespace Restless.App.Panama
             /// <returns>The window</returns>
             public static PublisherSelectWindow Create(string title)
             {
-                var window = new PublisherSelectWindow();
-                window.Title = title;
-                TextOptions.SetTextFormattingMode(window);
-                window.Owner = Application.Current.MainWindow;
-                var viewModel = new PublisherSelectWindowViewModel(window);
+                var window = new PublisherSelectWindow
+                {
+                    Title = title,
+                    Owner = Application.Current.MainWindow,
+                    DataContext = new PublisherSelectWindowViewModel(),
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
                 return window;
             }
         }
@@ -108,11 +121,12 @@ namespace Restless.App.Panama
             {
                 var window = new MessageSelectWindow
                 {
-                    Title = title
+                    Title = title,
+                    Owner = Application.Current.MainWindow,
+                    DataContext = new MessageSelectWindowViewModel(options)
                 };
-                TextOptions.SetTextFormattingMode(window);
-                window.Owner = Application.Current.MainWindow;
-                var viewModel = new MessageSelectWindowViewModel(window, options);
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
                 return window;
             }
         }
@@ -120,7 +134,7 @@ namespace Restless.App.Panama
         
         /************************************************************************/
 
-        #region MessageSelect
+        #region MessageFileSelect
         /// <summary>
         /// Provides static methods for creating a message file select window.
         /// </summary>
@@ -136,17 +150,16 @@ namespace Restless.App.Panama
             {
                 var window = new MessageFileSelectWindow
                 {
-                    Title = title
+                    Title = title,
+                    Owner = Application.Current.MainWindow,
+                    DataContext = new MessageFileSelectWindowViewModel(folder),
                 };
-                TextOptions.SetTextFormattingMode(window);
-                window.Owner = Application.Current.MainWindow;
-                var viewModel = new MessageFileSelectWindowViewModel(window, folder);
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
                 return window;
             }
         }
         #endregion
-
-
 
         /************************************************************************/
 
@@ -162,10 +175,13 @@ namespace Restless.App.Panama
             /// <returns>The window</returns>
             public static SubmissionDocumentSelectWindow Create()
             {
-                var window = new SubmissionDocumentSelectWindow();
-                TextOptions.SetTextFormattingMode(window);
-                window.Owner = Application.Current.MainWindow;
-                var viewModel = new SubmissionDocumentSelectWindowViewModel(window);
+                var window = new SubmissionDocumentSelectWindow()
+                {
+                    Owner = Application.Current.MainWindow,
+                    DataContext = new SubmissionDocumentSelectWindowViewModel()
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
                 return window;
             }
         }
@@ -186,17 +202,19 @@ namespace Restless.App.Panama
             /// <returns>The window</returns>
             public static CommandToolsWindow Create(StartupOptions ops)
             {
-                var window = new CommandToolsWindow();
-                TextOptions.SetTextFormattingMode(window);
-                //window.Owner = Application.Current.MainWindow;
-                var viewModel = new CommandToolsWindowViewModel(window, ops);
+                var window = new CommandToolsWindow()
+                {
+                    Owner = null, // this is a top level window
+                    DataContext = new CommandToolsWindowViewModel(ops)
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
                 return window;
             }
         }
         #endregion
 
         /************************************************************************/
-
         
         #region TitleVersionRename
         /// <summary>
@@ -213,11 +231,13 @@ namespace Restless.App.Panama
             {
                 var window = new TitleVersionRenameWindow
                 {
-                    Title = Restless.App.Panama.Resources.Strings.WindowTitleVersionRename
+                    Title = Resources.Strings.WindowTitleVersionRename,
+                    Owner = Application.Current.MainWindow,
+                    DataContext = new TitleVersionRenameWindowViewModel(titleId),
+
                 };
-                TextOptions.SetTextFormattingMode(window);
-                window.Owner = Application.Current.MainWindow;
-                var viewModel = new TitleVersionRenameWindowViewModel(window, titleId);
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
                 return window;
             }
         }
@@ -238,52 +258,32 @@ namespace Restless.App.Panama
             /// <returns>The window</returns>
             public static AlertWindow Create(ObservableCollection<AlertTable.RowObject> alerts)
             {
-                var window = new AlertWindow();
-                TextOptions.SetTextFormattingMode(window);
-                window.Owner = Application.Current.MainWindow;
-                var viewModel = new AlertWindowViewModel(window, alerts);
+                var window = new AlertWindow()
+                {
+                    Owner = Application.Current.MainWindow,
+                    DataContext = new AlertWindowViewModel(alerts)
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
                 return window;
             }
         }
         #endregion
+
         /************************************************************************/
 
         #region Workspace
-        /// <summary>
-        /// Provides static methods for creating a workspace window.
-        /// </summary>
-        public static class Workspace
+        private static void SetWindowOwner(Window window)
         {
-            /// <summary>
-            /// Creates an instance of WorkspaceWindow and its corresponding view model.
-            /// </summary>
-            /// <param name="title">The title of the window.</param>
-            /// <param name="viewModel">The view model to associate with the window.</param>
-            /// <returns>The window</returns>
-            public static WorkspaceWindow Create(string title, ApplicationViewModel viewModel)
+            if (window.DataContext is IWindowOwner owner)
             {
-                var window = new WorkspaceWindow();
-                window.Title = title;
-                TextOptions.SetTextFormattingMode(window);
-                window.Owner = Application.Current.MainWindow;
-                //window.DataContext = viewModel;
-                //window.DataContext = Application.Current.MainWindow.DataContext;
-                window.Content = viewModel;
-                return window;
+                owner.WindowOwner = window;
             }
         }
-        #endregion
 
-
-        /************************************************************************/
-        
-        #region TextOptions (private)
-        private static class TextOptions
+        private static void SetTextFormattingMode(DependencyObject element)
         {
-            public static void SetTextFormattingMode(DependencyObject element)
-            {
-                System.Windows.Media.TextOptions.SetTextFormattingMode(element, System.Windows.Media.TextFormattingMode.Display);
-            }
+            TextOptions.SetTextFormattingMode(element, TextFormattingMode.Display);
         }
         #endregion
     }

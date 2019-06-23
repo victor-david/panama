@@ -88,11 +88,7 @@ namespace Restless.App.Panama.ViewModel
                 {
                     Text = Clipboard.GetText();
                 }
-            }, (e) =>
-            {
-                MainViewModel.CreateNotificationMessage(e.Message);
-            }
-            );
+            }, (e) =>  MainWindowViewModel.Instance.CreateNotificationMessage(e.Message));
         }
 
         private void Scramble(object o)
@@ -100,10 +96,7 @@ namespace Restless.App.Panama.ViewModel
             Execution.TryCatch(() =>
             {
                 Text = Scrambled().ToString();
-            }, (e) =>
-            {
-                MainViewModel.CreateNotificationMessage(e.Message);
-            });
+            }, (e) => MainWindowViewModel.Instance.CreateNotificationMessage(e.Message));
         }
 
         private StringBuilder Scrambled()

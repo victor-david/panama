@@ -77,9 +77,11 @@ namespace Restless.App.Panama
             if (ops.IsAnyOperationRequested)
             {
                 Window tools = WindowFactory.CommandTools.Create(ops);
-                CommandToolsWindowViewModel vm = (CommandToolsWindowViewModel)tools.GetValue(WindowViewModel.ViewModelProperty);
-                tools.Show();
-                vm.PerformOperations();
+                if (tools.DataContext is CommandToolsWindowViewModel vm)
+                {
+                    tools.Show();
+                    vm.PerformOperations();
+                }
             }
             else
             {

@@ -424,7 +424,7 @@ namespace Restless.App.Panama.ViewModel
                 Execution.TryCatch(() =>
                 {
                     Properties.Save();
-                }, (ex) => { Owner.MainViewModel.CreateNotificationMessage(ex.Message); });
+                }, (ex) => MainWindowViewModel.Instance.CreateNotificationMessage(ex.Message));
             }
         }
 
@@ -460,7 +460,7 @@ namespace Restless.App.Panama.ViewModel
                     Execution.TryCatch(() =>
                     {
                         Properties = OpenXmlDocument.Reader.GetProperties(fileName);
-                    }, (ex) => { Owner.MainViewModel.CreateNotificationMessage(ex.Message); });
+                    }, (ex) => MainWindowViewModel.Instance.CreateNotificationMessage(ex.Message));
                 }
             }
         }

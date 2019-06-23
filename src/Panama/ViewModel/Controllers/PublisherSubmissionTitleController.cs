@@ -106,7 +106,8 @@ namespace Restless.App.Panama.ViewModel
             if (SelectedRow != null)
             {
                 long titleId = (long)SelectedRow[SubmissionTable.Defs.Columns.TitleId];
-                var ws = Owner.MainViewModel.SwitchToWorkspace<TitleViewModel>();
+
+                var ws = MainWindowViewModel.Instance.SwitchToWorkspace<TitleViewModel>();
                 if (ws != null)
                 {
                     // in case the VM was already open with a filter applied.

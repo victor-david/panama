@@ -5,8 +5,8 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Converters;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
+using Restless.App.Panama.View;
 using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System;
@@ -16,15 +16,14 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Windows.Data;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
-    /// Provides the view model logic for the <see cref="View.MessageFileSelectWindow"/>.
+    /// Provides the view model logic for the <see cref="MessageFileSelectWindow"/>.
     /// </summary>
-    public class MessageFileSelectWindowViewModel : WindowDataGridViewModel<DummyTable>
+    public class MessageFileSelectWindowViewModel : WindowViewModel
     {
         #region Private
         private readonly string folder;
@@ -85,10 +84,8 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageFileSelectWindowViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The window that owns this view model.</param>
         /// <param name="folder">The folder where submission message file are stored.</param>
-        public MessageFileSelectWindowViewModel(Window owner, string folder)
-            :base(owner)
+        public MessageFileSelectWindowViewModel(string folder)
         {
             Validations.ValidateNullEmpty(folder, nameof(folder));
             this.folder = folder;
@@ -109,7 +106,6 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Subject", nameof(MimeKitMessage.Subject));
             Columns.SetDefaultSort(dateCol, ListSortDirection.Descending);
             Commands.Add("Select", RunSelectCommand, (o) => SelectedItem != null);
-            Commands.Add("Cancel", (o) => Owner.Close());
             InitDisplayFilter();
             GetResults();
         }
@@ -191,7 +187,8 @@ namespace Restless.App.Panama.ViewModel
                     SelectedItems.Add(item);
                 }
             }
-            Owner.Close();
+
+            CloseWindowCommand.Execute(null);
         }
         #endregion
     }

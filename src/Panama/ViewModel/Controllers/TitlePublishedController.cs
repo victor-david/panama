@@ -128,9 +128,9 @@ namespace Restless.App.Panama.ViewModel
         #region Private methods
         private void RunAddPublishedCommand(object o)
         {
-            var select = WindowFactory.PublisherSelect.Create(Strings.WindowTitleSelectPublisherForPublished);
-            select.ShowDialog();
-            var vm = select.GetValue(WindowViewModel.ViewModelProperty) as PublisherSelectWindowViewModel;
+            var window = WindowFactory.PublisherSelect.Create(Strings.WindowTitleSelectPublisherForPublished);
+            window.ShowDialog();
+            var vm = window.DataContext as PublisherSelectWindowViewModel;
             if (vm != null)
             {
                 Execution.TryCatch(() =>

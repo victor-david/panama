@@ -15,7 +15,7 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Provides the display and selection logic for the <see cref="View.PublisherSelectWindow"/>.
     /// </summary>
-    public class PublisherSelectWindowViewModel : WindowDataGridViewModel<PublisherTable>
+    public class PublisherSelectWindowViewModel : WindowViewModel<PublisherTable>
     {
         #region Private
         #endregion
@@ -39,9 +39,7 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="PublisherSelectWindowViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The window that owns this view model.</param>
-        public PublisherSelectWindowViewModel(Window owner)
-            :base(owner)
+        public PublisherSelectWindowViewModel()
         {
             Columns.Create("Id", PublishedTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
@@ -81,7 +79,7 @@ namespace Restless.App.Panama.ViewModel
             {
                 SelectedPublisherId = (long)SelectedPrimaryKey;
             }
-            Owner.Close();
+            CloseWindowCommand.Execute(null);
         }
         #endregion
     }

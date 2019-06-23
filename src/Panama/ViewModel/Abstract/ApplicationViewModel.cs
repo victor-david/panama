@@ -4,7 +4,6 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Collections;
 using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
 using System.Collections.Generic;
@@ -19,24 +18,24 @@ namespace Restless.App.Panama.ViewModel
     public abstract class ApplicationViewModel : ViewModelBase
     {
         #region Private Vars
-        private MainWindowViewModel mainViewModel;
+        //private MainWindowViewModel mainViewModel;
         #endregion
 
         /************************************************************************/
 
         #region Public properties
-        /// <summary>
-        /// Gets or sets the owner of this view model. Once set, this property cannot be changed.
-        /// </summary>
-        public MainWindowViewModel MainViewModel
-        {
-            get { return mainViewModel; }
-            set
-            {
-                Validations.ValidateInvalidOperation(mainViewModel != null, "This property may only be set once");
-                mainViewModel = value;
-            }
-        }
+        ///// <summary>
+        ///// Gets or sets the owner of this view model. Once set, this property cannot be changed.
+        ///// </summary>
+        //public MainWindowViewModel MainViewModel
+        //{
+        //    get { return mainViewModel; }
+        //    set
+        //    {
+        //        Validations.ValidateInvalidOperation(mainViewModel != null, "This property may only be set once");
+        //        mainViewModel = value;
+        //    }
+        //}
 
         /// <summary>
         /// Gets the maximum number of workspaces that may be created. -1 means unlimited. The default is 1.
@@ -79,9 +78,9 @@ namespace Restless.App.Panama.ViewModel
         /// Although derived classes can access the singleton instance directly,
         /// this enables easy binding to certain configuration properties
         /// </summary>
-        public Restless.App.Panama.Configuration.Config Config
+        public Configuration.Config Config
         {
-            get => Restless.App.Panama.Configuration.Config.Instance;
+            get => Configuration.Config.Instance;
         }
         #endregion
 
@@ -110,7 +109,7 @@ namespace Restless.App.Panama.ViewModel
             VisualCommands = new List<VisualCommandViewModel>();
             FilterCommands = new List<VisualCommandViewModel>();
 
-            CloseCommand = RelayCommand.Create((o)=>
+            CloseCommand = RelayCommand.Create((p) =>
             {
                 OnClosing(new CancelEventArgs());
             });

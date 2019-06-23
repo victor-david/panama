@@ -175,7 +175,7 @@ namespace Restless.App.Panama.ViewModel
                 Execution.TryCatch(() =>
                 {
                     Clipboard.SetText(SelectedRow[columnName].ToString());
-                    MainViewModel.CreateNotificationMessage(string.Format("{0} copied to clipboard", columnName));
+                    MainWindowViewModel.Instance.CreateNotificationMessage($"{columnName} copied to clipboard");
                 });
             }
         }

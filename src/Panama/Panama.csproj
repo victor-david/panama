@@ -283,12 +283,12 @@
     <Compile Include="ViewModel\Windows\AlertWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\AboutWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\CommandToolsWindowViewModel.cs" />
+    <Compile Include="ViewModel\Windows\IWindowOwner.cs" />
     <Compile Include="ViewModel\Windows\MessageFileSelectWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\TitleVersionRenameWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\MessageSelectWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\SubmissionDocumentCreateType.cs" />
     <Compile Include="ViewModel\Windows\SubmissionDocumentSelectWindowViewModel.cs" />
-    <Compile Include="ViewModel\Windows\WindowDataGridViewModel.cs" />
     <Compile Include="ViewModel\Windows\PublisherSelectWindowViewModel.cs" />
     <Compile Include="ViewModel\ToolMetaUpdateViewModel.cs" />
     <Compile Include="ViewModel\LinkViewModel.cs" />
@@ -439,9 +439,6 @@
     </Compile>
     <Compile Include="View\Windows\SubmissionDocumentSelectWindow.xaml.cs">
       <DependentUpon>SubmissionDocumentSelectWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Windows\WorkspaceWindow.xaml.cs">
-      <DependentUpon>WorkspaceWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\ColorPicker\ColorPicker.xaml">
       <SubType>Designer</SubType>
@@ -783,10 +780,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Windows\SubmissionDocumentSelectWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Windows\WorkspaceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,26 +4,16 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using Restless.Tools.Utility;
+using Restless.App.Panama.View;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
-    /// Provides the selection logic for <see cref="View.SubmissionDocumentSelectWindow"/>. 
+    /// Provides the selection logic for <see cref="SubmissionDocumentSelectWindow"/>. 
     /// Used when the user wants to create a submission document.
     /// </summary>
     public class SubmissionDocumentSelectWindowViewModel : WindowViewModel
     {
-        #region Private
-        #endregion
-
-        /************************************************************************/
-
         #region Public properties
         /// <summary>
         /// Gets the submission document creation type as selected by the user.
@@ -41,37 +31,21 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmissionDocumentSelectWindowViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The window that owns this view model.</param>
-        public SubmissionDocumentSelectWindowViewModel(Window owner)
-            :base(owner)
+        public SubmissionDocumentSelectWindowViewModel()
         {
             CreateType = SubmissionDocumentCreateType.None;
-            Commands.Add("CreateDocx", (o) =>
+            Commands.Add("CreateDocx", (p) =>
                 {
                     CreateType = SubmissionDocumentCreateType.CreateDocX;
-                    CloseCommand.Execute(null);
+                    CloseWindowCommand.Execute(null);
                 });
 
-            Commands.Add("CreatePlaceholder", (o) =>
+            Commands.Add("CreatePlaceholder", (p) =>
             {
                 CreateType = SubmissionDocumentCreateType.CreatePlaceholder;
-                CloseCommand.Execute(null);
+                CloseWindowCommand.Execute(null);
             });
         }
         #endregion
-
-        /// <summary>
-        /// Closes the owner window when the close command is executed
-        /// </summary>
-        /// <param name="e">The event arguments</param>
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            if (!e.Cancel)
-            {
-                Owner.Close();
-            }
-            e.Cancel = true;
-            base.OnClosing(e);
-        }
     }
 }

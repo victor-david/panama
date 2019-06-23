@@ -304,9 +304,9 @@ namespace Restless.App.Panama.ViewModel
                 if (Messages.ShowYesNo(msg))
                 {
                     DatabaseController.Instance.GetTable<SubmissionBatchTable>().CreateSubmission(pubId);
-                    MainViewModel.CreateNotificationMessage(Strings.ResultSubmissionCreated);
-                    MainViewModel.NotifyWorkspaceOnRecordAdded<SubmissionViewModel>();
-                    MainViewModel.SwitchToWorkspace<SubmissionViewModel>();
+                    MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ResultSubmissionCreated);
+                    MainWindowViewModel.Instance.NotifyWorkspaceOnRecordAdded<SubmissionViewModel>();
+                    MainWindowViewModel.Instance.SwitchToWorkspace<SubmissionViewModel>();
                 }
             }
         }
@@ -327,7 +327,7 @@ namespace Restless.App.Panama.ViewModel
             if (SelectedCredential != null && SelectedCredential.Id != 0)
             {
                 Clipboard.SetText(SelectedCredential.Row[columnName].ToString());
-                MainViewModel.CreateNotificationMessage(string.Format("{0} copied to clipboard", columnName));
+                MainWindowViewModel.Instance.CreateNotificationMessage($"{columnName} copied to clipboard");
             }
         }
         #endregion

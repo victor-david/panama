@@ -158,10 +158,10 @@ namespace Restless.App.Panama.ViewModel
                 return;
             }
 
-            var w = WindowFactory.MessageFileSelect.Create(Strings.CaptionSelectSubmissionMessage, folder);
-            w.ShowDialog();
+            var window = WindowFactory.MessageFileSelect.Create(Strings.CaptionSelectSubmissionMessage, folder);
+            window.ShowDialog();
 
-            if (w.GetValue(WindowViewModel.ViewModelProperty) is MessageFileSelectWindowViewModel vm)
+            if (window.DataContext is MessageFileSelectWindowViewModel vm)
             {
                 if (vm.SelectedItems != null && Owner.SelectedPrimaryKey != null)
                 {

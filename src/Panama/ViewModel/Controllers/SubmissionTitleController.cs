@@ -186,7 +186,7 @@ namespace Restless.App.Panama.ViewModel
                         builder.AppendLine(rowv.Row[SubmissionTable.Defs.Columns.Joined.Title].ToString());
                     }
                     System.Windows.Clipboard.SetText(builder.ToString());
-                    Owner.MainViewModel.CreateNotificationMessage(Strings.ConfirmationTitlesCopiedToClipboard);
+                    MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ConfirmationTitlesCopiedToClipboard);
                 });
         }
         #endregion
