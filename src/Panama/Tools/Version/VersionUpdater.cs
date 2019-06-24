@@ -4,7 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.Tools.OpenXml;
@@ -70,7 +70,7 @@ namespace Restless.App.Panama.Tools
                                 // because props.Core.Modified is never equal to verObj.Info.LastWriteTimeUtc.
                                 //
                                 // titleObj.WrittenUtc comes from the database. The DateTime.Kind property is not stored, therefore
-                                // we don't know for sure if it's local or utc. With new entries / changes to Written, we store Utc. 
+                                // we don't know for sure if it's local or utc. With new entries / changes to Written, we store Utc.
                                 if (props.Core.Created != title.Written.ToLocalTime() || props.Core.Modified != ver.Info.LastWriteTime)
                                 {
                                     props.Core.Created = title.Written.ToLocalTime();
@@ -100,7 +100,7 @@ namespace Restless.App.Panama.Tools
                     }
                 }
             }
-            
+
         }
         #endregion
     }

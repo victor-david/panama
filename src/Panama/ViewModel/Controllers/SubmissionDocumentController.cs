@@ -5,8 +5,8 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Converters;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -197,7 +197,7 @@ namespace Restless.App.Panama.ViewModel
                 Execution.TryCatch(() =>
                 {
                     PreviewText = OpenXmlDocument.Reader.GetText(fileName);
-                }, 
+                },
                 (ex) => MainWindowViewModel.Instance.CreateNotificationMessage(ex.Message));
             }
         }

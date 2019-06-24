@@ -65,9 +65,9 @@ namespace Restless.App.Panama.ViewModel
         /// Although derived classes can access the singleton instance directly,
         /// this enables easy binding to certain configuration properties
         /// </summary>
-        public Configuration.Config Config
+        public Core.Config Config
         {
-            get => Configuration.Config.Instance;
+            get => Core.Config.Instance;
         }
         #endregion
 

@@ -4,8 +4,8 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Converters;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -240,7 +240,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("FlaggedFilter", (o) => Filters.SetToFlagged());
             Commands.Add("SubmittedFilter", (o) => Filters.SetToSubmitted());
             Commands.Add("PublishedFilter", (o) => Filters.SetToPublished());
-            Commands.Add("AdvancedFilter", (o) => 
+            Commands.Add("AdvancedFilter", (o) =>
             {
                 isFilterVisible = !isFilterVisible;
                 advFilter.Icon = (isFilterVisible) ? ResourceHelper.Get("ImageChevronUp") : ResourceHelper.Get("ImageChevronDown");

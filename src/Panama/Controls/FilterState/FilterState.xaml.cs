@@ -52,9 +52,9 @@ namespace Restless.App.Panama.Controls
         /// <summary>
         /// Gets or sets the filter state
         /// </summary>
-        public Filter.FilterState State
+        public Core.FilterState State
         {
-            get => (Filter.FilterState)GetValue(StateProperty);
+            get => (Core.FilterState)GetValue(StateProperty);
             set => SetValue(StateProperty, value);
         }
 
@@ -63,8 +63,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty StateProperty = DependencyProperty.Register
             (
-                nameof(State), typeof(Filter.FilterState), typeof(FilterState), 
-                new FrameworkPropertyMetadata(Filter.FilterState.Either, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
+                nameof(State), typeof(Core.FilterState), typeof(FilterState),
+                new FrameworkPropertyMetadata(Core.FilterState.Either, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
             );
 
         /// <summary>

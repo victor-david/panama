@@ -4,18 +4,9 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Restless.Tools.Database.SQLite;
 using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Collections;
-using System.Diagnostics;
-using System.Windows.Input;
-using System.Data;
 using System.Collections.ObjectModel;
+using System.Data;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -64,7 +55,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Public methods
 
         #endregion

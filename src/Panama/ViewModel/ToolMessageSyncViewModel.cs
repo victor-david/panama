@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -123,7 +124,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Private Methods
         private void PerformSync(object o)
         {
@@ -147,7 +148,7 @@ namespace Restless.App.Panama.ViewModel
                         var msg = new MimeKitMessage(fileName);
                         if (!msg.IsError)
                         {
-                            // set the subject. Normally it's already okay, but there's some entries where 
+                            // set the subject. Normally it's already okay, but there's some entries where
                             // it came from an Outlook extraction and the subject was edited.
                             row[SubmissionMessageTable.Defs.Columns.Subject] = msg.Subject;
 

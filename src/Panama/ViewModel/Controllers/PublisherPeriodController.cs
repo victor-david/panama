@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -28,7 +29,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Public properties
         /// <summary>
         /// Gets a visibility value that determines if the add submission period control is visible.
@@ -96,8 +97,7 @@ namespace Restless.App.Panama.ViewModel
         /// Initializes a new instance of the <see cref="PublisherPeriodController"/> class.
         /// </summary>
         /// <param name="owner">The view model that owns this controller.</param>
-        public PublisherPeriodController(PublisherViewModel owner)
-            : base(owner)
+        public PublisherPeriodController(PublisherViewModel owner) : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionPeriodTable>());
             DataView.RowFilter = string.Format("{0}=-1", SubmissionPeriodTable.Defs.Columns.PublisherId);
@@ -106,20 +106,20 @@ namespace Restless.App.Panama.ViewModel
             Columns.Create("Start", SubmissionPeriodTable.Defs.Columns.Start).MakeDate("MMMM dd", toLocal:false);
             Columns.Create("End", SubmissionPeriodTable.Defs.Columns.End).MakeDate("MMMM dd", toLocal:false);
             Columns.Create("Note", SubmissionPeriodTable.Defs.Columns.Notes);
-            Owner.Commands.Add("PeriodAddShow", (o) => 
+            Owner.Commands.Add("PeriodAddShow", (o) =>
                 {
                     SetAddControlVisibility(true);
                     SetNotesVisibility(false);
                 },
                 (o) => { return AddControlVisibility != Visibility.Visible; }
             );
-            Owner.Commands.Add("PeriodRemove", RunRemoveSubmissionPeriodCommand, (o) => 
+            Owner.Commands.Add("PeriodRemove", RunRemoveSubmissionPeriodCommand, (o) =>
                 { return SelectedRow != null && AddControlVisibility != Visibility.Visible; });
             Owner.Commands.Add("PeriodAddConfirm", RunAddSubmissionPeriodCommand);
             Owner.Commands.Add("PeriodAddConfirmAllYear", RunAddSubmissionPeriodAllYearCommand);
 
-            Owner.Commands.Add("PeriodAddCancel", (o) => 
-            { 
+            Owner.Commands.Add("PeriodAddCancel", (o) =>
+            {
                 SetAddControlVisibility(false);
                 SetNotesVisibility(SelectedItem != null);
             });
@@ -162,7 +162,7 @@ namespace Restless.App.Panama.ViewModel
             SetNotesVisibility(SelectedItem != null);
         }
         #endregion
-        
+
         /************************************************************************/
 
         #region Private methods

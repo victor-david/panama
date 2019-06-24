@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Converters;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -30,7 +31,7 @@ namespace Restless.App.Panama.ViewModel
 
         #region Public properties
         /// <summary>
-        /// Gets an operation message that can be bound to the UI. 
+        /// Gets an operation message that can be bound to the UI.
         /// Provides feedback such as "All files are already renamed", "Success. All files successfully renamed", etc.
         /// </summary>
         public string OperationMessage
@@ -43,7 +44,7 @@ namespace Restless.App.Panama.ViewModel
 
         }
         #endregion
-        
+
         /************************************************************************/
 
         #region Constructor
@@ -77,7 +78,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Private methods
         private void PopulateRenameItems(long titleId)
         {

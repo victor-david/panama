@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Core;
 using Restless.App.Panama.View;
 using Restless.Tools.Controls;
 using Restless.Tools.Utility;
@@ -41,7 +42,7 @@ namespace Restless.App.Panama.ViewModel
             get;
             private set;
         }
-        
+
         /// <summary>
         /// Gets the list of items that were selected by the user, or null if nothing selected.
         /// </summary>
@@ -111,7 +112,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Private methods
 
         private void RunSearch(MessageSelectOptions options)

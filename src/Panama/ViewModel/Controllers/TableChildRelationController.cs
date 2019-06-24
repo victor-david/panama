@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.Tools.Controls;
 using System.Data;
@@ -11,7 +12,7 @@ using System.Data;
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
-    /// Represents a controller that 
+    /// Represents a controller that
     /// </summary>
     public class TableChildRelationController : TableRelationController
     {
@@ -19,7 +20,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Public properties
         #endregion
 
@@ -41,7 +42,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Public methods
 
         #endregion

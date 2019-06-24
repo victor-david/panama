@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.ViewModel;
 using Restless.Tools.Utility.Search;

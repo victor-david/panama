@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
-    xmlns:config="clr-namespace:Restless.App.Panama.Configuration"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"

@@ -6,11 +6,12 @@
 */
 using Restless.App.Panama.Controls;
 using Restless.App.Panama.Resources;
+using Restless.Tools.Mvvm.Collections;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using ConfigDefault = Restless.App.Panama.Configuration.Config.Default;
+using ConfigDefault = Restless.App.Panama.Core.Config.Default;
 
 namespace Restless.App.Panama.ViewModel
 {

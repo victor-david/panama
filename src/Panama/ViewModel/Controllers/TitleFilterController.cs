@@ -4,11 +4,9 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Collections;
-using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Filter;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Mvvm;
 using Restless.Tools.Utility;
@@ -38,14 +36,14 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Public properties
         /// <summary>
         /// Gets a short description of the number of records in the data view
         /// </summary>
         public string RecordCountText
         {
-            get { return Format.Plural(Owner.DataView.Count, Strings.TextRecord, Strings.TextRecords); }  
+            get { return Format.Plural(Owner.DataView.Count, Strings.TextRecord, Strings.TextRecords); }
         }
 
         /// <summary>
@@ -53,13 +51,13 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public string Description
         {
-            get 
+            get
             {
                 if (filterDesc.Length == 0)
                 {
                     return "(none)";
                 }
-                return filterDesc.ToString(); 
+                return filterDesc.ToString();
             }
         }
 
@@ -114,7 +112,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Public methods
         /// <summary>
         /// Applies the filter options.

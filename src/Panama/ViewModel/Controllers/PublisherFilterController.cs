@@ -4,9 +4,8 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Filter;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
 using System;
@@ -27,14 +26,14 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Public properties
         /// <summary>
         /// Gets a short description of the number of records in the data view
         /// </summary>
         public string RecordCountText
         {
-            get { return Format.Plural(Owner.DataView.Count, Strings.TextRecord, Strings.TextRecords); }  
+            get { return Format.Plural(Owner.DataView.Count, Strings.TextRecord, Strings.TextRecords); }
         }
 
         /// <summary>
@@ -42,13 +41,13 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public string Description
         {
-            get 
+            get
             {
                 if (filterDesc.Length == 0)
                 {
                     return "(none)";
                 }
-                return filterDesc.ToString(); 
+                return filterDesc.ToString();
             }
         }
 
@@ -75,7 +74,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Public methods
         /// <summary>
         /// Applies the filter options
@@ -184,7 +183,7 @@ namespace Restless.App.Panama.ViewModel
                     string.Format("{0} LIKE '%{1}%'", PublisherTable.Defs.Columns.Name, f.Text.Replace("'", "''")),
                     string.Format("Name contains {0}", f.Text), 2);
             }
-            
+
             if (f.InPeriod != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");

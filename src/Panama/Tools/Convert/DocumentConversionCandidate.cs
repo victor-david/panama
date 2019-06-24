@@ -5,7 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 #if DOCX
-using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.Tools.Mvvm;
@@ -89,7 +89,7 @@ namespace Restless.App.Panama.Tools
         #endregion
 
         /************************************************************************/
-        
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentConversionCandidate"/> class.
@@ -104,7 +104,7 @@ namespace Restless.App.Panama.Tools
         #endregion
 
         /************************************************************************/
-        
+
         #region Public methods
         /// <summary>
         /// Performs the document conversion.
@@ -125,7 +125,7 @@ namespace Restless.App.Panama.Tools
                         DatabaseController.Instance.GetTable<TitleVersionTable>().Save();
                     }
                     Info = Result.ConvertedInfo;
-                }                
+                }
             }
         }
 
@@ -142,7 +142,7 @@ namespace Restless.App.Panama.Tools
         #endregion
 
         /************************************************************************/
-        
+
         #region Private methods
         #endregion
     }
