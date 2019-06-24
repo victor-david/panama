@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Converters;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -50,7 +51,7 @@ namespace Restless.App.Panama.ViewModel
 
             Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("O", SubmissionTable.Defs.Columns.Ordering).MakeCentered().MakeFixedWidth(FixedWidth.Standard).AddToolTip("Ordering");
-                
+
             Columns.CreateImage<IntegerToImageConverter>("S", SubmissionTable.Defs.Columns.Status, "ImageSubStatus").AddToolTip("Submission status of this title");
             Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);
             Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written).MakeDate();
@@ -186,7 +187,7 @@ namespace Restless.App.Panama.ViewModel
                         builder.AppendLine(rowv.Row[SubmissionTable.Defs.Columns.Joined.Title].ToString());
                     }
                     System.Windows.Clipboard.SetText(builder.ToString());
-                    Owner.MainViewModel.CreateNotificationMessage(Strings.ConfirmationTitlesCopiedToClipboard);
+                    MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ConfirmationTitlesCopiedToClipboard);
                 });
         }
         #endregion

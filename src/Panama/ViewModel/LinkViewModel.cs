@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Controls;
@@ -86,7 +87,7 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Called when the framework checks to see if Add command can execute
         /// </summary>
-        /// <returns>This method always returns true.</returns> 
+        /// <returns>This method always returns true.</returns>
         protected override bool CanRunAddCommand()
         {
             return true;
@@ -129,14 +130,14 @@ namespace Restless.App.Panama.ViewModel
         /// <returns>true if the command can execute (row selected and has a url); otherwise, false.</returns>
         protected override bool CanRunOpenRowCommand(object item)
         {
-            return 
+            return
                 base.CanRunOpenRowCommand(item) &&
                 !string.IsNullOrWhiteSpace(SelectedRow[LinkTable.Defs.Columns.Url].ToString());
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Private Methods
 
         private void AddViewSourceSortDescriptions()

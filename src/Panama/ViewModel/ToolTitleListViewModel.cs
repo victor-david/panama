@@ -58,7 +58,7 @@ namespace Restless.App.Panama.ViewModel
             MaxCreatable = 1;
             Creator = new ToolTitleListController(this);
             Creator.Scanner.Completed += ScannerCompleted;
-            Commands.Add("Begin", (o) => { Creator.Run(); });
+            Commands.Add("Begin", (o) => Creator.Run());
             Commands.Add("OpenFile", (o) => { OpenHelper.OpenFile(Creator.TitleListFileName); });
         }
         #endregion
@@ -72,12 +72,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="e">The event arguments</param>
         protected override void OnClosing(CancelEventArgs e)
         {
-            e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
-                {
-                    MainViewModel.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
-                    System.Media.SystemSounds.Beep.Play();
-
-                }, null);
+            SetCancelIfTasksInProgress(e);
             base.OnClosing(e);
             if (!e.Cancel)
             {
@@ -87,7 +82,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Private Methods
         private void ScannerCompleted(object sender, EventArgs e)
         {

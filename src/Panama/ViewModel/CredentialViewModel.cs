@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -43,7 +44,6 @@ namespace Restless.App.Panama.ViewModel
         /************************************************************************/
 
         #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CredentialViewModel"/> class.
         /// </summary>
@@ -157,7 +157,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Private Methods
 
         private void AddViewSourceSortDescriptions()
@@ -175,7 +175,7 @@ namespace Restless.App.Panama.ViewModel
                 Execution.TryCatch(() =>
                 {
                     Clipboard.SetText(SelectedRow[columnName].ToString());
-                    MainViewModel.CreateNotificationMessage(string.Format("{0} copied to clipboard", columnName));
+                    MainWindowViewModel.Instance.CreateNotificationMessage($"{columnName} copied to clipboard");
                 });
             }
         }

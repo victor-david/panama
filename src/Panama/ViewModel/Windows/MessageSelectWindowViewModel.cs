@@ -4,24 +4,26 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database.Tables;
+using Restless.App.Panama.Core;
+using Restless.App.Panama.View;
 using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using Restless.Tools.Utility.Search;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
-    /// Provides the view model logic for the <see cref="View.MessageSelectWindow"/>.
+    /// Provides the view model logic for the <see cref="MessageSelectWindow"/>.
     /// </summary>
-    public class MessageSelectWindowViewModel : WindowDataGridViewModel<DummyTable>
+    [Obsolete("Use MessageFileSelect instead")]
+    public class MessageSelectWindowViewModel : WindowViewModel
     {
         #region Private
         private ObservableCollection<WindowsSearchResult> resultsView;
@@ -40,7 +42,7 @@ namespace Restless.App.Panama.ViewModel
             get;
             private set;
         }
-        
+
         /// <summary>
         /// Gets the list of items that were selected by the user, or null if nothing selected.
         /// </summary>
@@ -62,17 +64,16 @@ namespace Restless.App.Panama.ViewModel
         }
 
         #endregion
-        
+
         /************************************************************************/
 
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageSelectWindowViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The window that owns this view model.</param>
         /// <param name="options">The options that affect how the window is displayed and used.</param>
-        public MessageSelectWindowViewModel(Window owner, MessageSelectOptions options)
-            :base(owner)
+        [Obsolete("Use MessageFileSelect instead", true)]
+        public MessageSelectWindowViewModel(MessageSelectOptions options)
         {
             resultsView = new ObservableCollection<WindowsSearchResult>();
             MainSource.Source = resultsView;
@@ -96,7 +97,7 @@ namespace Restless.App.Panama.ViewModel
             }
 
             Commands.Add("Select", RunSelectCommand, (o) => IsSelectedRowAccessible);
-            Commands.Add("Cancel", (o) => { Owner.Close(); });
+            Commands.Add("Cancel", (o) => WindowOwner.Close());
 
             Commands.Add("OpenItem", RunOpenItemCommand, (o) => IsSelectedRowAccessible);
             FilterPrompt = "need a prompt"; // Strings.FilterPromptPublisher; MAPI/IPM.Note MAPI.Ipm.Note.Read
@@ -111,7 +112,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Private methods
 
         private void RunSearch(MessageSelectOptions options)
@@ -158,7 +159,7 @@ namespace Restless.App.Panama.ViewModel
                     SelectedItems.Add(item);
                 }
             }
-            Owner.Close();
+            CloseWindowCommand.Execute(null);
         }
 
         private void RunOpenItemCommand(object o)

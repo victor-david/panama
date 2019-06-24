@@ -5,8 +5,8 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Converters;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -131,7 +131,7 @@ namespace Restless.App.Panama.ViewModel
             versionColumn = Columns.Create("V", TitleVersionTable.Defs.Columns.Version)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.Standard);
-            
+
             Columns.Create<IntegerToCharConverter>("Rev", TitleVersionTable.Defs.Columns.Revision)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.Standard);
@@ -261,7 +261,7 @@ namespace Restless.App.Panama.ViewModel
         private bool CanRunConvertToVersionCommand(object parm)
         {
             return
-                CanRunVersionCommand() && 
+                CanRunVersionCommand() &&
                 verController.GetRevisionCount(selectedRowObj.Version) > 1;
         }
 
@@ -392,7 +392,7 @@ namespace Restless.App.Panama.ViewModel
                 window.ShowDialog();
             }
         }
-        
+
         private void RunContextMenuOpeningCommand(object args)
         {
             if (SelectedRow != null)
@@ -424,7 +424,7 @@ namespace Restless.App.Panama.ViewModel
                 Execution.TryCatch(() =>
                 {
                     Properties.Save();
-                }, (ex) => { Owner.MainViewModel.CreateNotificationMessage(ex.Message); });
+                }, (ex) => MainWindowViewModel.Instance.CreateNotificationMessage(ex.Message));
             }
         }
 
@@ -460,7 +460,7 @@ namespace Restless.App.Panama.ViewModel
                     Execution.TryCatch(() =>
                     {
                         Properties = OpenXmlDocument.Reader.GetProperties(fileName);
-                    }, (ex) => { Owner.MainViewModel.CreateNotificationMessage(ex.Message); });
+                    }, (ex) => MainWindowViewModel.Instance.CreateNotificationMessage(ex.Message));
                 }
             }
         }

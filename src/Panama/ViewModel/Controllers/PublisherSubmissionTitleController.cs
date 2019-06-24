@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Converters;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.Tools.Controls;
@@ -106,7 +107,8 @@ namespace Restless.App.Panama.ViewModel
             if (SelectedRow != null)
             {
                 long titleId = (long)SelectedRow[SubmissionTable.Defs.Columns.TitleId];
-                var ws = Owner.MainViewModel.SwitchToWorkspace<TitleViewModel>();
+
+                var ws = MainWindowViewModel.Instance.SwitchToWorkspace<TitleViewModel>();
                 if (ws != null)
                 {
                     // in case the VM was already open with a filter applied.

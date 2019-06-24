@@ -4,8 +4,8 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Controls;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -149,18 +149,13 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="e">The event arguments</param>
         protected override void OnClosing(CancelEventArgs e)
         {
-            e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
-            {
-                MainViewModel.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
-                System.Media.SystemSounds.Beep.Play();
-
-            }, null);
+            SetCancelIfTasksInProgress(e);
             base.OnClosing(e);
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Private Methods
         /// <summary>
         /// Scan folders on a background thread and creates the folder statistics.
@@ -206,7 +201,7 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
-        /// Adds the items recursively. 
+        /// Adds the items recursively.
         /// </summary>
         /// <param name="treeItem"></param>
         /// <param name="statItem"></param>

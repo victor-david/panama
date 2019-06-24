@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.Tools.Controls;
@@ -41,8 +42,7 @@ namespace Restless.App.Panama.ViewModel
         /// Initializes a new instance of the <see cref="PublisherSubmissionController"/> class.
         /// </summary>
         /// <param name="owner">The view model that owns this controller.</param>
-        public PublisherSubmissionController(PublisherViewModel owner)
-            : base(owner)
+        public PublisherSubmissionController(PublisherViewModel owner): base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionBatchTable>());
             DataView.RowFilter = string.Format("{0}=-1", SubmissionBatchTable.Defs.Columns.PublisherId);
@@ -76,7 +76,7 @@ namespace Restless.App.Panama.ViewModel
             DataViewCount = DataView.Count;
         }
         #endregion
-        
+
         /************************************************************************/
 
         #region Private methods

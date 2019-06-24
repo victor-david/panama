@@ -4,7 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Collections;
+using Restless.App.Panama.Core;
 using Restless.Tools.Controls;
 using Restless.Tools.Utility;
 using System.Windows.Data;
@@ -85,7 +85,7 @@ namespace Restless.App.Panama.ViewModel
 
         #region Public methods
         /// <summary>
-        /// Sets the selected item by starting a background thread and then dispatching 
+        /// Sets the selected item by starting a background thread and then dispatching
         /// from that thread to perform the set. Funky work around to get the row to
         /// highlight.
         /// </summary>

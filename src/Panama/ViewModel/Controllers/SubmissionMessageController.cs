@@ -4,8 +4,8 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Converters;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -123,7 +123,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         /// <param name="item">The <see cref="DataRowView"/> object of the selected row.</param>
         /// <remarks>
-        /// This method only opens a message if it is a mapi reference or a file system reference. 
+        /// This method only opens a message if it is a mapi reference or a file system reference.
         /// Other messages (older) are stored in the <see cref="SubmissionMessageTable"/> directly.
         /// </remarks>
         protected override void RunOpenRowCommand(object item)
@@ -158,10 +158,10 @@ namespace Restless.App.Panama.ViewModel
                 return;
             }
 
-            var w = WindowFactory.MessageFileSelect.Create(Strings.CaptionSelectSubmissionMessage, folder);
-            w.ShowDialog();
+            var window = WindowFactory.MessageFileSelect.Create(Strings.CaptionSelectSubmissionMessage, folder);
+            window.ShowDialog();
 
-            if (w.GetValue(WindowViewModel.ViewModelProperty) is MessageFileSelectWindowViewModel vm)
+            if (window.DataContext is MessageFileSelectWindowViewModel vm)
             {
                 if (vm.SelectedItems != null && Owner.SelectedPrimaryKey != null)
                 {

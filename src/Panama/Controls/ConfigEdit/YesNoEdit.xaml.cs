@@ -29,7 +29,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty GroupNameProperty = DependencyProperty.Register
             (
-                "GroupName", typeof(string), typeof(YesNoEdit), new PropertyMetadata("Group")
+                nameof(GroupName), typeof(string), typeof(YesNoEdit), new PropertyMetadata("Group")
             );
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register
             (
-                "Header", typeof(string), typeof(YesNoEdit), new PropertyMetadata(null)
+                nameof(Header), typeof(string), typeof(YesNoEdit), new PropertyMetadata(null)
             );
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty IsYesProperty = DependencyProperty.Register
             (
-                "IsYes", typeof(bool), typeof(YesNoEdit), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
+                nameof(IsYes), typeof(bool), typeof(YesNoEdit), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
             );
 
         /// <summary>

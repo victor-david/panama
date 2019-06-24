@@ -4,7 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using System;
@@ -19,11 +19,6 @@ namespace Restless.App.Panama.Tools
     /// </summary>
     public class OrphanFinder : FileScanBase
     {
-        #region Private
-        #endregion
-
-        /************************************************************************/
-
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="OrphanFinder"/> class.
@@ -31,7 +26,15 @@ namespace Restless.App.Panama.Tools
         public OrphanFinder()
         {
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Public properties
+        /// <summary>
+        /// Gets the name of this file scanner tool.
+        /// </summary>
+        public override string ScannerName => "Orphan Finder";
         #endregion
 
         /************************************************************************/
@@ -49,8 +52,8 @@ namespace Restless.App.Panama.Tools
 
             foreach (string dir in Directory.EnumerateDirectories(Config.Instance.FolderTitleRoot, "*", SearchOption.AllDirectories))
             {
-                if (dir != Config.Instance.FolderSubmissionDocument && 
-                    dir != Config.Instance.FolderExport && 
+                if (dir != Config.Instance.FolderSubmissionDocument &&
+                    dir != Config.Instance.FolderExport &&
                     dir != Config.Instance.FolderSubmissionMessage &&
                     dir != Config.Instance.FolderSubmissionMessageAttachment &&
                     !dir.StartsWith(appDir))
@@ -67,7 +70,7 @@ namespace Restless.App.Panama.Tools
                 ScanCount++;
                 int excludeCount = 0;
                 string path = Path.GetDirectoryName(file).ToLower();
-                
+
                 foreach (string ex in exclusions)
                 {
                     if (path.Contains(ex.Trim().ToLower()))

@@ -4,7 +4,6 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,8 +24,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public Color SelectedColor
         {
-            get { return (Color)GetValue(SelectedColorProperty); }
-            set { SetValue(SelectedColorProperty, value); }
+            get => (Color)GetValue(SelectedColorProperty);
+            set => SetValue(SelectedColorProperty, value);
         }
 
         /// <summary>
@@ -34,7 +33,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register
             (
-                nameof(SelectedColor), typeof(Color), typeof(ColorPicker), 
+                nameof(SelectedColor), typeof(Color), typeof(ColorPicker),
                 new FrameworkPropertyMetadata(Colors.Transparent, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedColorPropertyChanged)
             );
 
@@ -43,8 +42,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public ICommand SelectedColorChangedCommand
         {
-            get { return (ICommand)GetValue(SelectedColorChangedCommandProperty); }
-            set { SetValue(SelectedColorChangedCommandProperty, value); }
+            get => (ICommand)GetValue(SelectedColorChangedCommandProperty);
+            set => SetValue(SelectedColorChangedCommandProperty, value);
         }
 
         /// <summary>
@@ -54,15 +53,15 @@ namespace Restless.App.Panama.Controls
             (
                 nameof(SelectedColorChangedCommand), typeof(ICommand), typeof(ColorPicker), new PropertyMetadata(null)
             );
-       
+
 
         /// <summary>
         /// Gets or sets the collection of available colors.
         /// </summary>
         public ObservableCollection<ColorItem> AvailableColors
         {
-            get { return (ObservableCollection<ColorItem>)GetValue(AvailableColorsProperty); }
-            set { SetValue(AvailableColorsProperty, value); }
+            get => (ObservableCollection<ColorItem>)GetValue(AvailableColorsProperty);
+            set => SetValue(AvailableColorsProperty, value);
         }
 
         /// <summary>
@@ -78,8 +77,8 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public ColorSortingMode ColorSortingMode
         {
-            get { return (ColorSortingMode)GetValue(ColorSortingModeProperty); }
-            set { SetValue(ColorSortingModeProperty, value); }
+            get => (ColorSortingMode)GetValue(ColorSortingModeProperty);
+            set => SetValue(ColorSortingModeProperty, value);
         }
 
         /// <summary>
@@ -87,7 +86,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty ColorSortingModeProperty = DependencyProperty.Register
             (
-                nameof(ColorSortingMode), typeof(ColorSortingMode), typeof(ColorPicker), 
+                nameof(ColorSortingMode), typeof(ColorSortingMode), typeof(ColorPicker),
                 new UIPropertyMetadata(ColorSortingMode.Alpha, OnColorSortingModeChanged)
             );
 

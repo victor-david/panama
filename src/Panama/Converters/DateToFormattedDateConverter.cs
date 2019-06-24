@@ -23,12 +23,12 @@ namespace Restless.App.Panama.Converters
         /// <param name="targetType">Not used.</param>
         /// <param name="parameter">Not used.</param>
         /// <param name="culture">Not used.</param>
-        /// <returns>A date formatted string according to the application's <see cref="Configuration.Config.DateFormat"/> property.</returns>
+        /// <returns>A date formatted string according to the application's <see cref="Core.Config.DateFormat"/> property.</returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value is DateTime dt)
             {
-                return dt.ToString(Configuration.Config.Instance.DateFormat);
+                return dt.ToString(Core.Config.Instance.DateFormat);
             }
             return value;
         }

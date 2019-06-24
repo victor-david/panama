@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 #if DOCX
+using Restless.App.Panama.Core;
 using Restless.Tools.Utility;
 using System;
 using System.Collections.ObjectModel;

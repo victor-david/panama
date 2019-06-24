@@ -4,7 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -26,8 +26,8 @@ namespace Restless.App.Panama.Tools
     /// </remarks>
     public class TitleExporter : FileScanBase
     {
-        #region Private Vars
-        private string exportDirectory;
+        #region Private
+        private readonly string exportDirectory;
         private TitleExportTitleList candidates;
         private int updated;
         private int removed;
@@ -44,7 +44,11 @@ namespace Restless.App.Panama.Tools
 
         /************************************************************************/
 
-        #region Public Properties
+        #region Public properties
+        /// <summary>
+        /// Gets the name of this file scanner tool.
+        /// </summary>
+        public override string ScannerName => "Title Exporter";
         #endregion
 
         /************************************************************************/
@@ -102,7 +106,7 @@ namespace Restless.App.Panama.Tools
                             Path.GetExtension(ver.FileName));
                     candidates.Add(new TitleExportCandidate(ver.Version, ver.Revision, title.Title, Paths.Title.WithRoot(ver.FileName), Path.Combine(exportDirectory, exportFileName)));
                 }
-                
+
             }
             TotalCount = candidates.Count;
         }
@@ -144,7 +148,7 @@ namespace Restless.App.Panama.Tools
         private void WriteReadMeFileIf()
         {
             string readMeFile = Path.Combine(exportDirectory, ReadMe);
-            if (updated > 0 || removed > 0 || !File.Exists(readMeFile)) 
+            if (updated > 0 || removed > 0 || !File.Exists(readMeFile))
             {
                 AssemblyInfo a = new AssemblyInfo(AssemblyInfoType.Entry);
                 File.WriteAllText(readMeFile, string.Format(Strings.FormatTextExport, a.Title, DateTime.UtcNow.ToString("R")));

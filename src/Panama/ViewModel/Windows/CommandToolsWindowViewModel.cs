@@ -4,15 +4,15 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Tools;
 using Restless.Tools.Utility;
 using System;
-using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
-    /// Provides the operation logic for <see cref="View.CommandToolsWindow"/>. 
+    /// Provides the operation logic for <see cref="View.CommandToolsWindow"/>.
     /// </summary>
     public class CommandToolsWindowViewModel : WindowViewModel
     {
@@ -45,21 +45,18 @@ namespace Restless.App.Panama.ViewModel
             }
         }
         #endregion
-        
+
         /************************************************************************/
 
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandToolsWindowViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The owner of this view model.</param>
         /// <param name="ops">The starup options that describe which operations to perform.</param>
-        public CommandToolsWindowViewModel(Window owner, StartupOptions ops)
-            :base(owner)
+        public CommandToolsWindowViewModel(StartupOptions ops)
         {
             this.ops = ops;
             DisplayName = string.Format("{0} {1} Command Tools", ApplicationInfo.Instance.Assembly.Title, ApplicationInfo.Instance.Assembly.VersionMajor);
-            Commands.Add("Close", (o) => { Owner.Close(); });
             Status = string.Empty;
             AddToStatus("Performing requested operations", true);
             IsCompleted = false;

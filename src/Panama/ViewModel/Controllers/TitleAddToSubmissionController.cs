@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Converters;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -18,7 +19,7 @@ namespace Restless.App.Panama.ViewModel
     /// Provides a controller that handles adding a title to an existing submission.
     /// </summary>
     /// <remarks>
-    /// This controller displays submissions that are available for adding a title. 
+    /// This controller displays submissions that are available for adding a title.
     /// To be available, a submission must not yet have a response date and must be unlocked.
     /// </remarks>
     public class TitleAddToSubmissionController : TitleController
@@ -28,7 +29,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Public properties
         /// <summary>
         /// Gets a boolean value that indicates if the portion of the UI bound to this property is visible.
@@ -65,7 +66,7 @@ namespace Restless.App.Panama.ViewModel
 
             Columns.Create("Publisher", SubmissionBatchTable.Defs.Columns.Joined.Publisher);
 
-            Owner.Commands.Add("AddTitleToSubmission", (o) => 
+            Owner.Commands.Add("AddTitleToSubmission", (o) =>
             {
                 Visible = true;
             });
@@ -79,9 +80,9 @@ namespace Restless.App.Panama.ViewModel
                 {
                     DatabaseController.Instance.GetTable<SubmissionTable>().AddSubmission(batchId, titleId);
                 }
-            }, (o) => 
-            { 
-                return SelectedRow != null; 
+            }, (o) =>
+            {
+                return SelectedRow != null;
             });
 
             Owner.Commands.Add("AddTitleToSubmissionCancel", (o) =>
@@ -107,7 +108,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            Visible = false; 
+            Visible = false;
         }
         #endregion
 

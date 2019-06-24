@@ -4,18 +4,18 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Controls;
 using System.ComponentModel;
-using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
     /// Provides the display and selection logic for the <see cref="View.PublisherSelectWindow"/>.
     /// </summary>
-    public class PublisherSelectWindowViewModel : WindowDataGridViewModel<PublisherTable>
+    public class PublisherSelectWindowViewModel : WindowViewModel<PublisherTable>
     {
         #region Private
         #endregion
@@ -32,16 +32,14 @@ namespace Restless.App.Panama.ViewModel
             private set;
         }
         #endregion
-        
+
         /************************************************************************/
 
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="PublisherSelectWindowViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The window that owns this view model.</param>
-        public PublisherSelectWindowViewModel(Window owner)
-            :base(owner)
+        public PublisherSelectWindowViewModel()
         {
             Columns.Create("Id", PublishedTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
@@ -73,7 +71,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Private methods
         private void RunSelectCommand(object o)
         {
@@ -81,7 +79,7 @@ namespace Restless.App.Panama.ViewModel
             {
                 SelectedPublisherId = (long)SelectedPrimaryKey;
             }
-            Owner.Close();
+            CloseWindowCommand.Execute(null);
         }
         #endregion
     }

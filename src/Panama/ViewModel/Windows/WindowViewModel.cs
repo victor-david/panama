@@ -4,63 +4,67 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Utility;
+using Restless.App.Panama.Core;
+using Restless.App.Panama.Database.Tables;
+using Restless.Tools.Database.SQLite;
+using Restless.Tools.Mvvm;
+using System;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Restless.App.Panama.ViewModel
 {
     /// <summary>
-    /// Represents the base view model that is associated with a Window. This class must be inherited.
+    /// Represents the base view model that is associated with a window that uses a dummy table.
+    /// This class must be inherited.
     /// </summary>
-    public abstract class WindowViewModel : ApplicationViewModel
+    public abstract class WindowViewModel : WindowViewModel<DummyTable>
     {
-        #region Public properties
-        /// <summary>
-        /// Gets the window that owns this view model
-        /// </summary>
-        protected new Window Owner
-        {
-            get;
-            private set;
-        }
+    }
+
+    /// <summary>
+    /// Represents the base view model that is associated with a window.
+    /// This class must be inherited.
+    /// </summary>
+    public abstract class WindowViewModel<T> : DataGridViewModel<T>, IWindowOwner where T : TableBase
+    {
+        #region Private
+        private System.Windows.Window windowOwner;
         #endregion
 
         /************************************************************************/
 
-        #region Static dependency property declarations
+        #region Public properties
         /// <summary>
-        /// Declares an attached dependency property that enables an object
-        /// that derives from <see cref="ApplicationViewModel"/> to be associated with the window.
+        /// Gets or sets the window that owns this view model
         /// </summary>
-        /// <AttachedPropertyComments>
-        /// <summary>
-        /// This attached property provides access to the view model that is associated with the window.
-        /// </summary>
-        /// </AttachedPropertyComments>
-        public static readonly DependencyProperty ViewModelProperty =
-            DependencyProperty.RegisterAttached
-            (
-                "ViewModel", typeof(ApplicationViewModel), typeof(WindowViewModel)
-            );
-
-        /// <summary>
-        /// Gets the <see cref="ViewModelProperty"/> for the specified element.
-        /// </summary>
-        /// <param name="obj">The dependency object to get the property for.</param>
-        /// <returns>The attached property, or null if none.</returns>
-        public static ApplicationViewModel GetViewModel(DependencyObject obj)
+        public Window WindowOwner
         {
-            return (ApplicationViewModel)obj.GetValue(ViewModelProperty);
+            get => windowOwner;
+            set
+            {
+                if (windowOwner != null) throw new InvalidOperationException($"{nameof(WindowOwner)} already set");
+                windowOwner = value ?? throw new ArgumentNullException(nameof(WindowOwner));
+                windowOwner.Closing += WindowOwnerClosing;
+                windowOwner.Closed += WindowOwnerClosed;
+            }
         }
 
         /// <summary>
-        /// Sets the <see cref="ViewModelProperty"/> on the specified element.
+        /// Gets a command that closes <see cref="WindowOwner"/>.
         /// </summary>
-        /// <param name="obj">The dependency object to set the property on.</param>
-        /// <param name="value">The property to set.</param>
-        public static void SetViewModel(DependencyObject obj, ApplicationViewModel value)
+        public ICommand CloseWindowCommand
         {
-            obj.SetValue(ViewModelProperty, value);
+            get;
+        }
+
+        /// <summary>
+        /// Gets the application information object.
+        /// </summary>
+        public ApplicationInfo AppInfo
+        {
+            get;
         }
         #endregion
 
@@ -70,13 +74,47 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The window that owns this instance.</param>
-        public WindowViewModel(Window owner) : base(null)
+        public WindowViewModel() : base(null)
         {
-            Validations.ValidateNull(owner, "Owner");
-            Owner = owner;
-            Owner.DataContext = this;
-            Owner.SetValue(ViewModelProperty, this);
+            AppInfo = ApplicationInfo.Instance;
+            CloseWindowCommand = RelayCommand.Create((p) => windowOwner?.Close());
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Protected methods
+        /// <summary>
+        /// A derived class can override this method to provide
+        /// custom logic when <see cref="WindowOwner"/> is closing.
+        /// The base implementation does nothing.
+        /// </summary>
+        /// <param name="e">The event args</param>
+        protected virtual void OnWindowClosing(CancelEventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// A derived class can override this method to provide
+        /// custom logic when <see cref="WindowOwner"/> has closed.
+        /// The base implementation does nothing.
+        /// </summary>
+        protected virtual void OnWindowClosed()
+        {
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+        private void WindowOwnerClosed(object sender, EventArgs e)
+        {
+            OnWindowClosed();
+        }
+
+        private void WindowOwnerClosing(object sender, CancelEventArgs e)
+        {
+            OnWindowClosing(e);
         }
         #endregion
     }

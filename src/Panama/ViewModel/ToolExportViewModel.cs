@@ -59,18 +59,13 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="e">The event arguments</param>
         protected override void OnClosing(CancelEventArgs e)
         {
-            e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
-                {
-                    MainViewModel.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
-                    System.Media.SystemSounds.Beep.Play();
-
-                }, null);
+            SetCancelIfTasksInProgress(e);
             base.OnClosing(e);
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Private Methods
         #endregion
     }

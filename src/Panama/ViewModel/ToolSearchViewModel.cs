@@ -4,8 +4,8 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Configuration;
 using Restless.App.Panama.Converters;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -185,7 +185,7 @@ namespace Restless.App.Panama.ViewModel
             }
         }
         #endregion
-        
+
         /************************************************************************/
 
         #region Private Methods
@@ -230,7 +230,7 @@ namespace Restless.App.Panama.ViewModel
             {
                 if (row.Extended is ExtendedSearchResult extended && extended.IsVersion)
                 {
-                    var ws = MainViewModel.SwitchToWorkspace<TitleViewModel>();
+                    var ws = MainWindowViewModel.Instance.SwitchToWorkspace<TitleViewModel>();
                     if (ws != null)
                     {
                         // in case the VM was already open with a filter applied.

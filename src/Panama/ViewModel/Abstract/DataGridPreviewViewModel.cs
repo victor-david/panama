@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Core;
 using Restless.Tools.Utility;
 using System.Windows.Media.Imaging;
 
@@ -53,7 +54,7 @@ namespace Restless.App.Panama.ViewModel
                     OnIsPreviewActiveChanged();
                     PerformPreviewIf();
                 }
-            
+
             }
         }
 
@@ -117,7 +118,7 @@ namespace Restless.App.Panama.ViewModel
         {
             IsPreviewActive = false;
             PreviewMode = PreviewMode.None;
-            Commands.Add("TogglePreview", (o) => 
+            Commands.Add("TogglePreview", (o) =>
             {
                 IsPreviewActive = !IsPreviewActive;
             });
@@ -188,7 +189,7 @@ namespace Restless.App.Panama.ViewModel
 
         /// <summary>
         /// Override in a derived class to get the preview mode for the specified item.
-        /// The base class returns PreviewMode.None; 
+        /// The base class returns PreviewMode.None;
         /// </summary>
         /// <param name="selectedItem">The selected grid item</param>
         /// <returns>The preview mode</returns>

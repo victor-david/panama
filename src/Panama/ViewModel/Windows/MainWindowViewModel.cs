@@ -4,7 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Utility;
@@ -41,14 +41,6 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets the application information object.
-        /// </summary>
-        public ApplicationInfo AppInfo
-        {
-            get;
-        }
-
-        /// <summary>
         /// Gets a notification message
         /// </summary>
         public string NotificationMessage
@@ -57,7 +49,7 @@ namespace Restless.App.Panama.ViewModel
             private set
             {
                 SetProperty(ref notificationMessage, value);
-                // Set backing store to null. Fixes a small problem where the same message 
+                // Set backing store to null. Fixes a small problem where the same message
                 // won't display twice in a row because the property hasn't changed.
                 notificationMessage = null;
                 System.Media.SystemSounds.Asterisk.Play();
@@ -67,18 +59,21 @@ namespace Restless.App.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Constructor
+        #region Singleton access and constructors
+        /// <summary>
+        /// Gets the singleton instance of this class.
+        /// </summary>
+        public static MainWindowViewModel Instance { get; } = new MainWindowViewModel();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The window object that wons this VM.</param>
-        public MainWindowViewModel(Window owner)
-            :base(owner)
+        private MainWindowViewModel()
         {
-            Owner.Closing += new CancelEventHandler(MainWindowClosing);
+            //Owner.Closing += new CancelEventHandler(MainWindowClosing);
             Commands.Add("About", OpenAbout);
             Commands.Add("Author", (o) => CreateIf<AuthorViewModel>());
-            Commands.Add("Close", CloseMainWindow);
+            Commands.Add("Close", (p) => WindowOwner.Close());
             Commands.Add("CloseAll", CloseAllWorkspaces, CloseAllWorkspacesCanExecute);
             Commands.Add("Config", (o) => CreateIf<ConfigViewModel>());
             Commands.Add("Credential", (o) => CreateIf<CredentialViewModel>());
@@ -106,11 +101,10 @@ namespace Restless.App.Panama.ViewModel
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandTitle, Strings.CommandTitleTooltip, Commands["Title"], ResourceHelper.Get("ImageTitle")));
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandPublisher, Strings.CommandPublisherTooltip, Commands["Publisher"], ResourceHelper.Get("ImagePublisher")));
             VisualCommands.Add(new VisualCommandViewModel(Strings.CommandSubmission, Strings.CommandSubmissionTooltip, Commands["Submission"], ResourceHelper.Get("ImageSubmission")));
-                
+
             Workspaces = new ObservableCollection<ApplicationViewModel>();
             Workspaces.CollectionChanged += OnWorkspacesChanged;
-            AppInfo = ApplicationInfo.Instance;
-            // 
+            //
             DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor}";
 #if DEBUG
             DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor} (DEBUG)";
@@ -119,7 +113,7 @@ namespace Restless.App.Panama.ViewModel
         #endregion
 
         /************************************************************************/
-        
+
         #region Public methods
         /// <summary>
         /// Creates a notification message that displays on the main status bar
@@ -152,7 +146,7 @@ namespace Restless.App.Panama.ViewModel
             // The reason we don't use CreateIf<T>() directly (which would work)
             // is to avoid the possibility that a VM allows more than one instance.
             // We want to go the first one. If there isn't a first one, we'll create.
-             
+
             var ws = GetFirstWorkspace<T>();
             if (ws != null)
             {
@@ -175,6 +169,30 @@ namespace Restless.App.Panama.ViewModel
 
         /************************************************************************/
 
+        #region Protected methods
+        /// <summary>
+        /// Called when the window is closing.
+        /// </summary>
+        /// <param name="e">Event args.</param>
+        protected override void OnWindowClosing(CancelEventArgs e)
+        {
+            SetCancelIfTasksInProgress(e);
+
+            if (!e.Cancel)
+            {
+
+                Config.Instance.MainWindowWidth = (int)WindowOwner.Width;
+                Config.Instance.MainWindowHeight = (int)WindowOwner.Height;
+                if (WindowOwner.WindowState != WindowState.Minimized)
+                {
+                    Config.Instance.MainWindowState = WindowOwner.WindowState;
+                }
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region Private methods (VM creation / management)
 
         private void Create<T>() where T : ApplicationViewModel
@@ -182,7 +200,7 @@ namespace Restless.App.Panama.ViewModel
             Execution.TryCatch(() =>
                 {
                     ApplicationViewModel vm = (T)Activator.CreateInstance(typeof(T), this);
-                    vm.MainViewModel = this;
+                    //vm.MainViewModel = this;
                     Workspaces.Add(vm);
                     SetActiveWorkspace(vm);
                 });
@@ -295,11 +313,6 @@ namespace Restless.App.Panama.ViewModel
             about.ShowDialog();
         }
 
-        private void CloseMainWindow(object o)
-        {
-            Owner.Close();
-        }
-
         private void Save(object o)
         {
             Config.Instance.SaveFilterObjects();
@@ -307,33 +320,13 @@ namespace Restless.App.Panama.ViewModel
             NotificationMessage = "All data successfully saved to the database";
         }
 
-        private void MainWindowClosing(object sender, CancelEventArgs e)
-        {
-            e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
-                {
-                    NotificationMessage = Strings.NotificationCannotExitTasksAreRunning;
-                    System.Media.SystemSounds.Beep.Play();
-                }, null);
-
-            if (!e.Cancel)
-            {
-
-                Config.Instance.MainWindowWidth = (int)Owner.Width;
-                Config.Instance.MainWindowHeight = (int)Owner.Height;
-                if (Owner.WindowState != WindowState.Minimized)
-                {
-                    Config.Instance.MainWindowState = Owner.WindowState;
-                }
-            }
-        }
-
         private void RunResetWindowCommand(object o)
         {
-            Owner.Width = Config.Default.MainWindow.Width;
-            Owner.Height = Config.Default.MainWindow.Height;
-            Owner.Top = (SystemParameters.WorkArea.Height / 2) - (Owner.Height / 2);
-            Owner.Left = (SystemParameters.WorkArea.Width / 2) - (Owner.Width / 2);
-            Owner.WindowState = WindowState.Normal;
+            WindowOwner.Width = Config.Default.MainWindow.Width;
+            WindowOwner.Height = Config.Default.MainWindow.Height;
+            WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
+            WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
+            WindowOwner.WindowState = WindowState.Normal;
         }
 
         private bool CanRunToolConvertCommand(object o)

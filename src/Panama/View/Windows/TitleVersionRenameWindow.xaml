@@ -22,7 +22,7 @@
             con:DataGridColumns.Columns="{Binding Columns}"/>
         <StackPanel Grid.Column="0" Grid.Row="1" Style="{StaticResource StackPanelCommandHolder}">
             <Button Command="{Binding Commands[Rename]}">Rename</Button>
-            <Button Command="{Binding Commands[Close]}">Close</Button>
+            <Button Command="{Binding CloseWindowCommand}">Close</Button>
             <TextBlock Style="{StaticResource TextBlockError}" VerticalAlignment="Center" Text="{Binding OperationMessage}"/>
         </StackPanel>
         

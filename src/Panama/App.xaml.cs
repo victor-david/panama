@@ -4,7 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Configuration;
+using Restless.App.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
@@ -26,7 +26,7 @@ namespace Restless.App.Panama
         /// </summary>
         /// <param name="e">The starup event args.</param>
         /// <remarks>
-        /// This method sets up the database and creates the main application window. 
+        /// This method sets up the database and creates the main application window.
         /// </remarks>
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -77,9 +77,11 @@ namespace Restless.App.Panama
             if (ops.IsAnyOperationRequested)
             {
                 Window tools = WindowFactory.CommandTools.Create(ops);
-                CommandToolsWindowViewModel vm = (CommandToolsWindowViewModel)tools.GetValue(WindowViewModel.ViewModelProperty);
-                tools.Show();
-                vm.PerformOperations();
+                if (tools.DataContext is CommandToolsWindowViewModel vm)
+                {
+                    tools.Show();
+                    vm.PerformOperations();
+                }
             }
             else
             {

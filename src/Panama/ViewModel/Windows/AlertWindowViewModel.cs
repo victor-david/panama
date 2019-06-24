@@ -4,7 +4,6 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Collections;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.Tools.Controls;
@@ -12,7 +11,6 @@ using Restless.Tools.Utility;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -50,21 +48,21 @@ namespace Restless.App.Panama.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets the data grid columns.
-        /// </summary>
-        public DataGridColumnCollection Columns
-        {
-            get;
-        }
+        ///// <summary>
+        ///// Gets the data grid columns.
+        ///// </summary>
+        //public DataGridColumnCollection Columns
+        //{
+        //    get;
+        //}
 
-        /// <summary>
-        /// Gets the collection of menu items. The view binds to this collection so that VMs can manipulate menu items programatically
-        /// </summary>
-        public MenuItemCollection MenuItems
-        {
-            get;
-        }
+        ///// <summary>
+        ///// Gets the collection of menu items. The view binds to this collection so that VMs can manipulate menu items programatically
+        ///// </summary>
+        //public MenuItemCollection MenuItems
+        //{
+        //    get;
+        //}
         #endregion
 
         /************************************************************************/
@@ -73,13 +71,11 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="AlertWindowViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The window that owns this view model.</param>
         /// <param name="alerts">The alerts</param>
-        public AlertWindowViewModel(Window owner, ObservableCollection<AlertTable.RowObject> alerts)
-            :base(owner)
+        public AlertWindowViewModel(ObservableCollection<AlertTable.RowObject> alerts)
         {
             Alerts = alerts ?? throw new ArgumentNullException(nameof(alerts));
-            Columns = new DataGridColumnCollection();
+            //Columns = new DataGridColumnCollection();
             var col = Columns.Create("Date", nameof(AlertTable.RowObject.Date)).MakeDate();
             Columns.SetDefaultSort(col, ListSortDirection.Ascending);
             Columns.Create("Title", nameof(AlertTable.RowObject.Title));
@@ -93,7 +89,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("Postpone10", Postpone10, IsAlertSelected);
             Commands.Add("Dismiss", Dismiss, IsAlertSelected);
 
-            MenuItems = new MenuItemCollection();
+            //MenuItems = new MenuItemCollection();
             MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, Commands["OpenUrl"]).AddImageResource("ImageBrowseToUrlMenu");
         }
         #endregion

@@ -144,13 +144,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Collections\TagCommandViewModelCollection.cs" />
-    <Compile Include="Collections\DataRowCacheDictionary.cs" />
-    <Compile Include="Config\Config.cs">
+    <Compile Include="Core\Collections\TagCommandViewModelCollection.cs" />
+    <Compile Include="Core\Collections\DataRowCacheDictionary.cs" />
+    <Compile Include="Core\Config\Config.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Config\ConfigColor.cs" />
-    <Compile Include="Config\ConfigColors.cs" />
+    <Compile Include="Core\Config\ConfigColor.cs" />
+    <Compile Include="Core\Config\ConfigColors.cs" />
     <Compile Include="Controls\ColorPicker\ColorItem.cs" />
     <Compile Include="Controls\ColorPicker\ColorSorter.cs" />
     <Compile Include="Controls\ColorPicker\ColorSortingMode.cs" />
@@ -180,35 +180,33 @@
     <Compile Include="Converters\BooleanToVisibilityMultiConverterOptions.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverterOptions.cs" />
     <Compile Include="Converters\StringToMaskedStringConverter.cs" />
-    <Compile Include="Filter\FilterBase.cs" />
-    <Compile Include="Filter\PublisherFilter.cs" />
-    <Compile Include="Filter\FilterState.cs" />
-    <Compile Include="Config\SubmissionDocumentOptions.cs" />
-    <Compile Include="Config\Paths.cs">
+    <Compile Include="Core\Filter\FilterBase.cs" />
+    <Compile Include="Core\Filter\PublisherFilter.cs" />
+    <Compile Include="Core\Filter\FilterState.cs" />
+    <Compile Include="Core\Config\SubmissionDocumentOptions.cs" />
+    <Compile Include="Core\Config\Paths.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Filter\TagFilterCombine.cs" />
-    <Compile Include="Filter\TitleFilter.cs" />
+    <Compile Include="Core\Filter\TagFilterCombine.cs" />
+    <Compile Include="Core\Filter\TitleFilter.cs" />
     <Compile Include="Converters\BooleanToBooleanMultiConverter.cs" />
     <Compile Include="Converters\BooleanToIntegerConverter.cs" />
     <Compile Include="Converters\BooleanToSelectionModeConverter.cs" />
     <Compile Include="Converters\DateToFormattedDateConverter.cs" />
     <Compile Include="Converters\StringToCleanStringOptions.cs" />
     <Compile Include="Converters\SubtractionConverter.cs" />
-    <Compile Include="Other\ApplicationInfo.cs" />
-    <Compile Include="Other\GeneralOption.cs" />
-    <Compile Include="Other\MimeKitMessage.cs" />
-    <Compile Include="Other\PreviewMode.cs" />
-    <Compile Include="Other\TitleVersionRenameItem.cs" />
-    <Compile Include="Other\DocumentPreviewer.cs" />
-    <Compile Include="Other\CommonDialogFactory.cs" />
-    <Compile Include="Config\RegistrySettings.cs" />
-    <Compile Include="Other\MessageSelectMode.cs" />
-    <Compile Include="Other\FixedWidth.cs" />
-    <Compile Include="Other\MessageSelectOptions.cs" />
-    <Compile Include="Other\TitleVersionRenameItemCollection.cs" />
-    <Compile Include="Other\WindowFactory.cs" />
-    <Compile Include="Startup\StartupOptions.cs" />
+    <Compile Include="Core\Other\ApplicationInfo.cs" />
+    <Compile Include="Core\Other\MimeKitMessage.cs" />
+    <Compile Include="Core\Other\PreviewMode.cs" />
+    <Compile Include="Core\Collections\TitleVersionRenameItem.cs" />
+    <Compile Include="Core\Other\DocumentPreviewer.cs" />
+    <Compile Include="Core\Windows\CommonDialogFactory.cs" />
+    <Compile Include="Core\Other\MessageSelectMode.cs" />
+    <Compile Include="Core\Other\FixedWidth.cs" />
+    <Compile Include="Core\Other\MessageSelectOptions.cs" />
+    <Compile Include="Core\Collections\TitleVersionRenameItemCollection.cs" />
+    <Compile Include="Core\Windows\WindowFactory.cs" />
+    <Compile Include="Core\Other\StartupOptions.cs" />
     <Compile Include="Tools\Convert\ConversionCompletedEventArgs.cs" />
     <Compile Include="Tools\Convert\DocumentConverter.cs" />
     <Compile Include="Tools\Convert\DocumentConversionCandidate.cs" />
@@ -245,9 +243,8 @@
     <Compile Include="Converters\IntegerToImageConverter.cs" />
     <Compile Include="Converters\StringToCleanStringConverter.cs" />
     <Compile Include="Converters\BooleanToImageConverter.cs" />
-    <Compile Include="Other\TagCache.cs" />
-    <Compile Include="Other\TagCacheDictionary.cs" />
-    <Compile Include="Other\TitleStyleSelector.cs" />
+    <Compile Include="Core\Collections\TagCache.cs" />
+    <Compile Include="Core\Collections\TagCacheDictionary.cs" />
     <Compile Include="Resources\ResourceHelper.cs" />
     <Compile Include="ViewModel\AuthorViewModel.cs" />
     <Compile Include="ViewModel\Controllers\ControllerBase.cs" />
@@ -283,12 +280,12 @@
     <Compile Include="ViewModel\Windows\AlertWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\AboutWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\CommandToolsWindowViewModel.cs" />
+    <Compile Include="ViewModel\Windows\IWindowOwner.cs" />
     <Compile Include="ViewModel\Windows\MessageFileSelectWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\TitleVersionRenameWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\MessageSelectWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\SubmissionDocumentCreateType.cs" />
     <Compile Include="ViewModel\Windows\SubmissionDocumentSelectWindowViewModel.cs" />
-    <Compile Include="ViewModel\Windows\WindowDataGridViewModel.cs" />
     <Compile Include="ViewModel\Windows\PublisherSelectWindowViewModel.cs" />
     <Compile Include="ViewModel\ToolMetaUpdateViewModel.cs" />
     <Compile Include="ViewModel\LinkViewModel.cs" />
@@ -439,9 +436,6 @@
     </Compile>
     <Compile Include="View\Windows\SubmissionDocumentSelectWindow.xaml.cs">
       <DependentUpon>SubmissionDocumentSelectWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Windows\WorkspaceWindow.xaml.cs">
-      <DependentUpon>WorkspaceWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\ColorPicker\ColorPicker.xaml">
       <SubType>Designer</SubType>
@@ -756,7 +750,7 @@
     </Compile>
     <Compile Include="Converters\BooleanToTextWrappingConverter.cs" />
     <Compile Include="Converters\StringToDateConverter.cs" />
-    <Compile Include="Other\AppTaskId.cs" />
+    <Compile Include="Core\Other\AppTaskId.cs" />
     <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
     <Compile Include="ViewModel\VisualCommandViewModel.cs" />
     <Compile Include="ViewModel\Abstract\DataGridViewModel.cs" />
@@ -783,10 +777,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Windows\SubmissionDocumentSelectWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Windows\WorkspaceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -976,6 +966,7 @@
       <Name>Panama.Database</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

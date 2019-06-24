@@ -4,22 +4,12 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Diagnostics;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 
 namespace Restless.App.Panama.Controls
 {
@@ -49,7 +39,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty ColumnsProperty = DependencyProperty.Register
             (
-                "Columns", typeof(int), typeof(GridRowDisplay), new UIPropertyMetadata(0, ColumnChanged, CoerceColumnValue)
+                nameof(Columns), typeof(int), typeof(GridRowDisplay), new UIPropertyMetadata(0, ColumnChanged, CoerceColumnValue)
             );
 
         /// <summary>
@@ -66,7 +56,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register
             (
-                "Header", typeof(string), typeof(GridRowDisplay), new UIPropertyMetadata(null)
+                nameof(Header), typeof(string), typeof(GridRowDisplay), new UIPropertyMetadata(null)
             );
         
         /// <summary>
@@ -83,7 +73,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty HeaderWidthProperty = DependencyProperty.Register
             (
-                "HeaderWidth", typeof(double), typeof(GridRowDisplay), new UIPropertyMetadata(120.0)
+                nameof(HeaderWidth), typeof(double), typeof(GridRowDisplay), new UIPropertyMetadata(120.0)
             );
 
         /// <summary>
@@ -100,7 +90,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty HeaderForegroundProperty = DependencyProperty.Register
             (
-                "HeaderForeground", typeof(Brush), typeof(GridRowDisplay), new UIPropertyMetadata(new SolidColorBrush(Colors.Black))
+                nameof(HeaderForeground), typeof(Brush), typeof(GridRowDisplay), new UIPropertyMetadata(new SolidColorBrush(Colors.Black))
             );
 
         /// <summary>
@@ -117,7 +107,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty HeaderFontSizeProperty = DependencyProperty.Register
             (
-                "HeaderFontSize", typeof(double), typeof(GridRowDisplay), new UIPropertyMetadata(11.0)
+                nameof(HeaderFontSize), typeof(double), typeof(GridRowDisplay), new UIPropertyMetadata(11.0)
             );
 
         /// <summary>
@@ -134,7 +124,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty ValueWidthProperty = DependencyProperty.Register
             (
-                "ValueWidth", typeof(double), typeof(GridRowDisplay), new UIPropertyMetadata(48.0, ValueWidthChanged)
+                nameof(ValueWidth), typeof(double), typeof(GridRowDisplay), new UIPropertyMetadata(48.0, ValueWidthChanged)
             );
 
         /// <summary>
@@ -151,7 +141,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty ValueForegroundProperty = DependencyProperty.Register
             (
-                "ValueForeground", typeof(Brush), typeof(GridRowDisplay), new UIPropertyMetadata(new SolidColorBrush(Colors.Blue))
+                nameof(ValueForeground), typeof(Brush), typeof(GridRowDisplay), new UIPropertyMetadata(new SolidColorBrush(Colors.Blue))
             );
 
         /// <summary>
@@ -168,7 +158,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty ValueFontSizeProperty = DependencyProperty.Register
             (
-                "ValueFontSize", typeof(double), typeof(GridRowDisplay), new UIPropertyMetadata(11.0)
+                nameof(ValueFontSize), typeof(double), typeof(GridRowDisplay), new UIPropertyMetadata(11.0)
             );
 
         /// <summary>
@@ -184,7 +174,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         private static readonly DependencyPropertyKey ValuesKey = DependencyProperty.RegisterReadOnly
             (
-                "Values", typeof(ObservableCollection<object>), typeof(GridRowDisplay), new PropertyMetadata()
+                nameof(Values), typeof(ObservableCollection<object>), typeof(GridRowDisplay), new PropertyMetadata()
             );
 
         /// <summary>
@@ -206,7 +196,7 @@ namespace Restless.App.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register
             (
-                "Value", typeof(object), typeof(GridRowDisplay), new UIPropertyMetadata(null, ValueChanged)
+                nameof(Value), typeof(object), typeof(GridRowDisplay), new UIPropertyMetadata(null, ValueChanged)
             );
 
         #endregion
