@@ -4,16 +4,13 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Media;
 using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.View;
 using Restless.App.Panama.ViewModel;
+using System;
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Media;
 
 namespace Restless.App.Panama.Core
 {
@@ -76,7 +73,7 @@ namespace Restless.App.Panama.Core
 
         /************************************************************************/
         
-        #region PublisheSelect
+        #region PublisherSelect
         /// <summary>
         /// Provides static methods for creating a publisher select window.
         /// </summary>
@@ -108,7 +105,6 @@ namespace Restless.App.Panama.Core
         /// <summary>
         /// Provides static methods for creating a message select window.
         /// </summary>
-        [Obsolete("Use MessageFileSelect instead")]
         public static class MessageSelect
         {
             /// <summary>
@@ -117,6 +113,7 @@ namespace Restless.App.Panama.Core
             /// <param name="title">The title of the window.</param>
             /// <param name="options">Options that affect the use and layout of the window.</param>
             /// <returns>The window</returns>
+            [Obsolete("Use MessageFileSelect instead")]
             public static MessageSelectWindow Create(string title, MessageSelectOptions options)
             {
                 var window = new MessageSelectWindow
@@ -272,7 +269,7 @@ namespace Restless.App.Panama.Core
 
         /************************************************************************/
 
-        #region Workspace
+        #region Private methods
         private static void SetWindowOwner(Window window)
         {
             if (window.DataContext is IWindowOwner owner)
