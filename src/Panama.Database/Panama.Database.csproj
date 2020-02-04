@@ -98,8 +98,8 @@
     <Reference Include="Restless.Tools.Database, Version=1.3.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Restless.Tools.Database.1.3.3\lib\net45\Restless.Tools.Database.dll</HintPath>
     </Reference>
-    <Reference Include="Restless.Tools.OpenXml, Version=1.3.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Restless.Tools.OpenXml.1.3.2\lib\net45\Restless.Tools.OpenXml.dll</HintPath>
+    <Reference Include="Restless.Tools.OpenXml, Version=1.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Restless.Tools.OpenXml.1.3.3\lib\net45\Restless.Tools.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="Restless.Tools.Utility, Version=1.3.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Restless.Tools.Utility.1.3.2\lib\net45\Restless.Tools.Utility.dll</HintPath>
@@ -257,7 +257,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
