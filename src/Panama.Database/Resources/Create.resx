@@ -245,6 +245,16 @@ CREATE INDEX "publisher_credentialid" ON "publisher" ("credentialid");</value>
 );</value>
     <comment>ddl for schema table</comment>
   </data>
+  <data name="SelfPublisher" xml:space="preserve">
+    <value>CREATE TABLE "selfpublisher" (
+  "id" INTEGER PRIMARY KEY NOT NULL,
+  "name" TEXT NOT NULL,
+  "url" TEXT,
+  "notes" TEXT,
+  "added" TIMESTAMP NOT NULL DEFAULT 0
+);</value>
+    <comment>ddl for self publisher table</comment>
+  </data>
   <data name="Submission" xml:space="preserve">
     <value>CREATE TABLE "submission"( 
   "id" INTEGER PRIMARY KEY NOT NULL, 
