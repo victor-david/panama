@@ -144,9 +144,7 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         protected override void SetDataRelations()
         {
-            //CreateParentChildRelation<SubmissionBatchTable>(Defs.Relations.ToSubmissionBatch, Defs.Columns.Id, SubmissionBatchTable.Defs.Columns.PublisherId);
-            //CreateParentChildRelation<SubmissionPeriodTable>(Defs.Relations.ToSubmissionPeriod, Defs.Columns.Id, SubmissionPeriodTable.Defs.Columns.PublisherId);
-            //CreateParentChildRelation<PublishedTable>(Defs.Relations.ToPublished, Defs.Columns.Id, PublishedTable.Defs.Columns.PublisherId);
+            CreateParentChildRelation<SelfPublishedTable>(Defs.Relations.ToPublished, Defs.Columns.Id, SelfPublishedTable.Defs.Columns.SelfPublisherId);
         }
 
         /// <summary>
@@ -154,8 +152,8 @@ namespace Restless.App.Panama.Database.Tables
         /// </summary>
         protected override void UseDataRelations()
         {
-            //string expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmissionBatch, SubmissionBatchTable.Defs.Columns.Id);
-            //CreateExpressionColumn<long>(Defs.Columns.Calculated.SubCount, expr);
+            string expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToPublished, SelfPublishedTable.Defs.Columns.Id);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.PubCount, expr);
 
             //expr = string.Format("Max(Child({0}).{1})", Defs.Relations.ToSubmissionBatch, SubmissionBatchTable.Defs.Columns.Submitted);
             //CreateExpressionColumn<DateTime>(Defs.Columns.Calculated.LastSub, expr);

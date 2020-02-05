@@ -100,6 +100,7 @@ namespace Restless.App.Panama.Database
             CreateAndRegisterTable<SubmissionMessageAttachmentTable>();
             CreateAndRegisterTable<SubmissionPeriodTable>();
             CreateAndRegisterTable<SchemaTable>();
+            CreateAndRegisterTable<SelfPublishedTable>();
             CreateAndRegisterTable<SelfPublisherTable>();
             CreateAndRegisterTable<TableTable>();
             CreateAndRegisterTable<TagTable>();

@@ -127,6 +127,9 @@
     <Compile Include="Database\Tables\DummyTable.cs">
       <SubType>foo</SubType>
     </Compile>
+    <Compile Include="Database\Tables\SelfPublishedTable.cs">
+      <SubType>foo</SubType>
+    </Compile>
     <Compile Include="Database\Tables\SelfPublisherTable.cs">
       <SubType>foo</SubType>
     </Compile>
@@ -230,6 +233,7 @@
     <Content Include="Schema\language.ddl.sql" />
     <Content Include="Schema\language.import.sql" />
     <Content Include="Schema\link.ddl.sql" />
+    <Content Include="Schema\selfpublished.ddl.sql" />
     <Content Include="Schema\published.ddl.sql" />
     <Content Include="Schema\selfpublisher.ddl.sql" />
     <Content Include="Schema\publisher.ddl.sql" />

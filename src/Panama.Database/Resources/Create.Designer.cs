@@ -246,6 +246,25 @@ namespace Restless.App.Panama.Database.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE &quot;selfpublished&quot; (
+        ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL,
+        ///  &quot;titleid&quot; INTEGER NOT NULL,
+        ///  &quot;selfpublisherid&quot; INTEGER NOT NULL DEFAULT 0,
+        ///  &quot;added&quot; TIMESTAMP NOT NULL,
+        ///  &quot;published&quot; TIMESTAMP,
+        ///  &quot;url&quot; TEXT,
+        ///  &quot;notes&quot; TEXT
+        ///);
+        ///CREATE INDEX &quot;selfpublished_selfpublisherid&quot; ON &quot;selfpublished&quot; (&quot;selfpublisherid&quot;);
+        ///CREATE INDEX &quot;selfpublished_titleid&quot; ON &quot;selfpublished&quot; (&quot;titleid&quot;);.
+        /// </summary>
+        internal static string SelfPublished {
+            get {
+                return ResourceManager.GetString("SelfPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE &quot;selfpublisher&quot; (
         ///  &quot;id&quot; INTEGER PRIMARY KEY NOT NULL,
         ///  &quot;name&quot; TEXT NOT NULL,
