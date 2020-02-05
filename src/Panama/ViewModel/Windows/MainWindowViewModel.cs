@@ -85,6 +85,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("ResetWindow", RunResetWindowCommand);
             Commands.Add("Submission", (o) => CreateIf<SubmissionViewModel>());
             Commands.Add("Save", Save);
+            Commands.Add("SelfPublisher", (o) => CreateIf<SelfPublisherViewModel>());
             Commands.Add("Statistics", (o) => CreateIf<StatisticsViewModel>());
             Commands.Add("Table", (o) => CreateIf<TableViewModel>());
             Commands.Add("Tag", (o) => CreateIf<TagViewModel>());

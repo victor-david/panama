@@ -785,6 +785,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Self Publishers.
+        /// </summary>
+        public static string CommandSelfPublisher {
+            get {
+                return ResourceManager.GetString("CommandSelfPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Statistics.
         /// </summary>
         public static string CommandStatistics {
@@ -2239,6 +2248,15 @@ namespace Restless.App.Panama.Resources {
         public static string TooltipScrambleWord {
             get {
                 return ResourceManager.GetString("TooltipScrambleWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published count - total number of items published.
+        /// </summary>
+        public static string TooltipSelfPublisherPublishedCount {
+            get {
+                return ResourceManager.GetString("TooltipSelfPublisherPublishedCount", resourceCulture);
             }
         }
         

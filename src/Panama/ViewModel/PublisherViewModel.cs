@@ -104,7 +104,7 @@ namespace Restless.App.Panama.ViewModel
         {
             DisplayName = Strings.CommandPublisher;
             MaxCreatable = 1;
-            Columns.Create("Id", PublishedTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod).AddToolTip(Strings.TooltipPublisherInPeriod);
             Columns.CreateImage<BooleanToImageConverter>("E", PublisherTable.Defs.Columns.Exclusive, "ImageExclamation").AddToolTip(Strings.TooltipPublisherExclusive);
             Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Paying, "ImageMoney").AddToolTip(Strings.TooltipPublisherPay);
@@ -251,13 +251,8 @@ namespace Restless.App.Panama.ViewModel
         /// <returns>true if the <see cref="DataGridViewModel{T}.OpenRowCommand"/> can run; otherwise, false.</returns>
         protected override bool CanRunOpenRowCommand(object item)
         {
-            return
-                (
-                    base.CanRunOpenRowCommand(item) &&
-                    !string.IsNullOrEmpty(SelectedRow[PublisherTable.Defs.Columns.Url].ToString())
-                );
+            return base.CanRunOpenRowCommand(item) && !string.IsNullOrEmpty(SelectedRow[PublisherTable.Defs.Columns.Url].ToString());
         }
-
 
         /// <summary>
         /// Runs the delete command to delete a record from the data table

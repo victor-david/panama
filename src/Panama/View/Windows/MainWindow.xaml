@@ -37,6 +37,7 @@
                     <MenuItem Header="Alerts" Icon="{StaticResource ImageCalendarMenu}" Command="{Binding Commands[Alert]}"/>
                     <MenuItem Header="Notes" Icon="{StaticResource ImageNoteMenu}" Command="{Binding Commands[Note]}"/>
                     <MenuItem Header="Links" Icon="{StaticResource ImageLinkMenu}" Command="{Binding Commands[Link]}"/>
+                    <MenuItem Header="Self Publishers" Icon="{StaticResource ImagePublisherMenu}" Command="{Binding Commands[SelfPublisher]}"/>
                     <Separator/>
                     <MenuItem Header="Statistics" Icon="{StaticResource ImageStatisticsMenu}" Command="{Binding Commands[Statistics]}"/>
                 </MenuItem>

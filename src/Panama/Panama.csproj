@@ -266,6 +266,7 @@
     <Compile Include="ViewModel\Controllers\ToolControllerBase.cs" />
     <Compile Include="ViewModel\CredentialViewModel.cs" />
     <Compile Include="ViewModel\Abstract\DataGridPreviewViewModel.cs" />
+    <Compile Include="ViewModel\SelfPublisherViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="ViewModel\ToolConvertViewModel.cs" />
     <Compile Include="ViewModel\ToolMessageSyncViewModel.cs" />
@@ -317,11 +318,17 @@
     <Compile Include="View\EditControls\PublishedEdit.xaml.cs">
       <DependentUpon>PublishedEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditControls\SelfPublisherEdit.xaml.cs">
+      <DependentUpon>SelfPublisherEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditControls\ToolPreview.xaml.cs">
       <DependentUpon>ToolPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditControls\AlertEdit.xaml.cs">
       <DependentUpon>AlertEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SelfPublisherView.xaml.cs">
+      <DependentUpon>SelfPublisherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
@@ -569,11 +576,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\EditControls\SelfPublisherEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\EditControls\ToolPreview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\EditControls\AlertEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SelfPublisherView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

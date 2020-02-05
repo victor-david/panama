@@ -68,10 +68,10 @@ namespace Restless.App.Panama.Database.Tables
                 public static class Calculated
                 {
                     /// <summary>
-                    /// The name of the submission count column. This calculated column
-                    /// holds the total number of submissions made to the publisher.
+                    /// The name of the published count column. This calculated column
+                    /// holds the total number of items published.
                     /// </summary>
-                    public const string SubCount = "CalcSubCount";
+                    public const string PubCount = "CalcPubCount";
                 }
             }
 
@@ -80,10 +80,10 @@ namespace Restless.App.Panama.Database.Tables
             /// </summary>
             public static class Relations
             {
-                ///// <summary>
-                ///// The name of the relation that relates the <see cref="PublisherTable"/> to the <see cref="PublishedTable"/>.
-                ///// </summary>
-                //public const string ToPublished = "PubToPublished";
+                /// <summary>
+                /// The name of the relation that relates the <see cref="SelfPublisherTable"/> to the <see cref="PublishedTable"/>.
+                /// </summary>
+                public const string ToPublished = "SelfPubToPublished";
             }
         }
 
@@ -170,6 +170,7 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="row">The freshly created DataRow to poulate</param>
         protected override void PopulateDefaultRow(System.Data.DataRow row)
         {
+            row[Defs.Columns.Name] = "(new self publisher)";
             row[Defs.Columns.Added] = DateTime.UtcNow;
         }
         #endregion
