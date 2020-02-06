@@ -356,6 +356,18 @@ namespace Restless.App.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets the grid splitter location for the self publisher grid
+        /// </summary>
+        /// <remarks>
+        /// This is a hidden internal value, used to remember the grid position.
+        /// </remarks>
+        public GridLength LeftColumnSelfPublisher
+        {
+            get => GetGridLength(Default.Other.SplitterWidth);
+            set => SetGridLength(value);
+        }
+
+        /// <summary>
         /// Gets or sets the grid splitter location for the submission grid
         /// </summary>
         /// <remarks>

@@ -12,7 +12,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <!-- MaxWidth binds to a value relative to the width of the grid. Converter parm is the desired min width of right column -->
-            <ColumnDefinition Width="{Binding Config.LeftColumnPublisher,Mode=TwoWay}" MinWidth="360" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}, Converter={cv:SubtractionConverter}, ConverterParameter=380}" />
+            <ColumnDefinition Width="{Binding Config.LeftColumnSelfPublisher,Mode=TwoWay}" MinWidth="360" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}, Converter={cv:SubtractionConverter}, ConverterParameter=380}" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
