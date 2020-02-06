@@ -963,4 +963,7 @@ Do you want to continue?</value>
   <data name="TooltipSelfPublisherPublishedCount" xml:space="preserve">
     <value>Published count - total number of items published</value>
   </data>
+  <data name="HeaderSelfPublished" xml:space="preserve">
+    <value>Self Published</value>
+  </data>
 </root>

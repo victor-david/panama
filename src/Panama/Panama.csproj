@@ -223,6 +223,7 @@
     <Compile Include="Tools\Submission\SubmissionUpdater.cs" />
     <Compile Include="Tools\Version\VersionUpdater.cs" />
     <Compile Include="ViewModel\Controllers\CredentialPublisherController.cs" />
+    <Compile Include="ViewModel\Controllers\TitleSelfPublishedController.cs" />
     <Compile Include="ViewModel\Controllers\ToolTitleListController.cs" />
     <Compile Include="ViewModel\Controllers\ToolOrphanFinderController.cs" />
     <Compile Include="ViewModel\Controllers\PublisherSubmissionTitleController.cs" />
@@ -283,6 +284,7 @@
     <Compile Include="ViewModel\Windows\CommandToolsWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\IWindowOwner.cs" />
     <Compile Include="ViewModel\Windows\MessageFileSelectWindowViewModel.cs" />
+    <Compile Include="ViewModel\Windows\SelfPublisherSelectWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\TitleVersionRenameWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\MessageSelectWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\SubmissionDocumentCreateType.cs" />
@@ -315,11 +317,17 @@
     <Compile Include="View\EditControls\ConfigEditSubmission.xaml.cs">
       <DependentUpon>ConfigEditSubmission.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditControls\SelfPublishedEdit.xaml.cs">
+      <DependentUpon>SelfPublishedEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditControls\PublishedEdit.xaml.cs">
       <DependentUpon>PublishedEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditControls\SelfPublisherEdit.xaml.cs">
       <DependentUpon>SelfPublisherEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditControls\TitleEditSelfPublished.xaml.cs">
+      <DependentUpon>TitleEditSelfPublished.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditControls\ToolPreview.xaml.cs">
       <DependentUpon>ToolPreview.xaml</DependentUpon>
@@ -572,11 +580,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\EditControls\SelfPublishedEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\EditControls\PublishedEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\EditControls\SelfPublisherEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditControls\TitleEditSelfPublished.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -28,7 +28,7 @@ namespace Restless.App.Panama.ViewModel
         #region Private
         private bool isFilterVisible;
         private string previewText;
-        private const int PreviewTabIndex = 4;
+        private const int PreviewTabIndex = 5;
         private bool autoPreview;
         private bool isOpenXml;
         private VisualCommandViewModel advFilter;
@@ -59,6 +59,15 @@ namespace Restless.App.Panama.ViewModel
         /// Gets the controller for title published records.
         /// </summary>
         public TitlePublishedController Published
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the controller for title published records.
+        /// </summary>
+        public TitleSelfPublishedController SelfPublished
         {
             get;
             private set;
@@ -274,6 +283,7 @@ namespace Restless.App.Panama.ViewModel
             Versions = new TitleVersionController(this);
             Submissions = new TitleSubmissionController(this);
             Published = new TitlePublishedController(this);
+            SelfPublished = new TitleSelfPublishedController(this);
             Tags = new TitleTagController(this);
 
             Filters = new TitleFilterController(this);
@@ -295,6 +305,7 @@ namespace Restless.App.Panama.ViewModel
             Versions.Update();
             Submissions.Update();
             Published.Update();
+            SelfPublished.Update();
             PrepareForOpenXml();
         }
 

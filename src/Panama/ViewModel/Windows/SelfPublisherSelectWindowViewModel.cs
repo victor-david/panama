@@ -15,7 +15,7 @@ namespace Restless.App.Panama.ViewModel
     /// <summary>
     /// Provides the display and selection logic for the <see cref="View.PublisherSelectWindow"/>.
     /// </summary>
-    public class PublisherSelectWindowViewModel : WindowViewModel<PublisherTable>
+    public class SelfPublisherSelectWindowViewModel : WindowViewModel<SelfPublisherTable>
     {
         #region Private
         #endregion
@@ -37,18 +37,16 @@ namespace Restless.App.Panama.ViewModel
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="PublisherSelectWindowViewModel"/> class.
+        /// Initializes a new instance of the <see cref="SelfPublisherSelectWindowViewModel"/> class.
         /// </summary>
-        public PublisherSelectWindowViewModel()
+        public SelfPublisherSelectWindowViewModel()
         {
-            Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
-            Columns.Create("Name", PublisherTable.Defs.Columns.Name);
-            var col = Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate();
+            Columns.Create("Id", SelfPublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Name", SelfPublisherTable.Defs.Columns.Name);
+            var col = Columns.Create("Added", SelfPublisherTable.Defs.Columns.Added).MakeDate();
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
-            Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub).MakeDate()
-                .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
-            Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount).MakeFixedWidth(FixedWidth.MediumNumeric)
-                .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+            Columns.Create("PC", SelfPublisherTable.Defs.Columns.Calculated.PubCount).MakeFixedWidth(FixedWidth.MediumNumeric)
+                .AddSort(null, SelfPublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
             Commands.Add("Select", RunSelectCommand, (o) => IsSelectedRowAccessible);
             FilterPrompt = Strings.FilterPromptPublisher;
@@ -65,7 +63,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = string.Format("{0} LIKE '%{1}%'", PublisherTable.Defs.Columns.Name, text);
+            DataView.RowFilter = string.Format("{0} LIKE '%{1}%'", SelfPublisherTable.Defs.Columns.Name, text);
         }
 
         #endregion

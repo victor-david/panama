@@ -4,16 +4,16 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using System.Windows;
+using System.Windows.Controls;
 
 namespace Restless.App.Panama.View
 {
-    public partial class PublisherSelectWindow : Window
+    public partial class SelfPublishedEdit : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PublisherSelectWindow"/> class
+        /// Initializes a new instance of the <see cref="SelfPublishedEdit"/> class.
         /// </summary>
-        public PublisherSelectWindow()
+        public SelfPublishedEdit()
         {
             InitializeComponent();
         }

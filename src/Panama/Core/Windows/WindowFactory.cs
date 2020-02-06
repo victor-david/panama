@@ -100,7 +100,35 @@ namespace Restless.App.Panama.Core
         #endregion
 
         /************************************************************************/
-        
+
+        #region SelfPublisherSelect
+        /// <summary>
+        /// Provides static methods for creating a self publisher select window.
+        /// </summary>
+        public static class SelfPublisherSelect
+        {
+            /// <summary>
+            /// Creates an instance of PublisherSelectWindow and its corresponding view model.
+            /// </summary>
+            /// <param name="title">The text to use for the window title.</param>
+            /// <returns>The window</returns>
+            public static PublisherSelectWindow Create(string title)
+            {
+                var window = new PublisherSelectWindow
+                {
+                    Title = title,
+                    Owner = Application.Current.MainWindow,
+                    DataContext = new SelfPublisherSelectWindowViewModel(),
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
+                return window;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region MessageSelect
         /// <summary>
         /// Provides static methods for creating a message select window.

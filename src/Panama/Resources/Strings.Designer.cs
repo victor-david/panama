@@ -1580,6 +1580,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Self Published.
+        /// </summary>
+        public static string HeaderSelfPublished {
+            get {
+                return ResourceManager.GetString("HeaderSelfPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date Format.
         /// </summary>
         public static string HeaderSettingsDateFormat {
