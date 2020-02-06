@@ -150,11 +150,19 @@ namespace Restless.App.Panama.ViewModel
         }
 
         /// <summary>
-        /// Sets the filter options to submitted only.
+        /// Sets the filter options to published only.
         /// </summary>
         public void SetToPublished()
         {
             ClearAndApplyAction(() => Config.TitleFilter.Published = FilterState.Yes);
+        }
+
+        /// <summary>
+        /// Sets the filter options to self published only.
+        /// </summary>
+        public void SetToSelfPublished()
+        {
+            ClearAndApplyAction(() => Config.TitleFilter.SelfPublished = FilterState.Yes);
         }
 
         /// <summary>
@@ -326,7 +334,13 @@ namespace Restless.App.Panama.ViewModel
             if (f.Published != FilterState.Either)
             {
                 if (filter.Length > 0) Append(" AND ", " and ");
-                Append(string.Format("{0}={1}", TitleTable.Defs.Columns.Calculated.IsPublished, (byte)f.Published), (f.Published == FilterState.No ? "not published" : "published"));
+                Append(string.Format("{0}={1}", TitleTable.Defs.Columns.Calculated.IsPublished, (byte)f.Published), f.Published == FilterState.No ? "not published" : "published");
+            }
+
+            if (f.SelfPublished != FilterState.Either)
+            {
+                if (filter.Length > 0) Append(" AND ", " and ");
+                Append(string.Format("{0}={1}", TitleTable.Defs.Columns.Calculated.IsSelfPublished, (byte)f.SelfPublished), f.SelfPublished == FilterState.No ? "not self published" : "self published");
             }
 
             if (f.WordCount != 0)

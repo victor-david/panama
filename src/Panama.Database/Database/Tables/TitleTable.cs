@@ -133,10 +133,22 @@ namespace Restless.App.Panama.Database.Tables
                     public const string PublishedCount = "CalcPubCount";
 
                     /// <summary>
+                    /// The name of the self published count column. This calculated column
+                    /// holds the number of times a title has been published, as per the <see cref="SelfPublishedTable"/>.
+                    /// </summary>
+                    public const string SelfPublishedCount = "CalcSelfPubCount";
+
+                    /// <summary>
                     /// The name of the is-published column. This calculated column
                     /// holds a boolean value that indicates if a title has any related records in the <see cref="PublishedTable"/>.
                     /// </summary>
                     public const string IsPublished = "CalcIsPublished";
+
+                    /// <summary>
+                    /// The name of the is-self-published column. This calculated column
+                    /// holds a boolean value that indicates if a title has any related records in the <see cref="SelfPublishedTable"/>.
+                    /// </summary>
+                    public const string IsSelfPublished = "CalcIsSelfPublished";
                 }
             }
 
@@ -164,6 +176,12 @@ namespace Restless.App.Panama.Database.Tables
                 /// The name of the relation that relates the <see cref="TitleTable"/> to the <see cref="PublishedTable"/>.
                 /// </summary>
                 public const string ToPublished = "TitleToPublished";
+
+                /// <summary>
+                /// The name of the relation that relates the <see cref="TitleTable"/> to the <see cref="SelfPublishedTable"/>.
+                /// </summary>
+                public const string ToSelfPublished = "TitleToSelfPublished";
+
             }
         }
 
@@ -257,6 +275,7 @@ namespace Restless.App.Panama.Database.Tables
             CreateParentChildRelation<TitleVersionTable>(Defs.Relations.ToVersion, Defs.Columns.Id, TitleVersionTable.Defs.Columns.TitleId);
             CreateParentChildRelation<TitleTagTable>(Defs.Relations.ToTitleTag, Defs.Columns.Id, TitleTagTable.Defs.Columns.TitleId);
             CreateParentChildRelation<PublishedTable>(Defs.Relations.ToPublished, Defs.Columns.Id, PublishedTable.Defs.Columns.TitleId);
+            CreateParentChildRelation<SelfPublishedTable>(Defs.Relations.ToSelfPublished, Defs.Columns.Id, SelfPublishedTable.Defs.Columns.TitleId);
         }
 
         /// <summary>
@@ -276,8 +295,14 @@ namespace Restless.App.Panama.Database.Tables
             expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToPublished, PublishedTable.Defs.Columns.Id);
             CreateExpressionColumn<long>(Defs.Columns.Calculated.PublishedCount, expr);
 
+            expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSelfPublished, SelfPublishedTable.Defs.Columns.Id);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.SelfPublishedCount, expr);
+
             expr = string.Format("Count(Child({0}).{1}) > 0", Defs.Relations.ToPublished, PublishedTable.Defs.Columns.Id);
             CreateExpressionColumn<bool>(Defs.Columns.Calculated.IsPublished, expr);
+
+            expr = string.Format("Count(Child({0}).{1}) > 0", Defs.Relations.ToSelfPublished, SelfPublishedTable.Defs.Columns.Id);
+            CreateExpressionColumn<bool>(Defs.Columns.Calculated.IsSelfPublished, expr);
 
             expr = string.Format("Sum(Child({0}).{1})", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Calculated.CurrentSubCount);
             CreateExpressionColumn<long>(Defs.Columns.Calculated.CurrentSubCount, expr);

@@ -249,6 +249,7 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("FlaggedFilter", (o) => Filters.SetToFlagged());
             Commands.Add("SubmittedFilter", (o) => Filters.SetToSubmitted());
             Commands.Add("PublishedFilter", (o) => Filters.SetToPublished());
+            Commands.Add("SelfPublishedFilter", (o) => Filters.SetToSelfPublished());
             Commands.Add("AdvancedFilter", (o) =>
             {
                 isFilterVisible = !isFilterVisible;
@@ -269,9 +270,9 @@ namespace Restless.App.Panama.ViewModel
             FilterCommands.Add(advFilter);
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterReady, Strings.CommandTitleFilterReadyTooltip, Commands["ReadyFilter"], null, imgSize, VisualCommandFontSize, minWidth));
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterFlagged, Strings.CommandTitleFilterFlaggedTooltip, Commands["FlaggedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterSubmitted, Strings.CommandTitleFilterSubmittedTooltip, Commands["SubmittedFilter"], null, imgSize, VisualCommandFontSize,  minWidth));
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterPublished, Strings.CommandTitleFilterPublishedTooltip, Commands["PublishedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterSelfPublished, Strings.CommandTitleFilterSelfPublishedTooltip, Commands["SelfPublishedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
             FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             /* Context menu items */

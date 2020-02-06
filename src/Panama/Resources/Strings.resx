@@ -966,4 +966,10 @@ Do you want to continue?</value>
   <data name="HeaderSelfPublished" xml:space="preserve">
     <value>Self Published</value>
   </data>
+  <data name="CommandTitleFilterSelfPublished" xml:space="preserve">
+    <value>Self Published</value>
+  </data>
+  <data name="CommandTitleFilterSelfPublishedTooltip" xml:space="preserve">
+    <value>Filter title list to display only titles that are self published</value>
+  </data>
 </root>

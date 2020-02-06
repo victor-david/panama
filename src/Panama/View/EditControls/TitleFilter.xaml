@@ -25,6 +25,7 @@
                     <con:FilterState Id="F3" Title="Currently Submitted" State="{Binding Config.TitleFilter.Submitted}" />
                     <con:FilterState Id="F4" Title="Ever Submitted" State="{Binding Config.TitleFilter.EverSubmitted}" />
                     <con:FilterState Id="F5" Title="Published" State="{Binding Config.TitleFilter.Published}" />
+                    <con:FilterState Id="F6" Title="Self Published" State="{Binding Config.TitleFilter.SelfPublished}" />
                 </UniformGrid>
                 <StackPanel Style="{StaticResource StackPanelCommandHolder}">
                     <Label>Word count</Label>

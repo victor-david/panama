@@ -965,6 +965,24 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Self Published.
+        /// </summary>
+        public static string CommandTitleFilterSelfPublished {
+            get {
+                return ResourceManager.GetString("CommandTitleFilterSelfPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter title list to display only titles that are self published.
+        /// </summary>
+        public static string CommandTitleFilterSelfPublishedTooltip {
+            get {
+                return ResourceManager.GetString("CommandTitleFilterSelfPublishedTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submitted.
         /// </summary>
         public static string CommandTitleFilterSubmitted {

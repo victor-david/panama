@@ -16,6 +16,7 @@ namespace Restless.App.Panama.Core
         #region Private
         private FilterState everSubmitted;
         private FilterState published;
+        private FilterState selfPublished;
         private FilterState ready;
         private FilterState flagged;
         private FilterState submitted;
@@ -38,6 +39,7 @@ namespace Restless.App.Panama.Core
                     base.IsAnyFilterActive ||
                     EverSubmitted != FilterState.Either ||
                     Published != FilterState.Either ||
+                    SelfPublished != FilterState.Either ||
                     Ready != FilterState.Either ||
                     Flagged != FilterState.Either ||
                     Submitted != FilterState.Either ||
@@ -79,6 +81,21 @@ namespace Restless.App.Panama.Core
             set
             {
                 if (SetProperty(ref published, value))
+                {
+                    OnChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the filter's self published option.
+        /// </summary>
+        public FilterState SelfPublished
+        {
+            get => selfPublished;
+            set
+            {
+                if (SetProperty(ref selfPublished, value))
                 {
                     OnChanged();
                 }
@@ -217,6 +234,7 @@ namespace Restless.App.Panama.Core
             Tags.Clear();
             EverSubmitted = FilterState.Either;
             Published = FilterState.Either;
+            SelfPublished = FilterState.Either;
             Ready = FilterState.Either;
             Flagged = FilterState.Either;
             Submitted = FilterState.Either;
