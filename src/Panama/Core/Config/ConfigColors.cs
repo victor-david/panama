@@ -51,6 +51,11 @@ namespace Restless.App.Panama.Core
                 public static Color TitlePublished = SystemColors.Transparent;
 
                 /// <summary>
+                /// Gets the default foreground color for a title that is self published.
+                /// </summary>
+                public static Color TitleSelfPublished = SystemColors.Firebrick;
+
+                /// <summary>
                 /// Gets the default foreground color for a title that is currently submitted.
                 /// </summary>
                 public static Color TitleSubmitted = SystemColors.White;
@@ -83,6 +88,11 @@ namespace Restless.App.Panama.Core
                 /// Gets the default background color for a title that is published.
                 /// </summary>
                 public static Color TitlePublished = SystemColors.PaleGreen;
+
+                /// <summary>
+                /// Gets the default background color for a title that is self published.
+                /// </summary>
+                public static Color TitleSelfPublished = SystemColors.Transparent;
 
                 /// <summary>
                 /// Gets the default background color for a title that is currently submitted.
@@ -133,6 +143,15 @@ namespace Restless.App.Panama.Core
         }
 
         /// <summary>
+        /// Get the color object used to display a title that has been self published.
+        /// </summary>
+        public ConfigColor TitleSelfPublished
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Get the color object used to display a title that is currently submitted.
         /// </summary>
         public ConfigColor TitleSubmitted
@@ -154,6 +173,7 @@ namespace Restless.App.Panama.Core
             PublisherGoner = new ConfigColor(nameof(PublisherGoner), Default.Foreground.PublisherGoner, Default.Background.PublisherGoner);
             PublisherPeriod = new ConfigColor(nameof(PublisherPeriod), Default.Foreground.PublisherPeriod, Default.Background.PublisherPeriod);
             TitlePublished = new ConfigColor(nameof(TitlePublished), Default.Foreground.TitlePublished, Default.Background.TitlePublished);
+            TitleSelfPublished = new ConfigColor(nameof(TitleSelfPublished), Default.Foreground.TitleSelfPublished, Default.Background.TitleSelfPublished);
             TitleSubmitted = new ConfigColor(nameof(TitleSubmitted), Default.Foreground.TitleSubmitted, Default.Background.TitleSubmitted);
         }
         #endregion

@@ -214,11 +214,13 @@ namespace Restless.App.Panama.ViewModel
         {
             SampleTitles = new ObservableCollection<SampleTitle>()
             {
-                new SampleTitle(1, "Title #1", DateTime.Now.AddDays(-10), DateTime.Now.AddDays(-10), false, false),
-                new SampleTitle(2, "Title #2 (published)", DateTime.Now.AddDays(-20), DateTime.Now.AddDays(-17),true, false),
-                new SampleTitle(3, "Title #3", DateTime.Now.AddDays(-30), DateTime.Now.AddDays(-30), false, false),
-                new SampleTitle(4, "Title #4 (submitted)", DateTime.Now.AddDays(-40), DateTime.Now.AddDays(-7), false, true),
-                new SampleTitle(5, "Title #5", DateTime.Now.AddDays(-50), DateTime.Now.AddDays(-20), false, false),
+                new SampleTitle(1, "Title #1", DateTime.Now.AddDays(-10), DateTime.Now.AddDays(-10), false, false, false),
+                new SampleTitle(2, "Title #2 (published)", DateTime.Now.AddDays(-20), DateTime.Now.AddDays(-17),true, false, false),
+                new SampleTitle(3, "Title #3", DateTime.Now.AddDays(-30), DateTime.Now.AddDays(-30), false, false, false),
+                new SampleTitle(4, "Title #4 (submitted)", DateTime.Now.AddDays(-40), DateTime.Now.AddDays(-7), false, false, true),
+                new SampleTitle(5, "Title #5", DateTime.Now.AddDays(-50), DateTime.Now.AddDays(-20), false, false, false),
+                new SampleTitle(6, "Title #6 (self published)", DateTime.Now.AddDays(-55), DateTime.Now.AddDays(-25), false, true, false),
+                new SampleTitle(7, "Title #7", DateTime.Now.AddDays(-67), DateTime.Now.AddDays(-30), false, false, false),
             };
         }
 
@@ -327,6 +329,15 @@ namespace Restless.App.Panama.ViewModel
             }
 
             /// <summary>
+            /// Gets a value that indicates if the title is published.
+            /// </summary>
+            public bool CalcIsSelfPublished
+            {
+                get;
+                private set;
+            }
+
+            /// <summary>
             /// Gets a value that indicates if the title is submitted.
             /// </summary>
             public bool CalcIsSubmitted
@@ -343,14 +354,16 @@ namespace Restless.App.Panama.ViewModel
             /// <param name="written">The date the title was written.</param>
             /// <param name="updated">The date the title was updated.</param>
             /// <param name="isPublished">A boolean value that indicates if the title is published.</param>
+            /// <param name="isSelfPublished">A boolean value that indicates if the title is self published.</param>
             /// <param name="isSubmitted">A boolean value that indicates if the title is submitted.</param>
-            public SampleTitle(long id, string title, DateTime written, DateTime updated, bool isPublished, bool isSubmitted)
+            public SampleTitle(long id, string title, DateTime written, DateTime updated, bool isPublished, bool isSelfPublished, bool isSubmitted)
             {
                 Id = id;
                 Title = title;
                 Written = written;
                 Updated = updated;
                 CalcIsPublished = isPublished;
+                CalcIsSelfPublished = isSelfPublished;
                 CalcIsSubmitted = isSubmitted;
             }
         }
