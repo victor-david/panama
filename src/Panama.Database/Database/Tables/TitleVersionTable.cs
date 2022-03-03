@@ -4,17 +4,13 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.OpenXml;
-using Restless.Tools.Utility;
+using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Text;
-using System.Linq;
 
-namespace Restless.App.Panama.Database.Tables
+namespace Restless.Panama.Database.Tables
 {
     /// <summary>
     /// Represents the table that contains information of versions of titles.
@@ -236,24 +232,25 @@ namespace Restless.App.Panama.Database.Tables
         protected override void OnColumnChanged(DataColumnChangeEventArgs e)
         {
             base.OnColumnChanged(e);
-            if (e.Column.ColumnName == Defs.Columns.FileName)
-            {
-                string fullPath = Path.Combine(Controller.GetTable<ConfigTable>().GetRowValue(ConfigTable.Defs.FieldIds.FolderTitleRoot), e.ProposedValue.ToString());
-                var info = new FileInfo(fullPath);
-                if (info.Exists)
-                {
-                    e.Row[Defs.Columns.Size] = info.Length;
-                    e.Row[Defs.Columns.Updated] = info.LastWriteTimeUtc;
-                    e.Row[Defs.Columns.WordCount] = OpenXmlDocument.Reader.TryGetWordCount(fullPath);
-                }
-                else
-                {
-                    e.Row[Defs.Columns.Size] = 0;;
-                    e.Row[Defs.Columns.Updated] = DateTime.UtcNow;
-                    e.Row[Defs.Columns.WordCount] = 0;
-                }
-                e.Row[Defs.Columns.DocType] = Controller.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(e.ProposedValue.ToString());
-            }
+            // TODO - OpenXml
+            //if (e.Column.ColumnName == Defs.Columns.FileName)
+            //{
+            //    string fullPath = Path.Combine(Controller.GetTable<ConfigTable>().GetRowValue(ConfigTable.Defs.FieldIds.FolderTitleRoot), e.ProposedValue.ToString());
+            //    var info = new FileInfo(fullPath);
+            //    if (info.Exists)
+            //    {
+            //        e.Row[Defs.Columns.Size] = info.Length;
+            //        e.Row[Defs.Columns.Updated] = info.LastWriteTimeUtc;
+            //        e.Row[Defs.Columns.WordCount] = OpenXmlDocument.Reader.TryGetWordCount(fullPath);
+            //    }
+            //    else
+            //    {
+            //        e.Row[Defs.Columns.Size] = 0;;
+            //        e.Row[Defs.Columns.Updated] = DateTime.UtcNow;
+            //        e.Row[Defs.Columns.WordCount] = 0;
+            //    }
+            //    e.Row[Defs.Columns.DocType] = Controller.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(e.ProposedValue.ToString());
+            //}
         }
         #endregion
 

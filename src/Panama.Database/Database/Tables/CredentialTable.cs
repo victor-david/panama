@@ -4,12 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Database.SQLite;
-using System;
+using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Restless.App.Panama.Database.Tables
+namespace Restless.Panama.Database.Tables
 {
     /// <summary>
     /// Represents the table that contains credential for accessing various systems such as submission systems.
@@ -68,11 +67,9 @@ namespace Restless.App.Panama.Database.Tables
         /************************************************************************/
         
         #region Constructor
-        #pragma warning disable 1591
         public CredentialTable() : base(DatabaseController.Instance, Defs.TableName)
         {
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/

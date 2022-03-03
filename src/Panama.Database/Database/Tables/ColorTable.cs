@@ -4,12 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
+using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Data;
 
-namespace Restless.App.Panama.Database.Tables
+namespace Restless.Panama.Database.Tables
 {
     /// <summary>
     /// Represents the table that contains the application color configuration.
@@ -94,17 +93,18 @@ namespace Restless.App.Panama.Database.Tables
         /// </remarks>
         public DataRow GetConfigurationRow(string id, object defaultForeColor, object defaultBackColor)
         {
-            Validations.ValidateNullEmpty(id, "id");
-            Validations.ValidateNull(defaultForeColor, "DefaultForeColor");
-            Validations.ValidateNull(defaultBackColor, "DefaultBackColor");
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
 
             DataRow[] rows = Select(string.Format("{0}='{1}'", Defs.Columns.Id, id));
             if (rows.Length == 1) return rows[0];
 
             DataRow row = NewRow();
             row[Defs.Columns.Id] = id;
-            row[Defs.Columns.Foreground] = defaultForeColor;
-            row[Defs.Columns.Background] = defaultBackColor;
+            row[Defs.Columns.Foreground] = defaultForeColor ?? throw new ArgumentNullException(nameof(defaultForeColor));
+            row[Defs.Columns.Background] = defaultBackColor ?? throw new ArgumentNullException(nameof(defaultBackColor));
             Rows.Add(row);
             Save();
             return row;

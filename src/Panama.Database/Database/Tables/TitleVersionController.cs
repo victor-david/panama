@@ -4,16 +4,15 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using Defs = Restless.App.Panama.Database.Tables.TitleVersionTable.Defs;
-using RowObject = Restless.App.Panama.Database.Tables.TitleVersionTable.RowObject;
+using Defs = Restless.Panama.Database.Tables.TitleVersionTable.Defs;
+using RowObject = Restless.Panama.Database.Tables.TitleVersionTable.RowObject;
 
-namespace Restless.App.Panama.Database.Tables
+namespace Restless.Panama.Database.Tables
 {
     /// <summary>
     /// Represents a controller used to manage and manipulate title versions.
@@ -98,7 +97,10 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="fileName">The name of the file for the new version.</param>
         public void Add(string fileName)
         {
-            Validations.ValidateNullEmpty(fileName, "AddVersion.Filename");
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
             DataRow row = owner.NewRow();
             row[Defs.Columns.TitleId] = TitleId;
             // OnColumnChanged(e) method will update the associated fields: Updated, Size, and DocType
@@ -117,9 +119,10 @@ namespace Restless.App.Panama.Database.Tables
         /// <param name="current">The version to remove.</param>
         public void Remove(RowObject current)
         {
-            Validations.ValidateNull(current, nameof(current));
-
-            long titleId = current.TitleId;
+            if (current == null)
+            {
+                throw new ArgumentNullException(nameof(current));
+            }
             current.Row.Delete();
             RenumberAllVersions();
             RenumberAllRevisions();
@@ -134,7 +137,10 @@ namespace Restless.App.Panama.Database.Tables
         /// </remarks>
         public void MoveUp(RowObject current)
         {
-            Validations.ValidateNull(current, nameof(current));
+            if (current == null)
+            {
+                throw new ArgumentNullException(nameof(current));
+            }
 
             if (!IsLatest(current))
             {
@@ -188,7 +194,10 @@ namespace Restless.App.Panama.Database.Tables
         /// </remarks>
         public void MoveDown(RowObject current)
         {
-            Validations.ValidateNull(current, nameof(current));
+            if (current == null)
+            {
+                throw new ArgumentNullException(nameof(current));
+            }
 
             if (!IsEarliest(current))
             {
@@ -235,7 +244,10 @@ namespace Restless.App.Panama.Database.Tables
         /// </remarks>
         public void ConvertToVersion(RowObject current)
         {
-            Validations.ValidateNull(current, nameof(current));
+            if (current == null)
+            {
+                throw new ArgumentNullException(nameof(current));
+            }
             
             if (GetRevisionCount(current.Version) > 1)
             {
@@ -255,7 +267,10 @@ namespace Restless.App.Panama.Database.Tables
         /// <returns>true if <paramref name="row"/> represents HighestVersion.RevA; otherwise, false</returns>
         public bool IsLatest(RowObject row)
         {
-            Validations.ValidateNull(row, nameof(row));
+            if (row == null)
+            {
+                throw new ArgumentNullException(nameof(row));
+            }
             return row.Version == VersionCount && row.Revision == Defs.Values.RevisionA;
         }
 
@@ -267,7 +282,11 @@ namespace Restless.App.Panama.Database.Tables
         /// <returns>true if <paramref name="row"/> represents Ver1.Rev[MaxRev]; otherwise, false</returns>
         public bool IsEarliest(RowObject row)
         {
-            Validations.ValidateNull(row, nameof(row));
+            if (row == null)
+            {
+                throw new ArgumentNullException(nameof(row));
+            }
+
             if (row.Version == 1)
             {
                 if (versionMap.ContainsKey(1))

@@ -4,11 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Database.SQLite;
+using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Data;
 
-namespace Restless.App.Panama.Database.Tables
+namespace Restless.Panama.Database.Tables
 {    /// <summary>
      /// Represents the table that contains submission records. A submission record maps to a title and the submission batch.
      /// </summary>
@@ -182,8 +182,6 @@ namespace Restless.App.Panama.Database.Tables
         public override void Load()
         {
             Load(null, Defs.Columns.Added);
-            int test = Columns.Count;
-            int some = Rows.Count;
 
             UniqueConstraint batchTitle =  new UniqueConstraint(new DataColumn[] 
             { 

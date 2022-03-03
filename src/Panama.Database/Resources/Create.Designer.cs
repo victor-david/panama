@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Restless.App.Panama.Database.Resources {
+namespace Restless.Panama.Database.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Restless.App.Panama.Database.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Restless.App.Panama.Database.Resources.Create", typeof(Create).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Restless.Panama.Database.Resources.Create", typeof(Create).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

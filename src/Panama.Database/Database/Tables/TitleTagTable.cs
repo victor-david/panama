@@ -4,12 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
-using System;
+using Restless.Toolkit.Core.Database.SQLite;
+using Restless.Toolkit.Core.Utility;
 using System.Data;
 
-namespace Restless.App.Panama.Database.Tables
+namespace Restless.Panama.Database.Tables
 {
     /// <summary>
     /// Represents the table that maps tag values to their use with title records.
@@ -67,11 +66,9 @@ namespace Restless.App.Panama.Database.Tables
         /************************************************************************/
         
         #region Constructor
-        #pragma warning disable 1591
         public TitleTagTable() : base(DatabaseController.Instance, Defs.TableName)
         {
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/

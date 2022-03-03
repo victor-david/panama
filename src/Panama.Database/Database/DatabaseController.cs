@@ -4,13 +4,12 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.IO;
 
-namespace Restless.App.Panama.Database
+namespace Restless.Panama.Database
 {
     /// <summary>
     /// A singleton class to provide high level database management via SQLite
@@ -79,7 +78,10 @@ namespace Restless.App.Panama.Database
         /// <param name="fileName">The name of the database file name, or null to use the default.</param>
         public void Init(string installationFolder, string fileName)
         {
-            Validations.ValidateNullEmpty(installationFolder, "Init.InstallationFolder");
+            if (string.IsNullOrEmpty(installationFolder))
+            {
+                throw new ArgumentNullException(nameof(installationFolder));
+            }
             base.CreateAndOpen(GetDatabaseFileName(installationFolder, fileName));
             CreateAndRegisterTable<AlertTable>();
             CreateAndRegisterTable<AuthorTable>();

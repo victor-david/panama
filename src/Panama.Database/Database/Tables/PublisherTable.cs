@@ -4,11 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Database.SQLite;
+using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Data;
 
-namespace Restless.App.Panama.Database.Tables
+namespace Restless.Panama.Database.Tables
 {
     /// <summary>
     /// Represents the table that contains publisher information.
@@ -397,11 +397,6 @@ namespace Restless.App.Panama.Database.Tables
                 end = end.AddYears(1);
             }
             return (DateTime.Compare(now, start) >= 0 && DateTime.Compare(now, end) <= 0);
-        }
-
-        private void UpdateHaveActive()
-        {
-
         }
         #endregion
     }

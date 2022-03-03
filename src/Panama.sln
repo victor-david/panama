@@ -1,51 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panama", "Panama\Panama.csproj", "{027477DC-4D9D-4E37-A282-60B19898E797}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panama", "Panama\Panama.csproj", "{892CBB68-0608-4210-855C-4EDBB9703C0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panama.Database", "Panama.Database\Panama.Database.csproj", "{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panama.Database", "Panama.Database\Panama.Database.csproj", "{072F5675-37D1-44F9-8D66-4811C1BB430F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Debug|x64.ActiveCfg = Debug|x64
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Debug|x64.Build.0 = Debug|x64
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Debug|x86.ActiveCfg = Debug|x86
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Debug|x86.Build.0 = Debug|x86
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Release|Any CPU.Build.0 = Release|Any CPU
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Release|x64.ActiveCfg = Release|x64
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Release|x64.Build.0 = Release|x64
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Release|x86.ActiveCfg = Release|x86
-		{027477DC-4D9D-4E37-A282-60B19898E797}.Release|x86.Build.0 = Release|x86
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Debug|x64.ActiveCfg = Debug|x64
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Debug|x64.Build.0 = Debug|x64
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Debug|x86.ActiveCfg = Debug|x86
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Debug|x86.Build.0 = Debug|x86
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Release|x64.ActiveCfg = Release|x64
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Release|x64.Build.0 = Release|x64
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Release|x86.ActiveCfg = Release|x86
-		{587B3ABC-DE8B-45E6-9255-0921D6D4CF8D}.Release|x86.Build.0 = Release|x86
+		{892CBB68-0608-4210-855C-4EDBB9703C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{892CBB68-0608-4210-855C-4EDBB9703C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{892CBB68-0608-4210-855C-4EDBB9703C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{892CBB68-0608-4210-855C-4EDBB9703C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{072F5675-37D1-44F9-8D66-4811C1BB430F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{072F5675-37D1-44F9-8D66-4811C1BB430F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{072F5675-37D1-44F9-8D66-4811C1BB430F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{072F5675-37D1-44F9-8D66-4811C1BB430F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {00A201EC-5AF9-41A0-A6DE-6863095C933C}
+		SolutionGuid = {1D17EACA-8852-40D8-9AFA-8B50FC01687E}
 	EndGlobalSection
 EndGlobal

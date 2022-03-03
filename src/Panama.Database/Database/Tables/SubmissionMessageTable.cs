@@ -4,11 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Database.SQLite;
+using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Data;
 
-namespace Restless.App.Panama.Database.Tables
+namespace Restless.Panama.Database.Tables
 {
     /// <summary>
     /// Represents the table that contains messages associated with a submission batch.
@@ -167,11 +167,9 @@ namespace Restless.App.Panama.Database.Tables
         /************************************************************************/
         
         #region Constructor
-        #pragma warning disable 1591
         public SubmissionMessageTable() : base(DatabaseController.Instance, Defs.TableName)
         {
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -277,43 +275,5 @@ namespace Restless.App.Panama.Database.Tables
             CreateExpressionColumn<string>(Defs.Columns.Calculated.RecipientFull, string.Format("{0}+' ('+{1}+')'", Defs.Columns.RecipientName, Defs.Columns.RecipientEmail));
         }
         #endregion
-
-        /************************************************************************/
-
-        #region ITableImport and IColumnRowImporter implementation (commented out)
-        //public bool PerformImport()
-        //{
-        //    return DatabaseImporter.Instance.ImportTable(this, this, "submission_message");
-        //}
-
-        //public string GetColumnName(string origColName)
-        //{
-        //    switch (origColName)
-        //    {
-        //        case "entry_id": return Defs.Columns.EntryId;
-        //        case "sender_name": return Defs.Columns.SenderName;
-        //        case "sender_email": return Defs.Columns.SenderEmail;
-        //        case "recipient_name": return Defs.Columns.RecipientName;
-        //        case "recipient_email": return Defs.Columns.RecipientEmail;
-        //        case "sent_date": return Defs.Columns.Sent;
-        //        case "received_date": return Defs.Columns.Received;
-        //        case "body_format": return Defs.Columns.BodyFormat;
-        //        default: return origColName;
-        //    }
-        //}
-
-        //public bool IncludeColumn(string origColName)
-        //{
-        //    return true;
-        //}
-
-        //public bool GetRowConfirmation(System.Data.DataRow row)
-        //{
-        //    return true;
-        //}
-        #endregion
-
-
-
     }
 }
