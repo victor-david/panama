@@ -1,7 +1,6 @@
 .vs/
+.docs/
 *.suo
 obj/
 bin/
-Help/
 packages/
-_docs/
