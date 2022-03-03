@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Restless.Toolkit.Core" Version="2.5.4" />
+    <PackageReference Include="Restless.Toolkit.Core" Version="2.5.5" />
   </ItemGroup>
 
 </Project>

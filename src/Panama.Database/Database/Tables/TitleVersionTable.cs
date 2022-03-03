@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Toolkit.Core.Database.SQLite;
+using Restless.Toolkit.Core.OpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -232,25 +233,24 @@ namespace Restless.Panama.Database.Tables
         protected override void OnColumnChanged(DataColumnChangeEventArgs e)
         {
             base.OnColumnChanged(e);
-            // TODO - OpenXml
-            //if (e.Column.ColumnName == Defs.Columns.FileName)
-            //{
-            //    string fullPath = Path.Combine(Controller.GetTable<ConfigTable>().GetRowValue(ConfigTable.Defs.FieldIds.FolderTitleRoot), e.ProposedValue.ToString());
-            //    var info = new FileInfo(fullPath);
-            //    if (info.Exists)
-            //    {
-            //        e.Row[Defs.Columns.Size] = info.Length;
-            //        e.Row[Defs.Columns.Updated] = info.LastWriteTimeUtc;
-            //        e.Row[Defs.Columns.WordCount] = OpenXmlDocument.Reader.TryGetWordCount(fullPath);
-            //    }
-            //    else
-            //    {
-            //        e.Row[Defs.Columns.Size] = 0;;
-            //        e.Row[Defs.Columns.Updated] = DateTime.UtcNow;
-            //        e.Row[Defs.Columns.WordCount] = 0;
-            //    }
-            //    e.Row[Defs.Columns.DocType] = Controller.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(e.ProposedValue.ToString());
-            //}
+            if (e.Column.ColumnName == Defs.Columns.FileName)
+            {
+                string fullPath = Path.Combine(Controller.GetTable<ConfigTable>().GetRowValue(ConfigTable.Defs.FieldIds.FolderTitleRoot), e.ProposedValue.ToString());
+                var info = new FileInfo(fullPath);
+                if (info.Exists)
+                {
+                    e.Row[Defs.Columns.Size] = info.Length;
+                    e.Row[Defs.Columns.Updated] = info.LastWriteTimeUtc;
+                    e.Row[Defs.Columns.WordCount] = OpenXmlDocument.Reader.TryGetWordCount(fullPath);
+                }
+                else
+                {
+                    e.Row[Defs.Columns.Size] = 0; ;
+                    e.Row[Defs.Columns.Updated] = DateTime.UtcNow;
+                    e.Row[Defs.Columns.WordCount] = 0;
+                }
+                e.Row[Defs.Columns.DocType] = Controller.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(e.ProposedValue.ToString());
+            }
         }
         #endregion
 
