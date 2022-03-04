@@ -7,6 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panama", "Panama\Panama.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panama.Database", "Panama.Database\Panama.Database.csproj", "{072F5675-37D1-44F9-8D66-4811C1BB430F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panama.Validation", "Panama.Validation\Panama.Validation.csproj", "{D5E448AB-3566-46BE-AD4E-17AC877DF2F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panama.Utility", "Panama.Utility\Panama.Utility.csproj", "{62048E0A-EEE2-45FF-863C-ED8EEE095857}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E44C0D4-9EAC-475E-97A2-E6C4845D5AD4}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +30,14 @@ Global
 		{072F5675-37D1-44F9-8D66-4811C1BB430F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{072F5675-37D1-44F9-8D66-4811C1BB430F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{072F5675-37D1-44F9-8D66-4811C1BB430F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5E448AB-3566-46BE-AD4E-17AC877DF2F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5E448AB-3566-46BE-AD4E-17AC877DF2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5E448AB-3566-46BE-AD4E-17AC877DF2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5E448AB-3566-46BE-AD4E-17AC877DF2F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62048E0A-EEE2-45FF-863C-ED8EEE095857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62048E0A-EEE2-45FF-863C-ED8EEE095857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62048E0A-EEE2-45FF-863C-ED8EEE095857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62048E0A-EEE2-45FF-863C-ED8EEE095857}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
