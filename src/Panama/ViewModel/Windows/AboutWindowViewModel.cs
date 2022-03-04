@@ -5,7 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides the view model logic for the <see cref="View.AboutWindow"/>.

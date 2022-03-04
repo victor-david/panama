@@ -8,7 +8,7 @@ using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.ComponentModel;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Represents the base class for view-model supplemental controllers.

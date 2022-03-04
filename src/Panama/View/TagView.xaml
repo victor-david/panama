@@ -1,8 +1,8 @@
 ﻿<UserControl 
-    x:Class="Restless.App.Panama.View.TagView"
+    x:Class="Restless.Panama.View.TagView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:view="clr-namespace:Restless.App.Panama.View"
+    xmlns:view="clr-namespace:Restless.Panama.View"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"

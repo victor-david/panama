@@ -5,31 +5,36 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
+using System.Windows.Media;
+using Restless.Panama.Resources;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.Panama.Core
 {
     /// <summary>
-    /// Provides a converter that accepts a string value and returns a <see cref="DateTime"/> object.
+    /// Provides a converter that accepts a boolean value and if true, returns a specified <see cref="ImageSource"/> object.
     /// </summary>
-    public class StringToDateConverter : IValueConverter
+    public class BooleanToImageConverter : IValueConverter
     {
         #region Public methods
         /// <summary>
-        /// Attempts to convert a string value to a <see cref="DateTime"/> object.
+        /// Converts a boolean value to an <see cref="ImageSource"/> object.
         /// </summary>
-        /// <param name="value">The string value</param>
+        /// <param name="value">The boolean value</param>
         /// <param name="targetType">Not used.</param>
-        /// <param name="parameter">Not used.</param>
+        /// <param name="parameter">The resource name of an image source to use when value is true. If null, the default of "ImageCheck" will be used.</param>
         /// <param name="culture">Not used.</param>
-        /// <returns>A <see cref="DateTime"/> object. If <paramref name="value"/> cannot be converted, returns <paramref name="value"/> unchanged.</returns>
+        /// <returns>The image, if <paramref name="value"/> is true; otherwise, null.</returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            try { return System.Convert.ToDateTime(value); }
-            catch { return value; }
+            ImageSource result = null;
+
+            if (value is bool && (bool)value)
+            {
+                string resourceName = (parameter is string) ? parameter.ToString() : "ImageCheck";
+                result = (ImageSource)ResourceHelper.Get(resourceName);
+            }
+            return result;
         }
 
         /// <summary>

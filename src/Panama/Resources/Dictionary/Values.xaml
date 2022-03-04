@@ -2,9 +2,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:core="clr-namespace:Restless.App.Panama.Core"
-    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
-    xmlns:con="clr-namespace:Restless.App.Panama.Controls">
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:cv="clr-namespace:Restless.Panama.Core"
+    xmlns:con="clr-namespace:Restless.Panama.Controls">
 
     <!-- Base control size definitions -->
     <sys:Double x:Key="ControlFontSize">13</sys:Double>

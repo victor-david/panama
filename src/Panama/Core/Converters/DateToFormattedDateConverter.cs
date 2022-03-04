@@ -5,37 +5,32 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Markup;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.Panama.Core
 {
     /// <summary>
-    /// Provides a converter that accepts a boolean value and returns a <see cref="DataGridSelectionMode"/> value.
+    /// Provides a converter that accepts a <see cref="DateTime"/> object and returns a formatted string.
     /// </summary>
-    public class BooleanToSelectionModeConverter : MarkupExtension, IValueConverter
+    public class DateToFormattedDateConverter : MarkupExtension, IValueConverter
     {
         #region Public methods
         /// <summary>
-        /// Converts a boolean value into a <see cref="DataGridSelectionMode"/> value.
+        /// Converts a <see cref="DateTime"/> object to a formatted string.
         /// </summary>
-        /// <param name="value">The boolean value</param>
+        /// <param name="value">The <see cref="DateTime"/> object.</param>
         /// <param name="targetType">Not used.</param>
         /// <param name="parameter">Not used.</param>
         /// <param name="culture">Not used.</param>
-        /// <returns>DataGridSelectionMode.Extended if <paramref name="value"/> is true; otherwise, DataGridSelectionMode.Single.</returns>
+        /// <returns>A date formatted string according to the application's <see cref="Core.Config.DateFormat"/> property.</returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is bool)
+            if (value is DateTime dt)
             {
-               return (bool)value ? DataGridSelectionMode.Extended : DataGridSelectionMode.Single;
+                return dt.ToString(Core.Config.Instance.DateFormat);
             }
-            return DataGridSelectionMode.Single;
+            return value;
         }
 
         /// <summary>

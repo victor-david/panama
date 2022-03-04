@@ -4,7 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Core;
+using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Mvvm;
@@ -13,7 +13,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Represents the base view model that is associated with a window that uses a dummy table.

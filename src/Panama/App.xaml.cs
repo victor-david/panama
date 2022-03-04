@@ -4,11 +4,9 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Core;
-using Restless.App.Panama.Resources;
-using Restless.App.Panama.ViewModel;
+using Restless.Panama.ViewModel;
+using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
-using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Panama.Utility;
 using System;

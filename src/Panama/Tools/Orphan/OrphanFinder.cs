@@ -4,14 +4,14 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Core;
+using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Restless.App.Panama.Tools
+namespace Restless.Panama.Tools
 {
     /// <summary>
     /// Provides a tool that locates files beneath <see cref="Config.FolderTitleRoot"/>

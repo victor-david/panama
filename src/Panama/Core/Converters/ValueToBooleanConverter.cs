@@ -13,7 +13,7 @@ using System.Windows;
 using System.Diagnostics;
 using System.Windows.Markup;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides a converter that accepts a value type and returns a boolean. Used in radio button binding.

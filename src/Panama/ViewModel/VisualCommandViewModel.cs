@@ -8,7 +8,7 @@ using Restless.Toolkit.Mvvm;
 using System;
 using System.Windows.Input;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Represents an actionable item that has a visual component to be bound and displayed by a view.

@@ -12,7 +12,7 @@ using System.Data;
 using System.Windows.Media;
 using SystemColors = System.Windows.Media.Colors;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Represents the foreground and background colors for a single configuration color item.

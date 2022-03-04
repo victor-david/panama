@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Represents a dictionary of data rows indexed by a key value

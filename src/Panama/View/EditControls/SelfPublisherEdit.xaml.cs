@@ -6,7 +6,7 @@
 */
 using System.Windows.Controls;
 
-namespace Restless.App.Panama.View
+namespace Restless.Panama.View
 {
     /// <summary>
     /// Interaction logic for SelfPublisherEdit.xaml

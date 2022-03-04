@@ -12,7 +12,7 @@ using System.Windows.Data;
 using System.Globalization;
 using System.Diagnostics;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides a debugging converter. When this converter is used, breaks into the debugger

@@ -7,7 +7,7 @@
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Extends CommandViewModel to provide a specialized view of actionable tags.

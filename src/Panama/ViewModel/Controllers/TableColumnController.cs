@@ -10,7 +10,7 @@ using Restless.Toolkit.Controls;
 using System.Collections.ObjectModel;
 using System.Data;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Represents a controller that displays the columns of a table.

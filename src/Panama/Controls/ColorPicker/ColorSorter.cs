@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restless.App.Panama.Controls
+namespace Restless.Panama.Controls
 {
     internal class ColorSorter : IComparer
     {

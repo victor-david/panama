@@ -9,7 +9,7 @@ using Restless.Panama.Database.Tables;
 using System;
 using System.IO;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Represents a single message

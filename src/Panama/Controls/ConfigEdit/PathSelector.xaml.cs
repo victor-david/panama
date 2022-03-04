@@ -5,12 +5,12 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Core;
+using Restless.Panama.Core;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Restless.App.Panama.Controls
+namespace Restless.Panama.Controls
 {
     /// <summary>
     /// Interaction logic for PathSelector.xaml

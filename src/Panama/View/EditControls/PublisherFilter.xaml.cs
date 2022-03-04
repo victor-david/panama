@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Restless.App.Panama.View
+namespace Restless.Panama.View
 {
     public partial class PublisherFilter : UserControl
     {

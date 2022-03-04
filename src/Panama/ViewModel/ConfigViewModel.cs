@@ -4,17 +4,16 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Resources;
+using Restless.Panama.Controls;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Mvvm.Collections;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using ConfigDefault = Restless.App.Panama.Core.Config.Default;
+using ConfigDefault = Restless.Panama.Core.Config.Default;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides the logic that is used for application settings.

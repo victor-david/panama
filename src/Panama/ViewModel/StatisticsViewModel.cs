@@ -4,13 +4,12 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Core;
-using Restless.App.Panama.Resources;
-using Restless.App.Panama.Tools;
+using Restless.Panama.Controls;
+using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
+using Restless.Panama.Tools;
 using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -18,7 +17,7 @@ using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides the logic that is used to display application statistcs.

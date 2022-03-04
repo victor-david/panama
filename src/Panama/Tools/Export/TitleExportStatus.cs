@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Restless.App.Panama.Tools
+namespace Restless.Panama.Tools
 {
     /// <summary>
     /// Provides enumeration values that describe the status of a single <see cref="TitleExportCandidate"/>.

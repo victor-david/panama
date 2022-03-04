@@ -11,7 +11,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Markup;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides option values that may be passed to <see cref="BooleanToVisibilityMultiConverter"/>

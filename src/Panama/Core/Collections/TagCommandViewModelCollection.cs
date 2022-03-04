@@ -4,10 +4,10 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.ViewModel;
+using Restless.Panama.ViewModel;
 using System.Collections.ObjectModel;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// An observable collection of TagCommandViewModel objects

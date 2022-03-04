@@ -6,7 +6,7 @@
 */
 using System;
 
-namespace Restless.App.Panama.Tools
+namespace Restless.Panama.Tools
 {
     /// <summary>
     /// Represents the result of a file scan and provides an object for visual components to bind to.

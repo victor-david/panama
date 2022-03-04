@@ -6,7 +6,7 @@
 */
 using System.Windows.Media;
 
-namespace Restless.App.Panama.Controls
+namespace Restless.Panama.Controls
 {
     /// <summary>
     /// Represents a single color item.

@@ -6,7 +6,7 @@
 */
 using System.Collections.ObjectModel;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Represents a collection of <see cref="TitleVersionRenameItem"/> objects.

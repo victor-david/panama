@@ -10,7 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Media;
 
-namespace Restless.App.Panama.Controls
+namespace Restless.Panama.Controls
 {
     /// <summary>
     /// Provides static utility methods for working with color values

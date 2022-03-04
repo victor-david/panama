@@ -9,7 +9,7 @@ using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using System.Data;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides static methods for creating CommonOpenFileDialog objects

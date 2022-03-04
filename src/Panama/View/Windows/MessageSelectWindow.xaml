@@ -1,9 +1,9 @@
 ﻿<Window 
-    x:Class="Restless.App.Panama.View.MessageSelectWindow"
+    x:Class="Restless.Panama.View.MessageSelectWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    xmlns:cv="clr-namespace:Restless.Panama.Core"
     Height="600" Width="1060" ShowInTaskbar="False" 
     WindowStartupLocation="CenterOwner">
     

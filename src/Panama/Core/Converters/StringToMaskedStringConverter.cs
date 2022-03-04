@@ -13,7 +13,7 @@ using System.Windows;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides a converter that accepts a string value and returns a masked string value.

@@ -12,7 +12,7 @@ using System.Windows.Markup;
 using System.Windows.Data;
 using System.Globalization;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides a converter that accepts a double value and returns that value minus the parameter value.

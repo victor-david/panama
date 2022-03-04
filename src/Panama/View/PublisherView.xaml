@@ -1,10 +1,10 @@
 ﻿<UserControl 
-    x:Class="Restless.App.Panama.View.PublisherView"
+    x:Class="Restless.Panama.View.PublisherView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
+    xmlns:cv="clr-namespace:Restless.Panama.Core"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:view="clr-namespace:Restless.App.Panama.View"
+    xmlns:view="clr-namespace:Restless.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"

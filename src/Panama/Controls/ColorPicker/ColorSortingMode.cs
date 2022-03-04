@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restless.App.Panama.Controls
+namespace Restless.Panama.Controls
 {
     /// <summary>
     /// Provides an enumeration of the modes in which the color pallete may be sorted.

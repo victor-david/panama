@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Restless.App.Panama.Controls
+namespace Restless.Panama.Controls
 {
     /// <summary>
     /// Provides the interaction logic for a GridRowDisplay control.

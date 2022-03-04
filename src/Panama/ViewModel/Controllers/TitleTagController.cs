@@ -4,7 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Core;
+using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Mvvm;
@@ -12,7 +12,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Windows.Input;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides a controller that manages the tags that may be assigned to a title.

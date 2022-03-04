@@ -1,5 +1,5 @@
 ﻿<Window 
-    x:Class="Restless.App.Panama.View.SubmissionDocumentSelectWindow"
+    x:Class="Restless.Panama.View.SubmissionDocumentSelectWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Create submission document" Height="212" Width="418" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">

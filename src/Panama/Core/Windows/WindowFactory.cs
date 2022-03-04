@@ -4,15 +4,15 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.View;
-using Restless.App.Panama.ViewModel;
+using Restless.Panama.View;
+using Restless.Panama.ViewModel;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides static methods for creating application windows.

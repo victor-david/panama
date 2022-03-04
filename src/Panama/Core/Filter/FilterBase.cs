@@ -7,7 +7,7 @@
 using Restless.Toolkit.Mvvm;
 using System;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Represents the base class for filters. This class must be inherited.

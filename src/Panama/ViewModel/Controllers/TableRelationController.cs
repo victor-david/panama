@@ -8,7 +8,7 @@ using Restless.Panama.Database.Tables;
 using System.Collections.ObjectModel;
 using System.Data;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Represnets the base class for a controller that handles the display of table relations. This class must be inherited.

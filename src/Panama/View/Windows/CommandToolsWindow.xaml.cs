@@ -17,7 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Restless.App.Panama.View
+namespace Restless.Panama.View
 {
     public partial class CommandToolsWindow : Window
     {

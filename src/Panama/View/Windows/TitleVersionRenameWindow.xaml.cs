@@ -16,9 +16,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Restless.App.Panama.ViewModel;
+using Restless.Panama.ViewModel;
 
-namespace Restless.App.Panama.View
+namespace Restless.Panama.View
 {
     public partial class TitleVersionRenameWindow : Window
     {

@@ -6,7 +6,7 @@
 */
 using System;
 
-namespace Restless.App.Panama.Tools
+namespace Restless.Panama.Tools
 {
     /// <summary>
     /// Represents the event arguments for file scan events.

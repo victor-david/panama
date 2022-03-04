@@ -11,7 +11,7 @@ using System.Text;
 using System.Windows.Data;
 using System.Windows;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides a converter that accepts a double value and returns a <see cref="GridLength"/>.

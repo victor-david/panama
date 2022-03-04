@@ -7,7 +7,7 @@
 using Restless.Toolkit.Mvvm;
 using System;
 
-namespace Restless.App.Panama.Tools
+namespace Restless.Panama.Tools
 {
     /// <summary>
     /// Represents the base class for a tool that scans files. This class must be inherited.

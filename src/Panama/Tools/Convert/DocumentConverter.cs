@@ -5,13 +5,13 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 #if DOCX
-using Restless.App.Panama.Core;
+using Restless.Panama.Core;
 using Restless.Tools.Utility;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
 
-namespace Restless.App.Panama.Tools
+namespace Restless.Panama.Tools
 {
     /// <summary>
     /// Provides document conversion services. Converts documents from .doc to .docx.

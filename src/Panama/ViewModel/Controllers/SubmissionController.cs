@@ -7,7 +7,7 @@
 
 using Restless.Panama.Database.Tables;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Base class for submission batch supplemental controllers.

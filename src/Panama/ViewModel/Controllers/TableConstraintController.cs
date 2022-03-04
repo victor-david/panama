@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Represents a controller that displays tables contraints.

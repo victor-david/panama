@@ -8,7 +8,7 @@ using Restless.Panama.Database.Core;
 using Restless.Toolkit.Controls;
 using System.Data;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Represents a controller that displays the parent relations of a table.

@@ -9,7 +9,7 @@ using Restless.Toolkit.Core.Utility;
 using System;
 using System.IO;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// A singleton class that provides information about the application.

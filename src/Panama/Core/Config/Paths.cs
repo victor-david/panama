@@ -6,7 +6,7 @@
 */
 using System.IO;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides static methods for handling rooted and non-rooted paths for title and submission documents.

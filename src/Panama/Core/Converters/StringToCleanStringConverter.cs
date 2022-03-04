@@ -8,7 +8,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Windows.Data;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides a converter that accepts a string value and returns a string value that has been cleaned up.

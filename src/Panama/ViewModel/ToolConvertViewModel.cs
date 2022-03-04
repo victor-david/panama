@@ -7,16 +7,16 @@
 #if DOCX
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Converters;
-using Restless.App.Panama.Core;
-using Restless.App.Panama.Resources;
-using Restless.App.Panama.Tools;
+using Restless.Panama.Core;
+using Restless.Panama.Resources;
+using Restless.Panama.Tools;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Utility;
 using System;
 using System.ComponentModel;
 #endif
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
 #if DOCX
     /// <summary>

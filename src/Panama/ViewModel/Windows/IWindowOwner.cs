@@ -7,7 +7,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Defines an interface that describes window ownership.

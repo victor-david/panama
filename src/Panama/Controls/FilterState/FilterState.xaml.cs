@@ -7,7 +7,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Restless.App.Panama.Controls
+namespace Restless.Panama.Controls
 {
     /// <summary>
     /// Interaction logic for FilterState.xaml
@@ -52,9 +52,9 @@ namespace Restless.App.Panama.Controls
         /// <summary>
         /// Gets or sets the filter state
         /// </summary>
-        public Core.FilterState State
+        public Restless.Panama.Core.FilterState State
         {
-            get => (Core.FilterState)GetValue(StateProperty);
+            get => (Restless.Panama.Core.FilterState)GetValue(StateProperty);
             set => SetValue(StateProperty, value);
         }
 

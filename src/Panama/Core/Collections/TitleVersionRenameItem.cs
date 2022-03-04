@@ -10,7 +10,7 @@ using Restless.Toolkit.Mvvm;
 using System;
 using System.IO;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Represents a single title version item for which to rename its associated file

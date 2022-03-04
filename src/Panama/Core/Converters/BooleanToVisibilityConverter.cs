@@ -12,7 +12,7 @@ using System.Windows.Markup;
 using System.Windows.Data;
 using System.Windows;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides a converter that accepts a boolean value and returns a <see cref="Visibility"/> value.

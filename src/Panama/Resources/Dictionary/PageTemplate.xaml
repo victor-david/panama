@@ -2,9 +2,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:vm="clr-namespace:Restless.App.Panama.ViewModel"
-    xmlns:vw="clr-namespace:Restless.App.Panama.View"
-    xmlns:con="clr-namespace:Restless.App.Panama.Controls">
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    xmlns:vw="clr-namespace:Restless.Panama.View">
     
     <!-- Template to apply a AuthorView to an instance of the AuthorViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:AlertViewModel}">

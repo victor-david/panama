@@ -4,13 +4,13 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Resources;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Mvvm;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 
-namespace Restless.App.Panama.ViewModel
+namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides the Close command and properties that are common to all view models. This class must be interited.
@@ -64,9 +64,9 @@ namespace Restless.App.Panama.ViewModel
         /// Although derived classes can access the singleton instance directly,
         /// this enables easy binding to certain configuration properties
         /// </summary>
-        public Core.Config Config
+        public Restless.Panama.Core.Config Config
         {
-            get => Core.Config.Instance;
+            get => Restless.Panama.Core.Config.Instance;
         }
         #endregion
 

@@ -7,7 +7,7 @@
 using System.Windows.Media;
 using SystemColors = System.Windows.Media.Colors;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides services for application color management.

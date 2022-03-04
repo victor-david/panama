@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Restless.App.Panama.View
+namespace Restless.Panama.View
 {
     /// <summary>
     /// Interaction logic for TitleEditAddToSubmission.xaml

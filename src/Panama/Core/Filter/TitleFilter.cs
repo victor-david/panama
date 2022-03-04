@@ -7,7 +7,7 @@
 
 using Restless.Toolkit.Core.Utility;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Represents the various filtering options that can be applied to the title list.

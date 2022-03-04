@@ -13,7 +13,7 @@ using System.Windows.Data;
 using System.Data;
 using System.Windows.Markup;
 
-namespace Restless.App.Panama.Converters
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides a converter that accepts an integer value and returns a <see cref="Visibility"/> value.

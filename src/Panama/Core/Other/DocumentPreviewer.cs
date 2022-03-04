@@ -11,7 +11,7 @@ using System;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides static methods to preview a document

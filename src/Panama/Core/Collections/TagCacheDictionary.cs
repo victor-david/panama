@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Represents a dictionary of TagCache objects
