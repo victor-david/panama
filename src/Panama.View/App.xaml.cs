@@ -16,7 +16,6 @@ namespace Restless.Panama
             DatabaseController.Instance.Init(RegistryManager.DatabaseDirectory);
             MainWindow window = new();
             window.Show();
-
         }
 
         protected override void OnExit(ExitEventArgs e)
