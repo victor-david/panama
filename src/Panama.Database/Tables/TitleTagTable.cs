@@ -152,11 +152,23 @@ namespace Restless.Panama.Database.Tables
         /// <returns>A <see cref="ColumnDefinitionCollection"/>.</returns>
         protected override ColumnDefinitionCollection GetColumnDefinitions()
         {
-            // TODO - this is a compound key
             return new ColumnDefinitionCollection()
             {
                 { Defs.Columns.TitleId, ColumnType.Integer },
                 { Defs.Columns.TagId, ColumnType.Integer },
+            };
+        }
+
+        /// <summary>
+        /// Gets the primary key collection
+        /// </summary>
+        /// <returns>A primary key collection for a compound primary key</returns>
+        protected override PrimaryKeyCollection GetPrimaryKeyDefinition()
+        {
+            return new PrimaryKeyCollection()
+            {
+                Defs.Columns.TitleId,
+                Defs.Columns.TagId
             };
         }
 
