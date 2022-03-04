@@ -4,10 +4,10 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.View;
 using Restless.App.Panama.ViewModel;
-using System;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media;
@@ -126,37 +126,7 @@ namespace Restless.App.Panama.Core
             }
         }
         #endregion
-
-        /************************************************************************/
-
-        #region MessageSelect
-        /// <summary>
-        /// Provides static methods for creating a message select window.
-        /// </summary>
-        public static class MessageSelect
-        {
-            /// <summary>
-            /// Creates an instance of MessageSelectWindow and its corresponding view model.
-            /// </summary>
-            /// <param name="title">The title of the window.</param>
-            /// <param name="options">Options that affect the use and layout of the window.</param>
-            /// <returns>The window</returns>
-            [Obsolete("Use MessageFileSelect instead")]
-            public static MessageSelectWindow Create(string title, MessageSelectOptions options)
-            {
-                var window = new MessageSelectWindow
-                {
-                    Title = title,
-                    Owner = Application.Current.MainWindow,
-                    DataContext = new MessageSelectWindowViewModel(options)
-                };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
-                return window;
-            }
-        }
-        #endregion
-        
+       
         /************************************************************************/
 
         #region MessageFileSelect
@@ -256,7 +226,7 @@ namespace Restless.App.Panama.Core
             {
                 var window = new TitleVersionRenameWindow
                 {
-                    Title = Resources.Strings.WindowTitleVersionRename,
+                    Title = Strings.WindowTitleVersionRename,
                     Owner = Application.Current.MainWindow,
                     DataContext = new TitleVersionRenameWindowViewModel(titleId),
 

@@ -5,12 +5,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="542">
-    <con:RestlessTabControl>
+    <tk:TabControl>
         <TabControl.Items>
             <TabItem Header="Data">
                 <DockPanel>
@@ -33,7 +33,12 @@
             </TabItem>
             <TabItem Header="Periods">
                 <StackPanel>
-                    <DataGrid Style="{StaticResource DataGridEdit}" Height="140" ItemsSource="{Binding Path=Periods.DataView}" SelectedItem="{Binding Periods.SelectedItem}" con:DataGridColumns.Columns="{Binding Periods.Columns}"/>
+                    <DataGrid 
+                        Style="{StaticResource DataGridEdit}" 
+                        Height="140" 
+                        ItemsSource="{Binding Path=Periods.DataView}" 
+                        SelectedItem="{Binding Periods.SelectedItem}"
+                        tk:DataGridColumns.Columns="{Binding Periods.Columns}"/>
                     <StackPanel Visibility="{Binding Periods.NotesVisibility}">
                         <Label>Note</Label>
                         <TextBox  Text="{Binding Periods.SelectedRow[notes]}"/>
@@ -60,8 +65,7 @@
                     <!-- submission batches -->
                     <DockPanel 
                         DockPanel.Dock="Top"
-                        Visibility="{Binding Submissions.DataViewCount,Converter={cv:IntegerToVisibilityConverter}}"
-                        >
+                        Visibility="{Binding Submissions.DataViewCount,Converter={cv:IntegerToVisibilityConverter}}">
                         <TextBlock 
                             DockPanel.Dock="Top" 
                             Style="{StaticResource TextBlockLabel}" 
@@ -73,7 +77,7 @@
                             Height="160" 
                             ItemsSource="{Binding Path=Submissions.DataView}" 
                             SelectedItem="{Binding Submissions.SelectedItem}" 
-                            con:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
+                            tk:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
                     </DockPanel>
                     
                     <!-- submission titles -->
@@ -87,7 +91,7 @@
                             Margin="4"
                             Text="All titles"/>
 
-                        <con:RestlessDataGrid 
+                        <tk:DataGrid 
                             x:Name="grid"  
                             DockPanel.Dock="Top" 
                             Style="{StaticResource DataGridEdit}" 
@@ -95,13 +99,13 @@
                             ItemsSource="{Binding Path=Titles.MainSource.View}"
                             SelectedItem="{Binding Titles.SelectedItem}"
                             CanUserSortColumns="False"
-                            con:DataGridColumns.Columns="{Binding Titles.Columns}">
+                            tk:DataGridColumns.Columns="{Binding Titles.Columns}">
                             <DataGrid.ContextMenu>
                                 <ContextMenu ItemsSource="{Binding Titles.MenuItems}"/>
                             </DataGrid.ContextMenu>
                             <DataGrid.RowStyle>
                                 <Style TargetType="DataGridRow">
-                                    <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Titles.OpenRowCommand}"/>
+                                    <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Titles.OpenRowCommand}"/>
                                 </Style>
                             </DataGrid.RowStyle>
                             <DataGrid.GroupStyle>
@@ -115,7 +119,7 @@
                                     </GroupStyle.HeaderTemplate>
                                 </GroupStyle>
                             </DataGrid.GroupStyle>
-                        </con:RestlessDataGrid>
+                        </tk:DataGrid>
                     </DockPanel>
                 </DockPanel>
             </TabItem>
@@ -134,5 +138,5 @@
                 </StackPanel>
             </TabItem>
         </TabControl.Items>
-    </con:RestlessTabControl>
+    </tk:TabControl>
 </UserControl>

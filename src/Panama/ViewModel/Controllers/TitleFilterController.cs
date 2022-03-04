@@ -5,11 +5,12 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Mvvm;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,11 +26,11 @@ namespace Restless.App.Panama.ViewModel
     public class TitleFilterController : TitleController
     {
         #region Private
-        private TitleTagTable titleTagTable;
-        private SubmissionBatchTable submissionBatchTable;
-        private SubmissionTable submissionTable;
-        private StringBuilder filter;
-        private StringBuilder filterDesc;
+        private readonly TitleTagTable titleTagTable;
+        private readonly SubmissionBatchTable submissionBatchTable;
+        private readonly SubmissionTable submissionTable;
+        private readonly StringBuilder filter;
+        private readonly StringBuilder filterDesc;
         private string wordCountText;
         private bool applyFilterPaused;
         private bool trimNextFilterDesc;
@@ -43,7 +44,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public string RecordCountText
         {
-            get { return Format.Plural(Owner.DataView.Count, Strings.TextRecord, Strings.TextRecords); }
+            get => Format.Plural(Owner.DataView.Count, Strings.TextRecord, Strings.TextRecords);
         }
 
         /// <summary>
@@ -244,7 +245,7 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         private void InitSelected()
         {
-            List<long> bads = new List<long>();
+            List<long> bads = new();
             //filterTags.AddValuesFromDelimitedString(Owner.Config.TitleFilter.Tags);
             /* Tags may have been deleted since we last saved the list */
             foreach (long tagId in Config.TitleFilter.Tags)

@@ -5,9 +5,10 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Core.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -81,7 +82,6 @@ namespace Restless.App.Panama.ViewModel
             Commands.Add("Link", (o) => CreateIf<LinkViewModel>());
             Commands.Add("Note", (o) => CreateIf<UserNoteViewModel>());
             Commands.Add("Publisher", (o) => CreateIf<PublisherViewModel>());
-            Commands.Add("Reference", (o) => OpenHelper.OpenFile(AppInfo.ReferenceFileName));
             Commands.Add("ResetWindow", RunResetWindowCommand);
             Commands.Add("Submission", (o) => CreateIf<SubmissionViewModel>());
             Commands.Add("Save", Save);
@@ -301,7 +301,7 @@ namespace Restless.App.Panama.ViewModel
 
         private void CloseAllWorkspaces(object o)
         {
-            List<ApplicationViewModel> temp = new List<ApplicationViewModel>(Workspaces);
+            List<ApplicationViewModel> temp = new(Workspaces);
             foreach (ApplicationViewModel workspace in temp)
             {
                 workspace.CloseCommand.Execute(null);

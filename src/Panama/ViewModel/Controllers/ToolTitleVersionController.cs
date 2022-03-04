@@ -7,7 +7,7 @@
 using Restless.App.Panama.Core;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Utility;
+using Restless.Panama.Resources;
 
 namespace Restless.App.Panama.ViewModel
 {
@@ -51,24 +51,24 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             scanner = new VersionUpdater();
+            // TODO
+            //scanner.Updated += (s, e) =>
+            //{
+            //    TaskManager.Instance.DispatchTask(() =>
+            //    {
+            //        AddToUpdated(e.Target);
+            //        UpdateFoundHeader();
+            //    });
+            //};
 
-            scanner.Updated += (s, e) =>
-            {
-                TaskManager.Instance.DispatchTask(() =>
-                {
-                    AddToUpdated(e.Target);
-                    UpdateFoundHeader();
-                });
-            };
-
-            scanner.NotFound += (s, e) =>
-            {
-                TaskManager.Instance.DispatchTask(() =>
-                {
-                    AddToNotFound(e.Target);
-                    UpdateNotFoundHeader();
-                });
-            };
+            //scanner.NotFound += (s, e) =>
+            //{
+            //    TaskManager.Instance.DispatchTask(() =>
+            //    {
+            //        AddToNotFound(e.Target);
+            //        UpdateNotFoundHeader();
+            //    });
+            //};
 
             UpdateFoundHeader();
             UpdateNotFoundHeader();

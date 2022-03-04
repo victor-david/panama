@@ -4,8 +4,8 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Mvvm;
-using Restless.Tools.Utility;
+using Restless.Toolkit.Mvvm;
+using System;
 using System.Windows.Input;
 
 namespace Restless.App.Panama.ViewModel
@@ -114,10 +114,9 @@ namespace Restless.App.Panama.ViewModel
                 double imageSize = DefaultImageSize, double fontSize = DefaultFontSize, double minWidth = DefaultMinWidth
             ) : base(null)
         {
-            Validations.ValidateNull(command, "CommandViewModel.Command");
             DisplayName = displayName;
             TooltipText = toolTipText;
-            Command = command;
+            Command = command ?? throw new ArgumentNullException(nameof(command));
             ImageSize = imageSize;
             FontSize = fontSize;
             MinWidth = minWidth;

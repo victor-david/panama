@@ -7,7 +7,8 @@
 using Restless.App.Panama.Core;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Utility;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Utility;
 using System.IO;
 
 namespace Restless.App.Panama.ViewModel
@@ -18,7 +19,7 @@ namespace Restless.App.Panama.ViewModel
     public class ToolTitleListController : ToolControllerBase<ToolTitleListViewModel>
     {
         #region Private
-        private TitleLister scanner;
+        private readonly TitleLister scanner;
         #endregion
 
         /************************************************************************/

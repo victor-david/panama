@@ -5,11 +5,12 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Core.Database.SQLite;
+using Restless.Toolkit.Utility;
 using System.Data;
 
 namespace Restless.App.Panama.ViewModel

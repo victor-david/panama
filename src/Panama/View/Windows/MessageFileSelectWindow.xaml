@@ -2,7 +2,7 @@
     x:Class="Restless.App.Panama.View.MessageFileSelectWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     Height="600" Width="1060" ShowInTaskbar="False" 
     ResizeMode="NoResize"
     WindowStartupLocation="CenterOwner">
@@ -28,14 +28,14 @@
 
         <!-- Main data grid to display the tabular data  -->
         <Border Grid.Row="1" Style="{StaticResource BorderGridContainer}">
-            <con:RestlessDataGrid 
+            <tk:DataGrid 
                 x:Name="grid"
                 SelectionMode="Extended"
                 SelectedItemsList="{Binding SelectedDataGridItems, Mode=OneWayToSource}"
                 ItemsSource="{Binding Path=MainSource.View}"
                 SelectedItem="{Binding SelectedItem}" 
-                con:DataGridColumns.Columns="{Binding Columns}">
-            </con:RestlessDataGrid>
+                tk:DataGridColumns.Columns="{Binding Columns}">
+            </tk:DataGrid>
         </Border>
 
         <StackPanel Grid.Row="2" Style="{StaticResource StackPanelCommandHolder}" Margin="4">

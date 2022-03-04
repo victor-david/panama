@@ -5,7 +5,8 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Resources;
-using Restless.Tools.Utility;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Core.Utility;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -59,7 +60,7 @@ namespace Restless.App.Panama.ViewModel
             Creator = new ToolTitleListController(this);
             Creator.Scanner.Completed += ScannerCompleted;
             Commands.Add("Begin", (o) => Creator.Run());
-            Commands.Add("OpenFile", (o) => { OpenHelper.OpenFile(Creator.TitleListFileName); });
+            Commands.Add("OpenFile", (o) => OpenHelper.OpenFile(Creator.TitleListFileName));
         }
         #endregion
 

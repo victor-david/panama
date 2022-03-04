@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
-    xmlns:cv="clr-namespace:Restless.Tools.Converters;assembly=Restless.Tools.Utility"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
     <Grid>
@@ -37,7 +37,7 @@
                 <Button
                     Width="70"
                     Command="{Binding Commands[Begin]}"
-                    IsEnabled="{Binding InProgress, Converter={cv:BooleanToInverseBooleanConverter}}"
+                    tk:Property.IsInverseEnabled="{Binding InProgress}"
                     Content="Begin"/>
                 <!-- Separator -->
                 <Separator/>

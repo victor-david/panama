@@ -4,15 +4,17 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+#if DOCX
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Core;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Controls;
-using Restless.Tools.Utility;
+using Restless.Toolkit.Controls;
+using Restless.Toolkit.Utility;
 using System;
 using System.ComponentModel;
+#endif
 
 namespace Restless.App.Panama.ViewModel
 {

@@ -4,9 +4,8 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
+using Restless.Toolkit.Core.Database.SQLite;
+using System;
 using System.ComponentModel;
 
 namespace Restless.App.Panama.ViewModel
@@ -81,8 +80,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="owner">The VM that owns this view model.</param>
         protected ControllerBase(VM owner) : base(owner)
         {
-            Validations.ValidateNull(owner, "ControllerBase.Owner");
-            Owner = owner;
+            Owner = owner ?? throw new ArgumentNullException(nameof(owner));
         }
         #endregion
 

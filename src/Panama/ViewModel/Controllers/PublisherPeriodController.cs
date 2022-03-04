@@ -5,11 +5,12 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Controls;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
+using Restless.Toolkit.Utility;
 using System;
 using System.Data;
 using System.Windows;
@@ -179,8 +180,8 @@ namespace Restless.App.Panama.ViewModel
 
         private void RunAddSubmissionPeriodAllYearCommand(object o)
         {
-            DateTime start = new DateTime(DateTime.Now.Year, 1, 1);
-            DateTime end = new DateTime(DateTime.Now.Year, 12, 31);
+            DateTime start = new(DateTime.Now.Year, 1, 1);
+            DateTime end = new(DateTime.Now.Year, 12, 31);
             AddSubmissionPeriod(start, end);
         }
 

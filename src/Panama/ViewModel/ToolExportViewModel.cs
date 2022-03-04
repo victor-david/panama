@@ -5,7 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Resources;
-using Restless.Tools.Utility;
+using Restless.Panama.Resources;
 using System.ComponentModel;
 
 namespace Restless.App.Panama.ViewModel

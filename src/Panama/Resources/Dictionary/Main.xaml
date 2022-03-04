@@ -2,7 +2,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls">
+    xmlns:tk="http://schemas.restless.toolkit.com/2021">
     
     <!-- Style for border separator -->
     <Style TargetType="Border" x:Key="MainBorderSeparator">
@@ -50,7 +50,7 @@
 
     <!-- This template explains how to render the 'Workspace' content area in the main window.  -->
     <DataTemplate x:Key="WorkspacesTemplate">
-        <con:RestlessTabControl
+        <tk:TabControl
             Margin="4"
             Background="White"
             AllowTabReorder="True"

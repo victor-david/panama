@@ -4,12 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
-    xmlns:cv="clr-namespace:Restless.Tools.Converters;assembly=Restless.Tools.Utility"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="498">
-    <con:RestlessTabControl>
+    <tk:TabControl>
         <TabControl.Items>
             <!-- Main data: flags, fees, notes -->
             <TabItem Header="{x:Static r:Strings.HeaderData}">
@@ -44,7 +43,8 @@
             <TabItem Header="{x:Static r:Strings.HeaderDates}">
                 <StackPanel>
                     <Expander Header="{Binding Submitted.Header}" IsExpanded="False">
-                        <con:RestlessCalendar SelectedDateUtc="{Binding Submitted.SubmittedDate}" />
+                        <!-- TODO -->
+                        <!--<tk:RestlessCalendar SelectedDateUtc="{Binding Submitted.SubmittedDate}" />-->
                     </Expander>
 
                     <Expander Header="{Binding Response.Header}" IsExpanded="False">
@@ -58,7 +58,8 @@
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Column="0">
                                 <Label>Date</Label>
-                                <con:RestlessCalendar SelectedDateUtc="{Binding Response.ResponseDate}" />
+                                <!-- TODO -->
+                                <!--<tk:RestlessCalendar SelectedDateUtc="{Binding Response.ResponseDate}" />-->
                             </StackPanel>
                             <StackPanel Grid.Column="1">
                                 <Label>Type</Label>
@@ -87,10 +88,10 @@
                         CanUserSortColumns="False"
                         ItemsSource="{Binding Path=Titles.DataView}"
                         SelectedItem="{Binding Titles.SelectedItem}"
-                        con:DataGridColumns.Columns="{Binding Titles.Columns}">
+                        tk:DataGridColumns.Columns="{Binding Titles.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
-                                <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid1, Path=DataContext.Titles.OpenRowCommand}"/>
+                                <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=grid1, Path=DataContext.Titles.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
                     </DataGrid>
@@ -113,10 +114,16 @@
             <!-- Documents -->
             <TabItem Header="{Binding Documents.Header}">
                 <DockPanel>
-                    <DataGrid DockPanel.Dock="Top" x:Name="grid2" Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Documents.DataView}" SelectedItem="{Binding Documents.SelectedItem}" con:DataGridColumns.Columns="{Binding Documents.Columns}">
+                    <DataGrid 
+                        DockPanel.Dock="Top"
+                        x:Name="grid2"
+                        Style="{StaticResource DataGridEdit}"
+                        ItemsSource="{Binding Path=Documents.DataView}"
+                        SelectedItem="{Binding Documents.SelectedItem}"
+                        tk:DataGridColumns.Columns="{Binding Documents.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
-                                <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid2, Path=DataContext.Documents.OpenRowCommand}"/>
+                                <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=grid2, Path=DataContext.Documents.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
                     </DataGrid>
@@ -137,7 +144,7 @@
                                     VerticalAlignment="Top"
                                     Margin="8"
                                     Style="{StaticResource TextBlockError}"
-                                    Visibility="{Binding Documents.IsOpenXml,Converter={cv:BooleanToInverseVisibilityConverter}}">
+                                    Visibility="{Binding Documents.IsOpenXml,Converter={tk:BooleanToInverseVisibilityConverter}}">
                         The text for this document cannot be displayed. Only Open Xml documents are supported.
                                 </TextBlock>
                                 <TextBox 
@@ -145,7 +152,7 @@
                                     Margin="4,8"
                                     Style="{StaticResource TextBoxMultiFull}"
                                     Text="{Binding Documents.PreviewText,Mode=OneWay}"
-                                    Visibility="{Binding Documents.IsOpenXml,Converter={cv:BooleanToVisibilityConverter}}"/>
+                                    tk:Property.IsVisible="{Binding Documents.IsOpenXml}"/>
                             </DockPanel>
                         </Expander>
                     </DockPanel>
@@ -165,10 +172,10 @@
                         Style="{StaticResource DataGridEdit}" 
                         ItemsSource="{Binding Path=Messages.DataView}"
                         SelectedItem="{Binding Messages.SelectedItem}"
-                        con:DataGridColumns.Columns="{Binding Messages.Columns}">
+                        tk:DataGridColumns.Columns="{Binding Messages.Columns}">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
-                                <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid3, Path=DataContext.Messages.OpenRowCommand}"/>
+                                <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=grid3, Path=DataContext.Messages.OpenRowCommand}"/>
                             </Style>
                         </DataGrid.RowStyle>
                         <DataGrid.ContextMenu>
@@ -242,5 +249,5 @@
                 </Grid>
             </TabItem>
         </TabControl.Items>
-    </con:RestlessTabControl>
+    </tk:TabControl>
 </UserControl>

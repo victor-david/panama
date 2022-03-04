@@ -18,15 +18,12 @@ namespace Restless.App.Panama.Controls
         public int Compare(object firstItem, object secondItem)
         {
             if (firstItem == null || secondItem == null)
-                return -1;
-
-            ColorItem colorItem1 = (ColorItem)firstItem;
-            ColorItem colorItem2 = (ColorItem)secondItem;
-
-            if (colorItem1.Color == null || colorItem2.Color == null)
             {
                 return -1;
             }
+
+            ColorItem colorItem1 = (ColorItem)firstItem;
+            ColorItem colorItem2 = (ColorItem)secondItem;
 
             System.Drawing.Color drawingColor1 = System.Drawing.Color.FromArgb(colorItem1.Color.A, colorItem1.Color.R, colorItem1.Color.G, colorItem1.Color.B);
             System.Drawing.Color drawingColor2 = System.Drawing.Color.FromArgb(colorItem2.Color.A, colorItem2.Color.R, colorItem2.Color.G, colorItem2.Color.B);

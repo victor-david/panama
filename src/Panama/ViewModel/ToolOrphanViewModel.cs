@@ -5,12 +5,13 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Controls;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
+using Restless.Toolkit.Utility;
 using System.ComponentModel;
 
 namespace Restless.App.Panama.ViewModel
@@ -118,9 +119,9 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedItem is FileScanDisplayObject file && Messages.ShowYesNo(Strings.ConfirmationCreateTitleFromOrphan))
             {
-                var title = DatabaseController.Instance.GetTable<TitleTable>();
-                var ver = DatabaseController.Instance.GetTable<TitleVersionTable>();
-                var row = new TitleTable.RowObject(title.AddDefaultRow())
+                TitleTable title = DatabaseController.Instance.GetTable<TitleTable>();
+                TitleVersionTable ver = DatabaseController.Instance.GetTable<TitleVersionTable>();
+                TitleTable.RowObject row = new(title.AddDefaultRow())
                 {
                     Title = "Title created from orphaned file",
                     Written = file.LastModified,

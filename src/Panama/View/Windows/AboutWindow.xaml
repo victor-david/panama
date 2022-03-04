@@ -2,9 +2,8 @@
     x:Class="Restless.App.Panama.View.AboutWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
-    xmlns:cv="clr-namespace:Restless.Tools.Converters;assembly=Restless.Tools.Utility"
-    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     Title="About" 
     Height="440" Width="586" 
     ResizeMode="NoResize" 
@@ -21,35 +20,36 @@
                 <Setter Property="Margin" Value="4"/>
                 <Setter Property="TextWrapping" Value="Wrap"/>
             </Style>
-            <Style TargetType="con:KeyValue">
+            <Style TargetType="tk:LineItem">
                 <Setter Property="Margin" Value="0,2"/>
-                <Setter Property="HeaderFontSize" Value="13"/>
-                <Setter Property="HeaderWidth" Value="84"/>
-                <Setter Property="HeaderForeground" Value="DarkBlue"/>
-                <Setter Property="HeaderVerticalAlignment" Value="Top"/>
+                <Setter Property="ItemFontSize" Value="13"/>
+                <Setter Property="ItemDisplayWidth" Value="84"/>
+                <Setter Property="ItemForeground" Value="DarkBlue"/>
+                <Setter Property="ItemVerticalAlignment" Value="Top"/>
                 <Setter Property="ValueFontSize" Value="13"/>
                 <Setter Property="ValueForeground" Value="#FF818181"/>
                 <Setter Property="ValueVerticalAlignment" Value="Top"/>
             </Style>
         </StackPanel.Resources>
 
-        <con:KeyValue Header="Product">
-            <con:KeyValue.Value>
-                <MultiBinding  Converter="{cv:StringConcatenationMultiConverter}" Mode="OneTime">
+        <!-- TODO -->
+        <!--<tk:LineItem Item="Product">
+            <tk:LineItem.Value>
+                <MultiBinding  Converter="{tk:StringConcatenationMultiConverter}" Mode="OneTime">
                     <Binding Path="AppInfo.Assembly.Title" />
                     <Binding Path="AppInfo.Assembly.VersionMajor" />
                 </MultiBinding>
-            </con:KeyValue.Value>
-        </con:KeyValue>
+            </tk:LineItem.Value>
+        </tk:LineItem>-->
 
-        <con:KeyValue Header="Build Date" Value="{Binding AppInfo.BuildDate, Mode=OneTime}"/>
-        <con:KeyValue Header="Company" Value="{Binding AppInfo.Assembly.Company, Mode=OneTime}"/>
-        <con:KeyValue Header="Copyright" Value="{Binding AppInfo.Assembly.Copyright, Mode=OneTime}"/>
-        <con:KeyValue Header="Description" Value="{Binding AppInfo.Assembly.Description, Mode=OneTime}"/>
-        <con:KeyValue Header="Framework" Value="{Binding AppInfo.Assembly.FrameworkVersion, Mode=OneTime}"/>
-        <con:KeyValue Header="Executable" Value="{Binding AppInfo.Assembly.Location, Mode=OneTime}"/>
-        <con:KeyValue Header="64 Bit" Value="{Binding AppInfo.Is64Bit, Mode=OneTime}"/>
-        <con:KeyValue Header="Database" Value="{Binding AppInfo.DatabaseFileName, Mode=OneTime}"/>
+        <tk:LineItem Item="Build Date" Value="{Binding AppInfo.BuildDate, Mode=OneTime}"/>
+        <tk:LineItem Item="Company" Value="{Binding AppInfo.Assembly.Company, Mode=OneTime}"/>
+        <tk:LineItem Item="Copyright" Value="{Binding AppInfo.Assembly.Copyright, Mode=OneTime}"/>
+        <tk:LineItem Item="Description" Value="{Binding AppInfo.Assembly.Description, Mode=OneTime}"/>
+        <tk:LineItem Item="Framework" Value="{Binding AppInfo.Assembly.FrameworkVersion, Mode=OneTime}"/>
+        <tk:LineItem Item="Executable" Value="{Binding AppInfo.Assembly.Location, Mode=OneTime}"/>
+        <tk:LineItem Item="64 Bit" Value="{Binding AppInfo.Is64Bit, Mode=OneTime}"/>
+        <tk:LineItem Item="Database" Value="{Binding AppInfo.DatabaseFileName, Mode=OneTime}"/>
 
         <Grid Margin="16,20">
             <Grid.ColumnDefinitions>

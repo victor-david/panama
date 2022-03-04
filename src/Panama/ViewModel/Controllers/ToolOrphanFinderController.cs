@@ -7,7 +7,9 @@
 using Restless.App.Panama.Core;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Utility;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Utility;
 using System.IO;
 
 namespace Restless.App.Panama.ViewModel
@@ -18,7 +20,7 @@ namespace Restless.App.Panama.ViewModel
     public class ToolOrphanFinderController : ToolControllerBase<ToolOrphanViewModel>
     {
         #region Private
-        private OrphanFinder scanner;
+        private readonly OrphanFinder scanner;
         #endregion
 
         /************************************************************************/
@@ -52,18 +54,19 @@ namespace Restless.App.Panama.ViewModel
             :base(owner)
         {
             scanner = new OrphanFinder();
-            scanner.Updated += (s, e) =>
-            {
-                TaskManager.Instance.DispatchTask(() => AddToUpdated(e.Target));
-            };
-            scanner.NotFound += (s, e) =>
-            {
-                TaskManager.Instance.DispatchTask(() =>
-                {
-                    AddToNotFound(e.Target);
-                    UpdateNotFoundHeader();
-                });
-            };
+            // TODO
+            //scanner.Updated += (s, e) =>
+            //{
+            //    TaskManager.Instance.DispatchTask(() => AddToUpdated(e.Target));
+            //};
+            //scanner.NotFound += (s, e) =>
+            //{
+            //    TaskManager.Instance.DispatchTask(() =>
+            //    {
+            //        AddToNotFound(e.Target);
+            //        UpdateNotFoundHeader();
+            //    });
+            //};
 
             Owner.Commands.Add("OpenFile", RunOpenFileCommand);
             Owner.Commands.Add("DeleteFile", RunDeleteFileCommand, (o) => Owner.SelectedItem != null);
@@ -110,10 +113,11 @@ namespace Restless.App.Panama.ViewModel
         {
             if (Owner.SelectedItem is FileScanDisplayObject row)
             {
-                if (FileOperations.SendToRecycle(Paths.Title.WithRoot(row.FileName)))
-                {
-                    RemoveFromNotFound(row);
-                }
+                // TODO
+                //if (FileOperations.SendToRecycle(Paths.Title.WithRoot(row.FileName)))
+                //{
+                //    RemoveFromNotFound(row);
+                //}
             }
         }
         #endregion

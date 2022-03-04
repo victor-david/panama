@@ -5,8 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Resources;
-using Restless.Tools.Mvvm;
-using Restless.Tools.Utility;
+using Restless.Toolkit.Mvvm;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -143,10 +142,11 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="e">The cancel event args.</param>
         protected void SetCancelIfTasksInProgress(CancelEventArgs e)
         {
-            e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
-            {
-                MainWindowViewModel.Instance.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
-            }, null);
+            // TODO
+            //e.Cancel = TaskManager.Instance.WaitForAllRegisteredTasks(() =>
+            //{
+            //    MainWindowViewModel.Instance.CreateNotificationMessage(Strings.NotificationCannotExitTasksAreRunning);
+            //}, null);
         }
 
         /// <summary>

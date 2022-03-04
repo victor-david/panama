@@ -5,8 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.Tools.Controls;
-using Restless.Tools.Utility;
+using Restless.Toolkit.Controls;
 using System.Windows.Data;
 
 namespace Restless.App.Panama.ViewModel
@@ -102,14 +101,16 @@ namespace Restless.App.Panama.ViewModel
 
             // this doesn't work
             //Application.Current.Dispatcher.BeginInvoke(new Action(() => SelectedItem = item));
-            TaskManager.Instance.ExecuteTask(AppTaskId.SelectedItemFunkyWorkaround, (token) =>
-               {
-                   //System.Threading.Thread.Sleep(1);
-                   TaskManager.Instance.DispatchTask(() =>
-                       {
-                           SelectedItem = item;
-                       });
-               }, null, null, false);
+
+            // TODO
+            //TaskManager.Instance.ExecuteTask(AppTaskId.SelectedItemFunkyWorkaround, (token) =>
+            //   {
+            //       //System.Threading.Thread.Sleep(1);
+            //       TaskManager.Instance.DispatchTask(() =>
+            //           {
+            //               SelectedItem = item;
+            //           });
+            //   }, null, null, false);
         }
         #endregion
 

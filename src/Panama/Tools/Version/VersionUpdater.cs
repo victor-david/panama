@@ -5,9 +5,9 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.OpenXml;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Core.OpenXml;
 using System.Linq;
 
 namespace Restless.App.Panama.Tools

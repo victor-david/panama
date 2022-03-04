@@ -5,10 +5,11 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Core.Utility;
 using System;
 using System.IO;
 
@@ -28,7 +29,7 @@ namespace Restless.App.Panama.Tools
     {
         #region Private
         private readonly string exportDirectory;
-        private TitleExportTitleList candidates;
+        private readonly TitleExportTitleList candidates;
         private int updated;
         private int removed;
         #endregion
@@ -74,7 +75,10 @@ namespace Restless.App.Panama.Tools
         protected override void ExecuteTask()
         {
             // This is checked by the caller, but we need to make sure.
-            Validations.ValidateInvalidOperation(!Directory.Exists(exportDirectory), Strings.InvalidOpExportFolderNotSet);
+            if (!Directory.Exists(exportDirectory))
+            {
+                throw new InvalidOperationException(Strings.InvalidOpExportFolderNotSet);
+            }
             updated = removed = 0;
             PopulateCandidates();
             PerformExport();
@@ -91,9 +95,9 @@ namespace Restless.App.Panama.Tools
         {
             candidates.Clear();
 
-            foreach (var title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
+            foreach (TitleTable.RowObject title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
             {
-                foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(title.Id))
+                foreach (TitleVersionTable.RowObject ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(title.Id))
                 {
                     // DateWritten_Title_vVer.Rev.Lang.ext
                     // Ex: 2011-05-24_Title_v1.A.en-us.docx
@@ -113,7 +117,7 @@ namespace Restless.App.Panama.Tools
 
         private void PerformExport()
         {
-            foreach (var candidate in candidates)
+            foreach (TitleExportCandidate candidate in candidates)
             {
                 ScanCount++;
                 if (candidate.Status == TitleExportStatus.OriginalIsNewer || candidate.Status == TitleExportStatus.ExportFileDoesNotExist)
@@ -150,7 +154,7 @@ namespace Restless.App.Panama.Tools
             string readMeFile = Path.Combine(exportDirectory, ReadMe);
             if (updated > 0 || removed > 0 || !File.Exists(readMeFile))
             {
-                AssemblyInfo a = new AssemblyInfo(AssemblyInfoType.Entry);
+                AssemblyInfo a = new(AssemblyInfoType.Entry);
                 File.WriteAllText(readMeFile, string.Format(Strings.FormatTextExport, a.Title, DateTime.UtcNow.ToString("R")));
             }
         }

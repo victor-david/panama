@@ -6,7 +6,7 @@
     xmlns:con="clr-namespace:Restless.App.Panama.Controls"    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
     <Grid>

@@ -7,12 +7,15 @@
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Controls;
-using Restless.Tools.OpenXml;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core.OpenXml;
+using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Utility;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -33,10 +36,10 @@ namespace Restless.App.Panama.ViewModel
         private bool isOpenXml;
         private PropertiesAdapter properties;
         private int dataViewCount;
-        private TitleVersionTable versionTable;
-        private Database.Tables.TitleVersionController verController;
+        private readonly TitleVersionTable versionTable;
+        private Restless.Panama.Database.Tables.TitleVersionController verController;
         private TitleVersionTable.RowObject selectedRowObj;
-        private DataGridColumn versionColumn;
+        private readonly DataGridColumn versionColumn;
         private string toggleGroupText;
         #endregion
 
@@ -322,12 +325,12 @@ namespace Restless.App.Panama.ViewModel
         /// <returns>true if <paramref name="fileName"/> does not already belong to </returns>
         private bool CanAddFileToTitle(string fileName)
         {
-            var verList = versionTable.GetVersionsWithFile(fileName);
+            List<TitleVersionTable.RowObject> verList = versionTable.GetVersionsWithFile(fileName);
             foreach (var ver in verList)
             {
                 if (ver.TitleId == currentOwnerTitleId)
                 {
-                    StringBuilder sb = new StringBuilder();
+                    StringBuilder sb = new();
                     sb.AppendLine(fileName);
                     sb.AppendLine();
                     sb.Append(Strings.InvalidOpCannotAddVersionFile);

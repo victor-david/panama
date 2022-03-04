@@ -5,10 +5,6 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Restless.Tools.Utility;
 
 namespace Restless.App.Panama.Tools
 {
@@ -37,8 +33,7 @@ namespace Restless.App.Panama.Tools
         /// <param name="target">The target</param>
         public FileScanEventArgs(FileScanDisplayObject target)
         {
-            Validations.ValidateNull(target, "FileScanEventArgs.Target");
-            Target = target;
+            Target = target ?? throw new ArgumentNullException(nameof(target));
         }
         #endregion
     }

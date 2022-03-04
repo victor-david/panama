@@ -5,10 +5,10 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Controls;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Core.Database.SQLite;
+using Restless.Toolkit.Core.Utility;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -28,13 +28,12 @@ namespace Restless.App.Panama.Core
         public static Config Instance { get; } = new Config();
 
         private Config() : base(DatabaseController.Instance.GetTable<ConfigTable>())
-
         {
             TitleFilter = GetItem(null, nameof(TitleFilter)).Deserialize<TitleFilter>();
             PublisherFilter = GetItem(null, nameof(PublisherFilter)).Deserialize<PublisherFilter>();
             Colors = new ConfigColors();
             // This is applied at when config is first created and when the DateFormat property is changed by the user in settings.
-            Restless.Tools.Controls.Default.Format.Date = DateFormat;
+            //Restless.Tools.Controls.Default.Format.Date = DateFormat;
         }
 
         /// <summary>
@@ -163,7 +162,8 @@ namespace Restless.App.Panama.Core
             set
             {
                 SetItem(value);
-                Restless.Tools.Controls.Default.Format.Date = value;
+                // TODO
+                //Restless.Tools.Controls.Default.Format.Date = value;
             }
         }
 
@@ -598,10 +598,7 @@ namespace Restless.App.Panama.Core
 
         private void SetGridLength(GridLength value, [CallerMemberName] string id = null)
         {
-            if (value != null)
-            {
-                SetItem(value.Value, id);
-            }
+            SetItem(value.Value, id);
         }
         #endregion
     }

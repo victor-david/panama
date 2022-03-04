@@ -5,9 +5,10 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Core.Utility;
 using System;
 using System.Text;
 
@@ -19,8 +20,8 @@ namespace Restless.App.Panama.ViewModel
     public class PublisherFilterController : PublisherController
     {
         #region Private
-        private StringBuilder filter;
-        private StringBuilder filterDesc;
+        private readonly StringBuilder filter;
+        private readonly StringBuilder filterDesc;
         private bool applyFilterPaused;
         private bool trimNextFilterDesc;
         #endregion
@@ -31,10 +32,7 @@ namespace Restless.App.Panama.ViewModel
         /// <summary>
         /// Gets a short description of the number of records in the data view
         /// </summary>
-        public string RecordCountText
-        {
-            get { return Format.Plural(Owner.DataView.Count, Strings.TextRecord, Strings.TextRecords); }
-        }
+        public string RecordCountText => Format.Plural(Owner.DataView.Count, Strings.TextRecord, Strings.TextRecords);
 
         /// <summary>
         /// Gets the friendly description of the current filter

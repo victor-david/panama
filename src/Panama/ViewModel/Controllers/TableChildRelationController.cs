@@ -5,8 +5,8 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.Tools.Controls;
+using Restless.Panama.Database.Core;
+using Restless.Toolkit.Controls;
 using System.Data;
 
 namespace Restless.App.Panama.ViewModel
@@ -59,7 +59,7 @@ namespace Restless.App.Panama.ViewModel
             string tableName = GetOwnerSelectedPrimaryIdString();
             if (tableName != null)
             {
-                var table = DatabaseController.Instance.DataSet.Tables[tableName];
+                DataTable table = DatabaseController.Instance.DataSet.Tables[tableName];
                 Relations.Clear();
                 foreach (DataRelation relation in table.ChildRelations)
                 {

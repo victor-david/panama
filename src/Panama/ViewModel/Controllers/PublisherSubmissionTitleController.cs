@@ -6,9 +6,9 @@
 */
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Controls;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Controls;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Data;

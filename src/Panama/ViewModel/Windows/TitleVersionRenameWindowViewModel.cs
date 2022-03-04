@@ -6,12 +6,13 @@
 */
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.View;
-using Restless.Tools.Controls;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core.Utility;
 using System;
 
 namespace Restless.App.Panama.ViewModel
@@ -22,7 +23,7 @@ namespace Restless.App.Panama.ViewModel
     public class TitleVersionRenameWindowViewModel : WindowViewModel
     {
         #region Private
-        private TitleVersionRenameItemCollection renameView;
+        private readonly TitleVersionRenameItemCollection renameView;
         private string operationMessage;
         private bool canRename;
         #endregion
@@ -118,13 +119,12 @@ namespace Restless.App.Panama.ViewModel
         private void RunRenameCommand(object o)
         {
             Execution.TryCatch(() =>
-                {
-                    renameView.Rename();
-                    DatabaseController.Instance.GetTable<TitleVersionTable>().Save();
-                    OperationMessage = Strings.ConfirmationAllVersionFilesRenamed;
-                    canRename = false;
-
-                });
+            {
+                renameView.Rename();
+                DatabaseController.Instance.GetTable<TitleVersionTable>().Save();
+                OperationMessage = Strings.ConfirmationAllVersionFilesRenamed;
+                canRename = false;
+            });
         }
 
         private bool CanRunRenameCommand(object o)

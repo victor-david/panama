@@ -5,7 +5,8 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Resources;
-using Restless.Tools.Utility;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Core.Utility;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,7 +22,7 @@ namespace Restless.App.Panama.ViewModel
     {
         #region Private
         private string text;
-        private Random rand;
+        private readonly Random rand;
         private const string SearchPattern = @"\w+";
         #endregion
 
@@ -101,13 +102,16 @@ namespace Restless.App.Panama.ViewModel
 
         private StringBuilder Scrambled()
         {
-            StringBuilder result = new StringBuilder(1024);
+            StringBuilder result = new(1024);
             if (Text == null) Text = string.Empty;
             string[] lines = Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
             int lineCount = lines.Length;
-            Validations.ValidateInvalidOperation(lineCount < 4, Strings.InvalidOpNotEnoughTextToScramble);
+            if (lineCount < 4)
+            {
+                throw new InvalidOperationException(Strings.InvalidOpNotEnoughTextToScramble);
+            }
 
-            List<int> used = new List<int>();
+            List<int> used = new();
 
             while (used.Count < lineCount)
             {
@@ -130,7 +134,7 @@ namespace Restless.App.Panama.ViewModel
 
         private string ScrambledWords(string line)
         {
-            List<string> words = new List<string>();
+            List<string> words = new();
             MatchCollection matches = Regex.Matches(line, SearchPattern);
             foreach (Match match in matches)
             {
@@ -143,7 +147,7 @@ namespace Restless.App.Panama.ViewModel
 
             if (words.Count < 2) { return line; }
 
-            List<int> used = new List<int>();
+            List<int> used = new();
 
             while (used.Count < words.Count)
             {

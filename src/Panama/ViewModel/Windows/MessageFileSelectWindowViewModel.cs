@@ -8,8 +8,8 @@ using Restless.App.Panama.Converters;
 using Restless.App.Panama.Core;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.View;
-using Restless.Tools.Controls;
-using Restless.Tools.Utility;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -88,7 +88,11 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="folder">The folder where submission message file are stored.</param>
         public MessageFileSelectWindowViewModel(string folder)
         {
-            Validations.ValidateNullEmpty(folder, nameof(folder));
+            if (string.IsNullOrEmpty(folder))
+            {
+                throw new ArgumentNullException(nameof(folder));
+            }
+
             this.folder = folder;
             resultsView = new ObservableCollection<MimeKitMessage>();
             MainSource.Source = resultsView;
@@ -152,19 +156,12 @@ namespace Restless.App.Panama.ViewModel
             {
                 if (DisplayFilterSelection != null)
                 {
-                    switch (DisplayFilterSelection.Item1)
+                    e.Accepted = DisplayFilterSelection.Item1 switch
                     {
-                        case 0:
-                            e.Accepted = true;
-                            break;
-                        case 1:
-                            e.Accepted = !m.InUse;
-                            break;
-                        default:
-                            e.Accepted = DateTime.Compare(DateTime.UtcNow, m.MessageDateUtc.AddDays(DisplayFilterSelection.Item1)) < 0;
-                            break;
-
-                    }
+                        0 => true,
+                        1 => !m.InUse,
+                        _ => DateTime.Compare(DateTime.UtcNow, m.MessageDateUtc.AddDays(DisplayFilterSelection.Item1)) < 0,
+                    };
                 }
             }
         }

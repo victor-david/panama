@@ -4,9 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.ViewModel;
-using Restless.Tools.Mvvm;
-using Restless.Tools.Utility;
+using Restless.Toolkit.Mvvm;
 using System;
 
 namespace Restless.App.Panama.Tools
@@ -67,13 +65,14 @@ namespace Restless.App.Panama.Tools
         /************************************************************************/
         
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileScanBase"/> class.
+        /// </summary>
         public FileScanBase()
         {
             ScanCount = 0;
             TotalCount = int.MaxValue;
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -85,16 +84,17 @@ namespace Restless.App.Panama.Tools
         /// <param name="taskId">The unique task id.</param>
         public void Execute(int taskId)
         {
-            IsRunning = true;
-            ScanCount = 0;
-            TaskManager.Instance.ExecuteTask(taskId, (token) =>
-                {
-                    ExecuteTask();
-                    OnCompleted();
-                    IsRunning = false;
-                }, null, null, false)
-                .ContinueWith((t)=> MainWindowViewModel.Instance.CreateNotificationMessage($"{ScannerName} complete"),
-                TaskManager.Instance.MainScheduler);
+            // TODO
+            //IsRunning = true;
+            //ScanCount = 0;
+            //TaskManager.Instance.ExecuteTask(taskId, (token) =>
+            //    {
+            //        ExecuteTask();
+            //        OnCompleted();
+            //        IsRunning = false;
+            //    }, null, null, false)
+            //    .ContinueWith((t)=> MainWindowViewModel.Instance.CreateNotificationMessage($"{ScannerName} complete"),
+            //    TaskManager.Instance.MainScheduler);
         }
 
         /// <summary>

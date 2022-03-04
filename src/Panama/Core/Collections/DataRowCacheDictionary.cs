@@ -4,9 +4,9 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Utility;
 using System.Collections.Generic;
 using System.Data;
+using System;
 
 namespace Restless.App.Panama.Core
 {
@@ -43,12 +43,14 @@ namespace Restless.App.Panama.Core
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataRowCacheDictionary"/> class.
+        /// </summary>
         public DataRowCacheDictionary()
         {
             storage = new Dictionary<string, DataRow>();
         }
-        #pragma warning restore 1591
+        
         #endregion
 
         /************************************************************************/
@@ -61,8 +63,7 @@ namespace Restless.App.Panama.Core
         /// <param name="row">TheDataRow object</param>
         public void Add(string key, DataRow row)
         {
-            Validations.ValidateNullEmpty(key, "Add.Key");
-            Validations.ValidateNull(row, "Add.Row");
+            ValidateArgs(key, row);
             storage.Add(key, row);
         }
 
@@ -73,11 +74,27 @@ namespace Restless.App.Panama.Core
         /// <param name="row">TheDataRow object</param>
         public void AddIf(string key, DataRow row)
         {
-            Validations.ValidateNullEmpty(key, "AddIf.Key");
-            Validations.ValidateNull(row, "AddIf.Row");
+            ValidateArgs(key, row);
             if (!storage.ContainsKey(key))
             {
                 storage.Add(key, row);
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+        private void ValidateArgs(string key, DataRow row)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (row == null)
+            {
+                throw new ArgumentNullException(nameof(row));
             }
         }
         #endregion

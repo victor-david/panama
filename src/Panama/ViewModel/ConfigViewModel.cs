@@ -6,7 +6,8 @@
 */
 using Restless.App.Panama.Controls;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Mvvm.Collections;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Mvvm.Collections;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -421,7 +422,7 @@ namespace Restless.App.Panama.ViewModel
             /// <summary>
             /// Gets a value that indicates if the publisher has been flagged as a goner.
             /// </summary>
-            public bool goner
+            public bool Goner
             {
                 get;
                 private set;
@@ -443,7 +444,7 @@ namespace Restless.App.Panama.ViewModel
                 Added = added;
                 LastSub = lastSub;
                 CalcInPeriod = isInPeriod;
-                goner = isGoner;
+                Goner = isGoner;
             }
         }
         #endregion

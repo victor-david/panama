@@ -5,18 +5,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
-    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     mc:Ignorable="d" 
     d:DesignHeight="500" d:DesignWidth="350">
-    <con:RestlessTabControl SelectedIndex="{Binding SelectedTabIndex,Mode=OneWayToSource}">
+    <tk:TabControl SelectedIndex="{Binding SelectedTabIndex,Mode=OneWayToSource}">
         <TabControl.Items>
             <TabItem Header="{x:Static r:Strings.HeaderData}">
                 <DockPanel Margin="6,4">
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                         <Label>Title</Label>
-                        <con:LinkedTextBlock
+                        <tk:LinkedTextBlock
                             Margin="6,6,0,0"
                             Text="Extract from latest version"
                             Command="{Binding Commands[ExtractTitle]}"/>
@@ -44,7 +44,8 @@
                     </Grid>
 
                     <Expander DockPanel.Dock="Top" Header="{Binding WrittenHeader}" IsExpanded="False">
-                        <con:RestlessCalendar SelectedDateUtc="{Binding WrittenDate}" />
+                        <!-- TODO -->
+                        <!--<tk:RestlessCalendar SelectedDateUtc="{Binding WrittenDate}" />-->
                     </Expander>
 
                     <Expander DockPanel.Dock="Top" Header="Current Tags" IsExpanded="True">
@@ -71,10 +72,10 @@
                     <DataGrid 
                         Style="{StaticResource DataGridEdit}" 
                         ItemsSource="{Binding Path=Submissions.DataView}" 
-                        con:DataGridColumns.Columns="{Binding Submissions.Columns}"
+                        tk:DataGridColumns.Columns="{Binding Submissions.Columns}"
                         CanUserSortColumns="False"
                         CanUserReorderColumns="False" />
-                    <con:LinkedTextBlock
+                    <tk:LinkedTextBlock
                         Margin="6"
                         Text="Add this title to a submission"
                         Command="{Binding Commands[AddTitleToSubmission]}"/>
@@ -101,5 +102,5 @@
                 </DockPanel>
             </TabItem>
         </TabControl.Items>
-    </con:RestlessTabControl>
+    </tk:TabControl>
 </UserControl>

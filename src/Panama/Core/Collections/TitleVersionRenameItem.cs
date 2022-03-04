@@ -4,9 +4,10 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Mvvm;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
+using System;
 using System.IO;
 
 namespace Restless.App.Panama.Core
@@ -154,9 +155,11 @@ namespace Restless.App.Panama.Core
         /// <param name="title">The title</param>
         public TitleVersionRenameItem(TitleVersionTable.RowObject ver, string title)
         {
-            Validations.ValidateNull(ver, nameof(ver));
-            Validations.ValidateNullEmpty(title, "VersionRenameItem.Title");
-            this.ver = ver;
+            this.ver = ver ?? throw new ArgumentNullException(nameof(ver));
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
 
             OriginalName = Paths.Title.WithRoot(ver.FileName);
             OriginalNameDisplay = Path.GetFileName(OriginalName);

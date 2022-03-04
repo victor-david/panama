@@ -113,7 +113,7 @@ namespace Restless.Panama.Database.Tables
         {
             return new ColumnDefinitionCollection()
             {
-                { Defs.Columns.Id, ColumnType.Integer, true },
+                { Defs.Columns.Id, ColumnType.Text, true },
                 { Defs.Columns.Foreground, ColumnType.Text },
                 { Defs.Columns.Background, ColumnType.Text },
             };

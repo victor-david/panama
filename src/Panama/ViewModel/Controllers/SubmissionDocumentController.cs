@@ -7,12 +7,14 @@
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Controls;
-using Restless.Tools.OpenXml;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core.OpenXml;
+using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Utility;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +28,7 @@ namespace Restless.App.Panama.ViewModel
     public class SubmissionDocumentController : SubmissionController
     {
         #region Private
-        private DocumentTypeTable documentTypeTable;
+        private readonly DocumentTypeTable documentTypeTable;
         private bool isPreviewMode;
         private bool isOpenXml;
         private string previewText;
@@ -197,8 +199,7 @@ namespace Restless.App.Panama.ViewModel
                 Execution.TryCatch(() =>
                 {
                     PreviewText = OpenXmlDocument.Reader.GetText(fileName);
-                },
-                (ex) => MainWindowViewModel.Instance.CreateNotificationMessage(ex.Message));
+                }, (ex) => MainWindowViewModel.Instance.CreateNotificationMessage(ex.Message));
             }
         }
 

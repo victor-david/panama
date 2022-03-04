@@ -6,11 +6,13 @@
 */
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Controls;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Utility;
 using System.ComponentModel;
 using System.Data;
 using System.Text;
@@ -180,15 +182,15 @@ namespace Restless.App.Panama.ViewModel
             // Had a uncaught exception buried deep within the Clipboard.SetText() method.
             // May have been a one-off, but putting the following within a try/catch.
             Execution.TryCatch(() =>
+            {
+                StringBuilder builder = new();
+                foreach (DataRowView rowv in DataView)
                 {
-                    StringBuilder builder = new StringBuilder();
-                    foreach (DataRowView rowv in DataView)
-                    {
-                        builder.AppendLine(rowv.Row[SubmissionTable.Defs.Columns.Joined.Title].ToString());
-                    }
-                    System.Windows.Clipboard.SetText(builder.ToString());
-                    MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ConfirmationTitlesCopiedToClipboard);
-                });
+                    builder.AppendLine(rowv.Row[SubmissionTable.Defs.Columns.Joined.Title].ToString());
+                }
+                System.Windows.Clipboard.SetText(builder.ToString());
+                MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ConfirmationTitlesCopiedToClipboard);
+            });
         }
         #endregion
 

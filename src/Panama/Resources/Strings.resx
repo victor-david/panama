@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CommandPublisher" xml:space="preserve">
     <value>Publishers</value>
@@ -971,5 +971,8 @@ Do you want to continue?</value>
   </data>
   <data name="CommandTitleFilterSelfPublishedTooltip" xml:space="preserve">
     <value>Filter title list to display only titles that are self published</value>
+  </data>
+  <data name="InvalidOperationNoSearchScope" xml:space="preserve">
+    <value>No search scope specified</value>
   </data>
 </root>

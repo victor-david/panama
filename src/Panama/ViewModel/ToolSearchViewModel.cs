@@ -6,12 +6,12 @@
 */
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Resources;
-using Restless.Tools.Controls;
-using Restless.Tools.Utility;
-using Restless.Tools.Utility.Search;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Panama.Tools;
+using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core.Utility;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -28,10 +28,10 @@ namespace Restless.App.Panama.ViewModel
     {
         #region Private
         private string foundHeader;
-        private ObservableCollection<WindowsSearchResult> resultsView;
-        private List<DataGridColumn> previewColumns;
+        private readonly ObservableCollection<WindowsSearchResult> resultsView;
+        private readonly List<DataGridColumn> previewColumns;
         private bool isEmptyResultSet;
-        private WindowsFileSearch provider;
+        private readonly WindowsFileSearch provider;
         #endregion
 
         /************************************************************************/
@@ -131,7 +131,6 @@ namespace Restless.App.Panama.ViewModel
             provider.ExcludedScopes.Add(Config.Instance.FolderSubmissionMessageAttachment);
             IsEmptyResultSet = false;
         }
-#pragma warning restore 1591
         #endregion
 
         /************************************************************************/
@@ -201,8 +200,8 @@ namespace Restless.App.Panama.ViewModel
                 Execution.TryCatch(() =>
                     {
                         resultsView.Clear();
-                        var versions = DatabaseController.Instance.GetTable<TitleVersionTable>();
-                        var results = provider.GetSearchResults(SearchText);
+                        TitleVersionTable versions = DatabaseController.Instance.GetTable<TitleVersionTable>();
+                        WindowsSearchResultCollection results = provider.GetSearchResults(SearchText);
 
                         foreach (var result in results)
                         {
@@ -264,11 +263,12 @@ namespace Restless.App.Panama.ViewModel
         {
             if (SelectedItem is WindowsSearchResult row)
             {
-                string fileName = Paths.Title.WithRoot(row.Values[SysProps.System.ItemPathDisplay].ToString());
-                if (FileOperations.SendToRecycle(fileName))
-                {
-                    resultsView.Remove(row);
-                }
+                // TODO
+                //string fileName = Paths.Title.WithRoot(row.Values[SysProps.System.ItemPathDisplay].ToString());
+                //if (FileOperations.SendToRecycle(fileName))
+                //{
+                //    resultsView.Remove(row);
+                //}
             }
         }
 

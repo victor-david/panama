@@ -7,7 +7,8 @@
 using Restless.App.Panama.Core;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Utility;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Utility;
 using System.IO;
 
 namespace Restless.App.Panama.ViewModel
@@ -18,7 +19,7 @@ namespace Restless.App.Panama.ViewModel
     public class ToolExportTitleController : ToolControllerBase<ToolExportViewModel>
     {
         #region Private
-        private TitleExporter scanner;
+        private readonly TitleExporter scanner;
         #endregion
 
         /************************************************************************/
@@ -70,14 +71,15 @@ namespace Restless.App.Panama.ViewModel
             : base(owner)
         {
             scanner = new TitleExporter(Config.Instance.FolderExport);
-            scanner.Updated += (s, e) =>
-            {
-                TaskManager.Instance.DispatchTask(() => { AddToUpdated(e.Target); });
-            };
-            scanner.NotFound += (s, e) =>
-            {
-                TaskManager.Instance.DispatchTask(() => { AddToNotFound(e.Target); });
-            };
+            // TODO
+            //scanner.Updated += (s, e) =>
+            //{
+            //    TaskManager.Instance.DispatchTask(() => { AddToUpdated(e.Target); });
+            //};
+            //scanner.NotFound += (s, e) =>
+            //{
+            //    TaskManager.Instance.DispatchTask(() => { AddToNotFound(e.Target); });
+            //};
         }
         #endregion
 

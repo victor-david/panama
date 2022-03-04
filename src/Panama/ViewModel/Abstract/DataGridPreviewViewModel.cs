@@ -5,7 +5,8 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.Tools.Utility;
+using Restless.Toolkit.Core.Utility;
+using System;
 using System.Windows.Media.Imaging;
 
 namespace Restless.App.Panama.ViewModel
@@ -152,7 +153,11 @@ namespace Restless.App.Panama.ViewModel
         /// </remarks>
         protected void PerformPreview(string fileName)
         {
-            Validations.ValidateNullEmpty(fileName, "PerformPreview.FileName");
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
             switch (PreviewMode)
             {
                 case PreviewMode.Text:

@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     mc:Ignorable="d" 
     d:DesignHeight="250" d:DesignWidth="700">
     <Grid>
@@ -39,7 +39,7 @@
 
         <!-- Grid to show conversion candidates and progress as they are converted -->
         <HeaderedContentControl Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource HCCTool}" Header="{Binding FoundHeader}" Margin="4">
-            <DataGrid ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}"/>
+            <DataGrid ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" tk:DataGridColumns.Columns="{Binding Columns}"/>
         </HeaderedContentControl>
     </Grid>
 </UserControl>

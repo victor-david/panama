@@ -6,11 +6,13 @@
 */
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Controls;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Utility;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
@@ -24,7 +26,7 @@ namespace Restless.App.Panama.ViewModel
     public class SubmissionMessageController : SubmissionController
     {
         #region Private
-        private StringToCleanStringConverter messageTextConverter;
+        private readonly StringToCleanStringConverter messageTextConverter;
         #endregion
 
         /************************************************************************/

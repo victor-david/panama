@@ -4,7 +4,6 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Tools.Utility;
 using System;
 
 namespace Restless.App.Panama.Tools
@@ -82,8 +81,14 @@ namespace Restless.App.Panama.Tools
         /// <param name="filename">The file name</param>
         public FileScanDisplayObject(long version, long revision, long size, string title, string filename)
         {
-            Validations.ValidateNullEmpty(title, "FileScanDisplayObject.Title");
-            Validations.ValidateNullEmpty(filename, "FileScanDisplayObject.FileName");
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+            if (string.IsNullOrEmpty(filename))
+            {
+                throw new ArgumentNullException(nameof(filename));
+            }
 
             Version = version;
             Revision = revision;

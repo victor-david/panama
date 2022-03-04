@@ -6,12 +6,14 @@
 */
 using Restless.App.Panama.Converters;
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Controls;
-using Restless.Tools.OpenXml;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core.OpenXml;
+using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +33,7 @@ namespace Restless.App.Panama.ViewModel
         private const int PreviewTabIndex = 5;
         private bool autoPreview;
         private bool isOpenXml;
-        private VisualCommandViewModel advFilter;
+        private readonly VisualCommandViewModel advFilter;
         #endregion
 
         /************************************************************************/

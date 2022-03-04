@@ -6,7 +6,6 @@
 */
 using Restless.App.Panama.Core;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Utility;
 using System;
 
 namespace Restless.App.Panama.ViewModel
@@ -17,7 +16,7 @@ namespace Restless.App.Panama.ViewModel
     public class CommandToolsWindowViewModel : WindowViewModel
     {
         #region Private
-        private StartupOptions ops;
+        private readonly StartupOptions ops;
         private bool isCompleted;
         #endregion
 
@@ -71,41 +70,42 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         public void PerformOperations()
         {
-            IsCompleted = false;
-            TaskManager.Instance.ExecuteTask(AppTaskId.CommandTools, (token) =>
-                {
-                    if (ops.IsUpdateRequested)
-                    {
-                        AddToStatus("  Updating title version meta data...", false);
-                        var versionUpdater = new VersionUpdater();
+            // TODO
+            //IsCompleted = false;
+            //TaskManager.Instance.ExecuteTask(AppTaskId.CommandTools, (token) =>
+            //    {
+            //        if (ops.IsUpdateRequested)
+            //        {
+            //            AddToStatus("  Updating title version meta data...", false);
+            //            var versionUpdater = new VersionUpdater();
 
-                        versionUpdater.Execute();
-                        AddToStatus("..done", true);
+            //            versionUpdater.Execute();
+            //            AddToStatus("..done", true);
 
-                        AddToStatus("  Updating submission document meta data...", false);
-                        var submissionUpdater = new SubmissionUpdater();
-                        submissionUpdater.Execute();
-                        AddToStatus("..done", true);
-                    }
+            //            AddToStatus("  Updating submission document meta data...", false);
+            //            var submissionUpdater = new SubmissionUpdater();
+            //            submissionUpdater.Execute();
+            //            AddToStatus("..done", true);
+            //        }
 
-                    if (ops.IsExportRequested)
-                    {
-                        AddToStatus("  Exporting title version documents...", false);
-                        var titleExporter = new TitleExporter(Config.FolderExport);
-                        titleExporter.Execute();
-                        AddToStatus("..done", true);
-                    }
+            //        if (ops.IsExportRequested)
+            //        {
+            //            AddToStatus("  Exporting title version documents...", false);
+            //            var titleExporter = new TitleExporter(Config.FolderExport);
+            //            titleExporter.Execute();
+            //            AddToStatus("..done", true);
+            //        }
 
-                    if (ops.IsTitleListRequested)
-                    {
-                        AddToStatus("  Creating title list... ", false);
-                        var titleLister = new TitleLister(Config.FolderTitleRoot);
-                        titleLister.Execute();
-                        AddToStatus("done", true);
-                        OpenHelper.OpenFile(titleLister.TitleListFileName);
-                    }
-                    IsCompleted = true;
-                }, null, null, false);
+            //        if (ops.IsTitleListRequested)
+            //        {
+            //            AddToStatus("  Creating title list... ", false);
+            //            var titleLister = new TitleLister(Config.FolderTitleRoot);
+            //            titleLister.Execute();
+            //            AddToStatus("done", true);
+            //            OpenHelper.OpenFile(titleLister.TitleListFileName);
+            //        }
+            //        IsCompleted = true;
+            //    }, null, null, false);
         }
         #endregion
 

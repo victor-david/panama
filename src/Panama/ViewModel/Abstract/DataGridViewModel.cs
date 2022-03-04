@@ -4,11 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Mvvm;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Toolkit.Core.Database.SQLite;
+using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -233,7 +233,11 @@ namespace Restless.App.Panama.ViewModel
         /// </remarks>
         protected void AssignDataViewFrom(DataTable table)
         {
-            Validations.ValidateNull(table, "AssignSourceFrom.Table");
+            if (table == null)
+            {
+                throw new ArgumentNullException(nameof(table));
+            }
+
             DataView.ListChanged -= DataViewListChanged;
             DataView = new DataView(table);
             DataView.ListChanged += DataViewListChanged;
@@ -344,9 +348,20 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="notFound">The action to run if the file does not exists.</param>
         protected void OpenFileRow(DataRow row, string fileColumnName, string pathRoot, Action<string> notFound)
         {
-            Validations.ValidateNull(row, "OpenFileRow.Row");
-            Validations.ValidateNullEmpty(fileColumnName, "OpenFileRow.FileColumnName");
-            Validations.ValidateNull(notFound, "OpenFileRow.NotFound");
+            if (row == null)
+            {
+                throw new ArgumentNullException(nameof(row));
+            }
+
+            if (string.IsNullOrEmpty(fileColumnName))
+            {
+                throw new ArgumentNullException(nameof(fileColumnName));
+            }
+
+            if (notFound == null)
+            {
+                throw new ArgumentNullException(nameof(notFound));
+            }
 
             string file = row[fileColumnName].ToString();
             if (!Path.IsPathRooted(file) && !string.IsNullOrWhiteSpace(pathRoot))

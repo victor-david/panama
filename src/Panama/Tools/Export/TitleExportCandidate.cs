@@ -5,7 +5,6 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.Tools.Utility;
 using System;
 using System.IO;
 
@@ -64,8 +63,14 @@ namespace Restless.App.Panama.Tools
         public TitleExportCandidate(long version, long revision, string title, string originalPath, string exportPath)
             :base(version, revision, title, Paths.Title.WithoutRoot(originalPath))
         {
-            Validations.ValidateNullEmpty(originalPath, "ExportCandidate.OriginalPath");
-            Validations.ValidateNullEmpty(exportPath, "ExportCandidate.ExportPath");
+            if (string.IsNullOrEmpty(originalPath))
+            {
+                throw new ArgumentNullException(nameof(originalPath));
+            }
+            if (string.IsNullOrEmpty(exportPath))
+            {
+                throw new ArgumentNullException(nameof(exportPath));
+            }
 
             OriginalPath = originalPath;
             ExportPath = exportPath;

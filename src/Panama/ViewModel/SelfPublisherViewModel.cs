@@ -5,10 +5,12 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Controls;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Utility;
 using System.ComponentModel;
 
 namespace Restless.App.Panama.ViewModel
@@ -18,13 +20,6 @@ namespace Restless.App.Panama.ViewModel
     /// </summary>
     public class SelfPublisherViewModel : DataGridViewModel<SelfPublisherTable>
     {
-        #region Private
-        private bool isFilterVisible;
-        private VisualCommandViewModel advFilter;
-        #endregion
-
-        /************************************************************************/
-
         #region Properties
         #endregion
 

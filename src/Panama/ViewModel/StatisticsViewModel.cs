@@ -6,12 +6,12 @@
 */
 using Restless.App.Panama.Controls;
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.Tools;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -162,12 +162,13 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         private void InitFolderView()
         {
-            TaskManager.Instance.ExecuteTask(AppTaskId.FolderStatScan, (token) =>
-                {
-                    rootStat = new FolderStatisticItem(Config.FolderTitleRoot);
-                    rootStat.Populate();
-                    TaskManager.Instance.DispatchTask(() => { IsFolderViewLoaded = true; });
-                }, null, null, false);
+            // TODO
+            //TaskManager.Instance.ExecuteTask(AppTaskId.FolderStatScan, (token) =>
+            //    {
+            //        rootStat = new FolderStatisticItem(Config.FolderTitleRoot);
+            //        rootStat.Populate();
+            //        TaskManager.Instance.DispatchTask(() => { IsFolderViewLoaded = true; });
+            //    }, null, null, false);
         }
 
         /// <summary>
@@ -175,12 +176,14 @@ namespace Restless.App.Panama.ViewModel
         /// </summary>
         private void CreateTreeViewItems()
         {
-            TreeViewItem rootItem = new TreeViewItem();
-            rootItem.Header = string.Format("Title root: {0}", Config.FolderTitleRoot);
-            rootItem.IsExpanded = true;
+            TreeViewItem rootItem = new()
+            {
+                Header = string.Format("Title root: {0}", Config.FolderTitleRoot),
+                IsExpanded = true
+            };
 
             // Make a header item that displays the file types
-            TreeViewItem headerItem = new TreeViewItem();
+            TreeViewItem headerItem = new();
             var headerItemDisplay = new GridRowDisplay()
             {
                 Columns = 6,

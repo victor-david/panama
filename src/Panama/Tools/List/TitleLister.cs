@@ -5,13 +5,14 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System;
+using Restless.Panama.Resources;
 
 namespace Restless.App.Panama.Tools
 {
@@ -21,9 +22,9 @@ namespace Restless.App.Panama.Tools
     public class TitleLister : FileScanBase
     {
         #region Private
-        private string outputDirectory;
-        private TitleTable titleTable;
-        private TitleVersionTable titleVersionTable;
+        private readonly string outputDirectory;
+        private readonly TitleTable titleTable;
+        private readonly TitleVersionTable titleVersionTable;
         #endregion
 
         /************************************************************************/
@@ -73,14 +74,17 @@ namespace Restless.App.Panama.Tools
         protected override void ExecuteTask()
         {
             // This is checked by the caller, but we need to make sure.
-            Validations.ValidateInvalidOperation(!Directory.Exists(outputDirectory), Strings.InvalidOpTitleListOutputFolder);
+            if (!Directory.Exists(outputDirectory))
+            {
+                throw new InvalidOperationException(Strings.InvalidOpTitleListOutputFolder);
+            }
 
-            List<string> lines = new List<string>();
+            List<string> lines = new();
 
             var titleEnumerator = titleTable.EnumerateTitles();
             TotalCount = titleEnumerator.Count();
 
-            foreach (var title in titleEnumerator)
+            foreach (TitleTable.RowObject title in titleEnumerator)
             {
                 lines.Add(string.Format("{0} - {1}", title.Written.ToString(Config.Instance.DateFormat), title.Title));
 

@@ -6,14 +6,9 @@
 */
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Resources;
-using Restless.App.Panama.ViewModel;
-using Restless.Tools.Utility.Search;
-using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
 
 namespace Restless.App.Panama.Controls
 {
@@ -167,24 +162,6 @@ namespace Restless.App.Panama.Controls
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
                     PathName = dialog.FileName;
-                }
-            }
-        }
-
-        [Obsolete("Mapi selection is deprecated")]
-        private void SelectMapiFolder()
-        {
-            MessageSelectOptions ops = new MessageSelectOptions(MessageSelectMode.Folder, null);
-            var window = WindowFactory.MessageSelect.Create(Strings.CaptionSelectMapiFolder, ops);
-            window.ShowDialog();
-
-            if (window.DataContext is MessageSelectWindowViewModel vm && vm.SelectedItems != null)
-            {
-                if (vm.SelectedItems[0] is WindowsSearchResult result)
-                {
-                    string url = result.Values[SysProps.System.ItemUrl].ToString();
-                    // remove "mapi:" from string
-                    PathName = url.Remove(0, 5);
                 }
             }
         }

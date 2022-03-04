@@ -5,8 +5,8 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
 using System.Data;
 
 namespace Restless.App.Panama.Core
@@ -26,7 +26,7 @@ namespace Restless.App.Panama.Core
         /// <returns>A CommonOpenFileDialog object.</returns>
         public static CommonOpenFileDialog Create(string initialDir, string title, bool isFolderPicker = false, long selectorFileType = 0)
         {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog()
+            CommonOpenFileDialog dialog = new()
             {
                 IsFolderPicker = isFolderPicker,
                 InitialDirectory = initialDir,

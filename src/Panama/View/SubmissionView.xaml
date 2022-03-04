@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -30,16 +30,16 @@
 
         <!-- Main data grid to display the tabular data -->
         <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
-            <con:RestlessDataGrid 
+            <tk:DataGrid 
                 x:Name="grid"
                 RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding Path=MainSource.View}"
                 SelectedItem="{Binding SelectedItem}"
-                con:DataGridColumns.Columns="{Binding Columns}">
+                tk:DataGridColumns.Columns="{Binding Columns}">
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
-            </con:RestlessDataGrid>
+            </tk:DataGrid>
         </Border>
 
         <!-- Splitter -->

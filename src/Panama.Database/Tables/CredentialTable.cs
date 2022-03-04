@@ -111,7 +111,7 @@ namespace Restless.Panama.Database.Tables
         {
             return new ColumnDefinitionCollection()
             {
-                { Defs.Columns.Id, ColumnType.Text, true },
+                { Defs.Columns.Id, ColumnType.Integer, true },
                 { Defs.Columns.Name, ColumnType.Text },
                 { Defs.Columns.LoginId, ColumnType.Text },
                 { Defs.Columns.Password, ColumnType.Text },

@@ -5,8 +5,8 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Tools;
-using Restless.Tools.Mvvm;
-using Restless.Tools.Utility;
+using Restless.Toolkit.Mvvm;
+using System;
 using System.Collections.ObjectModel;
 
 namespace Restless.App.Panama.ViewModel
@@ -109,8 +109,7 @@ namespace Restless.App.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public ToolControllerBase(VM owner)
         {
-            Validations.ValidateNull(owner, "ToolControllerBase.Owner");
-            Owner = owner;
+            Owner = owner ?? throw new ArgumentNullException(nameof(owner));
             Updated = new ObservableCollection<FileScanDisplayObject>();
             NotFound = new ObservableCollection<FileScanDisplayObject>();
         }

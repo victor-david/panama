@@ -5,10 +5,11 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Toolkit.Core.Utility;
 using System;
 using System.Data;
 using System.IO;
@@ -133,65 +134,66 @@ namespace Restless.App.Panama.ViewModel
             var table = DatabaseController.Instance.GetTable<SubmissionMessageTable>();
             TotalCount = table.Rows.Count;
 
-            TaskManager.Instance.ExecuteTask(1, (token) =>
-            {
-                foreach (DataRow row in table.Rows)
-                {
-                    TaskManager.Instance.DispatchTask(() => TotalScanCount++);
-                    string protocol = row[SubmissionMessageTable.Defs.Columns.Protocol].ToString();
-                    string entryId = row[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
-                    if (protocol == SubmissionMessageTable.Defs.Values.Protocol.FileSystem)
-                    {
-                        TaskManager.Instance.DispatchTask(() => MessageScanCount++);
+            // TODO
+            //TaskManager.Instance.ExecuteTask(1, (token) =>
+            //{
+            //    foreach (DataRow row in table.Rows)
+            //    {
+            //        TaskManager.Instance.DispatchTask(() => TotalScanCount++);
+            //        string protocol = row[SubmissionMessageTable.Defs.Columns.Protocol].ToString();
+            //        string entryId = row[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
+            //        if (protocol == SubmissionMessageTable.Defs.Values.Protocol.FileSystem)
+            //        {
+            //            TaskManager.Instance.DispatchTask(() => MessageScanCount++);
 
-                        string fileName = Path.Combine(Config.FolderSubmissionMessage, entryId);
-                        var msg = new MimeKitMessage(fileName);
-                        if (!msg.IsError)
-                        {
-                            // set the subject. Normally it's already okay, but there's some entries where
-                            // it came from an Outlook extraction and the subject was edited.
-                            row[SubmissionMessageTable.Defs.Columns.Subject] = msg.Subject;
+            //            string fileName = Path.Combine(Config.FolderSubmissionMessage, entryId);
+            //            var msg = new MimeKitMessage(fileName);
+            //            if (!msg.IsError)
+            //            {
+            //                // set the subject. Normally it's already okay, but there's some entries where
+            //                // it came from an Outlook extraction and the subject was edited.
+            //                row[SubmissionMessageTable.Defs.Columns.Subject] = msg.Subject;
 
-                            string cleanSubject = GetCleanStr(msg.Subject);
-                            string cleanSender = GetCleanStr(msg.FromName, msg.FromName == msg.FromEmail);
+            //                string cleanSubject = GetCleanStr(msg.Subject);
+            //                string cleanSender = GetCleanStr(msg.FromName, msg.FromName == msg.FromEmail);
 
-                            // MessageDate_Subject.ext
-                            // 2018-10-22_17.21.09_Subject.eml
-                            string newFileName =
-                                string.Format("{0}_{1}_{2}{3}",
-                                    msg.MessageDateUtc.ToString("yyyy-MM-dd_HH.mm.ss"),
-                                    Format.ValidFileName(cleanSender),
-                                    Format.ValidFileName(cleanSubject),
-                                    Path.GetExtension(fileName));
+            //                // MessageDate_Subject.ext
+            //                // 2018-10-22_17.21.09_Subject.eml
+            //                string newFileName =
+            //                    string.Format("{0}_{1}_{2}{3}",
+            //                        msg.MessageDateUtc.ToString("yyyy-MM-dd_HH.mm.ss"),
+            //                        Format.ValidFileName(cleanSender),
+            //                        Format.ValidFileName(cleanSubject),
+            //                        Path.GetExtension(fileName));
 
-                            if (entryId != newFileName)
-                            {
-                                AppendOutput($"Update {entryId} to {newFileName}");
-                                string newFileNameFull = Path.Combine(Config.FolderSubmissionMessage, newFileName);
-                                try
-                                {
-                                    File.Move(fileName, newFileNameFull);
-                                    row[SubmissionMessageTable.Defs.Columns.EntryId] = newFileName;
-                                    TaskManager.Instance.DispatchTask(() => ProcessCount++);
-                                }
-                                catch (Exception ex)
-                                {
-                                    AppendOutput(ex.Message);
-                                    TaskManager.Instance.DispatchTask(() => ErrorCount++);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            AppendOutput(msg.ParseException.Message);
-                            TaskManager.Instance.DispatchTask(() => ErrorCount++);
-                        }
-                    }
-                }
-                table.Save();
-                TaskManager.Instance.DispatchTask(() => InProgress = false);
+            //                if (entryId != newFileName)
+            //                {
+            //                    AppendOutput($"Update {entryId} to {newFileName}");
+            //                    string newFileNameFull = Path.Combine(Config.FolderSubmissionMessage, newFileName);
+            //                    try
+            //                    {
+            //                        File.Move(fileName, newFileNameFull);
+            //                        row[SubmissionMessageTable.Defs.Columns.EntryId] = newFileName;
+            //                        TaskManager.Instance.DispatchTask(() => ProcessCount++);
+            //                    }
+            //                    catch (Exception ex)
+            //                    {
+            //                        AppendOutput(ex.Message);
+            //                        TaskManager.Instance.DispatchTask(() => ErrorCount++);
+            //                    }
+            //                }
+            //            }
+            //            else
+            //            {
+            //                AppendOutput(msg.ParseException.Message);
+            //                TaskManager.Instance.DispatchTask(() => ErrorCount++);
+            //            }
+            //        }
+            //    }
+            //    table.Save();
+            //    TaskManager.Instance.DispatchTask(() => InProgress = false);
 
-            }, null, null, false);
+            //}, null, null, false);
         }
 
         private void ResetCounters()
@@ -206,7 +208,8 @@ namespace Restless.App.Panama.ViewModel
 
         private void AppendOutput(string str)
         {
-            TaskManager.Instance.DispatchTask(() => Output += str + Environment.NewLine);
+            // TODO
+            //TaskManager.Instance.DispatchTask(() => Output += str + Environment.NewLine);
         }
 
         private string GetCleanStr(string str, bool allowDot = false)

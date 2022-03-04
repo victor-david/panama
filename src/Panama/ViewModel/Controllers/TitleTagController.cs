@@ -5,9 +5,9 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Mvvm;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Mvvm;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Windows.Input;

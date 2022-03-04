@@ -4,14 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.App.Panama.Resources;
+using Restless.Panama.Resources;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Restless.Tools.Utility;
 using System.IO;
-using Restless.App.Panama.Resources;
-using System.Diagnostics;
 
 namespace Restless.App.Panama.Tools
 {
@@ -120,8 +117,14 @@ namespace Restless.App.Panama.Tools
         /// <param name="folder">The folder for which this set of statistics apply.</param>
         public FolderStatisticItem(string folder)
         {
-            Validations.ValidateNullEmpty(folder, "FolderStatisticItem.Folder");
-            Validations.ValidateInvalidOperation(!Directory.Exists(folder), Strings.InvalidOpDirectoryDoesNotExist);
+            if (string.IsNullOrEmpty(folder))
+            {
+                throw new ArgumentNullException(nameof(folder));
+            }
+            if (!Directory.Exists(folder))
+            {
+                throw new InvalidOperationException(Strings.InvalidOpDirectoryDoesNotExist);
+            }
             Folder = folder;
             Children = new List<FolderStatisticItem>();
             Depth = 0;
@@ -160,7 +163,7 @@ namespace Restless.App.Panama.Tools
 
             foreach (string dir in Directory.EnumerateDirectories(folder, "*", SearchOption.TopDirectoryOnly))
             {
-                FolderStatisticItem child = new FolderStatisticItem(dir);
+                FolderStatisticItem child = new(dir);
                 Children.Add(child);
                 child.Populate(dir, depth + 1);
             }

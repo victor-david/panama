@@ -4,28 +4,46 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"    
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"    
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300">
     <Border>
         <StackPanel>
             <Label>Columns</Label>
-            <DataGrid Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=ColumnData.DataColumns}" SelectedItem="{Binding ColumnData.SelectedItem}" con:DataGridColumns.Columns="{Binding ColumnData.Columns}" />
+            <DataGrid 
+                Style="{StaticResource DataGridEdit}"
+                ItemsSource="{Binding Path=ColumnData.DataColumns}"
+                SelectedItem="{Binding ColumnData.SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding ColumnData.Columns}"/>
             
              <Label>Relations from this table</Label>
-            <DataGrid Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Children.Relations}" SelectedItem="{Binding Children.SelectedItem}" con:DataGridColumns.Columns="{Binding Children.Columns}" />
+            <DataGrid
+                Style="{StaticResource DataGridEdit}"
+                ItemsSource="{Binding Path=Children.Relations}"
+                SelectedItem="{Binding Children.SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Children.Columns}"/>
           
             
             <Label>Relations to this table</Label>
-            <DataGrid Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Parents.Relations}" SelectedItem="{Binding Parents.SelectedItem}" con:DataGridColumns.Columns="{Binding Parents.Columns}" />
+            <DataGrid
+                Style="{StaticResource DataGridEdit}"
+                ItemsSource="{Binding Path=Parents.Relations}"
+                SelectedItem="{Binding Parents.SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Parents.Columns}"/>
 
             <Label>Unique constraints</Label>
-            <DataGrid Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Unique.Constraints}" SelectedItem="{Binding Unique.SelectedItem}" con:DataGridColumns.Columns="{Binding Unique.Columns}" />
+            <DataGrid
+                Style="{StaticResource DataGridEdit}"
+                ItemsSource="{Binding Path=Unique.Constraints}"
+                SelectedItem="{Binding Unique.SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Unique.Columns}"/>
 
             <Label>Foreign key constraints</Label>
-            <DataGrid Style="{StaticResource DataGridEdit}" ItemsSource="{Binding Path=Foreign.Constraints}" SelectedItem="{Binding Foreign.SelectedItem}" con:DataGridColumns.Columns="{Binding Foreign.Columns}" />
-
-
+            <DataGrid
+                Style="{StaticResource DataGridEdit}"
+                ItemsSource="{Binding Path=Foreign.Constraints}"
+                SelectedItem="{Binding Foreign.SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Foreign.Columns}"/>
 
         </StackPanel>
     </Border>

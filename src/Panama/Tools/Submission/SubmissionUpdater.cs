@@ -5,8 +5,8 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
 using System.IO;
 using System.Linq;
 
@@ -61,7 +61,7 @@ namespace Restless.App.Panama.Tools
                             row.Updated = info.LastWriteTimeUtc;
                             row.Size = info.Length;
                             DatabaseController.Instance.GetTable<SubmissionDocumentTable>().Save();
-                            var item = new FileScanDisplayObject(row.Title, row.DocumentId);
+                            FileScanDisplayObject item = new(row.Title, row.DocumentId);
                             OnUpdated(item);
                         }
                     }

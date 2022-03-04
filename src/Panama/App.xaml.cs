@@ -5,11 +5,12 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
 using Restless.App.Panama.Resources;
 using Restless.App.Panama.ViewModel;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Panama.Utility;
 using System;
 using System.Windows;
 
@@ -69,10 +70,10 @@ namespace Restless.App.Panama
 #if !DEBUG
             TopLevelExceptionHandler.Initialize();
 #endif
-            Validations.ThrowIfNotWindows7();
+            // Validations.ThrowIfNotWindows7();
             ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
-            StartupOptions ops = new StartupOptions(e.Args);
-            DatabaseController.Instance.Init(ApplicationInfo.Instance.RootFolder, ops.DatabaseFileName);
+            StartupOptions ops = new(e.Args);
+            DatabaseController.Instance.Init(RegistryManager.DatabaseDirectory);
 
             if (ops.IsAnyOperationRequested)
             {
@@ -86,8 +87,9 @@ namespace Restless.App.Panama
             else
             {
                 // These are applied one time only. They don't change.
-                Restless.Tools.Controls.Default.Style.DataGridHeaderCenter = ResourceHelper.StyleDataGridHeaderCenter;
-                Restless.Tools.Controls.Default.Style.TextBlockCenter = ResourceHelper.StyleTextBlockCenter;
+                // TODO
+                //Restless.Tools.Default.Style.DataGridHeaderCenter = ResourceHelper.StyleDataGridHeaderCenter;
+                //Restless.Tools.Controls.Default.Style.TextBlockCenter = ResourceHelper.StyleTextBlockCenter;
 
                 Window main = WindowFactory.Main.Create();
                 main.MinWidth = Config.Default.MainWindow.MinWidth;
@@ -96,19 +98,20 @@ namespace Restless.App.Panama
                 main.Height = Config.Instance.MainWindowHeight;
                 main.WindowState = Config.Instance.MainWindowState;
                 main.Show();
-                DisplayAlertsIf();
+                // TODO
+                //DisplayAlertsIf();
             }
         }
 
-        private void DisplayAlertsIf()
-        {
-            var alerts = DatabaseController.Instance.GetTable<AlertTable>().GetReadyAlerts();
-            if (alerts.Count > 0)
-            {
-                Window alert = WindowFactory.Alert.Create(alerts);
-                alert.Show();
-            }
-        }
+        //private void DisplayAlertsIf()
+        //{
+        //    var alerts = DatabaseController.Instance.GetTable<AlertTable>().GetReadyAlerts();
+        //    if (alerts.Count > 0)
+        //    {
+        //        Window alert = WindowFactory.Alert.Create(alerts);
+        //        alert.Show();
+        //    }
+        //}
         #endregion
     }
 }

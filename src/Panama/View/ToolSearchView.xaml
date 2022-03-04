@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
     mc:Ignorable="d" 
@@ -48,13 +48,13 @@
              Style="{StaticResource HCCTool}"
              Header="{Binding FoundHeader}" Margin="4">
             <Grid>
-                <DataGrid x:Name="grid" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}">
+                <DataGrid x:Name="grid" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" tk:DataGridColumns.Columns="{Binding Columns}">
                     <DataGrid.ContextMenu>
                         <ContextMenu ItemsSource="{Binding MenuItems}"/>
                     </DataGrid.ContextMenu>
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
-                            <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenItem]}"/>
+                            <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenItem]}"/>
                         </Style>
                     </DataGrid.RowStyle>
                 </DataGrid>

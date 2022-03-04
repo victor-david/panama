@@ -6,9 +6,8 @@
     xmlns:view="clr-namespace:Restless.App.Panama.View"    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:cv="clr-namespace:Restless.Tools.Converters;assembly=Restless.Tools.Utility"
-    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
-    xmlns:xc="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     mc:Ignorable="d"
     d:DesignWidth="862" d:DesignHeight="1900">
     <Grid>
@@ -38,7 +37,7 @@
             <!-- Section 1. General -->
             <StackPanel 
                 DockPanel.Dock="Top"
-                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64One}}">
+                Visibility="{Binding SelectedSection, Converter={tk:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64One}}">
                 
                 <!-- Date Format -->
                 <TextBlock Style="{StaticResource TextBlockLabel}" Text="{x:Static r:Strings.HeaderSettingsDateFormat}"/>
@@ -89,7 +88,7 @@
             <!-- Section 2. Folders -->
             <StackPanel
                 DockPanel.Dock="Top"
-                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Two}}">
+                Visibility="{Binding SelectedSection, Converter={tk:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Two}}">
                 <con:PathSelector Title="Title Root" PathName="{Binding Config.FolderTitleRoot}"/>
                 <con:PathSelector Title="Title Version" PathName="{Binding Config.FolderTitleVersion}"/>
                 <con:PathSelector Title="Submission Documents" PathName="{Binding Config.FolderSubmissionDocument}"/>
@@ -102,20 +101,20 @@
             <!-- Section 3. Colors -->
             <view:ConfigEditColor 
                 DockPanel.Dock="Top"
-                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Three}}"/>
+                Visibility="{Binding SelectedSection, Converter={tk:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Three}}"/>
 
 
             <!-- Section 4. Submission -->
             <view:ConfigEditSubmission
                 DockPanel.Dock="Top"
-                Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Four}}"/>
+                Visibility="{Binding SelectedSection, Converter={tk:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Four}}"/>
 
 
 
         </DockPanel>
         <view:ConfigEditColorPreview 
             Grid.Column="1" Grid.Row="1"
-            Visibility="{Binding SelectedSection, Converter={cv:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Three}}"/>
+            Visibility="{Binding SelectedSection, Converter={tk:Int64ToVisibilityConverter}, ConverterParameter={StaticResource Int64Three}}"/>
             
     </Grid>
     <!-- end main grid-->

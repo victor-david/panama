@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:view="clr-namespace:Restless.App.Panama.View"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     Height="460" Width="520" ShowInTaskbar="False" ResizeMode="NoResize"
     WindowStartupLocation="CenterOwner">
     
@@ -20,6 +20,10 @@
         <Button Grid.Column="1" Grid.Row="0" Margin="5" Command="{Binding Commands[Select]}">Select</Button>
 
         <!-- Main data grid to display the tabular data  -->
-        <con:RestlessDataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" con:DataGridColumns.Columns="{Binding Columns}"/>
+        <tk:DataGrid
+            Grid.Row="1" Grid.ColumnSpan="2" 
+            ItemsSource="{Binding Path=MainSource.View}"
+            SelectedItem="{Binding SelectedItem}"
+            tk:DataGridColumns.Columns="{Binding Columns}"/>
     </Grid>
 </Window>

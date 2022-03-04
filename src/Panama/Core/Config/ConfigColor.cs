@@ -4,9 +4,9 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Mvvm;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Mvvm;
 using System;
 using System.Data;
 using System.Windows.Media;
@@ -20,9 +20,9 @@ namespace Restless.App.Panama.Core
     public class ConfigColor : ObservableObject
     {
         #region Private
-        private ColorTable colorTable;
-        private DataRow colorRow;
-        private string id;
+        private readonly ColorTable colorTable;
+        private readonly DataRow colorRow;
+        private readonly string id;
         private Color defaultFore;
         private Color defaultBack;
         #endregion
@@ -111,7 +111,7 @@ namespace Restless.App.Panama.Core
         /// <param name="defaultBack">The default value for the background color.</param>
         public ConfigColor(string id, Color defaultFore, Color defaultBack)
         {
-            this.id = id ?? throw new ArgumentNullException();
+            this.id = id ?? throw new ArgumentNullException(nameof(id));
             this.defaultFore = defaultFore;
             this.defaultBack = defaultBack;
             colorTable = DatabaseController.Instance.GetTable<ColorTable>();

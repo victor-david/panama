@@ -4,10 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:cv="clr-namespace:Restless.App.Panama.Converters"
-    xmlns:r="clr-namespace:Restless.App.Panama.Resources"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     mc:Ignorable="d" 
     d:DesignHeight="600" d:DesignWidth="554">
     <StackPanel>
@@ -16,7 +16,7 @@
             Style="{StaticResource TextBlockError}"
             Text="No versions have been created for this title. Use the File button to add a version."
             Visibility="{Binding Versions.DataViewCount,Converter={cv:IntegerToVisibilityConverter},ConverterParameter={StaticResource Int32One}}" />
-        <con:RestlessDataGrid 
+        <tk:DataGrid 
             x:Name="grid" 
             Style="{StaticResource DataGridEdit}"
             MaxHeight="{x:Static sys:Double.PositiveInfinity}" 
@@ -24,7 +24,7 @@
             CanUserReorderColumns="False"
             ItemsSource="{Binding Path=Versions.MainSource.View}"
             SelectedItem="{Binding Versions.SelectedItem}"
-            con:DataGridColumns.Columns="{Binding Versions.Columns}" 
+            tk:DataGridColumns.Columns="{Binding Versions.Columns}" 
             ContextMenuOpeningCommand="{Binding Versions.Commands[ContextMenuOpening]}"
             Visibility="{Binding Versions.DataViewCount,Converter={cv:IntegerToVisibilityConverter}}">
             <DataGrid.ContextMenu>
@@ -32,7 +32,7 @@
             </DataGrid.ContextMenu>            
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
-                    <Setter Property="con:RestlessDataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Versions.OpenRowCommand}"/>
+                    <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Versions.OpenRowCommand}"/>
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.GroupStyle>
@@ -49,7 +49,7 @@
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
             </DataGrid.GroupStyle>
-        </con:RestlessDataGrid>
+        </tk:DataGrid>
         <ToolBarTray>
             <ToolBar Style="{StaticResource ToolBarCommandHolder}">
                 <Button Command="{Binding Versions.Commands[VersionMoveUp]}" Content="{StaticResource ImageArrowUpTool}" ToolTip="Move the selected version up"/>

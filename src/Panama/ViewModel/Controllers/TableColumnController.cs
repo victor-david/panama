@@ -4,9 +4,9 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Controls;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Controls;
 using System.Collections.ObjectModel;
 using System.Data;
 
@@ -69,7 +69,7 @@ namespace Restless.App.Panama.ViewModel
             string tableName = GetOwnerSelectedPrimaryIdString();
             if (tableName != null)
             {
-                var table = DatabaseController.Instance.DataSet.Tables[tableName];
+                DataTable table = DatabaseController.Instance.DataSet.Tables[tableName];
                 DataColumns.Clear();
                 foreach (DataColumn col in table.Columns)
                 {
