@@ -177,8 +177,9 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         protected override void SetColumnProperties()
         {
+            // override the base method to do nothing
         }
-
+    
         /// <summary>
         /// Creates the <see cref="Defs.Columns.Joined"/> columns for this table.
         /// </summary>

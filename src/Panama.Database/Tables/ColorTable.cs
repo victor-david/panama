@@ -34,7 +34,7 @@ namespace Restless.Panama.Database.Tables
                 /// <summary>
                 /// The name of the id column. This is the table's primary key.
                 /// </summary>
-                public const string Id = "id";
+                public const string Id = DefaultPrimaryKeyName;
 
                 /// <summary>
                 /// The name of the foreground column. Holds the foreground color.
@@ -46,14 +46,6 @@ namespace Restless.Panama.Database.Tables
                 /// </summary>
                 public const string Background = "background";
             }
-        }
-
-        /// <summary>
-        /// Gets the column name of the primary key.
-        /// </summary>
-        public override string PrimaryKeyName
-        {
-            get { return Defs.Columns.Id; }
         }
         #endregion
 

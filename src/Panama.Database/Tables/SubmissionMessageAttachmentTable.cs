@@ -33,7 +33,7 @@ namespace Restless.Panama.Database.Tables
                 /// <summary>
                 /// The name of the id column. This is the table's primary key.
                 /// </summary>
-                public const string Id = "id";
+                public const string Id = DefaultPrimaryKeyName;
                 /// <summary>
                 /// The name of the message id column. Holds the id of the message that owns an attachment.
                 /// </summary>
@@ -55,14 +55,6 @@ namespace Restless.Panama.Database.Tables
                 /// </summary>
                 public const string Type = "type";
             }
-        }
-
-        /// <summary>
-        /// Gets the column name of the primary key.
-        /// </summary>
-        public override string PrimaryKeyName
-        {
-            get { return Defs.Columns.Id; }
         }
         #endregion
 
@@ -108,48 +100,6 @@ namespace Restless.Panama.Database.Tables
                 { Defs.Columns.Type, ColumnType.Integer, false, false, 0 },
             };
         }
-
-        /// <summary>
-        /// Sets extended properties on certain columns. See the base implemntation <see cref="TableBase.SetColumnProperties"/> for more information.
-        /// </summary>
-        protected override void SetColumnProperties()
-        {
-            SetColumnProperty(Columns[Defs.Columns.Id], DataColumnPropertyKey.ExcludeFromInsert, DataColumnPropertyKey.ExcludeFromUpdate, DataColumnPropertyKey.ReceiveInsertedId);
-        }
         #endregion
-
-        /************************************************************************/
-
-        #region ITableImport and IColumnRowImporter implementation (commented out)
-        //public bool PerformImport()
-        //{
-        //    return DatabaseImporter.Instance.ImportTable(this, this, "submission_message_attachment");
-        //}
-
-        //public string GetColumnName(string origColName)
-        //{
-        //    switch (origColName)
-        //    {
-        //        case "message_id": return Defs.Columns.MessageId;
-        //        case "display_name": return Defs.Columns.Display;
-        //        case "file_name": return Defs.Columns.FileName;
-        //        case "file_size": return Defs.Columns.FileSize;
-        //        default: return origColName;
-        //    }
-        //}
-
-        //public bool IncludeColumn(string origColName)
-        //{
-        //    return true;
-        //}
-
-        //public bool GetRowConfirmation(System.Data.DataRow row)
-        //{
-        //    return true;
-        //}
-        #endregion
-
-
-
     }
 }

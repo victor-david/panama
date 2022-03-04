@@ -34,7 +34,7 @@ namespace Restless.Panama.Database.Tables
                 /// <summary>
                 /// The name of the id column. This is the table's primary key.
                 /// </summary>
-                public const string Id = "id";
+                public const string Id = DefaultPrimaryKeyName;
 
                 /// <summary>
                 /// The name of the name column. This column holds the name of the response type.
@@ -79,14 +79,6 @@ namespace Restless.Panama.Database.Tables
                 public const long ResponseAccepted = 255;
 
             }
-        }
-
-        /// <summary>
-        /// Gets the column name of the primary key.
-        /// </summary>
-        public override string PrimaryKeyName
-        {
-            get { return Defs.Columns.Id; }
         }
         #endregion
 
@@ -157,14 +149,6 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Sets extended properties on certain columns. See the base implemntation <see cref="TableBase.SetColumnProperties"/> for more information.
-        /// </summary>
-        protected override void SetColumnProperties()
-        {
-            SetColumnProperty(Columns[Defs.Columns.Id], DataColumnPropertyKey.ExcludeFromInsert, DataColumnPropertyKey.ExcludeFromUpdate, DataColumnPropertyKey.ReceiveInsertedId);
-        }
-
-        /// <summary>
         /// Establishes parent / child relationships with other tables.
         /// </summary>
         protected override void SetDataRelations()
@@ -172,6 +156,5 @@ namespace Restless.Panama.Database.Tables
             CreateParentChildRelation<SubmissionBatchTable>(Defs.Relations.ToSubmissionBatch, Defs.Columns.Id, SubmissionBatchTable.Defs.Columns.ResponseType);
         }
         #endregion
-
     }
 }

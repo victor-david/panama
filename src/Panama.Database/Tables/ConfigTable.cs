@@ -34,7 +34,7 @@ namespace Restless.Panama.Database.Tables
                 /// <summary>
                 /// The name of the id column. This is the table's primary key.
                 /// </summary>
-                public const string Id = "id";
+                public const string Id = DefaultPrimaryKeyName;
 
                 /// <summary>
                 /// The name of the value column.
@@ -109,14 +109,6 @@ namespace Restless.Panama.Database.Tables
                 public const string FolderSubmissionMessageAttachment = "FolderSubmissionMessageAttachment";
 
             }
-        }
-
-        /// <summary>
-        /// Gets the column name of the primary key.
-        /// </summary>
-        public override string PrimaryKeyName
-        {
-            get { return Defs.Columns.Id; }
         }
         #endregion
 

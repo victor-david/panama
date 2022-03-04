@@ -74,7 +74,7 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return Defs.Columns.Name; }
+            get => Defs.Columns.Name;
         }
         #endregion
 

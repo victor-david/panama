@@ -35,7 +35,7 @@ namespace Restless.Panama.Database.Tables
                 /// <summary>
                 /// The name of the id column. This is the table's primary key.
                 /// </summary>
-                public const string Id = "id";
+                public const string Id = DefaultPrimaryKeyName;
 
                 /// <summary>
                 /// Holds the title of the alert, i.e. the alert text.
@@ -58,14 +58,6 @@ namespace Restless.Panama.Database.Tables
                 public const string Enabled = "enabled";
 
             }
-        }
-
-        /// <summary>
-        /// Gets the column name of the primary key.
-        /// </summary>
-        public override string PrimaryKeyName
-        {
-            get => Defs.Columns.Id;
         }
         #endregion
 
@@ -132,14 +124,6 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Sets extended properties on certain columns. See the base implemntation <see cref="TableBase.SetColumnProperties"/> for more information.
-        /// </summary>
-        protected override void SetColumnProperties()
-        {
-            SetColumnProperty(Columns[Defs.Columns.Id], DataColumnPropertyKey.ExcludeFromInsert, DataColumnPropertyKey.ExcludeFromUpdate, DataColumnPropertyKey.ReceiveInsertedId);
-        }
-
-        /// <summary>
         /// Populates a new row with default (starter) values
         /// </summary>
         /// <param name="row">The freshly created DataRow to poulate</param>
@@ -156,7 +140,6 @@ namespace Restless.Panama.Database.Tables
 
         #region Private methods
         #endregion
-
 
         /************************************************************************/
 
@@ -235,6 +218,5 @@ namespace Restless.Panama.Database.Tables
             #endregion
         }
         #endregion
-
     }
 }

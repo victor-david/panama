@@ -31,7 +31,7 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         public override string PrimaryKeyName
         {
-            get { return null; }
+            get => null;
         }
         #endregion
 
@@ -45,16 +45,5 @@ namespace Restless.Panama.Database.Tables
         {
         }
         #endregion
-
-        /************************************************************************/
-
-        #region Public methods
-        #endregion
-
-        /************************************************************************/
-
-        #region Protected methods
-        #endregion
-
     }
 }

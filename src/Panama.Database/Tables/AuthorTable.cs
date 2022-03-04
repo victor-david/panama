@@ -34,7 +34,7 @@ namespace Restless.Panama.Database.Tables
                 /// <summary>
                 /// The name of the id column. This is the table's primary key.
                 /// </summary>
-                public const string Id = "id";
+                public const string Id = DefaultPrimaryKeyName;
                 /// <summary>
                 /// The name of the author name  column.
                 /// </summary>
@@ -55,14 +55,6 @@ namespace Restless.Panama.Database.Tables
                 /// </summary>
                 public const string ToTitle = "AuthorToTitle";
             }
-        }
-
-        /// <summary>
-        /// Gets the column name of the primary key.
-        /// </summary>
-        public override string PrimaryKeyName
-        {
-            get => Defs.Columns.Id;
         }
         #endregion
 
@@ -151,14 +143,6 @@ namespace Restless.Panama.Database.Tables
         protected override IEnumerable<object[]> EnumeratePopulateValues()
         {
             yield return new object[] { 1, "Your author name", true };
-        }
-
-        /// <summary>
-        /// Sets extended properties on certain columns. See the base implemntation <see cref="TableBase.SetColumnProperties"/> for more information.
-        /// </summary>
-        protected override void SetColumnProperties()
-        {
-            SetColumnProperty(Columns[Defs.Columns.Id], DataColumnPropertyKey.ExcludeFromInsert, DataColumnPropertyKey.ExcludeFromUpdate, DataColumnPropertyKey.ReceiveInsertedId);
         }
 
         /// <summary>
