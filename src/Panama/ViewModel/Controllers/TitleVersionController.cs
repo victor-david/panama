@@ -404,7 +404,7 @@ namespace Restless.Panama.ViewModel
                     item.Icon = null;
                     if (langId.Equals(item.Tag))
                     {
-                        item.Icon = ResourceHelper.Get("ImageDotGreenMenu");
+                        item.Icon = LocalResources.Get("ImageDotGreenMenu");
                     }
                 }
             }

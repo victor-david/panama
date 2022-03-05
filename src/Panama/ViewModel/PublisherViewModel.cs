@@ -24,7 +24,6 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private bool isFilterVisible;
-        private readonly VisualCommandViewModel advFilter;
         #endregion
 
         /************************************************************************/
@@ -139,30 +138,29 @@ namespace Restless.Panama.ViewModel
             Commands.Add("InPeriodFilter", (o) => Filters.SetToInPeriod());
             Commands.Add("PayingFilter", (o) => Filters.SetToPaying());
             Commands.Add("FollowupFilter", (o) => Filters.SetToFollowup());
-            Commands.Add("AdvancedFilter", (o) =>
-            {
-                isFilterVisible = !isFilterVisible;
-                advFilter.Icon = (isFilterVisible) ? ResourceHelper.Get("ImageChevronUp") : ResourceHelper.Get("ImageChevronDown");
-                OnPropertyChanged(nameof(FilterVisibility));
-            });
+            // TODO
+            //Commands.Add("AdvancedFilter", (o) =>
+            //{
+            //    isFilterVisible = !isFilterVisible;
+            //    advFilter.Icon = (isFilterVisible) ? ResourceHelper.Get("ImageChevronUp") : ResourceHelper.Get("ImageChevronDown");
+            //    OnPropertyChanged(nameof(FilterVisibility));
+            //});
 
             Commands.Add("AddSubmission", RunAddSubmissionCommand, (o) => IsSelectedRowAccessible);
             Commands.Add("CopyLoginId", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.LoginId); }, CanCopyCredential);
             Commands.Add("CopyPassword", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.Password); }, CanCopyCredential);
 
-
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddPublisher, Strings.CommandAddPublisherTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
-
-            double minWidth = 80.0;
-            double imgSize = 20.0;
-            advFilter = new VisualCommandViewModel(Strings.CommandFilterAdvanced, Strings.CommandFilterAdvancedTooltip, Commands["AdvancedFilter"], ResourceHelper.Get("ImageChevronDown"), imgSize, VisualCommandFontSize, 100.0);
-            FilterCommands.Add(advFilter);
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterActive, Strings.CommandPublisherFilterActiveTooltip, Commands["ActiveFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterHaveSub, Strings.CommandPublisherFilterHaveSubTooltip, Commands["HaveSubFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterInPeriod, Strings.CommandPublisherFilterInPeriodTooltip, Commands["InPeriodFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterPaying, Strings.CommandPublisherFilterPayingTooltip, Commands["PayingFilter"],null, imgSize, VisualCommandFontSize,  minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterFollowup, Strings.CommandPublisherFilterFollowupTooltip, Commands["FollowupFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            // TODO
+            //double minWidth = 80.0;
+            //double imgSize = 20.0;
+            //advFilter = new VisualCommandViewModel(Strings.CommandFilterAdvanced, Strings.CommandFilterAdvancedTooltip, Commands["AdvancedFilter"], ResourceHelper.Get("ImageChevronDown"), imgSize, VisualCommandFontSize, 100.0);
+            //FilterCommands.Add(advFilter);
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterActive, Strings.CommandPublisherFilterActiveTooltip, Commands["ActiveFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterHaveSub, Strings.CommandPublisherFilterHaveSubTooltip, Commands["HaveSubFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterInPeriod, Strings.CommandPublisherFilterInPeriodTooltip, Commands["InPeriodFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterPaying, Strings.CommandPublisherFilterPayingTooltip, Commands["PayingFilter"],null, imgSize, VisualCommandFontSize,  minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterFollowup, Strings.CommandPublisherFilterFollowupTooltip, Commands["FollowupFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             Periods = new PublisherPeriodController(this);
             Submissions = new PublisherSubmissionController(this);

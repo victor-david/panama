@@ -43,7 +43,6 @@ namespace Restless.Panama.ViewModel
             Columns.SetDefaultSort(Columns.Create("Date", AlertTable.Defs.Columns.Date).MakeDate(), ListSortDirection.Ascending);
             Columns.Create("Title", AlertTable.Defs.Columns.Title);
             AddViewSourceSortDescriptions();
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddAlert, Strings.CommandAddAlertTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
             Commands.Add("Browse", RunBrowseCommand, CanRunBrowseCommand);
 

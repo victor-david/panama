@@ -4,7 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +15,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the Close command and properties that are common to all view models. This class must be interited.
     /// </summary>
-    public abstract class ApplicationViewModel : ViewModelBase
+    public abstract class ApplicationViewModel : ViewModelBase, INavigator
     {
         #region Private Vars
         #endregion
@@ -42,45 +42,14 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Returns a list of commands that the UI can display and execute.
-        /// </summary>
-        public List<VisualCommandViewModel> VisualCommands
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Returns a list of filter commands that the UI can display and execute.
-        /// </summary>
-        public List<VisualCommandViewModel> FilterCommands
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// Gets the singleton instance of the configuration object.
         /// Although derived classes can access the singleton instance directly,
         /// this enables easy binding to certain configuration properties
         /// </summary>
-        public Restless.Panama.Core.Config Config
+        public Core.Config Config
         {
-            get => Restless.Panama.Core.Config.Instance;
+            get => Core.Config.Instance;
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region Protected properties
-        /// <summary>
-        /// Provides the standard image size for a visual command.
-        /// </summary>
-        protected const double VisualCommandImageSize = 20.0;
-        /// <summary>
-        /// Provides the standard font size for a visual command.
-        /// </summary>
-        protected const double VisualCommandFontSize = 11;
         #endregion
 
         /************************************************************************/
@@ -92,9 +61,6 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The VM that owns this view model.</param>
         protected ApplicationViewModel(ApplicationViewModel owner) : base(owner)
         {
-            VisualCommands = new List<VisualCommandViewModel>();
-            FilterCommands = new List<VisualCommandViewModel>();
-
             CloseCommand = RelayCommand.Create((p) =>
             {
                 OnClosing(new CancelEventArgs());
@@ -110,7 +76,6 @@ namespace Restless.Panama.ViewModel
         /// Raised when this workspace should be removed from the UI.
         /// </summary>
         public event CancelEventHandler Closing;
-
         #endregion
 
         /************************************************************************/

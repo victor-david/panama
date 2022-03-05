@@ -1,0 +1,56 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="StandardPathStyle" TargetType="Path">
+        <Setter Property="Fill" Value="{StaticResource DefaultIconBrush}"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Height" Value="18"/>
+        <Setter Property="Width" Value="18"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
+
+    <Style x:Key="MediumPathStyle" TargetType="Path" BasedOn="{StaticResource StandardPathStyle}">
+        <Setter Property="Height" Value="15"/>
+        <Setter Property="Width" Value="15"/>
+    </Style>
+
+    <Style x:Key="SmallPathStyle" TargetType="Path" BasedOn="{StaticResource StandardPathStyle}">
+        <Setter Property="Height" Value="10"/>
+        <Setter Property="Width" Value="10"/>
+    </Style>
+
+    <Geometry x:Key="ArrowRightGeometryKey">M4,15V9H12V4.16L19.84,12L12,19.84V15H4Z</Geometry>
+    <Geometry x:Key="ChevronDownGeometryKey">M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z</Geometry>
+    <Geometry x:Key="ChevronLeftGeometryKey">M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z</Geometry>
+    <Geometry x:Key="ChevronRightGeometryKey">M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z</Geometry>
+    <Geometry x:Key="ChevronUpGeometryKey">M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z</Geometry>
+    <Geometry x:Key="ExitGeometryKey">M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z</Geometry>
+    <Geometry x:Key="FileGeometryKey">M6 0A2 2 0 0 0 4 2V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V6L14 0H6M6 2H13V7H18V18H6V2M7 22V24H9V22H7M11 22V24H13V22H11M15 22V24H17V22H15Z</Geometry>
+    <Geometry x:Key="PlusGeometryKey" >M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z</Geometry>
+    <Geometry x:Key="PublisherGeometryKey">M5,4V6H19V4H5M5,14H9V20H15V14H19L12,7L5,14Z</Geometry>
+    <Geometry x:Key="SaveGeometryKey">M4 19H10V21H4C2.89 21 2 20.1 2 19V5C2 3.9 2.89 3 4 3H16L20 7V9.12L18 11.12V7.83L15.17 5H4V19M14 10V6H5V10H14M20.42 12.3C20.31 12.19 20.18 12.13 20.04 12.13C19.9 12.13 19.76 12.19 19.65 12.3L18.65 13.3L20.7 15.35L21.7 14.35C21.92 14.14 21.92 13.79 21.7 13.58L20.42 12.3M12 19.94V22H14.06L20.12 15.93L18.07 13.88L12 19.94M14 15C14 13.34 12.66 12 11 12S8 13.34 8 15 9.34 18 11 18C11.04 18 11.08 18 11.13 18L14 15.13C14 15.09 14 15.05 14 15</Geometry>
+    <Geometry x:Key="SubmissionGeometryKey">M19,15L13,21L11.58,19.58L15.17,16H4V4H6V14H15.17L11.58,10.42L13,9L19,15Z</Geometry>
+   
+    <Geometry x:Key="TitleGeometryKey">M4 20H18V22H4C2.9 22 2 21.1 2 20V6H4V20M22 4V16C22 17.1 21.1 18 20 18H8C6.9 18 6 17.1 6 16V4C6 2.9 6.9 2 8 2H20C21.1 2 22 2.9 22 4M20 4H8V16H20V4M18 6H13V13L15.5 11.5L18 13V6Z</Geometry>
+    <Geometry x:Key="ZGeometryKey">M9,7H15V9L11,15H15V17H9V15L13,9H9V7M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z</Geometry>
+
+    <Path x:Key="AppPathIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ZGeometryKey}"/>
+    <Path x:Key="ArrowRightIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ArrowRightGeometryKey}"/>
+    <Path x:Key="ChevronDownIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ChevronDownGeometryKey}"/>
+    <Path x:Key="ChevronLeftIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ChevronLeftGeometryKey}"/>
+    <Path x:Key="ChevronRightIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ChevronRightGeometryKey}"/>
+    <Path x:Key="ChevronUpIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ChevronUpGeometryKey}"/>
+    <Path x:Key="ExitIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ExitGeometryKey}"/>
+    <Path x:Key="FileIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource FileGeometryKey}"/>
+    <Path x:Key="PlusIconKey" x:Shared="False" Style="{StaticResource MediumPathStyle}" Data="{StaticResource PlusGeometryKey}"/>
+    <Path x:Key="PublisherIconKey" x:Shared="False" Style="{StaticResource MediumPathStyle}" Data="{StaticResource PublisherGeometryKey}"/>
+    <Path x:Key="SaveIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource SaveGeometryKey}"/>
+    <Path x:Key="SubmissionIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource SubmissionGeometryKey}"/>
+    <Path x:Key="TitleIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource TitleGeometryKey}"/>
+    <Path x:Key="ZIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ZGeometryKey}"/>
+    
+
+</ResourceDictionary>

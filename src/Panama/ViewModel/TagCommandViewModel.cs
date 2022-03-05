@@ -16,7 +16,7 @@ namespace Restless.Panama.ViewModel
     /// This class is used to provide actionable tag items and is used when selecting tags to be associated
     /// with a title, and for selecting tags to be used when filtering the title view by tag.
     /// </remarks>
-    public class TagCommandViewModel : VisualCommandViewModel
+    public class TagCommandViewModel : ApplicationViewModel
     {
         #region Private
         private SolidColorBrush foreground;
@@ -37,29 +37,20 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the tag name associated with this command view.
         /// </summary>
-        public string TagName
-        {
-            get { return DisplayName; }
-        }
+        public string TagName => DisplayName;
 
         /// <summary>
         /// Gets the tag description associated with this command view.
         /// </summary>
-        public string TagDescription
-        {
-            get { return TooltipText; }
-        }
+        public string TagDescription => "Need tool tip text";
 
         /// <summary>
         /// Gets or sets the foreground color for this command view
         /// </summary>
         public SolidColorBrush Foreground
         {
-            get { return foreground; }
-            set
-            {
-                SetProperty(ref foreground, value);
-            }
+            get => foreground;
+            set => SetProperty(ref foreground, value);
         }
         #endregion
 
@@ -73,9 +64,10 @@ namespace Restless.Panama.ViewModel
         /// <param name="tagName">The name of the tag.</param>
         /// <param name="tagDescription">The description of the tag.</param>
         /// <param name="command">The command associated with the selection of this tag.</param>
-        public TagCommandViewModel(long tagId, string tagName, string tagDescription, ICommand command)
-            :base(tagName, tagDescription, command, DefaultMinWidth)
+        public TagCommandViewModel(long tagId, string tagName, string tagDescription, ICommand command) : base(null)
+//            :base(tagName, tagDescription, command, DefaultMinWidth)
         {
+            // TODO (constructor)
             TagId = tagId;
             ResetDefaultForeground();
         }

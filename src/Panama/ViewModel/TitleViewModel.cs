@@ -31,7 +31,6 @@ namespace Restless.Panama.ViewModel
         private const int PreviewTabIndex = 5;
         private bool autoPreview;
         private bool isOpenXml;
-        private readonly VisualCommandViewModel advFilter;
         #endregion
 
         /************************************************************************/
@@ -250,30 +249,30 @@ namespace Restless.Panama.ViewModel
             Commands.Add("SubmittedFilter", (o) => Filters.SetToSubmitted());
             Commands.Add("PublishedFilter", (o) => Filters.SetToPublished());
             Commands.Add("SelfPublishedFilter", (o) => Filters.SetToSelfPublished());
-            Commands.Add("AdvancedFilter", (o) =>
-            {
-                isFilterVisible = !isFilterVisible;
-                advFilter.Icon = (isFilterVisible) ? ResourceHelper.Get("ImageChevronUp") : ResourceHelper.Get("ImageChevronDown");
-                OnPropertyChanged(nameof(FilterVisibility));
-            });
+            // TODO
+            //Commands.Add("AdvancedFilter", (o) =>
+            //{
+            //    isFilterVisible = !isFilterVisible;
+            //    advFilter.Icon = (isFilterVisible) ? LocalResources.Get("ImageChevronUp") : LocalResources.Get("ImageChevronDown");
+            //    OnPropertyChanged(nameof(FilterVisibility));
+            //});
 
             Commands.Add("ExtractTitle", RunExtractTitle, CanRunExtractTitle);
             Commands.Add("ToggleFlag", RunToggleTitleFlagCommand, (p) => IsSelectedRowAccessible);
             Commands.Add("ClearFlags", RunClearTitleFlagsCommand);
 
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandClearTitleFlags, Strings.CommandClearTitleFlagsTooltip, Commands["ClearFlags"], ResourceHelper.Get("ImageRemove"), VisualCommandImageSize, VisualCommandFontSize));
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddTitle, Strings.CommandAddTitleTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
-            double minWidth = 80.0;
-            double imgSize = 20.0;
-            advFilter = new VisualCommandViewModel(Strings.CommandFilterAdvanced, Strings.CommandFilterAdvancedTooltip, Commands["AdvancedFilter"], ResourceHelper.Get("ImageChevronDown"), imgSize, VisualCommandFontSize, 100.0);
-            FilterCommands.Add(advFilter);
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterReady, Strings.CommandTitleFilterReadyTooltip, Commands["ReadyFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterFlagged, Strings.CommandTitleFilterFlaggedTooltip, Commands["FlaggedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterSubmitted, Strings.CommandTitleFilterSubmittedTooltip, Commands["SubmittedFilter"], null, imgSize, VisualCommandFontSize,  minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterPublished, Strings.CommandTitleFilterPublishedTooltip, Commands["PublishedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterSelfPublished, Strings.CommandTitleFilterSelfPublishedTooltip, Commands["SelfPublishedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            // TODO
+            //double minWidth = 80.0;
+            //double imgSize = 20.0;
+            //advFilter = new VisualCommandViewModel(Strings.CommandFilterAdvanced, Strings.CommandFilterAdvancedTooltip, Commands["AdvancedFilter"], LocalResources.Get("ImageChevronDown"), imgSize, VisualCommandFontSize, 100.0);
+            //FilterCommands.Add(advFilter);
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterReady, Strings.CommandTitleFilterReadyTooltip, Commands["ReadyFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterFlagged, Strings.CommandTitleFilterFlaggedTooltip, Commands["FlaggedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterSubmitted, Strings.CommandTitleFilterSubmittedTooltip, Commands["SubmittedFilter"], null, imgSize, VisualCommandFontSize,  minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterPublished, Strings.CommandTitleFilterPublishedTooltip, Commands["PublishedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterSelfPublished, Strings.CommandTitleFilterSelfPublishedTooltip, Commands["SelfPublishedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandOpenTitleOrDoubleClick, OpenRowCommand).AddImageResource("ImageOpenWordMenu");

@@ -48,8 +48,6 @@ namespace Restless.Panama.ViewModel
                 .AddToolTip(Strings.TooltipSelfPublisherPublishedCount)
                 .AddSort(null, SelfPublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddPublisher, Strings.CommandAddPublisherTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
-
             AddViewSourceSortDescriptions();
 
             /* Context menu items */

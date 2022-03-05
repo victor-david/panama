@@ -34,8 +34,8 @@ namespace Restless.Panama.Core
                 var window = new MainWindow()
                 {
                     Owner = null, // this is a top level window
-                    MinWidth = Core.Config.Default.MainWindow.MinWidth,
-                    MinHeight = Core.Config.Default.MainWindow.MinHeight,
+                    MinWidth = Config.MainWindow.MinWidth,
+                    MinHeight = Config.MainWindow.MinHeight,
                     DataContext = MainWindowViewModel.Instance,
                 };
                 SetWindowOwner(window);

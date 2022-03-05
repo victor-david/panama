@@ -189,7 +189,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected Style NumericRightCell
         {
-            get => (Style)ResourceHelper.Get("TextBlockRight");
+            get => (Style)LocalResources.Get("TextBlockRight");
         }
         #endregion
 

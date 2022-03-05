@@ -975,4 +975,25 @@ Do you want to continue?</value>
   <data name="InvalidOperationNoSearchScope" xml:space="preserve">
     <value>No search scope specified</value>
   </data>
+  <data name="NavHeaderOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="NavHeaderMain" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="NavHeaderTools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="MenuItemPublishers" xml:space="preserve">
+    <value>Publishers</value>
+  </data>
+  <data name="MenuItemSelfPublishers" xml:space="preserve">
+    <value>Self publishers</value>
+  </data>
+  <data name="MenuItemSubmissions" xml:space="preserve">
+    <value>Submissions</value>
+  </data>
+  <data name="MenuItemTitles" xml:space="preserve">
+    <value>Titles</value>
+  </data>
 </root>

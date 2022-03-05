@@ -41,7 +41,6 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Created", UserNoteTable.Defs.Columns.Created).MakeDate();
             Columns.SetDefaultSort(Columns.Create("Title", UserNoteTable.Defs.Columns.Title), ListSortDirection.Ascending);
             AddViewSourceSortDescriptions();
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddUserNote, Strings.CommandAddUserNoteTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandDeleteUserNote, DeleteCommand).AddImageResource("ImageDeleteMenu");

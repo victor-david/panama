@@ -3,56 +3,63 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:tk="http://schemas.restless.toolkit.com/2021">
 
-    <Style TargetType="TextBlock" x:Key="TextBlockError" BasedOn="{StaticResource {x:Type TextBlock}}">
+    <Style x:Key="NavTitleTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="10,0,0,5"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkAlertForegroundBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="TextBlockError" TargetType="TextBlock">
         <Setter Property="FontSize" Value="11.5"/>
-        <Setter Property="Foreground" Value="Red" />
+        <Setter Property="Foreground" Value="{StaticResource AlertForegroundBrush}" />
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="Margin" Value="8,3" />
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="TextBlockMessage" BasedOn="{StaticResource {x:Type TextBlock}}">
+    <Style x:Key="TextBlockMessage" TargetType="TextBlock">
         <Setter Property="FontSize" Value="11.5"/>
         <Setter Property="Foreground" Value="#FF808080" />
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="Margin" Value="3,8" />
     </Style>
     
-    <Style TargetType="TextBlock" x:Key="TextBlockLabel" BasedOn="{StaticResource TextBlockMessage}">
+    <Style x:Key="TextBlockLabel" TargetType="TextBlock" BasedOn="{StaticResource TextBlockMessage}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="Margin" Value="0" />
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="TextBlockSepLabel" BasedOn="{StaticResource TextBlockLabel}">
+    <Style x:Key="TextBlockSepLabel" TargetType="TextBlock" BasedOn="{StaticResource TextBlockLabel}">
         <Setter Property="Margin" Value="0,20,0,0" />
     </Style>
     
-    <Style TargetType="TextBlock" x:Key="TextBlockConfigDesc" BasedOn="{StaticResource {x:Type TextBlock}}">
+    <Style x:Key="TextBlockConfigDesc" TargetType="TextBlock">
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="#FF808080" />
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="Margin" Value="8,8" />
     </Style>
 
-
-    <Style TargetType="TextBlock" x:Key="TextBlockFolderTitle" BasedOn="{StaticResource {x:Type TextBlock}}">
+    <Style x:Key="TextBlockFolderTitle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="#FF808080" />
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="Margin" Value="2" />
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="TextBlockFilterDescription" BasedOn="{StaticResource {x:Type TextBlock}}">
+    <Style x:Key="TextBlockFilterDescription" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource LabelBrush}" />
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Margin" Value="3,6" />
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="TextBlockCenter">
+    <Style x:Key="TextBlockCenter" TargetType="TextBlock">
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
     
-    <Style TargetType="TextBlock" x:Key="TextBlockRight">
+    <Style x:Key="TextBlockRight" TargetType="TextBlock">
         <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>
 

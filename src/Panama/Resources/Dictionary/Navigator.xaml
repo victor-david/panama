@@ -1,0 +1,13 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021">
+
+    <Style TargetType="tk:MainNavigator">
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="ItemIndent" Value="20"/>
+        <Setter Property="IconBrush" Value="{StaticResource NavigatorIconBrush}"/>
+        <Setter Property="HideWhenEmpty" Value="False"/>
+    </Style>
+
+</ResourceDictionary>

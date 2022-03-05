@@ -61,7 +61,6 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Login Id", CredentialTable.Defs.Columns.LoginId);
             Columns.Create("Password", CredentialTable.Defs.Columns.Password).MakeMasked();
             AddViewSourceSortDescriptions();
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddCredential, Strings.CommandAddCredentialTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
             Commands.Add("CopyLoginId", (o) =>
                 {

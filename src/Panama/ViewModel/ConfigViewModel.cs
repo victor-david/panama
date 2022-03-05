@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using ConfigDefault = Restless.Panama.Core.Config.Default;
+//using ConfigDefault = Restless.Panama.Core.Config.Default;
 
 namespace Restless.Panama.ViewModel
 {
@@ -24,7 +24,6 @@ namespace Restless.Panama.ViewModel
         private long selectedSection;
         private ObservableCollection<SampleTitle> sampleTitles;
         private ObservableCollection<SamplePublisher> samplePublishers;
-
         private ColorSortingMode colorSortingMode;
         #endregion
 
@@ -238,8 +237,8 @@ namespace Restless.Panama.ViewModel
 
         private void InitializeRanges()
         {
-            DataGridRowHeight = Enumerable.Range(ConfigDefault.DataGrid.MinRowHeight, ConfigDefault.DataGrid.MaxRowHeight - ConfigDefault.DataGrid.MinRowHeight + 1);
-            DataGridAlternation = Enumerable.Range(ConfigDefault.DataGrid.MinAlternationCount, ConfigDefault.DataGrid.MaxAlternationCount - ConfigDefault.DataGrid.MinAlternationCount + 1);
+            DataGridRowHeight = Enumerable.Range(Core.Config.DataGrid.MinRowHeight, Core.Config.DataGrid.MaxRowHeight - Core.Config.DataGrid.MinRowHeight + 1);
+            DataGridAlternation = Enumerable.Range(Core.Config.DataGrid.MinAlternationCount, Core.Config.DataGrid.MaxAlternationCount - Core.Config.DataGrid.MinAlternationCount + 1);
         }
 
         private void RunSwitchSection(object parm)

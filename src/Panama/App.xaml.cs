@@ -90,8 +90,6 @@ namespace Restless.App.Panama
                 //Restless.Tools.Controls.Default.Style.TextBlockCenter = ResourceHelper.StyleTextBlockCenter;
 
                 Window main = WindowFactory.Main.Create();
-                main.MinWidth = Config.Default.MainWindow.MinWidth;
-                main.MinHeight = Config.Default.MainWindow.MinHeight;
                 main.Width = Config.Instance.MainWindowWidth;
                 main.Height = Config.Instance.MainWindowHeight;
                 main.WindowState = Config.Instance.MainWindowState;

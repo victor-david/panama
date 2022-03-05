@@ -41,7 +41,6 @@ namespace Restless.Panama.ViewModel
             Columns.CreateImage<BooleanToImageConverter>("D", AuthorTable.Defs.Columns.IsDefault);
             Columns.Create("Name", AuthorTable.Defs.Columns.Name);
             AddViewSourceSortDescriptions();
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddAuthor, Strings.CommandAddAuthorTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandDeleteAuthor, DeleteCommand).AddImageResource("ImageDeleteMenu");

@@ -45,7 +45,6 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Url", LinkTable.Defs.Columns.Url).MakeFlexWidth(2.5);
             Columns.Create("Note", LinkTable.Defs.Columns.Notes).MakeSingleLine();
             AddViewSourceSortDescriptions();
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddLink, Strings.CommandAddLinkTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");

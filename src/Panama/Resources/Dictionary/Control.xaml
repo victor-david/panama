@@ -3,24 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Base style for all controls   -->
-    <Style TargetType="Control" x:Key="BaseControl">
-        <Setter Property="MinHeight" Value="{StaticResource MinControlHeight}" />
-        <Setter Property="Margin" Value="3" />
+    <Style x:Key="BaseControl" TargetType="Control">
         <Setter Property="FontSize" Value="{StaticResource ControlFontSize}"/>
-    </Style>
-
-    <!-- Base style for Label -->
-    <Style TargetType="Label" BasedOn="{StaticResource BaseControl}">
-        <Setter Property="Foreground" Value="{StaticResource LabelBrush}" />
-        <Setter Property="FontSize" Value="12.5" />
-        <Setter Property="Margin" Value="0" />
+        <Setter Property="Foreground" Value="{StaticResource DefaultForegroundBrush}"/>
     </Style>
 
     <!-- Base style for TextBox  -->
     <Style TargetType="TextBox" BasedOn="{StaticResource BaseControl}">
-        <Setter Property="Foreground" Value="{StaticResource TextBoxForegoundBrush}" />
-        <Setter Property="Background" Value="{StaticResource TextBoxBackgroundBrush}" />
-        <Setter Property="Margin" Value="6,0,6,6" />
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Style.Triggers>
             <Trigger Property="IsReadOnly" Value="True">
@@ -32,7 +21,6 @@
 
     <!-- Base style for CheckBox -->
     <Style TargetType="CheckBox" BasedOn="{StaticResource BaseControl}">
-        <Setter Property="Foreground" Value="DarkBlue" />
         <Setter Property="VerticalAlignment" Value="Bottom"/>
         <Setter Property="Margin" Value="4,0,4,0" />
         <Setter Property="Cursor" Value="Hand" />
@@ -40,7 +28,6 @@
 
     <!-- Base style for RadioButton -->
     <Style TargetType="RadioButton" BasedOn="{StaticResource BaseControl}">
-        <Setter Property="Foreground" Value="DarkBlue" />
         <Setter Property="FontSize" Value="12.5" />
         <Setter Property="Margin" Value="8,4" />
         <Setter Property="Cursor" Value="Hand" />
@@ -48,7 +35,6 @@
 
     <!-- Base style for ComboBox-->
     <Style TargetType="ComboBox" BasedOn="{StaticResource BaseControl}">
-        <Setter Property="Foreground" Value="Blue" />
         <Setter Property="MinHeight" Value="24" />
         <Setter Property="Height" Value="24" />
         <Setter Property="VerticalAlignment" Value="Top"/>
@@ -56,8 +42,8 @@
 
     <!-- Base style for ListBox -->
     <Style TargetType="ListBox" BasedOn="{StaticResource BaseControl}">
-        <Setter Property="FontSize" Value="11.0" />
-        <Setter Property="MinHeight" Value="80" />
+        <Setter Property="FontSize" Value="11.0"/>
+        <Setter Property="MinHeight" Value="80"/>
         <Style.Resources>
             <!-- This enables the selected row to retain a highlight when the data grid loses focus. Has a problem with .Net 4.0 -->
             <!--<SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightSalmon"/>-->
@@ -69,8 +55,7 @@
     <!-- Base style for GroupBox -->
     <Style TargetType="GroupBox">
         <Setter Property="BorderBrush" Value="DarkGray"/>
-        <Setter Property="Margin" Value="2" />
-        <Setter Property="Padding" Value="2" />
+        <Setter Property="Padding" Value="2"/>
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -82,19 +67,6 @@
         </Setter>
     </Style>
 
-    <!-- Base style for TextBlock. Note that TextBox derives from FrameworkElement, not Control  -->
-    <!--<Style TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{StaticResource ControlFontSize}"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="#FF000088" />
-        <Setter Property="Margin" Value="3,0,3,0" />
-    </Style>-->
-
-    <!-- Base style for TabItem - Gets triggers from App.Controls.xaml -->
-    <!--<Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
-        <Setter Property="Padding" Value="6,4"/>
-    </Style>-->
-
     <Style TargetType="MenuItem">
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -102,14 +74,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-    <!-- Base style for Border -->
-    <!--<Style TargetType="Border">
-        <Setter Property="BorderBrush" Value="DarkGray" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Margin" Value="3" />
-        <Setter Property="Padding" Value="3" />
-    </Style>-->
 
     <!-- Base style for Expander. Configures the header -->
     <Style TargetType="Expander">
@@ -125,10 +89,9 @@
     
     <!-- Base style for StatusBar -->
     <Style TargetType="StatusBar">
-        <Setter Property="Background" Value="{StaticResource StatusBarBrush}"/>
-        <Setter Property="Margin" Value="0,1,0,0"/>
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="Background" Value="{StaticResource TitleBarBackgroundBrush}"/>
+        <Setter Property="BorderThickness" Value="0,2,0,0" />
+        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}" />
     </Style>
     
 </ResourceDictionary>

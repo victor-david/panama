@@ -123,12 +123,13 @@ namespace Restless.Panama.ViewModel
             Commands.Add("PersonalNoteFilter", (o) => { FilterText = "Personal Note"; });
             Commands.Add("ClearFilter", (o) => { FilterText = null; });
 
-            double minWidth = 80.0;
-            double imgSize = 20.0;
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterActive, Strings.CommandSubmissionFilterActiveTooltip, Commands["ActiveFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterTryAgain, Strings.CommandSubmissionFilterTryAgainTooltip, Commands["TryAgainFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterPersonalNote, Strings.CommandSubmissionFilterPersonalNoteTooltip, Commands["PersonalNoteFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            // TODO
+            //double minWidth = 80.0;
+            //double imgSize = 20.0;
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterActive, Strings.CommandSubmissionFilterActiveTooltip, Commands["ActiveFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterTryAgain, Strings.CommandSubmissionFilterTryAgainTooltip, Commands["TryAgainFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterPersonalNote, Strings.CommandSubmissionFilterPersonalNoteTooltip, Commands["PersonalNoteFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandBrowseToPublisherUrl, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");

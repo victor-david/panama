@@ -7,6 +7,7 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Resources;
+using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Restless.Panama.ViewModel
 {
@@ -25,12 +27,54 @@ namespace Restless.Panama.ViewModel
     public class MainWindowViewModel : WindowViewModel
     {
         #region Private
+        private readonly ViewModelCache viewModelCache;
+        private ApplicationViewModel selectedViewModel;
+        private GridLength mainNavigationWidth;
         private string notificationMessage;
         #endregion
 
         /************************************************************************/
 
-        #region Public properties
+        #region Properties
+        /// <summary>
+        /// Gets the navigator items
+        /// </summary>
+        public NavigatorItemCollection NavigatorItems
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets or sets the width of the main navigation pane.
+        /// </summary>
+        public GridLength MainNavigationWidth
+        {
+            get => mainNavigationWidth;
+            set
+            {
+                if (SetProperty(ref mainNavigationWidth, value))
+                {
+                    Config.MainNavigationWidth = (int)value.Value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected view model.
+        /// </summary>
+        public ApplicationViewModel SelectedViewModel
+        {
+            get => selectedViewModel;
+            set
+            {
+                var prevSelect = selectedViewModel;
+                if (SetProperty(ref selectedViewModel, value))
+                {
+                    ChangeViewModelActivationState(prevSelect, selectedViewModel);
+                }
+            }
+        }
+
         /// <summary>
         /// Returns the collection of available workspaces to display.
         /// A 'workspace' is a ViewModel that can request to be closed.
@@ -59,7 +103,7 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Singleton access and constructors
+        #region Constructors
         /// <summary>
         /// Gets the singleton instance of this class.
         /// </summary>
@@ -98,16 +142,21 @@ namespace Restless.Panama.ViewModel
             Commands.Add("ToolSearch", (o) => CreateIf<ToolSearchViewModel>());
             Commands.Add("ToolTitleList", (o) => CreateIf<ToolTitleListViewModel>());
 
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandTitle, Strings.CommandTitleTooltip, Commands["Title"], ResourceHelper.Get("ImageTitle")));
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandPublisher, Strings.CommandPublisherTooltip, Commands["Publisher"], ResourceHelper.Get("ImagePublisher")));
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandSubmission, Strings.CommandSubmissionTooltip, Commands["Submission"], ResourceHelper.Get("ImageSubmission")));
+            MainNavigationWidth = new GridLength(Config.MainNavigationWidth, GridUnitType.Pixel);
+
+            NavigatorItems = new NavigatorItemCollection(3);
+            NavigatorItems.SelectedItemChanged += NavigatorItemsSelectedItemChanged;
+            RegisterStandardNavigatorItems();
+
+            viewModelCache = new ViewModelCache();
 
             Workspaces = new ObservableCollection<ApplicationViewModel>();
             Workspaces.CollectionChanged += OnWorkspacesChanged;
-            //
-            DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor}";
+
 #if DEBUG
             DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor} (DEBUG)";
+#else
+            DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor}";
 #endif
         }
         #endregion
@@ -193,7 +242,38 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
+        #region Private methods (navigator)
+        private void RegisterStandardNavigatorItems()
+        {
+            NavigatorItems.Add<TitleViewModel>(NavigationGroup.Title, Strings.MenuItemTitles, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TitleGeometryKey));
+            NavigatorItems.Add<PublisherViewModel>(NavigationGroup.Title, Strings.MenuItemPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));
+            NavigatorItems.Add<SelfPublisherViewModel>(NavigationGroup.Title, Strings.MenuItemSelfPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));
+            NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.SubmissionGeometryKey));
+        }
+
+        private void NavigatorItemsSelectedItemChanged(object sender, NavigatorItem navItem)
+        {
+            if (navItem != null && navItem.TargetType.IsAssignableTo(typeof(ApplicationViewModel)))
+            {
+                SelectedViewModel = viewModelCache.GetByNavigationItem(navItem);
+            }
+        }
+        #endregion
+
         #region Private methods (VM creation / management)
+
+        /// <summary>
+        /// Changes the activation state of the specified view models.
+        /// </summary>
+        /// <param name="previous">The previously selected view model. Gets deactived.</param>
+        /// <param name="current">The currently selected view model. Gets activated.</param>
+        private void ChangeViewModelActivationState(ApplicationViewModel previous, ApplicationViewModel current)
+        {
+            /* Deactivate the previously selected view model */
+            previous?.Deactivate();
+            current?.Activate();
+        }
+
 
         private void Create<T>() where T : ApplicationViewModel
         {
@@ -322,8 +402,8 @@ namespace Restless.Panama.ViewModel
 
         private void RunResetWindowCommand(object o)
         {
-            WindowOwner.Width = Config.Default.MainWindow.Width;
-            WindowOwner.Height = Config.Default.MainWindow.Height;
+            WindowOwner.Width = Config.MainWindow.Width;
+            WindowOwner.Height = Config.MainWindow.Height;
             WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
             WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
             WindowOwner.WindowState = WindowState.Normal;

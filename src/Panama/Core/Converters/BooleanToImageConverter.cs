@@ -32,7 +32,7 @@ namespace Restless.Panama.Core
             if (value is bool && (bool)value)
             {
                 string resourceName = (parameter is string) ? parameter.ToString() : "ImageCheck";
-                result = (ImageSource)ResourceHelper.Get(resourceName);
+                result = (ImageSource)LocalResources.Get(resourceName);
             }
             return result;
         }

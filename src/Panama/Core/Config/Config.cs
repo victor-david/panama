@@ -32,16 +32,9 @@ namespace Restless.Panama.Core
             TitleFilter = GetItem(null, nameof(TitleFilter)).Deserialize<TitleFilter>();
             PublisherFilter = GetItem(null, nameof(PublisherFilter)).Deserialize<PublisherFilter>();
             Colors = new ConfigColors();
+            // TODO
             // This is applied at when config is first created and when the DateFormat property is changed by the user in settings.
             //Restless.Tools.Controls.Default.Format.Date = DateFormat;
-        }
-
-        /// <summary>
-        /// Static constructor. Tells C# compiler not to mark type as beforefieldinit.
-        /// </summary>
-        static Config()
-        {
-            // not sure if this is still needed in .NET 4.x
         }
         #endregion
 
@@ -49,95 +42,148 @@ namespace Restless.Panama.Core
 
         #region Public fields
         /// <summary>
-        /// Provides static default values for properties
+        /// Provides static values for the main navigation pane.
         /// </summary>
-        public static class Default
+        public static class MainNavigation
         {
             /// <summary>
-            /// Provides default property values for DataGrid
+            /// Gets the minimum width of the main navigation pane.
             /// </summary>
-            public static class DataGrid
-            {
-                /// <summary>
-                /// Gets the default value for data grid row height.
-                /// </summary>
-                public const int RowHeight = 24;
-
-                /// <summary>
-                /// Gets the default value for data grid alternation count;
-                /// </summary>
-                public const int AlternationCount = 2;
-
-                /// <summary>
-                /// Gets the minimum value for data grid row height.
-                /// </summary>
-                public const int MinRowHeight = 24;
-
-                /// <summary>
-                /// Gets the maximum value for data grid row height.
-                /// </summary>
-                public const int MaxRowHeight = 42;
-
-                /// <summary>
-                /// Gets the minimum value for data grid alternation count.
-                /// </summary>
-                public const int MinAlternationCount = 2;
-
-                /// <summary>
-                /// Gets the maximum value for data grid alternation count.
-                /// </summary>
-                public const int MaxAlternationCount = 5;
-
-            }
+            public const double MinWidth = 146.0;
 
             /// <summary>
-            /// Gets default settings for the main window
+            /// Gets the maximum width of the main navigation pane.
             /// </summary>
-            public static class MainWindow
-            {
-                /// <summary>
-                /// Gets the default width for the main window.
-                /// </summary>
-                public const int Width = 1420;
-
-                /// <summary>
-                /// Gets the default height for the main window.
-                /// </summary>
-                public const int Height = 860;
-
-                /// <summary>
-                /// Gets the minimum width for the main window.
-                /// </summary>
-                public const int MinWidth = 960;
-
-                /// <summary>
-                /// Gets the minimum height for the main window.
-                /// </summary>
-                public const int MinHeight = 760;
-            }
+            public const double MaxWidth = 292.0;
 
             /// <summary>
-            /// Provides default property values for miscellaneous properties.
+            /// Gets the default width of the main navigation pane.
             /// </summary>
-            public static class Other
-            {
-                /// <summary>
-                /// Gets the default folder for title root, versions, etc.
-                /// </summary>
-                public const string Folder = @"C:\";
+            public const double DefaultWidth = 150.0;
+        }
 
+        /// <summary>
+        /// Provides static values for the main window
+        /// </summary>
+        public static class MainWindow
+        {
+            /// <summary>
+            /// Gets the default width for the main window.
+            /// </summary>
+            public const int Width = 1420;
 
-                /// <summary>
-                /// Gets the default value for grid splitter.
-                /// </summary>
-                public const double SplitterWidth = 684;
+            /// <summary>
+            /// Gets the default height for the main window.
+            /// </summary>
+            public const int Height = 860;
 
-                /// <summary>
-                /// Gets the default value for a submission document footer.
-                /// </summary>
-                public const string DocumentFooter = "Submissions to [publisher] - [author] - [month], [year]";
-            }
+            /// <summary>
+            /// Gets the minimum width for the main window.
+            /// </summary>
+            public const int MinWidth = 960;
 
+            /// <summary>
+            /// Gets the minimum height for the main window.
+            /// </summary>
+            public const int MinHeight = 760;
+        }
+
+        /// <summary>
+        /// Provides static values for DataGrid
+        /// </summary>
+        public static class DataGrid
+        {
+            /// <summary>
+            /// Gets the default value for data grid row height.
+            /// </summary>
+            public const int DefaultRowHeight = 24;
+
+            /// <summary>
+            /// Gets the default value for data grid alternation count;
+            /// </summary>
+            public const int AlternationCount = 2;
+
+            /// <summary>
+            /// Gets the minimum value for data grid row height.
+            /// </summary>
+            public const int MinRowHeight = 24;
+
+            /// <summary>
+            /// Gets the maximum value for data grid row height.
+            /// </summary>
+            public const int MaxRowHeight = 42;
+
+            /// <summary>
+            /// Gets the minimum value for data grid alternation count.
+            /// </summary>
+            public const int MinAlternationCount = 2;
+
+            /// <summary>
+            /// Gets the maximum value for data grid alternation count.
+            /// </summary>
+            public const int MaxAlternationCount = 5;
+
+        }
+
+        /// <summary>
+        /// Provides static values for miscellaneous properties.
+        /// </summary>
+        public static class Other
+        {
+            /// <summary>
+            /// Gets the default folder for title root, versions, etc.
+            /// </summary>
+            public const string Folder = @"C:\";
+
+            /// <summary>
+            /// Gets the default value for grid splitter.
+            /// </summary>
+            public const double SplitterWidth = 684;
+
+            /// <summary>
+            /// Gets the default value for a submission document footer.
+            /// </summary>
+            public const string DocumentFooter = "Submissions to [publisher] - [author] - [month], [year]";
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Navigator
+        /// <summary>
+        /// Gets or sets the width of the main navigation panel.
+        /// </summary>
+        public int MainNavigationWidth
+        {
+            get => GetItem((int)MainNavigation.DefaultWidth);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the titles navigator is expanded.
+        /// </summary>
+        public bool NavTitlesExpander
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the tools navigator is expanded.
+        /// </summary>
+        public bool NavToolsExpander
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the other navigator is expanded.
+        /// </summary>
+        public bool NavOtherExpander
+        {
+            get => GetItem(false);
+            set => SetItem(value);
         }
         #endregion
 
@@ -172,7 +218,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public int MainWindowWidth
         {
-            get => GetItem(Default.MainWindow.Width);
+            get => GetItem(MainWindow.Width);
             set => SetItem(value);
         }
 
@@ -181,7 +227,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public int MainWindowHeight
         {
-            get => GetItem(Default.MainWindow.Height);
+            get => GetItem(MainWindow.Height);
             set => SetItem(value);
         }
 
@@ -199,7 +245,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public int DataGridAlternationCount
         {
-            get => GetItem(Default.DataGrid.AlternationCount);
+            get => GetItem(DataGrid.AlternationCount);
             set => SetItem(value);
         }
 
@@ -208,7 +254,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public int DataGridRowHeight
         {
-            get => GetItem(Default.DataGrid.RowHeight);
+            get => GetItem(DataGrid.DefaultRowHeight);
             set => SetItem(value);
         }
 
@@ -242,7 +288,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public string FolderExport
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
 
@@ -260,7 +306,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public string FolderSubmissionDocument
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
 
@@ -269,7 +315,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public string FolderSubmissionMessage
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
 
@@ -278,7 +324,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public string FolderSubmissionMessageAttachment
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
 
@@ -287,7 +333,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public string FolderTitleVersion
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
 
@@ -296,7 +342,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public string FolderTitleRoot
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
 
@@ -327,7 +373,7 @@ namespace Restless.Panama.Core
         /// </remarks>
         public GridLength LeftColumnTable
         {
-            get => GetGridLength(Default.Other.SplitterWidth);
+            get => GetGridLength(Other.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -339,7 +385,7 @@ namespace Restless.Panama.Core
         /// </remarks>
         public GridLength LeftColumnTitle
         {
-            get => GetGridLength(Default.Other.SplitterWidth);
+            get => GetGridLength(Other.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -351,7 +397,7 @@ namespace Restless.Panama.Core
         /// </remarks>
         public GridLength LeftColumnPublisher
         {
-            get => GetGridLength(Default.Other.SplitterWidth);
+            get => GetGridLength(Other.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -363,7 +409,7 @@ namespace Restless.Panama.Core
         /// </remarks>
         public GridLength LeftColumnSelfPublisher
         {
-            get => GetGridLength(Default.Other.SplitterWidth);
+            get => GetGridLength(Other.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -375,7 +421,7 @@ namespace Restless.Panama.Core
         /// </remarks>
         public GridLength LeftColumnSubmission
         {
-            get => GetGridLength(Default.Other.SplitterWidth);
+            get => GetGridLength(Other.SplitterWidth);
             set => SetGridLength(value);
         }
 
@@ -431,7 +477,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public string SubmissionDocFooter
         {
-            get => GetItem(Default.Other.DocumentFooter);
+            get => GetItem(Other.DocumentFooter);
             set => SetItem(value);
         }
 

@@ -51,8 +51,6 @@ namespace Restless.Panama.ViewModel
                 {
                     DatabaseController.Instance.GetTable<TagTable>().RefreshTagUsage();
                 });
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandAddTag, Strings.CommandAddTagTooltip, AddCommand, ResourceHelper.Get("ImageAdd"), VisualCommandImageSize, VisualCommandFontSize));
-            VisualCommands.Add(new VisualCommandViewModel(Strings.CommandRefreshTagUsage, Strings.CommandRefreshTagUsageTooltip, Commands["RefreshTagUsage"], ResourceHelper.Get("ImageRefresh"), VisualCommandImageSize, VisualCommandFontSize));
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandDeleteTag, DeleteCommand).AddImageResource("ImageDeleteMenu");

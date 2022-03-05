@@ -67,7 +67,7 @@ namespace Restless.Panama.ViewModel
             get
             {
                 string resource = (isPreviewActive) ? "ImageChevronRightTool" : "ImageChevronLeftTool";
-                return Resources.ResourceHelper.Get(resource);
+                return Resources.LocalResources.Get(resource);
             }
         }
 

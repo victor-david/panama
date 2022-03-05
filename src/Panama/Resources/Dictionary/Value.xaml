@@ -7,7 +7,7 @@
     xmlns:con="clr-namespace:Restless.Panama.Controls">
 
     <!-- Base control size definitions -->
-    <sys:Double x:Key="ControlFontSize">13</sys:Double>
+    <sys:Double x:Key="ControlFontSize">12</sys:Double>
     <sys:Double x:Key="MinControlHeight">26</sys:Double>
     <sys:Double x:Key="MinButtonWidth">94</sys:Double>
 

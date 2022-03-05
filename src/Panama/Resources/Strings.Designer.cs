@@ -2072,6 +2072,69 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Publishers.
+        /// </summary>
+        public static string MenuItemPublishers {
+            get {
+                return ResourceManager.GetString("MenuItemPublishers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Self publishers.
+        /// </summary>
+        public static string MenuItemSelfPublishers {
+            get {
+                return ResourceManager.GetString("MenuItemSelfPublishers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submissions.
+        /// </summary>
+        public static string MenuItemSubmissions {
+            get {
+                return ResourceManager.GetString("MenuItemSubmissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Titles.
+        /// </summary>
+        public static string MenuItemTitles {
+            get {
+                return ResourceManager.GetString("MenuItemTitles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Main.
+        /// </summary>
+        public static string NavHeaderMain {
+            get {
+                return ResourceManager.GetString("NavHeaderMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        public static string NavHeaderOther {
+            get {
+                return ResourceManager.GetString("NavHeaderOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        public static string NavHeaderTools {
+            get {
+                return ResourceManager.GetString("NavHeaderTools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot exit at this time. Background tasks are still running..
         /// </summary>
         public static string NotificationCannotExitTasksAreRunning {

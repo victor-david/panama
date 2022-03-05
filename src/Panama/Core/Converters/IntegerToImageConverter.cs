@@ -49,7 +49,7 @@ namespace Restless.Panama.Core
             if (value is long)
             {
                 string resourcePreface = (parameter is string) ? parameter.ToString() : string.Empty;
-                result = (ImageSource)ResourceHelper.Get(string.Format("{0}{1}", resourcePreface, value));
+                result = (ImageSource)LocalResources.Get(string.Format("{0}{1}", resourcePreface, value));
             }
             return result;
         }
