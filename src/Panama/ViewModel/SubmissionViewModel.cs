@@ -93,7 +93,6 @@ namespace Restless.Panama.ViewModel
         public SubmissionViewModel()
         {
             DisplayName = Strings.CommandSubmission;
-            MaxCreatable = 1;
             Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.CreateImage<BooleanToImageConverter>("O", SubmissionBatchTable.Defs.Columns.Online)
                 .AddToolTip(Strings.TooltipSubmissionOnline);

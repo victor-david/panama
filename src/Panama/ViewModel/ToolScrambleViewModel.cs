@@ -59,7 +59,6 @@ namespace Restless.Panama.ViewModel
         public ToolScrambleViewModel()
         {
             DisplayName = Strings.CommandToolScramble;
-            MaxCreatable = 1;
             Commands.Add("Paste", Paste);
             Commands.Add("Begin", Scramble);
             rand = new Random();

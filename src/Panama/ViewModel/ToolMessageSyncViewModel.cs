@@ -102,7 +102,6 @@ namespace Restless.Panama.ViewModel
         public ToolMessageSyncViewModel()
         {
             DisplayName = Strings.CommandToolMessageSync;
-            MaxCreatable = 1;
             Commands.Add("Begin", PerformSync);
             ResetCounters();
         }

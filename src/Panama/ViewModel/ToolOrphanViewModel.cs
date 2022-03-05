@@ -45,7 +45,6 @@ namespace Restless.Panama.ViewModel
         public ToolOrphanViewModel()
         {
             DisplayName = Strings.CommandToolOrphan;
-            MaxCreatable = 1;
             Controller = new ToolOrphanFinderController(this);
             MainSource.Source = Controller.NotFound;
 

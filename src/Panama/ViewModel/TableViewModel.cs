@@ -80,7 +80,6 @@ namespace Restless.Panama.ViewModel
         public TableViewModel()
         {
             DisplayName = Strings.CommandTable;
-            MaxCreatable = 1;
             Columns.SetDefaultSort(Columns.Create("Name", TableTable.Defs.Columns.Name), ListSortDirection.Ascending);
             Columns.Create("Cols", TableTable.Defs.Columns.ColumnCount).MakeFixedWidth(FixedWidth.MediumNumeric);
             Columns.Create("Rows", TableTable.Defs.Columns.RowCount).MakeFixedWidth(FixedWidth.MediumNumeric);

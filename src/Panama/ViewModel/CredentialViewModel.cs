@@ -51,8 +51,6 @@ namespace Restless.Panama.ViewModel
         public CredentialViewModel()
         {
             DisplayName = Strings.CommandCredential;
-            MaxCreatable = 1;
-
             Publisher = new CredentialPublisherController(this);
 
             Columns.Create("Id", LinkTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);

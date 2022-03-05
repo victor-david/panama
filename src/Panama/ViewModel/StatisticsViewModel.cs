@@ -118,7 +118,6 @@ namespace Restless.Panama.ViewModel
         public StatisticsViewModel()
         {
             DisplayName = Strings.CommandStatistics;
-            MaxCreatable = 1;
             Title = new TableStatisticBase(DatabaseController.Instance.GetTable<TitleTable>());
             Version = new TitleVersionTableStats(DatabaseController.Instance.GetTable<TitleVersionTable>());
             Submission = new SubmissionBatchTableStats(DatabaseController.Instance.GetTable<SubmissionBatchTable>());

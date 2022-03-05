@@ -76,15 +76,6 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Returns the collection of available workspaces to display.
-        /// A 'workspace' is a ViewModel that can request to be closed.
-        /// </summary>
-        public ObservableCollection<ApplicationViewModel> Workspaces
-        {
-            get;
-        }
-
-        /// <summary>
         /// Gets a notification message
         /// </summary>
         public string NotificationMessage
@@ -116,43 +107,37 @@ namespace Restless.Panama.ViewModel
         {
             //Owner.Closing += new CancelEventHandler(MainWindowClosing);
             Commands.Add("About", OpenAbout);
-            Commands.Add("Author", (o) => CreateIf<AuthorViewModel>());
-            Commands.Add("Close", (p) => WindowOwner.Close());
-            Commands.Add("CloseAll", CloseAllWorkspaces, CloseAllWorkspacesCanExecute);
-            Commands.Add("Config", (o) => CreateIf<ConfigViewModel>());
-            Commands.Add("Credential", (o) => CreateIf<CredentialViewModel>());
-            Commands.Add("Alert", (o) => CreateIf<AlertViewModel>());
-            Commands.Add("Link", (o) => CreateIf<LinkViewModel>());
-            Commands.Add("Note", (o) => CreateIf<UserNoteViewModel>());
-            Commands.Add("Publisher", (o) => CreateIf<PublisherViewModel>());
+            Commands.Add("Author", p => NavigatorItems.Select<AuthorViewModel>());
+            Commands.Add("Close", p => WindowOwner.Close());
+            Commands.Add("Config", p => NavigatorItems.Select<ConfigViewModel>());
+            Commands.Add("Credential", p => NavigatorItems.Select<CredentialViewModel>());
+            Commands.Add("Alert", p => NavigatorItems.Select<AlertViewModel>());
+            Commands.Add("Link", p => NavigatorItems.Select<LinkViewModel>());
+            Commands.Add("Note", p => NavigatorItems.Select<UserNoteViewModel>());
+            Commands.Add("Publisher", p => NavigatorItems.Select<PublisherViewModel>());
             Commands.Add("ResetWindow", RunResetWindowCommand);
-            Commands.Add("Submission", (o) => CreateIf<SubmissionViewModel>());
+            Commands.Add("Submission", p => NavigatorItems.Select<SubmissionViewModel>());
             Commands.Add("Save", Save);
-            Commands.Add("SelfPublisher", (o) => CreateIf<SelfPublisherViewModel>());
-            Commands.Add("Statistics", (o) => CreateIf<StatisticsViewModel>());
-            Commands.Add("Table", (o) => CreateIf<TableViewModel>());
-            Commands.Add("Tag", (o) => CreateIf<TagViewModel>());
-            Commands.Add("Title", (o) => CreateIf<TitleViewModel>());
-            Commands.Add("ToolConvert", (o) => CreateIf<ToolConvertViewModel>(), CanRunToolConvertCommand);
-            Commands.Add("ToolExport", (o) => CreateIf<ToolExportViewModel>());
-            Commands.Add("ToolMessageSync", (o) => CreateIf<ToolMessageSyncViewModel>());
-            Commands.Add("ToolMeta", (o) => CreateIf<ToolMetaUpdateViewModel>());
-            Commands.Add("ToolOrphan", (o) => CreateIf<ToolOrphanViewModel>());
-            Commands.Add("ToolScramble", (o) => CreateIf<ToolScrambleViewModel>());
-            Commands.Add("ToolSearch", (o) => CreateIf<ToolSearchViewModel>());
-            Commands.Add("ToolTitleList", (o) => CreateIf<ToolTitleListViewModel>());
+            Commands.Add("SelfPublisher", p => NavigatorItems.Select<SelfPublisherViewModel>());
+            Commands.Add("Statistics", p => NavigatorItems.Select<StatisticsViewModel>());
+            Commands.Add("Table", p => NavigatorItems.Select<TableViewModel>());
+            Commands.Add("Tag", p => NavigatorItems.Select<TagViewModel>());
+            Commands.Add("Title", p => NavigatorItems.Select<TitleViewModel>());
+            Commands.Add("ToolConvert", p => NavigatorItems.Select<ToolConvertViewModel>(), CanRunToolConvertCommand);
+            Commands.Add("ToolExport", p => NavigatorItems.Select<ToolExportViewModel>());
+            Commands.Add("ToolMessageSync", p => NavigatorItems.Select<ToolMessageSyncViewModel>());
+            Commands.Add("ToolMeta", p => NavigatorItems.Select<ToolMetaUpdateViewModel>());
+            Commands.Add("ToolOrphan", p => NavigatorItems.Select<ToolOrphanViewModel>());
+            Commands.Add("ToolScramble", p => NavigatorItems.Select<ToolScrambleViewModel>());
+            Commands.Add("ToolSearch", p => NavigatorItems.Select<ToolSearchViewModel>());
+            Commands.Add("ToolTitleList", p => NavigatorItems.Select<ToolTitleListViewModel>());
 
             MainNavigationWidth = new GridLength(Config.MainNavigationWidth, GridUnitType.Pixel);
 
             NavigatorItems = new NavigatorItemCollection(3);
             NavigatorItems.SelectedItemChanged += NavigatorItemsSelectedItemChanged;
             RegisterStandardNavigatorItems();
-
             viewModelCache = new ViewModelCache();
-
-            Workspaces = new ObservableCollection<ApplicationViewModel>();
-            Workspaces.CollectionChanged += OnWorkspacesChanged;
-
 #if DEBUG
             DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor} (DEBUG)";
 #else
@@ -178,11 +163,12 @@ namespace Restless.Panama.ViewModel
         /// <typeparam name="T">The type of workspace to notify</typeparam>
         public void NotifyWorkspaceOnRecordAdded<T>() where T : ApplicationViewModel
         {
-            var ws = GetFirstWorkspace<T>();
-            if (ws != null)
-            {
-                ws.OnRecordAdded();
-            }
+            // TODO
+            //var ws = GetFirstWorkspace<T>();
+            //if (ws != null)
+            //{
+            //    ws.OnRecordAdded();
+            //}
         }
 
         /// <summary>
@@ -192,25 +178,26 @@ namespace Restless.Panama.ViewModel
         /// <returns>The workspace</returns>
         public T SwitchToWorkspace<T>() where T : ApplicationViewModel
         {
-            // The reason we don't use CreateIf<T>() directly (which would work)
+            // TODO
+            // The reason we don't use NavigatorItems.Select<T>() directly (which would work)
             // is to avoid the possibility that a VM allows more than one instance.
             // We want to go the first one. If there isn't a first one, we'll create.
 
-            var ws = GetFirstWorkspace<T>();
-            if (ws != null)
-            {
-                SetActiveWorkspace(ws);
-            }
-            else
-            {
-                Create<T>();
-            }
+            //var ws = GetFirstWorkspace<T>();
+            //if (ws != null)
+            //{
+            //    SetActiveWorkspace(ws);
+            //}
+            //else
+            //{
+            //    Create<T>();
+            //}
 
-            ICollectionView collectionView = CollectionViewSource.GetDefaultView(Workspaces);
-            if (collectionView != null)
-            {
-                return collectionView.CurrentItem as T;
-            }
+            //ICollectionView collectionView = CollectionViewSource.GetDefaultView(Workspaces);
+            //if (collectionView != null)
+            //{
+            //    return collectionView.CurrentItem as T;
+            //}
             return null;
 
         }
@@ -260,8 +247,7 @@ namespace Restless.Panama.ViewModel
         }
         #endregion
 
-        #region Private methods (VM creation / management)
-
+        #region Private methods (VM management)
         /// <summary>
         /// Changes the activation state of the specified view models.
         /// </summary>
@@ -273,124 +259,38 @@ namespace Restless.Panama.ViewModel
             previous?.Deactivate();
             current?.Activate();
         }
-
-
-        private void Create<T>() where T : ApplicationViewModel
-        {
-            Execution.TryCatch(() =>
-                {
-                    ApplicationViewModel vm = (T)Activator.CreateInstance(typeof(T), this);
-                    //vm.MainViewModel = this;
-                    Workspaces.Add(vm);
-                    SetActiveWorkspace(vm);
-                });
-        }
-
-        private void CreateIf<T>() where T : ApplicationViewModel
-        {
-            if (CanCreate<T>())
-            {
-                Create<T>();
-            }
-            else
-            {
-                ICollectionView collectionView = CollectionViewSource.GetDefaultView(Workspaces);
-                if (!(collectionView.CurrentItem is T))
-                {
-                    var vm = Workspaces.OfType<T>().First();
-                    SetActiveWorkspace(vm);
-                }
-            }
-        }
-
-        private bool CanCreate<T>() where T : ApplicationViewModel
-        {
-            var it = Workspaces.OfType<T>();
-            int count = it.Count();
-            if (count > 0)
-            {
-                T viewModel = it.First();
-                return viewModel.MaxCreatable == -1 || count < viewModel.MaxCreatable;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Gets the first workspace of type T
-        /// </summary>
-        /// <typeparam name="T">The workspace type</typeparam>
-        /// <returns>The workspace, or null if there isn't one.</returns>
-        private T GetFirstWorkspace<T>() where T : ApplicationViewModel
-        {
-            var it = Workspaces.OfType<T>();
-            int count = it.Count();
-            if (count > 0)
-            {
-                return it.First();
-            }
-            return null;
-        }
-
-        private void SetActiveWorkspace(ApplicationViewModel workspace)
-        {
-            ICollectionView collectionView = CollectionViewSource.GetDefaultView(Workspaces);
-            if (collectionView != null)
-            {
-                collectionView.MoveCurrentTo(workspace);
-            }
-        }
-
-        private void OnWorkspacesChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (var workspace in e.NewItems.OfType<ApplicationViewModel>())
-                {
-                    workspace.Closing += OnWorkspaceClosing;
-                }
-            }
-
-            if (e.OldItems != null)
-            {
-                foreach (var workspace in e.OldItems.OfType<ApplicationViewModel>())
-                {
-                    workspace.Closing -= OnWorkspaceClosing;
-                }
-            }
-        }
         #endregion
 
         /************************************************************************/
 
         #region Private methods (other)
 
-        private void OnWorkspaceClosing(object sender, CancelEventArgs e)
-        {
-            if (!e.Cancel && sender is ApplicationViewModel workspace)
-            {
-                workspace.Dispose();
-                Workspaces.Remove(workspace);
-            }
-        }
+        //private void OnWorkspaceClosing(object sender, CancelEventArgs e)
+        //{
+        //    if (!e.Cancel && sender is ApplicationViewModel workspace)
+        //    {
+        //        workspace.Dispose();
+        //        Workspaces.Remove(workspace);
+        //    }
+        //}
 
-        private bool CloseAllWorkspacesCanExecute(object o)
-        {
-            return Workspaces.Count > 0;
-        }
+        //private bool CloseAllWorkspacesCanExecute(object o)
+        //{
+        //    return Workspaces.Count > 0;
+        //}
 
-        private void CloseAllWorkspaces(object o)
-        {
-            List<ApplicationViewModel> temp = new(Workspaces);
-            foreach (ApplicationViewModel workspace in temp)
-            {
-                workspace.CloseCommand.Execute(null);
-            }
-        }
+        //private void CloseAllWorkspaces(object o)
+        //{
+        //    List<ApplicationViewModel> temp = new(Workspaces);
+        //    foreach (ApplicationViewModel workspace in temp)
+        //    {
+        //        workspace.CloseCommand.Execute(null);
+        //    }
+        //}
 
         private void OpenAbout(object o)
         {
-            var about = WindowFactory.About.Create();
-            about.ShowDialog();
+            WindowFactory.About.Create().ShowDialog();
         }
 
         private void Save(object o)

@@ -54,7 +54,6 @@ namespace Restless.Panama.ViewModel
         public ToolTitleListViewModel()
         {
             DisplayName = Strings.CommandToolTitleList;
-            MaxCreatable = 1;
             Creator = new ToolTitleListController(this);
             Creator.Scanner.Completed += ScannerCompleted;
             Commands.Add("Begin", (o) => Creator.Run());

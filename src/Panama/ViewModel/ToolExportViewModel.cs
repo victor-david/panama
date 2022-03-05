@@ -39,7 +39,6 @@ namespace Restless.Panama.ViewModel
         public ToolExportViewModel()
         {
             DisplayName = Strings.CommandToolExport;
-            MaxCreatable = 1;
             Commands.Add("Begin", (o) =>
             {
                 Export.Run();

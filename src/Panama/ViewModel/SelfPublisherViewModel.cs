@@ -31,7 +31,6 @@ namespace Restless.Panama.ViewModel
         public SelfPublisherViewModel()
         {
             DisplayName = Strings.CommandSelfPublisher;
-            MaxCreatable = 1;
             Columns.Create("Id", SelfPublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.Create("Name", SelfPublisherTable.Defs.Columns.Name);
             Columns.Create("Url", SelfPublisherTable.Defs.Columns.Url);

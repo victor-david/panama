@@ -48,7 +48,6 @@ namespace Restless.Panama.ViewModel
         public ToolMetaUpdateViewModel()
         {
             DisplayName = Strings.CommandToolMeta;
-            MaxCreatable = 1;
             Commands.Add("Begin", (o) =>
                 {
                     Versions.Run();

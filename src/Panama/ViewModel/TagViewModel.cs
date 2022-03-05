@@ -38,7 +38,6 @@ namespace Restless.Panama.ViewModel
         public TagViewModel()
         {
             DisplayName = Strings.CommandTag;
-            MaxCreatable = 1;
             Columns.Create("Id", TagTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.SetDefaultSort(Columns.Create("Tag", TagTable.Defs.Columns.Tag), ListSortDirection.Ascending);
             Columns.Create("Description", TagTable.Defs.Columns.Description).MakeFlexWidth(2.5);

@@ -201,7 +201,6 @@ namespace Restless.Panama.ViewModel
         public TitleViewModel()
         {
             DisplayName = Strings.CommandTitle;
-            MaxCreatable = 1;
             Columns.Create("Id", TitleTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
             Columns.CreateImage<BooleanToImageConverter>("R", TitleTable.Defs.Columns.Ready).AddToolTip(Strings.TooltipTitleReady);
             Columns.CreateImage<BooleanToImageConverter>("Q", TitleTable.Defs.Columns.QuickFlag, "ImageExclamation").AddToolTip(Strings.TooltipTitleQuickFlag);

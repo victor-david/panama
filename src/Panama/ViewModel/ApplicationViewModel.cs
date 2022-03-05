@@ -64,7 +64,6 @@ namespace Restless.Panama.ViewModel
             {
                 OnClosing(new CancelEventArgs());
             });
-            MaxCreatable = 1;
         }
         #endregion
 

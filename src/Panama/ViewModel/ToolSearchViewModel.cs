@@ -79,7 +79,6 @@ namespace Restless.Panama.ViewModel
         public ToolSearchViewModel()
         {
             DisplayName = Strings.CommandToolSearch;
-            MaxCreatable = 3;
             previewColumns = new List<DataGridColumn>();
 
             resultsView = new ObservableCollection<WindowsSearchResult>();

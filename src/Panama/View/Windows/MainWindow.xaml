@@ -26,7 +26,6 @@
         <Menu KeyboardNavigation.TabNavigation="Cycle">
             <MenuItem Header="_File">
                 <MenuItem Header="Save" Icon="{StaticResource SaveIconKey}" Command="{Binding Commands[Save]}" />
-                <MenuItem Header="Close all tabs" Command="{Binding Commands[CloseAll]}"/>
                 <Separator />
                 <MenuItem Header="E_xit" Icon="{StaticResource ExitIconKey}" Command="{Binding Commands[Close]}" />
             </MenuItem>

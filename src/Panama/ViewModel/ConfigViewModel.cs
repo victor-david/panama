@@ -127,7 +127,6 @@ namespace Restless.Panama.ViewModel
         public ConfigViewModel()
         {
             DisplayName = Strings.CommandConfig;
-            MaxCreatable = 1;
             Commands.Add("SwitchSection", RunSwitchSection);
             Commands.Add("SwitchColorMode", RunSwitchColorMode);
             Commands.Add("ResetColors", RunResetColorSelections);
