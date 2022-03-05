@@ -64,7 +64,7 @@ namespace Restless.Panama.ViewModel
         /// <param name="tagName">The name of the tag.</param>
         /// <param name="tagDescription">The description of the tag.</param>
         /// <param name="command">The command associated with the selection of this tag.</param>
-        public TagCommandViewModel(long tagId, string tagName, string tagDescription, ICommand command) : base(null)
+        public TagCommandViewModel(long tagId, string tagName, string tagDescription, ICommand command) : base()
 //            :base(tagName, tagDescription, command, DefaultMinWidth)
         {
             // TODO (constructor)

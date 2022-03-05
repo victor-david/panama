@@ -45,8 +45,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolMetaUpdateViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        public ToolMetaUpdateViewModel(ApplicationViewModel owner) : base(owner)
+        public ToolMetaUpdateViewModel()
         {
             DisplayName = Strings.CommandToolMeta;
             MaxCreatable = 1;

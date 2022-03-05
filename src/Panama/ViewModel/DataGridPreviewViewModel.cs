@@ -114,8 +114,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="DataGridPreviewViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        public DataGridPreviewViewModel(ApplicationViewModel owner) : base(owner)
+        public DataGridPreviewViewModel()
         {
             IsPreviewActive = false;
             PreviewMode = PreviewMode.None;

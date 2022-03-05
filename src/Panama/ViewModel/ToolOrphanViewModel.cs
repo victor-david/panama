@@ -42,8 +42,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolOrphanViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        public ToolOrphanViewModel(ApplicationViewModel owner) : base(owner)
+        public ToolOrphanViewModel()
         {
             DisplayName = Strings.CommandToolOrphan;
             MaxCreatable = 1;

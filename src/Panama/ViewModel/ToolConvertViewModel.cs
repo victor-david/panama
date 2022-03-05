@@ -199,13 +199,12 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolConvertViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
         /// <remarks>
         /// This class is not used when document conversion is off.
         /// It exists to satisfy requirements in other parts of the app
         /// but is never activated.
         /// </remarks>
-        public ToolConvertViewModel(ApplicationViewModel owner) : base (owner)
+        public ToolConvertViewModel()
         {
         }
     }

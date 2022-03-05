@@ -76,8 +76,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolSearchViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        public ToolSearchViewModel(ApplicationViewModel owner) : base(owner)
+        public ToolSearchViewModel()
         {
             DisplayName = Strings.CommandToolSearch;
             MaxCreatable = 3;

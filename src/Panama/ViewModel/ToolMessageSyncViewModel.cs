@@ -99,8 +99,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolMessageSyncViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        public ToolMessageSyncViewModel(ApplicationViewModel owner) : base(owner)
+        public ToolMessageSyncViewModel()
         {
             DisplayName = Strings.CommandToolMessageSync;
             MaxCreatable = 1;

@@ -71,8 +71,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="DataGridViewModelBase"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        protected DataGridViewModelBase(ApplicationViewModel owner) : base (owner)
+        protected DataGridViewModelBase()
         {
             Columns = new DataGridColumnCollection();
             MainSource = new CollectionViewSource();

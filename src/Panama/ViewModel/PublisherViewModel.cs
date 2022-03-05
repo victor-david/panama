@@ -98,8 +98,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="PublisherViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        public PublisherViewModel(ApplicationViewModel owner) : base(owner)
+        public PublisherViewModel()
         {
             DisplayName = Strings.CommandPublisher;
             MaxCreatable = 1;

@@ -115,8 +115,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="StatisticsViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        public StatisticsViewModel(ApplicationViewModel owner) : base(owner)
+        public StatisticsViewModel()
         {
             DisplayName = Strings.CommandStatistics;
             MaxCreatable = 1;

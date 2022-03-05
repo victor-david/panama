@@ -199,8 +199,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="DataGridViewModel{T}"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        protected DataGridViewModel(ApplicationViewModel owner) : base(owner)
+        protected DataGridViewModel()
         {
             Table = DatabaseController.Instance.GetTable<T>();
             DataView = new DataView(Table);

@@ -56,8 +56,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolScrambleViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        public ToolScrambleViewModel(ApplicationViewModel owner) : base (owner)
+        public ToolScrambleViewModel()
         {
             DisplayName = Strings.CommandToolScramble;
             MaxCreatable = 1;

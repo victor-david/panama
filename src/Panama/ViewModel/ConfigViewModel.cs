@@ -124,8 +124,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfigViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        public ConfigViewModel(ApplicationViewModel owner) : base (owner)
+        public ConfigViewModel()
         {
             DisplayName = Strings.CommandConfig;
             MaxCreatable = 1;

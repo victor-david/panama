@@ -13,7 +13,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Represents the base class for view-model supplemental controllers.
     /// </summary>
-    /// <typeparam name="VM">The view model that derives from <see cref="DataGridViewModel{T}"/></typeparam>
+    /// <typeparam name="VMT">The view model that derives from <see cref="DataGridViewModel{T}"/></typeparam>
     /// <typeparam name="T">The database table that derives from <see cref="TableBase"/></typeparam>
     /// <remarks>
     /// <para>
@@ -26,8 +26,8 @@ namespace Restless.Panama.ViewModel
     /// a controller attached to <see cref="TitleViewModel"/> displays related records from the <see cref="TitleVersionTable"/>.
     /// </para>
     /// </remarks>
-    public abstract class ControllerBase<VM,T> : DataGridViewModel<T>
-        where VM: DataGridViewModel<T>
+    public abstract class ControllerBase<VMT,T> : DataGridViewModel<T>
+        where VMT: DataGridViewModel<T>
         where T: TableBase
     {
         #region Private
@@ -64,7 +64,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the ViewModel that owns this controller.
         /// </summary>
-        protected new VM Owner
+        protected new VMT Owner
         {
             get;
             private set;
@@ -78,7 +78,7 @@ namespace Restless.Panama.ViewModel
         /// Initializes a new instance of the <see cref="ControllerBase{VM,T}"/> class.
         /// </summary>
         /// <param name="owner">The VM that owns this view model.</param>
-        protected ControllerBase(VM owner) : base(owner)
+        protected ControllerBase(VMT owner)
         {
             Owner = owner ?? throw new ArgumentNullException(nameof(owner));
         }

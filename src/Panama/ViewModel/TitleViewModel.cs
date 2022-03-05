@@ -198,8 +198,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        public TitleViewModel(ApplicationViewModel owner) : base(owner)
+        public TitleViewModel()
         {
             DisplayName = Strings.CommandTitle;
             MaxCreatable = 1;

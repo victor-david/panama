@@ -74,7 +74,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowViewModel"/> class.
         /// </summary>
-        public WindowViewModel() : base(null)
+        public WindowViewModel()
         {
             AppInfo = ApplicationInfo.Instance;
             CloseWindowCommand = RelayCommand.Create((p) => windowOwner?.Close());

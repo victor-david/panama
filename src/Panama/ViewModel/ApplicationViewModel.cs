@@ -58,8 +58,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        protected ApplicationViewModel(ApplicationViewModel owner) : base(owner)
+        protected ApplicationViewModel()
         {
             CloseCommand = RelayCommand.Create((p) =>
             {

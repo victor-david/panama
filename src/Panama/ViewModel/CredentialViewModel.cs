@@ -48,8 +48,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="CredentialViewModel"/> class.
         /// </summary>
-        /// <param name="owner">The VM that owns this view model.</param>
-        public CredentialViewModel(ApplicationViewModel owner) : base(owner)
+        public CredentialViewModel()
         {
             DisplayName = Strings.CommandCredential;
             MaxCreatable = 1;
