@@ -1,25 +1,8 @@
 ﻿<ResourceDictionary 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:tk="http://schemas.restless.toolkit.com/2021">
-
-    <!-- Min data grid row height. See also: Config.DataGrid.MinRowHeight -->
-    <sys:Double x:Key="DataGridMinRowHeight">24</sys:Double>
-    <!-- Max data grid row height. Not used in XAML. See also: Config.DataGrid.MaxRowHeight -->
-    <sys:Double x:Key="DataGridMaxRowHeight">42</sys:Double>
-
-    <SolidColorBrush x:Key="DataGridAlternationBrushSolid" Color="#FFCBE4EC"/>
-    
-    <!-- Brush used for the data grid alternation -->
-    <LinearGradientBrush x:Key="DataGridAlternationBrush" StartPoint="0.00,1.00" EndPoint="1.00,0.01">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#FFD6D6D5" Offset="0.069"/>
-                <GradientStop Color="#FFF4F4FA" Offset="1.000"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core">
 
     <Style x:Key="TitleDataGridRowStyle" TargetType="DataGridRow">
         <Style.Triggers>
@@ -129,31 +112,21 @@
         </Style.Triggers>
     </Style>
 
-    <!-- Defines a style to use for all DataGrid elements -->
-    <Style TargetType="DataGrid" BasedOn="{StaticResource BaseControl}">
-        <Setter Property="FontSize" Value="11"/>
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="ColumnWidth" Value="*" />
-        <Setter Property="MinRowHeight" Value="{StaticResource DataGridMinRowHeight}" />
-        <Setter Property="Background" Value="White" />
-        <Setter Property="BorderBrush" Value="DarkGray" />
+    <Style x:Key="DefaultDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultControlStyle}">
+        <Setter Property="Foreground" Value="{StaticResource DarkForegroundBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
+        <Setter Property="ColumnWidth" Value="*"/>
+        <Setter Property="MinRowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}" />
         <Setter Property="GridLinesVisibility" Value="None"/>
         <Setter Property="HeadersVisibility" Value="Column"/>
-        <Setter Property="IsReadOnly" Value="True" />
-        <Setter Property="AutoGenerateColumns" Value="False" />
-        <Setter Property="SelectionMode" Value="Single" />
-        <Setter Property="SelectionUnit" Value="FullRow" />
-        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="SelectionUnit" Value="FullRow"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="AlternationCount" Value="{Binding Config.DataGridAlternationCount}"/>
         <Setter Property="AlternatingRowBackground" Value="{Binding Config.Colors.DataGridAlternation.BackgroundBrush}"/>
-        <!--<Setter Property="RowStyle" Value="{StaticResource DataGridRowStyle}"/>-->
-        <!--<Setter Property="ColumnHeaderStyle">
-            <Setter.Value>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Foreground" Value="Blue"/>
-                </Style>
-            </Setter.Value>
-        </Setter>-->
         <Setter Property="CellStyle">
             <Setter.Value>
                 <Style TargetType="DataGridCell">
@@ -169,40 +142,42 @@
                 </Style>
             </Setter.Value>
         </Setter>
-        <Style.Resources>
-            <!-- This enables the selected row to retain a highlight when the data grid loses focus. Has a problem with .Net 4.0 -->
-            <!--<SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightSalmon"/>-->
-            <!-- This works in .Net 4.0 -->
-            <!--<SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="{StaticResource InactiveSelectionColor}" />-->
-        </Style.Resources>
     </Style>
 
-    <Style TargetType="DataGrid" x:Key="DataGridEdit" BasedOn="{StaticResource {x:Type DataGrid}}">
+    <Style TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
+    <Style TargetType="tk:DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
+
+    <Style x:Key="DataGridEdit" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
         <Setter Property="Margin" Value="4,2,4,4" />
         <Setter Property="MinHeight" Value="100" />
         <Setter Property="MaxHeight" Value="200" />
         <Setter Property="AlternatingRowBackground" Value="#FFDFDFDF"/>
     </Style>
 
-    <Style TargetType="tk:DataGrid" BasedOn="{StaticResource {x:Type DataGrid}}">
-
-    </Style>
-
     <!-- Bit of a kluge. But otherwise, the DataGrid's context menu also pops up if you right click the header row-->
-    <Style TargetType="{x:Type DataGridColumnHeader}">
+    <Style x:Key="DefaultDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu Visibility="Collapsed" IsEnabled="False"/>
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="DarkBlue"/>
+        <Setter Property="Foreground" Value="{StaticResource DefaultHeaderForegroundBrush}"/>
     </Style>
 
-    <!-- This style exists to have a named style same as default style (above). Used when dynamically adding a style -->
-    <Style TargetType="DataGridColumnHeader" x:Key="DataGridHeaderDefault" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-    </Style>
+    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}"/>
 
-    <Style TargetType="DataGridColumnHeader" x:Key="DataGridHeaderCenter" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+    <!-- Backward compatibility TODO: remove -->
+    <Style x:Key="DataGridHeaderCenter" TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
+
+    
+    <Style x:Key="CenterDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+    <!--<Style x:Key="CenterDataGridCellStyle" TargetType="DataGridCell">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>-->
+
 </ResourceDictionary>

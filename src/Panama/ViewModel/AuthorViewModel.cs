@@ -35,7 +35,7 @@ namespace Restless.Panama.ViewModel
         public AuthorViewModel()
         {
             DisplayName = Strings.CommandAuthor;
-            Columns.SetDefaultSort(Columns.Create("Id", AuthorTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard), ListSortDirection.Ascending);
+            Columns.SetDefaultSort(Columns.Create("Id", AuthorTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042), ListSortDirection.Ascending);
             Columns.CreateImage<BooleanToImageConverter>("D", AuthorTable.Defs.Columns.IsDefault);
             Columns.Create("Name", AuthorTable.Defs.Columns.Name);
             AddViewSourceSortDescriptions();

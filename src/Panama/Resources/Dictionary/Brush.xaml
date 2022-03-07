@@ -2,21 +2,37 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <!-- Basic brushes -->
+    <!-- Background -->
     <SolidColorBrush x:Key="DefaultBackgroundBrush" Color="#ffffff"/>
-    <SolidColorBrush x:Key="DefaultForegroundBrush" Color="#0000f0"/>
-    <SolidColorBrush x:Key="DarkForegroundBrush" Color="Gray"/>
-    <SolidColorBrush x:Key="DefaultMenuBrush" Color="#707070"/>
-    <SolidColorBrush x:Key="DefaultBorderBrush" Color="#a0a0a0"/>
-    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#bcbcbc" />
-    <SolidColorBrush x:Key="DefaultIconBrush" Color="RoyalBlue" />
-       
-    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
     <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
     <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#DDD" />
-    <SolidColorBrush x:Key="TextBoxForegoundBrush" Color="Blue"/>
-    <SolidColorBrush x:Key="TextBoxBackgroundBrush" Color="#FFF8F8DF"/> 
+    <SolidColorBrush x:Key="TextBoxBackgroundBrush" Color="Honeydew"/>
+    <SolidColorBrush x:Key="SelectorBackgroundBrush" Color="DarkBlue"/>
     
+    <!-- Foreground -->
+    <SolidColorBrush x:Key="DefaultForegroundBrush" Color="#0000f0"/>
+    <SolidColorBrush x:Key="DarkForegroundBrush" Color="Gray"/>
+    <SolidColorBrush x:Key="LightForegroundBrush" Color="#AB000000"/>
+    <SolidColorBrush x:Key="DefaultHeaderForegroundBrush" Color="#606060" />
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+    <SolidColorBrush x:Key="TextBoxForegroundBrush" Color="Blue"/>
+    <SolidColorBrush x:Key="SelectorForegroundBrush" Color="#808080"/>
+    <SolidColorBrush x:Key="AlertForegroundBrush" Color="Red"/>
+    <SolidColorBrush x:Key="DarkAlertForegroundBrush" Color="#A00000"/>
+
+    <!-- Border -->
+    <SolidColorBrush x:Key="DefaultBorderBrush" Color="#a0a0a0"/>
+    <SolidColorBrush x:Key="LightBorderBrush" Color="#e0e0e0"/>
+    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#efefef" />
+
+    <!-- Menu -->
+    <SolidColorBrush x:Key="DefaultMenuBrush" Color="#707070"/>
+
+    <!-- Buttons -->
+    <SolidColorBrush x:Key="ActionButtonBackgroundBrush" Color="SkyBlue"/>
+    <SolidColorBrush x:Key="ActionButtonForegroundBrush" Color="White"/>
+    <SolidColorBrush x:Key="ActionButtonRolloverBrush" Color="CadetBlue"/>
+
     <!-- Window -->
     <SolidColorBrush x:Key="TitleBarBackgroundBrush" Color="LightSteelBlue"/>
     <SolidColorBrush x:Key="TitleBarForegroundBrush" Color="#404040"/>
@@ -24,15 +40,20 @@
     <SolidColorBrush x:Key="TitleBarErrorForegroundBrush" Color="GhostWhite"/>
     <SolidColorBrush x:Key="TitleBarBorderBrush" Color="LightGray"/>
     <SolidColorBrush x:Key="TitleBarButtonBrush" Color="DarkGreen"/>
-
+    
+    <!-- Icon -->
+    <SolidColorBrush x:Key="DefaultIconBrush" Color="RoyalBlue"/>
+    <SolidColorBrush x:Key="GreenIconBrush" Color="Green"/>
+    <SolidColorBrush x:Key="BlueIconBrush" Color="Blue"/>
+    <SolidColorBrush x:Key="RedIconBrush" Color="#A00000"/>
+    <SolidColorBrush x:Key="GrayIconBrush" Color="Gray"/>
+    
     <!-- Other -->
     <SolidColorBrush x:Key="NavigatorIconBrush" Color="LightSlateGray"/>
-    <SolidColorBrush x:Key="AlertForegroundBrush" Color="Red"/>
-    <SolidColorBrush x:Key="DarkAlertForegroundBrush" Color="#C00000"/>
     <SolidColorBrush x:Key="LabelBrush" Color="#FF021F51"/>
-
-
-
+    <SolidColorBrush x:Key="DataGridAlternationBrush" Color="LightSteelBlue"/>
+    <SolidColorBrush x:Key="StatusBarBackgroundBrush" Color="GhostWhite"/>
+    
     <!-- Brush used for text block opener -->
     <LinearGradientBrush x:Key="OpenerBrush" StartPoint="0.00,0.00" EndPoint="1.00,0.00">
         <GradientBrush.GradientStops>

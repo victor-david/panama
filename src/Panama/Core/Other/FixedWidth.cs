@@ -13,33 +13,38 @@ namespace Restless.Panama.Core
     public class FixedWidth
     {
         /// <summary>
-        /// Standard fixed width for an id column, 42
+        /// Fixed width of 34
         /// </summary>
-        public const int Standard = 42;
+        public const int W034 = 34;
 
         /// <summary>
-        /// Fixed width for short string, 48
+        /// Fixed width of 42
         /// </summary>
-        public const int ShortString = 48;
+        public const int W042 = 42;
 
         /// <summary>
-        /// Fixed width for medium string, 96
+        /// Fixed width of 48
         /// </summary>
-        public const int MediumString = 96;
+        public const int W048 = 48;
 
         /// <summary>
-        /// Fixed width for a column that displays a bit longer numeric data, 52.
+        /// Fixed width of 52.
         /// </summary>
-        public const int MediumNumeric = 52;
+        public const int W052 = 52;
 
         /// <summary>
-        /// Fixed width for a column that displays longer numeric data, 76.
+        /// Fixed width of 76.
         /// </summary>
-        public const int LongerNumeric = 76;
+        public const int W076 = 76;
 
         /// <summary>
-        /// Fixed width for a column that displays longer data, 180
+        /// Fixed width of 96
         /// </summary>
-        public const int LongString = 180;
+        public const int W096 = 96;
+
+        /// <summary>
+        /// Fixed width of 180
+        /// </summary>
+        public const int W180 = 180;
     }
 }

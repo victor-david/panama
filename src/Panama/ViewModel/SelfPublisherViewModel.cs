@@ -31,7 +31,7 @@ namespace Restless.Panama.ViewModel
         public SelfPublisherViewModel()
         {
             DisplayName = Strings.CommandSelfPublisher;
-            Columns.Create("Id", SelfPublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", SelfPublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Name", SelfPublisherTable.Defs.Columns.Name);
             Columns.Create("Url", SelfPublisherTable.Defs.Columns.Url);
 
@@ -42,7 +42,7 @@ namespace Restless.Panama.ViewModel
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.Create("PC", SelfPublisherTable.Defs.Columns.Calculated.PubCount)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.Standard)
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipSelfPublisherPublishedCount)
                 .AddSort(null, SelfPublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 

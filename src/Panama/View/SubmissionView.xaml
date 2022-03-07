@@ -29,7 +29,7 @@
         </StackPanel>
 
         <!-- Main data grid to display the tabular data -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderEditContainerStyle}">
             <tk:DataGrid 
                 x:Name="grid"
                 RowHeight="{Binding Config.DataGridRowHeight}"
@@ -48,7 +48,7 @@
         <ItemsControl Grid.Column="2" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=FilterCommands}"/>
 
         <!-- Nested editing control on the right -->
-        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderEditContainerStyle}">
             <view:SubmissionEditWithTab Visibility="{Binding EditVisibility}"/>
         </Border>
 

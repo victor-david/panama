@@ -107,9 +107,16 @@
 
         <!-- Navigator splitter -->
         <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitterStyle}"/>
-        
+
+        <!-- Pages go inside the border -->
+        <Border Grid.Column="2" Style="{StaticResource MainContentBorderStyle}">
+            <ContentControl Content="{Binding SelectedViewModel}"/>
+        </Border>
+
         <!-- Status bar (bottom) -->
-        <StatusBar Grid.Row="1" Grid.ColumnSpan="3"/>
+        <StatusBar Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource MainStatusBarStyle}"/>
+        
+        
 
 
         <!-- ItemsControl to hold the main toolbar buttons -->

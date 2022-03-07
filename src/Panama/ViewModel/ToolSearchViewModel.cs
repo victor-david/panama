@@ -85,8 +85,8 @@ namespace Restless.Panama.ViewModel
             MainSource.Source = resultsView;
 
             Columns.CreateImage<BooleanToImageConverter>("V", "Extended.IsVersion");
-            Columns.Create("Type", WindowsSearchResult.GetBindingReference(SysProps.System.ItemType)).MakeFixedWidth(FixedWidth.ShortString);
-            Columns.Create("Size", WindowsSearchResult.GetBindingReference(SysProps.System.Size)).MakeNumeric(null, FixedWidth.LongerNumeric);
+            Columns.Create("Type", WindowsSearchResult.GetBindingReference(SysProps.System.ItemType)).MakeFixedWidth(FixedWidth.W048);
+            Columns.Create("Size", WindowsSearchResult.GetBindingReference(SysProps.System.Size)).MakeNumeric(null, FixedWidth.W076);
             Columns.Create("Modified", WindowsSearchResult.GetBindingReference(SysProps.System.DateModified)).MakeDate()
                 .AddToolTip("The modified date according to the file system");
 
@@ -104,7 +104,7 @@ namespace Restless.Panama.ViewModel
             Columns.Create("File", WindowsSearchResult.GetBindingReference(SysProps.System.ItemPathDisplay)).MakeFlexWidth(2.0);
 
             previewColumns.Add(Columns.Create("Title", WindowsSearchResult.GetBindingReference(SysProps.System.Title)).MakeFlexWidth(1.25));
-            previewColumns.Add(Columns.Create("Author", WindowsSearchResult.GetBindingReference(SysProps.System.Author)).MakeFixedWidth(FixedWidth.LongString));
+            previewColumns.Add(Columns.Create("Author", WindowsSearchResult.GetBindingReference(SysProps.System.Author)).MakeFixedWidth(FixedWidth.W180));
             previewColumns.Add(Columns.Create("Comment", WindowsSearchResult.GetBindingReference(SysProps.System.Comment)));
             previewColumns.Add(Columns.Create("Company", WindowsSearchResult.GetBindingReference(SysProps.System.Company)));
 

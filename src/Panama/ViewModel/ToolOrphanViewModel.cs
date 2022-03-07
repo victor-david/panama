@@ -50,7 +50,7 @@ namespace Restless.Panama.ViewModel
 
             Commands.Add("Begin", (o) => Controller.Run());
             Columns.Create("Modified", nameof(FileScanDisplayObject.LastModified)).MakeDate();
-            Columns.Create("Size", nameof(FileScanDisplayObject.Size)).MakeNumeric(null, FixedWidth.LongerNumeric);
+            Columns.Create("Size", nameof(FileScanDisplayObject.Size)).MakeNumeric(null, FixedWidth.W076);
             Columns.SetDefaultSort(Columns.Create("File", nameof(FileScanDisplayObject.FileName)), ListSortDirection.Ascending);
             AddViewSourceSortDescriptions();
             Commands.Add("CreateTitle", RunCreateTitleCommand, (p)=> SelectedItem != null);

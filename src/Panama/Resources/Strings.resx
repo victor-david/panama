@@ -165,10 +165,6 @@
     <value>Add title</value>
     <comment>Command text for add title</comment>
   </data>
-  <data name="CommandAddTitleTooltip" xml:space="preserve">
-    <value>Add a new title to the list</value>
-    <comment>Tooltip text for add title</comment>
-  </data>
   <data name="CommandApplyConfig" xml:space="preserve">
     <value>Apply</value>
     <comment>Command text for config apply</comment>
@@ -861,7 +857,7 @@ Do you want to continue?</value>
   <data name="TooltipSubmissionOnline" xml:space="preserve">
     <value>Submission is online</value>
   </data>
-  <data name="TooltipTitleReady" xml:space="preserve">
+  <data name="ToolTipTitleFilterReady" xml:space="preserve">
     <value>Title is flagged as ready</value>
   </data>
   <data name="TooltipPublisherExclusive" xml:space="preserve">
@@ -936,7 +932,7 @@ Do you want to continue?</value>
   <data name="ConfirmationClearTitleFlags" xml:space="preserve">
     <value>This operation will clear the quick flag from all titles. Do you want to continue?</value>
   </data>
-  <data name="TooltipTitleQuickFlag" xml:space="preserve">
+  <data name="ToolTipTitleFilterFlag" xml:space="preserve">
     <value>Title is flagged</value>
   </data>
   <data name="InvalidOpCannotAddVersionFile" xml:space="preserve">
@@ -995,5 +991,35 @@ Do you want to continue?</value>
   </data>
   <data name="MenuItemTitles" xml:space="preserve">
     <value>Titles</value>
+  </data>
+  <data name="MenuItemAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="MenuItemClear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="MenuItemCustom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="ToolTipFilterCustom" xml:space="preserve">
+    <value>Establish filter(s) on the collection</value>
+  </data>
+  <data name="ToolTipFilterClear" xml:space="preserve">
+    <value>Clear all filters</value>
+  </data>
+  <data name="ToolTipTitleAdd" xml:space="preserve">
+    <value>Add a title to the collection</value>
+  </data>
+  <data name="MenuItemAddTitle" xml:space="preserve">
+    <value>Add a title to the collection</value>
+  </data>
+  <data name="ToolTipTitleFilterPublished" xml:space="preserve">
+    <value>Title has been published</value>
+  </data>
+  <data name="ToolTipTitleFilterSubmitted" xml:space="preserve">
+    <value>Title is currently submitted</value>
+  </data>
+  <data name="TextNotOpenXmlDocument" xml:space="preserve">
+    <value>Not an Open Xml document</value>
   </data>
 </root>

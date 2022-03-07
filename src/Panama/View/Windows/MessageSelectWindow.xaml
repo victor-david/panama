@@ -20,7 +20,7 @@
         <!--<view:SimpleRowFilter Grid.Row="0"/>-->
         <!-- Main data grid to display the tabular data  -->
 
-        <Border Style="{StaticResource BorderGridContainer}">
+        <Border Style="{StaticResource BorderEditContainerStyle}">
             <tk:DataGrid 
                 x:Name="grid"
                 Grid.ColumnSpan="{Binding IsMessageSelectMode,Mode=OneTime,Converter={cv:BooleanToIntegerConverter},ConverterParameter={StaticResource Integer1}}"
@@ -36,7 +36,7 @@
                 </DataGrid.RowStyle>
             </tk:DataGrid>
         </Border>
-        <Border Grid.Column="1" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Column="1" Style="{StaticResource BorderEditContainerStyle}">
             <StackPanel Visibility="{Binding IsMessageSelectMode, Mode=OneTime, Converter={cv:BooleanToVisibilityConverter}}">
                 <StackPanel.Resources>
                     <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockMessage}">

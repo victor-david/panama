@@ -27,7 +27,7 @@
             SelectedItem="{Binding DisplayFilterSelection}" />
 
         <!-- Main data grid to display the tabular data  -->
-        <Border Grid.Row="1" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Row="1" Style="{StaticResource BorderEditContainerStyle}">
             <tk:DataGrid 
                 x:Name="grid"
                 SelectionMode="Extended"

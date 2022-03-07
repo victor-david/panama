@@ -11,6 +11,11 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
 
+    <Style x:Key="TitleDisplayTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkAlertForegroundBrush}"/>
+    </Style>
+
     <Style x:Key="TextBlockError" TargetType="TextBlock">
         <Setter Property="FontSize" Value="11.5"/>
         <Setter Property="Foreground" Value="{StaticResource AlertForegroundBrush}" />
@@ -63,14 +68,7 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>
 
-    <!-- TextBlock used in a StatusBar-->
-    <Style TargetType="TextBlock" x:Key="StatusBar">
-        <Setter Property="Margin" Value="3,0" />
-        <Setter Property="FontSize" Value="11.5" />
-        <Setter Property="Foreground" Value="Black" />
-    </Style>
-
-    <Style TargetType="TextBlock" x:Key="StatusBarNotificationMessage" BasedOn="{StaticResource StatusBar}">
+    <Style x:Key="StatusBarNotificationMessage" TargetType="TextBlock">
         <Setter Property="Text" Value="{Binding Path=NotificationMessage, NotifyOnTargetUpdated=True}" />
         <Setter Property="Foreground" Value="Red"/>
         <Style.Triggers>

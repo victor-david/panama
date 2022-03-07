@@ -28,7 +28,7 @@
         </Grid>
 
         <!-- Main data grid to display the tabular data  -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderEditContainerStyle}">
             <DataGrid ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" tk:DataGridColumns.Columns="{Binding Columns}">
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
@@ -37,7 +37,7 @@
         </Border>
         
         <!-- Nested editing control on the right -->
-        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderEditContainerStyle}">
             <view:TagEdit Visibility="{Binding EditVisibility}"/>
         </Border>
     </Grid>

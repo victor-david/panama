@@ -34,7 +34,7 @@
         </Grid>
 
         <!-- Main data grid to display the tabular data  -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderEditContainerStyle}">
             <tk:DataGrid 
                 x:Name="PublisherDataGrid" 
                 Grid.Row="1" Grid.Column="0" 
@@ -58,7 +58,7 @@
 
         <ItemsControl Grid.Column="2" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=FilterCommands}"/>
 
-        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderEditContainerStyle}">
             <DockPanel>
                 <view:PublisherFilter DockPanel.Dock="Top" Visibility="{Binding FilterVisibility}"/>
                 <view:PublisherEditWithTab DockPanel.Dock="Top" Visibility="{Binding EditVisibility}"/>

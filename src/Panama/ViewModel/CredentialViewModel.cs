@@ -53,7 +53,7 @@ namespace Restless.Panama.ViewModel
             DisplayName = Strings.CommandCredential;
             Publisher = new CredentialPublisherController(this);
 
-            Columns.Create("Id", LinkTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", LinkTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.SetDefaultSort(Columns.Create("Name", CredentialTable.Defs.Columns.Name), ListSortDirection.Ascending);
             Columns.Create("Login Id", CredentialTable.Defs.Columns.LoginId);
             Columns.Create("Password", CredentialTable.Defs.Columns.Password).MakeMasked();

@@ -131,14 +131,14 @@ namespace Restless.Panama.ViewModel
 
             versionColumn = Columns.Create("V", TitleVersionTable.Defs.Columns.Version)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.Standard);
+                .MakeFixedWidth(FixedWidth.W042);
 
             Columns.Create<IntegerToCharConverter>("Rev", TitleVersionTable.Defs.Columns.Revision)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.Standard);
+                .MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Updated", TitleVersionTable.Defs.Columns.Updated).MakeDate();
-            Columns.Create("WC", TitleVersionTable.Defs.Columns.WordCount).MakeFixedWidth(FixedWidth.Standard);
-            Columns.Create("Lang", TitleVersionTable.Defs.Columns.LangId).MakeFixedWidth(FixedWidth.ShortString);
+            Columns.Create("WC", TitleVersionTable.Defs.Columns.WordCount).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Lang", TitleVersionTable.Defs.Columns.LangId).MakeFixedWidth(FixedWidth.W048);
             Columns.Create("File", TitleVersionTable.Defs.Columns.FileName).MakeFlexWidth(1.65);
             Columns.Create("Note", TitleVersionTable.Defs.Columns.Note);
 

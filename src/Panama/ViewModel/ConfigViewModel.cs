@@ -235,7 +235,7 @@ namespace Restless.Panama.ViewModel
 
         private void InitializeRanges()
         {
-            DataGridRowHeight = Enumerable.Range(Core.Config.DataGrid.MinRowHeight, Core.Config.DataGrid.MaxRowHeight - Core.Config.DataGrid.MinRowHeight + 1);
+            DataGridRowHeight = Enumerable.Range((int)Core.Config.DataGrid.MinRowHeight, (int)Core.Config.DataGrid.MaxRowHeight - (int)Core.Config.DataGrid.MinRowHeight + 1);
             DataGridAlternation = Enumerable.Range(Core.Config.DataGrid.MinAlternationCount, Core.Config.DataGrid.MaxAlternationCount - Core.Config.DataGrid.MinAlternationCount + 1);
         }
 

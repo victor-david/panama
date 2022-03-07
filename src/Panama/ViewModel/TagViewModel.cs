@@ -38,12 +38,12 @@ namespace Restless.Panama.ViewModel
         public TagViewModel()
         {
             DisplayName = Strings.CommandTag;
-            Columns.Create("Id", TagTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", TagTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.SetDefaultSort(Columns.Create("Tag", TagTable.Defs.Columns.Tag), ListSortDirection.Ascending);
             Columns.Create("Description", TagTable.Defs.Columns.Description).MakeFlexWidth(2.5);
             Columns.Create("Usage", TagTable.Defs.Columns.UsageCount)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.MediumNumeric);
+                .MakeFixedWidth(FixedWidth.W052);
             AddViewSourceSortDescriptions();
             Commands.Add("RefreshTagUsage", (o) =>
                 {

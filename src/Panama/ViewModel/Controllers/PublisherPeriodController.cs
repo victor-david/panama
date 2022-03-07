@@ -102,7 +102,7 @@ namespace Restless.Panama.ViewModel
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionPeriodTable>());
             DataView.RowFilter = string.Format("{0}=-1", SubmissionPeriodTable.Defs.Columns.PublisherId);
             DataView.Sort = string.Format("{0} ASC", SubmissionPeriodTable.Defs.Columns.Start);
-            Columns.Create("Id", SubmissionPeriodTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", SubmissionPeriodTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Start", SubmissionPeriodTable.Defs.Columns.Start).MakeDate("MMMM dd", toLocal:false);
             Columns.Create("End", SubmissionPeriodTable.Defs.Columns.End).MakeDate("MMMM dd", toLocal:false);
             Columns.Create("Note", SubmissionPeriodTable.Defs.Columns.Notes);

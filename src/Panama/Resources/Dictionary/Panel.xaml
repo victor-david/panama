@@ -1,12 +1,89 @@
 ﻿<ResourceDictionary 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:Double x:Key="DataEntryPanelDefaultControlHeight">26</sys:Double>
+    <Thickness x:Key="DataEntryPanelDefaultControlMargin">0,0,0,4</Thickness>
+    <Thickness x:Key="DataEntryPanelAltControlMargin">0,4,4,4</Thickness>
+
+    <Thickness x:Key="DataEntryPanelDefaultTextBlockMargin">0,8,0,2</Thickness>
+    <Thickness x:Key="DataEntryPanelAltTextBlockMargin">0,1,0,0</Thickness>
+
+    <Style x:Key="DataEntryPanelDefaultTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="{StaticResource DataEntryPanelDefaultTextBlockMargin}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkForegroundBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="DataEntryPanelDefaultLinkedTextBlockStyle" TargetType="tk:LinkedTextBlock" BasedOn="{StaticResource DataEntryPanelDefaultTextBlockStyle}">
+        <Setter Property="RolloverBrush" Value="{StaticResource LightForegroundBrush}"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="DataEntryPanelStyle" TargetType="Panel">
+        <Style.Resources>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource DataEntryPanelDefaultTextBlockStyle}"/>
+            <Style TargetType="tk:LinkedTextBlock" BasedOn="{StaticResource DataEntryPanelDefaultLinkedTextBlockStyle}"/>
+
+            <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">
+                <Setter Property="Margin" Value="{StaticResource DataEntryPanelDefaultControlMargin}"/>
+                <Setter Property="Height" Value="{StaticResource DataEntryPanelDefaultControlHeight}"/>
+            </Style>
+
+
+
+            <Style TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
+                <Style.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Margin" Value="{StaticResource DataEntryPanelAltTextBlockMargin}"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+
+            <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultCheckBoxStyle}">
+                <Setter Property="Margin" Value="2,6"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
     <Style x:Key="VerticalGridSplitterStyle" TargetType="GridSplitter">
+        <Setter Property="Margin" Value="0,4"/>
         <Setter Property="Width" Value="2"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Background" Value="{StaticResource DarkForegroundBrush}"/>
     </Style>
-    
+
+    <Style x:Key="DefaultStatusBarStyle" TargetType="StatusBar" BasedOn="{StaticResource DefaultControlStyle}">
+        <Setter Property="Padding" Value="3,2"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorderBrush}"/>
+        <Setter Property="Background" Value="{StaticResource StatusBarBackgroundBrush}"/>
+        <Style.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="2,0"/>
+                <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
+                <Setter Property="Foreground" Value="{StaticResource DarkForegroundBrush}"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style TargetType="StatusBar" BasedOn="{StaticResource DefaultStatusBarStyle}"/>
+
+    <Style TargetType="Separator" x:Key="{x:Static StatusBar.SeparatorStyleKey}">
+        <Setter Property="Width" Value="1"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="Background" Value="{StaticResource DarkAlertForegroundBrush}"/>
+    </Style>
+
+    <Style x:Key="MainStatusBarStyle" TargetType="StatusBar">
+        <Setter Property="Background" Value="{StaticResource TitleBarBackgroundBrush}"/>
+        <Setter Property="BorderThickness" Value="0,2,0,0" />
+        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}" />
+    </Style>
+
 </ResourceDictionary>

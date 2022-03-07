@@ -32,7 +32,7 @@
         </Grid>
 
         <!-- Main data grid to display the tabular data  -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderEditContainerStyle}">
             <DataGrid ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" tk:DataGridColumns.Columns="{Binding Columns}"/>
         </Border>
 
@@ -43,7 +43,7 @@
 
 
         <!-- Nested editing control on the right -->
-        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderEditContainerStyle}">
             <view:TableDetail Visibility="{Binding EditVisibility}"/>
         </Border>
     </Grid>

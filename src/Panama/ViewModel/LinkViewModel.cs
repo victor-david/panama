@@ -37,7 +37,7 @@ namespace Restless.Panama.ViewModel
         public LinkViewModel()
         {
             DisplayName = Strings.CommandLink;
-            Columns.Create("Id", LinkTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", LinkTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Added", LinkTable.Defs.Columns.Added).MakeDate();
             Columns.SetDefaultSort(Columns.Create("Name", LinkTable.Defs.Columns.Name), ListSortDirection.Ascending);
             Columns.Create("Url", LinkTable.Defs.Columns.Url).MakeFlexWidth(2.5);

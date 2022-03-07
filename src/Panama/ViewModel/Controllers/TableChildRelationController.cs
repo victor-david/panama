@@ -35,7 +35,7 @@ namespace Restless.Panama.ViewModel
             : base(owner)
         {
             Columns.Create("Name", "RelationName").MakeFixedWidth(RelationWidth);
-            Columns.Create("Col", "ParentColumns[0].ColumnName").MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Col", "ParentColumns[0].ColumnName").MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Child Table", "ChildTable.TableName");
             Columns.Create("Child Column", "ChildColumns[0].ColumnName").MakeFlexWidth(1.5);
         }

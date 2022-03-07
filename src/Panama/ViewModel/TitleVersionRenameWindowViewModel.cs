@@ -57,11 +57,11 @@ namespace Restless.Panama.ViewModel
             MainSource.Source = renameView;
             Columns.Create("Ver", TitleVersionRenameItem.Properties.Version)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.Standard);
+                .MakeFixedWidth(FixedWidth.W042);
 
             Columns.Create<IntegerToCharConverter>("Rev", TitleVersionRenameItem.Properties.RevisionChar)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.Standard);
+                .MakeFixedWidth(FixedWidth.W042);
 
             Columns.Create("Old name", TitleVersionRenameItem.Properties.OriginalNameDisplay);
             Columns.Create("New name", TitleVersionRenameItem.Properties.NewNameDisplay);

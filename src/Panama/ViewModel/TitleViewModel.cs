@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Restless.Panama.ViewModel
 {
@@ -26,16 +27,36 @@ namespace Restless.Panama.ViewModel
     public class TitleViewModel : DataGridViewModel<TitleTable>
     {
         #region Private
+        private int selectedEditSection;
+        private TitleTable.RowObject selectedTitle;
         private bool isFilterVisible;
         private string previewText;
-        private const int PreviewTabIndex = 5;
-        private bool autoPreview;
+        private const int SectionPreviewId = 5;
         private bool isOpenXml;
         #endregion
 
         /************************************************************************/
 
         #region Properties
+        /// <summary>
+        /// Gets or sets the selected edit section
+        /// </summary>
+        public int SelectedEditSection
+        {
+            get => selectedEditSection;
+            set
+            {
+                SetProperty(ref selectedEditSection, value);
+                PrepareForOpenXml();
+            }
+        }
+
+        public TitleTable.RowObject SelectedTitle
+        {
+            get => selectedTitle;
+            private set => SetProperty(ref selectedTitle, value);
+        }
+
         /// <summary>
         /// Gets the controller for the title versions.
         /// </summary>
@@ -93,10 +114,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets an enumerable of <see cref="AuthorTable.RowObject"/> items. The UI binds to this list.
         /// </summary>
-        public IEnumerable<AuthorTable.RowObject> Authors
-        {
-            get => DatabaseController.Instance.GetTable<AuthorTable>().EnumerateAuthors();
-        }
+        public IEnumerable<AuthorTable.RowObject> Authors => DatabaseController.Instance.GetTable<AuthorTable>().EnumerateAuthors();
 
         /// <summary>
         /// Gets or sets the selected author item.
@@ -110,10 +128,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets a visibility value that determines if the title filter is visible.
         /// </summary>
-        public Visibility FilterVisibility
-        {
-            get => (isFilterVisible) ? Visibility.Visible : Visibility.Collapsed;
-        }
+        public Visibility FilterVisibility => isFilterVisible ? Visibility.Visible : Visibility.Collapsed;
 
         /// <summary>
         /// Gets a string value that displays the written date.
@@ -135,14 +150,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public object WrittenDate
         {
-            get
-            {
-                if (IsSelectedRowAccessible)
-                {
-                    return SelectedRow[TitleTable.Defs.Columns.Written];
-                }
-                return null;
-            }
+            get => IsSelectedRowAccessible ? SelectedRow[TitleTable.Defs.Columns.Written] : null;
             set
             {
                 if (IsSelectedRowAccessible)
@@ -157,19 +165,6 @@ namespace Restless.Panama.ViewModel
                     }
                     OnWrittenPropertiesChanged();
                 }
-            }
-        }
-
-        /// <summary>
-        /// Sets the selected tab index. This property is bound to the UI, Mode=OneWayToSource.
-        /// We use the selected tab item to perform auto preview of the title.
-        /// </summary>
-        public int SelectedTabIndex
-        {
-            set
-            {
-                autoPreview = (value == PreviewTabIndex);
-                PrepareForOpenXml();
             }
         }
 
@@ -201,13 +196,20 @@ namespace Restless.Panama.ViewModel
         public TitleViewModel()
         {
             DisplayName = Strings.CommandTitle;
-            Columns.Create("Id", TitleTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
-            Columns.CreateImage<BooleanToImageConverter>("R", TitleTable.Defs.Columns.Ready).AddToolTip(Strings.TooltipTitleReady);
-            Columns.CreateImage<BooleanToImageConverter>("Q", TitleTable.Defs.Columns.QuickFlag, "ImageExclamation").AddToolTip(Strings.TooltipTitleQuickFlag);
+            Columns.Create("Id", TitleTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.CreateResource<BooleanToPathConverter>("R", TitleTable.Defs.Columns.Ready, ResourceKeys.Icon.SquareSmallGreenIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W034)
+                .AddToolTip(Strings.ToolTipTitleFilterReady);
+
+            Columns.CreateResource<BooleanToPathConverter>("Q", TitleTable.Defs.Columns.QuickFlag, ResourceKeys.Icon.SquareSmallBlueIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W034)
+                .AddToolTip(Strings.ToolTipTitleFilterFlag);
 
             Columns.Create("Title", TitleTable.Defs.Columns.Title).MakeFlexWidth(4);
 
-            var col = Columns.Create("Written", TitleTable.Defs.Columns.Written).MakeDate();
+            DataGridBoundColumn col = Columns.Create("Written", TitleTable.Defs.Columns.Written).MakeDate();
 
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
 
@@ -215,68 +217,62 @@ namespace Restless.Panama.ViewModel
                 .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
 
-            Columns.Create("WC", TitleTable.Defs.Columns.Calculated.LastestVersionWordCount).MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("WC", TitleTable.Defs.Columns.Calculated.LastestVersionWordCount).MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleWordCount);
 
-            Columns.Create("SC", TitleTable.Defs.Columns.Calculated.SubCount).MakeCentered().MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("SC", TitleTable.Defs.Columns.Calculated.SubCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleSubmissionCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("CS", TitleTable.Defs.Columns.Calculated.CurrentSubCount).MakeCentered().MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("CS", TitleTable.Defs.Columns.Calculated.CurrentSubCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleCurrentSubmissionCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("VC", TitleTable.Defs.Columns.Calculated.VersionCount).MakeCentered().MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("VC", TitleTable.Defs.Columns.Calculated.VersionCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleVersionCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("TC", TitleTable.Defs.Columns.Calculated.TagCount).MakeCentered().MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("TC", TitleTable.Defs.Columns.Calculated.TagCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleTagCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("PC", TitleTable.Defs.Columns.Calculated.PublishedCount).MakeCentered().MakeFixedWidth(FixedWidth.Standard)
+            Columns.Create("PC", TitleTable.Defs.Columns.Calculated.PublishedCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitlePublishedCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
             AddViewSourceSortDescriptions();
 
             /* This command is used from this model and from the Filters controller */
-            Commands.Add("ClearFilter", (o) => Filters.ClearAll(), (o) => Config.TitleFilter.IsAnyFilterActive);
-            Commands.Add("ReadyFilter", (o) => Filters.SetToReady());
-            Commands.Add("FlaggedFilter", (o) => Filters.SetToFlagged());
-            Commands.Add("SubmittedFilter", (o) => Filters.SetToSubmitted());
-            Commands.Add("PublishedFilter", (o) => Filters.SetToPublished());
-            Commands.Add("SelfPublishedFilter", (o) => Filters.SetToSelfPublished());
+            Commands.Add("ClearFilter", p => Filters.ClearAll(), p => Config.TitleFilter.IsAnyFilterActive);
+            Commands.Add("ReadyFilter", p => Filters.SetToReady());
+            Commands.Add("FlaggedFilter", p => Filters.SetToFlagged());
+            Commands.Add("SubmittedFilter", p => Filters.SetToSubmitted());
+            Commands.Add("PublishedFilter", p => Filters.SetToPublished());
+            Commands.Add("SelfPublishedFilter", p => Filters.SetToSelfPublished());
+
+            Commands.Add("ToggleFilter", o =>
+            {
+
+            });
             // TODO
-            //Commands.Add("AdvancedFilter", (o) =>
-            //{
+            Commands.Add("CustomAdvancedFilter", (o) =>
+            {
             //    isFilterVisible = !isFilterVisible;
             //    advFilter.Icon = (isFilterVisible) ? LocalResources.Get("ImageChevronUp") : LocalResources.Get("ImageChevronDown");
             //    OnPropertyChanged(nameof(FilterVisibility));
-            //});
+            });
 
             Commands.Add("ExtractTitle", RunExtractTitle, CanRunExtractTitle);
-            Commands.Add("ToggleFlag", RunToggleTitleFlagCommand, (p) => IsSelectedRowAccessible);
+            Commands.Add("ToggleFlag", RunToggleTitleFlagCommand, p => IsSelectedRowAccessible);
             Commands.Add("ClearFlags", RunClearTitleFlagsCommand);
 
-
-            // TODO
-            //double minWidth = 80.0;
-            //double imgSize = 20.0;
-            //advFilter = new VisualCommandViewModel(Strings.CommandFilterAdvanced, Strings.CommandFilterAdvancedTooltip, Commands["AdvancedFilter"], LocalResources.Get("ImageChevronDown"), imgSize, VisualCommandFontSize, 100.0);
-            //FilterCommands.Add(advFilter);
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterReady, Strings.CommandTitleFilterReadyTooltip, Commands["ReadyFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterFlagged, Strings.CommandTitleFilterFlaggedTooltip, Commands["FlaggedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterSubmitted, Strings.CommandTitleFilterSubmittedTooltip, Commands["SubmittedFilter"], null, imgSize, VisualCommandFontSize,  minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterPublished, Strings.CommandTitleFilterPublishedTooltip, Commands["PublishedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandTitleFilterSelfPublished, Strings.CommandTitleFilterSelfPublishedTooltip, Commands["SelfPublishedFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandOpenTitleOrDoubleClick, OpenRowCommand).AddImageResource("ImageOpenWordMenu");
-            MenuItems.AddItem(Strings.CommandFlagTitle, Commands["ToggleFlag"]).AddImageResource("ImageExclamationMenu");
+            MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteTitle, DeleteCommand).AddImageResource("ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.CommandFlagTitle, Commands["ToggleFlag"]).AddIconResource(ResourceKeys.Icon.ToggleIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.CommandDeleteTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
 
             Versions = new TitleVersionController(this);
             Submissions = new TitleSubmissionController(this);
@@ -286,6 +282,11 @@ namespace Restless.Panama.ViewModel
 
             Filters = new TitleFilterController(this);
             Filters.Apply();
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Loaded, new Action(() =>
+            {
+                SelectedEditSection = 1;
+            }));
+                
         }
         #endregion
 
@@ -298,6 +299,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
+            SelectedTitle = new TitleTable.RowObject(SelectedRow);
             OnWrittenPropertiesChanged();
             Tags.Update();
             Versions.Update();
@@ -312,7 +314,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunAddCommand()
         {
-            if (Messages.ShowYesNo(Strings.ConfirmationAddTitle))
+            if (MessageWindow.ShowYesNo(Strings.ConfirmationAddTitle))
             {
                 Table.AddDefaultRow();
                 Table.Save();
@@ -371,13 +373,18 @@ namespace Restless.Panama.ViewModel
             if (SelectedPrimaryKey != null)
             {
                 long titleId = (long)SelectedPrimaryKey;
-                var verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                Database.Tables.TitleVersionController verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
 
                 if (verController.Versions.Count > 0)
                 {
                     OpenHelper.OpenFile(Paths.Title.WithRoot(verController.Versions[0].FileName));
                 }
             }
+        }
+
+        protected override bool CanRunOpenRowCommand(object item)
+        {
+            return true;
         }
 
         /// <summary>
@@ -448,7 +455,7 @@ namespace Restless.Panama.ViewModel
         {
             if (Messages.ShowYesNo(Strings.ConfirmationClearTitleFlags))
             {
-                foreach (var title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
+                foreach (TitleTable.RowObject title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
                 {
                     title.QuickFlag = false;
                 }
@@ -460,10 +467,10 @@ namespace Restless.Panama.ViewModel
             IsOpenXml = false;
             PreviewText = null;
 
-            if (autoPreview && SelectedPrimaryKey != null)
+            if (SelectedEditSection == SectionPreviewId && SelectedPrimaryKey != null)
             {
                 long titleId = (long)SelectedPrimaryKey;
-                var verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                Database.Tables.TitleVersionController verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
                 if (verController.Versions.Count > 0)
                 {
                     string fileName = Paths.Title.WithRoot(verController.Versions[0].FileName);

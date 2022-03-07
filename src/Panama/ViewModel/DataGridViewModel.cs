@@ -37,7 +37,6 @@ namespace Restless.Panama.ViewModel
         public RelayCommand AddCommand
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -46,7 +45,6 @@ namespace Restless.Panama.ViewModel
         public RelayCommand DeleteCommand
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -55,7 +53,6 @@ namespace Restless.Panama.ViewModel
         public ICommand ClearFilterCommand
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -64,23 +61,12 @@ namespace Restless.Panama.ViewModel
         public ICommand OpenRowCommand
         {
             get;
-            private set;
         }
 
         /// <summary>
         /// Gets the selected data row
         /// </summary>
-        public DataRow SelectedRow
-        {
-            get
-            {
-                if (SelectedItem is DataRowView view)
-                {
-                    return view.Row;
-                }
-                return null;
-            }
-        }
+        public DataRow SelectedRow => SelectedItem is DataRowView view ? view.Row : null;
 
         /// <summary>
         /// Gets a boolean value that indicates if <see cref="SelectedRow"/> is accessible.
@@ -95,48 +81,25 @@ namespace Restless.Panama.ViewModel
         /// Gets the primary key value of the selected row, or null if none 
         /// (no selected row or no primary key column on the table)
         /// </summary>
-        public object SelectedPrimaryKey
-        {
-            get
-            {
-                if (IsSelectedRowAccessible && Table.PrimaryKeyName != null)
-                {
-                    return SelectedRow[Table.PrimaryKeyName];
-                }
-                return null;
-            }
-        }
+        public object SelectedPrimaryKey => IsSelectedRowAccessible && Table.PrimaryKeyName != null ? SelectedRow[Table.PrimaryKeyName] : null;
 
         /// <summary>
         /// Gets a visibility value that determines if the edit control section is visible.
         /// </summary>
-        public Visibility EditVisibility
-        {
-            get
-            {
-                return (SelectedItem != null) ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
+        public Visibility EditVisibility => (SelectedItem != null) ? Visibility.Visible : Visibility.Collapsed;
+
         /// <summary>
         /// Gets the table object associated with this instance
         /// </summary>
         public T Table
         {
             get;
-            private set;
         }
-
 
         /// <summary>
         /// Gets the current count of rows in source
         /// </summary>
-        public int SourceCount
-        {
-            get
-            {
-                return (DataView != null) ? DataView.Count : 0;
-            }
-        }
+        public int SourceCount => (DataView != null) ? DataView.Count : 0;
 
         /// <summary>
         /// Gets the DataView created for this instance.

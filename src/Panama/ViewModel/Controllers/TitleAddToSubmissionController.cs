@@ -57,7 +57,7 @@ namespace Restless.Panama.ViewModel
             DataView.RowFilter = string.Format("{0} IS NULL AND {1}=0", SubmissionBatchTable.Defs.Columns.Response, SubmissionBatchTable.Defs.Columns.Locked);
             DataView.Sort = string.Format("{0} DESC", SubmissionBatchTable.Defs.Columns.Submitted);
 
-            Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Date", SubmissionBatchTable.Defs.Columns.Submitted).MakeDate();
 
             Columns.CreateImage<BooleanToImageConverter>("E", SubmissionBatchTable.Defs.Columns.Joined.PublisherExclusive, "ImageExclamation")

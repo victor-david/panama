@@ -81,11 +81,11 @@ namespace Restless.Panama.ViewModel
         {
             DisplayName = Strings.CommandTable;
             Columns.SetDefaultSort(Columns.Create("Name", TableTable.Defs.Columns.Name), ListSortDirection.Ascending);
-            Columns.Create("Cols", TableTable.Defs.Columns.ColumnCount).MakeFixedWidth(FixedWidth.MediumNumeric);
-            Columns.Create("Rows", TableTable.Defs.Columns.RowCount).MakeFixedWidth(FixedWidth.MediumNumeric);
-            Columns.Create("PR", TableTable.Defs.Columns.ParentRelationCount).MakeFixedWidth(FixedWidth.MediumNumeric);
-            Columns.Create("CR", TableTable.Defs.Columns.ChildRelationCount).MakeFixedWidth(FixedWidth.MediumNumeric);
-            Columns.Create("C", TableTable.Defs.Columns.ConstraintCount).MakeFixedWidth(FixedWidth.MediumNumeric);
+            Columns.Create("Cols", TableTable.Defs.Columns.ColumnCount).MakeFixedWidth(FixedWidth.W052);
+            Columns.Create("Rows", TableTable.Defs.Columns.RowCount).MakeFixedWidth(FixedWidth.W052);
+            Columns.Create("PR", TableTable.Defs.Columns.ParentRelationCount).MakeFixedWidth(FixedWidth.W052);
+            Columns.Create("CR", TableTable.Defs.Columns.ChildRelationCount).MakeFixedWidth(FixedWidth.W052);
+            Columns.Create("C", TableTable.Defs.Columns.ConstraintCount).MakeFixedWidth(FixedWidth.W052);
             AddViewSourceSortDescriptions();
             FilterPrompt = Strings.FilterPromptTable;
 

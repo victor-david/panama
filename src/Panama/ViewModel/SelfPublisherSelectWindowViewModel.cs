@@ -41,11 +41,11 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SelfPublisherSelectWindowViewModel()
         {
-            Columns.Create("Id", SelfPublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", SelfPublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Name", SelfPublisherTable.Defs.Columns.Name);
             var col = Columns.Create("Added", SelfPublisherTable.Defs.Columns.Added).MakeDate();
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
-            Columns.Create("PC", SelfPublisherTable.Defs.Columns.Calculated.PubCount).MakeFixedWidth(FixedWidth.MediumNumeric)
+            Columns.Create("PC", SelfPublisherTable.Defs.Columns.Calculated.PubCount).MakeFixedWidth(FixedWidth.W052)
                 .AddSort(null, SelfPublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
             Commands.Add("Select", RunSelectCommand, (o) => IsSelectedRowAccessible);

@@ -49,8 +49,8 @@ namespace Restless.Panama.ViewModel
             DataView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.BatchId);
             DataView.Sort = string.Format("{0},{1}", SubmissionTable.Defs.Columns.Ordering, SubmissionTable.Defs.Columns.Joined.Title);
 
-            Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
-            Columns.Create("O", SubmissionTable.Defs.Columns.Ordering).MakeCentered().MakeFixedWidth(FixedWidth.Standard).AddToolTip("Ordering");
+            Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("O", SubmissionTable.Defs.Columns.Ordering).MakeCentered().MakeFixedWidth(FixedWidth.W042).AddToolTip("Ordering");
 
             Columns.CreateImage<IntegerToImageConverter>("S", SubmissionTable.Defs.Columns.Status, "ImageSubStatus").AddToolTip("Submission status of this title");
             Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);

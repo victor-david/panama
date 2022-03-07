@@ -25,7 +25,7 @@
 
 
         <!-- Main data grid to display the tabular data  -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderEditContainerStyle}">
             <tk:DataGrid 
                 x:Name="PublisherDataGrid" 
                 Grid.Row="1" Grid.Column="0" 
@@ -47,7 +47,7 @@
         <!-- Splitter -->
         <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource GridSplitterVertical}" />
 
-        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderGridContainer}">
+        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderEditContainerStyle}">
             <DockPanel>
                 <view:SelfPublisherEdit DockPanel.Dock="Top" Visibility="{Binding EditVisibility}"/>
             </DockPanel>

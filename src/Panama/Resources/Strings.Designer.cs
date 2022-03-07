@@ -281,15 +281,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a new title to the list.
-        /// </summary>
-        public static string CommandAddTitleTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddTitleTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add this title to a submission.
         /// </summary>
         public static string CommandAddTitleToSubmission {
@@ -2072,6 +2063,42 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string MenuItemAdd {
+            get {
+                return ResourceManager.GetString("MenuItemAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a title to the collection.
+        /// </summary>
+        public static string MenuItemAddTitle {
+            get {
+                return ResourceManager.GetString("MenuItemAddTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string MenuItemClear {
+            get {
+                return ResourceManager.GetString("MenuItemClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        public static string MenuItemCustom {
+            get {
+                return ResourceManager.GetString("MenuItemCustom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Publishers.
         /// </summary>
         public static string MenuItemPublishers {
@@ -2162,6 +2189,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not an Open Xml document.
+        /// </summary>
+        public static string TextNotOpenXmlDocument {
+            get {
+                return ResourceManager.GetString("TextNotOpenXmlDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to record.
         /// </summary>
         public static string TextRecord {
@@ -2230,6 +2266,24 @@ namespace Restless.Panama.Resources {
         public static string TooltipColorReset {
             get {
                 return ResourceManager.GetString("TooltipColorReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear all filters.
+        /// </summary>
+        public static string ToolTipFilterClear {
+            get {
+                return ResourceManager.GetString("ToolTipFilterClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Establish filter(s) on the collection.
+        /// </summary>
+        public static string ToolTipFilterCustom {
+            get {
+                return ResourceManager.GetString("ToolTipFilterCustom", resourceCulture);
             }
         }
         
@@ -2387,6 +2441,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a title to the collection.
+        /// </summary>
+        public static string ToolTipTitleAdd {
+            get {
+                return ResourceManager.GetString("ToolTipTitleAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current submission count - the number of submissions that are still open for this title.
         /// </summary>
         public static string TooltipTitleCurrentSubmissionCount {
@@ -2396,29 +2459,47 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Published count - the number of times this title has been published..
+        ///   Looks up a localized string similar to Title is flagged.
         /// </summary>
-        public static string TooltipTitlePublishedCount {
+        public static string ToolTipTitleFilterFlag {
             get {
-                return ResourceManager.GetString("TooltipTitlePublishedCount", resourceCulture);
+                return ResourceManager.GetString("ToolTipTitleFilterFlag", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title is flagged.
+        ///   Looks up a localized string similar to Title has been published.
         /// </summary>
-        public static string TooltipTitleQuickFlag {
+        public static string ToolTipTitleFilterPublished {
             get {
-                return ResourceManager.GetString("TooltipTitleQuickFlag", resourceCulture);
+                return ResourceManager.GetString("ToolTipTitleFilterPublished", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Title is flagged as ready.
         /// </summary>
-        public static string TooltipTitleReady {
+        public static string ToolTipTitleFilterReady {
             get {
-                return ResourceManager.GetString("TooltipTitleReady", resourceCulture);
+                return ResourceManager.GetString("ToolTipTitleFilterReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title is currently submitted.
+        /// </summary>
+        public static string ToolTipTitleFilterSubmitted {
+            get {
+                return ResourceManager.GetString("ToolTipTitleFilterSubmitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published count - the number of times this title has been published..
+        /// </summary>
+        public static string TooltipTitlePublishedCount {
+            get {
+                return ResourceManager.GetString("TooltipTitlePublishedCount", resourceCulture);
             }
         }
         

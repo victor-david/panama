@@ -101,7 +101,7 @@ namespace Restless.Panama.ViewModel
         public PublisherViewModel()
         {
             DisplayName = Strings.CommandPublisher;
-            Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod).AddToolTip(Strings.TooltipPublisherInPeriod);
             Columns.CreateImage<BooleanToImageConverter>("E", PublisherTable.Defs.Columns.Exclusive, "ImageExclamation").AddToolTip(Strings.TooltipPublisherExclusive);
             Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Paying, "ImageMoney").AddToolTip(Strings.TooltipPublisherPay);
@@ -123,7 +123,7 @@ namespace Restless.Panama.ViewModel
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
             Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.Standard)
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipPublisherSubmissionCount)
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 

@@ -13,7 +13,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Represents the base class for view-model supplemental controllers.
     /// </summary>
-    /// <typeparam name="VMT">The view model that derives from <see cref="DataGridViewModel{T}"/></typeparam>
+    /// <typeparam name="TVM">The view model that derives from <see cref="DataGridViewModel{T}"/></typeparam>
     /// <typeparam name="T">The database table that derives from <see cref="TableBase"/></typeparam>
     /// <remarks>
     /// <para>
@@ -26,27 +26,13 @@ namespace Restless.Panama.ViewModel
     /// a controller attached to <see cref="TitleViewModel"/> displays related records from the <see cref="TitleVersionTable"/>.
     /// </para>
     /// </remarks>
-    public abstract class ControllerBase<VMT,T> : DataGridViewModel<T>
-        where VMT: DataGridViewModel<T>
-        where T: TableBase
+    public abstract class ControllerBase<TVM, T> : DataGridViewModel<T> where TVM : DataGridViewModel<T> where T : TableBase
     {
-        #region Private
-        #endregion
-
-        /************************************************************************/
-
         #region Public properties
         /// <summary>
         /// Gets a header value that may be bound to a UI element.
         /// </summary>
-        public virtual string Header
-        {
-            get 
-            {
-                return string.Format("{0} ({1})", HeaderPreface, SourceCount);
-            }
-
-        }
+        public virtual string Header => $"{HeaderPreface} ({SourceCount})";
         #endregion
 
         /************************************************************************/
@@ -64,10 +50,9 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the ViewModel that owns this controller.
         /// </summary>
-        protected new VMT Owner
+        protected new TVM Owner
         {
             get;
-            private set;
         }
         #endregion
 
@@ -75,25 +60,13 @@ namespace Restless.Panama.ViewModel
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="ControllerBase{VM,T}"/> class.
+        /// Initializes a new instance of the <see cref="ControllerBase{TVM,T}"/> class.
         /// </summary>
         /// <param name="owner">The VM that owns this view model.</param>
-        protected ControllerBase(VMT owner)
+        protected ControllerBase(TVM owner)
         {
             Owner = owner ?? throw new ArgumentNullException(nameof(owner));
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region Public methods
-        ///// <summary>
-        ///// Causes the controller to update.
-        ///// </summary>
-        //public void Update()
-        //{
-        //    OnUpdate();
-        //}
         #endregion
 
         /************************************************************************/
@@ -114,15 +87,7 @@ namespace Restless.Panama.ViewModel
         /// <returns>The Int64 primary id from the selected row of this controller's owner, or Int64.MinValue if none.</returns>
         protected long GetOwnerSelectedPrimaryId()
         {
-            if (Owner.SelectedRow != null)
-            {
-                object pk = Owner.SelectedPrimaryKey;
-                if (pk is long)
-                {
-                    return (long)pk;
-                }
-            }
-            return long.MinValue;
+            return Owner.SelectedRow != null && Owner.SelectedPrimaryKey is long @int ? @int : long.MinValue;
         }
 
         /// <summary>
@@ -131,22 +96,9 @@ namespace Restless.Panama.ViewModel
         /// <returns>The string primary id from the selected row of this controller's owner, or null if none.</returns>
         protected string GetOwnerSelectedPrimaryIdString()
         {
-            if (Owner.SelectedRow != null)
-            {
-                object pk = Owner.SelectedPrimaryKey;
-                if (pk is string)
-                {
-                    return (string)pk;
-                }
-            }
-            return null;
+            return Owner.SelectedRow != null && Owner.SelectedPrimaryKey is string @string ? @string : null;
         }
-        
-        #endregion
 
-        /************************************************************************/
-
-        #region Private methods
         #endregion
     }
 }

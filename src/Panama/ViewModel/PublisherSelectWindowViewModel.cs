@@ -41,13 +41,13 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public PublisherSelectWindowViewModel()
         {
-            Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
             var col = Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate();
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub).MakeDate()
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
-            Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount).MakeFixedWidth(FixedWidth.MediumNumeric)
+            Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount).MakeFixedWidth(FixedWidth.W052)
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
             Commands.Add("Select", RunSelectCommand, (o) => IsSelectedRowAccessible);

@@ -47,11 +47,11 @@ namespace Restless.Panama.ViewModel
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionBatchTable>());
             DataView.RowFilter = string.Format("{0}=-1", SubmissionBatchTable.Defs.Columns.PublisherId);
             DataView.Sort = string.Format("{0} DESC", SubmissionBatchTable.Defs.Columns.Submitted);
-            Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.Standard);
+            Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             var col = Columns.Create("Submitted", SubmissionBatchTable.Defs.Columns.Submitted).MakeDate();
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.Create("Response", SubmissionBatchTable.Defs.Columns.Response).MakeDate();
-            Columns.Create("Type", SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName).MakeFixedWidth(FixedWidth.MediumString);
+            Columns.Create("Type", SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName).MakeFixedWidth(FixedWidth.W096);
             Columns.Create("Note", SubmissionBatchTable.Defs.Columns.Notes).MakeSingleLine();
         }
         #endregion

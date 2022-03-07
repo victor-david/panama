@@ -85,7 +85,10 @@ namespace Restless.App.Panama
             else
             {
                 // These are applied one time only. They don't change.
-                // TODO
+                Toolkit.Controls.DataGridColumnExtensions.CenterAlignedDataGridColumnHeaderStyleKey = ResourceKeys.Style.CenterDataGridColumnHeaderStyle;
+                // TODO 
+                //Toolkit.Controls.DataGridColumnExtensions.CenterAlignedTextBlockStyleKey = ResourceKeys.Style.CenterDataGridCellStyle;
+
                 //Restless.Tools.Default.Style.DataGridHeaderCenter = ResourceHelper.StyleDataGridHeaderCenter;
                 //Restless.Tools.Controls.Default.Style.TextBlockCenter = ResourceHelper.StyleTextBlockCenter;
 

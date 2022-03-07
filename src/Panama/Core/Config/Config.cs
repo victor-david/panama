@@ -106,12 +106,12 @@ namespace Restless.Panama.Core
             /// <summary>
             /// Gets the minimum value for data grid row height.
             /// </summary>
-            public const int MinRowHeight = 24;
+            public const double MinRowHeight = 24;
 
             /// <summary>
             /// Gets the maximum value for data grid row height.
             /// </summary>
-            public const int MaxRowHeight = 42;
+            public const double MaxRowHeight = 42;
 
             /// <summary>
             /// Gets the minimum value for data grid alternation count.
