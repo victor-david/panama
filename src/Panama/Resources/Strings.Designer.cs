@@ -2189,6 +2189,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No versions for this title.
+        /// </summary>
+        public static string TextNoTitleVersions {
+            get {
+                return ResourceManager.GetString("TextNoTitleVersions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not an Open Xml document.
         /// </summary>
         public static string TextNotOpenXmlDocument {

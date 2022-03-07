@@ -14,6 +14,7 @@ using Restless.Toolkit.Core.Utility;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
@@ -200,10 +201,10 @@ namespace Restless.Panama.ViewModel
                         TitleVersionTable versions = DatabaseController.Instance.GetTable<TitleVersionTable>();
                         WindowsSearchResultCollection results = provider.GetSearchResults(SearchText);
 
-                        foreach (var result in results)
+                        foreach (WindowsSearchResult result in results)
                         {
                             result.SetItemPathDisplay(Paths.Title.WithoutRoot(result.Values[SysProps.System.ItemPathDisplay].ToString()));
-                            result.Extended = new ExtendedSearchResult(versions.GetVersionsWithFile(result.Values[SysProps.System.ItemPathDisplay].ToString()));
+                            result.Extended = new ExtendedSearchResult(versions.EnumerateVersions(result.Values[SysProps.System.ItemPathDisplay].ToString()));
                             resultsView.Add(result);
                         }
                         UpdateFoundHeader();
@@ -284,7 +285,7 @@ namespace Restless.Panama.ViewModel
         #region Private helper class
         private class ExtendedSearchResult
         {
-            public List<TitleVersionTable.RowObject> Versions
+            public List<TitleVersionRow> Versions
             {
                 get;
             }
@@ -294,9 +295,9 @@ namespace Restless.Panama.ViewModel
                 get => Versions.Count > 0;
             }
 
-            public ExtendedSearchResult(List<TitleVersionTable.RowObject> versions)
+            public ExtendedSearchResult(IEnumerable<TitleVersionRow> versions)
             {
-                Versions = versions;
+                Versions = versions.ToList();
             }
         }
         #endregion

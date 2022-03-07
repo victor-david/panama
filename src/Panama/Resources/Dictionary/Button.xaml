@@ -4,7 +4,7 @@
     xmlns:tk="http://schemas.restless.toolkit.com/2021">
 
     <Style x:Key="DefaultIconButtonStyle" TargetType="tk:IconButton">
-        <Setter Property="Height" Value="28"/>
+        <Setter Property="Height" Value="26"/>
         <Setter Property="Margin" Value="3,0"/>
         <Setter Property="Padding" Value="8,4"/>
         <Setter Property="IconPadding" Value="4"/>
@@ -14,15 +14,21 @@
         <Setter Property="HorizontalContentAlignment" Value="Right"/>
         <Setter Property="HorizontalPressedMovement" Value="2.0"/>
         <Setter Property="VerticalPressedMovement" Value="0"/>
-        <Setter Property="CornerRadius" Value="2"/>
+        <Setter Property="CornerRadius" Value="1"/>
         <Setter Property="Background" Value="{StaticResource ActionButtonBackgroundBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource ActionButtonForegroundBrush}"/>
         <Setter Property="RolloverBrush" Value="{StaticResource ActionButtonRolloverBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource LightBorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
     <Style TargetType="tk:IconButton" BasedOn="{StaticResource DefaultIconButtonStyle}"/>
+
+    <Style x:Key="SmallIconButtonStyle" TargetType="tk:IconButton" BasedOn="{StaticResource DefaultIconButtonStyle}">
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="IconPadding" Value="4"/>
+        <Setter Property="Padding" Value="6,0"/>
+    </Style>
 
     <Style TargetType="Button" x:Key="{x:Static ToolBar.ButtonStyleKey}">
     </Style>

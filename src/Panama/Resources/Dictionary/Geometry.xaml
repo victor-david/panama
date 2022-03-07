@@ -22,7 +22,10 @@
         <Setter Property="Width" Value="10"/>
     </Style>
 
+    <Geometry x:Key="ArrowDownGeometryKey">M9,4H15V12H19.84L12,19.84L4.16,12H9V4Z</Geometry>
+    <Geometry x:Key="ArrowLeftGeometryKey">M20,9V15H12V19.84L4.16,12L12,4.16V9H20Z</Geometry>
     <Geometry x:Key="ArrowRightGeometryKey">M4,15V9H12V4.16L19.84,12L12,19.84V15H4Z</Geometry>
+    <Geometry x:Key="ArrowUpGeometryKey">M15,20H9V12H4.16L12,4.16L19.84,12H15V20Z</Geometry>
     <Geometry x:Key="ChevronDownGeometryKey">M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z</Geometry>
     <Geometry x:Key="ChevronLeftGeometryKey">M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z</Geometry>
     <Geometry x:Key="ChevronRightGeometryKey">M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z</Geometry>
@@ -34,7 +37,7 @@
     <Geometry x:Key="FilterOffGeometryKey">M2.39 1.73L1.11 3L9 10.89V15.87C8.96 16.16 9.06 16.47 9.29 16.7L13.3 20.71C13.69 21.1 14.32 21.1 14.71 20.71C14.94 20.5 15.04 20.18 15 19.88V16.89L20.84 22.73L22.11 21.46L15 14.35V14.34L13 12.35L11 10.34L4.15 3.5L2.39 1.73M6.21 3L8.2 5H16.96L13.11 9.91L15 11.8V10.75L19.79 4.62C20.13 4.19 20.05 3.56 19.62 3.22C19.43 3.08 19.22 3 19 3H6.21M11 12.89L13 14.89V17.58L11 15.58V12.89Z</Geometry>
     <Geometry x:Key="PlusGeometryKey" >M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z</Geometry>
     <Geometry x:Key="PublisherGeometryKey">M5,4V6H19V4H5M5,14H9V20H15V14H19L12,7L5,14Z</Geometry>
-    <Geometry x:Key="SaveGeometryKey">M4 19H10V21H4C2.89 21 2 20.1 2 19V5C2 3.9 2.89 3 4 3H16L20 7V9.12L18 11.12V7.83L15.17 5H4V19M14 10V6H5V10H14M20.42 12.3C20.31 12.19 20.18 12.13 20.04 12.13C19.9 12.13 19.76 12.19 19.65 12.3L18.65 13.3L20.7 15.35L21.7 14.35C21.92 14.14 21.92 13.79 21.7 13.58L20.42 12.3M12 19.94V22H14.06L20.12 15.93L18.07 13.88L12 19.94M14 15C14 13.34 12.66 12 11 12S8 13.34 8 15 9.34 18 11 18C11.04 18 11.08 18 11.13 18L14 15.13C14 15.09 14 15.05 14 15</Geometry>
+    <Geometry x:Key="SaveGeometryKey">M1 7H3V21H17V23H3C1.9 23 1 22.11 1 21V7M19 1H7C5.89 1 5 1.9 5 3V17C5 18.1 5.89 19 7 19H21C22.1 19 23 18.1 23 17V5L19 1M21 17H7V3H18.17L21 5.83V17M14 10C12.34 10 11 11.34 11 13S12.34 16 14 16 17 14.66 17 13 15.66 10 14 10M8 4H17V8H8V4Z</Geometry>
     <Geometry x:Key="SquareGeometryKey">M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z</Geometry>
     <Geometry x:Key="SubmissionGeometryKey">M19,15L13,21L11.58,19.58L15.17,16H4V4H6V14H15.17L11.58,10.42L13,9L19,15Z</Geometry>
     <Geometry x:Key="TitleGeometryKey">M4 20H18V22H4C2.9 22 2 21.1 2 20V6H4V20M22 4V16C22 17.1 21.1 18 20 18H8C6.9 18 6 17.1 6 16V4C6 2.9 6.9 2 8 2H20C21.1 2 22 2.9 22 4M20 4H8V16H20V4M18 6H13V13L15.5 11.5L18 13V6Z</Geometry>
@@ -43,7 +46,17 @@
     <Geometry x:Key="ZGeometryKey">M9,7H15V9L11,15H15V17H9V15L13,9H9V7M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z</Geometry>
 
     <Path x:Key="AppPathIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ZGeometryKey}"/>
+    
+    <Path x:Key="ArrowDownIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ArrowDownGeometryKey}"/>
+    <Path x:Key="ArrowLeftIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ArrowLeftGeometryKey}"/>
     <Path x:Key="ArrowRightIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ArrowRightGeometryKey}"/>
+    <Path x:Key="ArrowUpIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ArrowUpGeometryKey}"/>
+
+    <Path x:Key="ArrowDownMediumIconKey" x:Shared="False" Style="{StaticResource MediumPathStyle}" Data="{StaticResource ArrowDownGeometryKey}"/>
+    <Path x:Key="ArrowLeftMediumIconKey" x:Shared="False" Style="{StaticResource MediumPathStyle}" Data="{StaticResource ArrowLeftGeometryKey}"/>
+    <Path x:Key="ArrowRightMediumIconKey" x:Shared="False" Style="{StaticResource MediumPathStyle}" Data="{StaticResource ArrowRightGeometryKey}"/>
+    <Path x:Key="ArrowUpMediumIconKey" x:Shared="False" Style="{StaticResource MediumPathStyle}" Data="{StaticResource ArrowUpGeometryKey}"/>
+
     <Path x:Key="ChevronDownIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ChevronDownGeometryKey}"/>
     <Path x:Key="ChevronLeftIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ChevronLeftGeometryKey}"/>
     <Path x:Key="ChevronRightIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ChevronRightGeometryKey}"/>
@@ -59,6 +72,7 @@
     <Path x:Key="PlusIconKey" x:Shared="False" Style="{StaticResource MediumPathStyle}" Data="{StaticResource PlusGeometryKey}"/>
     <Path x:Key="PublisherIconKey" x:Shared="False" Style="{StaticResource MediumPathStyle}" Data="{StaticResource PublisherGeometryKey}"/>
     <Path x:Key="SaveIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource SaveGeometryKey}"/>
+    <Path x:Key="SaveMediumIconKey" x:Shared="False" Style="{StaticResource MediumPathStyle}" Data="{StaticResource SaveGeometryKey}"/>
     <Path x:Key="SquareIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource SquareGeometryKey}"/>
     <Path x:Key="SquareSmallIconKey" x:Shared="False" Style="{StaticResource SmallPathStyle}" Data="{StaticResource SquareGeometryKey}"/>
     <Path x:Key="SquareSmallBlueIconKey" x:Shared="False" Style="{StaticResource SmallPathStyle}" Fill="{StaticResource BlueIconBrush}" Data="{StaticResource SquareGeometryKey}"/>
@@ -70,6 +84,7 @@
     <Path x:Key="ToggleIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ToggleGeometryKey}"/>
     <Path x:Key="XIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource XGeometryKey}"/>
     <Path x:Key="XRedIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Fill="{StaticResource RedIconBrush}" Data="{StaticResource XGeometryKey}"/>
+    <Path x:Key="XSmallRedIconKey" x:Shared="False" Style="{StaticResource SmallPathStyle}" Fill="{StaticResource RedIconBrush}" Data="{StaticResource XGeometryKey}"/>
     <Path x:Key="ZIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ZGeometryKey}"/>
 
 </ResourceDictionary>

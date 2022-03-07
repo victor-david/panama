@@ -10,11 +10,11 @@
                 <ResourceDictionary Source="Resources/Dictionary/Control.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/CheckBox.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/DataGrid.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/Expander.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Panel.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/TextBox.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Border.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Button.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/Expander.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Navigator.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/TextBlock.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Geometry.xaml"/>

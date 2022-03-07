@@ -5,8 +5,8 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <sys:Double x:Key="DataEntryPanelDefaultControlHeight">26</sys:Double>
-    <Thickness x:Key="DataEntryPanelDefaultControlMargin">0,0,0,4</Thickness>
-    <Thickness x:Key="DataEntryPanelAltControlMargin">0,4,4,4</Thickness>
+    <Thickness x:Key="DataEntryPanelDefaultControlMargin">0,0,6,4</Thickness>
+    <Thickness x:Key="DataEntryPanelAltControlMargin">0,4,6,4</Thickness>
 
     <Thickness x:Key="DataEntryPanelDefaultTextBlockMargin">0,8,0,2</Thickness>
     <Thickness x:Key="DataEntryPanelAltTextBlockMargin">0,1,0,0</Thickness>
@@ -34,18 +34,12 @@
                 <Setter Property="Height" Value="{StaticResource DataEntryPanelDefaultControlHeight}"/>
             </Style>
 
-
-
-            <Style TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
-                <Style.Resources>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Margin" Value="{StaticResource DataEntryPanelAltTextBlockMargin}"/>
-                    </Style>
-                </Style.Resources>
-            </Style>
-
             <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultCheckBoxStyle}">
                 <Setter Property="Margin" Value="2,6"/>
+            </Style>
+
+            <Style TargetType="Expander" BasedOn="{StaticResource DefaultExpanderStyle}">
+                <Setter Property="Margin" Value="0,4"/>
             </Style>
         </Style.Resources>
     </Style>

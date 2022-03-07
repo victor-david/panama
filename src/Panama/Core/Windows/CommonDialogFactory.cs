@@ -35,12 +35,11 @@ namespace Restless.Panama.Core
 
             if (!isFolderPicker)
             {
-                foreach (DataRow row in DatabaseController.Instance.GetTable<DocumentTypeTable>().GetSupportedDocTypes())
+                foreach (DocumentTypeRow row in DatabaseController.Instance.GetTable<DocumentTypeTable>().EnumerateSupported())
                 {
-                    long id = (long)row[DocumentTypeTable.Defs.Columns.Id];
-                    if (selectorFileType == 0 || selectorFileType == id)
+                    if (selectorFileType == 0 || selectorFileType == row.Id)
                     {
-                        dialog.Filters.Add(new CommonFileDialogFilter(row[DocumentTypeTable.Defs.Columns.Name].ToString(), row[DocumentTypeTable.Defs.Columns.Extensions].ToString()));
+                        dialog.Filters.Add(new CommonFileDialogFilter(row.Name, row.Extensions));
                     }
                 }
             }

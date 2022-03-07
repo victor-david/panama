@@ -19,7 +19,7 @@ namespace Restless.Panama.Core
     public class TitleVersionRenameItem : ObservableObject
     {
         #region Private
-        private readonly TitleVersionTable.RowObject ver;
+        private readonly TitleVersionRow ver;
         private string status;
         #endregion
 
@@ -153,7 +153,7 @@ namespace Restless.Panama.Core
         /// </summary>
         /// <param name="ver">The title version row object</param>
         /// <param name="title">The title</param>
-        public TitleVersionRenameItem(TitleVersionTable.RowObject ver, string title)
+        public TitleVersionRenameItem(TitleVersionRow ver, string title)
         {
             this.ver = ver ?? throw new ArgumentNullException(nameof(ver));
             if (string.IsNullOrEmpty(title))

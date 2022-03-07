@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -145,39 +146,31 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Provides an enumerable that gets all versions for the specified title
+        /// Provides an enumerable that enumerates all versions for the specified title
         /// in order of version ASC, revision ASC.
         /// </summary>
         /// <param name="titleId">The title id to get all versions for.</param>
-        /// <returns>A <see cref="RowObject"/></returns>
-        public IEnumerable<RowObject> EnumerateVersions(long titleId)
+        /// <returns>An enumerable</returns>
+        public IEnumerable<TitleVersionRow> EnumerateVersions(long titleId)
         {
-            DataRow[] rows = Select($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC");
-            foreach (DataRow row in rows)
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC"))
             {
-                yield return new RowObject(row);
+                yield return new TitleVersionRow(row);
             }
-            yield break;
         }
 
         /// <summary>
-        /// Gets a list of <see cref="RowObject"/> that contain the specified file name.
+        /// Provides an enumerable that enumerates all versions with the specified file name
         /// </summary>
         /// <param name="fileName">The file name (should be non-rooted)</param>
-        /// <returns>
-        /// A list of <see cref="RowObject"/> that contain the file name.
-        /// The list may be empty.
-        /// </returns>
-        public List<RowObject> GetVersionsWithFile(string fileName)
+        /// <returns>An enumerable</returns>
+        public IEnumerable<TitleVersionRow> EnumerateVersions(string fileName)
         {
-            List<RowObject> result = new List<RowObject>();
             fileName = fileName.Replace("'", "''");
-            DataRow[] rows = Select($"{Defs.Columns.FileName}='{fileName}'");
-            foreach (DataRow row in rows)
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.FileName}='{fileName}'"))
             {
-                result.Add(new RowObject(row));
+                yield return new TitleVersionRow(row);
             }
-            return result;
         }
 
         /// <summary>
@@ -187,7 +180,7 @@ namespace Restless.Panama.Database.Tables
         /// <returns>true if a record containing the title exists; otherwise, false.</returns>
         public bool VersionWithFileExists(string fileName)
         {
-            return GetVersionsWithFile(fileName).Count > 0;
+            return EnumerateVersions(fileName).Count() > 0;
         }
         #endregion
 
@@ -255,152 +248,5 @@ namespace Restless.Panama.Database.Tables
 
         #region Private methods
         #endregion
-
-        /************************************************************************/
-
-        #region Row Object
-        /// <summary>
-        /// Encapsulates a single row from the <see cref="TitleVersionTable"/>.
-        /// </summary>
-        public class RowObject : RowObjectBase<TitleVersionTable>
-        {
-            #region Public properties
-            /// <summary>
-            /// Gets the id for this row object.
-            /// </summary>
-            public long Id
-            {
-                get => GetInt64(Defs.Columns.Id);
-            }
-
-            /// <summary>
-            /// Gets the title id for this row object.
-            /// </summary>
-            public long TitleId
-            {
-                get => GetInt64(Defs.Columns.TitleId);
-            }
-
-            /// <summary>
-            /// Gets or sets the document type for this row object.
-            /// </summary>
-            public long DocType
-            {
-                get => GetInt64(Defs.Columns.DocType);
-                set => SetValue(Defs.Columns.DocType, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the file name for this row object.
-            /// </summary>
-            public string FileName
-            {
-                get => GetString(Defs.Columns.FileName);
-                set => SetValue(Defs.Columns.FileName, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the note for this row object.
-            /// </summary>
-            public string Note
-            {
-                get => GetString(Defs.Columns.Note);
-                set => SetValue(Defs.Columns.Note, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the updated value for this row object.
-            /// </summary>
-            public DateTime Updated
-            {
-                get => GetDateTime(Defs.Columns.Updated);
-                set => SetValue(Defs.Columns.Updated, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the size for this row object.
-            /// </summary>
-            public long Size
-            {
-                get => GetInt64(Defs.Columns.Size);
-                set => SetValue(Defs.Columns.Size, value);
-            }
-
-            /// <summary>
-            /// Gets the version for this row object.
-            /// </summary>
-            public long Version
-            {
-                get => GetInt64(Defs.Columns.Version);
-                internal set => SetValue(Defs.Columns.Version, value);
-            }
-
-            /// <summary>
-            /// Gets the revision
-            /// </summary>
-            public long Revision
-            {
-                get => GetInt64(Defs.Columns.Revision);
-                internal set => SetValue(Defs.Columns.Revision, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the language id.
-            /// </summary>
-            public string LanguageId
-            {
-                get => GetString(Defs.Columns.LangId);
-                set => SetValue(Defs.Columns.LangId, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the word count for this row object.
-            /// </summary>
-            public long WordCount
-            {
-                get => GetInt64(Defs.Columns.WordCount);
-                set => SetValue(Defs.Columns.WordCount, value);
-            }
-
-            /// <summary>
-            /// Gets the file information object for this row object.
-            /// You must call the <see cref="SetFileInfo"/> method before accessing this property.
-            /// </summary>
-            public FileInfo Info
-            {
-                get;
-                private set;
-            }
-            #endregion
-
-            /************************************************************************/
-
-            #region Constructor
-            /// <summary>
-            /// Initializes a new instance of the <see cref="RowObject"/> class.
-            /// </summary>
-            /// <param name="row">The data row</param>
-            public RowObject(DataRow row)
-                : base (row)
-            {
-            }
-            #endregion
-
-            /************************************************************************/
-
-            #region Public methods
-            /// <summary>
-            /// Sets the <see cref="Info"/> property according to the specified full file name.
-            /// </summary>
-            /// <param name="fullName">The full path to the file.</param>
-            public void SetFileInfo(string fullName)
-            {
-                Info = new FileInfo(fullName);
-            }
-
-            #endregion
-        }
-        #endregion
-
     }
 }

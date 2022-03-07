@@ -4,7 +4,6 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.Generic;
 using System.Data;
@@ -146,12 +145,15 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets a DataRow array that contains all supported doc types
+        /// Provides an enumerable that enumerates all supported document types
         /// </summary>
-        /// <returns>An array of <see cref="DataRow"/> objects that contains the supported document types.</returns>
-        public DataRow[] GetSupportedDocTypes()
+        /// <returns></returns>
+        public IEnumerable<DocumentTypeRow> EnumerateSupported()
         {
-            return Select(string.Format("{0}=1", Defs.Columns.Supported), Defs.Columns.Ordering);
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.Supported}=1", Defs.Columns.Ordering))
+            {
+                yield return new DocumentTypeRow(row);
+            }
         }
 
         /// <summary>
@@ -163,18 +165,15 @@ namespace Restless.Panama.Database.Tables
         {
             if (!string.IsNullOrEmpty(filename))
             {
-                string fileExt = System.IO.Path.GetExtension(filename).ToLower();
-                if (!string.IsNullOrEmpty(fileExt))
+                /* The leading dot is stripped because extensions are stored without one */
+                string extension = System.IO.Path.GetExtension(filename)?.ToLower().Substring(1);
+                if (!string.IsNullOrEmpty(extension))
                 {
-                    foreach (DataRow row in GetSupportedDocTypes())
+                    foreach (DocumentTypeRow docType in EnumerateSupported())
                     {
-                        string[] extensions = row[Defs.Columns.Extensions].ToString().Split(';');
-                        foreach (string ext in extensions)
+                        if (docType.ContainsExtension(extension))
                         {
-                            if (ext == fileExt)
-                            {
-                                return (long)row[Defs.Columns.Id];
-                            }
+                            return docType.Id;
                         }
                     }
                 }
@@ -218,15 +217,15 @@ namespace Restless.Panama.Database.Tables
         /// <returns>An IEnumerable</returns>
         protected override IEnumerable<object[]> EnumeratePopulateValues()
         {
-            yield return new object[] { 1, "Word Document (OpenXml)", ".docx;.dotm", 1, true };
-            yield return new object[] { 2, "Word Document (Old)", ".doc;.rtf", 2, true };
-            yield return new object[] { 3, "Pdf Document", ".pdf", 3, true };
-            yield return new object[] { 4, "Text Document", ".txt", 4, true };
-            yield return new object[] { 5, "Outlook Message", ".msg", 5, true };
-            yield return new object[] { 6, "Audio", ".mp3", 6, true };
-            yield return new object[] { 7, "Html", ".html;.htm", 7, true };
-            yield return new object[] { 8, "Images", ".jpg;.jpeg;.png", 8, true };
-            yield return new object[] { 9, "Executable", ".exe", 9, true };
+            yield return new object[] { 1, "Word Document (OpenXml)", "docx;dotm", 1, true };
+            yield return new object[] { 2, "Word Document (Old)", "doc;rtf", 2, true };
+            yield return new object[] { 3, "Pdf Document", "pdf", 3, true };
+            yield return new object[] { 4, "Text Document", "txt", 4, true };
+            yield return new object[] { 5, "Outlook Message", "msg", 5, true };
+            yield return new object[] { 6, "Audio", "mp3", 6, true };
+            yield return new object[] { 7, "Html", "html;htm", 7, true };
+            yield return new object[] { 8, "Images", "jpg;jpeg;png", 8, true };
+            yield return new object[] { 9, "Executable", "exe", 9, true };
             
             yield return new object[] { 0, "Unknown", null, 100, false };
             yield return new object[] { 10, "Outlook Message (Direct Reference)", null, 101, false };

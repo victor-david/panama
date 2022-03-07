@@ -55,7 +55,7 @@
 
     <!-- Base style for GroupBox -->
     <Style TargetType="GroupBox">
-        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
         <Setter Property="Padding" Value="2"/>
         <Setter Property="HeaderTemplate">
             <Setter.Value>
@@ -68,13 +68,18 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DefaultRadioButtonStyle" TargetType="tk:RadioButton">
+    <Style x:Key="DefaultRadioButtonPanelStyle" TargetType="tk:RadioButtonPanel">
         <Setter Property="TemplateStyle" Value="Underline"/>
+        <Setter Property="UnderlineHeight" Value="3"/>
+    </Style>
+
+    <Style TargetType="tk:RadioButtonPanel" BasedOn="{StaticResource DefaultRadioButtonPanelStyle}"/>
+    
+    <Style x:Key="DefaultRadioButtonStyle" TargetType="tk:RadioButton">
         <Setter Property="Margin" Value="8,0"/>
         <Setter Property="Padding" Value="0,2"/>
         <Setter Property="Foreground" Value="{StaticResource SelectorForegroundBrush}"/>
         <Setter Property="Background" Value="{StaticResource SelectorBackgroundBrush}"/>
-        <Setter Property="UnderlineHeight" Value="3"/>
     </Style>
 
     <Style TargetType="tk:RadioButton" BasedOn="{StaticResource DefaultRadioButtonStyle}"/>

@@ -10,7 +10,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using Defs = Restless.Panama.Database.Tables.TitleVersionTable.Defs;
-using RowObject = Restless.Panama.Database.Tables.TitleVersionTable.RowObject;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -52,10 +51,10 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets a list of <see cref="RowObject"/> for the title associated
+        /// Gets a list of <see cref="TitleVersionRow"/> for the title associated
         /// with this instance.
         /// </summary>
-        public List<RowObject> Versions
+        public List<TitleVersionRow> Versions
         {
             get;
         }
@@ -80,7 +79,7 @@ namespace Restless.Panama.Database.Tables
         /// <param name="titleId">The title id to get the version information for.</param>
         internal TitleVersionController(TitleVersionTable owner, long titleId)
         {
-            Versions = new List<RowObject>();
+            Versions = new List<TitleVersionRow>();
             versionMap = new Dictionary<long, List<long>>();
             this.owner = owner;
             TitleId = titleId;
@@ -117,7 +116,7 @@ namespace Restless.Panama.Database.Tables
         /// Removes the specifed version.
         /// </summary>
         /// <param name="current">The version to remove.</param>
-        public void Remove(RowObject current)
+        public void Remove(TitleVersionRow current)
         {
             if (current == null)
             {
@@ -133,9 +132,9 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         /// <param name="current">The current version to move.</param>
         /// <remarks>
-        /// See remarks for <see cref="MoveDown(RowObject)"/> for more info.
+        /// See remarks for <see cref="MoveDown(TitleVersionRow)"/> for more info.
         /// </remarks>
-        public void MoveUp(RowObject current)
+        public void MoveUp(TitleVersionRow current)
         {
             if (current == null)
             {
@@ -192,7 +191,7 @@ namespace Restless.Panama.Database.Tables
         /// into version 1A, turning the current 1A into 1B and the current 1B into 1C.
         /// </para>
         /// </remarks>
-        public void MoveDown(RowObject current)
+        public void MoveDown(TitleVersionRow current)
         {
             if (current == null)
             {
@@ -242,7 +241,7 @@ namespace Restless.Panama.Database.Tables
         /// greater than 1 (i.e. the version has only a single revision), this
         /// method does nothing.
         /// </remarks>
-        public void ConvertToVersion(RowObject current)
+        public void ConvertToVersion(TitleVersionRow current)
         {
             if (current == null)
             {
@@ -260,12 +259,12 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates if the specified <see cref="RowObject"/>
+        /// Gets a boolean value that indicates if the specified <see cref="TitleVersionRow"/>
         /// represents the latest version / revision, i.e. HighestVersion.RevA
         /// </summary>
         /// <param name="row">The row object</param>
         /// <returns>true if <paramref name="row"/> represents HighestVersion.RevA; otherwise, false</returns>
-        public bool IsLatest(RowObject row)
+        public bool IsLatest(TitleVersionRow row)
         {
             if (row == null)
             {
@@ -275,12 +274,12 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates if the specified <see cref="RowObject"/>
+        /// Gets a boolean value that indicates if the specified <see cref="TitleVersionRow"/>
         /// represents the earliest version / revision, i.e. Ver1.Rev[MaxRev]
         /// </summary>
         /// <param name="row">The row object</param>
         /// <returns>true if <paramref name="row"/> represents Ver1.Rev[MaxRev]; otherwise, false</returns>
-        public bool IsEarliest(RowObject row)
+        public bool IsEarliest(TitleVersionRow row)
         {
             if (row == null)
             {
@@ -339,7 +338,7 @@ namespace Restless.Panama.Database.Tables
 
         #region Private methods
         /// <summary>
-        /// Get the <see cref="RowObject"/> that comes before the specified row object.
+        /// Get the <see cref="TitleVersionRow"/> that comes before the specified row object.
         /// </summary>
         /// <param name="rowObj">The row object.</param>
         /// <returns>The previous row object.</returns>
@@ -353,28 +352,28 @@ namespace Restless.Panama.Database.Tables
         /// 2C - version 2 has 3 revisions.
         /// 1A - version 1 has 1 revision.
         /// </remarks>
-        private RowObject GetPrevious(RowObject rowObj)
+        private TitleVersionRow GetPrevious(TitleVersionRow rowObj)
         {
             return GetNeededRowObject(rowObj, -1);
         }
 
         /// <summary>
-        /// Get the <see cref="RowObject"/> that comes after the specified row object.
+        /// Get the <see cref="TitleVersionRow"/> that comes after the specified row object.
         /// </summary>
         /// <param name="rowObj">The row object.</param>
         /// <returns>The next row object.</returns>
         /// <remarks>
-        /// See remarks on <see cref="GetPrevious(RowObject)"/>.
+        /// See remarks on <see cref="GetPrevious(TitleVersionRow)"/>.
         /// </remarks>
-        private RowObject GetNext(RowObject rowObj)
+        private TitleVersionRow GetNext(TitleVersionRow rowObj)
         {
             return GetNeededRowObject(rowObj, 1);
         }
 
-        private RowObject GetNeededRowObject(RowObject rowObj, int offset)
+        private TitleVersionRow GetNeededRowObject(TitleVersionRow rowObj, int offset)
         {
             int idxNeeded = -1;
-            foreach (RowObject row in Versions)
+            foreach (TitleVersionRow row in Versions)
             {
                 if (row.Version == rowObj.Version && row.Revision == rowObj.Revision)
                 {
@@ -462,7 +461,7 @@ namespace Restless.Panama.Database.Tables
             DataRow[] rows = owner.Select($"{Defs.Columns.TitleId}={TitleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC");
             foreach (DataRow row in rows)
             {
-                RowObject rowObj = new RowObject(row);
+                TitleVersionRow rowObj = new TitleVersionRow(row);
                 if (rowObj.Revision == Defs.Values.RevisionA)
                 {
                     version++;
@@ -483,7 +482,7 @@ namespace Restless.Panama.Database.Tables
 
             foreach (DataRow row in rows)
             {
-                RowObject rowObj = new RowObject(row);
+                TitleVersionRow rowObj = new TitleVersionRow(row);
                 Versions.Add(rowObj);
 
                 if (rowObj.Version != lastVer)

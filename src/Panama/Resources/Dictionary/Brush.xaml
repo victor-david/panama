@@ -29,7 +29,8 @@
     <SolidColorBrush x:Key="DefaultMenuBrush" Color="#707070"/>
 
     <!-- Buttons -->
-    <SolidColorBrush x:Key="ActionButtonBackgroundBrush" Color="SkyBlue"/>
+    <!--<SolidColorBrush x:Key="ActionButtonBackgroundBrush" Color="SkyBlue"/>-->
+    <SolidColorBrush x:Key="ActionButtonBackgroundBrush" Color="LightSteelBlue"/>
     <SolidColorBrush x:Key="ActionButtonForegroundBrush" Color="White"/>
     <SolidColorBrush x:Key="ActionButtonRolloverBrush" Color="CadetBlue"/>
 

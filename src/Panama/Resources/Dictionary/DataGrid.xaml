@@ -114,6 +114,7 @@
 
     <Style x:Key="DefaultDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultControlStyle}">
         <Setter Property="Foreground" Value="{StaticResource DarkForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
         <Setter Property="ColumnWidth" Value="*"/>
         <Setter Property="MinRowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
@@ -147,11 +148,16 @@
     <Style TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
     <Style TargetType="tk:DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
 
-    <Style x:Key="DataGridEdit" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
-        <Setter Property="Margin" Value="4,2,4,4" />
+    <Style x:Key="DataGridEditStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
         <Setter Property="MinHeight" Value="100" />
-        <Setter Property="MaxHeight" Value="200" />
-        <Setter Property="AlternatingRowBackground" Value="#FFDFDFDF"/>
+        <Setter Property="MaxHeight" Value="260" />
+        <Setter Property="RowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
+        <Setter Property="AlternationCount" Value="2"/>
+    </Style>
+
+    <Style x:Key="DataGridEditLockedStyle" TargetType="DataGrid" BasedOn="{StaticResource DataGridEditStyle}">
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
     </Style>
 
     <!-- Bit of a kluge. But otherwise, the DataGrid's context menu also pops up if you right click the header row-->

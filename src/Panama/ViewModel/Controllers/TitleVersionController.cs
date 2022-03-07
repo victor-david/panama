@@ -12,7 +12,6 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.OpenXml;
 using Restless.Toolkit.Core.Utility;
-using Restless.Toolkit.Utility;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,13 +29,13 @@ namespace Restless.Panama.ViewModel
     public class TitleVersionController : TitleController
     {
         #region Private
+        private TitleVersionTable VersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
         private long currentOwnerTitleId;
         private bool isOpenXml;
         private PropertiesAdapter properties;
-        private int dataViewCount;
-        private readonly TitleVersionTable versionTable;
-        private Restless.Panama.Database.Tables.TitleVersionController verController;
-        private TitleVersionTable.RowObject selectedRowObj;
+        private bool haveVersion;
+        private Database.Tables.TitleVersionController verController;
+        private TitleVersionRow selectedVersion;
         private readonly DataGridColumn versionColumn;
         private string toggleGroupText;
         #endregion
@@ -44,6 +43,17 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Public properties
+
+
+        /// <summary>
+        /// Gets the currently selection version
+        /// </summary>
+        public TitleVersionRow SelectedVersion
+        {
+            get => selectedVersion;
+            private set => SetProperty(ref selectedVersion, value);
+        }
+
         /// <summary>
         /// Gets the header text
         /// </summary>
@@ -90,25 +100,15 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the version name for this file with the title root portion
         /// </summary>
-        public string VersionFileName
-        {
-            get
-            {
-                if (selectedRowObj != null)
-                {
-                    return Paths.Title.WithRoot(selectedRowObj.FileName);
-                }
-                return null;
-            }
-        }
+        public string VersionFileName => SelectedVersion != null ? Paths.Title.WithRoot(SelectedVersion.FileName) : null;
 
         /// <summary>
-        /// Gets the count of rows in the data view. The view binds to this property
+        /// Gets a boolean that indicates if there is at least one version
         /// </summary>
-        public int DataViewCount
+        public bool HaveVersion
         {
-            get => dataViewCount;
-            private set => SetProperty(ref dataViewCount, value);
+            get => haveVersion;
+            private set => SetProperty(ref haveVersion, value);
         }
         #endregion
 
@@ -123,11 +123,10 @@ namespace Restless.Panama.ViewModel
             : base(owner)
         {
             currentOwnerTitleId = -1;
-            versionTable = DatabaseController.Instance.GetTable<TitleVersionTable>();
-            AssignDataViewFrom(versionTable);
+            AssignDataViewFrom(VersionTable);
             DataView.RowFilter = $"{TitleVersionTable.Defs.Columns.TitleId}=-1";
             DataView.Sort = $"{TitleVersionTable.Defs.Columns.TitleId}, {TitleVersionTable.Defs.Columns.Version} DESC, {TitleVersionTable.Defs.Columns.Revision} ASC";
-            Columns.CreateImage<IntegerToImageConverter>("T", TitleVersionTable.Defs.Columns.DocType, "ImageFileType", 20.0);
+            //Columns.CreateImage<IntegerToImageConverter>("T", TitleVersionTable.Defs.Columns.DocType, "ImageFileType", 20.0);
 
             versionColumn = Columns.Create("V", TitleVersionTable.Defs.Columns.Version)
                 .MakeCentered()
@@ -139,20 +138,19 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Updated", TitleVersionTable.Defs.Columns.Updated).MakeDate();
             Columns.Create("WC", TitleVersionTable.Defs.Columns.WordCount).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Lang", TitleVersionTable.Defs.Columns.LangId).MakeFixedWidth(FixedWidth.W048);
-            Columns.Create("File", TitleVersionTable.Defs.Columns.FileName).MakeFlexWidth(1.65);
-            Columns.Create("Note", TitleVersionTable.Defs.Columns.Note);
+            Columns.Create("File", TitleVersionTable.Defs.Columns.FileName);
 
             Commands.Add("ConvertToVersion", RunConvertToVersionCommand, CanRunConvertToVersionCommand);
             Commands.Add("VersionAddByFile", RunAddVersionByFileCommand);
-            Commands.Add("VersionReplace", RunReplaceVersionCommand, (o) => IsSelectedRowAccessible);
-            Commands.Add("VersionRemove", RunRemoveVersionCommand, (o) => IsSelectedRowAccessible);
+            Commands.Add("VersionReplace", RunReplaceVersionCommand, o => IsSelectedRowAccessible);
+            Commands.Add("VersionRemove", RunRemoveVersionCommand, o => IsSelectedRowAccessible);
             Commands.Add("VersionMoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
             Commands.Add("VersionMoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
-            Commands.Add("VersionSync", RunSyncCommand, (o) => SourceCount > 0 );
+            Commands.Add("VersionSync", RunSyncCommand, o => SourceCount > 0 );
             Commands.Add("ContextMenuOpening", RunContextMenuOpeningCommand);
             Commands.Add("SaveProperty", RunSavePropertyCommand, CanRunSavePropertyCommand);
             Commands.Add("ToggleGroup", RunToggleGroupCommand);
-            Commands.Add("SetLanguage", RunSetLanguageCommand, (o) => IsSelectedRowAccessible);
+            Commands.Add("SetLanguage", RunSetLanguageCommand, o => IsSelectedRowAccessible);
 
             //MenuItems.AddItem("Make this a revision of the version above", Commands["ConvertToRevision"]);
             MenuItems.AddItem("Make this a separate version", Commands["ConvertToVersion"]);
@@ -187,11 +185,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
-            selectedRowObj = null;
-            if (IsSelectedRowAccessible)
-            {
-                selectedRowObj = new TitleVersionTable.RowObject(SelectedRow);
-            }
+            SelectedVersion = IsSelectedRowAccessible ? new TitleVersionRow(SelectedRow) : null;
             PrepareForOpenXml();
             OnPropertyChanged(nameof(VersionFileName));
         }
@@ -202,11 +196,11 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            selectedRowObj = null;
+            SelectedVersion = null;
             currentOwnerTitleId = GetOwnerSelectedPrimaryId();
             DataView.RowFilter = $"{TitleVersionTable.Defs.Columns.TitleId}={currentOwnerTitleId}";
-            DataViewCount = DataView.Count;
-            verController = versionTable.GetVersionController(currentOwnerTitleId);
+            HaveVersion = DataView.Count > 0;
+            verController = VersionTable.GetVersionController(currentOwnerTitleId);
             OnPropertyChanged(nameof(Header));
         }
 
@@ -220,7 +214,7 @@ namespace Restless.Panama.ViewModel
             {
                 OpenFileRow(view.Row, TitleVersionTable.Defs.Columns.FileName, Config.Instance.FolderTitleRoot, (f) =>
                     {
-                        Messages.ShowError(string.Format(Strings.FormatStringFileNotFound, f, "FolderTitleRoot"));
+                        MessageWindow.ShowError(string.Format(Strings.FormatStringFileNotFound, f, nameof(Config.FolderTitleRoot)));
                     });
             }
         }
@@ -253,7 +247,7 @@ namespace Restless.Panama.ViewModel
         {
             if (CanRunVersionCommand())
             {
-                verController.ConvertToVersion(selectedRowObj);
+                verController.ConvertToVersion(SelectedVersion);
                 AddViewSourceSortDescriptions();
                 OnPropertyChanged(nameof(Header));
             }
@@ -263,14 +257,14 @@ namespace Restless.Panama.ViewModel
         {
             return
                 CanRunVersionCommand() &&
-                verController.GetRevisionCount(selectedRowObj.Version) > 1;
+                verController.GetRevisionCount(SelectedVersion.Version) > 1;
         }
 
-        private void RunAddVersionByFileCommand(object o)
+        private void RunAddVersionByFileCommand(object parm)
         {
             if (verController != null)
             {
-                using (var dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Strings.CaptionSelectTitleVersionAddByFile))
+                using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Strings.CaptionSelectTitleVersionAddByFile))
                 {
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
@@ -285,28 +279,28 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void RunRemoveVersionCommand(object o)
+        private void RunRemoveVersionCommand(object parm)
         {
-            if (CanRunVersionCommand() && Messages.ShowYesNo(Strings.ConfirmationRemoveTitleVersion))
+            if (CanRunVersionCommand() && MessageWindow.ShowYesNo(Strings.ConfirmationRemoveTitleVersion))
             {
-                verController.Remove(selectedRowObj);
-                versionTable.Save();
+                verController.Remove(SelectedVersion);
+                VersionTable.Save();
                 OnUpdate();
             }
         }
 
-        private void RunReplaceVersionCommand(object o)
+        private void RunReplaceVersionCommand(object parm)
         {
-            if (selectedRowObj != null)
+            if (SelectedVersion != null)
             {
-                using (var dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Strings.CaptionSelectTitleVersionReplaceByFile))
+                using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Strings.CaptionSelectTitleVersionReplaceByFile))
                 {
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
                         string fileName = Paths.Title.WithoutRoot(dialog.FileName);
                         if (CanAddFileToTitle(fileName))
                         {
-                            selectedRowObj.FileName = fileName;
+                            SelectedVersion.FileName = fileName;
                             OnPropertyChanged(nameof(VersionFileName));
                         }
                     }
@@ -323,8 +317,7 @@ namespace Restless.Panama.ViewModel
         /// <returns>true if <paramref name="fileName"/> does not already belong to </returns>
         private bool CanAddFileToTitle(string fileName)
         {
-            List<TitleVersionTable.RowObject> verList = versionTable.GetVersionsWithFile(fileName);
-            foreach (var ver in verList)
+            foreach (TitleVersionRow ver in VersionTable.EnumerateVersions(fileName))
             {
                 if (ver.TitleId == currentOwnerTitleId)
                 {
@@ -332,41 +325,41 @@ namespace Restless.Panama.ViewModel
                     sb.AppendLine(fileName);
                     sb.AppendLine();
                     sb.Append(Strings.InvalidOpCannotAddVersionFile);
-                    Messages.ShowError(sb.ToString());
+                    MessageWindow.ShowError(sb.ToString());
                     return false;
                 }
             }
             return true;
         }
 
-        private void RunMoveUpCommand(object o)
+        private void RunMoveUpCommand(object parm)
         {
             if (CanRunVersionCommand())
             {
-                verController.MoveUp(selectedRowObj);
+                verController.MoveUp(SelectedVersion);
                 AddViewSourceSortDescriptions();
                 OnPropertyChanged(nameof(Header));
             }
         }
 
-        private void RunMoveDownCommand(object o)
+        private void RunMoveDownCommand(object parm)
         {
             if (CanRunVersionCommand())
             {
-                verController.MoveDown(selectedRowObj);
+                verController.MoveDown(SelectedVersion);
                 AddViewSourceSortDescriptions();
                 OnPropertyChanged(nameof(Header));
             }
         }
 
-        private bool CanRunMoveUpCommand(object o)
+        private bool CanRunMoveUpCommand(object parm)
         {
-            return CanRunVersionCommand() && !verController.IsLatest(selectedRowObj);
+            return CanRunVersionCommand() && !verController.IsLatest(SelectedVersion);
         }
 
-        private bool CanRunMoveDownCommand(object o)
+        private bool CanRunMoveDownCommand(object parm)
         {
-            return CanRunVersionCommand() && !verController.IsEarliest(selectedRowObj);
+            return CanRunVersionCommand() && !verController.IsEarliest(SelectedVersion);
         }
 
         /// <summary>
@@ -379,18 +372,16 @@ namespace Restless.Panama.ViewModel
         private bool CanRunVersionCommand()
         {
             return
-                selectedRowObj != null &&
+                SelectedVersion != null &&
                 verController != null &&
-                selectedRowObj.TitleId == verController.TitleId;
+                SelectedVersion.TitleId == verController.TitleId;
         }
 
-        private void RunSyncCommand(object o)
+        private void RunSyncCommand(object parm)
         {
-            if (Owner.SelectedPrimaryKey != null)
+            if (Owner.SelectedPrimaryKey is long titleId)
             {
-                long titleId = (long)Owner.SelectedPrimaryKey;
-                var window = WindowFactory.TitleVersionRename.Create(titleId);
-                window.ShowDialog();
+                WindowFactory.TitleVersionRename.Create(titleId).ShowDialog();
             }
         }
 
@@ -399,12 +390,12 @@ namespace Restless.Panama.ViewModel
             if (SelectedRow != null)
             {
                 string langId = SelectedRow[TitleVersionTable.Defs.Columns.LangId].ToString();
-                foreach (var item in MenuItems.OfType<MenuItem>())
+                foreach (MenuItem item in MenuItems.OfType<MenuItem>())
                 {
                     item.Icon = null;
                     if (langId.Equals(item.Tag))
                     {
-                        item.Icon = LocalResources.Get("ImageDotGreenMenu");
+                        item.Icon = LocalResources.Get<System.Windows.Shapes.Path>(ResourceKeys.Icon.SquareSmallRedIconKey);
                     }
                 }
             }
@@ -412,13 +403,13 @@ namespace Restless.Panama.ViewModel
 
         private void RunSetLanguageCommand(object parm)
         {
-            if (selectedRowObj != null && parm is string langId)
+            if (SelectedVersion != null && parm is string langId)
             {
-                selectedRowObj.LanguageId = langId;
+                SelectedVersion.LanguageId = langId;
             }
         }
 
-        private void RunSavePropertyCommand(object o)
+        private void RunSavePropertyCommand(object parm)
         {
             if (Properties != null)
             {
@@ -429,7 +420,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private bool CanRunSavePropertyCommand(object o)
+        private bool CanRunSavePropertyCommand(object parm)
         {
             return IsOpenXml && Properties != null;
         }
@@ -451,9 +442,9 @@ namespace Restless.Panama.ViewModel
         {
             IsOpenXml = false;
             Properties = null;
-            if (selectedRowObj != null)
+            if (SelectedVersion != null)
             {
-                string fileName = Paths.Title.WithRoot(selectedRowObj.FileName);
+                string fileName = Paths.Title.WithRoot(SelectedVersion.FileName);
                 long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
                 if (docType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType)
                 {

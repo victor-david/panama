@@ -1022,4 +1022,7 @@ Do you want to continue?</value>
   <data name="TextNotOpenXmlDocument" xml:space="preserve">
     <value>Not an Open Xml document</value>
   </data>
+  <data name="TextNoTitleVersions" xml:space="preserve">
+    <value>No versions for this title</value>
+  </data>
 </root>
