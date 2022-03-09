@@ -1,5 +1,5 @@
 ﻿<StackPanel
-    x:Class="Restless.Panama.View.TitleEdit1"
+    x:Class="Restless.Panama.View.TitleEditMain"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,8 +9,9 @@
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="400"
     Style="{StaticResource DataEntryPanelStyle}">
-    
     <!-- Title edit 1 (main title data) -->
+    <!-- TODO -->
+    <!--<tk:RestlessCalendar SelectedDateUtc="{Binding WrittenDate}" />-->
     
     <TextBlock Text="Title"/>
     <TextBox Text="{Binding SelectedTitle.Title}"/>

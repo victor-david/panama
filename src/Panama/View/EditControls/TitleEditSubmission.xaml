@@ -1,5 +1,5 @@
 ﻿<StackPanel
-    x:Class="Restless.Panama.View.TitleEdit3"
+    x:Class="Restless.Panama.View.TitleEditSubmission"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="400"
     Style="{StaticResource DataEntryPanelStyle}">
-    <!-- Title edit 3 (submissions) -->
+    <!-- Title edit 4 (submissions) -->
     <TextBlock Text="Submissions"/>
     <Border Background="LightGray" Height="32"/>
 

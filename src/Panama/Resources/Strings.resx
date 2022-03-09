@@ -1025,4 +1025,10 @@ Do you want to continue?</value>
   <data name="TextNoTitleVersions" xml:space="preserve">
     <value>No versions for this title</value>
   </data>
+  <data name="HeaderAssignedTags" xml:space="preserve">
+    <value>Assigned Tags</value>
+  </data>
+  <data name="HeaderAvailableTags" xml:space="preserve">
+    <value>Available Tags</value>
+  </data>
 </root>

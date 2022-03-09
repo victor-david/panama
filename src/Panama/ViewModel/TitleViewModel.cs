@@ -31,7 +31,7 @@ namespace Restless.Panama.ViewModel
         private TitleTable.RowObject selectedTitle;
         private bool isFilterVisible;
         private string previewText;
-        private const int SectionPreviewId = 5;
+        private const int SectionPreviewId = 6;
         private bool isOpenXml;
         #endregion
 
@@ -293,6 +293,14 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected Methods
+        /// <summary>
+        /// Called when this view model is activated.
+        /// </summary>
+        protected override void OnActivated()
+        {
+            Tags.RefreshAvailable();
+        }
+
         /// <summary>
         /// Called when the selected item on the associated data grid has changed.
         /// </summary>

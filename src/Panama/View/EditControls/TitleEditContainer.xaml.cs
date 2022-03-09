@@ -3,11 +3,11 @@
 namespace Restless.Panama.View
 {
     /// <summary>
-    /// Interaction logic for TitleEdit1.xaml
+    /// Interaction logic for TitleEditContainer.xaml
     /// </summary>
-    public partial class TitleEdit1 : StackPanel
+    public partial class TitleEditContainer : UserControl
     {
-        public TitleEdit1()
+        public TitleEditContainer()
         {
             InitializeComponent();
         }

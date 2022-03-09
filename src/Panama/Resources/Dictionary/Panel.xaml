@@ -38,6 +38,10 @@
                 <Setter Property="Margin" Value="2,6"/>
             </Style>
 
+            <Style TargetType="ListBox" BasedOn="{StaticResource DefaultListBoxStyle}">
+                <Setter Property="Margin" Value="{StaticResource DataEntryPanelDefaultControlMargin}"/>
+            </Style>
+
             <Style TargetType="Expander" BasedOn="{StaticResource DefaultExpanderStyle}">
                 <Setter Property="Margin" Value="0,4"/>
             </Style>

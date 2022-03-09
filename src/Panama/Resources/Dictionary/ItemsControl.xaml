@@ -54,7 +54,7 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <Button ToolTip="{Binding TagDescription}" Command="{Binding Command}" Margin="1" Width="92" Height="22" MinHeight="22" FontSize="12" Content="{Binding TagName}">
+                    <Button ToolTip="{Binding Description}" Command="{Binding Command}" Margin="1" Width="92" Height="22" MinHeight="22" FontSize="12" Content="{Binding Tag}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <ContentPresenter Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{TemplateBinding Content}" />

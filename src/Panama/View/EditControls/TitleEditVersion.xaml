@@ -1,102 +1,148 @@
-﻿<UserControl 
+﻿<StackPanel
     x:Class="Restless.Panama.View.TitleEditVersion"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:cv="clr-namespace:Restless.Panama.Core"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d" 
-    d:DesignHeight="600" d:DesignWidth="554">
-    <StackPanel>
-        <TextBlock 
-            Margin="4,24"
-            Style="{StaticResource TextBlockError}"
-            Text="No versions have been created for this title. Use the File button to add a version."
-            Visibility="{Binding Versions.DataViewCount,Converter={cv:IntegerToVisibilityConverter},ConverterParameter={StaticResource Int32One}}" />
-        <tk:DataGrid 
-            x:Name="grid" 
-            Style="{StaticResource DataGridEdit}"
-            MaxHeight="{x:Static sys:Double.PositiveInfinity}" 
-            CanUserSortColumns="False"
-            CanUserReorderColumns="False"
-            ItemsSource="{Binding Path=Versions.MainSource.View}"
+    d:DesignHeight="650" d:DesignWidth="400">
+    <!-- Title edit 3 (versions) -->
+    <Grid>
+        <tk:DataGrid
+            Style="{StaticResource DataGridEditLockedStyle}"
+            ItemsSource="{Binding Versions.MainSource.View}"
             SelectedItem="{Binding Versions.SelectedItem}"
             tk:DataGridColumns.Columns="{Binding Versions.Columns}" 
-            ContextMenuOpeningCommand="{Binding Versions.Commands[ContextMenuOpening]}"
-            Visibility="{Binding Versions.DataViewCount,Converter={cv:IntegerToVisibilityConverter}}">
+            ContextMenuOpeningCommand="{Binding Versions.Commands[ContextMenuOpening]}">
             <DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Versions.MenuItems}"  />
-            </DataGrid.ContextMenu>            
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Versions.OpenRowCommand}"/>
-                </Style>
-            </DataGrid.RowStyle>
-            <DataGrid.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="4,2,0,4" Margin="0,2" Background="#FFB3DAB8">
-                                <TextBlock Style="{StaticResource HCCHeaderText}">
-                                    <Run Text="Version"/>
-                                    <Run Text="{Binding Path=Name,Mode=OneWay}"/>
-                                </TextBlock>
-                            </Border>
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                </GroupStyle>
-            </DataGrid.GroupStyle>
+            </DataGrid.ContextMenu>
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+            </DataGrid.InputBindings>
         </tk:DataGrid>
-        <ToolBarTray>
-            <ToolBar Style="{StaticResource ToolBarCommandHolder}">
-                <Button Command="{Binding Versions.Commands[VersionMoveUp]}" Content="{StaticResource ImageArrowUpTool}" ToolTip="Move the selected version up"/>
-                <Button Command="{Binding Versions.Commands[VersionMoveDown]}" Content="{StaticResource ImageArrowDownTool}" ToolTip="Move the selected version down"/>
-                <Separator/>
-                <Button Command="{Binding Versions.Commands[VersionAddByFile]}" ToolTip="Add a version by selecting an existing file">File</Button>
-                <Button Command="{Binding Versions.Commands[VersionReplace]}" ToolTip="Replace the selected version with another file">Replace</Button>
-                <Button Command="{Binding Versions.Commands[VersionRemove]}" ToolTip="Remove the selected version (does not affect the file system)">Remove</Button>
-                <Separator/>
-                <Button Command="{Binding Versions.Commands[VersionSync]}" ToolTip="Rename the version files in accordance with title, language id and version #">Sync</Button>
-                <Separator/>
-                <Button Command="{Binding Versions.Commands[ToggleGroup]}" Content="{Binding Versions.ToggleGroupText}" ToolTip="Group or ungroup title versions"/>
-            </ToolBar>
-        </ToolBarTray>
-        <StackPanel Margin="0,8" Visibility="{Binding Versions.EditVisibility}">
-            <!--<TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding Versions.VersionFileName}"/>-->
-            <Label>Note</Label>
-            <TextBox Text="{Binding Versions.SelectedRow[note]}" />
+        <TextBlock
+            tk:Property.IsCollapsed="{Binding Versions.HaveVersion}"
+            Foreground="{StaticResource LightForegroundBrush}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Text="{x:Static r:Strings.TextNoTitleVersions}"/>
+    </Grid>
+    <!-- Action buttons for version -->
+    <StatusBar>
+        <StatusBar.Resources>
+            <Style TargetType="tk:IconButton" BasedOn="{StaticResource SmallIconButtonStyle}"/>
+        </StatusBar.Resources>
+        <tk:IconButton 
+            Padding="0"
+            Icon="{StaticResource ArrowUpMediumIconKey}"
+            Command="{Binding Versions.Commands[VersionMoveUp]}"/>
+        
+        <tk:IconButton
+            Padding="0"
+            Icon="{StaticResource ArrowDownMediumIconKey}"
+            Command="{Binding Versions.Commands[VersionMoveDown]}"/>
+        
+        <Separator/>
+        
+        <tk:IconButton
+            Content="File"
+            Icon="{StaticResource SquareSmallGreenIconKey}"
+            Command="{Binding Versions.Commands[VersionAddByFile]}"/>
+        
+        <tk:IconButton
+            Content="Replace"
+            Icon="{StaticResource SquareSmallGrayIconKey}"
+            Command="{Binding Versions.Commands[VersionReplace]}"/>
+        
+        <tk:IconButton
+            Content="Remove"
+            Icon="{StaticResource XSmallRedIconKey}"
+            Command="{Binding Versions.Commands[VersionRemove]}"/>
+        
+        <Separator/>
+        
+        <tk:IconButton
+            Content="Sync"
+            Icon="{StaticResource SquareSmallBlueIconKey}"
+            Command="{Binding Versions.Commands[VersionSync]}"/>
+    </StatusBar>
+    
+    <StackPanel 
+        Style="{StaticResource DataEntryPanelStyle}"
+        tk:Property.IsNullCollapsed="{Binding Versions.SelectedVersion}">
+        <TextBlock Text="Note"/>
+        <TextBox Text="{Binding Versions.SelectedVersion.Note}"/>
+
+        <Expander Header="Internal File Properties" IsExpanded="False">
             
-            <Expander Header="Internal File Properties" IsExpanded="False">
-                <StackPanel>
-                    <!-- Only displays when the selected version is Open Xml -->
-                    <StackPanel Visibility="{Binding Versions.IsOpenXml,Converter={cv:BooleanToVisibilityConverter}}">
-                        <UniformGrid Rows="7" Columns="2">
-                            <Label>Created</Label>
-                            <Label>Modified</Label>
-                            <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding Versions.Properties.Core.Created}"/>
-                            <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding Versions.Properties.Core.Modified}"/>
-                            <Label>Title</Label>
-                            <Label>Description / Comment</Label>
-                            <TextBox Text="{Binding Versions.Properties.Core.Title}"/>
-                            <TextBox Text="{Binding Versions.Properties.Core.Description}"/>
-                            <Label>Subject</Label>
-                            <Label>Company</Label>
-                            <TextBox Text="{Binding Versions.Properties.Core.Subject}"/>
-                            <TextBox Text="{Binding Versions.Properties.Extended.Company}"/>
-                            <Button Width="124" HorizontalAlignment="Left" Command="{Binding Versions.Commands[SaveProperty]}">Save</Button>
-                        </UniformGrid>
-                        <TextBlock Style="{StaticResource TextBlockMessage}" Margin="16,6" Text="{x:Static r:Strings.HeaderVersionProperties}"/>
-                    </StackPanel>
-                    <!-- Only displays when the selected version is not Open Xml -->
-                    <TextBlock 
-                        Style="{StaticResource TextBlockError}" Margin="8"
-                        Text="{x:Static r:Strings.HeaderVersionPropertiesNotOpenXml}"
-                        Visibility="{Binding Versions.IsOpenXml,Converter={cv:BooleanToVisibilityConverter},ConverterParameter={StaticResource BooleanFalseToVisibility}}"/>
-                </StackPanel>
-            </Expander>
-        </StackPanel>
+            <Grid tk:Property.RowHeights="*,Auto">
+                <!-- Only displays when the selected version is Open Xml -->
+                <Grid 
+                    tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                    tk:Property.ColumnWidths="*,*"
+                    tk:Property.IsVisible="{Binding Versions.IsOpenXml}">
+
+                    <TextBlock Text="Created"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Versions.Properties.Core.Created}"/>
+
+                    <TextBlock Grid.Column="1" Text="Modified"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Versions.Properties.Core.Modified}"/>
+
+                    <TextBlock Grid.Row="3" Text="Title"/>
+                    <TextBox Grid.Row="4" Text="{Binding Versions.Properties.Core.Title}"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Description / Comment"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Versions.Properties.Core.Description}"/>
+
+                    <TextBlock Grid.Row="5" Text="Subject"/>
+                    <TextBox Grid.Row="6" Text="{Binding Versions.Properties.Core.Subject}"/>
+
+                    <TextBlock Grid.Row="5" Grid.Column="1" Text="Company"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Versions.Properties.Extended.Company}"/>
+
+                    <tk:IconButton
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        Margin="{StaticResource DataEntryPanelAltControlMargin}"
+                        Style="{StaticResource SmallIconButtonStyle}"
+                        Width="62"
+                        HorizontalAlignment="Right"
+                        Icon="{StaticResource SaveMediumIconKey}"
+                        Content="Save"
+                        Command="{Binding Versions.Commands[SaveProperty]}"/>
+
+                    <TextBlock
+                        Grid.Row="8"
+                        Grid.ColumnSpan="2"
+                        FontSize="{StaticResource MediumFontSize}"
+                        Text="{x:Static r:Strings.HeaderVersionProperties}"/>
+                </Grid>
+                <!-- Only displays when the selected version is not Open Xml -->
+                <TextBlock
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource TextBlockError}" Margin="8"
+                    Text="{x:Static r:Strings.TextNotOpenXmlDocument}"
+                    tk:Property.IsCollapsed="{Binding Versions.IsOpenXml}"/>
+            </Grid>
+        </Expander>
+
+
+
+
+
+
+
+
+
+
+
+
+
     </StackPanel>
-</UserControl>
+</StackPanel>

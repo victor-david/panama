@@ -1535,6 +1535,24 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigned Tags.
+        /// </summary>
+        public static string HeaderAssignedTags {
+            get {
+                return ResourceManager.GetString("HeaderAssignedTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available Tags.
+        /// </summary>
+        public static string HeaderAvailableTags {
+            get {
+                return ResourceManager.GetString("HeaderAvailableTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data.
         /// </summary>
         public static string HeaderData {

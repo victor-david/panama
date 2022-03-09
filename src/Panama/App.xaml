@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="Resources/Dictionary/Control.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/CheckBox.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/DataGrid.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/ListBox.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Expander.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Panel.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/TextBox.xaml"/>
@@ -20,18 +21,14 @@
                 <ResourceDictionary Source="Resources/Dictionary/Geometry.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Window.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Images.xaml"/>
-                
                 <!--
                 <ResourceDictionary Source="Resources/Dictionary/Converters.xaml"/>
-                
-                
+                <ResourceDictionary Source="Resources/Dictionary/ItemsControl.xaml"/>                
                 <ResourceDictionary Source="Resources/Dictionary/Grid.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/StackPanel.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/ToolBar.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/HeaderedContentControl.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/HeaderedItemsControl.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/ListBox.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/ItemsControl.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Tab.xaml"/>
                 -->
             </ResourceDictionary.MergedDictionaries>

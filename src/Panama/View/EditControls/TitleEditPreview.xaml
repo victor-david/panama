@@ -1,5 +1,5 @@
 ﻿<Grid
-    x:Class="Restless.Panama.View.TitleEdit5"
+    x:Class="Restless.Panama.View.TitleEditPreview"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,7 +10,7 @@
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="400"
     Style="{StaticResource DataEntryPanelStyle}">
-    <!-- Title edit 5 (preview) -->
+    <!-- Title edit 6 (preview) -->
     <TextBox
         tk:Property.IsVisible="{Binding IsOpenXml}"
         Style="{StaticResource TextBoxMultiStretchStyle}"

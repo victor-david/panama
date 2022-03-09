@@ -113,7 +113,7 @@
             Grid.Row="1" Grid.Column="2"
             Style="{StaticResource BorderEditContainerStyle}"
             Visibility="{Binding EditVisibility}">
-            <view:TitleEdit/>
+            <view:TitleEditContainer/>
         </Border>
 
     </Grid>

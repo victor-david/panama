@@ -6,6 +6,7 @@
 */
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Core.Utility;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Restless.Panama.Database.Tables
@@ -49,6 +50,11 @@ namespace Restless.Panama.Database.Tables
                     /// The name of the tag name column. This column gets its value from the <see cref="TagTable"/>.
                     /// </summary>
                     public const string TagName = "JoinTagName";
+
+                    /// <summary>
+                    /// The name of the tag name column. This column gets its value from the <see cref="TagTable"/>.
+                    /// </summary>
+                    public const string TagDescription = "JoinTagDescription";
                 }
             }
         }
@@ -56,10 +62,7 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Gets the column name of the primary key.
         /// </summary>
-        public override string PrimaryKeyName
-        {
-            get { return null; }
-        }
+        public override string PrimaryKeyName => null;
         #endregion
 
         /************************************************************************/
@@ -85,45 +88,64 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Provides an enumerable that enumerates all records.
+        /// </summary>
+        /// <returns>An enumerable</returns>
+        public IEnumerable<TitleTagRow> EnumerateAll()
+        {
+            foreach (DataRow row in EnumerateRows())
+            {
+                yield return new TitleTagRow(row);
+            }
+        }
+
+        /// <summary>
+        /// Provides an enumerable that enumerates all records for the specified title.
+        /// </summary>
+        /// <param name="titleId">The title id</param>
+        /// <returns>An enumerable</returns>
+        public IEnumerable<TitleTagRow> EnumerateAll(long titleId)
+        {
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.TitleId}={titleId}", Defs.Columns.Joined.TagName))
+            {
+                yield return new TitleTagRow(row);
+            }
+        }
+
+        /// <summary>
         /// Adds the specified tag to the specified title if it doesn't already exist
         /// </summary>
-        /// <param name="tagId">The tag id to add</param>
         /// <param name="titleId">The title id</param>
-        public void Add(long tagId, long titleId)
+        /// <param name="tagId">The tag id to add</param>
+        /// <returns>true if added; false if tag already exists</returns>
+        public bool AddIfNotExist(long titleId, long tagId)
         {
-            if (!TagExists(tagId, titleId))
-            {
-                DataRow row = NewRow();
-                row[Defs.Columns.TagId] = tagId;
-                row[Defs.Columns.TitleId] = titleId;
-                Rows.Add(row);
-            }
+            return !TagExists(titleId, tagId) && AddRow(titleId, tagId);
         }
 
         /// <summary>
         /// Removes the specified tag from the specified title if it exists
         /// </summary>
-        /// <param name="tagId">The tag id to add</param>
         /// <param name="titleId">The title id</param>
-        public void Remove(long tagId, long titleId)
+        /// <param name="tagId">The tag id to add</param>
+        /// <returns>true if removed; false if tag does not exist</returns>
+        public bool RemoveIfExist(long titleId, long tagId)
         {
-            DataRow row = GetTitleTagRow(tagId, titleId);
-            if (row != null)
-            {
-                row.Delete();
-            }
+            DataRow row = GetRow(titleId, tagId);
+            row?.Delete();
+            Save();
+            return row != null;
         }
 
         /// <summary>
         /// Gets a boolean value that indicates if the specified tag exists for the specified title
         /// </summary>
-        /// <param name="tagId">The tag id</param>
         /// <param name="titleId">The title id</param>
+        /// <param name="tagId">The tag id</param>
         /// <returns>true if the tag exists for the title; otherwise, false.</returns>
-        public bool TagExists(long tagId, long titleId)
+        public bool TagExists(long titleId, long tagId)
         {
-            DataRow row = GetTitleTagRow(tagId, titleId);
-            return row != null;
+            return GetRow(titleId, tagId) != null;
         }
 
         /// <summary>
@@ -186,28 +208,27 @@ namespace Restless.Panama.Database.Tables
         protected override void UseDataRelations()
         {
             CreateChildToParentColumn(Defs.Columns.Joined.TagName, TagTable.Defs.Relations.ToTitleTag, TagTable.Defs.Columns.Tag);
+            CreateChildToParentColumn(Defs.Columns.Joined.TagDescription, TagTable.Defs.Relations.ToTitleTag, TagTable.Defs.Columns.Description);
         }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
-        /// <summary>
-        /// Gets the specified row
-        /// </summary>
-        /// <param name="tagId">The tag id</param>
-        /// <param name="titleId">The title id</param>
-        /// <returns>The row, or null if it doesn't exist</returns>
-        private DataRow GetTitleTagRow(long tagId, long titleId)
+        private DataRow GetRow(long titleId, long tagId)
         {
-            DataRow[] rows = Select(string.Format("{0}={1} AND {2}={3}", Defs.Columns.TagId, tagId, Defs.Columns.TitleId, titleId));
-            if (rows.Length == 1)
-            {
-                return rows[0];
-            }
-            return null;
+            return GetSingleRow($"{Defs.Columns.TitleId}={titleId} AND {Defs.Columns.TagId}={tagId}");
+        }
+
+        private bool AddRow(long titleId, long tagId)
+        {
+            DataRow row = NewRow();
+            row[Defs.Columns.TagId] = tagId;
+            row[Defs.Columns.TitleId] = titleId;
+            Rows.Add(row);
+            Save();
+            return true;
         }
         #endregion
-
     }
 }
