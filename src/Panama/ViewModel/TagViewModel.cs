@@ -129,15 +129,5 @@ namespace Restless.Panama.ViewModel
             return IsSelectedRowAccessible;
         }
         #endregion
-
-        /************************************************************************/
-
-        #region Private Methods
-        //private void AddViewSourceSortDescriptions()
-        //{
-        //    MainSource.SortDescriptions.Clear();
-        //    MainSource.SortDescriptions.Add(new SortDescription(TagTable.Defs.Columns.Tag, ListSortDirection.Ascending));
-        //}
-        #endregion
     }
 }
