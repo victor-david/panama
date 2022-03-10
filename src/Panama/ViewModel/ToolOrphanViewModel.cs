@@ -118,7 +118,7 @@ namespace Restless.Panama.ViewModel
             {
                 TitleTable title = DatabaseController.Instance.GetTable<TitleTable>();
                 TitleVersionTable ver = DatabaseController.Instance.GetTable<TitleVersionTable>();
-                TitleTable.RowObject row = new(title.AddDefaultRow())
+                TitleRow row = new(title.AddDefaultRow())
                 {
                     Title = "Title created from orphaned file",
                     Written = file.LastModified,

@@ -94,7 +94,7 @@ namespace Restless.Panama.Tools
         {
             candidates.Clear();
 
-            foreach (TitleTable.RowObject title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
+            foreach (TitleRow title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
             {
                 foreach (TitleVersionRow ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(title.Id))
                 {

@@ -28,7 +28,7 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private int selectedEditSection;
-        private TitleTable.RowObject selectedTitle;
+        private TitleRow selectedTitle;
         private bool isFilterVisible;
         private string previewText;
         private const int SectionPreviewId = 6;
@@ -51,7 +51,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        public TitleTable.RowObject SelectedTitle
+        public TitleRow SelectedTitle
         {
             get => selectedTitle;
             private set => SetProperty(ref selectedTitle, value);
@@ -307,7 +307,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
-            SelectedTitle = new TitleTable.RowObject(SelectedRow);
+            SelectedTitle = TitleRow.Create(SelectedRow);
             OnWrittenPropertiesChanged();
             Tags.Update();
             Versions.Update();
@@ -454,8 +454,7 @@ namespace Restless.Panama.ViewModel
         {
             if (IsSelectedRowAccessible)
             {
-                var obj = new TitleTable.RowObject(SelectedRow);
-                obj.QuickFlag = !obj.QuickFlag;
+                SelectedTitle?.ToggleQuickFlag();
             }
         }
 
@@ -463,7 +462,7 @@ namespace Restless.Panama.ViewModel
         {
             if (Messages.ShowYesNo(Strings.ConfirmationClearTitleFlags))
             {
-                foreach (TitleTable.RowObject title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
+                foreach (TitleRow title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
                 {
                     title.QuickFlag = false;
                 }

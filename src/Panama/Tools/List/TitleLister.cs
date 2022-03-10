@@ -83,7 +83,7 @@ namespace Restless.Panama.Tools
             var titleEnumerator = titleTable.EnumerateTitles();
             TotalCount = titleEnumerator.Count();
 
-            foreach (TitleTable.RowObject title in titleEnumerator)
+            foreach (TitleRow title in titleEnumerator)
             {
                 lines.Add(string.Format("{0} - {1}", title.Written.ToString(Config.Instance.DateFormat), title.Title));
 

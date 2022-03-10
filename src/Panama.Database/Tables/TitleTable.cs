@@ -210,13 +210,13 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Provides an enumerable that gets all titles in order of written DESC.
         /// </summary>
-        /// <returns>A <see cref="RowObject"/></returns>
-        public IEnumerable<RowObject> EnumerateTitles()
+        /// <returns>A <see cref="TitleRow"/></returns>
+        public IEnumerable<TitleRow> EnumerateTitles()
         {
             DataRow[] rows = Select(null, $"{Defs.Columns.Written} DESC");
             foreach (DataRow row in rows)
             {
-                yield return new RowObject(row);
+                yield return new TitleRow(row);
             }
             yield break;
         }
@@ -225,13 +225,13 @@ namespace Restless.Panama.Database.Tables
         /// Gets a single <see cref="RowObject"/> as specified by its id.
         /// </summary>
         /// <param name="id">The id of the record to get.</param>
-        /// <returns>A <see cref="RowObject"/> for <paramref name="id"/>, or null if not found</returns>
-        public RowObject GetSingleRecord(long id)
+        /// <returns>A <see cref="TitleRow"/> for <paramref name="id"/>, or null if not found</returns>
+        public TitleRow GetSingleRecord(long id)
         {
             DataRow[] rows = Select($"{Defs.Columns.Id}={id}");
             if (rows.Length==1)
             {
-                return new RowObject(rows[0]);
+                return new TitleRow(rows[0]);
             }
             return null;
         }
@@ -339,7 +339,7 @@ namespace Restless.Panama.Database.Tables
             foreach (DataRow row in Rows)
             {
                 long titleId = (long)row[Defs.Columns.Id];
-                var verController = versions.GetVersionController(titleId);
+                TitleVersionController verController = versions.GetVersionController(titleId);
                 if (verController.Versions.Count > 0)
                 {
                     row[Defs.Columns.Calculated.LastestVersionWordCount] = verController.Versions[0].WordCount;
@@ -390,7 +390,7 @@ namespace Restless.Panama.Database.Tables
             DataRow[] titleRows = Select($"{Defs.Columns.Id}={titleId}");
             if (titleRows.Length == 1)
             {
-                var verController = Controller.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                TitleVersionController verController = Controller.GetTable<TitleVersionTable>().GetVersionController(titleId);
                 if (verController.Versions.Count > 0)
                 {
                     titleRows[0][titleColumn] = verController.Versions[0].Row[titleVersionColumn];
@@ -398,104 +398,5 @@ namespace Restless.Panama.Database.Tables
             }
         }
         #endregion
-
-        /************************************************************************/
-
-        #region Row Object
-        /// <summary>
-        /// Encapsulates a single row from the <see cref="TitleTable"/>.
-        /// </summary>
-        public class RowObject : RowObjectBase<TitleTable>
-        {
-            #region Public properties
-            /// <summary>
-            /// Gets the id for this row object.
-            /// </summary>
-            public long Id
-            {
-                get => GetInt64(Defs.Columns.Id);
-            }
-
-            /// <summary>
-            /// Gets or sets the title for this row object.
-            /// </summary>
-            public string Title
-            {
-                get => GetString(Defs.Columns.Title);
-                set => SetValue(Defs.Columns.Title, value);
-            }
-
-            /// <summary>
-            /// Gets the created date/time value for this row object.
-            /// </summary>
-            public DateTime Created
-            {
-                get => GetDateTime(Defs.Columns.Created);
-            }
-
-            /// <summary>
-            /// Gets or sets the written date/time value for this row object.
-            /// The return value is expressed as UTC, but since this comes from
-            /// the database, it's not certain to be so. Earlier data was stored with local value.
-            /// When setting this field, use Utc.
-            /// </summary>
-            public DateTime Written
-            {
-                get => GetDateTime(Defs.Columns.Written);
-                set => SetValue(Defs.Columns.Written, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the author id for this row object.
-            /// </summary>
-            public long AuthorId
-            {
-                get => GetInt64(Defs.Columns.AuthorId);
-                set => SetValue(Defs.Columns.AuthorId, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the ready flag.
-            /// </summary>
-            public bool Ready
-            {
-                get => GetBoolean(Defs.Columns.Ready);
-                set => SetValue(Defs.Columns.Ready, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the quick tag flag.
-            /// </summary>
-            public bool QuickFlag
-            {
-                get => GetBoolean(Defs.Columns.QuickFlag);
-                set => SetValue(Defs.Columns.QuickFlag, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the notes for this row object.
-            /// </summary>
-            public string Notes
-            {
-                get => GetString(Defs.Columns.Notes);
-                set => SetValue(Defs.Columns.Notes, value);
-            }
-            #endregion
-
-            /************************************************************************/
-
-            #region Constructor
-            /// <summary>
-            /// Initializes a new instance of the <see cref="RowObject"/> class.
-            /// </summary>
-            /// <param name="row">The data row</param>
-            public RowObject(DataRow row)
-                : base(row)
-            {
-            }
-            #endregion
-        }
-        #endregion
-
     }
 }
