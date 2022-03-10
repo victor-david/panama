@@ -299,6 +299,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnActivated()
         {
             Tags.RefreshAvailable();
+            Tags.Update();
         }
 
         /// <summary>

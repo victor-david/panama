@@ -87,6 +87,7 @@
                 RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding Path=MainSource.View}"
                 SelectedItem="{Binding SelectedItem}"
+                RestoreStateBehavior="RestoreLastSelection"
                 tk:DataGridColumns.Columns="{Binding Columns}"
                 RowStyle="{StaticResource TitleDataGridRowStyle}">
                 
