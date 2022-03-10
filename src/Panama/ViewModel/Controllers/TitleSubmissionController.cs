@@ -48,8 +48,8 @@ namespace Restless.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
-            DataView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.TitleId);
-            DataView.Sort = string.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
+            MainView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.TitleId);
+            MainView.Sort = string.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
             Columns.Create("Id", SubmissionTable.Defs.Columns.BatchId)
                 .MakeFixedWidth(FixedWidth.W042);
             Columns.CreateImage<IntegerToImageConverter>("S", SubmissionTable.Defs.Columns.Status, "ImageSubStatus")
@@ -84,7 +84,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnUpdate()
         {
             long titleId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.TitleId, titleId);
+            MainView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.TitleId, titleId);
             Available.Update();
         }
         #endregion

@@ -56,7 +56,7 @@ namespace Restless.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = $"{AuthorTable.Defs.Columns.Name} LIKE '%{text}%'";
+            MainView.RowFilter = $"{AuthorTable.Defs.Columns.Name} LIKE '%{text}%'";
         }
 
         /// <summary>

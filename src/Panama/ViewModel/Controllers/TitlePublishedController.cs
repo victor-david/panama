@@ -66,8 +66,8 @@ namespace Restless.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<PublishedTable>());
-            DataView.RowFilter = string.Format("{0}=-1", PublishedTable.Defs.Columns.TitleId);
-            DataView.Sort = string.Format("{0} DESC", PublishedTable.Defs.Columns.Added);
+            MainView.RowFilter = string.Format("{0}=-1", PublishedTable.Defs.Columns.TitleId);
+            MainView.Sort = string.Format("{0} DESC", PublishedTable.Defs.Columns.Added);
             Columns.Create("Added", PublishedTable.Defs.Columns.Added).MakeDate();
             Columns.Create("Published", PublishedTable.Defs.Columns.Published).MakeDate();
             Columns.Create("Publisher", PublishedTable.Defs.Columns.Joined.Publisher);
@@ -95,7 +95,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnUpdate()
         {
             long titleId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = $"{PublishedTable.Defs.Columns.TitleId}={titleId}";
+            MainView.RowFilter = $"{PublishedTable.Defs.Columns.TitleId}={titleId}";
         }
 
         /// <summary>

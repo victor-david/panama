@@ -126,7 +126,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public ConfigViewModel()
         {
-            DisplayName = Strings.CommandConfig;
+            DisplayName = Strings.MenuItemSettings;
             Commands.Add("SwitchSection", RunSwitchSection);
             Commands.Add("SwitchColorMode", RunSwitchColorMode);
             Commands.Add("ResetColors", RunResetColorSelections);

@@ -66,7 +66,7 @@ namespace Restless.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = string.Format("{0} LIKE '%{1}%' OR {2} LIKE '%{3}%'", LinkTable.Defs.Columns.Name, text, LinkTable.Defs.Columns.Notes, text);
+            MainView.RowFilter = string.Format("{0} LIKE '%{1}%' OR {2} LIKE '%{3}%'", LinkTable.Defs.Columns.Name, text, LinkTable.Defs.Columns.Notes, text);
         }
 
         /// <summary>

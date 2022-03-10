@@ -23,13 +23,15 @@
     <!-- Border -->
     <SolidColorBrush x:Key="DefaultBorderBrush" Color="#a0a0a0"/>
     <SolidColorBrush x:Key="LightBorderBrush" Color="#e0e0e0"/>
-    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#efefef" />
+    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#efefef"/>
+    
+    <!-- Header -->
+    <SolidColorBrush x:Key="DefaultHeaderBrush" Color="LightSteelBlue"/>
 
     <!-- Menu -->
     <SolidColorBrush x:Key="DefaultMenuBrush" Color="#707070"/>
 
     <!-- Buttons -->
-    <!--<SolidColorBrush x:Key="ActionButtonBackgroundBrush" Color="SkyBlue"/>-->
     <SolidColorBrush x:Key="ActionButtonBackgroundBrush" Color="LightSteelBlue"/>
     <SolidColorBrush x:Key="ActionButtonForegroundBrush" Color="White"/>
     <SolidColorBrush x:Key="ActionButtonRolloverBrush" Color="CadetBlue"/>

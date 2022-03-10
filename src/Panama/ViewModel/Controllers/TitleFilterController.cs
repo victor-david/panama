@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
@@ -16,6 +17,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Text;
 using System.Windows.Input;
+using FilterState = Restless.Panama.Core.FilterState;
 
 namespace Restless.Panama.ViewModel
 {
@@ -43,7 +45,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public string RecordCountText
         {
-            get => Format.Plural(Owner.DataView.Count, Strings.TextRecord, Strings.TextRecords);
+            get => Format.Plural(Owner.MainView.Count, Strings.TextRecord, Strings.TextRecords);
         }
 
         /// <summary>
@@ -76,10 +78,9 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the list of available tags. The edit control binds to this.
         /// </summary>
-        public TagCommandViewModelCollection Available
+        public TagSelectorItemCollection Available
         {
             get;
-            private set;
         }
         #endregion
 
@@ -93,7 +94,7 @@ namespace Restless.Panama.ViewModel
         public TitleFilterController(TitleViewModel owner)
             : base(owner)
         {
-            Available = new TagCommandViewModelCollection();
+            Available = new TagSelectorItemCollection();
             titleTagTable = DatabaseController.Instance.GetTable<TitleTagTable>();
             submissionBatchTable = DatabaseController.Instance.GetTable<SubmissionBatchTable>();
             submissionTable = DatabaseController.Instance.GetTable<SubmissionTable>();
@@ -130,7 +131,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public void SetToReady()
         {
-            ClearAndApplyAction(()=> Config.TitleFilter.Ready = FilterState.Yes);
+            ClearAndApplyAction(() => Config.TitleFilter.Ready = FilterState.Yes);
         }
 
         /// <summary>
@@ -170,12 +171,12 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public void ClearTags()
         {
-            Config.Instance.TitleFilter.Tags.Clear();
-            foreach (var tagCmd in Available)
-            {
-                tagCmd.ResetDefaultForeground();
-            }
-            Config.TitleFilter.Update();
+            //Config.Instance.TitleFilter.Tags.Clear();
+            //foreach (var tagCmd in Available)
+            //{
+            //    tagCmd.ResetDefaultForeground();
+            //}
+            //Config.TitleFilter.Update();
         }
 
         /// <summary>
@@ -230,13 +231,13 @@ namespace Restless.Panama.ViewModel
         {
             //tagCache.Clear();
             Available.Clear();
-            var tagTable = DatabaseController.Instance.GetTable<TagTable>();
-            foreach (DataRow row in tagTable.Rows)
-            {
-                long tagId = (long)row[TagTable.Defs.Columns.Id];
-                ICommand cmd = RelayCommand.Create((o) => { RunToggleTagCommand(tagId); });
-                Available.Add(new TagCommandViewModel(tagId, row[TagTable.Defs.Columns.Tag].ToString(), row[TagTable.Defs.Columns.Description].ToString(), cmd));
-            }
+            //var tagTable = DatabaseController.Instance.GetTable<TagTable>();
+            //foreach (DataRow row in tagTable.Rows)
+            //{
+            //    long tagId = (long)row[TagTable.Defs.Columns.Id];
+            //    ICommand cmd = RelayCommand.Create((o) => { RunToggleTagCommand(tagId); });
+            //    Available.Add(new TagCommandViewModel(tagId, row[TagTable.Defs.Columns.Tag].ToString(), row[TagTable.Defs.Columns.Description].ToString(), cmd));
+            //}
         }
 
         /// <summary>
@@ -244,30 +245,30 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         private void InitSelected()
         {
-            List<long> bads = new();
-            //filterTags.AddValuesFromDelimitedString(Owner.Config.TitleFilter.Tags);
-            /* Tags may have been deleted since we last saved the list */
-            foreach (long tagId in Config.TitleFilter.Tags)
-            {
-                if (Available.GetItem(tagId) == null)
-                {
-                    bads.Add(tagId);
-                }
-            }
+            //List<long> bads = new();
+            ////filterTags.AddValuesFromDelimitedString(Owner.Config.TitleFilter.Tags);
+            ///* Tags may have been deleted since we last saved the list */
+            //foreach (long tagId in Config.TitleFilter.Tags)
+            //{
+            //    if (Available.GetItem(tagId) == null)
+            //    {
+            //        bads.Add(tagId);
+            //    }
+            //}
 
-            foreach (long tagId in bads)
-            {
-                Config.TitleFilter.Tags.Remove(tagId);
-            }
+            //foreach (long tagId in bads)
+            //{
+            //    Config.TitleFilter.Tags.Remove(tagId);
+            //}
 
-            foreach (long tagId in Config.TitleFilter.Tags)
-            {
-                var item = Available.GetItem(tagId);
-                if (item != null)
-                {
-                    item.Highlight();
-                }
-            }
+            //foreach (long tagId in Config.TitleFilter.Tags)
+            //{
+            //    var item = Available.GetItem(tagId);
+            //    if (item != null)
+            //    {
+            //        item.Highlight();
+            //    }
+            //}
         }
 
         private void ApplyPrivate()
@@ -402,9 +403,9 @@ namespace Restless.Panama.ViewModel
                                 break;
                         }
                     }
-                    var tagItem = Available.GetItem(tagId);
-                    string tagName = (tagItem != null) ? tagItem.TagName : "???";
-                    Append(string.Format("{0} IN ({1})", TitleTable.Defs.Columns.Id, titleIds), tagName);
+                    //var tagItem = Available.GetItem(tagId);
+                    //string tagName = (tagItem != null) ? tagItem.TagName : "???";
+                    //Append(string.Format("{0} IN ({1})", TitleTable.Defs.Columns.Id, titleIds), tagName);
                 }
                 if (!tagsOnly)
                 {
@@ -412,7 +413,7 @@ namespace Restless.Panama.ViewModel
                 }
             }
 
-            Owner.DataView.RowFilter = filter.ToString();
+            Owner.MainView.RowFilter = filter.ToString();
             OnPropertyChanged(nameof(Description));
             OnPropertyChanged(nameof(RecordCountText));
         }
@@ -440,12 +441,12 @@ namespace Restless.Panama.ViewModel
                 if (Config.TitleFilter.Tags.Contains(tagId))
                 {
                     Config.TitleFilter.Tags.Remove(tagId);
-                    item.ResetDefaultForeground();
+                    //item.ResetDefaultForeground();
                 }
                 else
                 {
                     Config.TitleFilter.Tags.Add(tagId);
-                    item.Highlight();
+                    //item.Highlight();
                 }
                 Config.TitleFilter.Update();
             }

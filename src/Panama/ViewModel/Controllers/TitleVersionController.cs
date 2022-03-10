@@ -124,8 +124,8 @@ namespace Restless.Panama.ViewModel
         {
             currentOwnerTitleId = -1;
             AssignDataViewFrom(VersionTable);
-            DataView.RowFilter = $"{TitleVersionTable.Defs.Columns.TitleId}=-1";
-            DataView.Sort = $"{TitleVersionTable.Defs.Columns.TitleId}, {TitleVersionTable.Defs.Columns.Version} DESC, {TitleVersionTable.Defs.Columns.Revision} ASC";
+            MainView.RowFilter = $"{TitleVersionTable.Defs.Columns.TitleId}=-1";
+            MainView.Sort = $"{TitleVersionTable.Defs.Columns.TitleId}, {TitleVersionTable.Defs.Columns.Version} DESC, {TitleVersionTable.Defs.Columns.Revision} ASC";
             //Columns.CreateImage<IntegerToImageConverter>("T", TitleVersionTable.Defs.Columns.DocType, "ImageFileType", 20.0);
 
             versionColumn = Columns.Create("V", TitleVersionTable.Defs.Columns.Version)
@@ -198,8 +198,8 @@ namespace Restless.Panama.ViewModel
         {
             SelectedVersion = null;
             currentOwnerTitleId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = $"{TitleVersionTable.Defs.Columns.TitleId}={currentOwnerTitleId}";
-            HaveVersion = DataView.Count > 0;
+            MainView.RowFilter = $"{TitleVersionTable.Defs.Columns.TitleId}={currentOwnerTitleId}";
+            HaveVersion = MainView.Count > 0;
             verController = VersionTable.GetVersionController(currentOwnerTitleId);
             OnPropertyChanged(nameof(Header));
         }

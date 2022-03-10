@@ -15,6 +15,8 @@ using System.Data;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Data;
+using Restless.Panama.Core;
 
 namespace Restless.Panama.ViewModel
 {
@@ -22,7 +24,7 @@ namespace Restless.Panama.ViewModel
     /// Extends DataGridViewModelBase to provide common functionality for views that use DataGrid to display table rows. This class must be interited.
     /// </summary>
     /// <typeparam name="T">The table type derived from <see cref="TableBase"/></typeparam>
-    public abstract class DataGridViewModel<T> : DataGridViewModelBase where T: TableBase
+    public abstract class DataGridViewModel<T> : DataGridViewModelBase where T : TableBase
     {
         #region Private Vars
         private string filterText;
@@ -31,6 +33,28 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Public fields / properties
+        /// <summary>
+        /// Gets the table object associated with this instance
+        /// </summary>
+        public T Table => DatabaseController.Instance.GetTable<T>();
+
+        /// <summary>
+        /// Gets the main data view, the one associated with the <see cref="TableBase"/> type used to create this class.
+        /// </summary>
+        public DataView MainView
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the list view. The UI binds to this property
+        /// </summary>
+        public ListCollectionView ListView
+        {
+            get;
+        }
+
         /// <summary>
         /// Gets a command to add a new record to the data table
         /// </summary>
@@ -89,26 +113,9 @@ namespace Restless.Panama.ViewModel
         public Visibility EditVisibility => (SelectedItem != null) ? Visibility.Visible : Visibility.Collapsed;
 
         /// <summary>
-        /// Gets the table object associated with this instance
-        /// </summary>
-        public T Table
-        {
-            get;
-        }
-
-        /// <summary>
         /// Gets the current count of rows in source
         /// </summary>
-        public int SourceCount => (DataView != null) ? DataView.Count : 0;
-
-        /// <summary>
-        /// Gets the DataView created for this instance.
-        /// </summary>
-        public DataView DataView
-        {
-            get;
-            private set;
-        }
+        public int SourceCount => (MainView != null) ? MainView.Count : 0;
 
         /// <summary>
         /// Gets or sets the text to use as a filter for the main data grid.
@@ -127,7 +134,7 @@ namespace Restless.Panama.ViewModel
                 }
                 else
                 {
-                    DataView.RowFilter = null;
+                    MainView.RowFilter = null;
                     OnFilterTextCleared();
                 }
                 OnPropertyChanged();
@@ -164,10 +171,17 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected DataGridViewModel()
         {
-            Table = DatabaseController.Instance.GetTable<T>();
-            DataView = new DataView(Table);
-            DataView.ListChanged += new ListChangedEventHandler(DataViewListChanged);
-            MainSource.Source = DataView;
+            MainView = new DataView(Table);
+            MainSource.Source = MainView;
+            MainView.ListChanged += DataViewListChanged;
+
+            ListView = new ListCollectionView(MainView);
+            using (ListView.DeferRefresh())
+            {
+                ListView.CustomSort = new GenericComparer<DataRowView>((x, y) => OnDataRowCompare(x.Row, y.Row));
+                ListView.Filter = (item) => item is DataRowView view && OnDataRowFilter(view.Row);
+            }
+
             AddCommand = RelayCommand.Create(RunAddCommand, CanRunAddCommand);
             DeleteCommand = RelayCommand.Create(RunDeleteCommand, CanRunDeleteCommand);
             ClearFilterCommand = RelayCommand.Create(RunClearFilterCommand, CanRunClearFilterCommand);
@@ -179,16 +193,16 @@ namespace Restless.Panama.ViewModel
 
         #region Protected methods
         /// <summary>
-        /// Assigns the <see cref="DataView"/> property so that it is associated with the specified table.
+        /// Assigns the <see cref="MainView"/> property so that it is associated with the specified table.
         /// </summary>
         /// <param name="table">The data table.</param>
         /// <remarks>
         /// <para>
-        /// When a <see cref="DataGridViewModel{T}"/> object is created, the <see cref="DataView"/> property is created
+        /// When a <see cref="DataGridViewModel{T}"/> object is created, the <see cref="MainView"/> property is created
         /// from the <see cref="TableBase"/> type declaration that was used to create the class.
         /// </para>
         /// <para>
-        /// A derived class can reassign the <see cref="DataView"/> property so that is created from another table.
+        /// A derived class can reassign the <see cref="MainView"/> property so that is created from another table.
         /// This functionality is used by controllers derived from <see cref="ControllerBase{VM,T}"/> to display
         /// child rows that are related to the main table.
         /// </para>
@@ -200,10 +214,10 @@ namespace Restless.Panama.ViewModel
                 throw new ArgumentNullException(nameof(table));
             }
 
-            DataView.ListChanged -= DataViewListChanged;
-            DataView = new DataView(table);
-            DataView.ListChanged += DataViewListChanged;
-            MainSource.Source = DataView;
+            MainView.ListChanged -= DataViewListChanged;
+            MainView = new DataView(table);
+            MainView.ListChanged += DataViewListChanged;
+            MainSource.Source = MainView;
         }
 
         /// <summary>
@@ -216,6 +230,77 @@ namespace Restless.Panama.ViewModel
             OnPropertyChanged(nameof(SelectedRow));
             OnPropertyChanged(nameof(EditVisibility));
         }
+
+        /// <summary>
+        /// Override in a derived class to filter <see cref="ListView"/>. The base implementation returns true.
+        /// </summary>
+        /// <param name="item">The item to check.</param>
+        /// <returns>true if <paramref name="item"/> is included; otherwise, false.</returns>
+        protected virtual bool OnDataRowFilter(DataRow item)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Override in a derived class to compares two specified <see cref="DataRow"/> objects.
+        /// The base method returns zero.
+        /// </summary>
+        /// <param name="item1">The first data row</param>
+        /// <param name="item2">The second data row</param>
+        /// <returns>An integer value 0, 1, or -1</returns>
+        protected virtual int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return 0;
+        }
+
+        /// <summary>
+        /// Shortcut method. Compares two data rows in a stringwise fashion.
+        /// </summary>
+        /// <param name="item1">The first data row.</param>
+        /// <param name="item2">The second data row.</param>
+        /// <param name="columnName">The name of the column to compare</param>
+        /// <returns>A string comparison result (zero, 1, or -1)</returns>
+        protected int DataRowCompareString(DataRow item1, DataRow item2, string columnName)
+        {
+            return string.Compare(item1[columnName].ToString(), item2[columnName].ToString());
+        }
+
+        /// <summary>
+        /// Shortcut method. Compares two data rows in a boolean fashion.
+        /// </summary>
+        /// <param name="item1">The first data row.</param>
+        /// <param name="item2">The second data row.</param>
+        /// <param name="columnName">The name of the column to compare</param>
+        /// <returns>A string comparison result (zero, 1, or -1)</returns>
+        protected int DataRowCompareBoolean(DataRow item1, DataRow item2, string columnName)
+        {
+            return ((bool)item1[columnName]).CompareTo((bool)item2[columnName]);
+        }
+
+        /// <summary>
+        /// Shortcut method. Compares two data rows in a long integer fashion.
+        /// </summary>
+        /// <param name="item1">The first data row.</param>
+        /// <param name="item2">The second data row.</param>
+        /// <param name="columnName">The name of the column to compare</param>
+        /// <returns>A string comparison result (zero, 1, or -1)</returns>
+        protected int DataRowCompareLong(DataRow item1, DataRow item2, string columnName)
+        {
+            return ((long)item1[columnName]).CompareTo((long)item2[columnName]);
+        }
+
+        /// <summary>
+        /// Shortcut method. Compares two data rows in a date/time fashion.
+        /// </summary>
+        /// <param name="item1">The first data row.</param>
+        /// <param name="item2">The second data row.</param>
+        /// <param name="columnName">The name of the column to compare</param>
+        /// <returns>A date/time comparison result (zero, 1, or -1)</returns>
+        protected int DataRowCompareDateTime(DataRow item1, DataRow item2, string columnName)
+        {
+            return DateTime.Compare((DateTime)item1[columnName], (DateTime)item2[columnName]);
+        }
+
 
         /// <summary>
         /// Override in a derived class to establish the filter on the main data grid.
@@ -293,7 +378,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Called when the <see cref="DataView"/> changes. Override in a derived class to recieve notification.
+        /// Called when the <see cref="MainView"/> changes. Override in a derived class to recieve notification.
         /// The base implementation does nothing.
         /// </summary>
         /// <param name="e">The arguments received from the event.</param>

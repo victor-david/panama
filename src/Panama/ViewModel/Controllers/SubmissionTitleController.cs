@@ -46,8 +46,8 @@ namespace Restless.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
-            DataView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.BatchId);
-            DataView.Sort = string.Format("{0},{1}", SubmissionTable.Defs.Columns.Ordering, SubmissionTable.Defs.Columns.Joined.Title);
+            MainView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.BatchId);
+            MainView.Sort = string.Format("{0},{1}", SubmissionTable.Defs.Columns.Ordering, SubmissionTable.Defs.Columns.Joined.Title);
 
             Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("O", SubmissionTable.Defs.Columns.Ordering).MakeCentered().MakeFixedWidth(FixedWidth.W042).AddToolTip("Ordering");
@@ -123,7 +123,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnUpdate()
         {
             long id = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.BatchId, id);
+            MainView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.BatchId, id);
         }
         #endregion
 
@@ -182,7 +182,7 @@ namespace Restless.Panama.ViewModel
             Execution.TryCatch(() =>
             {
                 StringBuilder builder = new();
-                foreach (DataRowView rowv in DataView)
+                foreach (DataRowView rowv in MainView)
                 {
                     builder.AppendLine(rowv.Row[SubmissionTable.Defs.Columns.Joined.Title].ToString());
                 }

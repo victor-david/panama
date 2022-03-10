@@ -407,15 +407,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settings.
-        /// </summary>
-        public static string CommandConfig {
-            get {
-                return ResourceManager.GetString("CommandConfig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to View and modify application settings.
         /// </summary>
         public static string CommandConfigTooltip {
@@ -871,15 +862,6 @@ namespace Restless.Panama.Resources {
         public static string CommandTable {
             get {
                 return ResourceManager.GetString("CommandTable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tags.
-        /// </summary>
-        public static string CommandTag {
-            get {
-                return ResourceManager.GetString("CommandTag", resourceCulture);
             }
         }
         
@@ -2135,11 +2117,29 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string MenuItemSettings {
+            get {
+                return ResourceManager.GetString("MenuItemSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submissions.
         /// </summary>
         public static string MenuItemSubmissions {
             get {
                 return ResourceManager.GetString("MenuItemSubmissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tags.
+        /// </summary>
+        public static string MenuItemTags {
+            get {
+                return ResourceManager.GetString("MenuItemTags", resourceCulture);
             }
         }
         

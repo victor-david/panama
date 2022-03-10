@@ -235,10 +235,10 @@ namespace Restless.Panama.ViewModel
 
                         // assigning the property applies the filter
                         ws.Config.TitleFilter.Id = extended.Versions[0].TitleId;
-                        if (ws.DataView.Count == 1)
+                        if (ws.MainView.Count == 1)
                         {
                             /* This method uses a funky work around */
-                            ws.SetSelectedItem(ws.DataView[0]);
+                            ws.SetSelectedItem(ws.MainView[0]);
                             /* Can be assigned directly, but doesn't highlight the row */
                             //ws.SelectedItem = ws.DataView[0];
                         }

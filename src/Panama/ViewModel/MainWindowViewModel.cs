@@ -236,6 +236,9 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<PublisherViewModel>(NavigationGroup.Title, Strings.MenuItemPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));
             NavigatorItems.Add<SelfPublisherViewModel>(NavigationGroup.Title, Strings.MenuItemSelfPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));
             NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.SubmissionGeometryKey));
+
+            NavigatorItems.Add<ConfigViewModel>(NavigationGroup.Tools, Strings.MenuItemSettings, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.SettingsGeometryKey));
+            NavigatorItems.Add<TagViewModel>(NavigationGroup.Tools, Strings.MenuItemTags, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TagGeometryKey));
         }
 
         private void NavigatorItemsSelectedItemChanged(object sender, NavigatorItem navItem)

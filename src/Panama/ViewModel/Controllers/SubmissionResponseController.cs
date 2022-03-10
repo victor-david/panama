@@ -130,8 +130,8 @@ namespace Restless.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<ResponseTable>());
-            DataView.Sort = ResponseTable.Defs.Columns.Id;
-            DataView.RowFilter = string.Format("{0} <> {1}", ResponseTable.Defs.Columns.Id, ResponseTable.Defs.Values.NoResponse);
+            MainView.Sort = ResponseTable.Defs.Columns.Id;
+            MainView.RowFilter = string.Format("{0} <> {1}", ResponseTable.Defs.Columns.Id, ResponseTable.Defs.Values.NoResponse);
             ClearResponseCommand = RelayCommand.Create(RunClearResponseCommand, CanClearResponseCommandRun);
         }
         #endregion

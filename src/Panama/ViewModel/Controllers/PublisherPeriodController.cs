@@ -100,8 +100,8 @@ namespace Restless.Panama.ViewModel
         public PublisherPeriodController(PublisherViewModel owner) : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionPeriodTable>());
-            DataView.RowFilter = string.Format("{0}=-1", SubmissionPeriodTable.Defs.Columns.PublisherId);
-            DataView.Sort = string.Format("{0} ASC", SubmissionPeriodTable.Defs.Columns.Start);
+            MainView.RowFilter = string.Format("{0}=-1", SubmissionPeriodTable.Defs.Columns.PublisherId);
+            MainView.Sort = string.Format("{0} ASC", SubmissionPeriodTable.Defs.Columns.Start);
             Columns.Create("Id", SubmissionPeriodTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Start", SubmissionPeriodTable.Defs.Columns.Start).MakeDate("MMMM dd", toLocal:false);
             Columns.Create("End", SubmissionPeriodTable.Defs.Columns.End).MakeDate("MMMM dd", toLocal:false);
@@ -157,7 +157,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnUpdate()
         {
             long publisherId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = string.Format("{0}={1}", SubmissionPeriodTable.Defs.Columns.PublisherId, publisherId);
+            MainView.RowFilter = string.Format("{0}={1}", SubmissionPeriodTable.Defs.Columns.PublisherId, publisherId);
             SetAddControlVisibility(false);
             SetNotesVisibility(SelectedItem != null);
         }

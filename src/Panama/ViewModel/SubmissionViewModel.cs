@@ -197,7 +197,7 @@ namespace Restless.Panama.ViewModel
             {
                 filter = $"{SubmissionBatchTable.Defs.Columns.Joined.Publisher} LIKE '%{text}%' OR {SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName} LIKE '%{text}%'";
             }
-            DataView.RowFilter = filter;
+            MainView.RowFilter = filter;
             // Note: save FilterText, not text. When applied again, it will be sanitized.
             Config.SubmissionFilter = FilterText;
         }

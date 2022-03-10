@@ -71,8 +71,8 @@ namespace Restless.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionMessageTable>());
-            DataView.RowFilter = string.Format("{0}=-1", SubmissionMessageTable.Defs.Columns.BatchId);
-            DataView.Sort = $"{SubmissionMessageTable.Defs.Columns.MessageDate} DESC";
+            MainView.RowFilter = string.Format("{0}=-1", SubmissionMessageTable.Defs.Columns.BatchId);
+            MainView.Sort = $"{SubmissionMessageTable.Defs.Columns.MessageDate} DESC";
             Columns.Create("Id", SubmissionMessageTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.SetDefaultSort(Columns.Create("Date", SubmissionMessageTable.Defs.Columns.MessageDate).MakeDate(), ListSortDirection.Descending);
             Columns.Create("Type", SubmissionMessageTable.Defs.Columns.Protocol).MakeFixedWidth(FixedWidth.W048);
@@ -115,7 +115,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnUpdate()
         {
             long id = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = string.Format("{0}={1}", SubmissionMessageTable.Defs.Columns.BatchId, id);
+            MainView.RowFilter = string.Format("{0}={1}", SubmissionMessageTable.Defs.Columns.BatchId, id);
         }
 
         /// <summary>

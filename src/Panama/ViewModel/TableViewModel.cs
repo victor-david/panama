@@ -113,7 +113,7 @@ namespace Restless.Panama.ViewModel
         /// <param name="text">The filter text.</param>
         protected override void OnFilterTextChanged(string text)
         {
-            DataView.RowFilter = string.Format("{0} LIKE '%{1}%'", TableTable.Defs.Columns.Name, text);
+            MainView.RowFilter = string.Format("{0} LIKE '%{1}%'", TableTable.Defs.Columns.Name, text);
         }
 
         /// <summary>

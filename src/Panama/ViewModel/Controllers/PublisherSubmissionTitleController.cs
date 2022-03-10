@@ -47,8 +47,8 @@ namespace Restless.Panama.ViewModel
             : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
-            DataView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.Joined.PublisherId);
-            DataView.Sort = string.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
+            MainView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.Joined.PublisherId);
+            MainView.Sort = string.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
             Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             //Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted).MakeDate();
             Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);
@@ -76,8 +76,8 @@ namespace Restless.Panama.ViewModel
         protected override void OnUpdate()
         {
             long publisherId = GetOwnerSelectedPrimaryId();
-            DataView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.Joined.PublisherId, publisherId);
-            DataViewCount = DataView.Count;
+            MainView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.Joined.PublisherId, publisherId);
+            DataViewCount = MainView.Count;
         }
         #endregion
 
@@ -114,10 +114,10 @@ namespace Restless.Panama.ViewModel
                     ws.Filters.ClearAll();
                     // assigning the property applies the filter
                     ws.Config.TitleFilter.Id = titleId;
-                    if (ws.DataView.Count == 1)
+                    if (ws.MainView.Count == 1)
                     {
                         /* This method uses a funky work around */
-                        ws.SetSelectedItem(ws.DataView[0]);
+                        ws.SetSelectedItem(ws.MainView[0]);
                         /* Can be assigned directly, but doesn't highlight the row */
                         //ws.SelectedItem = ws.DataView[0];
                     }

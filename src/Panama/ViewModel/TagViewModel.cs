@@ -10,9 +10,9 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
-using Restless.Toolkit.Utility;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 
 namespace Restless.Panama.ViewModel
 {
@@ -22,11 +22,20 @@ namespace Restless.Panama.ViewModel
     public class TagViewModel : DataGridViewModel<TagTable>
     {
         #region Private
+        private TagRow selectedTag;
         #endregion
 
         /************************************************************************/
 
         #region Properties
+        /// <summary>
+        /// Gets the currently selected tag
+        /// </summary>
+        public TagRow SelectedTag
+        {
+            get => selectedTag;
+            private set => SetProperty(ref selectedTag, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -37,42 +46,41 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TagViewModel()
         {
-            DisplayName = Strings.CommandTag;
+            DisplayName = Strings.MenuItemTags;
             Columns.Create("Id", TagTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.SetDefaultSort(Columns.Create("Tag", TagTable.Defs.Columns.Tag), ListSortDirection.Ascending);
+            Columns.Create("Tag", TagTable.Defs.Columns.Tag);
             Columns.Create("Description", TagTable.Defs.Columns.Description).MakeFlexWidth(2.5);
-            Columns.Create("Usage", TagTable.Defs.Columns.UsageCount)
+            Columns.Create("Usage", TagTable.Defs.Columns.Calculated.UsageCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052);
-            AddViewSourceSortDescriptions();
-            Commands.Add("RefreshTagUsage", (o) =>
-                {
-                    DatabaseController.Instance.GetTable<TagTable>().RefreshTagUsage();
-                });
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandDeleteTag, DeleteCommand).AddImageResource("ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandAddTag, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.CommandDeleteTag, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
             FilterPrompt = Strings.FilterPromptTag;
 
             AddCommand.Supported = CommandSupported.Yes;
+
+            ListView.IsLiveSorting = true;
+            ListView.LiveSortingProperties.Add(TagTable.Defs.Columns.Tag);
         }
         #endregion
 
         /************************************************************************/
 
-        #region Public methods
-        #endregion
-
-        /************************************************************************/
-
         #region Protected Methods
-        /// <summary>
-        /// Called when the filter text has changed to set the filter on the underlying data.
-        /// </summary>
-        /// <param name="text">The filter text.</param>
-        protected override void OnFilterTextChanged(string text)
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            DataView.RowFilter = string.Format("{0} LIKE '%{1}%'", TagTable.Defs.Columns.Tag, text);
+            return DataRowCompareString(item1, item2, TagTable.Defs.Columns.Tag);
+        }
+
+        /// <inheritdoc/>
+        protected override void OnSelectedItemChanged()
+        {
+            base.OnSelectedItemChanged();
+            SelectedTag = TagRow.Create(SelectedRow);
         }
 
         /// <summary>
@@ -83,8 +91,6 @@ namespace Restless.Panama.ViewModel
             Table.AddDefaultRow();
             Table.Save();
             FilterText = null;
-            AddViewSourceSortDescriptions();
-            Columns.RestoreDefaultSort();
         }
 
         /// <summary>
@@ -104,10 +110,10 @@ namespace Restless.Panama.ViewModel
             int childRowCount = SelectedRow.GetChildRows(TagTable.Defs.Relations.ToTitleTag).Length;
             if (childRowCount > 0)
             {
-                Messages.ShowError(string.Format(Strings.InvalidOpCannotDeleteTag, childRowCount));
+                MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.InvalidOpCannotDeleteTag, childRowCount));
                 return;
             }
-            if (Messages.ShowYesNo(Strings.ConfirmationDeleteTag))
+            if (MessageWindow.ShowYesNo(Strings.ConfirmationDeleteTag))
             {
                 SelectedRow.Delete();
                 Table.Save();
@@ -127,11 +133,11 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
-        private void AddViewSourceSortDescriptions()
-        {
-            MainSource.SortDescriptions.Clear();
-            MainSource.SortDescriptions.Add(new SortDescription(TagTable.Defs.Columns.Tag, ListSortDirection.Ascending));
-        }
+        //private void AddViewSourceSortDescriptions()
+        //{
+        //    MainSource.SortDescriptions.Clear();
+        //    MainSource.SortDescriptions.Add(new SortDescription(TagTable.Defs.Columns.Tag, ListSortDirection.Ascending));
+        //}
         #endregion
     }
 }

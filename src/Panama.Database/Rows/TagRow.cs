@@ -37,12 +37,11 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets or (from this assembly) sets the usage count.
+        /// Gets the usage count.
         /// </summary>
         public long UsageCount
         {
-            get => GetInt64(Columns.UsageCount);
-            internal set => SetValue(Columns.UsageCount, value);
+            get => GetInt64(Columns.Calculated.UsageCount);
         }
         #endregion
 
@@ -61,6 +60,16 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Public methods
+        /// <summary>
+        /// Creates a new <see cref="TagRow"/> object if <paramref name="row"/> is not null
+        /// </summary>
+        /// <param name="row">The row</param>
+        /// <returns>A new tag row, or null.</returns>
+        public static TagRow Create(DataRow row)
+        {
+            return row != null ? new TagRow(row) : null;
+        }
+
         /// <summary>
         /// Gets a string representation of this object
         /// </summary>

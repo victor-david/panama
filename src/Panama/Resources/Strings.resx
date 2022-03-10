@@ -125,7 +125,7 @@
     <value>Manage existing publishers, create new publishers, etc.</value>
     <comment>Tooltip text used for publisher command</comment>
   </data>
-  <data name="CommandConfig" xml:space="preserve">
+  <data name="MenuItemSettings" xml:space="preserve">
     <value>Settings</value>
     <comment>Command text to enter the settings view</comment>
   </data>
@@ -308,7 +308,7 @@ Please make sure that {1} is set correctly in configuration settings. File speci
   <data name="CommandAddTagTooltip" xml:space="preserve">
     <value>Add a tag to be used with titles</value>
   </data>
-  <data name="CommandTag" xml:space="preserve">
+  <data name="MenuItemTags" xml:space="preserve">
     <value>Tags</value>
   </data>
   <data name="FilterPromptTag" xml:space="preserve">

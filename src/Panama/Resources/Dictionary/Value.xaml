@@ -18,6 +18,8 @@
     <!-- Height of a grid row for a tab's toolbar -->
     <GridLength x:Key="GridRowHeightTool">38</GridLength>
 
+    <Thickness x:Key="DefaultPadding">10</Thickness> 
+
     <sys:Boolean x:Key="True">True</sys:Boolean>
     <sys:Boolean x:Key="False">False</sys:Boolean>
 

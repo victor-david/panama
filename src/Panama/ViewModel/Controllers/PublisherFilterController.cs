@@ -31,7 +31,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets a short description of the number of records in the data view
         /// </summary>
-        public string RecordCountText => Format.Plural(Owner.DataView.Count, Strings.TextRecord, Strings.TextRecords);
+        public string RecordCountText => Format.Plural(Owner.MainView.Count, Strings.TextRecord, Strings.TextRecords);
 
         /// <summary>
         /// Gets the friendly description of the current filter
@@ -217,7 +217,7 @@ namespace Restless.Panama.ViewModel
                 Append(string.Format("{0}={1}", PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission, (byte)f.HaveSubmission), FilterDescText(f.HaveSubmission, "have active submission"));
             }
 
-            Owner.DataView.RowFilter = filter.ToString();
+            Owner.MainView.RowFilter = filter.ToString();
             OnPropertyChanged(nameof(Description));
             OnPropertyChanged(nameof(RecordCountText));
         }

@@ -47,9 +47,12 @@ namespace Restless.Panama.Database.Tables
                 public const string Description = "description";
 
                 /// <summary>
-                /// The name of the usage count column.
+                /// Provides static names for calculated columns
                 /// </summary>
-                public const string UsageCount = "usagecount";
+                public static class Calculated
+                {
+                    public const string UsageCount = "CalcUsageCount";
+                }
             }
 
             /// <summary>
@@ -102,13 +105,13 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Checks child rows via the <see cref="Defs.Relations.ToTitleTag"/> relation and updates the tag usage count.
         /// </summary>
-        public void RefreshTagUsage()
-        {
-            foreach (TagRow tagRow in EnumerateAll())
-            {
-                tagRow.UsageCount = tagRow.Row.GetChildRows(Defs.Relations.ToTitleTag).LongLength;
-            }
-        }
+        //public void RefreshTagUsage()
+        //{
+        //    foreach (TagRow tagRow in EnumerateAll())
+        //    {
+        //        tagRow.UsageCount = tagRow.Row.GetChildRows(Defs.Relations.ToTitleTag).LongLength;
+        //    }
+        //}
         #endregion
 
         /************************************************************************/
@@ -125,7 +128,6 @@ namespace Restless.Panama.Database.Tables
                 { Defs.Columns.Id, ColumnType.Integer, true },
                 { Defs.Columns.Tag, ColumnType.Text },
                 { Defs.Columns.Description, ColumnType.Text },
-                { Defs.Columns.UsageCount, ColumnType.Integer, false, false, 0 },
             };
         }
 
@@ -159,7 +161,14 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         protected override void SetDataRelations()
         {
-            CreateParentChildRelation<TitleTagTable>(Defs.Relations.ToTitleTag, Defs.Columns.Id, TitleTagTable.Defs.Columns.TagId);   
+            CreateParentChildRelation<TitleTagTable>(Defs.Relations.ToTitleTag, Defs.Columns.Id, TitleTagTable.Defs.Columns.TagId);
+        }
+
+        /// <inheritdoc/>
+        protected override void UseDataRelations()
+        {
+            string expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToTitleTag, TitleTagTable.Defs.Columns.TagId);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.UsageCount, expr);
         }
 
         /// <summary>
@@ -170,22 +179,6 @@ namespace Restless.Panama.Database.Tables
         {
             row[Defs.Columns.Tag] = "(new tag)";
             row[Defs.Columns.Description] = "(new description)";
-            row[Defs.Columns.UsageCount] = 0;
-        }
-
-        /// <summary>
-        /// The controller calls this method for each table from its Shutdown() method.
-        /// </summary>
-        /// <param name="saveOnShutdown">The value that was passed to the controller's Shutdown method. 
-        /// If false, the table needs to call its Save() method if it makes changes to data.
-        /// </param>
-        protected override void OnShuttingDown(bool saveOnShutdown)
-        {
-            RefreshTagUsage();
-            if (!saveOnShutdown)
-            {
-                Save();
-            }
         }
         #endregion
     }
