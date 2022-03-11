@@ -1598,11 +1598,38 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        public static string HeaderSettingsAdvanced {
+            get {
+                return ResourceManager.GetString("HeaderSettingsAdvanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colors.
+        /// </summary>
+        public static string HeaderSettingsColor {
+            get {
+                return ResourceManager.GetString("HeaderSettingsColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date Format.
         /// </summary>
         public static string HeaderSettingsDateFormat {
             get {
                 return ResourceManager.GetString("HeaderSettingsDateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display.
+        /// </summary>
+        public static string HeaderSettingsDisplay {
+            get {
+                return ResourceManager.GetString("HeaderSettingsDisplay", resourceCulture);
             }
         }
         
@@ -1616,38 +1643,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Colors.
-        /// </summary>
-        public static string HeaderSettingsSectionColor {
-            get {
-                return ResourceManager.GetString("HeaderSettingsSectionColor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Folders.
-        /// </summary>
-        public static string HeaderSettingsSectionFolder {
-            get {
-                return ResourceManager.GetString("HeaderSettingsSectionFolder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to General.
-        /// </summary>
-        public static string HeaderSettingsSectionGeneral {
-            get {
-                return ResourceManager.GetString("HeaderSettingsSectionGeneral", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Submission.
         /// </summary>
-        public static string HeaderSettingsSectionSubmission {
+        public static string HeaderSettingsSubmission {
             get {
-                return ResourceManager.GetString("HeaderSettingsSectionSubmission", resourceCulture);
+                return ResourceManager.GetString("HeaderSettingsSubmission", resourceCulture);
             }
         }
         

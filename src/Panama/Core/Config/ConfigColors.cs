@@ -14,92 +14,29 @@ namespace Restless.Panama.Core
     /// </summary>
     public class ConfigColors
     {
-        #region Private
-        #endregion
-
-        /************************************************************************/
-
-        #region Public fields
+        #region Default values
         /// <summary>
         /// Provides static default values for properties.
         /// </summary>
-        public static class Default
+        private static class Values
         {
-            /// <summary>
-            /// Provides static values for default foreground colors.
-            /// </summary>
-            public static class Foreground
-            {
-                /// <summary>
-                /// Gets the default foreground color for an alternating data grid row.
-                /// </summary>
-                public static Color DataGridAlternation = SystemColors.Transparent;
+            public static Color DataGridAlternationForeground = SystemColors.Transparent;
+            public static Color DataGridAlternationBackground = (Color)ColorConverter.ConvertFromString("#FFCBE4EC");
 
-                /// <summary>
-                /// Gets the default foreground color for a publisher that is marked as a goner.
-                /// </summary>
-                public static Color PublisherGoner = SystemColors.Gray;
+            public static Color PublisherGonerForeground = SystemColors.Gray;
+            public static Color PublisherGonerBackground = SystemColors.Transparent;
 
-                /// <summary>
-                /// Gets the default foreground color for a publisher that is within its submission period.
-                /// </summary>
-                public static Color PublisherPeriod = SystemColors.Blue;
+            public static Color PublisherPeriodForeground = SystemColors.Blue;
+            public static Color PublisherPeriodBackground = SystemColors.Transparent;
 
-                /// <summary>
-                /// Gets the default foreground color for a title that is published.
-                /// </summary>
-                public static Color TitlePublished = SystemColors.Transparent;
+            public static Color TitlePublishedForeground = SystemColors.Transparent;
+            public static Color TitlePublishedBackground = SystemColors.PaleGreen;
 
-                /// <summary>
-                /// Gets the default foreground color for a title that is self published.
-                /// </summary>
-                public static Color TitleSelfPublished = SystemColors.Firebrick;
+            public static Color TitleSelfPublishedForeground = SystemColors.Firebrick;
+            public static Color TitleSelfPublishedBackground = SystemColors.Transparent;
 
-                /// <summary>
-                /// Gets the default foreground color for a title that is currently submitted.
-                /// </summary>
-                public static Color TitleSubmitted = SystemColors.White;
-            }
-
-            /// <summary>
-            /// Provides static values for default background colors.
-            /// </summary>
-            public static class Background
-            {
-                /// <summary>
-                /// Gets the default background color for an alternating data grid row.
-                /// </summary>
-                public static Color DataGridAlternation = (Color)ColorConverter.ConvertFromString("#FFCBE4EC");
-
-                // #FFCBE4EC
-                // #FFE3EBEE
-
-                /// <summary>
-                /// Gets the default background color for a publisher that is marked as a goner.
-                /// </summary>
-                public static Color PublisherGoner = SystemColors.Transparent;
-
-                /// <summary>
-                /// Gets the default background color for a publisher that is within its submission period.
-                /// </summary>
-                public static Color PublisherPeriod = SystemColors.Transparent;
-
-                /// <summary>
-                /// Gets the default background color for a title that is published.
-                /// </summary>
-                public static Color TitlePublished = SystemColors.PaleGreen;
-
-                /// <summary>
-                /// Gets the default background color for a title that is self published.
-                /// </summary>
-                public static Color TitleSelfPublished = SystemColors.Transparent;
-
-                /// <summary>
-                /// Gets the default background color for a title that is currently submitted.
-                /// </summary>
-                public static Color TitleSubmitted = SystemColors.SeaGreen;
-
-            }
+            public static Color TitleSubmittedForeground = SystemColors.White;
+            public static Color TitleSubmittedBackground = SystemColors.SeaGreen;
         }
         #endregion
 
@@ -112,7 +49,6 @@ namespace Restless.Panama.Core
         public ConfigColor DataGridAlternation
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -121,7 +57,6 @@ namespace Restless.Panama.Core
         public ConfigColor PublisherGoner
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -130,7 +65,6 @@ namespace Restless.Panama.Core
         public ConfigColor PublisherPeriod
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -139,7 +73,6 @@ namespace Restless.Panama.Core
         public ConfigColor TitlePublished
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -148,7 +81,6 @@ namespace Restless.Panama.Core
         public ConfigColor TitleSelfPublished
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -157,7 +89,6 @@ namespace Restless.Panama.Core
         public ConfigColor TitleSubmitted
         {
             get;
-            private set;
         }
         #endregion
 
@@ -169,12 +100,12 @@ namespace Restless.Panama.Core
         /// </summary>
         internal ConfigColors()
         {
-            DataGridAlternation = new ConfigColor(nameof(DataGridAlternation), Default.Foreground.DataGridAlternation, Default.Background.DataGridAlternation);
-            PublisherGoner = new ConfigColor(nameof(PublisherGoner), Default.Foreground.PublisherGoner, Default.Background.PublisherGoner);
-            PublisherPeriod = new ConfigColor(nameof(PublisherPeriod), Default.Foreground.PublisherPeriod, Default.Background.PublisherPeriod);
-            TitlePublished = new ConfigColor(nameof(TitlePublished), Default.Foreground.TitlePublished, Default.Background.TitlePublished);
-            TitleSelfPublished = new ConfigColor(nameof(TitleSelfPublished), Default.Foreground.TitleSelfPublished, Default.Background.TitleSelfPublished);
-            TitleSubmitted = new ConfigColor(nameof(TitleSubmitted), Default.Foreground.TitleSubmitted, Default.Background.TitleSubmitted);
+            DataGridAlternation = new ConfigColor(nameof(DataGridAlternation), Values.DataGridAlternationForeground, Values.DataGridAlternationBackground);
+            PublisherGoner = new ConfigColor(nameof(PublisherGoner), Values.PublisherGonerForeground, Values.PublisherGonerBackground);
+            PublisherPeriod = new ConfigColor(nameof(PublisherPeriod), Values.PublisherPeriodForeground, Values.PublisherPeriodBackground);
+            TitlePublished = new ConfigColor(nameof(TitlePublished), Values.TitlePublishedForeground, Values.TitlePublishedBackground);
+            TitleSelfPublished = new ConfigColor(nameof(TitleSelfPublished), Values.TitleSelfPublishedForeground, Values.TitleSelfPublishedBackground);
+            TitleSubmitted = new ConfigColor(nameof(TitleSubmitted), Values.TitleSubmittedForeground, Values.TitleSubmittedBackground);
         }
         #endregion
 
@@ -190,13 +121,9 @@ namespace Restless.Panama.Core
             PublisherGoner.ResetToDefault();
             PublisherPeriod.ResetToDefault();
             TitlePublished.ResetToDefault();
+            TitleSelfPublished.ResetToDefault();
             TitleSubmitted.ResetToDefault();
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region Private methods
         #endregion
     }
 }

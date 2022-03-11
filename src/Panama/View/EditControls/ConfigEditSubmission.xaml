@@ -55,13 +55,13 @@
         <TextBox Grid.Row="5" Text="{Binding Config.SubmissionDocFooter}" />
         
         <!-- Template File-->
-        <con:PathSelector 
+        <!--<con:PathSelector 
             Grid.Row="6" Grid.ColumnSpan="2"
             SelectorType="FileSystemFile"
             SelectorFileType="{StaticResource DocTypeWordOpenXmlFileType}"
             Title="Template File"
             ClearEnabled="True"
-            PathName="{Binding Config.TemplateFile}"/>
+            PathName="{Binding Config.TemplateFile}"/>-->
 
         <!-- Document Text -->
         <TextBlock Grid.Row="7" Text="Document Text"/>

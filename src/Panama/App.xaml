@@ -20,6 +20,7 @@
                 <ResourceDictionary Source="Resources/Dictionary/Navigator.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/TextBlock.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Geometry.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/PathSelector.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Window.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Images.xaml"/>
                 <!--

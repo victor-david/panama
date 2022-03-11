@@ -65,13 +65,6 @@
     <core:TagFilterCombine x:Key="FilterTagCombineOr">Or</core:TagFilterCombine>
     <core:TagFilterCombine x:Key="FilterTagCombineAnd">And</core:TagFilterCombine>
     <core:TagFilterCombine x:Key="FilterTagCombineAndNot">AndNot</core:TagFilterCombine>
-
-    <con:PathSelectorType x:Key="FolderEditTypeFileSystem">FileSystemFolder</con:PathSelectorType>
-    <con:PathSelectorType x:Key="FolderEditTypeMapi">Mapi</con:PathSelectorType>
-
-    <!-- These two must match the values in DocumentTypeTable.Defs.Values -->
-    <sys:Int64 x:Key="DocTypeWordOpenXmlFileType">1</sys:Int64>
-    <sys:Int64 x:Key="DocTypeExecutable">11</sys:Int64>
     
     <cv:BooleanToVisibilityConverterOptions x:Key="BooleanTrueToVisibility">TrueToVisibility</cv:BooleanToVisibilityConverterOptions>
     <cv:BooleanToVisibilityConverterOptions x:Key="BooleanFalseToVisibility">FalseToVisibility</cv:BooleanToVisibilityConverterOptions>

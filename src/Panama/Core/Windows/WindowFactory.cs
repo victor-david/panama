@@ -31,7 +31,7 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static MainWindow Create()
             {
-                var window = new MainWindow()
+                MainWindow window = new()
                 {
                     Owner = null, // this is a top level window
                     MinWidth = Config.MainWindow.MinWidth,
@@ -46,7 +46,34 @@ namespace Restless.Panama.Core
         #endregion
 
         /************************************************************************/
-        
+
+        #region Settings
+        /// <summary>
+        /// Provides static methods for creating the settings window
+        /// </summary>
+        public static class Settings
+        {
+            /// <summary>
+            /// Creates an instance of SettingsWindow and its corresponding view model
+            /// </summary>
+            /// <returns>The window</returns>
+            public static SettingsWindow Create()
+            {
+                SettingsWindow window = new()
+                {
+                    Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    DataContext = new SettingsWindowViewModel()
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
+                return window;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region About
         /// <summary>
         /// Provides static methods for creating the application's About window.
@@ -59,9 +86,10 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static AboutWindow Create()
             {
-                var window = new AboutWindow()
+                AboutWindow window = new()
                 {
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new AboutWindowViewModel(),
                 };
                 SetWindowOwner(window);
@@ -72,7 +100,7 @@ namespace Restless.Panama.Core
         #endregion
 
         /************************************************************************/
-        
+
         #region PublisherSelect
         /// <summary>
         /// Provides static methods for creating a publisher select window.
@@ -86,10 +114,11 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static PublisherSelectWindow Create(string title)
             {
-                var window = new PublisherSelectWindow
+                PublisherSelectWindow window = new()
                 {
                     Title = title,
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new PublisherSelectWindowViewModel(),
                 };
                 SetWindowOwner(window);
@@ -114,10 +143,11 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static PublisherSelectWindow Create(string title)
             {
-                var window = new PublisherSelectWindow
+                PublisherSelectWindow window = new()
                 {
                     Title = title,
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new SelfPublisherSelectWindowViewModel(),
                 };
                 SetWindowOwner(window);
@@ -126,7 +156,7 @@ namespace Restless.Panama.Core
             }
         }
         #endregion
-       
+
         /************************************************************************/
 
         #region MessageFileSelect
@@ -143,10 +173,11 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static MessageFileSelectWindow Create(string title, string folder)
             {
-                var window = new MessageFileSelectWindow
+                MessageFileSelectWindow window = new()
                 {
                     Title = title,
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new MessageFileSelectWindowViewModel(folder),
                 };
                 SetWindowOwner(window);
@@ -170,9 +201,10 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static SubmissionDocumentSelectWindow Create()
             {
-                var window = new SubmissionDocumentSelectWindow()
+                SubmissionDocumentSelectWindow window = new()
                 {
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new SubmissionDocumentSelectWindowViewModel()
                 };
                 SetWindowOwner(window);
@@ -197,9 +229,10 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static CommandToolsWindow Create(StartupOptions ops)
             {
-                var window = new CommandToolsWindow()
+                CommandToolsWindow window = new()
                 {
                     Owner = null, // this is a top level window
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
                     DataContext = new CommandToolsWindowViewModel(ops)
                 };
                 SetWindowOwner(window);
@@ -210,7 +243,7 @@ namespace Restless.Panama.Core
         #endregion
 
         /************************************************************************/
-        
+
         #region TitleVersionRename
         /// <summary>
         /// Provides static methods for creating a title version rename window.
@@ -224,10 +257,11 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static TitleVersionRenameWindow Create(long titleId)
             {
-                var window = new TitleVersionRenameWindow
+                TitleVersionRenameWindow window = new()
                 {
                     Title = Strings.WindowTitleVersionRename,
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new TitleVersionRenameWindowViewModel(titleId),
 
                 };
@@ -253,9 +287,10 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static AlertWindow Create(ObservableCollection<AlertTable.RowObject> alerts)
             {
-                var window = new AlertWindow()
+                AlertWindow window = new()
                 {
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new AlertWindowViewModel(alerts)
                 };
                 SetWindowOwner(window);

@@ -19,9 +19,4 @@
     <PackageTags>wpf controls wpf-controls</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
-  <ItemGroup>
-    <Page Update="Themes\Generic\TagSelectorControl.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-  </ItemGroup>
 </Project>

@@ -34,7 +34,7 @@
                 <MenuItem Header="Tags" Icon="{StaticResource TagIconKey}" Command="{Binding Commands[Tag]}"/>
                 <MenuItem Header="Credentials" Icon="{StaticResource ImageCredentialMenu}" Command="{Binding Commands[Credential]}"/>
                 <Separator />
-                <MenuItem Header="Settings" Icon="{StaticResource SettingsIconKey}" Command="{Binding Commands[Config]}" />
+                <MenuItem Header="Settings" Icon="{StaticResource SettingsIconKey}" Command="{Binding Commands[Settings]}" />
             </MenuItem>
             <MenuItem Header="_Other">
                 <MenuItem Header="Alerts" Icon="{StaticResource ImageCalendarMenu}" Command="{Binding Commands[Alert]}"/>

@@ -106,10 +106,10 @@ namespace Restless.Panama.ViewModel
         private MainWindowViewModel()
         {
             //Owner.Closing += new CancelEventHandler(MainWindowClosing);
-            Commands.Add("About", OpenAbout);
+            Commands.Add("About", p => WindowFactory.About.Create().ShowDialog());
             Commands.Add("Author", p => NavigatorItems.Select<AuthorViewModel>());
             Commands.Add("Close", p => WindowOwner.Close());
-            Commands.Add("Config", p => NavigatorItems.Select<ConfigViewModel>());
+            
             Commands.Add("Credential", p => NavigatorItems.Select<CredentialViewModel>());
             Commands.Add("Alert", p => NavigatorItems.Select<AlertViewModel>());
             Commands.Add("Link", p => NavigatorItems.Select<LinkViewModel>());
@@ -119,6 +119,8 @@ namespace Restless.Panama.ViewModel
             Commands.Add("Submission", p => NavigatorItems.Select<SubmissionViewModel>());
             Commands.Add("Save", Save);
             Commands.Add("SelfPublisher", p => NavigatorItems.Select<SelfPublisherViewModel>());
+            Commands.Add("Settings", p => WindowFactory.Settings.Create().ShowDialog());
+
             Commands.Add("Statistics", p => NavigatorItems.Select<StatisticsViewModel>());
             Commands.Add("Table", p => NavigatorItems.Select<TableViewModel>());
             Commands.Add("Tag", p => NavigatorItems.Select<TagViewModel>());
@@ -237,7 +239,6 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<SelfPublisherViewModel>(NavigationGroup.Title, Strings.MenuItemSelfPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));
             NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.SubmissionGeometryKey));
 
-            NavigatorItems.Add<ConfigViewModel>(NavigationGroup.Tools, Strings.MenuItemSettings, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.SettingsGeometryKey));
             NavigatorItems.Add<TagViewModel>(NavigationGroup.Tools, Strings.MenuItemTags, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TagGeometryKey));
         }
 
@@ -249,6 +250,8 @@ namespace Restless.Panama.ViewModel
             }
         }
         #endregion
+
+        /************************************************************************/
 
         #region Private methods (VM management)
         /// <summary>
@@ -290,11 +293,6 @@ namespace Restless.Panama.ViewModel
         //        workspace.CloseCommand.Execute(null);
         //    }
         //}
-
-        private void OpenAbout(object o)
-        {
-            WindowFactory.About.Create().ShowDialog();
-        }
 
         private void Save(object o)
         {

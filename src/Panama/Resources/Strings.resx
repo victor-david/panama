@@ -722,14 +722,11 @@ The application cannot continue.</value>
   <data name="HeaderPreview" xml:space="preserve">
     <value>Preview</value>
   </data>
-  <data name="HeaderSettingsSectionColor" xml:space="preserve">
+  <data name="HeaderSettingsColor" xml:space="preserve">
     <value>Colors</value>
   </data>
-  <data name="HeaderSettingsSectionFolder" xml:space="preserve">
-    <value>Folders</value>
-  </data>
-  <data name="HeaderSettingsSectionGeneral" xml:space="preserve">
-    <value>General</value>
+  <data name="HeaderSettingsDisplay" xml:space="preserve">
+    <value>Display</value>
   </data>
   <data name="HeaderSettingsDateFormat" xml:space="preserve">
     <value>Date Format</value>
@@ -737,7 +734,7 @@ The application cannot continue.</value>
   <data name="HeaderSettingsFolder" xml:space="preserve">
     <value>Folders</value>
   </data>
-  <data name="HeaderSettingsSectionSubmission" xml:space="preserve">
+  <data name="HeaderSettingsSubmission" xml:space="preserve">
     <value>Submission</value>
   </data>
   <data name="ConfigDataGridRowHeight" xml:space="preserve">
@@ -1030,5 +1027,8 @@ Do you want to continue?</value>
   </data>
   <data name="HeaderAvailableTags" xml:space="preserve">
     <value>Available Tags</value>
+  </data>
+  <data name="HeaderSettingsAdvanced" xml:space="preserve">
+    <value>Advanced</value>
   </data>
 </root>

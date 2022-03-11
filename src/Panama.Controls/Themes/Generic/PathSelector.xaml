@@ -1,0 +1,53 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:con="clr-namespace:Restless.Panama.Controls">
+
+    <Style x:Key="{x:Static con:PathSelector.ButtonStyleKey}" TargetType="Button">
+        <Setter Property="Margin" Value="4,0"/>
+        <Setter Property="MinWidth" Value="20"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+           
+    <Style TargetType="con:PathSelector">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="con:PathSelector">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Text="{TemplateBinding Title}"
+                                Style="{DynamicResource {x:Static con:PathSelector.TextBlockStyleKey}}"/>
+                            
+                            <TextBox
+                                Grid.Row="1"
+                                Margin="0"
+                                Text="{TemplateBinding Path}"
+                                Style="{DynamicResource {x:Static con:PathSelector.TextBoxStyleKey}}"/>
+                            
+                            <Button
+                                Name="D584BC74_5FC0_4705_9B0C_EF1D1C3E64DA"
+                                Grid.Row="1" Grid.Column="1"
+                                Style="{DynamicResource {x:Static con:PathSelector.ButtonStyleKey}}"
+                                Content="{TemplateBinding ButtonContent}"/>
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+</ResourceDictionary>

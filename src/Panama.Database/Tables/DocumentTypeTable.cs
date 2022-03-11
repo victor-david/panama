@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Toolkit.Core.Database.SQLite;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -90,6 +91,29 @@ namespace Restless.Panama.Database.Tables
                 public const long TextFileType = 4;
 
                 /// <summary>
+                /// The value of the <see cref="Columns.Id"/> column that represents an outlook message file.
+                /// </summary>
+                [Obsolete]
+                public const long OutlookMessage = 5;
+
+                /// <summary>
+                /// The value of the <see cref="Columns.Id"/> column that represents an outlook message file.
+                /// </summary>
+                [Obsolete]
+                public const long OutlookMessageDirect = 6;
+
+                /// <summary>
+                /// The value of the <see cref="Columns.Id"/> column that represents an outlook message file.
+                /// </summary>
+                [Obsolete]
+                public const long OutlookMessageFolder = 7;
+
+                /// <summary>
+                /// The value of the <see cref="Columns.Id"/> column that represents an audio file.
+                /// </summary>
+                public const long AudioFileType = 8;
+
+                /// <summary>
                 /// The value of the <see cref="Columns.Id"/> column that represents an Html document.
                 /// </summary>
                 public const long HtmlFileType = 9;
@@ -103,6 +127,11 @@ namespace Restless.Panama.Database.Tables
                 /// The value of the <see cref="Columns.Id"/> column that represents an executable file.
                 /// </summary>
                 public const long ExecutableFileType = 11;
+
+                /// <summary>
+                /// The value of the <see cref="Columns.Id"/> column that represents a video file.
+                /// </summary>
+                public const long VideoFileType = 12;
             }
         }
         #endregion
@@ -217,19 +246,26 @@ namespace Restless.Panama.Database.Tables
         /// <returns>An IEnumerable</returns>
         protected override IEnumerable<object[]> EnumeratePopulateValues()
         {
-            yield return new object[] { 1, "Word Document (OpenXml)", "docx;dotm", 1, true };
-            yield return new object[] { 2, "Word Document (Old)", "doc;rtf", 2, true };
-            yield return new object[] { 3, "Pdf Document", "pdf", 3, true };
-            yield return new object[] { 4, "Text Document", "txt", 4, true };
-            yield return new object[] { 5, "Outlook Message", "msg", 5, true };
-            yield return new object[] { 6, "Audio", "mp3", 6, true };
-            yield return new object[] { 7, "Html", "html;htm", 7, true };
-            yield return new object[] { 8, "Images", "jpg;jpeg;png", 8, true };
-            yield return new object[] { 9, "Executable", "exe", 9, true };
-            
-            yield return new object[] { 0, "Unknown", null, 100, false };
-            yield return new object[] { 10, "Outlook Message (Direct Reference)", null, 101, false };
-            yield return new object[] { 11, "Outlook Folder (Direct Reference)", null, 102, false };
+            yield return new object[] { Defs.Values.UnknownFileType, "Unknown", null, 100, false };
+
+            yield return new object[] { Defs.Values.WordOpenXmlFileType, "Word Document (OpenXml)", "docx;dotm", 1, true };
+            yield return new object[] { Defs.Values.WordOlderFileType, "Word Document (Old)", "doc;rtf", 2, true };
+            yield return new object[] { Defs.Values.PdfFileType, "Pdf Document", "pdf", 3, true };
+            yield return new object[] { Defs.Values.TextFileType, "Text Document", "txt", 4, true };
+
+            /* 5-7 are deprecated (see below) */
+
+            yield return new object[] { Defs.Values.AudioFileType, "Audio", "mp3", 5, true };
+
+            yield return new object[] { Defs.Values.HtmlFileType, "Html", "html;htm", 6, true };
+            yield return new object[] { Defs.Values.ImageFileType, "Images", "jpg;jpeg;png", 7, true };
+            yield return new object[] { Defs.Values.ExecutableFileType, "Executable", "exe", 8, true };
+            yield return new object[] { Defs.Values.VideoFileType, "Video", "mp4", 9, true };
+
+            /* All deprecated (using hard coded id to avoid obsolete warning on Defs.Values) */
+            yield return new object[] { 5, "Outlook Message", "msg", 101, false };
+            yield return new object[] { 6, "Outlook Message (Direct Reference)", null, 102, false };
+            yield return new object[] { 7, "Outlook Folder (Direct Reference)", null, 103, false };
         }
         #endregion
     }

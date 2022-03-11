@@ -66,7 +66,6 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public TitleTagController(TitleViewModel owner) : base(owner)
         {
-            // was: TagCommandViewModel
             Available = new TagSelectorItemCollection();
             Assigned = new TagSelectorItemCollection();
             Commands.Add("TagItemClick", RunTagSelectorItemClickedCommand);

@@ -5,13 +5,12 @@
     <Style x:Key="DefaultListBoxStyle" TargetType="ListBox" BasedOn="{StaticResource DefaultControlStyle}">
         <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
-
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Margin" Value="0"/>
-                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="Padding" Value="6"/>
                     <Setter Property="BorderBrush" Value="{StaticResource LightBorderBrush}"/>
                     <Setter Property="BorderThickness" Value="0,0,0,1"/>
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>

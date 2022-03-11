@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls">
     
     <!-- Background -->
     <SolidColorBrush x:Key="DefaultBackgroundBrush" Color="#ffffff"/>
@@ -56,7 +57,11 @@
     <SolidColorBrush x:Key="LabelBrush" Color="#FF021F51"/>
     <SolidColorBrush x:Key="DataGridAlternationBrush" Color="LightSteelBlue"/>
     <SolidColorBrush x:Key="StatusBarBackgroundBrush" Color="GhostWhite"/>
-    
+
+    <!-- External keys -->
+    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF79ABBB"/>
+    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#8050A8E2"/>
+
     <!-- Brush used for text block opener -->
     <LinearGradientBrush x:Key="OpenerBrush" StartPoint="0.00,0.00" EndPoint="1.00,0.00">
         <GradientBrush.GradientStops>
@@ -67,6 +72,7 @@
             </GradientStopCollection>
         </GradientBrush.GradientStops>
     </LinearGradientBrush>
+    
     
     <!-- Fill Brushes -->
     <LinearGradientBrush x:Key="StatusBarBrush" StartPoint="0.00,0.00" EndPoint="1.00,1.00">
@@ -145,19 +151,5 @@
             </GradientStopCollection>
         </GradientBrush.GradientStops>
     </LinearGradientBrush>
-
-
-
-
-    <!-- Some colors to stay consistent -->
-
-    
-    <!-- Defines the color used to highlight grid rows -->
-    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF79ABBB"/>
-    
-    <!-- This enables the selected row to retain a highlight when the data grid loses focus. Has a problem with .Net 4.0 -->
-    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#8050A8E2"/>
-    <!-- This works in .Net 4.0 -->
-    <!--<SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="LightSalmon"/>-->
 
 </ResourceDictionary>

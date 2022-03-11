@@ -40,6 +40,12 @@
         <Setter Property="Cursor" Value="Hand" />
     </Style>
 
+    <Style TargetType="Slider" BasedOn="{StaticResource DefaultControlStyle}">
+        <Setter Property="TickPlacement" Value="None"/>
+        <Setter Property="TickFrequency" Value="1"/>
+        <Setter Property="IsSnapToTickEnabled" Value="True"/>
+    </Style>
+
     <!-- Base style for ComboBox-->
     <Style TargetType="ComboBox" BasedOn="{StaticResource DefaultControlStyle}">
         <Setter Property="MinHeight" Value="24" />

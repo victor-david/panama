@@ -5,107 +5,82 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     xmlns:vw="clr-namespace:Restless.Panama.View">
     
-    <!-- Template to apply a AuthorView to an instance of the AuthorViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:AlertViewModel}">
         <vw:AlertView />
     </DataTemplate>
     
-    <!-- Template to apply a AuthorView to an instance of the AuthorViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:AuthorViewModel}">
         <vw:AuthorView />
     </DataTemplate>    
     
-    <!-- Template to apply a ConfigView to an instance of the ConfigViewModel class shown in the main window  -->
-    <DataTemplate DataType="{x:Type vm:ConfigViewModel}">
-        <vw:ConfigView />
-    </DataTemplate>
-    
-    <!-- Template to apply a CredentialView to an instance of the CredentialViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:CredentialViewModel}">
         <vw:CredentialView />
     </DataTemplate>
     
-    <!-- Template to apply a LinkView to an instance of the LinkViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:LinkViewModel}">
         <vw:LinkView />
     </DataTemplate>
 
-    <!-- Template to apply a PublisherView to an instance of the PublisherViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:PublisherViewModel}">
         <vw:PublisherView />
     </DataTemplate>
 
-    <!-- Template to apply a SelfPublisherView to an instance of the SelfPublisherViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:SelfPublisherViewModel}">
         <vw:SelfPublisherView />
     </DataTemplate>
 
-    <!-- Template to apply a StatisticsView to an instance of the StatisticsViewModel} class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:StatisticsViewModel}">
         <vw:StatisticsView />
     </DataTemplate>
 
-    <!-- Template to apply a SubmissionView to an instance of the SubmissionViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:SubmissionViewModel}">
         <vw:SubmissionView />
     </DataTemplate>
 
-    <!-- Template to apply a TableView to an instance of the TableViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:TableViewModel}">
         <vw:TableView />
     </DataTemplate>
     
-    <!-- Template to apply a TagView to an instance of the TagViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:TagViewModel}">
         <vw:TagView />
     </DataTemplate>
 
-    <!-- Template to apply a TitleView to an instance of the TitleViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:TitleViewModel}">
         <vw:TitleView />
     </DataTemplate>
     
-    <!-- Template to apply a ToolConvertView to an instance of the ToolConvertViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:ToolConvertViewModel}">
         <vw:ToolConvertView />
     </DataTemplate>
     
-    <!-- Template to apply a ToolExportView to an instance of the ToolExportViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:ToolExportViewModel}">
         <vw:ToolExportView />
     </DataTemplate>
     
-    <!-- Template to apply a ToolMessageSyncView to an instance of the ToolMessageSyncViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:ToolMessageSyncViewModel}">
         <vw:ToolMessageSyncView />
     </DataTemplate>
     
-    <!-- Template to apply a ToolMetaUpdateView to an instance of the ToolMetaUpdateViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:ToolMetaUpdateViewModel}">
         <vw:ToolMetaUpdateView />
     </DataTemplate>
 
-    <!-- Template to apply a ToolOrphanView to an instance of the ToolOrphanViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:ToolOrphanViewModel}">
         <vw:ToolOrphanView />
     </DataTemplate>
     
-    <!-- Template to apply a ToolScrambleView to an instance of the ToolScrambleViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:ToolScrambleViewModel}">
         <vw:ToolScrambleView />
     </DataTemplate>
     
-    <!-- Template to apply a ToolSearchView to an instance of the ToolSearchViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:ToolSearchViewModel}">
         <vw:ToolSearchView />
     </DataTemplate>
 
-    <!-- Template to apply a ToolTitleListView to an instance of the ToolTitleListViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:ToolTitleListViewModel}">
         <vw:ToolTitleListView />
     </DataTemplate>
 
-    <!-- Template to apply a UserNoteView to an instance of the UserNoteViewModel class shown in the main window  -->
     <DataTemplate DataType="{x:Type vm:UserNoteViewModel}">
         <vw:UserNoteView />
     </DataTemplate>

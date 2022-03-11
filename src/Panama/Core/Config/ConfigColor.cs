@@ -7,7 +7,6 @@
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Mvvm;
-using System;
 using System.Data;
 using System.Windows.Media;
 using SystemColors = System.Windows.Media.Colors;
@@ -22,9 +21,8 @@ namespace Restless.Panama.Core
         #region Private
         private readonly ColorTable colorTable;
         private readonly DataRow colorRow;
-        private readonly string id;
-        private Color defaultFore;
-        private Color defaultBack;
+        private Color defaultForeground;
+        private Color defaultBackground;
         #endregion
 
         /************************************************************************/
@@ -70,34 +68,22 @@ namespace Restless.Panama.Core
         /// <summary>
         /// Gets the foreground brush.
         /// </summary>
-        public Brush ForegroundBrush
-        {
-            get => new SolidColorBrush(Foreground);
-        }
+        public Brush ForegroundBrush => new SolidColorBrush(Foreground);
 
         /// <summary>
         /// Gets the background brush.
         /// </summary>
-        public Brush BackgroundBrush
-        {
-            get =>  new SolidColorBrush(Background);
-        }
+        public Brush BackgroundBrush => new SolidColorBrush(Background);
 
         /// <summary>
         /// Gets a boolean value that indicates if <see cref="Foreground"/> has its alpha channel set to a value greater than zero.
         /// </summary>
-        public bool HasForeground
-        {
-            get => Foreground.A > 0;
-        }
+        public bool HasForeground => Foreground.A > 0;
 
         /// <summary>
         /// Gets a boolean value that indicates if <see cref="Background"/> has its alpha channel set to a value greater than zero.
         /// </summary>
-        public bool HasBackground
-        {
-            get => Background.A > 0;
-        }
+        public bool HasBackground => Background.A > 0;
         #endregion
 
         /************************************************************************/
@@ -107,15 +93,14 @@ namespace Restless.Panama.Core
         /// Initializes a new instance of the <see cref="ConfigColor"/> class.
         /// </summary>
         /// <param name="id">The id associated with this color.</param>
-        /// <param name="defaultFore">The default value for the foreground color.</param>
-        /// <param name="defaultBack">The default value for the background color.</param>
-        public ConfigColor(string id, Color defaultFore, Color defaultBack)
+        /// <param name="defaultForeground">The default value for the foreground color.</param>
+        /// <param name="defaultBackground">The default value for the background color.</param>
+        public ConfigColor(string id, Color defaultForeground, Color defaultBackground)
         {
-            this.id = id ?? throw new ArgumentNullException(nameof(id));
-            this.defaultFore = defaultFore;
-            this.defaultBack = defaultBack;
+            this.defaultForeground = defaultForeground;
+            this.defaultBackground = defaultBackground;
             colorTable = DatabaseController.Instance.GetTable<ColorTable>();
-            colorRow = colorTable.GetConfigurationRow(id, defaultFore, defaultBack);
+            colorRow = colorTable.GetConfigurationRow(id, defaultForeground, defaultBackground);
         }
         #endregion
 
@@ -127,8 +112,8 @@ namespace Restless.Panama.Core
         /// </summary>
         public void ResetToDefault()
         {
-            Foreground = defaultFore;
-            Background = defaultBack;
+            Foreground = defaultForeground;
+            Background = defaultBackground;
         }
         #endregion
 
@@ -171,10 +156,9 @@ namespace Restless.Panama.Core
 
         private string GetColorStringFromRow(ColorType colorType)
         {
-            if (colorType == ColorType.Foreground)
-                return colorRow[ColorTable.Defs.Columns.Foreground].ToString();
-            else
-                return colorRow[ColorTable.Defs.Columns.Background].ToString();
+            return colorType == ColorType.Foreground
+                ? colorRow[ColorTable.Defs.Columns.Foreground].ToString()
+                : colorRow[ColorTable.Defs.Columns.Background].ToString();
 
         }
         #endregion

@@ -92,17 +92,7 @@ namespace Restless.Panama.Core
         /// Provides static values for DataGrid
         /// </summary>
         public static class DataGrid
-        {
-            /// <summary>
-            /// Gets the default value for data grid row height.
-            /// </summary>
-            public const int DefaultRowHeight = 24;
-
-            /// <summary>
-            /// Gets the default value for data grid alternation count;
-            /// </summary>
-            public const int AlternationCount = 2;
-
+        {            
             /// <summary>
             /// Gets the minimum value for data grid row height.
             /// </summary>
@@ -114,15 +104,24 @@ namespace Restless.Panama.Core
             public const double MaxRowHeight = 42;
 
             /// <summary>
+            /// Gets the default value for data grid row height.
+            /// </summary>
+            public const int DefaultRowHeight = 24;
+
+            /// <summary>
             /// Gets the minimum value for data grid alternation count.
             /// </summary>
-            public const int MinAlternationCount = 2;
+            public const double MinAlternationCount = 2;
 
             /// <summary>
             /// Gets the maximum value for data grid alternation count.
             /// </summary>
-            public const int MaxAlternationCount = 5;
+            public const double MaxAlternationCount = 5;
 
+            /// <summary>
+            /// Gets the default value for data grid alternation count;
+            /// </summary>
+            public const int DefaultAlternationCount = 2;
         }
 
         /// <summary>
@@ -245,7 +244,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public int DataGridAlternationCount
         {
-            get => GetItem(DataGrid.AlternationCount);
+            get => GetItem(DataGrid.DefaultAlternationCount);
             set => SetItem(value);
         }
 
@@ -265,22 +264,6 @@ namespace Restless.Panama.Core
         {
             get;
             private set;
-        }
-
-        /// <summary>
-        /// Gets or sets the mode used to sort the color pallete.
-        /// </summary>
-        public ColorSortingMode ColorSortingMode
-        {
-            get
-            {
-                Enum.TryParse(GetItem(ColorSortingMode.Alpha.ToString()), out ColorSortingMode mode);
-                return mode;
-            }
-            set
-            {
-                SetItem(value.ToString());
-            }
         }
 
         /// <summary>
@@ -625,9 +608,12 @@ namespace Restless.Panama.Core
         {
             switch (propertyId)
             {
+                case nameof(DataGridRowHeight):
                 case nameof(DataGridAlternationCount):
                 case nameof(IsTitleAuthorVisible):
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
+                    break;
+                default:
                     break;
             }
         }
