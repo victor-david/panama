@@ -147,7 +147,7 @@ namespace Restless.Panama.Database.Tables
         /// <returns>An IEnumerable</returns>
         protected override IEnumerable<object[]> EnumeratePopulateValues()
         {
-            yield return new object[] { 1, "Poetry", "A standard story, generally at least 2000 words" };
+            yield return new object[] { 1, "Poetry", "Poetry is what poetry does" };
             yield return new object[] { 2, "Fiction", "A standard story, generally at least 2000 words" };
             yield return new object[] { 3, "Flash", "Flash fiction, closer to a story, and not that long, 1 page or so" };
             yield return new object[] { 4, "Essay", "An essay or other article" };

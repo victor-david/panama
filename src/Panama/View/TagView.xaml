@@ -14,6 +14,7 @@
         <HeaderedContentControl Margin="2,0" Header="{x:Static r:Strings.MenuItemTags}">
             <DataGrid
                 CanUserSortColumns="False"
+                RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding ListView}" 
                 SelectedItem="{Binding SelectedItem}"
                 tk:DataGridColumns.Columns="{Binding Columns}">
@@ -34,9 +35,9 @@
                 Style="{StaticResource DataEntryPanelStyle}">
 
                 <TextBlock Text="Tag Name"/>
-                <TextBox Grid.Row="1" Text="{Binding SelectedTag.Tag}" />
+                <TextBox Grid.Row="1" Text="{Binding SelectedTag.Tag}"/>
                 <TextBlock Grid.Row="2" Text="Description"/>
-                <TextBox Grid.Row="3" Text="{Binding SelectedTag.Description}" />
+                <TextBox Grid.Row="3" Text="{Binding SelectedTag.Description}"/>
             </Grid>
             
         </HeaderedContentControl>
