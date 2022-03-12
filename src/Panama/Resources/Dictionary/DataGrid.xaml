@@ -92,7 +92,7 @@
 
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding goner}" Value="True"/>
+                    <Condition Binding="{Binding CalcGoner}" Value="True"/>
                     <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherGoner.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
@@ -102,7 +102,7 @@
             
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding goner}" Value="True"/>
+                    <Condition Binding="{Binding CalcGoner}" Value="True"/>
                     <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherGoner.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>

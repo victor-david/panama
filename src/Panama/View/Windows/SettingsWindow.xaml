@@ -11,13 +11,13 @@
     xmlns:table="clr-namespace:Restless.Panama.Database.Tables;assembly=Panama.Database"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:SettingsWindowViewModel}"
     mc:Ignorable="d"
+    ResizeMode="NoResize"
     Title="{x:Static r:Strings.MenuItemSettings}"
     Style="{StaticResource DefaultAppWindowStyle}"
-    ResizeMode="NoResize"
-    Height="660" Width="520">
+    Height="680" Width="568">
 
     <Grid 
-        tk:Property.ColumnWidths="116,*"
+        tk:Property.ColumnWidths="126,*"
         tk:Property.RowHeights="Auto,Auto,Auto,*"
         Style="{StaticResource DataEntryPanelStyle}">
         <ListBox
@@ -100,14 +100,14 @@
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
                 tk:Property.IsLongVisibleValue="3">
 
-                <Grid tk:Property.ColumnWidths="Auto,*,*" tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                <Grid 
+                    tk:Property.ColumnWidths="Auto,*,*"
+                    tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*">
                     <Grid.Resources>
                         <Style TargetType="con:SimpleColorPicker">
                             <Setter Property="Margin" Value="0,3"/>
                         </Style>
                     </Grid.Resources>
-
-
 
                     <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="Foreground"/>
                     <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Background"/>
@@ -140,8 +140,44 @@
                         Icon="{StaticResource SquareSmallRedIconKey}"
                         Content="Reset"
                         ToolTip="Reset all colors to their default values. No confirmation."
-                        Command="{Binding Commands[ResetColors]}"/>           
+                        Command="{Binding Commands[ResetColors]}"/>
 
+                    <!-- Display sample colors for titles and publications -->
+                    <Grid
+                        Grid.Row="7" Grid.ColumnSpan="3"
+                        tk:Property.RowHeights="Auto,*,Auto,*">
+
+                        <Grid.Resources>
+                            <Style TargetType="DataGrid" BasedOn="{StaticResource DataGridEditLockedStyle}"/>
+                        </Grid.Resources>
+                        
+                        <!-- Titles sample -->
+                        <TextBlock Text="Titles"/>
+                        <DataGrid
+                            Grid.Row="1"
+                            RowStyle="{StaticResource TitleDataGridRowStyle}"
+                            ItemsSource="{Binding SampleTitles}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="42"/>
+                                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="4*"/>
+                                <DataGridTextColumn Header="Written" Binding="{Binding Written}" Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <!-- Publications sample -->
+                        <TextBlock Grid.Row="2" Text="Publishers"/>
+                        <DataGrid
+                            Grid.Row="3"
+                            RowStyle="{StaticResource PublisherDataGridRowStyle}"
+                            ItemsSource="{Binding SamplePublishers}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="42"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="Added" Binding="{Binding Added}" Width="100"/>
+                                <DataGridTextColumn Header="Last Sub" Binding="{Binding LastSub}" Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </Grid>
             </HeaderedContentControl>
             

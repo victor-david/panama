@@ -166,6 +166,11 @@ namespace Restless.Panama.Database.Tables
                     /// submission that is currently active, i.e. has not yet received a response.
                     /// </summary>
                     public const string HaveActiveSubmission = "CalcActiveSub";
+
+                    /// <summary>
+                    /// Alias for <see cref="Columns.Goner"/>, needed in style binding
+                    /// </summary>
+                    public const string Goner = "CalcGoner";
                 }
             }
 
@@ -277,14 +282,16 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         protected override void UseDataRelations()
         {
-            string expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmissionBatch, SubmissionBatchTable.Defs.Columns.Id);
+            string expr = $"Count(Child({Defs.Relations.ToSubmissionBatch}).{SubmissionBatchTable.Defs.Columns.Id})";
             CreateExpressionColumn<long>(Defs.Columns.Calculated.SubCount, expr);
 
-            expr = string.Format("Max(Child({0}).{1})", Defs.Relations.ToSubmissionBatch, SubmissionBatchTable.Defs.Columns.Submitted);
+            expr = $"Max(Child({Defs.Relations.ToSubmissionBatch}).{SubmissionBatchTable.Defs.Columns.Submitted})";
             CreateExpressionColumn<DateTime>(Defs.Columns.Calculated.LastSub, expr);
 
-            expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmissionPeriod, SubmissionPeriodTable.Defs.Columns.Id);
+            expr = $"Count(Child({Defs.Relations.ToSubmissionPeriod}).{SubmissionPeriodTable.Defs.Columns.Id})";
             CreateExpressionColumn<long>(Defs.Columns.Calculated.SubPeriodCount, expr);
+
+            CreateExpressionColumn<string>(Defs.Columns.Calculated.Goner, Defs.Columns.Goner);
         }
 
         /// <summary>

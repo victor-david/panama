@@ -23,7 +23,7 @@ namespace Restless.Panama.Core
             public static Color DataGridAlternationForeground = SystemColors.Transparent;
             public static Color DataGridAlternationBackground = (Color)ColorConverter.ConvertFromString("#FFCBE4EC");
 
-            public static Color PublisherGonerForeground = SystemColors.Gray;
+            public static Color PublisherGonerForeground = SystemColors.OrangeRed;
             public static Color PublisherGonerBackground = SystemColors.Transparent;
 
             public static Color PublisherPeriodForeground = SystemColors.Blue;
