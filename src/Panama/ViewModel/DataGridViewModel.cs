@@ -26,7 +26,8 @@ namespace Restless.Panama.ViewModel
     /// <typeparam name="T">The table type derived from <see cref="TableBase"/></typeparam>
     public abstract class DataGridViewModel<T> : DataGridViewModelBase where T : TableBase
     {
-        #region Private Vars
+        #region Private
+        private bool isCustomFilterOpen;
         private string filterText;
         #endregion
 
@@ -80,11 +81,28 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
+        /// Gets a command to toggle the value of <see cref="IsCustomFilterOpen"/>.
+        /// </summary>
+        public ICommand ToggleCustomFilterCommand
+        {
+            get;
+        }
+
+        /// <summary>
         /// Gets a command to open the selected row.
         /// </summary>
         public ICommand OpenRowCommand
         {
             get;
+        }
+
+        /// <summary>
+        /// Gets or sets a boolean value that determines if the custom filter popup is open
+        /// </summary>
+        public bool IsCustomFilterOpen
+        {
+            get => isCustomFilterOpen;
+            set => SetProperty(ref isCustomFilterOpen, value);
         }
 
         /// <summary>
@@ -186,6 +204,7 @@ namespace Restless.Panama.ViewModel
             DeleteCommand = RelayCommand.Create(RunDeleteCommand, CanRunDeleteCommand);
             ClearFilterCommand = RelayCommand.Create(RunClearFilterCommand, CanRunClearFilterCommand);
             OpenRowCommand = RelayCommand.Create(RunOpenRowCommand, CanRunOpenRowCommand);
+            ToggleCustomFilterCommand = RelayCommand.Create(p => IsCustomFilterOpen = !IsCustomFilterOpen);
         }
         #endregion
 

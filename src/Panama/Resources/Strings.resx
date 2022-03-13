@@ -490,13 +490,13 @@ Last exported: {1}</value>
   <data name="WindowTitleSelectPublisherGeneric" xml:space="preserve">
     <value>Select a publisher</value>
   </data>
-  <data name="TooltipPublisherAdded" xml:space="preserve">
+  <data name="ToolTipPublisherAdded" xml:space="preserve">
     <value>The date this publisher was added to the database</value>
   </data>
   <data name="TooltipPublisherLastSubmission" xml:space="preserve">
     <value>The date that the last submission was created for this publisher</value>
   </data>
-  <data name="TooltipPublisherSubmissionCount" xml:space="preserve">
+  <data name="ToolTipPublisherSubmissionCount" xml:space="preserve">
     <value>Submission count - the total number of times a submission has been made to this publisher</value>
   </data>
   <data name="ConfirmationDeleteSubmissionDocument" xml:space="preserve">
@@ -535,7 +535,7 @@ Last exported: {1}</value>
   <data name="ConfirmationRemoveSubmissionPeriod" xml:space="preserve">
     <value>Remove this submission period for this publisher?</value>
   </data>
-  <data name="TooltipPublisherSubmissionPeriodCount" xml:space="preserve">
+  <data name="ToolTipPublisherSubmissionPeriodCount" xml:space="preserve">
     <value>Submission period count - the total number of submission periods that have been assigned to this publisher</value>
   </data>
   <data name="ConfirmationDeleteSubmission" xml:space="preserve">
@@ -755,10 +755,10 @@ The application cannot continue.</value>
   <data name="ConfigDataGrid" xml:space="preserve">
     <value>Data Grid</value>
   </data>
-  <data name="TooltipPublisherInPeriod" xml:space="preserve">
+  <data name="ToolTipPublisherInPeriod" xml:space="preserve">
     <value>Publisher is currently in one of its submission periods</value>
   </data>
-  <data name="TooltipPublisherPay" xml:space="preserve">
+  <data name="ToolTipPublisherPay" xml:space="preserve">
     <value>Publisher is a paying market</value>
   </data>
   <data name="ConfirmationAddTitle" xml:space="preserve">
@@ -783,40 +783,31 @@ Do you want to continue?</value>
   <data name="CommandTitleFilterPublishedTooltip" xml:space="preserve">
     <value>Filter title list to display only titles that are published</value>
   </data>
-  <data name="CommandTitleFilterReady" xml:space="preserve">
-    <value>Ready</value>
-  </data>
   <data name="CommandTitleFilterReadyTooltip" xml:space="preserve">
     <value>Filter title list to display only titles marked ready</value>
   </data>
   <data name="CommandTitleFilterSubmitted" xml:space="preserve">
     <value>Submitted</value>
   </data>
-  <data name="CommandTitleFilterSubmittedTooltip" xml:space="preserve">
-    <value>Filter title list to display only titles that are currently submitted</value>
-  </data>
-  <data name="CommandPublisherFilterFollowup" xml:space="preserve">
-    <value>Follow Up</value>
-  </data>
-  <data name="CommandPublisherFilterFollowupTooltip" xml:space="preserve">
+  <data name="ToolTipPublisherFilterFollowup" xml:space="preserve">
     <value>Filter publisher list to display only publishers that are active and flagged for follow up</value>
   </data>
   <data name="CommandPublisherFilterInPeriod" xml:space="preserve">
     <value>In Period</value>
   </data>
-  <data name="CommandPublisherFilterInPeriodTooltip" xml:space="preserve">
+  <data name="ToolTipPublisherFilterInPeriod" xml:space="preserve">
     <value>Filter publisher list to display only publishers that are active and currently within a submission period</value>
   </data>
   <data name="CommandPublisherFilterPaying" xml:space="preserve">
     <value>Paying</value>
   </data>
-  <data name="CommandPublisherFilterPayingTooltip" xml:space="preserve">
+  <data name="ToolTipPublisherFilterPaying" xml:space="preserve">
     <value>Filter publisher list to display only publishers that are active and are a paying market</value>
   </data>
   <data name="CommandPublisherFilterActive" xml:space="preserve">
     <value>Active</value>
   </data>
-  <data name="CommandPublisherFilterActiveTooltip" xml:space="preserve">
+  <data name="ToolTipPublisherFilterActive" xml:space="preserve">
     <value>Filter publisher list to display only publishers that are active, i.e. not flagged as a goner</value>
   </data>
   <data name="CommandAddAlert" xml:space="preserve">
@@ -881,13 +872,13 @@ Do you want to continue?</value>
   <data name="CommandSubmissionFilterTryAgainTooltip" xml:space="preserve">
     <value>Filter submission list to display submissions with a response type of Try Again</value>
   </data>
-  <data name="TooltipPublisherHasActive" xml:space="preserve">
+  <data name="ToolTipPublisherHasActive" xml:space="preserve">
     <value>Publisher currently has at least one submission that is active</value>
   </data>
   <data name="CommandPublisherFilterHaveSub" xml:space="preserve">
     <value>Open</value>
   </data>
-  <data name="CommandPublisherFilterHaveSubTooltip" xml:space="preserve">
+  <data name="ToolTipPublisherFilterHaveSub" xml:space="preserve">
     <value>Filter publisher list to display only publishers that currently have an open submission</value>
   </data>
   <data name="InvalidOpSubmissionMessageFolderNotSet" xml:space="preserve">
@@ -959,9 +950,6 @@ Do you want to continue?</value>
   <data name="HeaderSelfPublished" xml:space="preserve">
     <value>Self Published</value>
   </data>
-  <data name="CommandTitleFilterSelfPublished" xml:space="preserve">
-    <value>Self Published</value>
-  </data>
   <data name="CommandTitleFilterSelfPublishedTooltip" xml:space="preserve">
     <value>Filter title list to display only titles that are self published</value>
   </data>
@@ -1030,5 +1018,8 @@ Do you want to continue?</value>
   </data>
   <data name="HeaderSettingsAdvanced" xml:space="preserve">
     <value>Advanced</value>
+  </data>
+  <data name="ToolTipPublisherFollowup" xml:space="preserve">
+    <value>Publisher is flagged for follow up</value>
   </data>
 </root>

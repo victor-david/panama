@@ -37,7 +37,7 @@ namespace Restless.Panama.ViewModel
 
             var col = Columns.Create("Added", SelfPublisherTable.Defs.Columns.Added)
                 .MakeDate()
-                .AddToolTip(Strings.TooltipPublisherAdded);
+                .AddToolTip(Strings.ToolTipPublisherAdded);
 
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.Create("PC", SelfPublisherTable.Defs.Columns.Calculated.PubCount)

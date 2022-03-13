@@ -60,10 +60,11 @@
             <Separator/>
             
             <tk:IconButton
+                x:Name="CustomFilterButton"
                 Content="{x:Static r:Strings.MenuItemCustom}"
                 ToolTip="{x:Static r:Strings.ToolTipFilterCustom}"
                 Icon="{StaticResource FilterIconKey}"
-                Command="{Binding Commands[ToggleFilter]}"/>
+                Command="{Binding ToggleCustomFilterCommand}"/>
             
             <tk:IconButton
                 Content="{x:Static r:Strings.MenuItemClear}"
@@ -72,20 +73,58 @@
                 Command="{Binding Commands[ClearFilter]}"/>
 
             <Separator/>
+
+            <TextBlock>
+                <Run
+                    Foreground="{StaticResource DarkAlertForegroundBrush}" 
+                    Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
+                <Run Text="records"/>
+            </TextBlock>
             
-            <TextBlock Text="{Binding Filters.RecordCountText}"/>
             <TextBlock 
-                tk:Property.IsVisible="{Binding Config.TitleFilter.IsAnyFilterActive}"
+                tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
                 Foreground="{StaticResource DarkAlertForegroundBrush}"
                 Text="(row filter in effect)"/>
         </StatusBar>
 
+        <Popup
+            Placement="Bottom"
+            PlacementTarget="{Binding ElementName=CustomFilterButton}"
+            VerticalOffset="6"
+            HorizontalOffset="6"
+            IsOpen="{Binding IsCustomFilterOpen}"
+            StaysOpen="True">
+            <Border 
+                Style="{StaticResource BorderEditContainerStyle}"
+                BorderThickness="2"
+                BorderBrush="{StaticResource DefaultBorderBrush}"
+                Background="{StaticResource DefaultBackgroundBrush}">
+                
+                <Grid 
+                    tk:Property.ColumnWidths="*,*"
+                    Style="{StaticResource DataEntryPanelStyle}">
+
+                    <StackPanel>
+                        <tk:ThreeWay Header="Ready" State="{Binding Filters.ReadyState}"/>
+                        <tk:ThreeWay Header="Flagged" State="{Binding Filters.FlaggedState}"/>
+                        <tk:ThreeWay Header="Published" State="{Binding Filters.PublishedState}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <tk:ThreeWay Header="Submitted" State="{Binding Filters.CurrentlySubmittedState}"/>
+                        <tk:ThreeWay Header="Ever Submitted" State="{Binding Filters.EverSubmittedState}"/>
+                        <tk:ThreeWay Header="Self Published" State="{Binding Filters.SelfPublishedState}"/>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </Popup>
+
         <!-- Main data grid to display the tabular data -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderEditContainerStyle}">
+        <Border Grid.Row="1" Style="{StaticResource BorderEditContainerStyle}">
             <tk:DataGrid 
-                Grid.Row="1"
                 RowHeight="{Binding Config.DataGridRowHeight}"
-                ItemsSource="{Binding Path=MainSource.View}"
+                ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
                 RestoreStateBehavior="RestoreLastSelection"
                 tk:DataGridColumns.Columns="{Binding Columns}"

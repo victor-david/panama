@@ -29,8 +29,8 @@ namespace Restless.Panama.Core
 
         private Config() : base(DatabaseController.Instance.GetTable<ConfigTable>())
         {
-            TitleFilter = GetItem(null, nameof(TitleFilter)).Deserialize<TitleFilter>();
-            PublisherFilter = GetItem(null, nameof(PublisherFilter)).Deserialize<PublisherFilter>();
+            TitleFilter = GetItem(null, nameof(TitleFilter)).Deserialize<TitleRowFilter>();
+            PublisherFilter = GetItem(null, nameof(PublisherFilter)).Deserialize<PublisherRowFilter>();
             Colors = new ConfigColors();
             // TODO
             // This is applied at when config is first created and when the DateFormat property is changed by the user in settings.
@@ -188,30 +188,7 @@ namespace Restless.Panama.Core
 
         /************************************************************************/
 
-        #region Public properties
-        /// <summary>
-        /// Gets or sets the selected configuration section.
-        /// </summary>
-        public int SelectedConfigSection
-        {
-            get => GetItem(1);
-            set => SetItem(value);
-        }
-
-        /// <summary>
-        /// Gets or sets the date format for the application.
-        /// </summary>
-        public string DateFormat
-        {
-            get => GetItem("MMM dd, yyyy");
-            set
-            {
-                SetItem(value);
-                // TODO
-                //Restless.Tools.Controls.Default.Format.Date = value;
-            }
-        }
-
+        #region Main Window
         /// <summary>
         /// Gets or sets the width of the main window
         /// </summary>
@@ -238,16 +215,11 @@ namespace Restless.Panama.Core
             get => (WindowState)GetItem((int)WindowState.Normal);
             set => SetItem((int)value);
         }
+        #endregion
 
-        /// <summary>
-        /// Gets or sets the alternation count for data grids.
-        /// </summary>
-        public int DataGridAlternationCount
-        {
-            get => GetItem(DataGrid.DefaultAlternationCount);
-            set => SetItem(value);
-        }
+        /************************************************************************/
 
+        #region Data Grid
         /// <summary>
         /// Gets or sets the row height used in various data grids.
         /// </summary>
@@ -258,6 +230,19 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets the alternation count for data grids.
+        /// </summary>
+        public int DataGridAlternationCount
+        {
+            get => GetItem(DataGrid.DefaultAlternationCount);
+            set => SetItem(value);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Colors
+        /// <summary>
         /// Gets the set of configuration colors.
         /// </summary>
         public ConfigColors Colors
@@ -265,7 +250,11 @@ namespace Restless.Panama.Core
             get;
             private set;
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Folders
         /// <summary>
         /// Gets or sets the folder for the export operation.
         /// </summary>
@@ -328,26 +317,11 @@ namespace Restless.Panama.Core
             get => GetItem(Other.Folder);
             set => SetItem(value);
         }
+        #endregion
 
-        /// <summary>
-        /// Gets or sets the plain text viewer file.
-        /// </summary>
-        public string TextViewerFile
-        {
-            get => GetItem(null);
-            set => SetItem(value);
-        }
+        /************************************************************************/
 
-        /// <summary>
-        /// Gets or sets the template file that is used when creating a new submission document.
-        /// Styles from this document are copied into the new document.
-        /// </summary>
-        public string TemplateFile
-        {
-            get => GetItem(null);
-            set => SetItem(value);
-        }
-
+        #region Grid
         /// <summary>
         /// Gets or sets the grid splitter location for the table grid
         /// </summary>
@@ -407,7 +381,20 @@ namespace Restless.Panama.Core
             get => GetGridLength(Other.SplitterWidth);
             set => SetGridLength(value);
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Submission
+        /// <summary>
+        /// Gets or sets the template file that is used when creating a new submission document.
+        /// Styles from this document are copied into the new document.
+        /// </summary>
+        public string TemplateFile
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
         /// <summary>
         /// Gets the options for creating a submission document.
         /// </summary>
@@ -481,21 +468,15 @@ namespace Restless.Panama.Core
             get => GetItem(null);
             set => SetItem(value);
         }
+        #endregion
 
-        /// <summary>
-        /// Gets a boolean value that indicates if document internal dates (created, modified)
-        /// should be syncronized with title written date and file system modified date
-        /// during the meta-data update operation. Only Open XML documents are affected.
-        /// </summary>
-        public bool SyncDocumentInternalDates
-        {
-            get => GetItem(true);
-        }
+        /************************************************************************/
 
+        #region Filters
         /// <summary>
         /// Gets the title filter object which describes how to filter title rows.
         /// </summary>
-        public TitleFilter TitleFilter
+        public TitleRowFilter TitleFilter
         {
             get;
             private set;
@@ -504,7 +485,7 @@ namespace Restless.Panama.Core
         /// <summary>
         /// Gets the publisher filter object which describes how to filter publisher rows.
         /// </summary>
-        public PublisherFilter PublisherFilter
+        public PublisherRowFilter PublisherFilter
         {
             get;
             private set;
@@ -520,6 +501,52 @@ namespace Restless.Panama.Core
         {
             get => GetItem(null);
             set => SetItem(value);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Misc (selected config, text viewer, others)
+        /// <summary>
+        /// Gets or sets the selected configuration section.
+        /// </summary>
+        public int SelectedConfigSection
+        {
+            get => GetItem(1);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the date format for the application.
+        /// </summary>
+        public string DateFormat
+        {
+            get => GetItem("MMM dd, yyyy");
+            set
+            {
+                SetItem(value);
+                // TODO
+                //Restless.Tools.Controls.Default.Format.Date = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the plain text viewer file.
+        /// </summary>
+        public string TextViewerFile
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets a boolean value that indicates if document internal dates (created, modified)
+        /// should be syncronized with title written date and file system modified date
+        /// during the meta-data update operation. Only Open XML documents are affected.
+        /// </summary>
+        public bool SyncDocumentInternalDates
+        {
+            get => GetItem(true);
         }
 
         /// <summary>
@@ -588,7 +615,6 @@ namespace Restless.Panama.Core
         #region Public methods
         /// <summary>
         /// Saves the filter objects by serializing them into their rows.
-        /// This method is called at shutdown.
         /// </summary>
         public void SaveFilterObjects()
         {

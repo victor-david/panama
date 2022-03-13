@@ -4,67 +4,160 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cv="clr-namespace:Restless.Panama.Core"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:view="clr-namespace:Restless.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
     <Grid>
         <Grid.ColumnDefinitions>
-            <!-- MaxWidth binds to a value relative to the width of the grid. Converter parm is the desired min width of right column -->
-            <ColumnDefinition Width="{Binding Config.LeftColumnPublisher,Mode=TwoWay}" MinWidth="360" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}, Converter={cv:SubtractionConverter}, ConverterParameter=380}" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <!-- 
+            MaxWidth binds to a value relative to the width of the grid. 
+            Converter parm is the desired min width of right column
+            -->            
+            <ColumnDefinition
+                Width="{Binding Config.LeftColumnPublisher,Mode=TwoWay}"
+                MaxWidth="{Binding Path=ActualWidth,
+                RelativeSource={RelativeSource AncestorType=Grid},
+                Converter={cv:SubtractionConverter}, ConverterParameter=380}"
+                MinWidth="360"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource GridRowHeightTool}" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <!-- Controls specific to this view-->
-        <Grid Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding Filters.RecordCountText}"/>
-                <TextBlock Style="{StaticResource TextBlockMessage}" Visibility="{Binding Config.PublisherFilter.IsAnyFilterActive,Converter={cv:BooleanToVisibilityConverter}}"> - Row filter is in effect</TextBlock>
-            </StackPanel>
-            <ItemsControl Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>
-        </Grid>
+
+        <StatusBar Margin="0,0,4,0">
+            <TextBlock Text="Filters"/>
+            <tk:IconButton 
+                Content="Active"
+                ToolTip="{x:Static r:Strings.ToolTipPublisherFilterActive}"
+                Icon="{StaticResource SquareSmallGreenIconKey}" 
+                Command="{Binding Commands[ActiveFilter]}"/>
+
+            <tk:IconButton 
+                Content="Open"
+                ToolTip="{x:Static r:Strings.ToolTipPublisherFilterHaveSub}"
+                Icon="{StaticResource SquareSmallGreenIconKey}" 
+                Command="{Binding Commands[HaveSubFilter]}"/>
+            
+            <tk:IconButton 
+                Content="In Period"
+                ToolTip="{x:Static r:Strings.ToolTipPublisherFilterInPeriod}"
+                Icon="{StaticResource SquareSmallGreenIconKey}" 
+                Command="{Binding Commands[InPeriodFilter]}"/>
+
+            <tk:IconButton 
+                Content="Paying"
+                ToolTip="{x:Static r:Strings.ToolTipPublisherFilterPaying}"
+                Icon="{StaticResource SquareSmallGreenIconKey}" 
+                Command="{Binding Commands[PayingFilter]}"/>
+
+            <Separator/>
+
+            <tk:IconButton
+                x:Name="CustomFilterButton"
+                Content="{x:Static r:Strings.MenuItemCustom}"
+                ToolTip="{x:Static r:Strings.ToolTipFilterCustom}"
+                Icon="{StaticResource FilterIconKey}"
+                Command="{Binding ToggleCustomFilterCommand}"/>
+
+            <tk:IconButton
+                Content="{x:Static r:Strings.MenuItemClear}"
+                ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
+                Icon="{StaticResource FilterOffIconKey}"
+                Command="{Binding Commands[ClearFilter]}"/>
+
+            <Separator/>
+
+            <TextBlock>
+                <Run
+                    Foreground="{StaticResource DarkAlertForegroundBrush}" 
+                    Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
+                <Run Text="records"/>
+            </TextBlock>
+            
+            <TextBlock 
+                tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
+                Foreground="{StaticResource DarkAlertForegroundBrush}"
+                Text="(row filter in effect)"/>
+        </StatusBar>
+
+        <Popup
+            Placement="Bottom"
+            PlacementTarget="{Binding ElementName=CustomFilterButton}"
+            VerticalOffset="6"
+            HorizontalOffset="6"
+            IsOpen="{Binding IsCustomFilterOpen}"
+            StaysOpen="True">
+            <Border 
+                Style="{StaticResource BorderEditContainerStyle}"
+                BorderThickness="2"
+                BorderBrush="{StaticResource DefaultBorderBrush}"
+                Background="{StaticResource DefaultBackgroundBrush}">
+
+                <Grid 
+                    tk:Property.ColumnWidths="*,*"
+                    Style="{StaticResource DataEntryPanelStyle}">
+
+                    <StackPanel>
+                        <tk:ThreeWay Header="Active" State="{Binding Filters.ActiveState}"/>
+                        <tk:ThreeWay Header="Open Submission" State="{Binding Filters.OpenState}"/>
+                        <tk:ThreeWay Header="In Period" State="{Binding Filters.InPeriodState}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <tk:ThreeWay Header="Exclusive" State="{Binding Filters.ExclusiveState}"/>
+                        <tk:ThreeWay Header="Follow Up" State="{Binding Filters.FollowUpState}"/>
+                        <tk:ThreeWay Header="Paying" State="{Binding Filters.PayingState}"/>
+                        <tk:ThreeWay Header="Goner" State="{Binding Filters.GonerState}"/>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </Popup>
 
         <!-- Main data grid to display the tabular data  -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderEditContainerStyle}">
+        <Border Grid.Row="1" Style="{StaticResource BorderEditContainerStyle}">
             <tk:DataGrid 
-                x:Name="PublisherDataGrid" 
-                Grid.Row="1" Grid.Column="0" 
                 RowHeight="{Binding Config.DataGridRowHeight}"
-                ItemsSource="{Binding Path=MainSource.View}" 
+                ItemsSource="{Binding ListView}" 
                 SelectedItem="{Binding SelectedItem}"
-                tk:DataGridColumns.Columns="{Binding Columns}">
-                <DataGrid.RowStyle>
-                    <!-- Base style contains all the triggers -->
-                    <Style TargetType="DataGridRow" BasedOn="{StaticResource PublisherDataGridRowStyle}">
-                        <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=PublisherDataGrid, Path=DataContext.OpenRowCommand}"/>
-                    </Style>
-                </DataGrid.RowStyle>
+                RestoreStateBehavior="RestoreLastSelection"
+                tk:DataGridColumns.Columns="{Binding Columns}"
+                RowStyle="{StaticResource PublisherDataGridRowStyle}">
+
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                </DataGrid.InputBindings>
+                
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
             </tk:DataGrid>
         </Border>
+        
         <!-- Splitter -->
-        <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource GridSplitterVertical}" />
+        <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource VerticalGridSplitterStyle}" />
 
-        <ItemsControl Grid.Column="2" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=FilterCommands}"/>
+        <StatusBar Grid.Column="2" Margin="4,0,0,0">
+            <TextBlock 
+                Style="{StaticResource TitleDisplayTextBlockStyle}"
+                Text="{Binding SelectedTitle.Title}"/>
+        </StatusBar>
 
-        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderEditContainerStyle}">
-            <DockPanel>
-                <view:PublisherFilter DockPanel.Dock="Top" Visibility="{Binding FilterVisibility}"/>
-                <view:PublisherEditWithTab DockPanel.Dock="Top" Visibility="{Binding EditVisibility}"/>
-            </DockPanel>
+        <Border
+            Grid.Row="1" Grid.Column="2"
+            Style="{StaticResource BorderEditContainerStyle}"
+            Visibility="{Binding EditVisibility}">
+
+            <!--<view:/>  TODO -->
+            
         </Border>
 
     </Grid>
-    <!-- end main grid-->
 </UserControl>

@@ -623,47 +623,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active, i.e. not flagged as a goner.
-        /// </summary>
-        public static string CommandPublisherFilterActiveTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterActiveTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Follow Up.
-        /// </summary>
-        public static string CommandPublisherFilterFollowup {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterFollowup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and flagged for follow up.
-        /// </summary>
-        public static string CommandPublisherFilterFollowupTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterFollowupTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         public static string CommandPublisherFilterHaveSub {
             get {
                 return ResourceManager.GetString("CommandPublisherFilterHaveSub", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter publisher list to display only publishers that currently have an open submission.
-        /// </summary>
-        public static string CommandPublisherFilterHaveSubTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterHaveSubTooltip", resourceCulture);
             }
         }
         
@@ -677,29 +641,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and currently within a submission period.
-        /// </summary>
-        public static string CommandPublisherFilterInPeriodTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterInPeriodTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Paying.
         /// </summary>
         public static string CommandPublisherFilterPaying {
             get {
                 return ResourceManager.GetString("CommandPublisherFilterPaying", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and are a paying market.
-        /// </summary>
-        public static string CommandPublisherFilterPayingTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterPayingTooltip", resourceCulture);
             }
         }
         
@@ -920,29 +866,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ready.
-        /// </summary>
-        public static string CommandTitleFilterReady {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterReady", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Filter title list to display only titles marked ready.
         /// </summary>
         public static string CommandTitleFilterReadyTooltip {
             get {
                 return ResourceManager.GetString("CommandTitleFilterReadyTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Self Published.
-        /// </summary>
-        public static string CommandTitleFilterSelfPublished {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterSelfPublished", resourceCulture);
             }
         }
         
@@ -961,15 +889,6 @@ namespace Restless.Panama.Resources {
         public static string CommandTitleFilterSubmitted {
             get {
                 return ResourceManager.GetString("CommandTitleFilterSubmitted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only titles that are currently submitted.
-        /// </summary>
-        public static string CommandTitleFilterSubmittedTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterSubmittedTooltip", resourceCulture);
             }
         }
         
@@ -2335,9 +2254,9 @@ namespace Restless.Panama.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The date this publisher was added to the database.
         /// </summary>
-        public static string TooltipPublisherAdded {
+        public static string ToolTipPublisherAdded {
             get {
-                return ResourceManager.GetString("TooltipPublisherAdded", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherAdded", resourceCulture);
             }
         }
         
@@ -2351,20 +2270,74 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active, i.e. not flagged as a goner.
+        /// </summary>
+        public static string ToolTipPublisherFilterActive {
+            get {
+                return ResourceManager.GetString("ToolTipPublisherFilterActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and flagged for follow up.
+        /// </summary>
+        public static string ToolTipPublisherFilterFollowup {
+            get {
+                return ResourceManager.GetString("ToolTipPublisherFilterFollowup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that currently have an open submission.
+        /// </summary>
+        public static string ToolTipPublisherFilterHaveSub {
+            get {
+                return ResourceManager.GetString("ToolTipPublisherFilterHaveSub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and currently within a submission period.
+        /// </summary>
+        public static string ToolTipPublisherFilterInPeriod {
+            get {
+                return ResourceManager.GetString("ToolTipPublisherFilterInPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and are a paying market.
+        /// </summary>
+        public static string ToolTipPublisherFilterPaying {
+            get {
+                return ResourceManager.GetString("ToolTipPublisherFilterPaying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publisher is flagged for follow up.
+        /// </summary>
+        public static string ToolTipPublisherFollowup {
+            get {
+                return ResourceManager.GetString("ToolTipPublisherFollowup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Publisher currently has at least one submission that is active.
         /// </summary>
-        public static string TooltipPublisherHasActive {
+        public static string ToolTipPublisherHasActive {
             get {
-                return ResourceManager.GetString("TooltipPublisherHasActive", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherHasActive", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Publisher is currently in one of its submission periods.
         /// </summary>
-        public static string TooltipPublisherInPeriod {
+        public static string ToolTipPublisherInPeriod {
             get {
-                return ResourceManager.GetString("TooltipPublisherInPeriod", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherInPeriod", resourceCulture);
             }
         }
         
@@ -2380,27 +2353,27 @@ namespace Restless.Panama.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Publisher is a paying market.
         /// </summary>
-        public static string TooltipPublisherPay {
+        public static string ToolTipPublisherPay {
             get {
-                return ResourceManager.GetString("TooltipPublisherPay", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherPay", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Submission count - the total number of times a submission has been made to this publisher.
         /// </summary>
-        public static string TooltipPublisherSubmissionCount {
+        public static string ToolTipPublisherSubmissionCount {
             get {
-                return ResourceManager.GetString("TooltipPublisherSubmissionCount", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherSubmissionCount", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Submission period count - the total number of submission periods that have been assigned to this publisher.
         /// </summary>
-        public static string TooltipPublisherSubmissionPeriodCount {
+        public static string ToolTipPublisherSubmissionPeriodCount {
             get {
-                return ResourceManager.GetString("TooltipPublisherSubmissionPeriodCount", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherSubmissionPeriodCount", resourceCulture);
             }
         }
         

@@ -11,9 +11,11 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Utility;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace Restless.Panama.ViewModel
 {
@@ -60,11 +62,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the filters controller for this VM
         /// </summary>
-        public PublisherFilterController Filters
-        {
-            get;
-            private set;
-        }
+        public PublisherRowFilter Filters => Config.PublisherFilter;
 
         /// <summary>
         /// Gets a visibility value that determines if the title filter is visible.
@@ -102,20 +100,20 @@ namespace Restless.Panama.ViewModel
         {
             DisplayName = Strings.CommandPublisher;
             Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod).AddToolTip(Strings.TooltipPublisherInPeriod);
+            Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod).AddToolTip(Strings.ToolTipPublisherInPeriod);
             Columns.CreateImage<BooleanToImageConverter>("E", PublisherTable.Defs.Columns.Exclusive, "ImageExclamation").AddToolTip(Strings.TooltipPublisherExclusive);
-            Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Paying, "ImageMoney").AddToolTip(Strings.TooltipPublisherPay);
+            Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Paying, "ImageMoney").AddToolTip(Strings.ToolTipPublisherPay);
 
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
             Columns.Create("Url", PublisherTable.Defs.Columns.Url);
 
             var col = Columns.Create("Added", PublisherTable.Defs.Columns.Added)
                 .MakeDate()
-                .AddToolTip(Strings.TooltipPublisherAdded);
+                .AddToolTip(Strings.ToolTipPublisherAdded);
 
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.CreateImage<BooleanToImageConverter>("A", PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission, "ImageExclamation")
-                .AddToolTip(Strings.TooltipPublisherHasActive);
+                .AddToolTip(Strings.ToolTipPublisherHasActive);
 
             Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub)
                 .MakeDate()
@@ -124,50 +122,32 @@ namespace Restless.Panama.ViewModel
             Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
-                .AddToolTip(Strings.TooltipPublisherSubmissionCount)
+                .AddToolTip(Strings.ToolTipPublisherSubmissionCount)
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
             AddViewSourceSortDescriptions();
 
             /* This command is used from this model and from the Filters controller */
-            Commands.Add("ClearFilter", (o) => Filters.ClearAll(), (o) => Config.PublisherFilter.IsAnyFilterActive);
-            Commands.Add("ActiveFilter", (o) => Filters.SetToActive());
-            Commands.Add("HaveSubFilter", (o) => Filters.SetToHaveSubmission());
-            Commands.Add("InPeriodFilter", (o) => Filters.SetToInPeriod());
-            Commands.Add("PayingFilter", (o) => Filters.SetToPaying());
-            Commands.Add("FollowupFilter", (o) => Filters.SetToFollowup());
-            // TODO
-            //Commands.Add("AdvancedFilter", (o) =>
-            //{
-            //    isFilterVisible = !isFilterVisible;
-            //    advFilter.Icon = (isFilterVisible) ? ResourceHelper.Get("ImageChevronUp") : ResourceHelper.Get("ImageChevronDown");
-            //    OnPropertyChanged(nameof(FilterVisibility));
-            //});
-
+            Commands.Add("ClearFilter", p => Filters.ClearAll(), p => Config.PublisherFilter.IsAnyFilterActive);
+            Commands.Add("ActiveFilter", p => Filters.SetToActive());
+            Commands.Add("HaveSubFilter", p => Filters.SetToOpenSubmission());
+            Commands.Add("InPeriodFilter", p => Filters.SetToInPeriod());
+            Commands.Add("PayingFilter", p => Filters.SetToPaying());
+            Commands.Add("FollowupFilter", p => Filters.SetToFollowup());
+            Commands.Add("ToggleCustomFilter", o => IsCustomFilterOpen = !IsCustomFilterOpen);
             Commands.Add("AddSubmission", RunAddSubmissionCommand, (o) => IsSelectedRowAccessible);
             Commands.Add("CopyLoginId", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.LoginId); }, CanCopyCredential);
             Commands.Add("CopyPassword", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.Password); }, CanCopyCredential);
-
-            // TODO
-            //double minWidth = 80.0;
-            //double imgSize = 20.0;
-            //advFilter = new VisualCommandViewModel(Strings.CommandFilterAdvanced, Strings.CommandFilterAdvancedTooltip, Commands["AdvancedFilter"], ResourceHelper.Get("ImageChevronDown"), imgSize, VisualCommandFontSize, 100.0);
-            //FilterCommands.Add(advFilter);
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterActive, Strings.CommandPublisherFilterActiveTooltip, Commands["ActiveFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterHaveSub, Strings.CommandPublisherFilterHaveSubTooltip, Commands["HaveSubFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterInPeriod, Strings.CommandPublisherFilterInPeriodTooltip, Commands["InPeriodFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterPaying, Strings.CommandPublisherFilterPayingTooltip, Commands["PayingFilter"],null, imgSize, VisualCommandFontSize,  minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandPublisherFilterFollowup, Strings.CommandPublisherFilterFollowupTooltip, Commands["FollowupFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             Periods = new PublisherPeriodController(this);
             Submissions = new PublisherSubmissionController(this);
             Titles = new PublisherSubmissionTitleController(this);
 
+            // TODO
             // Credentials = DatabaseController.Instance.GetTable<CredentialTable>().GetCredentialList();
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandCreateSubmission, Commands["AddSubmission"]).AddImageResource("ImageSubmissionMenu");
+            MenuItems.AddItem(Strings.CommandCreateSubmission, Commands["AddSubmission"]).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
@@ -175,8 +155,12 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandDeletePublisher, DeleteCommand).AddImageResource("ImageDeleteMenu");
 
-            Filters = new PublisherFilterController(this);
-            Filters.Apply();
+            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
+            {
+                //SelectedEditSection = 1;
+                Filters.SetListView(ListView);
+                Filters.ApplyFilter();
+            }));
         }
         #endregion
 

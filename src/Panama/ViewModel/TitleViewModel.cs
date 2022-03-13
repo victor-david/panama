@@ -16,8 +16,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace Restless.Panama.ViewModel
 {
@@ -29,7 +29,6 @@ namespace Restless.Panama.ViewModel
         #region Private
         private int selectedEditSection;
         private TitleRow selectedTitle;
-        private bool isFilterVisible;
         private string previewText;
         private const int SectionPreviewId = 6;
         private bool isOpenXml;
@@ -51,6 +50,9 @@ namespace Restless.Panama.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets the currently selected title row
+        /// </summary>
         public TitleRow SelectedTitle
         {
             get => selectedTitle;
@@ -103,13 +105,9 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets the controller for the advanced title filters.
+        /// Gets the title filter object.
         /// </summary>
-        public TitleFilterController Filters
-        {
-            get;
-            private set;
-        }
+        public TitleRowFilter Filters => Config.TitleFilter;
 
         /// <summary>
         /// Gets an enumerable of <see cref="AuthorTable.RowObject"/> items. The UI binds to this list.
@@ -124,11 +122,6 @@ namespace Restless.Panama.ViewModel
             get;
             set;
         }
-
-        /// <summary>
-        /// Gets a visibility value that determines if the title filter is visible.
-        /// </summary>
-        public Visibility FilterVisibility => isFilterVisible ? Visibility.Visible : Visibility.Collapsed;
 
         /// <summary>
         /// Gets a string value that displays the written date.
@@ -155,14 +148,7 @@ namespace Restless.Panama.ViewModel
             {
                 if (IsSelectedRowAccessible)
                 {
-                    if (value != null)
-                    {
-                        SelectedRow[TitleTable.Defs.Columns.Written] = value;
-                    }
-                    else
-                    {
-                        SelectedRow[TitleTable.Defs.Columns.Written] = DBNull.Value;
-                    }
+                    SelectedRow[TitleTable.Defs.Columns.Written] = value ?? DBNull.Value;
                     OnWrittenPropertiesChanged();
                 }
             }
@@ -242,26 +228,12 @@ namespace Restless.Panama.ViewModel
 
             AddViewSourceSortDescriptions();
 
-            /* This command is used from this model and from the Filters controller */
-            Commands.Add("ClearFilter", p => Filters.ClearAll(), p => Config.TitleFilter.IsAnyFilterActive);
+            Commands.Add("ClearFilter", p => Filters.ClearAll(), p => Filters.IsAnyFilterActive);
             Commands.Add("ReadyFilter", p => Filters.SetToReady());
             Commands.Add("FlaggedFilter", p => Filters.SetToFlagged());
             Commands.Add("SubmittedFilter", p => Filters.SetToSubmitted());
             Commands.Add("PublishedFilter", p => Filters.SetToPublished());
             Commands.Add("SelfPublishedFilter", p => Filters.SetToSelfPublished());
-
-            Commands.Add("ToggleFilter", o =>
-            {
-
-            });
-            // TODO
-            Commands.Add("CustomAdvancedFilter", (o) =>
-            {
-            //    isFilterVisible = !isFilterVisible;
-            //    advFilter.Icon = (isFilterVisible) ? LocalResources.Get("ImageChevronUp") : LocalResources.Get("ImageChevronDown");
-            //    OnPropertyChanged(nameof(FilterVisibility));
-            });
-
             Commands.Add("ExtractTitle", RunExtractTitle, CanRunExtractTitle);
             Commands.Add("ToggleFlag", RunToggleTitleFlagCommand, p => IsSelectedRowAccessible);
             Commands.Add("ClearFlags", RunClearTitleFlagsCommand);
@@ -280,13 +252,12 @@ namespace Restless.Panama.ViewModel
             SelfPublished = new TitleSelfPublishedController(this);
             Tags = new TitleTagController(this);
 
-            Filters = new TitleFilterController(this);
-            Filters.Apply();
-            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Loaded, new Action(() =>
+            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {
                 SelectedEditSection = 1;
+                Filters.SetListView(ListView);
+                Filters.ApplyFilter();
             }));
-                
         }
         #endregion
 
@@ -316,6 +287,17 @@ namespace Restless.Panama.ViewModel
             Published.Update();
             SelfPublished.Update();
             PrepareForOpenXml();
+        }
+
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return Filters?.OnDataRowFilter(item) ?? false;
+        }
+
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return base.OnDataRowCompare(item1, item2);
         }
 
         /// <summary>
@@ -403,8 +385,9 @@ namespace Restless.Panama.ViewModel
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
+            // TODO
             // Fires the filter's OnClosing in order that the filter can remove its event handlers.
-            Filters.CloseCommand.Execute(null);
+            //Filters.CloseCommand.Execute(null);
         }
         #endregion
 

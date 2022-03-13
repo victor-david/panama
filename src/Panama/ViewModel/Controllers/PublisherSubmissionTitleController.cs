@@ -110,10 +110,7 @@ namespace Restless.Panama.ViewModel
                 var ws = MainWindowViewModel.Instance.SwitchToWorkspace<TitleViewModel>();
                 if (ws != null)
                 {
-                    // in case the VM was already open with a filter applied.
-                    ws.Filters.ClearAll();
-                    // assigning the property applies the filter
-                    ws.Config.TitleFilter.Id = titleId;
+                    ws.Config.TitleFilter.SetIdFilter(titleId);
                     if (ws.MainView.Count == 1)
                     {
                         /* This method uses a funky work around */

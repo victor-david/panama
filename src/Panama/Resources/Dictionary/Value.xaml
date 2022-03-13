@@ -59,9 +59,6 @@
     <sys:Int32 x:Key="IntegerAnd">1</sys:Int32>
     <sys:Int32 x:Key="IntegerAndNot">2</sys:Int32>
 
-    <core:FilterState x:Key="FilterStateNo">No</core:FilterState>
-    <core:FilterState x:Key="FilterStateYes">Yes</core:FilterState>
-    <core:FilterState x:Key="FilterStateEither">Either</core:FilterState>
     <core:TagFilterCombine x:Key="FilterTagCombineOr">Or</core:TagFilterCombine>
     <core:TagFilterCombine x:Key="FilterTagCombineAnd">And</core:TagFilterCombine>
     <core:TagFilterCombine x:Key="FilterTagCombineAndNot">AndNot</core:TagFilterCombine>
