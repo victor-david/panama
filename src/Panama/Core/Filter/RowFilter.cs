@@ -91,7 +91,6 @@ namespace Restless.Panama.Core
         public void SetListView(ListCollectionView listView)
         {
             ListView = listView ?? throw new ArgumentNullException(nameof(listView));
-            OnListViewSet();
         }
 
         /// <summary>
@@ -154,17 +153,6 @@ namespace Restless.Panama.Core
         /// <param name="item">The data row</param>
         /// <returns>true the data row passes the filter; otherwise, false</returns>
         public abstract bool OnDataRowFilter(DataRow item);
-
-        /// <summary>
-        /// Called when <see cref="SetListView(ListCollectionView)"/> is called.
-        /// </summary>
-        /// <remarks>
-        /// Override in a derived class to establish settings on the list view
-        /// such as live filtering. The base method does nothing.
-        /// </remarks>
-        protected virtual void OnListViewSet()
-        {
-        }
 
         /// <summary>
         /// Increases the <see cref="ApplyFilter"/> method suspension level

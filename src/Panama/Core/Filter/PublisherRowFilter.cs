@@ -1,7 +1,6 @@
 ﻿using Restless.Toolkit.Controls;
 using System.Collections.Generic;
 using System.Data;
-using Columns = Restless.Panama.Database.Tables.PublisherTable.Defs.Columns;
 
 namespace Restless.Panama.Core
 {
@@ -28,7 +27,7 @@ namespace Restless.Panama.Core
         public override bool IsAnyFilterActive => base.IsAnyFilterActive || IsAnyEvaluatorActive();
 
         /// <summary>
-        /// Gets or sets the filter state for whether a publisher is active (non a goner)
+        /// Gets or sets the filter state for whether a publisher is active (not a goner)
         /// </summary>
         public ThreeWayState ActiveState
         {
@@ -228,23 +227,6 @@ namespace Restless.Panama.Core
                 filterEvaluators[PublisherRowFilterType.FollowUp].Evaluate(item) &&
                 filterEvaluators[PublisherRowFilterType.Paying].Evaluate(item) &&
                 filterEvaluators[PublisherRowFilterType.Goner].Evaluate(item);
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Protected methods
-        /// <inheritdoc/>
-        protected override void OnListViewSet()
-        {
-            using (ListView.DeferRefresh())
-            {
-                ListView.IsLiveFiltering = true;
-                ListView.LiveFilteringProperties.Add(Columns.Exclusive);
-                ListView.LiveFilteringProperties.Add(Columns.Followup);
-                ListView.LiveFilteringProperties.Add(Columns.Paying);
-                ListView.LiveFilteringProperties.Add(Columns.Goner);
-            }
         }
         #endregion
 
