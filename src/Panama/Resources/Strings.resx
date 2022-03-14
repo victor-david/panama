@@ -133,10 +133,6 @@
     <value>View and modify application settings</value>
     <comment>Tooltip used for settings command</comment>
   </data>
-  <data name="CommandTitle" xml:space="preserve">
-    <value>Titles</value>
-    <comment>Command text to view titles</comment>
-  </data>
   <data name="CommandTitleTooltip" xml:space="preserve">
     <value>Manage existing titles, create new titles, etc.</value>
     <comment>Tooltip text used for title command</comment>
@@ -276,9 +272,6 @@ Please make sure that {1} is set correctly in configuration settings. File speci
   </data>
   <data name="FilterPromptSubmission" xml:space="preserve">
     <value>Publisher or response type</value>
-  </data>
-  <data name="FilterPromptTitle" xml:space="preserve">
-    <value>Title</value>
   </data>
   <data name="CommandAddTag" xml:space="preserve">
     <value>Add a tag</value>
@@ -1002,5 +995,23 @@ Do you want to continue?</value>
   </data>
   <data name="MenuItemCreatePublisher" xml:space="preserve">
     <value>Create a new publisher record</value>
+  </data>
+  <data name="TextEverSubmitted" xml:space="preserve">
+    <value>Ever Submitted</value>
+  </data>
+  <data name="TextFlagged" xml:space="preserve">
+    <value>Flagged</value>
+  </data>
+  <data name="TextPublished" xml:space="preserve">
+    <value>Published</value>
+  </data>
+  <data name="TextReady" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="TextSelfPublished" xml:space="preserve">
+    <value>Self Published</value>
+  </data>
+  <data name="TextTitle" xml:space="preserve">
+    <value>Title</value>
   </data>
 </root>

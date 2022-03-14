@@ -10,6 +10,10 @@
         /// </summary>
         Id,
         /// <summary>
+        /// Filter according to the specified text
+        /// </summary>
+        Text,
+        /// <summary>
         /// Title is flagged as ready
         /// </summary>
         Ready,

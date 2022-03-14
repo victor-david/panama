@@ -31,6 +31,7 @@ namespace Restless.Panama.Core
             return filterType switch
             {
                 TitleRowFilterType.Id => EvaluateId,
+                TitleRowFilterType.Text => EvaluateText,
                 TitleRowFilterType.Ready => EvaluateReady,
                 TitleRowFilterType.Flagged => EvaluateFlagged,
                 TitleRowFilterType.CurrentlySubmitted => EvaluateCurrentlySubmitted,
@@ -45,6 +46,13 @@ namespace Restless.Panama.Core
         {
             long id = Filter.GetIdFilter();
             return id == -1 || id == (long)item[Columns.Id];
+        }
+
+        private bool EvaluateText(DataRow item)
+        {
+            return
+                string.IsNullOrWhiteSpace(Filter.Text) ||
+                item[Columns.Title].ToString().Contains(Filter.Text, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private bool EvaluateReady(DataRow item)

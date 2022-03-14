@@ -61,7 +61,7 @@ namespace Restless.Panama.Core
             get => text;
             set
             {
-                if (SetProperty(ref text, value) && IsTextFilterSupported)
+                if (IsTextFilterSupported && SetProperty(ref text, value))
                 {
                     ApplyFilter();
                 }

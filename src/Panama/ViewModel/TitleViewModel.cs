@@ -181,7 +181,6 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TitleViewModel()
         {
-            DisplayName = Strings.CommandTitle;
             Columns.Create("Id", TitleTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.CreateResource<BooleanToPathConverter>("R", TitleTable.Defs.Columns.Ready, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()

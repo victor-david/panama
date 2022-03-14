@@ -26,7 +26,7 @@ namespace Restless.Panama.Core
         protected override bool IsIdFilterSupported => true;
 
         /// <inheritdoc/>
-        protected override bool IsTextFilterSupported => false;
+        protected override bool IsTextFilterSupported => true;
 
         /// <inheritdoc/>
         public override bool IsAnyFilterActive => base.IsAnyFilterActive || IsAnyEvaluatorActive();
@@ -127,6 +127,7 @@ namespace Restless.Panama.Core
             filterEvaluators = new Dictionary<TitleRowFilterType, TitleFilterEvaluator>()
             {
                 { TitleRowFilterType.Id, new TitleFilterEvaluator(this, TitleRowFilterType.Id) },
+                { TitleRowFilterType.Text, new TitleFilterEvaluator(this, TitleRowFilterType.Text) },
                 { TitleRowFilterType.Ready, new TitleFilterEvaluator(this, TitleRowFilterType.Ready) },
                 { TitleRowFilterType.Flagged, new TitleFilterEvaluator(this, TitleRowFilterType.Flagged) },
                 { TitleRowFilterType.CurrentlySubmitted, new TitleFilterEvaluator(this, TitleRowFilterType.CurrentlySubmitted) },
@@ -196,6 +197,7 @@ namespace Restless.Panama.Core
         {
             return
                 filterEvaluators[TitleRowFilterType.Id].Evaluate(item) &&
+                filterEvaluators[TitleRowFilterType.Text].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Ready].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Flagged].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.CurrentlySubmitted].Evaluate(item) &&

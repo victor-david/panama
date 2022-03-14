@@ -749,15 +749,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Titles.
-        /// </summary>
-        public static string CommandTitle {
-            get {
-                return ResourceManager.GetString("CommandTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Filter options.
         /// </summary>
         public static string CommandTitleFilter {
@@ -1306,15 +1297,6 @@ namespace Restless.Panama.Resources {
         public static string FilterPromptTag {
             get {
                 return ResourceManager.GetString("FilterPromptTag", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title.
-        /// </summary>
-        public static string FilterPromptTitle {
-            get {
-                return ResourceManager.GetString("FilterPromptTitle", resourceCulture);
             }
         }
         
@@ -2072,6 +2054,24 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ever Submitted.
+        /// </summary>
+        public static string TextEverSubmitted {
+            get {
+                return ResourceManager.GetString("TextEverSubmitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flagged.
+        /// </summary>
+        public static string TextFlagged {
+            get {
+                return ResourceManager.GetString("TextFlagged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (none).
         /// </summary>
         public static string TextNone {
@@ -2095,6 +2095,24 @@ namespace Restless.Panama.Resources {
         public static string TextNotOpenXmlDocument {
             get {
                 return ResourceManager.GetString("TextNotOpenXmlDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published.
+        /// </summary>
+        public static string TextPublished {
+            get {
+                return ResourceManager.GetString("TextPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        public static string TextReady {
+            get {
+                return ResourceManager.GetString("TextReady", resourceCulture);
             }
         }
         
@@ -2126,11 +2144,29 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Self Published.
+        /// </summary>
+        public static string TextSelfPublished {
+            get {
+                return ResourceManager.GetString("TextSelfPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submitted.
         /// </summary>
         public static string TextSubmitted {
             get {
                 return ResourceManager.GetString("TextSubmitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string TextTitle {
+            get {
+                return ResourceManager.GetString("TextTitle", resourceCulture);
             }
         }
         
