@@ -54,7 +54,8 @@ namespace Restless.Panama.ViewModel
         public TitleVersionRenameWindowViewModel(long titleId)
         {
             renameView = new TitleVersionRenameItemCollection();
-            MainSource.Source = renameView;
+            // TODO
+            // MainSource.Source = renameView;
             Columns.Create("Ver", TitleVersionRenameItem.Properties.Version)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);

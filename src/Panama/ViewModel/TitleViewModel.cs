@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
-using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace Restless.Panama.ViewModel
@@ -250,6 +249,9 @@ namespace Restless.Panama.ViewModel
             SelfPublished = new TitleSelfPublishedController(this);
             Tags = new TitleTagController(this);
 
+            ListView.IsLiveSorting = true;
+            ListView.LiveSortingProperties.Add(TitleTable.Defs.Columns.Written);
+
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {
                 SelectedEditSection = 1;
@@ -293,9 +295,10 @@ namespace Restless.Panama.ViewModel
             return Filters?.OnDataRowFilter(item) ?? false;
         }
 
+        /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return base.OnDataRowCompare(item1, item2);
+            return DataRowCompareDateTime(item2, item1, TitleTable.Defs.Columns.Written);
         }
 
         /// <summary>
@@ -309,6 +312,7 @@ namespace Restless.Panama.ViewModel
                 Table.Save();
                 Filters.ClearAll();
                 Columns.RestoreDefaultSort();
+                ForceListViewSort();
             }
         }
 

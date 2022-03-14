@@ -15,7 +15,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for the orphan finder tool.
     /// </summary>
-    public class ToolTitleListViewModel : DataGridViewModelBase
+    public class ToolTitleListViewModel : ApplicationViewModel // DataGridViewModelBase
     {
         #region Private
         private string text;

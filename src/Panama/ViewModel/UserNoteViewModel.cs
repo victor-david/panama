@@ -107,8 +107,9 @@ namespace Restless.Panama.ViewModel
         #region Private Methods
         private void AddViewSourceSortDescriptions()
         {
-            MainSource.SortDescriptions.Clear();
-            MainSource.SortDescriptions.Add(new SortDescription(UserNoteTable.Defs.Columns.Title, ListSortDirection.Ascending));
+            // TODO
+            //MainSource.SortDescriptions.Clear();
+            //MainSource.SortDescriptions.Add(new SortDescription(UserNoteTable.Defs.Columns.Title, ListSortDirection.Ascending));
         }
         #endregion
     }

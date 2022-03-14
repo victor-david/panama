@@ -13,7 +13,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides a controller that manages the tags that may be assigned to a title.
     /// </summary>
-    public class TitleTagController : TitleController
+    public class TitleTagController : ControllerBase<TitleViewModel, TitleTable>
     {
         #region Private
         private long selectedTitleId;

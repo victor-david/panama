@@ -19,7 +19,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides a controller that manages selection and updates of published titles.
     /// </summary>
-    public class TitlePublishedController : TitleController
+    public class TitlePublishedController : ControllerBase<TitleViewModel, TitleTable>
     {
         #region Private
         #endregion

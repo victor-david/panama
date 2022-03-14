@@ -17,7 +17,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides a controller that displays the history of sibmissions for a title.
     /// </summary>
-    public class TitleSubmissionController : TitleController
+    public class TitleSubmissionController : ControllerBase<TitleViewModel, TitleTable>
     {
         #region Private
         #endregion
@@ -94,9 +94,10 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private void AddViewSourceSortDescriptions()
         {
-            MainSource.SortDescriptions.Clear();
-            MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.SubmittedCalc, ListSortDirection.Descending));
-            MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Submitted, ListSortDirection.Descending));
+            // TODO
+            //MainSource.SortDescriptions.Clear();
+            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.SubmittedCalc, ListSortDirection.Descending));
+            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Submitted, ListSortDirection.Descending));
         }
         #endregion
     }

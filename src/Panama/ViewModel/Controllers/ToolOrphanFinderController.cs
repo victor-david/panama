@@ -67,9 +67,9 @@ namespace Restless.Panama.ViewModel
             //    });
             //};
 
-            Owner.Commands.Add("OpenFile", RunOpenFileCommand);
-            Owner.Commands.Add("DeleteFile", RunDeleteFileCommand, (o) => Owner.SelectedItem != null);
-            UpdateNotFoundHeader();
+            //Owner.Commands.Add("OpenFile", RunOpenFileCommand);
+            //Owner.Commands.Add("DeleteFile", RunDeleteFileCommand, (o) => Owner.SelectedItem != null);
+            //UpdateNotFoundHeader();
         }
         #endregion
 
@@ -102,22 +102,24 @@ namespace Restless.Panama.ViewModel
 
         private void RunOpenFileCommand(object o)
         {
-            if (Owner.SelectedItem is FileScanDisplayObject row)
-            {
-                OpenHelper.OpenFile(Paths.Title.WithRoot(row.FileName));
-            }
+            // TODO
+            //if (Owner.SelectedItem is FileScanDisplayObject row)
+            //{
+            //    OpenHelper.OpenFile(Paths.Title.WithRoot(row.FileName));
+            //}
         }
 
         private void RunDeleteFileCommand(object o)
         {
-            if (Owner.SelectedItem is FileScanDisplayObject row)
-            {
-                // TODO
-                //if (FileOperations.SendToRecycle(Paths.Title.WithRoot(row.FileName)))
-                //{
-                //    RemoveFromNotFound(row);
-                //}
-            }
+            // TODO
+            //if (Owner.SelectedItem is FileScanDisplayObject row)
+            //{
+            //    // TODO
+            //    //if (FileOperations.SendToRecycle(Paths.Title.WithRoot(row.FileName)))
+            //    //{
+            //    //    RemoveFromNotFound(row);
+            //    //}
+            //}
         }
         #endregion
     }

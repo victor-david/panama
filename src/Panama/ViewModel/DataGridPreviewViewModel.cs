@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
+using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Core.Utility;
 using System;
 using System.Windows.Media.Imaging;
@@ -16,7 +17,7 @@ namespace Restless.Panama.ViewModel
     /// for a view model that can preview the selected data grid row.
     /// This class must be inherited.
     /// </summary>
-    public abstract class DataGridPreviewViewModel : DataGridViewModelBase
+    public abstract class DataGridPreviewViewModel : DataGridViewModel<DummyTable>
     {
         #region Private
         private PreviewMode previewMode;
@@ -128,16 +129,16 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected methods
-        /// <summary>
-        /// Called when the selected grid item changes.
-        /// If <see cref="IsPreviewActive"/> is true, calls <see cref="OnPreview(object)"/>.
-        /// </summary>
-        protected override void OnSelectedItemChanged()
-        {
-            PreviewText = null;
-            PreviewImageSource = null;
-            PerformPreviewIf();
-        }
+        ///// <summary>
+        ///// Called when the selected grid item changes.
+        ///// If <see cref="IsPreviewActive"/> is true, calls <see cref="OnPreview(object)"/>.
+        ///// </summary>
+        //protected override void OnSelectedItemChanged()
+        //{
+        //    PreviewText = null;
+        //    PreviewImageSource = null;
+        //    PerformPreviewIf();
+        //}
 
         /// <summary>
         /// Performs a default preview action. A derived class can use this method

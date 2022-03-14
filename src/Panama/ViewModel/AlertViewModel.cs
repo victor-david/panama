@@ -111,8 +111,9 @@ namespace Restless.Panama.ViewModel
         #region Private Methods
         private void AddViewSourceSortDescriptions()
         {
-            MainSource.SortDescriptions.Clear();
-            MainSource.SortDescriptions.Add(new SortDescription(AlertTable.Defs.Columns.Date, ListSortDirection.Ascending));
+            // TODO
+            //MainSource.SortDescriptions.Clear();
+            //MainSource.SortDescriptions.Add(new SortDescription(AlertTable.Defs.Columns.Date, ListSortDirection.Ascending));
         }
 
         private void RunBrowseCommand(object parm)

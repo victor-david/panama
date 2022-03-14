@@ -87,18 +87,19 @@ namespace Restless.Panama.ViewModel
 
         private void AddViewSourceSortDescriptions()
         {
-            MainSource.SortDescriptions.Clear();
-            MainSource.GroupDescriptions.Clear();
-            // BUG: If grouped, and the first clicked parent has zero children, all the columns are scrunched together,
-            // and clicking on another parent (with children) does not change the columns.
-            // If not grouped, still scrunched if the first clicked parent has no children, but subsequent clicks
-            // on parents that do have children restore the columns.
-            // UPDATE 2018-08-25:
-            //   Workaround implemented. By binding the visibility of the data grid to the child count (0=hidden, otherwise visible)
-            //   the columns display as they should.
-            MainSource.GroupDescriptions.Add(new PropertyGroupDescription(SubmissionTable.Defs.Columns.Joined.Submitted, new DateToFormattedDateConverter()));
-            MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Submitted, ListSortDirection.Descending));
-            MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Title, ListSortDirection.Ascending));
+            // TODO
+            //MainSource.SortDescriptions.Clear();
+            //MainSource.GroupDescriptions.Clear();
+            //// BUG: If grouped, and the first clicked parent has zero children, all the columns are scrunched together,
+            //// and clicking on another parent (with children) does not change the columns.
+            //// If not grouped, still scrunched if the first clicked parent has no children, but subsequent clicks
+            //// on parents that do have children restore the columns.
+            //// UPDATE 2018-08-25:
+            ////   Workaround implemented. By binding the visibility of the data grid to the child count (0=hidden, otherwise visible)
+            ////   the columns display as they should.
+            //MainSource.GroupDescriptions.Add(new PropertyGroupDescription(SubmissionTable.Defs.Columns.Joined.Submitted, new DateToFormattedDateConverter()));
+            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Submitted, ListSortDirection.Descending));
+            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Title, ListSortDirection.Ascending));
         }
 
         private void RunGoToTitleRecordCommand(object o)
@@ -114,7 +115,8 @@ namespace Restless.Panama.ViewModel
                     if (ws.MainView.Count == 1)
                     {
                         /* This method uses a funky work around */
-                        ws.SetSelectedItem(ws.MainView[0]);
+                        // TODO
+                        //ws.SetSelectedItem(ws.MainView[0]);
                         /* Can be assigned directly, but doesn't highlight the row */
                         //ws.SelectedItem = ws.DataView[0];
                     }

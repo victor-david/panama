@@ -17,6 +17,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Data;
 using Restless.Panama.Core;
+using Restless.Toolkit.Controls;
 
 namespace Restless.Panama.ViewModel
 {
@@ -24,9 +25,10 @@ namespace Restless.Panama.ViewModel
     /// Extends DataGridViewModelBase to provide common functionality for views that use DataGrid to display table rows. This class must be interited.
     /// </summary>
     /// <typeparam name="T">The table type derived from <see cref="TableBase"/></typeparam>
-    public abstract class DataGridViewModel<T> : DataGridViewModelBase where T : TableBase
+    public abstract class DataGridViewModel<T> : ApplicationViewModel where T : TableBase
     {
         #region Private
+        private object selectedItem;
         private bool isCustomFilterOpen;
         private string filterText;
         #endregion
@@ -49,9 +51,38 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets the list view. The UI binds to this property
+        /// Gets the list view
         /// </summary>
         public ListCollectionView ListView
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets or sets the selected item of the DataGrid.
+        /// </summary>
+        public object SelectedItem
+        {
+            get => selectedItem;
+            set
+            {
+                SetProperty(ref selectedItem, value);
+                OnSelectedItemChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets the collection of columns
+        /// </summary>
+        public DataGridColumnCollection Columns
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the collection of menu items
+        /// </summary>
+        public MenuItemCollection MenuItems
         {
             get;
         }
@@ -190,7 +221,6 @@ namespace Restless.Panama.ViewModel
         protected DataGridViewModel()
         {
             MainView = new DataView(Table);
-            MainSource.Source = MainView;
             MainView.ListChanged += DataViewListChanged;
 
             ListView = new ListCollectionView(MainView);
@@ -199,6 +229,9 @@ namespace Restless.Panama.ViewModel
                 ListView.CustomSort = new GenericComparer<DataRowView>((x, y) => OnDataRowCompare(x.Row, y.Row));
                 ListView.Filter = (item) => item is DataRowView view && OnDataRowFilter(view.Row);
             }
+
+            Columns = new DataGridColumnCollection();
+            MenuItems = new MenuItemCollection();
 
             AddCommand = RelayCommand.Create(RunAddCommand, CanRunAddCommand);
             DeleteCommand = RelayCommand.Create(RunDeleteCommand, CanRunDeleteCommand);
@@ -236,16 +269,25 @@ namespace Restless.Panama.ViewModel
             MainView.ListChanged -= DataViewListChanged;
             MainView = new DataView(table);
             MainView.ListChanged += DataViewListChanged;
-            MainSource.Source = MainView;
+        }
+
+        /// <summary>
+        /// Forces <see cref="ListView"/> to refresh its sorting
+        /// </summary>
+        protected void ForceListViewSort()
+        {
+            using (ListView.DeferRefresh())
+            {
+                ListView.CustomSort = new GenericComparer<DataRowView>((x, y) => OnDataRowCompare(x.Row, y.Row));
+            }
         }
 
         /// <summary>
         /// Override in a derived class to perform actions when the selected item changes. 
         /// Always call the base implementation to perform standard operations.
         /// </summary>
-        protected override void OnSelectedItemChanged()
+        protected virtual void OnSelectedItemChanged()
         {
-            base.OnSelectedItemChanged();
             OnPropertyChanged(nameof(SelectedRow));
             OnPropertyChanged(nameof(EditVisibility));
         }

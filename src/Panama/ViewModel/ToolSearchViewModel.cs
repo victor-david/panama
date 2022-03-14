@@ -83,7 +83,8 @@ namespace Restless.Panama.ViewModel
             previewColumns = new List<DataGridColumn>();
 
             resultsView = new ObservableCollection<WindowsSearchResult>();
-            MainSource.Source = resultsView;
+            // TODO
+            // MainSource.Source = resultsView;
 
             Columns.CreateImage<BooleanToImageConverter>("V", "Extended.IsVersion");
             Columns.Create("Type", WindowsSearchResult.GetBindingReference(SysProps.System.ItemType)).MakeFixedWidth(FixedWidth.W048);
@@ -234,7 +235,8 @@ namespace Restless.Panama.ViewModel
                         if (ws.MainView.Count == 1)
                         {
                             /* This method uses a funky work around */
-                            ws.SetSelectedItem(ws.MainView[0]);
+                            // TODO
+                            // ws.SetSelectedItem(ws.MainView[0]);
                             /* Can be assigned directly, but doesn't highlight the row */
                             //ws.SelectedItem = ws.DataView[0];
                         }

@@ -14,7 +14,7 @@
     <Grid>
         <tk:DataGrid
             Style="{StaticResource DataGridEditLockedStyle}"
-            ItemsSource="{Binding Versions.MainSource.View}"
+            ItemsSource="{Binding Versions.ListView}"
             SelectedItem="{Binding Versions.SelectedItem}"
             tk:DataGridColumns.Columns="{Binding Versions.Columns}" 
             ContextMenuOpeningCommand="{Binding Versions.Commands[ContextMenuOpening]}">

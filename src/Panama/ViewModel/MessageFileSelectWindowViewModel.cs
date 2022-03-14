@@ -71,7 +71,8 @@ namespace Restless.Panama.ViewModel
                 if (SetProperty(ref displayFilterSelection, value))
                 {
                     Config.SubmissionMessageDisplay = value.Item1;
-                    MainSource.View.Refresh();
+                    // TODO
+                    // MainSource.View.Refresh();
                 }
             }
         }
@@ -93,10 +94,11 @@ namespace Restless.Panama.ViewModel
 
             this.folder = folder;
             resultsView = new ObservableCollection<MimeKitMessage>();
-            MainSource.Source = resultsView;
-            MainSource.Filter += MainSourceFilter;
+            // TODO
+            //MainSource.Source = resultsView;
+            //MainSource.Filter += MainSourceFilter;
 
-            MainSource.SortDescriptions.Add(new SortDescription(nameof(MimeKitMessage.MessageDateUtc), ListSortDirection.Descending));
+            //MainSource.SortDescriptions.Add(new SortDescription(nameof(MimeKitMessage.MessageDateUtc), ListSortDirection.Descending));
 
             Columns.CreateImage<BooleanToImageConverter>("E", nameof(MimeKitMessage.IsError), "ImageExclamation")
                 .AddToolTip(Strings.TooltipMessageError);

@@ -21,7 +21,7 @@ namespace Restless.Panama.ViewModel
     /// This controller displays submissions that are available for adding a title.
     /// To be available, a submission must not yet have a response date and must be unlocked.
     /// </remarks>
-    public class TitleAddToSubmissionController : TitleController
+    public class TitleAddToSubmissionController : ControllerBase<TitleViewModel, TitleTable>
     {
         #region Private
         private bool visible = false;

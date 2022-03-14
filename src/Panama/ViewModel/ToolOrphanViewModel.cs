@@ -46,7 +46,8 @@ namespace Restless.Panama.ViewModel
         {
             DisplayName = Strings.CommandToolOrphan;
             Controller = new ToolOrphanFinderController(this);
-            MainSource.Source = Controller.NotFound;
+            // TODO
+            //MainSource.Source = Controller.NotFound;
 
             Commands.Add("Begin", (o) => Controller.Run());
             Columns.Create("Modified", nameof(FileScanDisplayObject.LastModified)).MakeDate();
@@ -108,8 +109,9 @@ namespace Restless.Panama.ViewModel
         #region Private Methods
         private void AddViewSourceSortDescriptions()
         {
-            MainSource.SortDescriptions.Clear();
-            MainSource.SortDescriptions.Add(new SortDescription("FileName", ListSortDirection.Ascending));
+            // TODO
+            //MainSource.SortDescriptions.Clear();
+            //MainSource.SortDescriptions.Add(new SortDescription("FileName", ListSortDirection.Ascending));
         }
 
         private void RunCreateTitleCommand(object parm)

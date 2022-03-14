@@ -139,8 +139,9 @@ namespace Restless.Panama.ViewModel
 
         private void AddViewSourceSortDescriptions()
         {
-            MainSource.SortDescriptions.Clear();
-            MainSource.SortDescriptions.Add(new SortDescription(LinkTable.Defs.Columns.Name, ListSortDirection.Ascending));
+            // TODO
+            //MainSource.SortDescriptions.Clear();
+            //MainSource.SortDescriptions.Add(new SortDescription(LinkTable.Defs.Columns.Name, ListSortDirection.Ascending));
         }
         #endregion
     }
