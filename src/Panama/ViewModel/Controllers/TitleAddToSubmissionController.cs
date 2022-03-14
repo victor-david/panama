@@ -61,7 +61,7 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Date", SubmissionBatchTable.Defs.Columns.Submitted).MakeDate();
 
             Columns.CreateImage<BooleanToImageConverter>("E", SubmissionBatchTable.Defs.Columns.Joined.PublisherExclusive, "ImageExclamation")
-                .AddToolTip(Strings.TooltipPublisherExclusive);
+                .AddToolTip(Strings.ToolTipPublisherExclusive);
 
             Columns.Create("Publisher", SubmissionBatchTable.Defs.Columns.Joined.Publisher);
 

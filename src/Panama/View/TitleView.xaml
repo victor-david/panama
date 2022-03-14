@@ -5,7 +5,7 @@
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:cv="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
-    xmlns:view="clr-namespace:Restless.Panama.View"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
@@ -149,13 +149,14 @@
                 Text="{Binding SelectedTitle.Title}"/>
         </StatusBar>
         
+        <!-- Editing zone -->
         <Border
             Grid.Row="1" Grid.Column="2"
             Style="{StaticResource BorderEditContainerStyle}"
             Visibility="{Binding EditVisibility}">
-            <view:TitleEditContainer/>
+            
+            <vw:TitleEditContainer/>
+            
         </Border>
-
     </Grid>
-    <!-- end main grid-->
 </UserControl>

@@ -5,7 +5,7 @@
     xmlns:cv="clr-namespace:Restless.Panama.Core"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
-    xmlns:view="clr-namespace:Restless.Panama.View"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
@@ -36,19 +36,19 @@
             <tk:IconButton 
                 Content="Active"
                 ToolTip="{x:Static r:Strings.ToolTipPublisherFilterActive}"
-                Icon="{StaticResource SquareSmallGreenIconKey}" 
+                Icon="{StaticResource SquareSmallRedIconKey}" 
                 Command="{Binding Commands[ActiveFilter]}"/>
 
             <tk:IconButton 
                 Content="Open"
                 ToolTip="{x:Static r:Strings.ToolTipPublisherFilterHaveSub}"
-                Icon="{StaticResource SquareSmallGreenIconKey}" 
+                Icon="{StaticResource SquareSmallGrayIconKey}" 
                 Command="{Binding Commands[HaveSubFilter]}"/>
             
             <tk:IconButton 
                 Content="In Period"
                 ToolTip="{x:Static r:Strings.ToolTipPublisherFilterInPeriod}"
-                Icon="{StaticResource SquareSmallGreenIconKey}" 
+                Icon="{StaticResource SquareSmallBlueIconKey}" 
                 Command="{Binding Commands[InPeriodFilter]}"/>
 
             <tk:IconButton 
@@ -147,17 +147,17 @@
         <StatusBar Grid.Column="2" Margin="4,0,0,0">
             <TextBlock 
                 Style="{StaticResource TitleDisplayTextBlockStyle}"
-                Text="{Binding SelectedTitle.Title}"/>
+                Text="{Binding SelectedPublisher.Name}"/>
         </StatusBar>
 
+        <!-- Editing zone -->
         <Border
             Grid.Row="1" Grid.Column="2"
             Style="{StaticResource BorderEditContainerStyle}"
             Visibility="{Binding EditVisibility}">
 
-            <!--<view:/>  TODO -->
-            
-        </Border>
+            <vw:PublisherEditContainer/>
 
+        </Border>
     </Grid>
 </UserControl>

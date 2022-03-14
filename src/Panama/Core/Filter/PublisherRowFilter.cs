@@ -1,16 +1,17 @@
 ﻿using Restless.Toolkit.Controls;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Columns = Restless.Panama.Database.Tables.PublisherTable.Defs.Columns;
 
 namespace Restless.Panama.Core
 {
+    /// <summary>
+    /// Provides filtering capabilities for publisher rows
+    /// </summary>
     public class PublisherRowFilter : RowFilter
     {
         #region Private
+        private readonly Dictionary<PublisherRowFilterType, PublisherFilterEvaluator> filterEvaluators;
         private ThreeWayState activeState;
         private ThreeWayState openState;
         private ThreeWayState inPeriodState;
@@ -19,6 +20,8 @@ namespace Restless.Panama.Core
         private ThreeWayState payingState;
         private ThreeWayState gonerState;
         #endregion
+
+        /************************************************************************/
 
         #region Properties
         /// <inheritdoc/>
@@ -33,7 +36,7 @@ namespace Restless.Panama.Core
             set
             {
                 SetProperty(ref activeState, value);
-                //SetFilterEvaluatorState(TitleRowFilterType.Ready, value);
+                SetFilterEvaluatorState(PublisherRowFilterType.Active, value);
                 ApplyFilter();
             }
         }
@@ -47,7 +50,7 @@ namespace Restless.Panama.Core
             set
             {
                 SetProperty(ref openState, value);
-                //SetFilterEvaluatorState(TitleRowFilterType.Ready, value);
+                SetFilterEvaluatorState(PublisherRowFilterType.OpenSubmission, value);
                 ApplyFilter();
             }
         }
@@ -61,7 +64,7 @@ namespace Restless.Panama.Core
             set
             {
                 SetProperty(ref inPeriodState, value);
-                //SetFilterEvaluatorState(TitleRowFilterType.Ready, value);
+                SetFilterEvaluatorState(PublisherRowFilterType.InPeriod, value);
                 ApplyFilter();
             }
         }
@@ -75,7 +78,7 @@ namespace Restless.Panama.Core
             set
             {
                 SetProperty(ref exclusiveState, value);
-                //SetFilterEvaluatorState(TitleRowFilterType.Ready, value);
+                SetFilterEvaluatorState(PublisherRowFilterType.Exclusive, value);
                 ApplyFilter();
             }
         }
@@ -89,7 +92,7 @@ namespace Restless.Panama.Core
             set
             {
                 SetProperty(ref followUpState, value);
-                //SetFilterEvaluatorState(TitleRowFilterType.Ready, value);
+                SetFilterEvaluatorState(PublisherRowFilterType.FollowUp, value);
                 ApplyFilter();
             }
         }
@@ -103,7 +106,7 @@ namespace Restless.Panama.Core
             set
             {
                 SetProperty(ref payingState, value);
-                //SetFilterEvaluatorState(TitleRowFilterType.Ready, value);
+                SetFilterEvaluatorState(PublisherRowFilterType.Paying, value);
                 ApplyFilter();
             }
         }
@@ -117,20 +120,32 @@ namespace Restless.Panama.Core
             set
             {
                 SetProperty(ref gonerState, value);
-                //SetFilterEvaluatorState(TitleRowFilterType.Ready, value);
+                SetFilterEvaluatorState(PublisherRowFilterType.Goner, value);
                 ApplyFilter();
             }
         }
         #endregion
 
-
         /************************************************************************/
 
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PublisherRowFilter"/> class
+        /// </summary>
         public PublisherRowFilter()
         {
-
+            filterEvaluators = new Dictionary<PublisherRowFilterType, PublisherFilterEvaluator>()
+            {
+                { PublisherRowFilterType.Active, new PublisherFilterEvaluator(this, PublisherRowFilterType.Active) },
+                { PublisherRowFilterType.OpenSubmission, new PublisherFilterEvaluator(this, PublisherRowFilterType.OpenSubmission) },
+                { PublisherRowFilterType.InPeriod, new PublisherFilterEvaluator(this, PublisherRowFilterType.InPeriod) },
+                { PublisherRowFilterType.Exclusive, new PublisherFilterEvaluator(this, PublisherRowFilterType.Exclusive) },
+                { PublisherRowFilterType.FollowUp, new PublisherFilterEvaluator(this, PublisherRowFilterType.FollowUp) },
+                { PublisherRowFilterType.Paying, new PublisherFilterEvaluator(this, PublisherRowFilterType.Paying) },
+                { PublisherRowFilterType.Goner, new PublisherFilterEvaluator(this, PublisherRowFilterType.Goner) },
+            };
         }
-
+        #endregion
 
         /************************************************************************/
 
@@ -146,50 +161,104 @@ namespace Restless.Panama.Core
             DecreaseSuspendLevel();
         }
 
+        /// <summary>
+        /// Sets <see cref="ActiveState"/> to on, clearing all other filters
+        /// </summary>
         public void SetToActive()
         {
             SetCustomPropertyState(() => ActiveState = ThreeWayState.On);
         }
 
+        /// <summary>
+        /// Sets <see cref="OpenState"/> to on, clearing all other filters
+        /// </summary>
         public void SetToOpenSubmission()
         {
             SetCustomPropertyState(() => OpenState = ThreeWayState.On);
         }
 
+        /// <summary>
+        /// Sets <see cref="InPeriodState"/> to on, clearing all other filters
+        /// </summary>
         public void SetToInPeriod()
         {
             SetCustomPropertyState(() => InPeriodState = ThreeWayState.On);
         }
 
+        /// <summary>
+        /// Sets <see cref="ExclusiveState"/> to on, clearing all other filters
+        /// </summary>
         public void SetToExclusive()
         {
             SetCustomPropertyState(() => ExclusiveState = ThreeWayState.On);
         }
 
+        /// <summary>
+        /// Sets <see cref="FollowUpState"/> to on, clearing all other filters
+        /// </summary>
         public void SetToFollowup()
         {
             SetCustomPropertyState(() => FollowUpState = ThreeWayState.On);
         }
 
+        /// <summary>
+        /// Sets <see cref="PayingState"/> to on, clearing all other filters
+        /// </summary>
         public void SetToPaying()
         {
             SetCustomPropertyState(() => PayingState = ThreeWayState.On);
         }
 
+        /// <summary>
+        /// Sets <see cref="GonerState"/> to on, clearing all other filters
+        /// </summary>
         public void SetToGoner()
         {
             SetCustomPropertyState(() => GonerState = ThreeWayState.On);
         }
 
+        /// <inheritdoc/>
         public override bool OnDataRowFilter(DataRow item)
         {
-            return true;
+            return
+                filterEvaluators[PublisherRowFilterType.Active].Evaluate(item) &&
+                filterEvaluators[PublisherRowFilterType.OpenSubmission].Evaluate(item) &&
+                filterEvaluators[PublisherRowFilterType.InPeriod].Evaluate(item) &&
+                filterEvaluators[PublisherRowFilterType.Exclusive].Evaluate(item) &&
+                filterEvaluators[PublisherRowFilterType.FollowUp].Evaluate(item) &&
+                filterEvaluators[PublisherRowFilterType.Paying].Evaluate(item) &&
+                filterEvaluators[PublisherRowFilterType.Goner].Evaluate(item);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Protected methods
+        /// <inheritdoc/>
+        protected override void OnListViewSet()
+        {
+            using (ListView.DeferRefresh())
+            {
+                ListView.IsLiveFiltering = true;
+                ListView.LiveFilteringProperties.Add(Columns.Exclusive);
+                ListView.LiveFilteringProperties.Add(Columns.Followup);
+                ListView.LiveFilteringProperties.Add(Columns.Paying);
+                ListView.LiveFilteringProperties.Add(Columns.Goner);
+            }
         }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
+        private void SetFilterEvaluatorState(PublisherRowFilterType key, ThreeWayState state)
+        {
+            if (filterEvaluators != null)
+            {
+                filterEvaluators[key].SetState(state);
+            }
+        }
+
         private void ClearAllPropertyState()
         {
             ActiveState = ThreeWayState.Neutral;
@@ -203,19 +272,18 @@ namespace Restless.Panama.Core
 
         private bool IsAnyEvaluatorActive()
         {
-            //if (filterEvaluators != null)
-            //{
-            //    foreach (KeyValuePair<TitleRowFilterType, TitleFilterEvaluator> pair in filterEvaluators)
-            //    {
-            //        if (filterEvaluators[pair.Key].IsActive)
-            //        {
-            //            return true;
-            //        }
-            //    }
-            //}
-            return true; // TODO - false
+            if (filterEvaluators != null)
+            {
+                foreach (KeyValuePair<PublisherRowFilterType, PublisherFilterEvaluator> pair in filterEvaluators)
+                {
+                    if (filterEvaluators[pair.Key].IsActive)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
-
         #endregion
     }
 }

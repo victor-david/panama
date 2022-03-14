@@ -43,4 +43,19 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="View\EditControls\PublisherEditPeriod.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\EditControls\PublisherEditSubmission.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\EditControls\PublisherEditCredential.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

@@ -10,10 +10,11 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
-using Restless.Toolkit.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -25,12 +26,31 @@ namespace Restless.Panama.ViewModel
     public class PublisherViewModel : DataGridViewModel<PublisherTable>
     {
         #region Private
-        private bool isFilterVisible;
+        private int selectedEditSection;
+        private PublisherRow selectedPublisher;
         #endregion
 
         /************************************************************************/
 
         #region Properties
+        /// <summary>
+        /// Gets or sets the selected edit section
+        /// </summary>
+        public int SelectedEditSection
+        {
+            get => selectedEditSection;
+            set => SetProperty(ref selectedEditSection, value);
+        }
+
+        /// <summary>
+        /// Gets the currently selected publisher row
+        /// </summary>
+        public PublisherRow SelectedPublisher
+        {
+            get => selectedPublisher;
+            private set => SetProperty(ref selectedPublisher, value);
+        }
+
         /// <summary>
         /// Gets the submission period controller.
         /// </summary>
@@ -58,19 +78,10 @@ namespace Restless.Panama.ViewModel
             private set;
         }
 
-
         /// <summary>
-        /// Gets the filters controller for this VM
+        /// Gets the filters
         /// </summary>
         public PublisherRowFilter Filters => Config.PublisherFilter;
-
-        /// <summary>
-        /// Gets a visibility value that determines if the title filter is visible.
-        /// </summary>
-        public Visibility FilterVisibility
-        {
-            get => (isFilterVisible) ? Visibility.Visible : Visibility.Collapsed;
-        }
 
         /// <summary>
         /// Gets an enumerable of <see cref="CredentialTable.RowObject"/> items. The UI binds to this list.
@@ -100,9 +111,21 @@ namespace Restless.Panama.ViewModel
         {
             DisplayName = Strings.CommandPublisher;
             Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod).AddToolTip(Strings.ToolTipPublisherInPeriod);
-            Columns.CreateImage<BooleanToImageConverter>("E", PublisherTable.Defs.Columns.Exclusive, "ImageExclamation").AddToolTip(Strings.TooltipPublisherExclusive);
-            Columns.CreateImage<BooleanToImageConverter>("P", PublisherTable.Defs.Columns.Paying, "ImageMoney").AddToolTip(Strings.ToolTipPublisherPay);
+
+            Columns.CreateResource<BooleanToPathConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod, ResourceKeys.Icon.SquareSmallBlueIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W034)
+                .AddToolTip(Strings.ToolTipPublisherInPeriod);
+
+            Columns.CreateResource<BooleanToPathConverter>("E", PublisherTable.Defs.Columns.Exclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W034)
+                .AddToolTip(Strings.ToolTipPublisherExclusive);
+
+            Columns.CreateResource<BooleanToPathConverter>("P", PublisherTable.Defs.Columns.Paying, ResourceKeys.Icon.SquareSmallGreenIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W034)
+                .AddToolTip(Strings.ToolTipPublisherPay);
 
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
             Columns.Create("Url", PublisherTable.Defs.Columns.Url);
@@ -147,17 +170,19 @@ namespace Restless.Panama.ViewModel
             // Credentials = DatabaseController.Instance.GetTable<CredentialTable>().GetCredentialList();
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandCreateSubmission, Commands["AddSubmission"]).AddIconResource(ResourceKeys.Icon.PlusIconKey);
-            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.MenuItemCreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemCreateSubmission, Commands["AddSubmission"]).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
             MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeletePublisher, DeleteCommand).AddImageResource("ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandDeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
 
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {
-                //SelectedEditSection = 1;
+                SelectedEditSection = 1;
                 Filters.SetListView(ListView);
                 Filters.ApplyFilter();
             }));
@@ -173,9 +198,21 @@ namespace Restless.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
+            SelectedPublisher = PublisherRow.Create(SelectedRow);
             Periods.Update();
             Submissions.Update();
             Titles.Update();
+        }
+
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return Filters?.OnDataRowFilter(item) ?? false;
+        }
+
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return base.OnDataRowCompare(item1, item2);
         }
 
         /// <summary>
@@ -192,7 +229,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunAddCommand()
         {
-            if (Messages.ShowYesNo(Strings.ConfirmationAddPublisher))
+            if (MessageWindow.ShowYesNo(Strings.ConfirmationAddPublisher))
             {
                 Table.AddDefaultRow();
                 Table.Save();
@@ -244,10 +281,10 @@ namespace Restless.Panama.ViewModel
                 int childRowCount = SelectedRow.GetChildRows(PublisherTable.Defs.Relations.ToSubmissionBatch).Length;
                 if (childRowCount > 0)
                 {
-                    Messages.ShowError(string.Format(Strings.InvalidOpCannotDeletePublisher, childRowCount));
+                    MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.InvalidOpCannotDeletePublisher, childRowCount));
                     return;
                 }
-                if (Messages.ShowYesNo(Strings.ConfirmationDeletePublisher))
+                if (MessageWindow.ShowYesNo(Strings.ConfirmationDeletePublisher))
                 {
                     SelectedRow.Delete();
                     Table.Save();
@@ -270,15 +307,16 @@ namespace Restless.Panama.ViewModel
         #region Private Methods
         private void RunAddSubmissionCommand(object o)
         {
-            if (SelectedRow != null)
+            if (SelectedPublisher != null)
             {
-                long pubId = (long)SelectedRow[PublisherTable.Defs.Columns.Id];
-                string pubName = SelectedRow[PublisherTable.Defs.Columns.Name].ToString();
-                int openCount = DatabaseController.Instance.GetTable<SubmissionBatchTable>().OpenSubmissionCount(pubId);
-                string msg = (openCount == 0) ? string.Format(Strings.FormatStringCreateSubmission, pubName) : string.Format(Strings.FormatStringCreateSubmissionOpen, pubName);
-                if (Messages.ShowYesNo(msg))
+                int openCount = DatabaseController.Instance.GetTable<SubmissionBatchTable>().OpenSubmissionCount(SelectedPublisher.Id);
+                string msg = openCount == 0 ?
+                    string.Format(CultureInfo.InvariantCulture, Strings.FormatStringCreateSubmission, SelectedPublisher.Name) :
+                    string.Format(CultureInfo.InvariantCulture, Strings.FormatStringCreateSubmissionOpen, SelectedPublisher.Name);
+
+                if (MessageWindow.ShowYesNo(msg))
                 {
-                    DatabaseController.Instance.GetTable<SubmissionBatchTable>().CreateSubmission(pubId);
+                    DatabaseController.Instance.GetTable<SubmissionBatchTable>().CreateSubmission(SelectedPublisher.Id);
                     MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ResultSubmissionCreated);
                     MainWindowViewModel.Instance.NotifyWorkspaceOnRecordAdded<SubmissionViewModel>();
                     MainWindowViewModel.Instance.SwitchToWorkspace<SubmissionViewModel>();

@@ -218,33 +218,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add publisher.
-        /// </summary>
-        public static string CommandAddPublisher {
-            get {
-                return ResourceManager.GetString("CommandAddPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a new publisher to the list.
-        /// </summary>
-        public static string CommandAddPublisherTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddPublisherTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add submission.
-        /// </summary>
-        public static string CommandAddSubmission {
-            get {
-                return ResourceManager.GetString("CommandAddSubmission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Create a new submission.
         /// </summary>
         public static string CommandAddSubmissionTooltip {
@@ -268,24 +241,6 @@ namespace Restless.Panama.Resources {
         public static string CommandAddTagTooltip {
             get {
                 return ResourceManager.GetString("CommandAddTagTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add title.
-        /// </summary>
-        public static string CommandAddTitle {
-            get {
-                return ResourceManager.GetString("CommandAddTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add this title to a submission.
-        /// </summary>
-        public static string CommandAddTitleToSubmission {
-            get {
-                return ResourceManager.GetString("CommandAddTitleToSubmission", resourceCulture);
             }
         }
         
@@ -430,15 +385,6 @@ namespace Restless.Panama.Resources {
         public static string CommandCopyPassword {
             get {
                 return ResourceManager.GetString("CommandCopyPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create a submission to this publisher.
-        /// </summary>
-        public static string CommandCreateSubmission {
-            get {
-                return ResourceManager.GetString("CommandCreateSubmission", resourceCulture);
             }
         }
         
@@ -790,15 +736,6 @@ namespace Restless.Panama.Resources {
         public static string CommandSubmissionFilterTryAgainTooltip {
             get {
                 return ResourceManager.GetString("CommandSubmissionFilterTryAgainTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add, view and modify submission information.
-        /// </summary>
-        public static string CommandSubmissionTooltip {
-            get {
-                return ResourceManager.GetString("CommandSubmissionTooltip", resourceCulture);
             }
         }
         
@@ -2009,6 +1946,24 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a new publisher record.
+        /// </summary>
+        public static string MenuItemCreatePublisher {
+            get {
+                return ResourceManager.GetString("MenuItemCreatePublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a submission to this publisher.
+        /// </summary>
+        public static string MenuItemCreateSubmission {
+            get {
+                return ResourceManager.GetString("MenuItemCreateSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom.
         /// </summary>
         public static string MenuItemCustom {
@@ -2263,9 +2218,9 @@ namespace Restless.Panama.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Publisher wants an exclusive submission, i.e. does not accept simultaneous.
         /// </summary>
-        public static string TooltipPublisherExclusive {
+        public static string ToolTipPublisherExclusive {
             get {
-                return ResourceManager.GetString("TooltipPublisherExclusive", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherExclusive", resourceCulture);
             }
         }
         

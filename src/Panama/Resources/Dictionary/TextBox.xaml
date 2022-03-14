@@ -6,7 +6,8 @@
         <Setter Property="Margin" Value="{StaticResource DataEntryPanelDefaultControlMargin}"/>
         <Setter Property="AcceptsReturn" Value="True" />
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="MinHeight" Value="220"/>
+        <Setter Property="MinHeight" Value="198"/>
+        <Setter Property="MaxHeight" Value="198"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
     </Style>

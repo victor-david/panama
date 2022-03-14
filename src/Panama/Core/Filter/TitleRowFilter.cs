@@ -1,7 +1,7 @@
 ﻿using Restless.Toolkit.Controls;
-using System;
 using System.Collections.Generic;
 using System.Data;
+using Columns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
 
 namespace Restless.Panama.Core
 {
@@ -203,6 +203,20 @@ namespace Restless.Panama.Core
                 filterEvaluators[TitleRowFilterType.EverSubmitted].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Published].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.SelfPublished].Evaluate(item);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Protected methods
+        /// <inheritdoc/>
+        protected override void OnListViewSet()
+        {
+            using (ListView.DeferRefresh())
+            {
+                ListView.IsLiveFiltering = true;
+                ListView.LiveFilteringProperties.Add(Columns.Ready);
+            }
         }
         #endregion
 

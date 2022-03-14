@@ -20,10 +20,7 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Gets the id.
         /// </summary>
-        public long Id
-        {
-            get => GetInt64(Columns.Id);
-        }
+        public long Id => GetInt64(Columns.Id);
 
         /// <summary>
         /// Gets or sets the title.
@@ -37,10 +34,7 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Gets the created date/time value.
         /// </summary>
-        public DateTime Created
-        {
-            get => GetDateTime(Columns.Created);
-        }
+        public DateTime Created => GetDateTime(Columns.Created);
 
         /// <summary>
         /// Gets or sets the written date/time value.

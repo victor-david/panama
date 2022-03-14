@@ -57,7 +57,7 @@ namespace Restless.Panama.ViewModel
             Columns.SetDefaultSort(Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted)
                 .MakeDate(), ListSortDirection.Descending);
             Columns.CreateImage<BooleanToImageConverter>("E", SubmissionTable.Defs.Columns.Joined.PublisherExclusive, "ImageExclamation")
-                .AddToolTip(Strings.TooltipPublisherExclusive);
+                .AddToolTip(Strings.ToolTipPublisherExclusive);
             Columns.Create("Publisher", SubmissionTable.Defs.Columns.Joined.Publisher);
             Columns.Create("Batch Response", SubmissionTable.Defs.Columns.Joined.ResponseTypeName);
             AddViewSourceSortDescriptions();
