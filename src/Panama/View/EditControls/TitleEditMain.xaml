@@ -5,23 +5,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="400"
     Style="{StaticResource DataEntryPanelStyle}">
-    <!-- Title edit 1 (main title data) -->
+
     <!-- TODO -->
     <!--<tk:RestlessCalendar SelectedDateUtc="{Binding WrittenDate}" />-->
+
+    <Grid tk:Property.ColumnWidths="*,*">
+        <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
+        <tk:LinkedTextBlock 
+            Grid.Column="1"
+            Text="{x:Static r:Strings.TextExtract}"
+            ToolTip="{x:Static r:Strings.ToolTipExtract}"
+            Command="{Binding Commands[ExtractTitle]}"/>
+    </Grid>
     
-    <TextBlock Text="Title"/>
     <TextBox Text="{Binding SelectedTitle.Title}"/>
-            
-    <TextBlock Text="Notes"/>
+
+    <TextBlock Text="{x:Static r:Strings.TextNotes}"/>
     <TextBox
         Style="{StaticResource TextBoxMultiStyle}"
         Text="{Binding SelectedTitle.Notes}"/>
 
     <CheckBox 
-        Content="Ready"
+        Content="{x:Static r:Strings.TextReady}"
         IsChecked="{Binding SelectedTitle.Ready}"/>
 </StackPanel>

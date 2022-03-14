@@ -411,11 +411,10 @@ namespace Restless.Panama.ViewModel
                                 title = "(no title)";
                             }
 
-                            if (Messages.ShowYesNo(string.Format(CultureInfo.InvariantCulture, Strings.ConfirmationApplyExtractedTitleFormat, title)))
+                            if (MessageWindow.ShowYesNo(string.Format(CultureInfo.InvariantCulture, Strings.ConfirmationApplyExtractedTitleFormat, title)))
                             {
                                 SelectedTitle.Title = title;
-                                // the grid updates automatcially, but this is needed to update the text box.
-                                //OnPropertyChanged(nameof(SelectedRow));
+                                OnPropertyChanged(nameof(SelectedTitle));
                             }
                         });
                 }

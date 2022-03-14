@@ -34,7 +34,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public UserNoteViewModel()
         {
-            DisplayName = Strings.CommandUserNote;
+            DisplayName = Strings.TextNotes;
             Columns.Create("Id", UserNoteTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Created", UserNoteTable.Defs.Columns.Created).MakeDate();
             Columns.SetDefaultSort(Columns.Create("Title", UserNoteTable.Defs.Columns.Title), ListSortDirection.Ascending);

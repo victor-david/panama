@@ -920,15 +920,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notes.
-        /// </summary>
-        public static string CommandUserNote {
-            get {
-                return ResourceManager.GetString("CommandUserNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Data Grid.
         /// </summary>
         public static string ConfigDataGrid {
@@ -2063,6 +2054,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extract.
+        /// </summary>
+        public static string TextExtract {
+            get {
+                return ResourceManager.GetString("TextExtract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flagged.
         /// </summary>
         public static string TextFlagged {
@@ -2086,6 +2086,15 @@ namespace Restless.Panama.Resources {
         public static string TextNone {
             get {
                 return ResourceManager.GetString("TextNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notes.
+        /// </summary>
+        public static string TextNotes {
+            get {
+                return ResourceManager.GetString("TextNotes", resourceCulture);
             }
         }
         
@@ -2212,6 +2221,15 @@ namespace Restless.Panama.Resources {
         public static string TooltipColorReset {
             get {
                 return ResourceManager.GetString("TooltipColorReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extract title from latest version.
+        /// </summary>
+        public static string ToolTipExtract {
+            get {
+                return ResourceManager.GetString("ToolTipExtract", resourceCulture);
             }
         }
         

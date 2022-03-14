@@ -485,7 +485,7 @@ Last exported: {1}</value>
   <data name="CommandDeleteUserNote" xml:space="preserve">
     <value>Delete this note</value>
   </data>
-  <data name="CommandUserNote" xml:space="preserve">
+  <data name="TextNotes" xml:space="preserve">
     <value>Notes</value>
   </data>
   <data name="FilterPromptAuthor" xml:space="preserve">
@@ -1016,5 +1016,11 @@ Do you want to continue?</value>
   </data>
   <data name="TextName" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="TextExtract" xml:space="preserve">
+    <value>Extract</value>
+  </data>
+  <data name="ToolTipExtract" xml:space="preserve">
+    <value>Extract title from latest version</value>
   </data>
 </root>
