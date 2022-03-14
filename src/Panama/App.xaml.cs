@@ -12,7 +12,7 @@ using Restless.Panama.Utility;
 using System;
 using System.Windows;
 
-namespace Restless.App.Panama
+namespace Restless.Panama
 {
     /// <summary>
     /// Main application class. Provides starup and shutdown logic.
