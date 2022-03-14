@@ -1014,4 +1014,7 @@ Do you want to continue?</value>
   <data name="TextTitle" xml:space="preserve">
     <value>Title</value>
   </data>
+  <data name="TextName" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>

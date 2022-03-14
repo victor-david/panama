@@ -30,6 +30,7 @@ namespace Restless.Panama.Core
         {
             return filterType switch
             {
+                PublisherRowFilterType.Text => EvaluateText,
                 PublisherRowFilterType.Active => EvaluateActive,
                 PublisherRowFilterType.OpenSubmission => EvaluateOpenSubmission,
                 PublisherRowFilterType.InPeriod => EvaluateInPeriod,
@@ -39,6 +40,13 @@ namespace Restless.Panama.Core
                 PublisherRowFilterType.Goner => EvaluateGoner,
                 _ => EvaluateTrue,
             };
+        }
+
+        private bool EvaluateText(DataRow item)
+        {
+            return
+                string.IsNullOrWhiteSpace(Filter.Text) ||
+                item[Columns.Name].ToString().Contains(Filter.Text, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private bool EvaluateActive(DataRow item)

@@ -6,6 +6,10 @@
     public enum PublisherRowFilterType
     {
         /// <summary>
+        /// Filter according to the specified text
+        /// </summary>
+        Text,
+        /// <summary>
         /// Publisher is active, not a goner
         /// </summary>
         Active,

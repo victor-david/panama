@@ -87,6 +87,7 @@
                 Text="(row filter in effect)"/>
         </StatusBar>
 
+        <!-- Advanced filter -->
         <Popup
             Placement="Bottom"
             PlacementTarget="{Binding ElementName=CustomFilterButton}"
@@ -102,15 +103,24 @@
 
                 <Grid 
                     tk:Property.ColumnWidths="*,*"
+                    tk:Property.RowHeights="Auto,*"
                     Style="{StaticResource DataEntryPanelStyle}">
 
-                    <StackPanel>
+                    <StackPanel Grid.ColumnSpan="2">
+                        <TextBlock Text="{x:Static r:Strings.TextName}"/>
+                        <TextBox
+                            Text="{Binding Filters.Text, 
+                            UpdateSourceTrigger=PropertyChanged,
+                            Delay=500}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1">
                         <tk:ThreeWay Header="Active" State="{Binding Filters.ActiveState}"/>
                         <tk:ThreeWay Header="Open Submission" State="{Binding Filters.OpenState}"/>
                         <tk:ThreeWay Header="In Period" State="{Binding Filters.InPeriodState}"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1">
+                    <StackPanel Grid.Row="1" Grid.Column="1">
                         <tk:ThreeWay Header="Exclusive" State="{Binding Filters.ExclusiveState}"/>
                         <tk:ThreeWay Header="Follow Up" State="{Binding Filters.FollowUpState}"/>
                         <tk:ThreeWay Header="Paying" State="{Binding Filters.PayingState}"/>

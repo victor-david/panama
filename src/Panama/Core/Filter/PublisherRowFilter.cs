@@ -24,6 +24,9 @@ namespace Restless.Panama.Core
 
         #region Properties
         /// <inheritdoc/>
+        protected override bool IsTextFilterSupported => true;
+
+        /// <inheritdoc/>
         public override bool IsAnyFilterActive => base.IsAnyFilterActive || IsAnyEvaluatorActive();
 
         /// <summary>
@@ -135,6 +138,7 @@ namespace Restless.Panama.Core
         {
             filterEvaluators = new Dictionary<PublisherRowFilterType, PublisherFilterEvaluator>()
             {
+                { PublisherRowFilterType.Text, new PublisherFilterEvaluator(this, PublisherRowFilterType.Text) },
                 { PublisherRowFilterType.Active, new PublisherFilterEvaluator(this, PublisherRowFilterType.Active) },
                 { PublisherRowFilterType.OpenSubmission, new PublisherFilterEvaluator(this, PublisherRowFilterType.OpenSubmission) },
                 { PublisherRowFilterType.InPeriod, new PublisherFilterEvaluator(this, PublisherRowFilterType.InPeriod) },
@@ -220,6 +224,7 @@ namespace Restless.Panama.Core
         public override bool OnDataRowFilter(DataRow item)
         {
             return
+                filterEvaluators[PublisherRowFilterType.Text].Evaluate(item) &&
                 filterEvaluators[PublisherRowFilterType.Active].Evaluate(item) &&
                 filterEvaluators[PublisherRowFilterType.OpenSubmission].Evaluate(item) &&
                 filterEvaluators[PublisherRowFilterType.InPeriod].Evaluate(item) &&
