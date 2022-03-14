@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -37,6 +38,8 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Properties
+        private TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
+
         /// <summary>
         /// Gets or sets the selected edit section
         /// </summary>
@@ -184,19 +187,17 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Id", TitleTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.CreateResource<BooleanToPathConverter>("R", TitleTable.Defs.Columns.Ready, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W034)
+                .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipTitleFilterReady);
 
             Columns.CreateResource<BooleanToPathConverter>("Q", TitleTable.Defs.Columns.QuickFlag, ResourceKeys.Icon.SquareSmallBlueIconKey)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W034)
+                .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipTitleFilterFlag);
 
             Columns.Create("Title", TitleTable.Defs.Columns.Title).MakeFlexWidth(4);
 
-            DataGridBoundColumn col = Columns.Create("Written", TitleTable.Defs.Columns.Written).MakeDate();
-
-            Columns.SetDefaultSort(col, ListSortDirection.Descending);
+            Columns.SetDefaultSort(Columns.Create("Written", TitleTable.Defs.Columns.Written).MakeDate(), ListSortDirection.Descending);
 
             Columns.Create("Updated", TitleTable.Defs.Columns.Calculated.LastestVersionDate)
                 .MakeDate()
@@ -224,8 +225,6 @@ namespace Restless.Panama.ViewModel
             Columns.Create("PC", TitleTable.Defs.Columns.Calculated.PublishedCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitlePublishedCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
-
-            AddViewSourceSortDescriptions();
 
             Commands.Add("ClearFilter", p => Filters.ClearAll(), p => Filters.IsAnyFilterActive);
             Commands.Add("ReadyFilter", p => Filters.SetToReady());
@@ -309,7 +308,6 @@ namespace Restless.Panama.ViewModel
                 Table.AddDefaultRow();
                 Table.Save();
                 Filters.ClearAll();
-                AddViewSourceSortDescriptions();
                 Columns.RestoreDefaultSort();
             }
         }
@@ -360,10 +358,9 @@ namespace Restless.Panama.ViewModel
         /// <param name="item">The <see cref="DataRowView"/> object of the selected row.</param>
         protected override void RunOpenRowCommand(object item)
         {
-            if (SelectedPrimaryKey != null)
+            if (SelectedTitle != null)
             {
-                long titleId = (long)SelectedPrimaryKey;
-                Database.Tables.TitleVersionController verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                Database.Tables.TitleVersionController verController = TitleVersionTable.GetVersionController(SelectedTitle.Id);
 
                 if (verController.Versions.Count > 0)
                 {
@@ -393,26 +390,28 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
-
         private void RunExtractTitle(object o)
         {
-            if (SelectedPrimaryKey != null)
+            if (SelectedTitle != null)
             {
-                long titleId = (long)SelectedPrimaryKey;
-                var verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                Database.Tables.TitleVersionController verController = TitleVersionTable.GetVersionController(SelectedTitle.Id);
                 if (verController.Versions.Count > 0)
                 {
                     Execution.TryCatch(() =>
                         {
                             string fileName = Paths.Title.WithRoot(verController.Versions[0].FileName);
-                            var props = OpenXmlDocument.Reader.GetProperties(fileName);
+                            PropertiesAdapter props = OpenXmlDocument.Reader.GetProperties(fileName);
                             string title = props?.Core.Title;
-                            if (string.IsNullOrWhiteSpace(title)) title = "(no title)";
-                            if (Messages.ShowYesNo(string.Format(Strings.ConfirmationApplyExtractedTitleFormat, title)))
+                            if (string.IsNullOrWhiteSpace(title))
                             {
-                                SelectedRow[TitleTable.Defs.Columns.Title] = title;
+                                title = "(no title)";
+                            }
+
+                            if (Messages.ShowYesNo(string.Format(CultureInfo.InvariantCulture, Strings.ConfirmationApplyExtractedTitleFormat, title)))
+                            {
+                                SelectedTitle.Title = title;
                                 // the grid updates automatcially, but this is needed to update the text box.
-                                OnPropertyChanged(nameof(SelectedRow));
+                                //OnPropertyChanged(nameof(SelectedRow));
                             }
                         });
                 }
@@ -421,10 +420,9 @@ namespace Restless.Panama.ViewModel
 
         private bool CanRunExtractTitle(object o)
         {
-            if (SelectedPrimaryKey != null)
+            if (SelectedTitle != null)
             {
-                long titleId = (long)SelectedPrimaryKey;
-                var verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                Database.Tables.TitleVersionController verController = TitleVersionTable.GetVersionController(SelectedTitle.Id);
                 if (verController.Versions.Count > 0)
                 {
                     return verController.Versions[0].DocType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType;
@@ -435,17 +433,14 @@ namespace Restless.Panama.ViewModel
 
         private void RunToggleTitleFlagCommand(object parm)
         {
-            if (IsSelectedRowAccessible)
-            {
-                SelectedTitle?.ToggleQuickFlag();
-            }
+            SelectedTitle?.ToggleQuickFlag();
         }
 
         private void RunClearTitleFlagsCommand(object parm)
         {
             if (Messages.ShowYesNo(Strings.ConfirmationClearTitleFlags))
             {
-                foreach (TitleRow title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
+                foreach (TitleRow title in Table.EnumerateTitles())
                 {
                     title.QuickFlag = false;
                 }
@@ -457,10 +452,9 @@ namespace Restless.Panama.ViewModel
             IsOpenXml = false;
             PreviewText = null;
 
-            if (SelectedEditSection == SectionPreviewId && SelectedPrimaryKey != null)
+            if (SelectedEditSection == SectionPreviewId && SelectedTitle != null)
             {
-                long titleId = (long)SelectedPrimaryKey;
-                Database.Tables.TitleVersionController verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                Database.Tables.TitleVersionController verController = TitleVersionTable.GetVersionController(SelectedTitle.Id);
                 if (verController.Versions.Count > 0)
                 {
                     string fileName = Paths.Title.WithRoot(verController.Versions[0].FileName);
@@ -481,12 +475,6 @@ namespace Restless.Panama.ViewModel
         {
             OnPropertyChanged(nameof(WrittenHeader));
             OnPropertyChanged(nameof(WrittenDate));
-        }
-
-        private void AddViewSourceSortDescriptions()
-        {
-            MainSource.SortDescriptions.Clear();
-            MainSource.SortDescriptions.Add(new SortDescription(TitleTable.Defs.Columns.Written, ListSortDirection.Descending));
         }
         #endregion
     }

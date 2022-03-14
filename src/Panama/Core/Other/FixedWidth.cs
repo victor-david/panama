@@ -13,6 +13,11 @@ namespace Restless.Panama.Core
     public class FixedWidth
     {
         /// <summary>
+        /// Fixed width of 28
+        /// </summary>
+        public const int W028 = 28;
+
+        /// <summary>
         /// Fixed width of 34
         /// </summary>
         public const int W034 = 34;

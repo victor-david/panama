@@ -114,17 +114,17 @@ namespace Restless.Panama.ViewModel
 
             Columns.CreateResource<BooleanToPathConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod, ResourceKeys.Icon.SquareSmallBlueIconKey)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W034)
+                .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipPublisherInPeriod);
 
             Columns.CreateResource<BooleanToPathConverter>("E", PublisherTable.Defs.Columns.Exclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W034)
+                .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipPublisherExclusive);
 
             Columns.CreateResource<BooleanToPathConverter>("P", PublisherTable.Defs.Columns.Paying, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W034)
+                .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipPublisherPay);
 
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
@@ -147,8 +147,6 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.ToolTipPublisherSubmissionCount)
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
-
-            AddViewSourceSortDescriptions();
 
             /* This command is used from this model and from the Filters controller */
             Commands.Add("ClearFilter", p => Filters.ClearAll(), p => Config.PublisherFilter.IsAnyFilterActive);
@@ -216,15 +214,6 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Called when the filter text has changed to set the filter on the underlying data.
-        /// </summary>
-        /// <param name="text">The filter text.</param>
-        protected override void OnFilterTextChanged(string text)
-        {
-            MainView.RowFilter = string.Format("{0} LIKE '%{1}%'", PublisherTable.Defs.Columns.Name, text);
-        }
-
-        /// <summary>
         /// Runs the add command to add a new record to the data table
         /// </summary>
         protected override void RunAddCommand()
@@ -234,7 +223,6 @@ namespace Restless.Panama.ViewModel
                 Table.AddDefaultRow();
                 Table.Save();
                 Filters.ClearAll();
-                AddViewSourceSortDescriptions();
                 Columns.RestoreDefaultSort();
             }
         }
@@ -255,9 +243,9 @@ namespace Restless.Panama.ViewModel
         /// <param name="item">The command parameter, not used.</param>
         protected override void RunOpenRowCommand(object item)
         {
-            if (SelectedRow != null)
+            if (SelectedPublisher?.HasUrl() ?? false)
             {
-                OpenHelper.OpenWebSite(null, SelectedRow[PublisherTable.Defs.Columns.Url].ToString());
+                OpenHelper.OpenWebSite(null, SelectedPublisher.Url);
             }
         }
 
@@ -268,7 +256,7 @@ namespace Restless.Panama.ViewModel
         /// <returns>true if the <see cref="DataGridViewModel{T}.OpenRowCommand"/> can run; otherwise, false.</returns>
         protected override bool CanRunOpenRowCommand(object item)
         {
-            return base.CanRunOpenRowCommand(item) && !string.IsNullOrEmpty(SelectedRow[PublisherTable.Defs.Columns.Url].ToString());
+            return base.CanRunOpenRowCommand(item) && (SelectedPublisher?.HasUrl() ?? false);
         }
 
         /// <summary>
@@ -322,12 +310,6 @@ namespace Restless.Panama.ViewModel
                     MainWindowViewModel.Instance.SwitchToWorkspace<SubmissionViewModel>();
                 }
             }
-        }
-
-        private void AddViewSourceSortDescriptions()
-        {
-            MainSource.SortDescriptions.Clear();
-            MainSource.SortDescriptions.Add(new SortDescription(PublishedTable.Defs.Columns.Added, ListSortDirection.Descending));
         }
 
         private bool CanCopyCredential(object o)

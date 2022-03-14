@@ -197,6 +197,15 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Gets a boolean value that indicates if <see cref="Url"/> is populated.
+        /// </summary>
+        /// <returns></returns>
+        public bool HasUrl()
+        {
+            return !string.IsNullOrEmpty(Url);
+        }
+
+        /// <summary>
         /// Gets a string representation of this object
         /// </summary>
         /// <returns>A string</returns>
