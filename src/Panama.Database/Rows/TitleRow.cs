@@ -18,6 +18,11 @@ namespace Restless.Panama.Database.Tables
     {
         #region Public properties
         /// <summary>
+        /// Gets the default title value.
+        /// </summary>
+        public const string DefaultTitle = "(none)";
+
+        /// <summary>
         /// Gets the id.
         /// </summary>
         public long Id => GetInt64(Columns.Id);
@@ -28,7 +33,7 @@ namespace Restless.Panama.Database.Tables
         public string Title
         {
             get => GetString(Columns.Title);
-            set => SetValue(Columns.Title, value);
+            set => SetValue(Columns.Title, value.Trim().ToDefaultValue(DefaultTitle));
         }
 
         /// <summary>
