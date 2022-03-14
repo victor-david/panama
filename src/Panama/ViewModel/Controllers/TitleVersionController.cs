@@ -36,7 +36,7 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Properties
-        private DocumentTypeTable DocumentTypeTable = DatabaseController.Instance.GetTable<DocumentTypeTable>();
+        private DocumentTypeTable DocumentTypeTable => DatabaseController.Instance.GetTable<DocumentTypeTable>();
         private long CurrentTitleId => Owner?.SelectedTitle?.Id ?? 0;
 
         /// <summary>
