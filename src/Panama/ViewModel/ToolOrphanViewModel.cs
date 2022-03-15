@@ -123,9 +123,9 @@ namespace Restless.Panama.ViewModel
                 TitleRow row = new(title.AddDefaultRow())
                 {
                     Title = "Title created from orphaned file",
-                    Written = file.LastModified,
                     Notes = $"This entry was created from orphaned file {file.FileName}"
                 };
+                row.SetWrittenDate(file.LastModified);
 
                 // Get a version controller and add a version
                 ver.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(file.FileName));

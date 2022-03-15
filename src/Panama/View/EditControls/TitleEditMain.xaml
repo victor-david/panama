@@ -22,8 +22,18 @@
             ToolTip="{x:Static r:Strings.ToolTipExtract}"
             Command="{Binding Commands[ExtractTitle]}"/>
     </Grid>
-    
     <TextBox Text="{Binding SelectedTitle.Title}"/>
+
+    <!-- Written date -->
+    <Expander>
+        <Expander.Header>
+            <TextBlock Margin="0">
+                <Run Text="{x:Static r:Strings.TextWritten}"/>
+                <Run Foreground="{StaticResource DarkAlertForegroundBrush}" Text="{Binding WrittenHeader, Mode=OneWay}"/>
+            </TextBlock>
+        </Expander.Header>
+        <tk:Calendar SelectedDateUtc="{Binding WrittenDate}"/>
+    </Expander>
 
     <TextBlock Text="{x:Static r:Strings.TextNotes}"/>
     <TextBox

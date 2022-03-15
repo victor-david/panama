@@ -128,31 +128,18 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets a string value that displays the written date.
         /// </summary>
-        public string WrittenHeader
-        {
-            get
-            {
-                string dateStr = Strings.TextNone;
-                if (IsSelectedRowAccessible && SelectedRow[TitleTable.Defs.Columns.Written] is DateTime dt)
-                {
-                    dateStr = dt.ToLocalTime().ToString(Config.Instance.DateFormat);
-                }
-                return $"{Strings.TextWritten}: {dateStr}";
-            }
-        }
+        public string WrittenHeader => SelectedTitle?.GetWrittenToLocal(Config.Instance.DateFormat) ?? Strings.TextNone;
+
         /// <summary>
         /// Gets or sets the written date.
         /// </summary>
         public object WrittenDate
         {
-            get => IsSelectedRowAccessible ? SelectedRow[TitleTable.Defs.Columns.Written] : null;
+            get => SelectedTitle?.Written;
             set
             {
-                if (IsSelectedRowAccessible)
-                {
-                    SelectedRow[TitleTable.Defs.Columns.Written] = value ?? DBNull.Value;
-                    OnWrittenPropertiesChanged();
-                }
+                SelectedTitle?.SetWrittenDate(value);
+                OnWrittenPropertiesChanged();
             }
         }
 
@@ -298,7 +285,12 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareDateTime(item2, item1, TitleTable.Defs.Columns.Written);
+            int value = DataRowCompareDateTime(item2, item1, TitleTable.Defs.Columns.Written);
+            if (value == 0)
+            {
+                value = DataRowCompareString(item1, item2, TitleTable.Defs.Columns.Title);
+            }
+            return value;
         }
 
         /// <summary>
@@ -414,6 +406,7 @@ namespace Restless.Panama.ViewModel
                             if (MessageWindow.ShowYesNo(string.Format(CultureInfo.InvariantCulture, Strings.ConfirmationApplyExtractedTitleFormat, title)))
                             {
                                 SelectedTitle.Title = title;
+                                /* Needed to update the text box */
                                 OnPropertyChanged(nameof(SelectedTitle));
                             }
                         });

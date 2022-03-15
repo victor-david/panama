@@ -7,6 +7,7 @@
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Data;
+using System.Globalization;
 using Columns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
 
 namespace Restless.Panama.Database.Tables
@@ -50,7 +51,7 @@ namespace Restless.Panama.Database.Tables
         public DateTime Written
         {
             get => GetDateTime(Columns.Written);
-            set => SetValue(Columns.Written, value);
+            private set => SetValue(Columns.Written, value);
         }
 
         /// <summary>
@@ -113,6 +114,28 @@ namespace Restless.Panama.Database.Tables
         public static TitleRow Create(DataRow row)
         {
             return row != null ? new TitleRow(row) : null;
+        }
+
+        /// <summary>
+        /// Sets the <see cref="Written"/> property
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetWrittenDate(object value)
+        {
+            if (value is DateTime dateTime)
+            {
+                Written = dateTime.Kind == DateTimeKind.Local ? dateTime.ToUniversalTime() : dateTime;
+            }
+        }
+
+        /// <summary>
+        /// Gets the <see cref="Written"/> property (converted to local time) as a formatted string
+        /// </summary>
+        /// <param name="format">The format string</param>
+        /// <returns>The formatted value of <see cref="Written"/>, having been converted to local time</returns>
+        public string GetWrittenToLocal(string format)
+        {
+            return Written.ToLocalTime().ToString(format, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
