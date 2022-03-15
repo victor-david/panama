@@ -122,7 +122,9 @@ namespace Restless.Panama.ViewModel
                 MenuItems.AddItem($"Set language to {langName} ({langId})", Commands["SetLanguage"]).AddCommandParm(langId).AddTag(langId);
             }
 
-            AddViewSourceSortDescriptions();
+            ListView.IsLiveSorting = true;
+            ListView.LiveSortingProperties.Add(TitleVersionTable.Defs.Columns.Version);
+            ListView.LiveSortingProperties.Add(TitleVersionTable.Defs.Columns.Revision);
         }
         #endregion
 
@@ -188,32 +190,12 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
-        private void AddViewSourceSortDescriptions()
-        {
-            // TODO
-            //MainSource.SortDescriptions.Clear();
-            //MainSource.GroupDescriptions.Clear();
-            //// BUG: If grouped, and the first clicked parent has zero children, all the columns are scrunched together,
-            //// and clicking on another parent (with children) does not change the columns.
-            //// If not grouped, still scrunched if the first clicked parent has no children, but subsequent clicks
-            //// on parents that do have children restore the columns.
-            //// UPDATE 2018-08-25:
-            ////   Workaround implemented. By binding the visibility of the data grid to the child count (0=hidden, otherwise visible)
-            ////   the columns display as they should.
-            //if (Config.GroupTitleVersion)
-            //{
-            //    MainSource.GroupDescriptions.Add(new PropertyGroupDescription(TitleVersionTable.Defs.Columns.Version));
-            //}
-            //MainSource.SortDescriptions.Add(new SortDescription(TitleVersionTable.Defs.Columns.Version, ListSortDirection.Descending));
-            //MainSource.SortDescriptions.Add(new SortDescription(TitleVersionTable.Defs.Columns.Revision, ListSortDirection.Ascending));
-        }
 
         private void RunConvertToVersionCommand(object parm)
         {
             if (CanRunVersionCommand())
             {
                 verController.ConvertToVersion(SelectedVersion);
-                AddViewSourceSortDescriptions();
             }
         }
 
@@ -301,7 +283,6 @@ namespace Restless.Panama.ViewModel
             if (CanRunVersionCommand())
             {
                 verController.MoveUp(SelectedVersion);
-                AddViewSourceSortDescriptions();
             }
         }
 
@@ -310,7 +291,6 @@ namespace Restless.Panama.ViewModel
             if (CanRunVersionCommand())
             {
                 verController.MoveDown(SelectedVersion);
-                AddViewSourceSortDescriptions();
             }
         }
 
