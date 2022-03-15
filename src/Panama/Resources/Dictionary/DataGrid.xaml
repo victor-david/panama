@@ -113,6 +113,9 @@
     </Style>
 
     <Style x:Key="DefaultDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultControlStyle}">
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="CanUserResizeRows" Value="False"/>
         <Setter Property="Foreground" Value="{StaticResource DarkForegroundBrush}"/>
         <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
@@ -122,7 +125,6 @@
         <Setter Property="GridLinesVisibility" Value="None"/>
         <Setter Property="HeadersVisibility" Value="Column"/>
         <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="SelectionMode" Value="Single"/>
         <Setter Property="SelectionUnit" Value="FullRow"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -133,10 +135,10 @@
                 <Style TargetType="DataGridCell">
                     <Setter Property="Template">
                         <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type DataGridCell}">
-                                <Grid Background="{TemplateBinding Background}">
+                            <ControlTemplate TargetType="DataGridCell">
+                                <Border Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center" />
-                                </Grid>
+                                </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -162,12 +164,74 @@
 
     <!-- Bit of a kluge. But otherwise, the DataGrid's context menu also pops up if you right click the header row-->
     <Style x:Key="DefaultDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Height" Value="26"/>
+        <Setter Property="Padding" Value="3,0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>        
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <Path
+                                x:Name="SortAscendingPath"
+                                Grid.Column="1"
+                                Margin="0,0,6,0"
+                                Style="{StaticResource SmallPathStyle}"
+                                Data="{StaticResource ChevronDownGeometryKey}"
+                                Visibility="Collapsed"/>
+
+                            <Path
+                                x:Name="SortDescendingPath"
+                                Grid.Column="1"
+                                Margin="0,0,6,0"
+                                Style="{StaticResource SmallPathStyle}"
+                                Data="{StaticResource ChevronUpGeometryKey}"
+                                Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="SortDirection" Value="Ascending">
+                            <Setter TargetName="SortAscendingPath" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Descending">
+                            <Setter TargetName="SortDescendingPath" Property="Visibility" Value="Visible"/>
+                        </Trigger>                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu Visibility="Collapsed" IsEnabled="False"/>
             </Setter.Value>
         </Setter>
         <Setter Property="Foreground" Value="{StaticResource DefaultHeaderForegroundBrush}"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource RolloverHeaderBrush}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}"/>
@@ -176,7 +240,6 @@
     <Style x:Key="DataGridHeaderCenter" TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
-
     
     <Style x:Key="CenterDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
