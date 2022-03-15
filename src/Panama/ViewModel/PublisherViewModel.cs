@@ -137,13 +137,16 @@ namespace Restless.Panama.ViewModel
 
             Columns.SetDefaultSort(column, ListSortDirection.Descending);
 
-            Columns.CreateImage<BooleanToImageConverter>("A", PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission, "ImageExclamation")
+            Columns.CreateResource<BooleanToPathConverter>("A", PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission, ResourceKeys.Icon.SquareSmallGrayIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipPublisherHasActive);
 
             Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipPublisherLastSubmission)
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+
             Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)

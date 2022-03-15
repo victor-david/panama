@@ -69,7 +69,7 @@ namespace Restless.Panama
             TopLevelExceptionHandler.Initialize();
 #endif
             // Validations.ThrowIfNotWindows7();
-            ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
+            ShutdownMode = ShutdownMode.OnMainWindowClose;
             StartupOptions ops = new(e.Args);
             DatabaseController.Instance.Init(RegistryManager.DatabaseDirectory);
 
@@ -85,12 +85,8 @@ namespace Restless.Panama
             else
             {
                 // These are applied one time only. They don't change.
-                Toolkit.Controls.DataGridColumnExtensions.CenterAlignedDataGridColumnHeaderStyleKey = ResourceKeys.Style.CenterDataGridColumnHeaderStyle;
-                // TODO 
-                //Toolkit.Controls.DataGridColumnExtensions.CenterAlignedTextBlockStyleKey = ResourceKeys.Style.CenterDataGridCellStyle;
-
-                //Restless.Tools.Default.Style.DataGridHeaderCenter = ResourceHelper.StyleDataGridHeaderCenter;
-                //Restless.Tools.Controls.Default.Style.TextBlockCenter = ResourceHelper.StyleTextBlockCenter;
+                Toolkit.Controls.DataGridColumnExtensions.CenterAlignedDataGridColumnHeaderStyleKey = ResourceKeys.Style.CenteredDataGridColumnHeaderStyle;
+                Toolkit.Controls.DataGridColumnExtensions.CenterAlignedDataGridCellStyleKey = ResourceKeys.Style.CenteredDataGridCellStyle;
 
                 Window main = WindowFactory.Main.Create();
                 main.Width = Config.Instance.MainWindowWidth;

@@ -112,57 +112,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="DefaultDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultControlStyle}">
-        <Setter Property="AutoGenerateColumns" Value="False"/>
-        <Setter Property="CanUserReorderColumns" Value="False"/>
-        <Setter Property="CanUserResizeRows" Value="False"/>
-        <Setter Property="Foreground" Value="{StaticResource DarkForegroundBrush}"/>
-        <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}"/>
-        <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
-        <Setter Property="ColumnWidth" Value="*"/>
-        <Setter Property="MinRowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}" />
-        <Setter Property="GridLinesVisibility" Value="None"/>
-        <Setter Property="HeadersVisibility" Value="Column"/>
-        <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="SelectionMode" Value="Single"/>
-        <Setter Property="SelectionUnit" Value="FullRow"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="AlternationCount" Value="{Binding Config.DataGridAlternationCount}"/>
-        <Setter Property="AlternatingRowBackground" Value="{Binding Config.Colors.DataGridAlternation.BackgroundBrush}"/>
-        <Setter Property="CellStyle">
-            <Setter.Value>
-                <Style TargetType="DataGridCell">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="DataGridCell">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
-    <Style TargetType="tk:DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
-
-    <Style x:Key="DataGridEditStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
-        <Setter Property="MinHeight" Value="100" />
-        <Setter Property="MaxHeight" Value="260" />
-        <Setter Property="RowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
-        <Setter Property="AlternationCount" Value="2"/>
-    </Style>
-
-    <Style x:Key="DataGridEditLockedStyle" TargetType="DataGrid" BasedOn="{StaticResource DataGridEditStyle}">
-        <Setter Property="CanUserSortColumns" Value="False"/>
-        <Setter Property="CanUserReorderColumns" Value="False"/>
-    </Style>
-
-    <!-- Bit of a kluge. But otherwise, the DataGrid's context menu also pops up if you right click the header row-->
     <Style x:Key="DefaultDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Height" Value="26"/>
@@ -171,7 +120,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,1"/>        
+        <Setter Property="BorderThickness" Value="1,0,0,1"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -214,7 +163,7 @@
                         </Trigger>
                         <Trigger Property="SortDirection" Value="Descending">
                             <Setter TargetName="SortDescendingPath" Property="Visibility" Value="Visible"/>
-                        </Trigger>                        
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -228,25 +177,79 @@
         <Setter Property="Foreground" Value="{StaticResource DefaultHeaderForegroundBrush}"/>
 
         <Style.Triggers>
+             <Trigger Property="DisplayIndex" Value="0">
+                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            </Trigger>           
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource RolloverHeaderBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}"/>
+    <Style x:Key="CenteredDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="DefaultDataGridCellStyle" TargetType="DataGridCell">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridCell">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CenteredDataGridCellStyle" TargetType="DataGridCell" BasedOn="{StaticResource DefaultDataGridCellStyle}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="DefaultDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultControlStyle}">
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="CanUserResizeRows" Value="False"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
+        <Setter Property="ColumnWidth" Value="*"/>
+        <Setter Property="MinRowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}" />
+        <Setter Property="GridLinesVisibility" Value="None"/>
+        <Setter Property="HeadersVisibility" Value="Column"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="SelectionUnit" Value="FullRow"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="AlternationCount" Value="{Binding Config.DataGridAlternationCount}"/>
+        <Setter Property="AlternatingRowBackground" Value="{Binding Config.Colors.DataGridAlternation.BackgroundBrush}"/>
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource DefaultDataGridColumnHeaderStyle}"/>
+        <Setter Property="CellStyle" Value="{StaticResource DefaultDataGridCellStyle}"/>
+    </Style>
+
+    <Style TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
+    <Style TargetType="tk:DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
+
+    <Style x:Key="DataGridEditStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
+        <Setter Property="MinHeight" Value="100" />
+        <Setter Property="MaxHeight" Value="260" />
+        <Setter Property="RowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
+        <Setter Property="AlternationCount" Value="2"/>
+    </Style>
+
+    <Style x:Key="DataGridEditLockedStyle" TargetType="DataGrid" BasedOn="{StaticResource DataGridEditStyle}">
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+    </Style>
 
     <!-- Backward compatibility TODO: remove -->
     <Style x:Key="DataGridHeaderCenter" TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
-    
-    <Style x:Key="CenterDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}">
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-    </Style>
-
-    <!--<Style x:Key="CenterDataGridCellStyle" TargetType="DataGridCell">
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-    </Style>-->
 
 </ResourceDictionary>

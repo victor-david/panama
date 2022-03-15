@@ -24,12 +24,12 @@
     <!-- Border -->
     <SolidColorBrush x:Key="DefaultBorderBrush" Color="#a0a0a0"/>
     <SolidColorBrush x:Key="LightBorderBrush" Color="#e0e0e0"/>
-    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#efefef"/>
+    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#efefe0"/>
     
     <!-- Header -->
     <SolidColorBrush x:Key="DefaultHeaderBrush" Color="LightSteelBlue"/>
     <SolidColorBrush x:Key="LightHeaderBrush" Color="Azure"/>
-    <SolidColorBrush x:Key="RolloverHeaderBrush" Color="#80ADD8E6"/>
+    <SolidColorBrush x:Key="RolloverHeaderBrush" Color="#FFDAE8FF"/>
 
     <!-- Menu -->
     <SolidColorBrush x:Key="DefaultMenuBrush" Color="#707070"/>

@@ -60,8 +60,8 @@
 
         public static class Style
         {
-            public const string CenterDataGridColumnHeaderStyle = nameof(CenterDataGridColumnHeaderStyle);
-            public const string CenterDataGridCellStyle = nameof(CenterDataGridCellStyle);
+            public const string CenteredDataGridColumnHeaderStyle = nameof(CenteredDataGridColumnHeaderStyle);
+            public const string CenteredDataGridCellStyle = nameof(CenteredDataGridCellStyle);
         }
     }
 }
