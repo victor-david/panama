@@ -323,7 +323,7 @@ namespace Restless.Panama.ViewModel
         /// <returns>A string comparison result (zero, 1, or -1)</returns>
         protected int DataRowCompareString(DataRow item1, DataRow item2, string columnName)
         {
-            return string.Compare(item1[columnName].ToString(), item2[columnName].ToString());
+            return string.Compare(item1[columnName].ToString(), item2[columnName].ToString(), StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -362,6 +362,18 @@ namespace Restless.Panama.ViewModel
             return DateTime.Compare((DateTime)item1[columnName], (DateTime)item2[columnName]);
         }
 
+        /// <summary>
+        /// Deletes the selected row, saves the table, and refreshes <see cref="ListView"/>.
+        /// </summary>
+        protected void DeleteSelectedRow()
+        {
+            if (SelectedRow != null)
+            {
+                SelectedRow.Delete();
+                Table.Save();
+                ListView.Refresh();
+            }
+        }
 
         /// <summary>
         /// Override in a derived class to establish the filter on the main data grid.

@@ -1023,4 +1023,7 @@ Do you want to continue?</value>
   <data name="ToolTipExtract" xml:space="preserve">
     <value>Extract title from latest version</value>
   </data>
+  <data name="TextUrl" xml:space="preserve">
+    <value>Url</value>
+  </data>
 </root>

@@ -2189,6 +2189,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Url.
+        /// </summary>
+        public static string TextUrl {
+            get {
+                return ResourceManager.GetString("TextUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Written.
         /// </summary>
         public static string TextWritten {

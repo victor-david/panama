@@ -9,8 +9,9 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
-using Restless.Toolkit.Utility;
 using System.ComponentModel;
+using System.Data;
+using System.Globalization;
 
 namespace Restless.Panama.ViewModel
 {
@@ -19,7 +20,21 @@ namespace Restless.Panama.ViewModel
     /// </summary>
     public class SelfPublisherViewModel : DataGridViewModel<SelfPublisherTable>
     {
+        #region Private
+        private SelfPublisherRow selectedPublisher;
+        #endregion
+
+        /************************************************************************/
+
         #region Properties
+        /// <summary>
+        /// Gets the currently selected publisher row
+        /// </summary>
+        public SelfPublisherRow SelectedPublisher
+        {
+            get => selectedPublisher;
+            private set => SetProperty(ref selectedPublisher, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -34,22 +49,21 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Id", SelfPublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Name", SelfPublisherTable.Defs.Columns.Name);
             Columns.Create("Url", SelfPublisherTable.Defs.Columns.Url);
+            Columns.SetDefaultSort(Columns.Create("Added", SelfPublisherTable.Defs.Columns.Added).MakeDate().AddToolTip(Strings.ToolTipPublisherAdded), ListSortDirection.Descending);
 
-            var col = Columns.Create("Added", SelfPublisherTable.Defs.Columns.Added)
-                .MakeDate()
-                .AddToolTip(Strings.ToolTipPublisherAdded);
-
-            Columns.SetDefaultSort(col, ListSortDirection.Descending);
             Columns.Create("PC", SelfPublisherTable.Defs.Columns.Calculated.PubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipSelfPublisherPublishedCount)
                 .AddSort(null, SelfPublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
-            AddViewSourceSortDescriptions();
-
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.MenuItemCreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.CommandDeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+
         }
         #endregion
 
@@ -62,6 +76,19 @@ namespace Restless.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
+            SelectedPublisher = SelfPublisherRow.Create(SelectedRow);
+        }
+
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return true;
+        }
+
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareDateTime(item2, item1, SelfPublisherTable.Defs.Columns.Added);
         }
 
         /// <summary>
@@ -69,12 +96,13 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunAddCommand()
         {
-            if (Messages.ShowYesNo(Strings.ConfirmationAddPublisher))
+            if (MessageWindow.ShowYesNo(Strings.ConfirmationAddPublisher))
             {
                 Table.AddDefaultRow();
                 Table.Save();
-                AddViewSourceSortDescriptions();
+                // Filters.ClearAll();
                 Columns.RestoreDefaultSort();
+                ForceListViewSort();
             }
         }
 
@@ -94,9 +122,9 @@ namespace Restless.Panama.ViewModel
         /// <param name="item">The command parameter, not used.</param>
         protected override void RunOpenRowCommand(object item)
         {
-            if (SelectedRow != null)
+            if (SelectedPublisher?.HasUrl() ?? false)
             {
-                OpenHelper.OpenWebSite(null, SelectedRow[SelfPublisherTable.Defs.Columns.Url].ToString());
+                OpenHelper.OpenWebSite(null, SelectedPublisher.Url);
             }
         }
 
@@ -107,7 +135,7 @@ namespace Restless.Panama.ViewModel
         /// <returns>true if the <see cref="DataGridViewModel{T}.OpenRowCommand"/> can run; otherwise, false.</returns>
         protected override bool CanRunOpenRowCommand(object item)
         {
-            return base.CanRunOpenRowCommand(item) && !string.IsNullOrEmpty(SelectedRow[SelfPublisherTable.Defs.Columns.Url].ToString());
+            return base.CanRunOpenRowCommand(item) && (SelectedPublisher?.HasUrl() ?? false);
         }
 
         /// <summary>
@@ -117,10 +145,16 @@ namespace Restless.Panama.ViewModel
         {
             if (IsSelectedRowAccessible)
             {
-                if (Messages.ShowYesNo(Strings.ConfirmationDeletePublisher))
+                int childRowCount = SelectedRow.GetChildRows(SelfPublisherTable.Defs.Relations.ToPublished).Length;
+                if (childRowCount > 0)
                 {
-                    SelectedRow.Delete();
-                    Table.Save();
+                    MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.InvalidOpCannotDeletePublisher, childRowCount));
+                    return;
+                }
+
+                if (MessageWindow.ShowYesNo(Strings.ConfirmationDeletePublisher))
+                {
+                    DeleteSelectedRow();
                 }
             }
         }
@@ -132,18 +166,6 @@ namespace Restless.Panama.ViewModel
         protected override bool CanRunDeleteCommand()
         {
             return IsSelectedRowAccessible;
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Private Methods
-
-        private void AddViewSourceSortDescriptions()
-        {
-            // TODO
-            //MainSource.SortDescriptions.Clear();
-            //MainSource.SortDescriptions.Add(new SortDescription(PublishedTable.Defs.Columns.Added, ListSortDirection.Descending));
         }
         #endregion
     }

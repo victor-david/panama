@@ -4,15 +4,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cv="clr-namespace:Restless.Panama.Core"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:view="clr-namespace:Restless.Panama.View"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:SelfPublisherViewModel}"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
     <Grid>
         <Grid.ColumnDefinitions>
-            <!-- MaxWidth binds to a value relative to the width of the grid. Converter parm is the desired min width of right column -->
-            <ColumnDefinition Width="{Binding Config.LeftColumnSelfPublisher,Mode=TwoWay}" MinWidth="360" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}, Converter={cv:SubtractionConverter}, ConverterParameter=380}" />
+            <!-- 
+            MaxWidth binds to a value relative to the width of the grid. 
+            Converter parm is the desired min width of right column
+            -->
+            <ColumnDefinition
+                Width="{Binding Config.LeftColumnSelfPublisher,Mode=TwoWay}"
+                MaxWidth="{Binding Path=ActualWidth,
+                RelativeSource={RelativeSource AncestorType=Grid},
+                Converter={cv:SubtractionConverter}, ConverterParameter=380}"
+                MinWidth="360"/>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -20,39 +29,58 @@
             <RowDefinition Height="{StaticResource GridRowHeightTool}" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!-- Controls specific to this view-->
-        <ItemsControl HorizontalAlignment="Right" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>
 
+        <StatusBar Margin="0,0,4,0">
+            <!-- no filters for now -->
+        </StatusBar>
 
-        <!-- Main data grid to display the tabular data  -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderEditContainerStyle}">
+        <Border Grid.Row="1" Style="{StaticResource BorderEditContainerStyle}">
             <tk:DataGrid 
-                x:Name="PublisherDataGrid" 
-                Grid.Row="1" Grid.Column="0" 
                 RowHeight="{Binding Config.DataGridRowHeight}"
-                ItemsSource="{Binding Path=MainSource.View}" 
+                ItemsSource="{Binding ListView}" 
                 SelectedItem="{Binding SelectedItem}"
-                tk:DataGridColumns.Columns="{Binding Columns}">
-                <DataGrid.RowStyle>
-                    <!-- Base style contains all the triggers -->
-                    <Style TargetType="DataGridRow" BasedOn="{StaticResource PublisherDataGridRowStyle}">
-                        <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=PublisherDataGrid, Path=DataContext.OpenRowCommand}"/>
-                    </Style>
-                </DataGrid.RowStyle>
+                RestoreStateBehavior="RestoreLastSelection"
+                tk:DataGridColumns.Columns="{Binding Columns}"
+                RowStyle="{StaticResource PublisherDataGridRowStyle}">
+                
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                </DataGrid.InputBindings>
+
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
             </tk:DataGrid>
         </Border>
+        
         <!-- Splitter -->
-        <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource GridSplitterVertical}" />
+        <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource VerticalGridSplitterStyle}" />
 
-        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderEditContainerStyle}">
-            <DockPanel>
-                <view:SelfPublisherEdit DockPanel.Dock="Top" Visibility="{Binding EditVisibility}"/>
-            </DockPanel>
+        <StatusBar Grid.Column="2" Margin="4,0,0,0">
+            <TextBlock 
+                Style="{StaticResource TitleDisplayTextBlockStyle}"
+                Text="{Binding SelectedPublisher.Name}"/>
+        </StatusBar>
+
+        <!-- Editing zone -->
+        <Border
+            Grid.Row="1" Grid.Column="2"
+            Style="{StaticResource BorderEditContainerStyle}"
+            Visibility="{Binding EditVisibility}">
+
+            <StackPanel Style="{StaticResource DataEntryPanelStyle}">
+                <TextBlock Text="{x:Static r:Strings.TextName}"/>
+                <TextBox Text="{Binding SelectedPublisher.Name}"/>
+
+                <TextBlock Text="{x:Static r:Strings.TextUrl}"/>
+                <TextBox Text="{Binding SelectedPublisher.Url}"/>
+
+                <TextBlock Text="{x:Static r:Strings.TextNotes}"/>
+                <TextBox
+                    Style="{StaticResource TextBoxMultiStyle}"
+                    Text="{Binding SelectedPublisher.Notes}"/>
+            </StackPanel>
+
         </Border>
-
     </Grid>
-    <!-- end main grid-->
 </UserControl>

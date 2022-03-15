@@ -16,6 +16,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace Restless.Panama.ViewModel
@@ -130,11 +131,12 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
             Columns.Create("Url", PublisherTable.Defs.Columns.Url);
 
-            var col = Columns.Create("Added", PublisherTable.Defs.Columns.Added)
+            DataGridColumn column = Columns.Create("Added", PublisherTable.Defs.Columns.Added)
                 .MakeDate()
                 .AddToolTip(Strings.ToolTipPublisherAdded);
 
-            Columns.SetDefaultSort(col, ListSortDirection.Descending);
+            Columns.SetDefaultSort(column, ListSortDirection.Descending);
+
             Columns.CreateImage<BooleanToImageConverter>("A", PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission, "ImageExclamation")
                 .AddToolTip(Strings.ToolTipPublisherHasActive);
 
@@ -208,9 +210,10 @@ namespace Restless.Panama.ViewModel
             return Filters?.OnDataRowFilter(item) ?? false;
         }
 
+        /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return base.OnDataRowCompare(item1, item2);
+            return DataRowCompareDateTime(item2, item1, PublisherTable.Defs.Columns.Added);
         }
 
         /// <summary>
@@ -224,6 +227,7 @@ namespace Restless.Panama.ViewModel
                 Table.Save();
                 Filters.ClearAll();
                 Columns.RestoreDefaultSort();
+                ForceListViewSort();
             }
         }
 
@@ -272,10 +276,10 @@ namespace Restless.Panama.ViewModel
                     MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.InvalidOpCannotDeletePublisher, childRowCount));
                     return;
                 }
+
                 if (MessageWindow.ShowYesNo(Strings.ConfirmationDeletePublisher))
                 {
-                    SelectedRow.Delete();
-                    Table.Save();
+                    DeleteSelectedRow();
                 }
             }
         }

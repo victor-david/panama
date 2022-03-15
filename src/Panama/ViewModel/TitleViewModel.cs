@@ -326,16 +326,19 @@ namespace Restless.Panama.ViewModel
         /// </remarks>
         protected override void RunDeleteCommand()
         {
-            int childRowCount = SelectedRow.GetChildRows(TitleTable.Defs.Relations.ToSubmission).Length;
-            if (childRowCount > 0)
+            if (IsSelectedRowAccessible)
             {
-                Messages.ShowError(string.Format(Strings.InvalidOpCannotDeleteTitle, childRowCount));
-                return;
-            }
-            if (Messages.ShowYesNo(Strings.ConfirmationDeleteTitle))
-            {
-                SelectedRow.Delete();
-                Table.Save();
+                int childRowCount = SelectedRow.GetChildRows(TitleTable.Defs.Relations.ToSubmission).Length;
+                if (childRowCount > 0)
+                {
+                    MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.InvalidOpCannotDeleteTitle, childRowCount));
+                    return;
+                }
+
+                if (MessageWindow.ShowYesNo(Strings.ConfirmationDeleteTitle))
+                {
+                    DeleteSelectedRow();
+                }
             }
         }
 
