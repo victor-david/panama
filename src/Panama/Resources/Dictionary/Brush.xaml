@@ -11,8 +11,8 @@
     <SolidColorBrush x:Key="LightBackgroundBrush" Color="GhostWhite"/>
     
     <!-- Foreground -->
-    <SolidColorBrush x:Key="DefaultForegroundBrush" Color="#0000f0"/>
-    <SolidColorBrush x:Key="DarkForegroundBrush" Color="Gray"/>
+    <SolidColorBrush x:Key="DefaultForegroundBrush" Color="MediumBlue"/>
+    <SolidColorBrush x:Key="DarkForegroundBrush" Color="DimGray"/>
     <SolidColorBrush x:Key="LightForegroundBrush" Color="#AB000000"/>
     <SolidColorBrush x:Key="DefaultHeaderForegroundBrush" Color="#606060" />
     <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />

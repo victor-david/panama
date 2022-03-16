@@ -23,8 +23,9 @@ namespace Restless.Panama.ViewModel
     public class StatisticsViewModel : ApplicationViewModel
     {
         #region Private
-        private const int FileHeaderWidth = 216;
-        private const int FileValueWidth = 68;
+        private const int HeaderColumnWidth = 216;
+        private const int ValueColumnWidth = 68;
+        private const int MagicFactor = 20;
         private bool haveTitleRoot;
         private bool isFolderOperationInProgress;
         private FolderStatisticItem rootStat;
@@ -144,31 +145,28 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         private void CreateTreeViewItems()
         {
-            TreeViewItem rootItem = new()
+            DisplayGrid rootDisplay = new()
             {
+                HeaderFontSize = 14,
+                HeaderForeground = Brushes.DimGray,
                 Header = $"Title root: {Config.FolderTitleRoot}",
+                HeaderColumnWidth = HeaderColumnWidth + MagicFactor - 1,
+                ValueColumnWidth = ValueColumnWidth,
+                ValueFontSize = 13,
+                ValueForeground = Brushes.MediumBlue
+            };
+
+            rootDisplay.SetValues("Total", ".docx", ".doc", ".pdf", ".txt", "Other");
+
+            TreeViewItem rootTreeItem = new()
+            {
+                Header = rootDisplay,
                 IsExpanded = true
             };
 
-            // Make a header item that displays the file types
-            TreeViewItem headerItem = new();
-            GridRowDisplay headerItemDisplay = new()
-            {
-                Columns = 6,
-                HeaderWidth = FileHeaderWidth,
-                ValueWidth = FileValueWidth,
-                ValueFontSize = 12,
-                ValueForeground = new SolidColorBrush(Color.FromArgb(255, 204, 0, 0)),
-            };
-            headerItemDisplay.SetValues("Total", ".docx", ".doc", ".pdf", ".txt", "Other");
-            headerItem.Header = headerItemDisplay;
-            // add the header item
-            rootItem.Items.Add(headerItem);
-
-            // This can create recursive tree items.
-            AddTreeViewItem(rootItem, rootStat);
-
-            FolderView.Add(rootItem);
+            /* recursively adds tree items */
+            AddTreeViewItem(rootTreeItem, rootStat);
+            FolderView.Add(rootTreeItem);
         }
 
         /// <summary>
@@ -178,17 +176,14 @@ namespace Restless.Panama.ViewModel
         /// <param name="statItem"></param>
         private void AddTreeViewItem(TreeViewItem treeItem, FolderStatisticItem statItem)
         {
-
             foreach (FolderStatisticItem child in statItem.Children)
             {
-                GridRowDisplay display = new()
+                DisplayGrid display = new()
                 {
-                    Columns = 6,
                     Header = child.FolderDisplay,
-                    HeaderWidth = FileHeaderWidth - ((child.Depth - 1) * 20),
-                    ValueWidth = FileValueWidth,
+                    HeaderColumnWidth = HeaderColumnWidth - ((child.Depth - 1) * MagicFactor),
+                    ValueColumnWidth = ValueColumnWidth
                 };
-
 
                 display.SetValues(child.Total, child.Docx, child.Doc, child.Pdf, child.Txt, child.Other);
                 TreeViewItem item = new()

@@ -86,4 +86,13 @@
         <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}" />
     </Style>
 
+    <Style TargetType="con:DisplayGrid">
+        <Setter Property="Margin" Value="0,3"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HeaderFontSize" Value="12"/>
+        <Setter Property="HeaderForeground" Value="{StaticResource DefaultForegroundBrush}"/>
+        <Setter Property="ValueForeground" Value="{StaticResource DarkForegroundBrush}"/>
+        <Setter Property="ValueHorizontalAlignment" Value="Right"/>
+    </Style>
+
 </ResourceDictionary>
