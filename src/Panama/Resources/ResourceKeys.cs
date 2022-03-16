@@ -27,6 +27,7 @@
             public const string PublisherGeometryKey = nameof(PublisherGeometryKey);
             public const string SaveGeometryKey = nameof(SaveGeometryKey);
             public const string SettingsGeometryKey = nameof(SettingsGeometryKey);
+            public const string StatisticGeometryKey = nameof(StatisticGeometryKey);
             public const string SubmissionGeometryKey = nameof(SubmissionGeometryKey);
             public const string TagGeometryKey = nameof(TagGeometryKey);
             public const string TitleGeometryKey = nameof(TitleGeometryKey);
@@ -53,6 +54,7 @@
             public const string SquareSmallGrayIconKey = nameof(SquareSmallGrayIconKey);
             public const string SquareSmallGreenIconKey = nameof(SquareSmallGreenIconKey);
             public const string SquareSmallRedIconKey = nameof(SquareSmallRedIconKey);
+            public const string StatisticIconKey = nameof(StatisticIconKey);
             public const string ToggleIconKey = nameof(ToggleIconKey);
             public const string XIconKey = nameof(XIconKey);
             public const string XRedIconKey = nameof(XRedIconKey);

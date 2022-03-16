@@ -7,7 +7,9 @@
 using Restless.Panama.Resources;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Restless.Panama.Tools
 {
@@ -23,16 +25,12 @@ namespace Restless.Panama.Tools
         public string Folder
         {
             get;
-            private set;
         }
 
         /// <summary>
         /// Gets the display name for this item. Returns only the folder name.
         /// </summary>
-        public string FolderDisplay
-        {
-            get { return Path.GetFileName(Folder); }
-        }
+        public string FolderDisplay => Path.GetFileName(Folder);
 
         /// <summary>
         /// Gets the depth of this folder statistic within the folder hierarchy.
@@ -49,7 +47,7 @@ namespace Restless.Panama.Tools
         public int Total
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
@@ -58,7 +56,7 @@ namespace Restless.Panama.Tools
         public int Docx
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
@@ -67,7 +65,7 @@ namespace Restless.Panama.Tools
         public int Doc
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
@@ -76,7 +74,7 @@ namespace Restless.Panama.Tools
         public int Pdf
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
@@ -85,7 +83,7 @@ namespace Restless.Panama.Tools
         public int Txt
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
@@ -94,7 +92,7 @@ namespace Restless.Panama.Tools
         public int Other
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
@@ -103,7 +101,6 @@ namespace Restless.Panama.Tools
         public List<FolderStatisticItem> Children
         {
             get;
-            private set;
         }
         #endregion
 
@@ -120,6 +117,7 @@ namespace Restless.Panama.Tools
             {
                 throw new ArgumentNullException(nameof(folder));
             }
+
             if (!Directory.Exists(folder))
             {
                 throw new InvalidOperationException(Strings.InvalidOpDirectoryDoesNotExist);
@@ -135,36 +133,53 @@ namespace Restless.Panama.Tools
         #region Public methods
         /// <summary>
         /// Populates the folder statistics. This method recursively checks sub folders,
-        /// creating items for the <see cref="Children"/> property. This method may take a long time to run.
-        /// Consider running it on a background thread.
+        /// creating items for the <see cref="Children"/> property.
         /// </summary>
-        public void Populate()
+        public async Task PopulateAsync()
         {
-            Populate(Folder, 0);
+            await PopulateAsync(Folder, 0);
         }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
-        private void Populate(string folder, int depth)
+        private async Task PopulateAsync(string folder, int depth)
         {
             Depth = depth;
             foreach (string file in Directory.EnumerateFiles(folder, "*", SearchOption.TopDirectoryOnly))
             {
+                switch (Path.GetExtension(file).ToLower(CultureInfo.InvariantCulture))
+                {
+                    case ".docx":
+                        Docx++;
+                        break;
+
+                    case ".doc":
+                        Doc++;
+                        break;
+
+                    case ".pdf":
+                        Pdf++;
+                        break;
+
+                    case ".txt":
+                        Txt++;
+                        break;
+
+                    default:
+                        Other++;
+                        break;
+                }
+
                 Total++;
-                if (Path.GetExtension(file) == ".docx") Docx++;
-                else if (Path.GetExtension(file) == ".doc") Doc++;
-                else if (Path.GetExtension(file) == ".pdf") Pdf++;
-                else if (Path.GetExtension(file) == ".txt") Txt++;
-                else Other++;
             }
 
             foreach (string dir in Directory.EnumerateDirectories(folder, "*", SearchOption.TopDirectoryOnly))
             {
                 FolderStatisticItem child = new(dir);
                 Children.Add(child);
-                child.Populate(dir, depth + 1);
+                await child.PopulateAsync(dir, depth + 1);
             }
             SumChildren(this);
         }
@@ -181,7 +196,6 @@ namespace Restless.Panama.Tools
                 Txt += child.Txt;
                 Other += child.Other;
             }
-
         }
         #endregion
     }

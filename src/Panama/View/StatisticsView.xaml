@@ -5,92 +5,121 @@
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:StatisticsViewModel}"
     mc:Ignorable="d"
-    d:DesignWidth="860" d:DesignHeight="460">
-    <UniformGrid Columns="2" Rows="1">
-        <!-- Basic stats (left) -->
-        <HeaderedContentControl Header="Basic Stats">
-            <StackPanel Margin="0,4" >
-                <StackPanel.Resources>
-                    <Style TargetType="tk:LineItem">
-                        <Setter Property="Margin" Value="0,4"/>
-                        <Setter Property="ItemFontSize" Value="12"/>
-                        <Setter Property="ItemForeground" Value="#FF707070"/>
-                        <Setter Property="ValueForeground" Value="DarkBlue"/>
-                    </Style>
+    d:DesignWidth="460" d:DesignHeight="450">
+    <Grid tk:Property.ColumnWidths="*,1.5*">
 
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Foreground" Value="#FFCC0000"/>
-                        <Setter Property="FontSize" Value="13"/>
-                        <Setter Property="Margin" Value="0,2"/>
-                    </Style>
+        <Border Style="{StaticResource BorderEditContainerStyle}">
+            <HeaderedContentControl Header="Basic Stats">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="tk:LineItem">
+                            <Setter Property="Margin" Value="0,3"/>
+                            <Setter Property="IndentLevel" Value="2"/>
+                            <Setter Property="ItemFontSize" Value="12"/>
+                            <Setter Property="ValueFontSize" Value="11"/>
+                            <Setter Property="ItemForeground" Value="{StaticResource DarkForegroundBrush}"/>
+                            <Setter Property="ValueForeground" Value="{StaticResource DefaultForegroundBrush}"/>
+                        </Style>
+
+                        <Style TargetType="Expander" BasedOn="{StaticResource DefaultExpanderStyle}">
+                            <Setter Property="Margin" Value="0,0,0,10"/>
+                            <Setter Property="Padding" Value="10,5,10,10"/>
+                            <Setter Property="Foreground" Value="{StaticResource DarkAlertForegroundBrush}"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsExpanded" Value="False">
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Resources>
                     
-                    <Style TargetType="Separator">
-                        <Setter Property="Margin" Value="0,4"/>
-                    </Style>
-                </StackPanel.Resources>
-                <TextBlock Text="Titles"/>
-                <tk:LineItem Item="Total" Value="{Binding Title.RowCount,Mode=OneTime}" IndentLevel="1"/>
-                <Separator/>
-                <TextBlock Text="Versions"/>
-                <tk:LineItem Item="Total" Value="{Binding Version.RowCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item=".docx" Value="{Binding Version.WordOpenXmlCount,Mode=OneTime}" IndentLevel="1" />
-                <tk:LineItem Item=".doc" Value="{Binding Version.Word2007Count,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item=".pdf" Value="{Binding Version.PdfCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item=".txt" Value="{Binding Version.TextCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item=".html" Value="{Binding Version.HtmlCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item="shared" Value="{Binding Version.SharedCount,Mode=OneTime}" IndentLevel="1"/>
-                <Separator/>
-                <TextBlock Text="Submissions"/>
-                <tk:LineItem Item="Total" Value="{Binding Submission.RowCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item="Active" Value="{Binding Submission.ActiveCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item="Accepted" Value="{Binding Submission.AcceptedCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item="Rejected" Value="{Binding Submission.RejectedCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item="Fees" Value="{Binding Submission.TotalFees,Mode=OneTime,StringFormat=N2}" IndentLevel="1"/>
-                <Separator/>
-                <TextBlock Text="Publisher"/>
-                <tk:LineItem Item="Total" Value="{Binding Publisher.RowCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item="In Period" Value="{Binding Publisher.InSubmissionPeriodCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item="Followup" Value="{Binding Publisher.FollowupCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item="Paying" Value="{Binding Publisher.PayingCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item="Exclusive" Value="{Binding Publisher.ExclusiveCount,Mode=OneTime}" IndentLevel="1"/>
-                <tk:LineItem Item="Goner" Value="{Binding Publisher.GonerCount,Mode=OneTime}" IndentLevel="1"/>
-                <Separator/>
-                <TextBlock Text="Submission replies (days)"/>
-                <tk:LineItem Item="Minimum" Value="{Binding Submission.MinimumDays}" IndentLevel="1"/>
-                <tk:LineItem Item="Maximum" Value="{Binding Submission.MaximumDays}" IndentLevel="1"/>
-                <tk:LineItem Item="Average" Value="{Binding Submission.AverageDays}" IndentLevel="1"/>
-            </StackPanel>
-        </HeaderedContentControl>
-        
-        <!-- File type stats (right) -->
-        <HeaderedContentControl Header="Folders">
-            <DockPanel Margin="2,10">
-                <DockPanel
-                    DockPanel.Dock="Top"
-                    tk:Property.IsVisible="{Binding HaveFolderView}">
-                    <TreeView 
+                    <Expander Header="Titles">
+                        <tk:LineItem Item="Total" Value="{Binding Title.RowCount,Mode=OneTime}"/>
+                    </Expander>
+
+                    <Expander Header="Versions">
+                        <StackPanel>
+                            <tk:LineItem Item="Total" Value="{Binding Version.RowCount,Mode=OneTime}"/>
+                            <tk:LineItem Item=".docx" Value="{Binding Version.WordOpenXmlCount,Mode=OneTime}"/>
+                            <tk:LineItem Item=".doc" Value="{Binding Version.Word2007Count,Mode=OneTime}"/>
+                            <tk:LineItem Item=".pdf" Value="{Binding Version.PdfCount,Mode=OneTime}"/>
+                            <tk:LineItem Item=".txt" Value="{Binding Version.TextCount,Mode=OneTime}"/>
+                            <tk:LineItem Item=".html" Value="{Binding Version.HtmlCount,Mode=OneTime}"/>
+                            <tk:LineItem Item="shared" Value="{Binding Version.SharedCount,Mode=OneTime}"/>
+                        </StackPanel>
+                    </Expander>
+
+                    <Expander Header="Submissions">
+                        <StackPanel>
+                            <tk:LineItem Item="Total" Value="{Binding Submission.RowCount,Mode=OneTime}"/>
+                            <tk:LineItem Item="Active" Value="{Binding Submission.ActiveCount,Mode=OneTime}"/>
+                            <tk:LineItem Item="Accepted" Value="{Binding Submission.AcceptedCount,Mode=OneTime}"/>
+                            <tk:LineItem Item="Rejected" Value="{Binding Submission.RejectedCount,Mode=OneTime}"/>
+                            <tk:LineItem Item="Fees" Value="{Binding Submission.TotalFees,Mode=OneTime,StringFormat=N2}"/>
+                        </StackPanel>
+                    </Expander>
+
+                    <Expander Header="Publisher">
+                        <StackPanel>
+                            <tk:LineItem Item="Total" Value="{Binding Publisher.RowCount,Mode=OneTime}"/>
+                            <tk:LineItem Item="In Period" Value="{Binding Publisher.InSubmissionPeriodCount,Mode=OneTime}"/>
+                            <tk:LineItem Item="Followup" Value="{Binding Publisher.FollowupCount,Mode=OneTime}"/>
+                            <tk:LineItem Item="Paying" Value="{Binding Publisher.PayingCount,Mode=OneTime}"/>
+                            <tk:LineItem Item="Exclusive" Value="{Binding Publisher.ExclusiveCount,Mode=OneTime}"/>
+                            <tk:LineItem Item="Goner" Value="{Binding Publisher.GonerCount,Mode=OneTime}"/>
+                        </StackPanel>
+                    </Expander>
+
+
+                    <Expander Header="Submission replies (days)" BorderThickness="0">
+                        <StackPanel>
+                            <tk:LineItem Item="Minimum" Value="{Binding Submission.MinimumDays}"/>
+                            <tk:LineItem Item="Maximum" Value="{Binding Submission.MaximumDays}"/>
+                            <tk:LineItem Item="Average" Value="{Binding Submission.AverageDays}"/>
+                        </StackPanel>
+                    </Expander>
+                    
+                </StackPanel>
+            </HeaderedContentControl>
+        </Border>
+
+
+        <Border Grid.Column="1" Style="{StaticResource BorderEditContainerStyle}">
+
+            <HeaderedContentControl Header="Folders">
+                <DockPanel>
+                    <DockPanel
                         DockPanel.Dock="Top"
-                        BorderThickness="0"
-                        ScrollViewer.VerticalScrollBarVisibility="Auto"
-                        ItemsSource="{Binding FolderView}"
-                        tk:Property.IsVisible="{Binding IsFolderViewLoaded}"/>
+                        tk:Property.IsVisible="{Binding HaveTitleRoot}">
+                        <TreeView 
+                            DockPanel.Dock="Top"
+                            BorderThickness="0"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"
+                            ItemsSource="{Binding FolderView}"
+                            tk:Property.IsCollapsed="{Binding IsFolderOperationInProgress}"/>
+
+                        <ProgressBar
+                            DockPanel.Dock="Top"
+                            Height="18"
+                            IsIndeterminate="True"
+                            tk:Property.IsVisible="{Binding IsFolderOperationInProgress}"/>
+
+                    </DockPanel>
                     
-                    <StackPanel
-                        DockPanel.Dock="Top" 
-                        tk:Property.IsVisible="{Binding IsFolderViewLoaded}">
-                        <TextBlock Style="{StaticResource TextBlockMessage}">Loading...</TextBlock>
-                        <ProgressBar Height="18" HorizontalAlignment="Stretch" IsIndeterminate="True" />
-                    </StackPanel>
+                    <TextBlock 
+                        DockPanel.Dock="Top"
+                        Style="{StaticResource TextBlockMessage}"
+                        tk:Property.IsCollapsed="{Binding HaveTitleRoot}"
+                        Text="{x:Static r:Strings.InvalidOpTitleRootFolderNotSet}"/>
                 </DockPanel>
-                <TextBlock 
-                    DockPanel.Dock="Top"
-                    Style="{StaticResource TextBlockError}"
-                    tk:Property.IsCollapsed="{Binding HaveFolderView}"
-                    Text="{x:Static r:Strings.InvalidOpTitleRootFolderNotSet}"/>
-            </DockPanel>
-        </HeaderedContentControl>
-    </UniformGrid>
+            </HeaderedContentControl>
+
+        </Border>
+    </Grid>
 
 </UserControl>

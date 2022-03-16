@@ -240,6 +240,8 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.SubmissionGeometryKey));
 
             NavigatorItems.Add<TagViewModel>(NavigationGroup.Tools, Strings.MenuItemTags, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TagGeometryKey));
+
+            NavigatorItems.Add<StatisticsViewModel>(NavigationGroup.Other, Strings.MenuItemStatistics, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.StatisticGeometryKey));
         }
 
         private void NavigatorItemsSelectedItemChanged(object sender, NavigatorItem navItem)

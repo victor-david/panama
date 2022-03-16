@@ -668,15 +668,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Statistics.
-        /// </summary>
-        public static string CommandStatistics {
-            get {
-                return ResourceManager.GetString("CommandStatistics", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Submissions.
         /// </summary>
         public static string CommandSubmission {
@@ -1969,6 +1960,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemSettings {
             get {
                 return ResourceManager.GetString("MenuItemSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        public static string MenuItemStatistics {
+            get {
+                return ResourceManager.GetString("MenuItemStatistics", resourceCulture);
             }
         }
         

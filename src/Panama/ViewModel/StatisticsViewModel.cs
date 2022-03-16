@@ -8,11 +8,9 @@ using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
-using Restless.Panama.Resources;
 using Restless.Panama.Tools;
 using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -27,8 +25,8 @@ namespace Restless.Panama.ViewModel
         #region Private
         private const int FileHeaderWidth = 216;
         private const int FileValueWidth = 68;
-        private bool haveFolderView;
-        private bool isFolderViewLoaded;
+        private bool haveTitleRoot;
+        private bool isFolderOperationInProgress;
         private FolderStatisticItem rootStat;
         #endregion
 
@@ -41,7 +39,6 @@ namespace Restless.Panama.ViewModel
         public TableStatisticBase Title
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -50,7 +47,6 @@ namespace Restless.Panama.ViewModel
         public TitleVersionTableStats Version
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -59,7 +55,6 @@ namespace Restless.Panama.ViewModel
         public SubmissionBatchTableStats Submission
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -68,7 +63,6 @@ namespace Restless.Panama.ViewModel
         public PublisherTableStats Publisher
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -77,35 +71,25 @@ namespace Restless.Panama.ViewModel
         public ObservableCollection<TreeViewItem> FolderView
         {
             get;
-            private set;
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates if the folder view is available.
-        /// Folder view may be unavailable because the title root folder is not set
-        /// or points to a non-existent path.
+        /// Gets a boolean value that indicates if the title root folder 
+        /// is set and points to a valid path.
         /// </summary>
-        public bool HaveFolderView
+        public bool HaveTitleRoot
         {
-            get { return haveFolderView; }
-            private set
-            {
-                SetProperty(ref haveFolderView, value);
-            }
+            get => haveTitleRoot;
+            private set => SetProperty(ref haveTitleRoot, value);
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates if the folder view has finished loading.
+        /// Gets a boolean value that indicates if the folder operation is in progress
         /// </summary>
-        public bool IsFolderViewLoaded
+        public bool IsFolderOperationInProgress
         {
-            get { return isFolderViewLoaded; }
-            private set
-            {
-                SetProperty(ref isFolderViewLoaded, value);
-                if (isFolderViewLoaded) CreateTreeViewItems();
-                OnPropertyChanged();
-            }
+            get => isFolderOperationInProgress;
+            private set => SetProperty(ref isFolderOperationInProgress, value);
         }
         #endregion
 
@@ -117,37 +101,25 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public StatisticsViewModel()
         {
-            DisplayName = Strings.CommandStatistics;
             Title = new TableStatisticBase(DatabaseController.Instance.GetTable<TitleTable>());
             Version = new TitleVersionTableStats(DatabaseController.Instance.GetTable<TitleVersionTable>());
             Submission = new SubmissionBatchTableStats(DatabaseController.Instance.GetTable<SubmissionBatchTable>());
             Publisher = new PublisherTableStats(DatabaseController.Instance.GetTable<PublisherTable>());
             FolderView = new ObservableCollection<TreeViewItem>();
-            IsFolderViewLoaded = false;
-            HaveFolderView = (!string.IsNullOrEmpty(Config.FolderTitleRoot) && Directory.Exists(Config.FolderTitleRoot));
-            if (HaveFolderView)
-            {
-                InitFolderView();
-            }
+            HaveTitleRoot = !string.IsNullOrEmpty(Config.FolderTitleRoot) && Directory.Exists(Config.FolderTitleRoot);
         }
         #endregion
 
         /************************************************************************/
 
-        #region Public methods
-        #endregion
-
-        /************************************************************************/
-
         #region Protected Methods
-        /// <summary>
-        /// Raises the Closing event.
-        /// </summary>
-        /// <param name="e">The event arguments</param>
-        protected override void OnClosing(CancelEventArgs e)
+        /// <inheritdoc/>
+        protected override void OnActivated()
         {
-            SetCancelIfTasksInProgress(e);
-            base.OnClosing(e);
+            if (HaveTitleRoot)
+            {
+                InitFolderView();
+            }
         }
         #endregion
 
@@ -157,15 +129,14 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Scan folders on a background thread and creates the folder statistics.
         /// </summary>
-        private void InitFolderView()
+        private async void InitFolderView()
         {
-            // TODO
-            //TaskManager.Instance.ExecuteTask(AppTaskId.FolderStatScan, (token) =>
-            //    {
-            //        rootStat = new FolderStatisticItem(Config.FolderTitleRoot);
-            //        rootStat.Populate();
-            //        TaskManager.Instance.DispatchTask(() => { IsFolderViewLoaded = true; });
-            //    }, null, null, false);
+            IsFolderOperationInProgress = true;
+            FolderView.Clear();
+            rootStat = new FolderStatisticItem(Config.FolderTitleRoot);
+            await rootStat.PopulateAsync();
+            CreateTreeViewItems();
+            IsFolderOperationInProgress = false;
         }
 
         /// <summary>
@@ -175,13 +146,13 @@ namespace Restless.Panama.ViewModel
         {
             TreeViewItem rootItem = new()
             {
-                Header = string.Format("Title root: {0}", Config.FolderTitleRoot),
+                Header = $"Title root: {Config.FolderTitleRoot}",
                 IsExpanded = true
             };
 
             // Make a header item that displays the file types
             TreeViewItem headerItem = new();
-            var headerItemDisplay = new GridRowDisplay()
+            GridRowDisplay headerItemDisplay = new()
             {
                 Columns = 6,
                 HeaderWidth = FileHeaderWidth,
@@ -208,9 +179,9 @@ namespace Restless.Panama.ViewModel
         private void AddTreeViewItem(TreeViewItem treeItem, FolderStatisticItem statItem)
         {
 
-            foreach (var child in statItem.Children)
+            foreach (FolderStatisticItem child in statItem.Children)
             {
-                var display = new GridRowDisplay()
+                GridRowDisplay display = new()
                 {
                     Columns = 6,
                     Header = child.FolderDisplay,
@@ -220,7 +191,7 @@ namespace Restless.Panama.ViewModel
 
 
                 display.SetValues(child.Total, child.Docx, child.Doc, child.Pdf, child.Txt, child.Other);
-                var item = new TreeViewItem()
+                TreeViewItem item = new()
                 {
                     Header = display
                 };

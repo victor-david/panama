@@ -40,9 +40,8 @@
                 <MenuItem Header="Alerts" Icon="{StaticResource ImageCalendarMenu}" Command="{Binding Commands[Alert]}"/>
                 <MenuItem Header="Notes" Icon="{StaticResource ImageNoteMenu}" Command="{Binding Commands[Note]}"/>
                 <MenuItem Header="Links" Icon="{StaticResource ImageLinkMenu}" Command="{Binding Commands[Link]}"/>
-                <MenuItem Header="Self Publishers" Icon="{StaticResource ImagePublisherMenu}" Command="{Binding Commands[SelfPublisher]}"/>
                 <Separator/>
-                <MenuItem Header="Statistics" Icon="{StaticResource ImageStatisticsMenu}" Command="{Binding Commands[Statistics]}"/>
+                <MenuItem Header="Statistics" Icon="{StaticResource StatisticIconKey}" Command="{Binding Commands[Statistics]}"/>
             </MenuItem>
             <MenuItem Header="_Tools">
                 <MenuItem Header="Update Meta" Icon="{StaticResource ImageToolMetaMenu}" Command="{Binding Commands[ToolMeta]}"/>
@@ -59,8 +58,6 @@
                 <MenuItem Header="Reset window" Icon="{StaticResource ImageUndoMenu}" Command="{Binding Commands[ResetWindow]}" ToolTip="Reset the main window size to default"/>
             </MenuItem>
             <MenuItem Header="_Help">
-                <MenuItem Header="Reference" Icon="{StaticResource ImageReferenceMenu}" Command="{Binding Commands[Reference]}"/>
-                <Separator/>
                 <MenuItem Header="About" Icon="{StaticResource ImageInformationMenu}" Command="{Binding Commands[About]}"/>
             </MenuItem>
         </Menu>

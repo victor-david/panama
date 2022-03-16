@@ -620,7 +620,7 @@ When you save properties here however, the document's file  modification date is
   <data name="HeaderToolOperationConvertFoundFormat" xml:space="preserve">
     <value>{0} eligible files, {1} converted</value>
   </data>
-  <data name="CommandStatistics" xml:space="preserve">
+  <data name="MenuItemStatistics" xml:space="preserve">
     <value>Statistics</value>
   </data>
   <data name="CommandAddCredential" xml:space="preserve">
