@@ -38,11 +38,11 @@
                         </Style>
                     </StackPanel.Resources>
                     
-                    <Expander Header="Titles">
+                    <Expander Header="Titles" IsExpanded="{Binding Config.IsStatisticTitleExpanded}">
                         <tk:LineItem Item="Total" Value="{Binding Title.RowCount,Mode=OneTime}"/>
                     </Expander>
 
-                    <Expander Header="Versions">
+                    <Expander Header="Versions" IsExpanded="{Binding Config.IsStatisticVersionExpanded}">
                         <StackPanel>
                             <tk:LineItem Item="Total" Value="{Binding Version.RowCount,Mode=OneTime}"/>
                             <tk:LineItem Item=".docx" Value="{Binding Version.WordOpenXmlCount,Mode=OneTime}"/>
@@ -54,7 +54,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Header="Submissions">
+                    <Expander Header="Submissions" IsExpanded="{Binding Config.IsStatisticSubmissionExpanded}">
                         <StackPanel>
                             <tk:LineItem Item="Total" Value="{Binding Submission.RowCount,Mode=OneTime}"/>
                             <tk:LineItem Item="Active" Value="{Binding Submission.ActiveCount,Mode=OneTime}"/>
@@ -64,7 +64,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Header="Publisher">
+                    <Expander Header="Publisher" IsExpanded="{Binding Config.IsStatisticPublisherExpanded}">
                         <StackPanel>
                             <tk:LineItem Item="Total" Value="{Binding Publisher.RowCount,Mode=OneTime}"/>
                             <tk:LineItem Item="In Period" Value="{Binding Publisher.InSubmissionPeriodCount,Mode=OneTime}"/>
@@ -75,8 +75,7 @@
                         </StackPanel>
                     </Expander>
 
-
-                    <Expander Header="Submission replies (days)" BorderThickness="0">
+                    <Expander Header="Submission replies (days)" IsExpanded="{Binding Config.IsStatisticReplyExpanded}" BorderThickness="0">
                         <StackPanel>
                             <tk:LineItem Item="Minimum" Value="{Binding Submission.MinimumDays}"/>
                             <tk:LineItem Item="Maximum" Value="{Binding Submission.MaximumDays}"/>

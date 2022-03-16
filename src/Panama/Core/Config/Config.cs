@@ -188,6 +188,55 @@ namespace Restless.Panama.Core
 
         /************************************************************************/
 
+        #region Other expanders
+        /// <summary>
+        /// Gets or sets whether the statistic title expander is expanded.
+        /// </summary>
+        public bool IsStatisticTitleExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the statistic version expander is expanded.
+        /// </summary>
+        public bool IsStatisticVersionExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the statistic submission expander is expanded.
+        /// </summary>
+        public bool IsStatisticSubmissionExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the statistic publisher expander is expanded.
+        /// </summary>
+        public bool IsStatisticPublisherExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the statistic reply expander is expanded.
+        /// </summary>
+        public bool IsStatisticReplyExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region Main Window
         /// <summary>
         /// Gets or sets the width of the main window
