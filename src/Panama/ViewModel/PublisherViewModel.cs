@@ -153,8 +153,6 @@ namespace Restless.Panama.ViewModel
                 .AddToolTip(Strings.ToolTipPublisherSubmissionCount)
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
-            /* This command is used from this model and from the Filters controller */
-            Commands.Add("ClearFilter", p => Filters.ClearAll(), p => Config.PublisherFilter.IsAnyFilterActive);
             Commands.Add("ActiveFilter", p => Filters.SetToActive());
             Commands.Add("HaveSubFilter", p => Filters.SetToOpenSubmission());
             Commands.Add("InPeriodFilter", p => Filters.SetToInPeriod());
@@ -217,6 +215,18 @@ namespace Restless.Panama.ViewModel
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
             return DataRowCompareDateTime(item2, item1, PublisherTable.Defs.Columns.Added);
+        }
+
+        /// <inheritdoc/>
+        protected override void RunClearFilterCommand()
+        {
+            Filters.ClearAll();
+        }
+
+        /// <inheritdoc/>
+        protected override bool CanRunClearFilterCommand()
+        {
+            return Filters.IsAnyFilterActive;
         }
 
         /// <summary>

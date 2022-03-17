@@ -70,7 +70,7 @@
                 Content="{x:Static r:Strings.MenuItemClear}"
                 ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
                 Icon="{StaticResource FilterOffIconKey}"
-                Command="{Binding Commands[ClearFilter]}"/>
+                Command="{Binding ClearFilterCommand}"/>
 
             <Separator/>
 

@@ -57,8 +57,6 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddItem(Strings.MenuItemAddAuthor, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemDeleteAuthor, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
-
-            FilterPrompt = Strings.FilterPromptAuthor;
         }
         #endregion
 

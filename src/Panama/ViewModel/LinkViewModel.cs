@@ -48,7 +48,6 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandDeleteLink, DeleteCommand).AddImageResource("ImageDeleteMenu");
-            FilterPrompt = Strings.FilterPromptLink;
         }
         #endregion
 
@@ -61,22 +60,12 @@ namespace Restless.Panama.ViewModel
 
         #region Protected Methods
         /// <summary>
-        /// Called when the filter text has changed to set the filter on the underlying data.
-        /// </summary>
-        /// <param name="text">The filter text.</param>
-        protected override void OnFilterTextChanged(string text)
-        {
-            MainView.RowFilter = string.Format("{0} LIKE '%{1}%' OR {2} LIKE '%{3}%'", LinkTable.Defs.Columns.Name, text, LinkTable.Defs.Columns.Notes, text);
-        }
-
-        /// <summary>
         /// Runs the add command to add a new record to the data table
         /// </summary>
         protected override void RunAddCommand()
         {
             Table.AddDefaultRow();
             Table.Save();
-            FilterText = null;
             AddViewSourceSortDescriptions();
             Columns.RestoreDefaultSort();
         }

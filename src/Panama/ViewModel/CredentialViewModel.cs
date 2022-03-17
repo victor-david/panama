@@ -77,7 +77,6 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
 
             MenuItems.AddItem(Strings.CommandDeleteCredential, DeleteCommand).AddImageResource("ImageDeleteMenu");
-            FilterPrompt = Strings.FilterPromptCredential;
         }
         #endregion
 
@@ -97,14 +96,6 @@ namespace Restless.Panama.ViewModel
             base.OnSelectedItemChanged();
             Publisher.Update();
         }
-        /// <summary>
-        /// Called when the filter text has changed to set the filter on the underlying data.
-        /// </summary>
-        /// <param name="text">The filter text.</param>
-        protected override void OnFilterTextChanged(string text)
-        {
-            MainView.RowFilter = string.Format("{0} LIKE '%{1}%'", CredentialTable.Defs.Columns.Name, text);
-        }
 
         /// <summary>
         /// Runs the add command to add a new record to the data table
@@ -113,7 +104,6 @@ namespace Restless.Panama.ViewModel
         {
             Table.AddDefaultRow();
             Table.Save();
-            FilterText = null;
             AddViewSourceSortDescriptions();
             Columns.RestoreDefaultSort();
         }

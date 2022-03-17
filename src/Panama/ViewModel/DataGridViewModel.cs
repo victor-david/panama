@@ -30,7 +30,7 @@ namespace Restless.Panama.ViewModel
         #region Private
         private object selectedItem;
         private bool isCustomFilterOpen;
-        private string filterText;
+        //private string filterText;
         #endregion
 
         /************************************************************************/
@@ -166,38 +166,38 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public int SourceCount => (MainView != null) ? MainView.Count : 0;
 
-        /// <summary>
-        /// Gets or sets the text to use as a filter for the main data grid.
-        /// Derived classes should not use this property to filter.
-        /// Use the text passed with the OnFilterTextChanged method which has been sanitized.
-        /// </summary>
-        public string FilterText
-        {
-            get => filterText;
-            set
-            {
-                filterText = value;
-                if (!string.IsNullOrEmpty(filterText))
-                {
-                    OnFilterTextChanged(filterText.Replace("'","''"));
-                }
-                else
-                {
-                    MainView.RowFilter = null;
-                    OnFilterTextCleared();
-                }
-                OnPropertyChanged();
-            }
-        }
+        ///// <summary>
+        ///// Gets or sets the text to use as a filter for the main data grid.
+        ///// Derived classes should not use this property to filter.
+        ///// Use the text passed with the OnFilterTextChanged method which has been sanitized.
+        ///// </summary>
+        //public string FilterText
+        //{
+        //    get => filterText;
+        //    set
+        //    {
+        //        filterText = value;
+        //        if (!string.IsNullOrEmpty(filterText))
+        //        {
+        //            OnFilterTextChanged(filterText.Replace("'","''"));
+        //        }
+        //        else
+        //        {
+        //            MainView.RowFilter = null;
+        //            OnFilterTextCleared();
+        //        }
+        //        OnPropertyChanged();
+        //    }
+        //}
 
-        /// <summary>
-        /// Gets (or sets from a derived class) the prompt text that is shown in the filter input box
-        /// </summary>
-        public string FilterPrompt
-        {
-            get;
-            protected set;
-        }
+        ///// <summary>
+        ///// Gets (or sets from a derived class) the prompt text that is shown in the filter input box
+        ///// </summary>
+        //public string FilterPrompt
+        //{
+        //    get;
+        //    protected set;
+        //}
         #endregion
 
         /************************************************************************/
@@ -233,9 +233,9 @@ namespace Restless.Panama.ViewModel
             Columns = new DataGridColumnCollection();
             MenuItems = new MenuItemCollection();
 
-            AddCommand = RelayCommand.Create(RunAddCommand, CanRunAddCommand);
-            DeleteCommand = RelayCommand.Create(RunDeleteCommand, CanRunDeleteCommand);
-            ClearFilterCommand = RelayCommand.Create(RunClearFilterCommand, CanRunClearFilterCommand);
+            AddCommand = RelayCommand.Create(p => RunAddCommand(), p=> CanRunAddCommand());
+            DeleteCommand = RelayCommand.Create(p => RunDeleteCommand(), p => CanRunDeleteCommand());
+            ClearFilterCommand = RelayCommand.Create(p => RunClearFilterCommand(), p => CanRunClearFilterCommand());
             OpenRowCommand = RelayCommand.Create(RunOpenRowCommand, CanRunOpenRowCommand);
             ToggleCustomFilterCommand = RelayCommand.Create(p => IsCustomFilterOpen = !IsCustomFilterOpen);
         }
@@ -376,20 +376,21 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Override in a derived class to establish the filter on the main data grid.
-        /// This method is only called if the text has some characters. 
+        /// When overriden in a derived class, runs the command to clear filters.
+        /// The base implementation does nothing.
         /// </summary>
-        /// <param name="text">The filter text as it should be applied to the row filter. This value has been cleaned by the FilterText setter</param>
-        protected virtual void OnFilterTextChanged(string text)
+        protected virtual void RunClearFilterCommand()
         {
         }
 
         /// <summary>
-        /// Override in a derived class to perform actions when the filter text is cleared.
-        /// The base implementation does nothing.
+        /// When overriden in a derived class, runs the command predicate to check if the clear filter command can execute.
+        /// The base implementation returns <b>false</b>.
         /// </summary>
-        protected virtual void OnFilterTextCleared()
+        /// <returns>The base implememtation always returns <b>false</b>.</returns>
+        protected virtual bool CanRunClearFilterCommand()
         {
+            return false;
         }
 
         /// <summary>
@@ -500,36 +501,25 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
-        private void RunAddCommand(object o)
-        {
-            RunAddCommand();
-        }
+        //private void RunAddCommand(object o)
+        //{
+        //    RunAddCommand();
+        //}
 
-        private bool CanRunAddCommand(object o)
-        {
-            return CanRunAddCommand();
-        }
+        //private bool CanRunAddCommand(object o)
+        //{
+        //    return CanRunAddCommand();
+        //}
 
-        private void RunDeleteCommand(object o)
-        {
-            RunDeleteCommand();
-        }
+        //private void RunDeleteCommand(object o)
+        //{
+        //    RunDeleteCommand();
+        //}
 
-        private bool CanRunDeleteCommand(object o)
-        {
-            return CanRunDeleteCommand();
-        }
-
-        private void RunClearFilterCommand(object o)
-        {
-            FilterText = null;
-            OnPropertyChanged(nameof(FilterText));
-        }
-
-        private bool CanRunClearFilterCommand(object o)
-        {
-            return !string.IsNullOrEmpty(FilterText);
-        }
+        //private bool CanRunDeleteCommand(object o)
+        //{
+        //    return CanRunDeleteCommand();
+        //}
 
         private void DataViewListChanged(object sender, ListChangedEventArgs e)
         {

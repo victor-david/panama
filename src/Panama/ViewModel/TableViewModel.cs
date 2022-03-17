@@ -87,7 +87,6 @@ namespace Restless.Panama.ViewModel
             Columns.Create("CR", TableTable.Defs.Columns.ChildRelationCount).MakeFixedWidth(FixedWidth.W052);
             Columns.Create("C", TableTable.Defs.Columns.ConstraintCount).MakeFixedWidth(FixedWidth.W052);
             AddViewSourceSortDescriptions();
-            FilterPrompt = Strings.FilterPromptTable;
 
             ColumnData = new TableColumnController(this);
             Parents = new TableParentRelationController(this);
@@ -107,15 +106,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected Methods
-        /// <summary>
-        /// Called when the filter text has changed to set the filter on the underlying data.
-        /// </summary>
-        /// <param name="text">The filter text.</param>
-        protected override void OnFilterTextChanged(string text)
-        {
-            MainView.RowFilter = string.Format("{0} LIKE '%{1}%'", TableTable.Defs.Columns.Name, text);
-        }
-
         /// <summary>
         /// Called when the selected item on the associated data grid has changed.
         /// </summary>

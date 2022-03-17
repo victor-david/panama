@@ -51,23 +51,8 @@ namespace Restless.Panama.ViewModel
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
             Commands.Add("Select", RunSelectCommand, (o) => IsSelectedRowAccessible);
-            FilterPrompt = Strings.FilterPromptPublisher;
             SelectedPublisherId = -1;
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region Protected methods
-        /// <summary>
-        /// Called when the filter text has changed to set the filter on the underlying data.
-        /// </summary>
-        /// <param name="text">The filter text.</param>
-        protected override void OnFilterTextChanged(string text)
-        {
-            MainView.RowFilter = string.Format("{0} LIKE '%{1}%'", PublisherTable.Defs.Columns.Name, text);
-        }
-
         #endregion
 
         /************************************************************************/

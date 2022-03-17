@@ -115,11 +115,11 @@ namespace Restless.Panama.ViewModel
 
             AddViewSourceSortDescriptions();
 
-            Commands.Add("FilterToPublisher", RunFilterToPublisherCommand, (o) => IsSelectedRowAccessible);
-            Commands.Add("ActiveFilter", (o) => { FilterText = "--"; });
-            Commands.Add("TryAgainFilter", (o) => { FilterText = "Try Again"; });
-            Commands.Add("PersonalNoteFilter", (o) => { FilterText = "Personal Note"; });
-            Commands.Add("ClearFilter", (o) => { FilterText = null; });
+            //Commands.Add("FilterToPublisher", RunFilterToPublisherCommand, (o) => IsSelectedRowAccessible);
+            //Commands.Add("ActiveFilter", (o) => { FilterText = "--"; });
+            //Commands.Add("TryAgainFilter", (o) => { FilterText = "Try Again"; });
+            //Commands.Add("PersonalNoteFilter", (o) => { FilterText = "Personal Note"; });
+            //Commands.Add("ClearFilter", (o) => { FilterText = null; });
 
             // TODO
             //double minWidth = 80.0;
@@ -141,8 +141,6 @@ namespace Restless.Panama.ViewModel
             Messages = new SubmissionMessageController(this);
             Response = new SubmissionResponseController(this);
             Submitted = new SubmissionSubmittedController(this);
-            FilterPrompt = Strings.FilterPromptSubmission;
-            FilterText = Config.SubmissionFilter;
             AddCommand.Supported = CommandSupported.NoWithException;
         }
         #endregion
@@ -182,34 +180,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected Methods
-        /// <summary>
-        /// Called when the filter text has changed to set the filter on the underlying data.
-        /// </summary>
-        /// <param name="text">The filter text.</param>
-        protected override void OnFilterTextChanged(string text)
-        {
-            string filter = string.Empty;
-            if (text.StartsWith("-"))
-            {
-                filter = $"{SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName} IS NULL";
-            }
-            else
-            {
-                filter = $"{SubmissionBatchTable.Defs.Columns.Joined.Publisher} LIKE '%{text}%' OR {SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName} LIKE '%{text}%'";
-            }
-            MainView.RowFilter = filter;
-            // Note: save FilterText, not text. When applied again, it will be sanitized.
-            Config.SubmissionFilter = FilterText;
-        }
-
-        /// <summary>
-        /// Called when the filter text is cleared.
-        /// </summary>
-        protected override void OnFilterTextCleared()
-        {
-            Config.SubmissionFilter = null;
-        }
-
         /// <summary>
         /// Called when the selected item on the associated data grid has changed.
         /// </summary>
@@ -276,7 +246,7 @@ namespace Restless.Panama.ViewModel
         #region Private Methods
         private void RunFilterToPublisherCommand(object o)
         {
-            FilterText = SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.Publisher].ToString();
+            // TODO
         }
 
         private void AddViewSourceSortDescriptions()

@@ -46,8 +46,6 @@ namespace Restless.Panama.ViewModel
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandDeleteAlert, DeleteCommand).AddImageResource("ImageDeleteMenu");
-
-            FilterPrompt = Strings.FilterPromptAlert;
         }
         #endregion
 
@@ -55,22 +53,12 @@ namespace Restless.Panama.ViewModel
 
         #region Protected Methods
         /// <summary>
-        /// Called when the filter text has changed to set the filter on the underlying data.
-        /// </summary>
-        /// <param name="text">The filter text.</param>
-        protected override void OnFilterTextChanged(string text)
-        {
-            MainView.RowFilter = string.Format("{0} LIKE '%{1}%'", AlertTable.Defs.Columns.Title, text);
-        }
-
-        /// <summary>
         /// Runs the add command to add a new record to the data table
         /// </summary>
         protected override void RunAddCommand()
         {
             Table.AddDefaultRow();
             Table.Save();
-            FilterText = null;
             AddViewSourceSortDescriptions();
             Columns.RestoreDefaultSort();
         }

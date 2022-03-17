@@ -211,8 +211,7 @@ namespace Restless.Panama.ViewModel
             Columns.Create("PC", TitleTable.Defs.Columns.Calculated.PublishedCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitlePublishedCount)
                 .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
-
-            Commands.Add("ClearFilter", p => Filters.ClearAll(), p => Filters.IsAnyFilterActive);
+ 
             Commands.Add("ReadyFilter", p => Filters.SetToReady());
             Commands.Add("FlaggedFilter", p => Filters.SetToFlagged());
             Commands.Add("SubmittedFilter", p => Filters.SetToSubmitted());
@@ -291,6 +290,18 @@ namespace Restless.Panama.ViewModel
                 value = DataRowCompareString(item1, item2, TitleTable.Defs.Columns.Title);
             }
             return value;
+        }
+
+        /// <inheritdoc/>
+        protected override void RunClearFilterCommand()
+        {
+            Filters.ClearAll();
+        }
+
+        /// <inheritdoc/>
+        protected override bool CanRunClearFilterCommand()
+        {
+            return Filters.IsAnyFilterActive;
         }
 
         /// <summary>
