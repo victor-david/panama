@@ -1024,4 +1024,7 @@ Do you want to continue?</value>
   <data name="ToolTipAuthorDefault" xml:space="preserve">
     <value>This is the default author when creating new titles</value>
   </data>
+  <data name="TextDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
 </root>

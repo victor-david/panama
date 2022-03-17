@@ -2036,6 +2036,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string TextDescription {
+            get {
+                return ResourceManager.GetString("TextDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ever Submitted.
         /// </summary>
         public static string TextEverSubmitted {

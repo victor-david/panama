@@ -9,6 +9,7 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
+using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 
@@ -46,11 +47,11 @@ namespace Restless.Panama.ViewModel
         {
             DisplayName = Strings.MenuItemTags;
             Columns.Create("Id", TagTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Tag", TagTable.Defs.Columns.Tag);
+            Columns.SetDefaultSort(Columns.Create("Tag", TagTable.Defs.Columns.Tag), ListSortDirection.Ascending);
             Columns.Create("Description", TagTable.Defs.Columns.Description).MakeFlexWidth(2.5);
             Columns.Create("Usage", TagTable.Defs.Columns.Calculated.UsageCount)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W052);
+                .MakeFixedWidth(FixedWidth.W076);
 
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandAddTag, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
