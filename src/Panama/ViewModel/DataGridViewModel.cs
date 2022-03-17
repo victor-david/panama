@@ -164,40 +164,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the current count of rows in source
         /// </summary>
-        public int SourceCount => (MainView != null) ? MainView.Count : 0;
-
-        ///// <summary>
-        ///// Gets or sets the text to use as a filter for the main data grid.
-        ///// Derived classes should not use this property to filter.
-        ///// Use the text passed with the OnFilterTextChanged method which has been sanitized.
-        ///// </summary>
-        //public string FilterText
-        //{
-        //    get => filterText;
-        //    set
-        //    {
-        //        filterText = value;
-        //        if (!string.IsNullOrEmpty(filterText))
-        //        {
-        //            OnFilterTextChanged(filterText.Replace("'","''"));
-        //        }
-        //        else
-        //        {
-        //            MainView.RowFilter = null;
-        //            OnFilterTextCleared();
-        //        }
-        //        OnPropertyChanged();
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Gets (or sets from a derived class) the prompt text that is shown in the filter input box
-        ///// </summary>
-        //public string FilterPrompt
-        //{
-        //    get;
-        //    protected set;
-        //}
+        public int SourceCount => MainView?.Count ?? 0;
         #endregion
 
         /************************************************************************/
@@ -501,26 +468,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
-        //private void RunAddCommand(object o)
-        //{
-        //    RunAddCommand();
-        //}
-
-        //private bool CanRunAddCommand(object o)
-        //{
-        //    return CanRunAddCommand();
-        //}
-
-        //private void RunDeleteCommand(object o)
-        //{
-        //    RunDeleteCommand();
-        //}
-
-        //private bool CanRunDeleteCommand(object o)
-        //{
-        //    return CanRunDeleteCommand();
-        //}
-
         private void DataViewListChanged(object sender, ListChangedEventArgs e)
         {
             OnPropertyChanged(nameof(SourceCount));

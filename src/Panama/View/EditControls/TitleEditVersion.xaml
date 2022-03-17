@@ -22,7 +22,7 @@
                 <ContextMenu ItemsSource="{Binding Versions.MenuItems}"  />
             </DataGrid.ContextMenu>
             <DataGrid.InputBindings>
-                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Versions.OpenRowCommand}"/>
             </DataGrid.InputBindings>
         </tk:DataGrid>
         <TextBlock

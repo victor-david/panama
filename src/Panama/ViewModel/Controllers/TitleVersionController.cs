@@ -177,9 +177,9 @@ namespace Restless.Panama.ViewModel
         /// <param name="item">The <see cref="DataRowView"/> object of the selected row.</param>
         protected override void RunOpenRowCommand(object item)
         {
-            if (item is DataRowView view)
+            if (SelectedVersion != null)
             {
-                OpenFileRow(view.Row, TitleVersionTable.Defs.Columns.FileName, Config.Instance.FolderTitleRoot, (f) =>
+                OpenFileRow(SelectedVersion.Row, TitleVersionTable.Defs.Columns.FileName, Config.Instance.FolderTitleRoot, (f) =>
                     {
                         MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.FormatStringFileNotFound, f, nameof(Config.FolderTitleRoot)));
                     });
