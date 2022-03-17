@@ -110,18 +110,18 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the url of the published title.
         /// </summary>
-        /// <param name="item">The <see cref="DataRowView"/> object of the selected row.</param>
-        protected override void RunOpenRowCommand(object item)
+        protected override void RunOpenRowCommand()
         {
-            DataRowView view = item as DataRowView;
-            if (view != null)
-            {
-                string url = view.Row[PublishedTable.Defs.Columns.Url].ToString();
-                if (!string.IsNullOrEmpty(url))
-                {
-                    OpenHelper.OpenWebSite(null, url);
-                }
-            }
+            // TODO
+            //DataRowView view = item as DataRowView;
+            //if (view != null)
+            //{
+            //    string url = view.Row[PublishedTable.Defs.Columns.Url].ToString();
+            //    if (!string.IsNullOrEmpty(url))
+            //    {
+            //        OpenHelper.OpenWebSite(null, url);
+            //    }
+            //}
         }
         #endregion
 

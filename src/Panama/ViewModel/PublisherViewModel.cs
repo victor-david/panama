@@ -257,8 +257,7 @@ namespace Restless.Panama.ViewModel
         /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> command.
         /// This command opens the publisher's web site.
         /// </summary>
-        /// <param name="item">The command parameter, not used.</param>
-        protected override void RunOpenRowCommand(object item)
+        protected override void RunOpenRowCommand()
         {
             if (SelectedPublisher?.HasUrl() ?? false)
             {
@@ -269,11 +268,10 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets a value that indicates if the <see cref="DataGridViewModel{T}.OpenRowCommand"/> can run.
         /// </summary>
-        /// <param name="item">Command parameter, not used</param>
         /// <returns>true if the <see cref="DataGridViewModel{T}.OpenRowCommand"/> can run; otherwise, false.</returns>
-        protected override bool CanRunOpenRowCommand(object item)
+        protected override bool CanRunOpenRowCommand()
         {
-            return base.CanRunOpenRowCommand(item) && (SelectedPublisher?.HasUrl() ?? false);
+            return base.CanRunOpenRowCommand() && (SelectedPublisher?.HasUrl() ?? false);
         }
 
         /// <summary>

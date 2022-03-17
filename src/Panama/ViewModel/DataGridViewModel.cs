@@ -30,7 +30,6 @@ namespace Restless.Panama.ViewModel
         #region Private
         private object selectedItem;
         private bool isCustomFilterOpen;
-        //private string filterText;
         #endregion
 
         /************************************************************************/
@@ -203,7 +202,7 @@ namespace Restless.Panama.ViewModel
             AddCommand = RelayCommand.Create(p => RunAddCommand(), p=> CanRunAddCommand());
             DeleteCommand = RelayCommand.Create(p => RunDeleteCommand(), p => CanRunDeleteCommand());
             ClearFilterCommand = RelayCommand.Create(p => RunClearFilterCommand(), p => CanRunClearFilterCommand());
-            OpenRowCommand = RelayCommand.Create(RunOpenRowCommand, CanRunOpenRowCommand);
+            OpenRowCommand = RelayCommand.Create(p => RunOpenRowCommand(), p => CanRunOpenRowCommand());
             ToggleCustomFilterCommand = RelayCommand.Create(p => IsCustomFilterOpen = !IsCustomFilterOpen);
         }
         #endregion
@@ -399,21 +398,21 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Override in a derived class to provide open row logic. The base implementation does nothing.
         /// </summary>
-        /// <param name="item">The data item</param>
-        protected virtual void RunOpenRowCommand(object item)
+        protected virtual void RunOpenRowCommand()
         {
         }
 
         /// <summary>
         /// Runs the command predicate to check if the open row command can execute.
         /// </summary>
-        /// <param name="item">The object passed to the command method.</param>
-        /// <returns>The base implememtation returns true if <see cref="IsSelectedRowAccessible"/> is true; otherwise, false.</returns>
+        /// <returns>
+        /// The base implememtation returns true if <see cref="IsSelectedRowAccessible"/> is true; otherwise, false.
+        /// </returns>
         /// <remarks>
         /// The base implementation returns true if <see cref="IsSelectedRowAccessible"/> is true; otherwise, false. 
         /// If you need different logic, override this method.
         /// </remarks>
-        protected virtual bool CanRunOpenRowCommand(object item)
+        protected virtual bool CanRunOpenRowCommand()
         {
             return IsSelectedRowAccessible;
         }

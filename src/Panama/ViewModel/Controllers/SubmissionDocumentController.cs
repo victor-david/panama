@@ -158,30 +158,30 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the selected document.
         /// </summary>
-        /// <param name="item">The <see cref="DataRowView"/> object of the selected row.</param>
-        protected override void RunOpenRowCommand(object item)
+        protected override void RunOpenRowCommand()
         {
-            if (item is DataRowView view)
-            {
-                string docid = view.Row[SubmissionDocumentTable.Defs.Columns.DocId].ToString();
-                if (string.IsNullOrEmpty(docid))
-                {
-                    Messages.ShowError(Strings.InvalidOpNoDocumentId);
-                    return;
-                }
+            // TODO
+            //if (item is DataRowView view)
+            //{
+            //    string docid = view.Row[SubmissionDocumentTable.Defs.Columns.DocId].ToString();
+            //    if (string.IsNullOrEmpty(docid))
+            //    {
+            //        Messages.ShowError(Strings.InvalidOpNoDocumentId);
+            //        return;
+            //    }
 
-                long docType = (long)view.Row[SubmissionDocumentTable.Defs.Columns.DocType];
-                if (!documentTypeTable.IsDocTypeSupported(docType))
-                {
-                    Messages.ShowError(Strings.InvalidOpDocumentTypeNotSupported);
-                    return;
-                }
+            //    long docType = (long)view.Row[SubmissionDocumentTable.Defs.Columns.DocType];
+            //    if (!documentTypeTable.IsDocTypeSupported(docType))
+            //    {
+            //        Messages.ShowError(Strings.InvalidOpDocumentTypeNotSupported);
+            //        return;
+            //    }
 
-                OpenFileRow(view.Row, SubmissionDocumentTable.Defs.Columns.DocId, Config.Instance.FolderSubmissionDocument, (f) =>
-                    {
-                        Messages.ShowError(string.Format(Strings.FormatStringFileNotFound, f, "FolderSubmissionDocument"));
-                    });
-            }
+            //    OpenFileRow(view.Row, SubmissionDocumentTable.Defs.Columns.DocId, Config.Instance.FolderSubmissionDocument, (f) =>
+            //        {
+            //            Messages.ShowError(string.Format(Strings.FormatStringFileNotFound, f, "FolderSubmissionDocument"));
+            //        });
+            //}
         }
         #endregion
 

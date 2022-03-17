@@ -121,28 +121,28 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the selected message.
         /// </summary>
-        /// <param name="item">The <see cref="DataRowView"/> object of the selected row.</param>
         /// <remarks>
         /// This method only opens a message if it is a mapi reference or a file system reference.
         /// Other messages (older) are stored in the <see cref="SubmissionMessageTable"/> directly.
         /// </remarks>
-        protected override void RunOpenRowCommand(object item)
+        protected override void RunOpenRowCommand()
         {
-            if (item is DataRowView view)
-            {
-                string protocol = view.Row[SubmissionMessageTable.Defs.Columns.Protocol].ToString();
-                string entryId = view.Row[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
-                switch (protocol)
-                {
-                    case SubmissionMessageTable.Defs.Values.Protocol.Mapi:
-                        string url = $"{SubmissionMessageTable.Defs.Values.Protocol.Mapi}{Config.FolderMapi}{entryId}";
-                        OpenHelper.OpenFile(url);
-                        break;
-                    case SubmissionMessageTable.Defs.Values.Protocol.FileSystem:
-                        OpenHelper.OpenFile(Path.Combine(Config.FolderSubmissionMessage, entryId));
-                        break;
-                }
-            }
+            // TODO
+            //if (item is DataRowView view)
+            //{
+            //    string protocol = view.Row[SubmissionMessageTable.Defs.Columns.Protocol].ToString();
+            //    string entryId = view.Row[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
+            //    switch (protocol)
+            //    {
+            //        case SubmissionMessageTable.Defs.Values.Protocol.Mapi:
+            //            string url = $"{SubmissionMessageTable.Defs.Values.Protocol.Mapi}{Config.FolderMapi}{entryId}";
+            //            OpenHelper.OpenFile(url);
+            //            break;
+            //        case SubmissionMessageTable.Defs.Values.Protocol.FileSystem:
+            //            OpenHelper.OpenFile(Path.Combine(Config.FolderSubmissionMessage, entryId));
+            //            break;
+            //    }
+            //}
         }
         #endregion
 

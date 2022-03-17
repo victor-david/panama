@@ -40,21 +40,21 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the latest version of a selected title.
         /// </summary>
-        /// <param name="item">The <see cref="DataRowView"/> object of the selected row.</param>
-        protected override void RunOpenRowCommand(object item)
+        protected override void RunOpenRowCommand()
         {
-            if (item is DataRowView view)
-            {
-                long titleId = (long)view.Row[SubmissionTable.Defs.Columns.TitleId];
-                var verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
-                if (verController.Versions.Count > 0)
-                {
-                    OpenFileRow(verController.Versions[0].Row, TitleVersionTable.Defs.Columns.FileName, Config.Instance.FolderTitleRoot, (f) =>
-                    {
-                        Messages.ShowError(string.Format(Strings.FormatStringFileNotFound, f, "FolderTitleRoot"));
-                    });
-                }
-            }
+            // TODO
+            //if (item is DataRowView view)
+            //{
+            //    long titleId = (long)view.Row[SubmissionTable.Defs.Columns.TitleId];
+            //    var verController = DatabaseController.Instance.GetTable<TitleVersionTable>().GetVersionController(titleId);
+            //    if (verController.Versions.Count > 0)
+            //    {
+            //        OpenFileRow(verController.Versions[0].Row, TitleVersionTable.Defs.Columns.FileName, Config.Instance.FolderTitleRoot, (f) =>
+            //        {
+            //            Messages.ShowError(string.Format(Strings.FormatStringFileNotFound, f, "FolderTitleRoot"));
+            //        });
+            //    }
+            //}
         }
         #endregion
     }

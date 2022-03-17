@@ -103,8 +103,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Runs the open row command to browse to the row's url.
         /// </summary>
-        /// <param name="item">The command parameter (not used)</param>
-        protected override void RunOpenRowCommand(object item)
+        protected override void RunOpenRowCommand()
         {
             OpenHelper.OpenWebSite(null, SelectedRow[LinkTable.Defs.Columns.Url].ToString());
         }
@@ -112,12 +111,11 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets a boolean value that indicates if the <see cref=" DataGridViewModel{T}.OpenRowCommand"/> can run.
         /// </summary>
-        /// <param name="item">The command parameter (not used)</param>
         /// <returns>true if the command can execute (row selected and has a url); otherwise, false.</returns>
-        protected override bool CanRunOpenRowCommand(object item)
+        protected override bool CanRunOpenRowCommand()
         {
             return
-                base.CanRunOpenRowCommand(item) &&
+                base.CanRunOpenRowCommand() &&
                 !string.IsNullOrWhiteSpace(SelectedRow[LinkTable.Defs.Columns.Url].ToString());
         }
         #endregion

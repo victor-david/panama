@@ -365,8 +365,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the latest version of the selected title.
         /// </summary>
-        /// <param name="item">The <see cref="DataRowView"/> object of the selected row.</param>
-        protected override void RunOpenRowCommand(object item)
+        protected override void RunOpenRowCommand()
         {
             if (SelectedTitle != null)
             {
@@ -379,7 +378,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        protected override bool CanRunOpenRowCommand(object item)
+        protected override bool CanRunOpenRowCommand()
         {
             return true;
         }
