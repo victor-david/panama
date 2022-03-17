@@ -30,7 +30,10 @@
                 <MenuItem Header="E_xit" Icon="{StaticResource ExitIconKey}" Command="{Binding Commands[Close]}" />
             </MenuItem>
             <MenuItem Header="_Settings">
-                <MenuItem Header="Authors" Icon="{StaticResource ImageUserMenu}" Command="{Binding Commands[Author]}" />
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemAuthors}"
+                    Icon="{StaticResource UserIconKey}"
+                    Command="{Binding Commands[Author]}"/>
                 <MenuItem Header="Tags" Icon="{StaticResource TagIconKey}" Command="{Binding Commands[Tag]}"/>
                 <MenuItem Header="Credentials" Icon="{StaticResource ImageCredentialMenu}" Command="{Binding Commands[Credential]}"/>
                 <Separator />

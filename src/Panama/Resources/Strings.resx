@@ -205,11 +205,7 @@
     <value>This publisher cannot be deleted. It is participating in {0} submissions. </value>
     <comment>Used when a publisher cannot be deleted b/c it's involved in submissions</comment>
   </data>
-  <data name="CommandAuthor" xml:space="preserve">
-    <value>Authors</value>
-    <comment>Command text for author view</comment>
-  </data>
-  <data name="CommandDeleteAuthor" xml:space="preserve">
+  <data name="MenuItemDeleteAuthor" xml:space="preserve">
     <value>Delete this author</value>
   </data>
   <data name="ConfirmationDeleteAuthor" xml:space="preserve">
@@ -217,16 +213,12 @@
     <comment>Used to confirm author deletion</comment>
   </data>
   <data name="InvalidOpCannotDeleteAuthor" xml:space="preserve">
-    <value>This author cannot be deleted. He or she is participating in {0} titles. </value>
+    <value>This author cannot be deleted. They are participating in {0} titles. </value>
     <comment>Used when an author cannot be deleted b/c it's involved in titles</comment>
   </data>
-  <data name="CommandAddAuthor" xml:space="preserve">
+  <data name="MenuItemAddAuthor" xml:space="preserve">
     <value>Add author</value>
     <comment>Command text for add author</comment>
-  </data>
-  <data name="CommandAddAuthorTooltip" xml:space="preserve">
-    <value>Add a new author</value>
-    <comment>Tooltip text for add author</comment>
   </data>
   <data name="TextNone" xml:space="preserve">
     <value>(none)</value>
@@ -1025,5 +1017,11 @@ Do you want to continue?</value>
   </data>
   <data name="TextUrl" xml:space="preserve">
     <value>Url</value>
+  </data>
+  <data name="MenuItemAuthors" xml:space="preserve">
+    <value>Authors</value>
+  </data>
+  <data name="ToolTipAuthorDefault" xml:space="preserve">
+    <value>This is the default author when creating new titles</value>
   </data>
 </root>

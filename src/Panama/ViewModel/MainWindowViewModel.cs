@@ -136,7 +136,7 @@ namespace Restless.Panama.ViewModel
 
             MainNavigationWidth = new GridLength(Config.MainNavigationWidth, GridUnitType.Pixel);
 
-            NavigatorItems = new NavigatorItemCollection(3);
+            NavigatorItems = new NavigatorItemCollection(NavigationGroup.TotalNumberOfGroups);
             NavigatorItems.SelectedItemChanged += NavigatorItemsSelectedItemChanged;
             RegisterStandardNavigatorItems();
             viewModelCache = new ViewModelCache();
@@ -242,6 +242,11 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<TagViewModel>(NavigationGroup.Tools, Strings.MenuItemTags, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TagGeometryKey));
 
             NavigatorItems.Add<StatisticsViewModel>(NavigationGroup.Other, Strings.MenuItemStatistics, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.StatisticGeometryKey));
+
+            NavigatorItems.Add<AuthorViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemAuthors);
+
+
+
         }
 
         private void NavigatorItemsSelectedItemChanged(object sender, NavigatorItem navItem)

@@ -114,12 +114,12 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets an enumerable of <see cref="AuthorTable.RowObject"/> items. The UI binds to this list.
         /// </summary>
-        public IEnumerable<AuthorTable.RowObject> Authors => DatabaseController.Instance.GetTable<AuthorTable>().EnumerateAuthors();
+        public IEnumerable<AuthorRow> Authors => DatabaseController.Instance.GetTable<AuthorTable>().EnumerateAuthors();
 
         /// <summary>
         /// Gets or sets the selected author item.
         /// </summary>
-        public AuthorTable.RowObject SelectedAuthor
+        public AuthorRow SelectedAuthor
         {
             get;
             set;

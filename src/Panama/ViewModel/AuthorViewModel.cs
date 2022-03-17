@@ -10,6 +10,8 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Utility;
 using System.ComponentModel;
+using System.Data;
+using System.Globalization;
 
 namespace Restless.Panama.ViewModel
 {
@@ -19,11 +21,20 @@ namespace Restless.Panama.ViewModel
     public class AuthorViewModel : DataGridViewModel<AuthorTable>
     {
         #region Private
+        private AuthorRow selectedAuthor;
         #endregion
 
         /************************************************************************/
 
         #region Properties
+        /// <summary>
+        /// Gets the currently selected author
+        /// </summary>
+        public AuthorRow SelectedAuthor
+        {
+            get => selectedAuthor;
+            private set => SetProperty(ref selectedAuthor, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -34,14 +45,18 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AuthorViewModel()
         {
-            DisplayName = Strings.CommandAuthor;
             Columns.SetDefaultSort(Columns.Create("Id", AuthorTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042), ListSortDirection.Ascending);
-            Columns.CreateImage<BooleanToImageConverter>("D", AuthorTable.Defs.Columns.IsDefault);
+            Columns.CreateResource<BooleanToPathConverter>("R", AuthorTable.Defs.Columns.IsDefault, ResourceKeys.Icon.SquareSmallGreenIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip(Strings.ToolTipAuthorDefault);
+
             Columns.Create("Name", AuthorTable.Defs.Columns.Name);
-            AddViewSourceSortDescriptions();
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandDeleteAuthor, DeleteCommand).AddImageResource("ImageDeleteMenu");
+            MenuItems.AddItem(Strings.MenuItemAddAuthor, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemDeleteAuthor, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
 
             FilterPrompt = Strings.FilterPromptAuthor;
         }
@@ -50,13 +65,17 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected Methods
-        /// <summary>
-        /// Called when the filter text has changed to set the filter on the underlying data.
-        /// </summary>
-        /// <param name="text">The filter text.</param>
-        protected override void OnFilterTextChanged(string text)
+        /// <inheritdoc/>
+        protected override void OnSelectedItemChanged()
         {
-            MainView.RowFilter = $"{AuthorTable.Defs.Columns.Name} LIKE '%{text}%'";
+            base.OnSelectedItemChanged();
+            SelectedAuthor = AuthorRow.Create(SelectedRow);
+        }
+
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareLong(item1, item2, AuthorTable.Defs.Columns.Id);
         }
 
         /// <summary>
@@ -64,13 +83,13 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunAddCommand()
         {
-            if (Messages.ShowYesNo(Strings.ConfirmationAddAuthor))
+            if (MessageWindow.ShowYesNo(Strings.ConfirmationAddAuthor))
             {
                 Table.AddDefaultRow();
                 Table.Save();
-                FilterText = null;
-                AddViewSourceSortDescriptions();
+                // Filters.ClearAll();
                 Columns.RestoreDefaultSort();
+                ForceListViewSort();
             }
         }
 
@@ -93,13 +112,13 @@ namespace Restless.Panama.ViewModel
                 int childRowCount = SelectedRow.GetChildRows(AuthorTable.Defs.Relations.ToTitle).Length;
                 if (childRowCount > 0)
                 {
-                    Messages.ShowError(string.Format(Strings.InvalidOpCannotDeleteAuthor, childRowCount));
+                    MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.InvalidOpCannotDeleteAuthor, childRowCount));
                     return;
                 }
-                if (Messages.ShowYesNo(Strings.ConfirmationDeleteAuthor))
+
+                if (MessageWindow.ShowYesNo(Strings.ConfirmationDeleteAuthor))
                 {
-                    SelectedRow.Delete();
-                    Table.Save();
+                    DeleteSelectedRow();
                 }
             }
         }
@@ -110,19 +129,8 @@ namespace Restless.Panama.ViewModel
         /// <returns>true if a row is selected; otherwise, false.</returns>
         protected override bool CanRunDeleteCommand()
         {
-            // Can delete if the row is accesible and its not the system inserted author.
-            return IsSelectedRowAccessible && (long)SelectedPrimaryKey != 1;
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Private Methods
-        private void AddViewSourceSortDescriptions()
-        {
-            // TODO
-            //MainSource.SortDescriptions.Clear();
-            //MainSource.SortDescriptions.Add(new SortDescription(AuthorTable.Defs.Columns.Id, ListSortDirection.Ascending));
+            /* if selected and not the system generated author id */
+            return (SelectedAuthor?.Id ?? AuthorTable.Defs.Values.SystemAuthorId) != AuthorTable.Defs.Values.SystemAuthorId;
         }
         #endregion
     }

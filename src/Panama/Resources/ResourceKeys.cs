@@ -32,6 +32,7 @@
             public const string TagGeometryKey = nameof(TagGeometryKey);
             public const string TitleGeometryKey = nameof(TitleGeometryKey);
             public const string ToggleGeometryKey = nameof(ToggleGeometryKey);
+            public const string UserGeometryKey = nameof(UserGeometryKey);
             public const string XGeometryKey = nameof(XGeometryKey);
             public const string ZGeometryKey = nameof(ZGeometryKey);
         }
@@ -56,6 +57,7 @@
             public const string SquareSmallRedIconKey = nameof(SquareSmallRedIconKey);
             public const string StatisticIconKey = nameof(StatisticIconKey);
             public const string ToggleIconKey = nameof(ToggleIconKey);
+            public const string UserIconKey = nameof(UserIconKey);
             public const string XIconKey = nameof(XIconKey);
             public const string XRedIconKey = nameof(XRedIconKey);
         }

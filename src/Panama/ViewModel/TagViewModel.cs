@@ -88,7 +88,9 @@ namespace Restless.Panama.ViewModel
         {
             Table.AddDefaultRow();
             Table.Save();
-            FilterText = null;
+            // Filters.ClearAll();
+            Columns.RestoreDefaultSort();
+            ForceListViewSort();
         }
 
         /// <summary>

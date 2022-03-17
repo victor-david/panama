@@ -55,6 +55,17 @@ namespace Restless.Panama.Database.Tables
                 /// </summary>
                 public const string ToTitle = "AuthorToTitle";
             }
+
+            /// <summary>
+            /// Provides static values
+            /// </summary>
+            public static class Values
+            {
+                /// <summary>
+                /// The system supplied author id
+                /// </summary>
+                public const long SystemAuthorId = 1;
+            }
         }
         #endregion
 
@@ -83,13 +94,12 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Provides an enumerable that gets all authors in order of name ASC.
         /// </summary>
-        /// <returns>A <see cref="RowObject"/></returns>
-        public IEnumerable<RowObject> EnumerateAuthors()
+        /// <returns>An enumerable that gets all authors</returns>
+        public IEnumerable<AuthorRow> EnumerateAuthors()
         {
-            DataRow[] rows = Select(null, $"{Defs.Columns.Name} ASC");
-            foreach (DataRow row in rows)
+            foreach (DataRow row in EnumerateRows(null, Defs.Columns.Id))
             {
-                yield return new RowObject(row);
+                yield return new AuthorRow(row);
             }
             yield break;
         }
@@ -100,10 +110,12 @@ namespace Restless.Panama.Database.Tables
         /// <returns>The author name, or an empty string if none marked as default.</returns>
         public string GetDefaultAuthorName()
         {
-            DataRow[] rows = Select($"{Defs.Columns.IsDefault}=1", Defs.Columns.Id);
-            if (rows.Length > 0)
+            foreach (AuthorRow author in EnumerateAuthors())
             {
-                return rows[0][Defs.Columns.Name].ToString();
+                if (author.IsDefault)
+                {
+                    return author.Name;
+                }
             }
             return string.Empty;
         }
@@ -142,7 +154,7 @@ namespace Restless.Panama.Database.Tables
         /// <returns>An IEnumerable</returns>
         protected override IEnumerable<object[]> EnumeratePopulateValues()
         {
-            yield return new object[] { 1, "Your author name", true };
+            yield return new object[] { Defs.Values.SystemAuthorId, "Your author name", true };
         }
 
         /// <summary>
@@ -157,7 +169,7 @@ namespace Restless.Panama.Database.Tables
         /// Populates a new row with default (starter) values
         /// </summary>
         /// <param name="row">The freshly created DataRow to poulate</param>
-        protected override void PopulateDefaultRow(System.Data.DataRow row)
+        protected override void PopulateDefaultRow(DataRow row)
         {
             row[Defs.Columns.Name] = "(new author)";
             row[Defs.Columns.IsDefault] = false;
@@ -175,80 +187,20 @@ namespace Restless.Panama.Database.Tables
         internal long GetDefaultAuthorId()
         {
             long firstId = -1;
-            DataRow[] rows = Select(null, Defs.Columns.Id);
-            foreach (DataRow row in rows)
+            
+            foreach (AuthorRow author in EnumerateAuthors())
             {
-                var obj = new RowObject(row);
-                if (firstId == -1) firstId = obj.Id;
-                if (obj.IsDefault) return obj.Id;
+                if (firstId == -1)
+                {
+                    firstId = author.Id;
+                }
+                if (author.IsDefault)
+                {
+                    return author.Id;
+                }
             }
             return firstId;
         }
         #endregion
-
-        /************************************************************************/
-
-        #region Row Object
-        /// <summary>
-        /// Encapsulates a single row from the <see cref="AuthorTable"/>.
-        /// </summary>
-        public class RowObject : RowObjectBase<AuthorTable>
-        {
-            #region Public properties
-            /// <summary>
-            /// Gets the id for this row object.
-            /// </summary>
-            public long Id
-            {
-                get => GetInt64(Defs.Columns.Id);
-            }
-
-            /// <summary>
-            /// Gets or sets the author name.
-            /// </summary>
-            public string Name
-            {
-                get => GetString(Defs.Columns.Name);
-                set => SetValue(Defs.Columns.Name, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the IsDefault flag.
-            /// </summary>
-            public bool IsDefault
-            {
-                get => GetBoolean(Defs.Columns.IsDefault);
-                set => SetValue(Defs.Columns.IsDefault, value);
-            }
-            #endregion
-
-            /************************************************************************/
-
-            #region Constructor
-            /// <summary>
-            /// Initializes a new instance of the <see cref="RowObject"/> class.
-            /// </summary>
-            /// <param name="row">The data row</param>
-            public RowObject(DataRow row)
-                : base(row)
-            {
-            }
-            #endregion
-
-            /************************************************************************/
-
-            #region Public methods
-            /// <summary>
-            /// Gets the string representation of this object.
-            /// </summary>
-            /// <returns>The <see cref="Name"/></returns>
-            public override string ToString()
-            {
-                return Name;
-            }
-            #endregion
-        }
-        #endregion
-
     }
 }

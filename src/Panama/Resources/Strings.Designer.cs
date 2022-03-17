@@ -164,24 +164,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add author.
-        /// </summary>
-        public static string CommandAddAuthor {
-            get {
-                return ResourceManager.GetString("CommandAddAuthor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a new author.
-        /// </summary>
-        public static string CommandAddAuthorTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddAuthorTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add credential.
         /// </summary>
         public static string CommandAddCredential {
@@ -290,15 +272,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authors.
-        /// </summary>
-        public static string CommandAuthor {
-            get {
-                return ResourceManager.GetString("CommandAuthor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Browse to this publisher&apos;s web site.
         /// </summary>
         public static string CommandBrowseToPublisherUrl {
@@ -403,15 +376,6 @@ namespace Restless.Panama.Resources {
         public static string CommandDeleteAlert {
             get {
                 return ResourceManager.GetString("CommandDeleteAlert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this author.
-        /// </summary>
-        public static string CommandDeleteAuthor {
-            get {
-                return ResourceManager.GetString("CommandDeleteAuthor", resourceCulture);
             }
         }
         
@@ -1672,7 +1636,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This author cannot be deleted. He or she is participating in {0} titles. .
+        ///   Looks up a localized string similar to This author cannot be deleted. They are participating in {0} titles. .
         /// </summary>
         public static string InvalidOpCannotDeleteAuthor {
             get {
@@ -1892,11 +1856,29 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add author.
+        /// </summary>
+        public static string MenuItemAddAuthor {
+            get {
+                return ResourceManager.GetString("MenuItemAddAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a title to the collection.
         /// </summary>
         public static string MenuItemAddTitle {
             get {
                 return ResourceManager.GetString("MenuItemAddTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authors.
+        /// </summary>
+        public static string MenuItemAuthors {
+            get {
+                return ResourceManager.GetString("MenuItemAuthors", resourceCulture);
             }
         }
         
@@ -1933,6 +1915,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemCustom {
             get {
                 return ResourceManager.GetString("MenuItemCustom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this author.
+        /// </summary>
+        public static string MenuItemDeleteAuthor {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteAuthor", resourceCulture);
             }
         }
         
@@ -2203,6 +2194,15 @@ namespace Restless.Panama.Resources {
         public static string TextWritten {
             get {
                 return ResourceManager.GetString("TextWritten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is the default author when creating new titles.
+        /// </summary>
+        public static string ToolTipAuthorDefault {
+            get {
+                return ResourceManager.GetString("ToolTipAuthorDefault", resourceCulture);
             }
         }
         

@@ -495,21 +495,11 @@ namespace Restless.Panama.ViewModel
             }
             OpenHelper.OpenFile(file);
         }
-
-        /// <summary>
-        /// Called when this object is disposing to perform cleanup operations.
-        /// </summary>
-        //protected override void OnDispose()
-        //{
-        //    DataView.ListChanged -= DataViewListChanged;
-        //    base.OnDispose();
-        //}
         #endregion
 
         /************************************************************************/
 
         #region Private Methods
-
         private void RunAddCommand(object o)
         {
             RunAddCommand();
@@ -519,7 +509,6 @@ namespace Restless.Panama.ViewModel
         {
             return CanRunAddCommand();
         }
-
 
         private void RunDeleteCommand(object o)
         {
