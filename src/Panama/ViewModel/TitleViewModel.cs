@@ -369,12 +369,10 @@ namespace Restless.Panama.ViewModel
         {
             if (SelectedTitle != null)
             {
-                //Versions.
                 Database.Tables.TitleVersionController verController = TitleVersionTable.GetVersionController(SelectedTitle.Id);
-
                 if (verController.Versions.Count > 0)
                 {
-                    OpenHelper.OpenFile(Paths.Title.WithRoot(verController.Versions[0].FileName));
+                    Open.TitleVersionFile(verController.Versions[0].FileName);
                 }
             }
         }

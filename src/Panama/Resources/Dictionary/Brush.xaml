@@ -42,7 +42,7 @@
     <!-- Window -->
     <SolidColorBrush x:Key="TitleBarBackgroundBrush" Color="LightSteelBlue"/>
     <SolidColorBrush x:Key="TitleBarForegroundBrush" Color="#404040"/>
-    <SolidColorBrush x:Key="TitleBarErrorBackgroundBrush" Color="Coral"/>
+    <SolidColorBrush x:Key="TitleBarErrorBackgroundBrush" Color="LightSlateGray"/>
     <SolidColorBrush x:Key="TitleBarErrorForegroundBrush" Color="GhostWhite"/>
     <SolidColorBrush x:Key="TitleBarBorderBrush" Color="LightGray"/>
     <SolidColorBrush x:Key="TitleBarButtonBrush" Color="DarkGreen"/>

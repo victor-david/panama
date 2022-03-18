@@ -178,10 +178,7 @@ namespace Restless.Panama.ViewModel
         {
             if (SelectedVersion != null)
             {
-                OpenFileRow(SelectedVersion.Row, TitleVersionTable.Defs.Columns.FileName, Config.Instance.FolderTitleRoot, (f) =>
-                    {
-                        MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.FormatStringFileNotFound, f, nameof(Config.FolderTitleRoot)));
-                    });
+                Open.TitleVersionFile(SelectedVersion.FileName);
             }
         }
         #endregion

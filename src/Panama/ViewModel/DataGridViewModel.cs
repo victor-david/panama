@@ -411,34 +411,6 @@ namespace Restless.Panama.ViewModel
         protected virtual void OnDataViewListChanged(ListChangedEventArgs e)
         {
         }
-
-        /// <summary>
-        /// Attempts to open the path contained in the specified data row.
-        /// </summary>
-        /// <param name="row">The data row.</param>
-        /// <param name="fileColumnName">The column name that contains the path to open.</param>
-        /// <param name="pathRoot">A path root that should be applied if needed.</param>
-        /// <param name="notFound">The action to run if the file does not exists.</param>
-        protected void OpenFileRow(DataRow row, string fileColumnName, string pathRoot, Action<string> notFound)
-        {
-            Throw.IfNull(row);
-            Throw.IfNull(notFound);
-            Throw.IfEmpty(fileColumnName);
-
-            string file = row[fileColumnName].ToString();
-            if (!Path.IsPathRooted(file) && !string.IsNullOrWhiteSpace(pathRoot))
-            {
-                file = Path.Combine(pathRoot, file);
-            }
-            if (File.Exists(file))
-            {
-                OpenHelper.OpenFile(file);
-            }
-            else
-            {
-                notFound(file);
-            }
-        }
         #endregion
 
         /************************************************************************/
