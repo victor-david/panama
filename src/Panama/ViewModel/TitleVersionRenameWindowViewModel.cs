@@ -4,11 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.View;
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
+using Restless.Panama.View;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using System;
@@ -88,7 +88,7 @@ namespace Restless.Panama.ViewModel
                 throw new InvalidOperationException(Strings.InvalidOpTitleDoesNotExist);
             }
 
-            foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(titleId))
+            foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(titleId, SortDirection.Ascending))
             {
                 renameView.Add(new TitleVersionRenameItem(ver, title.Title));
             }

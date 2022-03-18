@@ -4,20 +4,22 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.Resources;
+using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
+using Restless.Panama.Utility;
+using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Input;
+using System.Windows.Controls;
 using System.Windows.Data;
-using Restless.Panama.Core;
-using Restless.Toolkit.Controls;
+using System.Windows.Input;
 
 namespace Restless.Panama.ViewModel
 {
@@ -168,18 +170,6 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Protected properties
-        /// <summary>
-        /// Gets the style resource that aligns a data cell to the right.
-        /// </summary>
-        protected Style NumericRightCell
-        {
-            get => (Style)LocalResources.Get("TextBlockRight");
-        }
-        #endregion
-
-        /************************************************************************/
-
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="DataGridViewModel{T}"/> class.
@@ -227,11 +217,7 @@ namespace Restless.Panama.ViewModel
         /// </remarks>
         protected void AssignDataViewFrom(DataTable table)
         {
-            if (table == null)
-            {
-                throw new ArgumentNullException(nameof(table));
-            }
-
+            Throw.IfNull(table);
             MainView.ListChanged -= DataViewListChanged;
             MainView = new DataView(table);
             MainView.ListChanged += DataViewListChanged;
@@ -435,32 +421,23 @@ namespace Restless.Panama.ViewModel
         /// <param name="notFound">The action to run if the file does not exists.</param>
         protected void OpenFileRow(DataRow row, string fileColumnName, string pathRoot, Action<string> notFound)
         {
-            if (row == null)
-            {
-                throw new ArgumentNullException(nameof(row));
-            }
-
-            if (string.IsNullOrEmpty(fileColumnName))
-            {
-                throw new ArgumentNullException(nameof(fileColumnName));
-            }
-
-            if (notFound == null)
-            {
-                throw new ArgumentNullException(nameof(notFound));
-            }
+            Throw.IfNull(row);
+            Throw.IfNull(notFound);
+            Throw.IfEmpty(fileColumnName);
 
             string file = row[fileColumnName].ToString();
             if (!Path.IsPathRooted(file) && !string.IsNullOrWhiteSpace(pathRoot))
             {
                 file = Path.Combine(pathRoot, file);
             }
-            if (!File.Exists(file))
+            if (File.Exists(file))
+            {
+                OpenHelper.OpenFile(file);
+            }
+            else
             {
                 notFound(file);
-                return;
             }
-            OpenHelper.OpenFile(file);
         }
         #endregion
 

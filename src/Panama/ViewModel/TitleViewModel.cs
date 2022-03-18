@@ -369,6 +369,7 @@ namespace Restless.Panama.ViewModel
         {
             if (SelectedTitle != null)
             {
+                //Versions.
                 Database.Tables.TitleVersionController verController = TitleVersionTable.GetVersionController(SelectedTitle.Id);
 
                 if (verController.Versions.Count > 0)

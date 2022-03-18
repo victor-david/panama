@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Core.OpenXml;
 using System;
@@ -140,20 +141,21 @@ namespace Restless.Panama.Database.Tables
         /// A <see cref="TitleVersionController"/> object that describes version information
         /// and provides version management for <paramref name="titleId"/>.
         /// </returns>
-        public TitleVersionController GetVersionController(long titleId)
+        public static TitleVersionController GetVersionController(long titleId)
         {
-            return new TitleVersionController(this, titleId);
+            return new TitleVersionController(titleId);
         }
 
         /// <summary>
         /// Provides an enumerable that enumerates all versions for the specified title
-        /// in order of version ASC, revision ASC.
+        /// with version ordered in the specified direction and revision ASC.
         /// </summary>
         /// <param name="titleId">The title id to get all versions for.</param>
+        /// <param name="verSort">Sort direction for version</param>
         /// <returns>An enumerable</returns>
-        public IEnumerable<TitleVersionRow> EnumerateVersions(long titleId)
+        public IEnumerable<TitleVersionRow> EnumerateVersions(long titleId, SortDirection verSort)
         {
-            foreach (DataRow row in EnumerateRows($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC"))
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.TitleId}={titleId}", $"{Defs.Columns.Version} {verSort.ToSql()}, {Defs.Columns.Revision} ASC"))
             {
                 yield return new TitleVersionRow(row);
             }

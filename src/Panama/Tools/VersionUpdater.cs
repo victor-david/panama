@@ -51,9 +51,8 @@ namespace Restless.Panama.Tools
             {
                 ScanCount++;
 
-                foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(title.Id))
+                foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(title.Id, SortDirection.Ascending))
                 {
-                    // var verObj = new TitleVersionTable.RowObject(ver);
                     ver.SetFileInfo(Paths.Title.WithRoot(ver.FileName));
 
                     if (ver.Info.Exists)

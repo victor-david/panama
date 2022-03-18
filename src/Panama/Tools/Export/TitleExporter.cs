@@ -96,7 +96,7 @@ namespace Restless.Panama.Tools
 
             foreach (TitleRow title in DatabaseController.Instance.GetTable<TitleTable>().EnumerateTitles())
             {
-                foreach (TitleVersionRow ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(title.Id))
+                foreach (TitleVersionRow ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(title.Id, SortDirection.Ascending))
                 {
                     // DateWritten_Title_vVer.Rev.Lang.ext
                     // Ex: 2011-05-24_Title_v1.A.en-us.docx

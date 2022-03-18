@@ -119,7 +119,6 @@ namespace Restless.Panama.ViewModel
             if (SelectedItem is FileScanDisplayObject file && Messages.ShowYesNo(Strings.ConfirmationCreateTitleFromOrphan))
             {
                 TitleTable title = DatabaseController.Instance.GetTable<TitleTable>();
-                TitleVersionTable ver = DatabaseController.Instance.GetTable<TitleVersionTable>();
                 TitleRow row = new(title.AddDefaultRow())
                 {
                     Title = "Title created from orphaned file",
@@ -128,9 +127,8 @@ namespace Restless.Panama.ViewModel
                 row.SetWrittenDate(file.LastModified);
 
                 // Get a version controller and add a version
-                ver.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(file.FileName));
+                TitleVersionTable.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(file.FileName)).VersionTable.Save();
 
-                ver.Save();
                 title.Save();
                 Controller.NotFound.Remove(file);
             }

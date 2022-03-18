@@ -335,11 +335,10 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         protected override void OnInitializationComplete()
         {
-            var versions = Controller.GetTable<TitleVersionTable>();
             foreach (DataRow row in Rows)
             {
                 long titleId = (long)row[Defs.Columns.Id];
-                TitleVersionController verController = versions.GetVersionController(titleId);
+                TitleVersionController verController = TitleVersionTable.GetVersionController(titleId);
                 if (verController.Versions.Count > 0)
                 {
                     row[Defs.Columns.Calculated.LastestVersionWordCount] = verController.Versions[0].WordCount;
@@ -390,7 +389,7 @@ namespace Restless.Panama.Database.Tables
             DataRow[] titleRows = Select($"{Defs.Columns.Id}={titleId}");
             if (titleRows.Length == 1)
             {
-                TitleVersionController verController = Controller.GetTable<TitleVersionTable>().GetVersionController(titleId);
+                TitleVersionController verController = TitleVersionTable.GetVersionController(titleId);
                 if (verController.Versions.Count > 0)
                 {
                     titleRows[0][titleColumn] = verController.Versions[0].Row[titleVersionColumn];

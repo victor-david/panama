@@ -87,7 +87,7 @@ namespace Restless.Panama.Tools
             {
                 lines.Add(string.Format("{0} - {1}", title.Written.ToString(Config.Instance.DateFormat), title.Title));
 
-                foreach (var ver in titleVersionTable.EnumerateVersions(title.Id))
+                foreach (var ver in titleVersionTable.EnumerateVersions(title.Id, SortDirection.Ascending))
                 {
                     string note = !string.IsNullOrEmpty(ver.Note) ? $"[{ver.Note}]" : string.Empty;
                     lines.Add($"  v{ver.Version}.{(char)ver.Revision} {ver.LanguageId} {ver.FileName}   {note}".Trim());

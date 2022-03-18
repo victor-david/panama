@@ -151,7 +151,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            int value = DataRowCompareLong(item1, item2, TitleVersionTable.Defs.Columns.Version);
+            int value = DataRowCompareLong(item2, item1, TitleVersionTable.Defs.Columns.Version);
             if (value == 0)
             {
                 value = DataRowCompareLong(item1, item2, TitleVersionTable.Defs.Columns.Revision);
@@ -166,7 +166,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnUpdate()
         {
             SelectedVersion = null;
-            verController = Table.GetVersionController(CurrentTitleId);
+            verController = TitleVersionTable.GetVersionController(CurrentTitleId);
             ListView.Refresh();
             OnPropertyChanged(nameof(HaveVersion));
         }

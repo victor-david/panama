@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Database.Core;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -36,12 +37,16 @@ namespace Restless.Panama.Database.Tables
         /// Maps a dictionary of version numbers to a list of revision ids.
         /// </summary>
         private readonly Dictionary<long, List<long>> versionMap;
-        private readonly TitleVersionTable owner;
         #endregion
 
         /************************************************************************/
 
-        #region Public properties
+        #region Properties
+        /// <summary>
+        /// Gets a reference to <see cref="TitleVersionTable"/>.
+        /// </summary>
+        public TitleVersionTable VersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
+
         /// <summary>
         /// Gets the title id that is associated with this instance.
         /// </summary>
@@ -77,11 +82,10 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         /// <param name="owner">The title version table that owns this instance.</param>
         /// <param name="titleId">The title id to get the version information for.</param>
-        internal TitleVersionController(TitleVersionTable owner, long titleId)
+        internal TitleVersionController(long titleId)
         {
             Versions = new List<TitleVersionRow>();
             versionMap = new Dictionary<long, List<long>>();
-            this.owner = owner;
             TitleId = titleId;
             BuildVersionsAndMap();
         }
@@ -94,22 +98,23 @@ namespace Restless.Panama.Database.Tables
         /// Adds a new version using the specified file name.
         /// </summary>
         /// <param name="fileName">The name of the file for the new version.</param>
-        public void Add(string fileName)
+        public TitleVersionController Add(string fileName)
         {
             if (string.IsNullOrEmpty(fileName))
             {
                 throw new ArgumentNullException(nameof(fileName));
             }
-            DataRow row = owner.NewRow();
+            DataRow row = VersionTable.NewRow();
             row[Defs.Columns.TitleId] = TitleId;
             // OnColumnChanged(e) method will update the associated fields: Updated, Size, and DocType
             row[Defs.Columns.FileName] = fileName;
             row[Defs.Columns.Version] = VersionCount + 1;
             row[Defs.Columns.Revision] = Defs.Values.RevisionA;
             row[Defs.Columns.LangId] = LanguageTable.Defs.Values.DefaultLanguageId;
-            owner.Rows.Add(row);
-            owner.Save();
+            VersionTable.Rows.Add(row);
+            VersionTable.Save();
             BuildVersionsAndMap();
+            return this;
         }
 
         /// <summary>
@@ -338,10 +343,10 @@ namespace Restless.Panama.Database.Tables
 
         #region Private methods
         /// <summary>
-        /// Get the <see cref="TitleVersionRow"/> that comes before the specified row object.
+        /// Get the <see cref="TitleVersionRow"/> that comes before the specified version row
         /// </summary>
-        /// <param name="rowObj">The row object.</param>
-        /// <returns>The previous row object.</returns>
+        /// <param name="verRow">The version row.</param>
+        /// <returns>The previous version row.</returns>
         /// <remarks>
         /// Previous is based upon the ordering of <see cref="Versions"/>. They are
         /// fetched from the data in descending order of version, ascending order of revision.
@@ -352,30 +357,30 @@ namespace Restless.Panama.Database.Tables
         /// 2C - version 2 has 3 revisions.
         /// 1A - version 1 has 1 revision.
         /// </remarks>
-        private TitleVersionRow GetPrevious(TitleVersionRow rowObj)
+        private TitleVersionRow GetPrevious(TitleVersionRow verRow)
         {
-            return GetNeededRowObject(rowObj, -1);
+            return GetVersionRowFromReference(verRow, -1);
         }
 
         /// <summary>
-        /// Get the <see cref="TitleVersionRow"/> that comes after the specified row object.
+        /// Get the <see cref="TitleVersionRow"/> that comes after the specified version row
         /// </summary>
-        /// <param name="rowObj">The row object.</param>
+        /// <param name="versionRow">The row object.</param>
         /// <returns>The next row object.</returns>
         /// <remarks>
         /// See remarks on <see cref="GetPrevious(TitleVersionRow)"/>.
         /// </remarks>
-        private TitleVersionRow GetNext(TitleVersionRow rowObj)
+        private TitleVersionRow GetNext(TitleVersionRow versionRow)
         {
-            return GetNeededRowObject(rowObj, 1);
+            return GetVersionRowFromReference(versionRow, 1);
         }
 
-        private TitleVersionRow GetNeededRowObject(TitleVersionRow rowObj, int offset)
+        private TitleVersionRow GetVersionRowFromReference(TitleVersionRow referenceRow, int offset)
         {
             int idxNeeded = -1;
             foreach (TitleVersionRow row in Versions)
             {
-                if (row.Version == rowObj.Version && row.Revision == rowObj.Revision)
+                if (row.Version == referenceRow.Version && row.Revision == referenceRow.Revision)
                 {
                     idxNeeded = Versions.IndexOf(row) + offset;
                     break;
@@ -383,7 +388,7 @@ namespace Restless.Panama.Database.Tables
             }
             if (idxNeeded < 0 || idxNeeded > Versions.Count - 1)
             {
-                throw new IndexOutOfRangeException($"GetNeededRowObject-Invalid index {idxNeeded}", new Exception(ToString()));
+                throw new IndexOutOfRangeException($"{nameof(GetVersionRowFromReference)}-Invalid index {idxNeeded}", new Exception(ToString()));
             }
             return Versions[idxNeeded];
         }
@@ -395,7 +400,7 @@ namespace Restless.Panama.Database.Tables
         /// <param name="offset">The amount to change the revisions. 1 or -1</param>
         private void ChangeRevisions(long version, int offset)
         {
-            foreach (var row in Versions)
+            foreach (TitleVersionRow row in Versions)
             {
                 if (row.Version == version)
                 {
@@ -458,15 +463,13 @@ namespace Restless.Panama.Database.Tables
         private void RenumberAllVersions()
         {
             long version = 0;
-            DataRow[] rows = owner.Select($"{Defs.Columns.TitleId}={TitleId}", $"{Defs.Columns.Version} ASC, {Defs.Columns.Revision} ASC");
-            foreach (DataRow row in rows)
+            foreach (TitleVersionRow verRow in VersionTable.EnumerateVersions(TitleId, SortDirection.Ascending))
             {
-                TitleVersionRow rowObj = new TitleVersionRow(row);
-                if (rowObj.Revision == Defs.Values.RevisionA)
+                if (verRow.Revision == Defs.Values.RevisionA)
                 {
                     version++;
                 }
-                rowObj.Version = version;
+                verRow.Version = version;
             }
             BuildVersionsAndMap();
         }
@@ -476,24 +479,20 @@ namespace Restless.Panama.Database.Tables
             Versions.Clear();
             versionMap.Clear();
 
-            DataRow[] rows = owner.Select($"{Defs.Columns.TitleId}={TitleId}", $"{Defs.Columns.Version} DESC, {Defs.Columns.Revision} ASC");
-
             long lastVer = -1;
 
-            foreach (DataRow row in rows)
+            foreach (TitleVersionRow verRow in VersionTable.EnumerateVersions(TitleId, SortDirection.Descending))
             {
-                TitleVersionRow rowObj = new TitleVersionRow(row);
-                Versions.Add(rowObj);
-
-                if (rowObj.Version != lastVer)
+                Versions.Add(verRow);
+                if (verRow.Version != lastVer)
                 {
-                    lastVer = rowObj.Version;
+                    lastVer = verRow.Version;
                     versionMap.Add(lastVer, new List<long>());
-                    versionMap[lastVer].Add(rowObj.Revision);
+                    versionMap[lastVer].Add(verRow.Revision);
                 }
                 else
                 {
-                    versionMap[lastVer].Add(rowObj.Revision);
+                    versionMap[lastVer].Add(verRow.Revision);
                 }
             }
         }
