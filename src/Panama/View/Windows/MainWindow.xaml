@@ -29,39 +29,58 @@
                 <Separator />
                 <MenuItem Header="E_xit" Icon="{StaticResource ExitIconKey}" Command="{Binding Commands[Close]}" />
             </MenuItem>
+            
             <MenuItem Header="_Settings">
                 <MenuItem
                     Header="{x:Static r:Strings.MenuItemAuthors}"
                     Icon="{StaticResource UserIconKey}"
-                    Command="{Binding Commands[Author]}"/>
-                <MenuItem Header="Tags" Icon="{StaticResource TagIconKey}" Command="{Binding Commands[Tag]}"/>
-                <MenuItem Header="Credentials" Icon="{StaticResource ImageCredentialMenu}" Command="{Binding Commands[Credential]}"/>
+                    Command="{Binding Commands[NavigateAuthor]}"/>
+                
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemTags}"
+                    Icon="{StaticResource TagIconKey}"
+                    Command="{Binding Commands[NavigateTag]}"/>
+                
+                <!--<MenuItem
+                    Header="Credentials" 
+                    Icon="{StaticResource ImageCredentialMenu}" 
+                    Command="{Binding Commands[Credential]}"/>-->
+                
                 <Separator />
-                <MenuItem Header="Settings" Icon="{StaticResource SettingsIconKey}" Command="{Binding Commands[Settings]}" />
+                
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemSettings}"
+                    Icon="{StaticResource SettingsIconKey}"
+                    Command="{Binding Commands[OpenSettingsWindow]}" />
             </MenuItem>
-            <MenuItem Header="_Other">
-                <MenuItem Header="Alerts" Icon="{StaticResource ImageCalendarMenu}" Command="{Binding Commands[Alert]}"/>
-                <MenuItem Header="Notes" Icon="{StaticResource ImageNoteMenu}" Command="{Binding Commands[Note]}"/>
-                <MenuItem Header="Links" Icon="{StaticResource ImageLinkMenu}" Command="{Binding Commands[Link]}"/>
-                <Separator/>
-                <MenuItem Header="Statistics" Icon="{StaticResource StatisticIconKey}" Command="{Binding Commands[Statistics]}"/>
-            </MenuItem>
+
             <MenuItem Header="_Tools">
-                <MenuItem Header="Update Meta" Icon="{StaticResource ImageToolMetaMenu}" Command="{Binding Commands[ToolMeta]}"/>
-                <MenuItem Header="Export" Icon="{StaticResource ImageToolExportMenu}" Command="{Binding Commands[ToolExport]}"/>
-                <MenuItem Header="Title List" Icon="{StaticResource ImageToolTitleListMenu}" Command="{Binding Commands[ToolTitleList]}"/>
-                <MenuItem Header="Message Sync" Icon="{StaticResource ImageToolMessageSyncMenu}" Command="{Binding Commands[ToolMessageSync]}"/>
-                <MenuItem Header="Table Info" Icon="{StaticResource ImageDatabaseMenu}" Command="{Binding Commands[Table]}"/>
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemUpdateTools}"
+                    Icon="{StaticResource ToolIconKey}"
+                    Command="{Binding Commands[OpenToolWindow]}"/>
+                
+                <!--<MenuItem Header="Export" Icon="{StaticResource ImageToolExportMenu}" Command="{Binding Commands[ToolExport]}"/>-->
+                <!--<MenuItem Header="Title List" Icon="{StaticResource ImageToolTitleListMenu}" Command="{Binding Commands[ToolTitleList]}"/>-->
+                <!--<MenuItem Header="Message Sync" Icon="{StaticResource ImageToolMessageSyncMenu}" Command="{Binding Commands[ToolMessageSync]}"/>-->
+                <!--<MenuItem Header="Table Info" Icon="{StaticResource ImageDatabaseMenu}" Command="{Binding Commands[Table]}"/>-->
                 <Separator/>
                 <MenuItem Header="Find Orphans" Icon="{StaticResource ImageToolOrphanMenu}" Command="{Binding Commands[ToolOrphan]}"/>
-                <MenuItem Header="Search" Icon="{StaticResource ImageToolSearchMenu}" Command="{Binding Commands[ToolSearch]}"/>
-                <MenuItem Header="Convert" Icon="{StaticResource ImageToolConvertMenu}" Command="{Binding Commands[ToolConvert]}"/>
-                <MenuItem Header="Scramble" Command="{Binding Commands[ToolScramble]}"/>
+                <!--<MenuItem Header="Search" Icon="{StaticResource ImageToolSearchMenu}" Command="{Binding Commands[ToolSearch]}"/>-->
+                <!--<MenuItem Header="Convert" Icon="{StaticResource ImageToolConvertMenu}" Command="{Binding Commands[ToolConvert]}"/>-->
+                <!--<MenuItem Header="Scramble" Command="{Binding Commands[ToolScramble]}"/>-->
                 <Separator/>
-                <MenuItem Header="Reset window" Icon="{StaticResource ImageUndoMenu}" Command="{Binding Commands[ResetWindow]}" ToolTip="Reset the main window size to default"/>
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemResetWindow}"
+                    Icon="{StaticResource SquareSmallGrayIconKey}"
+                    Command="{Binding Commands[ResetWindow]}"
+                    ToolTip="Reset the main window size to default"/>
             </MenuItem>
             <MenuItem Header="_Help">
-                <MenuItem Header="About" Icon="{StaticResource ImageInformationMenu}" Command="{Binding Commands[About]}"/>
+                <MenuItem
+                    Header="About"
+                    Icon="{StaticResource ImageInformationMenu}"
+                    Command="{Binding Commands[OpenAboutWindow]}"/>
             </MenuItem>
         </Menu>
     </tk:AppWindow.Menu>
@@ -92,8 +111,8 @@
                 SelectedItem="{Binding NavigatorItems.SelectedItems[0]}"/>
 
             <tk:MainNavigator
-                IsExpanded="{Binding Config.NavToolsExpander}"
-                HeaderText="{x:Static r:Strings.NavHeaderTools}"
+                IsExpanded="{Binding Config.NavSettingsExpander}"
+                HeaderText="{x:Static r:Strings.NavHeaderSettings}"
                 ItemsSource="{Binding NavigatorItems.Groups[1]}"
                 SelectedItem="{Binding NavigatorItems.SelectedItems[1]}"/>
 

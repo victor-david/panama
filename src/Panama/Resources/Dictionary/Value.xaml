@@ -3,8 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:core="clr-namespace:Restless.Panama.Core"
-    xmlns:cv="clr-namespace:Restless.Panama.Core"
-    xmlns:con="clr-namespace:Restless.Panama.Controls">
+    xmlns:cv="clr-namespace:Restless.Panama.Core">
 
     <!-- Base control size definitions -->
     <sys:Double x:Key="DefaultFontSize">12</sys:Double>
@@ -12,14 +11,23 @@
     <sys:Double x:Key="SmallFontSize">10</sys:Double>
     <sys:Double x:Key="MinControlHeight">26</sys:Double>
     <sys:Double x:Key="MinButtonWidth">94</sys:Double>
+    <sys:Double x:Key="MinHeaderHeight">32</sys:Double>
+
+    <sys:Double x:Key="DataEntryPanelDefaultControlHeight">26</sys:Double>
+    <Thickness x:Key="DataEntryPanelDefaultControlMargin">0,0,6,4</Thickness>
+    <Thickness x:Key="DataEntryPanelAltControlMargin">0,4,6,4</Thickness>
+
+    <Thickness x:Key="DataEntryPanelDefaultTextBlockMargin">0,8,0,2</Thickness>
+    <Thickness x:Key="DataEntryPanelAltTextBlockMargin">0,1,0,0</Thickness>
 
     <!-- This must be at least 6 more than MinControlHeight to account for control margins, 3 each side (have it at 8 more ) -->
     <GridLength x:Key="MinGridRowHeightDef">32</GridLength>
     <!-- Height of a grid row for a tab's toolbar -->
     <GridLength x:Key="GridRowHeightTool">38</GridLength>
 
-    <Thickness x:Key="DefaultPadding">10</Thickness> 
-
+    <Thickness x:Key="DefaultPadding">10</Thickness>
+    <Thickness x:Key="DefaultHeaderPadding">4</Thickness>
+    
     <sys:Boolean x:Key="True">True</sys:Boolean>
     <sys:Boolean x:Key="False">False</sys:Boolean>
 

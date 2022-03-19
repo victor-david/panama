@@ -28,7 +28,7 @@
     
     <!-- Header -->
     <SolidColorBrush x:Key="DefaultHeaderBrush" Color="LightSteelBlue"/>
-    <SolidColorBrush x:Key="LightHeaderBrush" Color="Azure"/>
+    <SolidColorBrush x:Key="LightHeaderBrush" Color="WhiteSmoke"/>
     <SolidColorBrush x:Key="RolloverHeaderBrush" Color="#FFDAE8FF"/>
 
     <!-- Menu -->
@@ -58,7 +58,6 @@
     <SolidColorBrush x:Key="NavigatorIconBrush" Color="LightSlateGray"/>
     <SolidColorBrush x:Key="LabelBrush" Color="#FF021F51"/>
     <SolidColorBrush x:Key="DataGridAlternationBrush" Color="LightSteelBlue"/>
-    <SolidColorBrush x:Key="StatusBarBackgroundBrush" Color="GhostWhite"/>
 
     <!-- External keys -->
     <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF79ABBB"/>

@@ -18,10 +18,8 @@
 
     <Grid 
         tk:Property.ColumnWidths="126,*"
-        tk:Property.RowHeights="Auto,Auto,Auto,*"
         Style="{StaticResource DataEntryPanelStyle}">
         <ListBox
-            Grid.RowSpan="4"
             BorderThickness="0,0,1,0"
             ItemsSource="{Binding Sections}"
             DisplayMemberPath="Name"

@@ -53,16 +53,8 @@
         <vw:ToolConvertView />
     </DataTemplate>
     
-    <DataTemplate DataType="{x:Type vm:ToolExportViewModel}">
-        <vw:ToolExportView />
-    </DataTemplate>
-    
     <DataTemplate DataType="{x:Type vm:ToolMessageSyncViewModel}">
         <vw:ToolMessageSyncView />
-    </DataTemplate>
-    
-    <DataTemplate DataType="{x:Type vm:ToolMetaUpdateViewModel}">
-        <vw:ToolMetaUpdateView />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:ToolOrphanViewModel}">
@@ -75,10 +67,6 @@
     
     <DataTemplate DataType="{x:Type vm:ToolSearchViewModel}">
         <vw:ToolSearchView />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:ToolTitleListViewModel}">
-        <vw:ToolTitleListView />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:UserNoteViewModel}">

@@ -36,7 +36,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the scanner object for this controller.
         /// </summary>
-        public override FileScanBase Scanner
+        public override Scanner Scanner
         {
             get => scanner;
         }
@@ -88,7 +88,7 @@ namespace Restless.Panama.ViewModel
                 return;
             }
             ClearCollections();
-            scanner.Execute(TaskId);
+            //scanner.Execute(TaskId);
         }
         #endregion
 

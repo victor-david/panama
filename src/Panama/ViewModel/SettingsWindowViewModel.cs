@@ -11,22 +11,7 @@ namespace Restless.Panama.ViewModel
     public class SettingsWindowViewModel : ApplicationViewModel
     {
         #region Private
-        private Section selectedSection;
-        #endregion
-
-        /************************************************************************/
-
-        #region Helper class
-        public class Section
-        {
-            public string Name { get; }
-            public long Id { get; }
-            public Section(string name, long id)
-            {
-                Name = name;
-                Id = id;
-            }
-        }
+        private NavigatorSection selectedSection;
         #endregion
 
         /************************************************************************/
@@ -35,7 +20,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the list of settings sections
         /// </summary>
-        public List<Section> Sections
+        public List<NavigatorSection> Sections
         {
             get;
         }
@@ -43,7 +28,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets or sets the selection section
         /// </summary>
-        public Section SelectedSection
+        public NavigatorSection SelectedSection
         {
             get => selectedSection;
             set
@@ -78,13 +63,13 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SettingsWindowViewModel()
         {
-            Sections = new List<Section>()
+            Sections = new List<NavigatorSection>()
             {
-                new Section(Strings.HeaderSettingsDisplay, 1),
-                new Section(Strings.HeaderSettingsFolder, 2),
-                new Section(Strings.HeaderSettingsColor, 3),
-                new Section(Strings.HeaderSettingsSubmission, 4),
-                new Section(Strings.HeaderSettingsAdvanced, 5),
+                new NavigatorSection(Strings.HeaderSettingsDisplay, 1),
+                new NavigatorSection(Strings.HeaderSettingsFolder, 2),
+                new NavigatorSection(Strings.HeaderSettingsColor, 3),
+                new NavigatorSection(Strings.HeaderSettingsSubmission, 4),
+                new NavigatorSection(Strings.HeaderSettingsAdvanced, 5),
             };
 
             SetInitialSection();

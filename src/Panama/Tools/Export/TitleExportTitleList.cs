@@ -29,10 +29,15 @@ namespace Restless.Panama.Tools
         /// <returns>true if <paramref name="exportPath"/> is represented in the list; otherwise, false.</returns>
         public bool HasCandidateWithExportPath(string exportPath)
         {
-            if (string.IsNullOrWhiteSpace(exportPath)) return false;
-            foreach (var item in this)
+            if (!string.IsNullOrWhiteSpace(exportPath))
             {
-                if (item.ExportPath.Equals(exportPath, StringComparison.InvariantCultureIgnoreCase)) return true;
+                foreach (TitleExportCandidate item in this)
+                {
+                    if (item.ExportPath.Equals(exportPath, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return true;
+                    }
+                }
             }
             return false;
         }

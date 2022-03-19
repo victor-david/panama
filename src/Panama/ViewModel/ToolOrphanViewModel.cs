@@ -49,10 +49,10 @@ namespace Restless.Panama.ViewModel
             // TODO
             //MainSource.Source = Controller.NotFound;
 
-            Commands.Add("Begin", (o) => Controller.Run());
-            Columns.Create("Modified", nameof(FileScanDisplayObject.LastModified)).MakeDate();
-            Columns.Create("Size", nameof(FileScanDisplayObject.Size)).MakeNumeric(null, FixedWidth.W076);
-            Columns.SetDefaultSort(Columns.Create("File", nameof(FileScanDisplayObject.FileName)), ListSortDirection.Ascending);
+            //Commands.Add("Begin", (o) => Controller.Run());
+            //Columns.Create("Modified", nameof(FileScanResult.LastModified)).MakeDate();
+            //Columns.Create("Size", nameof(FileScanResult.Size)).MakeNumeric(null, FixedWidth.W076);
+            //Columns.SetDefaultSort(Columns.Create("File", nameof(FileScanResult.FileName)), ListSortDirection.Ascending);
             AddViewSourceSortDescriptions();
             Commands.Add("CreateTitle", RunCreateTitleCommand, (p)=> SelectedItem != null);
             MenuItems.AddItem("Create a title entry from this file", Commands["CreateTitle"]);
@@ -72,11 +72,12 @@ namespace Restless.Panama.ViewModel
         /// <param name="selectedItem">The currently selected grid item.</param>
         protected override void OnPreview(object selectedItem)
         {
-            if (selectedItem is FileScanDisplayObject item)
-            {
-                string fileName = Paths.Title.WithRoot(item.FileName);
-                PerformPreview(fileName);
-            }
+            // TODO
+            //if (selectedItem is FileScanResult item)
+            //{
+            //    string fileName = Paths.Title.WithRoot(item.FileName);
+            //    PerformPreview(fileName);
+            //}
         }
 
         /// <summary>
@@ -86,10 +87,11 @@ namespace Restless.Panama.ViewModel
         /// <returns>The preview mode</returns>
         protected override PreviewMode GetPreviewMode(object selectedItem)
         {
-            if (selectedItem is FileScanDisplayObject item)
-            {
-                return DocumentPreviewer.GetPreviewMode(item.FileName);
-            }
+            // TODO
+            //if (selectedItem is FileScanResult item)
+            //{
+            //    return DocumentPreviewer.GetPreviewMode(item.FileName);
+            //}
             return PreviewMode.Unsupported;
         }
 
@@ -116,22 +118,23 @@ namespace Restless.Panama.ViewModel
 
         private void RunCreateTitleCommand(object parm)
         {
-            if (SelectedItem is FileScanDisplayObject file && Messages.ShowYesNo(Strings.ConfirmationCreateTitleFromOrphan))
-            {
-                TitleTable title = DatabaseController.Instance.GetTable<TitleTable>();
-                TitleRow row = new(title.AddDefaultRow())
-                {
-                    Title = "Title created from orphaned file",
-                    Notes = $"This entry was created from orphaned file {file.FileName}"
-                };
-                row.SetWrittenDate(file.LastModified);
+            // TODO
+            //if (SelectedItem is FileScanResult file && Messages.ShowYesNo(Strings.ConfirmationCreateTitleFromOrphan))
+            //{
+            //    TitleTable title = DatabaseController.Instance.GetTable<TitleTable>();
+            //    TitleRow row = new(title.AddDefaultRow())
+            //    {
+            //        Title = "Title created from orphaned file",
+            //        Notes = $"This entry was created from orphaned file {file.FileName}"
+            //    };
+            //    row.SetWrittenDate(file.LastModified);
 
-                // Get a version controller and add a version
-                TitleVersionTable.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(file.FileName)).VersionTable.Save();
+            //    // Get a version controller and add a version
+            //    TitleVersionTable.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(file.FileName)).VersionTable.Save();
 
-                title.Save();
-                Controller.NotFound.Remove(file);
-            }
+            //    title.Save();
+            //    Controller.NotFound.Remove(file);
+            //}
         }
         #endregion
     }

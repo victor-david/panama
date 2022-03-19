@@ -168,9 +168,9 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
-        /// Gets or sets whether the tools navigator is expanded.
+        /// Gets or sets whether the settings navigator is expanded.
         /// </summary>
-        public bool NavToolsExpander
+        public bool NavSettingsExpander
         {
             get => GetItem(false);
             set => SetItem(value);
@@ -560,6 +560,15 @@ namespace Restless.Panama.Core
         /// Gets or sets the selected configuration section.
         /// </summary>
         public int SelectedConfigSection
+        {
+            get => GetItem(1);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the selected tool section.
+        /// </summary>
+        public int SelectedToolSection
         {
             get => GetItem(1);
             set => SetItem(value);

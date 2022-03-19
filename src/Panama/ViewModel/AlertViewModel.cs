@@ -35,7 +35,6 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AlertViewModel()
         {
-            DisplayName = Strings.CommandAlert;
             Columns.Create("Id", AlertTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.CreateImage<BooleanToImageConverter>("E", AlertTable.Defs.Columns.Enabled);
             Columns.SetDefaultSort(Columns.Create("Date", AlertTable.Defs.Columns.Date).MakeDate(), ListSortDirection.Ascending);

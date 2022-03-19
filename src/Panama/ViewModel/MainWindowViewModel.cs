@@ -106,33 +106,40 @@ namespace Restless.Panama.ViewModel
         private MainWindowViewModel()
         {
             //Owner.Closing += new CancelEventHandler(MainWindowClosing);
-            Commands.Add("About", p => WindowFactory.About.Create().ShowDialog());
-            Commands.Add("Author", p => NavigatorItems.Select<AuthorViewModel>());
+            Commands.Add("OpenAboutWindow", p => WindowFactory.About.Create().ShowDialog());
+            Commands.Add("OpenSettingsWindow", p => WindowFactory.Settings.Create().ShowDialog());
+            Commands.Add("OpenToolWindow", p => WindowFactory.Tool.Create().ShowDialog());
+
+            Commands.Add("NavigateAuthor", p => NavigatorItems.Select<AuthorViewModel>());
+            Commands.Add("NavigateTag", p => NavigatorItems.Select<TagViewModel>());
+
             Commands.Add("Close", p => WindowOwner.Close());
             
             Commands.Add("Credential", p => NavigatorItems.Select<CredentialViewModel>());
-            Commands.Add("Alert", p => NavigatorItems.Select<AlertViewModel>());
-            Commands.Add("Link", p => NavigatorItems.Select<LinkViewModel>());
-            Commands.Add("Note", p => NavigatorItems.Select<UserNoteViewModel>());
-            Commands.Add("Publisher", p => NavigatorItems.Select<PublisherViewModel>());
+            //Commands.Add("Alert", p => NavigatorItems.Select<AlertViewModel>());
+            //Commands.Add("Link", p => NavigatorItems.Select<LinkViewModel>());
+            //Commands.Add("Note", p => NavigatorItems.Select<UserNoteViewModel>());
+            //Commands.Add("Publisher", p => NavigatorItems.Select<PublisherViewModel>());
             Commands.Add("ResetWindow", RunResetWindowCommand);
-            Commands.Add("Submission", p => NavigatorItems.Select<SubmissionViewModel>());
+            //Commands.Add("Submission", p => NavigatorItems.Select<SubmissionViewModel>());
             Commands.Add("Save", Save);
-            Commands.Add("SelfPublisher", p => NavigatorItems.Select<SelfPublisherViewModel>());
-            Commands.Add("Settings", p => WindowFactory.Settings.Create().ShowDialog());
+            //Commands.Add("SelfPublisher", p => NavigatorItems.Select<SelfPublisherViewModel>());
+            
 
-            Commands.Add("Statistics", p => NavigatorItems.Select<StatisticsViewModel>());
+            
+
             Commands.Add("Table", p => NavigatorItems.Select<TableViewModel>());
-            Commands.Add("Tag", p => NavigatorItems.Select<TagViewModel>());
-            Commands.Add("Title", p => NavigatorItems.Select<TitleViewModel>());
-            Commands.Add("ToolConvert", p => NavigatorItems.Select<ToolConvertViewModel>(), CanRunToolConvertCommand);
-            Commands.Add("ToolExport", p => NavigatorItems.Select<ToolExportViewModel>());
+            
+
+            //Commands.Add("ToolConvert", p => NavigatorItems.Select<ToolConvertViewModel>(), CanRunToolConvertCommand);
+            //Commands.Add("ToolExport", p => NavigatorItems.Select<ToolExportViewModel>());
             Commands.Add("ToolMessageSync", p => NavigatorItems.Select<ToolMessageSyncViewModel>());
-            Commands.Add("ToolMeta", p => NavigatorItems.Select<ToolMetaUpdateViewModel>());
+            //Commands.Add("ToolMeta", p => NavigatorItems.Select<ToolMetaUpdateViewModel>());
             Commands.Add("ToolOrphan", p => NavigatorItems.Select<ToolOrphanViewModel>());
-            Commands.Add("ToolScramble", p => NavigatorItems.Select<ToolScrambleViewModel>());
+            //Commands.Add("ToolScramble", p => NavigatorItems.Select<ToolScrambleViewModel>());
             Commands.Add("ToolSearch", p => NavigatorItems.Select<ToolSearchViewModel>());
-            Commands.Add("ToolTitleList", p => NavigatorItems.Select<ToolTitleListViewModel>());
+            //Commands.Add("ToolTitleList", p => NavigatorItems.Select<ToolTitleListViewModel>());
+            
 
             MainNavigationWidth = new GridLength(Config.MainNavigationWidth, GridUnitType.Pixel);
 
@@ -239,14 +246,13 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<SelfPublisherViewModel>(NavigationGroup.Title, Strings.MenuItemSelfPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));
             NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.SubmissionGeometryKey));
 
-            NavigatorItems.Add<TagViewModel>(NavigationGroup.Tools, Strings.MenuItemTags, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TagGeometryKey));
+            NavigatorItems.Add<AuthorViewModel>(NavigationGroup.Settings, Strings.MenuItemAuthors, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.UserGeometryKey));
+            NavigatorItems.Add<TagViewModel>(NavigationGroup.Settings, Strings.MenuItemTags, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TagGeometryKey));
 
+            NavigatorItems.Add<AlertViewModel>(NavigationGroup.Other, Strings.MenuItemAlerts, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.AlertGeometryKey));
+            NavigatorItems.Add<UserNoteViewModel>(NavigationGroup.Other, Strings.MenuItemNotes, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.NoteGeometryKey));
+            NavigatorItems.Add<LinkViewModel>(NavigationGroup.Other, Strings.MenuItemLinks, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.LinkGeometryKey));
             NavigatorItems.Add<StatisticsViewModel>(NavigationGroup.Other, Strings.MenuItemStatistics, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.StatisticGeometryKey));
-
-            NavigatorItems.Add<AuthorViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemAuthors);
-
-
-
         }
 
         private void NavigatorItemsSelectedItemChanged(object sender, NavigatorItem navItem)

@@ -18,7 +18,7 @@ namespace Restless.Panama.Tools
     /// <summary>
     /// Creates a list of all titles and their corresponding versions.
     /// </summary>
-    public class TitleLister : FileScanBase
+    public class TitleLister : Scanner
     {
         #region Private
         private readonly string outputDirectory;
@@ -33,11 +33,6 @@ namespace Restless.Panama.Tools
         /// Gets the name of the output file (file name only, no path) that holds the list of titles.
         /// </summary>
         public const string ListFile = "TitleList.txt";
-
-        /// <summary>
-        /// Gets the name of this file scanner tool.
-        /// </summary>
-        public override string ScannerName => "Title Lister";
 
         /// <summary>
         /// Gets the full path to the file that holds the list of titles.
@@ -68,36 +63,38 @@ namespace Restless.Panama.Tools
 
         #region Protected methods
         /// <summary>
-        /// Performs the title list operation. This method is called from the base class on a background task.
+        /// Performs the title list operation.
         /// </summary>
-        protected override void ExecuteTask()
+        protected override FileScanResult ExecuteTask()
         {
-            // This is checked by the caller, but we need to make sure.
-            if (!Directory.Exists(outputDirectory))
-            {
-                throw new InvalidOperationException(Strings.InvalidOpTitleListOutputFolder);
-            }
+            FileScanResult result = new();
+            //    // This is checked by the caller, but we need to make sure.
+            //    if (!Directory.Exists(outputDirectory))
+            //    {
+            //        throw new InvalidOperationException(Strings.InvalidOpTitleListOutputFolder);
+            //    }
 
-            List<string> lines = new();
+            //    List<string> lines = new();
 
-            var titleEnumerator = titleTable.EnumerateTitles();
-            TotalCount = titleEnumerator.Count();
+            //    var titleEnumerator = titleTable.EnumerateTitles();
+            //    TotalCount = titleEnumerator.Count();
 
-            foreach (TitleRow title in titleEnumerator)
-            {
-                lines.Add(string.Format("{0} - {1}", title.Written.ToString(Config.Instance.DateFormat), title.Title));
+            //    foreach (TitleRow title in titleEnumerator)
+            //    {
+            //        lines.Add(string.Format("{0} - {1}", title.Written.ToString(Config.Instance.DateFormat), title.Title));
 
-                foreach (var ver in titleVersionTable.EnumerateVersions(title.Id, SortDirection.Ascending))
-                {
-                    string note = !string.IsNullOrEmpty(ver.Note) ? $"[{ver.Note}]" : string.Empty;
-                    lines.Add($"  v{ver.Version}.{(char)ver.Revision} {ver.LanguageId} {ver.FileName}   {note}".Trim());
-                }
+            //        foreach (var ver in titleVersionTable.EnumerateVersions(title.Id, SortDirection.Ascending))
+            //        {
+            //            string note = !string.IsNullOrEmpty(ver.Note) ? $"[{ver.Note}]" : string.Empty;
+            //            lines.Add($"  v{ver.Version}.{(char)ver.Revision} {ver.LanguageId} {ver.FileName}   {note}".Trim());
+            //        }
 
-                lines.Add("----------------------------------------------------------------------------------------------------");
-                ScanCount++;
-            }
+            //        lines.Add("----------------------------------------------------------------------------------------------------");
+            //        ScanCount++;
+            //    }
 
-            File.WriteAllLines(TitleListFileName, lines);
+            //    File.WriteAllLines(TitleListFileName, lines);
+            return result;
         }
         #endregion
     }

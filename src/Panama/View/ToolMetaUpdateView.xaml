@@ -20,7 +20,7 @@
         </Grid.ColumnDefinitions>
         
         <!-- Tool explanation text -->
-        <TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationMetaUpdate}"/>
+        <!--<TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationMetaUpdate}"/>-->
 
         <!-- Tool bar -->
         <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">

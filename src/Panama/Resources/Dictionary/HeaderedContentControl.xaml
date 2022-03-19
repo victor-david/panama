@@ -5,38 +5,39 @@
 
     <Style x:Key="HeaderedContentControlHeaderBorderStyle" TargetType="Border">
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="4"/>
-        <Setter Property="Background" Value="{StaticResource DefaultHeaderBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorderBrush}"/>
+        <Setter Property="MinHeight" Value="{StaticResource MinHeaderHeight}"/>
+        <Setter Property="Padding" Value="{StaticResource DefaultHeaderPadding}"/>
+        <Setter Property="Background" Value="{StaticResource LightHeaderBrush}"/>
         <Setter Property="TextElement.Foreground" Value="{StaticResource DefaultForegroundBrush}"/>
         <Setter Property="TextElement.FontSize" Value="11"/>
     </Style>
 
-    <Style x:Key="HeaderedContentControlContentBorderStyle" TargetType="Border">
-        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}" />
-        <Setter Property="BorderThickness" Value="1"/>
-    </Style>
-
-    <!-- Defines a style to use on HeaderedContentControl elements. -->
     <Style x:Key="DefaultHeaderedContentControlStyle" TargetType="HeaderedContentControl">
+        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="{StaticResource DefaultPadding}"/>
         <Setter Property="IsTabStop" Value="False"/>
-        
-        <Setter Property="HeaderTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <Border Style="{StaticResource HeaderedContentControlHeaderBorderStyle}">
-                        <TextBlock Text="{TemplateBinding Content}"/>
-                    </Border>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
         
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="HeaderedContentControl">
-                    <Border Style="{StaticResource HeaderedContentControlContentBorderStyle}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid tk:Property.RowHeights="Auto,*">
-                            <ContentPresenter ContentSource="Header"/>
+                            <Border Style="{StaticResource HeaderedContentControlHeaderBorderStyle}">
+                                <Grid tk:Property.ColumnWidths="*,Auto">
+                                    <ContentPresenter
+                                        VerticalAlignment="Center"
+                                        ContentSource="Header"/>
+                                    
+                                    <ContentPresenter
+                                        Grid.Column="1"
+                                        Margin="0,0,5,0"
+                                        TextElement.Foreground="{StaticResource AlertForegroundBrush}"
+                                        VerticalAlignment="Center"
+                                        ContentSource="Tag"/>
+                                </Grid>
+                            </Border>
                             <ContentPresenter
                                 Grid.Row="1"
                                 Margin="{TemplateBinding Padding}"
@@ -49,14 +50,5 @@
     </Style>
 
     <Style TargetType="HeaderedContentControl" BasedOn="{StaticResource DefaultHeaderedContentControlStyle}"/>
-
-    <!--<Style TargetType="HeaderedContentControl" x:Key="HCCTool" BasedOn="{StaticResource {x:Type HeaderedContentControl}}">
-        <Style.Resources>
-            <Style TargetType="DataGrid" BasedOn="{StaticResource {x:Type DataGrid}}">
-                <Setter Property="AutoGenerateColumns" Value="False"/>
-                <Setter Property="Margin" Value="0,3"/>
-            </Style>
-        </Style.Resources>
-    </Style>-->
 
 </ResourceDictionary>

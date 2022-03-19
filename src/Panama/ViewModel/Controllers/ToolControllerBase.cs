@@ -37,24 +37,24 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the scanner object associated with this tool
         /// </summary>
-        public abstract FileScanBase Scanner
+        public abstract Scanner Scanner
         {
             get;
         }
 
         /// <summary>
-        /// Gets the collection of <see cref="FileScanDisplayObject"/> objects that represent updated items.
+        /// Gets the collection of <see cref="FileScanResult"/> objects that represent updated items.
         /// </summary>
-        public ObservableCollection<FileScanDisplayObject> Updated
+        public ObservableCollection<FileScanResult> Updated
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// Gets the collection of <see cref="FileScanDisplayObject"/> objects that represent not found items.
+        /// Gets the collection of <see cref="FileScanResult"/> objects that represent not found items.
         /// </summary>
-        public ObservableCollection<FileScanDisplayObject> NotFound
+        public ObservableCollection<FileScanResult> NotFound
         {
             get;
             private set;
@@ -110,8 +110,8 @@ namespace Restless.Panama.ViewModel
         public ToolControllerBase(VM owner)
         {
             Owner = owner ?? throw new ArgumentNullException(nameof(owner));
-            Updated = new ObservableCollection<FileScanDisplayObject>();
-            NotFound = new ObservableCollection<FileScanDisplayObject>();
+            Updated = new ObservableCollection<FileScanResult>();
+            NotFound = new ObservableCollection<FileScanResult>();
         }
         #endregion
 
@@ -136,7 +136,7 @@ namespace Restless.Panama.ViewModel
         /// Adds the specified item to the Updated collection.
         /// </summary>
         /// <param name="item">The item to add</param>
-        protected void AddToUpdated(FileScanDisplayObject item)
+        protected void AddToUpdated(FileScanResult item)
         {
             Updated.Add(item);
         }
@@ -145,7 +145,7 @@ namespace Restless.Panama.ViewModel
         /// Adds the specified item to the NotFound collection.
         /// </summary>
         /// <param name="item">The item to add</param>
-        protected void AddToNotFound(FileScanDisplayObject item)
+        protected void AddToNotFound(FileScanResult item)
         {
             NotFound.Add(item);
         }
@@ -155,7 +155,7 @@ namespace Restless.Panama.ViewModel
         /// Removes the specified item to the NotFound collection.
         /// </summary>
         /// <param name="item">The item to remove.</param>
-        protected void RemoveFromNotFound(FileScanDisplayObject item)
+        protected void RemoveFromNotFound(FileScanResult item)
         {
             NotFound.Remove(item);
         }

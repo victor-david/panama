@@ -15,8 +15,12 @@ namespace Restless.Panama.Tools
     /// <summary>
     /// Updates the submission document file database entries.
     /// </summary>
-    public class SubmissionUpdater : FileScanBase
+    public class SubmissionUpdater : Scanner
     {
+        private SubmissionDocumentTable SubmissionDocumentTable => DatabaseController.Instance.GetTable<SubmissionDocumentTable>();
+        private DocumentTypeTable DocumentTypeTable => DatabaseController.Instance.GetTable<DocumentTypeTable>();
+
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmissionUpdater"/> class.
@@ -28,50 +32,37 @@ namespace Restless.Panama.Tools
 
         /************************************************************************/
 
-        #region Public properties
-        /// <summary>
-        /// Gets the name of this file scanner tool.
-        /// </summary>
-        public override string ScannerName => "Submission Document Updater";
-        #endregion
-
-        /************************************************************************/
-
         #region Protected methods
         /// <summary>
-        /// Performs the update. This method is called from the base class on a background task.
+        /// Performs the update.
         /// </summary>
-        protected override void ExecuteTask()
+        protected override FileScanResult ExecuteTask()
         {
-            var submissionEnumerator = DatabaseController.Instance.GetTable<SubmissionDocumentTable>().EnumerateSubmissionDocuments();
+            FileScanResult result = new();
 
-            TotalCount = submissionEnumerator.Count();
-
-            foreach (var row in submissionEnumerator)
+            foreach (SubmissionDocumentRow document in SubmissionDocumentTable.EnumerateSubmissionDocuments())
             {
-                ScanCount++;
-                if (DatabaseController.Instance.GetTable<DocumentTypeTable>().IsDocTypeSupported(row.DocType))
+                result.ScanCount++;
+                if (DocumentTypeTable.IsDocTypeSupported(document.DocType))
                 {
-                    string filename = Paths.SubmissionDocument.WithRoot(row.DocumentId);
-                    var info = new FileInfo(filename);
-                    if (info.Exists)
+                    document.SetFileInfo(Paths.SubmissionDocument.WithRoot(document.DocumentId));
+
+                    if (document.Info.Exists)
                     {
-                        if (row.Updated != info.LastWriteTimeUtc || row.Size != info.Length)
+                        if (document.RequireSynchonization())
                         {
-                            row.Updated = info.LastWriteTimeUtc;
-                            row.Size = info.Length;
-                            DatabaseController.Instance.GetTable<SubmissionDocumentTable>().Save();
-                            FileScanDisplayObject item = new(row.Title, row.DocumentId);
-                            OnUpdated(item);
+                            document.Synchronize();
+                            SubmissionDocumentTable.Save();
+                            result.Updated.Add(FileScanItem.Create(document.Title, document.DocumentId, 0, 0));
                         }
                     }
                     else
                     {
-                        var item = new FileScanDisplayObject(row.Title, row.DocumentId);
-                        OnNotFound(item);
+                        result.NotFound.Add(FileScanItem.Create(document.Title, document.DocumentId, 0, 0));
                     }
                 }
             }
+            return result;
         }
         #endregion
     }

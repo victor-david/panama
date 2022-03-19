@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
         
         <!-- Tool explanation text -->
-        <TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationTitleList}"/>
+        <TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.ToolTitleListDetail}"/>
         
         <!-- Tool bar -->
         <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">

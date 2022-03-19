@@ -4,16 +4,16 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.Core;
+using Restless.Panama.Utility;
 using System;
-using System.IO;
+using IOFile = System.IO.File;
 
 namespace Restless.Panama.Tools
 {
     /// <summary>
     /// Represents a single candidate for the export operation.
     /// </summary>
-    public class TitleExportCandidate : FileScanDisplayObject
+    public class TitleExportCandidate : FileScanItem
     {
         #region Public Properties
         /// <summary>
@@ -22,7 +22,6 @@ namespace Restless.Panama.Tools
         public string OriginalPath
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -31,7 +30,6 @@ namespace Restless.Panama.Tools
         public string ExportPath
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -40,7 +38,6 @@ namespace Restless.Panama.Tools
         public TitleExportStatus Status
         {
             get;
-            private set;
         }
         #endregion
 
@@ -61,40 +58,33 @@ namespace Restless.Panama.Tools
         /// values from the <see cref="TitleExportStatus"/> enumeration.
         /// </remarks>
         public TitleExportCandidate(long version, long revision, string title, string originalPath, string exportPath)
-            :base(version, revision, title, Paths.Title.WithoutRoot(originalPath))
+            // :base(version, revision, title, Paths.Title.WithoutRoot(originalPath))
         {
-            if (string.IsNullOrEmpty(originalPath))
-            {
-                throw new ArgumentNullException(nameof(originalPath));
-            }
-            if (string.IsNullOrEmpty(exportPath))
-            {
-                throw new ArgumentNullException(nameof(exportPath));
-            }
+            Throw.IfEmpty(originalPath);
+            Throw.IfEmpty(exportPath);
 
             OriginalPath = originalPath;
             ExportPath = exportPath;
             Status = TitleExportStatus.None;
-            if (!File.Exists(originalPath))
+            if (!IOFile.Exists(originalPath))
+            {
                 Status = TitleExportStatus.OriginalFileDoesNotExist;
-            else if (!File.Exists(exportPath))
+            }
+            else if (!IOFile.Exists(exportPath))
+            {
                 Status = TitleExportStatus.ExportFileDoesNotExist;
+            }
             else /* compare dates */
             {
-                DateTime dtOrig = File.GetLastWriteTime(originalPath);
-                DateTime dtExport = File.GetLastWriteTime(exportPath);
+                DateTime dtOrig = IOFile.GetLastWriteTime(originalPath);
+                DateTime dtExport = IOFile.GetLastWriteTime(exportPath);
                 /*
                  * less than zero = t1 is earlier
                  * zero = same
                  * greater than zero = t1 is later
                  */
                 int diff = DateTime.Compare(dtOrig, dtExport);
-                if (diff == 0)
-                    Status = TitleExportStatus.SameDateTime;
-                else if (diff > 0)
-                    Status = TitleExportStatus.OriginalIsNewer;
-                else
-                    Status = TitleExportStatus.OriginalIsOlder;
+                Status = diff == 0 ? TitleExportStatus.SameDateTime : diff > 0 ? TitleExportStatus.OriginalIsNewer : TitleExportStatus.OriginalIsOlder;
             }
         }
         #endregion

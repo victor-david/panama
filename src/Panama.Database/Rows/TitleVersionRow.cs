@@ -21,18 +21,12 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Gets the id for this row object.
         /// </summary>
-        public long Id
-        {
-            get => GetInt64(Columns.Id);
-        }
+        public long Id => GetInt64(Columns.Id);
 
         /// <summary>
         /// Gets the title id for this row object.
         /// </summary>
-        public long TitleId
-        {
-            get => GetInt64(Columns.TitleId);
-        }
+        public long TitleId => GetInt64(Columns.TitleId);
 
         /// <summary>
         /// Gets or sets the document type for this row object.
@@ -148,6 +142,32 @@ namespace Restless.Panama.Database.Tables
         public void SetFileInfo(string fullName)
         {
             Info = new FileInfo(fullName);
+        }
+
+        /// <summary>
+        /// Gets a boolean value that indicates whether the properties of this instance
+        /// require synchronization with those of <see cref="Info"/> and/or the specified word count
+        /// </summary>
+        /// <param name="wordCount">The word count</param>
+        /// <returns>true if synchronization needed; otherwise, false</returns>
+        public bool RequireSynchonization(long wordCount)
+        {
+            return Info != null && (Updated != Info.LastWriteTimeUtc || Size != Info.Length || WordCount != wordCount);
+        }
+
+        /// <summary>
+        /// Sets the properties of this object to be synchronized with those of <see cref="Info"/>
+        /// and the specified word count.
+        /// </summary>
+        /// <param name="wordCount">The word count</param>
+        public void Synchronize(long wordCount)
+        {
+            if (Info != null)
+            {
+                Updated = Info.LastWriteTimeUtc;
+                Size = Info.Length;
+                WordCount = wordCount;
+            }
         }
         #endregion
     }

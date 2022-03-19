@@ -400,11 +400,11 @@ does not exist. Correct this by selecting the correct file and then try again.</
   <data name="CaptionSelectSubmissionDocument" xml:space="preserve">
     <value>Select a submission document</value>
   </data>
-  <data name="HeaderToolOperationExport" xml:space="preserve">
-    <value>This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted. Files are exported to: {0}</value>
+  <data name="ToolExportDetail" xml:space="preserve">
+    <value>This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted.</value>
   </data>
-  <data name="HeaderToolOperationMetaUpdate" xml:space="preserve">
-    <value>This operation first compacts the database file, and then verfies that all files associated with title versions and submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count.</value>
+  <data name="ToolMetadataDetail" xml:space="preserve">
+    <value>This operation verfies that all files associated with title versions and submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count.</value>
   </data>
   <data name="InvalidOpExportFolderNotSet" xml:space="preserve">
     <value>The folder for the export operation hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
@@ -546,7 +546,7 @@ Last exported: {1}</value>
   <data name="CommandToolTitleList" xml:space="preserve">
     <value>Title list</value>
   </data>
-  <data name="HeaderToolOperationTitleList" xml:space="preserve">
+  <data name="ToolTitleListDetail" xml:space="preserve">
     <value>This operation creates a text file that has a list of all titles and their corresponding versions. The text file is placed in the TitleRoot folder.</value>
   </data>
   <data name="TooltipTitleWordCount" xml:space="preserve">
@@ -788,7 +788,7 @@ Do you want to continue?</value>
   <data name="FilterPromptAlert" xml:space="preserve">
     <value>Alert title</value>
   </data>
-  <data name="CommandAlert" xml:space="preserve">
+  <data name="MenuItemAlerts" xml:space="preserve">
     <value>Alerts</value>
   </data>
   <data name="ConfirmationCreateTitleFromOrphan" xml:space="preserve">
@@ -925,8 +925,8 @@ Do you want to continue?</value>
   <data name="NavHeaderMain" xml:space="preserve">
     <value>Main</value>
   </data>
-  <data name="NavHeaderTools" xml:space="preserve">
-    <value>Tools</value>
+  <data name="NavHeaderSettings" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="MenuItemPublishers" xml:space="preserve">
     <value>Publishers</value>
@@ -1026,5 +1026,32 @@ Do you want to continue?</value>
   </data>
   <data name="TextDescription" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="MenuItemLinks" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="MenuItemNotes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="MenuItemResetWindow" xml:space="preserve">
+    <value>Reset window</value>
+  </data>
+  <data name="MenuItemTools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="MenuItemUpdateTools" xml:space="preserve">
+    <value>Update Tools</value>
+  </data>
+  <data name="HeaderToolExport" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="HeaderToolMetadata" xml:space="preserve">
+    <value>Metadata</value>
+  </data>
+  <data name="HeaderToolTitleList" xml:space="preserve">
+    <value>Title List</value>
+  </data>
+  <data name="TextStart" xml:space="preserve">
+    <value>Start</value>
   </data>
 </root>

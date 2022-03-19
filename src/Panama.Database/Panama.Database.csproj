@@ -24,4 +24,8 @@
     <PackageReference Include="Restless.Toolkit.Core" Version="2.5.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Rows\SubmissionDocumentRow.cs" />
+  </ItemGroup>
+
 </Project>

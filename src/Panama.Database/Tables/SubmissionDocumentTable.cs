@@ -129,12 +129,12 @@ namespace Restless.Panama.Database.Tables
         /// Provides an enumerable that gets all submission documents in order of id ASC.
         /// </summary>
         /// <returns>A <see cref="RowObject"/></returns>
-        public IEnumerable<RowObject> EnumerateSubmissionDocuments()
+        public IEnumerable<SubmissionDocumentRow> EnumerateSubmissionDocuments()
         {
             DataRow[] rows = Select(null, $"{Defs.Columns.Id} ASC");
             foreach (DataRow row in rows)
             {
-                yield return new RowObject(row);
+                yield return new SubmissionDocumentRow(row);
             }
             yield break;
         }
@@ -184,91 +184,6 @@ namespace Restless.Panama.Database.Tables
                 }
                 e.Row[Defs.Columns.DocType] = Controller.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(e.ProposedValue.ToString());
             }
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Row Object
-        /// <summary>
-        /// Encapsulates a single row from the <see cref="SubmissionDocumentTable"/>.
-        /// </summary>
-        public class RowObject : RowObjectBase<SubmissionDocumentTable>
-        {
-            #region Public properties
-            /// <summary>
-            /// Gets the id for this row object.
-            /// </summary>
-            public long Id
-            {
-                get => GetInt64(Defs.Columns.Id);
-            }
-
-            /// <summary>
-            /// Gets the batch id for this row object.
-            /// </summary>
-            public long BatchId
-            {
-                get => GetInt64(Defs.Columns.BatchId);
-            }
-
-            /// <summary>
-            /// Gets or sets the title for this row object.
-            /// </summary>
-            public string Title
-            {
-                get => GetString(Defs.Columns.Title);
-                set => SetValue(Defs.Columns.Title, value);
-            }
-
-            /// <summary>
-            /// Gets the document type for this row object.
-            /// </summary>
-            public long DocType
-            {
-                get => GetInt64(Defs.Columns.DocType);
-            }
-
-            /// <summary>
-            /// Gets or sets the document id (usually a file name) for this row object.
-            /// </summary>
-            public string DocumentId
-            {
-                get => GetString(Defs.Columns.DocId);
-                set => SetValue(Defs.Columns.DocId, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the updated date for this row object.
-            /// </summary>
-            public DateTime Updated
-            {
-                get => GetDateTime(Defs.Columns.Updated);
-                set => SetValue(Defs.Columns.Updated, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the file size.
-            /// </summary>
-            public long Size
-            {
-                get => GetInt64(Defs.Columns.Size);
-                set => SetValue(Defs.Columns.Size, value);
-            }
-            #endregion
-
-            /************************************************************************/
-
-            #region Constructor
-            /// <summary>
-            /// Initializes a new instance of the <see cref="RowObject"/> class.
-            /// </summary>
-            /// <param name="row">The data row</param>
-            public RowObject(DataRow row)
-                : base(row)
-            {
-            }
-            #endregion
         }
         #endregion
     }

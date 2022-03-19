@@ -14,9 +14,9 @@
         public const int Title = 0;
 
         /// <summary>
-        /// Tools, various other utilities.
+        /// Various settings
         /// </summary>
-        public const int Tools = 1;
+        public const int Settings = 1;
 
         /// <summary>
         /// Other, alerts, links, etc.

@@ -74,6 +74,33 @@ namespace Restless.Panama.Core
 
         /************************************************************************/
 
+        #region Tool
+        /// <summary>
+        /// Provides static methods for creating the tool window
+        /// </summary>
+        public static class Tool
+        {
+            /// <summary>
+            /// Creates an instance of ToolWindow and its corresponding view model
+            /// </summary>
+            /// <returns>The window</returns>
+            public static ToolWindow Create()
+            {
+                ToolWindow window = new()
+                {
+                    Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    DataContext = new ToolWindowViewModel()
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
+                return window;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region About
         /// <summary>
         /// Provides static methods for creating the application's About window.
