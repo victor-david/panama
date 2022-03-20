@@ -49,6 +49,7 @@
         Grid.Row="3"
         Visibility="{Binding UpdatedVisibility, ElementName=ToolControl}"
         Style="{StaticResource FileScanItemListBoxStyle}"
+        SelectedItem="{Binding SelectedUpdatedItem, ElementName=ToolControl}"
         ItemsSource="{Binding UpdatedItemsSource, ElementName=ToolControl}"/>
 
     <TextBlock
@@ -60,7 +61,14 @@
         Grid.Row="3" Grid.Column="1"
         Visibility="{Binding NotFoundVisibility, ElementName=ToolControl}"
         Style="{StaticResource FileScanItemListBoxStyle}"
+        SelectedItem="{Binding SelectedNotFoundItem, ElementName=ToolControl}"
         ItemsSource="{Binding NotFoundItemsSource, ElementName=ToolControl}"/>
+
+    <TextBox
+        Grid.Row="3" Grid.Column="1"
+        Text="{Binding PreviewText, ElementName=ToolControl}"
+        Visibility="{Binding PreviewVisibility, ElementName=ToolControl}"
+        Style="{StaticResource TextBoxMultiStretchStyle}"/>
 
     <StatusBar
         Grid.Row="4"

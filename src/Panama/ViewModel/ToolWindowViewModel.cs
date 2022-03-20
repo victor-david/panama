@@ -4,7 +4,6 @@ using Restless.Panama.Tools;
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -20,6 +19,8 @@ namespace Restless.Panama.ViewModel
         private readonly TitleExporter titleExporter;
         private readonly TitleLister titleLister;
         private readonly OrphanFinder orphanFinder;
+        private FileScanItem selectedOrphan;
+        private string orphanPreviewText;
         #endregion
 
         /************************************************************************/
@@ -64,6 +65,22 @@ namespace Restless.Panama.ViewModel
         {
             get;
         }
+
+        public FileScanItem SelectedOrphan
+        {
+            get => selectedOrphan;
+            set
+            {
+                SetProperty(ref selectedOrphan, value);
+                PreviewOrphan();
+            }
+        }
+
+        public string OrphanPreviewText
+        {
+            get => orphanPreviewText;
+            private set => SetProperty(ref orphanPreviewText, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -93,7 +110,6 @@ namespace Restless.Panama.ViewModel
             Commands.Add("RunExport", RunExportCommand);
             Commands.Add("RunTitleList", RunTitleListCommand);
             Commands.Add("RunOrphan", RunOrphanCommand);
-
 
             versionUpdater = new VersionUpdater();
             submissionUpdater = new SubmissionUpdater();
@@ -179,6 +195,18 @@ namespace Restless.Panama.ViewModel
             Adapter.AddToUpdate(index, result.Updated);
             Adapter.AddToNotFound(index, result.NotFound);
             Adapter.SetStatus(index, $"{result.ScanCount} items processed | {result.Updated.Count} updated | {result.NotFound.Count} not found");
+        }
+
+        private void PreviewOrphan()
+        {
+            if (SelectedOrphan != null)
+            {
+                PreviewMode mode = DocumentPreviewer.GetPreviewMode(SelectedOrphan.FullName);
+                if (mode == PreviewMode.Text)
+                {
+                    OrphanPreviewText = DocumentPreviewer.GetText(SelectedOrphan.FullName);
+                }
+            }
         }
         #endregion
     }

@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="400"
@@ -14,7 +13,6 @@
     <!-- Title edit 6 (preview) -->
     <TextBox
         tk:Property.IsVisible="{Binding IsOpenXml}"
-        MaxHeight="{x:Static sys:Double.PositiveInfinity}"
         Style="{StaticResource TextBoxMultiStretchStyle}"
         Text="{Binding PreviewText, Mode=OneWay}"/>
 

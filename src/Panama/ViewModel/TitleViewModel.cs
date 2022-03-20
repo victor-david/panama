@@ -466,14 +466,10 @@ namespace Restless.Panama.ViewModel
                 if (verController.Versions.Count > 0)
                 {
                     string fileName = Paths.Title.WithRoot(verController.Versions[0].FileName);
-                    long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
-                    if (docType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType)
+                    if (DocumentPreviewer.GetPreviewMode(fileName) == PreviewMode.Text)
                     {
+                        PreviewText = DocumentPreviewer.GetText(fileName);
                         IsOpenXml = true;
-                        Execution.TryCatch(() =>
-                        {
-                            PreviewText = OpenXmlDocument.Reader.GetText(fileName);
-                        }, (ex) => MainWindowViewModel.Instance.CreateNotificationMessage(ex.Message));
                     }
                 }
             }

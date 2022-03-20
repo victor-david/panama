@@ -6,6 +6,7 @@
 */
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
+using Restless.Panama.Utility;
 using Restless.Toolkit.Core.OpenXml;
 using System;
 using System.IO;
@@ -26,11 +27,7 @@ namespace Restless.Panama.Core
         /// <returns>The preview mode</returns>
         public static PreviewMode GetPreviewMode(string fileName)
         {
-            if (string.IsNullOrEmpty(fileName))
-            {
-                throw new ArgumentNullException(nameof(fileName));
-            }
-            
+            Throw.IfEmpty(fileName);
             long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
             return docType switch
             {
@@ -47,10 +44,7 @@ namespace Restless.Panama.Core
         /// <returns>The text.</returns>
         public static string GetText(string fileName)
         {
-            if (string.IsNullOrEmpty(fileName))
-            {
-                throw new ArgumentNullException(nameof(fileName));
-            }
+            Throw.IfEmpty(fileName);
             long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
             return docType switch
             {
@@ -68,6 +62,8 @@ namespace Restless.Panama.Core
         /// <returns>The image</returns>
         public static BitmapImage GetImage(string fileName)
         {
+            Throw.IfEmpty(fileName);
+
             int width = 250;
             using (FileStream stream = new(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
@@ -75,7 +71,7 @@ namespace Restless.Panama.Core
                 width = bitmapFrame.PixelWidth;
             }
 
-            BitmapImage img = new BitmapImage();
+            BitmapImage img = new();
             img.BeginInit();
             img.UriSource = new Uri(fileName);
             img.DecodePixelWidth = width;
@@ -90,31 +86,29 @@ namespace Restless.Panama.Core
 
         private static string PreviewWordOpenXml(string fileName)
         {
-            try
-            {
-                return OpenXmlDocument.Reader.GetText(fileName);
-            }
-            catch(Exception ex)
-            {
-                return ex.Message;
-            }
+            return GetPreviewText(fileName, f => OpenXmlDocument.Reader.GetText(f));
         }
 
         private static string PreviewText(string fileName)
         {
-            try
-            {
-                return File.ReadAllText(fileName);
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            return GetPreviewText(fileName, f => File.ReadAllText(f));
         }
 
         private static string PreviewHtml(string fileName)
         {
             return PreviewText(fileName);
+        }
+
+        private static string GetPreviewText(string fileName, Func<string, string> evaluator)
+        {
+            try
+            {
+                return evaluator(fileName);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
         #endregion
     }
