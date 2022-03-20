@@ -70,12 +70,12 @@ namespace Restless.Panama.Core
             /// <summary>
             /// Gets the default width for the main window.
             /// </summary>
-            public const int Width = 1420;
+            public const int DefaultWidth = 1420;
 
             /// <summary>
             /// Gets the default height for the main window.
             /// </summary>
-            public const int Height = 860;
+            public const int DefaultHeight = 860;
 
             /// <summary>
             /// Gets the minimum width for the main window.
@@ -86,6 +86,33 @@ namespace Restless.Panama.Core
             /// Gets the minimum height for the main window.
             /// </summary>
             public const int MinHeight = 760;
+        }
+
+
+        /// <summary>
+        /// Provides static values for the tools window
+        /// </summary>
+        public static class ToolWindow
+        {
+            /// <summary>
+            /// Gets the default width for the tool window.
+            /// </summary>
+            public const int DefaultWidth = 856;
+
+            /// <summary>
+            /// Gets the default height for the tool window.
+            /// </summary>
+            public const int DefaultHeight = 526;
+
+            /// <summary>
+            /// Gets the minimum width for the tool window.
+            /// </summary>
+            public const int MinWidth = 560;
+
+            /// <summary>
+            /// Gets the minimum height for the tool window.
+            /// </summary>
+            public const int MinHeight = 392;
         }
 
         /// <summary>
@@ -243,7 +270,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public int MainWindowWidth
         {
-            get => GetItem(MainWindow.Width);
+            get => GetItem(MainWindow.DefaultWidth);
             set => SetItem(value);
         }
 
@@ -252,7 +279,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public int MainWindowHeight
         {
-            get => GetItem(MainWindow.Height);
+            get => GetItem(MainWindow.DefaultHeight);
             set => SetItem(value);
         }
 
@@ -263,6 +290,28 @@ namespace Restless.Panama.Core
         {
             get => (WindowState)GetItem((int)WindowState.Normal);
             set => SetItem((int)value);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Tool Window
+        /// <summary>
+        /// Gets or sets the width of the tool window
+        /// </summary>
+        public int ToolWindowWidth
+        {
+            get => GetItem(ToolWindow.DefaultWidth);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the height of the tool window
+        /// </summary>
+        public int ToolWindowHeight
+        {
+            get => GetItem(ToolWindow.DefaultHeight);
+            set => SetItem(value);
         }
         #endregion
 

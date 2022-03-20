@@ -821,15 +821,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update.
-        /// </summary>
-        public static string CommandToolMeta {
-            get {
-                return ResourceManager.GetString("CommandToolMeta", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Find Orphans.
         /// </summary>
         public static string CommandToolOrphan {
@@ -1454,15 +1445,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Metadata.
-        /// </summary>
-        public static string HeaderToolMetadata {
-            get {
-                return ResourceManager.GetString("HeaderToolMetadata", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This operation converts all .doc files in the specified folder to Open Xml (.docx ) files. If the converted file belongs to a title version, the version record will be updated to reflect the change. If a corresponding .docx file exists in the folder (for example, Report.doc and Report.docx), the .docx file will be overwritten. After the conversion, the .doc file will be deleted..
         /// </summary>
         public static string HeaderToolOperationConvert {
@@ -1571,11 +1553,29 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Submission Data.
+        /// </summary>
+        public static string HeaderToolSubmissionMetadata {
+            get {
+                return ResourceManager.GetString("HeaderToolSubmissionMetadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title List.
         /// </summary>
         public static string HeaderToolTitleList {
             get {
                 return ResourceManager.GetString("HeaderToolTitleList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title Data.
+        /// </summary>
+        public static string HeaderToolTitleMetadata {
+            get {
+                return ResourceManager.GetString("HeaderToolTitleMetadata", resourceCulture);
             }
         }
         
@@ -1708,15 +1708,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The folder for the export operation hasn&apos;t been set or doesn&apos;t exist. Fix the configuration setting and try again..
-        /// </summary>
-        public static string InvalidOpExportFolderNotSet {
-            get {
-                return ResourceManager.GetString("InvalidOpExportFolderNotSet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The Outlook folder  from which to select submission messages hasn&apos;t been set. Fix the configuration and try again..
         /// </summary>
         public static string InvalidOpMapiFolderNotSet {
@@ -1740,6 +1731,15 @@ namespace Restless.Panama.Resources {
         public static string InvalidOpNotEnoughTextToScramble {
             get {
                 return ResourceManager.GetString("InvalidOpNotEnoughTextToScramble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The folder for this operation hasn&apos;t been set or doesn&apos;t exist. Fix the configuration setting and try again..
+        /// </summary>
+        public static string InvalidOpOutputFolderNotSet {
+            get {
+                return ResourceManager.GetString("InvalidOpOutputFolderNotSet", resourceCulture);
             }
         }
         
@@ -1955,11 +1955,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset window.
+        ///   Looks up a localized string similar to Reset windows.
         /// </summary>
-        public static string MenuItemResetWindow {
+        public static string MenuItemResetWindows {
             get {
-                return ResourceManager.GetString("MenuItemResetWindow", resourceCulture);
+                return ResourceManager.GetString("MenuItemResetWindows", resourceCulture);
             }
         }
         
@@ -2081,6 +2081,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added / Updated.
+        /// </summary>
+        public static string TextAddedUpdated {
+            get {
+                return ResourceManager.GetString("TextAddedUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string TextDescription {
@@ -2198,6 +2207,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Removed.
+        /// </summary>
+        public static string TextRemoved {
+            get {
+                return ResourceManager.GetString("TextRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Response.
         /// </summary>
         public static string TextResponse {
@@ -2270,11 +2288,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation verfies that all files associated with title versions and submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count..
+        ///   Looks up a localized string similar to This operation verfies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time..
         /// </summary>
-        public static string ToolMetadataDetail {
+        public static string ToolSubmissionMetadataDetail {
             get {
-                return ResourceManager.GetString("ToolMetadataDetail", resourceCulture);
+                return ResourceManager.GetString("ToolSubmissionMetadataDetail", resourceCulture);
             }
         }
         
@@ -2486,6 +2504,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resets all application windows to their default sizes.
+        /// </summary>
+        public static string ToolTipResetWindows {
+            get {
+                return ResourceManager.GetString("ToolTipResetWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scramble the text in the text area.
         /// </summary>
         public static string TooltipScrambleBegin {
@@ -2657,11 +2684,20 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation creates a text file that has a list of all titles and their corresponding versions. The text file is placed in the TitleRoot folder..
+        ///   Looks up a localized string similar to This operation creates a text file that has a list of all titles and their corresponding versions..
         /// </summary>
         public static string ToolTitleListDetail {
             get {
                 return ResourceManager.GetString("ToolTitleListDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation verfies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count..
+        /// </summary>
+        public static string ToolTitleMetadataDetail {
+            get {
+                return ResourceManager.GetString("ToolTitleMetadataDetail", resourceCulture);
             }
         }
         

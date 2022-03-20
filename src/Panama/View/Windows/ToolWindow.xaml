@@ -6,12 +6,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:ToolWindowViewModel}"
     mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="610"
     ResizeMode="CanResizeWithGrip"
     Title="{x:Static r:Strings.MenuItemTools}"
     Style="{StaticResource DefaultAppWindowStyle}"
-    Height="464" Width="846">
+    Height="{Binding Config.ToolWindowHeight, Mode=TwoWay}" 
+    Width="{Binding Config.ToolWindowWidth, Mode=TwoWay}">
 
     <Grid
         tk:Property.ColumnWidths="126,*"
@@ -35,7 +38,7 @@
         <Grid
             Grid.Column="1"
             Grid.RowSpan="2"
-            Margin="{StaticResource DefaultPadding}">
+            Margin="{StaticResource TightPadding}">
 
             <Panel.Resources>
                 <Style TargetType="tk:IconButton" BasedOn="{StaticResource DefaultIconButtonStyle}">
@@ -48,60 +51,69 @@
                 </Style>
             </Panel.Resources>
 
-            <!-- Section 1 -->
+            <!-- Section 1 (title metadata) -->
             <HeaderedContentControl
-                Header="{x:Static r:Strings.HeaderToolMetadata}"
+                Header="{x:Static r:Strings.HeaderToolTitleMetadata}"
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
                 tk:Property.IsLongVisibleValue="1">
 
-                <Grid
-                    tk:Property.ColumnWidths="*,*"
-                    tk:Property.RowHeights="Auto,Auto,Auto,*">
-                    
-                    <TextBlock Grid.ColumnSpan="2" Text="{x:Static r:Strings.ToolMetadataDetail}"/>
-                    <tk:IconButton Grid.Row="1" Command="{Binding Commands[RunMetadata]}"/>
+                <vw:ToolDetail
+                    ExplanationText="{x:Static r:Strings.ToolTitleMetadataDetail}"
+                    FolderDisplay="{Binding Config.FolderTitleRoot, Mode=OneTime}"
+                    UpdatedItemsSource="{Binding ToolResult.Updated[0]}"
+                    NotFoundItemsSource="{Binding ToolResult.NotFound[0]}"
+                    StatusText="{Binding ToolResult.Status[0]}"
+                    Command="{Binding Commands[RunTitleMetadata]}"/>
 
-                    <TextBlock Grid.Row="2" Text="Updated"/>
-                    <ListBox
-                        Grid.Row="3"
-                        Style="{StaticResource FileScanItemListBoxStyle}"
-                        ItemsSource="{Binding Updated}"/>
-
-                    <TextBlock Grid.Column="1" Grid.Row="2" Text="Not Found"/>
-                    <ListBox
-                        Grid.Column="1"
-                        Grid.Row="3"
-                        Style="{StaticResource FileScanItemListBoxStyle}"
-                        ItemsSource="{Binding NotFound}"/>
-
-                </Grid>
             </HeaderedContentControl>
 
-            <!-- Section 2 -->
+            <!-- Section 2 (submission metadata) -->
             <HeaderedContentControl
-                Header="{x:Static r:Strings.HeaderToolExport}"
-                Tag="{Binding Config.FolderExport, Mode=OneTime}"
+                Header="{x:Static r:Strings.HeaderToolSubmissionMetadata}"
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
                 tk:Property.IsLongVisibleValue="2">
 
-                <StackPanel>
-                    <TextBlock Text="{x:Static r:Strings.ToolExportDetail}"/>
-                    <tk:IconButton Command="{Binding Commands[RunExport]}"/>
-
-                </StackPanel>
+                <vw:ToolDetail
+                    ExplanationText="{x:Static r:Strings.ToolSubmissionMetadataDetail}"
+                    FolderDisplay="{Binding Config.FolderSubmissionDocument, Mode=OneTime}"
+                    UpdatedItemsSource="{Binding ToolResult.Updated[1]}"
+                    NotFoundItemsSource="{Binding ToolResult.NotFound[1]}"
+                    StatusText="{Binding ToolResult.Status[1]}"
+                    Command="{Binding Commands[RunSubmissionMetadata]}"/>
 
             </HeaderedContentControl>
 
-            <!-- Section 3 -->
+            <!-- Section 3 (export) -->
             <HeaderedContentControl
-                Header="{x:Static r:Strings.HeaderToolTitleList}"
+                Header="{x:Static r:Strings.HeaderToolExport}"
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
                 tk:Property.IsLongVisibleValue="3">
 
-                <StackPanel>
-                    <TextBlock Text="{x:Static r:Strings.ToolTitleListDetail}"/>
-                    <tk:IconButton Command="{Binding Commands[RunTitleList]}"/>
-                </StackPanel>
+                <vw:ToolDetail
+                    ExplanationText="{x:Static r:Strings.ToolExportDetail}"
+                    UpdatedText="{x:Static r:Strings.TextAddedUpdated}"
+                    NotFoundText="{x:Static r:Strings.TextRemoved}"
+                    FolderDisplay="{Binding Config.FolderExport, Mode=OneTime}"
+                    UpdatedItemsSource="{Binding ToolResult.Updated[2]}"
+                    NotFoundItemsSource="{Binding ToolResult.NotFound[2]}"
+                    StatusText="{Binding ToolResult.Status[2]}"
+                    Command="{Binding Commands[RunExport]}"/>
+
+            </HeaderedContentControl>
+
+            <!-- Section 4 (title list) -->
+            <HeaderedContentControl
+                Header="{x:Static r:Strings.HeaderToolTitleList}"
+                tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
+                tk:Property.IsLongVisibleValue="4">
+
+                <vw:ToolDetail
+                    UpdatedVisibility="Collapsed"
+                    NotFoundVisibility="Collapsed"
+                    StatusText="{Binding ToolResult.Status[3]}"
+                    ExplanationText="{x:Static r:Strings.ToolTitleListDetail}"
+                    FolderDisplay="{Binding TitleListFileName, Mode=OneTime}"
+                    Command="{Binding Commands[RunTitleList]}"/>
 
             </HeaderedContentControl>
 

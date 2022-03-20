@@ -71,10 +71,10 @@
                 <!--<MenuItem Header="Scramble" Command="{Binding Commands[ToolScramble]}"/>-->
                 <Separator/>
                 <MenuItem
-                    Header="{x:Static r:Strings.MenuItemResetWindow}"
+                    Header="{x:Static r:Strings.MenuItemResetWindows}"
                     Icon="{StaticResource SquareSmallGrayIconKey}"
                     Command="{Binding Commands[ResetWindow]}"
-                    ToolTip="Reset the main window size to default"/>
+                    ToolTip="{x:Static r:Strings.ToolTipResetWindows}"/>
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem

@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Database.Tables;
 using Restless.Panama.Utility;
 using System;
 
@@ -15,85 +16,91 @@ namespace Restless.Panama.Tools
     public class FileScanItem
     {
         #region Public properties
-        public string Title { get; private set; }
-        public string Path { get; private set; }
-        public string File { get; private set; }
-        public long Version { get; private set; }
-        public long Revision { get; private set; }
-        public string VersionRevision { get; private set; }
+        /// <summary>
+        /// Gets the title associated with the scan item
+        /// </summary>
+        public string Title
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the file name associated with the scan item
+        /// </summary>
+        public string File
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets or (from a devired class) sets the path
+        /// </summary>
+        public string Path
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
+        /// Gets the version associated with this scan item
+        /// </summary>
+        public long Version
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the revision associated with this scan item
+        /// </summary>
+        public long Revision
+        {
+            get;
+            private set;
+        }
+
+        public string VersionRevision => $"{Version}{(char)Revision}";
+
+        /// <summary>
+        /// Gets the size associated with this scan item
+        /// </summary>
         public long Size { get; }
+
+        /// <summary>
+        /// Gets the last modified date associated with this scan item
+        /// </summary>
         public DateTime LastModified { get; }
         #endregion
 
         /************************************************************************/
 
-        #region Constructor
-        public static FileScanItem Create(string title, string path, long version, long revision)
+        #region Constructors
+        private FileScanItem()
+        {
+        }
+
+        protected FileScanItem(TitleRow title, TitleVersionRow version)
+        {
+            Throw.IfNull(title);
+            Throw.IfNull(version);
+            Title = title.Title;
+            File = version.FileName;
+            Version = version.Version;
+            Revision = version.Revision;
+        }
+
+        public static FileScanItem Create(string title, string file, long version, long revision)
         {
             return new FileScanItem()
             {
                 Title = title,
-                Path = path,
-                File = System.IO.Path.GetFileName(path),
+                File = System.IO.Path.GetFileName(file),
                 Version = version,
                 Revision = revision,
-                VersionRevision = $"{version}{(char)revision}"
             };
         }
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="FileScanResult"/> class.
-        ///// </summary>
-        ///// <param name="version">The version number</param>
-        ///// <param name="revision">The revision number.</param>
-        ///// <param name="size">The size of the file</param>
-        ///// <param name="title">The title</param>
-        ///// <param name="filename">The file name</param>
-        //public FileScanItem(long version, long revision, long size, string title, string filename)
-        //{
-        //    Throw.IfEmpty(title);
-        //    Throw.IfEmpty(filename);
-        //    Version = version;
-        //    Revision = revision;
-        //    Size = size;
-        //    Title = title;
-        //    FileName = filename;
-        //}
-
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="FileScanResult"/> class.
-        ///// </summary>
-        ///// <param name="version">The version number</param>
-        ///// <param name="revision">The revision number.</param>
-        ///// <param name="title">The title</param>
-        ///// <param name="filename">The file name</param>
-        //public FileScanItem(long version, long revision, string title, string filename)
-        //    : this(version, revision, 0, title, filename)
-        //{
-        //}
-
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="FileScanResult"/> class,
-        ///// setting version number and revision number to zero.
-        ///// </summary>
-        ///// <param name="title">The title</param>
-        ///// <param name="filename">The file name</param>
-        //public FileScanItem(string title, string filename)
-        //    : this(0, 0, title, filename)
-        //{
-        //}
-
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="FileScanResult"/> class,
-        ///// setting title to 'n/a',  and version / revision numbers to zero.
-        ///// </summary>
-        ///// <param name="filename">The file name</param>
-        ///// <param name="size">The file size</param>
-        ///// <param name="lastModified">The last modified of the file</param>
-        //public FileScanItem(string filename, long size, DateTime lastModified)
-        //    : this(0, 0, size, "n/a", filename)
-        //{
-        //    LastModified = lastModified;
-        //}
         #endregion
 
         public override string ToString()

@@ -41,10 +41,9 @@ namespace Restless.Panama.Tools
 
             foreach (TitleRow title in TitleTable.EnumerateTitles())
             {
-                result.ScanCount++;
-
                 foreach (TitleVersionRow version in TitleVersionTable.EnumerateVersions(title.Id, SortDirection.Ascending))
                 {
+                    result.ScanCount++;
                     version.SetFileInfo(Paths.Title.WithRoot(version.FileName));
 
                     if (version.Info.Exists)

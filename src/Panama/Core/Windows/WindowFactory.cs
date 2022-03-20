@@ -36,6 +36,9 @@ namespace Restless.Panama.Core
                     Owner = null, // this is a top level window
                     MinWidth = Config.MainWindow.MinWidth,
                     MinHeight = Config.MainWindow.MinHeight,
+                    Width = Config.Instance.MainWindowWidth,
+                    Height = Config.Instance.MainWindowHeight,
+                    WindowState = Config.Instance.MainWindowState,
                     DataContext = MainWindowViewModel.Instance,
                 };
                 SetWindowOwner(window);
@@ -90,6 +93,10 @@ namespace Restless.Panama.Core
                 {
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    MinHeight = Config.ToolWindow.MinHeight,
+                    MinWidth = Config.ToolWindow.MinWidth,
+                    Height = Config.Instance.ToolWindowHeight,
+                    Width = Config.Instance.ToolWindowWidth,
                     DataContext = new ToolWindowViewModel()
                 };
                 SetWindowOwner(window);

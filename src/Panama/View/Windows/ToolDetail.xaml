@@ -1,0 +1,77 @@
+﻿<Grid 
+    x:Class="Restless.Panama.View.ToolDetail"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:ToolWindowViewModel}"
+    mc:Ignorable="d" 
+    d:DesignHeight="250" d:DesignWidth="400"
+    tk:Property.ColumnWidths="*,*"
+    tk:Property.RowHeights="Auto,Auto,Auto,*,Auto"
+    Name="ToolControl">
+
+    <Panel.Resources>
+        <Style TargetType="tk:IconButton" BasedOn="{StaticResource DefaultIconButtonStyle}">
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Content" Value="{x:Static r:Strings.TextStart}"/>
+            <Setter Property="Icon" Value="{StaticResource SquareSmallGreenIconKey}"/>
+            <Setter Property="tk:Property.IsInverseEnabled" Value="{Binding IsOperationInProgress}"/>
+        </Style>
+    </Panel.Resources>
+
+    <TextBlock
+        Grid.ColumnSpan="2"
+        Text="{Binding ExplanationText, ElementName=ToolControl}"/>
+    
+    <tk:IconButton
+        Grid.Row="1"
+        Command="{Binding Command, ElementName=ToolControl}"/>
+
+    <TextBlock
+        Grid.Row="1" Grid.Column="1"
+        Margin="10,0"
+        Foreground="{StaticResource AlertForegroundBrush}"
+        HorizontalAlignment="Right"
+        Text="{Binding FolderDisplay, ElementName=ToolControl}"/>
+    
+    <TextBlock
+        Grid.Row="2"
+        Visibility="{Binding UpdatedVisibility, ElementName=ToolControl}"
+        Text="{Binding UpdatedText, ElementName=ToolControl}"/>
+    
+    <ListBox
+        Grid.Row="3"
+        Visibility="{Binding UpdatedVisibility, ElementName=ToolControl}"
+        Style="{StaticResource FileScanItemListBoxStyle}"
+        ItemsSource="{Binding UpdatedItemsSource, ElementName=ToolControl}"/>
+
+    <TextBlock
+        Grid.Row="2" Grid.Column="1"
+        Visibility="{Binding NotFoundVisibility, ElementName=ToolControl}"
+        Text="{Binding NotFoundText, ElementName=ToolControl}"/>
+    
+    <ListBox
+        Grid.Row="3" Grid.Column="1"
+        Visibility="{Binding NotFoundVisibility, ElementName=ToolControl}"
+        Style="{StaticResource FileScanItemListBoxStyle}"
+        ItemsSource="{Binding NotFoundItemsSource, ElementName=ToolControl}"/>
+
+    <StatusBar
+        Grid.Row="4"
+        Grid.ColumnSpan="2">
+
+        <TextBlock 
+            Foreground="{StaticResource AlertForegroundBrush}"
+            Text="{Binding StatusText, ElementName=ToolControl}"/>
+
+    </StatusBar>
+
+
+
+</Grid>

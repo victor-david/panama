@@ -7,40 +7,22 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
-using Restless.Panama.Resources;
-using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
-using System.Linq;
 
 namespace Restless.Panama.Tools
 {
     /// <summary>
     /// Creates a list of all titles and their corresponding versions.
     /// </summary>
-    public class TitleLister : Scanner
+    public class TitleLister : TitleScanner
     {
-        #region Private
-        private readonly string outputDirectory;
-        private readonly TitleTable titleTable;
-        private readonly TitleVersionTable titleVersionTable;
-        #endregion
-
-        /************************************************************************/
-
         #region Public properties and fields
         /// <summary>
         /// Gets the name of the output file (file name only, no path) that holds the list of titles.
         /// </summary>
         public const string ListFile = "TitleList.txt";
-
-        /// <summary>
-        /// Gets the full path to the file that holds the list of titles.
-        /// </summary>
-        public string TitleListFileName
-        {
-            get;
-        }
         #endregion
 
         /************************************************************************/
@@ -49,13 +31,8 @@ namespace Restless.Panama.Tools
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleLister"/> class.
         /// </summary>
-        /// <param name="outputDirectory">The directory in which to write the title list.</param>
-        public TitleLister(string outputDirectory)
+        public TitleLister()
         {
-            this.outputDirectory = outputDirectory;
-            titleTable = DatabaseController.Instance.GetTable<TitleTable>();
-            titleVersionTable = DatabaseController.Instance.GetTable<TitleVersionTable>();
-            TitleListFileName = Path.Combine(outputDirectory, ListFile);
         }
         #endregion
 
@@ -67,33 +44,26 @@ namespace Restless.Panama.Tools
         /// </summary>
         protected override FileScanResult ExecuteTask()
         {
+            ThrowIfOutputDirectoryNotSet();
             FileScanResult result = new();
-            //    // This is checked by the caller, but we need to make sure.
-            //    if (!Directory.Exists(outputDirectory))
-            //    {
-            //        throw new InvalidOperationException(Strings.InvalidOpTitleListOutputFolder);
-            //    }
 
-            //    List<string> lines = new();
+            List<string> lines = new();
 
-            //    var titleEnumerator = titleTable.EnumerateTitles();
-            //    TotalCount = titleEnumerator.Count();
+            foreach (TitleRow title in TitleTable.EnumerateTitles())
+            {
+                lines.Add(string.Format(CultureInfo.InvariantCulture, "{0} - {1}", title.Written.ToString(Config.Instance.DateFormat, CultureInfo.InvariantCulture), title.Title));
 
-            //    foreach (TitleRow title in titleEnumerator)
-            //    {
-            //        lines.Add(string.Format("{0} - {1}", title.Written.ToString(Config.Instance.DateFormat), title.Title));
+                foreach (TitleVersionRow ver in TitleVersionTable.EnumerateVersions(title.Id, SortDirection.Ascending))
+                {
+                    result.ScanCount++;
+                    string note = !string.IsNullOrEmpty(ver.Note) ? $"[{ver.Note}]" : string.Empty;
+                    lines.Add($"  v{ver.Version}.{(char)ver.Revision} {ver.LanguageId} {ver.FileName} {note}".TrimEnd());
+                }
 
-            //        foreach (var ver in titleVersionTable.EnumerateVersions(title.Id, SortDirection.Ascending))
-            //        {
-            //            string note = !string.IsNullOrEmpty(ver.Note) ? $"[{ver.Note}]" : string.Empty;
-            //            lines.Add($"  v{ver.Version}.{(char)ver.Revision} {ver.LanguageId} {ver.FileName}   {note}".Trim());
-            //        }
+                lines.Add("----------------------------------------------------------------------------------------------------");
+            }
 
-            //        lines.Add("----------------------------------------------------------------------------------------------------");
-            //        ScanCount++;
-            //    }
-
-            //    File.WriteAllLines(TitleListFileName, lines);
+            File.WriteAllLines(Path.Combine(OutputDirectory, ListFile), lines);
             return result;
         }
         #endregion

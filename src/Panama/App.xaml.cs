@@ -88,11 +88,7 @@ namespace Restless.Panama
                 Toolkit.Controls.DataGridColumnExtensions.CenterAlignedDataGridColumnHeaderStyleKey = ResourceKeys.Style.CenteredDataGridColumnHeaderStyle;
                 Toolkit.Controls.DataGridColumnExtensions.CenterAlignedDataGridCellStyleKey = ResourceKeys.Style.CenteredDataGridCellStyle;
 
-                Window main = WindowFactory.Main.Create();
-                main.Width = Config.Instance.MainWindowWidth;
-                main.Height = Config.Instance.MainWindowHeight;
-                main.WindowState = Config.Instance.MainWindowState;
-                main.Show();
+                WindowFactory.Main.Create().Show();
                 // TODO
                 //DisplayAlertsIf();
             }

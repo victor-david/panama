@@ -8,15 +8,8 @@ using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
-using Restless.Toolkit.Core.Utility;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Restless.Panama.ViewModel
@@ -316,11 +309,14 @@ namespace Restless.Panama.ViewModel
 
         private void RunResetWindowCommand(object o)
         {
-            WindowOwner.Width = Config.MainWindow.Width;
-            WindowOwner.Height = Config.MainWindow.Height;
+            WindowOwner.Width = Config.MainWindow.DefaultWidth;
+            WindowOwner.Height = Config.MainWindow.DefaultHeight;
             WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
             WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
             WindowOwner.WindowState = WindowState.Normal;
+
+            Config.ToolWindowWidth = Config.ToolWindow.DefaultWidth;
+            Config.ToolWindowHeight = Config.ToolWindow.DefaultHeight;
         }
 
         private bool CanRunToolConvertCommand(object o)

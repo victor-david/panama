@@ -5,8 +5,8 @@ using Restless.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace Restless.Panama.ViewModel
 {
@@ -16,7 +16,9 @@ namespace Restless.Panama.ViewModel
         private bool isOperationInProgress;
         private NavigatorSection selectedSection;
         private readonly VersionUpdater versionUpdater;
+        private readonly SubmissionUpdater submissionUpdater;
         private readonly TitleExporter titleExporter;
+        private readonly TitleLister titleLister;
         #endregion
 
         /************************************************************************/
@@ -49,12 +51,15 @@ namespace Restless.Panama.ViewModel
             private set => SetProperty(ref isOperationInProgress, value);
         }
 
-        public ObservableCollection<FileScanItem> Updated
+        public ToolResultData ToolResult
         {
             get;
         }
 
-        public ObservableCollection<FileScanItem> NotFound
+        /// <summary>
+        /// Gets the title list file name
+        /// </summary>
+        public string TitleListFileName
         {
             get;
         }
@@ -70,26 +75,36 @@ namespace Restless.Panama.ViewModel
         {
             Sections = new List<NavigatorSection>()
             {
-                new NavigatorSection(Strings.HeaderToolMetadata, 1),
-                new NavigatorSection(Strings.HeaderToolExport, 2),
-                new NavigatorSection(Strings.HeaderToolTitleList, 3),
+                new NavigatorSection(Strings.HeaderToolTitleMetadata, 1),
+                new NavigatorSection(Strings.HeaderToolSubmissionMetadata, 2),
+                new NavigatorSection(Strings.HeaderToolExport, 3),
+                new NavigatorSection(Strings.HeaderToolTitleList, 4),
             };
 
             SetInitialSection();
 
-            Updated = new ObservableCollection<FileScanItem>();
-            NotFound = new ObservableCollection<FileScanItem>();
+            ToolResult = new ToolResultData(4);
 
-            Commands.Add("RunMetadata", RunMetadataCommand);
+            Commands.Add("RunTitleMetadata", RunTitleMetadataCommand);
+            Commands.Add("RunSubmissionMetadata", RunSubmissionMetadataCommand);
+
             Commands.Add("RunExport", RunExportCommand);
             Commands.Add("RunTitleList", RunTitleListCommand);
 
             versionUpdater = new VersionUpdater();
+            submissionUpdater = new SubmissionUpdater();
 
             titleExporter = new TitleExporter()
             {
-                ExportDirectory = Config.FolderExport
+                OutputDirectory = Config.FolderExport
             };
+
+            titleLister = new TitleLister()
+            {
+                OutputDirectory = Config.FolderTitleRoot
+            };
+
+            TitleListFileName = Path.Combine(Config.FolderTitleRoot, TitleLister.ListFile);
         }
 
         #endregion
@@ -110,31 +125,33 @@ namespace Restless.Panama.ViewModel
             });
         }
 
-        private async void RunMetadataCommand(object parm)
+        private async void RunTitleMetadataCommand(object parm)
         {
-            await RunTool(versionUpdater);
+            await RunTool(0, versionUpdater);
+        }
+
+        private async void RunSubmissionMetadataCommand(object parm)
+        {
+            await RunTool(1, submissionUpdater);
         }
 
         private async void RunExportCommand(object parm)
         {
-            await RunTool(titleExporter);
+            await RunTool(2, titleExporter);
         }
 
         private async void RunTitleListCommand(object parm)
         {
-            IsOperationInProgress = true;
-            await Task.Delay(1000);
-            IsOperationInProgress = false;
+            await RunTool(3, titleLister);
         }
 
-        private async Task RunTool(Scanner scanner)
+        private async Task RunTool(int index, Scanner scanner)
         {
             try
             {
                 IsOperationInProgress = true;
-                Updated.Clear();
-                NotFound.Clear();
-                HandleResult(await scanner.ExecuteAsync());
+                ToolResult.Clear(index);
+                HandleResult(await scanner.ExecuteAsync(), index);
             }
             catch (Exception ex)
             {
@@ -146,10 +163,11 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void HandleResult(FileScanResult result)
+        private void HandleResult(FileScanResult result, int index)
         {
-            result.Updated.ForEach(item => Updated.Add(item));
-            result.NotFound.ForEach(item => NotFound.Add(item));
+            ToolResult.AddToUpdate(index, result.Updated);
+            ToolResult.AddToNotFound(index, result.NotFound);
+            ToolResult.SetStatus(index, $"{result.ScanCount} items processed | {result.Updated.Count} updated | {result.NotFound.Count} not found");
         }
         #endregion
     }

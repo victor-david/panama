@@ -27,6 +27,7 @@
 
     <Thickness x:Key="DefaultPadding">10</Thickness>
     <Thickness x:Key="DefaultHeaderPadding">4</Thickness>
+    <Thickness x:Key="TightPadding">5</Thickness>
     
     <sys:Boolean x:Key="True">True</sys:Boolean>
     <sys:Boolean x:Key="False">False</sys:Boolean>

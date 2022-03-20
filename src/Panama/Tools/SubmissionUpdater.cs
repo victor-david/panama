@@ -7,8 +7,6 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
-using System.IO;
-using System.Linq;
 
 namespace Restless.Panama.Tools
 {
@@ -43,6 +41,7 @@ namespace Restless.Panama.Tools
             foreach (SubmissionDocumentRow document in SubmissionDocumentTable.EnumerateSubmissionDocuments())
             {
                 result.ScanCount++;
+
                 if (DocumentTypeTable.IsDocTypeSupported(document.DocType))
                 {
                     document.SetFileInfo(Paths.SubmissionDocument.WithRoot(document.DocumentId));
