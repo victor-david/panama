@@ -1508,15 +1508,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation searches all files beneath the title root directory to find those files that are not associated with a title entry. The submission document folder and title export folder are automatically excluded from the search if they exist beneath title root. You can exclude other folders in configuration..
-        /// </summary>
-        public static string HeaderToolOperationOrphan {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationOrphan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Files (not associated with a title entry) - {0}.
         /// </summary>
         public static string HeaderToolOperationOrphanNotFoundFormat {
@@ -1549,6 +1540,15 @@ namespace Restless.Panama.Resources {
         public static string HeaderToolOperationSearchFoundFormat {
             get {
                 return ResourceManager.GetString("HeaderToolOperationSearchFoundFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orphan.
+        /// </summary>
+        public static string HeaderToolOrphan {
+            get {
+                return ResourceManager.GetString("HeaderToolOrphan", resourceCulture);
             }
         }
         
@@ -2171,6 +2171,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Orphans.
+        /// </summary>
+        public static string TextOrphans {
+            get {
+                return ResourceManager.GetString("TextOrphans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Published.
         /// </summary>
         public static string TextPublished {
@@ -2284,6 +2293,15 @@ namespace Restless.Panama.Resources {
         public static string ToolExportDetail {
             get {
                 return ResourceManager.GetString("ToolExportDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation searches all files beneath the title root directory to find those files that are not associated with a title entry. The submission document folder and title export folder are automatically excluded from the search if they exist beneath title root. You can exclude other folders in configuration..
+        /// </summary>
+        public static string ToolOrphanDetail {
+            get {
+                return ResourceManager.GetString("ToolOrphanDetail", resourceCulture);
             }
         }
         

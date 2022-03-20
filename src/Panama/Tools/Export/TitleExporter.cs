@@ -94,21 +94,21 @@ namespace Restless.Panama.Tools
 
                 if (candidate.Status is TitleExportStatus.OriginalIsNewer or TitleExportStatus.ExportFileDoesNotExist)
                 {
-                    File.Copy(candidate.Path, candidate.ExportPath, true);
-                    result.Updated.Add(FileScanItem.Create(candidate.Title, candidate.ExportName, candidate.Version, candidate.Revision));
+                    File.Copy(candidate.FullName, candidate.ExportFullName, true);
+                    result.Updated.Add(FileScanItem.Create(candidate.Title, candidate.ExportFullName, candidate.Version, candidate.Revision));
                 }
             }
         }
 
         private void RemoveExtraFromExportDirectory(FileScanResult result)
         {
-            foreach (string path in Directory.EnumerateFiles(OutputDirectory))
+            foreach (string fullPath in Directory.EnumerateFiles(OutputDirectory))
             {
-                string fileName = Path.GetFileName(path);
-                if (fileName != ReadMe && !candidates.HasCandidateWithExportPath(path))
+                string fileName = Path.GetFileName(fullPath);
+                if (fileName != ReadMe && !candidates.HasCandidateWithExportPath(fullPath))
                 {
-                    File.Delete(path);
-                    result.NotFound.Add(FileScanItem.Create("(Unknown)", fileName, 0, TitleVersionTable.Defs.Values.RevisionA));
+                    File.Delete(fullPath);
+                    result.NotFound.Add(FileScanItem.Create(FileScanItem.TitleZero, fullPath, 0, 0));
                 }
             }
         }

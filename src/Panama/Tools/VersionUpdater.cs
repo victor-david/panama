@@ -77,12 +77,12 @@ namespace Restless.Panama.Tools
                         {
                             version.Synchronize(foundWordCount);
                             DatabaseController.Instance.GetTable<TitleVersionTable>().Save();
-                            result.Updated.Add(FileScanItem.Create(title.Title, version.FileName, version.Version, version.Revision));
+                            result.Updated.Add(FileScanItem.Create(title.Title, version.Info.FullName, version.Version, version.Revision));
                         }
                     }
                     else
                     {
-                        result.NotFound.Add(FileScanItem.Create(title.Title, version.FileName, version.Version, version.Revision));
+                        result.NotFound.Add(FileScanItem.Create(title.Title, version.Info.FullName, version.Version, version.Revision));
                     }
                 }
             }

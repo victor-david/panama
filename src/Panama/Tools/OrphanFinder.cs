@@ -5,10 +5,10 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 namespace Restless.Panama.Tools
@@ -17,8 +17,10 @@ namespace Restless.Panama.Tools
     /// Provides a tool that locates files beneath <see cref="Config.FolderTitleRoot"/>
     /// that are not included in title version record.
     /// </summary>
-    public class OrphanFinder : Scanner
+    public class OrphanFinder : TitleScanner
     {
+        private string[] userExclusions;
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="OrphanFinder"/> class.
@@ -32,59 +34,61 @@ namespace Restless.Panama.Tools
 
         #region Protected methods
         /// <summary>
-        /// Performs the update. This method is called from the base class on a background task.
+        /// Performs the update
         /// </summary>
         protected override FileScanResult ExecuteTask()
         {
             FileScanResult result = new();
-            //    var files = new List<string>();
-            //    var versions = DatabaseController.Instance.GetTable<TitleVersionTable>();
+            List<string> files = new();
+            
+            userExclusions = Config.Instance.OrphanExclusions.ToLower(CultureInfo.InvariantCulture).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 
-            //    string appDir = Path.GetDirectoryName(ApplicationInfo.Instance.Assembly.Location);
+            foreach (string dir in Directory.EnumerateDirectories(Config.Instance.FolderTitleRoot, "*", SearchOption.AllDirectories))
+            {
+                if (!IsDirectoryAutoExcluded(dir))
+                {
+                    files.AddRange(Directory.EnumerateFiles(dir, "*", SearchOption.TopDirectoryOnly));
+                }
+            }
 
-            //    foreach (string dir in Directory.EnumerateDirectories(Config.Instance.FolderTitleRoot, "*", SearchOption.AllDirectories))
-            //    {
-            //        if (dir != Config.Instance.FolderSubmissionDocument &&
-            //            dir != Config.Instance.FolderExport &&
-            //            dir != Config.Instance.FolderSubmissionMessage &&
-            //            dir != Config.Instance.FolderSubmissionMessageAttachment &&
-            //            !dir.StartsWith(appDir))
-            //        {
-            //            files.AddRange(Directory.EnumerateFiles(dir, "*", SearchOption.TopDirectoryOnly));
-            //        }
-            //    }
+            foreach (string fullPath in files)
+            {
+                result.ScanCount++;
 
-            //    TotalCount = files.Count;
-            //    string[] exclusions = Config.Instance.OrphanExclusions.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-
-            //    foreach (string file in files)
-            //    {
-            //        ScanCount++;
-            //        int excludeCount = 0;
-            //        string path = Path.GetDirectoryName(file).ToLower();
-
-            //        foreach (string ex in exclusions)
-            //        {
-            //            if (path.Contains(ex.Trim().ToLower()))
-            //            {
-            //                excludeCount++;
-            //            }
-            //        }
-
-            //        if (excludeCount == 0)
-            //        {
-            //            string searchFile = Paths.Title.WithoutRoot(file);
-
-            //            if (!versions.VersionWithFileExists(searchFile))
-            //            {
-            //                var info = new FileInfo(file);
-            //                var item = new FileScanDisplayObject(searchFile, info.Length, info.LastWriteTimeUtc);
-            //                OnNotFound(item);
-            //            }
-            //        }
-            //    }
-
+                if (!IsDirectoryUserExcluded(Path.GetDirectoryName(fullPath)))
+                {
+                    if (!TitleVersionTable.VersionWithFileExists(Paths.Title.WithoutRoot(fullPath)))
+                    {
+                        result.Updated.Add(FileScanItem.Create(fullPath));
+                    }
+                }
+            }
             return result;
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+        private bool IsDirectoryAutoExcluded(string directory)
+        {
+            return
+                directory == Config.Instance.FolderSubmissionDocument ||
+                directory == Config.Instance.FolderExport ||
+                directory == Config.Instance.FolderSubmissionMessage ||
+                directory == Config.Instance.FolderSubmissionMessageAttachment;
+        }
+
+        private bool IsDirectoryUserExcluded(string directory)
+        {
+            foreach (string ex in userExclusions)
+            {
+                if (directory.ToLower(CultureInfo.InvariantCulture).Contains(ex.ToLower(CultureInfo.InvariantCulture)))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         #endregion
     }

@@ -20,17 +20,9 @@ namespace Restless.Panama.Tools
     {
         #region Public Properties
         /// <summary>
-        /// Gets the export name, no path
+        /// Gets the full export path associated with this instance.
         /// </summary>
-        public string ExportName
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the export path associated with this instance.
-        /// </summary>
-        public string ExportPath
+        public string ExportFullName
         {
             get;
         }
@@ -57,24 +49,23 @@ namespace Restless.Panama.Tools
         {
             Throw.IfEmpty(exportDirectory);
 
-            Path = Paths.Title.WithRoot(version.FileName);
-            ExportName = GetExportName(title, version);
-            ExportPath = System.IO.Path.Combine(exportDirectory, ExportName);
+            FullName = Paths.Title.WithRoot(version.FileName);
+            ExportFullName = System.IO.Path.Combine(exportDirectory, GetExportName(title, version));
 
             Status = TitleExportStatus.None;
 
-            if (!System.IO.File.Exists(Path))
+            if (!System.IO.File.Exists(FullName))
             {
                 Status = TitleExportStatus.OriginalFileDoesNotExist;
             }
-            else if (!System.IO.File.Exists(ExportPath))
+            else if (!System.IO.File.Exists(ExportFullName))
             {
                 Status = TitleExportStatus.ExportFileDoesNotExist;
             }
             else /* compare dates */
             {
-                DateTime dateOrig = System.IO.File.GetLastWriteTime(Path);
-                DateTime dateExport = System.IO.File.GetLastWriteTime(ExportPath);
+                DateTime dateOrig = System.IO.File.GetLastWriteTime(FullName);
+                DateTime dateExport = System.IO.File.GetLastWriteTime(ExportFullName);
                 /*
                  * less than zero = t1 is earlier
                  * zero = same

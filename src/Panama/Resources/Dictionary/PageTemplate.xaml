@@ -56,10 +56,6 @@
     <DataTemplate DataType="{x:Type vm:ToolMessageSyncViewModel}">
         <vw:ToolMessageSyncView />
     </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:ToolOrphanViewModel}">
-        <vw:ToolOrphanView />
-    </DataTemplate>
     
     <DataTemplate DataType="{x:Type vm:ToolScrambleViewModel}">
         <vw:ToolScrambleView />

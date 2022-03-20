@@ -117,22 +117,13 @@ namespace Restless.Panama.ViewModel
             //Commands.Add("Submission", p => NavigatorItems.Select<SubmissionViewModel>());
             Commands.Add("Save", Save);
             //Commands.Add("SelfPublisher", p => NavigatorItems.Select<SelfPublisherViewModel>());
-            
-
-            
 
             Commands.Add("Table", p => NavigatorItems.Select<TableViewModel>());
-            
 
             //Commands.Add("ToolConvert", p => NavigatorItems.Select<ToolConvertViewModel>(), CanRunToolConvertCommand);
-            //Commands.Add("ToolExport", p => NavigatorItems.Select<ToolExportViewModel>());
             Commands.Add("ToolMessageSync", p => NavigatorItems.Select<ToolMessageSyncViewModel>());
-            //Commands.Add("ToolMeta", p => NavigatorItems.Select<ToolMetaUpdateViewModel>());
-            Commands.Add("ToolOrphan", p => NavigatorItems.Select<ToolOrphanViewModel>());
             //Commands.Add("ToolScramble", p => NavigatorItems.Select<ToolScrambleViewModel>());
             Commands.Add("ToolSearch", p => NavigatorItems.Select<ToolSearchViewModel>());
-            //Commands.Add("ToolTitleList", p => NavigatorItems.Select<ToolTitleListViewModel>());
-            
 
             MainNavigationWidth = new GridLength(Config.MainNavigationWidth, GridUnitType.Pixel);
 
@@ -276,30 +267,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods (other)
-
-        //private void OnWorkspaceClosing(object sender, CancelEventArgs e)
-        //{
-        //    if (!e.Cancel && sender is ApplicationViewModel workspace)
-        //    {
-        //        workspace.Dispose();
-        //        Workspaces.Remove(workspace);
-        //    }
-        //}
-
-        //private bool CloseAllWorkspacesCanExecute(object o)
-        //{
-        //    return Workspaces.Count > 0;
-        //}
-
-        //private void CloseAllWorkspaces(object o)
-        //{
-        //    List<ApplicationViewModel> temp = new(Workspaces);
-        //    foreach (ApplicationViewModel workspace in temp)
-        //    {
-        //        workspace.CloseCommand.Execute(null);
-        //    }
-        //}
-
         private void Save(object o)
         {
             Config.Instance.SaveFilterObjects();

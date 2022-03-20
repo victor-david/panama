@@ -7,6 +7,7 @@
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Utility;
 using System;
+using System.IO;
 
 namespace Restless.Panama.Tools
 {
@@ -15,7 +16,9 @@ namespace Restless.Panama.Tools
     /// </summary>
     public class FileScanItem
     {
-        #region Public properties
+        #region Public
+        public const string TitleZero = "---";
+
         /// <summary>
         /// Gets the title associated with the scan item
         /// </summary>
@@ -26,21 +29,21 @@ namespace Restless.Panama.Tools
         }
 
         /// <summary>
-        /// Gets the file name associated with the scan item
+        /// Gets the full path and file name for this scan item
         /// </summary>
-        public string File
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets or (from a devired class) sets the path
-        /// </summary>
-        public string Path
+        public string FullName
         {
             get;
             protected set;
+        }
+
+        /// <summary>
+        /// Gets the file name associated with the scan item
+        /// </summary>
+        public string FileName
+        {
+            get;
+            private set;
         }
 
         /// <summary>
@@ -63,15 +66,24 @@ namespace Restless.Panama.Tools
 
         public string VersionRevision => $"{Version}{(char)Revision}";
 
+
         /// <summary>
         /// Gets the size associated with this scan item
         /// </summary>
-        public long Size { get; }
+        public long Size
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Gets the last modified date associated with this scan item
         /// </summary>
-        public DateTime LastModified { get; }
+        public DateTime LastWriteTimeUtc
+        {
+            get;
+            private set;
+        }
         #endregion
 
         /************************************************************************/
@@ -86,26 +98,55 @@ namespace Restless.Panama.Tools
             Throw.IfNull(title);
             Throw.IfNull(version);
             Title = title.Title;
-            File = version.FileName;
+            FileName = version.FileName;
             Version = version.Version;
             Revision = version.Revision;
         }
 
-        public static FileScanItem Create(string title, string file, long version, long revision)
+        /// <summary>
+        /// Returns a new instance of the <see cref="FileScanItem"/> class.
+        /// </summary>
+        /// <param name="title">The title associated with this scan item</param>
+        /// <param name="fullName">The full path and file name</param>
+        /// <param name="version">The version</param>
+        /// <param name="revision">Revision. If zero, transforms to revision A</param>
+        /// <returns></returns>
+        public static FileScanItem Create(string title, string fullName, long version, long revision)
         {
             return new FileScanItem()
             {
-                Title = title,
-                File = System.IO.Path.GetFileName(file),
+                Title = string.IsNullOrWhiteSpace(title) ? TitleZero : title,
+                FullName = fullName,
+                FileName = Path.GetFileName(fullName),
                 Version = version,
-                Revision = revision,
+                Revision = revision == 0 ? TitleVersionTable.Defs.Values.RevisionA : revision,
             };
+        }
+
+        public static FileScanItem Create(string fullName)
+        {
+            FileScanItem result = new()
+            {
+                Title = TitleZero,
+                FullName = fullName,
+                FileName = Path.GetFileName(fullName),
+                Version = 0,
+                Revision = TitleVersionTable.Defs.Values.RevisionA
+            };
+
+            FileInfo fileInfo = new(fullName);
+            if (fileInfo.Exists)
+            {
+                result.Size = fileInfo.Length;
+                result.LastWriteTimeUtc = fileInfo.LastWriteTimeUtc;
+            }
+            return result;
         }
         #endregion
 
         public override string ToString()
         {
-            return Path;
+            return string.IsNullOrEmpty(FullName) ? FileName : FullName;
         }
     }
 

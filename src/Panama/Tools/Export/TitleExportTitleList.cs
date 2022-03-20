@@ -33,7 +33,7 @@ namespace Restless.Panama.Tools
             {
                 foreach (TitleExportCandidate item in this)
                 {
-                    if (item.ExportPath.Equals(exportPath, StringComparison.OrdinalIgnoreCase))
+                    if (item.ExportFullName.Equals(exportPath, StringComparison.OrdinalIgnoreCase))
                     {
                         return true;
                     }

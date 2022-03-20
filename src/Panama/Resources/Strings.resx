@@ -510,7 +510,7 @@ Last exported: {1}</value>
   <data name="CommandToolOrphan" xml:space="preserve">
     <value>Find Orphans</value>
   </data>
-  <data name="HeaderToolOperationOrphan" xml:space="preserve">
+  <data name="ToolOrphanDetail" xml:space="preserve">
     <value>This operation searches all files beneath the title root directory to find those files that are not associated with a title entry. The submission document folder and title export folder are automatically excluded from the search if they exist beneath title root. You can exclude other folders in configuration.</value>
   </data>
   <data name="InvalidOpTitleRootFolderNotSet" xml:space="preserve">
@@ -1065,5 +1065,11 @@ Do you want to continue?</value>
   </data>
   <data name="TextRemoved" xml:space="preserve">
     <value>Removed</value>
+  </data>
+  <data name="HeaderToolOrphan" xml:space="preserve">
+    <value>Orphan</value>
+  </data>
+  <data name="TextOrphans" xml:space="preserve">
+    <value>Orphans</value>
   </data>
 </root>

@@ -60,9 +60,9 @@
                 <vw:ToolDetail
                     ExplanationText="{x:Static r:Strings.ToolTitleMetadataDetail}"
                     FolderDisplay="{Binding Config.FolderTitleRoot, Mode=OneTime}"
+                    StatusText="{Binding Adapter.Status[0]}"
                     UpdatedItemsSource="{Binding Adapter.Updated[0]}"
                     NotFoundItemsSource="{Binding Adapter.NotFound[0]}"
-                    StatusText="{Binding Adapter.Status[0]}"
                     Command="{Binding Commands[RunTitleMetadata]}"/>
 
             </HeaderedContentControl>
@@ -76,9 +76,9 @@
                 <vw:ToolDetail
                     ExplanationText="{x:Static r:Strings.ToolSubmissionMetadataDetail}"
                     FolderDisplay="{Binding Config.FolderSubmissionDocument, Mode=OneTime}"
+                    StatusText="{Binding Adapter.Status[1]}"
                     UpdatedItemsSource="{Binding Adapter.Updated[1]}"
                     NotFoundItemsSource="{Binding Adapter.NotFound[1]}"
-                    StatusText="{Binding Adapter.Status[1]}"
                     Command="{Binding Commands[RunSubmissionMetadata]}"/>
 
             </HeaderedContentControl>
@@ -91,12 +91,12 @@
 
                 <vw:ToolDetail
                     ExplanationText="{x:Static r:Strings.ToolExportDetail}"
+                    FolderDisplay="{Binding Config.FolderExport, Mode=OneTime}"
+                    StatusText="{Binding Adapter.Status[2]}"
                     UpdatedText="{x:Static r:Strings.TextAddedUpdated}"
                     NotFoundText="{x:Static r:Strings.TextRemoved}"
-                    FolderDisplay="{Binding Config.FolderExport, Mode=OneTime}"
                     UpdatedItemsSource="{Binding Adapter.Updated[2]}"
                     NotFoundItemsSource="{Binding Adapter.NotFound[2]}"
-                    StatusText="{Binding Adapter.Status[2]}"
                     Command="{Binding Commands[RunExport]}"/>
 
             </HeaderedContentControl>
@@ -108,13 +108,30 @@
                 tk:Property.IsLongVisibleValue="4">
 
                 <vw:ToolDetail
-                    UpdatedVisibility="Collapsed"
-                    NotFoundVisibility="Collapsed"
-                    StatusText="{Binding Adapter.Status[3]}"
                     ExplanationText="{x:Static r:Strings.ToolTitleListDetail}"
                     FolderDisplay="{Binding TitleListFileName, Mode=OneTime}"
+                    StatusText="{Binding Adapter.Status[3]}"
+                    UpdatedVisibility="Collapsed"
+                    NotFoundVisibility="Collapsed"
                     Command="{Binding Commands[RunTitleList]}"/>
 
+            </HeaderedContentControl>
+            
+            <!-- Section 5 (orphans) -->
+            <HeaderedContentControl
+                Header="{x:Static r:Strings.HeaderToolOrphan}"
+                tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
+                tk:Property.IsLongVisibleValue="5">
+
+                <vw:ToolDetail
+                    ExplanationText="{x:Static r:Strings.ToolOrphanDetail}"
+                    FolderDisplay="{Binding Config.FolderTitleRoot, Mode=OneTime}"
+                    StatusText="{Binding Adapter.Status[4]}"
+                    UpdatedText="{x:Static r:Strings.TextOrphans}"
+                    NotFoundVisibility="Collapsed"
+                    UpdatedItemsSource="{Binding Adapter.Updated[4]}"
+                    Command="{Binding Commands[RunOrphan]}"/>                
+                
             </HeaderedContentControl>
 
         </Grid>

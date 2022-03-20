@@ -60,12 +60,8 @@
                     Icon="{StaticResource ToolIconKey}"
                     Command="{Binding Commands[OpenToolWindow]}"/>
                 
-                <!--<MenuItem Header="Export" Icon="{StaticResource ImageToolExportMenu}" Command="{Binding Commands[ToolExport]}"/>-->
-                <!--<MenuItem Header="Title List" Icon="{StaticResource ImageToolTitleListMenu}" Command="{Binding Commands[ToolTitleList]}"/>-->
                 <!--<MenuItem Header="Message Sync" Icon="{StaticResource ImageToolMessageSyncMenu}" Command="{Binding Commands[ToolMessageSync]}"/>-->
                 <!--<MenuItem Header="Table Info" Icon="{StaticResource ImageDatabaseMenu}" Command="{Binding Commands[Table]}"/>-->
-                <Separator/>
-                <MenuItem Header="Find Orphans" Icon="{StaticResource ImageToolOrphanMenu}" Command="{Binding Commands[ToolOrphan]}"/>
                 <!--<MenuItem Header="Search" Icon="{StaticResource ImageToolSearchMenu}" Command="{Binding Commands[ToolSearch]}"/>-->
                 <!--<MenuItem Header="Convert" Icon="{StaticResource ImageToolConvertMenu}" Command="{Binding Commands[ToolConvert]}"/>-->
                 <!--<MenuItem Header="Scramble" Command="{Binding Commands[ToolScramble]}"/>-->

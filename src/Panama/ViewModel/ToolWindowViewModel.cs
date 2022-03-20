@@ -19,6 +19,7 @@ namespace Restless.Panama.ViewModel
         private readonly SubmissionUpdater submissionUpdater;
         private readonly TitleExporter titleExporter;
         private readonly TitleLister titleLister;
+        private readonly OrphanFinder orphanFinder;
         #endregion
 
         /************************************************************************/
@@ -79,17 +80,20 @@ namespace Restless.Panama.ViewModel
                 new NavigatorSection(Strings.HeaderToolSubmissionMetadata, 2),
                 new NavigatorSection(Strings.HeaderToolExport, 3),
                 new NavigatorSection(Strings.HeaderToolTitleList, 4),
+                new NavigatorSection(Strings.HeaderToolOrphan, 5),
             };
 
             SetInitialSection();
 
-            Adapter = new ToolResultAdapter(4);
+            Adapter = new ToolResultAdapter(5);
 
             Commands.Add("RunTitleMetadata", RunTitleMetadataCommand);
             Commands.Add("RunSubmissionMetadata", RunSubmissionMetadataCommand);
 
             Commands.Add("RunExport", RunExportCommand);
             Commands.Add("RunTitleList", RunTitleListCommand);
+            Commands.Add("RunOrphan", RunOrphanCommand);
+
 
             versionUpdater = new VersionUpdater();
             submissionUpdater = new SubmissionUpdater();
@@ -103,6 +107,8 @@ namespace Restless.Panama.ViewModel
             {
                 OutputDirectory = Config.FolderTitleRoot
             };
+
+            orphanFinder = new OrphanFinder();
 
             TitleListFileName = Path.Combine(Config.FolderTitleRoot, TitleLister.ListFile);
         }
@@ -143,6 +149,11 @@ namespace Restless.Panama.ViewModel
         private async void RunTitleListCommand(object parm)
         {
             await RunTool(3, titleLister);
+        }
+
+        private async void RunOrphanCommand(object parm)
+        {
+            await RunTool(4, orphanFinder);
         }
 
         private async Task RunTool(int index, Scanner scanner)

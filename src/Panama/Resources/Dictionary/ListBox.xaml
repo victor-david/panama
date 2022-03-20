@@ -42,7 +42,7 @@
                             Foreground="{StaticResource DarkAlertForegroundBrush}"
                             Text="{Binding VersionRevision}"/>
                         
-                        <TextBlock Grid.Column="1" Text="{Binding File}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding FileName}"/>
                     </Grid>
                 </DataTemplate>
             </Setter.Value>

@@ -52,12 +52,12 @@ namespace Restless.Panama.Tools
                         {
                             document.Synchronize();
                             SubmissionDocumentTable.Save();
-                            result.Updated.Add(FileScanItem.Create(document.Title, document.DocumentId, 0, 0));
+                            result.Updated.Add(FileScanItem.Create(document.Title, document.Info.FullName, 0, 0));
                         }
                     }
                     else
                     {
-                        result.NotFound.Add(FileScanItem.Create(document.Title, document.DocumentId, 0, 0));
+                        result.NotFound.Add(FileScanItem.Create(document.Title, document.Info.FullName, 0, 0));
                     }
                 }
             }
