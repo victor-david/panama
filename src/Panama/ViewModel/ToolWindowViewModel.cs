@@ -51,7 +51,7 @@ namespace Restless.Panama.ViewModel
             private set => SetProperty(ref isOperationInProgress, value);
         }
 
-        public ToolResultData ToolResult
+        public ToolResultAdapter Adapter
         {
             get;
         }
@@ -83,7 +83,7 @@ namespace Restless.Panama.ViewModel
 
             SetInitialSection();
 
-            ToolResult = new ToolResultData(4);
+            Adapter = new ToolResultAdapter(4);
 
             Commands.Add("RunTitleMetadata", RunTitleMetadataCommand);
             Commands.Add("RunSubmissionMetadata", RunSubmissionMetadataCommand);
@@ -150,7 +150,7 @@ namespace Restless.Panama.ViewModel
             try
             {
                 IsOperationInProgress = true;
-                ToolResult.Clear(index);
+                Adapter.Clear(index);
                 HandleResult(await scanner.ExecuteAsync(), index);
             }
             catch (Exception ex)
@@ -165,9 +165,9 @@ namespace Restless.Panama.ViewModel
 
         private void HandleResult(FileScanResult result, int index)
         {
-            ToolResult.AddToUpdate(index, result.Updated);
-            ToolResult.AddToNotFound(index, result.NotFound);
-            ToolResult.SetStatus(index, $"{result.ScanCount} items processed | {result.Updated.Count} updated | {result.NotFound.Count} not found");
+            Adapter.AddToUpdate(index, result.Updated);
+            Adapter.AddToNotFound(index, result.NotFound);
+            Adapter.SetStatus(index, $"{result.ScanCount} items processed | {result.Updated.Count} updated | {result.NotFound.Count} not found");
         }
         #endregion
     }

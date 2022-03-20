@@ -60,9 +60,9 @@
                 <vw:ToolDetail
                     ExplanationText="{x:Static r:Strings.ToolTitleMetadataDetail}"
                     FolderDisplay="{Binding Config.FolderTitleRoot, Mode=OneTime}"
-                    UpdatedItemsSource="{Binding ToolResult.Updated[0]}"
-                    NotFoundItemsSource="{Binding ToolResult.NotFound[0]}"
-                    StatusText="{Binding ToolResult.Status[0]}"
+                    UpdatedItemsSource="{Binding Adapter.Updated[0]}"
+                    NotFoundItemsSource="{Binding Adapter.NotFound[0]}"
+                    StatusText="{Binding Adapter.Status[0]}"
                     Command="{Binding Commands[RunTitleMetadata]}"/>
 
             </HeaderedContentControl>
@@ -76,9 +76,9 @@
                 <vw:ToolDetail
                     ExplanationText="{x:Static r:Strings.ToolSubmissionMetadataDetail}"
                     FolderDisplay="{Binding Config.FolderSubmissionDocument, Mode=OneTime}"
-                    UpdatedItemsSource="{Binding ToolResult.Updated[1]}"
-                    NotFoundItemsSource="{Binding ToolResult.NotFound[1]}"
-                    StatusText="{Binding ToolResult.Status[1]}"
+                    UpdatedItemsSource="{Binding Adapter.Updated[1]}"
+                    NotFoundItemsSource="{Binding Adapter.NotFound[1]}"
+                    StatusText="{Binding Adapter.Status[1]}"
                     Command="{Binding Commands[RunSubmissionMetadata]}"/>
 
             </HeaderedContentControl>
@@ -94,9 +94,9 @@
                     UpdatedText="{x:Static r:Strings.TextAddedUpdated}"
                     NotFoundText="{x:Static r:Strings.TextRemoved}"
                     FolderDisplay="{Binding Config.FolderExport, Mode=OneTime}"
-                    UpdatedItemsSource="{Binding ToolResult.Updated[2]}"
-                    NotFoundItemsSource="{Binding ToolResult.NotFound[2]}"
-                    StatusText="{Binding ToolResult.Status[2]}"
+                    UpdatedItemsSource="{Binding Adapter.Updated[2]}"
+                    NotFoundItemsSource="{Binding Adapter.NotFound[2]}"
+                    StatusText="{Binding Adapter.Status[2]}"
                     Command="{Binding Commands[RunExport]}"/>
 
             </HeaderedContentControl>
@@ -110,7 +110,7 @@
                 <vw:ToolDetail
                     UpdatedVisibility="Collapsed"
                     NotFoundVisibility="Collapsed"
-                    StatusText="{Binding ToolResult.Status[3]}"
+                    StatusText="{Binding Adapter.Status[3]}"
                     ExplanationText="{x:Static r:Strings.ToolTitleListDetail}"
                     FolderDisplay="{Binding TitleListFileName, Mode=OneTime}"
                     Command="{Binding Commands[RunTitleList]}"/>

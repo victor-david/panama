@@ -7,7 +7,7 @@ namespace Restless.Panama.Tools
     /// <summary>
     /// Provides collections used for data display by the tools window.
     /// </summary>
-    public class ToolResultData
+    public class ToolResultAdapter
     {
         /// <summary>
         /// Gets an array of collections for updated items
@@ -34,10 +34,10 @@ namespace Restless.Panama.Tools
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToolResultData"/> class
+        /// Initializes a new instance of the <see cref="ToolResultAdapter"/> class
         /// </summary>
         /// <param name="size">The size of the collections</param>
-        public ToolResultData(int size)
+        public ToolResultAdapter(int size)
         {
             Updated = new ObservableCollection<FileScanItem>[size];
             NotFound = new ObservableCollection<FileScanItem>[size];
