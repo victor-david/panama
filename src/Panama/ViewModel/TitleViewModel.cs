@@ -29,9 +29,9 @@ namespace Restless.Panama.ViewModel
         #region Private
         private int selectedEditSection;
         private TitleRow selectedTitle;
+        private PreviewMode previewMode;
         private string previewText;
         private const int SectionPreviewId = 6;
-        private bool isOpenXml;
         #endregion
 
         /************************************************************************/
@@ -48,7 +48,7 @@ namespace Restless.Panama.ViewModel
             set
             {
                 SetProperty(ref selectedEditSection, value);
-                PrepareForOpenXml();
+                PrepareDocumentPreview();
             }
         }
 
@@ -144,12 +144,12 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates whether the latest version of the currently selected title is an Open XML document.
+        /// Gets the preview mode
         /// </summary>
-        public bool IsOpenXml
+        public PreviewMode PreviewMode
         {
-            get => isOpenXml;
-            private set => SetProperty(ref isOpenXml, value);
+            get => previewMode;
+            private set => SetProperty(ref previewMode, value);
         }
 
         /// <summary>
@@ -272,7 +272,7 @@ namespace Restless.Panama.ViewModel
             Submissions.Update();
             Published.Update();
             SelfPublished.Update();
-            PrepareForOpenXml();
+            PrepareDocumentPreview();
         }
 
         /// <inheritdoc/>
@@ -455,10 +455,10 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void PrepareForOpenXml()
+        private void PrepareDocumentPreview()
         {
-            IsOpenXml = false;
             PreviewText = null;
+            PreviewMode = PreviewMode.Unsupported;
 
             if (SelectedEditSection == SectionPreviewId && SelectedTitle != null)
             {
@@ -468,8 +468,8 @@ namespace Restless.Panama.ViewModel
                     string fileName = Paths.Title.WithRoot(verController.Versions[0].FileName);
                     if (DocumentPreviewer.GetPreviewMode(fileName) == PreviewMode.Text)
                     {
+                        PreviewMode = PreviewMode.Text;
                         PreviewText = DocumentPreviewer.GetText(fileName);
-                        IsOpenXml = true;
                     }
                 }
             }

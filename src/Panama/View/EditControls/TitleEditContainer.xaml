@@ -55,9 +55,13 @@
             tk:Property.IsLongVisibleValue="5"/>
 
         <!-- Preview -->
-        <vw:TitleEditPreview
+        <vw:PreviewPanel
             DockPanel.Dock="Top"
+            HeaderVisibility="Collapsed"
+            PreviewMode="{Binding PreviewMode}"
+            PreviewText="{Binding PreviewText}"
             tk:Property.IsLongVisible="{Binding SelectedEditSection}"
             tk:Property.IsLongVisibleValue="6"/>
+        
     </DockPanel>
 </UserControl>

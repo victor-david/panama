@@ -5,7 +5,6 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,8 +18,6 @@ namespace Restless.Panama.View
             InitializeComponent();
         }
 
-
-        /************************************************************************/
         #region PreviewMode
         /// <summary>
         /// Gets or sets the preview mode
@@ -178,12 +175,15 @@ namespace Restless.Panama.View
         public static readonly DependencyProperty UnsupportedVisibilityProperty = UnsupportedVisibilityPropertyKey.DependencyProperty;
         #endregion
 
+        /************************************************************************/
+
+        #region Private methods
         private void SetPreviewVisibility()
         {
             TextPreviewVisibility = PreviewMode == PreviewMode.Text ? Visibility.Visible : Visibility.Collapsed;
             ImagePreviewVisibility = PreviewMode == PreviewMode.Image ? Visibility.Visible : Visibility.Collapsed;
             UnsupportedVisibility = PreviewMode == PreviewMode.Unsupported ? Visibility.Visible : Visibility.Collapsed;
-
         }
+        #endregion
     }
 }
