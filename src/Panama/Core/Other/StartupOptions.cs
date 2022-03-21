@@ -5,6 +5,9 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 
+using System.Globalization;
+using System;
+
 namespace Restless.Panama.Core
 {
     /// <summary>
@@ -31,28 +34,15 @@ namespace Restless.Panama.Core
         /// The list is created in the title root folder.
         /// </summary>
         public const string TitleList = "/list";
-
-        /// <summary>
-        /// The startup option that the specifes the database file to use.
-        /// It must be in the form of /db:pathToDatabaseFile
-        /// </summary>
-        public const string Database = "/db:";
-
         #endregion
 
         /************************************************************************/
-        
+
         #region Public properties
         /// <summary>
         /// Gets a boolean value that indicates if any operation was specifed in the startup arguments.
         /// </summary>
-        public bool IsAnyOperationRequested
-        {
-            get
-            {
-                return IsUpdateRequested || IsExportRequested || IsTitleListRequested;
-            }
-        }
+        public bool IsAnyOperationRequested => IsUpdateRequested || IsExportRequested || IsTitleListRequested;
 
         /// <summary>
         /// Gets a boolean value that indicates if an update of title version and submission documents
@@ -80,16 +70,6 @@ namespace Restless.Panama.Core
         /// This corresponds to the <see cref="TitleList"/> argument.
         /// </summary>
         public bool IsTitleListRequested
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the name of the database file that was specified, or null if none.
-        /// This property is set via the <see cref="Database"/> argument.
-        /// </summary>
-        public string DatabaseFileName
         {
             get;
             private set;
@@ -123,13 +103,9 @@ namespace Restless.Panama.Core
         #region Private methods
         private void EvaluateArgument(string arg)
         {
-            if (arg.ToLower() == Update) IsUpdateRequested = true;
-            if (arg.ToLower() == Export) IsExportRequested = true;
-            if (arg.ToLower() == TitleList) IsTitleListRequested = true;
-            if (arg.ToLower().StartsWith(Database) && arg.Length > Database.Length)
-            {
-                DatabaseFileName = arg.Substring(Database.Length).Trim();
-            }
+            IsUpdateRequested = IsUpdateRequested || string.Compare(arg, Update, StringComparison.OrdinalIgnoreCase) == 0;
+            IsExportRequested = IsExportRequested || string.Compare(arg, Export, StringComparison.OrdinalIgnoreCase) == 0;
+            IsTitleListRequested = IsTitleListRequested || string.Compare(arg, TitleList, StringComparison.OrdinalIgnoreCase) == 0;
         }
         #endregion
     }

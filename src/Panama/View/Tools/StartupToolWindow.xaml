@@ -19,76 +19,60 @@
             </Style>
             <Style TargetType="tk:WaitPanel">
                 <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="Width" Value="42"/>
-                <Setter Property="Height" Value="42"/>
+                <Setter Property="Width" Value="34"/>
+                <Setter Property="Height" Value="34"/>
             </Style>
             <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockMessage}">
                 <Setter Property="Margin" Value="16,0,0,0"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
             <Style TargetType="Path" BasedOn="{StaticResource StandardPathStyle}">
+                <Setter Property="Margin" Value="7"/>
+                <Setter Property="Width" Value="20"/>
+                <Setter Property="Height" Value="20"/>
                 <Setter Property="Data" Value="{StaticResource SquareGeometryKey}"/>
                 <Setter Property="Fill" Value="ForestGreen"/>
             </Style>
         </Border.Resources>
-        <StackPanel>
-
-            <Grid 
-                tk:Property.ColumnWidths="42,*,42" 
-                tk:Property.IsVisible="{Binding OpTitleMetadata}">
-                <tk:WaitPanel/>
+        <StackPanel Margin="0,8">
+            <Grid
+                tk:Property.ColumnWidths="48,*" 
+                tk:Property.IsVisible="{Binding RequestedOps[0]}">
+                <tk:WaitPanel tk:Property.IsVisible="{Binding InProgressOps[0]}"/>
+                <Path tk:Property.IsVisible="{Binding CompletedOps[0]}"/>
                 <TextBlock Grid.Column="1" Text="Updating title metadata"/>
-                <Path Grid.Column="2" />
             </Grid>
             
             <Grid
-                tk:Property.ColumnWidths="42,*,42"
-                tk:Property.IsVisible="{Binding OpSubmissionMetadata}">
-                <tk:WaitPanel/>
+                tk:Property.ColumnWidths="48,*"
+                tk:Property.IsVisible="{Binding RequestedOps[1]}">
+                <tk:WaitPanel tk:Property.IsVisible="{Binding InProgressOps[1]}"/>
+                <Path tk:Property.IsVisible="{Binding CompletedOps[1]}"/>
                 <TextBlock Grid.Column="1" Text="Updating submission metadata"/>
-                <Path Grid.Column="2" />
             </Grid>
             
             <Grid 
-                tk:Property.ColumnWidths="42,*,42"
-                tk:Property.IsVisible="{Binding OpExport}">
-                <tk:WaitPanel/>
+                tk:Property.ColumnWidths="48,*"
+                tk:Property.IsVisible="{Binding RequestedOps[2]}">
+                <tk:WaitPanel tk:Property.IsVisible="{Binding InProgressOps[2]}"/>
+                <Path tk:Property.IsVisible="{Binding CompletedOps[2]}"/>
                 <TextBlock Grid.Column="1" Text="Exporting title documents"/>
-                <Path Grid.Column="2" />
             </Grid>
             
             <Grid
-                tk:Property.ColumnWidths="42,*,42"
-                tk:Property.IsVisible="{Binding OpTitleList}">
-                <tk:WaitPanel/>
+                tk:Property.ColumnWidths="48,*"
+                tk:Property.IsVisible="{Binding RequestedOps[3]}">
+                <tk:WaitPanel tk:Property.IsVisible="{Binding InProgressOps[3]}"/>
+                <Path tk:Property.IsVisible="{Binding CompletedOps[3]}"/>
                 <TextBlock Grid.Column="1" Text="Creating title list"/>
-                <Path Grid.Column="2" />
             </Grid>
 
+            <TextBlock HorizontalAlignment="Center" tk:Property.IsVisible="{Binding IsCompleted}">
+                <Run Text="Closing in"/>
+                <Run Foreground="{StaticResource AlertForegroundBrush}" Text="{Binding SecondsToClose, Mode=OneWay}"/>
+                <Run Text="seconds"/>
+            </TextBlock>
 
-            <!--<StackPanel>
-            <TextBlock Style="{StaticResource TextBlockStatus}" Text="Testing this style"/>
-            <TextBlock Style="{StaticResource TextBlockMessage}" Text="Performing requested operations"/>
-            <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding VersionUpdateStatus}" Visibility="{Binding Ops.IsUpdateRequested,Converter={cv:BooleanToVisibilityConverter}}"/>
-            <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding SubmissionUpdateStatus}" Visibility="{Binding Ops.IsUpdateRequested,Converter={cv:BooleanToVisibilityConverter}}"/>
-            <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding ExportStatus}" Visibility="{Binding Ops.IsExportRequested,Converter={cv:BooleanToVisibilityConverter}}"/>
-            <TextBlock Style="{StaticResource TextBlockMessage}" Text="{Binding TitleListStatus}" Visibility="{Binding Ops.IsTitleListRequested,Converter={cv:BooleanToVisibilityConverter}}"/>
-        </StackPanel>-->
-
-            <!--<TextBlock VerticalAlignment="Top" Text="{Binding Status, Mode=OneWay}"/>-->
-            <!--<TextBlock
-            VerticalAlignment="Top"
-            FontSize="14"
-            Foreground="DarkRed"
-            Text="{Binding Status, Mode=OneWay}"/>-->
-
-            <!--<Button
-            Grid.Row="1"
-            Width="120"
-            Height="22"
-            Command="{Binding CloseWindowCommand}"
-            Content="Close"
-            IsEnabled="{Binding IsCompleted}"/>-->
         </StackPanel>
     </Border>
 </tk:AppWindow>

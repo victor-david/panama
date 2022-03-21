@@ -6,7 +6,9 @@
 */
 using Restless.Panama.Core;
 using Restless.Panama.Tools;
-using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace Restless.Panama.ViewModel
 {
@@ -16,52 +18,36 @@ namespace Restless.Panama.ViewModel
     public class StartupToolWindowViewModel : ApplicationViewModel
     {
         #region Private
+        private const int VersionIdx = 0;
+        private const int SubmissionIdx = 1;
+        private const int ExportIdx = 2;
+        private const int ListIdx = 3;
+
         private readonly VersionUpdater versionUpdater;
         private readonly SubmissionUpdater submissionUpdater;
         private readonly TitleExporter titleExporter;
         private readonly TitleLister titleLister;
-        private readonly StartupOptions ops;
-        private bool opTitleMetadata;
-        private bool opSubmissionMetadata;
-        private bool opExport;
-        private bool opTitleList;
+
         private bool isCompleted;
+        private int secondsToClose;
         #endregion
 
         /************************************************************************/
 
         #region Public properties
-        public bool OpTitleMetadata
-        {
-            get => opTitleMetadata;
-            private set => SetProperty(ref opTitleMetadata, value);
-        }
-
-        public bool OpSubmissionMetadata
-        {
-            get => opSubmissionMetadata;
-            private set => SetProperty(ref opSubmissionMetadata, value);
-        }
-
-        public bool OpExport
-        {
-            get => opExport;
-            private set => SetProperty(ref opExport, value);
-        }
-
-        public bool OpTitleList
-        {
-            get => opTitleList;
-            private set => SetProperty(ref opTitleList, value);
-        }
-
-        /// <summary>
-        /// Gets a string that describes the status of the operations.
-        /// </summary>
-        public string Status
+        public ObservableCollection<bool> RequestedOps
         {
             get;
-            private set;
+        }
+
+        public ObservableCollection<bool> InProgressOps
+        {
+            get;
+        }
+
+        public ObservableCollection<bool> CompletedOps
+        {
+            get;
         }
 
         /// <summary>
@@ -71,6 +57,15 @@ namespace Restless.Panama.ViewModel
         {
             get => isCompleted;
             private set => SetProperty(ref isCompleted, value);
+        }
+
+        /// <summary>
+        /// Gets the number of seconds until automatic close
+        /// </summary>
+        public int SecondsToClose
+        {
+            get => secondsToClose;
+            private set => SetProperty(ref secondsToClose, value);
         }
         #endregion
 
@@ -83,11 +78,26 @@ namespace Restless.Panama.ViewModel
         public StartupToolWindowViewModel()
         {
             DisplayName = $"{ApplicationInfo.Instance.Assembly.Title} {ApplicationInfo.Instance.Assembly.VersionMajor} Command Tools";
-            Status = string.Empty;
-            AddToStatus("Performing requested operations", true);
-            IsCompleted = false;
+
+            RequestedOps = new ObservableCollection<bool>()
+            {
+                false, false, false, false
+            };
+
+            InProgressOps = new ObservableCollection<bool>()
+            {
+                false, false, false, false
+            };
+
+            CompletedOps = new ObservableCollection<bool>()
+            {
+                false, false, false, false
+            };
+
+
             versionUpdater = new();
             submissionUpdater = new();
+
             titleExporter = new()
             {
                 OutputDirectory = Config.FolderExport
@@ -98,7 +108,7 @@ namespace Restless.Panama.ViewModel
                 OutputDirectory = Config.FolderTitleRoot
             };
 
-
+            Application.Current.MainWindow.Closing += MainWindowClosing;
         }
         #endregion
 
@@ -112,39 +122,64 @@ namespace Restless.Panama.ViewModel
         {
             if (ops.IsUpdateRequested)
             {
-                OpTitleMetadata = true;
+                SetInProgress(VersionIdx);
                 await versionUpdater.ExecuteAsync();
-
-                OpSubmissionMetadata = true;
+                SetCompleted(VersionIdx);
+                
+                SetInProgress(SubmissionIdx);
                 await submissionUpdater.ExecuteAsync();
+                SetCompleted(SubmissionIdx);
             }
 
             if (ops.IsExportRequested)
             {
-                OpExport = true;
+                SetInProgress(ExportIdx);
                 await titleExporter.ExecuteAsync();
+                SetCompleted(ExportIdx);
             }
 
             if (ops.IsTitleListRequested)
             {
-                OpTitleList = true;
+                SetInProgress(ListIdx);
                 await titleLister.ExecuteAsync();
+                SetCompleted(ListIdx);
             }
+
+            IsCompleted = true;
+
+            await WaitForCloseAsync();
+            Application.Current.MainWindow.Close();
         }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
-        private void AddToStatus(string text, bool newLine)
+        private void SetInProgress(int index)
         {
-            Status += text;
-            if (newLine)
-            {
-                Status += Environment.NewLine;
-            }
+            RequestedOps[index] = true;
+            InProgressOps[index] = true;
+        }
 
-            OnPropertyChanged(nameof(Status));
+        private void SetCompleted(int index)
+        {
+            InProgressOps[index] = false;
+            CompletedOps[index] = true;
+        }
+
+        private async Task WaitForCloseAsync()
+        {
+            SecondsToClose = 5;
+            for (int k = 1; k <= 5; k++)
+            {
+                await Task.Delay(1000);
+                SecondsToClose--;
+            }
+        }
+
+        private void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !IsCompleted;
         }
         #endregion
     }

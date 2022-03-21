@@ -3,4 +3,4 @@
 *.suo
 obj/
 bin/
-packages/
+launchSettings.json
