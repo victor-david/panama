@@ -206,9 +206,12 @@
                         Path="{Binding Config.TextViewerFile}"
                         SelectCommand="{Binding Commands[SelectPath]}"/>                    
                     
-                    <TextBlock Text="{x:Static r:Strings.ConfigOrphanExclusion}"/>
-                    <TextBox Text="{Binding Config.OrphanExclusions}"/>
-                    
+                    <TextBlock Text="{x:Static r:Strings.ConfigOrphanDirectoryExclusion}"/>
+                    <TextBox Text="{Binding Config.OrphanDirectoryExclusions}"/>
+
+                    <TextBlock Text="{x:Static r:Strings.ConfigOrphanFileExclusion}"/>
+                    <TextBox Text="{Binding Config.OrphanFileExclusions}"/>
+
                 </StackPanel>
             </HeaderedContentControl>
             

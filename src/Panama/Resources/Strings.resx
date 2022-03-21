@@ -793,8 +793,8 @@ Do you want to continue?</value>
 
 Do you want to continue?</value>
   </data>
-  <data name="ConfigOrphanExclusion" xml:space="preserve">
-    <value>Orphan exclusions. This value specifies folder exclusions used during orphan detection. Values are separated by semi-colon and if found within a folder name indicate that the folder is ignored.</value>
+  <data name="ConfigOrphanDirectoryExclusion" xml:space="preserve">
+    <value>Orphan directory exclusions, separated by semi-colon</value>
   </data>
   <data name="TooltipSubmissionContest" xml:space="preserve">
     <value>Submission is for a contest</value>
@@ -1077,5 +1077,8 @@ Do you want to continue?</value>
   </data>
   <data name="TextImage" xml:space="preserve">
     <value>Image</value>
+  </data>
+  <data name="ConfigOrphanFileExclusion" xml:space="preserve">
+    <value>Orphan file exclusions, separated by semi-colon</value>
   </data>
 </root>

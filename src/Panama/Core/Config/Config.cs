@@ -677,9 +677,20 @@ namespace Restless.Panama.Core
         /// <summary>
         /// Gets or sets a value that specifies folder exclusions used during orphan detection.
         /// Values are separated by semi-colon and if found within a folder name indicate that
-        /// the folder is not considered when looking for orphans.
+        /// the folder is ignored
         /// </summary>
-        public string OrphanExclusions
+        public string OrphanDirectoryExclusions
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets a value that specifies file exclusions used during orphan detection.
+        /// Values are separated by semi-colon and if found within a file name indicate that
+        /// the file is ignored.
+        /// </summary>
+        public string OrphanFileExclusions
         {
             get => GetItem(null);
             set => SetItem(value);

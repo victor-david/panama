@@ -19,7 +19,8 @@ namespace Restless.Panama.Tools
     /// </summary>
     public class OrphanFinder : TitleScanner
     {
-        private string[] userExclusions;
+        private string[] directoryExclusions;
+        private string[] fileExclusions;
 
         #region Constructor
         /// <summary>
@@ -40,8 +41,11 @@ namespace Restless.Panama.Tools
         {
             FileScanResult result = new();
             List<string> files = new();
-            
-            userExclusions = Config.Instance.OrphanExclusions.ToLower(CultureInfo.InvariantCulture).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+            directoryExclusions = Config.Instance.OrphanDirectoryExclusions.ToLower(CultureInfo.InvariantCulture).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            fileExclusions = Config.Instance.OrphanFileExclusions.ToLower(CultureInfo.InvariantCulture).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+            files.AddRange(Directory.EnumerateFiles(Config.Instance.FolderTitleRoot));
 
             foreach (string dir in Directory.EnumerateDirectories(Config.Instance.FolderTitleRoot, "*", SearchOption.AllDirectories))
             {
@@ -55,7 +59,7 @@ namespace Restless.Panama.Tools
             {
                 result.ScanCount++;
 
-                if (!IsDirectoryUserExcluded(Path.GetDirectoryName(fullPath)))
+                if (!IsDirectoryUserExcluded(Path.GetDirectoryName(fullPath)) && !IsFileUserExcluded(Path.GetFileName(fullPath)))
                 {
                     if (!TitleVersionTable.VersionWithFileExists(Paths.Title.WithoutRoot(fullPath)))
                     {
@@ -81,9 +85,21 @@ namespace Restless.Panama.Tools
 
         private bool IsDirectoryUserExcluded(string directory)
         {
-            foreach (string ex in userExclusions)
+            foreach (string ex in directoryExclusions)
             {
                 if (directory.ToLower(CultureInfo.InvariantCulture).Contains(ex.ToLower(CultureInfo.InvariantCulture)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool IsFileUserExcluded(string file)
+        {
+            foreach (string ex in fileExclusions)
+            {
+                if (file.ToLower(CultureInfo.InvariantCulture).Contains(ex.ToLower(CultureInfo.InvariantCulture)))
                 {
                     return true;
                 }

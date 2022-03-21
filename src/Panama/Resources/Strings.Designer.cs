@@ -884,11 +884,20 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Orphan exclusions. This value specifies folder exclusions used during orphan detection. Values are separated by semi-colon and if found within a folder name indicate that the folder is ignored..
+        ///   Looks up a localized string similar to Orphan directory exclusions, separated by semi-colon.
         /// </summary>
-        public static string ConfigOrphanExclusion {
+        public static string ConfigOrphanDirectoryExclusion {
             get {
-                return ResourceManager.GetString("ConfigOrphanExclusion", resourceCulture);
+                return ResourceManager.GetString("ConfigOrphanDirectoryExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orphan file exclusions, separated by semi-colon.
+        /// </summary>
+        public static string ConfigOrphanFileExclusion {
+            get {
+                return ResourceManager.GetString("ConfigOrphanFileExclusion", resourceCulture);
             }
         }
         
