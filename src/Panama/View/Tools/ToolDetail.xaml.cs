@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Restless.Panama.Core;
+using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Restless.Panama.View
 {
@@ -11,15 +12,111 @@ namespace Restless.Panama.View
     /// </summary>
     public partial class ToolDetail : Grid
     {
+        #region Fields
         public const string DefaultUpdatedText = "Updated";
         public const string DefaultNotFoundText = "Not Found";
+        #endregion
 
+        /************************************************************************/
+
+        #region Constructor
         public ToolDetail()
         {
             InitializeComponent();
         }
+        #endregion
 
-        #region Text
+        /************************************************************************/
+
+        #region Mode
+        /// <summary>
+        /// Gets or sets the control mode
+        /// </summary>
+        public ToolDetailMode Mode
+        {
+            get => (ToolDetailMode)GetValue(ModeProperty);
+            set => SetValue(ModeProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="Mode"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register
+            (
+                nameof(Mode), typeof(ToolDetailMode), typeof(ToolDetail), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = ToolDetailMode.Standard,
+                    PropertyChangedCallback = OnModeChanged
+                }
+            );
+
+        private static void OnModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ToolDetail)?.SetMode();
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Preview
+        /// <summary>
+        /// Gets or sets the preview mode
+        /// </summary>
+        public PreviewMode PreviewMode
+        {
+            get => (PreviewMode)GetValue(PreviewModeProperty);
+            set => SetValue(PreviewModeProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="PreviewMode"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty PreviewModeProperty = DependencyProperty.Register
+            (
+                nameof(PreviewMode), typeof(PreviewMode), typeof(ToolDetail), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = PreviewMode.None,
+                }
+            );
+
+        /// <summary>
+        /// Gets or sets the preview text
+        /// </summary>
+        public string PreviewText
+        {
+            get => (string)GetValue(PreviewTextProperty);
+            set => SetValue(PreviewTextProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="PreviewText"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty PreviewTextProperty = DependencyProperty.Register
+            (
+                nameof(PreviewText), typeof(string), typeof(ToolDetail), new FrameworkPropertyMetadata()
+            );
+
+        /// <summary>
+        /// Gets or sets the preview image source
+        /// </summary>
+        public ImageSource PreviewImageSource
+        {
+            get => (ImageSource)GetValue(PreviewImageSourceProperty);
+            set => SetValue(PreviewImageSourceProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="PreviewImageSource"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty PreviewImageSourceProperty = DependencyProperty.Register
+            (
+                nameof(PreviewImageSource), typeof(ImageSource), typeof(ToolDetail), new FrameworkPropertyMetadata()
+            );
+        #endregion
+
+        /************************************************************************/
+
+        #region Other Text
         /// <summary>
         /// Gets or sets text that describes the tool
         /// </summary>
@@ -109,23 +206,6 @@ namespace Restless.Panama.View
         public static readonly DependencyProperty StatusTextProperty = DependencyProperty.Register
             (
                 nameof(StatusText), typeof(string), typeof(ToolDetail), new FrameworkPropertyMetadata()
-            );
-
-        /// <summary>
-        /// Gets or sets the preview text
-        /// </summary>
-        public string PreviewText
-        {
-            get => (string)GetValue(PreviewTextProperty);
-            set => SetValue(PreviewTextProperty, value);
-        }
-
-        /// <summary>
-        /// Identifies the <see cref="PreviewText"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty PreviewTextProperty = DependencyProperty.Register
-            (
-                nameof(PreviewText), typeof(string), typeof(ToolDetail), new FrameworkPropertyMetadata()
             );
         #endregion
 
@@ -230,20 +310,17 @@ namespace Restless.Panama.View
 
         /************************************************************************/
 
-        #region Visibility
+        #region Visibility (read only)
         /// <summary>
-        /// Gets or sets the visibility of the updated list box and its associated text block
+        /// Gets the visibility for the updated list box
         /// </summary>
         public Visibility UpdatedVisibility
         {
             get => (Visibility)GetValue(UpdatedVisibilityProperty);
-            set => SetValue(UpdatedVisibilityProperty, value);
+            private set => SetValue(UpdatedVisibilityPropertyKey, value);
         }
 
-        /// <summary>
-        /// Identifies the <see cref="UpdatedVisibility"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty UpdatedVisibilityProperty = DependencyProperty.Register
+        private static readonly DependencyPropertyKey UpdatedVisibilityPropertyKey = DependencyProperty.RegisterReadOnly
             (
                 nameof(UpdatedVisibility), typeof(Visibility), typeof(ToolDetail), new FrameworkPropertyMetadata()
                 {
@@ -252,18 +329,21 @@ namespace Restless.Panama.View
             );
 
         /// <summary>
-        /// Gets or sets the visibility of the not found list box and its associated text block
+        /// Identifies the <see cref="UpdatedVisibility"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty UpdatedVisibilityProperty = UpdatedVisibilityPropertyKey.DependencyProperty;
+
+
+        /// <summary>
+        /// Gets the...
         /// </summary>
         public Visibility NotFoundVisibility
         {
             get => (Visibility)GetValue(NotFoundVisibilityProperty);
-            set => SetValue(NotFoundVisibilityProperty, value);
+            private set => SetValue(NotFoundVisibilityPropertyKey, value);
         }
 
-        /// <summary>
-        /// Identifies the <see cref="NotFoundVisibility"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty NotFoundVisibilityProperty = DependencyProperty.Register
+        private static readonly DependencyPropertyKey NotFoundVisibilityPropertyKey = DependencyProperty.RegisterReadOnly
             (
                 nameof(NotFoundVisibility), typeof(Visibility), typeof(ToolDetail), new FrameworkPropertyMetadata()
                 {
@@ -272,24 +352,42 @@ namespace Restless.Panama.View
             );
 
         /// <summary>
-        /// Gets or sets the visibility of the preview
+        /// Identifies the <see cref="NotFoundVisibility"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty NotFoundVisibilityProperty = NotFoundVisibilityPropertyKey.DependencyProperty;
+
+        /// <summary>
+        /// Gets the visibility of the previewer
         /// </summary>
         public Visibility PreviewVisibility
         {
             get => (Visibility)GetValue(PreviewVisibilityProperty);
-            set => SetValue(PreviewVisibilityProperty, value);
+            private set => SetValue(PreviewVisibilityPropertyKey, value);
         }
 
-        /// <summary>
-        /// Identifies the <see cref="PreviewVisibility"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty PreviewVisibilityProperty = DependencyProperty.Register
+        private static readonly DependencyPropertyKey PreviewVisibilityPropertyKey = DependencyProperty.RegisterReadOnly
             (
                 nameof(PreviewVisibility), typeof(Visibility), typeof(ToolDetail), new FrameworkPropertyMetadata()
                 {
                     DefaultValue = Visibility.Collapsed
                 }
             );
+
+        /// <summary>
+        /// Identifies the <see cref="PreviewVisibility"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty PreviewVisibilityProperty = PreviewVisibilityPropertyKey.DependencyProperty;
+        #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+        private void SetMode()
+        {
+            UpdatedVisibility = (Mode is ToolDetailMode.Standard or ToolDetailMode.Preview) ? Visibility.Visible : Visibility.Collapsed;
+            NotFoundVisibility = (Mode is ToolDetailMode.Standard) ? Visibility.Visible : Visibility.Collapsed;
+            PreviewVisibility = (Mode is ToolDetailMode.Preview) ? Visibility.Visible : Visibility.Collapsed;
+        }
         #endregion
     }
 }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Restless.Panama.ViewModel
 {
@@ -20,7 +21,9 @@ namespace Restless.Panama.ViewModel
         private readonly TitleLister titleLister;
         private readonly OrphanFinder orphanFinder;
         private FileScanItem selectedOrphan;
+        private PreviewMode orphanPreviewMode;
         private string orphanPreviewText;
+        private ImageSource orphanImageSource;
         #endregion
 
         /************************************************************************/
@@ -76,10 +79,22 @@ namespace Restless.Panama.ViewModel
             }
         }
 
+        public PreviewMode OrphanPreviewMode
+        {
+            get => orphanPreviewMode;
+            private set => SetProperty(ref orphanPreviewMode, value);
+        }
+
         public string OrphanPreviewText
         {
             get => orphanPreviewText;
             private set => SetProperty(ref orphanPreviewText, value);
+        }
+
+        public ImageSource OrphanImageSource
+        {
+            get => orphanImageSource;
+            private set => SetProperty(ref orphanImageSource, value);
         }
         #endregion
 
@@ -201,10 +216,18 @@ namespace Restless.Panama.ViewModel
         {
             if (SelectedOrphan != null)
             {
-                PreviewMode mode = DocumentPreviewer.GetPreviewMode(SelectedOrphan.FullName);
-                if (mode == PreviewMode.Text)
+                OrphanPreviewMode = DocumentPreviewer.GetPreviewMode(SelectedOrphan.FullName);
+                switch (OrphanPreviewMode)
                 {
-                    OrphanPreviewText = DocumentPreviewer.GetText(SelectedOrphan.FullName);
+                    case PreviewMode.Text:
+                        OrphanPreviewText = DocumentPreviewer.GetText(SelectedOrphan.FullName);
+                        break;
+                    case PreviewMode.Image:
+                        OrphanImageSource = DocumentPreviewer.GetImage(SelectedOrphan.FullName);
+                        break;
+                    case PreviewMode.None:
+                    case PreviewMode.Unsupported:
+                        break;
                 }
             }
         }

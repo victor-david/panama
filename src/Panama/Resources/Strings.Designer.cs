@@ -1337,15 +1337,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Preview.
-        /// </summary>
-        public static string HeaderPreview {
-            get {
-                return ResourceManager.GetString("HeaderPreview", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Published.
         /// </summary>
         public static string HeaderPublished {
@@ -2099,6 +2090,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Document Preview Not Supported.
+        /// </summary>
+        public static string TextDocumentPreviewNotSupported {
+            get {
+                return ResourceManager.GetString("TextDocumentPreviewNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ever Submitted.
         /// </summary>
         public static string TextEverSubmitted {
@@ -2122,6 +2122,15 @@ namespace Restless.Panama.Resources {
         public static string TextFlagged {
             get {
                 return ResourceManager.GetString("TextFlagged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
+        /// </summary>
+        public static string TextImage {
+            get {
+                return ResourceManager.GetString("TextImage", resourceCulture);
             }
         }
         
@@ -2162,7 +2171,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not an Open Xml document.
+        ///   Looks up a localized string similar to Not an Open Xml Document.
         /// </summary>
         public static string TextNotOpenXmlDocument {
             get {
@@ -2176,6 +2185,15 @@ namespace Restless.Panama.Resources {
         public static string TextOrphans {
             get {
                 return ResourceManager.GetString("TextOrphans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
+        public static string TextPreview {
+            get {
+                return ResourceManager.GetString("TextPreview", resourceCulture);
             }
         }
         

@@ -27,7 +27,7 @@
 
         <!-- Tool bar -->
         <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">
-            <ToolBar Style="{StaticResource ToolBarCommandHolder}">
+            <ToolBar>
                 <!-- Prompt -->
                 <TextBlock Text="Search text"/>
                 <!-- Search text-->
@@ -45,7 +45,6 @@
         <HeaderedContentControl
              Grid.Row="2" 
              Grid.ColumnSpan="{Binding IsPreviewActive, Converter={cv:BooleanToIntegerConverter}, ConverterParameter={StaticResource Integer1}}"
-             Style="{StaticResource HCCTool}"
              Header="{Binding FoundHeader}" Margin="4">
             <Grid>
                 <DataGrid x:Name="grid" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" tk:DataGridColumns.Columns="{Binding Columns}">
@@ -69,7 +68,7 @@
         </HeaderedContentControl>
 
         <!-- Preview -->
-        <view:ToolPreview 
+        <view:PreviewPanel
             Grid.Row="2"
             Grid.Column="1"
             Visibility="{Binding IsPreviewActive, Converter={cv:BooleanToVisibilityConverter}}"/>

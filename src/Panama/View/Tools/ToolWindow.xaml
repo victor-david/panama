@@ -58,6 +58,7 @@
                 tk:Property.IsLongVisibleValue="1">
 
                 <vw:ToolDetail
+                    Mode="Standard"
                     ExplanationText="{x:Static r:Strings.ToolTitleMetadataDetail}"
                     FolderDisplay="{Binding Config.FolderTitleRoot, Mode=OneTime}"
                     StatusText="{Binding Adapter.Status[0]}"
@@ -74,6 +75,7 @@
                 tk:Property.IsLongVisibleValue="2">
 
                 <vw:ToolDetail
+                    Mode="Standard"
                     ExplanationText="{x:Static r:Strings.ToolSubmissionMetadataDetail}"
                     FolderDisplay="{Binding Config.FolderSubmissionDocument, Mode=OneTime}"
                     StatusText="{Binding Adapter.Status[1]}"
@@ -90,6 +92,7 @@
                 tk:Property.IsLongVisibleValue="3">
 
                 <vw:ToolDetail
+                    Mode="Standard"
                     ExplanationText="{x:Static r:Strings.ToolExportDetail}"
                     FolderDisplay="{Binding Config.FolderExport, Mode=OneTime}"
                     StatusText="{Binding Adapter.Status[2]}"
@@ -108,11 +111,10 @@
                 tk:Property.IsLongVisibleValue="4">
 
                 <vw:ToolDetail
+                    Mode="Bare"
                     ExplanationText="{x:Static r:Strings.ToolTitleListDetail}"
                     FolderDisplay="{Binding TitleListFileName, Mode=OneTime}"
                     StatusText="{Binding Adapter.Status[3]}"
-                    UpdatedVisibility="Collapsed"
-                    NotFoundVisibility="Collapsed"
                     Command="{Binding Commands[RunTitleList]}"/>
 
             </HeaderedContentControl>
@@ -124,13 +126,14 @@
                 tk:Property.IsLongVisibleValue="5">
 
                 <vw:ToolDetail
+                    Mode="Preview"
                     ExplanationText="{x:Static r:Strings.ToolOrphanDetail}"
                     FolderDisplay="{Binding Config.FolderTitleRoot, Mode=OneTime}"
                     StatusText="{Binding Adapter.Status[4]}"
                     UpdatedText="{x:Static r:Strings.TextOrphans}"
-                    NotFoundVisibility="Collapsed"
-                    PreviewVisibility="Visible"
+                    PreviewMode="{Binding OrphanPreviewMode}"
                     PreviewText="{Binding OrphanPreviewText}"
+                    PreviewImageSource="{Binding OrphanImageSource}"
                     SelectedUpdatedItem="{Binding SelectedOrphan}"
                     UpdatedItemsSource="{Binding Adapter.Updated[4]}"
                     Command="{Binding Commands[RunOrphan]}"/>                

@@ -5,13 +5,6 @@
     xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <!--<sys:Double x:Key="DataEntryPanelDefaultControlHeight">26</sys:Double>
-    <Thickness x:Key="DataEntryPanelDefaultControlMargin">0,0,6,4</Thickness>
-    <Thickness x:Key="DataEntryPanelAltControlMargin">0,4,6,4</Thickness>
-
-    <Thickness x:Key="DataEntryPanelDefaultTextBlockMargin">0,8,0,2</Thickness>
-    <Thickness x:Key="DataEntryPanelAltTextBlockMargin">0,1,0,0</Thickness>-->
-
     <Style x:Key="DataEntryPanelDefaultTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="{StaticResource DataEntryPanelDefaultTextBlockMargin}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>

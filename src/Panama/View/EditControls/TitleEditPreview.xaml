@@ -21,5 +21,5 @@
         FontSize="16"
         Foreground="{StaticResource DarkAlertForegroundBrush}"
         HorizontalAlignment="Center"
-        Text="{x:Static r:Strings.TextNotOpenXmlDocument}"/>
+        Text="{x:Static r:Strings.TextDocumentPreviewNotSupported}"/>
 </Grid>

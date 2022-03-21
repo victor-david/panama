@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:ToolWindowViewModel}"
     mc:Ignorable="d" 
     d:DesignHeight="250" d:DesignWidth="400"
@@ -64,11 +65,12 @@
         SelectedItem="{Binding SelectedNotFoundItem, ElementName=ToolControl}"
         ItemsSource="{Binding NotFoundItemsSource, ElementName=ToolControl}"/>
 
-    <TextBox
-        Grid.Row="3" Grid.Column="1"
-        Text="{Binding PreviewText, ElementName=ToolControl}"
-        Visibility="{Binding PreviewVisibility, ElementName=ToolControl}"
-        Style="{StaticResource TextBoxMultiStretchStyle}"/>
+    <vw:PreviewPanel
+        Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"
+        PreviewMode="{Binding PreviewMode, ElementName=ToolControl}"
+        PreviewText="{Binding PreviewText, ElementName=ToolControl}"
+        PreviewImageSource="{Binding PreviewImageSource, ElementName=ToolControl}"
+        Visibility="{Binding PreviewVisibility, ElementName=ToolControl}"/>
 
     <StatusBar
         Grid.Row="4"
@@ -79,7 +81,4 @@
             Text="{Binding StatusText, ElementName=ToolControl}"/>
 
     </StatusBar>
-
-
-
 </Grid>

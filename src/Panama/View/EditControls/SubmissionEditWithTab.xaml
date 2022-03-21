@@ -137,7 +137,7 @@
                     <DockPanel DockPanel.Dock="Top" Margin="0,8" Visibility="{Binding Documents.EditVisibility}">
                         <Label DockPanel.Dock="Top">Document title</Label>
                         <TextBox DockPanel.Dock="Top" Text="{Binding Documents.SelectedRow[title]}"/>
-                        <Expander DockPanel.Dock="Top" Header="{x:Static r:Strings.HeaderPreview}" IsExpanded="{Binding Documents.IsPreviewMode}">
+                        <Expander DockPanel.Dock="Top" Header="{x:Static r:Strings.TextPreview}" IsExpanded="{Binding Documents.IsPreviewMode}">
                             <DockPanel VerticalAlignment="Stretch">
                                 <TextBlock
                                     DockPanel.Dock="Top" 

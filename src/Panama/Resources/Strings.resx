@@ -679,7 +679,7 @@ The application cannot continue.</value>
   <data name="HeaderDates" xml:space="preserve">
     <value>Dates</value>
   </data>
-  <data name="HeaderPreview" xml:space="preserve">
+  <data name="TextPreview" xml:space="preserve">
     <value>Preview</value>
   </data>
   <data name="HeaderSettingsColor" xml:space="preserve">
@@ -964,8 +964,8 @@ Do you want to continue?</value>
   <data name="ToolTipTitleFilterSubmitted" xml:space="preserve">
     <value>Title is currently submitted</value>
   </data>
-  <data name="TextNotOpenXmlDocument" xml:space="preserve">
-    <value>Not an Open Xml document</value>
+  <data name="TextDocumentPreviewNotSupported" xml:space="preserve">
+    <value>Document Preview Not Supported</value>
   </data>
   <data name="TextNoTitleVersions" xml:space="preserve">
     <value>No versions for this title</value>
@@ -1071,5 +1071,11 @@ Do you want to continue?</value>
   </data>
   <data name="TextOrphans" xml:space="preserve">
     <value>Orphans</value>
+  </data>
+  <data name="TextNotOpenXmlDocument" xml:space="preserve">
+    <value>Not an Open Xml Document</value>
+  </data>
+  <data name="TextImage" xml:space="preserve">
+    <value>Image</value>
   </data>
 </root>
