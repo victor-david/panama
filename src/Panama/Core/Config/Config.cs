@@ -116,6 +116,22 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Provides static values for the startup tool window
+        /// </summary>
+        public static class StartupToolWindow
+        {
+            /// <summary>
+            /// Gets the default width for the tool window.
+            /// </summary>
+            public const int DefaultWidth = 480;
+
+            /// <summary>
+            /// Gets the default height for the tool window.
+            /// </summary>
+            public const int DefaultHeight = 260;
+        }
+
+        /// <summary>
         /// Provides static values for DataGrid
         /// </summary>
         public static class DataGrid

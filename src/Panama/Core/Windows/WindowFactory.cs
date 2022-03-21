@@ -250,24 +250,25 @@ namespace Restless.Panama.Core
 
         /************************************************************************/
 
-        #region CommandTools
+        #region StartupTool
         /// <summary>
-        /// Provides static methods for creating a command tools window.
+        /// Provides static methods for creating a startup tool window.
         /// </summary>
-        public static class CommandTools
+        public static class StartupTool
         {
             /// <summary>
-            /// Creates an instance of CommandToolsWindow and its corresponding view model.
+            /// Creates an instance of StartupToolWindow and its corresponding view model.
             /// </summary>
-            /// <param name="ops">The startup options.</param>
             /// <returns>The window</returns>
-            public static CommandToolsWindow Create(StartupOptions ops)
+            public static StartupToolWindow Create()
             {
-                CommandToolsWindow window = new()
+                StartupToolWindow window = new()
                 {
                     Owner = null, // this is a top level window
+                    Width = Config.StartupToolWindow.DefaultWidth,
+                    Height = Config.StartupToolWindow.DefaultHeight,
                     WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                    DataContext = new CommandToolsWindowViewModel(ops)
+                    DataContext = new StartupToolWindowViewModel()
                 };
                 SetWindowOwner(window);
                 SetTextFormattingMode(window);
