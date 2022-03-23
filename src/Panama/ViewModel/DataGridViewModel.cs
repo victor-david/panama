@@ -9,15 +9,11 @@ using Restless.Panama.Database.Core;
 using Restless.Panama.Utility;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Database.SQLite;
-using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 

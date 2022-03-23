@@ -11,11 +11,6 @@ namespace Restless.Panama.Tools
     /// </summary>
     public class WindowsFileSearch : WindowsSearchBase
     {
-        #region Private
-        #endregion
-
-        /************************************************************************/
-
         #region Public properties
         /// <summary>
         /// Gets a list of scopes to be excluded from the search. Only applies to file search
@@ -82,7 +77,7 @@ namespace Restless.Panama.Tools
                 sql.Append(k < Scopes.Count - 1 ? " OR " : string.Empty);
 
             }
-            sql.Append(")");
+            sql.Append(')');
 
             foreach (string scope in ExcludedScopes)
             {

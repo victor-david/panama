@@ -839,15 +839,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search.
-        /// </summary>
-        public static string CommandToolSearch {
-            get {
-                return ResourceManager.GetString("CommandToolSearch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Title list.
         /// </summary>
         public static string CommandToolTitleList {
@@ -1964,6 +1955,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string MenuItemSearch {
+            get {
+                return ResourceManager.GetString("MenuItemSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Self publishers.
         /// </summary>
         public static string MenuItemSelfPublishers {
@@ -2311,6 +2311,15 @@ namespace Restless.Panama.Resources {
         public static string TextWritten {
             get {
                 return ResourceManager.GetString("TextWritten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search returned no results.
+        /// </summary>
+        public static string TextZeroSearchResults {
+            get {
+                return ResourceManager.GetString("TextZeroSearchResults", resourceCulture);
             }
         }
         

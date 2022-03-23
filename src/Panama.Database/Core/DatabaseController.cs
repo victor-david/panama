@@ -109,15 +109,15 @@ namespace Restless.Panama.Database.Core
             }
             DatabaseRoot = databaseRoot;
             CreateAndOpen(MemoryDatabase);
-            AttachSchemaDatabase();
-            AttachMainDatabase(MainFileAlias, MainFileId);
+            AttachMemorySchema();
+            AttachMainSchema(MainFileAlias, MainFileId);
         }
 
         /// <summary>
         /// Attaches the main finance database
         /// </summary>
         /// <param name="databaseFileId">The database name (not path)</param>
-        public void AttachMainDatabase(string alias, string databaseFileId)
+        public void AttachMainSchema(string alias, string databaseFileId)
         {
             if (string.IsNullOrEmpty(databaseFileId))
             {
@@ -212,11 +212,12 @@ namespace Restless.Panama.Database.Core
             }
         }
 
-        private void AttachSchemaDatabase()
+        private void AttachMemorySchema()
         {
             Attach(MemorySchemaName, MemoryDatabase, () =>
             {
                 CreateAndRegisterTable<SchemaTable>();
+                CreateAndRegisterTable<SearchTable>();
                 TableRegistrationComplete(MemorySchemaName);
             });
         }

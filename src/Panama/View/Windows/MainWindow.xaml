@@ -62,10 +62,16 @@
                 
                 <!--<MenuItem Header="Message Sync" Icon="{StaticResource ImageToolMessageSyncMenu}" Command="{Binding Commands[ToolMessageSync]}"/>-->
                 <!--<MenuItem Header="Table Info" Icon="{StaticResource ImageDatabaseMenu}" Command="{Binding Commands[Table]}"/>-->
-                <!--<MenuItem Header="Search" Icon="{StaticResource ImageToolSearchMenu}" Command="{Binding Commands[ToolSearch]}"/>-->
+                
                 <!--<MenuItem Header="Convert" Icon="{StaticResource ImageToolConvertMenu}" Command="{Binding Commands[ToolConvert]}"/>-->
                 <!--<MenuItem Header="Scramble" Command="{Binding Commands[ToolScramble]}"/>-->
                 <Separator/>
+
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemSearch}"
+                    Icon="{StaticResource SearchIconKey}"
+                    Command="{Binding Commands[NavigateSearch]}"/>
+
                 <MenuItem
                     Header="{x:Static r:Strings.MenuItemResetWindows}"
                     Icon="{StaticResource SquareSmallGrayIconKey}"

@@ -68,6 +68,13 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>
 
+    <Style x:Key="TextBlockZeroResultStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{StaticResource LightForegroundBrush}"/>
+    </Style>
+
     <Style x:Key="StatusBarNotificationMessage" TargetType="TextBlock">
         <Setter Property="Text" Value="{Binding Path=NotificationMessage, NotifyOnTargetUpdated=True}" />
         <Setter Property="Foreground" Value="Red"/>

@@ -6,71 +6,65 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:view="clr-namespace:Restless.Panama.View"
-    xmlns:cv="clr-namespace:Restless.Panama.Core"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:ToolSearchViewModel}"
     mc:Ignorable="d" 
-    d:DesignHeight="250" d:DesignWidth="700">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+    d:DesignHeight="250" d:DesignWidth="400">
+    <Grid
+        tk:Property.ColumnWidths="2*,*"
+        tk:Property.RowHeights="Auto,*">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-
-        <!-- Tool explanation text -->
-        <TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationSearch}"/>
-
-        <!-- Tool bar -->
-        <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">
-            <ToolBar>
-                <!-- Prompt -->
-                <TextBlock Text="Search text"/>
-                <!-- Search text-->
-                <TextBox Width="180" Text="{Binding SearchText}"/>
-                <!-- Tool start button -->
-                <Button Width="70" Command="{Binding Commands[Begin]}" Content="Begin"/>
-                <!-- Separator -->
-                <Separator/>
-                <!-- Toggle preview button -->
-                <Button Width="70" Command="{Binding Commands[TogglePreview]}" Content="{Binding PreviewActiveIcon}" />
-            </ToolBar>
-        </ToolBarTray>
+        <StatusBar Margin="0,0,4,0">
+            <TextBlock Text="Search:"/>
+            <TextBox Width="120" Text="{Binding SearchText}"/>
+            <tk:IconButton Content="Begin" Command="{Binding Commands[Begin]}"/>
+        </StatusBar>
 
         <!-- Main grid for results -->
-        <HeaderedContentControl
-             Grid.Row="2" 
-             Grid.ColumnSpan="{Binding IsPreviewActive, Converter={cv:BooleanToIntegerConverter}, ConverterParameter={StaticResource Integer1}}"
-             Header="{Binding FoundHeader}" Margin="4">
+        <Border
+            Grid.Row="1"
+            Style="{StaticResource BorderEditContainerStyle}">
+            
             <Grid>
-                <DataGrid x:Name="grid" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" tk:DataGridColumns.Columns="{Binding Columns}">
+                <DataGrid
+                    Style="{StaticResource DataGridEditLockedStretchedStyle}"
+                    ItemsSource="{Binding Path=ListView}"
+                    SelectedItem="{Binding SelectedItem}"
+                    tk:DataGridColumns.Columns="{Binding Columns}">
+                    
                     <DataGrid.ContextMenu>
                         <ContextMenu ItemsSource="{Binding MenuItems}"/>
                     </DataGrid.ContextMenu>
-                    <DataGrid.RowStyle>
-                        <Style TargetType="DataGridRow">
-                            <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.Commands[OpenItem]}"/>
-                        </Style>
-                    </DataGrid.RowStyle>
+                    
+                    <DataGrid.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                    </DataGrid.InputBindings>
+                    
                 </DataGrid>
-                <TextBlock 
-                    Style="{StaticResource TextBlockError}"
-                    FontSize="12"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Text="Search returned no results" 
-                    Visibility="{Binding IsEmptyResultSet,Converter={cv:BooleanToVisibilityConverter}}"/>
-            </Grid>
-        </HeaderedContentControl>
+                
+                <TextBlock
+                    Style="{StaticResource TextBlockZeroResultStyle}"
+                    tk:Property.IsCollapsed="{Binding HaveResults}"
+                    Text="{x:Static r:Strings.TextZeroSearchResults}"/>
 
-        <!-- Preview -->
-        <view:PreviewPanel
-            Grid.Row="2"
+            </Grid>
+
+        </Border>
+        <StatusBar Grid.Column="1" Margin="4,0,0,0">
+            
+        </StatusBar>
+
+        <Border
             Grid.Column="1"
-            Visibility="{Binding IsPreviewActive, Converter={cv:BooleanToVisibilityConverter}}"/>
+            Grid.Row="1"
+            Style="{StaticResource BorderEditContainerStyle}" >
+
+            <vw:PreviewPanel/>
+        </Border>
+        
+            
+        
+        
     </Grid>
 </UserControl>

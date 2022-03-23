@@ -247,6 +247,11 @@
         <Setter Property="CanUserReorderColumns" Value="False"/>
     </Style>
 
+    <Style x:Key="DataGridEditLockedStretchedStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+    </Style>
+
     <!-- Backward compatibility TODO: remove -->
     <Style x:Key="DataGridHeaderCenter" TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>

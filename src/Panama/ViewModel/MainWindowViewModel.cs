@@ -104,6 +104,7 @@ namespace Restless.Panama.ViewModel
             Commands.Add("OpenToolWindow", p => WindowFactory.Tool.Create().ShowDialog());
 
             Commands.Add("NavigateAuthor", p => NavigatorItems.Select<AuthorViewModel>());
+            Commands.Add("NavigateSearch", p => NavigatorItems.Select<ToolSearchViewModel>());
             Commands.Add("NavigateTag", p => NavigatorItems.Select<TagViewModel>());
 
             Commands.Add("Close", p => WindowOwner.Close());
@@ -116,14 +117,12 @@ namespace Restless.Panama.ViewModel
             Commands.Add("ResetWindow", RunResetWindowCommand);
             //Commands.Add("Submission", p => NavigatorItems.Select<SubmissionViewModel>());
             Commands.Add("Save", Save);
-            //Commands.Add("SelfPublisher", p => NavigatorItems.Select<SelfPublisherViewModel>());
 
             Commands.Add("Table", p => NavigatorItems.Select<TableViewModel>());
 
             //Commands.Add("ToolConvert", p => NavigatorItems.Select<ToolConvertViewModel>(), CanRunToolConvertCommand);
             Commands.Add("ToolMessageSync", p => NavigatorItems.Select<ToolMessageSyncViewModel>());
             //Commands.Add("ToolScramble", p => NavigatorItems.Select<ToolScrambleViewModel>());
-            Commands.Add("ToolSearch", p => NavigatorItems.Select<ToolSearchViewModel>());
 
             MainNavigationWidth = new GridLength(Config.MainNavigationWidth, GridUnitType.Pixel);
 
@@ -237,6 +236,8 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<UserNoteViewModel>(NavigationGroup.Other, Strings.MenuItemNotes, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.NoteGeometryKey));
             NavigatorItems.Add<LinkViewModel>(NavigationGroup.Other, Strings.MenuItemLinks, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.LinkGeometryKey));
             NavigatorItems.Add<StatisticsViewModel>(NavigationGroup.Other, Strings.MenuItemStatistics, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.StatisticGeometryKey));
+
+            NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemStatistics); 
         }
 
         private void NavigatorItemsSelectedItemChanged(object sender, NavigatorItem navItem)

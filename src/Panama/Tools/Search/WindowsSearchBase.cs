@@ -1,5 +1,4 @@
 ﻿using Restless.Toolkit.Core.Utility;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.OleDb;
@@ -55,7 +54,7 @@ namespace Restless.Panama.Tools
         #endregion
 
         /************************************************************************/
-        
+
         #region Public methods
         /// <summary>
         /// When implemented in a derived class, gets the search results.
@@ -68,15 +67,6 @@ namespace Restless.Panama.Tools
 
         /************************************************************************/
 
-        #region Public events
-        /// <summary>
-        /// Occurs when adding a search result. If the consumer sets the cancel flag, the result will not be added.
-        /// </summary>
-        public EventHandler<SearchResultEventArgs> AddingResult;
-        #endregion
-
-        /************************************************************************/
-
         #region Protected methods
         /// <summary>
         /// Gets the collection of results, based on the specified sql.
@@ -85,7 +75,7 @@ namespace Restless.Panama.Tools
         /// <returns>WindowsSearchResultCollection</returns>
         protected WindowsSearchResultCollection GetCollection(string sql)
         {
-            WindowsSearchResultCollection result = new();
+            WindowsSearchResultCollection collection = new();
 
             using (OleDbConnection conn = new(ConnectionStr))
             {
@@ -95,23 +85,20 @@ namespace Restless.Panama.Tools
 
                 while (reader.Read())
                 {
-                    WindowsSearchResult r = new();
+                    WindowsSearchResult result = new();
                     foreach (PropSystem.PropertyKey key in keys)
                     {
-                        //string name = GetPropName(key);
-                        Execution.TryCatchSwallow(() => { r.Values.SetProperty(key, reader[GetPropName(key)]); });
+                        Execution.TryCatchSwallow(() => 
+                        {
+                            result.Values.SetProperty(key, reader[GetPropName(key)]);
+                        });
                     }
-                    SearchResultEventArgs e = new(r);
-                    OnAddingResult(e);
-                    if (!e.Cancel)
-                    {
-                        result.Add(r);
-                    }
+                    collection.Add(result);
                 }
                 conn.Close();
             }
 
-            return result;
+            return collection;
         }
 
         /// <summary>
@@ -123,7 +110,7 @@ namespace Restless.Panama.Tools
             StringBuilder sql = new(256);
             foreach (PropSystem.PropertyKey key in keys)
             {
-                sql.AppendFormat("{0},", GetPropName(key));
+                sql.Append($"{GetPropName(key)},");
             }
 
             sql.Remove(sql.Length - 1, 1);
@@ -151,7 +138,7 @@ namespace Restless.Panama.Tools
             {
                 orderBy.Append(" ORDER BY ");
                 int k = 0;
-                foreach (var spec in OrderBy)
+                foreach (KeyValuePair<PropSystem.PropertyKey, ListSortDirection> spec in OrderBy)
                 {
                     orderBy.Append(GetPropName(spec.Key));
                     orderBy.Append((spec.Value == ListSortDirection.Ascending) ? " ASC" : " DESC");
@@ -161,19 +148,10 @@ namespace Restless.Panama.Tools
             }
             sql.Append(orderBy);
         }
-
-        /// <summary>
-        /// Raises the <see cref="AddingResult"/> event.
-        /// </summary>
-        /// <param name="e">The event arguments.</param>
-        protected virtual void OnAddingResult(SearchResultEventArgs e)
-        {
-            AddingResult?.Invoke(this, e);
-        }
         #endregion
 
         /************************************************************************/
-        
+
         #region Private methods
         /// <summary>
         /// Populates our list of keys with the property keys that we're interested in.

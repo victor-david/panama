@@ -1,4 +1,6 @@
-﻿using PropSystem = Microsoft.WindowsAPICodePack.Shell.PropertySystem;
+﻿using Restless.Panama.Database.Tables;
+using System;
+using PropSystem = Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
 
 namespace Restless.Panama.Tools
@@ -9,15 +11,6 @@ namespace Restless.Panama.Tools
     public class WindowsSearchResult
     {
         #region Public properties
-        /// <summary>
-        /// Gets or sets an object of custom data.
-        /// </summary>
-        public object Extended
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// Gets the values for this search result.
         /// </summary>
@@ -40,13 +33,29 @@ namespace Restless.Panama.Tools
         #endregion
 
         /************************************************************************/
-
-        #region Internal methods
-        #endregion
-
-        /************************************************************************/
         
         #region Public methods
+        /// <summary>
+        /// Creates a <see cref="SearchRowItem"/> from current values
+        /// </summary>
+        /// <param name="versionExists">true if version exists</param>
+        /// <returns>A <see cref="SearchRowItem"/> to pass to the table inserter</returns>
+        public SearchRowItem ToSearchTableItem(bool versionExists)
+        {
+            return new SearchRowItem()
+            {
+                Type = Values.GetValue<string>(SysProps.System.ItemType),
+                File = Values.GetValue<string>(SysProps.System.ItemPathDisplay),
+                Title = Values.GetValue<string>(SysProps.System.Title),
+                Author = Values.GetValue<string>(SysProps.System.Author),
+                Company = Values.GetValue<string>(SysProps.System.Company),
+                Size = (int)Values.GetValue<decimal>(SysProps.System.Size),
+                IsVersion = versionExists,
+                Created = Values.GetValue<DateTime>(SysProps.System.DateCreated),
+                Modified = Values.GetValue<DateTime>(SysProps.System.DateModified),
+            };
+        }
+
         /// <summary>
         /// Sets the System.ItemPathDisplay property
         /// </summary>
@@ -54,18 +63,6 @@ namespace Restless.Panama.Tools
         public void SetItemPathDisplay(string value)
         {
             Values.SetProperty(SysProps.System.ItemPathDisplay, value);
-        }
-
-        /// <summary>
-        /// Gets a property descriptor for binding (ex: "Values[System.ItemName]") based
-        /// upon the specified property key.
-        /// </summary>
-        /// <param name="key">The property key</param>
-        /// <returns>A string that can be used in programatic binding, ex: "Values[System.ItemName]"</returns>
-        public static string GetBindingReference(PropSystem.PropertyKey key)
-        {
-            var desc = SysProps.GetPropertyDescription(key);
-            return string.Format("Values[{0}]", desc.CanonicalName);
         }
         #endregion
     }

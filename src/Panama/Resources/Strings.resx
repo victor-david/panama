@@ -522,7 +522,7 @@ Last exported: {1}</value>
   <data name="HeaderToolOperationSearch" xml:space="preserve">
     <value>This operation searches all files beneath the title root directory to find all files that contain the specified search term.</value>
   </data>
-  <data name="CommandToolSearch" xml:space="preserve">
+  <data name="MenuItemSearch" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="ConfirmationRemoveSubmissionMessage" xml:space="preserve">
@@ -1080,5 +1080,8 @@ Do you want to continue?</value>
   </data>
   <data name="ConfigOrphanFileExclusion" xml:space="preserve">
     <value>Orphan file exclusions, separated by semi-colon</value>
+  </data>
+  <data name="TextZeroSearchResults" xml:space="preserve">
+    <value>Search returned no results</value>
   </data>
 </root>

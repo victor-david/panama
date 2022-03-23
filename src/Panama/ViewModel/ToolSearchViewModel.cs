@@ -13,10 +13,7 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
 using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
 
 namespace Restless.Panama.ViewModel
@@ -24,31 +21,19 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for the search tool.
     /// </summary>
-    public class ToolSearchViewModel : DataGridPreviewViewModel
+    public class ToolSearchViewModel : DataGridViewModel<SearchTable>
     {
         #region Private
-        private string foundHeader;
-        private readonly ObservableCollection<WindowsSearchResult> resultsView;
-        private readonly List<DataGridColumn> previewColumns;
-        private bool isEmptyResultSet;
+        private SearchRow selectedSearch;
+        private bool haveResults;
         private readonly WindowsFileSearch provider;
+        private TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
+        private SearchTable SearchTable => DatabaseController.Instance.GetTable<SearchTable>();
         #endregion
 
         /************************************************************************/
 
         #region Properties
-        /// <summary>
-        /// Gets a string value for the results header.
-        /// </summary>
-        public string FoundHeader
-        {
-            get { return foundHeader; }
-            private set
-            {
-                SetProperty(ref foundHeader, value);
-            }
-        }
-
         /// <summary>
         /// Gets or sets the search text.
         /// </summary>
@@ -59,15 +44,21 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates if the lastest search returned an empty result set.
+        /// Gets a boolean value that indicates if the lastest search contains results
         /// </summary>
-        public bool IsEmptyResultSet
+        public bool HaveResults
         {
-            get { return isEmptyResultSet; }
-            private set
-            {
-                SetProperty(ref isEmptyResultSet, value);
-            }
+            get => haveResults;
+            private set => SetProperty(ref haveResults, value);
+        }
+
+        /// <summary>
+        /// Gets the selected search row
+        /// </summary>
+        public SearchRow SelectedSearch
+        {
+            get => selectedSearch;
+            private set => SetProperty(ref selectedSearch, value);
         }
         #endregion
 
@@ -79,48 +70,28 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public ToolSearchViewModel()
         {
-            DisplayName = Strings.CommandToolSearch;
-            previewColumns = new List<DataGridColumn>();
-
-            resultsView = new ObservableCollection<WindowsSearchResult>();
-            // TODO
-            // MainSource.Source = resultsView;
-
-            Columns.CreateImage<BooleanToImageConverter>("V", "Extended.IsVersion");
-            Columns.Create("Type", WindowsSearchResult.GetBindingReference(SysProps.System.ItemType)).MakeFixedWidth(FixedWidth.W048);
-            Columns.Create("Size", WindowsSearchResult.GetBindingReference(SysProps.System.Size)).MakeNumeric(null, FixedWidth.W076);
-            Columns.Create("Modified", WindowsSearchResult.GetBindingReference(SysProps.System.DateModified)).MakeDate()
-                .AddToolTip("The modified date according to the file system");
-
-            previewColumns.Add
-                (
-                    Columns.Create("Created", WindowsSearchResult.GetBindingReference(SysProps.System.Document.DateCreated)).MakeDate()
-                    .AddToolTip("The created date according to the document internal properties")
-                );
-            previewColumns.Add
-                (
-                    Columns.Create("Saved", WindowsSearchResult.GetBindingReference(SysProps.System.Document.DateSaved)).MakeDate()
-                        .AddToolTip("The saved date according to the document internal properties")
-                );
-
-            Columns.Create("File", WindowsSearchResult.GetBindingReference(SysProps.System.ItemPathDisplay)).MakeFlexWidth(2.0);
-
-            previewColumns.Add(Columns.Create("Title", WindowsSearchResult.GetBindingReference(SysProps.System.Title)).MakeFlexWidth(1.25));
-            previewColumns.Add(Columns.Create("Author", WindowsSearchResult.GetBindingReference(SysProps.System.Author)).MakeFixedWidth(FixedWidth.W180));
-            previewColumns.Add(Columns.Create("Comment", WindowsSearchResult.GetBindingReference(SysProps.System.Comment)));
-            previewColumns.Add(Columns.Create("Company", WindowsSearchResult.GetBindingReference(SysProps.System.Company)));
+            Columns.CreateResource<BooleanToPathConverter>("V", SearchTable.Defs.Columns.IsVersion, ResourceKeys.Icon.SquareSmallGreenIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028);
+            Columns.Create("Type", SearchTable.Defs.Columns.Type).MakeFixedWidth(FixedWidth.W048);
+            Columns.Create("Size", SearchTable.Defs.Columns.Size).MakeNumeric(null, FixedWidth.W076);
+            Columns.Create("Created", SearchTable.Defs.Columns.Created).MakeDate();
+            Columns.Create("Modified", SearchTable.Defs.Columns.Modified).MakeDate();
+            Columns.Create("File", SearchTable.Defs.Columns.File).MakeFlexWidth(2.0);
+            Columns.Create("Title", SearchTable.Defs.Columns.Title).MakeFlexWidth(1.25);
+            Columns.Create("Author", SearchTable.Defs.Columns.Author).MakeFixedWidth(FixedWidth.W180);
+            Columns.Create("Company", SearchTable.Defs.Columns.Company);
 
             Commands.Add("Begin", RunSearchCommand);
-            Commands.Add("OpenItem", RunOpenItemCommand, (o)=> SelectedItem != null);
             Commands.Add("GoToTitleRecord", RunGoToTitleRecordCommand, CanRunGoToTitleRecordCommand);
             Commands.Add("DeleteItem", RunDeleteItemCommand, CanRunDeleteItemCommand);
             //RawCommands.Add("TogglePreview", (o) => { IsPreviewMode = !IsPreviewMode; });
 
-            MenuItems.AddItem(Strings.CommandOpenItemOrDoubleClick, Commands["OpenItem"]).AddImageResource("ImageOpenFileMenu");
-            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"]).AddImageResource("ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.CommandOpenItemOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            //MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"]).AddImageResource("ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem("Delete this item", Commands["DeleteItem"]).AddImageResource("ImageDeleteMenu");
-            UpdateFoundHeader();
+            MenuItems.AddItem("Delete this item", Commands["DeleteItem"]).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+
             // init the search provider
             provider = new WindowsFileSearch();
             provider.Scopes.Add(Config.Instance.FolderTitleRoot);
@@ -128,58 +99,24 @@ namespace Restless.Panama.ViewModel
             provider.ExcludedScopes.Add(Config.Instance.FolderSubmissionDocument);
             provider.ExcludedScopes.Add(Config.Instance.FolderSubmissionMessage);
             provider.ExcludedScopes.Add(Config.Instance.FolderSubmissionMessageAttachment);
-            IsEmptyResultSet = false;
+            HaveResults = true;
         }
         #endregion
 
         /************************************************************************/
 
         #region Protected Methods
-        /// <summary>
-        /// Called by the ancestor class when a preview of the selected item is needed.
-        /// </summary>
-        /// <param name="selectedItem">The currently selected grid item.</param>
-        protected override void OnPreview(object selectedItem)
+        protected override void OnSelectedItemChanged()
         {
-            WindowsSearchResult item = selectedItem as WindowsSearchResult;
-            if (item != null)
-            {
-                string path = item.Values[SysProps.System.ItemFolderPathDisplay].ToString();
-                string file = item.Values[SysProps.System.FileName].ToString();
-                string fileName = Path.Combine(path, file);
-                PerformPreview(fileName);
-            }
+            base.OnSelectedItemChanged();
+            SelectedSearch = SearchRow.Create(SelectedRow);
         }
 
-        /// <summary>
-        /// Gets the preview mode for the specified item.
-        /// </summary>
-        /// <param name="selectedItem">The selected grid item</param>
-        /// <returns>The preview mode</returns>
-        protected override PreviewMode GetPreviewMode(object selectedItem)
+        protected override void RunOpenRowCommand()
         {
-            var item = selectedItem as WindowsSearchResult;
-            if (item != null)
+            if (SelectedSearch != null)
             {
-                string path = item.Values[SysProps.System.ItemFolderPathDisplay].ToString();
-                string file = item.Values[SysProps.System.FileName].ToString();
-                return DocumentPreviewer.GetPreviewMode(Path.Combine(path, file));
-            }
-            return PreviewMode.Unsupported;
-        }
-
-        /// <summary>
-        /// Called by the ancestor class when <see cref="DataGridPreviewViewModel.IsPreviewActive"/> changes.
-        /// </summary>
-        protected override void OnIsPreviewActiveChanged()
-        {
-            if (previewColumns != null)
-            {
-                Visibility visibility = (IsPreviewActive) ? Visibility.Hidden : Visibility.Visible;
-                foreach (var col in previewColumns)
-                {
-                    col.Visibility = visibility;
-                }
+                Open.TitleVersionFile(SelectedSearch.File);
             }
         }
         #endregion
@@ -187,77 +124,63 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
-        private void UpdateFoundHeader()
-        {
-            FoundHeader = string.Format(Strings.HeaderToolOperationSearchFoundFormat, resultsView.Count);
-        }
-
-        private void RunSearchCommand(object o)
+        private void RunSearchCommand(object parm)
         {
             if (!string.IsNullOrEmpty(SearchText))
             {
                 Execution.TryCatch(() =>
                     {
-                        resultsView.Clear();
-                        TitleVersionTable versions = DatabaseController.Instance.GetTable<TitleVersionTable>();
                         WindowsSearchResultCollection results = provider.GetSearchResults(SearchText);
 
                         foreach (WindowsSearchResult result in results)
                         {
-                            result.SetItemPathDisplay(Paths.Title.WithoutRoot(result.Values[SysProps.System.ItemPathDisplay].ToString()));
-                            result.Extended = new ExtendedSearchResult(versions.EnumerateVersions(result.Values[SysProps.System.ItemPathDisplay].ToString()));
-                            resultsView.Add(result);
+                            string pathDisplay = Paths.Title.WithoutRoot(result.Values.GetValue<string>(SysProps.System.ItemPathDisplay));
+                            result.SetItemPathDisplay(pathDisplay);
+                            bool versionExists = TitleVersionTable.VersionWithFileExists(pathDisplay);
+                            SearchTable.Add(result.ToSearchTableItem(versionExists));
                         }
-                        UpdateFoundHeader();
-                        IsEmptyResultSet = (results.Count == 0);
+                        HaveResults = results.Count > 0;
+                        ListView.Refresh();
                     });
             }
         }
 
-        private void RunOpenItemCommand(object o)
+        private void RunGoToTitleRecordCommand(object parm)
         {
-            if (SelectedItem is WindowsSearchResult row)
+            if (SelectedSearch != null)
             {
-                OpenHelper.OpenFile(row.Values[SysProps.System.ItemUrl].ToString());
-            }
-        }
-
-        private void RunGoToTitleRecordCommand(object o)
-        {
-            if (SelectedItem is WindowsSearchResult row)
-            {
-                if (row.Extended is ExtendedSearchResult extended && extended.IsVersion)
-                {
-                    var ws = MainWindowViewModel.Instance.SwitchToWorkspace<TitleViewModel>();
-                    if (ws != null)
-                    {
-                        ws.Config.TitleFilter.SetIdFilter(extended.Versions[0].TitleId);
-                        if (ws.MainView.Count == 1)
-                        {
-                            /* This method uses a funky work around */
-                            // TODO
-                            // ws.SetSelectedItem(ws.MainView[0]);
-                            /* Can be assigned directly, but doesn't highlight the row */
-                            //ws.SelectedItem = ws.DataView[0];
-                        }
-                    }
-                }
+                //if (row.Extended is ExtendedSearchResult extended && extended.IsVersion)
+                //{
+                //    var ws = MainWindowViewModel.Instance.SwitchToWorkspace<TitleViewModel>();
+                //    if (ws != null)
+                //    {
+                //        ws.Config.TitleFilter.SetIdFilter(extended.Versions[0].TitleId);
+                //        if (ws.MainView.Count == 1)
+                //        {
+                //            /* This method uses a funky work around */
+                //            // TODO
+                //            // ws.SetSelectedItem(ws.MainView[0]);
+                //            /* Can be assigned directly, but doesn't highlight the row */
+                //            //ws.SelectedItem = ws.DataView[0];
+                //        }
+                //    }
+                //}
             }
         }
 
         private bool CanRunGoToTitleRecordCommand(object o)
         {
-            if (SelectedItem is WindowsSearchResult row)
-            {
-                return (row.Extended is ExtendedSearchResult extended && extended.IsVersion);
-            }
+            //if (SelectedItem is WindowsSearchResult row)
+            //{
+            //    return row.Extended is ExtendedSearchResult extended && extended.IsVersion;
+            //}
             return false;
         }
 
 
-        private void RunDeleteItemCommand(object o)
+        private void RunDeleteItemCommand(object parm)
         {
-            if (SelectedItem is WindowsSearchResult row)
+            if (CanRunDeleteItemCommand(parm))
             {
                 // TODO
                 //string fileName = Paths.Title.WithRoot(row.Values[SysProps.System.ItemPathDisplay].ToString());
@@ -268,35 +191,9 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private bool CanRunDeleteItemCommand(object o)
+        private bool CanRunDeleteItemCommand(object parm)
         {
-            if (SelectedItem is WindowsSearchResult row)
-            {
-                return (row.Extended is ExtendedSearchResult extended && !extended.IsVersion);
-            }
-            return false;
-        }
-
-
-        #endregion
-
-        #region Private helper class
-        private class ExtendedSearchResult
-        {
-            public List<TitleVersionRow> Versions
-            {
-                get;
-            }
-
-            public bool IsVersion
-            {
-                get => Versions.Count > 0;
-            }
-
-            public ExtendedSearchResult(IEnumerable<TitleVersionRow> versions)
-            {
-                Versions = versions.ToList();
-            }
+            return !SelectedSearch?.IsVersion ?? false;
         }
         #endregion
     }

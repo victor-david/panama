@@ -26,10 +26,8 @@
             </DataGrid.InputBindings>
         </tk:DataGrid>
         <TextBlock
+            Style="{StaticResource TextBlockZeroResultStyle}"
             tk:Property.IsCollapsed="{Binding Versions.HaveVersion}"
-            Foreground="{StaticResource LightForegroundBrush}"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
             Text="{x:Static r:Strings.TextNoTitleVersions}"/>
     </Grid>
     <!-- Action buttons for version -->

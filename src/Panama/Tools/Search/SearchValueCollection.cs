@@ -26,7 +26,7 @@ namespace Restless.Panama.Tools
         {
             get
             {
-                var desc = SysProps.GetPropertyDescription(index);
+                PropSystem.ShellPropertyDescription desc = SysProps.GetPropertyDescription(index);
                 return this[desc.CanonicalName];
             }
         }
@@ -36,21 +36,11 @@ namespace Restless.Panama.Tools
         /// </summary>
         /// <param name="index">The property name index.</param>
         /// <returns>The value associated with <paramref name="index"/>, or null if not present.</returns>
-        public object this[string index]
-        {
-            get 
-            {
-                if (values.ContainsKey(index))
-                {
-                    return values[index];
-                }
-                return null;
-            }
-        }
+        public object this[string index] => values.ContainsKey(index) ? values[index] : null;
         #endregion
 
         /************************************************************************/
-        
+
         #region Constructor (internal)
         internal SearchValueCollection()
         {
@@ -61,6 +51,12 @@ namespace Restless.Panama.Tools
         /************************************************************************/
         
         #region Public methods
+
+        public T GetValue<T>(PropSystem.PropertyKey key)
+        {
+            return this[key] is T value ? value : default;
+        }
+
         /// <summary>
         /// Gets a string representation of all the key / value pairs in the collection.
         /// </summary>
@@ -72,7 +68,8 @@ namespace Restless.Panama.Tools
             b.AppendLine("=====================");
             foreach (string key in values.Keys)
             {
-                b.AppendLine(string.Format("{0} -> {1}", key, values[key].ToString()));
+                b.AppendLine($"{key} -> {values[key]}");
+
             }
             return b.ToString();
         }
@@ -83,8 +80,8 @@ namespace Restless.Panama.Tools
         #region Internal methods
         internal void SetProperty(PropSystem.PropertyKey key, object value)
         {
-            var desc = SysProps.GetPropertyDescription(key);
-            var formattedValue = GetValue(value);
+            PropSystem.ShellPropertyDescription desc = SysProps.GetPropertyDescription(key);
+            object formattedValue = GetValue(value);
             string index = desc.CanonicalName;
             if (values.ContainsKey(index))
             {
@@ -102,12 +99,12 @@ namespace Restless.Panama.Tools
         #region Private methods
         private object GetValue(object value)
         {
-            if (value is string[] && ((string[])value).Length > 0)
+            if (value is string[] varray && varray.Length > 0)
             {
                 string retValue = string.Empty;
-                foreach (string a in (string[])value)
+                foreach (string a in varray)
                 {
-                    retValue += string.Format("{0}, ", a);
+                    retValue += $"{a}, ";
                 }
                 retValue = retValue[0..^2];
                 return retValue;
