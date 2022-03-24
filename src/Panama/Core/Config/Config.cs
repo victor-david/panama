@@ -142,6 +142,10 @@ namespace Restless.Panama.Core
             public const double MinSearchDetailWidth = 240;
             public const double MaxSearchDetailWidth = 520;
             public const double DefaultSearchDetailWidth = MinSearchDetailWidth;
+
+            public const double MinSelfPublisherDetailWidth = 360;
+            public const double MaxSelfPublisherDetailWidth = 520;
+            public const double DefaultSelfPublisherDetailWidth = MinSelfPublisherDetailWidth;
         }
 
         /// <summary>
@@ -530,6 +534,18 @@ namespace Restless.Panama.Core
         public double SearchDetailWidth
         {
             get => GetItem(Grid.DefaultSearchDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool SelfPublisherDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double SelfPublisherDetailWidth
+        {
+            get => GetItem(Grid.DefaultSelfPublisherDetailWidth);
             set => SetItem(value);
         }
         #endregion

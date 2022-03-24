@@ -2,47 +2,44 @@
     x:Class="Restless.Panama.View.SelfPublisherView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:cv="clr-namespace:Restless.Panama.Core"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:SelfPublisherViewModel}"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <!-- 
-            MaxWidth binds to a value relative to the width of the grid. 
-            Converter parm is the desired min width of right column
-            -->
-            <ColumnDefinition
-                Width="{Binding Config.LeftColumnSelfPublisher,Mode=TwoWay}"
-                MaxWidth="{Binding Path=ActualWidth,
-                RelativeSource={RelativeSource AncestorType=Grid},
-                Converter={cv:SubtractionConverter}, ConverterParameter=380}"
-                MinWidth="360"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <con:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinSelfPublisherDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxSelfPublisherDetailWidth}"
+        IsDetailExpanded="{Binding Config.SelfPublisherDetailExpanded}"
+        DetailWidth="{Binding Config.SelfPublisherDetailWidth}">
 
-        <StatusBar Margin="0,0,4,0">
-            <TextBlock Text="Self publishers"/>
-            <!-- no filters for now -->
-        </StatusBar>
+        <con:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <TextBlock Text="Self publishers"/>
+                <!-- no filters for now -->
+            </StatusBar>
+        </con:SplitterGrid.HeaderLeft>
 
-        <Border Grid.Row="1" Style="{StaticResource BorderEditContainerStyle}">
+        <con:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedPublisher.Name}"/>
+            </StatusBar>
+        </con:SplitterGrid.HeaderRight>
+
+        <con:SplitterGrid.ContentLeft>
             <tk:DataGrid 
                 RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding ListView}" 
                 SelectedItem="{Binding SelectedItem}"
                 RestoreStateBehavior="RestoreLastSelection"
                 tk:DataGridColumns.Columns="{Binding Columns}">
-                
+
                 <DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
                 </DataGrid.InputBindings>
@@ -50,25 +47,15 @@
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
-            </tk:DataGrid>
-        </Border>
-        
-        <!-- Splitter -->
-        <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource VerticalGridSplitterStyle}" />
+            </tk:DataGrid>            
+        </con:SplitterGrid.ContentLeft>
 
-        <StatusBar Grid.Column="2" Margin="4,0,0,0">
-            <TextBlock 
-                Style="{StaticResource TitleDisplayTextBlockStyle}"
-                Text="{Binding SelectedPublisher.Name}"/>
-        </StatusBar>
+        <con:SplitterGrid.ContentRight>
 
-        <!-- Editing zone -->
-        <Border
-            Grid.Row="1" Grid.Column="2"
-            Style="{StaticResource BorderEditContainerStyle}"
-            Visibility="{Binding EditVisibility}">
-
-            <StackPanel Style="{StaticResource DataEntryPanelStyle}">
+            <StackPanel 
+                Style="{StaticResource DataEntryPanelStyle}"
+                Visibility="{Binding EditVisibility}">
+                
                 <TextBlock Text="{x:Static r:Strings.TextName}"/>
                 <TextBox Text="{Binding SelectedPublisher.Name}"/>
 
@@ -80,7 +67,8 @@
                     Style="{StaticResource TextBoxMultiStyle}"
                     Text="{Binding SelectedPublisher.Notes}"/>
             </StackPanel>
-
-        </Border>
-    </Grid>
+            
+        </con:SplitterGrid.ContentRight>
+        
+    </con:SplitterGrid>
 </UserControl>
