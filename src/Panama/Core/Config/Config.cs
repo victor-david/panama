@@ -495,6 +495,18 @@ namespace Restless.Panama.Core
             get => GetGridLength(Other.SplitterWidth);
             set => SetGridLength(value);
         }
+
+        /// <summary>
+        /// Gets or sets the grid splitter location for the link grid
+        /// </summary>
+        /// <remarks>
+        /// This is a hidden internal value, used to remember the grid position.
+        /// </remarks>
+        public GridLength LeftColumnLink
+        {
+            get => GetGridLength(Other.SplitterWidth);
+            set => SetGridLength(value);
+        }
         #endregion
 
         /************************************************************************/

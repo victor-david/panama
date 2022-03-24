@@ -7,6 +7,7 @@
         <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/PathSelector.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/TagSelectorControl.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/TagSelectorItem.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/SplitterGrid.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

@@ -1,0 +1,60 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:con="clr-namespace:Restless.Panama.Controls">
+    
+    <Style x:Key="{x:Static con:SplitterGrid.SplitterStyleKey}" TargetType="GridSplitter">
+        <Setter Property="Margin" Value="0,4"/>
+        <Setter Property="Width" Value="2"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Background" Value="DimGray"/>
+    </Style>
+    
+    <ControlTemplate x:Key="SplitterGridControlTemplate" TargetType="con:SplitterGrid">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="{Binding LeftWidth, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"
+                    MinWidth="{TemplateBinding LeftMinWidth}"
+                    MaxWidth="{TemplateBinding LeftMaxWidth}"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <ContentPresenter
+                Margin="{TemplateBinding MarginHeaderLeft}"
+                Content="{TemplateBinding HeaderLeft}"/>
+            
+            <ContentPresenter
+                Grid.Column="2"
+                Margin="{TemplateBinding MarginHeaderRight}"
+                Content="{TemplateBinding HeaderRight}"/>
+            
+            <GridSplitter 
+                Grid.Column="1"
+                Grid.Row="1"
+                Style="{DynamicResource {x:Static con:SplitterGrid.SplitterStyleKey}}"/>
+
+            <ContentPresenter
+                Grid.Row="1"
+                Margin="{TemplateBinding MarginContentLeft}"
+                Content="{TemplateBinding ContentLeft}"/>
+            
+            <ContentPresenter
+                Grid.Column="2" Grid.Row="1"
+                Margin="{TemplateBinding MarginContentRight}"
+                Content="{TemplateBinding ContentRight}"/>
+
+        </Grid>
+    </ControlTemplate>
+
+    <Style TargetType="con:SplitterGrid">
+        <Setter Property="Template" Value="{StaticResource SplitterGridControlTemplate}"/>
+    </Style>
+    
+</ResourceDictionary>

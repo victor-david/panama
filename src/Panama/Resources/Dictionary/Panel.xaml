@@ -2,8 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls">
 
     <Style x:Key="DataEntryPanelDefaultTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="{StaticResource DataEntryPanelDefaultTextBlockMargin}"/>
@@ -88,5 +87,14 @@
         <Setter Property="ValueForeground" Value="{StaticResource DarkForegroundBrush}"/>
         <Setter Property="ValueHorizontalAlignment" Value="Right"/>
     </Style>
+    
+    <Style x:Key="DefaultSplitterGridStyle" TargetType="con:SplitterGrid">
+        <Setter Property="MarginHeaderLeft" Value="0,0,4,0"/>
+        <Setter Property="MarginHeaderRight" Value="4,0,0,0"/>
+        <Setter Property="MarginContentLeft" Value="{StaticResource DefaultPadding}"/>
+        <Setter Property="MarginContentRight" Value="{StaticResource DefaultPadding}"/>
+    </Style>
+
+    <Style TargetType="con:SplitterGrid" BasedOn="{StaticResource DefaultSplitterGridStyle}"/>
 
 </ResourceDictionary>

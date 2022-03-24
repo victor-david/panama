@@ -6,6 +6,7 @@
 */
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Restless.Panama.Database.Tables
@@ -52,7 +53,7 @@ namespace Restless.Panama.Database.Tables
                 public const string Notes = "notes";
 
                 /// <summary>
-                /// The name of the credentail id column.
+                /// The name of the credential id column.
                 /// </summary>
                 public const string CredentialId = "credentialid";
 
@@ -87,6 +88,17 @@ namespace Restless.Panama.Database.Tables
             Load(null, Defs.Columns.Name);
         }
 
+        /// <summary>
+        /// Provides an enumerable that gets all records in order of id.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<LinkRow> EnumerateAll()
+        {
+            foreach (DataRow row in EnumerateRows(null, Defs.Columns.Id))
+            {
+                yield return LinkRow.Create(row);
+            }
+        }
 
         /// <summary>
         /// Clears the credential id of all links with the specified credential id.
@@ -94,8 +106,7 @@ namespace Restless.Panama.Database.Tables
         /// <param name="id">The credential id.</param>
         public void ClearCredential(long id)
         {
-            DataRow[] rows = Select(string.Format("{0}={1}", Defs.Columns.CredentialId, id));
-            foreach (DataRow row in rows)
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.CredentialId}={id}"))
             {
                 row[Defs.Columns.CredentialId] = 0;
             }
@@ -127,10 +138,10 @@ namespace Restless.Panama.Database.Tables
         /// Populates a new row with default (starter) values
         /// </summary>
         /// <param name="row">The freshly created DataRow to poulate</param>
-        protected override void PopulateDefaultRow(System.Data.DataRow row)
+        protected override void PopulateDefaultRow(DataRow row)
         {
-            row[Defs.Columns.Name] = "(new link)";
-            row[Defs.Columns.Url] = string.Empty;
+            row[Defs.Columns.Name] = LinkRow.DefaultValue;
+            row[Defs.Columns.Url] = LinkRow.DefaultValue;
             row[Defs.Columns.Notes] = DBNull.Value;
             row[Defs.Columns.CredentialId] = 0;
             row[Defs.Columns.Added] = DateTime.UtcNow;

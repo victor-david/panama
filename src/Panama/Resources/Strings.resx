@@ -318,7 +318,7 @@ Please make sure that {1} is set correctly in configuration settings. File speci
   <data name="FilterPromptLink" xml:space="preserve">
     <value>Link name or note</value>
   </data>
-  <data name="CommandAddLink" xml:space="preserve">
+  <data name="MenuItemAddLink" xml:space="preserve">
     <value>Add link</value>
   </data>
   <data name="CommandAddLinkTooltip" xml:space="preserve">

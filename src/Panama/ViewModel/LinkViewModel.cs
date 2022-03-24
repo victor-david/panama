@@ -21,11 +21,20 @@ namespace Restless.Panama.ViewModel
     public class LinkViewModel : DataGridViewModel<LinkTable>
     {
         #region Private
+        private LinkRow selectedLink;
         #endregion
 
         /************************************************************************/
 
         #region Properties
+        /// <summary>
+        /// Gets the selected link
+        /// </summary>
+        public LinkRow SelectedLink
+        {
+            get => selectedLink;
+            private set => SetProperty(ref selectedLink, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -42,23 +51,32 @@ namespace Restless.Panama.ViewModel
             Columns.SetDefaultSort(Columns.Create("Name", LinkTable.Defs.Columns.Name), ListSortDirection.Ascending);
             Columns.Create("Url", LinkTable.Defs.Columns.Url).MakeFlexWidth(2.5);
             Columns.Create("Note", LinkTable.Defs.Columns.Notes).MakeSingleLine();
-            AddViewSourceSortDescriptions();
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.MenuItemAddLink, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteLink, DeleteCommand).AddImageResource("ImageDeleteMenu");
+            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.CommandDeleteLink, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
         }
         #endregion
 
         /************************************************************************/
 
-        #region Public methods
-        #endregion
-
-        /************************************************************************/
-
         #region Protected Methods
+        /// <inheritdoc/>
+        protected override void OnSelectedItemChanged()
+        {
+            base.OnSelectedItemChanged();
+            SelectedLink = LinkRow.Create(SelectedRow);
+        }
+
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareString(item1, item2, LinkTable.Defs.Columns.Name);
+        }
+
         /// <summary>
         /// Runs the add command to add a new record to the data table
         /// </summary>
@@ -66,8 +84,8 @@ namespace Restless.Panama.ViewModel
         {
             Table.AddDefaultRow();
             Table.Save();
-            AddViewSourceSortDescriptions();
             Columns.RestoreDefaultSort();
+            ForceListViewSort();
         }
 
         /// <summary>
@@ -84,10 +102,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunDeleteCommand()
         {
-            if (IsSelectedRowAccessible && Messages.ShowYesNo(Strings.ConfirmationDeleteLink))
+            if (IsSelectedRowAccessible && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteLink))
             {
-                SelectedRow.Delete();
-                Table.Save();
+                DeleteSelectedRow();
             }
         }
 
@@ -105,7 +122,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunOpenRowCommand()
         {
-            OpenHelper.OpenWebSite(null, SelectedRow[LinkTable.Defs.Columns.Url].ToString());
+            OpenHelper.OpenWebSite(null, SelectedLink.Url);
         }
 
         /// <summary>
@@ -114,21 +131,7 @@ namespace Restless.Panama.ViewModel
         /// <returns>true if the command can execute (row selected and has a url); otherwise, false.</returns>
         protected override bool CanRunOpenRowCommand()
         {
-            return
-                base.CanRunOpenRowCommand() &&
-                !string.IsNullOrWhiteSpace(SelectedRow[LinkTable.Defs.Columns.Url].ToString());
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Private Methods
-
-        private void AddViewSourceSortDescriptions()
-        {
-            // TODO
-            //MainSource.SortDescriptions.Clear();
-            //MainSource.SortDescriptions.Add(new SortDescription(LinkTable.Defs.Columns.Name, ListSortDirection.Ascending));
+            return !string.IsNullOrWhiteSpace(SelectedLink?.Url);
         }
         #endregion
     }

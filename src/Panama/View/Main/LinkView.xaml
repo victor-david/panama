@@ -2,50 +2,65 @@
     x:Class="Restless.Panama.View.LinkView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:view="clr-namespace:Restless.Panama.View"
-    xmlns:tk="http://schemas.restless.toolkit.com/2021"    
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:LinkViewModel}"
     mc:Ignorable="d"
-    d:DesignWidth="860" d:DesignHeight="400">
-    
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource GridRowHeightTool}" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <!-- Controls specific to this view-->
-        <Grid Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <view:SimpleRowFilter Grid.Column="0" HorizontalAlignment="Left" />
-            <ItemsControl Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>
-        </Grid>
+    d:DesignWidth="500" d:DesignHeight="300">
+
+    <con:SplitterGrid
+        LeftWidth="{Binding Config.LeftColumnLink}"
+        LeftMinWidth="700"
+        RightMinWidth="220">
         
-        <!-- Main data grid to display the tabular data  -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderEditContainerStyle}">
-            <DataGrid x:Name="grid" ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" tk:DataGridColumns.Columns="{Binding Columns}">
+        <con:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <TextBlock Text="Links"/>
+                <!-- no filters for now -->
+            </StatusBar>
+        </con:SplitterGrid.HeaderLeft>
+
+        <con:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedLink.Name}"/>
+            </StatusBar>
+        </con:SplitterGrid.HeaderRight>
+
+        <con:SplitterGrid.ContentLeft>
+            <DataGrid
+                RowHeight="{Binding Config.DataGridRowHeight}"
+                ItemsSource="{Binding ListView}"
+                SelectedItem="{Binding SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Columns}">
+
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                </DataGrid.InputBindings>
+
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=grid, Path=DataContext.OpenRowCommand}"/>
-                    </Style>
-                </DataGrid.RowStyle>
+
             </DataGrid>
-        </Border>
-        
-        <!-- Nested editing control on the right -->
-        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderEditContainerStyle}">
-            <view:LinkEdit Visibility="{Binding EditVisibility}"/>
-        </Border>
-    </Grid>
-    <!-- end main grid-->
+        </con:SplitterGrid.ContentLeft>
+
+        <con:SplitterGrid.ContentRight>
+            <StackPanel 
+                Style="{StaticResource DataEntryPanelStyle}"
+                Visibility="{Binding EditVisibility}">
+                <TextBlock Text="Name"/>
+                <TextBox Text="{Binding SelectedLink.Name}"/>
+                <TextBlock Text="Url"/>
+                <TextBox Text="{Binding SelectedLink.Url}"/>
+                <TextBlock Text="Note"/>
+                <TextBox Text="{Binding SelectedLink.Notes}"/>
+            </StackPanel>
+        </con:SplitterGrid.ContentRight>
+
+    </con:SplitterGrid>
 </UserControl>

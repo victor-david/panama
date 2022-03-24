@@ -182,15 +182,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add link.
-        /// </summary>
-        public static string CommandAddLink {
-            get {
-                return ResourceManager.GetString("CommandAddLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add a link to a resource.
         /// </summary>
         public static string CommandAddLinkTooltip {
@@ -1843,6 +1834,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemAddAuthor {
             get {
                 return ResourceManager.GetString("MenuItemAddAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add link.
+        /// </summary>
+        public static string MenuItemAddLink {
+            get {
+                return ResourceManager.GetString("MenuItemAddLink", resourceCulture);
             }
         }
         
