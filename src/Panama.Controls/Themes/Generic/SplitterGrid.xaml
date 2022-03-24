@@ -3,6 +3,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:con="clr-namespace:Restless.Panama.Controls">
     
+    <Style x:Key="StandardPathStyle" TargetType="Path">
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Height" Value="18"/>
+        <Setter Property="Width" Value="18"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
+
+    <Geometry x:Key="ChevronLeftGeometryKey">M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z</Geometry>
+    <Geometry x:Key="ChevronRightGeometryKey">M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z</Geometry>
+
     <Style x:Key="{x:Static con:SplitterGrid.SplitterStyleKey}" TargetType="GridSplitter">
         <Setter Property="Margin" Value="0,4"/>
         <Setter Property="Width" Value="2"/>
@@ -10,16 +22,53 @@
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Background" Value="DimGray"/>
     </Style>
-    
+
+    <Style x:Key="{x:Static con:SplitterGrid.ToggleButtonStyleKey}" TargetType="ToggleButton">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Foreground" Value="RoyalBlue"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border Background="Transparent">
+                        <Grid>
+                            <Path
+                                x:Name="C1"
+                                Style="{StaticResource StandardPathStyle}"
+                                Fill="{TemplateBinding Foreground}"
+                                Data="{StaticResource ChevronLeftGeometryKey}"/>
+
+                            <Path
+                                x:Name="C2"
+                                Style="{StaticResource StandardPathStyle}"
+                                Fill="{TemplateBinding Foreground}"
+                                Data="{StaticResource ChevronRightGeometryKey}"
+                                Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="C1" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="C2" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <ControlTemplate x:Key="SplitterGridControlTemplate" TargetType="con:SplitterGrid">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="{Binding LeftWidth, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"
-                    MinWidth="{TemplateBinding LeftMinWidth}"
-                    MaxWidth="{TemplateBinding LeftMaxWidth}"/>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition
+                    MinWidth="{TemplateBinding ActualMinDetailWidth}"
+                    MaxWidth="{TemplateBinding MaxDetailWidth}"
+                    Width="{Binding ActualDetailWidth, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -36,8 +85,8 @@
                 Content="{TemplateBinding HeaderRight}"/>
             
             <GridSplitter 
-                Grid.Column="1"
-                Grid.Row="1"
+                Grid.Column="1" Grid.Row="1"
+                Visibility="{TemplateBinding SplitterVisibility}"
                 Style="{DynamicResource {x:Static con:SplitterGrid.SplitterStyleKey}}"/>
 
             <ContentPresenter
@@ -49,6 +98,12 @@
                 Grid.Column="2" Grid.Row="1"
                 Margin="{TemplateBinding MarginContentRight}"
                 Content="{TemplateBinding ContentRight}"/>
+
+            <ToggleButton
+                Grid.Column="3" Grid.Row="1"
+                Visibility="{TemplateBinding ExpanderVisibility}"
+                Style="{DynamicResource {x:Static con:SplitterGrid.ToggleButtonStyleKey}}"
+                IsChecked="{Binding IsDetailExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
 
         </Grid>
     </ControlTemplate>

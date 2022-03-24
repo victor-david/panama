@@ -88,7 +88,6 @@ namespace Restless.Panama.Core
             public const int MinHeight = 760;
         }
 
-
         /// <summary>
         /// Provides static values for the tools window
         /// </summary>
@@ -131,6 +130,16 @@ namespace Restless.Panama.Core
             public const int DefaultHeight = 260;
         }
 
+        /// <summary>
+        /// Provides static values for grid detail
+        /// </summary>
+        public static class Grid
+        {
+            public const double MinLinkDetailWidth = 280;
+            public const double MaxLinkDetailWidth = 480;
+            public const double DefaultLinkDetailWidth = MinLinkDetailWidth;
+
+        }
         /// <summary>
         /// Provides static values for DataGrid
         /// </summary>
@@ -496,16 +505,16 @@ namespace Restless.Panama.Core
             set => SetGridLength(value);
         }
 
-        /// <summary>
-        /// Gets or sets the grid splitter location for the link grid
-        /// </summary>
-        /// <remarks>
-        /// This is a hidden internal value, used to remember the grid position.
-        /// </remarks>
-        public GridLength LeftColumnLink
+        public bool LinkDetailExpanded
         {
-            get => GetGridLength(Other.SplitterWidth);
-            set => SetGridLength(value);
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double LinkDetailWidth
+        {
+            get => GetItem(Grid.DefaultLinkDetailWidth);
+            set => SetItem(value);
         }
         #endregion
 

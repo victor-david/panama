@@ -4,20 +4,35 @@ using System.Windows.Controls;
 
 namespace Restless.Panama.Controls
 {
+    /// <summary>
+    /// Provides a specialized control that contains a grid
+    /// that can be expanded / contracted to show or hide detail
+    /// </summary>
     public class SplitterGrid : Control
     {
+        #region Private
+        private bool widthUpdateInProgress;
+        #endregion
+
+        /************************************************************************/
+
+        #region Public fields
         public static readonly ComponentResourceKey SplitterStyleKey = new ComponentResourceKey(typeof(SplitterGrid), nameof(SplitterStyleKey));
-        public const double MinLeftMinWidth = 100;
-        public const double MaxLeftMinWidth = 1000;
-        public const double DefaultLeftMinWidth = 480;
+        public static readonly ComponentResourceKey ToggleButtonStyleKey = new ComponentResourceKey(typeof(SplitterGrid), nameof(ToggleButtonStyleKey));
 
-        public const double MinRightMinWidth = 100;
-        public const double MaxRightMinWidth = 480;
-        public const double DefaultRightMinWidth = 280;
+        public const double MinMinDetailWidth = 100;
+        public const double DefaultMinDetailWidth = 220;
+        public const double MinMaxDetailWidth = 120;
+        public const double DefaultMaxDetailWidth = 600;
+        public const double DefaultDetailWidth = 480;
+        #endregion
 
-        public const double DefaultLeftWidth = 480;
-        public const double DefaultLeftMaxWidth = 520;
+        /************************************************************************/
 
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SplitterGrid"/> class
+        /// </summary>
         public SplitterGrid()
         {
         }
@@ -26,115 +41,251 @@ namespace Restless.Panama.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SplitterGrid), new FrameworkPropertyMetadata(typeof(SplitterGrid)));
         }
+        #endregion
+
+        /************************************************************************/
+
+        #region State
+        /// <summary>
+        /// Gets or sets a boolean value that determines if the detail panel may be collapsed
+        /// </summary>
+        public bool CanCollapseDetail
+        {
+            get => (bool)GetValue(CanCollapseDetailProperty);
+            set => SetValue(CanCollapseDetailProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="CanCollapseDetail"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty CanCollapseDetailProperty = DependencyProperty.Register
+            (
+                nameof(CanCollapseDetail), typeof(bool), typeof(SplitterGrid), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = true,
+                    PropertyChangedCallback = OnCanCollapseDetailChanged
+                }
+            );
+
+        private static void OnCanCollapseDetailChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SplitterGrid control)
+            {
+                control.ExpanderVisibility = control.CanCollapseDetail ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a boolean value that determines if the detail panel is expanded.
+        /// </summary>
+        public bool IsDetailExpanded
+        {
+            get => (bool)GetValue(IsDetailExpandedProperty);
+            set => SetValue(IsDetailExpandedProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="IsDetailExpanded"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty IsDetailExpandedProperty = DependencyProperty.Register
+            (
+                nameof(IsDetailExpanded), typeof(bool), typeof(SplitterGrid), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = true,
+                    BindsTwoWayByDefault = true,
+                    PropertyChangedCallback = OnIsDetailExpandedChanged
+                }
+            );
+
+        private static void OnIsDetailExpandedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as SplitterGrid)?.UpdateActualDetailWidth();
+        }
+
+        /// <summary>
+        /// Gets the...
+        /// </summary>
+        public Visibility ExpanderVisibility
+        {
+            get => (Visibility)GetValue(ExpanderVisibilityProperty);
+            private set => SetValue(ExpanderVisibilityPropertyKey, value);
+        }
+
+        private static readonly DependencyPropertyKey ExpanderVisibilityPropertyKey = DependencyProperty.RegisterReadOnly
+            (
+                nameof(ExpanderVisibility), typeof(Visibility), typeof(SplitterGrid), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = Visibility.Visible
+                }
+            );
+
+        /// <summary>
+        /// Identifies the <see cref="ExpanderVisibility"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ExpanderVisibilityProperty = ExpanderVisibilityPropertyKey.DependencyProperty;
+
+
+
+        /// <summary>
+        /// Gets the...
+        /// </summary>
+        public Visibility SplitterVisibility
+        {
+            get => (Visibility)GetValue(SplitterVisibilityProperty);
+            private set => SetValue(SplitterVisibilityPropertyKey, value);
+        }
+
+        private static readonly DependencyPropertyKey SplitterVisibilityPropertyKey = DependencyProperty.RegisterReadOnly
+            (
+                nameof(SplitterVisibility), typeof(Visibility), typeof(SplitterGrid), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = Visibility.Visible
+                }
+            );
+
+        /// <summary>
+        /// Identifies the <see cref="SplitterVisibility"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty SplitterVisibilityProperty = SplitterVisibilityPropertyKey.DependencyProperty;
+
+
+        #endregion
+
+        /************************************************************************/
 
         #region Dimensions
         /// <summary>
-        /// Gets or sets the minimum width for the left column
+        /// Gets or sets the minimum detail width
         /// </summary>
-        public double LeftMinWidth
+        public double MinDetailWidth
         {
-            get => (double)GetValue(LeftMinWidthProperty);
-            set => SetValue(LeftMinWidthProperty, value);
+            get => (double)GetValue(MinDetailWidthProperty);
+            set => SetValue(MinDetailWidthProperty, value);
         }
 
         /// <summary>
-        /// Identifies the <see cref="LeftMinWidth"/> dependency property.
+        /// Identifies the <see cref="MinDetailWidth"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty LeftMinWidthProperty = DependencyProperty.Register
+        public static readonly DependencyProperty MinDetailWidthProperty = DependencyProperty.Register
             (
-                nameof(LeftMinWidth), typeof(double), typeof(SplitterGrid), new FrameworkPropertyMetadata()
+                nameof(MinDetailWidth), typeof(double), typeof(SplitterGrid), new FrameworkPropertyMetadata()
                 {
-                    DefaultValue = DefaultLeftMinWidth,
-                    CoerceValueCallback = OnCoerceLeftMinWidth,
+                    DefaultValue = DefaultMinDetailWidth,
+                    CoerceValueCallback = OnCoerceMinDetailWidth,
+                    PropertyChangedCallback = OnMinDetailWidthChanged
                 }
             );
 
-        private static object OnCoerceLeftMinWidth(DependencyObject d, object baseValue)
+        private static object OnCoerceMinDetailWidth(DependencyObject d, object baseValue)
         {
-            return Math.Clamp((double)baseValue, MinLeftMinWidth, MaxLeftMinWidth);
+            return Math.Max((double)baseValue, MinMinDetailWidth);
+        }
+
+        private static void OnMinDetailWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as SplitterGrid)?.HandleMinDetailWidthChanged();
         }
 
         /// <summary>
-        /// Gets or sets the minimum width for the right column
+        /// Gets the actual min detail width
         /// </summary>
-        public double RightMinWidth
+        public double ActualMinDetailWidth
         {
-            get => (double)GetValue(RightMinWidthProperty);
-            set => SetValue(RightMinWidthProperty, value);
+            get => (double)GetValue(ActualMinDetailWidthProperty);
+            private set => SetValue(ActualMinDetailWidthPropertyKey, value);
         }
 
-        /// <summary>
-        /// Identifies the <see cref="RightMinWidth"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty RightMinWidthProperty = DependencyProperty.Register
+        private static readonly DependencyPropertyKey ActualMinDetailWidthPropertyKey = DependencyProperty.RegisterReadOnly
             (
-                nameof(RightMinWidth), typeof(double), typeof(SplitterGrid), new FrameworkPropertyMetadata()
+                nameof(ActualMinDetailWidth), typeof(double), typeof(SplitterGrid), new FrameworkPropertyMetadata()
                 {
-                    DefaultValue = DefaultRightMinWidth,
-                    CoerceValueCallback = OnCoerceRightMinWidth
+                    DefaultValue = DefaultMinDetailWidth
                 }
             );
 
-        private static object OnCoerceRightMinWidth(DependencyObject d, object baseValue)
+        /// <summary>
+        /// Identifies the <see cref="ActualMinDetailWidth"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ActualMinDetailWidthProperty = ActualMinDetailWidthPropertyKey.DependencyProperty;
+
+        /// <summary>
+        /// Gets or sets the maximum detail width
+        /// </summary>
+        public double MaxDetailWidth
         {
-            return Math.Clamp((double)baseValue, MinRightMinWidth, MaxRightMinWidth);
+            get => (double)GetValue(MaxDetailWidthProperty);
+            set => SetValue(MaxDetailWidthProperty, value);
         }
 
         /// <summary>
-        /// Gets or sets the left grid width
+        /// Identifies the <see cref="MaxDetailWidth"/> dependency property.
         /// </summary>
-        public GridLength LeftWidth
-        {
-            get => (GridLength)GetValue(LeftWidthProperty);
-            set => SetValue(LeftWidthProperty, value);
-        }
-
-        /// <summary>
-        /// Identifies the <see cref="LeftWidth"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty LeftWidthProperty = DependencyProperty.Register
+        public static readonly DependencyProperty MaxDetailWidthProperty = DependencyProperty.Register
             (
-                nameof(LeftWidth), typeof(GridLength), typeof(SplitterGrid), new FrameworkPropertyMetadata()
+                nameof(MaxDetailWidth), typeof(double), typeof(SplitterGrid), new FrameworkPropertyMetadata()
                 {
-                    DefaultValue = new GridLength(DefaultLeftWidth),
+                    DefaultValue = DefaultMaxDetailWidth,
+                    CoerceValueCallback = OnCoerceMaxDetailWidth
+                }
+            );
+
+        private static object OnCoerceMaxDetailWidth(DependencyObject d, object baseValue)
+        {
+            return Math.Max((double)baseValue, MinMaxDetailWidth);
+        }
+
+        /// <summary>
+        /// Gets or sets the detail width
+        /// </summary>
+        public double DetailWidth
+        {
+            get => (double)GetValue(DetailWidthProperty);
+            set => SetValue(DetailWidthProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="DetailWidth"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty DetailWidthProperty = DependencyProperty.Register
+            (
+                nameof(DetailWidth), typeof(double), typeof(SplitterGrid), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = DefaultDetailWidth,
                     BindsTwoWayByDefault = true,
-                    // CoerceValueCallback = OnCoerceLeftWidth,
-                    PropertyChangedCallback = OnLeftWidthChanged
+                    PropertyChangedCallback = OnDetailWidthChanged
                 }
             );
 
-        //private static object OnCoerceLeftWidth(DependencyObject d, object baseValue)
-        //{
-        //    return (d as SplitterGrid)?.GetLeftWidth((GridLength)baseValue) ?? baseValue;
-        //}
-
-        private static void OnLeftWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnDetailWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            (d as SplitterGrid)?.SetLeftMaxWidth();
+            (d as SplitterGrid)?.HandleDetailWidthChanged();
         }
 
         /// <summary>
-        /// Gets the maxium width for the left column
+        /// Gets or sets the actual detail width
         /// </summary>
-        public double LeftMaxWidth
+        internal GridLength ActualDetailWidth
         {
-            get => (double)GetValue(LeftMaxWidthProperty);
-            private set => SetValue(LeftMaxWidthPropertyKey, value);
+            get => (GridLength)GetValue(ActualDetailWidthProperty);
+            set => SetValue(ActualDetailWidthProperty, value);
         }
 
-        private static readonly DependencyPropertyKey LeftMaxWidthPropertyKey = DependencyProperty.RegisterReadOnly
+        /// <summary>
+        /// Identifies the <see cref="ActualDetailWidth"/> dependency property.
+        /// </summary>
+        internal static readonly DependencyProperty ActualDetailWidthProperty = DependencyProperty.Register
             (
-                nameof(LeftMaxWidth), typeof(double), typeof(SplitterGrid), new FrameworkPropertyMetadata()
+                nameof(ActualDetailWidth), typeof(GridLength), typeof(SplitterGrid), new FrameworkPropertyMetadata()
                 {
-                    DefaultValue = DefaultLeftMaxWidth
+                    DefaultValue = new GridLength(DefaultDetailWidth),
+                    PropertyChangedCallback = OnActualDetailWidthChanged
                 }
             );
 
-        /// <summary>
-        /// Identifies the <see cref="LeftMaxWidth"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty LeftMaxWidthProperty = LeftMaxWidthPropertyKey.DependencyProperty;
-
+        private static void OnActualDetailWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as SplitterGrid)?.HandleActualDetailWidthChanged();
+        }
         #endregion
 
         /************************************************************************/
@@ -299,16 +450,43 @@ namespace Restless.Panama.Controls
         /************************************************************************/
 
         #region Private methods
-        private void SetLeftMaxWidth()
+        private void HandleMinDetailWidthChanged()
         {
-            LeftMaxWidth = ActualWidth - RightMinWidth;
         }
 
-        //private GridLength GetLeftWidth(GridLength current)
-        //{
-        //    return ActualWidth - current.Value < RightMinWidth ? new GridLength(ActualWidth - RightMinWidth) : current;
-        //}
-        #endregion
+        private void HandleDetailWidthChanged()
+        {
+            if (!widthUpdateInProgress)
+            {
+                UpdateActualDetailWidth();
+            }
+        }
 
+        private void HandleActualDetailWidthChanged()
+        {
+            if (IsDetailExpanded)
+            {
+                widthUpdateInProgress = true;
+                DetailWidth = ActualDetailWidth.Value;
+                widthUpdateInProgress = false;
+            }
+        }
+
+        private void UpdateActualDetailWidth()
+        {
+            if (IsDetailExpanded)
+            {
+                ActualDetailWidth = new GridLength(DetailWidth);
+                ActualMinDetailWidth = MinDetailWidth;
+                SplitterVisibility = Visibility.Visible;
+            }
+            else
+            {
+                ActualMinDetailWidth = 0;
+                ActualDetailWidth = new GridLength(0);
+                SplitterVisibility = Visibility.Collapsed;
+            }
+        }
+        #endregion
     }
 }
