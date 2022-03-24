@@ -6,65 +6,60 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:ToolSearchViewModel}"
     mc:Ignorable="d" 
     d:DesignHeight="250" d:DesignWidth="400">
-    <Grid
-        tk:Property.ColumnWidths="2*,*"
-        tk:Property.RowHeights="Auto,*">
+    <con:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinSearchDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxSearchDetailWidth}"
+        IsDetailExpanded="{Binding Config.SearchDetailExpanded}"
+        DetailWidth="{Binding Config.SearchDetailWidth}">
 
-        <StatusBar Margin="0,0,4,0">
-            <TextBlock Text="Search:"/>
-            <TextBox Width="120" Text="{Binding SearchText}"/>
-            <tk:IconButton Content="Begin" Command="{Binding Commands[Begin]}"/>
-        </StatusBar>
+        <con:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <TextBlock Text="Search:"/>
+                <TextBox Width="120" Text="{Binding SearchText}"/>
+                <tk:IconButton Content="Begin" Command="{Binding Commands[Begin]}"/>
+            </StatusBar>
+        </con:SplitterGrid.HeaderLeft>
 
-        <!-- Main grid for results -->
-        <Border
-            Grid.Row="1"
-            Style="{StaticResource BorderEditContainerStyle}">
-            
+        <con:SplitterGrid.HeaderRight>
+            <StatusBar/>
+        </con:SplitterGrid.HeaderRight>
+
+        <con:SplitterGrid.ContentLeft>
             <Grid>
                 <DataGrid
                     Style="{StaticResource DataGridEditLockedStretchedStyle}"
                     ItemsSource="{Binding Path=ListView}"
                     SelectedItem="{Binding SelectedItem}"
                     tk:DataGridColumns.Columns="{Binding Columns}">
-                    
+
                     <DataGrid.ContextMenu>
                         <ContextMenu ItemsSource="{Binding MenuItems}"/>
                     </DataGrid.ContextMenu>
-                    
+
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
                     </DataGrid.InputBindings>
-                    
+
                 </DataGrid>
-                
+
                 <TextBlock
                     Style="{StaticResource TextBlockZeroResultStyle}"
                     tk:Property.IsCollapsed="{Binding HaveResults}"
                     Text="{x:Static r:Strings.TextZeroSearchResults}"/>
 
-            </Grid>
+            </Grid>            
+        </con:SplitterGrid.ContentLeft>
 
-        </Border>
-        <StatusBar Grid.Column="1" Margin="4,0,0,0">
-            
-        </StatusBar>
-
-        <Border
-            Grid.Column="1"
-            Grid.Row="1"
-            Style="{StaticResource BorderEditContainerStyle}" >
-
+        <con:SplitterGrid.ContentRight>
             <vw:PreviewPanel/>
-        </Border>
-        
-            
-        
-        
-    </Grid>
+        </con:SplitterGrid.ContentRight>
+
+    </con:SplitterGrid>
 </UserControl>

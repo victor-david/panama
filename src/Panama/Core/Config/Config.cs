@@ -139,7 +139,11 @@ namespace Restless.Panama.Core
             public const double MaxLinkDetailWidth = 480;
             public const double DefaultLinkDetailWidth = MinLinkDetailWidth;
 
+            public const double MinSearchDetailWidth = 240;
+            public const double MaxSearchDetailWidth = 520;
+            public const double DefaultSearchDetailWidth = MinSearchDetailWidth;
         }
+
         /// <summary>
         /// Provides static values for DataGrid
         /// </summary>
@@ -514,6 +518,18 @@ namespace Restless.Panama.Core
         public double LinkDetailWidth
         {
             get => GetItem(Grid.DefaultLinkDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool SearchDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double SearchDetailWidth
+        {
+            get => GetItem(Grid.DefaultSearchDetailWidth);
             set => SetItem(value);
         }
         #endregion
