@@ -135,6 +135,10 @@ namespace Restless.Panama.Core
         /// </summary>
         public static class Grid
         {
+            public const double MinAuthorDetailWidth = 250;
+            public const double MaxAuthorDetailWidth = 460;
+            public const double DefaultAuthorDetailWidth = MinAuthorDetailWidth;
+
             public const double MinLinkDetailWidth = 280;
             public const double MaxLinkDetailWidth = 480;
             public const double DefaultLinkDetailWidth = MinLinkDetailWidth;
@@ -473,41 +477,41 @@ namespace Restless.Panama.Core
             set => SetGridLength(value);
         }
 
-        /// <summary>
-        /// Gets or sets the grid splitter location for the title grid
-        /// </summary>
-        /// <remarks>
-        /// This is a hidden internal value, used to remember the grid position.
-        /// </remarks>
-        public GridLength LeftColumnTitle
-        {
-            get => GetGridLength(Other.SplitterWidth);
-            set => SetGridLength(value);
-        }
+        ///// <summary>
+        ///// Gets or sets the grid splitter location for the title grid
+        ///// </summary>
+        ///// <remarks>
+        ///// This is a hidden internal value, used to remember the grid position.
+        ///// </remarks>
+        //public GridLength LeftColumnTitle
+        //{
+        //    get => GetGridLength(Other.SplitterWidth);
+        //    set => SetGridLength(value);
+        //}
 
-        /// <summary>
-        /// Gets or sets the grid splitter location for the publisher grid
-        /// </summary>
-        /// <remarks>
-        /// This is a hidden internal value, used to remember the grid position.
-        /// </remarks>
-        public GridLength LeftColumnPublisher
-        {
-            get => GetGridLength(Other.SplitterWidth);
-            set => SetGridLength(value);
-        }
+        ///// <summary>
+        ///// Gets or sets the grid splitter location for the publisher grid
+        ///// </summary>
+        ///// <remarks>
+        ///// This is a hidden internal value, used to remember the grid position.
+        ///// </remarks>
+        //public GridLength LeftColumnPublisher
+        //{
+        //    get => GetGridLength(Other.SplitterWidth);
+        //    set => SetGridLength(value);
+        //}
 
-        /// <summary>
-        /// Gets or sets the grid splitter location for the self publisher grid
-        /// </summary>
-        /// <remarks>
-        /// This is a hidden internal value, used to remember the grid position.
-        /// </remarks>
-        public GridLength LeftColumnSelfPublisher
-        {
-            get => GetGridLength(Other.SplitterWidth);
-            set => SetGridLength(value);
-        }
+        ///// <summary>
+        ///// Gets or sets the grid splitter location for the self publisher grid
+        ///// </summary>
+        ///// <remarks>
+        ///// This is a hidden internal value, used to remember the grid position.
+        ///// </remarks>
+        //public GridLength LeftColumnSelfPublisher
+        //{
+        //    get => GetGridLength(Other.SplitterWidth);
+        //    set => SetGridLength(value);
+        //}
 
         /// <summary>
         /// Gets or sets the grid splitter location for the submission grid
@@ -519,6 +523,18 @@ namespace Restless.Panama.Core
         {
             get => GetGridLength(Other.SplitterWidth);
             set => SetGridLength(value);
+        }
+
+        public bool AuthorDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double AuthorDetailWidth
+        {
+            get => GetItem(Grid.DefaultAuthorDetailWidth);
+            set => SetItem(value);
         }
 
         public bool LinkDetailExpanded
