@@ -218,24 +218,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add note.
-        /// </summary>
-        public static string CommandAddUserNote {
-            get {
-                return ResourceManager.GetString("CommandAddUserNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a new note.
-        /// </summary>
-        public static string CommandAddUserNoteTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddUserNoteTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Apply.
         /// </summary>
         public static string CommandApplyConfig {
@@ -1856,6 +1838,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a note.
+        /// </summary>
+        public static string MenuItemAddUserNote {
+            get {
+                return ResourceManager.GetString("MenuItemAddUserNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alerts.
         /// </summary>
         public static string MenuItemAlerts {
@@ -2158,6 +2149,15 @@ namespace Restless.Panama.Resources {
         public static string TextNone {
             get {
                 return ResourceManager.GetString("TextNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note.
+        /// </summary>
+        public static string TextNote {
+            get {
+                return ResourceManager.GetString("TextNote", resourceCulture);
             }
         }
         

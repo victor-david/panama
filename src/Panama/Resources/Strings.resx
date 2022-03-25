@@ -466,13 +466,9 @@ Last exported: {1}</value>
     <value>Getting ready to delete this submission document. This only deletes the entry in the database, not the associated document. Do you want to continue?</value>
     <comment>Used to confirm title deletion</comment>
   </data>
-  <data name="CommandAddUserNote" xml:space="preserve">
-    <value>Add note</value>
+  <data name="MenuItemAddUserNote" xml:space="preserve">
+    <value>Add a note</value>
     <comment>Command text for add user note</comment>
-  </data>
-  <data name="CommandAddUserNoteTooltip" xml:space="preserve">
-    <value>Add a new note</value>
-    <comment>Tooltip text for add user note</comment>
   </data>
   <data name="CommandDeleteUserNote" xml:space="preserve">
     <value>Delete this note</value>
@@ -1083,5 +1079,8 @@ Do you want to continue?</value>
   </data>
   <data name="TextZeroSearchResults" xml:space="preserve">
     <value>Search returned no results</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>Note</value>
   </data>
 </root>

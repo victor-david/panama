@@ -1,45 +1,68 @@
-﻿<UserControl 
+﻿<UserControl
     x:Class="Restless.Panama.View.UserNoteView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:view="clr-namespace:Restless.Panama.View"    
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:UserNoteViewModel}"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="500">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource GridRowHeightTool}" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <!-- Controls specific to this view-->
-        <Grid Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <view:SimpleRowFilter Grid.Column="0" HorizontalAlignment="Left" />
-            <ItemsControl Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>
-        </Grid>
+    <con:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinNoteDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxNoteDetailWidth}"
+        IsDetailExpanded="{Binding Config.NoteDetailExpanded}"
+        DetailWidth="{Binding Config.NoteDetailWidth}">
+
+        <con:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <TextBlock Text="{x:Static r:Strings.TextNotes}"/>
+                <!-- no filters for now -->                
+            </StatusBar>
+        </con:SplitterGrid.HeaderLeft>
+
+        <con:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedNote.Title}"/>                
+            </StatusBar>
+        </con:SplitterGrid.HeaderRight>
         
-        <!-- Main data grid to display the tabular data  -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderEditContainerStyle}">
-            <DataGrid ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" tk:DataGridColumns.Columns="{Binding Columns}">
+        <con:SplitterGrid.ContentLeft>
+            <DataGrid
+                RowHeight="{Binding Config.DataGridRowHeight}"
+                ItemsSource="{Binding Path=ListView}"
+                SelectedItem="{Binding SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Columns}">
+                
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
+                
             </DataGrid>
-        </Border>
+        </con:SplitterGrid.ContentLeft>
+
+        <con:SplitterGrid.ContentRight>
+            <DockPanel
+                tk:Property.DefaultDock="Top"
+                Style="{StaticResource DataEntryPanelStyle}"
+                Visibility="{Binding EditVisibility}">
+
+                <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
+                <TextBox Text="{Binding SelectedNote.Title}" />
+                <TextBlock Text="{x:Static r:Strings.TextNote}"/>
+                <TextBox 
+                    Style="{StaticResource TextBoxMultiStretchStyle}"
+                    Text="{Binding SelectedNote.Note}"/>
+                
+            </DockPanel>
+        </con:SplitterGrid.ContentRight>
         
-        <!-- Nested editing control on the right -->
-        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderEditContainerStyle}">
-            <view:UserNoteEdit Visibility="{Binding EditVisibility}"/>
-        </Border>
-    </Grid>
-    <!-- end main grid-->
+    </con:SplitterGrid>
+
 </UserControl>

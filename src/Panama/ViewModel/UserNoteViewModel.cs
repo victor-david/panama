@@ -10,6 +10,7 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Utility;
 using System.ComponentModel;
+using System.Data;
 
 namespace Restless.Panama.ViewModel
 {
@@ -19,11 +20,20 @@ namespace Restless.Panama.ViewModel
     public class UserNoteViewModel : DataGridViewModel<UserNoteTable>
     {
         #region Private
+        private UserNoteRow selectedNote;
         #endregion
 
         /************************************************************************/
 
         #region Properties
+        /// <summary>
+        /// Gets the selected note
+        /// </summary>
+        public UserNoteRow SelectedNote
+        {
+            get => selectedNote;
+            private set => SetProperty(ref selectedNote, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -34,20 +44,31 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public UserNoteViewModel()
         {
-            DisplayName = Strings.TextNotes;
             Columns.Create("Id", UserNoteTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Created", UserNoteTable.Defs.Columns.Created).MakeDate();
             Columns.SetDefaultSort(Columns.Create("Title", UserNoteTable.Defs.Columns.Title), ListSortDirection.Ascending);
-            AddViewSourceSortDescriptions();
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandDeleteUserNote, DeleteCommand).AddImageResource("ImageDeleteMenu");
+            MenuItems.AddItem(Strings.MenuItemAddUserNote, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.CommandDeleteUserNote, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
         }
         #endregion
 
         /************************************************************************/
 
         #region Protected Methods
+        protected override void OnSelectedItemChanged()
+        {
+            base.OnSelectedItemChanged();
+            SelectedNote = UserNoteRow.Create(SelectedRow);
+        }
+
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareString(item1, item2, UserNoteTable.Defs.Columns.Title);
+        }
+
         /// <summary>
         /// Runs the add command to add a new record to the data table
         /// </summary>
@@ -55,8 +76,8 @@ namespace Restless.Panama.ViewModel
         {
             Table.AddDefaultRow();
             Table.Save();
-            AddViewSourceSortDescriptions();
             Columns.RestoreDefaultSort();
+            ForceListViewSort();
         }
 
         /// <summary>
@@ -73,10 +94,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunDeleteCommand()
         {
-            if (IsSelectedRowAccessible && Messages.ShowYesNo(Strings.ConfirmationDeleteUserNote))
+            if (IsSelectedRowAccessible && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteUserNote))
             {
-                SelectedRow.Delete();
-                Table.Save();
+                DeleteSelectedRow();
             }
         }
 
@@ -87,17 +107,6 @@ namespace Restless.Panama.ViewModel
         protected override bool CanRunDeleteCommand()
         {
             return IsSelectedRowAccessible;
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Private Methods
-        private void AddViewSourceSortDescriptions()
-        {
-            // TODO
-            //MainSource.SortDescriptions.Clear();
-            //MainSource.SortDescriptions.Add(new SortDescription(UserNoteTable.Defs.Columns.Title, ListSortDirection.Ascending));
         }
         #endregion
     }

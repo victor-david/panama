@@ -6,6 +6,7 @@
 */
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
+using System.Data;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -72,7 +73,7 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         public override void Load()
         {
-            Load(null, string.Format("{0} ASC",Defs. Columns.Title));
+            Load(null, Defs.Columns.Title);
         }
         #endregion
 
@@ -98,7 +99,7 @@ namespace Restless.Panama.Database.Tables
         /// Populates a new row with default (starter) values
         /// </summary>
         /// <param name="row">The freshly created DataRow to poulate</param>
-        protected override void PopulateDefaultRow(System.Data.DataRow row)
+        protected override void PopulateDefaultRow(DataRow row)
         {
             row[Defs.Columns.Title] = "(new note)";
             row[Defs.Columns.Created] = DateTime.UtcNow;

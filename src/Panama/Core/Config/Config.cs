@@ -141,6 +141,10 @@ namespace Restless.Panama.Core
             public const double MaxLinkDetailWidth = 480;
             public const double DefaultLinkDetailWidth = MinLinkDetailWidth;
 
+            public const double MinNoteDetailWidth = 520;
+            public const double MaxNoteDetailWidth = 720;
+            public const double DefaultNoteDetailWidth = MinNoteDetailWidth;
+
             public const double MinPublisherDetailWidth = 360;
             public const double MaxPublisherDetailWidth = 520;
             public const double DefaultPublisherDetailWidth = MinPublisherDetailWidth;
@@ -488,6 +492,18 @@ namespace Restless.Panama.Core
         public double LinkDetailWidth
         {
             get => GetItem(Grid.DefaultLinkDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool NoteDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double NoteDetailWidth
+        {
+            get => GetItem(Grid.DefaultNoteDetailWidth);
             set => SetItem(value);
         }
 
