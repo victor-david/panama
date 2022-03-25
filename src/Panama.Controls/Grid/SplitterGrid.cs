@@ -103,7 +103,7 @@ namespace Restless.Panama.Controls
         }
 
         /// <summary>
-        /// Gets the...
+        /// Gets the visibility for the expander
         /// </summary>
         public Visibility ExpanderVisibility
         {
@@ -124,10 +124,8 @@ namespace Restless.Panama.Controls
         /// </summary>
         public static readonly DependencyProperty ExpanderVisibilityProperty = ExpanderVisibilityPropertyKey.DependencyProperty;
 
-
-
         /// <summary>
-        /// Gets the...
+        /// Gets the visibility for the splitter
         /// </summary>
         public Visibility SplitterVisibility
         {
@@ -147,8 +145,6 @@ namespace Restless.Panama.Controls
         /// Identifies the <see cref="SplitterVisibility"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SplitterVisibilityProperty = SplitterVisibilityPropertyKey.DependencyProperty;
-
-
         #endregion
 
         /************************************************************************/
@@ -392,7 +388,6 @@ namespace Restless.Panama.Controls
                 nameof(HeaderLeft), typeof(object), typeof(SplitterGrid), new FrameworkPropertyMetadata()
             );
 
-
         /// <summary>
         /// Gets or sets right side header content
         /// </summary>
@@ -410,7 +405,6 @@ namespace Restless.Panama.Controls
                 nameof(HeaderRight), typeof(object), typeof(SplitterGrid), new FrameworkPropertyMetadata()
             );
 
-
         /// <summary>
         /// Gets or sets the left side content
         /// </summary>
@@ -427,7 +421,6 @@ namespace Restless.Panama.Controls
             (
                 nameof(ContentLeft), typeof(object), typeof(SplitterGrid), new FrameworkPropertyMetadata()
             );
-
 
         /// <summary>
         /// Gets or sets the right side content
