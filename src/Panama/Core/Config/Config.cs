@@ -150,6 +150,10 @@ namespace Restless.Panama.Core
             public const double MinSelfPublisherDetailWidth = 360;
             public const double MaxSelfPublisherDetailWidth = 520;
             public const double DefaultSelfPublisherDetailWidth = MinSelfPublisherDetailWidth;
+
+            public const double MinTitleDetailWidth = 432;
+            public const double MaxTitleDetailWidth = 560;
+            public const double DefaultTitleDetailWidth = MinTitleDetailWidth;
         }
 
         /// <summary>
@@ -562,6 +566,18 @@ namespace Restless.Panama.Core
         public double SelfPublisherDetailWidth
         {
             get => GetItem(Grid.DefaultSelfPublisherDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool TitleDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double TitleDetailWidth
+        {
+            get => GetItem(Grid.DefaultTitleDetailWidth);
             set => SetItem(value);
         }
         #endregion
