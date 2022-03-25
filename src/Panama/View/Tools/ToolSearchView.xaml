@@ -12,23 +12,39 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:ToolSearchViewModel}"
     mc:Ignorable="d" 
-    d:DesignHeight="250" d:DesignWidth="400">
+    d:DesignHeight="250" d:DesignWidth="930">
     <con:SplitterGrid
         MinDetailWidth="{x:Static core:Config+Grid.MinSearchDetailWidth}"
         MaxDetailWidth="{x:Static core:Config+Grid.MaxSearchDetailWidth}"
-        IsDetailExpanded="{Binding Config.SearchDetailExpanded}"
+        IsDetailExpanded="{Binding IsDetailExpanded}"
         DetailWidth="{Binding Config.SearchDetailWidth}">
 
         <con:SplitterGrid.HeaderLeft>
             <StatusBar>
                 <TextBlock Text="Search:"/>
-                <TextBox Width="120" Text="{Binding SearchText}"/>
-                <tk:IconButton Content="Begin" Command="{Binding Commands[Begin]}"/>
+                <TextBox Width="100" Text="{Binding SearchText}"/>
+                <CheckBox IsChecked="{Binding VersionOnly}" Content="Version only"/>
+                <tk:IconButton
+                    Icon="{StaticResource SquareSmallGreenIconKey}"
+                    Content="Begin"
+                    Command="{Binding Commands[StartSearch]}"/>
+
+                <Separator/>
+
+                <tk:IconButton
+                    Icon="{StaticResource SquareSmallRedIconKey}"
+                    Content="Clear"
+                    Command="{Binding Commands[ClearSearch]}"/>
+
             </StatusBar>
         </con:SplitterGrid.HeaderLeft>
 
         <con:SplitterGrid.HeaderRight>
-            <StatusBar/>
+            <StatusBar>
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedSearch.File}"/>
+            </StatusBar>
         </con:SplitterGrid.HeaderRight>
 
         <con:SplitterGrid.ContentLeft>
@@ -54,11 +70,15 @@
                     tk:Property.IsCollapsed="{Binding HaveResults}"
                     Text="{x:Static r:Strings.TextZeroSearchResults}"/>
 
-            </Grid>            
+            </Grid>
         </con:SplitterGrid.ContentLeft>
 
         <con:SplitterGrid.ContentRight>
-            <vw:PreviewPanel/>
+            <vw:PreviewPanel
+                HeaderVisibility="Collapsed"
+                PreviewMode="{Binding PreviewMode}"
+                PreviewText="{Binding PreviewText}"
+                PreviewImageSource="{Binding PreviewImageSource}"/>
         </con:SplitterGrid.ContentRight>
 
     </con:SplitterGrid>

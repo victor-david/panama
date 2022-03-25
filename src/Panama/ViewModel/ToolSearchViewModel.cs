@@ -11,9 +11,8 @@ using Restless.Panama.Resources;
 using Restless.Panama.Tools;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+using System.Data;
+using System.Windows.Media;
 using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
 
 namespace Restless.Panama.ViewModel
@@ -26,6 +25,9 @@ namespace Restless.Panama.ViewModel
         #region Private
         private SearchRow selectedSearch;
         private bool haveResults;
+        private PreviewMode previewMode;
+        private string previewText;
+        private ImageSource previewImageSource;
         private readonly WindowsFileSearch provider;
         private TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
         private SearchTable SearchTable => DatabaseController.Instance.GetTable<SearchTable>();
@@ -44,6 +46,37 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
+        /// Gets or sets a value that determines whether only search
+        /// results associated with a title version are displayed.
+        /// </summary>
+        public bool VersionOnly
+        {
+            get => Config.SearchVersionOnly;
+            set
+            {
+                Config.SearchVersionOnly = value;
+                ListView.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value that determines if the detail panel is expanded.
+        /// </summary>
+        /// <remarks>
+        /// This is a proxy property for Config.SearchDetailExpanded in order
+        /// to show a document preview when the panel opens and we have a selected file.
+        /// </remarks>
+        public bool IsDetailExpanded
+        {
+            get => Config.SearchDetailExpanded;
+            set
+            {
+                Config.SearchDetailExpanded = value;
+                PrepareDocumentPreview();
+            }
+        }
+
+        /// <summary>
         /// Gets a boolean value that indicates if the lastest search contains results
         /// </summary>
         public bool HaveResults
@@ -59,6 +92,33 @@ namespace Restless.Panama.ViewModel
         {
             get => selectedSearch;
             private set => SetProperty(ref selectedSearch, value);
+        }
+
+        /// <summary>
+        /// Gets the preview mode
+        /// </summary>
+        public PreviewMode PreviewMode
+        {
+            get => previewMode;
+            private set => SetProperty(ref previewMode, value);
+        }
+
+        /// <summary>
+        /// Gets the preview text
+        /// </summary>
+        public string PreviewText
+        {
+            get => previewText;
+            private set => SetProperty(ref previewText, value);
+        }
+
+        /// <summary>
+        /// Gets the preview image source
+        /// </summary>
+        public ImageSource PreviewImageSource
+        {
+            get => previewImageSource;
+            private set => SetProperty(ref previewImageSource, value);
         }
         #endregion
 
@@ -82,10 +142,9 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Author", SearchTable.Defs.Columns.Author).MakeFixedWidth(FixedWidth.W180);
             Columns.Create("Company", SearchTable.Defs.Columns.Company);
 
-            Commands.Add("Begin", RunSearchCommand);
-            Commands.Add("GoToTitleRecord", RunGoToTitleRecordCommand, CanRunGoToTitleRecordCommand);
+            Commands.Add("StartSearch", RunSearchCommand);
+            Commands.Add("ClearSearch", RunClearSearchCommand);
             Commands.Add("DeleteItem", RunDeleteItemCommand, CanRunDeleteItemCommand);
-            //RawCommands.Add("TogglePreview", (o) => { IsPreviewMode = !IsPreviewMode; });
 
             MenuItems.AddItem(Strings.CommandOpenItemOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
             //MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"]).AddImageResource("ImageBrowseToUrlMenu");
@@ -106,12 +165,21 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected Methods
+        /// <inheritdoc/>
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
             SelectedSearch = SearchRow.Create(SelectedRow);
+            PrepareDocumentPreview();
         }
 
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return !VersionOnly || (bool)item[SearchTable.Defs.Columns.IsVersion];
+        }
+
+        /// <inheritdoc/>
         protected override void RunOpenRowCommand()
         {
             if (SelectedSearch != null)
@@ -124,6 +192,14 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
+        private void RunClearSearchCommand(object parm)
+        {
+            SearchTable.Clear();
+            SearchTable.Save();
+            ListView.Refresh();
+            PreviewMode = PreviewMode.None;
+        }
+
         private void RunSearchCommand(object parm)
         {
             if (!string.IsNullOrEmpty(SearchText))
@@ -145,39 +221,6 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void RunGoToTitleRecordCommand(object parm)
-        {
-            if (SelectedSearch != null)
-            {
-                //if (row.Extended is ExtendedSearchResult extended && extended.IsVersion)
-                //{
-                //    var ws = MainWindowViewModel.Instance.SwitchToWorkspace<TitleViewModel>();
-                //    if (ws != null)
-                //    {
-                //        ws.Config.TitleFilter.SetIdFilter(extended.Versions[0].TitleId);
-                //        if (ws.MainView.Count == 1)
-                //        {
-                //            /* This method uses a funky work around */
-                //            // TODO
-                //            // ws.SetSelectedItem(ws.MainView[0]);
-                //            /* Can be assigned directly, but doesn't highlight the row */
-                //            //ws.SelectedItem = ws.DataView[0];
-                //        }
-                //    }
-                //}
-            }
-        }
-
-        private bool CanRunGoToTitleRecordCommand(object o)
-        {
-            //if (SelectedItem is WindowsSearchResult row)
-            //{
-            //    return row.Extended is ExtendedSearchResult extended && extended.IsVersion;
-            //}
-            return false;
-        }
-
-
         private void RunDeleteItemCommand(object parm)
         {
             if (CanRunDeleteItemCommand(parm))
@@ -194,6 +237,32 @@ namespace Restless.Panama.ViewModel
         private bool CanRunDeleteItemCommand(object parm)
         {
             return !SelectedSearch?.IsVersion ?? false;
+        }
+
+        private void PrepareDocumentPreview()
+        {
+            PreviewText = null;
+            PreviewMode = PreviewMode.None;
+
+            if (SelectedSearch != null && IsDetailExpanded)
+            {
+                string fileName = Paths.Title.WithRoot(SelectedSearch.File);
+                PreviewMode = DocumentPreviewer.GetPreviewMode(fileName);
+
+                switch (PreviewMode)
+                {
+                    case PreviewMode.Text:
+                        PreviewText = DocumentPreviewer.GetText(fileName);
+                        break;
+                    case PreviewMode.Image:
+                        PreviewImageSource = DocumentPreviewer.GetImage(fileName);
+                        break;
+                    case PreviewMode.None:
+                    case PreviewMode.Unsupported:
+                    default:
+                        break;
+                }
+            }
         }
         #endregion
     }

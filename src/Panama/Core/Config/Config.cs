@@ -467,66 +467,6 @@ namespace Restless.Panama.Core
         /************************************************************************/
 
         #region Grid
-        /// <summary>
-        /// Gets or sets the grid splitter location for the table grid
-        /// </summary>
-        /// <remarks>
-        /// This is a hidden internal value, used to remember the grid position.
-        /// </remarks>
-        public GridLength LeftColumnTable
-        {
-            get => GetGridLength(Other.SplitterWidth);
-            set => SetGridLength(value);
-        }
-
-        ///// <summary>
-        ///// Gets or sets the grid splitter location for the title grid
-        ///// </summary>
-        ///// <remarks>
-        ///// This is a hidden internal value, used to remember the grid position.
-        ///// </remarks>
-        //public GridLength LeftColumnTitle
-        //{
-        //    get => GetGridLength(Other.SplitterWidth);
-        //    set => SetGridLength(value);
-        //}
-
-        ///// <summary>
-        ///// Gets or sets the grid splitter location for the publisher grid
-        ///// </summary>
-        ///// <remarks>
-        ///// This is a hidden internal value, used to remember the grid position.
-        ///// </remarks>
-        //public GridLength LeftColumnPublisher
-        //{
-        //    get => GetGridLength(Other.SplitterWidth);
-        //    set => SetGridLength(value);
-        //}
-
-        ///// <summary>
-        ///// Gets or sets the grid splitter location for the self publisher grid
-        ///// </summary>
-        ///// <remarks>
-        ///// This is a hidden internal value, used to remember the grid position.
-        ///// </remarks>
-        //public GridLength LeftColumnSelfPublisher
-        //{
-        //    get => GetGridLength(Other.SplitterWidth);
-        //    set => SetGridLength(value);
-        //}
-
-        /// <summary>
-        /// Gets or sets the grid splitter location for the submission grid
-        /// </summary>
-        /// <remarks>
-        /// This is a hidden internal value, used to remember the grid position.
-        /// </remarks>
-        public GridLength LeftColumnSubmission
-        {
-            get => GetGridLength(Other.SplitterWidth);
-            set => SetGridLength(value);
-        }
-
         public bool AuthorDetailExpanded
         {
             get => GetItem(true);
@@ -718,6 +658,16 @@ namespace Restless.Panama.Core
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// Gets or sets a value that determines whether search
+        /// results are filtered to those associated with a title version.
+        /// </summary>
+        public bool SearchVersionOnly
+        {
+            get => GetItem(false);
+            set => SetItem(value);
         }
 
         /// <summary>
