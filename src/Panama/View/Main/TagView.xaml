@@ -5,18 +5,34 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TagViewModel}"
     mc:Ignorable="d"
     d:DesignWidth="400" d:DesignHeight="200">
-    <Grid tk:Property.ColumnWidths="*,*" tk:Property.RowHeights="Auto,*">
+    <con:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinTagDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxTagDetailWidth}"
+        IsDetailExpanded="{Binding Config.TagDetailExpanded}"
+        DetailWidth="{Binding Config.TagDetailWidth}">
 
-        <StatusBar Margin="0,0,4,0">
-            <TextBlock Text="{x:Static r:Strings.MenuItemTags}"/>
-            <!-- no filters for now -->
-        </StatusBar>
+        <con:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <TextBlock Text="{x:Static r:Strings.MenuItemTags}"/>
+                <!-- no filters for now -->
+            </StatusBar>           
+        </con:SplitterGrid.HeaderLeft>
 
-        <Border Grid.Row="1" Style="{StaticResource BorderEditContainerStyle}">
+        <con:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedTag.Tag}"/>
+            </StatusBar>
+        </con:SplitterGrid.HeaderRight>
+
+        <con:SplitterGrid.ContentLeft>
             <DataGrid
                 RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding ListView}" 
@@ -28,26 +44,19 @@
                 </DataGrid.ContextMenu>
                 
             </DataGrid>            
-        </Border>
+        </con:SplitterGrid.ContentLeft>
 
-        <StatusBar Grid.Column="1" Margin="4,0,0,0">
-            <TextBlock 
-                Style="{StaticResource TitleDisplayTextBlockStyle}"
-                Text="{Binding SelectedTag.Tag}"/>
-        </StatusBar>
-
-        <Border
-            Grid.Row="1" Grid.Column="1"
-            Style="{StaticResource BorderEditContainerStyle}"
-            Visibility="{Binding EditVisibility}">
-            
-            <StackPanel Style="{StaticResource DataEntryPanelStyle}">
+        <con:SplitterGrid.ContentRight>
+            <StackPanel 
+                Style="{StaticResource DataEntryPanelStyle}"
+                Visibility="{Binding EditVisibility}">
+                
                 <TextBlock Text="{x:Static r:Strings.TextName}"/>
                 <TextBox Text="{Binding SelectedTag.Tag}"/>
                 <TextBlock Text="{x:Static r:Strings.TextDescription}"/>
                 <TextBox Text="{Binding SelectedTag.Description}"/>
+                
             </StackPanel>
-            
-        </Border>
-    </Grid>
+        </con:SplitterGrid.ContentRight>
+    </con:SplitterGrid>
 </UserControl>

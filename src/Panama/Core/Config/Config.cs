@@ -4,12 +4,10 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.Controls;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Core.Utility;
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -154,6 +152,10 @@ namespace Restless.Panama.Core
             public const double MinSelfPublisherDetailWidth = 360;
             public const double MaxSelfPublisherDetailWidth = 520;
             public const double DefaultSelfPublisherDetailWidth = MinSelfPublisherDetailWidth;
+            
+            public const double MinTagDetailWidth = 302;
+            public const double MaxTagDetailWidth = 582;
+            public const double DefaultTagDetailWidth = MinTagDetailWidth;
 
             public const double MinTitleDetailWidth = 432;
             public const double MaxTitleDetailWidth = 560;
@@ -592,6 +594,18 @@ namespace Restless.Panama.Core
         }
 
         public double TitleDetailWidth
+        {
+            get => GetItem(Grid.DefaultTitleDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool TagDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double TagDetailWidth
         {
             get => GetItem(Grid.DefaultTitleDetailWidth);
             set => SetItem(value);
