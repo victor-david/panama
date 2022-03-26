@@ -104,25 +104,25 @@ namespace Restless.Panama.ViewModel
 
         private void RunGoToTitleRecordCommand(object o)
         {
-            if (SelectedRow != null)
-            {
-                long titleId = (long)SelectedRow[SubmissionTable.Defs.Columns.TitleId];
+            //if (SelectedRow != null)
+            //{
+            //    long titleId = (long)SelectedRow[SubmissionTable.Defs.Columns.TitleId];
 
-                var ws = MainWindowViewModel.Instance.SwitchToWorkspace<TitleViewModel>();
-                if (ws != null)
-                {
-                    ws.Config.TitleFilter.SetIdFilter(titleId);
-                    if (ws.MainView.Count == 1)
-                    {
-                        /* This method uses a funky work around */
-                        // TODO
-                        //ws.SetSelectedItem(ws.MainView[0]);
-                        /* Can be assigned directly, but doesn't highlight the row */
-                        //ws.SelectedItem = ws.DataView[0];
-                    }
-                }
+            //    var ws = MainWindowViewModel.Instance.SwitchToWorkspace<TitleViewModel>();
+            //    if (ws != null)
+            //    {
+            //        ws.Config.TitleFilter.SetIdFilter(titleId);
+            //        if (ws.MainView.Count == 1)
+            //        {
+            //            /* This method uses a funky work around */
+            //            // TODO
+            //            //ws.SetSelectedItem(ws.MainView[0]);
+            //            /* Can be assigned directly, but doesn't highlight the row */
+            //            //ws.SelectedItem = ws.DataView[0];
+            //        }
+            //    }
 
-            }
+            //}
         }
         #endregion
     }

@@ -165,10 +165,6 @@
     <value>Restore the changed application settings to their previous values</value>
     <comment>Tooltip used for config revert</comment>
   </data>
-  <data name="CommandSubmission" xml:space="preserve">
-    <value>Submissions</value>
-    <comment>Command text for submissions</comment>
-  </data>
   <data name="CommandAddSubmissionTooltip" xml:space="preserve">
     <value>Create a new submission</value>
     <comment>Tooltip text for add submission</comment>
@@ -177,15 +173,15 @@
     <value>This command is not supported</value>
     <comment>Used for certain default commands that aren't supported in some VMs</comment>
   </data>
-  <data name="CommandDeletePublisher" xml:space="preserve">
+  <data name="MenuItemDeletePublisher" xml:space="preserve">
     <value>Delete this publisher</value>
     <comment>Used on context menu to delete a publisher</comment>
   </data>
-  <data name="CommandDeleteSubmission" xml:space="preserve">
+  <data name="MenuItemDeleteSubmission" xml:space="preserve">
     <value>Delete this submission</value>
     <comment>Used on context menu to delete a submission</comment>
   </data>
-  <data name="CommandDeleteTitle" xml:space="preserve">
+  <data name="MenuItemDeleteTitle" xml:space="preserve">
     <value>Delete this title</value>
     <comment>Used on context menu to delete a title</comment>
   </data>
@@ -242,10 +238,10 @@ Please make sure that {1} is set correctly in configuration settings. File speci
     <comment>Used when attempting to view obsolete Outlook direct reference in submission documents</comment>
   </data>
   <data name="MenuItemCreateSubmission" xml:space="preserve">
-    <value>Create a submission to this publisher</value>
+    <value>Create a submission</value>
     <comment>Command text for create a submission</comment>
   </data>
-  <data name="CommandBrowseToPublisherUrlOrClick" xml:space="preserve">
+  <data name="MenuItemBrowseToPublisherUrlOrClick" xml:space="preserve">
     <value>Browse to this publisher's web site (or double click the row)</value>
   </data>
   <data name="FormatStringCreateSubmission" xml:space="preserve">
@@ -277,7 +273,7 @@ Please make sure that {1} is set correctly in configuration settings. File speci
   <data name="FilterPromptTag" xml:space="preserve">
     <value>Tag name</value>
   </data>
-  <data name="CommandDeleteTag" xml:space="preserve">
+  <data name="MenuItemDeleteTag" xml:space="preserve">
     <value>Delete this tag</value>
   </data>
   <data name="ConfirmationDeleteTag" xml:space="preserve">
@@ -324,10 +320,10 @@ Please make sure that {1} is set correctly in configuration settings. File speci
   <data name="CommandAddLinkTooltip" xml:space="preserve">
     <value>Add a link to a resource</value>
   </data>
-  <data name="CommandDeleteLink" xml:space="preserve">
+  <data name="MenuItemDeleteLink" xml:space="preserve">
     <value>Delete this link</value>
   </data>
-  <data name="CommandDeleteNote" xml:space="preserve">
+  <data name="MenuItemDeleteNote" xml:space="preserve">
     <value>Delete this note</value>
   </data>
   <data name="ConfirmationDeleteLink" xml:space="preserve">
@@ -417,7 +413,7 @@ Usually, the individual files are kept in different sub directories; this direct
 
 Last exported: {1}</value>
   </data>
-  <data name="CommandFilterToPublisher" xml:space="preserve">
+  <data name="MenuItemFilterToPublisher" xml:space="preserve">
     <value>Filter list to display only submissions to this publisher</value>
   </data>
   <data name="ConfirmationTitleSubmittedPreviouslyToPublisher" xml:space="preserve">
@@ -469,9 +465,6 @@ Last exported: {1}</value>
   <data name="MenuItemAddUserNote" xml:space="preserve">
     <value>Add a note</value>
     <comment>Command text for add user note</comment>
-  </data>
-  <data name="CommandDeleteUserNote" xml:space="preserve">
-    <value>Delete this note</value>
   </data>
   <data name="TextNotes" xml:space="preserve">
     <value>Notes</value>
@@ -548,10 +541,10 @@ Last exported: {1}</value>
   <data name="CommandOpenItemOrDoubleClick" xml:space="preserve">
     <value>Open this item (or double click the row)</value>
   </data>
-  <data name="CommandOpenTitleOrDoubleClick" xml:space="preserve">
+  <data name="MenuItemOpenTitleOrDoubleClick" xml:space="preserve">
     <value>Open the latest version of this title (or double click the row)</value>
   </data>
-  <data name="CommandBrowseToPublisherUrl" xml:space="preserve">
+  <data name="MenuItemBrowseToPublisherUrl" xml:space="preserve">
     <value>Browse to this publisher's web site</value>
   </data>
   <data name="CommandToolScramble" xml:space="preserve">
@@ -663,7 +656,7 @@ The application cannot continue.</value>
   <data name="InstallationCaption" xml:space="preserve">
     <value>Select the directory that will hold the database files</value>
   </data>
-  <data name="CommandBrowseToUrlOrClick" xml:space="preserve">
+  <data name="MenuItemBrowseToUrlOrClick" xml:space="preserve">
     <value>Browse to this url (or double click the row)</value>
   </data>
   <data name="CaptionIconsDesigned1" xml:space="preserve">
@@ -792,13 +785,13 @@ Do you want to continue?</value>
   <data name="ConfigOrphanDirectoryExclusion" xml:space="preserve">
     <value>Orphan directory exclusions, separated by semi-colon</value>
   </data>
-  <data name="TooltipSubmissionContest" xml:space="preserve">
+  <data name="ToolTipSubmissionContest" xml:space="preserve">
     <value>Submission is for a contest</value>
   </data>
-  <data name="TooltipSubmissionLocked" xml:space="preserve">
+  <data name="ToolTipSubmissionLocked" xml:space="preserve">
     <value>Submission is locked</value>
   </data>
-  <data name="TooltipSubmissionOnline" xml:space="preserve">
+  <data name="ToolTipSubmissionOnline" xml:space="preserve">
     <value>Submission is online</value>
   </data>
   <data name="ToolTipTitleFilterReady" xml:space="preserve">
@@ -864,7 +857,7 @@ Do you want to continue?</value>
   <data name="CommandClearTitleFlagsTooltip" xml:space="preserve">
     <value>Clear flag from all titles</value>
   </data>
-  <data name="CommandFlagTitle" xml:space="preserve">
+  <data name="MenuItemFlagTitle" xml:space="preserve">
     <value>Toggle flag for this title</value>
   </data>
   <data name="CommandTitleFilterFlagged" xml:space="preserve">
@@ -1082,5 +1075,9 @@ Do you want to continue?</value>
   </data>
   <data name="TextNote" xml:space="preserve">
     <value>Note</value>
+  </data>
+  <data name="MenuItemCreateSubmissionToPublisher" xml:space="preserve">
+    <value>Create a submission to this publisher</value>
+    <comment>Command text for create a submission</comment>
   </data>
 </root>

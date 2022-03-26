@@ -51,7 +51,7 @@ namespace Restless.Panama.ViewModel
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemAddUserNote, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteUserNote, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            MenuItems.AddItem(Strings.MenuItemDeleteNote, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
         }
         #endregion
 

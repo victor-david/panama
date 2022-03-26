@@ -80,7 +80,6 @@ namespace Restless.Panama.ViewModel
                 // Set backing store to null. Fixes a small problem where the same message
                 // won't display twice in a row because the property hasn't changed.
                 notificationMessage = null;
-                System.Media.SystemSounds.Asterisk.Play();
             }
         }
         #endregion
@@ -149,6 +148,7 @@ namespace Restless.Panama.ViewModel
         {
             NotificationMessage = message;
         }
+
         /// <summary>
         /// Notifies the workspace that a new record has been added that affects it
         /// </summary>
@@ -164,34 +164,12 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Creates if necessary and switches to the workspace specified by its type.
+        /// Navigates to the specified view model
         /// </summary>
-        /// <typeparam name="T">The type of workspace to switch to.</typeparam>
-        /// <returns>The workspace</returns>
-        public T SwitchToWorkspace<T>() where T : ApplicationViewModel
+        /// <typeparam name="T">The type of view model</typeparam>
+        public void NavigateTo<T>() where T : ApplicationViewModel
         {
-            // TODO
-            // The reason we don't use NavigatorItems.Select<T>() directly (which would work)
-            // is to avoid the possibility that a VM allows more than one instance.
-            // We want to go the first one. If there isn't a first one, we'll create.
-
-            //var ws = GetFirstWorkspace<T>();
-            //if (ws != null)
-            //{
-            //    SetActiveWorkspace(ws);
-            //}
-            //else
-            //{
-            //    Create<T>();
-            //}
-
-            //ICollectionView collectionView = CollectionViewSource.GetDefaultView(Workspaces);
-            //if (collectionView != null)
-            //{
-            //    return collectionView.CurrentItem as T;
-            //}
-            return null;
-
+            NavigatorItems.Select<T>();
         }
         #endregion
 

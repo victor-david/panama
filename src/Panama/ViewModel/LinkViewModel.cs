@@ -55,9 +55,9 @@ namespace Restless.Panama.ViewModel
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemAddLink, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteLink, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            MenuItems.AddItem(Strings.MenuItemDeleteLink, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
         }
         #endregion
 

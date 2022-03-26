@@ -288,7 +288,7 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn(Defs.Columns.Joined.Title, TitleTable.Defs.Relations.ToSubmission, TitleTable.Defs.Columns.Title);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Written, TitleTable.Defs.Relations.ToSubmission, TitleTable.Defs.Columns.Written);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Submitted, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Submitted);
-            CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.SubmittedCalc, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Calculated.Submitted);
+            // CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.SubmittedCalc, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Calculated.Submitted);
 
             CreateExpressionColumn<long>(Defs.Columns.Calculated.CurrentSubCount, string.Format("IIF(Parent({0}).{1} IS NULL, 1, 0)", SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Response));
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Response, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Response);

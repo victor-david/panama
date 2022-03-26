@@ -224,10 +224,10 @@ namespace Restless.Panama.ViewModel
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
-            MenuItems.AddItem(Strings.CommandFlagTitle, Commands["ToggleFlag"]).AddIconResource(ResourceKeys.Icon.ToggleIconKey);
+            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemFlagTitle, Commands["ToggleFlag"]).AddIconResource(ResourceKeys.Icon.ToggleIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            MenuItems.AddItem(Strings.MenuItemDeleteTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
 
             Versions = new TitleVersionController(this);
             Submissions = new TitleSubmissionController(this);

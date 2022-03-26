@@ -60,9 +60,9 @@ namespace Restless.Panama.ViewModel
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemCreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemBrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            MenuItems.AddItem(Strings.MenuItemDeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
 
         }
         #endregion

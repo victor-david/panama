@@ -14,6 +14,7 @@ using Restless.Toolkit.Mvvm;
 using System;
 using System.ComponentModel;
 using System.Data;
+using System.Windows.Controls;
 
 namespace Restless.Panama.ViewModel
 {
@@ -23,12 +24,22 @@ namespace Restless.Panama.ViewModel
     public class SubmissionViewModel : DataGridViewModel<SubmissionBatchTable>
     {
         #region Private
+        private SubmissionBatchRow selectedBatch;
         private string submissionHeader;
         #endregion
 
         /************************************************************************/
 
         #region Properties
+        /// <summary>
+        /// Gets the selected submission batch
+        /// </summary>
+        public SubmissionBatchRow SelectedBatch
+        {
+            get => selectedBatch;
+            private set => SetProperty(ref selectedBatch, value);
+        }
+
         /// <summary>
         /// Gets the header text for the submission.
         /// </summary>
@@ -44,7 +55,6 @@ namespace Restless.Panama.ViewModel
         public SubmissionTitleController Titles
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -53,7 +63,6 @@ namespace Restless.Panama.ViewModel
         public SubmissionDocumentController Documents
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -62,7 +71,6 @@ namespace Restless.Panama.ViewModel
         public SubmissionMessageController Messages
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -71,7 +79,6 @@ namespace Restless.Panama.ViewModel
         public SubmissionSubmittedController Submitted
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -80,7 +87,6 @@ namespace Restless.Panama.ViewModel
         public SubmissionResponseController Response
         {
             get;
-            private set;
         }
         #endregion
 
@@ -92,28 +98,47 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SubmissionViewModel()
         {
-            DisplayName = Strings.CommandSubmission;
             Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.CreateImage<BooleanToImageConverter>("O", SubmissionBatchTable.Defs.Columns.Online)
-                .AddToolTip(Strings.TooltipSubmissionOnline);
-            Columns.CreateImage<BooleanToImageConverter>("C", SubmissionBatchTable.Defs.Columns.Contest)
-                .AddToolTip(Strings.TooltipSubmissionContest);
-            Columns.CreateImage<BooleanToImageConverter>("L", SubmissionBatchTable.Defs.Columns.Locked)
-                .AddToolTip(Strings.TooltipSubmissionLocked);
-            var col = Columns.Create("Submitted", SubmissionBatchTable.Defs.Columns.Submitted)
-                .MakeDate()
-                .AddSort(SubmissionBatchTable.Defs.Columns.Calculated.Submitted, SubmissionBatchTable.Defs.Columns.Submitted, DataGridColumnSortBehavior.FollowPrimary);
+
+            Columns.CreateResource<BooleanToPathConverter>("R", SubmissionBatchTable.Defs.Columns.Online, ResourceKeys.Icon.SquareSmallGreenIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip(Strings.ToolTipSubmissionOnline);
+
+            Columns.CreateResource<BooleanToPathConverter>("C", SubmissionBatchTable.Defs.Columns.Contest, ResourceKeys.Icon.SquareSmallGrayIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip(Strings.ToolTipSubmissionContest);
+
+            Columns.CreateResource<BooleanToPathConverter>("L", SubmissionBatchTable.Defs.Columns.Locked, ResourceKeys.Icon.SquareSmallRedIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip(Strings.ToolTipSubmissionLocked);
+
+            DataGridColumn col = Columns.Create("Submitted", SubmissionBatchTable.Defs.Columns.Submitted)
+                .MakeDate();
+            //.AddSort(SubmissionBatchTable.Defs.Columns.Calculated.Submitted, SubmissionBatchTable.Defs.Columns.Submitted, DataGridColumnSortBehavior.FollowPrimary);
+
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
+
             Columns.Create("Response", SubmissionBatchTable.Defs.Columns.Response).MakeDate();
             Columns.Create("Type", SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName).MakeFixedWidth(FixedWidth.W096);
-            // string.Empty because VS gets confused and tries to connect to the wromg overload
-            Columns.Create<DatesToDayDiffConverter>("Days", SubmissionBatchTable.Defs.Columns.Submitted, SubmissionBatchTable.Defs.Columns.Response, string.Empty).MakeCentered().MakeFixedWidth(FixedWidth.W052);
-            Columns.Create("Publisher", SubmissionBatchTable.Defs.Columns.Joined.Publisher);
-            Columns.Create("Fee", SubmissionBatchTable.Defs.Columns.Fee).MakeNumeric("N2", FixedWidth.W052);
-            Columns.Create("Award", SubmissionBatchTable.Defs.Columns.Award).MakeNumeric("N0", FixedWidth.W052);
-            Columns.Create("Note", SubmissionBatchTable.Defs.Columns.Notes).MakeSingleLine();
 
-            AddViewSourceSortDescriptions();
+            // string.Empty because VS gets confused and tries to connect to the wrong overload
+            Columns.Create<DatesToDayDiffConverter>("Days", SubmissionBatchTable.Defs.Columns.Submitted, SubmissionBatchTable.Defs.Columns.Response, string.Empty)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W052);
+
+            Columns.Create("Publisher", SubmissionBatchTable.Defs.Columns.Joined.Publisher);
+
+            Columns.Create("Fee", SubmissionBatchTable.Defs.Columns.Fee)
+                .MakeNumeric("N2", FixedWidth.W052);
+
+            Columns.Create("Award", SubmissionBatchTable.Defs.Columns.Award)
+                .MakeNumeric("N0", FixedWidth.W052);
+
+            Columns.Create("Note", SubmissionBatchTable.Defs.Columns.Notes)
+                .MakeSingleLine();
 
             //Commands.Add("FilterToPublisher", RunFilterToPublisherCommand, (o) => IsSelectedRowAccessible);
             //Commands.Add("ActiveFilter", (o) => { FilterText = "--"; });
@@ -130,18 +155,18 @@ namespace Restless.Panama.ViewModel
             //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrl, OpenRowCommand).AddImageResource("ImageBrowseToUrlMenu");
-            MenuItems.AddItem(Strings.CommandFilterToPublisher, Commands["FilterToPublisher"]).AddImageResource("ImageFilterMenu");
-
+            MenuItems.AddItem(Strings.MenuItemCreateSubmission, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteSubmission, DeleteCommand).AddImageResource("ImageDeleteMenu");
+            MenuItems.AddItem(Strings.MenuItemBrowseToPublisherUrl, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemFilterToPublisher, Commands["FilterToPublisher"]).AddIconResource(ResourceKeys.Icon.FilterIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemDeleteSubmission, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
 
             Titles = new SubmissionTitleController(this);
             Documents = new SubmissionDocumentController(this);
             Messages = new SubmissionMessageController(this);
             Response = new SubmissionResponseController(this);
             Submitted = new SubmissionSubmittedController(this);
-            AddCommand.Supported = CommandSupported.NoWithException;
         }
         #endregion
 
@@ -154,8 +179,8 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public override void OnRecordAdded()
         {
-            AddViewSourceSortDescriptions();
             Columns.RestoreDefaultSort();
+            ForceListViewSort();
         }
 
         /// <summary>
@@ -186,12 +211,18 @@ namespace Restless.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
+            SelectedBatch = SubmissionBatchRow.Create(SelectedRow);
             SetSubmissionHeader();
             Titles.Update();
             Documents.Update();
             Messages.Update();
             Response.Update();
             Submitted.Update();
+        }
+
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareDateTime(item2, item1, SubmissionBatchTable.Defs.Columns.Submitted);
         }
 
         /// <summary>
@@ -245,14 +276,6 @@ namespace Restless.Panama.ViewModel
         private void RunFilterToPublisherCommand(object o)
         {
             // TODO
-        }
-
-        private void AddViewSourceSortDescriptions()
-        {
-            // TODO
-            //MainSource.SortDescriptions.Clear();
-            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionBatchTable.Defs.Columns.Calculated.Submitted, ListSortDirection.Descending));
-            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionBatchTable.Defs.Columns.Submitted, ListSortDirection.Descending));
         }
         #endregion
     }

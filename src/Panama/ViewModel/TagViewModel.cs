@@ -56,7 +56,7 @@ namespace Restless.Panama.ViewModel
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandAddTag, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeleteTag, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            MenuItems.AddItem(Strings.MenuItemDeleteTag, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
 
             AddCommand.Supported = CommandSupported.Yes;
 

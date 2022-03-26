@@ -173,13 +173,13 @@ namespace Restless.Panama.ViewModel
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemCreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemCreateSubmission, Commands["AddSubmission"]).AddIconResource(ResourceKeys.Icon.PlusIconKey);
-            MenuItems.AddItem(Strings.CommandBrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemCreateSubmissionToPublisher, Commands["AddSubmission"]).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemBrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
             MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandDeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            MenuItems.AddItem(Strings.MenuItemDeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
 
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {
@@ -322,7 +322,7 @@ namespace Restless.Panama.ViewModel
                     DatabaseController.Instance.GetTable<SubmissionBatchTable>().CreateSubmission(SelectedPublisher.Id);
                     MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ResultSubmissionCreated);
                     MainWindowViewModel.Instance.NotifyWorkspaceOnRecordAdded<SubmissionViewModel>();
-                    MainWindowViewModel.Instance.SwitchToWorkspace<SubmissionViewModel>();
+                    MainWindowViewModel.Instance.NavigateTo<SubmissionViewModel>();
                 }
             }
         }

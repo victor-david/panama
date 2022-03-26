@@ -236,33 +236,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Browse to this publisher&apos;s web site.
-        /// </summary>
-        public static string CommandBrowseToPublisherUrl {
-            get {
-                return ResourceManager.GetString("CommandBrowseToPublisherUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Browse to this publisher&apos;s web site (or double click the row).
-        /// </summary>
-        public static string CommandBrowseToPublisherUrlOrClick {
-            get {
-                return ResourceManager.GetString("CommandBrowseToPublisherUrlOrClick", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Browse to this url (or double click the row).
-        /// </summary>
-        public static string CommandBrowseToUrlOrClick {
-            get {
-                return ResourceManager.GetString("CommandBrowseToUrlOrClick", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string CommandClearFilter {
@@ -353,69 +326,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete this link.
-        /// </summary>
-        public static string CommandDeleteLink {
-            get {
-                return ResourceManager.GetString("CommandDeleteLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this note.
-        /// </summary>
-        public static string CommandDeleteNote {
-            get {
-                return ResourceManager.GetString("CommandDeleteNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this publisher.
-        /// </summary>
-        public static string CommandDeletePublisher {
-            get {
-                return ResourceManager.GetString("CommandDeletePublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this submission.
-        /// </summary>
-        public static string CommandDeleteSubmission {
-            get {
-                return ResourceManager.GetString("CommandDeleteSubmission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this tag.
-        /// </summary>
-        public static string CommandDeleteTag {
-            get {
-                return ResourceManager.GetString("CommandDeleteTag", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this title.
-        /// </summary>
-        public static string CommandDeleteTitle {
-            get {
-                return ResourceManager.GetString("CommandDeleteTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this note.
-        /// </summary>
-        public static string CommandDeleteUserNote {
-            get {
-                return ResourceManager.GetString("CommandDeleteUserNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Advanced.
         /// </summary>
         public static string CommandFilterAdvanced {
@@ -434,24 +344,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filter list to display only submissions to this publisher.
-        /// </summary>
-        public static string CommandFilterToPublisher {
-            get {
-                return ResourceManager.GetString("CommandFilterToPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Toggle flag for this title.
-        /// </summary>
-        public static string CommandFlagTitle {
-            get {
-                return ResourceManager.GetString("CommandFlagTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Links.
         /// </summary>
         public static string CommandLink {
@@ -466,15 +358,6 @@ namespace Restless.Panama.Resources {
         public static string CommandOpenItemOrDoubleClick {
             get {
                 return ResourceManager.GetString("CommandOpenItemOrDoubleClick", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open the latest version of this title (or double click the row).
-        /// </summary>
-        public static string CommandOpenTitleOrDoubleClick {
-            get {
-                return ResourceManager.GetString("CommandOpenTitleOrDoubleClick", resourceCulture);
             }
         }
         
@@ -592,15 +475,6 @@ namespace Restless.Panama.Resources {
         public static string CommandSelfPublisher {
             get {
                 return ResourceManager.GetString("CommandSelfPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Submissions.
-        /// </summary>
-        public static string CommandSubmission {
-            get {
-                return ResourceManager.GetString("CommandSubmission", resourceCulture);
             }
         }
         
@@ -1865,6 +1739,33 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse to this publisher&apos;s web site.
+        /// </summary>
+        public static string MenuItemBrowseToPublisherUrl {
+            get {
+                return ResourceManager.GetString("MenuItemBrowseToPublisherUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse to this publisher&apos;s web site (or double click the row).
+        /// </summary>
+        public static string MenuItemBrowseToPublisherUrlOrClick {
+            get {
+                return ResourceManager.GetString("MenuItemBrowseToPublisherUrlOrClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse to this url (or double click the row).
+        /// </summary>
+        public static string MenuItemBrowseToUrlOrClick {
+            get {
+                return ResourceManager.GetString("MenuItemBrowseToUrlOrClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string MenuItemClear {
@@ -1883,11 +1784,20 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a submission to this publisher.
+        ///   Looks up a localized string similar to Create a submission.
         /// </summary>
         public static string MenuItemCreateSubmission {
             get {
                 return ResourceManager.GetString("MenuItemCreateSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a submission to this publisher.
+        /// </summary>
+        public static string MenuItemCreateSubmissionToPublisher {
+            get {
+                return ResourceManager.GetString("MenuItemCreateSubmissionToPublisher", resourceCulture);
             }
         }
         
@@ -1910,6 +1820,78 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete this link.
+        /// </summary>
+        public static string MenuItemDeleteLink {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this note.
+        /// </summary>
+        public static string MenuItemDeleteNote {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this publisher.
+        /// </summary>
+        public static string MenuItemDeletePublisher {
+            get {
+                return ResourceManager.GetString("MenuItemDeletePublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this submission.
+        /// </summary>
+        public static string MenuItemDeleteSubmission {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this tag.
+        /// </summary>
+        public static string MenuItemDeleteTag {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this title.
+        /// </summary>
+        public static string MenuItemDeleteTitle {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter list to display only submissions to this publisher.
+        /// </summary>
+        public static string MenuItemFilterToPublisher {
+            get {
+                return ResourceManager.GetString("MenuItemFilterToPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle flag for this title.
+        /// </summary>
+        public static string MenuItemFlagTitle {
+            get {
+                return ResourceManager.GetString("MenuItemFlagTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Links.
         /// </summary>
         public static string MenuItemLinks {
@@ -1924,6 +1906,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemNotes {
             get {
                 return ResourceManager.GetString("MenuItemNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open the latest version of this title (or double click the row).
+        /// </summary>
+        public static string MenuItemOpenTitleOrDoubleClick {
+            get {
+                return ResourceManager.GetString("MenuItemOpenTitleOrDoubleClick", resourceCulture);
             }
         }
         
@@ -2605,27 +2596,27 @@ namespace Restless.Panama.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Submission is for a contest.
         /// </summary>
-        public static string TooltipSubmissionContest {
+        public static string ToolTipSubmissionContest {
             get {
-                return ResourceManager.GetString("TooltipSubmissionContest", resourceCulture);
+                return ResourceManager.GetString("ToolTipSubmissionContest", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Submission is locked.
         /// </summary>
-        public static string TooltipSubmissionLocked {
+        public static string ToolTipSubmissionLocked {
             get {
-                return ResourceManager.GetString("TooltipSubmissionLocked", resourceCulture);
+                return ResourceManager.GetString("ToolTipSubmissionLocked", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Submission is online.
         /// </summary>
-        public static string TooltipSubmissionOnline {
+        public static string ToolTipSubmissionOnline {
             get {
-                return ResourceManager.GetString("TooltipSubmissionOnline", resourceCulture);
+                return ResourceManager.GetString("ToolTipSubmissionOnline", resourceCulture);
             }
         }
         

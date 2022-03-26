@@ -116,17 +116,17 @@ namespace Restless.Panama.Database.Tables
                     public const string ResponseTypeName = "JoinRespTypeName";
                 }
 
-                /// <summary>
-                /// Provides static column names for columns that are calculated from other values.
-                /// </summary>
-                public static class Calculated
-                {
-                    /// <summary>
-                    /// Gets the name of the calculated submitted column.
-                    /// This is a special use column that is used for sorting.
-                    /// </summary>
-                    public const string Submitted = "CalcSubmitted";
-                }
+                ///// <summary>
+                ///// Provides static column names for columns that are calculated from other values.
+                ///// </summary>
+                //public static class Calculated
+                //{
+                //    /// <summary>
+                //    /// Gets the name of the calculated submitted column.
+                //    /// This is a special use column that is used for sorting.
+                //    /// </summary>
+                //    public const string Submitted = "CalcSubmitted";
+                //}
             }
 
             /// <summary>
@@ -237,15 +237,9 @@ namespace Restless.Panama.Database.Tables
         /// <param name="publisherId">The publisher id</param>
         public void CreateSubmission(long publisherId)
         {
-            DataRow row = NewRow();
-            row[Defs.Columns.PublisherId] = publisherId;
-            row[Defs.Columns.Online] = false;
-            row[Defs.Columns.Contest] = false;
-            row[Defs.Columns.Locked] = false;
-            row[Defs.Columns.Submitted] = DateTime.UtcNow;
-            row[Defs.Columns.ResponseType] = ResponseTable.Defs.Values.NoResponse;
-            Rows.Add(row);
-            DataRow parentRow = row.GetParentRow(PublisherTable.Defs.Relations.ToSubmissionBatch);
+            SubmissionBatchRow created = SubmissionBatchRow.Create(NewRow(), publisherId);
+            Rows.Add(created.Row);
+            DataRow parentRow = created.Row.GetParentRow(PublisherTable.Defs.Relations.ToSubmissionBatch);
             Controller.GetTable<PublisherTable>().UpdateHaveActive(parentRow);
             Save();
         }
@@ -317,27 +311,27 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn(Defs.Columns.Joined.PublisherUrl, PublisherTable.Defs.Relations.ToSubmissionBatch, PublisherTable.Defs.Columns.Url);
             CreateChildToParentColumn<bool>(Defs.Columns.Joined.PublisherExclusive, PublisherTable.Defs.Relations.ToSubmissionBatch, PublisherTable.Defs.Columns.Exclusive);
             CreateChildToParentColumn(Defs.Columns.Joined.ResponseTypeName, ResponseTable.Defs.Relations.ToSubmissionBatch, ResponseTable.Defs.Columns.Name);
-            CreateActionExpressionColumn<DateTime>
-                (
-                    Defs.Columns.Calculated.Submitted,
-                    this,
-                    UpdateCalculatedSubmitted,
-                    Defs.Columns.Submitted,
-                    Defs.Columns.Response
-                );
+            //CreateActionExpressionColumn<DateTime>
+            //    (
+            //        Defs.Columns.Calculated.Submitted,
+            //        this,
+            //        UpdateCalculatedSubmitted,
+            //        Defs.Columns.Submitted,
+            //        Defs.Columns.Response
+            //    );
         }
 
-        /// <summary>
-        /// Called when database initialization is complete to populate the <see cref="Defs.Columns.Calculated.Submitted"/> column.
-        /// </summary>
-        protected override void OnInitializationComplete()
-        {
-            foreach (DataRow row in Rows)
-            {
-                UpdateCalculatedSubmitted(row);
-            }
-            AcceptChanges();
-        }
+        ///// <summary>
+        ///// Called when database initialization is complete to populate the <see cref="Defs.Columns.Calculated.Submitted"/> column.
+        ///// </summary>
+        //protected override void OnInitializationComplete()
+        //{
+        //    foreach (DataRow row in Rows)
+        //    {
+        //        UpdateCalculatedSubmitted(row);
+        //    }
+        //    AcceptChanges();
+        //}
 
         /// <summary>
         /// Called when a data column is changing its value.
@@ -376,24 +370,24 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Private methods
-        private void UpdateCalculatedSubmitted(ActionDataColumn col, DataRowChangeEventArgs e)
-        {
-            UpdateCalculatedSubmitted(e.Row);
-        }
+        //private void UpdateCalculatedSubmitted(ActionDataColumn col, DataRowChangeEventArgs e)
+        //{
+        //    UpdateCalculatedSubmitted(e.Row);
+        //}
 
-        private void UpdateCalculatedSubmitted(DataRow row)
-        {
-            DateTime baseDate = new DateTime(DateTime.UtcNow.Year + 10, 1, 1);
-            if (row[Defs.Columns.Response] == DBNull.Value)
-            {
-                DateTime submitted = (DateTime)row[Defs.Columns.Submitted];
-                row[Defs.Columns.Calculated.Submitted] = baseDate.AddTicks(submitted.Ticks);
-            }
-            else
-            {
-                row[Defs.Columns.Calculated.Submitted] = row[Defs.Columns.Submitted];
-            }
-        }
+        //private void UpdateCalculatedSubmitted(DataRow row)
+        //{
+        //    DateTime baseDate = new DateTime(DateTime.UtcNow.Year + 10, 1, 1);
+        //    if (row[Defs.Columns.Response] == DBNull.Value)
+        //    {
+        //        DateTime submitted = (DateTime)row[Defs.Columns.Submitted];
+        //        row[Defs.Columns.Calculated.Submitted] = baseDate.AddTicks(submitted.Ticks);
+        //    }
+        //    else
+        //    {
+        //        row[Defs.Columns.Calculated.Submitted] = row[Defs.Columns.Submitted];
+        //    }
+        //}
         #endregion
 
     }
