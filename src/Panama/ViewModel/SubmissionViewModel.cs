@@ -5,7 +5,6 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
@@ -13,6 +12,7 @@ using Restless.Toolkit.Core.Utility;
 using System;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Windows.Controls;
 
 namespace Restless.Panama.ViewModel
@@ -207,9 +207,7 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected Methods
-        /// <summary>
-        /// Called when the selected item on the associated data grid has changed.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
@@ -222,55 +220,59 @@ namespace Restless.Panama.ViewModel
             Submitted.Update();
         }
 
+        /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
             return DataRowCompareDateTime(item2, item1, SubmissionBatchTable.Defs.Columns.Submitted);
         }
 
-        /// <summary>
-        /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> command.
-        /// This command opens the publisher's web site.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void RunOpenRowCommand()
         {
-            if (SelectedRow != null)
+            if (CanRunOpenRowCommand())
             {
-                OpenHelper.OpenWebSite(null, SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.PublisherUrl].ToString());
+                OpenHelper.OpenWebSite(null, SelectedBatch.PublisherUrl);
             }
         }
 
-        /// <summary>
-        /// Gets a value that indicates if the <see cref="DataGridViewModel{T}.OpenRowCommand"/> can run.
-        /// </summary>
-        /// <returns>true if the <see cref="DataGridViewModel{T}.OpenRowCommand"/> can run; otherwise, false.</returns>
+        /// <inheritdoc/>
         protected override bool CanRunOpenRowCommand()
         {
-            return
-                    base.CanRunOpenRowCommand() &&
-                    !string.IsNullOrEmpty(SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.PublisherUrl].ToString());
+            return base.CanRunOpenRowCommand() && (SelectedBatch?.HasPublisherUrl ?? false);
         }
 
+        /// <inheritdoc/>
         protected override void RunAddCommand()
         {
-            base.RunAddCommand();
+            if (WindowFactory.PublisherSelect.Create().GetPublisher() is PublisherRow publisher)
+            {
+                int openCount = Table.OpenSubmissionCount(publisher.Id);
+                string msg = openCount == 0 ?
+                    string.Format(CultureInfo.InvariantCulture, Strings.FormatStringCreateSubmission, publisher.Name) :
+                    string.Format(CultureInfo.InvariantCulture, Strings.FormatStringCreateSubmissionOpen, publisher.Name);
+
+                if (MessageWindow.ShowYesNo(msg))
+                {
+                    Table.CreateSubmission(publisher.Id);
+                    MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ResultSubmissionCreated);
+                    Columns.RestoreDefaultSort();
+                    ForceListViewSort();
+                }
+            }
         }
 
-        /// <summary>
-        /// Runs the delete command to delete a record from the data table
-        /// </summary>
+        /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
             if (CanRunDeleteCommand() && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteSubmission))
             {
                 // Call the DeleteSubmission() method to delete and perform other cleanup.
-                Table.DeleteSubmission(SelectedRow);
+                Table.DeleteSubmission(SelectedBatch);
+                ListView.Refresh();
             }
         }
 
-        /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is selected and the submission is unlocked; otherwise, false.</returns>
+        /// <inheritdoc/>
         protected override bool CanRunDeleteCommand()
         {
             return IsSelectedRowAccessible && !(SelectedBatch?.IsLocked ?? true);

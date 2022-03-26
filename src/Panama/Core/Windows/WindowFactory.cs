@@ -144,13 +144,11 @@ namespace Restless.Panama.Core
             /// <summary>
             /// Creates an instance of PublisherSelectWindow and its corresponding view model.
             /// </summary>
-            /// <param name="title">The text to use for the window title.</param>
             /// <returns>The window</returns>
-            public static PublisherSelectWindow Create(string title)
+            public static PublisherSelectWindow Create()
             {
                 PublisherSelectWindow window = new()
                 {
-                    Title = title,
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new PublisherSelectWindowViewModel(),

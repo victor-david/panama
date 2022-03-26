@@ -362,15 +362,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Publishers.
-        /// </summary>
-        public static string CommandPublisher {
-            get {
-                return ResourceManager.GetString("CommandPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string CommandPublisherFilterActive {
@@ -2203,6 +2194,15 @@ namespace Restless.Panama.Resources {
         public static string TextPublished {
             get {
                 return ResourceManager.GetString("TextPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publisher.
+        /// </summary>
+        public static string TextPublisher {
+            get {
+                return ResourceManager.GetString("TextPublisher", resourceCulture);
             }
         }
         

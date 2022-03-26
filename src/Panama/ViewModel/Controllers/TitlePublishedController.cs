@@ -130,21 +130,21 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private void RunAddPublishedCommand(object o)
         {
-            var window = WindowFactory.PublisherSelect.Create(Strings.WindowTitleSelectPublisherForPublished);
-            window.ShowDialog();
-            var vm = window.DataContext as PublisherSelectWindowViewModel;
-            if (vm != null)
-            {
-                Execution.TryCatch(() =>
-                    {
-                        long publisherId = vm.SelectedPublisherId;
-                        if (publisherId > 0)
-                        {
-                            long titleId = (long)Owner.SelectedPrimaryKey;
-                            DatabaseController.Instance.GetTable<PublishedTable>().Add(titleId, publisherId);
-                        }
-                    });
-            }
+            //    var window = WindowFactory.PublisherSelect.Create();
+            //    window.ShowDialog();
+            //    var vm = window.DataContext as PublisherSelectWindowViewModel;
+            //    if (vm != null)
+            //    {
+            //        Execution.TryCatch(() =>
+            //            {
+            //                long publisherId = vm.SelectedPublisherId;
+            //                if (publisherId > 0)
+            //                {
+            //                    long titleId = (long)Owner.SelectedPrimaryKey;
+            //                    DatabaseController.Instance.GetTable<PublishedTable>().Add(titleId, publisherId);
+            //                }
+            //            });
+            //    }
         }
 
         private void RunRemovePublishedCommand(object o)

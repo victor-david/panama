@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CommandPublisher" xml:space="preserve">
-    <value>Publishers</value>
+  <data name="TextPublisher" xml:space="preserve">
+    <value>Publisher</value>
     <comment>Command text to view publishers</comment>
   </data>
   <data name="CommandPublisherTooltip" xml:space="preserve">

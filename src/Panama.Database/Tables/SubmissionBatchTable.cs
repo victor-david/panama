@@ -247,18 +247,18 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Deletes the specified submission.
         /// </summary>
-        /// <param name="row">The data row</param>
+        /// <param name="batch">The batch object</param>
         /// <remarks>
         /// This method deletes the specified row and updates the parent publisher table
         /// to reflect the changed status of active submissions. You should call this method
         /// rather than deleting the row directly in order to update the parent.
         /// </remarks>
-        public void DeleteSubmission(DataRow row)
+        public void DeleteSubmission(SubmissionBatchRow batch)
         {
-            if (row != null && row.Table.TableName == TableName)
+            if (batch != null)
             {
-                DataRow parentRow = row.GetParentRow(PublisherTable.Defs.Relations.ToSubmissionBatch);
-                row.Delete();
+                DataRow parentRow = batch.Row.GetParentRow(PublisherTable.Defs.Relations.ToSubmissionBatch);
+                batch.Row.Delete();
                 /* Update the parent publisher record */
                 Controller.GetTable<PublisherTable>().UpdateHaveActive(parentRow);
                 /* Save all. A submission delete affects other tables */

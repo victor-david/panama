@@ -113,7 +113,6 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public PublisherViewModel()
         {
-            DisplayName = Strings.CommandPublisher;
             Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
 
             Columns.CreateResource<BooleanToPathConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod, ResourceKeys.Icon.SquareSmallBlueIconKey)
@@ -162,7 +161,6 @@ namespace Restless.Panama.ViewModel
             Commands.Add("PayingFilter", p => Filters.SetToPaying());
             Commands.Add("FollowupFilter", p => Filters.SetToFollowup());
             Commands.Add("ToggleCustomFilter", o => IsCustomFilterOpen = !IsCustomFilterOpen);
-            Commands.Add("AddSubmission", RunAddSubmissionCommand, (o) => IsSelectedRowAccessible);
             Commands.Add("CopyLoginId", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.LoginId); }, CanCopyCredential);
             Commands.Add("CopyPassword", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.Password); }, CanCopyCredential);
 
@@ -176,7 +174,6 @@ namespace Restless.Panama.ViewModel
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemCreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemCreateSubmissionToPublisher, Commands["AddSubmission"]).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddItem(Strings.MenuItemBrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
@@ -302,25 +299,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
-        private void RunAddSubmissionCommand(object o)
-        {
-            if (SelectedPublisher != null)
-            {
-                int openCount = DatabaseController.Instance.GetTable<SubmissionBatchTable>().OpenSubmissionCount(SelectedPublisher.Id);
-                string msg = openCount == 0 ?
-                    string.Format(CultureInfo.InvariantCulture, Strings.FormatStringCreateSubmission, SelectedPublisher.Name) :
-                    string.Format(CultureInfo.InvariantCulture, Strings.FormatStringCreateSubmissionOpen, SelectedPublisher.Name);
-
-                if (MessageWindow.ShowYesNo(msg))
-                {
-                    DatabaseController.Instance.GetTable<SubmissionBatchTable>().CreateSubmission(SelectedPublisher.Id);
-                    MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ResultSubmissionCreated);
-                    MainWindowViewModel.Instance.NotifyWorkspaceOnRecordAdded<SubmissionViewModel>();
-                    MainWindowViewModel.Instance.NavigateTo<SubmissionViewModel>();
-                }
-            }
-        }
-
         private bool CanCopyCredential(object o)
         {
             return SelectedCredential != null && SelectedCredential.Id != 0;

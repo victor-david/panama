@@ -6,9 +6,11 @@
 */
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
-using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
+using System;
 using System.ComponentModel;
+using System.Data;
+using System.Windows.Controls;
 
 namespace Restless.Panama.ViewModel
 {
@@ -18,18 +20,33 @@ namespace Restless.Panama.ViewModel
     public class PublisherSelectWindowViewModel : WindowViewModel<PublisherTable>
     {
         #region Private
+        private string searchText;
+        private PublisherRow selectedPublisher;
         #endregion
 
         /************************************************************************/
 
         #region Public properties
         /// <summary>
-        /// Gets the selected publisher id, or -1 if none selected.
+        /// Gets or sets the search text
         /// </summary>
-        public long SelectedPublisherId
+        public string SearchText
         {
-            get;
-            private set;
+            get => searchText;
+            set
+            {
+                SetProperty(ref searchText, value);
+                ListView.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// Gets the selected publisher
+        /// </summary>
+        public PublisherRow SelectedPublisher
+        {
+            get => selectedPublisher;
+            private set => SetProperty(ref selectedPublisher, value);
         }
         #endregion
 
@@ -41,30 +58,54 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public PublisherSelectWindowViewModel()
         {
-            Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Id", PublisherTable.Defs.Columns.Id)
+                .MakeFixedWidth(FixedWidth.W042);
+
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
-            var col = Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate();
+
+            DataGridColumn col = Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate();
             Columns.SetDefaultSort(col, ListSortDirection.Descending);
-            Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub).MakeDate()
-                .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
-            Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount).MakeFixedWidth(FixedWidth.W052)
+
+            Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub)
+                .MakeDate()
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Commands.Add("Select", RunSelectCommand, (o) => IsSelectedRowAccessible);
-            SelectedPublisherId = -1;
+            Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount)
+                .MakeFixedWidth(FixedWidth.W052)
+                .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+
+            Commands.Add("Select", RunSelectCommand, p => IsSelectedRowAccessible);
         }
         #endregion
 
         /************************************************************************/
 
-        #region Private methods
-        private void RunSelectCommand(object o)
+        protected override void OnSelectedItemChanged()
         {
-            if (SelectedPrimaryKey != null)
+            base.OnSelectedItemChanged();
+            SelectedPublisher = PublisherRow.Create(SelectedRow);
+        }
+
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareDateTime(item2, item1, PublisherTable.Defs.Columns.Added);
+        }
+
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return
+                string.IsNullOrWhiteSpace(SearchText) ||
+                item[PublisherTable.Defs.Columns.Name].ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
+        }
+
+        #region Private methods
+        private void RunSelectCommand(object parm)
+        {
+            if (SelectedPublisher != null)
             {
-                SelectedPublisherId = (long)SelectedPrimaryKey;
+                WindowOwner.DialogResult = true;
+                CloseWindowCommand.Execute(null);
             }
-            CloseWindowCommand.Execute(null);
         }
         #endregion
     }

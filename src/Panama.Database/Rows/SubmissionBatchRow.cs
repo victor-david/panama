@@ -105,6 +105,16 @@ namespace Restless.Panama.Database.Tables
             get => GetString(Columns.Notes);
             set => SetValue(Columns.Notes, value);
         }
+
+        /// <summary>
+        /// Gets the publisher url
+        /// </summary>
+        public string PublisherUrl => GetString(Columns.Joined.PublisherUrl);
+
+        /// <summary>
+        /// Gets a boolean value that indicates whether the publisher has a url
+        /// </summary>
+        public bool HasPublisherUrl => !string.IsNullOrWhiteSpace(PublisherUrl);
         #endregion
 
         /************************************************************************/
