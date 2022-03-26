@@ -32,7 +32,7 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Public fields / properties
+        #region Properties
         /// <summary>
         /// Gets the table object associated with this instance
         /// </summary>
@@ -83,6 +83,11 @@ namespace Restless.Panama.ViewModel
         {
             get;
         }
+
+        /// <summary>
+        /// Gets a boolean value that determines if <see cref="AddCommand"/> is enabled.
+        /// </summary>
+        public virtual bool AddCommandEnabled => false;
 
         /// <summary>
         /// Gets a command to add a new record to the data table
@@ -185,7 +190,7 @@ namespace Restless.Panama.ViewModel
             Columns = new DataGridColumnCollection();
             MenuItems = new MenuItemCollection();
 
-            AddCommand = RelayCommand.Create(p => RunAddCommand(), p=> CanRunAddCommand());
+            AddCommand = RelayCommand.Create(p => RunAddCommand(), p => AddCommandEnabled);
             DeleteCommand = RelayCommand.Create(p => RunDeleteCommand(), p => CanRunDeleteCommand());
             ClearFilterCommand = RelayCommand.Create(p => RunClearFilterCommand(), p => CanRunClearFilterCommand());
             OpenRowCommand = RelayCommand.Create(p => RunOpenRowCommand(), p => CanRunOpenRowCommand());
@@ -347,16 +352,6 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected virtual void RunAddCommand()
         {
-        }
-
-        /// <summary>
-        /// When overriden in a derived class, runs the command predicate to check if the add command can execute.
-        /// The base implementation returns <b>false</b>.
-        /// </summary>
-        /// <returns>The base implememtation always returns <b>false</b>.</returns>
-        protected virtual bool CanRunAddCommand()
-        {
-            return false;
         }
 
         /// <summary>

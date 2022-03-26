@@ -10,7 +10,6 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
-using Restless.Toolkit.Mvvm;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -31,6 +30,9 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Properties
+        /// <inheritdoc/>
+        public override bool AddCommandEnabled => true;
+
         /// <summary>
         /// Gets the selected submission batch
         /// </summary>
@@ -248,15 +250,20 @@ namespace Restless.Panama.ViewModel
                     !string.IsNullOrEmpty(SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.PublisherUrl].ToString());
         }
 
+        protected override void RunAddCommand()
+        {
+            base.RunAddCommand();
+        }
+
         /// <summary>
         /// Runs the delete command to delete a record from the data table
         /// </summary>
         protected override void RunDeleteCommand()
         {
-            if (CanRunDeleteCommand() && Toolkit.Utility.Messages.ShowYesNo(Strings.ConfirmationDeleteSubmission))
+            if (CanRunDeleteCommand() && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteSubmission))
             {
                 // Call the DeleteSubmission() method to delete and perform other cleanup.
-                DatabaseController.Instance.GetTable<SubmissionBatchTable>().DeleteSubmission(SelectedRow);
+                Table.DeleteSubmission(SelectedRow);
             }
         }
 
@@ -266,7 +273,7 @@ namespace Restless.Panama.ViewModel
         /// <returns>true if a row is selected and the submission is unlocked; otherwise, false.</returns>
         protected override bool CanRunDeleteCommand()
         {
-            return IsSelectedRowAccessible && !(bool)SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
+            return IsSelectedRowAccessible && !(SelectedBatch?.IsLocked ?? true);
         }
         #endregion
 

@@ -39,6 +39,9 @@ namespace Restless.Panama.ViewModel
         #region Properties
         private TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
 
+        /// <inheritdoc/>
+        public override bool AddCommandEnabled => true;
+
         /// <summary>
         /// Gets or sets the selected edit section
         /// </summary>
@@ -317,15 +320,6 @@ namespace Restless.Panama.ViewModel
                 Columns.RestoreDefaultSort();
                 ForceListViewSort();
             }
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Add command can execute
-        /// </summary>
-        /// <returns>This method always returns true.</returns>
-        protected override bool CanRunAddCommand()
-        {
-            return true;
         }
 
         /// <summary>

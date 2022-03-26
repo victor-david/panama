@@ -25,6 +25,8 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Properties
+        /// <inheritdoc/>
+        public override bool AddCommandEnabled => true;
         #endregion
 
         /************************************************************************/
@@ -60,15 +62,6 @@ namespace Restless.Panama.ViewModel
             Table.Save();
             AddViewSourceSortDescriptions();
             Columns.RestoreDefaultSort();
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Add command can execute
-        /// </summary>
-        /// <returns>This method always returns true.</returns>
-        protected override bool CanRunAddCommand()
-        {
-            return true;
         }
 
         /// <summary>
