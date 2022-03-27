@@ -315,6 +315,24 @@ namespace Restless.Panama.Core
             get => GetItem(false);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets whether the submission and response dates are expanded
+        /// </summary>
+        public bool IsSubmissionSubmittedDateExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the submission response date is expanded
+        /// </summary>
+        public bool IsSubmissionResponseDateExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/

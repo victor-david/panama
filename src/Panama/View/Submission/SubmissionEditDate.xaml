@@ -1,0 +1,56 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.SubmissionEditDate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
+    mc:Ignorable="d" 
+    d:DesignHeight="430" d:DesignWidth="310">
+    <StackPanel Style="{StaticResource DataEntryPanelStyle}">
+
+        <Expander
+            Header="{Binding Dates.Header1}"
+            IsExpanded="{Binding Config.IsSubmissionSubmittedDateExpanded, FallbackValue=True}">
+
+            <tk:Calendar SelectedDateUtc="{Binding Dates.SubmittedDate}"/>
+
+        </Expander>
+
+        <Expander
+            Header="{Binding Dates.Header2}"
+            IsExpanded="{Binding Config.IsSubmissionResponseDateExpanded, FallbackValue=True}">
+
+            <Grid
+                tk:Property.ColumnWidths="Auto,120"
+                tk:Property.RowHeights="*,Auto">
+
+                <tk:Calendar SelectedDateUtc="{Binding Dates.ResponseDate}"/>
+
+                <tk:IconButton
+                    Grid.Row="1"
+                    Margin="0,4"
+                    Width="80"
+                    HorizontalAlignment="Left"
+                    Icon="{StaticResource SquareSmallBlueIconKey}"
+                    Content="{x:Static r:Strings.TextClear}"
+                    Command="{Binding Dates.ClearResponseCommand}"/>
+
+                <ListBox
+                    Grid.Column="1"
+                    Margin="4,3"
+                    MinHeight="0"
+                    Style="{StaticResource CompactListBoxStyle}"
+                    IsEnabled="{Binding Dates.HaveResponseDate}"
+                    ItemsSource="{Binding Dates.Responses}"
+                    SelectedValue="{Binding Dates.ResponseType}"
+                    SelectedValuePath="Id"/>
+
+            </Grid>
+        </Expander>
+
+    </StackPanel>
+</UserControl>

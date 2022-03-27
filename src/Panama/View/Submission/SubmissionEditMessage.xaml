@@ -1,0 +1,16 @@
+﻿<UserControl
+    x:Class="Restless.Panama.View.SubmissionEditMessage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
+    mc:Ignorable="d"
+    d:DesignHeight="600" d:DesignWidth="400">
+    <Grid>
+        <TextBlock Text="Message"/>
+    </Grid>
+</UserControl>

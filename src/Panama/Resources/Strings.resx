@@ -478,7 +478,7 @@ Last exported: {1}</value>
   <data name="ConfirmationDeleteUserNote" xml:space="preserve">
     <value>Delete this note?</value>
   </data>
-  <data name="CommandClearFilter" xml:space="preserve">
+  <data name="TextClear" xml:space="preserve">
     <value>Clear</value>
   </data>
   <data name="CommandClearFilterTooltip" xml:space="preserve">

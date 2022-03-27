@@ -87,7 +87,7 @@ namespace Restless.Panama.ViewModel
             MainView.RowFilter = string.Format("{0}=-1", SubmissionDocumentTable.Defs.Columns.BatchId);
             MainView.Sort = SubmissionDocumentTable.Defs.Columns.Title;
 
-            Columns.CreateImage<IntegerToImageConverter>("T", SubmissionDocumentTable.Defs.Columns.DocType, "ImageFileType", 20.0);
+            Columns.CreateImage<Int64ToPathConverter>("T", SubmissionDocumentTable.Defs.Columns.DocType, "ImageFileType", 20.0);
             Columns.Create("Updated", SubmissionDocumentTable.Defs.Columns.Updated).MakeDate();
             Columns.SetDefaultSort(Columns.Create("Title", SubmissionDocumentTable.Defs.Columns.Title), ListSortDirection.Ascending);
             Columns.Create("Id", SubmissionDocumentTable.Defs.Columns.DocId);

@@ -32,6 +32,26 @@
 
     <Style TargetType="ListBox" BasedOn="{StaticResource DefaultListBoxStyle}"/>
 
+    <Style x:Key="CompactListBoxStyle" TargetType="ListBox" BasedOn="{StaticResource DefaultListBoxStyle}">
+
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="2"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="FileScanItemListBoxStyle" TargetType="ListBox" BasedOn="{StaticResource DefaultListBoxStyle}">
         <Setter Property="Margin" Value="{StaticResource DataEntryPanelDefaultControlMargin}"/>
         <Setter Property="ItemTemplate">

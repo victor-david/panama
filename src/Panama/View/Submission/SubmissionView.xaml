@@ -23,7 +23,11 @@
         </con:SplitterGrid.HeaderLeft>
 
         <con:SplitterGrid.HeaderRight>
-            <StatusBar/>
+            <StatusBar>
+                <TextBlock 
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SubmissionHeader}"/>
+            </StatusBar>
         </con:SplitterGrid.HeaderRight>
 
         <con:SplitterGrid.ContentLeft>

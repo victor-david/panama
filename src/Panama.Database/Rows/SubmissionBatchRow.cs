@@ -94,7 +94,7 @@ namespace Restless.Panama.Database.Tables
         public long ResponseType
         {
             get => GetInt64(Columns.ResponseType);
-            set => SetValue(Columns.ResponseType, value);
+            private set => SetValue(Columns.ResponseType, value);
         }
 
         /// <summary>
@@ -163,6 +163,15 @@ namespace Restless.Panama.Database.Tables
                 ResponseType = ResponseTable.Defs.Values.NoResponse,
                 Notes = null
             };
+        }
+
+        /// <summary>
+        /// Sets <see cref="ResponseType"/> to the specified value.
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        public void SetResponseType(long value)
+        {
+            ResponseType = value;
         }
 
         /// <summary>

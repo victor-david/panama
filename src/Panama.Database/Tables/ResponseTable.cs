@@ -6,6 +6,7 @@
 */
 using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -102,6 +103,19 @@ namespace Restless.Panama.Database.Tables
         public override void Load()
         {
             Load(null, Defs.Columns.Id);
+        }
+
+        /// <summary>
+        /// Provides an enumerable that enumerates all valid responses,
+        /// excludes <see cref="Defs.Values.NoResponse"/>
+        /// </summary>
+        /// <returns>An enumerable</returns>
+        public IEnumerable<ResponseRow> EnumerateResponses()
+        {
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.Id} <> {Defs.Values.NoResponse}", Defs.Columns.Id))
+            {
+                yield return new ResponseRow(row);
+            }
         }
         #endregion
 

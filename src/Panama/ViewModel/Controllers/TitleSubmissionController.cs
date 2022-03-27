@@ -52,7 +52,7 @@ namespace Restless.Panama.ViewModel
             MainView.Sort = string.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
             Columns.Create("Id", SubmissionTable.Defs.Columns.BatchId)
                 .MakeFixedWidth(FixedWidth.W042);
-            Columns.CreateImage<IntegerToImageConverter>("S", SubmissionTable.Defs.Columns.Status, "ImageSubStatus")
+            Columns.CreateImage<Int64ToPathConverter>("S", SubmissionTable.Defs.Columns.Status, "ImageSubStatus")
                 .AddToolTip("Submission status of this title");
             Columns.SetDefaultSort(Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted)
                 .MakeDate(), ListSortDirection.Descending);

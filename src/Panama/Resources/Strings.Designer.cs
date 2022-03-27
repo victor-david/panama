@@ -236,15 +236,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear.
-        /// </summary>
-        public static string CommandClearFilter {
-            get {
-                return ResourceManager.GetString("CommandClearFilter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Clear all filters.
         /// </summary>
         public static string CommandClearFilterTooltip {
@@ -2068,6 +2059,15 @@ namespace Restless.Panama.Resources {
         public static string TextAddedUpdated {
             get {
                 return ResourceManager.GetString("TextAddedUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string TextClear {
+            get {
+                return ResourceManager.GetString("TextClear", resourceCulture);
             }
         }
         

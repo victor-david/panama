@@ -89,15 +89,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the controller that handles submission dates.
         /// </summary>
-        public SubmissionSubmittedController Submitted
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the controller that handles submission responses.
-        /// </summary>
-        public SubmissionResponseController Response
+        public SubmissionDateController Dates
         {
             get;
         }
@@ -178,8 +170,7 @@ namespace Restless.Panama.ViewModel
             Titles = new SubmissionTitleController(this);
             Documents = new SubmissionDocumentController(this);
             Messages = new SubmissionMessageController(this);
-            Response = new SubmissionResponseController(this);
-            Submitted = new SubmissionSubmittedController(this);
+            Dates = new SubmissionDateController(this);
 
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {
@@ -205,7 +196,7 @@ namespace Restless.Panama.ViewModel
         /// Sets the <see cref="SubmissionHeader"/> property.
         /// </summary>
         /// <remarks>
-        /// This method is called when the selected row changes or when the <see cref="Submitted"/> controller
+        /// This method is called when the selected row changes or when the <see cref="Dates"/> controller
         /// updates its submitted date.
         /// </remarks>
         public void SetSubmissionHeader()
@@ -232,8 +223,7 @@ namespace Restless.Panama.ViewModel
             Titles.Update();
             Documents.Update();
             Messages.Update();
-            Response.Update();
-            Submitted.Update();
+            Dates.Update();
         }
 
         /// <inheritdoc/>

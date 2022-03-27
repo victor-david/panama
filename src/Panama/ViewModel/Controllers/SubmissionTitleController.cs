@@ -11,6 +11,8 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Utility;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Text;
@@ -20,9 +22,14 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Submission title controller. Handles title related to a submission
     /// </summary>
-    public class SubmissionTitleController : SubmissionController
+    public class SubmissionTitleController : BaseController<SubmissionViewModel, SubmissionTable>
     {
         #region Private
+        private static readonly Dictionary<long, string> PathMap = new Dictionary<long, string>
+        {
+            { SubmissionTable.Defs.Values.StatusWithdrawn, ResourceKeys.Icon.SquareSmallGrayIconKey },
+            { SubmissionTable.Defs.Values.StatusAccepted, ResourceKeys.Icon.SquareSmallGreenIconKey },
+        };
         #endregion
 
         /************************************************************************/
@@ -42,20 +49,25 @@ namespace Restless.Panama.ViewModel
         /// Initializes a new instance of the <see cref="SubmissionTitleController"/> class.
         /// </summary>
         /// <param name="owner">The view model that owns this controller.</param>
-        public SubmissionTitleController(SubmissionViewModel owner)
-            : base(owner)
+        public SubmissionTitleController(SubmissionViewModel owner) : base(owner)
         {
-            AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
-            MainView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.BatchId);
-            MainView.Sort = string.Format("{0},{1}", SubmissionTable.Defs.Columns.Ordering, SubmissionTable.Defs.Columns.Joined.Title);
+            Columns.Create("Id", SubmissionTable.Defs.Columns.Id)
+                .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("O", SubmissionTable.Defs.Columns.Ordering).MakeCentered().MakeFixedWidth(FixedWidth.W042).AddToolTip("Ordering");
+            Columns.Create("O", SubmissionTable.Defs.Columns.Ordering)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip("Ordering");
 
-            Columns.CreateImage<IntegerToImageConverter>("S", SubmissionTable.Defs.Columns.Status, "ImageSubStatus").AddToolTip("Submission status of this title");
+            Columns.CreateResource<Int64ToPathConverter>("S", SubmissionTable.Defs.Columns.Status, PathMap)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip("Submission status of this title");
+
             Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);
-            Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written).MakeDate();
-            AddViewSourceSortDescriptions();
+
+            Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written)
+                .MakeDate();
 
             Commands.Add("MoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
             Commands.Add("MoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
@@ -89,10 +101,9 @@ namespace Restless.Panama.ViewModel
 
             Commands.Add("RemoveFromSubmission", (o) =>
             {
-                if (Messages.ShowYesNo(Strings.ConfirmationRemoveTitleFromSubmission))
+                if (MessageWindow.ShowYesNo(Strings.ConfirmationRemoveTitleFromSubmission))
                 {
-                    SelectedRow.Delete();
-                    DatabaseController.Instance.GetTable<SubmissionTable>().Save();
+                    DeleteSelectedRow();
                 }
             }, (o) =>
             {
@@ -103,8 +114,6 @@ namespace Restless.Panama.ViewModel
             });
 
             Commands.Add("CopyToClipboard", RunCopyToClipboardCommand, (o) => { return SourceCount > 0; });
-
-            HeaderPreface = Strings.HeaderTitles;
         }
         #endregion
 
@@ -116,33 +125,34 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected methods
-        /// <summary>
-        /// Called by the <see cref=" ControllerBase{VM,T}.Owner"/> of this controller
-        /// in order to update the controller values.
-        /// </summary>
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareLong(item1, item2, SubmissionTable.Defs.Columns.Ordering);
+        }
+
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return (long)item[SubmissionTable.Defs.Columns.BatchId] == (Owner?.SelectedBatch?.Id ?? 0);
+        }
+
+        /// <inheritdoc/>
         protected override void OnUpdate()
         {
-            long id = GetOwnerSelectedPrimaryId();
-            MainView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.BatchId, id);
+            ListView.Refresh();
         }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
-        private void AddViewSourceSortDescriptions()
-        {
-            // TODO
-            //MainSource.SortDescriptions.Clear();
-            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Ordering, ListSortDirection.Ascending));
-            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Title, ListSortDirection.Ascending));
-        }
 
         private void RunMoveUpCommand(object o)
         {
             if (CanRunMoveUpCommand(null))
             {
-                DatabaseController.Instance.GetTable<SubmissionTable>().MoveSubmissionUp(SelectedRow);
+                Table.MoveSubmissionUp(SelectedRow);
             }
         }
 
@@ -157,7 +167,7 @@ namespace Restless.Panama.ViewModel
         {
             if (CanRunMoveDownCommand(null))
             {
-                DatabaseController.Instance.GetTable<SubmissionTable>().MoveSubmissionDown(SelectedRow);
+                Table.MoveSubmissionDown(SelectedRow);
             }
         }
 

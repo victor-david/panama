@@ -25,11 +25,30 @@
             <tk:RadioButton Grid.Column="4" Value="5" Content="{x:Static r:Strings.HeaderMessages}"/>
         </tk:RadioButtonPanel>
 
-        <!-- Main title data -->
         <vw:SubmissionEditMain
             DockPanel.Dock="Top"
             tk:Property.IsLongVisible="{Binding SelectedEditSection}"
             tk:Property.IsLongVisibleValue="1"/>
+        
+        <vw:SubmissionEditDate
+            DockPanel.Dock="Top"
+            tk:Property.IsLongVisible="{Binding SelectedEditSection}"
+            tk:Property.IsLongVisibleValue="2"/>
+
+        <vw:SubmissionEditTitle
+            DockPanel.Dock="Top"
+            tk:Property.IsLongVisible="{Binding SelectedEditSection}"
+            tk:Property.IsLongVisibleValue="3"/>
+        
+        <vw:SubmissionEditDocument
+            DockPanel.Dock="Top"
+            tk:Property.IsLongVisible="{Binding SelectedEditSection}"
+            tk:Property.IsLongVisibleValue="4"/>
+
+        <vw:SubmissionEditMessage
+            DockPanel.Dock="Top"
+            tk:Property.IsLongVisible="{Binding SelectedEditSection}"
+            tk:Property.IsLongVisibleValue="5"/>
 
     </DockPanel>
 </UserControl>
