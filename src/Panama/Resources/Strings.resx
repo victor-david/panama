@@ -1080,4 +1080,7 @@ Do you want to continue?</value>
     <value>Create a submission to this publisher</value>
     <comment>Command text for create a submission</comment>
   </data>
+  <data name="HeaderMain" xml:space="preserve">
+    <value>Main</value>
+  </data>
 </root>

@@ -157,8 +157,8 @@ namespace Restless.Panama.Core
             public const double MaxSelfPublisherDetailWidth = 520;
             public const double DefaultSelfPublisherDetailWidth = MinSelfPublisherDetailWidth;
 
-            public const double MinSubmissionDetailWidth = 240;
-            public const double MaxSubmissionDetailWidth = 520;
+            public const double MinSubmissionDetailWidth = 366;
+            public const double MaxSubmissionDetailWidth = 620;
             public const double DefaultSubmissionDetailWidth = MinSubmissionDetailWidth;
 
             public const double MinTagDetailWidth = 302;

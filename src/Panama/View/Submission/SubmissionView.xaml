@@ -5,7 +5,7 @@
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:core="clr-namespace:Restless.Panama.Core"
-    xmlns:view="clr-namespace:Restless.Panama.View"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
@@ -26,7 +26,6 @@
             <StatusBar/>
         </con:SplitterGrid.HeaderRight>
 
-        <!-- Main data grid to display the tabular data -->
         <con:SplitterGrid.ContentLeft>
             <DataGrid 
                 RowHeight="{Binding Config.DataGridRowHeight}"
@@ -40,7 +39,7 @@
         </con:SplitterGrid.ContentLeft>
 
         <con:SplitterGrid.ContentRight>
-            <TextBlock Text="OK"/>
+            <vw:SubmissionEditContainer Visibility="{Binding EditVisibility}"/>
         </con:SplitterGrid.ContentRight>
 
     </con:SplitterGrid>

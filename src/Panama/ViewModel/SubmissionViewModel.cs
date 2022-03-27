@@ -14,6 +14,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace Restless.Panama.ViewModel
 {
@@ -23,6 +24,7 @@ namespace Restless.Panama.ViewModel
     public class SubmissionViewModel : DataGridViewModel<SubmissionBatchTable>
     {
         #region Private
+        private int selectedEditSection;
         private SubmissionBatchRow selectedBatch;
         private string submissionHeader;
         #endregion
@@ -32,6 +34,15 @@ namespace Restless.Panama.ViewModel
         #region Properties
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
+
+        /// <summary>
+        /// Gets or sets the selected edit section
+        /// </summary>
+        public int SelectedEditSection
+        {
+            get => selectedEditSection;
+            set => SetProperty(ref selectedEditSection, value);
+        }
 
         /// <summary>
         /// Gets the selected submission batch
@@ -169,6 +180,11 @@ namespace Restless.Panama.ViewModel
             Messages = new SubmissionMessageController(this);
             Response = new SubmissionResponseController(this);
             Submitted = new SubmissionSubmittedController(this);
+
+            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
+            {
+                SelectedEditSection = 1;
+            }));
         }
         #endregion
 

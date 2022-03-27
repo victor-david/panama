@@ -1,0 +1,29 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.SubmissionEditMain"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
+    mc:Ignorable="d" 
+    d:DesignHeight="400" d:DesignWidth="400">
+    <StackPanel Style="{StaticResource DataEntryPanelStyle}">
+        
+        <CheckBox IsChecked="{Binding SelectedBatch.IsOnline}" Content="Online"/>
+        <CheckBox IsChecked="{Binding SelectedBatch.IsContest}" Content="Contest"/>
+        <CheckBox IsChecked="{Binding SelectedBatch.IsLocked}" Content="Locked"/>
+
+        <TextBlock Text="Fee"/>
+        <TextBox Text="{Binding SelectedBatch.Fee, StringFormat=N2}"/>
+
+        <TextBlock Text="Award"/>
+        <TextBox Text="{Binding SelectedBatch.Award, StringFormat=N2}"/>
+
+        <TextBlock Text="Notes"/>
+        <TextBox 
+            Style="{StaticResource TextBoxMultiStyle}" 
+            Text="{Binding SelectedBatch.Notes}"/>
+
+    </StackPanel>
+</UserControl>
