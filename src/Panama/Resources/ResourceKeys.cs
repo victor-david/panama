@@ -76,5 +76,10 @@
             public const string CenteredDataGridColumnHeaderStyle = nameof(CenteredDataGridColumnHeaderStyle);
             public const string CenteredDataGridCellStyle = nameof(CenteredDataGridCellStyle);
         }
+
+        public static class ToolTip
+        {
+            public const string SubmissionTitleStatusToolTip = nameof(SubmissionTitleStatusToolTip);
+        }
     }
 }

@@ -10,10 +10,7 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
-using Restless.Toolkit.Utility;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Text;
 
@@ -62,7 +59,7 @@ namespace Restless.Panama.ViewModel
             Columns.CreateResource<Int64ToPathConverter>("S", SubmissionTable.Defs.Columns.Status, PathMap)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip("Submission status of this title");
+                .AddToolTip(LocalResources.Get(ResourceKeys.ToolTip.SubmissionTitleStatusToolTip));
 
             Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);
 
