@@ -21,7 +21,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Submission message controller. Handles messages related to a submission.
     /// </summary>
-    public class SubmissionMessageController : SubmissionController
+    public class SubmissionMessageController : BaseController<SubmissionViewModel, SubmissionMessageTable>
     {
         #region Private
         private readonly StringToCleanStringConverter messageTextConverter;
@@ -77,7 +77,7 @@ namespace Restless.Panama.ViewModel
             Columns.SetDefaultSort(Columns.Create("Date", SubmissionMessageTable.Defs.Columns.MessageDate).MakeDate(), ListSortDirection.Descending);
             Columns.Create("Type", SubmissionMessageTable.Defs.Columns.Protocol).MakeFixedWidth(FixedWidth.W048);
             Columns.Create("Subject", SubmissionMessageTable.Defs.Columns.Display);
-            HeaderPreface = Strings.HeaderMessages;
+            //HeaderPreface = Strings.HeaderMessages;
             messageTextConverter = new StringToCleanStringConverter();
             Commands.Add("AddMessage", RunAddMessageCommand);
             Commands.Add("RemoveMessage", RunRemoveMessageCommand, (o) => IsSelectedRowAccessible);
@@ -114,8 +114,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            long id = GetOwnerSelectedPrimaryId();
-            MainView.RowFilter = string.Format("{0}={1}", SubmissionMessageTable.Defs.Columns.BatchId, id);
+            ListView.Refresh();
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Submission document controller. Handles documents related to a submission
     /// </summary>
-    public class SubmissionDocumentController : SubmissionController
+    public class SubmissionDocumentController : BaseController<SubmissionViewModel, SubmissionDocumentTable>
     {
         #region Private
         private readonly DocumentTypeTable documentTypeTable;
@@ -80,8 +80,7 @@ namespace Restless.Panama.ViewModel
         /// Initializes a new instance of the <see cref="SubmissionDocumentController"/> class.
         /// </summary>
         /// <param name="owner">The view model that owns this controller.</param>
-        public SubmissionDocumentController(SubmissionViewModel owner)
-            : base(owner)
+        public SubmissionDocumentController(SubmissionViewModel owner) : base(owner)
         {
             AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionDocumentTable>());
             MainView.RowFilter = string.Format("{0}=-1", SubmissionDocumentTable.Defs.Columns.BatchId);
@@ -116,7 +115,7 @@ namespace Restless.Panama.ViewModel
                         Owner.SelectedRow != null &&
                         !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
                 });
-            HeaderPreface = Strings.HeaderDocuments;
+            //HeaderPreface = Strings.HeaderDocuments;
 
         }
         #endregion
@@ -135,8 +134,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            long id = GetOwnerSelectedPrimaryId();
-            MainView.RowFilter = string.Format("{0}={1}", SubmissionDocumentTable.Defs.Columns.BatchId, id);
+            ListView.Refresh();
         }
 
         /// <summary>
