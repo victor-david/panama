@@ -5,6 +5,7 @@
 
     <Style x:Key="DefaultToolTipStyle" TargetType="ToolTip">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="TextElement.Foreground" Value="{StaticResource DarkForegroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToolTip">
