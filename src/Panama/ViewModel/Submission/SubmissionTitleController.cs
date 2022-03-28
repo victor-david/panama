@@ -22,6 +22,8 @@ namespace Restless.Panama.ViewModel
     public class SubmissionTitleController : BaseController<SubmissionViewModel, SubmissionTable>
     {
         #region Private
+        private SubmissionRow selectedSubmission;
+
         private static readonly Dictionary<long, string> PathMap = new Dictionary<long, string>
         {
             { SubmissionTable.Defs.Values.StatusWithdrawn, ResourceKeys.Icon.SquareSmallGrayIconKey },
@@ -32,6 +34,14 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Public properties
+        /// <summary>
+        /// Gets the selected submission.
+        /// </summary>
+        public SubmissionRow SelectedSubmission
+        {
+            get => selectedSubmission;
+            private set => SetProperty(ref selectedSubmission, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -66,8 +76,8 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written)
                 .MakeDate();
 
-            Commands.Add("MoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
-            Commands.Add("MoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
+            Commands.Add("TitleMoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
+            Commands.Add("TitleMoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
 
             Commands.Add("SetStatusAccepted", (o) =>
             {
@@ -111,17 +121,21 @@ namespace Restless.Panama.ViewModel
             });
 
             Commands.Add("CopyToClipboard", RunCopyToClipboardCommand, (o) => { return SourceCount > 0; });
+
+            ListView.IsLiveSorting = true;
+            ListView.LiveSortingProperties.Add(SubmissionTable.Defs.Columns.Ordering);
         }
         #endregion
 
         /************************************************************************/
 
-        #region Public methods
-        #endregion
-
-        /************************************************************************/
-
         #region Protected methods
+        protected override void OnSelectedItemChanged()
+        {
+            base.OnSelectedItemChanged();
+            SelectedSubmission = SubmissionRow.Create(SelectedRow);
+        }
+
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
@@ -149,38 +163,35 @@ namespace Restless.Panama.ViewModel
         {
             if (CanRunMoveUpCommand(null))
             {
-                Table.MoveSubmissionUp(SelectedRow);
+                Table.MoveSubmissionUp(SelectedSubmission);
             }
         }
 
         private bool CanRunMoveUpCommand(object o)
         {
-            return
-                CanRunMoveCommandBase() &&
-                (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering] > 1;
+            return CanRunMoveCommandBase() && SelectedSubmission.Ordering > 1;
         }
 
         private void RunMoveDownCommand(object o)
         {
             if (CanRunMoveDownCommand(null))
             {
-                Table.MoveSubmissionDown(SelectedRow);
+                Table.MoveSubmissionDown(SelectedSubmission);
             }
         }
 
         private bool CanRunMoveDownCommand(object o)
         {
-            return
-                CanRunMoveCommandBase() &&
-                (long)SelectedRow[SubmissionTable.Defs.Columns.Ordering] < DatabaseController.Instance.GetTable<SubmissionTable>().GetHighestOrdering((long)Owner.SelectedPrimaryKey);
+            return CanRunMoveCommandBase() && SelectedSubmission.Ordering < Table.GetHighestOrdering(Owner.SelectedBatch.Id);
         }
 
         private bool CanRunMoveCommandBase()
         {
             return
+                IsSelectedRowAccessible &&
+                SelectedSubmission != null &&
                 Owner.IsSelectedRowAccessible &&
-                !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked] &&
-                IsSelectedRowAccessible;
+                !(Owner.SelectedBatch?.IsLocked ?? true);
         }
 
         private void RunCopyToClipboardCommand(object o)

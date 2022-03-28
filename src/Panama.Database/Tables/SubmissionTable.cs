@@ -6,6 +6,7 @@
 */
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Restless.Panama.Database.Tables
@@ -175,13 +176,26 @@ namespace Restless.Panama.Database.Tables
         {
             Load(null, Defs.Columns.Added);
 
-            UniqueConstraint batchTitle =  new UniqueConstraint(new DataColumn[] 
-            { 
-                Columns[Defs.Columns.BatchId], 
+            UniqueConstraint batchTitle = new UniqueConstraint(new DataColumn[]
+            {
+                Columns[Defs.Columns.BatchId],
                 Columns[Defs.Columns.TitleId]
             });
 
             Constraints.Add(batchTitle);
+        }
+
+        /// <summary>
+        /// Provides an enumerable that enumerates all record with the specified batch in order of ordering.
+        /// </summary>
+        /// <param name="batchId">The batch id</param>
+        /// <returns>An enumerable</returns>
+        public IEnumerable<SubmissionRow> EnumerateAll(long batchId)
+        {
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.BatchId}={batchId}", Defs.Columns.Ordering))
+            {
+                yield return SubmissionRow.Create(row);
+            }
         }
 
         /// <summary>
@@ -212,8 +226,7 @@ namespace Restless.Panama.Database.Tables
         /// <returns>true if exists; otherwise, false.</returns>
         public bool SubmissionExists(long batchId, long titleId)
         {
-            DataRow[] rows = Select(string.Format("{0}={1} AND {2}={3}", Defs.Columns.BatchId, batchId, Defs.Columns.TitleId, titleId));
-            return (rows.Length > 0);
+            return Select($"{Defs.Columns.BatchId}={batchId} AND {Defs.Columns.TitleId}={titleId}").Length > 0;
         }
 
         /// <summary>
@@ -224,37 +237,37 @@ namespace Restless.Panama.Database.Tables
         public long GetHighestOrdering(long batchId)
         {
             DataRow[] rows = Select($"{Defs.Columns.BatchId}={batchId}", $"{Defs.Columns.Ordering} DESC");
-            if (rows.Length > 0)
-            {
-                return (long)rows[0][Defs.Columns.Ordering];
-            }
-            return 0;
+            return rows.Length > 0 ? (long)rows[0][Defs.Columns.Ordering] : 0;
         }
 
         /// <summary>
         /// Changes the ordering of the specified row by moving it up.
         /// </summary>
         /// <param name="rowToMove">The row to move up.</param>
-        public void MoveSubmissionUp(DataRow rowToMove)
+        public void MoveSubmissionUp(SubmissionRow rowToMove)
         {
-            if (rowToMove == null) throw new ArgumentNullException(nameof(rowToMove));
-            long batchId = (long)rowToMove[Defs.Columns.BatchId];
-            EnsureCorrectOrdering(batchId);
-            long ordering = (long)rowToMove[Defs.Columns.Ordering];
-            ChangeSubmissionOrdering(batchId, ordering, ordering - 1);
+            if (rowToMove == null)
+            {
+                throw new ArgumentNullException(nameof(rowToMove));
+            }
+
+            EnsureCorrectOrdering(rowToMove.BatchId);
+            ChangeSubmissionOrdering(rowToMove.BatchId, rowToMove.Ordering, rowToMove.Ordering - 1);
         }
 
         /// <summary>
         /// Changes the ordering of the specified row by moving it down.
         /// </summary>
         /// <param name="rowToMove">The row to move up.</param>
-        public void MoveSubmissionDown(DataRow rowToMove)
+        public void MoveSubmissionDown(SubmissionRow rowToMove)
         {
-            if (rowToMove == null) throw new ArgumentNullException(nameof(rowToMove));
-            long batchId = (long)rowToMove[Defs.Columns.BatchId];
-            EnsureCorrectOrdering(batchId);
-            long ordering = (long)rowToMove[Defs.Columns.Ordering];
-            ChangeSubmissionOrdering(batchId, ordering, ordering + 1);
+            if (rowToMove == null)
+            {
+                throw new ArgumentNullException(nameof(rowToMove));
+            }
+
+            EnsureCorrectOrdering(rowToMove.BatchId);
+            ChangeSubmissionOrdering(rowToMove.BatchId, rowToMove.Ordering, rowToMove.Ordering + 1);
         }
         #endregion
 
@@ -334,36 +347,38 @@ namespace Restless.Panama.Database.Tables
             return 1;
         }
 
-        private DataRow[] GetDataRowsByBatch(long batchId)
-        {
-            return Select($"{Defs.Columns.BatchId}={batchId}", Defs.Columns.Ordering);
-        }
-
         private void EnsureCorrectOrdering(long batchId)
         {
             long ordering = 1;
-            foreach (DataRow row in GetDataRowsByBatch(batchId))
+            foreach (SubmissionRow row in EnumerateAll(batchId))
             {
-                row[Defs.Columns.Ordering] = ordering++;
+                row.Ordering = ordering++;
             }
         }
 
         private void ChangeSubmissionOrdering(long batchId, long ordering, long newOrdering)
         {
-            DataRow orderingRow = null;
-            DataRow newOrderingRow = null;
+            SubmissionRow orderingRow = null;
+            SubmissionRow newOrderingRow = null;
 
-            foreach (DataRow row in GetDataRowsByBatch(batchId))
+            foreach (SubmissionRow row in EnumerateAll(batchId))
             {
-                long rowOrdering = (long)row[Defs.Columns.Ordering];
-                if (rowOrdering == ordering) orderingRow = row;
-                if (rowOrdering == newOrdering) newOrderingRow = row;
+                // long rowOrdering = row.Ordering;
+                if (row.Ordering == ordering)
+                {
+                    orderingRow = row;
+                }
+
+                if (row.Ordering == newOrdering)
+                {
+                    newOrderingRow = row;
+                }
             }
 
             if (orderingRow != null && newOrderingRow != null)
             {
-                orderingRow[Defs.Columns.Ordering] = newOrdering;
-                newOrderingRow[Defs.Columns.Ordering] = ordering;
+                orderingRow.Ordering = newOrdering;
+                newOrderingRow.Ordering = ordering;
             }
         }
         #endregion

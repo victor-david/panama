@@ -9,8 +9,8 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
-    d:DesignHeight="600" d:DesignWidth="400">
-    <Grid>
+    d:DesignHeight="300" d:DesignWidth="500">
+    <Grid tk:Property.RowHeights="200,Auto">
         <DataGrid
             Style="{StaticResource DataGridEditLockedStyle}"
             ItemsSource="{Binding Titles.ListView}"
@@ -22,6 +22,56 @@
             </DataGrid.InputBindings>
             
         </DataGrid>
+
+        <StatusBar Grid.Row="1" Margin="0,6">
+
+            <StatusBar.Resources>
+                <Style TargetType="tk:IconButton" BasedOn="{StaticResource SmallIconButtonStyle}">
+                    <Setter Property="Icon" Value="{StaticResource SquareSmallGrayIconKey}"/>
+                </Style>
+            </StatusBar.Resources>
+            <tk:IconButton
+                Padding="0"
+                Icon="{StaticResource ArrowUpMediumIconKey}"
+                Command="{Binding Titles.Commands[TitleMoveUp]}"/>
+
+            <tk:IconButton
+                Padding="0"
+                Icon="{StaticResource ArrowDownMediumIconKey}"
+                Command="{Binding Titles.Commands[TitleMoveDown]}"/>
+
+            <Separator/>
+
+            <tk:IconButton 
+                Command="{Binding Titles.Commands[SetStatusAccepted]}" 
+                Content="Accepted"
+                ToolTip="Set the status of the selected title to accepted"/>
+            
+            <tk:IconButton
+                Command="{Binding Titles.Commands[SetStatusWithdrawn]}"
+                Content="Withdrawn"
+                ToolTip="Set the status of the selected title to withdrawn"/>
+            
+            <tk:IconButton
+                Command="{Binding Titles.Commands[ResetStatus]}"
+                Content="Reset"
+                ToolTip="Reset the status of the selected title"/>
+            
+            <Separator/>
+            
+            <tk:IconButton
+                Command="{Binding Titles.Commands[RemoveFromSubmission]}"
+                Content="Remove"
+                ToolTip="Remove the selected title from the submission (does not affect the file system)"/>
+            
+            <Separator/>
+            
+            <tk:IconButton
+                Command="{Binding Titles.Commands[CopyToClipboard]}"
+                Content="Copy"
+                ToolTip="Copy the list of titles to the clipboard"/>
+            
+        </StatusBar>
 
     </Grid>
 </UserControl>
