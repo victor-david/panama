@@ -18,10 +18,7 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Gets the record id.
         /// </summary>
-        public long Id
-        {
-            get => GetInt64(Columns.Id);
-        }
+        public long Id => GetInt64(Columns.Id);
 
         /// <summary>
         /// Gets or sets the author name.
