@@ -2666,6 +2666,42 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Submission has been accepted.
+        /// </summary>
+        public static string ToolTipSubmissionFilterAccepted {
+            get {
+                return ResourceManager.GetString("ToolTipSubmissionFilterAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission is active (has not yet received a response).
+        /// </summary>
+        public static string ToolTipSubmissionFilterActive {
+            get {
+                return ResourceManager.GetString("ToolTipSubmissionFilterActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission received a personal response.
+        /// </summary>
+        public static string ToolTipSubmissionFilterPersonal {
+            get {
+                return ResourceManager.GetString("ToolTipSubmissionFilterPersonal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission received a try again response.
+        /// </summary>
+        public static string ToolTipSubmissionFilterTryAgain {
+            get {
+                return ResourceManager.GetString("ToolTipSubmissionFilterTryAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submission is locked.
         /// </summary>
         public static string ToolTipSubmissionLocked {

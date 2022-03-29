@@ -94,6 +94,11 @@ namespace Restless.Panama.ViewModel
         {
             get;
         }
+
+        /// <summary>
+        /// Gets the filters
+        /// </summary>
+        public SubmissionRowFilter Filters => Config.SubmissionFilter;
         #endregion
 
         /************************************************************************/
@@ -106,7 +111,7 @@ namespace Restless.Panama.ViewModel
         {
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.Online, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.CreateResource<BooleanToPathConverter>("O", TableColumns.Online, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipSubmissionOnline);
@@ -148,19 +153,10 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Note", TableColumns.Notes)
                 .MakeSingleLine();
 
-            //Commands.Add("FilterToPublisher", RunFilterToPublisherCommand, (o) => IsSelectedRowAccessible);
-            //Commands.Add("ActiveFilter", (o) => { FilterText = "--"; });
-            //Commands.Add("TryAgainFilter", (o) => { FilterText = "Try Again"; });
-            //Commands.Add("PersonalNoteFilter", (o) => { FilterText = "Personal Note"; });
-            //Commands.Add("ClearFilter", (o) => { FilterText = null; });
-
-            // TODO
-            //double minWidth = 80.0;
-            //double imgSize = 20.0;
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterActive, Strings.CommandSubmissionFilterActiveTooltip, Commands["ActiveFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterTryAgain, Strings.CommandSubmissionFilterTryAgainTooltip, Commands["TryAgainFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandSubmissionFilterPersonalNote, Strings.CommandSubmissionFilterPersonalNoteTooltip, Commands["PersonalNoteFilter"], null, imgSize, VisualCommandFontSize, minWidth));
-            //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
+            Commands.Add("ActiveFilter", p => Filters.SetToActive());
+            Commands.Add("TryAgainFilter", p => Filters.SetToTryAgain());
+            Commands.Add("PersonalFilter", p => Filters.SetToPersonal());
+            Commands.Add("AcceptedFilter", p => Filters.SetToAccepted());
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemCreateSubmission, AddCommand)
@@ -192,6 +188,8 @@ namespace Restless.Panama.ViewModel
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {
                 SelectedEditSection = 1;
+                Filters.SetListView(ListView);
+                Filters.ApplyFilter();
             }));
         }
         #endregion
@@ -234,9 +232,27 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return Filters?.OnDataRowFilter(item) ?? false;
+        }
+
+        /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
             return DataRowCompareDateTime(item2, item1, TableColumns.Submitted);
+        }
+
+        /// <inheritdoc/>
+        protected override void RunClearFilterCommand()
+        {
+            Filters.ClearAll();
+        }
+
+        /// <inheritdoc/>
+        protected override bool CanRunClearFilterCommand()
+        {
+            return Filters.IsAnyFilterActive;
         }
 
         /// <inheritdoc/>
@@ -297,7 +313,7 @@ namespace Restless.Panama.ViewModel
         #region Private Methods
         private void RunFilterToPublisherCommand(object parm)
         {
-            // TODO
+            Filters.SetIdFilter(SelectedBatch.PublisherId);
         }
         #endregion
     }

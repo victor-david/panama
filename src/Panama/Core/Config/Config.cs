@@ -29,6 +29,7 @@ namespace Restless.Panama.Core
         {
             TitleFilter = GetItem(null, nameof(TitleFilter)).Deserialize<TitleRowFilter>();
             PublisherFilter = GetItem(null, nameof(PublisherFilter)).Deserialize<PublisherRowFilter>();
+            SubmissionFilter = GetItem(null, nameof(SubmissionFilter)).Deserialize<SubmissionRowFilter>();
             Colors = new ConfigColors();
             // TODO
             // This is applied at when config is first created and when the DateFormat property is changed by the user in settings.
@@ -711,24 +712,21 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets the submission filter object which describes how to filter submission rows.
+        /// </summary>
+        public SubmissionRowFilter SubmissionFilter
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Gets or sets a value that determines whether search
         /// results are filtered to those associated with a title version.
         /// </summary>
         public bool SearchVersionOnly
         {
             get => GetItem(false);
-            set => SetItem(value);
-        }
-
-        /// <summary>
-        /// Gets or sets the filter value used on the submission tab.
-        /// This value is matched against either the name of the publisher
-        /// or the name of the response type. When this value starts with "-",
-        /// it filters for submissions that are active (no response date)
-        /// </summary>
-        public string SubmissionFilter
-        {
-            get => GetItem(null);
             set => SetItem(value);
         }
         #endregion
@@ -869,6 +867,7 @@ namespace Restless.Panama.Core
         {
             SetItem(TitleFilter.Serialize(), nameof(TitleFilter));
             SetItem(PublisherFilter.Serialize(), nameof(PublisherFilter));
+            SetItem(SubmissionFilter.Serialize(), nameof(SubmissionFilter));
         }
         #endregion
 

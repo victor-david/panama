@@ -1101,4 +1101,16 @@ Do you want to continue?</value>
   <data name="TextLocked" xml:space="preserve">
     <value>Locked</value>
   </data>
+  <data name="ToolTipSubmissionFilterAccepted" xml:space="preserve">
+    <value>Submission has been accepted</value>
+  </data>
+  <data name="ToolTipSubmissionFilterActive" xml:space="preserve">
+    <value>Submission is active (has not yet received a response)</value>
+  </data>
+  <data name="ToolTipSubmissionFilterPersonal" xml:space="preserve">
+    <value>Submission received a personal response</value>
+  </data>
+  <data name="ToolTipSubmissionFilterTryAgain" xml:space="preserve">
+    <value>Submission received a try again response</value>
+  </data>
 </root>

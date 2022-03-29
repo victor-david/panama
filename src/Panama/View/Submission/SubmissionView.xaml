@@ -20,7 +20,54 @@
         DetailWidth="{Binding Config.SubmissionDetailWidth}">
 
         <con:SplitterGrid.HeaderLeft>
-            <StatusBar/>
+            <StatusBar>
+                <TextBlock Text="Filters"/>
+                <tk:IconButton
+                    Content="Active"
+                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterActive}"
+                    Icon="{StaticResource SquareSmallRedIconKey}" 
+                    Command="{Binding Commands[ActiveFilter]}"/>
+
+                <tk:IconButton 
+                    Content="Try Again"
+                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterTryAgain}"
+                    Icon="{StaticResource SquareSmallGrayIconKey}" 
+                    Command="{Binding Commands[TryAgainFilter]}"/>
+
+                <tk:IconButton 
+                    Content="Personal"
+                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterPersonal}"
+                    Icon="{StaticResource SquareSmallBlueIconKey}" 
+                    Command="{Binding Commands[PersonalFilter]}"/>
+
+                <tk:IconButton 
+                    Content="Accepted"
+                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterAccepted}"
+                    Icon="{StaticResource SquareSmallGreenIconKey}" 
+                    Command="{Binding Commands[AcceptedFilter]}"/>
+                
+                <Separator/>
+
+                <tk:IconButton
+                    Content="{x:Static r:Strings.MenuItemClear}"
+                    ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
+                    Icon="{StaticResource FilterOffIconKey}"
+                    Command="{Binding ClearFilterCommand}"/>
+
+                <Separator/>
+
+                <TextBlock>
+                    <Run
+                        Foreground="{StaticResource DarkAlertForegroundBrush}" 
+                        Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
+                    <Run Text="records"/>
+                </TextBlock>
+
+                <TextBlock
+                    tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
+                    Foreground="{StaticResource DarkAlertForegroundBrush}"
+                    Text="(row filter in effect)"/>
+            </StatusBar>
         </con:SplitterGrid.HeaderLeft>
 
         <con:SplitterGrid.HeaderRight>
@@ -30,11 +77,11 @@
                     Text="{Binding SubmissionHeader}"/>
 
                 <Separator
-                    tk:Property.IsVisible="{Binding SelectedBatch.IsLocked}"/>
+                    tk:Property.IsVisible="{Binding SelectedBatch.IsLocked, FallbackValue=False}"/>
 
                 <TextBlock
                     Style="{StaticResource TitleDisplayTextBlockStyle}"
-                    tk:Property.IsVisible="{Binding SelectedBatch.IsLocked}"
+                    tk:Property.IsVisible="{Binding SelectedBatch.IsLocked, FallbackValue=False}"
                     Text="{x:Static r:Strings.TextLocked}"/>
             </StatusBar>
         </con:SplitterGrid.HeaderRight>

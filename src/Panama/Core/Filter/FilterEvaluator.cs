@@ -98,6 +98,11 @@ namespace Restless.Panama.Core
         {
             return State == ThreeWayState.On ? GetLongColumnValue(column) > 0 : GetLongColumnValue(column) == 0;
         }
+
+        protected bool EvaluateLongColumn(object column, long value)
+        {
+            return State == ThreeWayState.On ? GetLongColumnValue(column) == value : GetLongColumnValue(column) != value;
+        }
         #endregion
 
         /************************************************************************/

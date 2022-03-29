@@ -75,6 +75,31 @@ namespace Restless.Panama.Database.Tables
                 public const long ResponseNotSpecified = 1;
 
                 /// <summary>
+                /// Response is a bfn
+                /// </summary>
+                public const long ResponseBfn = 2;
+
+                /// <summary>
+                /// Response is a try again
+                /// </summary>
+                public const long ResponseTryAgain = 3;
+
+                /// <summary>
+                /// Response contains something personal
+                /// </summary>
+                public const long ResponsePersonal = 4;
+
+                /// <summary>
+                /// Response is a general blast
+                /// </summary>
+                public const long ResponseGeneralBlast = 10;
+
+                /// <summary>
+                /// Response is flakey
+                /// </summary>
+                public const long ResponseFlakey = 11;
+
+                /// <summary>
                 /// The value used when the response is an acceptance.
                 /// </summary>
                 public const long ResponseAccepted = 255;
@@ -152,14 +177,14 @@ namespace Restless.Panama.Database.Tables
         /// <returns>An IEnumerable</returns>
         protected override IEnumerable<object[]> EnumeratePopulateValues()
         {
-            yield return new object[] { 0, null, "None. The submission has not yet received a response." };
-            yield return new object[] { 1, "(not specified)", "Not Specified. The response type has not been specified." };
-            yield return new object[] { 2, "BFN", "Form Rejection. Standard BFN note. No personalization. No encouragement." };
-            yield return new object[] { 3, "Try Again", "A rejection with at least a hint of encouragement to submit again." };
-            yield return new object[] { 4, "Personal Note", "Received a personal note." };
-            yield return new object[] { 10, "General Blast", "Sent a general email announcing new issue / contest winners, or just posted on web site." };
-            yield return new object[] { 11, "Flakey", "Flakey. No response." };
-            yield return new object[] { 255, "Accepted", "Acceptance of one or more pieces in the submission." };
+            yield return new object[] { Defs.Values.NoResponse, null, "None. The submission has not yet received a response." };
+            yield return new object[] { Defs.Values.ResponseNotSpecified, "(not specified)", "Not Specified. The response type has not been specified." };
+            yield return new object[] { Defs.Values.ResponseBfn, "BFN", "Form Rejection. Standard BFN note. No personalization. No encouragement." };
+            yield return new object[] { Defs.Values.ResponseTryAgain, "Try Again", "A rejection with at least a hint of encouragement to submit again." };
+            yield return new object[] { Defs.Values.ResponsePersonal, "Personal Note", "Received a personal note." };
+            yield return new object[] { Defs.Values.ResponseGeneralBlast, "General Blast", "Sent a general email announcing new issue / contest winners, or just posted on web site." };
+            yield return new object[] { Defs.Values.ResponseFlakey, "Flakey", "Flakey. No response." };
+            yield return new object[] { Defs.Values.ResponseAccepted, "Accepted", "Acceptance of one or more pieces in the submission." };
         }
 
         /// <summary>
