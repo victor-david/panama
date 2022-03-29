@@ -135,6 +135,33 @@ namespace Restless.Panama.Core
 
         /************************************************************************/
 
+        #region TitleSelect
+        /// <summary>
+        /// Provides static methods for creating a title select window.
+        /// </summary>
+        public static class TitleSelect
+        {
+            /// <summary>
+            /// Creates an instance of TitleSelectWindow and its corresponding view model.
+            /// </summary>
+            /// <returns>The window</returns>
+            public static TitleSelectWindow Create()
+            {
+                TitleSelectWindow window = new()
+                {
+                    Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    DataContext = new TitleSelectWindowViewModel(),
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
+                return window;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region PublisherSelect
         /// <summary>
         /// Provides static methods for creating a publisher select window.

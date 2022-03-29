@@ -91,7 +91,6 @@ namespace Restless.Panama.ViewModel
                 .AddCommandParm(SubmissionValues.StatusAccepted)
                 .AddIconResource(ResourceKeys.Icon.SquareSmallGreenIconKey);
 
-
             MenuItems.AddItem(
                 Strings.MenuItemSetTitleStatusWithdrawn,
                 RelayCommand.Create(RunSetTitleStatusCommand, CanRunSetTitleStatusCommand))
@@ -107,7 +106,8 @@ namespace Restless.Panama.ViewModel
 
             MenuItems.AddItem(
                 Strings.MenuItemRemoveTitleFromSubmission, 
-                RelayCommand.Create(RunRemoveTitleFromSubmissionCommand, p => CanRunIfNotLocked()));
+                RelayCommand.Create(RunRemoveTitleFromSubmissionCommand, p => CanRunIfNotLocked()))
+                .AddIconResource(ResourceKeys.Icon.XIconKey);
 
             ListView.IsLiveSorting = true;
             ListView.LiveSortingProperties.Add(TableColumns.Ordering);
@@ -139,6 +139,16 @@ namespace Restless.Panama.ViewModel
         protected override void OnUpdate()
         {
             ListView.Refresh();
+        }
+
+        /// <inheritdoc/>
+        protected override void RunAddCommand()
+        {
+            if (WindowFactory.TitleSelect.Create().GetTitles() is List<TitleRow> titles)
+            {
+                titles.ForEach(title => Table.AddSubmission(Owner.SelectedBatch.Id, title.Id));
+                ListView.Refresh();
+            }
         }
         #endregion
 
@@ -187,7 +197,6 @@ namespace Restless.Panama.ViewModel
             {
                 SelectedSubmission.Status = status;
             }
-
         }
 
         private bool CanRunSetTitleStatusCommand(object parm)

@@ -1,0 +1,138 @@
+/*
+ * Copyright 2019 Victor D. Sandiego
+ * This file is part of Panama.
+ * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
+ * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
+*/
+using Restless.Panama.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Controls;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Linq;
+using TableColumns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
+
+namespace Restless.Panama.ViewModel
+{
+    /// <summary>
+    /// Provides the display and selection logic for the <see cref="View.TitleSelectWindow"/>.
+    /// </summary>
+    public class TitleSelectWindowViewModel : WindowViewModel<TitleTable>
+    {
+        #region Private
+        private int selectedCount;
+        private string searchText;
+        private IList selectedDataGridItems;
+        #endregion
+
+        /************************************************************************/
+
+        #region Public properties
+        /// <summary>
+        /// Gets or sets the search text
+        /// </summary>
+        public string SearchText
+        {
+            get => searchText;
+            set
+            {
+                SetProperty(ref searchText, value);
+                ListView.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// Gets the number of titles selected
+        /// </summary>
+        public int SelectedCount
+        {
+            get => selectedCount;
+            private set => SetProperty(ref selectedCount, value);
+        }
+
+        /// <summary>
+        /// Gets the selected titles
+        /// </summary>
+        public List<TitleRow> SelectedTitles
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Sets the selected data grid items. This property is bound to the view.
+        /// </summary>
+        public IList SelectedDataGridItems
+        {
+            get => selectedDataGridItems;
+            set
+            {
+                SetProperty(ref selectedDataGridItems, value);
+                SelectedCount = selectedDataGridItems?.Count ?? 0;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TitleSelectWindowViewModel"/> class.
+        /// </summary>
+        public TitleSelectWindowViewModel()
+        {
+            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Title", TableColumns.Title);
+            Columns.SetDefaultSort(Columns.Create("Written", TableColumns.Written).MakeDate(), ListSortDirection.Descending);
+            Columns.Create("Updated", TableColumns.Calculated.LastestVersionDate).MakeDate();
+
+            Commands.Add("Select", RunSelectCommand, p => IsSelectedRowAccessible);
+
+            SelectedTitles = new List<TitleRow>();
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Protected methods
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareDateTime(item2, item1, TableColumns.Written);
+        }
+
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return
+                string.IsNullOrWhiteSpace(SearchText) ||
+                item[TableColumns.Title].ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+        private void RunSelectCommand(object parm)
+        {
+            PopulateSelectedTitles();
+            if (SelectedTitles.Count > 0)
+            {
+                WindowOwner.DialogResult = true;
+                CloseWindowCommand.Execute(null);
+            }
+        }
+
+        private void PopulateSelectedTitles()
+        {
+            SelectedTitles.Clear();
+            foreach (DataRowView dataRowView in SelectedDataGridItems.OfType<DataRowView>())
+            {
+                SelectedTitles.Add(new TitleRow(dataRowView.Row));
+            }
+        }
+        #endregion
+    }
+}

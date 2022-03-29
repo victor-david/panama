@@ -1703,7 +1703,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a title to this submission.
+        ///   Looks up a localized string similar to Add title(s) to this submission.
         /// </summary>
         public static string MenuItemAddTitleToSubmission {
             get {
@@ -2869,6 +2869,15 @@ namespace Restless.Panama.Resources {
         public static string WindowTitleSelectPublisherGeneric {
             get {
                 return ResourceManager.GetString("WindowTitleSelectPublisherGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select titles.
+        /// </summary>
+        public static string WindowTitleSelectTitlesGeneric {
+            get {
+                return ResourceManager.GetString("WindowTitleSelectTitlesGeneric", resourceCulture);
             }
         }
         

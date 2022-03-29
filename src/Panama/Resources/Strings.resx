@@ -1084,7 +1084,7 @@ Do you want to continue?</value>
     <value>Main</value>
   </data>
   <data name="MenuItemAddTitleToSubmission" xml:space="preserve">
-    <value>Add a title to this submission</value>
+    <value>Add title(s) to this submission</value>
   </data>
   <data name="MenuItemRemoveTitleFromSubmission" xml:space="preserve">
     <value>Remove title from submission</value>
@@ -1112,5 +1112,8 @@ Do you want to continue?</value>
   </data>
   <data name="ToolTipSubmissionFilterTryAgain" xml:space="preserve">
     <value>Submission received a try again response</value>
+  </data>
+  <data name="WindowTitleSelectTitlesGeneric" xml:space="preserve">
+    <value>Select titles</value>
   </data>
 </root>
