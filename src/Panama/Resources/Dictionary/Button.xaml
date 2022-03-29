@@ -30,9 +30,16 @@
         <Setter Property="Padding" Value="6,0"/>
     </Style>
 
-    <Style TargetType="Button" x:Key="{x:Static ToolBar.ButtonStyleKey}">
+    <Style x:Key="DefaultButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
+    <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}"/>
 
     <!-- Style for a tool bar style button. -->
     <!--<Style TargetType="Button" x:Key="ToolBarButton" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">

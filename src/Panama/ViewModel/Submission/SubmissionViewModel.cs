@@ -9,12 +9,13 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
-using System.Windows.Controls;
 using System.Windows.Threading;
+using TableColumns = Restless.Panama.Database.Tables.SubmissionBatchTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -103,46 +104,48 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SubmissionViewModel()
         {
-            Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<BooleanToPathConverter>("R", SubmissionBatchTable.Defs.Columns.Online, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.Online, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipSubmissionOnline);
 
-            Columns.CreateResource<BooleanToPathConverter>("C", SubmissionBatchTable.Defs.Columns.Contest, ResourceKeys.Icon.SquareSmallGrayIconKey)
+            Columns.CreateResource<BooleanToPathConverter>("C", TableColumns.Contest, ResourceKeys.Icon.SquareSmallGrayIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipSubmissionContest);
 
-            Columns.CreateResource<BooleanToPathConverter>("L", SubmissionBatchTable.Defs.Columns.Locked, ResourceKeys.Icon.SquareSmallRedIconKey)
+            Columns.CreateResource<BooleanToPathConverter>("L", TableColumns.Locked, ResourceKeys.Icon.SquareSmallRedIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipSubmissionLocked);
 
-            DataGridColumn col = Columns.Create("Submitted", SubmissionBatchTable.Defs.Columns.Submitted)
+            Columns.SetDefaultSort(
+                Columns.Create("Submitted", TableColumns.Submitted)
+                .MakeDate(),
+                ListSortDirection.Descending);
+
+            Columns.Create("Response", TableColumns.Response)
                 .MakeDate();
-            //.AddSort(SubmissionBatchTable.Defs.Columns.Calculated.Submitted, SubmissionBatchTable.Defs.Columns.Submitted, DataGridColumnSortBehavior.FollowPrimary);
 
-            Columns.SetDefaultSort(col, ListSortDirection.Descending);
-
-            Columns.Create("Response", SubmissionBatchTable.Defs.Columns.Response).MakeDate();
-            Columns.Create("Type", SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName).MakeFixedWidth(FixedWidth.W096);
+            Columns.Create("Type", TableColumns.Joined.ResponseTypeName)
+                .MakeFixedWidth(FixedWidth.W096);
 
             // string.Empty because VS gets confused and tries to connect to the wrong overload
-            Columns.Create<DatesToDayDiffConverter>("Days", SubmissionBatchTable.Defs.Columns.Submitted, SubmissionBatchTable.Defs.Columns.Response, string.Empty)
+            Columns.Create<DatesToDayDiffConverter>("Days", TableColumns.Submitted, TableColumns.Response, string.Empty)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052);
 
-            Columns.Create("Publisher", SubmissionBatchTable.Defs.Columns.Joined.Publisher);
+            Columns.Create("Publisher", TableColumns.Joined.Publisher);
 
-            Columns.Create("Fee", SubmissionBatchTable.Defs.Columns.Fee)
+            Columns.Create("Fee", TableColumns.Fee)
                 .MakeNumeric("N2", FixedWidth.W052);
 
-            Columns.Create("Award", SubmissionBatchTable.Defs.Columns.Award)
+            Columns.Create("Award", TableColumns.Award)
                 .MakeNumeric("N0", FixedWidth.W052);
 
-            Columns.Create("Note", SubmissionBatchTable.Defs.Columns.Notes)
+            Columns.Create("Note", TableColumns.Notes)
                 .MakeSingleLine();
 
             //Commands.Add("FilterToPublisher", RunFilterToPublisherCommand, (o) => IsSelectedRowAccessible);
@@ -160,17 +163,31 @@ namespace Restless.Panama.ViewModel
             //FilterCommands.Add(new VisualCommandViewModel(Strings.CommandClearFilter, Strings.CommandClearFilterTooltip, Commands["ClearFilter"], null, imgSize, VisualCommandFontSize, minWidth));
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.MenuItemCreateSubmission, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemCreateSubmission, AddCommand)
+                .AddIconResource(ResourceKeys.Icon.PlusIconKey);
+
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemBrowseToPublisherUrl, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
-            MenuItems.AddItem(Strings.MenuItemFilterToPublisher, Commands["FilterToPublisher"]).AddIconResource(ResourceKeys.Icon.FilterIconKey);
+            
+            MenuItems.AddItem(Strings.MenuItemBrowseToPublisherUrl, OpenRowCommand)
+                .AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            
+            MenuItems.AddItem(
+                Strings.MenuItemFilterToPublisher,
+                RelayCommand.Create(RunFilterToPublisherCommand, p => SelectedBatch != null))
+                .AddIconResource(ResourceKeys.Icon.FilterIconKey);
+
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemDeleteSubmission, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            
+            MenuItems.AddItem(Strings.MenuItemDeleteSubmission, DeleteCommand)
+                .AddIconResource(ResourceKeys.Icon.XRedIconKey);
 
             Titles = new SubmissionTitleController(this);
             Documents = new SubmissionDocumentController(this);
             Messages = new SubmissionMessageController(this);
             Dates = new SubmissionDateController(this);
+
+            ListView.IsLiveSorting = true;
+            ListView.LiveSortingProperties.Add(SubmissionBatchTable.Defs.Columns.Submitted);
 
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {
@@ -183,16 +200,6 @@ namespace Restless.Panama.ViewModel
 
         #region Public methods
         /// <summary>
-        /// Receives notification when a data record has been added.
-        /// A new submission record is added from the PublisherViewModel
-        /// </summary>
-        public override void OnRecordAdded()
-        {
-            Columns.RestoreDefaultSort();
-            ForceListViewSort();
-        }
-
-        /// <summary>
         /// Sets the <see cref="SubmissionHeader"/> property.
         /// </summary>
         /// <remarks>
@@ -202,10 +209,10 @@ namespace Restless.Panama.ViewModel
         public void SetSubmissionHeader()
         {
             string header = null;
-            if (SelectedRow != null && SelectedRow[SubmissionBatchTable.Defs.Columns.Submitted] is DateTime dt)
+            if (SelectedBatch?.Submitted is DateTime date)
             {
-                string dateStr = dt.ToLocalTime().ToString(Config.Instance.DateFormat);
-                header = $"{dateStr} to {SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.Publisher]}";
+                string dateStr = date.ToLocalTime().ToString(Config.Instance.DateFormat, CultureInfo.InvariantCulture);
+                header = $"{dateStr} to {SelectedBatch.PublisherName}";
             }
             SubmissionHeader = header;
         }
@@ -229,7 +236,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareDateTime(item2, item1, SubmissionBatchTable.Defs.Columns.Submitted);
+            return DataRowCompareDateTime(item2, item1, TableColumns.Submitted);
         }
 
         /// <inheritdoc/>
@@ -288,7 +295,7 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
-        private void RunFilterToPublisherCommand(object o)
+        private void RunFilterToPublisherCommand(object parm)
         {
             // TODO
         }

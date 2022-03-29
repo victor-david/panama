@@ -6,6 +6,7 @@
     xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
@@ -27,6 +28,14 @@
                 <TextBlock 
                     Style="{StaticResource TitleDisplayTextBlockStyle}"
                     Text="{Binding SubmissionHeader}"/>
+
+                <Separator
+                    tk:Property.IsVisible="{Binding SelectedBatch.IsLocked}"/>
+
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    tk:Property.IsVisible="{Binding SelectedBatch.IsLocked}"
+                    Text="{x:Static r:Strings.TextLocked}"/>
             </StatusBar>
         </con:SplitterGrid.HeaderRight>
 

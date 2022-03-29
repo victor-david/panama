@@ -5,14 +5,17 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using ResponseValues = Restless.Panama.Database.Tables.ResponseTable.Defs.Values;
+using SubmissionValues = Restless.Panama.Database.Tables.SubmissionTable.Defs.Values;
+using TableColumns = Restless.Panama.Database.Tables.SubmissionTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -24,16 +27,18 @@ namespace Restless.Panama.ViewModel
         #region Private
         private SubmissionRow selectedSubmission;
 
-        private static readonly Dictionary<long, string> PathMap = new Dictionary<long, string>
+        private static readonly Dictionary<long, string> PathMap = new()
         {
-            { SubmissionTable.Defs.Values.StatusWithdrawn, ResourceKeys.Icon.SquareSmallGrayIconKey },
-            { SubmissionTable.Defs.Values.StatusAccepted, ResourceKeys.Icon.SquareSmallGreenIconKey },
+            { SubmissionValues.StatusWithdrawn, ResourceKeys.Icon.SquareSmallGrayIconKey },
+            { SubmissionValues.StatusAccepted, ResourceKeys.Icon.SquareSmallGreenIconKey },
         };
         #endregion
 
         /************************************************************************/
 
         #region Public properties
+        public override bool AddCommandEnabled => !(Owner.SelectedBatch?.IsLocked ?? true) && Owner.SelectedBatch.ResponseType == ResponseValues.NoResponse;
+
         /// <summary>
         /// Gets the selected submission.
         /// </summary>
@@ -46,11 +51,6 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Protected properties
-        #endregion
-
-        /************************************************************************/
-
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmissionTitleController"/> class.
@@ -58,72 +58,59 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public SubmissionTitleController(SubmissionViewModel owner) : base(owner)
         {
-            Columns.Create("Id", SubmissionTable.Defs.Columns.Id)
+            Columns.Create("Id", TableColumns.Id)
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("O", SubmissionTable.Defs.Columns.Ordering)
+            Columns.Create("O", TableColumns.Ordering)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip("Ordering");
 
-            Columns.CreateResource<Int64ToPathConverter>("S", SubmissionTable.Defs.Columns.Status, PathMap)
+            Columns.CreateResource<Int64ToPathConverter>("S", TableColumns.Status, PathMap)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(LocalResources.Get(ResourceKeys.ToolTip.SubmissionTitleStatusToolTip));
 
-            Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);
+            Columns.Create("Title", TableColumns.Joined.Title);
 
-            Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written)
+            Columns.Create("Written", TableColumns.Joined.Written)
                 .MakeDate();
 
             Commands.Add("TitleMoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
             Commands.Add("TitleMoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
+            Commands.Add("CopyToClipboard", RunCopyToClipboardCommand);
 
-            Commands.Add("SetStatusAccepted", (o) =>
-            {
-                SelectedRow[SubmissionTable.Defs.Columns.Status] = SubmissionTable.Defs.Values.StatusAccepted;
-            }, (o) =>
-            {
-                return
-                    SelectedRow != null &&
-                    Owner.SelectedRow != null &&
-                    (long)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.ResponseType] == ResponseTable.Defs.Values.ResponseAccepted;
-            });
+            MenuItems.AddItem(Strings.MenuItemAddTitleToSubmission, AddCommand)
+                .AddIconResource(ResourceKeys.Icon.PlusIconKey);
 
-            Commands.Add("SetStatusWithdrawn", (o) =>
-            {
-                SelectedRow[SubmissionTable.Defs.Columns.Status] = SubmissionTable.Defs.Values.StatusWithdrawn;
-            }, (o) =>
-            {
-                return SelectedRow != null;
-            });
+            MenuItems.AddSeparator();
 
-            Commands.Add("ResetStatus", (o) =>
-            {
-                SelectedRow[SubmissionTable.Defs.Columns.Status] = SubmissionTable.Defs.Values.StatusNotSpecified;
-            }, (o) =>
-            {
-                return SelectedRow != null;
-            });
+            MenuItems.AddItem(
+                Strings.MenuItemSetTitleStatusAccepted,
+                RelayCommand.Create(RunSetTitleStatusCommand, CanRunSetTitleStatusCommand))
+                .AddCommandParm(SubmissionValues.StatusAccepted)
+                .AddIconResource(ResourceKeys.Icon.SquareSmallGreenIconKey);
 
-            Commands.Add("RemoveFromSubmission", (o) =>
-            {
-                if (MessageWindow.ShowYesNo(Strings.ConfirmationRemoveTitleFromSubmission))
-                {
-                    DeleteSelectedRow();
-                }
-            }, (o) =>
-            {
-                return
-                    SelectedRow != null &&
-                    Owner.SelectedRow != null &&
-                    !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
-            });
 
-            Commands.Add("CopyToClipboard", RunCopyToClipboardCommand, (o) => { return SourceCount > 0; });
+            MenuItems.AddItem(
+                Strings.MenuItemSetTitleStatusWithdrawn,
+                RelayCommand.Create(RunSetTitleStatusCommand, CanRunSetTitleStatusCommand))
+                .AddCommandParm(SubmissionValues.StatusWithdrawn)
+                .AddIconResource(ResourceKeys.Icon.SquareSmallGrayIconKey);
+
+            MenuItems.AddItem(
+                Strings.MenuItemSetTitleStatusNone,
+                RelayCommand.Create(RunSetTitleStatusCommand, CanRunSetTitleStatusCommand))
+                .AddCommandParm(SubmissionValues.StatusNotSpecified);
+
+            MenuItems.AddSeparator();
+
+            MenuItems.AddItem(
+                Strings.MenuItemRemoveTitleFromSubmission, 
+                RelayCommand.Create(RunRemoveTitleFromSubmissionCommand, p => CanRunIfNotLocked()));
 
             ListView.IsLiveSorting = true;
-            ListView.LiveSortingProperties.Add(SubmissionTable.Defs.Columns.Ordering);
+            ListView.LiveSortingProperties.Add(TableColumns.Ordering);
         }
         #endregion
 
@@ -139,13 +126,13 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareLong(item1, item2, SubmissionTable.Defs.Columns.Ordering);
+            return DataRowCompareLong(item1, item2, TableColumns.Ordering);
         }
 
         /// <inheritdoc/>
         protected override bool OnDataRowFilter(DataRow item)
         {
-            return (long)item[SubmissionTable.Defs.Columns.BatchId] == (Owner?.SelectedBatch?.Id ?? 0);
+            return (long)item[TableColumns.BatchId] == (Owner?.SelectedBatch?.Id ?? 0);
         }
 
         /// <inheritdoc/>
@@ -159,7 +146,7 @@ namespace Restless.Panama.ViewModel
 
         #region Private methods
 
-        private void RunMoveUpCommand(object o)
+        private void RunMoveUpCommand(object parm)
         {
             if (CanRunMoveUpCommand(null))
             {
@@ -167,12 +154,12 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private bool CanRunMoveUpCommand(object o)
+        private bool CanRunMoveUpCommand(object parm)
         {
-            return CanRunMoveCommandBase() && SelectedSubmission.Ordering > 1;
+            return CanRunIfNotLocked() && SelectedSubmission.Ordering > 1;
         }
 
-        private void RunMoveDownCommand(object o)
+        private void RunMoveDownCommand(object parm)
         {
             if (CanRunMoveDownCommand(null))
             {
@@ -180,12 +167,12 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private bool CanRunMoveDownCommand(object o)
+        private bool CanRunMoveDownCommand(object parm)
         {
-            return CanRunMoveCommandBase() && SelectedSubmission.Ordering < Table.GetHighestOrdering(Owner.SelectedBatch.Id);
+            return CanRunIfNotLocked() && SelectedSubmission.Ordering < Table.GetHighestOrdering(Owner.SelectedBatch.Id);
         }
 
-        private bool CanRunMoveCommandBase()
+        private bool CanRunIfNotLocked()
         {
             return
                 IsSelectedRowAccessible &&
@@ -194,22 +181,44 @@ namespace Restless.Panama.ViewModel
                 !(Owner.SelectedBatch?.IsLocked ?? true);
         }
 
-        private void RunCopyToClipboardCommand(object o)
+        private void RunSetTitleStatusCommand(object parm)
         {
-            // Had a uncaught exception buried deep within the Clipboard.SetText() method.
-            // May have been a one-off, but putting the following within a try/catch.
+            if (parm is long status)
+            {
+                SelectedSubmission.Status = status;
+            }
+
+        }
+
+        private bool CanRunSetTitleStatusCommand(object parm)
+        {
+            return
+                parm is long status && 
+                SelectedSubmission != null &&
+                (status != SubmissionValues.StatusAccepted || Owner.SelectedBatch?.ResponseType == ResponseValues.ResponseAccepted);
+        }
+
+        private void RunRemoveTitleFromSubmissionCommand(object parm)
+        {
+            if (MessageWindow.ShowYesNo(Strings.ConfirmationRemoveTitleFromSubmission))
+            {
+                DeleteSelectedRow();
+            }
+        }
+
+        private void RunCopyToClipboardCommand(object parm)
+        {
             Execution.TryCatch(() =>
             {
                 StringBuilder builder = new();
-                foreach (DataRowView rowv in MainView)
+                foreach (SubmissionRow row in Table.EnumerateAll(Owner.SelectedBatch.Id))
                 {
-                    builder.AppendLine(rowv.Row[SubmissionTable.Defs.Columns.Joined.Title].ToString());
+                    builder.AppendLine(row.Title);
                 }
                 System.Windows.Clipboard.SetText(builder.ToString());
                 MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ConfirmationTitlesCopiedToClipboard);
             });
         }
         #endregion
-
     }
 }

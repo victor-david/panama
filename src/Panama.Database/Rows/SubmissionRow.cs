@@ -46,7 +46,15 @@ namespace Restless.Panama.Database.Tables
             set => SetValue(Columns.Status, value);
         }
 
+        /// <summary>
+        /// Gets the date / time record added
+        /// </summary>
+        public DateTime Added => GetDateTime(Columns.Added);
 
+        /// <summary>
+        /// Gets the title
+        /// </summary>
+        public string Title => GetString(Columns.Joined.Title);
         #endregion
 
         /************************************************************************/

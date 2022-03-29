@@ -10,27 +10,60 @@
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="500">
-    <Grid tk:Property.RowHeights="200,Auto">
+    <Grid
+        tk:Property.RowHeights="30,170,Auto"
+        tk:Property.ColumnWidths="Auto,*">
+        
+        <StackPanel Grid.Row="1">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                    <Setter Property="Margin" Value="0,2,6,2"/>
+                </Style>
+            </StackPanel.Resources>
+            
+            <Button
+                Content="{StaticResource ArrowUpIconKey}"
+                Command="{Binding Titles.Commands[TitleMoveUp]}"/>
+
+            <Button
+                Content="{StaticResource ArrowDownIconKey}"
+                Command="{Binding Titles.Commands[TitleMoveDown]}"/>
+
+            <Button
+                Content="{StaticResource SubmissionIconKey}"
+                Command="{Binding Titles.Commands[CopyToClipboard]}"
+                ToolTip="Copy the list of titles to the clipboard"/>
+        </StackPanel>       
+        
+        
         <DataGrid
+            Grid.Column="1"
+            Grid.RowSpan="2"
             Style="{StaticResource DataGridEditLockedStyle}"
             ItemsSource="{Binding Titles.ListView}"
             SelectedItem="{Binding Titles.SelectedItem}"
             tk:DataGridColumns.Columns="{Binding Titles.Columns}">
 
             <DataGrid.InputBindings>
-                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Titles.OpenRowCommand}"/>
             </DataGrid.InputBindings>
-            
+
+            <DataGrid.ContextMenu>
+                <ContextMenu ItemsSource="{Binding Titles.MenuItems}"/>
+            </DataGrid.ContextMenu>
+
         </DataGrid>
 
-        <StatusBar Grid.Row="1" Margin="0,6">
 
-            <StatusBar.Resources>
+
+        <!--<StatusBar Grid.Row="1" Margin="0,6">-->
+
+            <!--<StatusBar.Resources>
                 <Style TargetType="tk:IconButton" BasedOn="{StaticResource SmallIconButtonStyle}">
                     <Setter Property="Icon" Value="{StaticResource SquareSmallGrayIconKey}"/>
                 </Style>
-            </StatusBar.Resources>
-            <tk:IconButton
+            </StatusBar.Resources>-->
+            <!--<tk:IconButton
                 Padding="0"
                 Icon="{StaticResource ArrowUpMediumIconKey}"
                 Command="{Binding Titles.Commands[TitleMoveUp]}"/>
@@ -38,40 +71,40 @@
             <tk:IconButton
                 Padding="0"
                 Icon="{StaticResource ArrowDownMediumIconKey}"
-                Command="{Binding Titles.Commands[TitleMoveDown]}"/>
+                Command="{Binding Titles.Commands[TitleMoveDown]}"/>-->
 
-            <Separator/>
+            <!--<Separator/>-->
 
-            <tk:IconButton 
+            <!--<tk:IconButton 
                 Command="{Binding Titles.Commands[SetStatusAccepted]}" 
                 Content="Accepted"
-                ToolTip="Set the status of the selected title to accepted"/>
+                ToolTip="Set the status of the selected title to accepted"/>-->
             
-            <tk:IconButton
+            <!--<tk:IconButton
                 Command="{Binding Titles.Commands[SetStatusWithdrawn]}"
                 Content="Withdrawn"
-                ToolTip="Set the status of the selected title to withdrawn"/>
+                ToolTip="Set the status of the selected title to withdrawn"/>-->
             
-            <tk:IconButton
+            <!--<tk:IconButton
                 Command="{Binding Titles.Commands[ResetStatus]}"
                 Content="Reset"
-                ToolTip="Reset the status of the selected title"/>
+                ToolTip="Reset the status of the selected title"/>-->
             
-            <Separator/>
+            <!--<Separator/>-->
             
-            <tk:IconButton
+            <!--<tk:IconButton
                 Command="{Binding Titles.Commands[RemoveFromSubmission]}"
                 Content="Remove"
-                ToolTip="Remove the selected title from the submission (does not affect the file system)"/>
+                ToolTip="Remove the selected title from the submission (does not affect the file system)"/>-->
             
-            <Separator/>
+            <!--<Separator/>-->
             
-            <tk:IconButton
+            <!--<tk:IconButton
                 Command="{Binding Titles.Commands[CopyToClipboard]}"
                 Content="Copy"
-                ToolTip="Copy the list of titles to the clipboard"/>
+                ToolTip="Copy the list of titles to the clipboard"/>-->
             
-        </StatusBar>
+        <!--</StatusBar>-->
 
     </Grid>
 </UserControl>

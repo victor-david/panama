@@ -107,6 +107,11 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Gets the publisher name
+        /// </summary>
+        public string PublisherName => GetString(Columns.Joined.Publisher);
+
+        /// <summary>
         /// Gets the publisher url
         /// </summary>
         public string PublisherUrl => GetString(Columns.Joined.PublisherUrl);

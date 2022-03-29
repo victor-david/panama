@@ -1703,6 +1703,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a title to this submission.
+        /// </summary>
+        public static string MenuItemAddTitleToSubmission {
+            get {
+                return ResourceManager.GetString("MenuItemAddTitleToSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a note.
         /// </summary>
         public static string MenuItemAddUserNote {
@@ -1919,6 +1928,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove title from submission.
+        /// </summary>
+        public static string MenuItemRemoveTitleFromSubmission {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveTitleFromSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset windows.
         /// </summary>
         public static string MenuItemResetWindows {
@@ -1951,6 +1969,33 @@ namespace Restless.Panama.Resources {
         public static string MenuItemSettings {
             get {
                 return ResourceManager.GetString("MenuItemSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set status to accepted.
+        /// </summary>
+        public static string MenuItemSetTitleStatusAccepted {
+            get {
+                return ResourceManager.GetString("MenuItemSetTitleStatusAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set status to none.
+        /// </summary>
+        public static string MenuItemSetTitleStatusNone {
+            get {
+                return ResourceManager.GetString("MenuItemSetTitleStatusNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set status to withdrawn.
+        /// </summary>
+        public static string MenuItemSetTitleStatusWithdrawn {
+            get {
+                return ResourceManager.GetString("MenuItemSetTitleStatusWithdrawn", resourceCulture);
             }
         }
         
@@ -2122,6 +2167,15 @@ namespace Restless.Panama.Resources {
         public static string TextImage {
             get {
                 return ResourceManager.GetString("TextImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locked.
+        /// </summary>
+        public static string TextLocked {
+            get {
+                return ResourceManager.GetString("TextLocked", resourceCulture);
             }
         }
         

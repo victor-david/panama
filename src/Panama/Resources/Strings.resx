@@ -1083,4 +1083,22 @@ Do you want to continue?</value>
   <data name="HeaderMain" xml:space="preserve">
     <value>Main</value>
   </data>
+  <data name="MenuItemAddTitleToSubmission" xml:space="preserve">
+    <value>Add a title to this submission</value>
+  </data>
+  <data name="MenuItemRemoveTitleFromSubmission" xml:space="preserve">
+    <value>Remove title from submission</value>
+  </data>
+  <data name="MenuItemSetTitleStatusAccepted" xml:space="preserve">
+    <value>Set status to accepted</value>
+  </data>
+  <data name="MenuItemSetTitleStatusNone" xml:space="preserve">
+    <value>Set status to none</value>
+  </data>
+  <data name="MenuItemSetTitleStatusWithdrawn" xml:space="preserve">
+    <value>Set status to withdrawn</value>
+  </data>
+  <data name="TextLocked" xml:space="preserve">
+    <value>Locked</value>
+  </data>
 </root>
