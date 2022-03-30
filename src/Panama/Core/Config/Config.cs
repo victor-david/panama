@@ -721,6 +721,24 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets a value that determines if the title list is filtered by the ready flag
+        /// </summary>
+        public bool SubmissionTitleReady
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets a value that determines if the title list is filtered by the quick flag
+        /// </summary>
+        public bool SubmissionTitleFlagged
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets or sets a value that determines whether search
         /// results are filtered to those associated with a title version.
         /// </summary>

@@ -24,6 +24,14 @@
                 Width="100"
                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
             
+            <CheckBox
+                IsChecked="{Binding IsReady}"
+                Content="Ready"/>
+            
+            <CheckBox
+                IsChecked="{Binding IsFlagged}"
+                Content="Flagged"/>
+            
             <Separator/>
 
             <TextBlock>

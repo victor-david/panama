@@ -6,6 +6,7 @@
 */
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections;
@@ -40,6 +41,32 @@ namespace Restless.Panama.ViewModel
             set
             {
                 SetProperty(ref searchText, value);
+                ListView.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value that determines if the title list is filtered by the ready flag
+        /// </summary>
+        public bool IsReady
+        {
+            get => Config.SubmissionTitleReady;
+            set
+            {
+                Config.SubmissionTitleReady = value;
+                ListView.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value that determines if the title list is filtered by the quick flag
+        /// </summary>
+        public bool IsFlagged
+        {
+            get => Config.SubmissionTitleFlagged;
+            set
+            {
+                Config.SubmissionTitleFlagged = value;
                 ListView.Refresh();
             }
         }
@@ -84,6 +111,17 @@ namespace Restless.Panama.ViewModel
         public TitleSelectWindowViewModel()
         {
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+
+            Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.Ready, ResourceKeys.Icon.SquareSmallGreenIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip(Strings.ToolTipTitleFilterReady);
+
+            Columns.CreateResource<BooleanToPathConverter>("Q", TableColumns.QuickFlag, ResourceKeys.Icon.SquareSmallBlueIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip(Strings.ToolTipTitleFilterFlag);
+
             Columns.Create("Title", TableColumns.Title);
             Columns.SetDefaultSort(Columns.Create("Written", TableColumns.Written).MakeDate(), ListSortDirection.Descending);
             Columns.Create("Updated", TableColumns.Calculated.LastestVersionDate).MakeDate();
@@ -106,9 +144,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override bool OnDataRowFilter(DataRow item)
         {
-            return
-                string.IsNullOrWhiteSpace(SearchText) ||
-                item[TableColumns.Title].ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
+            return TitleIsReady(item) && TitleIsFlagged(item) && TitleHasText(item);
         }
         #endregion
 
@@ -134,5 +170,22 @@ namespace Restless.Panama.ViewModel
             }
         }
         #endregion
+
+        private bool TitleIsReady(DataRow item)
+        {
+            return !IsReady || (bool)item[TableColumns.Ready];
+        }
+
+        private bool TitleIsFlagged(DataRow item)
+        {
+            return !IsFlagged || (bool)item[TableColumns.QuickFlag];
+        }
+
+        private bool TitleHasText(DataRow item)
+        {
+            return
+                string.IsNullOrWhiteSpace(SearchText) ||
+                item[TableColumns.Title].ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
+        }
     }
 }
