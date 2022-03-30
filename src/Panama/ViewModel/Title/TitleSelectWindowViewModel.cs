@@ -144,7 +144,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override bool OnDataRowFilter(DataRow item)
         {
-            return TitleIsReady(item) && TitleIsFlagged(item) && TitleHasText(item);
+            return TitleFilterIsReady(item) && TitleFilterIsFlagged(item) && TitleFilterHasText(item);
         }
         #endregion
 
@@ -171,17 +171,17 @@ namespace Restless.Panama.ViewModel
         }
         #endregion
 
-        private bool TitleIsReady(DataRow item)
+        private bool TitleFilterIsReady(DataRow item)
         {
             return !IsReady || (bool)item[TableColumns.Ready];
         }
 
-        private bool TitleIsFlagged(DataRow item)
+        private bool TitleFilterIsFlagged(DataRow item)
         {
             return !IsFlagged || (bool)item[TableColumns.QuickFlag];
         }
 
-        private bool TitleHasText(DataRow item)
+        private bool TitleFilterHasText(DataRow item)
         {
             return
                 string.IsNullOrWhiteSpace(SearchText) ||
