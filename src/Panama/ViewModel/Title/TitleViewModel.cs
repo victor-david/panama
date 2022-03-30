@@ -38,8 +38,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Properties
-        private TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
-
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
 
@@ -370,11 +368,6 @@ namespace Restless.Panama.ViewModel
                     Open.TitleVersionFile(verController.Versions[0].FileName);
                 }
             }
-        }
-
-        protected override bool CanRunOpenRowCommand()
-        {
-            return true;
         }
 
         /// <summary>

@@ -150,12 +150,23 @@ namespace Restless.Panama.ViewModel
                 ListView.Refresh();
             }
         }
+
+        protected override void RunOpenRowCommand()
+        {
+            if (SelectedSubmission != null)
+            {
+                Database.Tables.TitleVersionController verController = TitleVersionTable.GetVersionController(SelectedSubmission.TitleId);
+                if (verController.Versions.Count > 0)
+                {
+                    Open.TitleVersionFile(verController.Versions[0].FileName);
+                }
+            }
+        }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
-
         private void RunMoveUpCommand(object parm)
         {
             if (CanRunMoveUpCommand(null))
