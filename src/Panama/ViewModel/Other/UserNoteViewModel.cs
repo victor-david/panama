@@ -8,9 +8,9 @@ using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
-using Restless.Toolkit.Utility;
 using System.ComponentModel;
 using System.Data;
+using TableColumns = Restless.Panama.Database.Tables.UserNoteTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -47,9 +47,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public UserNoteViewModel()
         {
-            Columns.Create("Id", UserNoteTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Created", UserNoteTable.Defs.Columns.Created).MakeDate();
-            Columns.SetDefaultSort(Columns.Create("Title", UserNoteTable.Defs.Columns.Title), ListSortDirection.Ascending);
+            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Created", TableColumns.Created).MakeDate();
+            Columns.SetDefaultSort(Columns.Create("Title", TableColumns.Title), ListSortDirection.Ascending);
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemAddUserNote, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
@@ -69,7 +69,7 @@ namespace Restless.Panama.ViewModel
 
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareString(item1, item2, UserNoteTable.Defs.Columns.Title);
+            return DataRowCompareString(item1, item2, TableColumns.Title);
         }
 
         /// <summary>

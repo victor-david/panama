@@ -12,6 +12,7 @@ using Restless.Toolkit.Mvvm;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
+using TableColumns = Restless.Panama.Database.Tables.TagTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -49,10 +50,10 @@ namespace Restless.Panama.ViewModel
         public TagViewModel()
         {
             DisplayName = Strings.MenuItemTags;
-            Columns.Create("Id", TagTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.SetDefaultSort(Columns.Create("Tag", TagTable.Defs.Columns.Tag), ListSortDirection.Ascending);
-            Columns.Create("Description", TagTable.Defs.Columns.Description).MakeFlexWidth(2.5);
-            Columns.Create("Usage", TagTable.Defs.Columns.Calculated.UsageCount)
+            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.SetDefaultSort(Columns.Create("Tag", TableColumns.Tag), ListSortDirection.Ascending);
+            Columns.Create("Description", TableColumns.Description).MakeFlexWidth(2.5);
+            Columns.Create("Usage", TableColumns.Calculated.UsageCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W076);
 
@@ -64,7 +65,7 @@ namespace Restless.Panama.ViewModel
             AddCommand.Supported = CommandSupported.Yes;
 
             ListView.IsLiveSorting = true;
-            ListView.LiveSortingProperties.Add(TagTable.Defs.Columns.Tag);
+            ListView.LiveSortingProperties.Add(TableColumns.Tag);
         }
         #endregion
 
@@ -74,7 +75,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareString(item1, item2, TagTable.Defs.Columns.Tag);
+            return DataRowCompareString(item1, item2, TableColumns.Tag);
         }
 
         /// <inheritdoc/>

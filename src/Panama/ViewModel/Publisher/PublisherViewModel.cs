@@ -18,6 +18,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using TableColumns = Restless.Panama.Database.Tables.PublisherTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -113,47 +114,47 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public PublisherViewModel()
         {
-            Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<BooleanToPathConverter>("P", PublisherTable.Defs.Columns.Calculated.InSubmissionPeriod, ResourceKeys.Icon.SquareSmallBlueIconKey)
+            Columns.CreateResource<BooleanToPathConverter>("P", TableColumns.Calculated.InSubmissionPeriod, ResourceKeys.Icon.SquareSmallBlueIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipPublisherInPeriod);
 
-            Columns.CreateResource<BooleanToPathConverter>("E", PublisherTable.Defs.Columns.Exclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
+            Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Exclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipPublisherExclusive);
 
-            Columns.CreateResource<BooleanToPathConverter>("P", PublisherTable.Defs.Columns.Paying, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.CreateResource<BooleanToPathConverter>("P", TableColumns.Paying, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipPublisherPay);
 
-            Columns.Create("Name", PublisherTable.Defs.Columns.Name);
-            Columns.Create("Url", PublisherTable.Defs.Columns.Url);
+            Columns.Create("Name", TableColumns.Name);
+            Columns.Create("Url", TableColumns.Url);
 
-            DataGridColumn column = Columns.Create("Added", PublisherTable.Defs.Columns.Added)
+            DataGridColumn column = Columns.Create("Added", TableColumns.Added)
                 .MakeDate()
                 .AddToolTip(Strings.ToolTipPublisherAdded);
 
             Columns.SetDefaultSort(column, ListSortDirection.Descending);
 
-            Columns.CreateResource<BooleanToPathConverter>("A", PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission, ResourceKeys.Icon.SquareSmallGrayIconKey)
+            Columns.CreateResource<BooleanToPathConverter>("A", TableColumns.Calculated.HaveActiveSubmission, ResourceKeys.Icon.SquareSmallGrayIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipPublisherHasActive);
 
-            Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub)
+            Columns.Create("Last Sub", TableColumns.Calculated.LastSub)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipPublisherLastSubmission)
-                .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount)
+            Columns.Create("SC", TableColumns.Calculated.SubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.ToolTipPublisherSubmissionCount)
-                .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
             Commands.Add("ActiveFilter", p => Filters.SetToActive());
             Commands.Add("HaveSubFilter", p => Filters.SetToOpenSubmission());
@@ -214,7 +215,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareDateTime(item2, item1, PublisherTable.Defs.Columns.Added);
+            return DataRowCompareDateTime(item2, item1, TableColumns.Added);
         }
 
         /// <inheritdoc/>

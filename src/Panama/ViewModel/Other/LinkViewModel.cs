@@ -9,9 +9,9 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
-using Restless.Toolkit.Utility;
 using System.ComponentModel;
 using System.Data;
+using TableColumns = Restless.Panama.Database.Tables.LinkTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -49,11 +49,11 @@ namespace Restless.Panama.ViewModel
         public LinkViewModel()
         {
             DisplayName = Strings.CommandLink;
-            Columns.Create("Id", LinkTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Added", LinkTable.Defs.Columns.Added).MakeDate();
-            Columns.SetDefaultSort(Columns.Create("Name", LinkTable.Defs.Columns.Name), ListSortDirection.Ascending);
-            Columns.Create("Url", LinkTable.Defs.Columns.Url).MakeFlexWidth(2.5);
-            Columns.Create("Note", LinkTable.Defs.Columns.Notes).MakeSingleLine();
+            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Added", TableColumns.Added).MakeDate();
+            Columns.SetDefaultSort(Columns.Create("Name", TableColumns.Name), ListSortDirection.Ascending);
+            Columns.Create("Url", TableColumns.Url).MakeFlexWidth(2.5);
+            Columns.Create("Note", TableColumns.Notes).MakeSingleLine();
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemAddLink, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
@@ -77,7 +77,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareString(item1, item2, LinkTable.Defs.Columns.Name);
+            return DataRowCompareString(item1, item2, TableColumns.Name);
         }
 
         /// <summary>

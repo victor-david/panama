@@ -12,6 +12,7 @@ using Restless.Toolkit.Core.Utility;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
+using TableColumns = Restless.Panama.Database.Tables.SelfPublisherTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -49,16 +50,16 @@ namespace Restless.Panama.ViewModel
         public SelfPublisherViewModel()
         {
             DisplayName = Strings.CommandSelfPublisher;
-            Columns.Create("Id", SelfPublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Name", SelfPublisherTable.Defs.Columns.Name);
-            Columns.Create("Url", SelfPublisherTable.Defs.Columns.Url);
-            Columns.SetDefaultSort(Columns.Create("Added", SelfPublisherTable.Defs.Columns.Added).MakeDate().AddToolTip(Strings.ToolTipPublisherAdded), ListSortDirection.Descending);
+            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Name", TableColumns.Name);
+            Columns.Create("Url", TableColumns.Url);
+            Columns.SetDefaultSort(Columns.Create("Added", TableColumns.Added).MakeDate().AddToolTip(Strings.ToolTipPublisherAdded), ListSortDirection.Descending);
 
-            Columns.Create("PC", SelfPublisherTable.Defs.Columns.Calculated.PubCount)
+            Columns.Create("PC", TableColumns.Calculated.PubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipSelfPublisherPublishedCount)
-                .AddSort(null, SelfPublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemCreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
@@ -91,7 +92,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareDateTime(item2, item1, SelfPublisherTable.Defs.Columns.Added);
+            return DataRowCompareDateTime(item2, item1, TableColumns.Added);
         }
 
         /// <summary>

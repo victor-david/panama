@@ -18,6 +18,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Windows.Threading;
+using TableColumns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -173,47 +174,47 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TitleViewModel()
         {
-            Columns.Create("Id", TitleTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.CreateResource<BooleanToPathConverter>("R", TitleTable.Defs.Columns.Ready, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.Ready, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipTitleFilterReady);
 
-            Columns.CreateResource<BooleanToPathConverter>("Q", TitleTable.Defs.Columns.QuickFlag, ResourceKeys.Icon.SquareSmallBlueIconKey)
+            Columns.CreateResource<BooleanToPathConverter>("Q", TableColumns.QuickFlag, ResourceKeys.Icon.SquareSmallBlueIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipTitleFilterFlag);
 
-            Columns.Create("Title", TitleTable.Defs.Columns.Title).MakeFlexWidth(4);
+            Columns.Create("Title", TableColumns.Title).MakeFlexWidth(4);
 
-            Columns.SetDefaultSort(Columns.Create("Written", TitleTable.Defs.Columns.Written).MakeDate(), ListSortDirection.Descending);
+            Columns.SetDefaultSort(Columns.Create("Written", TableColumns.Written).MakeDate(), ListSortDirection.Descending);
 
-            Columns.Create("Updated", TitleTable.Defs.Columns.Calculated.LastestVersionDate)
+            Columns.Create("Updated", TableColumns.Calculated.LastestVersionDate)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
 
-            Columns.Create("WC", TitleTable.Defs.Columns.Calculated.LastestVersionWordCount).MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("WC", TableColumns.Calculated.LastestVersionWordCount).MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleWordCount);
 
-            Columns.Create("SC", TitleTable.Defs.Columns.Calculated.SubCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("SC", TableColumns.Calculated.SubCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleSubmissionCount)
-                .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("CS", TitleTable.Defs.Columns.Calculated.CurrentSubCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("CS", TableColumns.Calculated.CurrentSubCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleCurrentSubmissionCount)
-                .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("VC", TitleTable.Defs.Columns.Calculated.VersionCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("VC", TableColumns.Calculated.VersionCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleVersionCount)
-                .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("TC", TitleTable.Defs.Columns.Calculated.TagCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("TC", TableColumns.Calculated.TagCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleTagCount)
-                .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("PC", TitleTable.Defs.Columns.Calculated.PublishedCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("PC", TableColumns.Calculated.PublishedCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitlePublishedCount)
-                .AddSort(null, TitleTable.Defs.Columns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
  
             Commands.Add("ReadyFilter", p => Filters.SetToReady());
             Commands.Add("FlaggedFilter", p => Filters.SetToFlagged());
@@ -239,7 +240,7 @@ namespace Restless.Panama.ViewModel
             Tags = new TitleTagController(this);
 
             ListView.IsLiveSorting = true;
-            ListView.LiveSortingProperties.Add(TitleTable.Defs.Columns.Written);
+            ListView.LiveSortingProperties.Add(TableColumns.Written);
 
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {
@@ -287,10 +288,10 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            int value = DataRowCompareDateTime(item2, item1, TitleTable.Defs.Columns.Written);
+            int value = DataRowCompareDateTime(item2, item1, TableColumns.Written);
             if (value == 0)
             {
-                value = DataRowCompareString(item1, item2, TitleTable.Defs.Columns.Title);
+                value = DataRowCompareString(item1, item2, TableColumns.Title);
             }
             return value;
         }

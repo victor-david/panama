@@ -8,10 +8,10 @@ using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
-using Restless.Toolkit.Utility;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
+using TableColumns = Restless.Panama.Database.Tables.AuthorTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -48,13 +48,13 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AuthorViewModel()
         {
-            Columns.SetDefaultSort(Columns.Create("Id", AuthorTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042), ListSortDirection.Ascending);
-            Columns.CreateResource<BooleanToPathConverter>("R", AuthorTable.Defs.Columns.IsDefault, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.SetDefaultSort(Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042), ListSortDirection.Ascending);
+            Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.IsDefault, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipAuthorDefault);
 
-            Columns.Create("Name", AuthorTable.Defs.Columns.Name);
+            Columns.Create("Name", TableColumns.Name);
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemAddAuthor, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
@@ -76,7 +76,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareLong(item1, item2, AuthorTable.Defs.Columns.Id);
+            return DataRowCompareLong(item1, item2, TableColumns.Id);
         }
 
         /// <summary>
