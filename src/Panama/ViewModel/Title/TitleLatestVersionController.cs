@@ -17,10 +17,10 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides a intermediary class that implements the RunOpenRow command for the latest version of a title.
     /// </summary>
-    /// <typeparam name="VM">A view model type derived from <see cref="DataGridViewModel{T}"/></typeparam>
+    /// <typeparam name="VM">A view model type derived from <see cref="DataRowViewModel{T}"/></typeparam>
     /// <typeparam name="T">A type derived from <see cref="TableBase"/></typeparam>
-    public abstract class TitleLatestVersionController<VM, T> : ControllerBase<VM, T>
-        where VM : DataGridViewModel<T>
+    public abstract class TitleLatestVersionController<VM, T> : BaseController<VM, T>
+        where VM : DataRowViewModel<T>
         where T : TableBase
     {
 
@@ -38,7 +38,7 @@ namespace Restless.Panama.ViewModel
 
         #region Protected methods
         /// <summary>
-        /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the latest version of a selected title.
+        /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> to open the latest version of a selected title.
         /// </summary>
         protected override void RunOpenRowCommand()
         {

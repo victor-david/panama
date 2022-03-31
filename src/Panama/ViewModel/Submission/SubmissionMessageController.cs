@@ -134,7 +134,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the selected message.
+        /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> to open the selected message.
         /// </summary>
         /// <remarks>
         /// This method only opens a message if it is a mapi reference or a file system reference.

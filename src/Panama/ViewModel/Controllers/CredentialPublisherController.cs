@@ -16,7 +16,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides logic to display publishers that are related to a credential.
     /// </summary>
-    public class CredentialPublisherController : ControllerBase<CredentialViewModel, CredentialTable>
+    public class CredentialPublisherController : BaseController<CredentialViewModel, CredentialTable>
     {
         #region Private
         #endregion
@@ -61,8 +61,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            long credentialId = GetOwnerSelectedPrimaryId();
-            MainView.RowFilter = string.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, credentialId);
+            // TODO
+            //long credentialId = GetOwnerSelectedPrimaryId();
+            //MainView.RowFilter = string.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, credentialId);
         }
         #endregion
 

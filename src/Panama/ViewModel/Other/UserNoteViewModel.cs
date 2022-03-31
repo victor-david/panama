@@ -17,7 +17,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for managing user notes.
     /// </summary>
-    public class UserNoteViewModel : DataGridViewModel<UserNoteTable>
+    public class UserNoteViewModel : DataRowViewModel<UserNoteTable>
     {
         #region Private
         private UserNoteRow selectedNote;

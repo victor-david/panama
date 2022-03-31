@@ -15,26 +15,11 @@ using System.Data;
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
-    /// Provides a controller that displays the history of sibmissions for a title.
+    /// Provides a controller that displays the history of submissions for a title.
     /// </summary>
-    public class TitleSubmissionController : ControllerBase<TitleViewModel, TitleTable>
+    public class TitleSubmissionController : BaseController<TitleViewModel, TitleTable>
     {
         #region Private
-        #endregion
-
-        /************************************************************************/
-
-        #region Public properties
-
-        /// <summary>
-        /// Gets the controller that displays available submissions.
-        /// A submission is available if it does not yet have a response date and it is unlocked.
-        /// </summary>
-        public TitleAddToSubmissionController Available
-        {
-            get;
-            private set;
-        }
         #endregion
 
         /************************************************************************/
@@ -62,9 +47,7 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Batch Response", SubmissionTable.Defs.Columns.Joined.ResponseTypeName);
             AddViewSourceSortDescriptions();
 
-            Available = new TitleAddToSubmissionController(Owner);
-
-            HeaderPreface = Strings.HeaderSubmissions;
+            // HeaderPreface = Strings.HeaderSubmissions;
         }
         #endregion
 
@@ -83,9 +66,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            long titleId = GetOwnerSelectedPrimaryId();
-            MainView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.TitleId, titleId);
-            Available.Update();
+            //long titleId = GetOwnerSelectedPrimaryId();
+            //MainView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.TitleId, titleId);
+            //Available.Update();
         }
         #endregion
 

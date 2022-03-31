@@ -23,7 +23,7 @@ namespace Restless.Panama.ViewModel
     /// Extends DataGridViewModelBase to provide common functionality for views that use DataGrid to display table rows. This class must be interited.
     /// </summary>
     /// <typeparam name="T">The table type derived from <see cref="TableBase"/></typeparam>
-    public abstract class DataGridViewModel<T> : ApplicationViewModel where T : TableBase
+    public abstract class DataRowViewModel<T> : ApplicationViewModel where T : TableBase
     {
         #region Private
         private object selectedItem;
@@ -173,9 +173,9 @@ namespace Restless.Panama.ViewModel
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataGridViewModel{T}"/> class.
+        /// Initializes a new instance of the <see cref="DataRowViewModel{T}"/> class.
         /// </summary>
-        protected DataGridViewModel()
+        protected DataRowViewModel()
         {
             MainView = new DataView(Table);
             MainView.ListChanged += DataViewListChanged;
@@ -207,7 +207,7 @@ namespace Restless.Panama.ViewModel
         /// <param name="table">The data table.</param>
         /// <remarks>
         /// <para>
-        /// When a <see cref="DataGridViewModel{T}"/> object is created, the <see cref="MainView"/> property is created
+        /// When a <see cref="DataRowViewModel{T}"/> object is created, the <see cref="MainView"/> property is created
         /// from the <see cref="TableBase"/> type declaration that was used to create the class.
         /// </para>
         /// <para>

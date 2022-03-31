@@ -22,7 +22,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for the submission view.
     /// </summary>
-    public class SubmissionViewModel : DataGridViewModel<SubmissionBatchTable>
+    public class SubmissionViewModel : DataRowViewModel<SubmissionBatchTable>
     {
         #region Private
         private int selectedEditSection;

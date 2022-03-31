@@ -17,7 +17,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for managing user notes.
     /// </summary>
-    public class AlertViewModel : DataGridViewModel<AlertTable>
+    public class AlertViewModel : DataRowViewModel<AlertTable>
     {
         #region Private
         #endregion

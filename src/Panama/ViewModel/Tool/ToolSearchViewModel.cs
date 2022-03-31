@@ -20,7 +20,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for the search tool.
     /// </summary>
-    public class ToolSearchViewModel : DataGridViewModel<SearchTable>
+    public class ToolSearchViewModel : DataRowViewModel<SearchTable>
     {
         #region Private
         private SearchRow selectedSearch;

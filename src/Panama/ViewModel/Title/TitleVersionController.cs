@@ -13,10 +13,8 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.OpenXml;
 using Restless.Toolkit.Core.Utility;
 using System.Data;
-using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace Restless.Panama.ViewModel
@@ -24,7 +22,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides a controller that manages title versions.
     /// </summary>
-    public class TitleVersionController : DataGridViewModelController<TitleViewModel, TitleVersionTable>
+    public class TitleVersionController : BaseController<TitleViewModel, TitleVersionTable>
     {
         #region Private
         private bool isOpenXml;
@@ -159,10 +157,7 @@ namespace Restless.Panama.ViewModel
             return value;
         }
 
-        /// <summary>
-        /// Called by the <see cref=" ControllerBase{VM,T}.Owner"/> of this controller
-        /// in order to update the controller values.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void OnUpdate()
         {
             SelectedVersion = null;
@@ -171,9 +166,7 @@ namespace Restless.Panama.ViewModel
             OnPropertyChanged(nameof(HaveVersion));
         }
 
-        /// <summary>
-        /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the selected title version.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void RunOpenRowCommand()
         {
             if (SelectedVersion != null)

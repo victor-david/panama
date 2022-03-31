@@ -18,7 +18,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used to view and manage links in the <see cref="LinkTable"/>.
     /// </summary>
-    public class LinkViewModel : DataGridViewModel<LinkTable>
+    public class LinkViewModel : DataRowViewModel<LinkTable>
     {
         #region Private
         private LinkRow selectedLink;
@@ -120,7 +120,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates if the <see cref=" DataGridViewModel{T}.OpenRowCommand"/> can run.
+        /// Gets a boolean value that indicates if the <see cref=" DataRowViewModel{T}.OpenRowCommand"/> can run.
         /// </summary>
         /// <returns>true if the command can execute (row selected and has a url); otherwise, false.</returns>
         protected override bool CanRunOpenRowCommand()

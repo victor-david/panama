@@ -20,7 +20,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used to view and manage credentials in the <see cref="CredentialTable"/>.
     /// </summary>
-    public class CredentialViewModel : DataGridViewModel<CredentialTable>
+    public class CredentialViewModel : DataRowViewModel<CredentialTable>
     {
         #region Private
         #endregion

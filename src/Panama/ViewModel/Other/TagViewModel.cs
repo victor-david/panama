@@ -19,7 +19,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used to display and manage tags in the <see cref="TagTable"/>.
     /// </summary>
-    public class TagViewModel : DataGridViewModel<TagTable>
+    public class TagViewModel : DataRowViewModel<TagTable>
     {
         #region Private
         private TagRow selectedTag;

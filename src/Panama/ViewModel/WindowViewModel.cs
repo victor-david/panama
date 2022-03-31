@@ -27,7 +27,7 @@ namespace Restless.Panama.ViewModel
     /// Represents the base view model that is associated with a window.
     /// This class must be inherited.
     /// </summary>
-    public abstract class WindowViewModel<T> : DataGridViewModel<T>, IWindowOwner where T : TableBase
+    public abstract class WindowViewModel<T> : DataRowViewModel<T>, IWindowOwner where T : TableBase
     {
         #region Private
         private System.Windows.Window windowOwner;

@@ -25,7 +25,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used to view and manage publisher records.
     /// </summary>
-    public class PublisherViewModel : DataGridViewModel<PublisherTable>
+    public class PublisherViewModel : DataRowViewModel<PublisherTable>
     {
         #region Private
         private int selectedEditSection;
@@ -246,7 +246,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> command.
+        /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> command.
         /// This command opens the publisher's web site.
         /// </summary>
         protected override void RunOpenRowCommand()
@@ -258,9 +258,9 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a value that indicates if the <see cref="DataGridViewModel{T}.OpenRowCommand"/> can run.
+        /// Gets a value that indicates if the <see cref="DataRowViewModel{T}.OpenRowCommand"/> can run.
         /// </summary>
-        /// <returns>true if the <see cref="DataGridViewModel{T}.OpenRowCommand"/> can run; otherwise, false.</returns>
+        /// <returns>true if the <see cref="DataRowViewModel{T}.OpenRowCommand"/> can run; otherwise, false.</returns>
         protected override bool CanRunOpenRowCommand()
         {
             return base.CanRunOpenRowCommand() && (SelectedPublisher?.HasUrl() ?? false);

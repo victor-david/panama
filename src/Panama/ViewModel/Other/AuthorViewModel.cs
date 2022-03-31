@@ -18,7 +18,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for authors management.
     /// </summary>
-    public class AuthorViewModel : DataGridViewModel<AuthorTable>
+    public class AuthorViewModel : DataRowViewModel<AuthorTable>
     {
         #region Private
         private AuthorRow selectedAuthor;

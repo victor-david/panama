@@ -25,7 +25,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for titles management.
     /// </summary>
-    public class TitleViewModel : DataGridViewModel<TitleTable>
+    public class TitleViewModel : DataRowViewModel<TitleTable>
     {
         #region Private
         private int selectedEditSection;
@@ -356,7 +356,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the latest version of the selected title.
+        /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> to open the latest version of the selected title.
         /// </summary>
         protected override void RunOpenRowCommand()
         {

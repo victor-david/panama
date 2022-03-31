@@ -75,9 +75,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            long publisherId = GetOwnerSelectedPrimaryId();
-            MainView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.Joined.PublisherId, publisherId);
-            DataViewCount = MainView.Count;
+            //long publisherId = GetOwnerSelectedPrimaryId();
+            //MainView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.Joined.PublisherId, publisherId);
+            //DataViewCount = MainView.Count;
         }
         #endregion
 

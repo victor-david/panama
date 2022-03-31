@@ -17,7 +17,7 @@ namespace Restless.Panama.ViewModel
     /// Represents a controller that displays tables contraints.
     /// </summary>
     /// <typeparam name="T">The type of contraint that this controller handles.</typeparam>
-    public class TableConstraintController<T> : ControllerBase<TableViewModel, TableTable> where T: Constraint
+    public class TableConstraintController<T> : BaseController<TableViewModel, TableTable> where T : Constraint
     {
         #region Private
         #endregion
@@ -73,16 +73,16 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            string tableName = GetOwnerSelectedPrimaryIdString();
-            if (tableName != null)
-            {
-                var table = DatabaseController.Instance.DataSet.Tables[tableName];
-                Constraints.Clear();
-                foreach (T c in table.Constraints.OfType<T>())
-                {
-                    Constraints.Add(c);
-                }
-            }
+            //string tableName = GetOwnerSelectedPrimaryIdString();
+            //if (tableName != null)
+            //{
+            //    var table = DatabaseController.Instance.DataSet.Tables[tableName];
+            //    Constraints.Clear();
+            //    foreach (T c in table.Constraints.OfType<T>())
+            //    {
+            //        Constraints.Add(c);
+            //    }
+            //}
         }
         #endregion
 

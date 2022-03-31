@@ -156,10 +156,10 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            long publisherId = GetOwnerSelectedPrimaryId();
-            MainView.RowFilter = string.Format("{0}={1}", SubmissionPeriodTable.Defs.Columns.PublisherId, publisherId);
-            SetAddControlVisibility(false);
-            SetNotesVisibility(SelectedItem != null);
+            //long publisherId = GetOwnerSelectedPrimaryId();
+            //MainView.RowFilter = string.Format("{0}={1}", SubmissionPeriodTable.Defs.Columns.PublisherId, publisherId);
+            //SetAddControlVisibility(false);
+            //SetNotesVisibility(SelectedItem != null);
         }
         #endregion
 
