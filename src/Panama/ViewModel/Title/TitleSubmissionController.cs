@@ -32,9 +32,9 @@ namespace Restless.Panama.ViewModel
         public TitleSubmissionController(TitleViewModel owner)
             : base(owner)
         {
-            AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
-            MainView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.TitleId);
-            MainView.Sort = string.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
+            //AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
+            //MainView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.TitleId);
+            //MainView.Sort = string.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
             Columns.Create("Id", SubmissionTable.Defs.Columns.BatchId)
                 .MakeFixedWidth(FixedWidth.W042);
             Columns.CreateImage<Int64ToPathConverter>("S", SubmissionTable.Defs.Columns.Status, "ImageSubStatus")

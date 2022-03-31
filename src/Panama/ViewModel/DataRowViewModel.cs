@@ -20,7 +20,8 @@ using System.Windows.Input;
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
-    /// Extends DataGridViewModelBase to provide common functionality for views that use DataGrid to display table rows. This class must be interited.
+    /// Provides common functionality for views that use DataGrid to display table rows.
+    /// This class must be interited.
     /// </summary>
     /// <typeparam name="T">The table type derived from <see cref="TableBase"/></typeparam>
     public abstract class DataRowViewModel<T> : ApplicationViewModel where T : TableBase
@@ -201,29 +202,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected methods
-        /// <summary>
-        /// Assigns the <see cref="MainView"/> property so that it is associated with the specified table.
-        /// </summary>
-        /// <param name="table">The data table.</param>
-        /// <remarks>
-        /// <para>
-        /// When a <see cref="DataRowViewModel{T}"/> object is created, the <see cref="MainView"/> property is created
-        /// from the <see cref="TableBase"/> type declaration that was used to create the class.
-        /// </para>
-        /// <para>
-        /// A derived class can reassign the <see cref="MainView"/> property so that is created from another table.
-        /// This functionality is used by controllers derived from <see cref="ControllerBase{VM,T}"/> to display
-        /// child rows that are related to the main table.
-        /// </para>
-        /// </remarks>
-        protected void AssignDataViewFrom(DataTable table)
-        {
-            Throw.IfNull(table);
-            MainView.ListChanged -= DataViewListChanged;
-            MainView = new DataView(table);
-            MainView.ListChanged += DataViewListChanged;
-        }
-
         /// <summary>
         /// Forces <see cref="ListView"/> to refresh its sorting
         /// </summary>

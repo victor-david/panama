@@ -44,9 +44,9 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public PublisherSubmissionController(PublisherViewModel owner): base(owner)
         {
-            AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionBatchTable>());
-            MainView.RowFilter = string.Format("{0}=-1", SubmissionBatchTable.Defs.Columns.PublisherId);
-            MainView.Sort = string.Format("{0} DESC", SubmissionBatchTable.Defs.Columns.Submitted);
+            //AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionBatchTable>());
+            //MainView.RowFilter = string.Format("{0}=-1", SubmissionBatchTable.Defs.Columns.PublisherId);
+            //MainView.Sort = string.Format("{0} DESC", SubmissionBatchTable.Defs.Columns.Submitted);
             Columns.Create("Id", SubmissionBatchTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             var col = Columns.Create("Submitted", SubmissionBatchTable.Defs.Columns.Submitted).MakeDate();
             Columns.SetDefaultSort(col, ListSortDirection.Descending);

@@ -36,8 +36,8 @@ namespace Restless.Panama.ViewModel
         public CredentialPublisherController(CredentialViewModel owner)
             : base(owner)
         {
-            AssignDataViewFrom(DatabaseController.Instance.GetTable<PublisherTable>());
-            MainView.RowFilter = string.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, -1);
+            //AssignDataViewFrom(DatabaseController.Instance.GetTable<PublisherTable>());
+            //MainView.RowFilter = string.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, -1);
             Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.SetDefaultSort(Columns.Create("Publisher", PublisherTable.Defs.Columns.Name), ListSortDirection.Ascending);
             Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate();

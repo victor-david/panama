@@ -99,9 +99,9 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public PublisherPeriodController(PublisherViewModel owner) : base(owner)
         {
-            AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionPeriodTable>());
-            MainView.RowFilter = string.Format("{0}=-1", SubmissionPeriodTable.Defs.Columns.PublisherId);
-            MainView.Sort = string.Format("{0} ASC", SubmissionPeriodTable.Defs.Columns.Start);
+            //AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionPeriodTable>());
+            //MainView.RowFilter = string.Format("{0}=-1", SubmissionPeriodTable.Defs.Columns.PublisherId);
+            //MainView.Sort = string.Format("{0} ASC", SubmissionPeriodTable.Defs.Columns.Start);
             Columns.Create("Id", SubmissionPeriodTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Start", SubmissionPeriodTable.Defs.Columns.Start).MakeDate("MMMM dd", toLocal:false);
             Columns.Create("End", SubmissionPeriodTable.Defs.Columns.End).MakeDate("MMMM dd", toLocal:false);

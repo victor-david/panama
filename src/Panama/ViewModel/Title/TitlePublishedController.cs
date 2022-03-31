@@ -65,9 +65,9 @@ namespace Restless.Panama.ViewModel
         public TitlePublishedController(TitleViewModel owner)
             : base(owner)
         {
-            AssignDataViewFrom(DatabaseController.Instance.GetTable<PublishedTable>());
-            MainView.RowFilter = string.Format("{0}=-1", PublishedTable.Defs.Columns.TitleId);
-            MainView.Sort = string.Format("{0} DESC", PublishedTable.Defs.Columns.Added);
+            //AssignDataViewFrom(DatabaseController.Instance.GetTable<PublishedTable>());
+            //MainView.RowFilter = string.Format("{0}=-1", PublishedTable.Defs.Columns.TitleId);
+            //MainView.Sort = string.Format("{0} DESC", PublishedTable.Defs.Columns.Added);
             Columns.Create("Added", PublishedTable.Defs.Columns.Added).MakeDate();
             Columns.Create("Published", PublishedTable.Defs.Columns.Published).MakeDate();
             Columns.Create("Publisher", PublishedTable.Defs.Columns.Joined.Publisher);

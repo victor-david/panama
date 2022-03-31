@@ -65,9 +65,9 @@ namespace Restless.Panama.ViewModel
         public TitleSelfPublishedController(TitleViewModel owner)
             : base(owner)
         {
-            AssignDataViewFrom(DatabaseController.Instance.GetTable<SelfPublishedTable>());
-            MainView.RowFilter = string.Format("{0}=-1", SelfPublishedTable.Defs.Columns.TitleId);
-            MainView.Sort = string.Format("{0} DESC", SelfPublishedTable.Defs.Columns.Added);
+            //AssignDataViewFrom(DatabaseController.Instance.GetTable<SelfPublishedTable>());
+            //MainView.RowFilter = string.Format("{0}=-1", SelfPublishedTable.Defs.Columns.TitleId);
+            //MainView.Sort = string.Format("{0} DESC", SelfPublishedTable.Defs.Columns.Added);
             Columns.Create("Added", SelfPublishedTable.Defs.Columns.Added).MakeDate();
             Columns.Create("Published", SelfPublishedTable.Defs.Columns.Published).MakeDate();
             Columns.Create("Publisher", SelfPublishedTable.Defs.Columns.Joined.SelfPublisher);
