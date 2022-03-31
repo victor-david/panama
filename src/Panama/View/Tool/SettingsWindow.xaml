@@ -11,10 +11,11 @@
     xmlns:table="clr-namespace:Restless.Panama.Database.Tables;assembly=Panama.Database"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:SettingsWindowViewModel}"
     mc:Ignorable="d"
+    d:DesignHeight="2060" d:DesignWidth="568"
     ResizeMode="NoResize"
     Title="{x:Static r:Strings.MenuItemSettings}"
     Style="{StaticResource DefaultAppWindowStyle}"
-    Height="680" Width="568">
+    Height="702" Width="568">
 
     <Grid 
         tk:Property.ColumnWidths="126,*"
@@ -187,6 +188,37 @@
                 tk:Property.IsLongVisibleValue="4">
                 
                 <StackPanel>
+                    <TextBlock Text="Company"/>
+                    <TextBox Text="{Binding Config.SubmissionDocCompany}"/>
+                    
+                    <!-- Header -->
+                    <TextBlock Text="Header"/>
+                    <CheckBox
+                        Content="Include page #"
+                        IsChecked="{Binding Config.SubmissionDocHeaderPages}"/>
+                    <TextBox Text="{Binding Config.SubmissionDocHeader}"/>
+
+                    <!-- Footer -->
+                    <TextBlock Text="Footer"/>
+                    <CheckBox 
+                        Content="Include page#"
+                        IsChecked="{Binding Config.SubmissionDocFooterPages}"/>
+                    <TextBox Text="{Binding Config.SubmissionDocFooter}"/>
+
+                    <!-- Template File-->
+                    <con:PathSelector
+                        Title="Template File"
+                        SelectorType="File"
+                        SelectorFileType="{x:Static table:DocumentTypeTable+Defs+Values.WordOpenXmlFileType}"
+                        Path="{Binding Config.TemplateFile}"
+                        SelectCommand="{Binding Commands[SelectPath]}"/>
+
+                    <!-- Document Text -->
+                    <TextBlock Text="Document Text"/>
+                    <TextBox
+                        MinHeight="292"
+                        Style="{StaticResource TextBoxMultiStyle}" 
+                        Text="{Binding Config.SubmissionDocBody}"/>
 
                 </StackPanel>
             </HeaderedContentControl>
