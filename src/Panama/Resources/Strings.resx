@@ -538,7 +538,7 @@ Last exported: {1}</value>
   <data name="TooltipTitleWordCount" xml:space="preserve">
     <value>Word count - the number of words in the latest version of this title</value>
   </data>
-  <data name="CommandOpenItemOrDoubleClick" xml:space="preserve">
+  <data name="MenuItemOpenItemOrDoubleClick" xml:space="preserve">
     <value>Open this item (or double click the row)</value>
   </data>
   <data name="MenuItemOpenTitleOrDoubleClick" xml:space="preserve">
@@ -1142,5 +1142,14 @@ Do you want to continue?</value>
   </data>
   <data name="TextCreateSubmissionDocument5" xml:space="preserve">
     <value>Create placeholder</value>
+  </data>
+  <data name="MenuItemAddSubmissionMessage" xml:space="preserve">
+    <value>Add a message to this submission</value>
+  </data>
+  <data name="MenuItemRemoveSubmissionMessage" xml:space="preserve">
+    <value>Remove this message from submission</value>
+  </data>
+  <data name="WindowTitleSelectMessagesGeneric" xml:space="preserve">
+    <value>Select messages</value>
   </data>
 </root>

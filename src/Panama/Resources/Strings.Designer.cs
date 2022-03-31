@@ -344,15 +344,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open this item (or double click the row).
-        /// </summary>
-        public static string CommandOpenItemOrDoubleClick {
-            get {
-                return ResourceManager.GetString("CommandOpenItemOrDoubleClick", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string CommandPublisherFilterActive {
@@ -1703,6 +1694,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a message to this submission.
+        /// </summary>
+        public static string MenuItemAddSubmissionMessage {
+            get {
+                return ResourceManager.GetString("MenuItemAddSubmissionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a title to the collection.
         /// </summary>
         public static string MenuItemAddTitle {
@@ -1919,6 +1919,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open this item (or double click the row).
+        /// </summary>
+        public static string MenuItemOpenItemOrDoubleClick {
+            get {
+                return ResourceManager.GetString("MenuItemOpenItemOrDoubleClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open the latest version of this title (or double click the row).
         /// </summary>
         public static string MenuItemOpenTitleOrDoubleClick {
@@ -1942,6 +1951,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemRemoveSubmissionDocument {
             get {
                 return ResourceManager.GetString("MenuItemRemoveSubmissionDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this message from submission.
+        /// </summary>
+        public static string MenuItemRemoveSubmissionMessage {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveSubmissionMessage", resourceCulture);
             }
         }
         
@@ -2932,6 +2950,15 @@ namespace Restless.Panama.Resources {
         public static string ValidationOperationIntegerNeeded {
             get {
                 return ResourceManager.GetString("ValidationOperationIntegerNeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select messages.
+        /// </summary>
+        public static string WindowTitleSelectMessagesGeneric {
+            get {
+                return ResourceManager.GetString("WindowTitleSelectMessagesGeneric", resourceCulture);
             }
         }
         

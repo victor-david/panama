@@ -10,7 +10,21 @@
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="400">
-    <Grid>
-        <TextBlock Text="Message"/>
+    <Grid tk:Property.RowHeights="200,Auto,*">
+        <DataGrid 
+            Style="{StaticResource DataGridEditLockedStyle}"
+            ItemsSource="{Binding Messages.ListView}"
+            SelectedItem="{Binding Messages.SelectedItem}"
+            tk:DataGridColumns.Columns="{Binding Messages.Columns}">
+
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Messages.OpenRowCommand}"/>
+            </DataGrid.InputBindings>
+
+            <DataGrid.ContextMenu>
+                <ContextMenu ItemsSource="{Binding Messages.MenuItems}"/>
+            </DataGrid.ContextMenu>
+
+        </DataGrid>
     </Grid>
 </UserControl>

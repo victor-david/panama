@@ -218,26 +218,23 @@ namespace Restless.Panama.Core
 
         /************************************************************************/
 
-        #region MessageFileSelect
+        #region SubmissionMessageSelect
         /// <summary>
-        /// Provides static methods for creating a message file select window.
+        /// Provides static methods for creating a submission message select window.
         /// </summary>
-        public static class MessageFileSelect
+        public static class SubmissionMessageSelect
         {
             /// <summary>
             /// Creates an instance of MessageSelectWindow and its corresponding view model.
             /// </summary>
-            /// <param name="title">The title of the window.</param>
-            /// <param name="folder">The name of the folder in which to look for messages.</param>
             /// <returns>The window</returns>
-            public static MessageFileSelectWindow Create(string title, string folder)
+            public static SubmissionMessageSelectWindow Create()
             {
-                MessageFileSelectWindow window = new()
+                SubmissionMessageSelectWindow window = new()
                 {
-                    Title = title,
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
-                    DataContext = new MessageFileSelectWindowViewModel(folder),
+                    DataContext = new SubmissionMessageSelectWindowViewModel(),
                 };
                 SetWindowOwner(window);
                 SetTextFormattingMode(window);

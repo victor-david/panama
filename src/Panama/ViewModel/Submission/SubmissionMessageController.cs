@@ -11,10 +11,12 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Utility;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
+using TableColumns = Restless.Panama.Database.Tables.SubmissionMessageTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -29,35 +31,24 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Public properties
+        #region Properties
+        /// <inheritdoc/>
+        public override bool AddCommandEnabled => true;
+
         /// <summary>
         /// Gets the message text (cleaned up)
         /// </summary>
-        public string MessageText
-        {
-            get => GetMessageText();
-        }
+        public string MessageText => GetMessageText();
 
         /// <summary>
         /// Gets a string representation of the message sender.
         /// </summary>
-        public string From
-        {
-            get => GetAddress(SubmissionMessageTable.Defs.Columns.SenderName, SubmissionMessageTable.Defs.Columns.SenderEmail);
-        }
+        public string From => GetAddress(TableColumns.SenderName, TableColumns.SenderEmail);
 
         /// <summary>
         /// Gets a string representation of the message recipient.
         /// </summary>
-        public string To
-        {
-            get => GetAddress(SubmissionMessageTable.Defs.Columns.RecipientName, SubmissionMessageTable.Defs.Columns.RecipientEmail);
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Protected properties
+        public string To => GetAddress(TableColumns.RecipientName, TableColumns.RecipientEmail);
         #endregion
 
         /************************************************************************/
@@ -67,31 +58,26 @@ namespace Restless.Panama.ViewModel
         /// Initializes a new instance of the <see cref="SubmissionMessageController"/> class.
         /// </summary>
         /// <param name="owner">The view model that owns this controller.</param>
-        public SubmissionMessageController(SubmissionViewModel owner)
-            : base(owner)
+        public SubmissionMessageController(SubmissionViewModel owner) : base(owner)
         {
-            AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionMessageTable>());
-            MainView.RowFilter = string.Format("{0}=-1", SubmissionMessageTable.Defs.Columns.BatchId);
-            MainView.Sort = $"{SubmissionMessageTable.Defs.Columns.MessageDate} DESC";
-            Columns.Create("Id", SubmissionMessageTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.SetDefaultSort(Columns.Create("Date", SubmissionMessageTable.Defs.Columns.MessageDate).MakeDate(), ListSortDirection.Descending);
-            Columns.Create("Type", SubmissionMessageTable.Defs.Columns.Protocol).MakeFixedWidth(FixedWidth.W048);
-            Columns.Create("Subject", SubmissionMessageTable.Defs.Columns.Display);
-            //HeaderPreface = Strings.HeaderMessages;
+            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.SetDefaultSort(Columns.Create("Date", TableColumns.MessageDate).MakeDate(), ListSortDirection.Descending);
+            Columns.Create("Type", TableColumns.Protocol).MakeFixedWidth(FixedWidth.W048);
+            Columns.Create("Subject", TableColumns.Display);
+
             messageTextConverter = new StringToCleanStringConverter();
-            Commands.Add("AddMessage", RunAddMessageCommand);
-            Commands.Add("RemoveMessage", RunRemoveMessageCommand, (o) => IsSelectedRowAccessible);
-            Commands.Add("ViewMessageFile", RunViewMessageFileCommand, CanRunViewMessageFileCommand);
+            
+            MenuItems.AddItem(Strings.MenuItemAddSubmissionMessage, AddCommand)
+                .AddIconResource(ResourceKeys.Icon.PlusIconKey);
 
-            MenuItems.AddItem("View message file", Commands["ViewMessageFile"]).AddImageResource("ImageNoteMenu");
+            MenuItems.AddItem(Strings.MenuItemOpenItemOrDoubleClick, OpenRowCommand)
+                .AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+
             MenuItems.AddSeparator();
-            MenuItems.AddItem("Remove", Commands["RemoveMessage"]).AddImageResource("ImageDeleteMenu");
+
+            MenuItems.AddItem(Strings.MenuItemRemoveSubmissionMessage, DeleteCommand)
+                .AddIconResource(ResourceKeys.Icon.XMediumIconKey);
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region Public methods
         #endregion
 
         /************************************************************************/
@@ -108,13 +94,43 @@ namespace Restless.Panama.ViewModel
             OnPropertyChanged(nameof(MessageText));
         }
 
-        /// <summary>
-        /// Called by the <see cref=" ControllerBase{VM,T}.Owner"/> of this controller
-        /// in order to update the controller values.
-        /// </summary>
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareDateTime(item2, item1, TableColumns.MessageDate);
+        }
+
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return (long)item[TableColumns.BatchId] == (Owner?.SelectedBatch?.Id ?? 0);
+        }
+
+        /// <inheritdoc/>
         protected override void OnUpdate()
         {
             ListView.Refresh();
+        }
+
+        /// <inheritdoc/>
+        protected override void RunAddCommand()
+        {
+            RunAddCommandPrivate();
+        }
+
+        /// <inheritdoc/>
+        protected override void RunDeleteCommand()
+        {
+            if (SelectedRow != null && MessageWindow.ShowYesNo(Strings.ConfirmationRemoveSubmissionMessage))
+            {
+                DeleteSelectedRow();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override bool CanRunDeleteCommand()
+        {
+            return base.CanRunDeleteCommand();
         }
 
         /// <summary>
@@ -148,47 +164,40 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
-        private void RunAddMessageCommand(object o)
+        private void RunAddCommandPrivate()
         {
-            string folder = Config.Instance.FolderSubmissionMessage;
-            if (string.IsNullOrEmpty(folder) || !Directory.Exists(folder))
+            if (!Directory.Exists(Config.Instance.FolderSubmissionMessage))
             {
-                Messages.ShowError(Strings.InvalidOpSubmissionMessageFolderNotSet);
+                MessageWindow.ShowError(Strings.InvalidOpSubmissionMessageFolderNotSet);
                 return;
             }
 
-            var window = WindowFactory.MessageFileSelect.Create(Strings.CaptionSelectSubmissionMessage, folder);
-            window.ShowDialog();
-
-            if (window.DataContext is MessageFileSelectWindowViewModel vm)
+            if (WindowFactory.SubmissionMessageSelect.Create().GetMessages() is List<MimeKitMessage> messages)
             {
-                if (vm.SelectedItems != null && Owner.SelectedPrimaryKey != null)
-                {
-                    long batchId = (long)Owner.SelectedPrimaryKey;
-                    var table = DatabaseController.Instance.GetTable<SubmissionMessageTable>();
 
-                    foreach (MimeKitMessage item in vm.SelectedItems.Where((m)=>!m.IsError))
-                    {
-                        table.Add
-                        (
-                             batchId,
-                             item.Subject,
-                             SubmissionMessageTable.Defs.Values.Protocol.FileSystem, Path.GetFileName(item.File),
-                             item.MessageId, item.MessageDateUtc,
-                             item.ToName, item.ToEmail,
-                             item.FromName, item.FromEmail);
-                    }
-                }
             }
-        }
+            //var window = WindowFactory.SubmissionMessageSelect.Create();
+            //window.ShowDialog();
 
-        private void RunRemoveMessageCommand(object o)
-        {
-            if (SelectedRow != null && Messages.ShowYesNo(Strings.ConfirmationRemoveSubmissionMessage))
-            {
-                SelectedRow.Delete();
-                DatabaseController.Instance.GetTable<SubmissionMessageTable>().Save();
-            }
+            //if (window.DataContext is SubmissionMessageSelectWindowViewModel vm)
+            //{
+            //    if (vm.SelectedItems != null && Owner.SelectedPrimaryKey != null)
+            //    {
+            //        long batchId = (long)Owner.SelectedPrimaryKey;
+
+            //        foreach (MimeKitMessage item in vm.SelectedItems.Where((m) => !m.IsError))
+            //        {
+            //            Table.Add
+            //            (
+            //                 batchId,
+            //                 item.Subject,
+            //                 SubmissionMessageTable.Defs.Values.Protocol.FileSystem, Path.GetFileName(item.File),
+            //                 item.MessageId, item.MessageDateUtc,
+            //                 item.ToName, item.ToEmail,
+            //                 item.FromName, item.FromEmail);
+            //        }
+            //    }
+            //}
         }
 
         private void RunViewMessageFileCommand(object parm)
@@ -198,7 +207,7 @@ namespace Restless.Panama.ViewModel
                 Messages.ShowError(Strings.InvalidOpTextViewerNotSet);
                 return;
             }
-            string file = Path.Combine(Config.FolderSubmissionMessage, SelectedRow[SubmissionMessageTable.Defs.Columns.EntryId].ToString());
+            string file = Path.Combine(Config.FolderSubmissionMessage, SelectedRow[TableColumns.EntryId].ToString());
             OpenHelper.OpenFile(Config.TextViewerFile, file);
 
         }
@@ -208,7 +217,7 @@ namespace Restless.Panama.ViewModel
             if (IsSelectedRowAccessible)
             {
                 return
-                    SelectedRow[SubmissionMessageTable.Defs.Columns.Protocol].ToString() == SubmissionMessageTable.Defs.Values.Protocol.FileSystem;
+                    SelectedRow[TableColumns.Protocol].ToString() == SubmissionMessageTable.Defs.Values.Protocol.FileSystem;
             }
             return false;
         }
@@ -232,15 +241,15 @@ namespace Restless.Panama.ViewModel
         {
             if (IsSelectedRowAccessible)
             {
-                switch (SelectedRow[SubmissionMessageTable.Defs.Columns.Protocol].ToString())
+                switch (SelectedRow[TableColumns.Protocol].ToString())
                 {
                     case SubmissionMessageTable.Defs.Values.Protocol.Database:
-                        return messageTextConverter.Convert(SelectedRow[SubmissionMessageTable.Defs.Columns.Body].ToString(), StringToCleanStringOptions.RemoveHtml);
+                        return messageTextConverter.Convert(SelectedRow[TableColumns.Body].ToString(), StringToCleanStringOptions.RemoveHtml);
                     case SubmissionMessageTable.Defs.Values.Protocol.Mapi:
                         return Strings.InvalidOpCannotDisplayMapi;
                     case SubmissionMessageTable.Defs.Values.Protocol.FileSystem:
-                        string file = SelectedRow[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
-                        var msg = new MimeKitMessage(Path.Combine(Config.FolderSubmissionMessage, file));
+                        string file = SelectedRow[TableColumns.EntryId].ToString();
+                        MimeKitMessage msg = new MimeKitMessage(Path.Combine(Config.FolderSubmissionMessage, file));
                         if (msg.TextFormat == MimeKitMessage.MessageTextFormat.Unknown)
                         {
                             return "Message has unknown message format";
@@ -252,6 +261,5 @@ namespace Restless.Panama.ViewModel
             return null;
         }
         #endregion
-
     }
 }
