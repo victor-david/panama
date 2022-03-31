@@ -39,5 +39,32 @@ namespace Restless.Panama.Core
                 MessageWindow.ShowError(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Opens a submission documentn file.
+        /// </summary>
+        /// <param name="file">The file name</param>
+        /// <remarks>
+        /// This method attempts to open a submission document file. If the file name
+        /// is not fully qualified, the current value of submission document directory will be applied.
+        /// </remarks>
+        public static void SubmissionDocumentFile(string file)
+        {
+            try
+            {
+                Throw.IfEmpty(file);
+                file = Paths.SubmissionDocument.WithRoot(file);
+                if (!File.Exists(file))
+                {
+                    throw new IOException(string.Format(CultureInfo.InvariantCulture, Strings.FormatStringFileNotFound, file, nameof(Config.FolderSubmissionDocument)));
+                }
+
+                OpenHelper.OpenFile(file);
+            }
+            catch (Exception ex)
+            {
+                MessageWindow.ShowError(ex.Message);
+            }
+        }
     }
 }

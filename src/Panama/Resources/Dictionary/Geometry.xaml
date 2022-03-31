@@ -92,12 +92,14 @@
     <Path x:Key="SquareSmallRedIconKey" x:Shared="False" Style="{StaticResource SmallPathStyle}" Fill="{StaticResource RedIconBrush}" Data="{StaticResource SquareGeometryKey}"/>
     <Path x:Key="StatisticIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource StatisticGeometryKey}"/>
     <Path x:Key="SubmissionIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource SubmissionGeometryKey}"/>
+    <Path x:Key="SubmissionMediumIconKey" x:Shared="False" Style="{StaticResource MediumPathStyle}" Data="{StaticResource SubmissionGeometryKey}"/>
     <Path x:Key="TagIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource TagGeometryKey}"/>
     <Path x:Key="TitleIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource TitleGeometryKey}"/>
     <Path x:Key="ToggleIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ToggleGeometryKey}"/>
     <Path x:Key="ToolIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ToolGeometryKey}"/>
     <Path x:Key="UserIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource UserGeometryKey}"/>
     <Path x:Key="XIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource XGeometryKey}"/>
+    <Path x:Key="XMediumIconKey" x:Shared="False" Style="{StaticResource MediumPathStyle}" Data="{StaticResource XGeometryKey}"/>
     <Path x:Key="XRedIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Fill="{StaticResource RedIconBrush}" Data="{StaticResource XGeometryKey}"/>
     <Path x:Key="XSmallRedIconKey" x:Shared="False" Style="{StaticResource SmallPathStyle}" Fill="{StaticResource RedIconBrush}" Data="{StaticResource XGeometryKey}"/>
     <Path x:Key="ZIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ZGeometryKey}"/>

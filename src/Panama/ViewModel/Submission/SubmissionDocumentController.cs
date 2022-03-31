@@ -12,11 +12,12 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.OpenXml;
 using Restless.Toolkit.Core.Utility;
-using Restless.Toolkit.Utility;
+using Restless.Toolkit.Mvvm;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
+using TableColumns = Restless.Panama.Database.Tables.SubmissionDocumentTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -26,16 +27,31 @@ namespace Restless.Panama.ViewModel
     public class SubmissionDocumentController : BaseController<SubmissionViewModel, SubmissionDocumentTable>
     {
         #region Private
-        private readonly DocumentTypeTable documentTypeTable;
+        private SubmissionDocumentRow selectedDocument;
+        private PreviewMode previewMode;
         private bool isPreviewMode;
-        private bool isOpenXml;
+        //private bool isOpenXml;
         private string previewText;
-        private string selectedFileName;
         #endregion
 
         /************************************************************************/
 
-        #region Public properties
+        #region Properties
+        private AuthorTable AuthorTable => DatabaseController.Instance.GetTable<AuthorTable>();
+        private DocumentTypeTable DocumentTypeTable => DatabaseController.Instance.GetTable<DocumentTypeTable>();
+
+        /// <inheritdoc/>
+        public override bool AddCommandEnabled => !(Owner.SelectedBatch?.IsLocked ?? true);
+
+        /// <summary>
+        /// Gets the selected document
+        /// </summary>
+        public SubmissionDocumentRow SelectedDocument
+        {
+            get => selectedDocument;
+            private set => SetProperty(ref selectedDocument, value);
+        }
+
         /// <summary>
         /// Gets or sets a value that indicates if the controller is in document preview mode.
         /// </summary>
@@ -44,18 +60,18 @@ namespace Restless.Panama.ViewModel
             get => isPreviewMode;
             set
             {
-                isPreviewMode = value;
-                DisplayPreviewIf();
+                SetProperty(ref isPreviewMode, value);
+                PrepareDocumentPreview();
             }
         }
 
         /// <summary>
-        /// Gets a value that indicates if the selected document is Open Xml.
+        /// Gets the preview mode
         /// </summary>
-        public bool IsOpenXml
+        public PreviewMode PreviewMode
         {
-            get => isOpenXml;
-            private set => SetProperty(ref isOpenXml, value);
+            get => previewMode;
+            private set => SetProperty(ref previewMode, value);
         }
 
         /// <summary>
@@ -70,11 +86,6 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Protected properties
-        #endregion
-
-        /************************************************************************/
-
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmissionDocumentController"/> class.
@@ -82,41 +93,28 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public SubmissionDocumentController(SubmissionViewModel owner) : base(owner)
         {
-            AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionDocumentTable>());
-            MainView.RowFilter = string.Format("{0}=-1", SubmissionDocumentTable.Defs.Columns.BatchId);
-            MainView.Sort = SubmissionDocumentTable.Defs.Columns.Title;
+            Columns.CreateImage<Int64ToPathConverter>("T", TableColumns.DocType, "ImageFileType", 20.0);
+            Columns.Create("Updated", TableColumns.Updated).MakeDate();
+            Columns.SetDefaultSort(Columns.Create("Title", TableColumns.Title), ListSortDirection.Ascending);
+            Columns.Create("Id", TableColumns.DocId);
 
-            Columns.CreateImage<Int64ToPathConverter>("T", SubmissionDocumentTable.Defs.Columns.DocType, "ImageFileType", 20.0);
-            Columns.Create("Updated", SubmissionDocumentTable.Defs.Columns.Updated).MakeDate();
-            Columns.SetDefaultSort(Columns.Create("Title", SubmissionDocumentTable.Defs.Columns.Title), ListSortDirection.Ascending);
-            Columns.Create("Id", SubmissionDocumentTable.Defs.Columns.DocId);
+            MenuItems.AddItem(Strings.MenuItemAddDocumentToSubmission, AddCommand)
+                .AddIconResource(ResourceKeys.Icon.PlusIconKey);
 
-            documentTypeTable = DatabaseController.Instance.GetTable<DocumentTypeTable>();
+            MenuItems.AddSeparator();
 
-            Owner.Commands.Add("DocumentAdd", RunAddDocumentCommand, (o) =>
-                {
-                    return
-                        Owner.SelectedRow != null &&
-                        !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
-                });
+            MenuItems.AddItem(
+                Strings.MenuItemReplaceSubmissionDocument,
+                RelayCommand.Create(RunReplaceDocumentCommand, p => AddCommandEnabled && SelectedDocument != null))
+                .AddIconResource(ResourceKeys.Icon.SubmissionMediumIconKey);
 
-            Owner.Commands.Add("DocumentReplace", RunReplaceDocumentCommand, (o) =>
-            {
-                return
-                    SelectedRow != null &&
-                    Owner.SelectedRow != null &&
-                    !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
-            });
+            MenuItems.AddSeparator();
 
-            Owner.Commands.Add("DocumentRemove", RunRemoveDocumentCommand, (o) =>
-                {
-                    return
-                        SelectedRow != null &&
-                        Owner.SelectedRow != null &&
-                        !(bool)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Locked];
-                });
-            //HeaderPreface = Strings.HeaderDocuments;
+            MenuItems.AddItem(Strings.MenuItemRemoveSubmissionDocument, DeleteCommand)
+                .AddIconResource(ResourceKeys.Icon.XMediumIconKey);
 
+            ListView.IsLiveSorting = true;
+            ListView.LiveSortingProperties.Add(TableColumns.Title);
         }
         #endregion
 
@@ -128,150 +126,160 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected methods
-        /// <summary>
-        /// Called by the <see cref=" ControllerBase{VM,T}.Owner"/> of this controller
-        /// in order to update the controller values.
-        /// </summary>
+        /// <inheritdoc/>
+        protected override void OnSelectedItemChanged()
+        {
+            base.OnSelectedItemChanged();
+            SelectedDocument = SubmissionDocumentRow.Create(SelectedRow);
+            PrepareDocumentPreview();
+        }
+
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareString(item1, item2, TableColumns.Title);
+        }
+
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return (long)item[TableColumns.BatchId] == (Owner?.SelectedBatch?.Id ?? 0);
+        }
+
+        /// <inheritdoc/>
         protected override void OnUpdate()
         {
             ListView.Refresh();
         }
 
-        /// <summary>
-        /// Called when the selected grid item changes
-        /// </summary>
-        protected override void OnSelectedItemChanged()
+        /// <inheritdoc/>
+        protected override void RunAddCommand()
         {
-            base.OnSelectedItemChanged();
-            IsOpenXml = false;
-            var row = SelectedRow;
-            if (row != null)
+            if (!Directory.Exists(Config.Instance.FolderSubmissionDocument))
             {
-                selectedFileName = row[SubmissionDocumentTable.Defs.Columns.DocId].ToString();
-                IsOpenXml = documentTypeTable.GetDocTypeFromFileName(selectedFileName) == DocumentTypeTable.Defs.Values.WordOpenXmlFileType;
-                DisplayPreviewIf();
+                MessageWindow.ShowError(Strings.InvalidOpSubmissionDocumentFolderNotSet);
+                return;
+            }
+
+            switch (WindowFactory.SubmissionDocumentSelect.Create().GetDocumentCreationType())
+            {
+                case SubmissionDocumentCreationType.None:
+                    break;
+                case SubmissionDocumentCreationType.CreateDocX:
+                    CreateDocxDocument();
+                    break;
+                case SubmissionDocumentCreationType.CreatePlaceholder:
+                    CreatePlaceholderDocument();
+                    break;
+                default:
+                    break;
             }
         }
 
-        /// <summary>
-        /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the selected document.
-        /// </summary>
+        /// <inheritdoc/>
+        protected override void RunDeleteCommand()
+        {
+            if (CanRunDeleteCommand() && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteSubmissionDocument))
+            {
+                DeleteSelectedRow();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override bool CanRunDeleteCommand()
+        {
+            return IsSelectedRowAccessible;
+        }
+
+        /// <inheritdoc/>
         protected override void RunOpenRowCommand()
         {
-            // TODO
-            //if (item is DataRowView view)
-            //{
-            //    string docid = view.Row[SubmissionDocumentTable.Defs.Columns.DocId].ToString();
-            //    if (string.IsNullOrEmpty(docid))
-            //    {
-            //        Messages.ShowError(Strings.InvalidOpNoDocumentId);
-            //        return;
-            //    }
-
-            //    long docType = (long)view.Row[SubmissionDocumentTable.Defs.Columns.DocType];
-            //    if (!documentTypeTable.IsDocTypeSupported(docType))
-            //    {
-            //        Messages.ShowError(Strings.InvalidOpDocumentTypeNotSupported);
-            //        return;
-            //    }
-
-            //    OpenFileRow(view.Row, SubmissionDocumentTable.Defs.Columns.DocId, Config.Instance.FolderSubmissionDocument, (f) =>
-            //        {
-            //            Messages.ShowError(string.Format(Strings.FormatStringFileNotFound, f, "FolderSubmissionDocument"));
-            //        });
-            //}
+            if (SelectedDocument?.HasDocumentId ?? false)
+            {
+                if (DocumentTypeTable.IsDocTypeSupported(SelectedDocument.DocType))
+                {
+                    Open.SubmissionDocumentFile(SelectedDocument.DocumentId);
+                }
+                else
+                {
+                    MessageWindow.ShowError(Strings.InvalidOpDocumentTypeNotSupported);
+                }
+            }
+            else
+            {
+                MessageWindow.ShowError(Strings.InvalidOpNoDocumentId);
+            }
         }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
-
-        private void DisplayPreviewIf()
+        private void CreateDocxDocument()
         {
-            if (IsOpenXml && IsPreviewMode)
+            Execution.TryCatch(() =>
             {
-                string fileName = Paths.SubmissionDocument.WithRoot(selectedFileName);
-                Execution.TryCatch(() =>
+                SubmissionDocumentOptions ops = Config.Instance.SubmissionDocOptions;
+
+                AssemblyInfo ai = new(AssemblyInfoType.Entry);
+                string publisherName = Owner.SelectedBatch.PublisherName;
+                string fileName = Path.Combine(Config.Instance.FolderSubmissionDocument, Format.MakeFileName(publisherName));
+
+                OpenXmlDocumentCreator xml = new()
                 {
-                    PreviewText = OpenXmlDocument.Reader.GetText(fileName);
-                }, (ex) => MainWindowViewModel.Instance.CreateNotificationMessage(ex.Message));
-            }
+                    Filename = $"{fileName}.docx",
+                    TemplateFile = Config.TemplateFile,
+                    HeaderText = ProcessPlaceholders(ops.Header),
+                    FooterText = ProcessPlaceholders(ops.Footer),
+                    HeaderPageNumbers = ops.HeaderPageNumbers,
+                    FooterPageNumbers = ops.FooterPageNumbers,
+                    Paragraphs = GetParagraphs(ProcessPlaceholders(ops.Text)),
+                    Author = AuthorTable.GetDefaultAuthorName(),
+                    Description = $"Created by {ai.Title} {ai.Version}",
+                    Title = $"Submissions to {publisherName}",
+                    Company = ops.Company
+                };
+                xml.Create();
+                Table.AddEntry(Owner.SelectedBatch.Id, Paths.SubmissionDocument.WithoutRoot(xml.Filename));
+                ListView.Refresh();
+                OpenHelper.OpenFile(xml.Filename);
+
+            }, e => MessageWindow.ShowError(e.Message));
         }
 
-        private void RunAddDocumentCommand(object o)
+        private void CreatePlaceholderDocument()
         {
-            if (!Directory.Exists(Config.Instance.FolderSubmissionDocument))
+            Table.AddEntry(Owner.SelectedBatch.Id);
+            ListView.Refresh();
+        }
+
+        private void PrepareDocumentPreview()
+        {
+            PreviewText = null;
+            PreviewMode = PreviewMode.Unsupported;
+
+            if (IsPreviewMode && !string.IsNullOrEmpty(SelectedDocument?.DocumentId))
             {
-                Messages.ShowError(Strings.InvalidOpSubmissionDocumentFolderNotSet);
-                return;
-            }
+                string fileName = Paths.SubmissionDocument.WithRoot(SelectedDocument.DocumentId);
 
-            long batchId = (long)Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Id];
-            string publisher = Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.Publisher].ToString();
-
-            var window = WindowFactory.SubmissionDocumentSelect.Create();
-            window.ShowDialog();
-
-            if (window.DataContext is SubmissionDocumentSelectWindowViewModel vm)
-            {
-                switch (vm.CreateType)
+                if (DocumentPreviewer.GetPreviewMode(fileName) == PreviewMode.Text)
                 {
-                    case SubmissionDocumentCreateType.CreateDocX:
-                        Execution.TryCatch(() =>
-                        {
-                            var ops = Config.Instance.SubmissionDocOptions;
-
-                            var ai = new AssemblyInfo(AssemblyInfoType.Entry);
-                            var xml = new OpenXmlDocumentCreator()
-                            {
-                                Filename = string.Format("{0}.docx", Path.Combine(Config.Instance.FolderSubmissionDocument, Format.MakeFileName(publisher))),
-                                TemplateFile = Config.TemplateFile,
-                                HeaderText = ProcessPlaceholders(ops.Header),
-                                FooterText = ProcessPlaceholders(ops.Footer),
-                                HeaderPageNumbers = ops.HeaderPageNumbers,
-                                FooterPageNumbers = ops.FooterPageNumbers,
-                                Paragraphs = GetParagraphs(ProcessPlaceholders(ops.Text)),
-                                Author = DatabaseController.Instance.GetTable<AuthorTable>().GetDefaultAuthorName(),
-                                Description = string.Format("Created by {0} {1}", ai.Title, ai.Version),
-                                Title = string.Format("Submissions to {0}", publisher),
-                                Company = ops.Company
-                            };
-                            xml.Create();
-                            DatabaseController.Instance.GetTable<SubmissionDocumentTable>().AddEntry(batchId, Paths.SubmissionDocument.WithoutRoot(xml.Filename));
-                            OpenHelper.OpenFile(xml.Filename);
-                        });
-                        break;
-
-                    case SubmissionDocumentCreateType.CreatePlaceholder:
-                        DatabaseController.Instance.GetTable<SubmissionDocumentTable>().AddEntry(batchId);
-                        break;
-
-                    case SubmissionDocumentCreateType.None:
-                        break;
+                    PreviewMode = PreviewMode.Text;
+                    PreviewText = DocumentPreviewer.GetText(fileName);
                 }
             }
         }
 
         private void RunReplaceDocumentCommand(object o)
         {
-            using (var dialog = CommonDialogFactory.Create(Config.Instance.FolderSubmissionDocument, Strings.CaptionSelectSubmissionDocument))
+            using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderSubmissionDocument, Strings.CaptionSelectSubmissionDocument))
             {
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
                     // SubmissionDocumentTable.OnColumnChanged(e) method will update the associated fields: Updated, Size, and DocType
-                    SelectedRow[SubmissionDocumentTable.Defs.Columns.DocId] = Paths.SubmissionDocument.WithoutRoot(dialog.FileName);
-                    DatabaseController.Instance.GetTable<SubmissionDocumentTable>().Save();
-
+                    SelectedDocument.DocumentId = Paths.SubmissionDocument.WithoutRoot(dialog.FileName);
+                    Table.Save();
                 }
-            }
-        }
-
-        private void RunRemoveDocumentCommand(object o)
-        {
-            if (SelectedRow != null && Messages.ShowYesNo(Strings.ConfirmationDeleteSubmissionDocument))
-            {
-                SelectedRow.Delete();
             }
         }
 
@@ -281,10 +289,11 @@ namespace Restless.Panama.ViewModel
             string[] paras = str.Split(split, StringSplitOptions.RemoveEmptyEntries);
             return paras;
         }
+
         private string ProcessPlaceholders(string str)
         {
-            string author = DatabaseController.Instance.GetTable<AuthorTable>().GetDefaultAuthorName();
-            string temp = str.Replace("[publisher]", Owner.SelectedRow[SubmissionBatchTable.Defs.Columns.Joined.Publisher].ToString());
+            string author = AuthorTable.GetDefaultAuthorName();
+            string temp = str.Replace("[publisher]", Owner.SelectedBatch.PublisherName);
             temp = temp.Replace("[author]", author);
             temp = temp.Replace("[date]", DateTime.Now.ToString("D"));
             temp = temp.Replace("[month]", DateTime.Now.ToString("MMMM"));
@@ -292,6 +301,5 @@ namespace Restless.Panama.ViewModel
             return temp;
         }
         #endregion
-
     }
 }

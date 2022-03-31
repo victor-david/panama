@@ -64,10 +64,13 @@
             public const string SquareSmallGreenIconKey = nameof(SquareSmallGreenIconKey);
             public const string SquareSmallRedIconKey = nameof(SquareSmallRedIconKey);
             public const string StatisticIconKey = nameof(StatisticIconKey);
+            public const string SubmissionIconKey = nameof(SubmissionIconKey);
+            public const string SubmissionMediumIconKey = nameof(SubmissionMediumIconKey);
             public const string ToggleIconKey = nameof(ToggleIconKey);
             public const string ToolIconKey = nameof(ToolIconKey);
             public const string UserIconKey = nameof(UserIconKey);
             public const string XIconKey = nameof(XIconKey);
+            public const string XMediumIconKey = nameof(XMediumIconKey);
             public const string XRedIconKey = nameof(XRedIconKey);
         }
 

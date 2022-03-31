@@ -4,17 +4,13 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides enumeration values that describe the types of submission documents that may be created.
     /// </summary>
-    public enum SubmissionDocumentCreateType
+    public enum SubmissionDocumentCreationType
     {
         /// <summary>
         /// No selection
@@ -29,5 +25,4 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         CreatePlaceholder,
     }
-
 }

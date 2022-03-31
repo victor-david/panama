@@ -52,6 +52,11 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Gets a boolean value that indicates if <see cref="DocumentId"/> is present
+        /// </summary>
+        public bool HasDocumentId => !string.IsNullOrEmpty(DocumentId);
+
+        /// <summary>
         /// Gets or sets the updated date for this row object.
         /// </summary>
         public DateTime Updated
@@ -90,8 +95,21 @@ namespace Restless.Panama.Database.Tables
         public SubmissionDocumentRow(DataRow row) : base(row)
         {
         }
+
+        /// <summary>
+        /// Creates a new <see cref="SubmissionDocumentRow"/> object if <paramref name="row"/> is not null
+        /// </summary>
+        /// <param name="row">The row</param>
+        /// <returns>A new tag row, or null.</returns>
+        public static SubmissionDocumentRow Create(DataRow row)
+        {
+            return row != null ? new SubmissionDocumentRow(row) : null;
+        }
         #endregion
 
+        /************************************************************************/
+
+        #region Public methods
         /// <summary>
         /// Sets the <see cref="Info"/> property according to the specified full file name.
         /// </summary>
@@ -122,5 +140,6 @@ namespace Restless.Panama.Database.Tables
                 Size = Info.Length;
             }
         }
+        #endregion
     }
 }

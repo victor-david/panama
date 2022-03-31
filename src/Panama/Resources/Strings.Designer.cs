@@ -1685,6 +1685,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a document to this submission.
+        /// </summary>
+        public static string MenuItemAddDocumentToSubmission {
+            get {
+                return ResourceManager.GetString("MenuItemAddDocumentToSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add link.
         /// </summary>
         public static string MenuItemAddLink {
@@ -1928,11 +1937,29 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove this document from submission.
+        /// </summary>
+        public static string MenuItemRemoveSubmissionDocument {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveSubmissionDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove title from submission.
         /// </summary>
         public static string MenuItemRemoveTitleFromSubmission {
             get {
                 return ResourceManager.GetString("MenuItemRemoveTitleFromSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace this submission document.
+        /// </summary>
+        public static string MenuItemReplaceSubmissionDocument {
+            get {
+                return ResourceManager.GetString("MenuItemReplaceSubmissionDocument", resourceCulture);
             }
         }
         
@@ -2113,6 +2140,60 @@ namespace Restless.Panama.Resources {
         public static string TextClear {
             get {
                 return ResourceManager.GetString("TextClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create submission document.
+        /// </summary>
+        public static string TextCreateSubmissionDocument0 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Getting ready to create a submission document. You may:.
+        /// </summary>
+        public static string TextCreateSubmissionDocument1 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a .docx document compatible with Microsoft Word and other word processors that support the Open XML specification..
+        /// </summary>
+        public static string TextCreateSubmissionDocument2 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a placeholder entry in the submission documents. After, you can select an existing file to associate with this entry..
+        /// </summary>
+        public static string TextCreateSubmissionDocument3 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create .docx.
+        /// </summary>
+        public static string TextCreateSubmissionDocument4 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create placeholder.
+        /// </summary>
+        public static string TextCreateSubmissionDocument5 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument5", resourceCulture);
             }
         }
         

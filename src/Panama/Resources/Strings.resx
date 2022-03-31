@@ -1116,4 +1116,31 @@ Do you want to continue?</value>
   <data name="WindowTitleSelectTitlesGeneric" xml:space="preserve">
     <value>Select titles</value>
   </data>
+  <data name="MenuItemAddDocumentToSubmission" xml:space="preserve">
+    <value>Add a document to this submission</value>
+  </data>
+  <data name="MenuItemRemoveSubmissionDocument" xml:space="preserve">
+    <value>Remove this document from submission</value>
+  </data>
+  <data name="MenuItemReplaceSubmissionDocument" xml:space="preserve">
+    <value>Replace this submission document</value>
+  </data>
+  <data name="TextCreateSubmissionDocument0" xml:space="preserve">
+    <value>Create submission document</value>
+  </data>
+  <data name="TextCreateSubmissionDocument1" xml:space="preserve">
+    <value>Getting ready to create a submission document. You may:</value>
+  </data>
+  <data name="TextCreateSubmissionDocument2" xml:space="preserve">
+    <value>Create a .docx document compatible with Microsoft Word and other word processors that support the Open XML specification.</value>
+  </data>
+  <data name="TextCreateSubmissionDocument3" xml:space="preserve">
+    <value>Create a placeholder entry in the submission documents. After, you can select an existing file to associate with this entry.</value>
+  </data>
+  <data name="TextCreateSubmissionDocument4" xml:space="preserve">
+    <value>Create .docx</value>
+  </data>
+  <data name="TextCreateSubmissionDocument5" xml:space="preserve">
+    <value>Create placeholder</value>
+  </data>
 </root>

@@ -107,7 +107,7 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddItem(
                 Strings.MenuItemRemoveTitleFromSubmission, 
                 RelayCommand.Create(RunRemoveTitleFromSubmissionCommand, p => CanRunIfNotLocked()))
-                .AddIconResource(ResourceKeys.Icon.XIconKey);
+                .AddIconResource(ResourceKeys.Icon.XMediumIconKey);
 
             ListView.IsLiveSorting = true;
             ListView.LiveSortingProperties.Add(TableColumns.Ordering);

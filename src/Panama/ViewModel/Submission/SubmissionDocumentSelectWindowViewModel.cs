@@ -18,7 +18,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the submission document creation type as selected by the user.
         /// </summary>
-        public SubmissionDocumentCreateType CreateType
+        public SubmissionDocumentCreationType CreateType
         {
             get;
             private set;
@@ -33,19 +33,17 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SubmissionDocumentSelectWindowViewModel()
         {
-            CreateType = SubmissionDocumentCreateType.None;
-            Commands.Add("CreateDocx", (p) =>
-                {
-                    CreateType = SubmissionDocumentCreateType.CreateDocX;
-                    CloseWindowCommand.Execute(null);
-                });
-
-            Commands.Add("CreatePlaceholder", (p) =>
-            {
-                CreateType = SubmissionDocumentCreateType.CreatePlaceholder;
-                CloseWindowCommand.Execute(null);
-            });
+            CreateType = SubmissionDocumentCreationType.None;
+            Commands.Add("CreateDocX", p => CreateSelection(SubmissionDocumentCreationType.CreateDocX));
+            Commands.Add("CreatePlaceholder", p => CreateSelection(SubmissionDocumentCreationType.CreatePlaceholder));
         }
         #endregion
+
+        private void CreateSelection(SubmissionDocumentCreationType creationType)
+        {
+            CreateType = creationType;
+            WindowOwner.DialogResult = true;
+            CloseWindowCommand.Execute(null);
+        }
     }
 }

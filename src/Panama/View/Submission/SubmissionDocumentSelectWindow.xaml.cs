@@ -4,28 +4,23 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Restless.Panama.ViewModel;
+using Restless.Toolkit.Controls;
 
 namespace Restless.Panama.View
 {
-    public partial class SubmissionDocumentSelectWindow : Window
+    public partial class SubmissionDocumentSelectWindow : AppWindow
     {
-        #pragma warning disable 1591
         public SubmissionDocumentSelectWindow()
         {
             InitializeComponent();
         }
-        #pragma warning restore 1591
+
+        public SubmissionDocumentCreationType GetDocumentCreationType()
+        {
+            return ShowDialog() == true && DataContext is SubmissionDocumentSelectWindowViewModel viewModel
+                ? viewModel.CreateType
+                : SubmissionDocumentCreationType.None;
+        }
     }
 }
