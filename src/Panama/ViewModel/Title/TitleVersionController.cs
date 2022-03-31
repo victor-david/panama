@@ -103,7 +103,7 @@ namespace Restless.Panama.ViewModel
             Commands.Add("VersionRemove", RunRemoveVersionCommand, o => IsSelectedRowAccessible);
             Commands.Add("VersionMoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
             Commands.Add("VersionMoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
-            Commands.Add("VersionSync", RunSyncCommand, o => SourceCount > 0 );
+            Commands.Add("VersionSync", RunSyncCommand);
             Commands.Add("ContextMenuOpening", RunContextMenuOpeningCommand);
             Commands.Add("SaveProperty", RunSavePropertyCommand, CanRunSavePropertyCommand);
             Commands.Add("SetLanguage", RunSetLanguageCommand, o => IsSelectedRowAccessible);

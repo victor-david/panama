@@ -30,6 +30,12 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
 
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
+
+        /// <inheritdoc/>
+        public override bool OpenRowCommandEnabled => string.IsNullOrWhiteSpace(SelectedLink?.Url);
+
         /// <summary>
         /// Gets the selected link
         /// </summary>
@@ -103,29 +109,11 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is selected; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
-        }
-
-        /// <summary>
         /// Runs the open row command to browse to the row's url.
         /// </summary>
         protected override void RunOpenRowCommand()
         {
             OpenHelper.OpenWebSite(null, SelectedLink.Url);
-        }
-
-        /// <summary>
-        /// Gets a boolean value that indicates if the <see cref=" DataRowViewModel{T}.OpenRowCommand"/> can run.
-        /// </summary>
-        /// <returns>true if the command can execute (row selected and has a url); otherwise, false.</returns>
-        protected override bool CanRunOpenRowCommand()
-        {
-            return !string.IsNullOrWhiteSpace(SelectedLink?.Url);
         }
         #endregion
     }

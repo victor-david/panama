@@ -41,6 +41,12 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
 
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
+
+        /// <inheritdoc/>
+        public override bool ClearFilterCommandEnabled => Filters.IsAnyFilterActive;
+
         /// <summary>
         /// Gets or sets the selected edit section
         /// </summary>
@@ -300,12 +306,6 @@ namespace Restless.Panama.ViewModel
             Filters.ClearAll();
         }
 
-        /// <inheritdoc/>
-        protected override bool CanRunClearFilterCommand()
-        {
-            return Filters.IsAnyFilterActive;
-        }
-
         /// <summary>
         /// Runs the add command to add a new record to the data table
         /// </summary>
@@ -344,15 +344,6 @@ namespace Restless.Panama.ViewModel
                     DeleteSelectedRow();
                 }
             }
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is accessible; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
         }
 
         /// <summary>

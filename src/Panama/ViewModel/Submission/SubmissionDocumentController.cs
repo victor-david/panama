@@ -43,6 +43,9 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         public override bool AddCommandEnabled => !(Owner.SelectedBatch?.IsLocked ?? true);
 
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => !(Owner.SelectedBatch?.IsLocked ?? true);
+
         /// <summary>
         /// Gets the selected document
         /// </summary>
@@ -179,16 +182,10 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (CanRunDeleteCommand() && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteSubmissionDocument))
+            if (DeleteCommandEnabled && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteSubmissionDocument))
             {
                 DeleteSelectedRow();
             }
-        }
-
-        /// <inheritdoc/>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
         }
 
         /// <inheritdoc/>

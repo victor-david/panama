@@ -27,6 +27,9 @@ namespace Restless.Panama.ViewModel
         #region Properties
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
         #endregion
 
         /************************************************************************/
@@ -71,18 +74,8 @@ namespace Restless.Panama.ViewModel
         {
             if (IsSelectedRowAccessible && Messages.ShowYesNo(Strings.ConfirmationDeleteAlert))
             {
-                SelectedRow.Delete();
-                Table.Save();
+                DeleteSelectedRow();
             }
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is selected; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
         }
         #endregion
 

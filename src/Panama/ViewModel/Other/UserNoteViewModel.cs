@@ -29,6 +29,9 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
 
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
+
         /// <summary>
         /// Gets the selected note
         /// </summary>
@@ -92,15 +95,6 @@ namespace Restless.Panama.ViewModel
             {
                 DeleteSelectedRow();
             }
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is selected; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
         }
         #endregion
     }

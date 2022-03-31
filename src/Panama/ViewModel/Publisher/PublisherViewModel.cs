@@ -38,6 +38,15 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
 
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
+
+        /// <inheritdoc/>
+        public override bool ClearFilterCommandEnabled => Filters.IsAnyFilterActive;
+
+        /// <inheritdoc/>
+        public override bool OpenRowCommandEnabled => SelectedPublisher?.HasUrl() ?? false;
+
         /// <summary>
         /// Gets or sets the selected edit section
         /// </summary>
@@ -161,7 +170,6 @@ namespace Restless.Panama.ViewModel
             Commands.Add("InPeriodFilter", p => Filters.SetToInPeriod());
             Commands.Add("PayingFilter", p => Filters.SetToPaying());
             Commands.Add("FollowupFilter", p => Filters.SetToFollowup());
-            Commands.Add("ToggleCustomFilter", o => IsCustomFilterOpen = !IsCustomFilterOpen);
             Commands.Add("CopyLoginId", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.LoginId); }, CanCopyCredential);
             Commands.Add("CopyPassword", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.Password); }, CanCopyCredential);
 
@@ -224,12 +232,6 @@ namespace Restless.Panama.ViewModel
             Filters.ClearAll();
         }
 
-        /// <inheritdoc/>
-        protected override bool CanRunClearFilterCommand()
-        {
-            return Filters.IsAnyFilterActive;
-        }
-
         /// <summary>
         /// Runs the add command to add a new record to the data table
         /// </summary>
@@ -258,15 +260,6 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a value that indicates if the <see cref="DataRowViewModel{T}.OpenRowCommand"/> can run.
-        /// </summary>
-        /// <returns>true if the <see cref="DataRowViewModel{T}.OpenRowCommand"/> can run; otherwise, false.</returns>
-        protected override bool CanRunOpenRowCommand()
-        {
-            return base.CanRunOpenRowCommand() && (SelectedPublisher?.HasUrl() ?? false);
-        }
-
-        /// <summary>
         /// Runs the delete command to delete a record from the data table
         /// </summary>
         protected override void RunDeleteCommand()
@@ -285,15 +278,6 @@ namespace Restless.Panama.ViewModel
                     DeleteSelectedRow();
                 }
             }
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is selected; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
         }
         #endregion
 

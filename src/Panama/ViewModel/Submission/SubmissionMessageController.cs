@@ -35,6 +35,9 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
 
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => false; // TODO
+
         /// <summary>
         /// Gets the message text (cleaned up)
         /// </summary>
@@ -125,12 +128,6 @@ namespace Restless.Panama.ViewModel
             {
                 DeleteSelectedRow();
             }
-        }
-
-        /// <inheritdoc/>
-        protected override bool CanRunDeleteCommand()
-        {
-            return base.CanRunDeleteCommand();
         }
 
         /// <summary>

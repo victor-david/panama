@@ -31,6 +31,12 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
 
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
+
+        /// <inheritdoc/>
+        public override bool OpenRowCommandEnabled => SelectedPublisher?.HasUrl() ?? false;
+
         /// <summary>
         /// Gets the currently selected publisher row
         /// </summary>
@@ -123,15 +129,6 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a value that indicates if the <see cref="DataRowViewModel{T}.OpenRowCommand"/> can run.
-        /// </summary>
-        /// <returns>true if the <see cref="DataRowViewModel{T}.OpenRowCommand"/> can run; otherwise, false.</returns>
-        protected override bool CanRunOpenRowCommand()
-        {
-            return base.CanRunOpenRowCommand() && (SelectedPublisher?.HasUrl() ?? false);
-        }
-
-        /// <summary>
         /// Runs the delete command to delete a record from the data table
         /// </summary>
         protected override void RunDeleteCommand()
@@ -150,15 +147,6 @@ namespace Restless.Panama.ViewModel
                     DeleteSelectedRow();
                 }
             }
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is selected; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
         }
         #endregion
     }
