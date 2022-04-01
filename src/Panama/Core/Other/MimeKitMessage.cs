@@ -8,6 +8,7 @@ using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using System;
 using System.IO;
+using TableValues = Restless.Panama.Database.Tables.SubmissionMessageTable.Defs.Values;
 
 namespace Restless.Panama.Core
 {
@@ -35,7 +36,17 @@ namespace Restless.Panama.Core
             Html
         }
 
-        #region Public properties
+        #region Properties
+        private SubmissionMessageTable SubmissionMessageTable => DatabaseController.Instance.GetTable<SubmissionMessageTable>();
+
+        /// <summary>
+        /// Gets the underlying mime message object.
+        /// </summary>
+        public MimeKit.MimeMessage MimeMessage
+        {
+            get;
+        }
+
         /// <summary>
         /// Gets the file name for this message.
         /// </summary>
@@ -154,38 +165,35 @@ namespace Restless.Panama.Core
             try
             {
                 File = file;
-                var msg = MimeKit.MimeMessage.Load(file);
-                MessageId = msg.MessageId;
-                MessageDateUtc = msg.Date.UtcDateTime;
+                MimeMessage = MimeKit.MimeMessage.Load(file);
+                MessageId = MimeMessage.MessageId;
+                MessageDateUtc = MimeMessage.Date.UtcDateTime;
 
-                var from = ExtractAddress(msg.From);
+                Tuple<string, string> from = ExtractAddress(MimeMessage.From);
                 FromName = from.Item1;
                 FromEmail = from.Item2;
 
-                var to = ExtractAddress(msg.To);
+                Tuple<string, string> to = ExtractAddress(MimeMessage.To);
                 ToName = to.Item1;
                 ToEmail = to.Item2;
 
-                Subject = msg.Subject;
-                if (string.IsNullOrEmpty(Subject))
-                {
-                    Subject = "(no subject)";
-                }
+                Subject = !string.IsNullOrWhiteSpace(MimeMessage.Subject) ? MimeMessage.Subject : "(no subject)";
 
                 TextFormat = MessageTextFormat.Unknown;
-                if (!string.IsNullOrEmpty(msg.TextBody))
+
+                if (!string.IsNullOrEmpty(MimeMessage.TextBody))
                 {
-                    MessageText = msg.TextBody;
+                    MessageText = MimeMessage.TextBody;
                     TextFormat = MessageTextFormat.Text;
                 }
-                else if (!string.IsNullOrEmpty(msg.HtmlBody))
+                else if (!string.IsNullOrEmpty(MimeMessage.HtmlBody))
                 {
-                    MessageText = msg.HtmlBody;
+                    MessageText = MimeMessage.HtmlBody;
                     TextFormat = MessageTextFormat.Html;
                 }
 
                 IsError = false;
-                InUse = DatabaseController.Instance.GetTable<SubmissionMessageTable>().MessageInUse(SubmissionMessageTable.Defs.Values.Protocol.FileSystem, Path.GetFileName(File));
+                InUse = SubmissionMessageTable.MessageInUse(TableValues.Protocol.FileSystem, Path.GetFileName(File));
             }
             catch (Exception ex)
             {
