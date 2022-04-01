@@ -23,6 +23,8 @@ namespace Restless.Panama.ViewModel
     public abstract class DataViewModel<T> : ApplicationViewModel where T : class
     {
         #region Private
+        private int selectedCount;
+        private IList selectedItems;
         private object selectedItem;
         private bool isCustomFilterOpen;
         #endregion
@@ -49,6 +51,28 @@ namespace Restless.Panama.ViewModel
             {
                 SetProperty(ref selectedItem, value);
                 OnSelectedItemChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets the number of items selected
+        /// </summary>
+        public int SelectedCount
+        {
+            get => selectedCount;
+            private set => SetProperty(ref selectedCount, value);
+        }
+
+        /// <summary>
+        /// Sets the IList of selected items
+        /// </summary>
+        public IList SelectedItems
+        {
+            get => selectedItems;
+            set
+            {
+                SetProperty(ref selectedItems, value);
+                SelectedCount = selectedItems?.Count ?? 0;
             }
         }
 

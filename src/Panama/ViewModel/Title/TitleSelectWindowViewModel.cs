@@ -24,9 +24,7 @@ namespace Restless.Panama.ViewModel
     public class TitleSelectWindowViewModel : WindowViewModel<TitleTable>
     {
         #region Private
-        private int selectedCount;
         private string searchText;
-        private IList selectedDataGridItems;
         #endregion
 
         /************************************************************************/
@@ -72,33 +70,11 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets the number of titles selected
-        /// </summary>
-        public int SelectedCount
-        {
-            get => selectedCount;
-            private set => SetProperty(ref selectedCount, value);
-        }
-
-        /// <summary>
         /// Gets the selected titles
         /// </summary>
         public List<TitleRow> SelectedTitles
         {
             get;
-        }
-
-        /// <summary>
-        /// Sets the selected data grid items. This property is bound to the view.
-        /// </summary>
-        public IList SelectedDataGridItems
-        {
-            get => selectedDataGridItems;
-            set
-            {
-                SetProperty(ref selectedDataGridItems, value);
-                SelectedCount = selectedDataGridItems?.Count ?? 0;
-            }
         }
         #endregion
 
@@ -164,7 +140,7 @@ namespace Restless.Panama.ViewModel
         private void PopulateSelectedTitles()
         {
             SelectedTitles.Clear();
-            foreach (DataRowView dataRowView in SelectedDataGridItems.OfType<DataRowView>())
+            foreach (DataRowView dataRowView in SelectedItems.OfType<DataRowView>())
             {
                 SelectedTitles.Add(new TitleRow(dataRowView.Row));
             }

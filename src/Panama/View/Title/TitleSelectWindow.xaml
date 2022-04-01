@@ -55,7 +55,7 @@
             SelectionMode="Extended"
             RowHeight="{Binding Config.DataGridRowHeight}"
             ItemsSource="{Binding ListView}"
-            SelectedItemsList="{Binding SelectedDataGridItems, Mode=OneWayToSource}"
+            SelectedItemsList="{Binding SelectedItems, Mode=OneWayToSource}"
             SelectedItem="{Binding SelectedItem}"
             tk:DataGridColumns.Columns="{Binding Columns}"/>
     </Grid>
