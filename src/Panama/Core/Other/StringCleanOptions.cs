@@ -5,17 +5,14 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Restless.Panama.Core
 {
     /// <summary>
-    /// Provides options that may be used when cleaning a string with <see cref="StringToCleanStringConverter"/>.
+    /// Provides options that may be used when cleaning a string with <see cref="StringClean"/>.
     /// </summary>
     [Flags]
-    public enum StringToCleanStringOptions
+    public enum StringCleanOptions
     {
         /// <summary>
         /// No options have been specified

@@ -10,7 +10,7 @@
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="400">
-    <Grid tk:Property.RowHeights="200,Auto,*">
+    <Grid tk:Property.RowHeights="200,*">
         <DataGrid 
             Style="{StaticResource DataGridEditLockedStyle}"
             ItemsSource="{Binding Messages.ListView}"
@@ -26,5 +26,26 @@
             </DataGrid.ContextMenu>
 
         </DataGrid>
+
+        <Grid
+            Grid.Row="1"
+            Visibility="{Binding Messages.EditVisibility}"
+            Style="{StaticResource DataEntryPanelStyle}"
+            tk:Property.RowHeights="Auto,Auto,Auto,*">
+
+            <TextBlock Text="Display"/>
+            <TextBox
+                Grid.Row="1"
+                Text="{Binding Messages.SelectedMessage.Display}"/>
+
+            <TextBlock Grid.Row="2" Text="Message"/>
+
+            <TextBox
+                Grid.Row="3"
+                Style="{StaticResource TextBoxMultiStretchStyle}"
+                IsReadOnly="True"
+                Text="{Binding Messages.MessageText, Mode=OneWay}"/>
+        </Grid>
+       
     </Grid>
 </UserControl>

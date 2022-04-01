@@ -5,18 +5,16 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
-using Restless.Toolkit.Core.Utility;
-using Restless.Toolkit.Utility;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionMessageTable.Defs.Columns;
+using TableValues = Restless.Panama.Database.Tables.SubmissionMessageTable.Defs.Values;
 
 namespace Restless.Panama.ViewModel
 {
@@ -26,7 +24,7 @@ namespace Restless.Panama.ViewModel
     public class SubmissionMessageController : BaseController<SubmissionViewModel, SubmissionMessageTable>
     {
         #region Private
-        private readonly StringToCleanStringConverter messageTextConverter;
+        private SubmissionMessageRow selectedMessage;
         #endregion
 
         /************************************************************************/
@@ -39,6 +37,15 @@ namespace Restless.Panama.ViewModel
         public override bool DeleteCommandEnabled => false; // TODO
 
         /// <summary>
+        /// Gets the selected message.
+        /// </summary>
+        public SubmissionMessageRow SelectedMessage
+        {
+            get => selectedMessage;
+            private set => SetProperty(ref selectedMessage, value);
+        }
+
+        /// <summary>
         /// Gets the message text (cleaned up)
         /// </summary>
         public string MessageText => GetMessageText();
@@ -46,12 +53,12 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets a string representation of the message sender.
         /// </summary>
-        public string From => GetAddress(TableColumns.SenderName, TableColumns.SenderEmail);
+        public string From => SelectedMessage?.SenderFull;
 
         /// <summary>
         /// Gets a string representation of the message recipient.
         /// </summary>
-        public string To => GetAddress(TableColumns.RecipientName, TableColumns.RecipientEmail);
+        public string To => SelectedMessage?.RecipientFull;
         #endregion
 
         /************************************************************************/
@@ -67,9 +74,7 @@ namespace Restless.Panama.ViewModel
             Columns.SetDefaultSort(Columns.Create("Date", TableColumns.MessageDate).MakeDate(), ListSortDirection.Descending);
             Columns.Create("Type", TableColumns.Protocol).MakeFixedWidth(FixedWidth.W048);
             Columns.Create("Subject", TableColumns.Display);
-
-            messageTextConverter = new StringToCleanStringConverter();
-            
+           
             MenuItems.AddItem(Strings.MenuItemAddSubmissionMessage, AddCommand)
                 .AddIconResource(ResourceKeys.Icon.PlusIconKey);
 
@@ -92,6 +97,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
+            SelectedMessage = SubmissionMessageRow.Create(SelectedRow);
             OnPropertyChanged(nameof(From));
             OnPropertyChanged(nameof(To));
             OnPropertyChanged(nameof(MessageText));
@@ -135,27 +141,15 @@ namespace Restless.Panama.ViewModel
         /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> to open the selected message.
         /// </summary>
         /// <remarks>
-        /// This method only opens a message if it is a mapi reference or a file system reference.
+        /// This method only opens a message if it is a file system reference.
         /// Other messages (older) are stored in the <see cref="SubmissionMessageTable"/> directly.
         /// </remarks>
         protected override void RunOpenRowCommand()
         {
-            // TODO
-            //if (item is DataRowView view)
-            //{
-            //    string protocol = view.Row[SubmissionMessageTable.Defs.Columns.Protocol].ToString();
-            //    string entryId = view.Row[SubmissionMessageTable.Defs.Columns.EntryId].ToString();
-            //    switch (protocol)
-            //    {
-            //        case SubmissionMessageTable.Defs.Values.Protocol.Mapi:
-            //            string url = $"{SubmissionMessageTable.Defs.Values.Protocol.Mapi}{Config.FolderMapi}{entryId}";
-            //            OpenHelper.OpenFile(url);
-            //            break;
-            //        case SubmissionMessageTable.Defs.Values.Protocol.FileSystem:
-            //            OpenHelper.OpenFile(Path.Combine(Config.FolderSubmissionMessage, entryId));
-            //            break;
-            //    }
-            //}
+            if (SelectedMessage?.IsFileSystem ?? false)
+            {
+                Open.SubmissionMessageFile(SelectedMessage.EntryId);
+            }
         }
         #endregion
 
@@ -178,7 +172,7 @@ namespace Restless.Panama.ViewModel
                     (
                          Owner.SelectedBatch.Id,
                          message.Subject,
-                         SubmissionMessageTable.Defs.Values.Protocol.FileSystem,
+                         TableValues.Protocol.FileSystem,
                          Path.GetFileName(message.File),
                          message.MessageId, message.MessageDateUtc,
                          message.ToName, message.ToEmail,
@@ -189,65 +183,38 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void RunViewMessageFileCommand(object parm)
-        {
-            if (string.IsNullOrEmpty(Config.TextViewerFile))
-            {
-                Messages.ShowError(Strings.InvalidOpTextViewerNotSet);
-                return;
-            }
-            string file = Path.Combine(Config.FolderSubmissionMessage, SelectedRow[TableColumns.EntryId].ToString());
-            OpenHelper.OpenFile(Config.TextViewerFile, file);
-
-        }
-
-        private bool CanRunViewMessageFileCommand(object parm)
-        {
-            if (IsSelectedRowAccessible)
-            {
-                return
-                    SelectedRow[TableColumns.Protocol].ToString() == SubmissionMessageTable.Defs.Values.Protocol.FileSystem;
-            }
-            return false;
-        }
-
-        private string GetAddress(string nameCol, string emailCol)
-        {
-            if (IsSelectedRowAccessible)
-            {
-                string name = SelectedRow[nameCol].ToString();
-                string email = SelectedRow[emailCol].ToString();
-                if (string.IsNullOrEmpty(name) || name == email)
-                {
-                    return $"<{email}>";
-                }
-                return $"{name} <{email}>";
-            }
-            return null;
-        }
-
         private string GetMessageText()
         {
-            if (IsSelectedRowAccessible)
+            if (SelectedMessage != null)
             {
-                switch (SelectedRow[TableColumns.Protocol].ToString())
+                switch (SelectedMessage.Protocol)
                 {
-                    case SubmissionMessageTable.Defs.Values.Protocol.Database:
-                        return messageTextConverter.Convert(SelectedRow[TableColumns.Body].ToString(), StringToCleanStringOptions.RemoveHtml);
-                    case SubmissionMessageTable.Defs.Values.Protocol.Mapi:
+                    case TableValues.Protocol.Database:
+                        return StringClean.Clean(SelectedMessage.Body, StringCleanOptions.RemoveHtml);
+
+                    case TableValues.Protocol.Mapi:
                         return Strings.InvalidOpCannotDisplayMapi;
-                    case SubmissionMessageTable.Defs.Values.Protocol.FileSystem:
-                        string file = SelectedRow[TableColumns.EntryId].ToString();
-                        MimeKitMessage msg = new MimeKitMessage(Path.Combine(Config.FolderSubmissionMessage, file));
+
+                    case TableValues.Protocol.FileSystem:
+                        string file = SelectedMessage.EntryId;
+                        MimeKitMessage msg = new(Path.Combine(Config.FolderSubmissionMessage, file));
                         if (msg.TextFormat == MimeKitMessage.MessageTextFormat.Unknown)
                         {
                             return "Message has unknown message format";
                         }
-                        StringToCleanStringOptions ops = (msg.TextFormat == MimeKitMessage.MessageTextFormat.Text) ? StringToCleanStringOptions.None : StringToCleanStringOptions.All;
-                        return messageTextConverter.Convert(msg.MessageText, ops);
+
+                        return StringClean.Clean(msg.MessageText, TextFormatToStringCleanOptions(msg.TextFormat));
+
+                    default:
+                        break;
                 }
             }
             return null;
+        }
+
+        private StringCleanOptions TextFormatToStringCleanOptions(MimeKitMessage.MessageTextFormat format)
+        {
+            return (format == MimeKitMessage.MessageTextFormat.Text) ? StringCleanOptions.None : StringCleanOptions.All;
         }
         #endregion
     }

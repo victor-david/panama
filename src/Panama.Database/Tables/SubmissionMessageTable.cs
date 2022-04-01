@@ -35,66 +35,67 @@ namespace Restless.Panama.Database.Tables
                 /// The name of the id column. This is the table's primary key.
                 /// </summary>
                 public const string Id = DefaultPrimaryKeyName;
+
                 /// <summary>
                 /// Protocol column. Holds the protocol used to access the message.
                 /// </summary>
                 public const string Protocol = "protocol";
+
                 /// <summary>
                 /// The name of the entry id column. Holds the path to the message.
                 /// </summary>
                 public const string EntryId = "entryid";
+
                 /// <summary>
                 /// The message id.
                 /// </summary>
                 public const string MessageId = "messageid";
+
                 /// <summary>
                 /// The message date.
                 /// </summary>
                 public const string MessageDate = "messagedate";
+
                 /// <summary>
                 /// The name of the batch id column.
                 /// </summary>
                 public const string BatchId = "submissionbatchid";
-                ///// <summary>
-                ///// The name of the outgoing column.
-                ///// </summary>
-                //public const string Outgoing = "outgoing";
+
                 /// <summary>
                 /// The name of the sender name column.
                 /// </summary>
                 public const string SenderName = "sendername";
+
                 /// <summary>
                 /// The name of the sender email column.
                 /// </summary>
                 public const string SenderEmail = "senderemail";
+
                 /// <summary>
                 /// The name of the recipient name column.
                 /// </summary>
                 public const string RecipientName = "recipientname";
+
                 /// <summary>
                 /// The name of the recipient email column.
                 /// </summary>
                 public const string RecipientEmail = "recipientemail";
+
                 /// <summary>
                 /// The name of the subject column.
                 /// </summary>
                 public const string Subject = "subject";
+
                 /// <summary>
                 /// The name of the display column.
                 /// </summary>
                 public const string Display = "display";
-                ///// <summary>
-                ///// The name of the sent column.
-                ///// </summary>
-                //public const string Sent = "sent";
-                ///// <summary>
-                ///// The name of the received column.
-                ///// </summary>
-                //public const string Received = "received";
+
                 /// <summary>
                 /// The name of the body format column.
                 /// </summary>
                 public const string BodyFormat = "bodyformat";
+
                 /// <summary>
                 /// The name of the body column. No longer used.
                 /// </summary>
@@ -113,7 +114,6 @@ namespace Restless.Panama.Database.Tables
                     /// The name of the recipient full name column. This calculated column combines recipient name and email.
                     /// </summary>
                     public const string RecipientFull = "RecipientFull";
-
                 }
             }
 
@@ -273,8 +273,8 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         protected override void UseDataRelations()
         {
-            CreateExpressionColumn<string>(Defs.Columns.Calculated.SenderFull, string.Format("{0}+' ('+{1}+')'", Defs.Columns.SenderName, Defs.Columns.SenderEmail));
-            CreateExpressionColumn<string>(Defs.Columns.Calculated.RecipientFull, string.Format("{0}+' ('+{1}+')'", Defs.Columns.RecipientName, Defs.Columns.RecipientEmail));
+            CreateExpressionColumn<string>(Defs.Columns.Calculated.SenderFull, $"{Defs.Columns.SenderName}+' ('+{Defs.Columns.SenderEmail}+')'");
+            CreateExpressionColumn<string>(Defs.Columns.Calculated.RecipientFull, $"{Defs.Columns.RecipientName}+' ('+{Defs.Columns.RecipientEmail}+')'");
         }
         #endregion
     }

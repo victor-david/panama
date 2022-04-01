@@ -41,7 +41,7 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
-        /// Opens a submission documentn file.
+        /// Opens a submission document file.
         /// </summary>
         /// <param name="file">The file name</param>
         /// <remarks>
@@ -57,6 +57,33 @@ namespace Restless.Panama.Core
                 if (!File.Exists(file))
                 {
                     throw new IOException(string.Format(CultureInfo.InvariantCulture, Strings.FormatStringFileNotFound, file, nameof(Config.FolderSubmissionDocument)));
+                }
+
+                OpenHelper.OpenFile(file);
+            }
+            catch (Exception ex)
+            {
+                MessageWindow.ShowError(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Opens a submission message file.
+        /// </summary>
+        /// <param name="file">The file name</param>
+        /// <remarks>
+        /// This method attempts to open a submission message file. If the file name
+        /// is not fully qualified, the current value of submission message directory will be applied.
+        /// </remarks>
+        public static void SubmissionMessageFile(string file)
+        {
+            try
+            {
+                Throw.IfEmpty(file);
+                file = Paths.SubmissionMessage.WithRoot(file);
+                if (!File.Exists(file))
+                {
+                    throw new IOException(string.Format(CultureInfo.InvariantCulture, Strings.FormatStringFileNotFound, file, nameof(Config.FolderSubmissionMessage)));
                 }
 
                 OpenHelper.OpenFile(file);
