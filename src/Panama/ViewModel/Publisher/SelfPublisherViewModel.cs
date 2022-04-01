@@ -19,7 +19,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used to view and manage self publisher records.
     /// </summary>
-    public class SelfPublisherViewModel : DataGridViewModel<SelfPublisherTable>
+    public class SelfPublisherViewModel : DataRowViewModel<SelfPublisherTable>
     {
         #region Private
         private SelfPublisherRow selectedPublisher;
@@ -30,6 +30,12 @@ namespace Restless.Panama.ViewModel
         #region Properties
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
+
+        /// <inheritdoc/>
+        public override bool OpenRowCommandEnabled => SelectedPublisher?.HasUrl() ?? false;
 
         /// <summary>
         /// Gets the currently selected publisher row
@@ -111,7 +117,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> command.
+        /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> command.
         /// This command opens the publisher's web site.
         /// </summary>
         protected override void RunOpenRowCommand()
@@ -120,15 +126,6 @@ namespace Restless.Panama.ViewModel
             {
                 OpenHelper.OpenWebSite(null, SelectedPublisher.Url);
             }
-        }
-
-        /// <summary>
-        /// Gets a value that indicates if the <see cref="DataGridViewModel{T}.OpenRowCommand"/> can run.
-        /// </summary>
-        /// <returns>true if the <see cref="DataGridViewModel{T}.OpenRowCommand"/> can run; otherwise, false.</returns>
-        protected override bool CanRunOpenRowCommand()
-        {
-            return base.CanRunOpenRowCommand() && (SelectedPublisher?.HasUrl() ?? false);
         }
 
         /// <summary>
@@ -150,15 +147,6 @@ namespace Restless.Panama.ViewModel
                     DeleteSelectedRow();
                 }
             }
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is selected; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
         }
         #endregion
     }

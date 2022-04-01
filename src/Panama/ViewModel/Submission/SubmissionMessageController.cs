@@ -33,7 +33,10 @@ namespace Restless.Panama.ViewModel
 
         #region Properties
         /// <inheritdoc/>
-        public override bool AddCommandEnabled => true;
+        public override bool AddCommandEnabled => Owner.SelectedBatch != null;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => false; // TODO
 
         /// <summary>
         /// Gets the message text (cleaned up)
@@ -116,6 +119,7 @@ namespace Restless.Panama.ViewModel
         protected override void RunAddCommand()
         {
             RunAddCommandPrivate();
+            ListView.Refresh();
         }
 
         /// <inheritdoc/>
@@ -127,14 +131,8 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        /// <inheritdoc/>
-        protected override bool CanRunDeleteCommand()
-        {
-            return base.CanRunDeleteCommand();
-        }
-
         /// <summary>
-        /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the selected message.
+        /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> to open the selected message.
         /// </summary>
         /// <remarks>
         /// This method only opens a message if it is a mapi reference or a file system reference.
@@ -174,30 +172,21 @@ namespace Restless.Panama.ViewModel
 
             if (WindowFactory.SubmissionMessageSelect.Create().GetMessages() is List<MimeKitMessage> messages)
             {
-
+                foreach (MimeKitMessage message in messages.Where(m => !m.IsError))
+                {
+                    Table.Add
+                    (
+                         Owner.SelectedBatch.Id,
+                         message.Subject,
+                         SubmissionMessageTable.Defs.Values.Protocol.FileSystem,
+                         Path.GetFileName(message.File),
+                         message.MessageId, message.MessageDateUtc,
+                         message.ToName, message.ToEmail,
+                         message.FromName, message.FromEmail
+                     );
+                }
+                Table.Save();
             }
-            //var window = WindowFactory.SubmissionMessageSelect.Create();
-            //window.ShowDialog();
-
-            //if (window.DataContext is SubmissionMessageSelectWindowViewModel vm)
-            //{
-            //    if (vm.SelectedItems != null && Owner.SelectedPrimaryKey != null)
-            //    {
-            //        long batchId = (long)Owner.SelectedPrimaryKey;
-
-            //        foreach (MimeKitMessage item in vm.SelectedItems.Where((m) => !m.IsError))
-            //        {
-            //            Table.Add
-            //            (
-            //                 batchId,
-            //                 item.Subject,
-            //                 SubmissionMessageTable.Defs.Values.Protocol.FileSystem, Path.GetFileName(item.File),
-            //                 item.MessageId, item.MessageDateUtc,
-            //                 item.ToName, item.ToEmail,
-            //                 item.FromName, item.FromEmail);
-            //        }
-            //    }
-            //}
         }
 
         private void RunViewMessageFileCommand(object parm)

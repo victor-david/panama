@@ -17,7 +17,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used to display information about the application tables.
     /// </summary>
-    public class TableViewModel : DataGridViewModel<TableTable>
+    public class TableViewModel : DataRowViewModel<TableTable>
     {
         #region Private
         #endregion

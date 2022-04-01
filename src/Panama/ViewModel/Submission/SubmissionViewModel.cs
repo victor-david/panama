@@ -22,7 +22,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for the submission view.
     /// </summary>
-    public class SubmissionViewModel : DataGridViewModel<SubmissionBatchTable>
+    public class SubmissionViewModel : DataRowViewModel<SubmissionBatchTable>
     {
         #region Private
         private int selectedEditSection;
@@ -35,6 +35,15 @@ namespace Restless.Panama.ViewModel
         #region Properties
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => !(SelectedBatch?.IsLocked ?? true);
+
+        /// <inheritdoc/>
+        public override bool ClearFilterCommandEnabled => Filters.IsAnyFilterActive;
+
+        /// <inheritdoc/>
+        public override bool OpenRowCommandEnabled => SelectedBatch?.HasPublisherUrl ?? false;
 
         /// <summary>
         /// Gets or sets the selected edit section
@@ -250,24 +259,12 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <inheritdoc/>
-        protected override bool CanRunClearFilterCommand()
-        {
-            return Filters.IsAnyFilterActive;
-        }
-
-        /// <inheritdoc/>
         protected override void RunOpenRowCommand()
         {
-            if (CanRunOpenRowCommand())
+            if (OpenRowCommandEnabled)
             {
                 OpenHelper.OpenWebSite(null, SelectedBatch.PublisherUrl);
             }
-        }
-
-        /// <inheritdoc/>
-        protected override bool CanRunOpenRowCommand()
-        {
-            return base.CanRunOpenRowCommand() && (SelectedBatch?.HasPublisherUrl ?? false);
         }
 
         /// <inheritdoc/>
@@ -293,18 +290,12 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (CanRunDeleteCommand() && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteSubmission))
+            if (DeleteCommandEnabled && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteSubmission))
             {
                 // Call the DeleteSubmission() method to delete and perform other cleanup.
                 Table.DeleteSubmission(SelectedBatch);
                 ListView.Refresh();
             }
-        }
-
-        /// <inheritdoc/>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible && !(SelectedBatch?.IsLocked ?? true);
         }
         #endregion
 

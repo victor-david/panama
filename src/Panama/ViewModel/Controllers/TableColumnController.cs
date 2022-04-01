@@ -15,7 +15,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Represents a controller that displays the columns of a table.
     /// </summary>
-    public class TableColumnController : ControllerBase<TableViewModel, TableTable>
+    public class TableColumnController : BaseController<TableViewModel, TableTable>
     {
         #region Private
         #endregion
@@ -66,16 +66,16 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            string tableName = GetOwnerSelectedPrimaryIdString();
-            if (tableName != null)
-            {
-                DataTable table = DatabaseController.Instance.DataSet.Tables[tableName];
-                DataColumns.Clear();
-                foreach (DataColumn col in table.Columns)
-                {
-                    DataColumns.Add(col);
-                }
-            }
+            //string tableName = GetOwnerSelectedPrimaryIdString();
+            //if (tableName != null)
+            //{
+            //    DataTable table = DatabaseController.Instance.DataSet.Tables[tableName];
+            //    DataColumns.Clear();
+            //    foreach (DataColumn col in table.Columns)
+            //    {
+            //        DataColumns.Add(col);
+            //    }
+            //}
         }
         #endregion
 

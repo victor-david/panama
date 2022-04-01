@@ -19,7 +19,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used to display and manage tags in the <see cref="TagTable"/>.
     /// </summary>
-    public class TagViewModel : DataGridViewModel<TagTable>
+    public class TagViewModel : DataRowViewModel<TagTable>
     {
         #region Private
         private TagRow selectedTag;
@@ -30,6 +30,9 @@ namespace Restless.Panama.ViewModel
         #region Properties
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
 
         /// <summary>
         /// Gets the currently selected tag
@@ -113,15 +116,6 @@ namespace Restless.Panama.ViewModel
                 SelectedRow.Delete();
                 Table.Save();
             }
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is selected; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
         }
         #endregion
     }

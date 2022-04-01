@@ -13,7 +13,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Represnets the base class for a controller that handles the display of table relations. This class must be inherited.
     /// </summary>
-    public abstract class TableRelationController : ControllerBase<TableViewModel, TableTable>
+    public abstract class TableRelationController : BaseController<TableViewModel, TableTable>
     {
         #region Private
         #endregion

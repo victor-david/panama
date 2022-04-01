@@ -27,10 +27,10 @@ namespace Restless.Panama.ViewModel
     /// Represents the base view model that is associated with a window.
     /// This class must be inherited.
     /// </summary>
-    public abstract class WindowViewModel<T> : DataGridViewModel<T>, IWindowOwner where T : TableBase
+    public abstract class WindowViewModel<T> : DataRowViewModel<T>, IWindowOwner where T : TableBase
     {
         #region Private
-        private System.Windows.Window windowOwner;
+        private Window windowOwner;
         #endregion
 
         /************************************************************************/
@@ -44,7 +44,11 @@ namespace Restless.Panama.ViewModel
             get => windowOwner;
             set
             {
-                if (windowOwner != null) throw new InvalidOperationException($"{nameof(WindowOwner)} already set");
+                if (windowOwner != null)
+                {
+                    throw new InvalidOperationException($"{nameof(WindowOwner)} already set");
+                }
+
                 windowOwner = value ?? throw new ArgumentNullException(nameof(WindowOwner));
                 windowOwner.Closing += WindowOwnerClosing;
                 windowOwner.Closed += WindowOwnerClosed;
@@ -77,7 +81,7 @@ namespace Restless.Panama.ViewModel
         public WindowViewModel()
         {
             AppInfo = ApplicationInfo.Instance;
-            CloseWindowCommand = RelayCommand.Create((p) => windowOwner?.Close());
+            CloseWindowCommand = RelayCommand.Create(p => windowOwner?.Close());
         }
         #endregion
 

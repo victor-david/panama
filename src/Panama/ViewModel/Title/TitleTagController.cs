@@ -13,7 +13,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides a controller that manages the tags that may be assigned to a title.
     /// </summary>
-    public class TitleTagController : ControllerBase<TitleViewModel, TitleTable>
+    public class TitleTagController : BaseController<TitleViewModel, TitleTable>
     {
         #region Private
         private long selectedTitleId;
@@ -101,10 +101,10 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            selectedTitleId = GetOwnerSelectedPrimaryId();
+            selectedTitleId = Owner.SelectedTitle?.Id ?? 0;
             Assigned.Clear();
             Available.EnableAll();
-            foreach (TitleTagRow tagRow in TitleTagTable.EnumerateAll(GetOwnerSelectedPrimaryId()))
+            foreach (TitleTagRow tagRow in TitleTagTable.EnumerateAll(selectedTitleId))
             {
                 Assigned.Add(GetTagSelectorItem(tagRow));
                 Available.GetItem(tagRow.TagId)?.Disable();

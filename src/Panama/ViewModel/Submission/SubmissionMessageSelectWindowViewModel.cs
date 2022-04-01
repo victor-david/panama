@@ -8,23 +8,25 @@ using Restless.Panama.Core;
 using Restless.Panama.Resources;
 using Restless.Panama.View;
 using Restless.Toolkit.Controls;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
+using System.Linq;
+using System.Windows;
 
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides the view model logic for the <see cref="SubmissionMessageSelectWindow"/>.
     /// </summary>
-    public class SubmissionMessageSelectWindowViewModel : WindowViewModel
+    public class SubmissionMessageSelectWindowViewModel : DataViewModel<MimeKitMessage>, IWindowOwner
     {
         #region Private
-        private readonly ObservableCollection<MimeKitMessage> resultsView;
-        private IList selectedDataGridItems;
+        private readonly ObservableCollection<MimeKitMessage> messageCollection;
         #endregion
 
         /************************************************************************/
@@ -36,6 +38,7 @@ namespace Restless.Panama.ViewModel
             set
             {
                 Config.SubmissionMessageDisplay = value;
+                ListView.Refresh();
             }
         }
         /// <summary>
@@ -47,12 +50,9 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Sets the selected data grid items. This property is bound to the view.
+        /// Gets or sets the window owner
         /// </summary>
-        public IList SelectedDataGridItems
-        {
-            set => selectedDataGridItems = value;
-        }
+        public Window WindowOwner { get; set; }
         #endregion
 
         /************************************************************************/
@@ -63,22 +63,14 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SubmissionMessageSelectWindowViewModel()
         {
-            resultsView = new ObservableCollection<MimeKitMessage>();
-
-            SelectedMessages = new List<MimeKitMessage>();
-            // TODO
-            //MainView.
-            //MainSource.Source = resultsView;
-            //MainSource.Filter += MainSourceFilter;
-
-            //MainSource.SortDescriptions.Add(new SortDescription(nameof(MimeKitMessage.MessageDateUtc), ListSortDirection.Descending));
-
             Columns.CreateResource<BooleanToPathConverter>("E", nameof(MimeKitMessage.IsError), ResourceKeys.Icon.SquareSmallRedIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.TooltipMessageError);
 
             Columns.CreateResource<BooleanToPathConverter>("U", nameof(MimeKitMessage.InUse), ResourceKeys.Icon.SquareSmallBlueIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.TooltipMessageInUse);
 
             Columns.SetDefaultSort(
@@ -88,72 +80,68 @@ namespace Restless.Panama.ViewModel
             Columns.Create("From", nameof(MimeKitMessage.FromName));
             Columns.Create("Subject", nameof(MimeKitMessage.Subject));
 
-            Commands.Add("Select", RunSelectCommand, p => SelectedItem != null);
+            Commands.Add("Select", RunSelectCommand, p => SelectedCount > 0);
 
-            GetResults();
+            SelectedMessages = new List<MimeKitMessage>();
+
+            messageCollection = new ObservableCollection<MimeKitMessage>();
+
+            PopulateMessageCollection();
+
+            InitListView(messageCollection);
         }
         #endregion
 
         /************************************************************************/
 
         #region Protected methods
-        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(MimeKitMessage item1, MimeKitMessage item2)
         {
-            return base.OnDataRowCompare(item1, item2);
+            return DateTime.Compare(item2.MessageDateUtc, item1.MessageDateUtc);
         }
 
-        protected override bool OnDataRowFilter(DataRow item)
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(MimeKitMessage item)
         {
-            return base.OnDataRowFilter(item);
+            return SelectedFilterValue switch
+            {
+                0 => true,
+                1 => !item.InUse,
+                _ => DateTime.Compare(DateTime.UtcNow, item.MessageDateUtc.AddDays(SelectedFilterValue)) < 0,
+            };
         }
-
         #endregion
 
         /************************************************************************/
 
         #region Private methods
-        //private void MainSourceFilter(object sender, FilterEventArgs e)
-        //{
-        //    if (e.Item is MimeKitMessage m)
-        //    {
-        //        if (DisplayFilterSelection != null)
-        //        {
-        //            e.Accepted = DisplayFilterSelection.Item1 switch
-        //            {
-        //                0 => true,
-        //                1 => !m.InUse,
-        //                _ => DateTime.Compare(DateTime.UtcNow, m.MessageDateUtc.AddDays(DisplayFilterSelection.Item1)) < 0,
-        //            };
-        //        }
-        //    }
-        //}
-
-        private void GetResults()
+        private void PopulateMessageCollection()
         {
-            resultsView.Clear();
+            messageCollection.Clear();
             foreach (string file in Directory.EnumerateFiles(Config.FolderSubmissionMessage, "*.eml"))
             {
-                resultsView.Add(new MimeKitMessage(file));
+                messageCollection.Add(new MimeKitMessage(file));
             }
         }
 
         private void RunSelectCommand(object parm)
         {
             PopulateSelectedMessages();
-            if (SelectedMessages.Count > 0)
+            if (WindowOwner != null && SelectedMessages.Count > 0)
             {
                 WindowOwner.DialogResult = true;
-                CloseWindowCommand.Execute(null);
+                WindowOwner.Close();
             }
         }
 
         private void PopulateSelectedMessages()
         {
             SelectedMessages.Clear();
-            //foreach (DataRowView dataRowView in SelectedDataGridItems.OfType<DataRowView>())
-            //{
-            //    SelectedTitles.Add(new TitleRow(dataRowView.Row));
-            //}
+            foreach (MimeKitMessage message in SelectedItems.OfType<MimeKitMessage>())
+            {
+                SelectedMessages.Add(message);
+            }
         }
         #endregion
     }

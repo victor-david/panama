@@ -20,7 +20,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used to view and manage credentials in the <see cref="CredentialTable"/>.
     /// </summary>
-    public class CredentialViewModel : DataGridViewModel<CredentialTable>
+    public class CredentialViewModel : DataRowViewModel<CredentialTable>
     {
         #region Private
         #endregion
@@ -30,6 +30,9 @@ namespace Restless.Panama.ViewModel
         #region Properties
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
 
         /// <summary>
         /// Gets the publisher controller.
@@ -120,15 +123,6 @@ namespace Restless.Panama.ViewModel
                 SelectedRow.Delete();
                 Table.Save();
             }
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is selected; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
         }
         #endregion
 

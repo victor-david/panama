@@ -56,16 +56,16 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            string tableName = GetOwnerSelectedPrimaryIdString();
-            if (tableName != null)
-            {
-                DataTable table = DatabaseController.Instance.DataSet.Tables[tableName];
-                Relations.Clear();
-                foreach (DataRelation relation in table.ChildRelations)
-                {
-                    Relations.Add(relation);
-                }
-            }
+            //string tableName = GetOwnerSelectedPrimaryIdString();
+            //if (tableName != null)
+            //{
+            //    DataTable table = DatabaseController.Instance.DataSet.Tables[tableName];
+            //    Relations.Clear();
+            //    foreach (DataRelation relation in table.ChildRelations)
+            //    {
+            //        Relations.Add(relation);
+            //    }
+            //}
         }
         #endregion
 

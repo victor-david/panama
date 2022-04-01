@@ -16,7 +16,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides logic to display publishers that are related to a credential.
     /// </summary>
-    public class CredentialPublisherController : ControllerBase<CredentialViewModel, CredentialTable>
+    public class CredentialPublisherController : BaseController<CredentialViewModel, CredentialTable>
     {
         #region Private
         #endregion
@@ -36,8 +36,8 @@ namespace Restless.Panama.ViewModel
         public CredentialPublisherController(CredentialViewModel owner)
             : base(owner)
         {
-            AssignDataViewFrom(DatabaseController.Instance.GetTable<PublisherTable>());
-            MainView.RowFilter = string.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, -1);
+            //AssignDataViewFrom(DatabaseController.Instance.GetTable<PublisherTable>());
+            //MainView.RowFilter = string.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, -1);
             Columns.Create("Id", PublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.SetDefaultSort(Columns.Create("Publisher", PublisherTable.Defs.Columns.Name), ListSortDirection.Ascending);
             Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate();
@@ -61,8 +61,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            long credentialId = GetOwnerSelectedPrimaryId();
-            MainView.RowFilter = string.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, credentialId);
+            // TODO
+            //long credentialId = GetOwnerSelectedPrimaryId();
+            //MainView.RowFilter = string.Format("{0}={1}", PublisherTable.Defs.Columns.CredentialId, credentialId);
         }
         #endregion
 

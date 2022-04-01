@@ -17,7 +17,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for managing user notes.
     /// </summary>
-    public class UserNoteViewModel : DataGridViewModel<UserNoteTable>
+    public class UserNoteViewModel : DataRowViewModel<UserNoteTable>
     {
         #region Private
         private UserNoteRow selectedNote;
@@ -28,6 +28,9 @@ namespace Restless.Panama.ViewModel
         #region Properties
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
 
         /// <summary>
         /// Gets the selected note
@@ -92,15 +95,6 @@ namespace Restless.Panama.ViewModel
             {
                 DeleteSelectedRow();
             }
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is selected; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
         }
         #endregion
     }

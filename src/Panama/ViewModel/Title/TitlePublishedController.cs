@@ -19,7 +19,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides a controller that manages selection and updates of published titles.
     /// </summary>
-    public class TitlePublishedController : ControllerBase<TitleViewModel, TitleTable>
+    public class TitlePublishedController : BaseController<TitleViewModel, TitleTable>
     {
         #region Private
         #endregion
@@ -65,9 +65,9 @@ namespace Restless.Panama.ViewModel
         public TitlePublishedController(TitleViewModel owner)
             : base(owner)
         {
-            AssignDataViewFrom(DatabaseController.Instance.GetTable<PublishedTable>());
-            MainView.RowFilter = string.Format("{0}=-1", PublishedTable.Defs.Columns.TitleId);
-            MainView.Sort = string.Format("{0} DESC", PublishedTable.Defs.Columns.Added);
+            //AssignDataViewFrom(DatabaseController.Instance.GetTable<PublishedTable>());
+            //MainView.RowFilter = string.Format("{0}=-1", PublishedTable.Defs.Columns.TitleId);
+            //MainView.Sort = string.Format("{0} DESC", PublishedTable.Defs.Columns.Added);
             Columns.Create("Added", PublishedTable.Defs.Columns.Added).MakeDate();
             Columns.Create("Published", PublishedTable.Defs.Columns.Published).MakeDate();
             Columns.Create("Publisher", PublishedTable.Defs.Columns.Joined.Publisher);
@@ -75,7 +75,7 @@ namespace Restless.Panama.ViewModel
             Commands.Add("PublishedAdd", RunAddPublishedCommand);
             Commands.Add("PublishedRemove", RunRemovePublishedCommand, (o) => SelectedRow != null);
             Commands.Add("ClearPublishedDate", (o) => PublishedDate = null);
-            HeaderPreface = Strings.HeaderPublished;
+            //HeaderPreface = Strings.HeaderPublished;
         }
         #endregion
 
@@ -94,8 +94,8 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnUpdate()
         {
-            long titleId = GetOwnerSelectedPrimaryId();
-            MainView.RowFilter = $"{PublishedTable.Defs.Columns.TitleId}={titleId}";
+            //long titleId = GetOwnerSelectedPrimaryId();
+            //MainView.RowFilter = $"{PublishedTable.Defs.Columns.TitleId}={titleId}";
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the url of the published title.
+        /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> to open the url of the published title.
         /// </summary>
         protected override void RunOpenRowCommand()
         {

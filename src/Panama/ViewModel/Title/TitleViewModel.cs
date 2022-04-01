@@ -25,7 +25,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for titles management.
     /// </summary>
-    public class TitleViewModel : DataGridViewModel<TitleTable>
+    public class TitleViewModel : DataRowViewModel<TitleTable>
     {
         #region Private
         private int selectedEditSection;
@@ -40,6 +40,12 @@ namespace Restless.Panama.ViewModel
         #region Properties
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
+
+        /// <inheritdoc/>
+        public override bool ClearFilterCommandEnabled => Filters.IsAnyFilterActive;
 
         /// <summary>
         /// Gets or sets the selected edit section
@@ -300,12 +306,6 @@ namespace Restless.Panama.ViewModel
             Filters.ClearAll();
         }
 
-        /// <inheritdoc/>
-        protected override bool CanRunClearFilterCommand()
-        {
-            return Filters.IsAnyFilterActive;
-        }
-
         /// <summary>
         /// Runs the add command to add a new record to the data table
         /// </summary>
@@ -347,16 +347,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is accessible; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            return IsSelectedRowAccessible;
-        }
-
-        /// <summary>
-        /// Runs the <see cref="DataGridViewModel{T}.OpenRowCommand"/> to open the latest version of the selected title.
+        /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> to open the latest version of the selected title.
         /// </summary>
         protected override void RunOpenRowCommand()
         {

@@ -18,7 +18,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the logic that is used for authors management.
     /// </summary>
-    public class AuthorViewModel : DataGridViewModel<AuthorTable>
+    public class AuthorViewModel : DataRowViewModel<AuthorTable>
     {
         #region Private
         private AuthorRow selectedAuthor;
@@ -29,6 +29,9 @@ namespace Restless.Panama.ViewModel
         #region Properties
         /// <inheritdoc/>
         public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => (SelectedAuthor?.Id ?? AuthorTable.Defs.Values.SystemAuthorId) != AuthorTable.Defs.Values.SystemAuthorId;
 
         /// <summary>
         /// Gets the currently selected author
@@ -99,7 +102,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunDeleteCommand()
         {
-            if (CanRunDeleteCommand())
+            if (DeleteCommandEnabled)
             {
                 int childRowCount = SelectedRow.GetChildRows(AuthorTable.Defs.Relations.ToTitle).Length;
                 if (childRowCount > 0)
@@ -113,16 +116,6 @@ namespace Restless.Panama.ViewModel
                     DeleteSelectedRow();
                 }
             }
-        }
-
-        /// <summary>
-        /// Called when the framework checks to see if Delete command can execute
-        /// </summary>
-        /// <returns>true if a row is selected; otherwise, false.</returns>
-        protected override bool CanRunDeleteCommand()
-        {
-            /* if selected and not the system generated author id */
-            return (SelectedAuthor?.Id ?? AuthorTable.Defs.Values.SystemAuthorId) != AuthorTable.Defs.Values.SystemAuthorId;
         }
         #endregion
     }

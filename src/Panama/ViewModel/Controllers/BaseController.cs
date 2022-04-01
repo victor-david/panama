@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Restless.Panama.ViewModel
 {
-    public abstract class BaseController<T1, T2> : DataGridViewModel<T2> where T1 : ViewModelBase where T2 : TableBase
+    public abstract class BaseController<T1, T2> : DataRowViewModel<T2> where T1 : ViewModelBase where T2 : TableBase
     {
         protected new T1 Owner
         {

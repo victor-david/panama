@@ -17,6 +17,7 @@
     <Grid 
         Margin="{StaticResource DefaultPadding}"
         tk:Property.RowHeights="Auto,*,Auto">
+        
         <!-- Filter options -->
         <tk:RadioButtonPanel
             Margin="0,0,0,8"
@@ -35,17 +36,17 @@
         <tk:DataGrid
             Grid.Row="1"
             SelectionMode="Extended"
-            SelectedItemsList="{Binding SelectedDataGridItems, Mode=OneWayToSource}"
+            SelectedItemsList="{Binding SelectedItems, Mode=OneWayToSource}"
             ItemsSource="{Binding ListView}"
             SelectedItem="{Binding SelectedItem}" 
             tk:DataGridColumns.Columns="{Binding Columns}">
         </tk:DataGrid>
 
-
-        <!--<StackPanel Grid.Row="2" Style="{StaticResource StackPanelCommandHolder}" Margin="4">
-            <Button Command="{Binding Commands[Select]}">Select</Button>
-            <Button Command="{Binding CloseWindowCommand}">Cancel</Button>
-        </StackPanel>-->
+        <Button
+            Grid.Row="2"
+            Style="{StaticResource BorderedButtonStyle}"
+            Content="Okay"
+            Command="{Binding Commands[Select]}"/>
 
     </Grid>
 </tk:AppWindow>
