@@ -27,25 +27,53 @@
 
         </DataGrid>
 
-        <Grid
+        <HeaderedContentControl
             Grid.Row="1"
-            Visibility="{Binding Messages.EditVisibility}"
-            Style="{StaticResource DataEntryPanelStyle}"
-            tk:Property.RowHeights="Auto,Auto,Auto,*">
+            Margin="0,6,0,0"
+            Header="{Binding Messages.SelectedMessage.Subject}"
+            Visibility="{Binding Messages.EditVisibility}">
 
-            <TextBlock Text="Display"/>
-            <TextBox
-                Grid.Row="1"
-                Text="{Binding Messages.SelectedMessage.Display}"/>
+            <Grid
+                Style="{StaticResource DataEntryPanelStyle}"
+                tk:Property.RowHeights="Auto,*">
 
-            <TextBlock Grid.Row="2" Text="Message"/>
+                <StackPanel>
+                    <TextBlock Text="Display"/>
+                    <TextBox Text="{Binding Messages.SelectedMessage.Display}"/>
 
-            <TextBox
-                Grid.Row="3"
-                Style="{StaticResource TextBoxMultiStretchStyle}"
-                IsReadOnly="True"
-                Text="{Binding Messages.MessageText, Mode=OneWay}"/>
-        </Grid>
-       
+                    <TextBlock>
+                        <Run Text="Date:"/>
+                        <Run
+                            Foreground="{StaticResource AlertForegroundBrush}"
+                            Text="{Binding Messages.SelectedMessage.MessageDate, Mode=OneWay}"/>
+                    </TextBlock>
+
+                    <TextBlock>
+                        <Run Text="From:"/>
+                        <Run
+                            Foreground="{StaticResource AlertForegroundBrush}"
+                            Text="{Binding Messages.SelectedMessage.SenderName, Mode=OneWay}"/>
+                    </TextBlock>
+
+                    <TextBlock>
+                        <Run Text="To:"/>
+                        <Run
+                            Foreground="{StaticResource AlertForegroundBrush}"
+                            Text="{Binding Messages.SelectedMessage.RecipientName, Mode=OneWay}"/>
+                    </TextBlock>
+
+                    <TextBlock Text="Message"/>
+                </StackPanel>
+
+                <TextBox
+                    Grid.Row="1"
+                    Style="{StaticResource TextBoxMultiStretchStyle}"
+                    IsReadOnly="True"
+                    Text="{Binding Messages.MessageText, Mode=OneWay}"/>
+
+            </Grid>
+            
+        </HeaderedContentControl>
+
     </Grid>
 </UserControl>

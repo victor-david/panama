@@ -49,16 +49,6 @@ namespace Restless.Panama.ViewModel
         /// Gets the message text (cleaned up)
         /// </summary>
         public string MessageText => GetMessageText();
-
-        /// <summary>
-        /// Gets a string representation of the message sender.
-        /// </summary>
-        public string From => SelectedMessage?.SenderFull;
-
-        /// <summary>
-        /// Gets a string representation of the message recipient.
-        /// </summary>
-        public string To => SelectedMessage?.RecipientFull;
         #endregion
 
         /************************************************************************/
@@ -98,8 +88,6 @@ namespace Restless.Panama.ViewModel
         {
             base.OnSelectedItemChanged();
             SelectedMessage = SubmissionMessageRow.Create(SelectedRow);
-            OnPropertyChanged(nameof(From));
-            OnPropertyChanged(nameof(To));
             OnPropertyChanged(nameof(MessageText));
         }
 
