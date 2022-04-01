@@ -8,6 +8,7 @@ using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,7 +35,7 @@ namespace Restless.Panama.ViewModel
         public override bool AddCommandEnabled => Owner.SelectedBatch != null;
 
         /// <inheritdoc/>
-        public override bool DeleteCommandEnabled => false; // TODO
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
 
         /// <summary>
         /// Gets the selected message.
@@ -113,7 +114,6 @@ namespace Restless.Panama.ViewModel
         protected override void RunAddCommand()
         {
             RunAddCommandPrivate();
-            ListView.Refresh();
         }
 
         /// <inheritdoc/>
@@ -146,28 +146,36 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private void RunAddCommandPrivate()
         {
-            if (!Directory.Exists(Config.Instance.FolderSubmissionMessage))
+            try
             {
-                MessageWindow.ShowError(Strings.InvalidOpSubmissionMessageFolderNotSet);
-                return;
+                if (!Directory.Exists(Config.Instance.FolderSubmissionMessage))
+                {
+                    throw new IOException(Strings.InvalidOpSubmissionMessageFolderNotSet);
+                }
+
+                if (WindowFactory.SubmissionMessageSelect.Create().GetMessages() is List<MimeKitMessage> messages)
+                {
+                    foreach (MimeKitMessage message in messages.Where(m => !m.IsError))
+                    {
+                        Table.Add
+                        (
+                             Owner.SelectedBatch.Id,
+                             message.Subject,
+                             TableValues.Protocol.FileSystem,
+                             Path.GetFileName(message.File),
+                             message.MessageId, message.MessageDateUtc,
+                             message.ToName, message.ToEmail,
+                             message.FromName, message.FromEmail
+                         );
+                    }
+                    Table.Save();
+                    ListView.Refresh();
+                }
             }
 
-            if (WindowFactory.SubmissionMessageSelect.Create().GetMessages() is List<MimeKitMessage> messages)
+            catch (Exception ex)
             {
-                foreach (MimeKitMessage message in messages.Where(m => !m.IsError))
-                {
-                    Table.Add
-                    (
-                         Owner.SelectedBatch.Id,
-                         message.Subject,
-                         TableValues.Protocol.FileSystem,
-                         Path.GetFileName(message.File),
-                         message.MessageId, message.MessageDateUtc,
-                         message.ToName, message.ToEmail,
-                         message.FromName, message.FromEmail
-                     );
-                }
-                Table.Save();
+                MessageWindow.ShowError(ex.Message);
             }
         }
 
