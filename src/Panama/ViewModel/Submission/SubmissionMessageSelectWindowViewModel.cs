@@ -80,7 +80,7 @@ namespace Restless.Panama.ViewModel
             Columns.Create("From", nameof(MimeKitMessage.FromName));
             Columns.Create("Subject", nameof(MimeKitMessage.Subject));
 
-            Commands.Add("Select", RunSelectCommand, p => SelectedItem != null);
+            Commands.Add("Select", RunSelectCommand, p => SelectedCount > 0);
 
             SelectedMessages = new List<MimeKitMessage>();
 

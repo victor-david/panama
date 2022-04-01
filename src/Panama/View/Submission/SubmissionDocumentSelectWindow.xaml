@@ -19,12 +19,8 @@
         Style="{StaticResource DataEntryPanelStyle}"
         tk:Property.RowHeights="Auto,Auto,*">
         <Grid.Resources>
-            <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-                <Setter Property="Height" Value="32"/>
+            <Style TargetType="Button" BasedOn="{StaticResource BorderedButtonStyle}">
                 <Setter Property="MinWidth" Value="150"/>
-                <Setter Property="Margin" Value="6"/>
-                <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
-                <Setter Property="Foreground" Value="{StaticResource DefaultForegroundBrush}"/>
             </Style>
         </Grid.Resources>
 
