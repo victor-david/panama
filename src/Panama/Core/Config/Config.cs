@@ -162,6 +162,10 @@ namespace Restless.Panama.Core
             public const double MaxSubmissionDetailWidth = 620;
             public const double DefaultSubmissionDetailWidth = MinSubmissionDetailWidth;
 
+            public const double MinTableDetailWidth = 302;
+            public const double MaxTableDetailWidth = 716;
+            public const double DefaultTableDetailWidth = MinTagDetailWidth;
+
             public const double MinTagDetailWidth = 302;
             public const double MaxTagDetailWidth = 582;
             public const double DefaultTagDetailWidth = MinTagDetailWidth;
@@ -578,15 +582,15 @@ namespace Restless.Panama.Core
             set => SetItem(value);
         }
 
-        public bool TitleDetailExpanded
+        public bool TableDetailExpanded
         {
             get => GetItem(true);
             set => SetItem(value);
         }
 
-        public double TitleDetailWidth
+        public double TableDetailWidth
         {
-            get => GetItem(Grid.DefaultTitleDetailWidth);
+            get => GetItem(Grid.DefaultTableDetailWidth);
             set => SetItem(value);
         }
 
@@ -597,6 +601,18 @@ namespace Restless.Panama.Core
         }
 
         public double TagDetailWidth
+        {
+            get => GetItem(Grid.DefaultTitleDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool TitleDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double TitleDetailWidth
         {
             get => GetItem(Grid.DefaultTitleDetailWidth);
             set => SetItem(value);

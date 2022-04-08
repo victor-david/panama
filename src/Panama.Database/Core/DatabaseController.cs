@@ -148,7 +148,6 @@ namespace Restless.Panama.Database.Core
                 CreateAndRegisterTable<SubmissionPeriodTable>();
                 CreateAndRegisterTable<SelfPublishedTable>();
                 CreateAndRegisterTable<SelfPublisherTable>();
-                CreateAndRegisterTable<TableTable>();
                 CreateAndRegisterTable<TagTable>();
                 CreateAndRegisterTable<TitleTable>();
                 CreateAndRegisterTable<TitleTagTable>();

@@ -59,10 +59,15 @@
                     Header="{x:Static r:Strings.MenuItemUpdateTools}"
                     Icon="{StaticResource ToolIconKey}"
                     Command="{Binding Commands[OpenToolWindow]}"/>
+
+                <Separator/>
                 
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemTableInfo}"
+                    Icon="{StaticResource TableIconKey}"
+                    Command="{Binding Commands[NavigateTable]}"/>
+
                 <!--<MenuItem Header="Message Sync" Icon="{StaticResource ImageToolMessageSyncMenu}" Command="{Binding Commands[ToolMessageSync]}"/>-->
-                <!--<MenuItem Header="Table Info" Icon="{StaticResource ImageDatabaseMenu}" Command="{Binding Commands[Table]}"/>-->
-                
                 <!--<MenuItem Header="Convert" Icon="{StaticResource ImageToolConvertMenu}" Command="{Binding Commands[ToolConvert]}"/>-->
                 <!--<MenuItem Header="Scramble" Command="{Binding Commands[ToolScramble]}"/>-->
                 <Separator/>

@@ -2,50 +2,52 @@
     x:Class="Restless.Panama.View.TableView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:cv="clr-namespace:Restless.Panama.Core"    
-    xmlns:tk="http://schemas.restless.toolkit.com/2021"    
-    xmlns:view="clr-namespace:Restless.Panama.View"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:TableViewModel}"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <!-- MaxWidth binds to a value relative to the width of the grid. Converter parm is the desired min width of right column -->
-            <ColumnDefinition Width="{Binding Config.LeftColumnTable,Mode=TwoWay}" MinWidth="360" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}, Converter={cv:SubtractionConverter}, ConverterParameter=450}" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+    <con:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinTableDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxTableDetailWidth}"
+        IsDetailExpanded="{Binding Config.TableDetailExpanded}"
+        DetailWidth="{Binding Config.TableDetailWidth}">
 
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource GridRowHeightTool}" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <!-- Controls specific to this view-->
-        <Grid Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <view:SimpleRowFilter Grid.Column="0" HorizontalAlignment="Left" />
-            <!--<ItemsControl Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>-->
-        </Grid>
+        <con:SplitterGrid.Resources>
+            <Style TargetType="DataGrid" BasedOn="{StaticResource DataGridEditLockedStretchedStyle}">
+                <Setter Property="RowHeight" Value="28"/>
+            </Style>
+        </con:SplitterGrid.Resources>
 
-        <!-- Main data grid to display the tabular data  -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderEditContainerStyle}">
-            <DataGrid ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" tk:DataGridColumns.Columns="{Binding Columns}"/>
-        </Border>
+        <con:SplitterGrid.HeaderLeft>
+            <StatusBar/>
+        </con:SplitterGrid.HeaderLeft>
 
-        <!-- Splitter -->
-        <GridSplitter Grid.Row="1" Grid.Column="1" Style="{StaticResource GridSplitterVertical}" />
+        <con:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock 
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedTable.TableName}"/>
+            </StatusBar>
+        </con:SplitterGrid.HeaderRight>
 
+        <con:SplitterGrid.ContentLeft>
+            <DataGrid
+                ItemsSource="{Binding ListView}"
+                SelectedItem="{Binding SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Columns}"/>
 
+        </con:SplitterGrid.ContentLeft>
 
-
-        <!-- Nested editing control on the right -->
-        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource BorderEditContainerStyle}">
-            <view:TableDetail Visibility="{Binding EditVisibility}"/>
-        </Border>
-    </Grid>
-    <!-- end main grid-->
+        <con:SplitterGrid.ContentRight>
+            <vw:TableDetail Visibility="{Binding EditVisibility}"/>
+        </con:SplitterGrid.ContentRight>
+        
+    </con:SplitterGrid>
 </UserControl>

@@ -506,15 +506,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tables.
-        /// </summary>
-        public static string CommandTable {
-            get {
-                return ResourceManager.GetString("CommandTable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Filter options.
         /// </summary>
         public static string CommandTitleFilter {
@@ -2059,6 +2050,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemSubmissions {
             get {
                 return ResourceManager.GetString("MenuItemSubmissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table info.
+        /// </summary>
+        public static string MenuItemTableInfo {
+            get {
+                return ResourceManager.GetString("MenuItemTableInfo", resourceCulture);
             }
         }
         

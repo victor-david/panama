@@ -302,8 +302,8 @@ Please make sure that {1} is set correctly in configuration settings. File speci
   <data name="TextSubmitted" xml:space="preserve">
     <value>Submitted</value>
   </data>
-  <data name="CommandTable" xml:space="preserve">
-    <value>Tables</value>
+  <data name="MenuItemTableInfo" xml:space="preserve">
+    <value>Table info</value>
   </data>
   <data name="FilterPromptTable" xml:space="preserve">
     <value>Table name</value>
