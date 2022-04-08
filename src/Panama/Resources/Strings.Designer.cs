@@ -2297,6 +2297,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No submissions to this publisher.
+        /// </summary>
+        public static string TextNoPublisherSubmissions {
+            get {
+                return ResourceManager.GetString("TextNoPublisherSubmissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Note.
         /// </summary>
         public static string TextNote {
@@ -2311,6 +2320,15 @@ namespace Restless.Panama.Resources {
         public static string TextNotes {
             get {
                 return ResourceManager.GetString("TextNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No titles.
+        /// </summary>
+        public static string TextNoTitles {
+            get {
+                return ResourceManager.GetString("TextNoTitles", resourceCulture);
             }
         }
         

@@ -9,7 +9,7 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
     mc:Ignorable="d" 
     d:DesignHeight="800" d:DesignWidth="330">
-    <DockPanel tk:Property.RowHeights="Auto,Auto,*,Auto,Auto,Auto,*">
+    <Grid tk:Property.RowHeights="Auto,*">
         <tk:RadioButtonPanel
             DockPanel.Dock="Top"
             Margin="0,0,0,8"
@@ -24,27 +24,27 @@
 
         <!-- Main publisher data -->
         <vw:PublisherEditMain
-            DockPanel.Dock="Top"
+            Grid.Row="1"
             tk:Property.IsLongVisible="{Binding SelectedEditSection}"
             tk:Property.IsLongVisibleValue="1"/>
         
         <!-- Submission periods -->
         <vw:PublisherEditPeriod
-            DockPanel.Dock="Top"
+            Grid.Row="1"
             tk:Property.IsLongVisible="{Binding SelectedEditSection}"
             tk:Property.IsLongVisibleValue="2"/>
         
         <!-- Submissions -->
         <vw:PublisherEditSubmission
-            DockPanel.Dock="Top"
+            Grid.Row="1"
             tk:Property.IsLongVisible="{Binding SelectedEditSection}"
             tk:Property.IsLongVisibleValue="3"/>
 
         <!-- Credentials -->
         <vw:PublisherEditCredential
-            DockPanel.Dock="Top"
+            Grid.Row="1"
             tk:Property.IsLongVisible="{Binding SelectedEditSection}"
             tk:Property.IsLongVisibleValue="4"/>
 
-    </DockPanel>
+    </Grid>
 </UserControl>

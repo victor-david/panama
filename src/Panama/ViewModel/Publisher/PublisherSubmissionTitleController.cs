@@ -5,34 +5,34 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
-using System.ComponentModel;
 using System.Data;
 using System.Windows.Data;
+using TableColumns = Restless.Panama.Database.Tables.SubmissionTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Represents the controller that handles the titles that have been submitted to a publisher.
     /// </summary>
-    public class PublisherSubmissionTitleController : PublisherController
+    public class PublisherSubmissionTitleController : BaseController<PublisherViewModel, SubmissionTable>
     {
         #region Private
-        private int dataViewCount;
+        private SubmissionRow selectedSubmission;
         #endregion
 
         /************************************************************************/
 
-        #region Public properties
+        #region Properties
         /// <summary>
-        /// Gets the count of rows in the data view. The view binds to this property
+        /// Gets the selected submission
         /// </summary>
-        public int DataViewCount
+        public SubmissionRow SelectedSubmission
         {
-            get => dataViewCount;
-            private set => SetProperty(ref dataViewCount, value);
+            get => selectedSubmission;
+            private set => SetProperty(ref selectedSubmission, value);
         }
         #endregion
 
@@ -43,86 +43,59 @@ namespace Restless.Panama.ViewModel
         /// Initializes a new instance of the <see cref="PublisherSubmissionTitleController"/> class.
         /// </summary>
         /// <param name="owner">The view model that owns this controller.</param>
-        public PublisherSubmissionTitleController(PublisherViewModel owner)
-            : base(owner)
+        public PublisherSubmissionTitleController(PublisherViewModel owner) : base(owner)
         {
-            //AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
-            //MainView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.Joined.PublisherId);
-            //MainView.Sort = string.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
-            Columns.Create("Id", SubmissionTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            //Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted).MakeDate();
-            Columns.Create("Title", SubmissionTable.Defs.Columns.Joined.Title);
-            Columns.Create("Written", SubmissionTable.Defs.Columns.Joined.Written).MakeDate();
-            //AddDataGridViewColumns();
-            Commands.Add("GoToTitleRecord", RunGoToTitleRecordCommand);
-            MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"]).AddImageResource("ImageBrowseToUrlMenu");
-            AddViewSourceSortDescriptions();
+            Columns.Create("Id", TableColumns.Id)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042);
+
+            Columns.Create("Batch", TableColumns.BatchId)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W048);
+
+            Columns.Create("Title", TableColumns.Joined.Title);
+
+            Columns.Create("Written", TableColumns.Joined.Written).MakeDate();
+
+            //ListView.GroupDescriptions.Add(new PropertyGroupDescription(TableColumns.Joined.Submitted));
+
+            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region Public methods
-
         #endregion
 
         /************************************************************************/
 
         #region Protected methods
-        /// <summary>
-        /// Called by the <see cref=" ControllerBase{VM,T}.Owner"/> of this controller
-        /// in order to update the controller values.
-        /// </summary>
-        protected override void OnUpdate()
+        /// <inheritdoc/>
+        protected override void OnSelectedItemChanged()
         {
-            //long publisherId = GetOwnerSelectedPrimaryId();
-            //MainView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.Joined.PublisherId, publisherId);
-            //DataViewCount = MainView.Count;
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Private methods
-
-        private void AddViewSourceSortDescriptions()
-        {
-            // TODO
-            //MainSource.SortDescriptions.Clear();
-            //MainSource.GroupDescriptions.Clear();
-            //// BUG: If grouped, and the first clicked parent has zero children, all the columns are scrunched together,
-            //// and clicking on another parent (with children) does not change the columns.
-            //// If not grouped, still scrunched if the first clicked parent has no children, but subsequent clicks
-            //// on parents that do have children restore the columns.
-            //// UPDATE 2018-08-25:
-            ////   Workaround implemented. By binding the visibility of the data grid to the child count (0=hidden, otherwise visible)
-            ////   the columns display as they should.
-            //MainSource.GroupDescriptions.Add(new PropertyGroupDescription(SubmissionTable.Defs.Columns.Joined.Submitted, new DateToFormattedDateConverter()));
-            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Submitted, ListSortDirection.Descending));
-            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Title, ListSortDirection.Ascending));
+            base.OnSelectedItemChanged();
+            SelectedSubmission = SubmissionRow.Create(SelectedRow);
         }
 
-        private void RunGoToTitleRecordCommand(object o)
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            //if (SelectedRow != null)
-            //{
-            //    long titleId = (long)SelectedRow[SubmissionTable.Defs.Columns.TitleId];
+            return DataRowCompareDateTime(item2, item1, TableColumns.Joined.Submitted);
+        }
 
-            //    var ws = MainWindowViewModel.Instance.SwitchToWorkspace<TitleViewModel>();
-            //    if (ws != null)
-            //    {
-            //        ws.Config.TitleFilter.SetIdFilter(titleId);
-            //        if (ws.MainView.Count == 1)
-            //        {
-            //            /* This method uses a funky work around */
-            //            // TODO
-            //            //ws.SetSelectedItem(ws.MainView[0]);
-            //            /* Can be assigned directly, but doesn't highlight the row */
-            //            //ws.SelectedItem = ws.DataView[0];
-            //        }
-            //    }
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return (long)item[TableColumns.Joined.PublisherId] == (Owner?.SelectedPublisher?.Id ?? 0);
+        }
 
-            //}
+        /// <inheritdoc/>
+        protected override void RunOpenRowCommand()
+        {
+            if (SelectedSubmission != null)
+            {
+                Database.Tables.TitleVersionController verController = TitleVersionTable.GetVersionController(SelectedSubmission.TitleId);
+                if (verController.Versions.Count > 0)
+                {
+                    Open.TitleVersionFile(verController.Versions[0].FileName);
+                }
+            }
         }
         #endregion
     }

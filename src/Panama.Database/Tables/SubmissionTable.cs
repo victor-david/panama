@@ -305,7 +305,7 @@ namespace Restless.Panama.Database.Tables
 
             CreateExpressionColumn<long>(Defs.Columns.Calculated.CurrentSubCount, string.Format("IIF(Parent({0}).{1} IS NULL, 1, 0)", SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Response));
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Response, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Response);
-            CreateChildToParentColumn(Defs.Columns.Joined.PublisherId, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.PublisherId);
+            CreateChildToParentColumn<long>(Defs.Columns.Joined.PublisherId, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.PublisherId);
             CreateChildToParentColumn(Defs.Columns.Joined.Publisher, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Joined.Publisher);
             CreateChildToParentColumn<bool>(Defs.Columns.Joined.PublisherExclusive, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Joined.PublisherExclusive);
             CreateChildToParentColumn(Defs.Columns.Joined.ResponseTypeName, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName);

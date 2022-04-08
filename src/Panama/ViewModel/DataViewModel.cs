@@ -165,6 +165,8 @@ namespace Restless.Panama.ViewModel
         /// Gets a visibility value that determines if the edit control section is visible.
         /// </summary>
         public Visibility EditVisibility => (SelectedItem != null) ? Visibility.Visible : Visibility.Collapsed;
+
+        public bool HaveItems => (ListView?.Count ?? 0) > 0;
         #endregion
 
         /************************************************************************/
@@ -212,6 +214,17 @@ namespace Restless.Panama.ViewModel
             {
                 ListView.CustomSort = new GenericComparer<T>((x, y) => OnDataRowCompare(x, y));
             }
+        }
+
+        /// <summary>
+        /// Override in a derived class to process update. Always call the base method
+        /// to refresh <see cref="ListView"/> and <see cref="HaveItems"/>.
+        /// </summary>
+        protected override void OnUpdate()
+        {
+            base.OnUpdate();
+            ListView?.Refresh();
+            OnPropertyChanged(nameof(HaveItems));
         }
 
         /// <summary>

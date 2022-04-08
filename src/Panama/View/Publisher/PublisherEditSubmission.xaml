@@ -1,16 +1,59 @@
-﻿<StackPanel
+﻿<Grid
     x:Class="Restless.Panama.View.PublisherEditSubmission"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="400"
-    Style="{StaticResource DataEntryPanelStyle}">
+    tk:Property.RowHeights="Auto,*,Auto,2*">
 
-    <TextBlock Text="Submissions"/>
-    <Border Background="Yellow" Height="32"/>
+    <TextBlock
+        Style="{StaticResource DataEntryPanelDefaultTextBlockStyle}"
+        Text="{x:Static r:Strings.HeaderSubmissions}"/>
 
-</StackPanel>
+    <DataGrid
+        Grid.Row="1"
+        ItemsSource="{Binding Submissions.ListView}"
+        SelectedItem="{Binding Submissions.SelectedItem}"
+        tk:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
+
+    <TextBlock
+        Grid.Row="1"
+        Style="{StaticResource TextBlockZeroResultStyle}"
+        tk:Property.IsCollapsed="{Binding Submissions.HaveItems}"
+        Text="{x:Static r:Strings.TextNoPublisherSubmissions}"/>
+
+    <TextBlock
+        Grid.Row="2"
+        Style="{StaticResource DataEntryPanelDefaultTextBlockStyle}"
+        Text="{x:Static r:Strings.HeaderTitles}"/>
+
+    <!--  -->
+    <DataGrid
+        Grid.Row="3"
+        ItemsSource="{Binding Titles.ListView}"
+        SelectedItem="{Binding Titles.SelectedItem}"
+        tk:DataGridColumns.Columns="{Binding Titles.Columns}">
+        
+        <DataGrid.ContextMenu>
+            <ContextMenu ItemsSource="{Binding Titles.MenuItems}"  />
+        </DataGrid.ContextMenu>
+        
+        <DataGrid.InputBindings>
+            <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Titles.OpenRowCommand}"/>
+        </DataGrid.InputBindings>
+        
+    </DataGrid>
+
+    <TextBlock
+        Grid.Row="3"
+        Style="{StaticResource TextBlockZeroResultStyle}"
+        tk:Property.IsCollapsed="{Binding Titles.HaveItems}"
+        Text="{x:Static r:Strings.TextNoTitles}"/>
+
+</Grid>

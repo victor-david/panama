@@ -1155,4 +1155,10 @@ Do you want to continue?</value>
   <data name="TextRename" xml:space="preserve">
     <value>Rename</value>
   </data>
+  <data name="TextNoPublisherSubmissions" xml:space="preserve">
+    <value>No submissions to this publisher</value>
+  </data>
+  <data name="TextNoTitles" xml:space="preserve">
+    <value>No titles</value>
+  </data>
 </root>
