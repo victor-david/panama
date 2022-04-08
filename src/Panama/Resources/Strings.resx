@@ -1152,4 +1152,7 @@ Do you want to continue?</value>
   <data name="WindowTitleSelectMessagesGeneric" xml:space="preserve">
     <value>Select messages</value>
   </data>
+  <data name="TextRename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
 </root>

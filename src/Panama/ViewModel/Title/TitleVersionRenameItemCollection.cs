@@ -22,9 +22,12 @@ namespace Restless.Panama.Core
         {
             get
             {
-                foreach (var item in this)
+                foreach (TitleVersionRenameItem item in this)
                 {
-                    if (!item.OriginalExists) return false;
+                    if (!item.OriginalExists)
+                    {
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -39,9 +42,12 @@ namespace Restless.Panama.Core
         {
             get
             {
-                foreach (var item in this)
+                foreach (TitleVersionRenameItem item in this)
                 {
-                    if (!item.Same) return false;
+                    if (!item.Same)
+                    {
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -57,13 +63,11 @@ namespace Restless.Panama.Core
         /// </summary>
         public void Rename()
         {
-            foreach (var item in this)
+            foreach (TitleVersionRenameItem item in this)
             {
                 item.Rename();
             }
         }
         #endregion
-
-
     }
 }

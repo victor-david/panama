@@ -2405,6 +2405,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rename.
+        /// </summary>
+        public static string TextRename {
+            get {
+                return ResourceManager.GetString("TextRename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Response.
         /// </summary>
         public static string TextResponse {

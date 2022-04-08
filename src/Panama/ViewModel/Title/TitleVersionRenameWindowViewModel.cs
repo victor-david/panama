@@ -18,10 +18,10 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the display and selection logic for the <see cref="TitleVersionRenameWindow"/>.
     /// </summary>
-    public class TitleVersionRenameWindowViewModel : WindowViewModel
+    public class TitleVersionRenameWindowViewModel : DataViewModel<TitleVersionRenameItem>
     {
         #region Private
-        private readonly TitleVersionRenameItemCollection renameView;
+        private readonly TitleVersionRenameItemCollection renameItems;
         private string operationMessage;
         private bool canRename;
         #endregion
@@ -35,12 +35,8 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public string OperationMessage
         {
-            get { return operationMessage; }
-            private set
-            {
-                SetProperty(ref operationMessage, value);
-            }
-
+            get => operationMessage;
+            private set => SetProperty(ref operationMessage, value);
         }
         #endregion
 
@@ -53,28 +49,39 @@ namespace Restless.Panama.ViewModel
         /// <param name="titleId">The title id for the versions to rename.</param>
         public TitleVersionRenameWindowViewModel(long titleId)
         {
-            renameView = new TitleVersionRenameItemCollection();
-            // TODO
-            // MainSource.Source = renameView;
-            Columns.Create("Ver", TitleVersionRenameItem.Properties.Version)
+            renameItems = new TitleVersionRenameItemCollection();
+
+            Columns.Create("Ver", nameof(TitleVersionRenameItem.Version))
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create<IntegerToCharConverter>("Rev", TitleVersionRenameItem.Properties.RevisionChar)
+            Columns.Create<IntegerToCharConverter>("Rev", nameof(TitleVersionRenameItem.RevisionChar))
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Old name", TitleVersionRenameItem.Properties.OriginalNameDisplay);
-            Columns.Create("New name", TitleVersionRenameItem.Properties.NewNameDisplay);
-            Columns.Create("Status", TitleVersionRenameItem.Properties.Status);
-            Commands.Add("Rename", RunRenameCommand, CanRunRenameCommand);
+            Columns.Create("Old name", nameof(TitleVersionRenameItem.OriginalNameDisplay));
+            Columns.Create("New name", nameof(TitleVersionRenameItem.NewNameDisplay));
+            Columns.Create("Status", nameof(TitleVersionRenameItem.Status));
+            Commands.Add("Rename", RunRenameCommand, p => canRename);
+
             PopulateRenameItems(titleId);
+            InitListView(renameItems);
         }
         #endregion
 
         /************************************************************************/
 
         #region Protected methods
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(TitleVersionRenameItem item1, TitleVersionRenameItem item2)
+        {
+            int result = item1.Version.CompareTo(item2.Version);
+            if (result == 0)
+            {
+                result = item1.RevisionChar.CompareTo(item2.RevisionChar);
+            }
+            return result;
+        }
         #endregion
 
         /************************************************************************/
@@ -82,18 +89,18 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private void PopulateRenameItems(long titleId)
         {
-            var title  = DatabaseController.Instance.GetTable<TitleTable>().GetSingleRecord(titleId);
+            TitleRow title  = DatabaseController.Instance.GetTable<TitleTable>().GetSingleRecord(titleId);
             if (title == null)
             {
                 throw new InvalidOperationException(Strings.InvalidOpTitleDoesNotExist);
             }
 
-            foreach (var ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(titleId, SortDirection.Ascending))
+            foreach (TitleVersionRow ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(titleId, SortDirection.Ascending))
             {
-                renameView.Add(new TitleVersionRenameItem(ver, title.Title));
+                renameItems.Add(new TitleVersionRenameItem(ver, title.Title));
             }
 
-            if (renameView.Count == 0)
+            if (renameItems.Count == 0)
             {
                 OperationMessage = Strings.InvalidOpRenameCandidateListEmpty;
                 return;
@@ -101,11 +108,11 @@ namespace Restless.Panama.ViewModel
 
             canRename = false;
 
-            if (!renameView.AllOriginalExist)
+            if (!renameItems.AllOriginalExist)
             {
                 OperationMessage = Strings.InvalidOpRenameFilesMissing;
             }
-            else if (renameView.AllSame)
+            else if (renameItems.AllSame)
             {
                 OperationMessage = Strings.InvalidOpRenameAllCandidatesAlreadyRenamed;
             }
@@ -115,20 +122,15 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void RunRenameCommand(object o)
+        private void RunRenameCommand(object parm)
         {
             Execution.TryCatch(() =>
             {
-                renameView.Rename();
+                renameItems.Rename();
                 DatabaseController.Instance.GetTable<TitleVersionTable>().Save();
                 OperationMessage = Strings.ConfirmationAllVersionFilesRenamed;
                 canRename = false;
             });
-        }
-
-        private bool CanRunRenameCommand(object o)
-        {
-            return canRename;
         }
         #endregion
     }

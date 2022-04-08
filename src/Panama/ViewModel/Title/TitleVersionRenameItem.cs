@@ -8,6 +8,7 @@ using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
+using System.Globalization;
 using System.IO;
 
 namespace Restless.Panama.Core
@@ -25,41 +26,6 @@ namespace Restless.Panama.Core
 
         /************************************************************************/
 
-        #region Public fields
-        /// <summary>
-        /// Provides static property name values to be used for binding.
-        /// </summary>
-        public static class Properties
-        {
-            /// <summary>
-            /// The name of the <see cref="TitleVersionRenameItem.Status"/> property.
-            /// </summary>
-            public const string Status = nameof(Status);
-
-            /// <summary>
-            /// The name of the <see cref="TitleVersionRenameItem.Version"/> property.
-            /// </summary>
-            public const string Version = nameof(Version);
-
-            /// <summary>
-            /// The name of the <see cref="TitleVersionRenameItem.RevisionChar"/> property.
-            /// </summary>
-            public const string RevisionChar = nameof(RevisionChar);
-
-            /// <summary>
-            /// The name of the <see cref="TitleVersionRenameItem.OriginalNameDisplay"/> property.
-            /// </summary>
-            public const string OriginalNameDisplay = nameof(OriginalNameDisplay);
-
-            /// <summary>
-            /// The name of the <see cref="TitleVersionRenameItem.NewNameDisplay"/> property.
-            /// </summary>
-            public const string NewNameDisplay = nameof(NewNameDisplay);
-        }
-        #endregion
-
-        /************************************************************************/
-
         #region Public properties
         /// <summary>
         /// Gets the status message for this rename item.
@@ -73,34 +39,22 @@ namespace Restless.Panama.Core
         /// <summary>
         /// Gets a boolean value indicating if the original file name and the new file name are the same, i.e. already renamed.
         /// </summary>
-        public bool Same
-        {
-            get => OriginalName == NewName;
-        }
+        public bool Same => OriginalName == NewName;
 
         /// <summary>
         /// Gets the version.
         /// </summary>
-        public long Version
-        {
-            get => ver.Version;
-        }
+        public long Version => ver.Version;
 
         /// <summary>
         /// Gets the revision.
         /// </summary>
-        public long Revision
-        {
-            get => ver.Revision;
-        }
+        public long Revision => ver.Revision;
 
         /// <summary>
         /// Gets the revision character.
         /// </summary>
-        public char RevisionChar
-        {
-            get => (char)ver.Revision;
-        }
+        public char RevisionChar => (char)ver.Revision;
 
         /// <summary>
         /// Gets the original file name.
@@ -108,7 +62,6 @@ namespace Restless.Panama.Core
         public string OriginalName
         {
             get;
-            //private set;
         }
 
         /// <summary>
@@ -117,16 +70,12 @@ namespace Restless.Panama.Core
         public string OriginalNameDisplay
         {
             get;
-            //private set;
         }
 
         /// <summary>
         /// Gets a boolean value that indicates if the original file exists.
         /// </summary>
-        public bool OriginalExists
-        {
-            get => File.Exists(OriginalName);
-        }
+        public bool OriginalExists => File.Exists(OriginalName);
 
         /// <summary>
         /// Gets the proposed new name.
@@ -170,7 +119,7 @@ namespace Restless.Panama.Core
              * The Title Of This Piece_v3.B.es-mx.docx
              */
             string newNameWithoutPath =
-                string.Format("{0}_v{1}.{2}.{3}{4}",
+                string.Format(CultureInfo.InvariantCulture, "{0}_v{1}.{2}.{3}{4}",
                     Format.ValidFileName(title),
                     Version,
                     RevisionChar,
@@ -180,12 +129,7 @@ namespace Restless.Panama.Core
             NewName = Path.Combine(Path.GetDirectoryName(OriginalName), newNameWithoutPath);
             NewNameDisplay = Path.GetFileName(NewName);
 
-            if (!OriginalExists)
-                Status = "Missing";
-            else if (Same)
-                Status = "Already renamed";
-            else
-                Status = "Ready to rename";
+            Status = !OriginalExists ? "Missing" : Same ? "Already renamed" : "Ready to rename";
         }
         #endregion
 
