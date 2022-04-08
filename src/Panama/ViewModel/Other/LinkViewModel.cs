@@ -34,7 +34,7 @@ namespace Restless.Panama.ViewModel
         public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
 
         /// <inheritdoc/>
-        public override bool OpenRowCommandEnabled => string.IsNullOrWhiteSpace(SelectedLink?.Url);
+        public override bool OpenRowCommandEnabled => !string.IsNullOrWhiteSpace(SelectedLink?.Url);
 
         /// <summary>
         /// Gets the selected link
