@@ -1161,4 +1161,19 @@ Do you want to continue?</value>
   <data name="TextNoTitles" xml:space="preserve">
     <value>No titles</value>
   </data>
+  <data name="MenuItemAddSubmissionPeriod" xml:space="preserve">
+    <value>Add a submission period</value>
+  </data>
+  <data name="MenuItemRemoveSubmissionPeriod" xml:space="preserve">
+    <value>Remove this submission period</value>
+  </data>
+  <data name="TextNoPublisherPeriods" xml:space="preserve">
+    <value>No submission periods defined for this publisher</value>
+  </data>
+  <data name="ConfirmationAddSubmissionPeriod" xml:space="preserve">
+    <value>This operation adds a submission period that runs from January 1 - December 31, i.e. all year. Once added, you can change the range of the submission period if needed.</value>
+  </data>
+  <data name="ConfirmationResetSubmissionPeriod" xml:space="preserve">
+    <value>This operation sets the submission period to January 1 - December 31, i.e. all year.</value>
+  </data>
 </root>

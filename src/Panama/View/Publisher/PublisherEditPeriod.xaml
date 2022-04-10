@@ -1,16 +1,67 @@
-﻿<StackPanel
+﻿<Grid
     x:Class="Restless.Panama.View.PublisherEditPeriod"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
     mc:Ignorable="d" 
-    d:DesignHeight="450" d:DesignWidth="400"
-    Style="{StaticResource DataEntryPanelStyle}">
+    d:DesignHeight="480" d:DesignWidth="460"
+    tk:Property.RowHeights="*,3*">
 
-    <TextBlock Text="Submission Period"/>
-    <Border Background="LightGray" Height="32"/>
+    <DataGrid
+        ItemsSource="{Binding Periods.ListView}"
+        SelectedItem="{Binding Periods.SelectedItem}"
+        tk:DataGridColumns.Columns="{Binding Periods.Columns}">
+        
+        <DataGrid.ContextMenu>
+            <ContextMenu ItemsSource="{Binding Periods.MenuItems}"  />
+        </DataGrid.ContextMenu>
+        
+    </DataGrid>
 
-</StackPanel>
+    <TextBlock
+        Style="{StaticResource TextBlockZeroResultStyle}"
+        tk:Property.IsCollapsed="{Binding Periods.HaveItems}"
+        Text="{x:Static r:Strings.TextNoPublisherPeriods}"/>
+
+    <Grid
+        Grid.Row="1"
+        tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,*"
+        tk:Property.ColumnWidths="*,*"
+        Style="{StaticResource DataEntryPanelStyle}"
+        Visibility="{Binding Periods.EditVisibility}">
+
+        <TextBlock Grid.ColumnSpan="2" Text="Note"/>
+        
+        <TextBox
+            Grid.Row="1" Grid.ColumnSpan="2"
+            Text="{Binding Periods.SelectedPeriod.Notes}"/>
+
+        <TextBlock Grid.Row="2" Text="Start"/>
+        <tk:Calendar
+            Grid.Row="3"
+            IsUtcMode="False"
+            DisplayDate="{Binding Periods.SelectedPeriod.Start}"
+            SelectedDate="{Binding Periods.SelectedPeriod.Start}"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="End"/>
+        <tk:Calendar
+            Grid.Row="3" Grid.Column="1"
+            IsUtcMode="False"
+            DisplayDate="{Binding Periods.SelectedPeriod.End}"
+            SelectedDate="{Binding Periods.SelectedPeriod.End}"/>
+        
+        <StatusBar Grid.Row="4" Grid.ColumnSpan="2">
+            <tk:IconButton
+                Icon="{StaticResource SquareSmallGreenIconKey}"
+                Content="All year"
+                Command="{Binding Periods.Commands[MakeAllYear]}"/>
+        </StatusBar>
+
+    </Grid>
+
+</Grid>

@@ -5,78 +5,40 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
-using Restless.Toolkit.Utility;
-using System;
 using System.Data;
-using System.Windows;
+using TableColumns = Restless.Panama.Database.Tables.SubmissionPeriodTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides logic for handling the submission periods that are associated with a publisher.
     /// </summary>
-    public class PublisherPeriodController : PublisherController
+    public class PublisherPeriodController : BaseController<PublisherViewModel, SubmissionPeriodTable>
     {
         #region Private
-        private Visibility addControlVisibility;
-        private Visibility notesVisibility;
-        private DateTime addStart;
-        private DateTime addEnd;
+        private const string DateColumnFormat = "MMMM dd";
+        private SubmissionPeriodRow selectedPeriod;
         #endregion
 
         /************************************************************************/
 
         #region Public properties
-        /// <summary>
-        /// Gets a visibility value that determines if the add submission period control is visible.
-        /// </summary>
-        public Visibility AddControlVisibility
-        {
-            get => addControlVisibility;
-            private set => SetProperty(ref addControlVisibility, value);
-        }
+        /// <inheritdoc/>
+        public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => SelectedPeriod != null;
 
         /// <summary>
-        /// Gets a visibility value that determines if the notes edit control is visible.
+        /// Get the selected period
         /// </summary>
-        public Visibility NotesVisibility
+        public SubmissionPeriodRow SelectedPeriod
         {
-            get => notesVisibility;
-            private set => SetProperty(ref notesVisibility, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the start date when adding a submission period.
-        /// </summary>
-        public DateTime AddStart
-        {
-            get => addStart;
-            set
-            {
-                if (SetProperty(ref addStart, value))
-                {
-                    UpdateSelectedDisplay();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the end date when adding a submission period.
-        /// </summary>
-        public DateTime AddEnd
-        {
-            get => addEnd;
-            set
-            {
-                if (SetProperty(ref addEnd, value))
-                {
-                    UpdateSelectedDisplay();
-                }
-            }
+            get => selectedPeriod;
+            private set => SetProperty(ref selectedPeriod, value);
         }
 
         /// <summary>
@@ -99,67 +61,68 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public PublisherPeriodController(PublisherViewModel owner) : base(owner)
         {
-            //AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionPeriodTable>());
-            //MainView.RowFilter = string.Format("{0}=-1", SubmissionPeriodTable.Defs.Columns.PublisherId);
-            //MainView.Sort = string.Format("{0} ASC", SubmissionPeriodTable.Defs.Columns.Start);
-            Columns.Create("Id", SubmissionPeriodTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Start", SubmissionPeriodTable.Defs.Columns.Start).MakeDate("MMMM dd", toLocal:false);
-            Columns.Create("End", SubmissionPeriodTable.Defs.Columns.End).MakeDate("MMMM dd", toLocal:false);
-            Columns.Create("Note", SubmissionPeriodTable.Defs.Columns.Notes);
-            Owner.Commands.Add("PeriodAddShow", (o) =>
-                {
-                    SetAddControlVisibility(true);
-                    SetNotesVisibility(false);
-                },
-                (o) => { return AddControlVisibility != Visibility.Visible; }
-            );
-            Owner.Commands.Add("PeriodRemove", RunRemoveSubmissionPeriodCommand, (o) =>
-                { return SelectedRow != null && AddControlVisibility != Visibility.Visible; });
-            Owner.Commands.Add("PeriodAddConfirm", RunAddSubmissionPeriodCommand);
-            Owner.Commands.Add("PeriodAddConfirmAllYear", RunAddSubmissionPeriodAllYearCommand);
+            Columns.Create("Id", TableColumns.Id)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042);
 
-            Owner.Commands.Add("PeriodAddCancel", (o) =>
-            {
-                SetAddControlVisibility(false);
-                SetNotesVisibility(SelectedItem != null);
-            });
-            AddControlVisibility = Visibility.Collapsed;
-            NotesVisibility = Visibility.Collapsed;
+            Columns.Create("Start", TableColumns.Start)
+                .MakeDate(DateColumnFormat, toLocal:false);
 
-            AddStart = new DateTime(DateTime.Now.Year, 1, 1);
-            AddEnd = new DateTime(DateTime.Now.Year, 12, 31);
+            Columns.Create("End", TableColumns.End)
+                .MakeDate(DateColumnFormat, toLocal:false);
+
+            Columns.Create("Note", TableColumns.Notes).MakeSingleLine();
+
+            MenuItems.AddItem(Strings.MenuItemAddSubmissionPeriod, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemRemoveSubmissionPeriod, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
+
+            Commands.Add("MakeAllYear", RunMakeAllYearCommand);
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region Public methods
-
         #endregion
 
         /************************************************************************/
 
         #region Protected methods
-        /// <summary>
-        /// Called when the selected item on the associated data grid has changed.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
-            SetAddControlVisibility(false);
-            SetNotesVisibility(SelectedItem != null);
+            SelectedPeriod = SubmissionPeriodRow.Create(SelectedRow);
         }
 
-        /// <summary>
-        /// Called by the <see cref=" ControllerBase{VM,T}.Owner"/> of this controller
-        /// in order to update the controller values.
-        /// </summary>
-        protected override void OnUpdate()
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            //long publisherId = GetOwnerSelectedPrimaryId();
-            //MainView.RowFilter = string.Format("{0}={1}", SubmissionPeriodTable.Defs.Columns.PublisherId, publisherId);
-            //SetAddControlVisibility(false);
-            //SetNotesVisibility(SelectedItem != null);
+            return DataRowCompareDateTime(item1, item2, TableColumns.Start);
+        }
+
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return (long)item[TableColumns.PublisherId] == (Owner?.SelectedPublisher?.Id ?? 0);
+        }
+
+        /// <inheritdoc/>
+        protected override void RunAddCommand()
+        {
+            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationAddSubmissionPeriod))
+            {
+                Table.AddSubmissionPeriod(Owner.SelectedPublisher.Id);
+                Update();
+            }
+
+        }
+
+        /// <inheritdoc/>
+        protected override void RunDeleteCommand()
+        {
+            if (MessageWindow.ShowYesNo(Strings.ConfirmationRemoveSubmissionPeriod))
+            {
+                // Call the specialized Table method instead of DeleteSelectedRow() to update other records
+                Table.DeleteSubmissionPeriod(SelectedRow);
+                Update();
+            }
         }
         #endregion
 
@@ -168,49 +131,17 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private void UpdateSelectedDisplay()
         {
-            SelectedDisplay = string.Format("Period: {0} - {1}", AddStart.ToString("MMMM dd"), AddEnd.ToString("MMMM dd"));
-            OnPropertyChanged(nameof(SelectedDisplay));
+            //SelectedDisplay = string.Format("Period: {0} - {1}", AddStart.ToString(DateColumnFormat), AddEnd.ToString(DateColumnFormat));
+            //OnPropertyChanged(nameof(SelectedDisplay));
         }
 
-        private void RunAddSubmissionPeriodCommand(object o)
+        private void RunMakeAllYearCommand(object parm)
         {
-            AddSubmissionPeriod(AddStart, AddEnd);
-        }
-
-        private void RunAddSubmissionPeriodAllYearCommand(object o)
-        {
-            DateTime start = new(DateTime.Now.Year, 1, 1);
-            DateTime end = new(DateTime.Now.Year, 12, 31);
-            AddSubmissionPeriod(start, end);
-        }
-
-        private void AddSubmissionPeriod(DateTime start, DateTime end)
-        {
-            if (Owner.SelectedPrimaryKey != null)
+            if (SelectedPeriod != null && MessageWindow.ShowContinueCancel(Strings.ConfirmationResetSubmissionPeriod))
             {
-                long publisherId = (long)Owner.SelectedPrimaryKey;
-                DatabaseController.Instance.GetTable<SubmissionPeriodTable>().AddSubmissionPeriod(publisherId, start, end);
-                SetAddControlVisibility(false);
-                SetNotesVisibility(SelectedItem != null);
+                SelectedPeriod.MakeAllYear();
+                OnPropertyChanged(nameof(SelectedPeriod));
             }
-        }
-
-        private void RunRemoveSubmissionPeriodCommand(object o)
-        {
-            if (SelectedRow != null && Messages.ShowYesNo(Strings.ConfirmationRemoveSubmissionPeriod))
-            {
-                DatabaseController.Instance.GetTable<SubmissionPeriodTable>().DeleteSubmissionPeriod(SelectedRow);
-            }
-        }
-
-        private void SetAddControlVisibility(bool visible)
-        {
-            AddControlVisibility = (visible) ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void SetNotesVisibility(bool visible)
-        {
-            NotesVisibility = (visible) ? Visibility.Visible : Visibility.Hidden;
         }
         #endregion
     }

@@ -146,7 +146,7 @@ namespace Restless.Panama.Core
             public const double MaxNoteDetailWidth = 720;
             public const double DefaultNoteDetailWidth = MinNoteDetailWidth;
 
-            public const double MinPublisherDetailWidth = 360;
+            public const double MinPublisherDetailWidth = 390;
             public const double MaxPublisherDetailWidth = 520;
             public const double DefaultPublisherDetailWidth = MinPublisherDetailWidth;
 

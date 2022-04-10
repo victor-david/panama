@@ -96,14 +96,12 @@ namespace Restless.Panama.Database.Tables
         /// Adds a record to the submission period table
         /// </summary>
         /// <param name="publisherId">The publisher id</param>
-        /// <param name="start">The start date of the submission period</param>
-        /// <param name="end">The end date of the submission period</param>
-        public void AddSubmissionPeriod(long publisherId, DateTime start, DateTime end)
+        public void AddSubmissionPeriod(long publisherId)
         {
             DataRow row = NewRow();
             row[Defs.Columns.PublisherId] = publisherId;
-            row[Defs.Columns.Start] = start;
-            row[Defs.Columns.End] = end;
+            row[Defs.Columns.Start] = new DateTime(DateTime.Now.Year, 1, 1);
+            row[Defs.Columns.End] = new DateTime(DateTime.Now.Year, 12, 31);
             Rows.Add(row);
             Save();
             /* Get the publisher parent row and update it */
@@ -162,5 +160,22 @@ namespace Restless.Panama.Database.Tables
         #endregion
 
         /************************************************************************/
+
+        #region Internal methods
+        /// <summary>
+        /// Updates the corresponding publisher's in-period status 
+        /// </summary>
+        /// <param name="period">The submission periodw</param>
+        /// <remarks>
+        /// This method is used by <see cref="SubmissionPeriodRow"/> to update
+        /// a publisher's in period status when the user changes either the 
+        /// period start or period end date.
+        /// </remarks>
+        internal void UpdateInPeriod(SubmissionPeriodRow period)
+        {
+            DataRow parentRow = period.Row.GetParentRow(PublisherTable.Defs.Relations.ToSubmissionPeriod);
+            Controller.GetTable<PublisherTable>().UpdateInPeriod(parentRow);
+        }
+        #endregion
     }
 }

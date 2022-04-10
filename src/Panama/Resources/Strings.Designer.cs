@@ -726,6 +726,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation adds a submission period that runs from January 1 - December 31, i.e. all year. Once added, you can change the range of the submission period if needed..
+        /// </summary>
+        public static string ConfirmationAddSubmissionPeriod {
+            get {
+                return ResourceManager.GetString("ConfirmationAddSubmissionPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation will add a new title record. If any title filters are in effect, they will be removed so that the new title displays in the list. 
         ///
         ///Do you want to continue?.
@@ -937,6 +946,15 @@ namespace Restless.Panama.Resources {
         public static string ConfirmationRemoveTitleVersion {
             get {
                 return ResourceManager.GetString("ConfirmationRemoveTitleVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation sets the submission period to January 1 - December 31, i.e. all year..
+        /// </summary>
+        public static string ConfirmationResetSubmissionPeriod {
+            get {
+                return ResourceManager.GetString("ConfirmationResetSubmissionPeriod", resourceCulture);
             }
         }
         
@@ -1694,6 +1712,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a submission period.
+        /// </summary>
+        public static string MenuItemAddSubmissionPeriod {
+            get {
+                return ResourceManager.GetString("MenuItemAddSubmissionPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a title to the collection.
         /// </summary>
         public static string MenuItemAddTitle {
@@ -1951,6 +1978,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemRemoveSubmissionMessage {
             get {
                 return ResourceManager.GetString("MenuItemRemoveSubmissionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this submission period.
+        /// </summary>
+        public static string MenuItemRemoveSubmissionPeriod {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveSubmissionPeriod", resourceCulture);
             }
         }
         
@@ -2293,6 +2329,15 @@ namespace Restless.Panama.Resources {
         public static string TextNone {
             get {
                 return ResourceManager.GetString("TextNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No submission periods defined for this publisher.
+        /// </summary>
+        public static string TextNoPublisherPeriods {
+            get {
+                return ResourceManager.GetString("TextNoPublisherPeriods", resourceCulture);
             }
         }
         

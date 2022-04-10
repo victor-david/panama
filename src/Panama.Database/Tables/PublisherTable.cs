@@ -19,7 +19,7 @@ namespace Restless.Panama.Database.Tables
         #region Private
         private bool isInitializing;
         #endregion
-        
+
         /************************************************************************/
 
         #region Public properties
@@ -217,7 +217,7 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         public override void Load()
         {
-            Load(null, string.Format("{0} DESC", Defs.Columns.Added));
+            Load(null, $"{Defs.Columns.Added} DESC");
         }
 
         /// <summary>
@@ -226,8 +226,7 @@ namespace Restless.Panama.Database.Tables
         /// <param name="id">The credential id.</param>
         public void ClearCredential(long id)
         {
-            DataRow[] rows = Select(string.Format("{0}={1}", Defs.Columns.CredentialId, id));
-            foreach (DataRow row in rows)
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.CredentialId}={id}"))
             {
                 row[Defs.Columns.CredentialId] = 0;
             }
@@ -302,7 +301,6 @@ namespace Restless.Panama.Database.Tables
             DataColumn col1 = new DataColumn(Defs.Columns.Calculated.InSubmissionPeriod, typeof(bool));
             Columns.Add(col1);
             SetColumnProperty(col1, DataColumnPropertyKey.ExcludeFromInsert, DataColumnPropertyKey.ExcludeFromUpdate);
-            // UpdateInPeriod();
 
             DataColumn col2 = new DataColumn(Defs.Columns.Calculated.HaveActiveSubmission, typeof(bool));
             Columns.Add(col2);
@@ -335,7 +333,7 @@ namespace Restless.Panama.Database.Tables
         #endregion
 
         /************************************************************************/
-        
+
         #region Internal methods
         /// <summary>
         /// Updates the specified publisher data row, setting its calculated <see cref="Defs.Columns.Calculated.InSubmissionPeriod"/> column.
@@ -350,25 +348,26 @@ namespace Restless.Panama.Database.Tables
         {
             if (row != null && row.Table.TableName == TableName)
             {
-                 // When initializing, this method is called from OnInitializationComplete()
-                 // for every row in the table. At this time, isInitializing is true.
-                 // Later, this method is called from SubmissionPeriodTable to update when
-                 // a period is added or deleted. At that point, isInitializing is false
-                 // and therefore we save the table first because we don't want any other pending 
-                 // changes on the row to be lost with row.AcceptChanges()
-                if (!isInitializing) Save();
-
-                row[Defs.Columns.Calculated.InSubmissionPeriod] = false;
-                DataRow[] childRows = row.GetChildRows(Defs.Relations.ToSubmissionPeriod);
-                bool inPeriod = false;
-                foreach (DataRow childRow in childRows)
+                // When initializing, this method is called from OnInitializationComplete()
+                // for every row in the table. At this time, isInitializing is true.
+                // Later, this method is called from SubmissionPeriodTable to update when
+                // a period is added or deleted. At that point, isInitializing is false
+                // and therefore we save the table first because we don't want any other pending 
+                // changes on the row to be lost with row.AcceptChanges()
+                if (!isInitializing)
                 {
-                    DateTime start = (DateTime)childRow[SubmissionPeriodTable.Defs.Columns.Start];
-                    DateTime end = (DateTime)childRow[SubmissionPeriodTable.Defs.Columns.End];
-                    inPeriod = inPeriod || IsInPeriod(start, end);
+                    Save();
                 }
+
+                bool inPeriod = false;
+                foreach (DataRow childRow in row.GetChildRows(Defs.Relations.ToSubmissionPeriod))
+                {
+                    DateTime periodStart = (DateTime)childRow[SubmissionPeriodTable.Defs.Columns.Start];
+                    DateTime periodEnd = (DateTime)childRow[SubmissionPeriodTable.Defs.Columns.End];
+                    inPeriod = inPeriod || IsInPeriod(periodStart, periodEnd);
+                }
+
                 row[Defs.Columns.Calculated.InSubmissionPeriod] = inPeriod;
-                /* This is a virtual calculated field. Don't want this change being seen as dirty. */
                 row.AcceptChanges();
             }
         }
@@ -382,10 +381,14 @@ namespace Restless.Panama.Database.Tables
             if (row != null && row.Table.TableName == TableName)
             {
                 // See comment on UpdateInPeriod(). Same idea.
-                if (!isInitializing) Save();
+                if (!isInitializing)
+                {
+                    Save();
+                }
+
                 bool haveActive = false;
-                DataRow[] rows = row.GetChildRows(Defs.Relations.ToSubmissionBatch);
-                foreach(DataRow child in rows)
+
+                foreach (DataRow child in row.GetChildRows(Defs.Relations.ToSubmissionBatch))
                 {
                     if (child[SubmissionBatchTable.Defs.Columns.Response] == DBNull.Value)
                     {
@@ -402,13 +405,12 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Private methods
-
         private bool IsInPeriod(DateTime start, DateTime end)
         {
-            DateTime now = DateTime.UtcNow;
+            DateTime now = DateTime.Now;
             // Normalize both dates to the same year
             start = new DateTime(now.Year - 1, start.Month, start.Day);
-            end = new DateTime(now.Year - 1, end.Month, end.Day);
+            end = new DateTime(now.Year - 1, end.Month, end.Day, 23, 59, 59);
 
             // If start date (day of year) comes later than end date (day of year), bump end date up one year.
             if (start.DayOfYear > end.DayOfYear)
@@ -422,7 +424,7 @@ namespace Restless.Panama.Database.Tables
                 start = start.AddYears(1);
                 end = end.AddYears(1);
             }
-            return (DateTime.Compare(now, start) >= 0 && DateTime.Compare(now, end) <= 0);
+            return DateTime.Compare(now, start) >= 0 && DateTime.Compare(now, end) <= 0;
         }
         #endregion
     }
