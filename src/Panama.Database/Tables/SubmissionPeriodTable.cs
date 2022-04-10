@@ -6,6 +6,7 @@
 */
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Restless.Panama.Database.Tables
@@ -52,6 +53,26 @@ namespace Restless.Panama.Database.Tables
                 public const string End = "end";
 
                 /// <summary>
+                /// Month number when submission period starts
+                /// </summary>
+                public const string MonthStart = "monthstart";
+
+                /// <summary>
+                /// Day number when submission period starts
+                /// </summary>
+                public const string DayStart = "daystart";
+
+                /// <summary>
+                /// Month number when submission period ends
+                /// </summary>
+                public const string MonthEnd = "monthend";
+
+                /// <summary>
+                /// Day number when submission period ends
+                /// </summary>
+                public const string DayEnd = "dayend";
+
+                /// <summary>
                 /// The name of the notes column.
                 /// </summary>
                 public const string Notes = "notes";
@@ -93,7 +114,19 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Adds a record to the submission period table
+        /// Provides an enumerable that enumerates all record, ordered by id
+        /// </summary>
+        /// <returns>An enumerable</returns>
+        public IEnumerable<SubmissionPeriodRow> EnumerateAll()
+        {
+            foreach (DataRow row in EnumerateRows(null, Defs.Columns.Id))
+            {
+                yield return new SubmissionPeriodRow(row);
+            }
+        }
+
+        /// <summary>
+        /// Adds an all-year record to the submission period table
         /// </summary>
         /// <param name="publisherId">The publisher id</param>
         public void AddSubmissionPeriod(long publisherId)
@@ -102,6 +135,10 @@ namespace Restless.Panama.Database.Tables
             row[Defs.Columns.PublisherId] = publisherId;
             row[Defs.Columns.Start] = new DateTime(DateTime.Now.Year, 1, 1);
             row[Defs.Columns.End] = new DateTime(DateTime.Now.Year, 12, 31);
+            row[Defs.Columns.MonthStart] = 1;
+            row[Defs.Columns.DayStart] = 1;
+            row[Defs.Columns.MonthEnd] = 12;
+            row[Defs.Columns.DayEnd] = 31;
             Rows.Add(row);
             Save();
             /* Get the publisher parent row and update it */
@@ -146,6 +183,10 @@ namespace Restless.Panama.Database.Tables
                 { Defs.Columns.PublisherId, ColumnType.Integer },
                 { Defs.Columns.Start, ColumnType.Timestamp },
                 { Defs.Columns.End, ColumnType.Timestamp },
+                { Defs.Columns.MonthStart, ColumnType.Integer },
+                { Defs.Columns.DayStart, ColumnType.Integer },
+                { Defs.Columns.MonthEnd, ColumnType.Integer },
+                { Defs.Columns.DayEnd, ColumnType.Integer },
                 { Defs.Columns.Notes, ColumnType.Text, false, true },
             };
         }

@@ -40,6 +40,42 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Gets or sets the month that the submission period starts
+        /// </summary>
+        public long MonthStart
+        {
+            get => GetInt64(Columns.MonthStart);
+            set => SetMonthValue(Columns.MonthStart, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the day that the submission period starts
+        /// </summary>
+        public long DayStart
+        {
+            get => GetInt64(Columns.DayStart);
+            set => SetDayValue(Columns.DayStart, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the month that the submission period ends
+        /// </summary>
+        public long MonthEnd
+        {
+            get => GetInt64(Columns.MonthEnd);
+            set => SetMonthValue(Columns.MonthEnd, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the day that the submission period ends
+        /// </summary>
+        public long DayEnd
+        {
+            get => GetInt64(Columns.DayEnd);
+            set => SetDayValue(Columns.DayEnd, value);
+        }
+
+        /// <summary>
         /// Gets or sets the notes associated with this entry
         /// </summary>
         public string Notes
@@ -88,6 +124,18 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Private methods
+        private void SetMonthValue(string columnName, long value)
+        {
+            SetValue(columnName, Math.Clamp(value, 1, 12));
+            Table.UpdateInPeriod(this);
+        }
+
+        private void SetDayValue(string columnName, long value)
+        {
+            SetValue(columnName, Math.Clamp(value, 1, 31));
+            Table.UpdateInPeriod(this);
+        }
+
         private void SetPeriodStartDate(DateTime value)
         {
             SetValue(Columns.Start, new DateTime(value.Year, value.Month, value.Day));
