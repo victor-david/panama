@@ -73,7 +73,7 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemRemoveSubmissionPeriod, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
 
-            Commands.Add("MakeAllYear", RunMakeAllYearCommand);
+            Commands.Add("MakeAllYear", RunMakeAllYearCommand, p => !(SelectedPeriod?.IsAllYear ?? true));
         }
         #endregion
 

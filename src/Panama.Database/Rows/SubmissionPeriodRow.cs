@@ -1,5 +1,6 @@
 ﻿using Restless.Toolkit.Core.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using Columns = Restless.Panama.Database.Tables.SubmissionPeriodTable.Defs.Columns;
 
@@ -10,6 +11,17 @@ namespace Restless.Panama.Database.Tables
     /// </summary>
     public class SubmissionPeriodRow : RowObjectBase<SubmissionPeriodTable>
     {
+        #region Private
+        private static readonly Dictionary<long, long> MonthDayMap = new Dictionary<long, long>()
+        {
+            { 1, 31 }, { 2, 28 }, { 3, 31 }, { 4, 30 },
+            { 5, 31 }, { 6, 30 }, { 7, 31 }, { 8, 31 },
+            { 9, 30 }, { 10, 31 }, { 11, 30 }, { 12, 31 },
+        };
+        #endregion
+
+        /************************************************************************/
+
         #region Properties
         /// <summary>
         /// Gets the record id.
@@ -27,7 +39,7 @@ namespace Restless.Panama.Database.Tables
         public long MonthStart
         {
             get => GetInt64(Columns.MonthStart);
-            set => SetMonthValue(Columns.MonthStart, value);
+            set => SetMonthStart(value);
         }
 
         /// <summary>
@@ -36,7 +48,7 @@ namespace Restless.Panama.Database.Tables
         public long DayStart
         {
             get => GetInt64(Columns.DayStart);
-            set => SetDayValue(Columns.DayStart, value);
+            set => SetDayStart(value);
         }
 
         /// <summary>
@@ -45,7 +57,7 @@ namespace Restless.Panama.Database.Tables
         public long MonthEnd
         {
             get => GetInt64(Columns.MonthEnd);
-            set => SetMonthValue(Columns.MonthEnd, value);
+            set => SetMonthEnd(value);
         }
 
         /// <summary>
@@ -54,7 +66,7 @@ namespace Restless.Panama.Database.Tables
         public long DayEnd
         {
             get => GetInt64(Columns.DayEnd);
-            set => SetDayValue(Columns.DayEnd, value);
+            set => SetDayEnd(value);
         }
 
         /// <summary>
@@ -65,6 +77,11 @@ namespace Restless.Panama.Database.Tables
             get => GetString(Columns.Notes);
             set => SetValue(Columns.Notes, value);
         }
+
+        /// <summary>
+        /// Gets a boolean value that indicates whether this period spans the entire year
+        /// </summary>
+        public bool IsAllYear => MonthStart == 1 && DayStart == 1 && MonthEnd == 12 && DayEnd == 31;
         #endregion
 
         /************************************************************************/
@@ -110,15 +127,35 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Private methods
-        private void SetMonthValue(string columnName, long value)
+        private void SetMonthStart(long value)
         {
-            SetValue(columnName, Math.Clamp(value, 1, 12));
+            SetValue(Columns.MonthStart, Math.Clamp(value, 1, 12));
+            if (DayStart > MonthDayMap[MonthStart])
+            {
+                SetValue(Columns.DayStart, MonthDayMap[MonthStart]);
+            }
             Table.UpdateInPeriod(this);
         }
 
-        private void SetDayValue(string columnName, long value)
+        private void SetMonthEnd(long value)
         {
-            SetValue(columnName, Math.Clamp(value, 1, 31));
+            SetValue(Columns.MonthEnd, Math.Clamp(value, 1, 12));
+            if (DayEnd > MonthDayMap[MonthEnd])
+            {
+                SetValue(Columns.DayEnd, MonthDayMap[MonthEnd]);
+            }
+            Table.UpdateInPeriod(this);
+        }
+
+        private void SetDayStart(long value)
+        {
+            SetValue(Columns.DayStart, Math.Clamp(value, 1, MonthDayMap[MonthStart]));
+            Table.UpdateInPeriod(this);
+        }
+
+        private void SetDayEnd(long value)
+        {
+            SetValue(Columns.DayEnd, Math.Clamp(value, 1, MonthDayMap[MonthEnd]));
             Table.UpdateInPeriod(this);
         }
         #endregion
