@@ -411,25 +411,24 @@ namespace Restless.Panama.Database.Tables
         #region Private methods
         private bool IsInPeriod(long monthStart, long dayStart, long monthEnd, long dayEnd)
         {
-            //DateTime now = DateTime.Now;
-            //// Normalize both dates to the same year
-            //start = new DateTime(now.Year - 1, start.Month, start.Day);
-            //end = new DateTime(now.Year - 1, end.Month, end.Day, 23, 59, 59);
+            DateTime now = DateTime.Now;
+            DateTime start = new DateTime(now.Year - 1, (int)monthStart, (int)dayStart);
+            DateTime end = new DateTime(now.Year - 1, (int)monthEnd, (int)dayEnd, 23, 59, 59);
 
-            //// If start date (day of year) comes later than end date (day of year), bump end date up one year.
-            //if (start.DayOfYear > end.DayOfYear)
-            //{
-            //    end = end.AddYears(1);
-            //}
+            /* If start date (day of year) comes later than end date (day of year), bump end date up one year */
+            if (start.DayOfYear > end.DayOfYear)
+            {
+                end = end.AddYears(1);
+            }
 
-            //// If both are behind today, bump both up one year.
-            //if (DateTime.Compare(start, now) < 0 && DateTime.Compare(end, now) < 0)
-            //{
-            //    start = start.AddYears(1);
-            //    end = end.AddYears(1);
-            //}
-            //return DateTime.Compare(now, start) >= 0 && DateTime.Compare(now, end) <= 0;
-            return false;
+            /* If both are behind today, bump both up one year */
+            if (DateTime.Compare(start, now) < 0 && DateTime.Compare(end, now) < 0)
+            {
+                start = start.AddYears(1);
+                end = end.AddYears(1);
+            }
+
+            return DateTime.Compare(now, start) >= 0 && DateTime.Compare(now, end) <= 0;
         }
         #endregion
     }
