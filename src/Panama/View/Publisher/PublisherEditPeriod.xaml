@@ -5,12 +5,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
     mc:Ignorable="d" 
     d:DesignHeight="480" d:DesignWidth="460"
     tk:Property.RowHeights="*,3*">
+
+    <Grid.Resources>
+        <Style TargetType="con:MonthDaySelector">
+            <Setter Property="Margin" Value="0,0,8,0"/>
+        </Style>
+    </Grid.Resources>
 
     <DataGrid
         ItemsSource="{Binding Periods.ListView}"
@@ -42,18 +49,17 @@
             Text="{Binding Periods.SelectedPeriod.Notes}"/>
 
         <TextBlock Grid.Row="2" Text="Start"/>
-        <tk:Calendar
+
+        <con:MonthDaySelector
             Grid.Row="3"
-            IsUtcMode="False"
-            DisplayDate="{Binding Periods.SelectedPeriod.Start}"
-            SelectedDate="{Binding Periods.SelectedPeriod.Start}"/>
+            SelectedMonth="{Binding Periods.SelectedPeriod.MonthStart}"
+            SelectedDay="{Binding Periods.SelectedPeriod.DayStart}"/>
 
         <TextBlock Grid.Row="2" Grid.Column="1" Text="End"/>
-        <tk:Calendar
+        <con:MonthDaySelector
             Grid.Row="3" Grid.Column="1"
-            IsUtcMode="False"
-            DisplayDate="{Binding Periods.SelectedPeriod.End}"
-            SelectedDate="{Binding Periods.SelectedPeriod.End}"/>
+            SelectedMonth="{Binding Periods.SelectedPeriod.MonthEnd}"
+            SelectedDay="{Binding Periods.SelectedPeriod.DayEnd}"/>
         
         <StatusBar Grid.Row="4" Grid.ColumnSpan="2">
             <tk:IconButton

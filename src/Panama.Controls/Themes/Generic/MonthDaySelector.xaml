@@ -1,0 +1,109 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:con="clr-namespace:Restless.Panama.Controls">
+
+    <Style x:Key="DefaultMonthSelectorStyle" TargetType="ListBox">
+        <Setter Property="BorderThickness" Value="1,1,0,1"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="3"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style x:Key="DefaultDaySelectorStyle" TargetType="ListBox">
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="3"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Height" Value="21"/>
+                    <Setter Property="Width" Value="21"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
+            </Setter.Value>
+        </Setter>        
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Border
+                        Padding="4,1"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}">
+                        
+                        <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                        
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+        <Style.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style TargetType="con:MonthDaySelector">
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="Foreground" Value="DimGray"/>
+        <Setter Property="MonthSelectorStyle" Value="{StaticResource DefaultMonthSelectorStyle}"/>
+        <Setter Property="DaySelectorStyle" Value="{StaticResource DefaultDaySelectorStyle}"/>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="con:MonthDaySelector">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        Padding="{TemplateBinding Padding}">
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <ListBox
+                                MinWidth="{TemplateBinding MonthMinWidth}"
+                                Foreground="{TemplateBinding Foreground}"
+                                BorderThickness="1,1,0,1"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Style="{TemplateBinding MonthSelectorStyle}"
+                                ItemsSource="{TemplateBinding Months}"
+                                SelectedValue="{Binding SelectedMonth, RelativeSource={RelativeSource TemplatedParent}}"
+                                SelectedValuePath="Value"/>
+
+                            <ListBox
+                                Grid.Column="1"
+                                Foreground="{TemplateBinding Foreground}"
+                                BorderThickness="1"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Style="{TemplateBinding DaySelectorStyle}"
+                                ItemsSource="{TemplateBinding Days}"
+                                SelectedValue="{Binding SelectedDay, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
