@@ -22,24 +22,6 @@ namespace Restless.Panama.Database.Tables
         public long PublisherId => GetInt64(Columns.PublisherId);
 
         /// <summary>
-        /// Gets or sets the submission period start
-        /// </summary>
-        public DateTime Start
-        {
-            get => GetDateTime(Columns.Start);
-            set => SetPeriodStartDate(value);
-        }
-
-        /// <summary>
-        /// Gets or sets the submission period end
-        /// </summary>
-        public DateTime End
-        {
-            get => GetDateTime(Columns.End);
-            set => SetPeriodEndDate(value);
-        }
-
-        /// <summary>
         /// Gets or sets the month that the submission period starts
         /// </summary>
         public long MonthStart
@@ -115,8 +97,12 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         public void MakeAllYear()
         {
-            SetValue(Columns.Start, new DateTime(DateTime.Now.Year, 1, 1));
-            SetValue(Columns.End, new DateTime(DateTime.Now.Year, 12, 31, 23, 59, 59));
+            SetValue(Columns.MonthStart, 1L);
+            SetValue(Columns.DayStart, 1L);
+
+            SetValue(Columns.MonthEnd, 12L);
+            SetValue(Columns.DayEnd, 31L);
+
             Table.UpdateInPeriod(this);
         }
         #endregion
@@ -133,18 +119,6 @@ namespace Restless.Panama.Database.Tables
         private void SetDayValue(string columnName, long value)
         {
             SetValue(columnName, Math.Clamp(value, 1, 31));
-            Table.UpdateInPeriod(this);
-        }
-
-        private void SetPeriodStartDate(DateTime value)
-        {
-            SetValue(Columns.Start, new DateTime(value.Year, value.Month, value.Day));
-            Table.UpdateInPeriod(this);
-        }
-
-        private void SetPeriodEndDate(DateTime value)
-        {
-            SetValue(Columns.End, new DateTime(value.Year, value.Month, value.Day, 23, 59, 59));
             Table.UpdateInPeriod(this);
         }
         #endregion

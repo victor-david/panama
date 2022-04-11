@@ -241,7 +241,10 @@ namespace Restless.Panama.Controls
 
         private void AdjustAvailableDays()
         {
-            SelectedDay = Math.Min(SelectedDay, MonthDayMap[SelectedMonth]);
+            if (SelectedDay > MonthDayMap[SelectedMonth])
+            {
+                SelectedDay = MonthDayMap[SelectedMonth];
+            }
             Days.Refresh();
         }
         #endregion

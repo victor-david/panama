@@ -65,12 +65,8 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Start", TableColumns.Start)
-                .MakeDate(DateColumnFormat, toLocal:false);
-
-            Columns.Create("End", TableColumns.End)
-                .MakeDate(DateColumnFormat, toLocal:false);
-
+            Columns.Create<MonthDayMultiConverter>("Start", TableColumns.MonthStart, TableColumns.DayStart);
+            Columns.Create<MonthDayMultiConverter>("End", TableColumns.MonthEnd, TableColumns.DayEnd);
             Columns.Create("Note", TableColumns.Notes).MakeSingleLine();
 
             MenuItems.AddItem(Strings.MenuItemAddSubmissionPeriod, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
@@ -94,7 +90,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareDateTime(item1, item2, TableColumns.Start);
+            return DataRowCompareLong(item1, item2, TableColumns.MonthStart);
         }
 
         /// <inheritdoc/>
@@ -111,7 +107,6 @@ namespace Restless.Panama.ViewModel
                 Table.AddSubmissionPeriod(Owner.SelectedPublisher.Id);
                 Update();
             }
-
         }
 
         /// <inheritdoc/>

@@ -43,16 +43,6 @@ namespace Restless.Panama.Database.Tables
                 public const string PublisherId = "publisherid";
 
                 /// <summary>
-                /// The name of the start column. Holds the date that a submission period starts.
-                /// </summary>
-                public const string Start = "start";
-
-                /// <summary>
-                /// The name of the end column. Holds the date that a submission period ends.
-                /// </summary>
-                public const string End = "end";
-
-                /// <summary>
                 /// Month number when submission period starts
                 /// </summary>
                 public const string MonthStart = "monthstart";
@@ -83,7 +73,7 @@ namespace Restless.Panama.Database.Tables
                 public static class Joined
                 {
                     /// <summary>
-                    /// The name of the publisre name column. This column gets its value from the <see cref="PublisherTable"/>.
+                    /// Publisher name, gets its value from the <see cref="PublisherTable"/>.
                     /// </summary>
                     public const string Publisher = "JoinPubName";
                 }
@@ -133,8 +123,6 @@ namespace Restless.Panama.Database.Tables
         {
             DataRow row = NewRow();
             row[Defs.Columns.PublisherId] = publisherId;
-            row[Defs.Columns.Start] = new DateTime(DateTime.Now.Year, 1, 1);
-            row[Defs.Columns.End] = new DateTime(DateTime.Now.Year, 12, 31);
             row[Defs.Columns.MonthStart] = 1;
             row[Defs.Columns.DayStart] = 1;
             row[Defs.Columns.MonthEnd] = 12;
@@ -181,8 +169,6 @@ namespace Restless.Panama.Database.Tables
             {
                 { Defs.Columns.Id, ColumnType.Integer, true },
                 { Defs.Columns.PublisherId, ColumnType.Integer },
-                { Defs.Columns.Start, ColumnType.Timestamp },
-                { Defs.Columns.End, ColumnType.Timestamp },
                 { Defs.Columns.MonthStart, ColumnType.Integer },
                 { Defs.Columns.DayStart, ColumnType.Integer },
                 { Defs.Columns.MonthEnd, ColumnType.Integer },

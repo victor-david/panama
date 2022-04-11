@@ -341,7 +341,7 @@ namespace Restless.Panama.Database.Tables
         /// <param name="row">The publisher data row</param>
         /// <remarks>
         /// This method is used by the SubmissionPeriodTable to sync the publisher table
-        /// when a submission period record is added or deleted. It's also used by this
+        /// when a submission period record is added, deleted, or modified. It's also used by this
         /// class when performing the startup initialization.
         /// </remarks>
         internal void UpdateInPeriod(DataRow row)
@@ -362,9 +362,13 @@ namespace Restless.Panama.Database.Tables
                 bool inPeriod = false;
                 foreach (DataRow childRow in row.GetChildRows(Defs.Relations.ToSubmissionPeriod))
                 {
-                    DateTime periodStart = (DateTime)childRow[SubmissionPeriodTable.Defs.Columns.Start];
-                    DateTime periodEnd = (DateTime)childRow[SubmissionPeriodTable.Defs.Columns.End];
-                    inPeriod = inPeriod || IsInPeriod(periodStart, periodEnd);
+                    long monthStart = (long)childRow[SubmissionPeriodTable.Defs.Columns.MonthStart];
+                    long dayStart = (long)childRow[SubmissionPeriodTable.Defs.Columns.DayStart];
+
+                    long monthEnd = (long)childRow[SubmissionPeriodTable.Defs.Columns.MonthEnd];
+                    long dayEnd = (long)childRow[SubmissionPeriodTable.Defs.Columns.DayEnd];
+
+                    inPeriod = inPeriod || IsInPeriod(monthStart, dayStart, monthEnd, dayEnd);
                 }
 
                 row[Defs.Columns.Calculated.InSubmissionPeriod] = inPeriod;
@@ -405,26 +409,27 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Private methods
-        private bool IsInPeriod(DateTime start, DateTime end)
+        private bool IsInPeriod(long monthStart, long dayStart, long monthEnd, long dayEnd)
         {
-            DateTime now = DateTime.Now;
-            // Normalize both dates to the same year
-            start = new DateTime(now.Year - 1, start.Month, start.Day);
-            end = new DateTime(now.Year - 1, end.Month, end.Day, 23, 59, 59);
+            //DateTime now = DateTime.Now;
+            //// Normalize both dates to the same year
+            //start = new DateTime(now.Year - 1, start.Month, start.Day);
+            //end = new DateTime(now.Year - 1, end.Month, end.Day, 23, 59, 59);
 
-            // If start date (day of year) comes later than end date (day of year), bump end date up one year.
-            if (start.DayOfYear > end.DayOfYear)
-            {
-                end = end.AddYears(1);
-            }
+            //// If start date (day of year) comes later than end date (day of year), bump end date up one year.
+            //if (start.DayOfYear > end.DayOfYear)
+            //{
+            //    end = end.AddYears(1);
+            //}
 
-            // If both are behind today, bump both up one year.
-            if (DateTime.Compare(start, now) < 0 && DateTime.Compare(end, now) < 0)
-            {
-                start = start.AddYears(1);
-                end = end.AddYears(1);
-            }
-            return DateTime.Compare(now, start) >= 0 && DateTime.Compare(now, end) <= 0;
+            //// If both are behind today, bump both up one year.
+            //if (DateTime.Compare(start, now) < 0 && DateTime.Compare(end, now) < 0)
+            //{
+            //    start = start.AddYears(1);
+            //    end = end.AddYears(1);
+            //}
+            //return DateTime.Compare(now, start) >= 0 && DateTime.Compare(now, end) <= 0;
+            return false;
         }
         #endregion
     }
