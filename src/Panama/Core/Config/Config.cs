@@ -138,6 +138,10 @@ namespace Restless.Panama.Core
             public const double MaxAuthorDetailWidth = 460;
             public const double DefaultAuthorDetailWidth = MinAuthorDetailWidth;
 
+            public const double MinCredentialDetailWidth = 302;
+            public const double MaxCredentialDetailWidth = 582;
+            public const double DefaultCredentialDetailWidth = MinCredentialDetailWidth;
+
             public const double MinLinkDetailWidth = 280;
             public const double MaxLinkDetailWidth = 480;
             public const double DefaultLinkDetailWidth = MinLinkDetailWidth;
@@ -507,6 +511,18 @@ namespace Restless.Panama.Core
         public double AuthorDetailWidth
         {
             get => GetItem(Grid.DefaultAuthorDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool CredentialDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double CredentialDetailWidth
+        {
+            get => GetItem(Grid.DefaultCredentialDetailWidth);
             set => SetItem(value);
         }
 

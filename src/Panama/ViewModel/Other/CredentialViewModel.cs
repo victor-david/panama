@@ -9,11 +9,12 @@ using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
-using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
 using Restless.Toolkit.Utility;
 using System.ComponentModel;
+using System.Data;
 using System.Windows;
-
+using TableColumns = Restless.Panama.Database.Tables.CredentialTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -23,6 +24,9 @@ namespace Restless.Panama.ViewModel
     public class CredentialViewModel : DataRowViewModel<CredentialTable>
     {
         #region Private
+        private PublisherTable PublisherTable => DatabaseController.Instance.GetTable<PublisherTable>();
+        private LinkTable LinkTable => DatabaseController.Instance.GetTable<LinkTable>();
+        private CredentialRow selectedCredential;
         #endregion
 
         /************************************************************************/
@@ -35,12 +39,20 @@ namespace Restless.Panama.ViewModel
         public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
 
         /// <summary>
+        /// Gets the selected credential
+        /// </summary>
+        public CredentialRow SelectedCredential
+        {
+            get => selectedCredential;
+            private set => SetProperty(ref selectedCredential, value);
+        }
+
+        /// <summary>
         /// Gets the publisher controller.
         /// </summary>
         public CredentialPublisherController Publisher
         {
             get;
-            private set;
         }
         #endregion
 
@@ -52,76 +64,69 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public CredentialViewModel()
         {
-            DisplayName = Strings.CommandCredential;
             Publisher = new CredentialPublisherController(this);
 
-            Columns.Create("Id", LinkTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.SetDefaultSort(Columns.Create("Name", CredentialTable.Defs.Columns.Name), ListSortDirection.Ascending);
-            Columns.Create("Login Id", CredentialTable.Defs.Columns.LoginId);
-            Columns.Create("Password", CredentialTable.Defs.Columns.Password).MakeMasked();
-            AddViewSourceSortDescriptions();
+            Columns.Create("Id", TableColumns.Id)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042);
 
-            Commands.Add("CopyLoginId", (o) =>
-                {
-                    CopyCredentialPart(CredentialTable.Defs.Columns.LoginId);
-                },
-                (o) => IsSelectedRowAccessible);
-
-            Commands.Add("CopyPassword", (o) =>
-            {
-                CopyCredentialPart(CredentialTable.Defs.Columns.Password);
-            },
-            (o) => IsSelectedRowAccessible);
-
+            Columns.SetDefaultSort(Columns.Create("Name", TableColumns.Name), ListSortDirection.Ascending);
+            Columns.Create("Login Id", TableColumns.LoginId);
+            Columns.Create("Password", TableColumns.Password).MakeMasked();
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
-            MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
+            MenuItems.AddItem(Strings.MenuItemAddCredential, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(
+                Strings.CommandCopyLoginId,
+                RelayCommand.Create(p => CopyToClipboard(SelectedCredential?.LoginId), p => IsSelectedRowAccessible)
+                );
+            MenuItems.AddItem(
+                Strings.CommandCopyPassword,
+                RelayCommand.Create(p => CopyToClipboard(SelectedCredential?.Password), p => IsSelectedRowAccessible)
+                );
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.CommandDeleteCredential, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
 
-            MenuItems.AddItem(Strings.CommandDeleteCredential, DeleteCommand).AddImageResource("ImageDeleteMenu");
+            ListView.IsLiveSorting = true;
+            ListView.LiveSortingProperties.Add(TableColumns.Name);
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region Public methods
         #endregion
 
         /************************************************************************/
 
         #region Protected Methods
-        /// <summary>
-        /// Called when the selected item changes.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
+            SelectedCredential = CredentialRow.Create(SelectedRow);
             Publisher.Update();
         }
 
-        /// <summary>
-        /// Runs the add command to add a new record to the data table
-        /// </summary>
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareString(item1, item2, TableColumns.Name);
+        }
+
+        /// <inheritdoc/>
         protected override void RunAddCommand()
         {
             Table.AddDefaultRow();
             Table.Save();
-            AddViewSourceSortDescriptions();
             Columns.RestoreDefaultSort();
+            ForceListViewSort();
         }
 
-        /// <summary>
-        /// Runs the delete command to delete a record from the data table
-        /// </summary>
+        /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (IsSelectedRowAccessible && Messages.ShowYesNo(Strings.ConfirmationDeleteCredential))
+            if (SelectedCredential != null && Messages.ShowYesNo(Strings.ConfirmationDeleteCredential))
             {
-                long credId = (long)SelectedPrimaryKey;
-                DatabaseController.Instance.GetTable<PublisherTable>().ClearCredential(credId);
-                DatabaseController.Instance.GetTable<LinkTable>().ClearCredential(credId);
-                SelectedRow.Delete();
-                Table.Save();
+                PublisherTable.ClearCredential(SelectedCredential.Id);
+                LinkTable.ClearCredential(SelectedCredential.Id);
+                DeleteSelectedRow();
             }
         }
         #endregion
@@ -129,25 +134,18 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
-
-        private void AddViewSourceSortDescriptions()
+        private void CopyToClipboard(string value)
         {
-            // TODO
-            //MainSource.SortDescriptions.Clear();
-            //MainSource.SortDescriptions.Add(new SortDescription(CredentialTable.Defs.Columns.Name, ListSortDirection.Ascending));
-        }
-
-        private void CopyCredentialPart(string columnName)
-        {
-            if (SelectedRow != null)
+            try
             {
-                // Once in a while the Clipboard.SetText() method throws an exception.
-                // It's rare, but catch it if it happens so it's not unhandled.
-                Execution.TryCatch(() =>
+                if (!string.IsNullOrEmpty(value))
                 {
-                    Clipboard.SetText(SelectedRow[columnName].ToString());
-                    MainWindowViewModel.Instance.CreateNotificationMessage($"{columnName} copied to clipboard");
-                });
+                    Clipboard.SetText(value);
+                    MainWindowViewModel.Instance.CreateNotificationMessage("Copied to clipboard");
+                }
+            }
+            catch
+            {
             }
         }
         #endregion

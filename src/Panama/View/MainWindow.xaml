@@ -37,14 +37,14 @@
                     Command="{Binding Commands[NavigateAuthor]}"/>
                 
                 <MenuItem
+                    Header="Credentials" 
+                    Icon="{StaticResource LockIconKey}" 
+                    Command="{Binding Commands[NavigateCredential]}"/>
+                
+                <MenuItem
                     Header="{x:Static r:Strings.MenuItemTags}"
                     Icon="{StaticResource TagIconKey}"
                     Command="{Binding Commands[NavigateTag]}"/>
-                
-                <!--<MenuItem
-                    Header="Credentials" 
-                    Icon="{StaticResource ImageCredentialMenu}" 
-                    Command="{Binding Commands[Credential]}"/>-->
                 
                 <Separator />
                 

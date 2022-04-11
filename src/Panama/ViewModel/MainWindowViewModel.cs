@@ -103,19 +103,14 @@ namespace Restless.Panama.ViewModel
             Commands.Add("OpenToolWindow", p => WindowFactory.Tool.Create().ShowDialog());
 
             Commands.Add("NavigateAuthor", p => NavigatorItems.Select<AuthorViewModel>());
+            Commands.Add("NavigateCredential", p => NavigatorItems.Select<CredentialViewModel>());
             Commands.Add("NavigateSearch", p => NavigatorItems.Select<ToolSearchViewModel>());
             Commands.Add("NavigateTable", p => NavigatorItems.Select<TableViewModel>());
             Commands.Add("NavigateTag", p => NavigatorItems.Select<TagViewModel>());
 
             Commands.Add("Close", p => WindowOwner.Close());
             
-            Commands.Add("Credential", p => NavigatorItems.Select<CredentialViewModel>());
-            //Commands.Add("Alert", p => NavigatorItems.Select<AlertViewModel>());
-            //Commands.Add("Link", p => NavigatorItems.Select<LinkViewModel>());
-            //Commands.Add("Note", p => NavigatorItems.Select<UserNoteViewModel>());
-            //Commands.Add("Publisher", p => NavigatorItems.Select<PublisherViewModel>());
             Commands.Add("ResetWindow", RunResetWindowCommand);
-            //Commands.Add("Submission", p => NavigatorItems.Select<SubmissionViewModel>());
             Commands.Add("Save", Save);
 
             //Commands.Add("ToolConvert", p => NavigatorItems.Select<ToolConvertViewModel>(), CanRunToolConvertCommand);
@@ -207,6 +202,7 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.SubmissionGeometryKey));
 
             NavigatorItems.Add<AuthorViewModel>(NavigationGroup.Settings, Strings.MenuItemAuthors, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.UserGeometryKey));
+            NavigatorItems.Add<CredentialViewModel>(NavigationGroup.Settings, Strings.MenuItemCredentials, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.LockGeometryKey));
             NavigatorItems.Add<TagViewModel>(NavigationGroup.Settings, Strings.MenuItemTags, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TagGeometryKey));
 
             NavigatorItems.Add<AlertViewModel>(NavigationGroup.Other, Strings.MenuItemAlerts, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.AlertGeometryKey));

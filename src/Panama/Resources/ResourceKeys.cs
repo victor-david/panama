@@ -24,6 +24,7 @@
             public const string FilterGeometryKey = nameof(FilterGeometryKey);
             public const string FilterOffGeometryKey = nameof(FilterOffGeometryKey);
             public const string LinkGeometryKey = nameof(LinkGeometryKey);
+            public const string LockGeometryKey = nameof(LockGeometryKey);
             public const string NoteGeometryKey = nameof(NoteGeometryKey);
             public const string PlusGeometryKey = nameof(PlusGeometryKey);
             public const string PublisherGeometryKey = nameof(PublisherGeometryKey);
@@ -56,6 +57,8 @@
             public const string FilterIconKey = nameof(FilterIconKey);
             public const string FilterOffIconKey = nameof(FilterOffIconKey);
             public const string LinkIconKey = nameof(LinkIconKey);
+            public const string LockIconKey = nameof(LockIconKey);
+            public const string LockMediumIconKey = nameof(LockMediumIconKey);
             public const string NoteIconKey = nameof(NoteIconKey);
             public const string PlusIconKey = nameof(PlusIconKey);
             public const string SettingsIconKey = nameof(SettingsIconKey);

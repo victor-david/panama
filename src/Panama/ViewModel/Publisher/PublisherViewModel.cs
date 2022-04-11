@@ -98,17 +98,14 @@ namespace Restless.Panama.ViewModel
         public PublisherRowFilter Filters => Config.PublisherFilter;
 
         /// <summary>
-        /// Gets an enumerable of <see cref="CredentialTable.RowObject"/> items. The UI binds to this list.
+        /// Gets an enumerable of <see cref="CredentialRow"/> items.
         /// </summary>
-        public IEnumerable<CredentialTable.RowObject> Credentials
-        {
-            get => DatabaseController.Instance.GetTable<CredentialTable>().EnumerateCredentials();
-        }
+        public IEnumerable<CredentialRow> Credentials => DatabaseController.Instance.GetTable<CredentialTable>().EnumerateAll();
 
         /// <summary>
         /// Gets or sets the selected credential item.
         /// </summary>
-        public CredentialTable.RowObject SelectedCredential
+        public CredentialRow SelectedCredential
         {
             get;
             set;

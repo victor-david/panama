@@ -173,15 +173,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a credential set.
-        /// </summary>
-        public static string CommandAddCredentialTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddCredentialTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add a link to a resource.
         /// </summary>
         public static string CommandAddLinkTooltip {
@@ -286,15 +277,6 @@ namespace Restless.Panama.Resources {
         public static string CommandCopyPassword {
             get {
                 return ResourceManager.GetString("CommandCopyPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Credentials.
-        /// </summary>
-        public static string CommandCredential {
-            get {
-                return ResourceManager.GetString("CommandCredential", resourceCulture);
             }
         }
         
@@ -1685,6 +1667,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a credential set.
+        /// </summary>
+        public static string MenuItemAddCredential {
+            get {
+                return ResourceManager.GetString("MenuItemAddCredential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a document to this submission.
         /// </summary>
         public static string MenuItemAddDocumentToSubmission {
@@ -1825,6 +1816,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemCreateSubmissionToPublisher {
             get {
                 return ResourceManager.GetString("MenuItemCreateSubmissionToPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credentials.
+        /// </summary>
+        public static string MenuItemCredentials {
+            get {
+                return ResourceManager.GetString("MenuItemCredentials", resourceCulture);
             }
         }
         

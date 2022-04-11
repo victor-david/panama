@@ -604,7 +604,7 @@ When you save properties here however, the document's file  modification date is
   <data name="CommandAddCredential" xml:space="preserve">
     <value>Add credential</value>
   </data>
-  <data name="CommandAddCredentialTooltip" xml:space="preserve">
+  <data name="MenuItemAddCredential" xml:space="preserve">
     <value>Add a credential set</value>
   </data>
   <data name="CommandCopyLoginId" xml:space="preserve">
@@ -613,7 +613,7 @@ When you save properties here however, the document's file  modification date is
   <data name="CommandCopyPassword" xml:space="preserve">
     <value>Copy password to clipboard</value>
   </data>
-  <data name="CommandCredential" xml:space="preserve">
+  <data name="MenuItemCredentials" xml:space="preserve">
     <value>Credentials</value>
   </data>
   <data name="CommandDeleteCredential" xml:space="preserve">

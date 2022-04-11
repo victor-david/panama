@@ -80,8 +80,8 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Provides an enumerable that gets all credentials in order of name ASC.
         /// </summary>
-        /// <returns>A <see cref="RowObject"/></returns>
-        public IEnumerable<RowObject> EnumerateCredentials()
+        /// <returns>An enumerable</returns>
+        public IEnumerable<CredentialRow> EnumerateAll()
         {
             DataRow zeroRow = NewRow();
             zeroRow[Defs.Columns.Id] = 0;
@@ -89,14 +89,11 @@ namespace Restless.Panama.Database.Tables
             zeroRow[Defs.Columns.LoginId] = "***";
             zeroRow[Defs.Columns.Password] = "***";
 
-            yield return new RowObject(zeroRow);
-
-            DataRow[] rows = Select(null, $"{Defs.Columns.Name} ASC");
-            foreach (DataRow row in rows)
+            yield return new CredentialRow(zeroRow);
+            foreach (DataRow row in EnumerateRows(null, Defs.Columns.Name))
             {
-                yield return new RowObject(row);
+                yield return new CredentialRow(row);
             }
-            yield break;
         }
         #endregion
 
@@ -132,79 +129,25 @@ namespace Restless.Panama.Database.Tables
 
         /************************************************************************/
 
-        #region Row Object
-        /// <summary>
-        /// Encapsulates a single row from the <see cref="CredentialTable"/>.
-        /// </summary>
-        public class RowObject : RowObjectBase<CredentialTable>
-        {
-            #region Public properties
-            /// <summary>
-            /// Gets the id for this row object.
-            /// </summary>
-            public long Id
-            {
-                get { return GetInt64(Defs.Columns.Id); }
-            }
 
-            /// <summary>
-            /// Gets or sets the name for this row object.
-            /// </summary>
-            public string Name
-            {
-                get { return GetString(Defs.Columns.Name); }
-                set { SetValue(Defs.Columns.Name, value); }
-            }
-            /// <summary>
-            /// Gets or sets the login id for this row object.
-            /// </summary>
-            public string LoginId
-            {
-                get { return GetString(Defs.Columns.LoginId); }
-                set { SetValue(Defs.Columns.LoginId, value); }
-            }
-
-            /// <summary>
-            /// Gets or sets the author id for this row object.
-            /// </summary>
-            public string Password
-            {
-                get { return GetString(Defs.Columns.Password); }
-                set { SetValue(Defs.Columns.Password, value); }
-            }
-            #endregion
-
-            /************************************************************************/
-
-            #region Constructor
-            /// <summary>
-            /// Initializes a new instance of the <see cref="RowObject"/> class.
-            /// </summary>
-            /// <param name="row">The data row</param>
-            public RowObject(DataRow row)
-                : base(row)
-            {
-            }
-            #endregion
-
-            /************************************************************************/
+        //    /************************************************************************/
             
-            #region Public methods
-            /// <summary>
-            /// Gets the string representation of this object.
-            /// </summary>
-            /// <returns>A string with the name and login id concatenated.</returns>
-            public override string ToString()
-            {
-                string loginId = string.Empty;
-                if (Id > 0)
-                {
-                    loginId = string.Format(" ({0})", LoginId);
-                }
-                return string.Format("{0}{1}", Name, loginId);
-            }
-            #endregion
-        }
-        #endregion
+        //    #region Public methods
+        //    /// <summary>
+        //    /// Gets the string representation of this object.
+        //    /// </summary>
+        //    /// <returns>A string with the name and login id concatenated.</returns>
+        //    public override string ToString()
+        //    {
+        //        string loginId = string.Empty;
+        //        if (Id > 0)
+        //        {
+        //            loginId = string.Format(" ({0})", LoginId);
+        //        }
+        //        return string.Format("{0}{1}", Name, loginId);
+        //    }
+        //    #endregion
+        //}
+        //#endregion
     }
 }
