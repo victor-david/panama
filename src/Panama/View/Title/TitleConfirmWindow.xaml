@@ -20,6 +20,7 @@
 
         <tk:DataGrid
             RowHeight="{Binding Config.DataGridRowHeight}"
+            RowStyle="{StaticResource TitleConfirmDataGridRowStyle}"
             ItemsSource="{Binding ListView}"
             SelectedItem="{Binding SelectedItem}"
             tk:DataGridColumns.Columns="{Binding Columns}"/>
