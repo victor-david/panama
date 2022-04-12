@@ -202,7 +202,7 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.SubmissionGeometryKey));
 
             NavigatorItems.Add<AuthorViewModel>(NavigationGroup.Settings, Strings.MenuItemAuthors, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.UserGeometryKey));
-            NavigatorItems.Add<CredentialViewModel>(NavigationGroup.Settings, Strings.MenuItemCredentials, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.LockGeometryKey));
+            //NavigatorItems.Add<CredentialViewModel>(NavigationGroup.Settings, Strings.MenuItemCredentials, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.LockGeometryKey));
             NavigatorItems.Add<TagViewModel>(NavigationGroup.Settings, Strings.MenuItemTags, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TagGeometryKey));
 
             NavigatorItems.Add<AlertViewModel>(NavigationGroup.Other, Strings.MenuItemAlerts, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.AlertGeometryKey));

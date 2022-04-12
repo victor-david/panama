@@ -14,14 +14,7 @@
     Title="{Binding Path=DisplayName, Mode=OneTime}" 
     TextOptions.TextRenderingMode="ClearType"
     WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Resources/Dictionary/PageTemplate.xaml" />
-                <ResourceDictionary Source="../../Resources/Dictionary/Main.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+
     <tk:AppWindow.Menu>
         <Menu KeyboardNavigation.TabNavigation="Cycle">
             <MenuItem Header="_File">
@@ -36,10 +29,10 @@
                     Icon="{StaticResource UserIconKey}"
                     Command="{Binding Commands[NavigateAuthor]}"/>
                 
-                <MenuItem
+                <!--<MenuItem
                     Header="Credentials" 
                     Icon="{StaticResource LockIconKey}" 
-                    Command="{Binding Commands[NavigateCredential]}"/>
+                    Command="{Binding Commands[NavigateCredential]}"/>-->
                 
                 <MenuItem
                     Header="{x:Static r:Strings.MenuItemTags}"

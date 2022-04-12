@@ -19,7 +19,7 @@
             <tk:RadioButton Grid.Column="0" Value="1" Content="Main"/>
             <tk:RadioButton Grid.Column="1" Value="2" Content="Periods"/>
             <tk:RadioButton Grid.Column="2" Value="3" Content="Submissions"/>
-            <tk:RadioButton Grid.Column="3" Value="4" Content="Credentials"/>
+            <!--<tk:RadioButton Grid.Column="3" Value="4" Content="Credentials"/>-->
         </tk:RadioButtonPanel>
 
         <!-- Main publisher data -->
@@ -41,10 +41,10 @@
             tk:Property.IsLongVisibleValue="3"/>
 
         <!-- Credentials -->
-        <vw:PublisherEditCredential
+        <!--<vw:PublisherEditCredential
             Grid.Row="1"
             tk:Property.IsLongVisible="{Binding SelectedEditSection}"
-            tk:Property.IsLongVisibleValue="4"/>
+            tk:Property.IsLongVisibleValue="4"/>-->
 
     </Grid>
 </UserControl>
