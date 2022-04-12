@@ -416,8 +416,8 @@ Last exported: {1}</value>
   <data name="MenuItemFilterToPublisher" xml:space="preserve">
     <value>Filter list to display only submissions to this publisher</value>
   </data>
-  <data name="ConfirmationTitleSubmittedPreviouslyToPublisher" xml:space="preserve">
-    <value>This title has been previously submitted to the same publisher. Do you want to continue and submit it to the same publisher again?</value>
+  <data name="TitleStatusPreviousToPublisher" xml:space="preserve">
+    <value>Previously submitted to the same publisher</value>
   </data>
   <data name="TooltipTitleCurrentSubmissionCount" xml:space="preserve">
     <value>Current submission count - the number of submissions that are still open for this title</value>
@@ -800,8 +800,8 @@ Do you want to continue?</value>
   <data name="ToolTipPublisherExclusive" xml:space="preserve">
     <value>Publisher wants an exclusive submission, i.e. does not accept simultaneous</value>
   </data>
-  <data name="ConfirmationTitleSubmittedToExclusivePublisher" xml:space="preserve">
-    <value>This title is currently submitted to a publisher that does not accept simultaneous submissions. Do you want to continue and submit the title to another publisher?</value>
+  <data name="TitleStatusSubmittedToExclusive" xml:space="preserve">
+    <value>Currently submitted to a publisher that does not accept simultaneous submissions</value>
   </data>
   <data name="CommandSubmissionFilterActive" xml:space="preserve">
     <value>Active</value>
@@ -1175,5 +1175,23 @@ Do you want to continue?</value>
   </data>
   <data name="ConfirmationResetSubmissionPeriod" xml:space="preserve">
     <value>This operation sets the submission period to January 1 - December 31, i.e. all year.</value>
+  </data>
+  <data name="TextCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TextConfirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="TitleStatusHeader" xml:space="preserve">
+    <value>Please confirm that you want to submit the following titles</value>
+  </data>
+  <data name="TitleStatusOkay" xml:space="preserve">
+    <value>No conflict</value>
+  </data>
+  <data name="TitleStatusUnknown" xml:space="preserve">
+    <value>Unknown status</value>
+  </data>
+  <data name="WindowTitleConfirmTitleSubmission" xml:space="preserve">
+    <value>Confirm title submission</value>
   </data>
 </root>

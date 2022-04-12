@@ -314,22 +314,6 @@ namespace Restless.Panama.Database.Tables
 
         /************************************************************************/
 
-        #region Internal methods
-        /// <summary>
-        /// Checks if the specified title exists within the specified batch.
-        /// </summary>
-        /// <param name="batchId">The submission batch id</param>
-        /// <param name="titleId">The title id</param>
-        /// <returns>true if the title is part of the batch;otherwise, false.</returns>
-        internal bool TitleExistsInBatch(long batchId, long titleId)
-        {
-            DataRow[] rows = Select($"{Defs.Columns.BatchId}={batchId} AND {Defs.Columns.TitleId}={titleId}");
-            return rows.Length > 0;
-        }
-        #endregion
-
-        /************************************************************************/
-
         #region Private methods
         /// <summary>
         /// Gets the next ordering value for the specified batch id.

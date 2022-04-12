@@ -17,6 +17,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Restless.Panama.ViewModel
 {
@@ -31,7 +32,7 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Public properties
+        #region Properties
         public int SelectedFilterValue
         {
             get => Config.SubmissionMessageDisplay;
@@ -48,11 +49,20 @@ namespace Restless.Panama.ViewModel
         {
             get;
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region IWindowOwner
         /// <summary>
-        /// Gets or sets the window owner
+        /// Gets or sets the window owner. Set in <see cref="WindowFactory"/>
         /// </summary>
         public Window WindowOwner { get; set; }
+
+        /// <summary>
+        /// Gets or sets a command to close the window. Set in <see cref="WindowFactory"/>
+        /// </summary>
+        public ICommand CloseWindowCommand { get; set; }
         #endregion
 
         /************************************************************************/

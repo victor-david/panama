@@ -11,6 +11,8 @@ using Restless.Panama.Resources;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media;
+using System.Collections.Generic;
+using Restless.Toolkit.Mvvm;
 
 namespace Restless.Panama.Core
 {
@@ -153,6 +155,34 @@ namespace Restless.Panama.Core
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     ShowInTaskbar = false,
                     DataContext = new TitleSelectWindowViewModel(),
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
+                return window;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region TitleConfirm
+        /// <summary>
+        /// Provides static methods for creating a title submission confirmation window.
+        /// </summary>
+        public static class TitleConfirm
+        {
+            /// <summary>
+            /// Creates an instance of TitleSelectWindow and its corresponding view model.
+            /// </summary>
+            /// <returns>The window</returns>
+            public static TitleConfirmWindow Create(SubmissionBatchRow submissionBatch, List<TitleRow> titles)
+            {
+                TitleConfirmWindow window = new()
+                {
+                    Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
+                    DataContext = new TitleConfirmWindowViewModel(submissionBatch, titles),
                 };
                 SetWindowOwner(window);
                 SetTextFormattingMode(window);
@@ -368,6 +398,7 @@ namespace Restless.Panama.Core
             if (window.DataContext is IWindowOwner owner)
             {
                 owner.WindowOwner = window;
+                owner.CloseWindowCommand = RelayCommand.Create(p => owner.WindowOwner?.Close());
             }
         }
 

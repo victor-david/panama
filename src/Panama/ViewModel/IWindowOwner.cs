@@ -18,5 +18,10 @@ namespace Restless.Panama.ViewModel
         /// Gets or sets the window owner.
         /// </summary>
         Window WindowOwner { get; set; }
+
+        /// <summary>
+        /// Gets or sets a command to close the window.
+        /// </summary>
+        ICommand CloseWindowCommand { get; set; }
     }
 }

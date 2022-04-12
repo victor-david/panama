@@ -7,7 +7,6 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Core.Database.SQLite;
-using Restless.Toolkit.Mvvm;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -35,9 +34,21 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Public properties
+        #region Properties
         /// <summary>
-        /// Gets or sets the window that owns this view model
+        /// Gets the application information object.
+        /// </summary>
+        public ApplicationInfo AppInfo
+        {
+            get;
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region IWindowOwner
+        /// <summary>
+        /// Gets or sets the window owner. Set in <see cref="WindowFactory"/>
         /// </summary>
         public Window WindowOwner
         {
@@ -56,20 +67,9 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a command that closes <see cref="WindowOwner"/>.
+        /// Gets or sets a command to close the window. Set in <see cref="WindowFactory"/>
         /// </summary>
-        public ICommand CloseWindowCommand
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the application information object.
-        /// </summary>
-        public ApplicationInfo AppInfo
-        {
-            get;
-        }
+        public ICommand CloseWindowCommand { get; set; }
         #endregion
 
         /************************************************************************/
@@ -81,7 +81,6 @@ namespace Restless.Panama.ViewModel
         public WindowViewModel()
         {
             AppInfo = ApplicationInfo.Instance;
-            CloseWindowCommand = RelayCommand.Create(p => windowOwner?.Close());
         }
         #endregion
 

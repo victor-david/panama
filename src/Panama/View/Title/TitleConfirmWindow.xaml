@@ -1,0 +1,44 @@
+﻿<tk:AppWindow 
+    x:Class="Restless.Panama.View.TitleConfirmWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:TitleSelectWindowViewModel}"
+    mc:Ignorable="d"
+    ResizeMode="NoResize"
+    Title="{x:Static r:Strings.WindowTitleConfirmTitleSubmission}"
+    Style="{StaticResource DefaultAppWindowStyle}"
+    Height="370" Width="860">
+    
+    <Grid 
+        Margin="{StaticResource TightPadding}"
+        tk:Property.RowHeights="*,Auto">
+
+        <tk:DataGrid
+            RowHeight="{Binding Config.DataGridRowHeight}"
+            ItemsSource="{Binding ListView}"
+            SelectedItem="{Binding SelectedItem}"
+            tk:DataGridColumns.Columns="{Binding Columns}"/>
+
+        <StackPanel
+            Grid.Row="1"
+            Margin="0,5,0,0"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+
+            <tk:IconButton
+                Icon="{StaticResource SquareSmallGreenIconKey}"
+                Content="{x:Static r:Strings.TextConfirm}"
+                Command="{Binding Commands[Confirm]}"/>
+
+            <tk:IconButton
+                Icon="{StaticResource SquareSmallRedIconKey}"
+                Content="{x:Static r:Strings.TextCancel}"
+                Command="{Binding CloseWindowCommand}"/> 
+        </StackPanel>
+    </Grid>
+</tk:AppWindow>

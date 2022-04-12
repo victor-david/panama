@@ -223,7 +223,7 @@ namespace Restless.Panama.Database.Tables
             foreach(DataRow row in active)
             {
                 long batchId = (long)row[Defs.Columns.Id];
-                if (sub.TitleExistsInBatch(batchId, titleId))
+                if (sub.SubmissionExists(batchId, titleId))
                 {
                     count++;
                 }

@@ -151,6 +151,11 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052);
 
+            Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Joined.PublisherExclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip(Strings.ToolTipPublisherExclusive);
+
             Columns.Create("Publisher", TableColumns.Joined.Publisher);
 
             Columns.Create("Fee", TableColumns.Fee)

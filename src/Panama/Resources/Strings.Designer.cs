@@ -950,24 +950,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This title has been previously submitted to the same publisher. Do you want to continue and submit it to the same publisher again?.
-        /// </summary>
-        public static string ConfirmationTitleSubmittedPreviouslyToPublisher {
-            get {
-                return ResourceManager.GetString("ConfirmationTitleSubmittedPreviouslyToPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This title is currently submitted to a publisher that does not accept simultaneous submissions. Do you want to continue and submit the title to another publisher?.
-        /// </summary>
-        public static string ConfirmationTitleSubmittedToExclusivePublisher {
-            get {
-                return ResourceManager.GetString("ConfirmationTitleSubmittedToExclusivePublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Alert title.
         /// </summary>
         public static string FilterPromptAlert {
@@ -2189,11 +2171,29 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string TextCancel {
+            get {
+                return ResourceManager.GetString("TextCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string TextClear {
             get {
                 return ResourceManager.GetString("TextClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string TextConfirm {
+            get {
+                return ResourceManager.GetString("TextConfirm", resourceCulture);
             }
         }
         
@@ -2545,6 +2545,51 @@ namespace Restless.Panama.Resources {
         public static string TextZeroSearchResults {
             get {
                 return ResourceManager.GetString("TextZeroSearchResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please confirm that you want to submit the following titles.
+        /// </summary>
+        public static string TitleStatusHeader {
+            get {
+                return ResourceManager.GetString("TitleStatusHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No conflict.
+        /// </summary>
+        public static string TitleStatusOkay {
+            get {
+                return ResourceManager.GetString("TitleStatusOkay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previously submitted to the same publisher.
+        /// </summary>
+        public static string TitleStatusPreviousToPublisher {
+            get {
+                return ResourceManager.GetString("TitleStatusPreviousToPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently submitted to a publisher that does not accept simultaneous submissions.
+        /// </summary>
+        public static string TitleStatusSubmittedToExclusive {
+            get {
+                return ResourceManager.GetString("TitleStatusSubmittedToExclusive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown status.
+        /// </summary>
+        public static string TitleStatusUnknown {
+            get {
+                return ResourceManager.GetString("TitleStatusUnknown", resourceCulture);
             }
         }
         
@@ -3022,6 +3067,15 @@ namespace Restless.Panama.Resources {
         public static string ValidationOperationIntegerNeeded {
             get {
                 return ResourceManager.GetString("ValidationOperationIntegerNeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm title submission.
+        /// </summary>
+        public static string WindowTitleConfirmTitleSubmission {
+            get {
+                return ResourceManager.GetString("WindowTitleConfirmTitleSubmission", resourceCulture);
             }
         }
         

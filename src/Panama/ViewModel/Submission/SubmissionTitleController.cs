@@ -13,6 +13,7 @@ using Restless.Toolkit.Mvvm;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Linq;
 using ResponseValues = Restless.Panama.Database.Tables.ResponseTable.Defs.Values;
 using SubmissionValues = Restless.Panama.Database.Tables.SubmissionTable.Defs.Values;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionTable.Defs.Columns;
@@ -144,7 +145,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunAddCommand()
         {
-            if (WindowFactory.TitleSelect.Create().GetTitles() is List<TitleRow> titles)
+            if (WindowFactory.TitleSelect.Create().GetTitles() is List<TitleRow> titles && ConfirmTitleSubmission(titles))
             {
                 titles.ForEach(title => Table.AddSubmission(Owner.SelectedBatch.Id, title.Id));
                 ListView.Refresh();
@@ -237,6 +238,31 @@ namespace Restless.Panama.ViewModel
                 }
                 System.Windows.Clipboard.SetText(builder.ToString());
                 MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ConfirmationTitlesCopiedToClipboard);
+            });
+        }
+
+        private bool ConfirmTitleSubmission(List<TitleRow> titles)
+        {
+            RemoveDuplicateTitles(titles);
+            return titles.Count == 0 || WindowFactory.TitleConfirm.Create(Owner.SelectedBatch, titles).ConfirmTitles();
+        }
+
+        /* Removes titles that are already part of the current batch */
+        private void RemoveDuplicateTitles(List<TitleRow> titles)
+        {
+            List<TitleRow> toRemove = new();
+
+            titles.ForEach(title =>
+            {
+                if (Table.SubmissionExists(Owner.SelectedBatch.Id, title.Id))
+                {
+                    toRemove.Add(title);
+                }
+            });
+
+            toRemove.ForEach(title =>
+            {
+                titles.Remove(title);
             });
         }
         #endregion
