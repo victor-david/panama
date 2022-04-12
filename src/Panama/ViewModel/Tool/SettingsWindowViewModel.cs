@@ -2,6 +2,7 @@
 using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Resources;
+using Restless.Panama.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,6 +37,15 @@ namespace Restless.Panama.ViewModel
                 SetProperty(ref selectedSection, value);
                 Config.SelectedConfigSection = (int)selectedSection.Id;
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the database location
+        /// </summary>
+        public string DatabaseLocation
+        {
+            get => RegistryManager.DatabaseDirectory;
+            set => RegistryManager.SetDatabaseDirectory(value);
         }
 
         /// <summary>

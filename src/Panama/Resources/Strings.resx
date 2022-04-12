@@ -686,7 +686,7 @@ The application cannot continue.</value>
   <data name="HeaderSettingsSubmission" xml:space="preserve">
     <value>Submission</value>
   </data>
-  <data name="ConfigDataGridRowHeight" xml:space="preserve">
+  <data name="SettingsDataGridRowHeight" xml:space="preserve">
     <value>Data grid row height</value>
   </data>
   <data name="TooltipColorAlpha" xml:space="preserve">
@@ -698,11 +698,8 @@ The application cannot continue.</value>
   <data name="TooltipColorReset" xml:space="preserve">
     <value>Reset all colors to their default values</value>
   </data>
-  <data name="ConfigDataGridRowAlternation" xml:space="preserve">
+  <data name="SettingsDataGridRowAlternation" xml:space="preserve">
     <value>Data grid row alternation</value>
-  </data>
-  <data name="ConfigDataGrid" xml:space="preserve">
-    <value>Data Grid</value>
   </data>
   <data name="ToolTipPublisherInPeriod" xml:space="preserve">
     <value>Publisher is currently in one of its submission periods</value>
@@ -782,7 +779,7 @@ Do you want to continue?</value>
 
 Do you want to continue?</value>
   </data>
-  <data name="ConfigOrphanDirectoryExclusion" xml:space="preserve">
+  <data name="SettingsOrphanDirectoryExclusion" xml:space="preserve">
     <value>Orphan directory exclusions, separated by semi-colon</value>
   </data>
   <data name="ToolTipSubmissionContest" xml:space="preserve">
@@ -1067,7 +1064,7 @@ Do you want to continue?</value>
   <data name="TextImage" xml:space="preserve">
     <value>Image</value>
   </data>
-  <data name="ConfigOrphanFileExclusion" xml:space="preserve">
+  <data name="SettingsOrphanFileExclusion" xml:space="preserve">
     <value>Orphan file exclusions, separated by semi-colon</value>
   </data>
   <data name="TextZeroSearchResults" xml:space="preserve">
@@ -1193,5 +1190,16 @@ Do you want to continue?</value>
   </data>
   <data name="WindowTitleConfirmTitleSubmission" xml:space="preserve">
     <value>Confirm title submission</value>
+  </data>
+  <data name="SettingsDatabaseLocation" xml:space="preserve">
+    <value>Database Location</value>
+  </data>
+  <data name="SettingsDatabaseLocationText" xml:space="preserve">
+    <value>Changing the database location will create a new database. No data will be copied. If you want to preserve your data, copy all files from the previous location to the new one.
+
+Changes will take effect after you restart the application.</value>
+  </data>
+  <data name="SettingsTextViewer" xml:space="preserve">
+    <value>Text Viewer</value>
   </data>
 </root>

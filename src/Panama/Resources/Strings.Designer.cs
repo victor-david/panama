@@ -641,51 +641,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data Grid.
-        /// </summary>
-        public static string ConfigDataGrid {
-            get {
-                return ResourceManager.GetString("ConfigDataGrid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Data grid row alternation.
-        /// </summary>
-        public static string ConfigDataGridRowAlternation {
-            get {
-                return ResourceManager.GetString("ConfigDataGridRowAlternation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Data grid row height.
-        /// </summary>
-        public static string ConfigDataGridRowHeight {
-            get {
-                return ResourceManager.GetString("ConfigDataGridRowHeight", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Orphan directory exclusions, separated by semi-colon.
-        /// </summary>
-        public static string ConfigOrphanDirectoryExclusion {
-            get {
-                return ResourceManager.GetString("ConfigOrphanDirectoryExclusion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Orphan file exclusions, separated by semi-colon.
-        /// </summary>
-        public static string ConfigOrphanFileExclusion {
-            get {
-                return ResourceManager.GetString("ConfigOrphanFileExclusion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This operation will add a new author record. If any filters are in effect, they will be removed so that the new author displays in the list. 
         ///
         ///Do you want to continue?.
@@ -2158,6 +2113,71 @@ namespace Restless.Panama.Resources {
         public static string ResultSubmissionCreated {
             get {
                 return ResourceManager.GetString("ResultSubmissionCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database Location.
+        /// </summary>
+        public static string SettingsDatabaseLocation {
+            get {
+                return ResourceManager.GetString("SettingsDatabaseLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changing the database location will create a new database. No data will be copied. If you want to preserve your data, copy all files from the previous location to the new one.
+        ///
+        ///Changes will take effect after you restart the application..
+        /// </summary>
+        public static string SettingsDatabaseLocationText {
+            get {
+                return ResourceManager.GetString("SettingsDatabaseLocationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data grid row alternation.
+        /// </summary>
+        public static string SettingsDataGridRowAlternation {
+            get {
+                return ResourceManager.GetString("SettingsDataGridRowAlternation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data grid row height.
+        /// </summary>
+        public static string SettingsDataGridRowHeight {
+            get {
+                return ResourceManager.GetString("SettingsDataGridRowHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orphan directory exclusions, separated by semi-colon.
+        /// </summary>
+        public static string SettingsOrphanDirectoryExclusion {
+            get {
+                return ResourceManager.GetString("SettingsOrphanDirectoryExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orphan file exclusions, separated by semi-colon.
+        /// </summary>
+        public static string SettingsOrphanFileExclusion {
+            get {
+                return ResourceManager.GetString("SettingsOrphanFileExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text Viewer.
+        /// </summary>
+        public static string SettingsTextViewer {
+            get {
+                return ResourceManager.GetString("SettingsTextViewer", resourceCulture);
             }
         }
         

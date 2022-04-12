@@ -11,11 +11,11 @@
     xmlns:table="clr-namespace:Restless.Panama.Database.Tables;assembly=Panama.Database"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:SettingsWindowViewModel}"
     mc:Ignorable="d"
-    d:DesignHeight="2060" d:DesignWidth="568"
+    d:DesignHeight="2260" d:DesignWidth="602"
     ResizeMode="NoResize"
     Title="{x:Static r:Strings.MenuItemSettings}"
     Style="{StaticResource DefaultAppWindowStyle}"
-    Height="702" Width="568">
+    Height="702" Width="602">
 
     <Grid 
         tk:Property.ColumnWidths="126,*"
@@ -38,13 +38,13 @@
                 tk:Property.IsLongVisibleValue="1">
                 
                 <StackPanel>
-                    <TextBlock Text="{x:Static r:Strings.ConfigDataGridRowHeight}"/>
+                    <TextBlock Text="{x:Static r:Strings.SettingsDataGridRowHeight}"/>
                     <Slider
                         Minimum="{x:Static core:Config+DataGrid.MinRowHeight}"
                         Maximum="{x:Static core:Config+DataGrid.MaxRowHeight}"
                         Value="{Binding Config.DataGridRowHeight}"/>
 
-                    <TextBlock Text="{x:Static r:Strings.ConfigDataGridRowAlternation}"/>
+                    <TextBlock Text="{x:Static r:Strings.SettingsDataGridRowAlternation}"/>
                     <Slider
                         Minimum="{x:Static core:Config+DataGrid.MinAlternationCount}"
                         Maximum="{x:Static core:Config+DataGrid.MaxAlternationCount}"
@@ -232,18 +232,25 @@
                 <StackPanel>
                     
                     <con:PathSelector
-                        Title="Text Viewer"
+                        Title="{x:Static r:Strings.SettingsTextViewer}"
                         SelectorType="File"
                         SelectorFileType="{x:Static table:DocumentTypeTable+Defs+Values.ExecutableFileType}"
                         Path="{Binding Config.TextViewerFile}"
                         SelectCommand="{Binding Commands[SelectPath]}"/>                    
                     
-                    <TextBlock Text="{x:Static r:Strings.ConfigOrphanDirectoryExclusion}"/>
+                    <TextBlock Text="{x:Static r:Strings.SettingsOrphanDirectoryExclusion}"/>
                     <TextBox Text="{Binding Config.OrphanDirectoryExclusions}"/>
 
-                    <TextBlock Text="{x:Static r:Strings.ConfigOrphanFileExclusion}"/>
+                    <TextBlock Text="{x:Static r:Strings.SettingsOrphanFileExclusion}"/>
                     <TextBox Text="{Binding Config.OrphanFileExclusions}"/>
 
+                    <con:PathSelector 
+                        Title="{x:Static r:Strings.SettingsDatabaseLocation}"
+                        Path="{Binding DatabaseLocation}"
+                        SelectCommand="{Binding Commands[SelectPath]}"/>
+
+                    <TextBlock Text="{x:Static r:Strings.SettingsDatabaseLocationText}"/>
+                    
                 </StackPanel>
             </HeaderedContentControl>
             
