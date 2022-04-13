@@ -13,8 +13,7 @@
     Style="{StaticResource DefaultAppWindowStyle}"
     Height="352" Width="852">
     
-    <Grid
-        tk:Property.RowHeights="*,Auto">
+    <Grid tk:Property.RowHeights="*,Auto">
         
         <DataGrid 
             BorderThickness="0,0,0,1"

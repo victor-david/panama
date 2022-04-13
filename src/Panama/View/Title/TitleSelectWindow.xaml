@@ -14,9 +14,7 @@
     Style="{StaticResource DefaultAppWindowStyle}"
     Height="680" Width="568">
     
-    <Grid 
-        Margin="{StaticResource DefaultPadding}"
-        tk:Property.RowHeights="Auto,*">
+    <Grid tk:Property.RowHeights="Auto,*">
 
         <StatusBar>
             <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
@@ -51,7 +49,7 @@
 
         <tk:DataGrid
             Grid.Row="1"
-            Margin="0,5"
+            BorderThickness="0,1,0,0"
             SelectionMode="Extended"
             RowHeight="{Binding Config.DataGridRowHeight}"
             ItemsSource="{Binding ListView}"

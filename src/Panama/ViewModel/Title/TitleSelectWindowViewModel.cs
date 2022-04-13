@@ -9,7 +9,6 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -86,7 +85,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TitleSelectWindowViewModel()
         {
-            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Id", TableColumns.Id)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042);
 
             Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.Ready, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
@@ -145,7 +146,6 @@ namespace Restless.Panama.ViewModel
                 SelectedTitles.Add(new TitleRow(dataRowView.Row));
             }
         }
-        #endregion
 
         private bool TitleFilterIsReady(DataRow item)
         {
@@ -163,5 +163,6 @@ namespace Restless.Panama.ViewModel
                 string.IsNullOrWhiteSpace(SearchText) ||
                 item[TableColumns.Title].ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
         }
+        #endregion
     }
 }

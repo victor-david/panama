@@ -59,6 +59,7 @@ namespace Restless.Panama.ViewModel
         public PublisherSelectWindowViewModel()
         {
             Columns.Create("Id", PublisherTable.Defs.Columns.Id)
+                .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
@@ -71,6 +72,7 @@ namespace Restless.Panama.ViewModel
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
             Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount)
+                .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052)
                 .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
