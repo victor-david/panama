@@ -373,15 +373,14 @@ namespace Restless.Panama.Core
             /// <summary>
             /// Creates an instance of AlertWindow and its corresponding view model.
             /// </summary>
-            /// <param name="alerts">The list of alerts to display.</param>
             /// <returns>The window</returns>
-            public static AlertWindow Create(ObservableCollection<AlertTable.RowObject> alerts)
+            public static AlertWindow Create()
             {
                 AlertWindow window = new()
                 {
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
-                    DataContext = new AlertWindowViewModel(alerts)
+                    DataContext = new AlertWindowViewModel()
                 };
                 SetWindowOwner(window);
                 SetTextFormattingMode(window);

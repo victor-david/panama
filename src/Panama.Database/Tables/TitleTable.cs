@@ -355,9 +355,10 @@ namespace Restless.Panama.Database.Tables
         /// <param name="row">The freshly created DataRow to poulate</param>
         protected override void PopulateDefaultRow(DataRow row)
         {
+            DateTime now = DateTime.Now;
             row[Defs.Columns.Title] = "(new title)";
             row[Defs.Columns.Created] = DateTime.UtcNow;
-            row[Defs.Columns.Written] = DateTime.UtcNow;
+            row[Defs.Columns.Written] = new DateTime(now.Year, now.Month, now.Day).ToUniversalTime();
             row[Defs.Columns.AuthorId] = Controller.GetTable<AuthorTable>().GetDefaultAuthorId();
             row[Defs.Columns.Ready] = false;
             row[Defs.Columns.QuickFlag] = false;
@@ -367,7 +368,6 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Private methods
-
         private void UpdateLatestVersionDate(ActionDataColumn col, DataRowChangeEventArgs e)
         {
             UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LastestVersionDate, TitleVersionTable.Defs.Columns.Updated);

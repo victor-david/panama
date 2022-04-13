@@ -11,6 +11,8 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Utility;
 using System.ComponentModel;
+using System.Data;
+using TableColumns = Restless.Panama.Database.Tables.AlertTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -20,6 +22,7 @@ namespace Restless.Panama.ViewModel
     public class AlertViewModel : DataRowViewModel<AlertTable>
     {
         #region Private
+        private AlertRow selectedAlert;
         #endregion
 
         /************************************************************************/
@@ -30,6 +33,15 @@ namespace Restless.Panama.ViewModel
 
         /// <inheritdoc/>
         public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
+
+        /// <summary>
+        /// Gets the selected alert
+        /// </summary>
+        public AlertRow SelectedAlert
+        {
+            get => selectedAlert;
+            private set => SetProperty(ref selectedAlert, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -40,36 +52,62 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AlertViewModel()
         {
-            Columns.Create("Id", AlertTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.CreateImage<BooleanToImageConverter>("E", AlertTable.Defs.Columns.Enabled);
-            Columns.SetDefaultSort(Columns.Create("Date", AlertTable.Defs.Columns.Date).MakeDate(), ListSortDirection.Ascending);
-            Columns.Create("Title", AlertTable.Defs.Columns.Title);
-            AddViewSourceSortDescriptions();
+            Columns.Create("Id", TableColumns.Id)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042);
+
+            Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Enabled, ResourceKeys.Icon.SquareSmallGreenIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip(Strings.ToolTipAlertEnabled);
+
+            Columns.SetDefaultSort(
+                Columns.Create("Date", TableColumns.Date)
+                .MakeDate(),
+                ListSortDirection.Ascending);
+
+            Columns.Create("Title", TableColumns.Title);
 
             Commands.Add("Browse", RunBrowseCommand, CanRunBrowseCommand);
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandDeleteAlert, DeleteCommand).AddImageResource("ImageDeleteMenu");
+            MenuItems.AddItem(Strings.MenuItemAddAlert, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemDeleteAlert, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
         }
         #endregion
 
         /************************************************************************/
 
         #region Protected Methods
-        /// <summary>
-        /// Runs the add command to add a new record to the data table
-        /// </summary>
-        protected override void RunAddCommand()
+        /// <inheritdoc/>
+        protected override void OnSelectedItemChanged()
         {
-            Table.AddDefaultRow();
-            Table.Save();
-            AddViewSourceSortDescriptions();
-            Columns.RestoreDefaultSort();
+            base.OnSelectedItemChanged();
+            SelectedAlert = AlertRow.Create(SelectedRow);
+            SelectedAlert?.SetDateFormat(Config.DateFormat);
         }
 
-        /// <summary>
-        /// Runs the delete command to delete a record from the data table
-        /// </summary>
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareDateTime(item1, item2, TableColumns.Date);
+        }
+
+        /// <inheritdoc/>
+        protected override void RunAddCommand()
+        {
+            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationAddAlert))
+            {
+                Table.AddDefaultRow();
+                Table.Save();
+                // Filters.ClearAll();
+                Columns.RestoreDefaultSort();
+                ForceListViewSort();
+            }
+        }
+
+        /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
             if (IsSelectedRowAccessible && Messages.ShowYesNo(Strings.ConfirmationDeleteAlert))
@@ -82,18 +120,11 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
-        private void AddViewSourceSortDescriptions()
-        {
-            // TODO
-            //MainSource.SortDescriptions.Clear();
-            //MainSource.SortDescriptions.Add(new SortDescription(AlertTable.Defs.Columns.Date, ListSortDirection.Ascending));
-        }
-
         private void RunBrowseCommand(object parm)
         {
             if (CanRunBrowseCommand(parm))
             {
-                OpenHelper.OpenWebSite(null, SelectedRow[AlertTable.Defs.Columns.Url].ToString());
+                OpenHelper.OpenWebSite(null, SelectedRow[TableColumns.Url].ToString());
             }
         }
 
@@ -101,7 +132,7 @@ namespace Restless.Panama.ViewModel
         {
             return
                 IsSelectedRowAccessible &&
-                !string.IsNullOrEmpty(SelectedRow[AlertTable.Defs.Columns.Url].ToString());
+                !string.IsNullOrEmpty(SelectedRow[TableColumns.Url].ToString());
         }
         #endregion
     }

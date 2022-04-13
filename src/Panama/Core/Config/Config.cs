@@ -134,6 +134,10 @@ namespace Restless.Panama.Core
         /// </summary>
         public static class Grid
         {
+            public const double MinAlertDetailWidth = 250;
+            public const double MaxAlertDetailWidth = 460;
+            public const double DefaultAlertDetailWidth = MinAlertDetailWidth;
+
             public const double MinAuthorDetailWidth = 250;
             public const double MaxAuthorDetailWidth = 460;
             public const double DefaultAuthorDetailWidth = MinAuthorDetailWidth;
@@ -502,6 +506,18 @@ namespace Restless.Panama.Core
         /************************************************************************/
 
         #region Grid
+        public bool AlertDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double AlertDetailWidth
+        {
+            get => GetItem(Grid.DefaultAlertDetailWidth);
+            set => SetItem(value);
+        }
+
         public bool AuthorDetailExpanded
         {
             get => GetItem(true);

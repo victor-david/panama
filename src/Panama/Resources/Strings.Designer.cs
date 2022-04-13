@@ -146,24 +146,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add alert.
-        /// </summary>
-        public static string CommandAddAlert {
-            get {
-                return ResourceManager.GetString("CommandAddAlert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a new alert with default value.
-        /// </summary>
-        public static string CommandAddAlertTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddAlertTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add credential.
         /// </summary>
         public static string CommandAddCredential {
@@ -277,15 +259,6 @@ namespace Restless.Panama.Resources {
         public static string CommandCopyPassword {
             get {
                 return ResourceManager.GetString("CommandCopyPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this alert.
-        /// </summary>
-        public static string CommandDeleteAlert {
-            get {
-                return ResourceManager.GetString("CommandDeleteAlert", resourceCulture);
             }
         }
         
@@ -637,6 +610,15 @@ namespace Restless.Panama.Resources {
         public static string CommandToolTitleList {
             get {
                 return ResourceManager.GetString("CommandToolTitleList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation will add a new alert record. If any filters are in effect, they will be removed so that the new alert displays in the list..
+        /// </summary>
+        public static string ConfirmationAddAlert {
+            get {
+                return ResourceManager.GetString("ConfirmationAddAlert", resourceCulture);
             }
         }
         
@@ -1595,7 +1577,16 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add author.
+        ///   Looks up a localized string similar to Add an alert.
+        /// </summary>
+        public static string MenuItemAddAlert {
+            get {
+                return ResourceManager.GetString("MenuItemAddAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an author.
         /// </summary>
         public static string MenuItemAddAuthor {
             get {
@@ -1771,6 +1762,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemCustom {
             get {
                 return ResourceManager.GetString("MenuItemCustom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this alert.
+        /// </summary>
+        public static string MenuItemDeleteAlert {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteAlert", resourceCulture);
             }
         }
         
@@ -2272,6 +2272,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string TextDate {
+            get {
+                return ResourceManager.GetString("TextDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string TextDescription {
@@ -2286,6 +2295,15 @@ namespace Restless.Panama.Resources {
         public static string TextDocumentPreviewNotSupported {
             get {
                 return ResourceManager.GetString("TextDocumentPreviewNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string TextEnabled {
+            get {
+                return ResourceManager.GetString("TextEnabled", resourceCulture);
             }
         }
         
@@ -2637,6 +2655,15 @@ namespace Restless.Panama.Resources {
         public static string ToolSubmissionMetadataDetail {
             get {
                 return ResourceManager.GetString("ToolSubmissionMetadataDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This alert is currently enabled.
+        /// </summary>
+        public static string ToolTipAlertEnabled {
+            get {
+                return ResourceManager.GetString("ToolTipAlertEnabled", resourceCulture);
             }
         }
         

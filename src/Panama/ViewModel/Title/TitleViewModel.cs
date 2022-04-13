@@ -134,24 +134,6 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a string value that displays the written date.
-        /// </summary>
-        public string WrittenHeader => SelectedTitle?.GetWrittenToLocal(Config.Instance.DateFormat) ?? Strings.TextNone;
-
-        /// <summary>
-        /// Gets or sets the written date.
-        /// </summary>
-        public object WrittenDate
-        {
-            get => SelectedTitle?.Written;
-            set
-            {
-                SelectedTitle?.SetWrittenDate(value);
-                OnWrittenPropertiesChanged();
-            }
-        }
-
-        /// <summary>
         /// Gets the preview mode
         /// </summary>
         public PreviewMode PreviewMode
@@ -274,7 +256,7 @@ namespace Restless.Panama.ViewModel
         {
             base.OnSelectedItemChanged();
             SelectedTitle = TitleRow.Create(SelectedRow);
-            OnWrittenPropertiesChanged();
+            SelectedTitle?.SetDateFormat(Config.DateFormat);
             Tags.Update();
             Versions.Update();
             Submissions.Update();
@@ -452,12 +434,6 @@ namespace Restless.Panama.ViewModel
                     }
                 }
             }
-        }
-
-        private void OnWrittenPropertiesChanged()
-        {
-            OnPropertyChanged(nameof(WrittenHeader));
-            OnPropertyChanged(nameof(WrittenDate));
         }
         #endregion
     }

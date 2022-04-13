@@ -9,6 +9,7 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -20,32 +21,27 @@ namespace Restless.Panama.ViewModel
     public class AlertWindowViewModel : WindowViewModel
     {
         #region Private
-        private AlertTable.RowObject selectedAlert;
+        private AlertRow selectedAlert;
         #endregion
 
         /************************************************************************/
 
         #region Public properties
-        /// <summary>
-        /// Gets a list of row objects that represents current alerts
-        /// </summary>
-        public ObservableCollection<AlertTable.RowObject> Alerts
-        {
-            get;
-        }
+        ///// <summary>
+        ///// Gets a list of row objects that represents current alerts
+        ///// </summary>
+        //public  ObservableCollection<AlertTable.RowObject> Alerts
+        //{
+        //    get;
+        //}
 
         /// <summary>
         /// Gets or sets the selected alert object.
         /// </summary>
-        public AlertTable.RowObject SelectedAlert
+        public AlertRow SelectedAlert
         {
             get => selectedAlert;
-            set
-            {
-                if (SetProperty(ref selectedAlert, value))
-                {
-                }
-            }
+            set => SetProperty(ref selectedAlert, value);
         }
 
         ///// <summary>
@@ -71,15 +67,16 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="AlertWindowViewModel"/> class.
         /// </summary>
-        /// <param name="alerts">The alerts</param>
-        public AlertWindowViewModel(ObservableCollection<AlertTable.RowObject> alerts)
+        public AlertWindowViewModel()
         {
-            Alerts = alerts ?? throw new ArgumentNullException(nameof(alerts));
             //Columns = new DataGridColumnCollection();
-            var col = Columns.Create("Date", nameof(AlertTable.RowObject.Date)).MakeDate();
-            Columns.SetDefaultSort(col, ListSortDirection.Ascending);
-            Columns.Create("Title", nameof(AlertTable.RowObject.Title));
-            Columns.Create("Url", nameof(AlertTable.RowObject.Url));
+            Columns.SetDefaultSort(
+                Columns.Create("Date", nameof(AlertRow.Date))
+                .MakeDate(),
+                ListSortDirection.Ascending);
+
+            Columns.Create("Title", nameof(AlertRow.Title));
+            Columns.Create("Url", nameof(AlertRow.Url));
 
             Commands.Add("OpenUrl", OpenUrl, HasUrl);
             Commands.Add("Postpone1", Postpone1, IsAlertSelected);
@@ -145,8 +142,8 @@ namespace Restless.Panama.ViewModel
             if (SelectedAlert != null)
             {
                 DateTime utc = DateTime.UtcNow.AddDays(days);
-                SelectedAlert.Date = new DateTime(utc.Year, utc.Month, utc.Day);
-                Alerts.Remove(SelectedAlert);
+                //SelectedAlert.Date = new DateTime(utc.Year, utc.Month, utc.Day);
+                //Alerts.Remove(SelectedAlert);
             }
         }
 
@@ -155,7 +152,7 @@ namespace Restless.Panama.ViewModel
             if (SelectedAlert != null)
             {
                 SelectedAlert.Enabled = false;
-                Alerts.Remove(SelectedAlert);
+                //Alerts.Remove(SelectedAlert);
             }
         }
         #endregion

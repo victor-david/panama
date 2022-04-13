@@ -6,6 +6,7 @@
 */
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 
@@ -84,23 +85,30 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets a list of alerts that are currently ready, i.e with a date that falls on or before the current date.
+        /// Provides an enumerable that enumerates all records in order of id
         /// </summary>
-        /// <returns>An Observable collection of <see cref="RowObject"/> items that contains all active alerts.</returns>
-        public ObservableCollection<RowObject> GetReadyAlerts()
+        /// <returns>An enumerable</returns>
+        public IEnumerable<AlertRow> EnumerateAll()
         {
-            ObservableCollection<RowObject> result = new ObservableCollection<RowObject>();
-            DateTime utc = DateTime.UtcNow;
-
-            foreach (DataRow row in Rows)
+            foreach (DataRow row in EnumerateRows(null, Defs.Columns.Id))
             {
-                var obj = new RowObject(row);
-                if (obj.Enabled && DateTime.Compare(obj.Date, utc) <= 0)
+                yield return new AlertRow(row);
+            }
+        }
+
+        /// <summary>
+        /// Provides an enumerable alerts that are currently ready, i.e with a date that falls on or before the current date.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<AlertRow> EnumerateReady()
+        {
+            foreach (AlertRow alert in EnumerateAll())
+            {
+                if (alert.Enabled && DateTime.Compare(alert.Date, DateTime.Now) <= 0)
                 {
-                    result.Add(obj);
+                    yield return alert;
                 }
             }
-            return result;
         }
         #endregion
 
@@ -117,7 +125,7 @@ namespace Restless.Panama.Database.Tables
             {
                 { Defs.Columns.Id, ColumnType.Integer, true },
                 { Defs.Columns.Title, ColumnType.Text },
-                { Defs.Columns.Url, ColumnType.Text },
+                { Defs.Columns.Url, ColumnType.Text, false, true },
                 { Defs.Columns.Date, ColumnType.Timestamp },
                 { Defs.Columns.Enabled, ColumnType.Boolean, false, false, 0 }
             };
@@ -127,95 +135,13 @@ namespace Restless.Panama.Database.Tables
         /// Populates a new row with default (starter) values
         /// </summary>
         /// <param name="row">The freshly created DataRow to poulate</param>
-        protected override void PopulateDefaultRow(System.Data.DataRow row)
+        protected override void PopulateDefaultRow(DataRow row)
         {
-            DateTime utc = DateTime.UtcNow.AddDays(7);
+            DateTime now = DateTime.UtcNow.AddDays(7);
             row[Defs.Columns.Title] = "(new alert)";
-            row[Defs.Columns.Date] = new DateTime(utc.Year, utc.Month, utc.Day);
+            row[Defs.Columns.Url] = DBNull.Value;
+            row[Defs.Columns.Date] = new DateTime(now.Year, now.Month, now.Day);
             row[Defs.Columns.Enabled] = true;
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Private methods
-        #endregion
-
-        /************************************************************************/
-
-        #region Row Object
-        /// <summary>
-        /// Encapsulates a single row from the <see cref="AlertTable"/>.
-        /// </summary>
-        public class RowObject : RowObjectBase<AlertTable>
-        {
-            #region Public properties
-            /// <summary>
-            /// Gets the id for this row object.
-            /// </summary>
-            public long Id
-            {
-                get => GetInt64(Defs.Columns.Id);
-            }
-
-            /// <summary>
-            /// Gets or sets the title for this row object.
-            /// </summary>
-            public string Title
-            {
-                get => GetString(Defs.Columns.Title);
-                set => SetValue(Defs.Columns.Title, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the url for this row object.
-            /// </summary>
-            public string Url
-            {
-                get => GetString(Defs.Columns.Url);
-                set => SetValue(Defs.Columns.Url, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the date for alert.
-            /// When setting this property, the time portion of the value is zeroed out.
-            /// </summary>
-            public DateTime Date
-            {
-                get => GetDateTime(Defs.Columns.Date);
-                set => SetValue(Defs.Columns.Date, new DateTime(value.Year, value.Month, value.Day));
-            }
-
-            /// <summary>
-            /// Gets or sets the enabled status.
-            /// </summary>
-            public bool Enabled
-            {
-                get => GetBoolean(Defs.Columns.Enabled);
-                set => SetValue(Defs.Columns.Enabled, value);
-            }
-
-            /// <summary>
-            /// Gets a boolean value that indicates if this object contains a url.
-            /// </summary>
-            public bool HasUrl
-            {
-                get => !string.IsNullOrEmpty(Url);
-            }
-            #endregion
-
-            /************************************************************************/
-
-            #region Constructor
-            /// <summary>
-            /// Initializes a new instance of the <see cref="RowObject"/> class.
-            /// </summary>
-            /// <param name="row">The data row</param>
-            public RowObject(DataRow row)
-                : base(row)
-            {
-            }
-            #endregion
         }
         #endregion
     }

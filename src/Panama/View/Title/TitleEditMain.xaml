@@ -11,9 +11,6 @@
     d:DesignHeight="450" d:DesignWidth="400"
     Style="{StaticResource DataEntryPanelStyle}">
 
-    <!-- TODO -->
-    <!--<tk:RestlessCalendar SelectedDateUtc="{Binding WrittenDate}" />-->
-
     <Grid tk:Property.ColumnWidths="*,*">
         <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
         <tk:LinkedTextBlock 
@@ -29,10 +26,12 @@
         <Expander.Header>
             <TextBlock Margin="0">
                 <Run Text="{x:Static r:Strings.TextWritten}"/>
-                <Run Foreground="{StaticResource DarkAlertForegroundBrush}" Text="{Binding WrittenHeader, Mode=OneWay}"/>
+                <Run
+                    Foreground="{StaticResource DarkAlertForegroundBrush}"
+                    Text="{Binding SelectedTitle.WrittenLocal, Mode=OneWay}"/>
             </TextBlock>
         </Expander.Header>
-        <tk:Calendar SelectedDateUtc="{Binding WrittenDate}"/>
+        <tk:Calendar SelectedDateUtc="{Binding SelectedTitle.Written}"/>
     </Expander>
 
     <TextBlock Text="{x:Static r:Strings.TextNotes}"/>

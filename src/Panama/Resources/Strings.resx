@@ -213,7 +213,7 @@
     <comment>Used when an author cannot be deleted b/c it's involved in titles</comment>
   </data>
   <data name="MenuItemAddAuthor" xml:space="preserve">
-    <value>Add author</value>
+    <value>Add an author</value>
     <comment>Command text for add author</comment>
   </data>
   <data name="TextNone" xml:space="preserve">
@@ -756,13 +756,10 @@ Do you want to continue?</value>
   <data name="ToolTipPublisherFilterActive" xml:space="preserve">
     <value>Filter publisher list to display only publishers that are active, i.e. not flagged as a goner</value>
   </data>
-  <data name="CommandAddAlert" xml:space="preserve">
-    <value>Add alert</value>
+  <data name="MenuItemAddAlert" xml:space="preserve">
+    <value>Add an alert</value>
   </data>
-  <data name="CommandAddAlertTooltip" xml:space="preserve">
-    <value>Add a new alert with default value</value>
-  </data>
-  <data name="CommandDeleteAlert" xml:space="preserve">
+  <data name="MenuItemDeleteAlert" xml:space="preserve">
     <value>Delete this alert</value>
   </data>
   <data name="ConfirmationDeleteAlert" xml:space="preserve">
@@ -1201,5 +1198,17 @@ Changes will take effect after you restart the application.</value>
   </data>
   <data name="SettingsTextViewer" xml:space="preserve">
     <value>Text Viewer</value>
+  </data>
+  <data name="ConfirmationAddAlert" xml:space="preserve">
+    <value>This operation will add a new alert record. If any filters are in effect, they will be removed so that the new alert displays in the list.</value>
+  </data>
+  <data name="TextDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="TextEnabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="ToolTipAlertEnabled" xml:space="preserve">
+    <value>This alert is currently enabled</value>
   </data>
 </root>

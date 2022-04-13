@@ -9,14 +9,15 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
-using Columns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
+using System.Runtime.CompilerServices;
+using Columns = Restless.Panama.Database.Tables.AlertTable.Defs.Columns;
 
 namespace Restless.Panama.Database.Tables
 {
     /// <summary>
-    /// Encapsulates a single row from the <see cref="TitleTable"/>.
+    /// Encapsulates a single row from the <see cref="AlertTable"/>.
     /// </summary>
-    public class TitleRow : RowObjectBase<TitleTable>, INotifyPropertyChanged
+    public class AlertRow : RowObjectBase<AlertTable>, INotifyPropertyChanged
     {
         #region Private
         private string dateFormat;
@@ -31,73 +32,55 @@ namespace Restless.Panama.Database.Tables
         public const string DefaultTitle = "(none)";
 
         /// <summary>
-        /// Gets the id.
+        /// Gets the id
         /// </summary>
         public long Id => GetInt64(Columns.Id);
 
         /// <summary>
-        /// Gets or sets the title.
+        /// Gets or sets the title
         /// </summary>
         public string Title
         {
             get => GetString(Columns.Title);
-            set => SetValue(Columns.Title, value.Trim().ToDefaultValue(DefaultTitle));
+            set => SetValue(Columns.Title, value.ToDefaultValue(DefaultTitle));
         }
 
         /// <summary>
-        /// Gets the created date/time value.
+        /// Gets or sets the url
         /// </summary>
-        public DateTime Created => GetDateTime(Columns.Created);
-
-        /// <summary>
-        /// Gets or sets the written date/time value.
-        /// </summary>
-        public DateTime Written
+        public string Url
         {
-            get => GetDateTime(Columns.Written);
-            set => SetValue(Columns.Written, value);
+            get => GetString(Columns.Url);
+            set => SetValue(Columns.Url, value);
         }
 
         /// <summary>
-        /// Gets or sets the author id.
+        /// Gets or sets the date for alert.
         /// </summary>
-        public long AuthorId
+        public DateTime Date
         {
-            get => GetInt64(Columns.AuthorId);
-            set => SetValue(Columns.AuthorId, value);
+            get => GetDateTime(Columns.Date);
+            set => SetValue(Columns.Date, value);
         }
 
         /// <summary>
-        /// Gets or sets the ready flag.
+        /// Gets or sets the enabled status.
         /// </summary>
-        public bool Ready
+        public bool Enabled
         {
-            get => GetBoolean(Columns.Ready);
-            set => SetValue(Columns.Ready, value);
+            get => GetBoolean(Columns.Enabled);
+            set => SetValue(Columns.Enabled, value);
         }
 
         /// <summary>
-        /// Gets or sets the quick tag flag.
+        /// Gets a boolean value that indicates if this object contains a url.
         /// </summary>
-        public bool QuickFlag
-        {
-            get => GetBoolean(Columns.QuickFlag);
-            set => SetValue(Columns.QuickFlag, value);
-        }
+        public bool HasUrl => !string.IsNullOrEmpty(Url);
 
         /// <summary>
-        /// Gets or sets the notes.
+        /// Gets a formatted value for <see cref="Date"/> converted to local time.
         /// </summary>
-        public string Notes
-        {
-            get => GetString(Columns.Notes);
-            set => SetValue(Columns.Notes, value);
-        }
-
-        /// <summary>
-        /// Gets a formatted value for <see cref="Written"/> converted to local time.
-        /// </summary>
-        public string WrittenLocal => Written.ToLocalTime().ToString(dateFormat, CultureInfo.InvariantCulture);
+        public string DateLocal => Date.ToLocalTime().ToString(dateFormat, CultureInfo.InvariantCulture);
         #endregion
 
         /************************************************************************/
@@ -110,22 +93,22 @@ namespace Restless.Panama.Database.Tables
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="TitleRow"/> class.
+        /// Initializes a new instance of the <see cref="RowObject"/> class.
         /// </summary>
         /// <param name="row">The data row</param>
-        public TitleRow(DataRow row) : base(row)
+        public AlertRow(DataRow row) : base(row)
         {
             dateFormat = "MMM dd, yyyy";
         }
 
         /// <summary>
-        /// Creates a new <see cref="TitleRow"/> object if <paramref name="row"/> is not null
+        /// Creates a new <see cref="AlertRow"/> object if <paramref name="row"/> is not null
         /// </summary>
         /// <param name="row">The row</param>
         /// <returns>A new row, or null.</returns>
-        public static TitleRow Create(DataRow row)
+        public static AlertRow Create(DataRow row)
         {
-            return row != null ? new TitleRow(row) : null;
+            return row != null ? new AlertRow(row) : null;
         }
         #endregion
 
@@ -143,23 +126,6 @@ namespace Restless.Panama.Database.Tables
                 dateFormat = value;
             }
         }
-
-        /// <summary>
-        /// Toggles the value of the <see cref="QuickFlag"/> property.
-        /// </summary>
-        public void ToggleQuickFlag()
-        {
-            QuickFlag = !QuickFlag;
-        }
-
-        /// <summary>
-        /// Gets a string representation of this object
-        /// </summary>
-        /// <returns>A string</returns>
-        public override string ToString()
-        {
-            return $"{nameof(TitleRow)} {Id} {Title}";
-        }
         #endregion
 
         /************************************************************************/
@@ -168,9 +134,9 @@ namespace Restless.Panama.Database.Tables
         /// <inheritdoc/>
         protected override void OnSetValue(string columnName, object value)
         {
-            if (columnName == Columns.Written)
+            if (columnName == Columns.Date)
             {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(WrittenLocal)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DateLocal)));
             }
         }
         #endregion
