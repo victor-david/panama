@@ -13,7 +13,6 @@ using Restless.Toolkit.Mvvm;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
-using System.Linq;
 using ResponseValues = Restless.Panama.Database.Tables.ResponseTable.Defs.Values;
 using SubmissionValues = Restless.Panama.Database.Tables.SubmissionTable.Defs.Values;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionTable.Defs.Columns;
