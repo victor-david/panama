@@ -239,6 +239,7 @@ namespace Restless.Panama.Core
                     Title = title,
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
                     DataContext = new SelfPublisherSelectWindowViewModel(),
                 };
                 SetWindowOwner(window);
@@ -266,6 +267,7 @@ namespace Restless.Panama.Core
                 {
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
                     DataContext = new SubmissionMessageSelectWindowViewModel(),
                 };
                 SetWindowOwner(window);
@@ -293,6 +295,7 @@ namespace Restless.Panama.Core
                 {
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
                     DataContext = new SubmissionDocumentSelectWindowViewModel()
                 };
                 SetWindowOwner(window);
@@ -380,6 +383,7 @@ namespace Restless.Panama.Core
                 {
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
                     DataContext = new AlertWindowViewModel()
                 };
                 SetWindowOwner(window);

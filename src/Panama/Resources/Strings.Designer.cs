@@ -2281,11 +2281,65 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1 day.
+        /// </summary>
+        public static string TextDays01 {
+            get {
+                return ResourceManager.GetString("TextDays01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3 days.
+        /// </summary>
+        public static string TextDays03 {
+            get {
+                return ResourceManager.GetString("TextDays03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5 days.
+        /// </summary>
+        public static string TextDays05 {
+            get {
+                return ResourceManager.GetString("TextDays05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 7 days.
+        /// </summary>
+        public static string TextDays07 {
+            get {
+                return ResourceManager.GetString("TextDays07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10 days.
+        /// </summary>
+        public static string TextDays10 {
+            get {
+                return ResourceManager.GetString("TextDays10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string TextDescription {
             get {
                 return ResourceManager.GetString("TextDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dismiss.
+        /// </summary>
+        public static string TextDismiss {
+            get {
+                return ResourceManager.GetString("TextDismiss", resourceCulture);
             }
         }
         
@@ -3114,6 +3168,15 @@ namespace Restless.Panama.Resources {
         public static string ValidationOperationIntegerNeeded {
             get {
                 return ResourceManager.GetString("ValidationOperationIntegerNeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Alerts.
+        /// </summary>
+        public static string WindowTitleActiveAlerts {
+            get {
+                return ResourceManager.GetString("WindowTitleActiveAlerts", resourceCulture);
             }
         }
         

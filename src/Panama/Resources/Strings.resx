@@ -1211,4 +1211,25 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolTipAlertEnabled" xml:space="preserve">
     <value>This alert is currently enabled</value>
   </data>
+  <data name="TextDays01" xml:space="preserve">
+    <value>1 day</value>
+  </data>
+  <data name="TextDays03" xml:space="preserve">
+    <value>3 days</value>
+  </data>
+  <data name="TextDays05" xml:space="preserve">
+    <value>5 days</value>
+  </data>
+  <data name="TextDays07" xml:space="preserve">
+    <value>7 days</value>
+  </data>
+  <data name="TextDays10" xml:space="preserve">
+    <value>10 days</value>
+  </data>
+  <data name="TextDismiss" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
+  <data name="WindowTitleActiveAlerts" xml:space="preserve">
+    <value>Active Alerts</value>
+  </data>
 </root>

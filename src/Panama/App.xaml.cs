@@ -11,6 +11,7 @@ using Restless.Panama.Resources;
 using Restless.Panama.Utility;
 using System;
 using System.Windows;
+using Restless.Panama.Database.Tables;
 
 namespace Restless.Panama
 {
@@ -86,20 +87,17 @@ namespace Restless.Panama
                 Toolkit.Controls.DataGridColumnExtensions.CenterAlignedDataGridCellStyleKey = ResourceKeys.Style.CenteredDataGridCellStyle;
 
                 WindowFactory.Main.Create().Show();
-                // TODO
-                //DisplayAlertsIf();
+                DisplayAlertsIf();
             }
         }
 
-        //private void DisplayAlertsIf()
-        //{
-        //    var alerts = DatabaseController.Instance.GetTable<AlertTable>().GetReadyAlerts();
-        //    if (alerts.Count > 0)
-        //    {
-        //        Window alert = WindowFactory.Alert.Create(alerts);
-        //        alert.Show();
-        //    }
-        //}
+        private void DisplayAlertsIf()
+        {
+            if (DatabaseController.Instance.GetTable<AlertTable>().HaveAlertsReady())
+            {
+                WindowFactory.Alert.Create().Show();
+            }
+        }
         #endregion
     }
 }

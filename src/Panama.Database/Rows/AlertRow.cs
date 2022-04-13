@@ -126,6 +126,23 @@ namespace Restless.Panama.Database.Tables
                 dateFormat = value;
             }
         }
+
+        /// <summary>
+        /// Postpones the alert by the specified number of days
+        /// </summary>
+        /// <param name="days">Number of days to postpone</param>
+        public void Postpone(int days)
+        {
+            Date = Utility.GetUtcNowZero().AddDays(days);
+        }
+
+        /// <summary>
+        /// Dismisses the alert by setting <see cref="Enabled"/> to false
+        /// </summary>
+        public void Dismiss()
+        {
+            Enabled = false;
+        }
         #endregion
 
         /************************************************************************/

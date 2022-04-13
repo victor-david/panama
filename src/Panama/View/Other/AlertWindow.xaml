@@ -1,58 +1,76 @@
-﻿<Window 
+﻿<tk:AppWindow 
     x:Class="Restless.Panama.View.AlertWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    Title="Alerts" 
-    Height="360" Width="532" 
-    ResizeMode="NoResize" 
-    ShowInTaskbar="False"
-    WindowStartupLocation="CenterOwner">
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:AlertWindowViewModel}"
+    mc:Ignorable="d"
+    ResizeMode="NoResize"
+    Title="{x:Static r:Strings.WindowTitleActiveAlerts}"
+    Style="{StaticResource DefaultAppWindowStyle}"    
+    Height="360" Width="584" >
     
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="100"/>
-        </Grid.ColumnDefinitions>
+    <Grid
+        tk:Property.RowHeights="*,Auto">
 
         <Grid.Resources>
-            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                <Setter Property="Margin" Value="2"/>
-                <Setter Property="Width" Value="64"/>
-                <Setter Property="Height" Value="18"/>
+            <Style TargetType="tk:IconButton" BasedOn="{StaticResource DefaultIconButtonStyle}">
+                <Setter Property="Icon" Value="{StaticResource SquareSmallBlueIconKey}"/>
+                <Setter Property="Command" Value="{Binding PostponeCommand}"/>
             </Style>
         </Grid.Resources>
 
-        <tk:DataGrid
-            x:Name="AlertDataGrid" 
-            Grid.ColumnSpan="2"
-            ItemsSource="{Binding Path=Alerts}"
-            SelectedItem="{Binding SelectedAlert}"
+        <DataGrid
+            BorderThickness="0,0,0,1"
+            RowHeight="{Binding Config.DataGridRowHeight}"
+            ItemsSource="{Binding ListView}"
+            SelectedItem="{Binding SelectedItem}"
             tk:DataGridColumns.Columns="{Binding Columns}">
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="tk:DataGrid.DoubleClickCommand" Value="{Binding ElementName=AlertDataGrid, Path=DataContext.Commands[OpenUrl]}"/>
-                </Style>
-            </DataGrid.RowStyle>
+
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+            </DataGrid.InputBindings>
+
             <DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding MenuItems}"/>
             </DataGrid.ContextMenu>
-        </tk:DataGrid>
-        
-        <TextBlock Grid.Row="1" Style="{StaticResource TextBlockLabel}" Margin="2" Text="Postpone"/>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="2,4">
-            <Button Content="1 day" Command="{Binding Commands[Postpone1]}"/>
-            <Button Content="3 days" Command="{Binding Commands[Postpone3]}"/>
-            <Button Content="5 days" Command="{Binding Commands[Postpone5]}"/>
-            <Button Content="7 days" Command="{Binding Commands[Postpone7]}"/>
-            <Button Content="10 days" Command="{Binding Commands[Postpone10]}"/>
-        </StackPanel>
+            
+        </DataGrid>
 
-        <Button Grid.Row="2" Grid.Column="1" Content="Dismiss" Command="{Binding Commands[Dismiss]}"/>
+        <StatusBar Grid.Row="1">
+            <TextBlock Text="Postpone"/>
+            <tk:IconButton
+                Content="{x:Static r:Strings.TextDays01}"
+                CommandParameter="1"/>
+            
+            <tk:IconButton
+                Content="{x:Static r:Strings.TextDays03}"
+                CommandParameter="3"/>
+            
+            <tk:IconButton
+                Content="{x:Static r:Strings.TextDays05}"
+                CommandParameter="5"/>
+            
+            <tk:IconButton
+                Content="{x:Static r:Strings.TextDays07}"
+                CommandParameter="7"/>
+            
+            <tk:IconButton
+                Content="{x:Static r:Strings.TextDays10}"
+                CommandParameter="10"/>
+            
+            <Separator/>
+            
+            <tk:IconButton
+                Icon="{StaticResource SquareSmallRedIconKey}"
+                Content="{x:Static r:Strings.TextDismiss}"
+                Command="{Binding DismissCommand}"/>
+
+        </StatusBar>
+        
     </Grid>
-</Window>
+</tk:AppWindow>

@@ -4,21 +4,24 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
+using System.Windows.Input;
+using TableColumns = Restless.Panama.Database.Tables.AlertTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides the view model logic for the <see cref="View.AboutWindow"/>.
     /// </summary>
-    public class AlertWindowViewModel : WindowViewModel
+    public class AlertWindowViewModel : WindowViewModel<AlertTable>
     {
         #region Private
         private AlertRow selectedAlert;
@@ -27,14 +30,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Public properties
-        ///// <summary>
-        ///// Gets a list of row objects that represents current alerts
-        ///// </summary>
-        //public  ObservableCollection<AlertTable.RowObject> Alerts
-        //{
-        //    get;
-        //}
-
         /// <summary>
         /// Gets or sets the selected alert object.
         /// </summary>
@@ -44,21 +39,24 @@ namespace Restless.Panama.ViewModel
             set => SetProperty(ref selectedAlert, value);
         }
 
-        ///// <summary>
-        ///// Gets the data grid columns.
-        ///// </summary>
-        //public DataGridColumnCollection Columns
-        //{
-        //    get;
-        //}
+        /// <summary>
+        /// Gets the command used to postpone an alert
+        /// </summary>
+        public ICommand PostponeCommand
+        {
+            get;
+        }
 
-        ///// <summary>
-        ///// Gets the collection of menu items. The view binds to this collection so that VMs can manipulate menu items programatically
-        ///// </summary>
-        //public MenuItemCollection MenuItems
-        //{
-        //    get;
-        //}
+        /// <summary>
+        /// Gets the command to dismiss an alert
+        /// </summary>
+        public ICommand DismissCommand
+        {
+            get;
+        }
+
+        /// <inheritdoc/>
+        public override bool OpenRowCommandEnabled => SelectedAlert?.HasUrl ?? false;
         #endregion
 
         /************************************************************************/
@@ -69,91 +67,75 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AlertWindowViewModel()
         {
-            //Columns = new DataGridColumnCollection();
+            Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Enabled, ResourceKeys.Icon.SquareSmallGreenIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip(Strings.ToolTipAlertEnabled);
+
             Columns.SetDefaultSort(
-                Columns.Create("Date", nameof(AlertRow.Date))
+                Columns.Create("Date", TableColumns.Date)
                 .MakeDate(),
                 ListSortDirection.Ascending);
 
-            Columns.Create("Title", nameof(AlertRow.Title));
-            Columns.Create("Url", nameof(AlertRow.Url));
+            Columns.Create("Title", TableColumns.Title);
+            Columns.Create("Url", TableColumns.Url);
 
-            Commands.Add("OpenUrl", OpenUrl, HasUrl);
-            Commands.Add("Postpone1", Postpone1, IsAlertSelected);
-            Commands.Add("Postpone3", Postpone3, IsAlertSelected);
-            Commands.Add("Postpone5", Postpone5, IsAlertSelected);
-            Commands.Add("Postpone7", Postpone7, IsAlertSelected);
-            Commands.Add("Postpone10", Postpone10, IsAlertSelected);
-            Commands.Add("Dismiss", Dismiss, IsAlertSelected);
+            PostponeCommand = RelayCommand.Create(RunPostponeCommand, p => SelectedAlert != null);
+            DismissCommand = RelayCommand.Create(RunDismissCommand, p => SelectedAlert != null);
 
-            //MenuItems = new MenuItemCollection();
-            //MenuItems.AddItem(Strings.CommandBrowseToUrlOrClick, Commands["OpenUrl"]).AddImageResource("ImageBrowseToUrlMenu");
+            MenuItems.AddItem(Strings.MenuItemOpenItemOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
         }
         #endregion
 
         /************************************************************************/
-        
-        #region Private methods
-        private bool IsAlertSelected(object parm)
+
+        #region Protected methods
+        /// <inheritdoc/>
+        protected override void OnSelectedItemChanged()
         {
-            return SelectedAlert != null;
+            base.OnSelectedItemChanged();
+            SelectedAlert = AlertRow.Create(SelectedRow);
+            SelectedAlert?.SetDateFormat(Config.DateFormat);
         }
 
-        private bool HasUrl(object parm)
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return SelectedAlert != null && SelectedAlert.HasUrl;
+            return DataRowCompareDateTime(item1, item2, TableColumns.Date);
         }
 
-        private void OpenUrl(object parm)
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
         {
-            if (SelectedAlert != null && !string.IsNullOrEmpty(SelectedAlert.Url))
+            return
+                (bool)item[TableColumns.Enabled] &&
+                DateTime.Compare((DateTime)item[TableColumns.Date], DateTime.UtcNow) <= 0;
+        }
+
+        /// <inheritdoc/>
+        protected override void RunOpenRowCommand()
+        {
+            if (SelectedAlert?.HasUrl ?? false)
             {
                 OpenHelper.OpenWebSite(null, SelectedAlert.Url);
             }
         }
+        #endregion
 
-        private void Postpone1(object parm)
-        {
-            Postpone(1);
-        }
+        /************************************************************************/
 
-        private void Postpone3(object parm)
+        #region Private methods
+        private void RunPostponeCommand(object parm)
         {
-            Postpone(3);
-        }
-
-        private void Postpone5(object parm)
-        {
-            Postpone(5);
-        }
-
-        private void Postpone7(object parm)
-        {
-            Postpone(7);
-        }
-
-        private void Postpone10(object parm)
-        {
-            Postpone(10);
-        }
-
-        private void Postpone(int days)
-        {
-            if (SelectedAlert != null)
+            if (int.TryParse(parm?.ToString(), out int days))
             {
-                DateTime utc = DateTime.UtcNow.AddDays(days);
-                //SelectedAlert.Date = new DateTime(utc.Year, utc.Month, utc.Day);
-                //Alerts.Remove(SelectedAlert);
+                SelectedAlert?.Postpone(days);
             }
         }
 
-        private void Dismiss(object parm)
+        private void RunDismissCommand(object parm)
         {
-            if (SelectedAlert != null)
-            {
-                SelectedAlert.Enabled = false;
-                //Alerts.Remove(SelectedAlert);
-            }
+            SelectedAlert?.Dismiss();
         }
         #endregion
     }

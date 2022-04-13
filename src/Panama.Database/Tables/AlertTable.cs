@@ -8,6 +8,7 @@ using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -103,11 +104,20 @@ namespace Restless.Panama.Database.Tables
         {
             foreach (AlertRow alert in EnumerateAll())
             {
-                if (alert.Enabled && DateTime.Compare(alert.Date, DateTime.Now) <= 0)
+                if (alert.Enabled && DateTime.Compare(alert.Date, DateTime.UtcNow) <= 0)
                 {
                     yield return alert;
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets a boolean value that indicates if there are any alerts in the ready state.
+        /// </summary>
+        /// <returns>true if at least one alert is ready; otherwise, false</returns>
+        public bool HaveAlertsReady()
+        {
+            return EnumerateReady().Count() > 0;
         }
         #endregion
 

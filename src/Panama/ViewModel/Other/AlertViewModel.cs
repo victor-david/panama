@@ -74,6 +74,9 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddItem(Strings.MenuItemAddAlert, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemDeleteAlert, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
+
+            ListView.IsLiveSorting = true;
+            ListView.LiveSortingProperties.Add(TableColumns.Date);
         }
         #endregion
 
