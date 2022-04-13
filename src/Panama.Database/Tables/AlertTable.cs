@@ -7,7 +7,6 @@
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
 
 namespace Restless.Panama.Database.Tables
@@ -137,10 +136,9 @@ namespace Restless.Panama.Database.Tables
         /// <param name="row">The freshly created DataRow to poulate</param>
         protected override void PopulateDefaultRow(DataRow row)
         {
-            DateTime now = DateTime.UtcNow.AddDays(7);
             row[Defs.Columns.Title] = "(new alert)";
             row[Defs.Columns.Url] = DBNull.Value;
-            row[Defs.Columns.Date] = new DateTime(now.Year, now.Month, now.Day);
+            row[Defs.Columns.Date] = Utility.GetUtcNowZero().AddDays(7);
             row[Defs.Columns.Enabled] = true;
         }
         #endregion

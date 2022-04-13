@@ -355,10 +355,9 @@ namespace Restless.Panama.Database.Tables
         /// <param name="row">The freshly created DataRow to poulate</param>
         protected override void PopulateDefaultRow(DataRow row)
         {
-            DateTime now = DateTime.Now;
             row[Defs.Columns.Title] = "(new title)";
             row[Defs.Columns.Created] = DateTime.UtcNow;
-            row[Defs.Columns.Written] = new DateTime(now.Year, now.Month, now.Day).ToUniversalTime();
+            row[Defs.Columns.Written] = Utility.GetUtcNowZero();
             row[Defs.Columns.AuthorId] = Controller.GetTable<AuthorTable>().GetDefaultAuthorId();
             row[Defs.Columns.Ready] = false;
             row[Defs.Columns.QuickFlag] = false;

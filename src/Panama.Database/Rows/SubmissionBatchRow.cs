@@ -163,7 +163,7 @@ namespace Restless.Panama.Database.Tables
                 IsOnline = false,
                 IsContest = false,
                 IsLocked = false,
-                Submitted = DateTime.UtcNow,
+                Submitted = Utility.GetUtcNowZero(),
                 Response = null,
                 ResponseType = ResponseTable.Defs.Values.NoResponse,
                 Notes = null
