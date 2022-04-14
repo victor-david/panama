@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.Win32;
 
 namespace Restless.Panama.Utility
@@ -10,20 +11,22 @@ namespace Restless.Panama.Utility
     {
         #region Private
         private const string RegistryKey = @"Software\RestlessAnimal\Panama";
-        private const string DatabaseSubDirectory = @"\RestlessAnimal\Panama";
+        private const string AppDirectory = @"RestlessAnimal\Panama";
         private const string DatabaseDirectoryValue = "DatabaseDirectory";
-        private static readonly string DefaultDatabaseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + DatabaseSubDirectory;
         #endregion
 
         /************************************************************************/
 
         #region Public
+        public static string AppDataDirectory =
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppDirectory);
+
         /// <summary>
         /// Gets the directory for the database.
         /// </summary>
         public static string DatabaseDirectory
         {
-            get => Get<string>(DatabaseDirectoryValue, DefaultDatabaseDirectory);
+            get => Get<string>(DatabaseDirectoryValue, AppDataDirectory);
         }
 
         /// <summary>
@@ -35,7 +38,7 @@ namespace Restless.Panama.Utility
             {
                 if (key.GetValue(DatabaseDirectoryValue) == null)
                 {
-                    key.SetValue(DatabaseDirectoryValue, DefaultDatabaseDirectory);
+                    key.SetValue(DatabaseDirectoryValue, AppDataDirectory);
                 }
             }
         }

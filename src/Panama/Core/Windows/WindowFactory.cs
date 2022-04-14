@@ -4,15 +4,15 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.View;
-using Restless.Panama.ViewModel;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
-using System.Collections.ObjectModel;
+using Restless.Panama.View;
+using Restless.Panama.ViewModel;
+using Restless.Toolkit.Mvvm;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
-using System.Collections.Generic;
-using Restless.Toolkit.Mvvm;
 
 namespace Restless.Panama.Core
 {
@@ -386,6 +386,38 @@ namespace Restless.Panama.Core
                     ShowInTaskbar = false,
                     DataContext = new AlertWindowViewModel()
                 };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
+                return window;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Terminate
+        /// <summary>
+        /// Provides static methods for creating a fatal terminate window.
+        /// </summary>
+        public static class Terminate
+        {
+            /// <summary>
+            /// Creates an instance of TerminateWindow and its corresponding view model.
+            /// </summary>
+            /// <param name="e">The exception</param>
+            /// <returns>The window</returns>
+            public static TerminateWindow Create(Exception e)
+            {
+                int windowCount = Application.Current.Windows.Count;
+
+                TerminateWindow window = new()
+                {
+                    Owner = windowCount > 0 ? Application.Current.MainWindow : null,
+                    WindowStartupLocation = windowCount > 0 ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen,
+                    ShowInTaskbar = windowCount == 0,
+                    DataContext = new TerminateWindowViewModel(e)
+                };
+
                 SetWindowOwner(window);
                 SetTextFormattingMode(window);
                 return window;

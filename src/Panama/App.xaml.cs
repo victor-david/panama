@@ -12,6 +12,7 @@ using Restless.Panama.Utility;
 using System;
 using System.Windows;
 using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Controls;
 
 namespace Restless.Panama
 {
@@ -38,7 +39,7 @@ namespace Restless.Panama
 
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format(Strings.ApplicationFatalExceptionFormat, ex.Message), Strings.CaptionFatalError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageWindow.ShowError(ex.Message, null, false);
                 Environment.Exit(0);
             }
         }
@@ -67,7 +68,7 @@ namespace Restless.Panama
         private void RunApplication(StartupEventArgs e)
         {
 #if !DEBUG
-            TopLevelExceptionHandler.Initialize();
+            TopLevelException.Initialize();
 #endif
             // Validations.ThrowIfNotWindows7();
             ShutdownMode = ShutdownMode.OnMainWindowClose;
@@ -83,9 +84,8 @@ namespace Restless.Panama
             else
             {
                 // These are applied one time only. They don't change.
-                Toolkit.Controls.DataGridColumnExtensions.CenterAlignedDataGridColumnHeaderStyleKey = ResourceKeys.Style.CenteredDataGridColumnHeaderStyle;
-                Toolkit.Controls.DataGridColumnExtensions.CenterAlignedDataGridCellStyleKey = ResourceKeys.Style.CenteredDataGridCellStyle;
-
+                DataGridColumnExtensions.CenterAlignedDataGridColumnHeaderStyleKey = ResourceKeys.Style.CenteredDataGridColumnHeaderStyle;
+                DataGridColumnExtensions.CenterAlignedDataGridCellStyleKey = ResourceKeys.Style.CenteredDataGridCellStyle;
                 WindowFactory.Main.Create().Show();
                 DisplayAlertsIf();
             }

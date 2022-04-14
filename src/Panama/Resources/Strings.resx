@@ -1232,4 +1232,13 @@ Changes will take effect after you restart the application.</value>
   <data name="WindowTitleActiveAlerts" xml:space="preserve">
     <value>Active Alerts</value>
   </data>
+  <data name="TextSendReport" xml:space="preserve">
+    <value>Send report</value>
+  </data>
+  <data name="ToolTipSendReport" xml:space="preserve">
+    <value>Send problem report. No personal information is included</value>
+  </data>
+  <data name="WindowTitleFatalError" xml:space="preserve">
+    <value>A fatal error has occured</value>
+  </data>
 </root>

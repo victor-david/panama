@@ -2587,6 +2587,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send report.
+        /// </summary>
+        public static string TextSendReport {
+            get {
+                return ResourceManager.GetString("TextSendReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start.
         /// </summary>
         public static string TextStart {
@@ -2974,6 +2983,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send problem report. No personal information is included.
+        /// </summary>
+        public static string ToolTipSendReport {
+            get {
+                return ResourceManager.GetString("ToolTipSendReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submission is for a contest.
         /// </summary>
         public static string ToolTipSubmissionContest {
@@ -3186,6 +3204,15 @@ namespace Restless.Panama.Resources {
         public static string WindowTitleConfirmTitleSubmission {
             get {
                 return ResourceManager.GetString("WindowTitleConfirmTitleSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A fatal error has occured.
+        /// </summary>
+        public static string WindowTitleFatalError {
+            get {
+                return ResourceManager.GetString("WindowTitleFatalError", resourceCulture);
             }
         }
         
