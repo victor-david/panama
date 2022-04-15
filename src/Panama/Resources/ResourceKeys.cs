@@ -1,4 +1,7 @@
-﻿namespace Restless.Panama.Resources
+﻿using System.Collections.Generic;
+using SubmissionValues = Restless.Panama.Database.Tables.SubmissionTable.Defs.Values;
+
+namespace Restless.Panama.Resources
 {
     /// <summary>
     /// Provides static values for resource keys
@@ -48,6 +51,15 @@
         /// </summary>
         public static class Icon
         {
+            /// <summary>
+            /// Provides an icon map for the status of submitted titles
+            /// </summary>
+            public static readonly Dictionary<long, string> TitleStatusIconMap = new()
+            {
+                { SubmissionValues.StatusWithdrawn, SquareSmallGrayIconKey },
+                { SubmissionValues.StatusAccepted, SquareSmallGreenIconKey },
+            };
+
             public const string AlertIconKey = nameof(AlertIconKey);
             public const string ChevronRightIconKey = nameof(ChevronRightIconKey);
             public const string CircleIconKey = nameof(CircleIconKey);

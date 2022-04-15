@@ -1241,4 +1241,7 @@ Changes will take effect after you restart the application.</value>
   <data name="WindowTitleFatalError" xml:space="preserve">
     <value>A fatal error has occured</value>
   </data>
+  <data name="TextNoTitleSubmissions" xml:space="preserve">
+    <value>No submissions for this title</value>
+  </data>
 </root>

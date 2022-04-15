@@ -5,7 +5,7 @@ namespace Restless.Panama.View
     /// <summary>
     /// Interaction logic for PublisherEditContainer.xaml
     /// </summary>
-    public partial class PublisherEditContainer : UserControl
+    public partial class PublisherEditContainer : Grid
     {
         public PublisherEditContainer()
         {

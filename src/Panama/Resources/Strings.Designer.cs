@@ -2470,6 +2470,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No submissions for this title.
+        /// </summary>
+        public static string TextNoTitleSubmissions {
+            get {
+                return ResourceManager.GetString("TextNoTitleSubmissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No versions for this title.
         /// </summary>
         public static string TextNoTitleVersions {

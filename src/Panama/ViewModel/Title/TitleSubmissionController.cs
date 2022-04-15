@@ -5,21 +5,35 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System.ComponentModel;
 using System.Data;
+using TableColumns = Restless.Panama.Database.Tables.SubmissionTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides a controller that displays the history of submissions for a title.
     /// </summary>
-    public class TitleSubmissionController : BaseController<TitleViewModel, TitleTable>
+    public class TitleSubmissionController : BaseController<TitleViewModel, SubmissionTable>
     {
         #region Private
+        private SubmissionRow selectedSubmission;
+        #endregion
+
+        /************************************************************************/
+
+        #region Properties
+        /// <summary>
+        /// Get the selected submission
+        /// </summary>
+        public SubmissionRow SelectedSubmission
+        {
+            get => selectedSubmission;
+            private set => SetProperty(ref selectedSubmission, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -29,58 +43,52 @@ namespace Restless.Panama.ViewModel
         /// Initializes a new instance of the <see cref="TitleSubmissionController"/> class.
         /// </summary>
         /// <param name="owner">The view model that owns this controller.</param>
-        public TitleSubmissionController(TitleViewModel owner)
-            : base(owner)
+        public TitleSubmissionController(TitleViewModel owner) : base(owner)
         {
-            //AssignDataViewFrom(DatabaseController.Instance.GetTable<SubmissionTable>());
-            //MainView.RowFilter = string.Format("{0}=-1", SubmissionTable.Defs.Columns.TitleId);
-            //MainView.Sort = string.Format("{0} DESC", SubmissionTable.Defs.Columns.Joined.Submitted);
-            Columns.Create("Id", SubmissionTable.Defs.Columns.BatchId)
+            Columns.Create("Id", TableColumns.TitleId)
+                .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
-            Columns.CreateImage<Int64ToPathConverter>("S", SubmissionTable.Defs.Columns.Status, "ImageSubStatus")
-                .AddToolTip("Submission status of this title");
-            Columns.SetDefaultSort(Columns.Create("Submitted", SubmissionTable.Defs.Columns.Joined.Submitted)
-                .MakeDate(), ListSortDirection.Descending);
-            Columns.CreateImage<BooleanToImageConverter>("E", SubmissionTable.Defs.Columns.Joined.PublisherExclusive, "ImageExclamation")
+
+            Columns.CreateResource<Int64ToPathConverter>("S", TableColumns.Status, ResourceKeys.Icon.TitleStatusIconMap)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .AddToolTip(LocalResources.Get(ResourceKeys.ToolTip.SubmissionTitleStatusToolTip));
+
+            Columns.SetDefaultSort(
+                Columns.Create("Submitted", TableColumns.Joined.Submitted)
+                .MakeDate(),
+                ListSortDirection.Descending);
+
+            Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Joined.PublisherExclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipPublisherExclusive);
-            Columns.Create("Publisher", SubmissionTable.Defs.Columns.Joined.Publisher);
-            Columns.Create("Batch Response", SubmissionTable.Defs.Columns.Joined.ResponseTypeName);
-            AddViewSourceSortDescriptions();
 
-            // HeaderPreface = Strings.HeaderSubmissions;
+            Columns.Create("Publisher", TableColumns.Joined.Publisher);
+            Columns.Create("Response", TableColumns.Joined.ResponseTypeName);
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region Public methods
-
         #endregion
 
         /************************************************************************/
 
         #region Protected methods
-        /// <summary>
-        /// Called by the <see cref=" ControllerBase{VM,T}.Owner"/> of this controller
-        /// in order to update the controller values.
-        /// </summary>
-        protected override void OnUpdate()
+        /// <inheritdoc/>
+        protected override void OnSelectedItemChanged()
         {
-            //long titleId = GetOwnerSelectedPrimaryId();
-            //MainView.RowFilter = string.Format("{0}={1}", SubmissionTable.Defs.Columns.TitleId, titleId);
-            //Available.Update();
+            base.OnSelectedItemChanged();
+            SelectedSubmission = SubmissionRow.Create(SelectedRow);
         }
-        #endregion
 
-        /************************************************************************/
-
-        #region Private methods
-        private void AddViewSourceSortDescriptions()
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            // TODO
-            //MainSource.SortDescriptions.Clear();
-            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.SubmittedCalc, ListSortDirection.Descending));
-            //MainSource.SortDescriptions.Add(new SortDescription(SubmissionTable.Defs.Columns.Joined.Submitted, ListSortDirection.Descending));
+            return DataRowCompareDateTime(item2, item1, TableColumns.Joined.Submitted);
+        }
+
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return (long)item[TableColumns.TitleId] == (Owner?.SelectedTitle?.Id ?? 0);
         }
         #endregion
     }

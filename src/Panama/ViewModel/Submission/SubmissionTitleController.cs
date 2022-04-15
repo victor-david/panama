@@ -26,12 +26,6 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private SubmissionRow selectedSubmission;
-
-        private static readonly Dictionary<long, string> PathMap = new()
-        {
-            { SubmissionValues.StatusWithdrawn, ResourceKeys.Icon.SquareSmallGrayIconKey },
-            { SubmissionValues.StatusAccepted, ResourceKeys.Icon.SquareSmallGreenIconKey },
-        };
         #endregion
 
         /************************************************************************/
@@ -66,7 +60,7 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip("Ordering");
 
-            Columns.CreateResource<Int64ToPathConverter>("S", TableColumns.Status, PathMap)
+            Columns.CreateResource<Int64ToPathConverter>("S", TableColumns.Status, ResourceKeys.Icon.TitleStatusIconMap)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(LocalResources.Get(ResourceKeys.ToolTip.SubmissionTitleStatusToolTip));
