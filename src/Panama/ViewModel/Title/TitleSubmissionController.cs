@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
+using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
@@ -20,6 +21,8 @@ namespace Restless.Panama.ViewModel
     public class TitleSubmissionController : BaseController<TitleViewModel, SubmissionTable>
     {
         #region Private
+        private SubmissionBatchTable SubmissionBatchTable => DatabaseController.Instance.GetTable<SubmissionBatchTable>();
+        private SubmissionBatchRow selectedBatch;
         private SubmissionRow selectedSubmission;
         #endregion
 
@@ -33,6 +36,15 @@ namespace Restless.Panama.ViewModel
         {
             get => selectedSubmission;
             private set => SetProperty(ref selectedSubmission, value);
+        }
+
+        /// <summary>
+        /// Gets the submission batch that corresponds to <see cref="SelectedSubmission"/>
+        /// </summary>
+        public SubmissionBatchRow SelectedBatch
+        {
+            get => selectedBatch;
+            private set => SetProperty(ref selectedBatch, value);
         }
         #endregion
 
@@ -77,6 +89,7 @@ namespace Restless.Panama.ViewModel
         {
             base.OnSelectedItemChanged();
             SelectedSubmission = SubmissionRow.Create(SelectedRow);
+            SelectedBatch = SubmissionBatchTable.GetSubmissionBatch(SelectedSubmission?.BatchId ?? 0);
         }
 
         /// <inheritdoc/>

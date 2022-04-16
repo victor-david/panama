@@ -1,6 +1,7 @@
 ﻿using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Data;
+using System.Globalization;
 using Columns = Restless.Panama.Database.Tables.SubmissionBatchTable.Defs.Columns;
 
 namespace Restless.Panama.Database.Tables
@@ -10,6 +11,12 @@ namespace Restless.Panama.Database.Tables
     /// </summary>
     public class SubmissionBatchRow : RowObjectBase<SubmissionBatchTable>
     {
+        #region Private
+        private string dateFormat;
+        #endregion
+
+        /************************************************************************/
+
         #region Properties
         /// <summary>
         /// Gets the record id.
@@ -107,6 +114,21 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Gets a formatted value for <see cref="Submitted"/> converted to local time.
+        /// </summary>
+        public string SubmittedLocal => Submitted.ToLocalTime().ToString(dateFormat, CultureInfo.InvariantCulture);
+
+        /// <summary>
+        /// Gets a formatted value for <see cref="Response"/> converted to local time.
+        /// </summary>
+        public string ResponseLocal => Response?.ToLocalTime().ToString(dateFormat, CultureInfo.InvariantCulture) ?? "--";
+
+        /// <summary>
+        /// Gets the response type descriptive name
+        /// </summary>
+        public string ResponseTypeName => GetString(Columns.Joined.ResponseTypeName);
+
+        /// <summary>
         /// Gets the publisher name
         /// </summary>
         public string PublisherName => GetString(Columns.Joined.Publisher);
@@ -131,22 +153,23 @@ namespace Restless.Panama.Database.Tables
         /// <param name="row">The data row</param>
         private SubmissionBatchRow(DataRow row) : base(row)
         {
+            dateFormat = "MMM dd, yyyy";
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="SubmissionBatchRow"/> object if <paramref name="row"/> is not null
+        /// </summary>
+        /// <param name="row">The row</param>
+        /// <returns>A new row, or null.</returns>
+        public static SubmissionBatchRow Create(DataRow row)
+        {
+            return row != null ? new SubmissionBatchRow(row) : null;
         }
         #endregion
 
         /************************************************************************/
 
-        #region Public methods
-        /// <summary>
-        /// Creates a new <see cref="SubmissionBatchRow"/> object if <paramref name="row"/> is not null
-        /// </summary>
-        /// <param name="row">The row</param>
-        /// <returns>A new tag row, or null.</returns>
-        public static SubmissionBatchRow Create(DataRow row)
-        {
-            return row != null ? new SubmissionBatchRow(row) : null;
-        }
-
+        #region Methods
         /// <summary>
         /// Creates a new <see cref="SubmissionBatchRow"/> object for a new submission
         /// </summary>
@@ -168,6 +191,18 @@ namespace Restless.Panama.Database.Tables
                 ResponseType = ResponseTable.Defs.Values.NoResponse,
                 Notes = null
             };
+        }
+
+        /// <summary>
+        /// Sets the date format used for <see cref="DateLocal"/>
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetDateFormat(string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                dateFormat = value;
+            }
         }
 
         /// <summary>

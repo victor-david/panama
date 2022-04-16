@@ -15,10 +15,51 @@
     <DataGrid
         ItemsSource="{Binding Submissions.ListView}"
         SelectedItem="{Binding Submissions.SelectedItem}"
-        tk:DataGridColumns.Columns="{Binding Submissions.Columns}"
-        />
+        tk:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
+    
     <TextBlock
             Style="{StaticResource TextBlockZeroResultStyle}"
             tk:Property.IsCollapsed="{Binding Submissions.HaveItems}"
             Text="{x:Static r:Strings.TextNoTitleSubmissions}"/>
+
+    <HeaderedContentControl
+        Grid.Row="1"
+        Margin="0,5,0,0"
+        Visibility="{Binding Submissions.EditVisibility}"
+        Header="{Binding Submissions.SelectedBatch.PublisherName}">
+
+        <HeaderedContentControl.Resources>
+            <Style TargetType="tk:LineItem">
+                <Setter Property="Margin" Value="4"/>
+                <Setter Property="ItemForeground" Value="{StaticResource DefaultForegroundBrush}"/>
+                <Setter Property="ValueForeground" Value="{StaticResource DarkForegroundBrush}"/>
+                <Setter Property="ItemDisplayWidth" Value="80"/>
+                <Setter Property="ItemVerticalAlignment" Value="Top"/>
+                <Setter Property="ValueVerticalAlignment" Value="Top"/>
+            </Style>
+        </HeaderedContentControl.Resources>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <tk:LineItem
+                    Item="Submitted"
+                    Value="{Binding Submissions.SelectedBatch.SubmittedLocal}"/>
+
+                <tk:LineItem
+                    Item="Response"
+                    Value="{Binding Submissions.SelectedBatch.ResponseLocal}"/>
+
+                <tk:LineItem
+                    Item="Type"
+                    Value="{Binding Submissions.SelectedBatch.ResponseTypeName}"/>
+
+                <tk:LineItem
+                    Item="Note"
+                    Value="{Binding Submissions.SelectedBatch.Notes}"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </HeaderedContentControl>
+
 </Grid>

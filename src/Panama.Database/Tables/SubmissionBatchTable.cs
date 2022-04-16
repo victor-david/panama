@@ -175,6 +175,17 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Gets a <see cref="SubmissionBatchRow"/> object for the specified batch id
+        /// </summary>
+        /// <param name="id">The batch id</param>
+        /// <returns>The batch row or null</returns>
+        public SubmissionBatchRow GetSubmissionBatch(long id)
+        {
+            DataRow[] rows = Select($"{Defs.Columns.Id}={id}");
+            return SubmissionBatchRow.Create(GetUniqueRow(rows));
+        }
+
+        /// <summary>
         /// Gets the count of submissions to the specified publisher that are open
         /// </summary>
         /// <param name="publisherId">The publisher id</param>
