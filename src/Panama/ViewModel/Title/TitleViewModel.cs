@@ -173,7 +173,9 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Title", TableColumns.Title).MakeFlexWidth(4);
 
-            Columns.SetDefaultSort(Columns.Create("Written", TableColumns.Written).MakeDate(), ListSortDirection.Descending);
+            Columns.Create("Written", TableColumns.Written)
+                .MakeDate()
+                .MakeInitialSortDescending();
 
             Columns.Create("Updated", TableColumns.Calculated.LastestVersionDate)
                 .MakeDate()
@@ -201,7 +203,7 @@ namespace Restless.Panama.ViewModel
             Columns.Create("PC", TableColumns.Calculated.PublishedCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitlePublishedCount)
                 .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
- 
+
             Commands.Add("ReadyFilter", p => Filters.SetToReady());
             Commands.Add("FlaggedFilter", p => Filters.SetToFlagged());
             Commands.Add("SubmittedFilter", p => Filters.SetToSubmitted());
@@ -245,6 +247,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnActivated()
         {
+            base.OnActivated();
             Tags.RefreshAvailable();
             Tags.Update();
         }
@@ -298,7 +301,6 @@ namespace Restless.Panama.ViewModel
                 Table.AddDefaultRow();
                 Table.Save();
                 Filters.ClearAll();
-                Columns.RestoreDefaultSort();
                 ForceListViewSort();
             }
         }
