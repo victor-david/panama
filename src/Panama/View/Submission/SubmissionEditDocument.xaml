@@ -12,7 +12,7 @@
     mc:Ignorable="d" 
     d:DesignHeight="900" d:DesignWidth="400">
     <Grid tk:Property.RowHeights="200,Auto,*">
-        <DataGrid 
+        <tk:DataGrid 
             Style="{StaticResource DataGridEditLockedStyle}"
             ItemsSource="{Binding Documents.ListView}"
             SelectedItem="{Binding Documents.SelectedItem}"
@@ -26,7 +26,7 @@
                 <ContextMenu ItemsSource="{Binding Documents.MenuItems}"/>
             </DataGrid.ContextMenu>
             
-        </DataGrid>
+        </tk:DataGrid>
 
         <StackPanel
             Grid.Row="1"

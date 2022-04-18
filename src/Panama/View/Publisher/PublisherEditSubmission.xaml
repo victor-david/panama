@@ -16,7 +16,7 @@
         Style="{StaticResource DataEntryPanelDefaultTextBlockStyle}"
         Text="{x:Static r:Strings.HeaderSubmissions}"/>
 
-    <DataGrid
+    <tk:DataGrid
         Grid.Row="1"
         ItemsSource="{Binding Submissions.ListView}"
         SelectedItem="{Binding Submissions.SelectedItem}"
@@ -33,8 +33,7 @@
         Style="{StaticResource DataEntryPanelDefaultTextBlockStyle}"
         Text="{x:Static r:Strings.HeaderTitles}"/>
 
-    <!--  -->
-    <DataGrid
+    <tk:DataGrid
         Grid.Row="3"
         ItemsSource="{Binding Titles.ListView}"
         SelectedItem="{Binding Titles.SelectedItem}"
@@ -48,7 +47,7 @@
             <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Titles.OpenRowCommand}"/>
         </DataGrid.InputBindings>
         
-    </DataGrid>
+    </tk:DataGrid>
 
     <TextBlock
         Grid.Row="3"

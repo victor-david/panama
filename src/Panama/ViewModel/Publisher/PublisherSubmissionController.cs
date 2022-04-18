@@ -7,7 +7,6 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Controls;
-using System.ComponentModel;
 using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionBatchTable.Defs.Columns;
 
@@ -29,7 +28,9 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.SetDefaultSort(Columns.Create("Submitted", TableColumns.Submitted).MakeDate(), ListSortDirection.Descending);
+            Columns.Create("Submitted", TableColumns.Submitted)
+                .MakeDate()
+                .MakeInitialSortDescending();
 
             Columns.Create("Response", TableColumns.Response)
                 .MakeDate();
