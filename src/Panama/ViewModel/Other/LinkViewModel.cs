@@ -9,7 +9,6 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
-using System.ComponentModel;
 using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.LinkTable.Defs.Columns;
 
@@ -57,7 +56,7 @@ namespace Restless.Panama.ViewModel
             DisplayName = Strings.CommandLink;
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Added", TableColumns.Added).MakeDate();
-            Columns.SetDefaultSort(Columns.Create("Name", TableColumns.Name), ListSortDirection.Ascending);
+            Columns.Create("Name", TableColumns.Name).MakeInitialSortAscending();
             Columns.Create("Url", TableColumns.Url).MakeFlexWidth(2.5);
             Columns.Create("Note", TableColumns.Notes).MakeSingleLine();
 
@@ -93,7 +92,6 @@ namespace Restless.Panama.ViewModel
         {
             Table.AddDefaultRow();
             Table.Save();
-            Columns.RestoreDefaultSort();
             ForceListViewSort();
         }
 

@@ -9,7 +9,6 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
-using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using TableColumns = Restless.Panama.Database.Tables.TagTable.Defs.Columns;
@@ -54,7 +53,7 @@ namespace Restless.Panama.ViewModel
         {
             DisplayName = Strings.MenuItemTags;
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.SetDefaultSort(Columns.Create("Tag", TableColumns.Tag), ListSortDirection.Ascending);
+            Columns.Create("Tag", TableColumns.Tag).MakeInitialSortAscending();
             Columns.Create("Description", TableColumns.Description).MakeFlexWidth(2.5);
             Columns.Create("Usage", TableColumns.Calculated.UsageCount)
                 .MakeCentered()
@@ -96,7 +95,6 @@ namespace Restless.Panama.ViewModel
             Table.AddDefaultRow();
             Table.Save();
             // Filters.ClearAll();
-            Columns.RestoreDefaultSort();
             ForceListViewSort();
         }
 

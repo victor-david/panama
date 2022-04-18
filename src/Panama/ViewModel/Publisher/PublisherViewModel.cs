@@ -12,11 +12,9 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.PublisherTable.Defs.Columns;
 
@@ -140,11 +138,10 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Name", TableColumns.Name);
             Columns.Create("Url", TableColumns.Url);
 
-            DataGridColumn column = Columns.Create("Added", TableColumns.Added)
+            Columns.Create("Added", TableColumns.Added)
                 .MakeDate()
-                .AddToolTip(Strings.ToolTipPublisherAdded);
-
-            Columns.SetDefaultSort(column, ListSortDirection.Descending);
+                .AddToolTip(Strings.ToolTipPublisherAdded)
+                .MakeInitialSortDescending();
 
             Columns.CreateResource<BooleanToPathConverter>("A", TableColumns.Calculated.HaveActiveSubmission, ResourceKeys.Icon.SquareSmallGrayIconKey)
                 .MakeCentered()
@@ -239,7 +236,6 @@ namespace Restless.Panama.ViewModel
                 Table.AddDefaultRow();
                 Table.Save();
                 Filters.ClearAll();
-                Columns.RestoreDefaultSort();
                 ForceListViewSort();
             }
         }

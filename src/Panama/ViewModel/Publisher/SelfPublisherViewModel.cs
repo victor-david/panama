@@ -9,7 +9,6 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
-using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using TableColumns = Restless.Panama.Database.Tables.SelfPublisherTable.Defs.Columns;
@@ -59,7 +58,10 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Name", TableColumns.Name);
             Columns.Create("Url", TableColumns.Url);
-            Columns.SetDefaultSort(Columns.Create("Added", TableColumns.Added).MakeDate().AddToolTip(Strings.ToolTipPublisherAdded), ListSortDirection.Descending);
+            Columns.Create("Added", TableColumns.Added)
+                .MakeDate()
+                .AddToolTip(Strings.ToolTipPublisherAdded)
+                .MakeInitialSortDescending();
 
             Columns.Create("PC", TableColumns.Calculated.PubCount)
                 .MakeCentered()
@@ -111,7 +113,6 @@ namespace Restless.Panama.ViewModel
                 Table.AddDefaultRow();
                 Table.Save();
                 // Filters.ClearAll();
-                Columns.RestoreDefaultSort();
                 ForceListViewSort();
             }
         }

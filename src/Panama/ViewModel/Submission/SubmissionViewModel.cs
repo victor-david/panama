@@ -11,7 +11,6 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
-using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Windows.Threading;
@@ -135,10 +134,9 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipSubmissionLocked);
 
-            Columns.SetDefaultSort(
-                Columns.Create("Submitted", TableColumns.Submitted)
-                .MakeDate(),
-                ListSortDirection.Descending);
+            Columns.Create("Submitted", TableColumns.Submitted)
+                .MakeDate()
+                .MakeInitialSortDescending();
 
             Columns.Create("Response", TableColumns.Response)
                 .MakeDate();
@@ -286,7 +284,6 @@ namespace Restless.Panama.ViewModel
                 {
                     Table.CreateSubmission(publisher.Id);
                     MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ResultSubmissionCreated);
-                    Columns.RestoreDefaultSort();
                     ForceListViewSort();
                 }
             }
