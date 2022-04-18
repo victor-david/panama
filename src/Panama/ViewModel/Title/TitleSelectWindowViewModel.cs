@@ -10,7 +10,6 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using TableColumns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
@@ -100,7 +99,10 @@ namespace Restless.Panama.ViewModel
                 .AddToolTip(Strings.ToolTipTitleFilterFlag);
 
             Columns.Create("Title", TableColumns.Title);
-            Columns.SetDefaultSort(Columns.Create("Written", TableColumns.Written).MakeDate(), ListSortDirection.Descending);
+            Columns.Create("Written", TableColumns.Written)
+                .MakeDate()
+                .MakeInitialSortDescending();
+
             Columns.Create("Updated", TableColumns.Calculated.LastestVersionDate).MakeDate();
 
             Commands.Add("Select", RunSelectCommand, p => IsSelectedRowAccessible);

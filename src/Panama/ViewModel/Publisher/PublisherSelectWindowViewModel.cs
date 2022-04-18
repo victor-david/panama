@@ -8,9 +8,7 @@ using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Controls;
 using System;
-using System.ComponentModel;
 using System.Data;
-using System.Windows.Controls;
 
 namespace Restless.Panama.ViewModel
 {
@@ -64,8 +62,9 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Name", PublisherTable.Defs.Columns.Name);
 
-            DataGridColumn col = Columns.Create("Added", PublisherTable.Defs.Columns.Added).MakeDate();
-            Columns.SetDefaultSort(col, ListSortDirection.Descending);
+            Columns.Create("Added", PublisherTable.Defs.Columns.Added)
+                .MakeDate()
+                .MakeInitialSortDescending();
 
             Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub)
                 .MakeDate()

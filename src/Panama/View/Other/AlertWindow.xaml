@@ -24,7 +24,7 @@
             </Style>
         </Grid.Resources>
 
-        <DataGrid
+        <tk:DataGrid
             BorderThickness="0,0,0,1"
             RowHeight="{Binding Config.DataGridRowHeight}"
             ItemsSource="{Binding ListView}"
@@ -39,7 +39,7 @@
                 <ContextMenu ItemsSource="{Binding MenuItems}"/>
             </DataGrid.ContextMenu>
             
-        </DataGrid>
+        </tk:DataGrid>
 
         <StatusBar Grid.Row="1">
             <TextBlock Text="Postpone"/>
