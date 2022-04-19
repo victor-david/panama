@@ -421,6 +421,15 @@ namespace Restless.Panama.Core
             get => GetItem(DataGrid.DefaultAlternationCount);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets the state of the title grid columns
+        /// </summary>
+        public string TitleGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/

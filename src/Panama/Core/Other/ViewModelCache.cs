@@ -2,7 +2,6 @@
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Restless.Panama.Core
 {
@@ -36,16 +35,22 @@ namespace Restless.Panama.Core
                 throw new ArgumentNullException(nameof(navItem));
             }
 
-            //if (navItem.GroupIndex == NavigationGroup.Domain && navItem.TargetType == typeof(DomainViewModel))
-            //{
-            //    return GetDomainItem(navItem);
-            //}
             return GetStandardItem(navItem);
         }
 
         /// <summary>
-        /// Signals all <see cref="ApplicationViewModel"/> objects in the collection
-        /// that they are closing.
+        /// Signals all view models in the collection to save state
+        /// </summary>
+        public void SignalSave()
+        {
+            foreach (ApplicationViewModel item in this)
+            {
+                item.SignalSave();
+            }
+        }
+
+        /// <summary>
+        /// Signals all view models in the collection that they are closing.
         /// </summary>
         public void SignalClosing()
         {
@@ -73,22 +78,6 @@ namespace Restless.Panama.Core
             Add(createdItem);
             return createdItem;
         }
-
-        //private ApplicationViewModel GetDomainItem(NavigatorItem navItem)
-        //{
-        //    foreach (var item in this.OfType<DomainViewModel>())
-        //    {
-        //        if (item.Domain.Id == navItem.Id)
-        //        {
-        //            return item;
-        //        }
-        //    }
-
-        //    DomainRow domain = DatabaseController.Instance.GetTable<DomainTable>().GetSingleRecord(navItem.Id);
-        //    DomainViewModel createdItem = new(domain);
-        //    Add(createdItem);
-        //    return createdItem;
-        //}
         #endregion
     }
 }

@@ -207,6 +207,8 @@ namespace Restless.Panama.ViewModel
                 .AddToolTip(Strings.TooltipTitlePublishedCount)
                 .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
 
+            Columns.RestoreColumnState(Config.TitleGridColumnState);
+
             Commands.Add("ReadyFilter", p => Filters.SetToReady());
             Commands.Add("FlaggedFilter", p => Filters.SetToFlagged());
             Commands.Add("SubmittedFilter", p => Filters.SetToSubmitted());
@@ -348,23 +350,24 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        /// <summary>
-        /// Called when this VM is being removed from the workspaces.
-        /// </summary>
-        /// <param name="e">The event args.</param>
-        protected override void OnClosing(CancelEventArgs e)
+        /// <inheritdoc/>
+        protected override void OnSave()
         {
-            base.OnClosing(e);
-            // TODO
-            // Fires the filter's OnClosing in order that the filter can remove its event handlers.
-            //Filters.CloseCommand.Execute(null);
+            Config.TitleGridColumnState = Columns.GetColumnState();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnClosing()
+        {
+            base.OnClosing();
+            SignalSave();
         }
         #endregion
 
         /************************************************************************/
 
         #region Private Methods
-        private void RunExtractTitle(object o)
+        private void RunExtractTitle(object parm)
         {
             if (SelectedTitle != null)
             {
@@ -392,7 +395,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private bool CanRunExtractTitle(object o)
+        private bool CanRunExtractTitle(object parm)
         {
             if (SelectedTitle != null)
             {
