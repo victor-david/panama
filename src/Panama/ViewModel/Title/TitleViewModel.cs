@@ -14,7 +14,6 @@ using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Utility;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Windows.Threading;
@@ -167,12 +166,14 @@ namespace Restless.Panama.ViewModel
             Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.Ready, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipTitleFilterReady);
+                .AddToolTip(Strings.ToolTipTitleFilterReady)
+                .SetSelectorName("Ready");
 
             Columns.CreateResource<BooleanToPathConverter>("Q", TableColumns.QuickFlag, ResourceKeys.Icon.SquareSmallBlueIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipTitleFilterFlag);
+                .AddToolTip(Strings.ToolTipTitleFilterFlag)
+                .SetSelectorName("Quick Flag");
 
             Columns.Create("Title", TableColumns.Title).MakeFlexWidth(4);
 
@@ -184,28 +185,45 @@ namespace Restless.Panama.ViewModel
                 .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
 
-            Columns.Create("WC", TableColumns.Calculated.LastestVersionWordCount).MakeFixedWidth(FixedWidth.W042)
-                .AddToolTip(Strings.TooltipTitleWordCount);
+            Columns.Create("WC", TableColumns.Calculated.LastestVersionWordCount)
+                .MakeFixedWidth(FixedWidth.W042)
+                .AddToolTip(Strings.TooltipTitleWordCount)
+                .SetSelectorName("Word Count");
 
-            Columns.Create("SC", TableColumns.Calculated.SubCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("SC", TableColumns.Calculated.SubCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleSubmissionCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Total Submission Count");
 
-            Columns.Create("CS", TableColumns.Calculated.CurrentSubCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("CS", TableColumns.Calculated.CurrentSubCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleCurrentSubmissionCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Current Submission Count");
 
-            Columns.Create("VC", TableColumns.Calculated.VersionCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("VC", TableColumns.Calculated.VersionCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleVersionCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Version Count");
 
-            Columns.Create("TC", TableColumns.Calculated.TagCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("TC", TableColumns.Calculated.TagCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleTagCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Tag Count");
 
-            Columns.Create("PC", TableColumns.Calculated.PublishedCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("PC", TableColumns.Calculated.PublishedCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitlePublishedCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Published Count");
 
             Columns.RestoreColumnState(Config.TitleGridColumnState);
 
@@ -241,6 +259,8 @@ namespace Restless.Panama.ViewModel
                 Filters.SetListView(ListView);
                 Filters.ApplyFilter();
             }));
+
+
         }
         #endregion
 

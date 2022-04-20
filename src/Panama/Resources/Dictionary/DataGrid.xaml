@@ -129,6 +129,7 @@
         <Setter Property="Padding" Value="3,0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource DefaultHeaderForegroundBrush}"/>
         <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1,0,0,1"/>
@@ -176,6 +177,7 @@
                             <Setter TargetName="SortDescendingPath" Property="Visibility" Value="Visible"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -185,7 +187,6 @@
                 <ContextMenu Visibility="Collapsed" IsEnabled="False"/>
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="{StaticResource DefaultHeaderForegroundBrush}"/>
 
         <Style.Triggers>
              <Trigger Property="DisplayIndex" Value="0">

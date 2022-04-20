@@ -129,6 +129,7 @@
         <con:SplitterGrid.ContentLeft>
             <tk:DataGrid
                 CanUserReorderColumns="True"
+                HeaderMode="ColumnSelector"
                 RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
@@ -139,7 +140,8 @@
                 <DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
                 </DataGrid.InputBindings>
-
+                
+                
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
