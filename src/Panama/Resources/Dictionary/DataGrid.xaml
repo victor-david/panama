@@ -123,6 +123,19 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="ColumnHeaderGripperStyle" TargetType="Thumb">
+        <Setter Property="Width" Value="6"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="SizeWE"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Border Background="{TemplateBinding Background}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style x:Key="DefaultDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Height" Value="26"/>
@@ -167,6 +180,18 @@
                                 Style="{StaticResource SmallPathStyle}"
                                 Data="{StaticResource ChevronUpGeometryKey}"
                                 Visibility="Collapsed"/>
+
+                            <Thumb
+                                x:Name="PART_LeftHeaderGripper"
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource ColumnHeaderGripperStyle}"/>
+
+                            <Thumb
+                                Grid.Column="1"
+                                x:Name="PART_RightHeaderGripper"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource ColumnHeaderGripperStyle}"/>
+
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
