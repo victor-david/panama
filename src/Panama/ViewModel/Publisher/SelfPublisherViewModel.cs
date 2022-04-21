@@ -69,6 +69,8 @@ namespace Restless.Panama.ViewModel
                 .AddToolTip(Strings.TooltipSelfPublisherPublishedCount)
                 .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
+            Columns.RestoreColumnState(Config.SelfPublisherGridColumnState);
+
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemCreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
@@ -148,6 +150,19 @@ namespace Restless.Panama.ViewModel
                     DeleteSelectedRow();
                 }
             }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnSave()
+        {
+            Config.SelfPublisherGridColumnState = Columns.GetColumnState();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnClosing()
+        {
+            base.OnClosing();
+            SignalSave();
         }
         #endregion
     }

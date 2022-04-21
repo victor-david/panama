@@ -439,6 +439,15 @@ namespace Restless.Panama.Core
             get => GetItem(null);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets the state of the self publisher grid columns
+        /// </summary>
+        public string SelfPublisherGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/
