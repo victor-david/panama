@@ -430,6 +430,15 @@ namespace Restless.Panama.Core
             get => GetItem(null);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets the state of the publisher grid columns
+        /// </summary>
+        public string PublisherGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/

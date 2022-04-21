@@ -259,8 +259,6 @@ namespace Restless.Panama.ViewModel
                 Filters.SetListView(ListView);
                 Filters.ApplyFilter();
             }));
-
-
         }
         #endregion
 

@@ -130,6 +130,8 @@
 
         <con:SplitterGrid.ContentLeft>
             <tk:DataGrid
+                CanUserReorderColumns="True"
+                HeaderMode="ColumnSelector"
                 RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding ListView}" 
                 SelectedItem="{Binding SelectedItem}"
