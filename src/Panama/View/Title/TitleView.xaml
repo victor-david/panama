@@ -130,6 +130,7 @@
             <tk:DataGrid
                 CanUserReorderColumns="True"
                 HeaderMode="ColumnSelector"
+                ColumnSelectorMinimumVisible="3"
                 RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
