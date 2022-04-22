@@ -12,7 +12,7 @@
     tk:Property.RowHeights="*,*"
     d:DesignHeight="450" d:DesignWidth="400">
 
-    <DataGrid
+    <tk:DataGrid
         ItemsSource="{Binding Submissions.ListView}"
         SelectedItem="{Binding Submissions.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Submissions.Columns}"/>

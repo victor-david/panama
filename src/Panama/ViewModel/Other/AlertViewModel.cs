@@ -61,10 +61,9 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipAlertEnabled);
 
-            Columns.SetDefaultSort(
-                Columns.Create("Date", TableColumns.Date)
-                .MakeDate(),
-                ListSortDirection.Ascending);
+            Columns.Create("Date", TableColumns.Date)
+                .MakeDate()
+                .MakeInitialSortAscending();
 
             Columns.Create("Title", TableColumns.Title);
 
@@ -105,7 +104,6 @@ namespace Restless.Panama.ViewModel
                 Table.AddDefaultRow();
                 Table.Save();
                 // Filters.ClearAll();
-                Columns.RestoreDefaultSort();
                 ForceListViewSort();
             }
         }

@@ -12,11 +12,9 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.PublisherTable.Defs.Columns;
 
@@ -125,43 +123,50 @@ namespace Restless.Panama.ViewModel
             Columns.CreateResource<BooleanToPathConverter>("P", TableColumns.Calculated.InSubmissionPeriod, ResourceKeys.Icon.SquareSmallBlueIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipPublisherInPeriod);
+                .AddToolTip(Strings.ToolTipPublisherInPeriod)
+                .SetSelectorName("In Period");
 
             Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Exclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipPublisherExclusive);
+                .AddToolTip(Strings.ToolTipPublisherExclusive)
+                .SetSelectorName("Exclusive"); ;
 
             Columns.CreateResource<BooleanToPathConverter>("P", TableColumns.Paying, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipPublisherPay);
+                .AddToolTip(Strings.ToolTipPublisherPay)
+                .SetSelectorName("Paying");
 
             Columns.Create("Name", TableColumns.Name);
             Columns.Create("Url", TableColumns.Url);
 
-            DataGridColumn column = Columns.Create("Added", TableColumns.Added)
+            Columns.Create("Added", TableColumns.Added)
                 .MakeDate()
-                .AddToolTip(Strings.ToolTipPublisherAdded);
-
-            Columns.SetDefaultSort(column, ListSortDirection.Descending);
+                .AddToolTip(Strings.ToolTipPublisherAdded)
+                .MakeInitialSortDescending();
 
             Columns.CreateResource<BooleanToPathConverter>("A", TableColumns.Calculated.HaveActiveSubmission, ResourceKeys.Icon.SquareSmallGrayIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipPublisherHasActive);
+                .AddToolTip(Strings.ToolTipPublisherHasActive)
+                .SetSelectorName("Has Active Submission");
 
             Columns.Create("Last Sub", TableColumns.Calculated.LastSub)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipPublisherLastSubmission)
-                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Last Submission");
 
             Columns.Create("SC", TableColumns.Calculated.SubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.ToolTipPublisherSubmissionCount)
-                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Submission Count");
 
+            Columns.RestoreColumnState(Config.PublisherGridColumnState);
+            
             Commands.Add("ActiveFilter", p => Filters.SetToActive());
             Commands.Add("HaveSubFilter", p => Filters.SetToOpenSubmission());
             Commands.Add("InPeriodFilter", p => Filters.SetToInPeriod());
@@ -239,7 +244,6 @@ namespace Restless.Panama.ViewModel
                 Table.AddDefaultRow();
                 Table.Save();
                 Filters.ClearAll();
-                Columns.RestoreDefaultSort();
                 ForceListViewSort();
             }
         }
@@ -275,6 +279,19 @@ namespace Restless.Panama.ViewModel
                     DeleteSelectedRow();
                 }
             }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnSave()
+        {
+            Config.PublisherGridColumnState = Columns.GetColumnState();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnClosing()
+        {
+            base.OnClosing();
+            SignalSave();
         }
         #endregion
 

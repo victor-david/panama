@@ -11,7 +11,6 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
-using System.ComponentModel;
 using System.Data;
 using System.Windows.Input;
 using TableColumns = Restless.Panama.Database.Tables.AlertTable.Defs.Columns;
@@ -72,10 +71,9 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipAlertEnabled);
 
-            Columns.SetDefaultSort(
-                Columns.Create("Date", TableColumns.Date)
-                .MakeDate(),
-                ListSortDirection.Ascending);
+            Columns.Create("Date", TableColumns.Date)
+                .MakeDate()
+                .MakeInitialSortAscending();
 
             Columns.Create("Title", TableColumns.Title);
             Columns.Create("Url", TableColumns.Url);

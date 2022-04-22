@@ -9,11 +9,8 @@ using Restless.Panama.Resources;
 using Restless.Panama.View;
 using Restless.Toolkit.Controls;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -83,9 +80,9 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.TooltipMessageInUse);
 
-            Columns.SetDefaultSort(
-                Columns.Create("Date", nameof(MimeKitMessage.MessageDateUtc)).MakeDate(),
-                ListSortDirection.Descending);
+            Columns.Create("Date", nameof(MimeKitMessage.MessageDateUtc))
+                .MakeDate()
+                .MakeInitialSortDescending();
 
             Columns.Create("From", nameof(MimeKitMessage.FromName));
             Columns.Create("Subject", nameof(MimeKitMessage.Subject));

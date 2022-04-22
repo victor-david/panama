@@ -10,6 +10,8 @@ using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -133,6 +135,22 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
+        /// Gets a custom sorting command. Supported by <see cref="Toolkit.Controls.DataGrid"/>
+        /// </summary>
+        public ICommand SortingCommand
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets a command for column header. Supported by <see cref="Toolkit.Controls.DataGrid"/>
+        /// </summary>
+        public ICommand HeaderCommand
+        {
+            get;
+        }
+
+        /// <summary>
         /// Gets a boolean value that determines if <see cref="AddCommand"/> is enabled.
         /// </summary>
         public virtual bool AddCommandEnabled => false;
@@ -151,6 +169,11 @@ namespace Restless.Panama.ViewModel
         /// Gets a boolean value that determines if <see cref="OpenRowCommand"/> is enabled.
         /// </summary>
         public virtual bool OpenRowCommandEnabled => false;
+
+        /// <summary>
+        /// Gets a boolean value that determines if <see cref="HeaderCommand"/> is enabled.
+        /// </summary>
+        public virtual bool HeaderCommandEnabled => false;
 
         /// <summary>
         /// Gets or sets a boolean value that determines if the custom filter popup is open
@@ -184,6 +207,8 @@ namespace Restless.Panama.ViewModel
             DeleteCommand = RelayCommand.Create(p => RunDeleteCommand(), p => DeleteCommandEnabled);
             ClearFilterCommand = RelayCommand.Create(p => RunClearFilterCommand(), p => ClearFilterCommandEnabled);
             OpenRowCommand = RelayCommand.Create(p => RunOpenRowCommand(), p => OpenRowCommandEnabled);
+            SortingCommand = RelayCommand.Create(p => RunSortingCommand(p as DataGridColumn));
+            HeaderCommand = RelayCommand.Create(p => RunHeaderCommand(p as DataGridColumnHeader), p => HeaderCommandEnabled);
             ToggleCustomFilterCommand = RelayCommand.Create(p => IsCustomFilterOpen = !IsCustomFilterOpen);
         }
         #endregion
@@ -286,6 +311,20 @@ namespace Restless.Panama.ViewModel
         /// Override in a derived class to provide open row logic. The base implementation does nothing.
         /// </summary>
         protected virtual void RunOpenRowCommand()
+        {
+        }
+
+        /// <summary>
+        /// Override in a derived class to handle the sorting command. The base implementation does nothing.
+        /// </summary>
+        protected virtual void RunSortingCommand(DataGridColumn column)
+        {
+        }
+
+        /// <summary>
+        /// Override in a derived class to handle the header command. The base implementation does nothing.
+        /// </summary>
+        protected virtual void RunHeaderCommand(DataGridColumnHeader header)
         {
         }
         #endregion

@@ -87,7 +87,10 @@
         </con:SplitterGrid.HeaderRight>
 
         <con:SplitterGrid.ContentLeft>
-            <DataGrid 
+            <tk:DataGrid
+                CanUserReorderColumns="True"
+                HeaderMode="ColumnSelector"
+                ColumnSelectorMinimumVisible="3"                
                 RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
@@ -95,7 +98,7 @@
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
-            </DataGrid>
+            </tk:DataGrid>
         </con:SplitterGrid.ContentLeft>
 
         <con:SplitterGrid.ContentRight>

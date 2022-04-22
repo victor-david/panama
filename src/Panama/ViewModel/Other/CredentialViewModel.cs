@@ -11,7 +11,6 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
 using Restless.Toolkit.Utility;
-using System.ComponentModel;
 using System.Data;
 using System.Windows;
 using TableColumns = Restless.Panama.Database.Tables.CredentialTable.Defs.Columns;
@@ -70,7 +69,7 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.SetDefaultSort(Columns.Create("Name", TableColumns.Name), ListSortDirection.Ascending);
+            Columns.Create("Name", TableColumns.Name).MakeInitialSortAscending();
             Columns.Create("Login Id", TableColumns.LoginId);
             Columns.Create("Password", TableColumns.Password).MakeMasked();
 
@@ -115,7 +114,6 @@ namespace Restless.Panama.ViewModel
         {
             Table.AddDefaultRow();
             Table.Save();
-            Columns.RestoreDefaultSort();
             ForceListViewSort();
         }
 

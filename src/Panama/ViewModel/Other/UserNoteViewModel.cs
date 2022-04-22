@@ -8,7 +8,6 @@ using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
-using System.ComponentModel;
 using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.UserNoteTable.Defs.Columns;
 
@@ -52,7 +51,7 @@ namespace Restless.Panama.ViewModel
         {
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Created", TableColumns.Created).MakeDate();
-            Columns.SetDefaultSort(Columns.Create("Title", TableColumns.Title), ListSortDirection.Ascending);
+            Columns.Create("Title", TableColumns.Title).MakeInitialSortAscending();
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemAddUserNote, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
@@ -82,7 +81,6 @@ namespace Restless.Panama.ViewModel
         {
             Table.AddDefaultRow();
             Table.Save();
-            Columns.RestoreDefaultSort();
             ForceListViewSort();
         }
 

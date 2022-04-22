@@ -8,7 +8,6 @@ using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
-using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using TableColumns = Restless.Panama.Database.Tables.AuthorTable.Defs.Columns;
@@ -51,7 +50,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AuthorViewModel()
         {
-            Columns.SetDefaultSort(Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042), ListSortDirection.Ascending);
+            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042)
+                .MakeInitialSortAscending();
+
             Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.IsDefault, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
@@ -92,7 +93,6 @@ namespace Restless.Panama.ViewModel
                 Table.AddDefaultRow();
                 Table.Save();
                 // Filters.ClearAll();
-                Columns.RestoreDefaultSort();
                 ForceListViewSort();
             }
         }

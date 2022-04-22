@@ -421,6 +421,42 @@ namespace Restless.Panama.Core
             get => GetItem(DataGrid.DefaultAlternationCount);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets the state of the title grid columns
+        /// </summary>
+        public string TitleGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the state of the publisher grid columns
+        /// </summary>
+        public string PublisherGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the state of the self publisher grid columns
+        /// </summary>
+        public string SelfPublisherGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the state of the submission grid columns
+        /// </summary>
+        public string SubmissionGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/

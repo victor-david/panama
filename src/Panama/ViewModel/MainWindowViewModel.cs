@@ -97,7 +97,6 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         private MainWindowViewModel()
         {
-            //Owner.Closing += new CancelEventHandler(MainWindowClosing);
             Commands.Add("OpenAboutWindow", p => WindowFactory.About.Create().ShowDialog());
             Commands.Add("OpenSettingsWindow", p => WindowFactory.Settings.Create().ShowDialog());
             Commands.Add("OpenToolWindow", p => WindowFactory.Tool.Create().ShowDialog());
@@ -111,7 +110,7 @@ namespace Restless.Panama.ViewModel
             Commands.Add("Close", p => WindowOwner.Close());
             
             Commands.Add("ResetWindow", RunResetWindowCommand);
-            Commands.Add("Save", Save);
+            Commands.Add("Save", RunSaveCommand);
 
             //Commands.Add("ToolConvert", p => NavigatorItems.Select<ToolConvertViewModel>(), CanRunToolConvertCommand);
             Commands.Add("ToolMessageSync", p => NavigatorItems.Select<ToolMessageSyncViewModel>());
@@ -176,11 +175,9 @@ namespace Restless.Panama.ViewModel
         /// <param name="e">Event args.</param>
         protected override void OnWindowClosing(CancelEventArgs e)
         {
-            SetCancelIfTasksInProgress(e);
-
             if (!e.Cancel)
             {
-
+                viewModelCache.SignalClosing();
                 Config.Instance.MainWindowWidth = (int)WindowOwner.Width;
                 Config.Instance.MainWindowHeight = (int)WindowOwner.Height;
                 if (WindowOwner.WindowState != WindowState.Minimized)
@@ -242,8 +239,9 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods (other)
-        private void Save(object o)
+        private void RunSaveCommand(object parm)
         {
+            viewModelCache.SignalSave();
             Config.Instance.SaveFilterObjects();
             DatabaseController.Instance.Save();
             NotificationMessage = "All data successfully saved to the database";

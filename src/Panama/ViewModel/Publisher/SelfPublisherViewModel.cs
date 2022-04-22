@@ -9,7 +9,6 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
-using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using TableColumns = Restless.Panama.Database.Tables.SelfPublisherTable.Defs.Columns;
@@ -59,13 +58,18 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Name", TableColumns.Name);
             Columns.Create("Url", TableColumns.Url);
-            Columns.SetDefaultSort(Columns.Create("Added", TableColumns.Added).MakeDate().AddToolTip(Strings.ToolTipPublisherAdded), ListSortDirection.Descending);
+            Columns.Create("Added", TableColumns.Added)
+                .MakeDate()
+                .AddToolTip(Strings.ToolTipPublisherAdded)
+                .MakeInitialSortDescending();
 
             Columns.Create("PC", TableColumns.Calculated.PubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipSelfPublisherPublishedCount)
                 .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+
+            Columns.RestoreColumnState(Config.SelfPublisherGridColumnState);
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemCreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
@@ -111,7 +115,6 @@ namespace Restless.Panama.ViewModel
                 Table.AddDefaultRow();
                 Table.Save();
                 // Filters.ClearAll();
-                Columns.RestoreDefaultSort();
                 ForceListViewSort();
             }
         }
@@ -147,6 +150,19 @@ namespace Restless.Panama.ViewModel
                     DeleteSelectedRow();
                 }
             }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnSave()
+        {
+            Config.SelfPublisherGridColumnState = Columns.GetColumnState();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnClosing()
+        {
+            base.OnClosing();
+            SignalSave();
         }
         #endregion
     }

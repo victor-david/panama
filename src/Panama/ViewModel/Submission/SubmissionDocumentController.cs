@@ -14,7 +14,6 @@ using Restless.Toolkit.Core.OpenXml;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
-using System.ComponentModel;
 using System.Data;
 using System.IO;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionDocumentTable.Defs.Columns;
@@ -98,7 +97,7 @@ namespace Restless.Panama.ViewModel
         {
             Columns.CreateImage<Int64ToPathConverter>("T", TableColumns.DocType, "ImageFileType", 20.0);
             Columns.Create("Updated", TableColumns.Updated).MakeDate();
-            Columns.SetDefaultSort(Columns.Create("Title", TableColumns.Title), ListSortDirection.Ascending);
+            Columns.Create("Title", TableColumns.Title).MakeInitialSortAscending();
             Columns.Create("Id", TableColumns.DocId);
 
             MenuItems.AddItem(Strings.MenuItemAddDocumentToSubmission, AddCommand)

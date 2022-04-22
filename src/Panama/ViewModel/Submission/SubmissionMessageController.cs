@@ -10,7 +10,6 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -62,7 +61,10 @@ namespace Restless.Panama.ViewModel
         public SubmissionMessageController(SubmissionViewModel owner) : base(owner)
         {
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.SetDefaultSort(Columns.Create("Date", TableColumns.MessageDate).MakeDate(), ListSortDirection.Descending);
+            Columns.Create("Date", TableColumns.MessageDate)
+                .MakeDate()
+                .MakeInitialSortDescending();
+
             Columns.Create("Type", TableColumns.Protocol).MakeFixedWidth(FixedWidth.W048);
             Columns.Create("Subject", TableColumns.Display);
            

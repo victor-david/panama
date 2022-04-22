@@ -9,7 +9,6 @@ using Restless.Panama.Database.Core;
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
 
@@ -96,7 +95,7 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Namespace", nameof(DataTable.Namespace))
                 .MakeFixedWidth(FixedWidth.W096);
 
-            Columns.SetDefaultSort(Columns.Create("Name", nameof(DataTable.TableName)), ListSortDirection.Ascending);
+            Columns.Create("Name", nameof(DataTable.TableName)).MakeInitialSortAscending();
 
             Columns.Create("Cols", $"{nameof(DataTable.Columns)}.{nameof(DataTable.Columns.Count)}")
                 .MakeCentered()

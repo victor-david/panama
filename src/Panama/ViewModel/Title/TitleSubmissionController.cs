@@ -9,7 +9,6 @@ using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
-using System.ComponentModel;
 using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionTable.Defs.Columns;
 
@@ -66,10 +65,9 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(LocalResources.Get(ResourceKeys.ToolTip.SubmissionTitleStatusToolTip));
 
-            Columns.SetDefaultSort(
-                Columns.Create("Submitted", TableColumns.Joined.Submitted)
-                .MakeDate(),
-                ListSortDirection.Descending);
+            Columns.Create("Submitted", TableColumns.Joined.Submitted)
+                .MakeDate()
+                .MakeInitialSortDescending();
 
             Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Joined.PublisherExclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
                 .MakeCentered()

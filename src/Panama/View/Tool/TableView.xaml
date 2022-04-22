@@ -38,7 +38,7 @@
         </con:SplitterGrid.HeaderRight>
 
         <con:SplitterGrid.ContentLeft>
-            <DataGrid
+            <tk:DataGrid
                 ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
                 tk:DataGridColumns.Columns="{Binding Columns}"/>

@@ -14,7 +14,6 @@ using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Utility;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Windows.Threading;
@@ -160,48 +159,74 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TitleViewModel()
         {
-            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Id", TableColumns.Id)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042);
+
             Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.Ready, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipTitleFilterReady);
+                .AddToolTip(Strings.ToolTipTitleFilterReady)
+                .SetSelectorName("Ready");
 
             Columns.CreateResource<BooleanToPathConverter>("Q", TableColumns.QuickFlag, ResourceKeys.Icon.SquareSmallBlueIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipTitleFilterFlag);
+                .AddToolTip(Strings.ToolTipTitleFilterFlag)
+                .SetSelectorName("Quick Flag");
 
             Columns.Create("Title", TableColumns.Title).MakeFlexWidth(4);
 
-            Columns.SetDefaultSort(Columns.Create("Written", TableColumns.Written).MakeDate(), ListSortDirection.Descending);
+            Columns.Create("Written", TableColumns.Written)
+                .MakeDate()
+                .MakeInitialSortDescending();
 
             Columns.Create("Updated", TableColumns.Calculated.LastestVersionDate)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
 
-            Columns.Create("WC", TableColumns.Calculated.LastestVersionWordCount).MakeFixedWidth(FixedWidth.W042)
-                .AddToolTip(Strings.TooltipTitleWordCount);
+            Columns.Create("WC", TableColumns.Calculated.LastestVersionWordCount)
+                .MakeFixedWidth(FixedWidth.W042)
+                .AddToolTip(Strings.TooltipTitleWordCount)
+                .SetSelectorName("Word Count");
 
-            Columns.Create("SC", TableColumns.Calculated.SubCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("SC", TableColumns.Calculated.SubCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleSubmissionCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Total Submission Count");
 
-            Columns.Create("CS", TableColumns.Calculated.CurrentSubCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("CS", TableColumns.Calculated.CurrentSubCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleCurrentSubmissionCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Current Submission Count");
 
-            Columns.Create("VC", TableColumns.Calculated.VersionCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("VC", TableColumns.Calculated.VersionCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleVersionCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Version Count");
 
-            Columns.Create("TC", TableColumns.Calculated.TagCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("TC", TableColumns.Calculated.TagCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleTagCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Tag Count");
 
-            Columns.Create("PC", TableColumns.Calculated.PublishedCount).MakeCentered().MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("PC", TableColumns.Calculated.PublishedCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitlePublishedCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending);
- 
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Published Count");
+
+            Columns.RestoreColumnState(Config.TitleGridColumnState);
+
             Commands.Add("ReadyFilter", p => Filters.SetToReady());
             Commands.Add("FlaggedFilter", p => Filters.SetToFlagged());
             Commands.Add("SubmittedFilter", p => Filters.SetToSubmitted());
@@ -245,6 +270,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void OnActivated()
         {
+            base.OnActivated();
             Tags.RefreshAvailable();
             Tags.Update();
         }
@@ -298,7 +324,6 @@ namespace Restless.Panama.ViewModel
                 Table.AddDefaultRow();
                 Table.Save();
                 Filters.ClearAll();
-                Columns.RestoreDefaultSort();
                 ForceListViewSort();
             }
         }
@@ -343,23 +368,24 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        /// <summary>
-        /// Called when this VM is being removed from the workspaces.
-        /// </summary>
-        /// <param name="e">The event args.</param>
-        protected override void OnClosing(CancelEventArgs e)
+        /// <inheritdoc/>
+        protected override void OnSave()
         {
-            base.OnClosing(e);
-            // TODO
-            // Fires the filter's OnClosing in order that the filter can remove its event handlers.
-            //Filters.CloseCommand.Execute(null);
+            Config.TitleGridColumnState = Columns.GetColumnState();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnClosing()
+        {
+            base.OnClosing();
+            SignalSave();
         }
         #endregion
 
         /************************************************************************/
 
         #region Private Methods
-        private void RunExtractTitle(object o)
+        private void RunExtractTitle(object parm)
         {
             if (SelectedTitle != null)
             {
@@ -387,7 +413,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private bool CanRunExtractTitle(object o)
+        private bool CanRunExtractTitle(object parm)
         {
             if (SelectedTitle != null)
             {
