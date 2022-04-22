@@ -122,27 +122,32 @@ namespace Restless.Panama.ViewModel
             Columns.CreateResource<BooleanToPathConverter>("O", TableColumns.Online, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipSubmissionOnline);
+                .AddToolTip(Strings.ToolTipSubmissionOnline)
+                .SetSelectorName("Online");
 
             Columns.CreateResource<BooleanToPathConverter>("C", TableColumns.Contest, ResourceKeys.Icon.SquareSmallGrayIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipSubmissionContest);
+                .AddToolTip(Strings.ToolTipSubmissionContest)
+                .SetSelectorName("Contest");
 
             Columns.CreateResource<BooleanToPathConverter>("L", TableColumns.Locked, ResourceKeys.Icon.SquareSmallRedIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipSubmissionLocked);
+                .AddToolTip(Strings.ToolTipSubmissionLocked)
+                .SetSelectorName("Locked");
 
             Columns.Create("Submitted", TableColumns.Submitted)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
             Columns.Create("Response", TableColumns.Response)
-                .MakeDate();
+                .MakeDate()
+                .SetSelectorName("Response Date");
 
             Columns.Create("Type", TableColumns.Joined.ResponseTypeName)
-                .MakeFixedWidth(FixedWidth.W096);
+                .MakeFixedWidth(FixedWidth.W096)
+                .SetSelectorName("Response Type");
 
             // string.Empty because VS gets confused and tries to connect to the wrong overload
             Columns.Create<DatesToDayDiffConverter>("Days", TableColumns.Submitted, TableColumns.Response, string.Empty)
@@ -152,7 +157,8 @@ namespace Restless.Panama.ViewModel
             Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Joined.PublisherExclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipPublisherExclusive);
+                .AddToolTip(Strings.ToolTipPublisherExclusive)
+                .SetSelectorName("Publisher Exclusive");
 
             Columns.Create("Publisher", TableColumns.Joined.Publisher);
 
@@ -164,6 +170,8 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Note", TableColumns.Notes)
                 .MakeSingleLine();
+            
+            Columns.RestoreColumnState(Config.SubmissionGridColumnState);
 
             Commands.Add("ActiveFilter", p => Filters.SetToActive());
             Commands.Add("TryAgainFilter", p => Filters.SetToTryAgain());
@@ -298,6 +306,19 @@ namespace Restless.Panama.ViewModel
                 Table.DeleteSubmission(SelectedBatch);
                 ListView.Refresh();
             }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnSave()
+        {
+            Config.SubmissionGridColumnState = Columns.GetColumnState();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnClosing()
+        {
+            base.OnClosing();
+            SignalSave();
         }
         #endregion
 
