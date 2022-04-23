@@ -24,6 +24,7 @@
                 <ResourceDictionary Source="Resources/Dictionary/Window.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Images.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/ToolTip.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/ScrollBar.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/DataTemplate.xaml"/>
                 <!--
                 <ResourceDictionary Source="Resources/Dictionary/Converters.xaml"/>
