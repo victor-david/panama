@@ -151,6 +151,12 @@
         <Setter Property="RowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
     </Style>
 
+    <Style x:Key="DataGridStackStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
+        <Setter Property="AlternationCount" Value="2"/>
+        <Setter Property="MinHeight" Value="128"/>
+        <Setter Property="RowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
+    </Style>
+
     <Style x:Key="DataGridEditLockedStyle" TargetType="DataGrid" BasedOn="{StaticResource DataGridEditStyle}">
         <Setter Property="CanUserSortColumns" Value="False"/>
         <Setter Property="CanUserReorderColumns" Value="False"/>

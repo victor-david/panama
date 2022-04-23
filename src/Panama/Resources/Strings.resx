@@ -438,10 +438,7 @@ Last exported: {1}</value>
     <value>Version count - the number of versions that this title has</value>
   </data>
   <data name="ConfirmationRemoveTitlePublished" xml:space="preserve">
-    <value>Remove this record of publication for this title?</value>
-  </data>
-  <data name="HeaderPublished" xml:space="preserve">
-    <value>Published</value>
+    <value>This operation removes the record of publication for this title. You can add a new record back at any time.</value>
   </data>
   <data name="WindowTitleSelectPublisherForPublished" xml:space="preserve">
     <value>Select a publisher for this published record</value>
@@ -722,9 +719,6 @@ Do you want to continue?</value>
   </data>
   <data name="CommandFilterAdvancedTooltip" xml:space="preserve">
     <value>Display / hide the advanced filters</value>
-  </data>
-  <data name="CommandTitleFilterPublished" xml:space="preserve">
-    <value>Published</value>
   </data>
   <data name="CommandTitleFilterPublishedTooltip" xml:space="preserve">
     <value>Filter title list to display only titles that are published</value>
@@ -1243,5 +1237,20 @@ Changes will take effect after you restart the application.</value>
   </data>
   <data name="TextNoTitleSubmissions" xml:space="preserve">
     <value>No submissions for this title</value>
+  </data>
+  <data name="MenuItemAddPublished" xml:space="preserve">
+    <value>Add a published record to this title</value>
+  </data>
+  <data name="MenuItemAddSelfPublished" xml:space="preserve">
+    <value>Add a self published record to this title</value>
+  </data>
+  <data name="MenuItemRemovePublished" xml:space="preserve">
+    <value>Remove this published record</value>
+  </data>
+  <data name="ConfirmationClearPublishedDate" xml:space="preserve">
+    <value>This operation clears the published date for this item. You can set the date again at any time.</value>
+  </data>
+  <data name="MenuItemClearPublishedDate" xml:space="preserve">
+    <value>Clear the published date</value>
   </data>
 </root>

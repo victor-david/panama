@@ -228,15 +228,13 @@ namespace Restless.Panama.Core
         public static class SelfPublisherSelect
         {
             /// <summary>
-            /// Creates an instance of PublisherSelectWindow and its corresponding view model.
+            /// Creates an instance of SelfPublisherSelectWindow and its corresponding view model.
             /// </summary>
-            /// <param name="title">The text to use for the window title.</param>
             /// <returns>The window</returns>
-            public static PublisherSelectWindow Create(string title)
+            public static SelfPublisherSelectWindow Create()
             {
-                PublisherSelectWindow window = new()
+                SelfPublisherSelectWindow window = new()
                 {
-                    Title = title,
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     ShowInTaskbar = false,

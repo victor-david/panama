@@ -330,6 +330,24 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets whether the title published expander is expanded
+        /// </summary>
+        public bool IsTitlePublishedExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the title self published expander is expanded
+        /// </summary>
+        public bool IsTitleSelfPublishedExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets or sets whether the submission and response dates are expanded
         /// </summary>
         public bool IsSubmissionSubmittedDateExpanded

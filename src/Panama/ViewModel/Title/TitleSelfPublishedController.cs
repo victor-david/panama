@@ -10,47 +10,54 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
 using Restless.Toolkit.Utility;
 using System;
 using System.Data;
+using TableColumns = Restless.Panama.Database.Tables.SelfPublishedTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides a controller that manages selection and updates of published titles.
     /// </summary>
-    public class TitleSelfPublishedController : BaseController<TitleViewModel, TitleTable>
+    public class TitleSelfPublishedController : BaseController<TitleViewModel, SelfPublishedTable>
     {
         #region Private
+        private SelfPublishedRow selectedPublished;
         #endregion
 
         /************************************************************************/
 
         #region Public properties
+        /// <inheritdoc/>
+        public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
+
+        /// <inheritdoc/>
+        public override bool OpenRowCommandEnabled => SelectedPublished?.HasUrl ?? false;
+
+        /// <summary>
+        /// Gets the selected published row
+        /// </summary>
+        public SelfPublishedRow SelectedPublished
+        {
+            get => selectedPublished;
+            private set => SetProperty(ref selectedPublished, value);
+        }
+
         /// <summary>
         /// Gets or sets the published date.
         /// </summary>
-        public object PublishedDate
+        public DateTime? PublishedDate
         {
-            get
-            {
-                if (SelectedRow != null)
-                {
-                    if (SelectedRow[SelfPublishedTable.Defs.Columns.Published] is DateTime dt)
-                    {
-                        return dt;
-                    }
-                }
-                return null;
-            }
+            get => SelectedPublished?.Published;
             set
             {
-                if (SelectedRow != null)
-                {
-                    if (value == null) value = DBNull.Value;
-                    SelectedRow[SelfPublishedTable.Defs.Columns.Published] = value;
-                    OnPropertyChanged();
-                }
+                SelectedPublished?.SetPublishedDate(value);
+                OnPropertyChanged();
             }
         }
         #endregion
@@ -62,96 +69,91 @@ namespace Restless.Panama.ViewModel
         /// Initializes a new instance of the <see cref="TitlePublishedController"/> class.
         /// </summary>
         /// <param name="owner">The view model that owns this controller.</param>
-        public TitleSelfPublishedController(TitleViewModel owner)
-            : base(owner)
+        public TitleSelfPublishedController(TitleViewModel owner) : base(owner)
         {
-            //AssignDataViewFrom(DatabaseController.Instance.GetTable<SelfPublishedTable>());
-            //MainView.RowFilter = string.Format("{0}=-1", SelfPublishedTable.Defs.Columns.TitleId);
-            //MainView.Sort = string.Format("{0} DESC", SelfPublishedTable.Defs.Columns.Added);
-            Columns.Create("Added", SelfPublishedTable.Defs.Columns.Added).MakeDate();
-            Columns.Create("Published", SelfPublishedTable.Defs.Columns.Published).MakeDate();
-            Columns.Create("Publisher", SelfPublishedTable.Defs.Columns.Joined.SelfPublisher);
-            Columns.Create("Url",  SelfPublishedTable.Defs.Columns.Url);
-            Commands.Add("PublishedAdd", RunAddPublishedCommand);
-            Commands.Add("PublishedRemove", RunRemovePublishedCommand, (o) => SelectedRow != null);
-            Commands.Add("ClearPublishedDate", (o) => PublishedDate = null);
-            //HeaderPreface = Strings.HeaderSelfPublished;
+            Columns.Create("Added", TableColumns.Added)
+                .MakeDate()
+                .MakeInitialSortDescending();
+
+            Columns.Create("Published", TableColumns.Published)
+                .MakeDate();
+
+            Columns.Create("Publisher", TableColumns.Joined.SelfPublisher);
+
+            MenuItems.AddItem(Strings.MenuItemAddSelfPublished, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(
+                Strings.MenuItemClearPublishedDate,
+                RelayCommand.Create(RunClearPublishedDateCommand, p => SelectedPublished?.HasPublishedDate ?? false)
+                );
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemRemovePublished, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
+
+            Commands.Add("ClearPublishedDate", p => PublishedDate = null);
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region Public methods
-
         #endregion
 
         /************************************************************************/
 
         #region Protected methods
-        /// <summary>
-        /// Called by the <see cref=" ControllerBase{VM,T}.Owner"/> of this controller
-        /// in order to update the controller values.
-        /// </summary>
-        protected override void OnUpdate()
-        {
-            //long titleId = GetOwnerSelectedPrimaryId();
-            //MainView.RowFilter = $"{SelfPublishedTable.Defs.Columns.TitleId}={titleId}";
-        }
-
-        /// <summary>
-        /// Called when the selected item changes
-        /// </summary>
+        /// <inheritdoc/>
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
+            SelectedPublished = SelfPublishedRow.Create(SelectedRow);
             OnPropertyChanged(nameof(PublishedDate));
         }
 
-        /// <summary>
-        /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> to open the url of the published title.
-        /// </summary>
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareDateTime(item2, item1, TableColumns.Added);
+        }
+
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return (long)item[TableColumns.TitleId] == (Owner?.SelectedTitle?.Id ?? 0);
+        }
+
+        /// <inheritdoc/>
+        protected override void RunAddCommand()
+        {
+            if (WindowFactory.SelfPublisherSelect.Create().GetPublisher() is SelfPublisherRow publisher)
+            {
+                Table.Add(Owner.SelectedTitle.Id, publisher.Id);
+                ListView.Refresh();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void RunDeleteCommand()
+        {
+            if (IsSelectedRowAccessible && MessageWindow.ShowContinueCancel(Strings.ConfirmationRemoveTitlePublished))
+            {
+                DeleteSelectedRow();
+            }
+        }
+
+        /// <inheritdoc/>
         protected override void RunOpenRowCommand()
         {
-            // TODO
-            //DataRowView view = item as DataRowView;
-            //if (view != null)
-            //{
-            //    string url = view.Row[SelfPublishedTable.Defs.Columns.Url].ToString();
-            //    if (!string.IsNullOrEmpty(url))
-            //    {
-            //        OpenHelper.OpenWebSite(null, url);
-            //    }
-            //}
+            if (SelectedPublished?.HasUrl ?? false)
+            {
+                OpenHelper.OpenWebSite(null, SelectedPublished.Url);
+            }
         }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
-        private void RunAddPublishedCommand(object o)
+        private void RunClearPublishedDateCommand(object parm)
         {
-            var window = WindowFactory.SelfPublisherSelect.Create(Strings.WindowTitleSelectPublisherForPublished);
-            window.ShowDialog();
-            if (window.DataContext is SelfPublisherSelectWindowViewModel vm)
+            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationClearPublishedDate))
             {
-                Execution.TryCatch(() =>
-                    {
-                        long publisherId = vm.SelectedPublisherId;
-                        if (publisherId > 0)
-                        {
-                            long titleId = (long)Owner.SelectedPrimaryKey;
-                            DatabaseController.Instance.GetTable<SelfPublishedTable>().Add(titleId, publisherId);
-                        }
-                    });
-            }
-        }
-
-        private void RunRemovePublishedCommand(object o)
-        {
-            if (SelectedRow != null && Messages.ShowYesNo(Strings.ConfirmationRemoveTitlePublished))
-            {
-                SelectedRow.Delete();
-                DatabaseController.Instance.GetTable<SelfPublishedTable>().Save();
+                PublishedDate = null;
             }
         }
         #endregion

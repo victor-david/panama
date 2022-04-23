@@ -7,27 +7,45 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Controls;
+using System;
+using System.Data;
+using TableColumns = Restless.Panama.Database.Tables.SelfPublisherTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
-    /// Provides the display and selection logic for the <see cref="View.PublisherSelectWindow"/>.
+    /// Provides the display and selection logic for the <see cref="View.SelfPublisherSelectWindow"/>.
     /// </summary>
     public class SelfPublisherSelectWindowViewModel : WindowViewModel<SelfPublisherTable>
     {
         #region Private
+        private string searchText;
+        private SelfPublisherRow selectedPublisher;
         #endregion
 
         /************************************************************************/
 
         #region Public properties
         /// <summary>
-        /// Gets the selected publisher id, or -1 if none selected.
+        /// Gets or sets the search text
         /// </summary>
-        public long SelectedPublisherId
+        public string SearchText
         {
-            get;
-            private set;
+            get => searchText;
+            set
+            {
+                SetProperty(ref searchText, value);
+                ListView.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// Gets the selected publisher
+        /// </summary>
+        public SelfPublisherRow SelectedPublisher
+        {
+            get => selectedPublisher;
+            private set => SetProperty(ref selectedPublisher, value);
         }
         #endregion
 
@@ -39,30 +57,55 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SelfPublisherSelectWindowViewModel()
         {
-            Columns.Create("Id", SelfPublisherTable.Defs.Columns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Name", SelfPublisherTable.Defs.Columns.Name);
-            Columns.Create("Added", SelfPublisherTable.Defs.Columns.Added)
+            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Name", TableColumns.Name);
+            Columns.Create("Added", TableColumns.Added)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("PC", SelfPublisherTable.Defs.Columns.Calculated.PubCount).MakeFixedWidth(FixedWidth.W052)
-                .AddSort(null, SelfPublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+            Columns.Create("PC", TableColumns.Calculated.PubCount)
+                .MakeFixedWidth(FixedWidth.W052)
+                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Commands.Add("Select", RunSelectCommand, (o) => IsSelectedRowAccessible);
-            SelectedPublisherId = -1;
+            Commands.Add("Select", RunSelectCommand, p => IsSelectedRowAccessible);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Protected methods
+        /// <inheritdoc/>
+        protected override void OnSelectedItemChanged()
+        {
+            base.OnSelectedItemChanged();
+            SelectedPublisher = SelfPublisherRow.Create(SelectedRow);
+        }
+
+        /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            return DataRowCompareDateTime(item2, item1, TableColumns.Added);
+        }
+
+        /// <inheritdoc/>
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            return
+                string.IsNullOrWhiteSpace(SearchText) ||
+                item[TableColumns.Name].ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
         }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
-        private void RunSelectCommand(object o)
+        private void RunSelectCommand(object parm)
         {
-            if (SelectedPrimaryKey != null)
+            if (SelectedPublisher != null)
             {
-                SelectedPublisherId = (long)SelectedPrimaryKey;
+                WindowOwner.DialogResult = true;
+                CloseWindowCommand.Execute(null);
             }
-            CloseWindowCommand.Execute(null);
         }
         #endregion
     }

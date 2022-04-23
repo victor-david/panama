@@ -9,6 +9,7 @@ using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Controls;
 using System;
 using System.Data;
+using TableColumns = Restless.Panama.Database.Tables.PublisherTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -56,24 +57,24 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public PublisherSelectWindowViewModel()
         {
-            Columns.Create("Id", PublisherTable.Defs.Columns.Id)
+            Columns.Create("Id", TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Name", PublisherTable.Defs.Columns.Name);
+            Columns.Create("Name", TableColumns.Name);
 
-            Columns.Create("Added", PublisherTable.Defs.Columns.Added)
+            Columns.Create("Added", TableColumns.Added)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("Last Sub", PublisherTable.Defs.Columns.Calculated.LastSub)
+            Columns.Create("Last Sub", TableColumns.Calculated.LastSub)
                 .MakeDate()
-                .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
-            Columns.Create("SC", PublisherTable.Defs.Columns.Calculated.SubCount)
+            Columns.Create("SC", TableColumns.Calculated.SubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052)
-                .AddSort(null, PublisherTable.Defs.Columns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
             Commands.Add("Select", RunSelectCommand, p => IsSelectedRowAccessible);
         }
@@ -81,23 +82,30 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
+        #region Protected methods
+        /// <inheritdoc/>
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
             SelectedPublisher = PublisherRow.Create(SelectedRow);
         }
 
+        /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareDateTime(item2, item1, PublisherTable.Defs.Columns.Added);
+            return DataRowCompareDateTime(item2, item1, TableColumns.Added);
         }
 
+        /// <inheritdoc/>
         protected override bool OnDataRowFilter(DataRow item)
         {
             return
                 string.IsNullOrWhiteSpace(SearchText) ||
-                item[PublisherTable.Defs.Columns.Name].ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
+                item[TableColumns.Name].ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
         }
+        #endregion
+
+        /************************************************************************/
 
         #region Private methods
         private void RunSelectCommand(object parm)

@@ -1,10 +1,6 @@
 ﻿using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Restless.Panama.ViewModel
 {

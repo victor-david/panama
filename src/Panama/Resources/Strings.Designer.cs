@@ -488,15 +488,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Published.
-        /// </summary>
-        public static string CommandTitleFilterPublished {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterPublished", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Filter title list to display only titles that are published.
         /// </summary>
         public static string CommandTitleFilterPublishedTooltip {
@@ -687,6 +678,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation clears the published date for this item. You can set the date again at any time..
+        /// </summary>
+        public static string ConfirmationClearPublishedDate {
+            get {
+                return ResourceManager.GetString("ConfirmationClearPublishedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation will clear the quick flag from all titles. Do you want to continue?.
         /// </summary>
         public static string ConfirmationClearTitleFlags {
@@ -851,7 +851,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove this record of publication for this title?.
+        ///   Looks up a localized string similar to This operation removes the record of publication for this title. You can add a new record back at any time..
         /// </summary>
         public static string ConfirmationRemoveTitlePublished {
             get {
@@ -1072,15 +1072,6 @@ namespace Restless.Panama.Resources {
         public static string HeaderMessages {
             get {
                 return ResourceManager.GetString("HeaderMessages", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Published.
-        /// </summary>
-        public static string HeaderPublished {
-            get {
-                return ResourceManager.GetString("HeaderPublished", resourceCulture);
             }
         }
         
@@ -1622,6 +1613,24 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a published record to this title.
+        /// </summary>
+        public static string MenuItemAddPublished {
+            get {
+                return ResourceManager.GetString("MenuItemAddPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a self published record to this title.
+        /// </summary>
+        public static string MenuItemAddSelfPublished {
+            get {
+                return ResourceManager.GetString("MenuItemAddSelfPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a message to this submission.
         /// </summary>
         public static string MenuItemAddSubmissionMessage {
@@ -1717,6 +1726,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemClear {
             get {
                 return ResourceManager.GetString("MenuItemClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear the published date.
+        /// </summary>
+        public static string MenuItemClearPublishedDate {
+            get {
+                return ResourceManager.GetString("MenuItemClearPublishedDate", resourceCulture);
             }
         }
         
@@ -1897,6 +1915,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemPublishers {
             get {
                 return ResourceManager.GetString("MenuItemPublishers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this published record.
+        /// </summary>
+        public static string MenuItemRemovePublished {
+            get {
+                return ResourceManager.GetString("MenuItemRemovePublished", resourceCulture);
             }
         }
         
