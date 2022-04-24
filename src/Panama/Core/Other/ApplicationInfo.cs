@@ -4,9 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.Database.Core;
 using System;
-using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Versioning;
 
@@ -34,9 +32,9 @@ namespace Restless.Panama.Core
         public string Product => Assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
 
         /// <summary>
-        /// Gets the title
+        /// Gets the assembly title
         /// </summary>
-        public string Title => Product;
+        public string Title => Assembly.GetCustomAttribute<AssemblyTitleAttribute>()?.Title; 
 
         /// <summary>
         /// Gets the company

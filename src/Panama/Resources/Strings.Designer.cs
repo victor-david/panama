@@ -2227,15 +2227,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Panama ∑en.
-        /// </summary>
-        public static string TextApplicationTitle {
-            get {
-                return ResourceManager.GetString("TextApplicationTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string TextCancel {

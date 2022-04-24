@@ -1256,7 +1256,4 @@ Changes will take effect after you restart the application.</value>
   <data name="MenuItemSummary" xml:space="preserve">
     <value>Summary</value>
   </data>
-  <data name="TextApplicationTitle" xml:space="preserve">
-    <value>Panama ∑en</value>
-  </data>
 </root>
