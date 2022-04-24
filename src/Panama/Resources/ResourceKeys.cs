@@ -31,6 +31,7 @@ namespace Restless.Panama.Resources
             public const string NoteGeometryKey = nameof(NoteGeometryKey);
             public const string PlusGeometryKey = nameof(PlusGeometryKey);
             public const string PublisherGeometryKey = nameof(PublisherGeometryKey);
+            public const string ReportGeometryKey = nameof(ReportGeometryKey);
             public const string SaveGeometryKey = nameof(SaveGeometryKey);
             public const string SearchGeometryKey = nameof(SearchGeometryKey);
             public const string SettingsGeometryKey = nameof(SettingsGeometryKey);
@@ -73,6 +74,7 @@ namespace Restless.Panama.Resources
             public const string LockMediumIconKey = nameof(LockMediumIconKey);
             public const string NoteIconKey = nameof(NoteIconKey);
             public const string PlusIconKey = nameof(PlusIconKey);
+            public const string ReportIconKey = nameof(ReportIconKey);
             public const string SettingsIconKey = nameof(SettingsIconKey);
             public const string SearchIconKey = nameof(SearchIconKey);
             public const string SquareSmallBlueIconKey = nameof(SquareSmallBlueIconKey);
