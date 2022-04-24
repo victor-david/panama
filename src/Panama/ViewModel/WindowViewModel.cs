@@ -34,18 +34,6 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Properties
-        /// <summary>
-        /// Gets the application information object.
-        /// </summary>
-        public ApplicationInfo AppInfo
-        {
-            get;
-        }
-        #endregion
-
-        /************************************************************************/
-
         #region IWindowOwner
         /// <summary>
         /// Gets or sets the window owner. Set in <see cref="WindowFactory"/>
@@ -80,7 +68,6 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public WindowViewModel()
         {
-            AppInfo = ApplicationInfo.Instance;
         }
         #endregion
 

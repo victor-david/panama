@@ -16,9 +16,12 @@ namespace Restless.Panama.ViewModel
     {
         #region Public properties
         /// <summary>
+        /// Gets the singletom instance of the application information object.
+        /// </summary>
+        public Core.ApplicationInfo AppInfo => Core.ApplicationInfo.Instance;
+
+        /// <summary>
         /// Gets the singleton instance of the configuration object.
-        /// Although derived classes can access the singleton instance directly,
-        /// this enables easy binding to certain configuration properties
         /// </summary>
         public Core.Config Config => Core.Config.Instance;
         #endregion
