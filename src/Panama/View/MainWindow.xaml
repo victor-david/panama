@@ -102,7 +102,7 @@
         <StackPanel>
             <TextBlock
                 Style="{StaticResource NavTitleTextBlockStyle}"
-                Text="{Binding AppInfo.Assembly.Product}"/>
+                Text="{Binding AppInfo.Product}"/>
 
             <tk:MainNavigator
                 IsExpanded="{Binding Config.NavTitlesExpander}"

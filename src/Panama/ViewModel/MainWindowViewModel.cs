@@ -97,6 +97,11 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         private MainWindowViewModel()
         {
+#if DEBUG
+            DisplayName = $"{AppInfo.Title} {AppInfo.VersionMajor} (DEBUG)";
+#else
+            DisplayName = $"{AppInfo.Title} {AppInfo.VersionMajor}";
+#endif
             Commands.Add("OpenAboutWindow", p => WindowFactory.About.Create().ShowDialog());
             Commands.Add("OpenSettingsWindow", p => WindowFactory.Settings.Create().ShowDialog());
             Commands.Add("OpenToolWindow", p => WindowFactory.Tool.Create().ShowDialog());
@@ -122,11 +127,6 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.SelectedItemChanged += NavigatorItemsSelectedItemChanged;
             RegisterStandardNavigatorItems();
             viewModelCache = new ViewModelCache();
-#if DEBUG
-            DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor} (DEBUG)";
-#else
-            DisplayName = $"{AppInfo.Assembly.Title} {AppInfo.Assembly.VersionMajor}";
-#endif
         }
         #endregion
 
@@ -140,20 +140,6 @@ namespace Restless.Panama.ViewModel
         public void CreateNotificationMessage(string message)
         {
             NotificationMessage = message;
-        }
-
-        /// <summary>
-        /// Notifies the workspace that a new record has been added that affects it
-        /// </summary>
-        /// <typeparam name="T">The type of workspace to notify</typeparam>
-        public void NotifyWorkspaceOnRecordAdded<T>() where T : ApplicationViewModel
-        {
-            // TODO
-            //var ws = GetFirstWorkspace<T>();
-            //if (ws != null)
-            //{
-            //    ws.OnRecordAdded();
-            //}
         }
 
         /// <summary>
@@ -193,6 +179,7 @@ namespace Restless.Panama.ViewModel
         #region Private methods (navigator)
         private void RegisterStandardNavigatorItems()
         {
+            // NavigatorItems.Add<HomeViewModel>(NavigationGroup.Title, Strings.MenuItemSummary, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.ReportGeometryKey));
             NavigatorItems.Add<TitleViewModel>(NavigationGroup.Title, Strings.MenuItemTitles, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TitleGeometryKey));
             NavigatorItems.Add<PublisherViewModel>(NavigationGroup.Title, Strings.MenuItemPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));
             NavigatorItems.Add<SelfPublisherViewModel>(NavigationGroup.Title, Strings.MenuItemSelfPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));

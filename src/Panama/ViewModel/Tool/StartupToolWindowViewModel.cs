@@ -77,7 +77,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public StartupToolWindowViewModel()
         {
-            DisplayName = $"{ApplicationInfo.Instance.Assembly.Title} {ApplicationInfo.Instance.Assembly.VersionMajor} Command Tools";
+            DisplayName = $"{AppInfo.Title} {AppInfo.VersionMajor} Command Tools";
 
             RequestedOps = new ObservableCollection<bool>()
             {

@@ -5,9 +5,10 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Database.Core;
-using Restless.Toolkit.Core.Utility;
 using System;
-using System.IO;
+using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.Versioning;
 
 namespace Restless.Panama.Core
 {
@@ -25,53 +26,47 @@ namespace Restless.Panama.Core
         /// <summary>
         /// Gets the assembly information object.
         /// </summary>
-        public AssemblyInfo Assembly
-        {
-            get;
-            private set;
-        }
+        public Assembly Assembly { get; }
 
         /// <summary>
-        /// Gets the build date for the assembly.
+        /// Gets the assembly product
         /// </summary>
-        public DateTime BuildDate
-        {
-            get
-            {
-                var version = Assembly.VersionRaw;
-                DateTime buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
-                return buildDate;
-            }
-        }
+        public string Product => Assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
 
         /// <summary>
-        /// Gets the root folder for the application.
+        /// Gets the title
         /// </summary>
-        /// <remarks>
-        /// <para>
-        /// This property is used to locate the database file. The sub-directory "db" is always appended.
-        /// </para>
-        /// <para>
-        /// During normal execution, this property returns the location of the application executable.
-        /// During development, you can specify a folder to be used by modifying DevelopmentRoot.txt.
-        /// That way, you can use a database located outside of the development environment.
-        /// </para>
-        /// </remarks>
-        public string RootFolder
-        {
-            get;
-            private set;
-        }
+        public string Title => Product;
 
         /// <summary>
-        /// Gets the name of the reference help file.
+        /// Gets the company
         /// </summary>
-        public string ReferenceFileName => Path.Combine(RootFolder, "Panama.Reference.chm");
+        public string Company => Assembly.GetCustomAttribute<AssemblyCompanyAttribute>()?.Company;
 
         /// <summary>
-        /// Gets the database file name
+        /// Gets the description
         /// </summary>
-        public string DatabaseFileName => DatabaseController.Instance.DatabaseFileName;
+        public string Description => Assembly.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description;
+
+        /// <summary>
+        /// Gets the framework
+        /// </summary>
+        public string Framework => Assembly.GetCustomAttribute<TargetFrameworkAttribute>().FrameworkName;
+
+        /// <summary>
+        /// Gets the raw version property for the assmebly.
+        /// </summary>
+        public Version VersionRaw => Assembly.GetName().Version;
+
+        /// <summary>
+        /// Gets the full version of the assembly as a string.
+        /// </summary>
+        public string Version => VersionRaw.ToString();
+
+        /// <summary>
+        /// Gets the major version of the calling assembly.
+        /// </summary>
+        public string VersionMajor => $"{VersionRaw.Major}.{VersionRaw.Minor}";
 
         /// <summary>
         /// Gets a boolean value that indicates if the current process is a 64 bit process.
@@ -85,8 +80,7 @@ namespace Restless.Panama.Core
 
         private ApplicationInfo()
         {
-            Assembly = new AssemblyInfo(AssemblyInfoType.Entry);
-            RootFolder = Path.GetDirectoryName(Assembly.Location);
+            Assembly = Assembly.GetEntryAssembly();
         }
         #endregion
     }
