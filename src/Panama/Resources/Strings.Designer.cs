@@ -2054,6 +2054,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Summary.
+        /// </summary>
+        public static string MenuItemSummary {
+            get {
+                return ResourceManager.GetString("MenuItemSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Table info.
         /// </summary>
         public static string MenuItemTableInfo {
@@ -2214,6 +2223,15 @@ namespace Restless.Panama.Resources {
         public static string TextAddedUpdated {
             get {
                 return ResourceManager.GetString("TextAddedUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Panama ∑en.
+        /// </summary>
+        public static string TextApplicationTitle {
+            get {
+                return ResourceManager.GetString("TextApplicationTitle", resourceCulture);
             }
         }
         

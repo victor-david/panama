@@ -1253,4 +1253,10 @@ Changes will take effect after you restart the application.</value>
   <data name="MenuItemClearPublishedDate" xml:space="preserve">
     <value>Clear the published date</value>
   </data>
+  <data name="MenuItemSummary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="TextApplicationTitle" xml:space="preserve">
+    <value>Panama ∑en</value>
+  </data>
 </root>
