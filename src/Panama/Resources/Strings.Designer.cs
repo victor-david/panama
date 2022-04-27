@@ -61,28 +61,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A fatal error occured.
-        ///
-        ///{0}
-        ///
-        ///The application cannot continue..
-        /// </summary>
-        public static string ApplicationFatalExceptionFormat {
-            get {
-                return ResourceManager.GetString("ApplicationFatalExceptionFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fatal Error.
-        /// </summary>
-        public static string CaptionFatalError {
-            get {
-                return ResourceManager.GetString("CaptionFatalError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Icons designed by Linear Color SEO (Freepik), Smashicons, Swifticons, Maxim Basinski, and Eleonor Wang from Flaticon.
         /// </summary>
         public static string CaptionIconsDesigned1 {
@@ -146,101 +124,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add credential.
-        /// </summary>
-        public static string CommandAddCredential {
-            get {
-                return ResourceManager.GetString("CommandAddCredential", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a link to a resource.
-        /// </summary>
-        public static string CommandAddLinkTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddLinkTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create a new submission.
-        /// </summary>
-        public static string CommandAddSubmissionTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddSubmissionTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add a tag.
         /// </summary>
         public static string CommandAddTag {
             get {
                 return ResourceManager.GetString("CommandAddTag", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a tag to be used with titles.
-        /// </summary>
-        public static string CommandAddTagTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddTagTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Apply.
-        /// </summary>
-        public static string CommandApplyConfig {
-            get {
-                return ResourceManager.GetString("CommandApplyConfig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Apply the changed application settings.
-        /// </summary>
-        public static string CommandApplyConfigTooltip {
-            get {
-                return ResourceManager.GetString("CommandApplyConfigTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clear all filters.
-        /// </summary>
-        public static string CommandClearFilterTooltip {
-            get {
-                return ResourceManager.GetString("CommandClearFilterTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clear Flags.
-        /// </summary>
-        public static string CommandClearTitleFlags {
-            get {
-                return ResourceManager.GetString("CommandClearTitleFlags", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clear flag from all titles.
-        /// </summary>
-        public static string CommandClearTitleFlagsTooltip {
-            get {
-                return ResourceManager.GetString("CommandClearTitleFlagsTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View and modify application settings.
-        /// </summary>
-        public static string CommandConfigTooltip {
-            get {
-                return ResourceManager.GetString("CommandConfigTooltip", resourceCulture);
             }
         }
         
@@ -272,119 +160,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Advanced.
-        /// </summary>
-        public static string CommandFilterAdvanced {
-            get {
-                return ResourceManager.GetString("CommandFilterAdvanced", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Display / hide the advanced filters.
-        /// </summary>
-        public static string CommandFilterAdvancedTooltip {
-            get {
-                return ResourceManager.GetString("CommandFilterAdvancedTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Links.
         /// </summary>
         public static string CommandLink {
             get {
                 return ResourceManager.GetString("CommandLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Active.
-        /// </summary>
-        public static string CommandPublisherFilterActive {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterActive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open.
-        /// </summary>
-        public static string CommandPublisherFilterHaveSub {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterHaveSub", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to In Period.
-        /// </summary>
-        public static string CommandPublisherFilterInPeriod {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterInPeriod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Paying.
-        /// </summary>
-        public static string CommandPublisherFilterPaying {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterPaying", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refresh usage.
-        /// </summary>
-        public static string CommandRefreshTagUsage {
-            get {
-                return ResourceManager.GetString("CommandRefreshTagUsage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refresh tag usage. This gets automatically refreshed when you restart the application, but you can do it manually if needed.
-        /// </summary>
-        public static string CommandRefreshTagUsageTooltip {
-            get {
-                return ResourceManager.GetString("CommandRefreshTagUsageTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Revert.
-        /// </summary>
-        public static string CommandRevertConfig {
-            get {
-                return ResourceManager.GetString("CommandRevertConfig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Restore the changed application settings to their previous values.
-        /// </summary>
-        public static string CommandRevertConfigTooltip {
-            get {
-                return ResourceManager.GetString("CommandRevertConfigTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save.
-        /// </summary>
-        public static string CommandSave {
-            get {
-                return ResourceManager.GetString("CommandSave", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save all modifications to data.
-        /// </summary>
-        public static string CommandSaveTooltip {
-            get {
-                return ResourceManager.GetString("CommandSaveTooltip", resourceCulture);
             }
         }
         
@@ -398,155 +178,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active.
-        /// </summary>
-        public static string CommandSubmissionFilterActive {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterActive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter submission list to display only submissions that are active, i.e. have not yet received a response.
-        /// </summary>
-        public static string CommandSubmissionFilterActiveTooltip {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterActiveTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Personal.
-        /// </summary>
-        public static string CommandSubmissionFilterPersonalNote {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterPersonalNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter submission list to display submissions with a response type of Personal Note.
-        /// </summary>
-        public static string CommandSubmissionFilterPersonalNoteTooltip {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterPersonalNoteTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Try Again.
-        /// </summary>
-        public static string CommandSubmissionFilterTryAgain {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterTryAgain", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter submission list to display submissions with a response type of Try Again.
-        /// </summary>
-        public static string CommandSubmissionFilterTryAgainTooltip {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterTryAgainTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter options.
-        /// </summary>
-        public static string CommandTitleFilter {
-            get {
-                return ResourceManager.GetString("CommandTitleFilter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Flagged.
-        /// </summary>
-        public static string CommandTitleFilterFlagged {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterFlagged", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only titles that are flagged.
-        /// </summary>
-        public static string CommandTitleFilterFlaggedTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterFlaggedTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only titles that are published.
-        /// </summary>
-        public static string CommandTitleFilterPublishedTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterPublishedTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only titles marked ready.
-        /// </summary>
-        public static string CommandTitleFilterReadyTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterReadyTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only titles that are self published.
-        /// </summary>
-        public static string CommandTitleFilterSelfPublishedTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterSelfPublishedTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Submitted.
-        /// </summary>
-        public static string CommandTitleFilterSubmitted {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterSubmitted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View or hide the title filter options.
-        /// </summary>
-        public static string CommandTitleFilterTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tools.
-        /// </summary>
-        public static string CommandTool {
-            get {
-                return ResourceManager.GetString("CommandTool", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Convert.
         /// </summary>
         public static string CommandToolConvert {
             get {
                 return ResourceManager.GetString("CommandToolConvert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Export.
-        /// </summary>
-        public static string CommandToolExport {
-            get {
-                return ResourceManager.GetString("CommandToolExport", resourceCulture);
             }
         }
         
@@ -560,29 +196,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find Orphans.
-        /// </summary>
-        public static string CommandToolOrphan {
-            get {
-                return ResourceManager.GetString("CommandToolOrphan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Scramble.
         /// </summary>
         public static string CommandToolScramble {
             get {
                 return ResourceManager.GetString("CommandToolScramble", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title list.
-        /// </summary>
-        public static string CommandToolTitleList {
-            get {
-                return ResourceManager.GetString("CommandToolTitleList", resourceCulture);
             }
         }
         
@@ -743,15 +361,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete this note?.
-        /// </summary>
-        public static string ConfirmationDeleteNote {
-            get {
-                return ResourceManager.GetString("ConfirmationDeleteNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Getting ready to delete this publisher. Do you want to continue?.
         /// </summary>
         public static string ConfirmationDeletePublisher {
@@ -865,87 +474,6 @@ namespace Restless.Panama.Resources {
         public static string ConfirmationTitlesCopiedToClipboard {
             get {
                 return ResourceManager.GetString("ConfirmationTitlesCopiedToClipboard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Alert title.
-        /// </summary>
-        public static string FilterPromptAlert {
-            get {
-                return ResourceManager.GetString("FilterPromptAlert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Author name.
-        /// </summary>
-        public static string FilterPromptAuthor {
-            get {
-                return ResourceManager.GetString("FilterPromptAuthor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Credential name.
-        /// </summary>
-        public static string FilterPromptCredential {
-            get {
-                return ResourceManager.GetString("FilterPromptCredential", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Link name or note.
-        /// </summary>
-        public static string FilterPromptLink {
-            get {
-                return ResourceManager.GetString("FilterPromptLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Publisher name.
-        /// </summary>
-        public static string FilterPromptPublisher {
-            get {
-                return ResourceManager.GetString("FilterPromptPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Publisher or response type.
-        /// </summary>
-        public static string FilterPromptSubmission {
-            get {
-                return ResourceManager.GetString("FilterPromptSubmission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Table name.
-        /// </summary>
-        public static string FilterPromptTable {
-            get {
-                return ResourceManager.GetString("FilterPromptTable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tag name.
-        /// </summary>
-        public static string FilterPromptTag {
-            get {
-                return ResourceManager.GetString("FilterPromptTag", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Note title.
-        /// </summary>
-        public static string FilterPromptUserNote {
-            get {
-                return ResourceManager.GetString("FilterPromptUserNote", resourceCulture);
             }
         }
         
@@ -1175,42 +703,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Submission documents (not found) - {0}.
-        /// </summary>
-        public static string HeaderToolOperationMetaSubmissionNotFoundFormat {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationMetaSubmissionNotFoundFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Submission documents (updated) - {0}.
-        /// </summary>
-        public static string HeaderToolOperationMetaSubmissionUpdatedFormat {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationMetaSubmissionUpdatedFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title documents (not found) - {0}.
-        /// </summary>
-        public static string HeaderToolOperationMetaTitleNotFoundFormat {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationMetaTitleNotFoundFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title documents (updated) - {0}.
-        /// </summary>
-        public static string HeaderToolOperationMetaTitleUpdatedFormat {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationMetaTitleUpdatedFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Files (not associated with a title entry) - {0}.
         /// </summary>
         public static string HeaderToolOperationOrphanNotFoundFormat {
@@ -1290,15 +782,6 @@ namespace Restless.Panama.Resources {
         public static string HeaderVersionProperties {
             get {
                 return ResourceManager.GetString("HeaderVersionProperties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The properties for this version cannot be displayed. Only Open Xml documents are supported..
-        /// </summary>
-        public static string HeaderVersionPropertiesNotOpenXml {
-            get {
-                return ResourceManager.GetString("HeaderVersionPropertiesNotOpenXml", resourceCulture);
             }
         }
         
@@ -2821,15 +2304,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset all colors to their default values.
-        /// </summary>
-        public static string TooltipColorReset {
-            get {
-                return ResourceManager.GetString("TooltipColorReset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Extract title from latest version.
         /// </summary>
         public static string ToolTipExtract {
@@ -2934,15 +2408,6 @@ namespace Restless.Panama.Resources {
         public static string ToolTipPublisherFilterPaying {
             get {
                 return ResourceManager.GetString("ToolTipPublisherFilterPaying", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Publisher is flagged for follow up.
-        /// </summary>
-        public static string ToolTipPublisherFollowup {
-            get {
-                return ResourceManager.GetString("ToolTipPublisherFollowup", resourceCulture);
             }
         }
         
@@ -3127,15 +2592,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a title to the collection.
-        /// </summary>
-        public static string ToolTipTitleAdd {
-            get {
-                return ResourceManager.GetString("ToolTipTitleAdd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Current submission count - the number of submissions that are still open for this title.
         /// </summary>
         public static string TooltipTitleCurrentSubmissionCount {
@@ -3249,15 +2705,6 @@ namespace Restless.Panama.Resources {
         public static string ToolTitleMetadataDetail {
             get {
                 return ResourceManager.GetString("ToolTitleMetadataDetail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An integer value is required.
-        /// </summary>
-        public static string ValidationOperationIntegerNeeded {
-            get {
-                return ResourceManager.GetString("ValidationOperationIntegerNeeded", resourceCulture);
             }
         }
         
