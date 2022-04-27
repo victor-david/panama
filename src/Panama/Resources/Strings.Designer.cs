@@ -2286,20 +2286,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Display drop down colors in alphabetical order.
+        ///   Looks up a localized string similar to Copy the list of titles to the clipboard.
         /// </summary>
-        public static string TooltipColorAlpha {
+        public static string ToolTipCopyTitles {
             get {
-                return ResourceManager.GetString("TooltipColorAlpha", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Display drop down colors in order of hue, saturation and brightness.
-        /// </summary>
-        public static string TooltipColorHSB {
-            get {
-                return ResourceManager.GetString("TooltipColorHSB", resourceCulture);
+                return ResourceManager.GetString("ToolTipCopyTitles", resourceCulture);
             }
         }
         

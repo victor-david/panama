@@ -554,12 +554,6 @@ When you save properties here however, the document's file  modification date is
   <data name="SettingsDataGridRowHeight" xml:space="preserve">
     <value>Data grid row height</value>
   </data>
-  <data name="TooltipColorAlpha" xml:space="preserve">
-    <value>Display drop down colors in alphabetical order</value>
-  </data>
-  <data name="TooltipColorHSB" xml:space="preserve">
-    <value>Display drop down colors in order of hue, saturation and brightness</value>
-  </data>
   <data name="SettingsDataGridRowAlternation" xml:space="preserve">
     <value>Data grid row alternation</value>
   </data>
@@ -1066,5 +1060,8 @@ Changes will take effect after you restart the application.</value>
   </data>
   <data name="MenuItemReplaceTitleVersion" xml:space="preserve">
     <value>Replace the file for this version with another file</value>
+  </data>
+  <data name="ToolTipCopyTitles" xml:space="preserve">
+    <value>Copy the list of titles to the clipboard</value>
   </data>
 </root>

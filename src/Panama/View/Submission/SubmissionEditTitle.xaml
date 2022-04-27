@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<Grid
     x:Class="Restless.Panama.View.SubmissionEditTitle"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,48 +9,42 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="500">
-    <Grid
-        tk:Property.RowHeights="30,170,Auto"
-        tk:Property.ColumnWidths="Auto,*">
-        
-        <StackPanel Grid.Row="1">
-            <StackPanel.Resources>
-                <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-                    <Setter Property="Margin" Value="0,2,6,2"/>
-                </Style>
-            </StackPanel.Resources>
-            
-            <Button
-                Content="{StaticResource ArrowUpIconKey}"
-                Command="{Binding Titles.Commands[TitleMoveUp]}"/>
+    tk:Property.RowHeights="*,2*"
+    tk:Property.ColumnWidths="Auto,*"
+    d:DesignHeight="650" d:DesignWidth="400">
+    
+    <DataGrid
+        Grid.Column="1"
+        Style="{StaticResource DataGridLockedStyle}"
+        ItemsSource="{Binding Titles.ListView}"
+        SelectedItem="{Binding Titles.SelectedItem}"
+        tk:DataGridColumns.Columns="{Binding Titles.Columns}">
 
-            <Button
-                Content="{StaticResource ArrowDownIconKey}"
-                Command="{Binding Titles.Commands[TitleMoveDown]}"/>
+        <DataGrid.InputBindings>
+            <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Titles.OpenRowCommand}"/>
+        </DataGrid.InputBindings>
 
-            <Button
-                Content="{StaticResource SubmissionIconKey}"
-                Command="{Binding Titles.Commands[CopyToClipboard]}"
-                ToolTip="Copy the list of titles to the clipboard"/>
-        </StackPanel>       
-        
-        <DataGrid
-            Grid.Column="1"
-            Grid.RowSpan="2"
-            Style="{StaticResource DataGridEditLockedStyle}"
-            ItemsSource="{Binding Titles.ListView}"
-            SelectedItem="{Binding Titles.SelectedItem}"
-            tk:DataGridColumns.Columns="{Binding Titles.Columns}">
+        <DataGrid.ContextMenu>
+            <ContextMenu ItemsSource="{Binding Titles.MenuItems}"/>
+        </DataGrid.ContextMenu>
 
-            <DataGrid.InputBindings>
-                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Titles.OpenRowCommand}"/>
-            </DataGrid.InputBindings>
+    </DataGrid>
 
-            <DataGrid.ContextMenu>
-                <ContextMenu ItemsSource="{Binding Titles.MenuItems}"/>
-            </DataGrid.ContextMenu>
+    <StackPanel Style="{StaticResource SidePanelStyle}">
 
-        </DataGrid>
-    </Grid>
-</UserControl>
+        <Button
+            Content="{StaticResource ArrowUpIconKey}"
+            Command="{Binding Titles.Commands[TitleMoveUp]}"/>
+
+        <Button
+            Content="{StaticResource ArrowDownIconKey}"
+            Command="{Binding Titles.Commands[TitleMoveDown]}"/>
+
+        <Button
+            Content="{StaticResource SubmissionIconKey}"
+            Command="{Binding Titles.Commands[CopyToClipboard]}"
+            ToolTip="{x:Static r:Strings.ToolTipCopyTitles}"/>
+
+    </StackPanel>       
+
+</Grid>

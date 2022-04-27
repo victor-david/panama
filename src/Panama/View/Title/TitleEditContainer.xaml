@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:vw="clr-namespace:Restless.Panama.View" 
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d" 
     tk:Property.RowHeights="Auto,*"
     d:DesignHeight="800" d:DesignWidth="330">

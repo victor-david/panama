@@ -90,9 +90,11 @@
                 ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
                 tk:DataGridColumns.Columns="{Binding Columns}">
+                
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
+                
             </tk:DataGrid>
         </con:SplitterGrid.ContentLeft>
 
