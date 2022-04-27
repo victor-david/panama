@@ -14,10 +14,11 @@
                 <ResourceDictionary Source="Resources/Dictionary/ListBox.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/HeaderedContentControl.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Expander.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/Button.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Panel.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/TextBox.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Border.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/Button.xaml"/>
+                
                 <ResourceDictionary Source="Resources/Dictionary/Navigator.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/TextBlock.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/PathSelector.xaml"/>

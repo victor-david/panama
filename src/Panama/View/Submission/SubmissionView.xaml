@@ -22,36 +22,31 @@
         <con:SplitterGrid.HeaderLeft>
             <StatusBar>
                 <TextBlock Text="Filters"/>
-                <tk:IconButton
+                <Button
                     Content="Active"
                     ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterActive}"
-                    Icon="{StaticResource SquareSmallRedIconKey}" 
                     Command="{Binding Commands[ActiveFilter]}"/>
 
-                <tk:IconButton 
+                <Button 
                     Content="Try Again"
                     ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterTryAgain}"
-                    Icon="{StaticResource SquareSmallGrayIconKey}" 
                     Command="{Binding Commands[TryAgainFilter]}"/>
 
-                <tk:IconButton 
+                <Button 
                     Content="Personal"
                     ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterPersonal}"
-                    Icon="{StaticResource SquareSmallBlueIconKey}" 
                     Command="{Binding Commands[PersonalFilter]}"/>
 
-                <tk:IconButton 
+                <Button 
                     Content="Accepted"
                     ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterAccepted}"
-                    Icon="{StaticResource SquareSmallGreenIconKey}" 
                     Command="{Binding Commands[AcceptedFilter]}"/>
                 
                 <Separator/>
 
-                <tk:IconButton
+                <Button
                     Content="{x:Static r:Strings.MenuItemClear}"
                     ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
-                    Icon="{StaticResource FilterOffIconKey}"
                     Command="{Binding ClearFilterCommand}"/>
 
                 <Separator/>

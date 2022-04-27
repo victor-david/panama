@@ -21,43 +21,37 @@
         <con:SplitterGrid.HeaderLeft>
             <StatusBar>
                 <TextBlock Text="Filters"/>
-                <tk:IconButton 
+                <Button 
                     Content="Ready"
                     ToolTip="{x:Static r:Strings.ToolTipTitleFilterReady}"
-                    Icon="{StaticResource SquareSmallGreenIconKey}" 
                     Command="{Binding Commands[ReadyFilter]}"/>
 
-                <tk:IconButton
+                <Button
                     Content="Flagged"
                     ToolTip="{x:Static r:Strings.ToolTipTitleFilterFlag}"
-                    Icon="{StaticResource SquareSmallBlueIconKey}"
                     Command="{Binding Commands[FlaggedFilter]}"/>
 
-                <tk:IconButton
+                <Button
                     Content="Submitted"
                     ToolTip="{x:Static r:Strings.ToolTipTitleFilterSubmitted}"
-                    Icon="{StaticResource SquareSmallGrayIconKey}"
                     Command="{Binding Commands[SubmittedFilter]}"/>
 
-                <tk:IconButton
+                <Button
                     Content="Published"
                     ToolTip="{x:Static r:Strings.ToolTipTitleFilterPublished}"
-                    Icon="{StaticResource SquareSmallRedIconKey}"
                     Command="{Binding Commands[PublishedFilter]}"/>
 
                 <Separator/>
 
-                <tk:IconButton
+                <Button
                     x:Name="CustomFilterButton"
                     Content="{x:Static r:Strings.MenuItemCustom}"
                     ToolTip="{x:Static r:Strings.ToolTipFilterCustom}"
-                    Icon="{StaticResource FilterIconKey}"
                     Command="{Binding ToggleCustomFilterCommand}"/>
 
-                <tk:IconButton
+                <Button
                     Content="{x:Static r:Strings.MenuItemClear}"
                     ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
-                    Icon="{StaticResource FilterOffIconKey}"
                     Command="{Binding ClearFilterCommand}"/>
 
                 <Separator/>

@@ -62,6 +62,10 @@
                 <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
                 <Setter Property="Foreground" Value="{StaticResource DarkForegroundBrush}"/>
             </Style>
+            <Style TargetType="Button" BasedOn="{StaticResource StatusBarButtonStyle}">
+                <Setter Property="Margin" Value="3,0"/>
+                <Setter Property="MinWidth" Value="44"/>
+            </Style>
         </Style.Resources>
     </Style>
 
