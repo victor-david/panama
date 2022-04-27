@@ -5,7 +5,7 @@ namespace Restless.Panama.View
     /// <summary>
     /// Interaction logic for TitleEditVersion.xaml
     /// </summary>
-    public partial class TitleEditVersion : StackPanel
+    public partial class TitleEditVersion : Grid
     {
         public TitleEditVersion()
         {

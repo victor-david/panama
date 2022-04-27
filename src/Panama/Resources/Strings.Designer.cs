@@ -335,15 +335,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manage existing publishers, create new publishers, etc..
-        /// </summary>
-        public static string CommandPublisherTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Refresh usage.
         /// </summary>
         public static string CommandRefreshTagUsage {
@@ -529,15 +520,6 @@ namespace Restless.Panama.Resources {
         public static string CommandTitleFilterTooltip {
             get {
                 return ResourceManager.GetString("CommandTitleFilterTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Manage existing titles, create new titles, etc..
-        /// </summary>
-        public static string CommandTitleTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleTooltip", resourceCulture);
             }
         }
         
@@ -860,7 +842,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will remove the selected version from this title. It does not delete the file on disk. Do you want to continue?.
+        ///   Looks up a localized string similar to This operation will remove the selected version from this title. It does not delete the file on disk..
         /// </summary>
         public static string ConfirmationRemoveTitleVersion {
             get {
@@ -1667,6 +1649,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add an existing file as a version.
+        /// </summary>
+        public static string MenuItemAddTitleVersion {
+            get {
+                return ResourceManager.GetString("MenuItemAddTitleVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a note.
         /// </summary>
         public static string MenuItemAddUserNote {
@@ -1883,6 +1874,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Make this a separate version.
+        /// </summary>
+        public static string MenuItemMakeSeparateVersion {
+            get {
+                return ResourceManager.GetString("MenuItemMakeSeparateVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notes.
         /// </summary>
         public static string MenuItemNotes {
@@ -1964,11 +1964,29 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove this title version.
+        /// </summary>
+        public static string MenuItemRemoveTitleVersion {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveTitleVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Replace this submission document.
         /// </summary>
         public static string MenuItemReplaceSubmissionDocument {
             get {
                 return ResourceManager.GetString("MenuItemReplaceSubmissionDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace the file for this version with another file.
+        /// </summary>
+        public static string MenuItemReplaceTitleVersion {
+            get {
+                return ResourceManager.GetString("MenuItemReplaceTitleVersion", resourceCulture);
             }
         }
         
@@ -3096,6 +3114,15 @@ namespace Restless.Panama.Resources {
         public static string ToolTipSubmissionOnline {
             get {
                 return ResourceManager.GetString("ToolTipSubmissionOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronize file names to title and version.
+        /// </summary>
+        public static string ToolTipSynchonizeTitles {
+            get {
+                return ResourceManager.GetString("ToolTipSynchonizeTitles", resourceCulture);
             }
         }
         

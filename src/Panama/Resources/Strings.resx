@@ -121,10 +121,6 @@
     <value>Publisher</value>
     <comment>Command text to view publishers</comment>
   </data>
-  <data name="CommandPublisherTooltip" xml:space="preserve">
-    <value>Manage existing publishers, create new publishers, etc.</value>
-    <comment>Tooltip text used for publisher command</comment>
-  </data>
   <data name="MenuItemSettings" xml:space="preserve">
     <value>Settings</value>
     <comment>Command text to enter the settings view</comment>
@@ -132,10 +128,6 @@
   <data name="CommandConfigTooltip" xml:space="preserve">
     <value>View and modify application settings</value>
     <comment>Tooltip used for settings command</comment>
-  </data>
-  <data name="CommandTitleTooltip" xml:space="preserve">
-    <value>Manage existing titles, create new titles, etc.</value>
-    <comment>Tooltip text used for title command</comment>
   </data>
   <data name="ValidationOperationIntegerNeeded" xml:space="preserve">
     <value>An integer value is required</value>
@@ -370,7 +362,7 @@ does not exist. Correct this by selecting the correct file and then try again.</
     <value>records</value>
   </data>
   <data name="ConfirmationRemoveTitleVersion" xml:space="preserve">
-    <value>This operation will remove the selected version from this title. It does not delete the file on disk. Do you want to continue?</value>
+    <value>This operation will remove the selected version from this title. It does not delete the file on disk.</value>
   </data>
   <data name="CaptionSelectTitleVersionReplaceByFile" xml:space="preserve">
     <value>Select a file to replace the file of the selected version</value>
@@ -1255,5 +1247,20 @@ Changes will take effect after you restart the application.</value>
   </data>
   <data name="MenuItemSummary" xml:space="preserve">
     <value>Summary</value>
+  </data>
+  <data name="MenuItemAddTitleVersion" xml:space="preserve">
+    <value>Add an existing file as a version</value>
+  </data>
+  <data name="MenuItemRemoveTitleVersion" xml:space="preserve">
+    <value>Remove this title version</value>
+  </data>
+  <data name="ToolTipSynchonizeTitles" xml:space="preserve">
+    <value>Synchronize file names to title and version</value>
+  </data>
+  <data name="MenuItemMakeSeparateVersion" xml:space="preserve">
+    <value>Make this a separate version</value>
+  </data>
+  <data name="MenuItemReplaceTitleVersion" xml:space="preserve">
+    <value>Replace the file for this version with another file</value>
   </data>
 </root>

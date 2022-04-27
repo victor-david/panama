@@ -143,7 +143,13 @@
 
     <Style TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
     <Style TargetType="tk:DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
-
+    
+    <Style x:Key="DataGridLockedStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="RowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
+    </Style>
+    
     <Style x:Key="DataGridEditStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
         <Setter Property="AlternationCount" Value="2"/>
         <Setter Property="MaxHeight" Value="260" />

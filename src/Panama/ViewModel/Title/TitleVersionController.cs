@@ -12,6 +12,8 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.OpenXml;
 using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
+using System;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -36,6 +38,12 @@ namespace Restless.Panama.ViewModel
         #region Properties
         private DocumentTypeTable DocumentTypeTable => DatabaseController.Instance.GetTable<DocumentTypeTable>();
         private long CurrentTitleId => Owner?.SelectedTitle?.Id ?? 0;
+
+        /// <inheritdoc/>
+        public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => CanRunVersionCommand();
 
         /// <summary>
         /// Gets the currently selection version
@@ -84,23 +92,25 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public TitleVersionController(TitleViewModel owner) : base(owner)
         {
-            //Columns.CreateImage<IntegerToImageConverter>("T", TitleVersionTable.Defs.Columns.DocType, "ImageFileType", 20.0);
             Columns.Create("V", TitleVersionTable.Defs.Columns.Version)
-            .MakeCentered()
-            .MakeFixedWidth(FixedWidth.W042);
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042);
 
             Columns.Create<IntegerToCharConverter>("Rev", TitleVersionTable.Defs.Columns.Revision)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Updated", TitleVersionTable.Defs.Columns.Updated).MakeDate();
-            Columns.Create("WC", TitleVersionTable.Defs.Columns.WordCount).MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Lang", TitleVersionTable.Defs.Columns.LangId).MakeFixedWidth(FixedWidth.W048);
+
+            Columns.Create("Updated", TitleVersionTable.Defs.Columns.Updated)
+                .MakeDate();
+
+            Columns.Create("WC", TitleVersionTable.Defs.Columns.WordCount)
+                .MakeFixedWidth(FixedWidth.W042);
+
+            Columns.Create("Lang", TitleVersionTable.Defs.Columns.LangId)
+                .MakeFixedWidth(FixedWidth.W048);
+
             Columns.Create("File", TitleVersionTable.Defs.Columns.FileName);
 
-            Commands.Add("ConvertToVersion", RunConvertToVersionCommand, CanRunConvertToVersionCommand);
-            Commands.Add("VersionAddByFile", RunAddVersionByFileCommand);
-            Commands.Add("VersionReplace", RunReplaceVersionCommand, o => IsSelectedRowAccessible);
-            Commands.Add("VersionRemove", RunRemoveVersionCommand, o => IsSelectedRowAccessible);
             Commands.Add("VersionMoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
             Commands.Add("VersionMoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
             Commands.Add("VersionSync", RunSyncCommand);
@@ -108,8 +118,10 @@ namespace Restless.Panama.ViewModel
             Commands.Add("SaveProperty", RunSavePropertyCommand, CanRunSavePropertyCommand);
             Commands.Add("SetLanguage", RunSetLanguageCommand, o => IsSelectedRowAccessible);
 
-            //MenuItems.AddItem("Make this a revision of the version above", Commands["ConvertToRevision"]);
-            MenuItems.AddItem("Make this a separate version", Commands["ConvertToVersion"]);
+            MenuItems.AddItem(Strings.MenuItemAddTitleVersion, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemReplaceTitleVersion, RelayCommand.Create(RunReplaceVersionCommand, p => CanRunVersionCommand()));
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemMakeSeparateVersion, RelayCommand.Create(RunConvertToVersionCommand, CanRunConvertToVersionCommand));
             MenuItems.AddSeparator();
 
             foreach (DataRow row in DatabaseController.Instance.GetTable<LanguageTable>().Rows)
@@ -119,6 +131,9 @@ namespace Restless.Panama.ViewModel
 
                 MenuItems.AddItem($"Set language to {langName} ({langId})", Commands["SetLanguage"]).AddCommandParm(langId).AddTag(langId);
             }
+
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemRemoveTitleVersion, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
 
             ListView.IsLiveSorting = true;
             ListView.LiveSortingProperties.Add(TitleVersionTable.Defs.Columns.Version);
@@ -167,6 +182,37 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <inheritdoc/>
+        protected override void RunAddCommand()
+        {
+            if (verController != null)
+            {
+                using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Strings.CaptionSelectTitleVersionAddByFile))
+                {
+                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                    {
+                        string fileName = Paths.Title.WithoutRoot(dialog.FileName);
+                        if (CanAddFileToTitle(fileName))
+                        {
+                            verController.Add(fileName);
+                            OnUpdate();
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void RunDeleteCommand()
+        {
+            if (CanRunVersionCommand() && MessageWindow.ShowContinueCancel(Strings.ConfirmationRemoveTitleVersion))
+            {
+                verController.Remove(SelectedVersion);
+                Table.Save();
+                OnUpdate();
+            }
+        }
+
+        /// <inheritdoc/>
         protected override void RunOpenRowCommand()
         {
             if (SelectedVersion != null)
@@ -195,35 +241,6 @@ namespace Restless.Panama.ViewModel
                 verController.GetRevisionCount(SelectedVersion.Version) > 1;
         }
 
-        private void RunAddVersionByFileCommand(object parm)
-        {
-            if (verController != null)
-            {
-                using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Strings.CaptionSelectTitleVersionAddByFile))
-                {
-                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-                    {
-                        string fileName = Paths.Title.WithoutRoot(dialog.FileName);
-                        if (CanAddFileToTitle(fileName))
-                        {
-                            verController.Add(fileName);
-                            OnUpdate();
-                        }
-                    }
-                }
-            }
-        }
-
-        private void RunRemoveVersionCommand(object parm)
-        {
-            if (CanRunVersionCommand() && MessageWindow.ShowYesNo(Strings.ConfirmationRemoveTitleVersion))
-            {
-                verController.Remove(SelectedVersion);
-                Table.Save();
-                OnUpdate();
-            }
-        }
-
         private void RunReplaceVersionCommand(object parm)
         {
             if (SelectedVersion != null)
@@ -240,7 +257,6 @@ namespace Restless.Panama.ViewModel
                         }
                     }
                 }
-
             }
         }
 
@@ -316,10 +332,13 @@ namespace Restless.Panama.ViewModel
                 string langId = SelectedVersion.LanguageId;
                 foreach (MenuItem item in MenuItems.OfType<MenuItem>())
                 {
-                    item.Icon = null;
-                    if (langId.Equals(item.Tag))
+                    if (item.Tag is string menuLangId)
                     {
-                        item.Icon = LocalResources.Get<System.Windows.Shapes.Path>(ResourceKeys.Icon.SquareSmallRedIconKey);
+                        item.Icon = null;
+                        if (langId.Equals(menuLangId, StringComparison.Ordinal))
+                        {
+                            item.Icon = LocalResources.Get<System.Windows.Shapes.Path>(ResourceKeys.Icon.SquareSmallRedIconKey);
+                        }
                     }
                 }
             }
