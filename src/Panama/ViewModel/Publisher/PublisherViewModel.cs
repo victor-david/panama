@@ -300,11 +300,11 @@ namespace Restless.Panama.ViewModel
         {
             return new FlagGridColumnCollection()
             {
-                { TableColumns.Exclusive, Brushes.Red },
-                { TableColumns.Paying, Brushes.Green },
-                { TableColumns.Goner, Brushes.Gray },
-                { TableColumns.Calculated.HaveActiveSubmission, Brushes.RoyalBlue },
-                { TableColumns.Calculated.InSubmissionPeriod, Brushes.Coral },
+                { TableColumns.Exclusive, Config.Colors.PublisherExclusive.BackgroundBrush },
+                { TableColumns.Paying, Config.Colors.PublisherPaying.BackgroundBrush },
+                { TableColumns.Goner, Config.Colors.PublisherGoner.BackgroundBrush },
+                { TableColumns.Calculated.HaveActiveSubmission, Config.Colors.PublisherActiveSubmission.BackgroundBrush },
+                { TableColumns.Calculated.InSubmissionPeriod, Config.Colors.PublisherPeriod.BackgroundBrush },
             };
         }
         #endregion
