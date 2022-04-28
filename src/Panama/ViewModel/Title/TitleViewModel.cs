@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
@@ -16,6 +17,10 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
 
@@ -163,17 +168,9 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.Ready, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.Add(MakeFlagsColumn("Flags")
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipTitleFilterReady)
-                .SetSelectorName("Ready");
-
-            Columns.CreateResource<BooleanToPathConverter>("Q", TableColumns.QuickFlag, ResourceKeys.Icon.SquareSmallBlueIconKey)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipTitleFilterFlag)
-                .SetSelectorName("Quick Flag");
+                .MakeFixedWidth(FixedWidth.W076));
 
             Columns.Create("Title", TableColumns.Title).MakeFlexWidth(4);
 
@@ -460,6 +457,45 @@ namespace Restless.Panama.ViewModel
                     }
                 }
             }
+        }
+
+        private DataGridTemplateColumn MakeFlagsColumn(string header) // , params FlagGridColumn[] columns)
+        {
+            DataGridTemplateColumn col = new()
+            {
+                Header = header
+            };
+
+            FrameworkElementFactory factory = new(typeof(ContentControl));
+
+            FlagGridColumnCollection columns = new()
+            {
+                { TableColumns.Ready, Brushes.Green },
+                { TableColumns.QuickFlag, Brushes.Blue },
+                { TableColumns.Calculated.IsPublished, Brushes.Red },
+                { TableColumns.Calculated.IsSelfPublished, Brushes.Coral },
+                { TableColumns.Calculated.IsSubmitted, Brushes.Black }
+            };
+
+            MultiBinding multiBinding = new()
+            {
+                Converter = new BooleanToFlagGridMultiConverter(),
+                ConverterParameter = columns,
+                TargetNullValue = "---"
+            };
+
+            foreach (FlagGridColumn name in columns)
+            {
+                multiBinding.Bindings.Add(new Binding(name.ColumnName));
+            }
+
+            factory.SetValue(ContentControl.ContentProperty, multiBinding);
+            col.CellTemplate = new DataTemplate
+            {
+                VisualTree = factory
+            };
+            DataGridColumns.SetSelectorName(col, header);
+            return col;
         }
         #endregion
     }
