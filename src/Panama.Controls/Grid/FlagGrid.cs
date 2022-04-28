@@ -93,7 +93,7 @@ namespace Restless.Panama.Controls
 
         private Brush GetBrush(int column)
         {
-            return columns != null && column < columns.Count - 1 ? columns[column].Brush : Brushes.Transparent;
+            return columns != null && column < columns.Count ? columns[column].Brush : Brushes.Transparent;
         }
         #endregion
     }
