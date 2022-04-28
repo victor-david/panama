@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
@@ -15,6 +16,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.PublisherTable.Defs.Columns;
 
@@ -120,23 +124,9 @@ namespace Restless.Panama.ViewModel
         {
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<BooleanToPathConverter>("P", TableColumns.Calculated.InSubmissionPeriod, ResourceKeys.Icon.SquareSmallBlueIconKey)
+            Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipPublisherInPeriod)
-                .SetSelectorName("In Period");
-
-            Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Exclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipPublisherExclusive)
-                .SetSelectorName("Exclusive"); ;
-
-            Columns.CreateResource<BooleanToPathConverter>("P", TableColumns.Paying, ResourceKeys.Icon.SquareSmallGreenIconKey)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipPublisherPay)
-                .SetSelectorName("Paying");
+                .MakeFixedWidth(FixedWidth.W076));
 
             Columns.Create("Name", TableColumns.Name);
             Columns.Create("Url", TableColumns.Url);
@@ -145,12 +135,6 @@ namespace Restless.Panama.ViewModel
                 .MakeDate()
                 .AddToolTip(Strings.ToolTipPublisherAdded)
                 .MakeInitialSortDescending();
-
-            Columns.CreateResource<BooleanToPathConverter>("A", TableColumns.Calculated.HaveActiveSubmission, ResourceKeys.Icon.SquareSmallGrayIconKey)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipPublisherHasActive)
-                .SetSelectorName("Has Active Submission");
 
             Columns.Create("Last Sub", TableColumns.Calculated.LastSub)
                 .MakeDate()
@@ -310,6 +294,18 @@ namespace Restless.Panama.ViewModel
                 Clipboard.SetText(SelectedCredential.Row[columnName].ToString());
                 MainWindowViewModel.Instance.CreateNotificationMessage($"{columnName} copied to clipboard");
             }
+        }
+
+        private FlagGridColumnCollection GetFlagGridColumns()
+        {
+            return new FlagGridColumnCollection()
+            {
+                { TableColumns.Exclusive, Brushes.Red },
+                { TableColumns.Paying, Brushes.Green },
+                { TableColumns.Goner, Brushes.Gray },
+                { TableColumns.Calculated.HaveActiveSubmission, Brushes.RoyalBlue },
+                { TableColumns.Calculated.InSubmissionPeriod, Brushes.Coral },
+            };
         }
         #endregion
     }

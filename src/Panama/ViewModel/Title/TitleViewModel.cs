@@ -168,7 +168,7 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Add(MakeFlagsColumn("Flags")
+            Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W076));
 
@@ -459,16 +459,9 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private DataGridTemplateColumn MakeFlagsColumn(string header) // , params FlagGridColumn[] columns)
+        private FlagGridColumnCollection GetFlagGridColumns()
         {
-            DataGridTemplateColumn col = new()
-            {
-                Header = header
-            };
-
-            FrameworkElementFactory factory = new(typeof(ContentControl));
-
-            FlagGridColumnCollection columns = new()
+            return new FlagGridColumnCollection()
             {
                 { TableColumns.Ready, Brushes.Green },
                 { TableColumns.QuickFlag, Brushes.Blue },
@@ -476,26 +469,6 @@ namespace Restless.Panama.ViewModel
                 { TableColumns.Calculated.IsSelfPublished, Brushes.Coral },
                 { TableColumns.Calculated.IsSubmitted, Brushes.Black }
             };
-
-            MultiBinding multiBinding = new()
-            {
-                Converter = new BooleanToFlagGridMultiConverter(),
-                ConverterParameter = columns,
-                TargetNullValue = "---"
-            };
-
-            foreach (FlagGridColumn name in columns)
-            {
-                multiBinding.Bindings.Add(new Binding(name.ColumnName));
-            }
-
-            factory.SetValue(ContentControl.ContentProperty, multiBinding);
-            col.CellTemplate = new DataTemplate
-            {
-                VisualTree = factory
-            };
-            DataGridColumns.SetSelectorName(col, header);
-            return col;
         }
         #endregion
     }

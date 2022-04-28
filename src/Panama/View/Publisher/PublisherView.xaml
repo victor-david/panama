@@ -131,8 +131,7 @@
                 ItemsSource="{Binding ListView}" 
                 SelectedItem="{Binding SelectedItem}"
                 RestoreStateBehavior="RestoreLastSelection"
-                tk:DataGridColumns.Columns="{Binding Columns}"
-                RowStyle="{StaticResource PublisherDataGridRowStyle}">
+                tk:DataGridColumns.Columns="{Binding Columns}">
 
                 <DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
