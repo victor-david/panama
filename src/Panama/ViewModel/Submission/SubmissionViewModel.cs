@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
@@ -13,6 +14,7 @@ using Restless.Toolkit.Mvvm;
 using System;
 using System.Data;
 using System.Globalization;
+using System.Windows.Media;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionBatchTable.Defs.Columns;
 
@@ -119,23 +121,9 @@ namespace Restless.Panama.ViewModel
         {
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<BooleanToPathConverter>("O", TableColumns.Online, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipSubmissionOnline)
-                .SetSelectorName("Online");
-
-            Columns.CreateResource<BooleanToPathConverter>("C", TableColumns.Contest, ResourceKeys.Icon.SquareSmallGrayIconKey)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipSubmissionContest)
-                .SetSelectorName("Contest");
-
-            Columns.CreateResource<BooleanToPathConverter>("L", TableColumns.Locked, ResourceKeys.Icon.SquareSmallRedIconKey)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipSubmissionLocked)
-                .SetSelectorName("Locked");
+                .MakeFixedWidth(FixedWidth.W076));
 
             Columns.Create("Submitted", TableColumns.Submitted)
                 .MakeDate()
@@ -153,12 +141,6 @@ namespace Restless.Panama.ViewModel
             Columns.Create<DatesToDayDiffConverter>("Days", TableColumns.Submitted, TableColumns.Response, string.Empty)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052);
-
-            Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Joined.PublisherExclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipPublisherExclusive)
-                .SetSelectorName("Publisher Exclusive");
 
             Columns.Create("Publisher", TableColumns.Joined.Publisher);
 
@@ -328,6 +310,17 @@ namespace Restless.Panama.ViewModel
         private void RunFilterToPublisherCommand(object parm)
         {
             Filters.SetIdFilter(SelectedBatch.PublisherId);
+        }
+
+        private FlagGridColumnCollection GetFlagGridColumns()
+        {
+            return new FlagGridColumnCollection()
+            {
+                { TableColumns.Online, Brushes.Green },
+                { TableColumns.Contest, Brushes.Gray },
+                { TableColumns.Locked, Brushes.MediumVioletRed },
+                { TableColumns.Joined.PublisherExclusive, Brushes.Red },
+            };
         }
         #endregion
     }
