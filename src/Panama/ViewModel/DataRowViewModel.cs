@@ -182,7 +182,10 @@ namespace Restless.Panama.ViewModel
         {
             DataGridTemplateColumn col = new()
             {
-                Header = header
+                Header = new TextBlock()
+                {
+                    Text = header
+                }
             };
 
             FrameworkElementFactory factory = new(typeof(ContentControl));
