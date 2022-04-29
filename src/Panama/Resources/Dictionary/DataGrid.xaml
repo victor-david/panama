@@ -4,70 +4,6 @@
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:core="clr-namespace:Restless.Panama.Core">
 
-    <Style x:Key="TitleDataGridRowStyle" TargetType="DataGridRow">
-        <Style.Triggers>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsPublished}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitlePublished.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding DataContext.Config.Colors.TitlePublished.BackgroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsPublished}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitlePublished.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{Binding DataContext.Config.Colors.TitlePublished.ForegroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />                    
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsSelfPublished}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSelfPublished.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding DataContext.Config.Colors.TitleSelfPublished.BackgroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsSelfPublished}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSelfPublished.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{Binding DataContext.Config.Colors.TitleSelfPublished.ForegroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsSubmitted}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSubmitted.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding DataContext.Config.Colors.TitleSubmitted.BackgroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsSubmitted}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSubmitted.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{Binding DataContext.Config.Colors.TitleSubmitted.ForegroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-        </Style.Triggers>
-    </Style>
-
     <Style x:Key="TitleConfirmDataGridRowStyle" TargetType="DataGridRow">
         <Style.Triggers>
             <DataTrigger Binding="{Binding Status}" Value="SamePublisher">
@@ -76,50 +12,6 @@
             <DataTrigger Binding="{Binding Status}" Value="Exclusive">
                 <Setter Property="Foreground" Value="{StaticResource AlertForegroundBrush}"/>
             </DataTrigger>            
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="PublisherDataGridRowStyle" TargetType="DataGridRow">
-        <Style.Triggers>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcInPeriod}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherPeriod.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding DataContext.Config.Colors.PublisherPeriod.BackgroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcInPeriod}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherPeriod.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{Binding DataContext.Config.Colors.PublisherPeriod.ForegroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcGoner}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherGoner.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding DataContext.Config.Colors.PublisherGoner.BackgroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>            
-            
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcGoner}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherGoner.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{Binding DataContext.Config.Colors.PublisherGoner.ForegroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
         </Style.Triggers>
     </Style>
 
