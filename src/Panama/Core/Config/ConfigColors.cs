@@ -20,8 +20,7 @@ namespace Restless.Panama.Core
         /// </summary>
         private static class Values
         {
-            public static readonly Color DataGridAlternationForeground = SystemColors.Transparent;
-            public static readonly Color DataGridAlternationBackground = (Color)ColorConverter.ConvertFromString("#FFCBE4EC");
+            public static readonly Color DataGridAlternationDefault = (Color)ColorConverter.ConvertFromString("#FFCBE4EC");
 
             public static readonly Color TitleReadyDefault = SystemColors.Green;
             public static readonly Color TitleFlaggedDefault = SystemColors.Blue;
@@ -41,18 +40,6 @@ namespace Restless.Panama.Core
 
             public static readonly Color PublisherGonerForeground = SystemColors.OrangeRed;
             public static readonly Color PublisherGonerBackground = SystemColors.Transparent;
-
-            //public static Color PublisherPeriodForeground = SystemColors.Blue;
-            //public static Color PublisherPeriodBackground = SystemColors.Transparent;
-
-            //public static Color TitlePublishedForeground = SystemColors.Transparent;
-            //public static Color TitlePublishedBackground = SystemColors.PaleGreen;
-
-            //public static Color TitleSelfPublishedForeground = SystemColors.Firebrick;
-            //public static Color TitleSelfPublishedBackground = SystemColors.Transparent;
-
-            //public static Color TitleSubmittedForeground = SystemColors.White;
-            //public static Color TitleSubmittedBackground = SystemColors.SeaGreen;
         }
         #endregion
 
@@ -85,23 +72,23 @@ namespace Restless.Panama.Core
         /// </summary>
         internal ConfigColors()
         {
-            DataGridAlternation = new ConfigColor(nameof(DataGridAlternation), Values.DataGridAlternationForeground, Values.DataGridAlternationBackground);
+            DataGridAlternation = new ConfigColor(nameof(DataGridAlternation), Values.DataGridAlternationDefault);
 
-            TitleReady = new ConfigColor(nameof(TitleReady), SystemColors.Transparent, Values.TitleReadyDefault);
-            TitleFlagged = new ConfigColor(nameof(TitleFlagged), SystemColors.Transparent, Values.TitleFlaggedDefault);
-            TitlePublished = new ConfigColor(nameof(TitlePublished), SystemColors.Transparent, Values.TitlePublishedDefault);
-            TitleSelfPublished = new ConfigColor(nameof(TitleSelfPublished), SystemColors.Transparent, Values.TitleSelfPublishedDefault);
-            TitleSubmitted = new ConfigColor(nameof(TitleSubmitted), SystemColors.Transparent, Values.TitleSubmittedDefault);
+            TitleReady = new ConfigColor(nameof(TitleReady), Values.TitleReadyDefault);
+            TitleFlagged = new ConfigColor(nameof(TitleFlagged), Values.TitleFlaggedDefault);
+            TitlePublished = new ConfigColor(nameof(TitlePublished), Values.TitlePublishedDefault);
+            TitleSelfPublished = new ConfigColor(nameof(TitleSelfPublished), Values.TitleSelfPublishedDefault);
+            TitleSubmitted = new ConfigColor(nameof(TitleSubmitted), Values.TitleSubmittedDefault);
 
-            PublisherExclusive = new ConfigColor(nameof(PublisherExclusive), SystemColors.Transparent, Values.PublisherExclusiveDefault);
-            PublisherPaying = new ConfigColor(nameof(PublisherPaying), SystemColors.Transparent, Values.PublisherPayingDefault);
-            PublisherGoner = new ConfigColor(nameof(PublisherGoner), SystemColors.Transparent, Values.PublisherGonerDefault);
-            PublisherActiveSubmission = new ConfigColor(nameof(PublisherActiveSubmission), SystemColors.Transparent, Values.PublisherActiveSubmissionDefault);
-            PublisherPeriod = new ConfigColor(nameof(PublisherPeriod), SystemColors.Transparent, Values.PublisherPeriodDefault);
+            PublisherExclusive = new ConfigColor(nameof(PublisherExclusive), Values.PublisherExclusiveDefault);
+            PublisherPaying = new ConfigColor(nameof(PublisherPaying), Values.PublisherPayingDefault);
+            PublisherGoner = new ConfigColor(nameof(PublisherGoner), Values.PublisherGonerDefault);
+            PublisherActiveSubmission = new ConfigColor(nameof(PublisherActiveSubmission), Values.PublisherActiveSubmissionDefault);
+            PublisherPeriod = new ConfigColor(nameof(PublisherPeriod), Values.PublisherPeriodDefault);
 
-            SubmissionOnline = new ConfigColor(nameof(SubmissionOnline), SystemColors.Transparent, Values.SubmissionOnlineDefault);
-            SubmissionContest = new ConfigColor(nameof(SubmissionContest), SystemColors.Transparent, Values.SubmissionContestDefault);
-            SubmissionLocked = new ConfigColor(nameof(SubmissionLocked), SystemColors.Transparent, Values.SubmissionLockedDefault);
+            SubmissionOnline = new ConfigColor(nameof(SubmissionOnline), Values.SubmissionOnlineDefault);
+            SubmissionContest = new ConfigColor(nameof(SubmissionContest), Values.SubmissionContestDefault);
+            SubmissionLocked = new ConfigColor(nameof(SubmissionLocked), Values.SubmissionLockedDefault);
         }
         #endregion
 

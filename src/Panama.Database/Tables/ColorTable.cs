@@ -37,14 +37,9 @@ namespace Restless.Panama.Database.Tables
                 public const string Id = DefaultPrimaryKeyName;
 
                 /// <summary>
-                /// The name of the foreground column. Holds the foreground color.
+                /// Holds the stringified color value
                 /// </summary>
-                public const string Foreground = "foreground";
-
-                /// <summary>
-                /// The name of the background column. Holds the background color.
-                /// </summary>
-                public const string Background = "background";
+                public const string Color = "color";
             }
         }
         #endregion
@@ -76,26 +71,27 @@ namespace Restless.Panama.Database.Tables
         /// Gets the configuration row with the specified id. Adds a row first, if it doesn't already exist.
         /// </summary>
         /// <param name="id">The unique id</param>
-        /// <param name="defaultForeColor">The initial value for the foreground color.</param>
-        /// <param name="defaultBackColor">The initial value for the background color.</param>
+        /// <param name="defaultColor">The initial value for the background color.</param>
         /// <returns>The data row</returns>
         /// <remarks>
         /// If the color configuration value specified by <paramref name="id"/> does not already exist, this method first creates it.
         /// </remarks>
-        public DataRow GetConfigurationRow(string id, object defaultForeColor, object defaultBackColor)
+        public DataRow GetConfigurationRow(string id, object defaultColor)
         {
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrWhiteSpace(id))
             {
                 throw new ArgumentNullException(nameof(id));
             }
 
-            DataRow[] rows = Select(string.Format("{0}='{1}'", Defs.Columns.Id, id));
-            if (rows.Length == 1) return rows[0];
+            DataRow[] rows = Select($"{Defs.Columns.Id}='{id}'");
+            if (rows.Length == 1)
+            {
+                return rows[0];
+            }
 
             DataRow row = NewRow();
             row[Defs.Columns.Id] = id;
-            row[Defs.Columns.Foreground] = defaultForeColor ?? throw new ArgumentNullException(nameof(defaultForeColor));
-            row[Defs.Columns.Background] = defaultBackColor ?? throw new ArgumentNullException(nameof(defaultBackColor));
+            row[Defs.Columns.Color] = defaultColor ?? throw new ArgumentNullException(nameof(defaultColor));
             Rows.Add(row);
             Save();
             return row;
@@ -114,8 +110,7 @@ namespace Restless.Panama.Database.Tables
             return new ColumnDefinitionCollection()
             {
                 { Defs.Columns.Id, ColumnType.Text, true },
-                { Defs.Columns.Foreground, ColumnType.Text },
-                { Defs.Columns.Background, ColumnType.Text },
+                { Defs.Columns.Color, ColumnType.Text },
             };
         }
 

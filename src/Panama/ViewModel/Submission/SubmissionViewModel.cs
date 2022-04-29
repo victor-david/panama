@@ -316,10 +316,10 @@ namespace Restless.Panama.ViewModel
         {
             return new FlagGridColumnCollection()
             {
-                { TableColumns.Online, Config.Colors.SubmissionOnline.BackgroundBrush },
-                { TableColumns.Contest, Config.Colors.SubmissionContest.BackgroundBrush },
-                { TableColumns.Locked, Config.Colors.SubmissionLocked.BackgroundBrush },
-                { TableColumns.Joined.PublisherExclusive, Config.Colors.PublisherExclusive.BackgroundBrush },
+                { TableColumns.Online, Config.Colors.SubmissionOnline.ColorBrush },
+                { TableColumns.Contest, Config.Colors.SubmissionContest.ColorBrush },
+                { TableColumns.Locked, Config.Colors.SubmissionLocked.ColorBrush },
+                { TableColumns.Joined.PublisherExclusive, Config.Colors.PublisherExclusive.ColorBrush },
             };
         }
         #endregion

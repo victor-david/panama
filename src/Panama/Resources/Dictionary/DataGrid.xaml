@@ -133,7 +133,7 @@
 
     <Style x:Key="DefaultDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource {x:Static tk:DataGrid.DataGridStyleKey}}">
         <Setter Property="AlternationCount" Value="{Binding Config.DataGridAlternationCount}"/>
-        <Setter Property="AlternatingRowBackground" Value="{Binding Config.Colors.DataGridAlternation.BackgroundBrush}"/>
+        <Setter Property="AlternatingRowBackground" Value="{Binding Config.Colors.DataGridAlternation.ColorBrush}"/>
         <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}" />
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
