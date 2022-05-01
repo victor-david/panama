@@ -8,13 +8,13 @@ using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
+using Restless.Panama.View;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Data;
 using System.Globalization;
-using System.Windows.Media;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionBatchTable.Defs.Columns;
 
@@ -123,7 +123,8 @@ namespace Restless.Panama.ViewModel
 
             Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W076));
+                .MakeFixedWidth(FixedWidth.W076)
+                .AddToolTip(SubmissionFlagsToolTip.Create(this)));
 
             Columns.Create("Submitted", TableColumns.Submitted)
                 .MakeDate()
