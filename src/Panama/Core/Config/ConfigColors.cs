@@ -20,76 +20,48 @@ namespace Restless.Panama.Core
         /// </summary>
         private static class Values
         {
-            public static Color DataGridAlternationForeground = SystemColors.Transparent;
-            public static Color DataGridAlternationBackground = (Color)ColorConverter.ConvertFromString("#FFCBE4EC");
+            public static readonly Color DataGridAlternationDefault = (Color)ColorConverter.ConvertFromString("#FFCBE4EC");
 
-            public static Color PublisherGonerForeground = SystemColors.OrangeRed;
-            public static Color PublisherGonerBackground = SystemColors.Transparent;
+            public static readonly Color TitleReadyDefault = SystemColors.Green;
+            public static readonly Color TitleFlaggedDefault = SystemColors.Blue;
+            public static readonly Color TitlePublishedDefault = SystemColors.Red;
+            public static readonly Color TitleSelfPublishedDefault = SystemColors.Coral;
+            public static readonly Color TitleSubmittedDefault = SystemColors.Black;
 
-            public static Color PublisherPeriodForeground = SystemColors.Blue;
-            public static Color PublisherPeriodBackground = SystemColors.Transparent;
+            public static readonly Color PublisherExclusiveDefault = SystemColors.Red;
+            public static readonly Color PublisherPayingDefault = SystemColors.Green;
+            public static readonly Color PublisherGonerDefault = SystemColors.Gray;
+            public static readonly Color PublisherActiveSubmissionDefault = SystemColors.RoyalBlue;
+            public static readonly Color PublisherPeriodDefault = SystemColors.Coral;
 
-            public static Color TitlePublishedForeground = SystemColors.Transparent;
-            public static Color TitlePublishedBackground = SystemColors.PaleGreen;
+            public static readonly Color SubmissionOnlineDefault = SystemColors.Green;
+            public static readonly Color SubmissionContestDefault = SystemColors.Gray;
+            public static readonly Color SubmissionLockedDefault = SystemColors.Firebrick;
 
-            public static Color TitleSelfPublishedForeground = SystemColors.Firebrick;
-            public static Color TitleSelfPublishedBackground = SystemColors.Transparent;
-
-            public static Color TitleSubmittedForeground = SystemColors.White;
-            public static Color TitleSubmittedBackground = SystemColors.SeaGreen;
+            public static readonly Color PublisherGonerForeground = SystemColors.OrangeRed;
+            public static readonly Color PublisherGonerBackground = SystemColors.Transparent;
         }
         #endregion
 
         /************************************************************************/
 
         #region Public properties
-        /// <summary>
-        /// Get the color object used to display alternation rows in data grids.
-        /// </summary>
-        public ConfigColor DataGridAlternation
-        {
-            get;
-        }
+        public ConfigColor DataGridAlternation { get; }
+        public ConfigColor TitleReady { get; }
+        public ConfigColor TitleFlagged { get; }
+        public ConfigColor TitlePublished { get; }
+        public ConfigColor TitleSelfPublished { get; }
+        public ConfigColor TitleSubmitted { get; }
 
-        /// <summary>
-        /// Get the color object used to display a publisher that has been flagged as a goner.
-        /// </summary>
-        public ConfigColor PublisherGoner
-        {
-            get;
-        }
+        public ConfigColor PublisherExclusive { get; }
+        public ConfigColor PublisherPaying { get; }
+        public ConfigColor PublisherGoner { get; }
+        public ConfigColor PublisherActiveSubmission { get; }
+        public ConfigColor PublisherPeriod { get; }
 
-        /// <summary>
-        /// Get the color object used to display a publisher that is within its submission period.
-        /// </summary>
-        public ConfigColor PublisherPeriod
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Get the color object used to display a title that has been published.
-        /// </summary>
-        public ConfigColor TitlePublished
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Get the color object used to display a title that has been self published.
-        /// </summary>
-        public ConfigColor TitleSelfPublished
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Get the color object used to display a title that is currently submitted.
-        /// </summary>
-        public ConfigColor TitleSubmitted
-        {
-            get;
-        }
+        public ConfigColor SubmissionOnline { get; }
+        public ConfigColor SubmissionContest { get; }
+        public ConfigColor SubmissionLocked { get; }
         #endregion
 
         /************************************************************************/
@@ -100,12 +72,23 @@ namespace Restless.Panama.Core
         /// </summary>
         internal ConfigColors()
         {
-            DataGridAlternation = new ConfigColor(nameof(DataGridAlternation), Values.DataGridAlternationForeground, Values.DataGridAlternationBackground);
-            PublisherGoner = new ConfigColor(nameof(PublisherGoner), Values.PublisherGonerForeground, Values.PublisherGonerBackground);
-            PublisherPeriod = new ConfigColor(nameof(PublisherPeriod), Values.PublisherPeriodForeground, Values.PublisherPeriodBackground);
-            TitlePublished = new ConfigColor(nameof(TitlePublished), Values.TitlePublishedForeground, Values.TitlePublishedBackground);
-            TitleSelfPublished = new ConfigColor(nameof(TitleSelfPublished), Values.TitleSelfPublishedForeground, Values.TitleSelfPublishedBackground);
-            TitleSubmitted = new ConfigColor(nameof(TitleSubmitted), Values.TitleSubmittedForeground, Values.TitleSubmittedBackground);
+            DataGridAlternation = new ConfigColor(nameof(DataGridAlternation), Values.DataGridAlternationDefault);
+
+            TitleReady = new ConfigColor(nameof(TitleReady), Values.TitleReadyDefault);
+            TitleFlagged = new ConfigColor(nameof(TitleFlagged), Values.TitleFlaggedDefault);
+            TitlePublished = new ConfigColor(nameof(TitlePublished), Values.TitlePublishedDefault);
+            TitleSelfPublished = new ConfigColor(nameof(TitleSelfPublished), Values.TitleSelfPublishedDefault);
+            TitleSubmitted = new ConfigColor(nameof(TitleSubmitted), Values.TitleSubmittedDefault);
+
+            PublisherExclusive = new ConfigColor(nameof(PublisherExclusive), Values.PublisherExclusiveDefault);
+            PublisherPaying = new ConfigColor(nameof(PublisherPaying), Values.PublisherPayingDefault);
+            PublisherGoner = new ConfigColor(nameof(PublisherGoner), Values.PublisherGonerDefault);
+            PublisherActiveSubmission = new ConfigColor(nameof(PublisherActiveSubmission), Values.PublisherActiveSubmissionDefault);
+            PublisherPeriod = new ConfigColor(nameof(PublisherPeriod), Values.PublisherPeriodDefault);
+
+            SubmissionOnline = new ConfigColor(nameof(SubmissionOnline), Values.SubmissionOnlineDefault);
+            SubmissionContest = new ConfigColor(nameof(SubmissionContest), Values.SubmissionContestDefault);
+            SubmissionLocked = new ConfigColor(nameof(SubmissionLocked), Values.SubmissionLockedDefault);
         }
         #endregion
 
@@ -118,11 +101,22 @@ namespace Restless.Panama.Core
         public void Reset()
         {
             DataGridAlternation.ResetToDefault();
-            PublisherGoner.ResetToDefault();
-            PublisherPeriod.ResetToDefault();
+
+            TitleReady.ResetToDefault();
+            TitleFlagged.ResetToDefault();
             TitlePublished.ResetToDefault();
             TitleSelfPublished.ResetToDefault();
             TitleSubmitted.ResetToDefault();
+
+            PublisherExclusive.ResetToDefault();
+            PublisherPaying.ResetToDefault();
+            PublisherGoner.ResetToDefault();
+            PublisherActiveSubmission.ResetToDefault();
+            PublisherPeriod.ResetToDefault();
+
+            SubmissionOnline.ResetToDefault();
+            SubmissionContest.ResetToDefault();
+            SubmissionLocked.ResetToDefault();
         }
         #endregion
     }

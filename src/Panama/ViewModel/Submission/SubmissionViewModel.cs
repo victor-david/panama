@@ -4,9 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
+using Restless.Panama.View;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
@@ -119,23 +121,10 @@ namespace Restless.Panama.ViewModel
         {
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<BooleanToPathConverter>("O", TableColumns.Online, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipSubmissionOnline)
-                .SetSelectorName("Online");
-
-            Columns.CreateResource<BooleanToPathConverter>("C", TableColumns.Contest, ResourceKeys.Icon.SquareSmallGrayIconKey)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipSubmissionContest)
-                .SetSelectorName("Contest");
-
-            Columns.CreateResource<BooleanToPathConverter>("L", TableColumns.Locked, ResourceKeys.Icon.SquareSmallRedIconKey)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipSubmissionLocked)
-                .SetSelectorName("Locked");
+                .MakeFixedWidth(FixedWidth.W076)
+                .AddToolTip(SubmissionFlagsToolTip.Create(this)));
 
             Columns.Create("Submitted", TableColumns.Submitted)
                 .MakeDate()
@@ -154,19 +143,15 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052);
 
-            Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Joined.PublisherExclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipPublisherExclusive)
-                .SetSelectorName("Publisher Exclusive");
-
             Columns.Create("Publisher", TableColumns.Joined.Publisher);
 
             Columns.Create("Fee", TableColumns.Fee)
-                .MakeNumeric("N2", FixedWidth.W052);
+                .MakeNumeric("N2", FixedWidth.W058)
+                .MakeRightAligned();
 
             Columns.Create("Award", TableColumns.Award)
-                .MakeNumeric("N0", FixedWidth.W052);
+                .MakeNumeric("N2", FixedWidth.W058)
+                .MakeRightAligned();
 
             Columns.Create("Note", TableColumns.Notes)
                 .MakeSingleLine();
@@ -328,6 +313,17 @@ namespace Restless.Panama.ViewModel
         private void RunFilterToPublisherCommand(object parm)
         {
             Filters.SetIdFilter(SelectedBatch.PublisherId);
+        }
+
+        private FlagGridColumnCollection GetFlagGridColumns()
+        {
+            return new FlagGridColumnCollection(this)
+            {
+                { TableColumns.Online, Config.Colors.SubmissionOnline.ToBindingPath() },
+                { TableColumns.Contest, Config.Colors.SubmissionContest.ToBindingPath() },
+                { TableColumns.Locked, Config.Colors.SubmissionLocked.ToBindingPath() },
+                { TableColumns.Joined.PublisherExclusive, Config.Colors.PublisherExclusive.ToBindingPath() },
+            };
         }
         #endregion
     }

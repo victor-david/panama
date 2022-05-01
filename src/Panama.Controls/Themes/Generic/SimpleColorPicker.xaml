@@ -160,5 +160,32 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="con:SimpleColorPickerWrapper">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="con:SimpleColorPickerWrapper">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <con:SimpleColorPicker
+                            Margin="0,0,0,4"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            SelectedColor="{Binding Color, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        
+                         <TextBlock
+                            Grid.Row="1"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Text="{TemplateBinding Header}"/>                       
+                        
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     
 </ResourceDictionary>

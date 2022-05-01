@@ -4,10 +4,16 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Controls;
+using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
+using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Data;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Restless.Panama.ViewModel
 {
@@ -164,6 +170,45 @@ namespace Restless.Panama.ViewModel
                 Table.Save();
                 ListView.Refresh();
             }
+        }
+
+        /// <summary>
+        /// Creates a specialized column to display flags
+        /// </summary>
+        /// <param name="header">The column header</param>
+        /// <param name="columns">Column collection that describes the flags</param>
+        /// <returns></returns>
+        protected DataGridTemplateColumn CreateFlagsColumn(string header, FlagGridColumnCollection columns)
+        {
+            DataGridTemplateColumn col = new()
+            {
+                Header = new TextBlock()
+                {
+                    Text = header
+                }
+            };
+
+            FrameworkElementFactory factory = new(typeof(ContentControl));
+
+            MultiBinding multiBinding = new()
+            {
+                Converter = new BooleanToFlagGridMultiConverter(),
+                ConverterParameter = columns ?? throw new ArgumentNullException(nameof(columns)),
+                TargetNullValue = "---"
+            };
+
+            foreach (FlagGridColumn name in columns)
+            {
+                multiBinding.Bindings.Add(new Binding(name.ColumnName));
+            }
+
+            factory.SetValue(ContentControl.ContentProperty, multiBinding);
+            col.CellTemplate = new DataTemplate
+            {
+                VisualTree = factory
+            };
+            DataGridColumns.SetSelectorName(col, header);
+            return col;
         }
         #endregion
     }

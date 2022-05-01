@@ -38,6 +38,16 @@ namespace Restless.Panama.Core
         public const int W052 = 52;
 
         /// <summary>
+        /// Fixed width of 58.
+        /// </summary>
+        public const int W058 = 58;
+
+        /// <summary>
+        /// Fixed width of 64.
+        /// </summary>
+        public const int W064 = 64;
+
+        /// <summary>
         /// Fixed width of 76.
         /// </summary>
         public const int W076 = 76;

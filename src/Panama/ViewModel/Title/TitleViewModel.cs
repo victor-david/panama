@@ -4,10 +4,12 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
+using Restless.Panama.View;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.OpenXml;
 using Restless.Toolkit.Core.Utility;
@@ -163,17 +165,10 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.Ready, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipTitleFilterReady)
-                .SetSelectorName("Ready");
-
-            Columns.CreateResource<BooleanToPathConverter>("Q", TableColumns.QuickFlag, ResourceKeys.Icon.SquareSmallBlueIconKey)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipTitleFilterFlag)
-                .SetSelectorName("Quick Flag");
+                .MakeFixedWidth(FixedWidth.W076)
+                .AddToolTip(TitleFlagsToolTip.Create(this)));
 
             Columns.Create("Title", TableColumns.Title).MakeFlexWidth(4);
 
@@ -460,6 +455,18 @@ namespace Restless.Panama.ViewModel
                     }
                 }
             }
+        }
+
+        private FlagGridColumnCollection GetFlagGridColumns()
+        {
+            return new FlagGridColumnCollection(this)
+            {
+                { TableColumns.Ready, Config.Colors.TitleReady.ToBindingPath() },
+                { TableColumns.QuickFlag, Config.Colors.TitleFlagged.ToBindingPath() },
+                { TableColumns.Calculated.IsPublished, Config.Colors.TitlePublished.ToBindingPath() },
+                { TableColumns.Calculated.IsSelfPublished, Config.Colors.TitleSelfPublished.ToBindingPath() },
+                { TableColumns.Calculated.IsSubmitted, Config.Colors.TitleSubmitted.ToBindingPath() }
+            };
         }
         #endregion
     }
