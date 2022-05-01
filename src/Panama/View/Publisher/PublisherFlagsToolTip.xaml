@@ -1,0 +1,50 @@
+﻿<Grid
+    x:Class="Restless.Panama.View.PublisherFlagsToolTip"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    mc:Ignorable="d" 
+    tk:Property.ColumnWidths="Auto,*"
+    tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto"
+    d:DesignHeight="135" d:DesignWidth="180">
+
+    <Grid.Resources>
+        <Style TargetType="Border" BasedOn="{StaticResource ToolTipBorderIconStyle}"/>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource ToolTipTextBlockStyle}"/>
+    </Grid.Resources>
+
+    <Border
+        Grid.Row="1"
+        Background="{Binding Config.Colors.PublisherExclusive.ColorBrush}"/>
+    
+    <Border
+        Grid.Row="2"
+        Background="{Binding Config.Colors.PublisherPaying.ColorBrush}"/>
+
+    <Border
+        Grid.Row="3"
+        Background="{Binding Config.Colors.PublisherGoner.ColorBrush}"/>
+
+    <Border
+        Grid.Row="4"
+        Background="{Binding Config.Colors.PublisherActiveSubmission.ColorBrush}"/>
+
+    <Border
+        Grid.Row="5"
+        Background="{Binding Config.Colors.PublisherPeriod.ColorBrush}"/>
+
+    <TextBlock
+        Grid.ColumnSpan="2"
+        Style="{StaticResource ToolTipTextBlockHeaderStyle}"
+        Text="Publisher flags"/>
+
+    <TextBlock Grid.Row="1" Grid.Column="1" Text="Exclusive (no simultaneous)"/>
+    <TextBlock Grid.Row="2" Grid.Column="1" Text="Paying"/>
+    <TextBlock Grid.Row="3" Grid.Column="1" Text="Goner"/>
+    <TextBlock Grid.Row="4" Grid.Column="1" Text="Active submission"/>
+    <TextBlock Grid.Row="5" Grid.Column="1" Text="In period"/>
+</Grid>

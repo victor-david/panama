@@ -168,8 +168,7 @@ namespace Restless.Panama.ViewModel
             Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W076)
-                .AddToolTip(TitleFlagsToolTip.Create(this))
-                );
+                .AddToolTip(TitleFlagsToolTip.Create(this)));
 
             Columns.Create("Title", TableColumns.Title).MakeFlexWidth(4);
 

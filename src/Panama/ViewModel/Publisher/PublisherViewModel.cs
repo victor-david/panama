@@ -9,6 +9,7 @@ using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
+using Restless.Panama.View;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using System;
@@ -16,9 +17,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Media;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.PublisherTable.Defs.Columns;
 
@@ -126,7 +124,8 @@ namespace Restless.Panama.ViewModel
 
             Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W076));
+                .MakeFixedWidth(FixedWidth.W076)
+                .AddToolTip(PublisherFlagsToolTip.Create(this)));
 
             Columns.Create("Name", TableColumns.Name);
             Columns.Create("Url", TableColumns.Url);
