@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Restless.Panama.Controls
 {
@@ -67,16 +66,16 @@ namespace Restless.Panama.Controls
 
         private void CreateFlagsPrivate(object[] flags)
         {
-            for (int col = 0; col < flagCount; col++)
+            for (int colIdx = 0; colIdx < flagCount; colIdx++)
             {
-                if (flags[col] is bool value && value)
+                if (flags[colIdx] is bool value && value)
                 {
-                    Children.Add(CreateFlag(col));
+                    Children.Add(CreateFlag(colIdx));
                 }
             }
         }
 
-        private Border CreateFlag(int column)
+        private Border CreateFlag(int colIdx)
         {
             Border border = new Border()
             {
@@ -84,16 +83,12 @@ namespace Restless.Panama.Controls
                 Height = flagSize - 2,
                 Width = flagSize - 2,
                 CornerRadius = new CornerRadius(1),
-                Background = GetBrush(column)
+                DataContext = columns.DataContext
             };
 
-            SetColumn(border, column);
+            border.SetBinding(Border.BackgroundProperty, columns[colIdx].BindingPath);
+            SetColumn(border, colIdx);
             return border;
-        }
-
-        private Brush GetBrush(int column)
-        {
-            return columns != null && column < columns.Count ? columns[column].Brush : Brushes.Transparent;
         }
         #endregion
     }

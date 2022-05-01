@@ -74,6 +74,11 @@ namespace Restless.Panama.Core
         {
             Color = defaultColor;
         }
+
+        public string ToBindingPath()
+        {
+            return $"{nameof(Config)}.{nameof(Config.Colors)}.{colorRow[ColorTable.Defs.Columns.Id]}.{nameof(ColorBrush)}";
+        }
         #endregion
 
         /************************************************************************/

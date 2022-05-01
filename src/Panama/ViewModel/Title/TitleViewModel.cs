@@ -459,13 +459,13 @@ namespace Restless.Panama.ViewModel
 
         private FlagGridColumnCollection GetFlagGridColumns()
         {
-            return new FlagGridColumnCollection()
+            return new FlagGridColumnCollection(this)
             {
-                { TableColumns.Ready, Config.Colors.TitleReady.ColorBrush },
-                { TableColumns.QuickFlag, Config.Colors.TitleFlagged.ColorBrush },
-                { TableColumns.Calculated.IsPublished, Config.Colors.TitlePublished.ColorBrush },
-                { TableColumns.Calculated.IsSelfPublished, Config.Colors.TitleSelfPublished.ColorBrush },
-                { TableColumns.Calculated.IsSubmitted, Config.Colors.TitleSubmitted.ColorBrush }
+                { TableColumns.Ready, Config.Colors.TitleReady.ToBindingPath() },
+                { TableColumns.QuickFlag, Config.Colors.TitleFlagged.ToBindingPath() },
+                { TableColumns.Calculated.IsPublished, Config.Colors.TitlePublished.ToBindingPath() },
+                { TableColumns.Calculated.IsSelfPublished, Config.Colors.TitleSelfPublished.ToBindingPath() },
+                { TableColumns.Calculated.IsSubmitted, Config.Colors.TitleSubmitted.ToBindingPath() }
             };
         }
         #endregion
