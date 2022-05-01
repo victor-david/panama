@@ -7,6 +7,7 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
+using Restless.Panama.View;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
@@ -63,7 +64,7 @@ namespace Restless.Panama.ViewModel
             Columns.CreateResource<Int64ToPathConverter>("S", TableColumns.Status, ResourceKeys.Icon.TitleStatusIconMap)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(LocalResources.Get(ResourceKeys.ToolTip.SubmissionTitleStatusToolTip));
+                .AddToolTip(SubmissionTitleStatusToolTip.Create(this));
 
             Columns.Create("Title", TableColumns.Joined.Title);
 

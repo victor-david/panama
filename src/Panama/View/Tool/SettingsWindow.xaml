@@ -99,22 +99,132 @@
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
                 tk:Property.IsLongVisibleValue="3">
 
-                <Grid 
-                    tk:Property.ColumnWidths="Auto,*"
-                    tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*">
+                <Grid
+                    tk:Property.RowHeights="Auto,Auto,Auto,Auto,*">
+
                     <Grid.Resources>
-                        <Style TargetType="con:SimpleColorPicker">
-                            <Setter Property="Margin" Value="0,2"/>
+                        <Style TargetType="Expander" BasedOn="{StaticResource DefaultExpanderStyle}">
+                            <Setter Property="Padding" Value="6"/>
                         </Style>
                     </Grid.Resources>
 
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="Color"/>
+                    <Expander
+                        Header="Title"
+                        IsExpanded="{Binding Config.IsSettingTitleColorExpanded}">
 
-                    <TextBlock Grid.Row="1" Text="Title Ready"/>
-                    <TextBlock Grid.Row="2" Text="Title Flagged"/>
-                    <TextBlock Grid.Row="3" Text="Title Published"/>
-                    <TextBlock Grid.Row="4" Text="Title Self Published"/>
-                    <TextBlock Grid.Row="5" Text="Title Submitted"/>
+                        <Grid tk:Property.ColumnWidths="*,*,*,*,*">
+
+                            <con:SimpleColorPickerWrapper
+                                Header="Ready"
+                                Color="{Binding Config.Colors.TitleReady.Color}"/>
+
+                            <con:SimpleColorPickerWrapper
+                                Grid.Column="1"
+                                Header="Flagged"
+                                Color="{Binding Config.Colors.TitleFlagged.Color}"/>
+
+                            <con:SimpleColorPickerWrapper
+                                Grid.Column="2"
+                                Header="Published"
+                                Color="{Binding Config.Colors.TitlePublished.Color}"/>
+
+                            <con:SimpleColorPickerWrapper
+                                Grid.Column="3"
+                                Header="Self Published"
+                                Color="{Binding Config.Colors.TitleSelfPublished.Color}"/>
+
+                            <con:SimpleColorPickerWrapper
+                                Grid.Column="4"
+                                Header="Submitted"
+                                Color="{Binding Config.Colors.TitleSubmitted.Color}"/>
+                        </Grid>
+
+                    </Expander>
+
+                    <Expander
+                        Grid.Row="1"
+                        Header="Publisher"
+                        IsExpanded="{Binding Config.IsSettingPublisherColorExpanded}">
+                        
+                        <Grid tk:Property.ColumnWidths="*,*,*,*,*">
+                            
+                            <con:SimpleColorPickerWrapper
+                                Header="Exclusive"
+                                Color="{Binding Config.Colors.PublisherExclusive.Color}"/>
+
+                            <con:SimpleColorPickerWrapper
+                                Grid.Column="1"
+                                Header="Paying"
+                                Color="{Binding Config.Colors.PublisherPaying.Color}"/>
+
+                            <con:SimpleColorPickerWrapper
+                                Grid.Column="2"
+                                Header="Goner"
+                                Color="{Binding Config.Colors.PublisherGoner.Color}"/>
+                            
+                            <con:SimpleColorPickerWrapper
+                                Grid.Column="3"
+                                Header="Submission"
+                                Color="{Binding Config.Colors.PublisherActiveSubmission.Color}"/>
+                            
+                            <con:SimpleColorPickerWrapper
+                                Grid.Column="4"
+                                Header="In Period"
+                                Color="{Binding Config.Colors.PublisherPeriod.Color}"/>                            
+                            
+                        </Grid>
+
+                    </Expander>
+
+                    <Expander
+                        Grid.Row="2"
+                        Header="Submission"
+                        IsExpanded="{Binding Config.IsSettingSubmissionColorExpanded}">
+                        
+                        <Grid tk:Property.ColumnWidths="*,*,*,*,*">
+                            
+                            <con:SimpleColorPickerWrapper
+                                Header="Online"
+                                Color="{Binding Config.Colors.SubmissionOnline.Color}"/>
+                            
+                            <con:SimpleColorPickerWrapper
+                                Grid.Column="1"
+                                Header="Contest"
+                                Color="{Binding Config.Colors.SubmissionContest.Color}"/>
+                            
+                            <con:SimpleColorPickerWrapper
+                                Grid.Column="2"
+                                Header="Locked"
+                                Color="{Binding Config.Colors.SubmissionLocked.Color}"/>
+                        </Grid>
+                        
+                    </Expander>
+
+                    <Expander
+                        Grid.Row="3"
+                        Header="Other"
+                        IsExpanded="{Binding Config.IsSettingOtherColorExpanded}">
+                        
+                        <Grid tk:Property.ColumnWidths="*,*,*,*,*">
+                            
+                            <con:SimpleColorPickerWrapper
+                                Header="Alternation"
+                                Color="{Binding Config.Colors.DataGridAlternation.Color}"/>
+                            
+                        </Grid>
+                    </Expander>
+
+                    <!--<TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="Color"/>
+                    <TextBlock Grid.Column="3" HorizontalAlignment="Center" Text="Color"/>
+
+                    <TextBlock Grid.Row="1" Text="Title"/>
+
+                    <TextBlock Grid.Row="2" Text="Ready"/>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="Flagged"/>
+                    
+                    <TextBlock Grid.Row="3" Text="Published"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="Self Published"/>
+                    <TextBlock Grid.Row="4" Text="Submitted"/>
 
                     <TextBlock Grid.Row="6" Text="Publisher Exclusive"/>
                     <TextBlock Grid.Row="7" Text="Publisher Paying"/>
@@ -124,27 +234,10 @@
                     
                     <TextBlock Grid.Row="11" Text="Submission Online"/>
                     <TextBlock Grid.Row="12" Text="Submission Contest"/>
-                    <TextBlock Grid.Row="13" Text="Submission Locked"/>
+                    <TextBlock Grid.Row="13" Text="Submission Locked"/>-->
                     
-                    <con:SimpleColorPicker
-                        Grid.Row="1" Grid.Column="1"
-                        SelectedColor="{Binding Config.Colors.TitleReady.Color}"/>
+                    <!--
                     
-                    <con:SimpleColorPicker
-                        Grid.Row="2" Grid.Column="1"
-                        SelectedColor="{Binding Config.Colors.TitleFlagged.Color}"/>
-                    
-                    <con:SimpleColorPicker
-                        Grid.Row="3" Grid.Column="1"
-                        SelectedColor="{Binding Config.Colors.TitlePublished.Color}"/>
-                    
-                    <con:SimpleColorPicker
-                        Grid.Row="4" Grid.Column="1"
-                        SelectedColor="{Binding Config.Colors.TitleSelfPublished.Color}"/>
-
-                    <con:SimpleColorPicker
-                        Grid.Row="5" Grid.Column="1"
-                        SelectedColor="{Binding Config.Colors.TitleSubmitted.Color}"/>
                     
                     <con:SimpleColorPicker
                         Grid.Row="6" Grid.Column="1"
@@ -176,7 +269,7 @@
                     
                     <con:SimpleColorPicker
                         Grid.Row="13" Grid.Column="1"
-                        SelectedColor="{Binding Config.Colors.SubmissionLocked.Color}"/>
+                        SelectedColor="{Binding Config.Colors.SubmissionLocked.Color}"/>-->
 
                     <tk:IconButton
                         Grid.Row="14"

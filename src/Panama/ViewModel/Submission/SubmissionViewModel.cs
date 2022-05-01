@@ -145,10 +145,12 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Publisher", TableColumns.Joined.Publisher);
 
             Columns.Create("Fee", TableColumns.Fee)
-                .MakeNumeric("N2", FixedWidth.W052);
+                .MakeNumeric("N2", FixedWidth.W058)
+                .MakeRightAligned();
 
             Columns.Create("Award", TableColumns.Award)
-                .MakeNumeric("N0", FixedWidth.W052);
+                .MakeNumeric("N2", FixedWidth.W058)
+                .MakeRightAligned();
 
             Columns.Create("Note", TableColumns.Notes)
                 .MakeSingleLine();

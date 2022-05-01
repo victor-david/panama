@@ -364,6 +364,42 @@ namespace Restless.Panama.Core
             get => GetItem(false);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets whether the settings title color is expanded
+        /// </summary>
+        public bool IsSettingTitleColorExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the settings publisher color is expanded
+        /// </summary>
+        public bool IsSettingPublisherColorExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the settings submission color is expanded
+        /// </summary>
+        public bool IsSettingSubmissionColorExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the settings other color is expanded
+        /// </summary>
+        public bool IsSettingOtherColorExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/

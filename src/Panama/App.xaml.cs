@@ -83,9 +83,7 @@ namespace Restless.Panama
             }
             else
             {
-                // These are applied one time only. They don't change.
-                DataGridColumnExtensions.CenterAlignedDataGridColumnHeaderStyleKey = ResourceKeys.Style.CenteredDataGridColumnHeaderStyle;
-                DataGridColumnExtensions.CenterAlignedDataGridCellStyleKey = ResourceKeys.Style.CenteredDataGridCellStyle;
+                DataGridColumnExtensions.UseDeferredToolTip = true;
                 WindowFactory.Main.Create().Show();
                 DisplayAlertsIf();
             }

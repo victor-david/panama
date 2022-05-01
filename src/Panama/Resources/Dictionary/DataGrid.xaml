@@ -15,14 +15,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="CenteredDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Static tk:DataGrid.ColumnHeaderStyleKey}}">
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-    </Style>
-
-    <Style x:Key="CenteredDataGridCellStyle" TargetType="DataGridCell" BasedOn="{StaticResource {x:Static tk:DataGrid.DataGridCellStyleKey}}">
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-    </Style>
-
     <Style x:Key="DefaultDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource {x:Static tk:DataGrid.DataGridStyleKey}}">
         <Setter Property="AlternationCount" Value="{Binding Config.DataGridAlternationCount}"/>
         <Setter Property="AlternatingRowBackground" Value="{Binding Config.Colors.DataGridAlternation.ColorBrush}"/>
