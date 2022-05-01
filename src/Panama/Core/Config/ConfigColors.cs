@@ -36,7 +36,7 @@ namespace Restless.Panama.Core
 
             public static readonly Color SubmissionOnlineDefault = SystemColors.Green;
             public static readonly Color SubmissionContestDefault = SystemColors.Gray;
-            public static readonly Color SubmissionLockedDefault = SystemColors.Red;
+            public static readonly Color SubmissionLockedDefault = SystemColors.Firebrick;
 
             public static readonly Color PublisherGonerForeground = SystemColors.OrangeRed;
             public static readonly Color PublisherGonerBackground = SystemColors.Transparent;

@@ -75,6 +75,10 @@ namespace Restless.Panama.Core
             Color = defaultColor;
         }
 
+        /// <summary>
+        /// Gets the binding path to <see cref="ColorBrush"/>
+        /// </summary>
+        /// <returns>A binding path string</returns>
         public string ToBindingPath()
         {
             return $"{nameof(Config)}.{nameof(Config.Colors)}.{colorRow[ColorTable.Defs.Columns.Id]}.{nameof(ColorBrush)}";
