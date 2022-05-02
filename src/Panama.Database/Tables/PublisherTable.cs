@@ -7,6 +7,7 @@
 using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Restless.Panama.Database.Tables
@@ -218,6 +219,18 @@ namespace Restless.Panama.Database.Tables
         public override void Load()
         {
             Load(null, $"{Defs.Columns.Added} DESC");
+        }
+
+        /// <summary>
+        /// Provides an enumerable that gets all entries in order of id ASC.
+        /// </summary>
+        /// <returns>An enumerable that gets all entries</returns>
+        public IEnumerable<PublisherRow> EnumerateAll()
+        {
+            foreach (DataRow row in EnumerateRows(null, Defs.Columns.Id))
+            {
+                yield return new PublisherRow(row);
+            }
         }
 
         /// <summary>

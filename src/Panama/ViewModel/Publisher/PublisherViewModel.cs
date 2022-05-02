@@ -45,7 +45,7 @@ namespace Restless.Panama.ViewModel
         public override bool ClearFilterCommandEnabled => Filters.IsAnyFilterActive;
 
         /// <inheritdoc/>
-        public override bool OpenRowCommandEnabled => SelectedPublisher?.HasUrl() ?? false;
+        public override bool OpenRowCommandEnabled => SelectedPublisher?.HasUrl ?? false;
 
         /// <summary>
         /// Gets or sets the selected edit section
@@ -237,7 +237,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunOpenRowCommand()
         {
-            if (SelectedPublisher?.HasUrl() ?? false)
+            if (SelectedPublisher?.HasUrl ?? false)
             {
                 OpenHelper.OpenWebSite(null, SelectedPublisher.Url);
             }

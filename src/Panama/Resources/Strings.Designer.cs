@@ -1357,6 +1357,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verify links.
+        /// </summary>
+        public static string MenuItemLinkVerify {
+            get {
+                return ResourceManager.GetString("MenuItemLinkVerify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Make this a separate version.
         /// </summary>
         public static string MenuItemMakeSeparateVersion {
@@ -2097,6 +2106,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string TextRefresh {
+            get {
+                return ResourceManager.GetString("TextRefresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Removed.
         /// </summary>
         public static string TextRemoved {
@@ -2174,6 +2192,15 @@ namespace Restless.Panama.Resources {
         public static string TextUrl {
             get {
                 return ResourceManager.GetString("TextUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verify.
+        /// </summary>
+        public static string TextVerify {
+            get {
+                return ResourceManager.GetString("TextVerify", resourceCulture);
             }
         }
         
@@ -2282,6 +2309,15 @@ namespace Restless.Panama.Resources {
         public static string ToolTipAuthorDefault {
             get {
                 return ResourceManager.GetString("ToolTipAuthorDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel the operation.
+        /// </summary>
+        public static string ToolTipCancel {
+            get {
+                return ResourceManager.GetString("ToolTipCancel", resourceCulture);
             }
         }
         
@@ -2453,6 +2489,15 @@ namespace Restless.Panama.Resources {
         public static string ToolTipPublisherSubmissionPeriodCount {
             get {
                 return ResourceManager.GetString("ToolTipPublisherSubmissionPeriodCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh the link list, adding new entries and removing any state entries.
+        /// </summary>
+        public static string ToolTipRefreshLinkVerify {
+            get {
+                return ResourceManager.GetString("ToolTipRefreshLinkVerify", resourceCulture);
             }
         }
         
@@ -2678,6 +2723,15 @@ namespace Restless.Panama.Resources {
         public static string TooltipTitleWordCount {
             get {
                 return ResourceManager.GetString("TooltipTitleWordCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Begin verification of links.
+        /// </summary>
+        public static string ToolTipVerifyLinks {
+            get {
+                return ResourceManager.GetString("ToolTipVerifyLinks", resourceCulture);
             }
         }
         

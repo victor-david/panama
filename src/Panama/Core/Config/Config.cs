@@ -149,6 +149,10 @@ namespace Restless.Panama.Core
             public const double MinLinkDetailWidth = 280;
             public const double MaxLinkDetailWidth = 480;
             public const double DefaultLinkDetailWidth = MinLinkDetailWidth;
+            
+            public const double MinLinkVerifyDetailWidth = 280;
+            public const double MaxLinkVerifyDetailWidth = 380;
+            public const double DefaultLinkVerifyDetailWidth = MinLinkDetailWidth;
 
             public const double MinNoteDetailWidth = 520;
             public const double MaxNoteDetailWidth = 720;
@@ -641,6 +645,18 @@ namespace Restless.Panama.Core
         public double LinkDetailWidth
         {
             get => GetItem(Grid.DefaultLinkDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool LinkVerifyDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double LinkVerifyDetailWidth
+        {
+            get => GetItem(Grid.DefaultLinkVerifyDetailWidth);
             set => SetItem(value);
         }
 
