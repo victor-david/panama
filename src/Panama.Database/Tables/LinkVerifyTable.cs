@@ -4,11 +4,9 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -70,9 +68,34 @@ namespace Restless.Panama.Database.Tables
             public static class Values
             {
                 /// <summary>
-                /// The system supplied author id
+                /// Identifier for alert source
                 /// </summary>
-                public const long SystemAuthorId = 1;
+                public const string AlertSource = "Alert";
+
+                /// <summary>
+                /// Identifier for link source
+                /// </summary>
+                public const string LinkSource = "Link";
+
+                /// <summary>
+                /// Identifier for published source
+                /// </summary>
+                public const string PublishedSource = "Published";
+
+                /// <summary>
+                /// Identifier for publisher source
+                /// </summary>
+                public const string PublisherSource = "Publisher";
+
+                /// <summary>
+                /// Identifier for self published source
+                /// </summary>
+                public const string SelfPublishedSource = "Self-Published";
+
+                /// <summary>
+                /// Identifier for self publisher source
+                /// </summary>
+                public const string SelfPublisherSource = "Self-Publisher";
             }
         }
         #endregion
@@ -172,7 +195,7 @@ namespace Restless.Panama.Database.Tables
             {
                 if (alert.HasUrl)
                 {
-                    AddRow(AlertTable.Defs.TableName.ToUpperInvariant(), alert.Id, alert.Url);
+                    AddRow(Defs.Values.AlertSource, alert.Id, alert.Url);
                 }
             }
 
@@ -180,7 +203,7 @@ namespace Restless.Panama.Database.Tables
             {
                 if (link.HasUrl)
                 {
-                    AddRow(LinkTable.Defs.TableName.ToUpperInvariant(), link.Id, link.Url);
+                    AddRow(Defs.Values.LinkSource, link.Id, link.Url);
                 }
             }
 
@@ -188,7 +211,7 @@ namespace Restless.Panama.Database.Tables
             {
                 if (published.HasUrl)
                 {
-                    AddRow(PublishedTable.Defs.TableName.ToUpperInvariant(), published.Id, published.Url);
+                    AddRow(Defs.Values.PublishedSource, published.Id, published.Url);
                 }
             }
 
@@ -196,7 +219,7 @@ namespace Restless.Panama.Database.Tables
             {
                 if (publisher.HasUrl)
                 {
-                    AddRow(PublisherTable.Defs.TableName.ToUpperInvariant(), publisher.Id, publisher.Url);
+                    AddRow(Defs.Values.PublisherSource, publisher.Id, publisher.Url);
                 }
             }
 
@@ -204,7 +227,7 @@ namespace Restless.Panama.Database.Tables
             {
                 if (published.HasUrl)
                 {
-                    AddRow(SelfPublishedTable.Defs.TableName.ToUpperInvariant(), published.Id, published.Url);
+                    AddRow(Defs.Values.SelfPublishedSource, published.Id, published.Url);
                 }
             }
 
@@ -212,7 +235,7 @@ namespace Restless.Panama.Database.Tables
             {
                 if (publisher.HasUrl)
                 {
-                    AddRow(SelfPublisherTable.Defs.TableName.ToUpperInvariant(), publisher.Id, publisher.Url);
+                    AddRow(Defs.Values.SelfPublisherSource, publisher.Id, publisher.Url);
                 }
             }
         }

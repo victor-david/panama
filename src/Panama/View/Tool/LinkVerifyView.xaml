@@ -51,7 +51,13 @@
                     Command="{Binding Commands[Cancel]}"
                     ToolTip="{x:Static r:Strings.ToolTipCancel}"
                     tk:Property.IsVisible="{Binding OperationInProgress}"
-                    IsEnabled="{Binding OperationInProgress}"/>
+                    tk:Property.IsInverseEnabled="{Binding IsCanceling}"/>
+
+                <tk:WaitSpinner
+                    Margin="24,0,0,0"
+                    Height="20"
+                    tk:Property.IsVisible="{Binding OperationInProgress}"/>
+
             </StatusBar>
         </con:SplitterGrid.HeaderLeft>
 

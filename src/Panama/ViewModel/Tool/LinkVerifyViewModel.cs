@@ -12,7 +12,7 @@ namespace Restless.Panama.ViewModel
         #region Private
         private LinkVerifyRow selectedLink;
         private bool operationInProgress;
-        private bool canceling;
+        private bool isCanceling;
         #endregion
 
         /************************************************************************/
@@ -34,6 +34,15 @@ namespace Restless.Panama.ViewModel
         {
             get => operationInProgress;
             private set => SetProperty(ref operationInProgress, value);
+        }
+
+        /// <summary>
+        /// Gets a boolean value that indicates whether the verification operation is canceling
+        /// </summary>
+        public bool IsCanceling
+        {
+            get => isCanceling;
+            private set => SetProperty(ref isCanceling, value);
         }
         #endregion
 
@@ -64,7 +73,7 @@ namespace Restless.Panama.ViewModel
 
             Commands.Add("Refresh", RunRefreshCommand);
             Commands.Add("Verify", RunVerifyCommand);
-            Commands.Add("Cancel", RunCancelCommand);
+            Commands.Add("Cancel", p => IsCanceling = true);
         }
         #endregion
 
@@ -96,25 +105,23 @@ namespace Restless.Panama.ViewModel
             Table.Refresh();
             ListView.Refresh();
         }
+
         private async void RunVerifyCommand(object parm)
         {
             OperationInProgress = true;
-            canceling = false;
+            IsCanceling = false;
+
             foreach (LinkVerifyRow link in Table.EnumerateAll())
             {
-                if (!canceling)
+                if (!IsCanceling)
                 {
-                    await Task.Delay(1200);
+                    await Task.Delay(1000);
                     link.SetScanned();
                 }
             }
 
             OperationInProgress = false;
-        }
-
-        private void RunCancelCommand(object parm)
-        {
-            canceling = true;
+            IsCanceling = false;
         }
     }
 }
