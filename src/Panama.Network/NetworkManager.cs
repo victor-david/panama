@@ -40,7 +40,7 @@ namespace Restless.Panama.Network
         {
             client = new HttpClient(new HttpTimeoutHandler()
             {
-                DefaultTimeout = TimeSpan.FromSeconds(30),
+                DefaultTimeout = TimeSpan.FromSeconds(15),
                 InnerHandler = new HttpClientHandler()
                 {
                     ServerCertificateCustomValidationCallback = CertificateValidation,
@@ -63,11 +63,7 @@ namespace Restless.Panama.Network
         /// </summary>
         ~ NetworkManager()
         {
-            if (client != null)
-            {
-                client.Dispose();
-            }
-
+            client?.Dispose();
             client = null;
         }
         #endregion
@@ -75,32 +71,6 @@ namespace Restless.Panama.Network
         /************************************************************************/
 
         #region Public methods
-        ///// <summary>
-        ///// Synchronously gets a network request
-        ///// </summary>
-        ///// <param name="url">The url</param>
-        ///// <param name="headers">An IEnumerable that provides custom headers, or null if not needed.</param>
-        ///// <returns>A <see cref="NetworkResponse"/> object.</returns>
-        //public NetworkResponse GetHttp(string url, IEnumerable<HttpHeader> headers = null)
-        //{
-        //    try
-        //    {
-        //        using (HttpRequestMessage request = new(HttpMethod.Get, url))
-        //        {
-        //            /* Add caller specified headers if any */
-        //            AddCallerHeaders(request, headers);
-
-        //            HttpResponseMessage response = client.Send(request);
-        //            string body = response.Content.ToString();
-        //            return new NetworkResponse(response, url, body);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new NetworkResponse(ex);
-        //    }
-        //}
-
         /// <summary>
         /// Asynchronously gets a network request
         /// </summary>

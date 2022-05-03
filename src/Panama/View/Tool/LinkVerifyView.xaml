@@ -81,18 +81,27 @@
             <StackPanel
                 Style="{StaticResource DataEntryPanelStyle}"
                 Visibility="{Binding EditVisibility}">
-                
-                <TextBlock Text="Url"/>
-                <TextBlock Text="{Binding SelectedLink.Url}"/>
 
-                <TextBlock Text="Status"/>
-                <TextBlock Text="{Binding SelectedLink.Status}"/>
+                <StackPanel.Resources>
+                    <Style TargetType="tk:LineItem">
+                        <Setter Property="Margin" Value="4"/>
+                        <Setter Property="ItemDisplayWidth" Value="52"/>
+                        <Setter Property="ItemFontSize" Value="12"/>
+                        <Setter Property="ValueFontSize" Value="12"/>
+                        <Setter Property="ItemVerticalAlignment" Value="Top"/>
+                        <Setter Property="ValueVerticalAlignment" Value="Top"/>
+                        <Setter Property="ItemForeground" Value="{StaticResource DarkAlertForegroundBrush}"/>
+                        <Setter Property="ValueForeground" Value="{StaticResource DefaultForegroundBrush}"/>
+                    </Style>
+                </StackPanel.Resources>
 
-                <TextBlock Text="Status Text"/>
-                <TextBlock Text="{Binding SelectedLink.StatusText}"/>
-                
-                <TextBlock Text="Error"/>
-                <TextBlock Text="{Binding SelectedLink.Error}"/>
+                <tk:LineItem Item="Source" Value="{Binding SelectedLink.Source}"/>
+                <tk:LineItem Item="Url" Value="{Binding SelectedLink.Url}"/>
+                <tk:LineItem Item="Status" Value="{Binding SelectedLink.Status}"/>
+                <tk:LineItem Item="Text" Value="{Binding SelectedLink.StatusText}"/>
+                <tk:LineItem Item="Size" Value="{Binding SelectedLink.Size}"/>
+                <tk:LineItem Item="Error" Value="{Binding SelectedLink.Error}"/>
+
             </StackPanel>
 
         </con:SplitterGrid.ContentRight>

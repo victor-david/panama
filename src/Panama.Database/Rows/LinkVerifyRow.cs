@@ -143,6 +143,16 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Clears status, status text, size, and error
+        /// </summary>
+        /// <returns>This instance</returns>
+        public LinkVerifyRow ClearAll()
+        {
+            SetStatus(0).SetStatusText(null).SetSize(0).SetError(null);
+            return this;
+        }
+
+        /// <summary>
         /// Gets a string representation of this object
         /// </summary>
         /// <returns>A string</returns>

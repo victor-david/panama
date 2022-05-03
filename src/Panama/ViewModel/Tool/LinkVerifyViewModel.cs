@@ -5,7 +5,6 @@ using Restless.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using TableColumns = Restless.Panama.Database.Tables.LinkVerifyTable.Defs.Columns;
@@ -91,12 +90,6 @@ namespace Restless.Panama.ViewModel
 
         #region Protected methods
         /// <inheritdoc/>
-        protected override void OnActivated()
-        {
-            base.OnActivated();
-        }
-
-        /// <inheritdoc/>
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
@@ -110,6 +103,9 @@ namespace Restless.Panama.ViewModel
         }
         #endregion
 
+        /************************************************************************/
+
+        #region Private methods
         private void RunRefreshCommand(object parm)
         {
             Table.Refresh();
@@ -119,7 +115,7 @@ namespace Restless.Panama.ViewModel
         private void RunCancelVerifyCommand(object parm)
         {
             IsCanceling = true;
-            tokenSource.Cancel();
+            tokenSource?.Cancel();
         }
 
         private async void RunVerifyCommand(object parm)
@@ -154,24 +150,26 @@ namespace Restless.Panama.ViewModel
 
         private void UpdateLink(LinkVerifyRow link, NetworkResponse response)
         {
-            Debug.WriteLine("Update Link");
-            link.SetScanned().SetStatus(0).SetSize(0).SetStatusText(null).SetError(null);
+            if (response.Exception is not OperationCanceledException)
+            {
+                link.SetScanned().ClearAll();
 
-            if (response.IsFaulted)
-            {
-                link.SetStatus(-1).SetStatusText("Error").SetError(response.Exception);
-            }
-            else if (response.IsSuccess)
-            {
-                link.SetStatus((long)response.HttpResponse.StatusCode)
-                    .SetStatusText(response.HttpResponse.ReasonPhrase)
-                    .SetSize(response.ResponseBody.Length);
-            }
-            else
-            {
-                link.SetStatus((long)response.HttpResponse.StatusCode)
-                    .SetStatusText(response.HttpResponse.ReasonPhrase)
-                    .SetSize(0);
+                if (response.IsFaulted)
+                {
+                    link.SetStatus(-1).SetStatusText("Error").SetError(response.Exception);
+                }
+                else if (response.IsSuccess)
+                {
+                    link.SetStatus((long)response.HttpResponse.StatusCode)
+                        .SetStatusText(response.HttpResponse.ReasonPhrase)
+                        .SetSize(response.ResponseBody.Length);
+                }
+                else
+                {
+                    link.SetStatus((long)response.HttpResponse.StatusCode)
+                        .SetStatusText(response.HttpResponse.ReasonPhrase)
+                        .SetSize(0);
+                }
             }
         }
 
@@ -185,5 +183,6 @@ namespace Restless.Panama.ViewModel
             s = ((!s.Contains("://", System.StringComparison.CurrentCulture)) ? "http://" : string.Empty) + s;
             return s;
         }
+        #endregion
     }
 }
