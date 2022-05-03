@@ -9,9 +9,11 @@
     xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
+    
     <con:SplitterGrid
         MinDetailWidth="{x:Static core:Config+Grid.MinPublisherDetailWidth}"
         MaxDetailWidth="{x:Static core:Config+Grid.MaxPublisherDetailWidth}"
@@ -68,49 +70,14 @@
                     Foreground="{StaticResource DarkAlertForegroundBrush}"
                     Text="(row filter in effect)"/>
 
-                <!-- Advanced filter -->
-                <Popup
+                <vw:PublisherCustomFilter
                     Placement="Bottom"
                     PlacementTarget="{Binding ElementName=CustomFilterButton}"
                     VerticalOffset="6"
                     HorizontalOffset="6"
                     IsOpen="{Binding IsCustomFilterOpen}"
-                    StaysOpen="True">
-                    <Border 
-                        Style="{StaticResource BorderEditContainerStyle}"
-                        BorderThickness="2"
-                        BorderBrush="{StaticResource DefaultBorderBrush}"
-                        Background="{StaticResource DefaultBackgroundBrush}">
+                    StaysOpen="False"/>
 
-                        <Grid 
-                            tk:Property.ColumnWidths="*,*"
-                            tk:Property.RowHeights="Auto,*"
-                            Style="{StaticResource DataEntryPanelStyle}">
-
-                            <StackPanel Grid.ColumnSpan="2">
-                                <TextBlock Text="{x:Static r:Strings.TextName}"/>
-                                <TextBox
-                                    Text="{Binding Filters.Text, 
-                                    UpdateSourceTrigger=PropertyChanged,
-                                    Delay=500}"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="1">
-                                <tk:ThreeWay Header="Active" State="{Binding Filters.ActiveState}"/>
-                                <tk:ThreeWay Header="Open Submission" State="{Binding Filters.OpenState}"/>
-                                <tk:ThreeWay Header="In Period" State="{Binding Filters.InPeriodState}"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="1" Grid.Column="1">
-                                <tk:ThreeWay Header="Exclusive" State="{Binding Filters.ExclusiveState}"/>
-                                <tk:ThreeWay Header="Follow Up" State="{Binding Filters.FollowUpState}"/>
-                                <tk:ThreeWay Header="Paying" State="{Binding Filters.PayingState}"/>
-                                <tk:ThreeWay Header="Goner" State="{Binding Filters.GonerState}"/>
-                            </StackPanel>
-
-                        </Grid>
-                    </Border>
-                </Popup>
             </StatusBar>
         </con:SplitterGrid.HeaderLeft>
 
