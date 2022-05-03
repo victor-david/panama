@@ -57,6 +57,11 @@ namespace Restless.Panama.Database.Tables
         /// Gets the date/time record added.
         /// </summary>
         public DateTime Added => GetDateTime(Columns.Added);
+
+        /// <summary>
+        /// Gets a boolean value that indicates if <see cref="Url"/> is populated.
+        /// </summary>
+        public bool HasUrl => !string.IsNullOrEmpty(Url);
         #endregion
 
         /************************************************************************/

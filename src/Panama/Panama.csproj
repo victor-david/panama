@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Panama.Controls\Panama.Controls.csproj" />
     <ProjectReference Include="..\Panama.Database\Panama.Database.csproj" />
+    <ProjectReference Include="..\Panama.Network\Panama.Network.csproj" />
     <ProjectReference Include="..\Panama.Utility\Panama.Utility.csproj" />
   </ItemGroup>
   

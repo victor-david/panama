@@ -149,6 +149,10 @@ namespace Restless.Panama.Core
             public const double MinLinkDetailWidth = 280;
             public const double MaxLinkDetailWidth = 480;
             public const double DefaultLinkDetailWidth = MinLinkDetailWidth;
+            
+            public const double MinLinkVerifyDetailWidth = 280;
+            public const double MaxLinkVerifyDetailWidth = 380;
+            public const double DefaultLinkVerifyDetailWidth = MinLinkDetailWidth;
 
             public const double MinNoteDetailWidth = 520;
             public const double MaxNoteDetailWidth = 720;
@@ -644,6 +648,18 @@ namespace Restless.Panama.Core
             set => SetItem(value);
         }
 
+        public bool LinkVerifyDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double LinkVerifyDetailWidth
+        {
+            get => GetItem(Grid.DefaultLinkVerifyDetailWidth);
+            set => SetItem(value);
+        }
+
         public bool NoteDetailExpanded
         {
             get => GetItem(true);
@@ -1002,6 +1018,16 @@ namespace Restless.Panama.Core
             get => GetItem(true);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets a value that determines if the verify link feature
+        /// (experimental) is enabled
+        /// </summary>
+        public bool IsVerifyLinkEnabled
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/
@@ -1041,6 +1067,7 @@ namespace Restless.Panama.Core
                 case nameof(DataGridRowHeight):
                 case nameof(DataGridAlternationCount):
                 case nameof(IsTitleAuthorVisible):
+                case nameof(IsVerifyLinkEnabled):
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
                     break;
                 default:

@@ -20,6 +20,10 @@
     <DataTemplate DataType="{x:Type vm:LinkViewModel}">
         <vw:LinkView />
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:LinkVerifyViewModel}">
+        <vw:LinkVerifyView />
+    </DataTemplate>    
 
     <DataTemplate DataType="{x:Type vm:PublisherViewModel}">
         <vw:PublisherView />

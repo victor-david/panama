@@ -169,6 +169,11 @@ namespace Restless.Panama.Database.Tables
         /// Gets the date / time publisher added
         /// </summary>
         public DateTime Added => GetDateTime(Columns.Added);
+
+        /// <summary>
+        /// Gets a boolean value that indicates if <see cref="Url"/> is populated.
+        /// </summary>
+        public bool HasUrl => !string.IsNullOrEmpty(Url);
         #endregion
 
         /************************************************************************/
@@ -194,15 +199,6 @@ namespace Restless.Panama.Database.Tables
         public static PublisherRow Create(DataRow row)
         {
             return row != null ? new PublisherRow(row) : null;
-        }
-
-        /// <summary>
-        /// Gets a boolean value that indicates if <see cref="Url"/> is populated.
-        /// </summary>
-        /// <returns></returns>
-        public bool HasUrl()
-        {
-            return !string.IsNullOrEmpty(Url);
         }
 
         /// <summary>

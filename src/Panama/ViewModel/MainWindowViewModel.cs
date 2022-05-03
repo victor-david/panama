@@ -108,12 +108,13 @@ namespace Restless.Panama.ViewModel
 
             Commands.Add("NavigateAuthor", p => NavigatorItems.Select<AuthorViewModel>());
             Commands.Add("NavigateCredential", p => NavigatorItems.Select<CredentialViewModel>());
+            Commands.Add("NavigateLinkVerify", p => NavigatorItems.Select<LinkVerifyViewModel>());
             Commands.Add("NavigateSearch", p => NavigatorItems.Select<ToolSearchViewModel>());
             Commands.Add("NavigateTable", p => NavigatorItems.Select<TableViewModel>());
             Commands.Add("NavigateTag", p => NavigatorItems.Select<TagViewModel>());
 
             Commands.Add("Close", p => WindowOwner.Close());
-            
+
             Commands.Add("ResetWindow", RunResetWindowCommand);
             Commands.Add("Save", RunSaveCommand);
 
@@ -195,7 +196,8 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<StatisticsViewModel>(NavigationGroup.Other, Strings.MenuItemStatistics, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.StatisticGeometryKey));
 
             NavigatorItems.Add<TableViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemStatistics);
-            NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemSearch); 
+            NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemSearch);
+            NavigatorItems.Add<LinkVerifyViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemAddLink);
         }
 
         private void NavigatorItemsSelectedItemChanged(object sender, NavigatorItem navItem)

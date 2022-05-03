@@ -1064,4 +1064,25 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolTipCopyTitles" xml:space="preserve">
     <value>Copy the list of titles to the clipboard</value>
   </data>
+  <data name="MenuItemLinkVerify" xml:space="preserve">
+    <value>Verify links</value>
+  </data>
+  <data name="TextRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="TextVerify" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="ToolTipCancel" xml:space="preserve">
+    <value>Cancel the operation</value>
+  </data>
+  <data name="ToolTipRefreshLinkVerify" xml:space="preserve">
+    <value>Refresh the link list, adding new entries and removing any state entries</value>
+  </data>
+  <data name="ToolTipVerifyLinks" xml:space="preserve">
+    <value>Begin verification of links</value>
+  </data>
+  <data name="SettingsVerifyLinks" xml:space="preserve">
+    <value>Enable link verification tool (experimental)</value>
+  </data>
 </root>

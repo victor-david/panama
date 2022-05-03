@@ -137,6 +137,7 @@ namespace Restless.Panama.Database.Core
                 CreateAndRegisterTable<DummyTable>();
                 CreateAndRegisterTable<LanguageTable>();
                 CreateAndRegisterTable<LinkTable>();
+                CreateAndRegisterTable<LinkVerifyTable>();
                 CreateAndRegisterTable<PublishedTable>();
                 CreateAndRegisterTable<PublisherTable>();
                 CreateAndRegisterTable<ResponseTable>();

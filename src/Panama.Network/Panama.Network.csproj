@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <PackageId>Panama.Network</PackageId>
+    <AssemblyName>Panama.Network</AssemblyName>
+    <RootNamespace>Restless.Panama.Network</RootNamespace>
+    <Description>Provides network operations for the Panama application.</Description>
+    <PackageProjectUrl>https://github.com/victor-david/panama</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/victor-david/panama</RepositoryUrl>
+    <Authors>Restless Animal Development</Authors>
+    <Company>Restless Animal Development</Company>
+    <Version>1.0.0</Version>
+    <Product>Panama Network</Product>
+    <Title>Panama Network</Title>
+    <AssemblyTitle>Panama Network</AssemblyTitle>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <Copyright>Copyright © 2022</Copyright>
+    <PackageTags>network</PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+  </PropertyGroup>  
+
+</Project>

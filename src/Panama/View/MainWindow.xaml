@@ -53,8 +53,14 @@
                     Icon="{StaticResource ToolIconKey}"
                     Command="{Binding Commands[OpenToolWindow]}"/>
 
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemLinkVerify}"
+                    Icon="{StaticResource LinkIconKey}"
+                    Command="{Binding Commands[NavigateLinkVerify]}"
+                    tk:Property.IsVisible="{Binding Config.IsVerifyLinkEnabled}"/>
+
                 <Separator/>
-                
+
                 <MenuItem
                     Header="{x:Static r:Strings.MenuItemTableInfo}"
                     Icon="{StaticResource TableIconKey}"

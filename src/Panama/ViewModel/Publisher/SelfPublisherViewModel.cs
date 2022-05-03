@@ -34,7 +34,7 @@ namespace Restless.Panama.ViewModel
         public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
 
         /// <inheritdoc/>
-        public override bool OpenRowCommandEnabled => SelectedPublisher?.HasUrl() ?? false;
+        public override bool OpenRowCommandEnabled => SelectedPublisher?.HasUrl ?? false;
 
         /// <summary>
         /// Gets the currently selected publisher row
@@ -125,7 +125,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunOpenRowCommand()
         {
-            if (SelectedPublisher?.HasUrl() ?? false)
+            if (SelectedPublisher?.HasUrl ?? false)
             {
                 OpenHelper.OpenWebSite(null, SelectedPublisher.Url);
             }

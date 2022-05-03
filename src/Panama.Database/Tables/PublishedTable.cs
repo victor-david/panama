@@ -4,8 +4,10 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Restless.Panama.Database.Tables
@@ -100,6 +102,18 @@ namespace Restless.Panama.Database.Tables
         public override void Load()
         {
             Load(null, Defs.Columns.TitleId);
+        }
+
+        /// <summary>
+        /// Provides an enumerable that gets all entries in order of id ASC.
+        /// </summary>
+        /// <returns>An enumerable that gets all entries</returns>
+        public IEnumerable<PublishedRow> EnumerateAll()
+        {
+            foreach (DataRow row in EnumerateRows(null, Defs.Columns.Id))
+            {
+                yield return new PublishedRow(row);
+            }
         }
 
         /// <summary>
