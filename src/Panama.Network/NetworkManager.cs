@@ -26,11 +26,6 @@ namespace Restless.Panama.Network
         /// Defines the content type for a standard text/html request
         /// </summary>
         public const string TextHtmlContent = "text/html";
-
-        /// <summary>
-        /// User agent string
-        /// </summary>
-        public const string UserAgent = "Mozilla/5.0, (Windows NT 10.0; Win64; x64), AppleWebKit/537.36, (KHTML, like Gecko), Chrome/70.0.3538.77, Safari/537.36";
         #endregion
 
         /************************************************************************/
@@ -45,17 +40,17 @@ namespace Restless.Panama.Network
         {
             client = new HttpClient(new HttpTimeoutHandler()
             {
-
                 DefaultTimeout = TimeSpan.FromSeconds(30),
-
                 InnerHandler = new HttpClientHandler()
                 {
                     ServerCertificateCustomValidationCallback = CertificateValidation,
-                    SslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12 | SslProtocols.Tls13,
+                    SslProtocols = SslProtocols.None,
+                    UseProxy = false,
+                    AllowAutoRedirect = true,
                 },
             })
             {
-                Timeout = Timeout.InfiniteTimeSpan
+                Timeout = Timeout.InfiniteTimeSpan,
             };
         }
 
@@ -80,24 +75,50 @@ namespace Restless.Panama.Network
         /************************************************************************/
 
         #region Public methods
+        ///// <summary>
+        ///// Synchronously gets a network request
+        ///// </summary>
+        ///// <param name="url">The url</param>
+        ///// <param name="headers">An IEnumerable that provides custom headers, or null if not needed.</param>
+        ///// <returns>A <see cref="NetworkResponse"/> object.</returns>
+        //public NetworkResponse GetHttp(string url, IEnumerable<HttpHeader> headers = null)
+        //{
+        //    try
+        //    {
+        //        using (HttpRequestMessage request = new(HttpMethod.Get, url))
+        //        {
+        //            /* Add caller specified headers if any */
+        //            AddCallerHeaders(request, headers);
+
+        //            HttpResponseMessage response = client.Send(request);
+        //            string body = response.Content.ToString();
+        //            return new NetworkResponse(response, url, body);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new NetworkResponse(ex);
+        //    }
+        //}
+
         /// <summary>
         /// Asynchronously gets a network request
         /// </summary>
         /// <param name="url">The url</param>
         /// <param name="headers">An IEnumerable that provides custom headers, or null if not needed.</param>
         /// <returns>A <see cref="NetworkResponse"/> object.</returns>
-        public async Task<NetworkResponse> GetHttpAsync(string url, IEnumerable<HttpHeader> headers = null)
+        public async Task<NetworkResponse> GetHttpAsync(string url, CancellationToken token, IEnumerable<HttpHeader> headers = null)
         {
             try
             {
                 using (HttpRequestMessage request = new(HttpMethod.Get, url))
                 {
-                    AddStandardRequestHeaders(request, TextHtmlContent);
+                    AddStandardHeaders(request);
                     /* Add caller specified headers if any */
                     AddCallerHeaders(request, headers);
 
-                    HttpResponseMessage response = await client.SendAsync(request);
-                    string body = await response.Content.ReadAsStringAsync();
+                    HttpResponseMessage response = await client.SendAsync(request, token);
+                    string body = await response.Content.ReadAsStringAsync(token);
                     return new NetworkResponse(response, url, body);
                 }
             }
@@ -112,22 +133,34 @@ namespace Restless.Panama.Network
 
         #region Private methods
 
-        private void AddStandardRequestHeaders(HttpRequestMessage request, string contentType)
+        private void AddStandardHeaders(HttpRequestMessage request)
         {
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
-            request.Headers.Host = request.RequestUri.Host;
-            request.Headers.Add("Connection", "Close");
-            request.Headers.Add("User-Agent", UserAgent);
-            request.Headers.Date = new DateTimeOffset(DateTime.Now);
-            request.Headers.Add("Accept-Language", "en-us");
-            request.Headers.Add("Cache-Control", "no-cache");
+
+            ProductInfoHeaderValue productValue = new("ScraperBot", "1.0");
+            ProductInfoHeaderValue commentValue = new("(+http://www.API.com/ScraperBot.html)");
+
+            request.Headers.UserAgent.Add(productValue);
+            request.Headers.UserAgent.Add(commentValue);
+
+            //request.Headers.Host = request.RequestUri.Host;
         }
+
+        //private void AddStandardRequestHeaders(HttpRequestMessage request, string contentType)
+        //{
+        //    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
+        //    request.Headers.Host = request.RequestUri.Host;
+        //    request.Headers.Add("Connection", "Close");
+        //    //request.Headers.Add("User-Agent", UserAgent);
+        //    request.Headers.Date = new DateTimeOffset(DateTime.Now);
+        //    request.Headers.Add("Accept-Language", "en-us");
+        //    request.Headers.Add("Cache-Control", "no-cache");
+        //}
 
         private void AddCallerHeaders(HttpRequestMessage request, IEnumerable<HttpHeader> headers)
         {
             if (headers != null)
             {
-                foreach (var header in headers)
+                foreach (HttpHeader header in headers)
                 {
                     request.Headers.Add(header.Name, header.Value);
                 }

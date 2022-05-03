@@ -78,7 +78,22 @@
         </con:SplitterGrid.ContentLeft>
 
         <con:SplitterGrid.ContentRight>
-            <Border></Border>
+            <StackPanel
+                Style="{StaticResource DataEntryPanelStyle}"
+                Visibility="{Binding EditVisibility}">
+                
+                <TextBlock Text="Url"/>
+                <TextBlock Text="{Binding SelectedLink.Url}"/>
+
+                <TextBlock Text="Status"/>
+                <TextBlock Text="{Binding SelectedLink.Status}"/>
+
+                <TextBlock Text="Status Text"/>
+                <TextBlock Text="{Binding SelectedLink.StatusText}"/>
+                
+                <TextBlock Text="Error"/>
+                <TextBlock Text="{Binding SelectedLink.Error}"/>
+            </StackPanel>
 
         </con:SplitterGrid.ContentRight>
         

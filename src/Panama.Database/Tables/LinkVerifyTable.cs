@@ -57,9 +57,24 @@ namespace Restless.Panama.Database.Tables
                 public const string Scanned = "scanned";
 
                 /// <summary>
-                /// Status
+                /// Status, ex: 200
                 /// </summary>
                 public const string Status = "status";
+
+                /// <summary>
+                /// Status text, ex: Ok
+                /// </summary>
+                public const string StatusText = "statustext";
+
+                /// <summary>
+                /// Response size in bytes
+                /// </summary>
+                public const string Size = "size";
+
+                /// <summary>
+                /// Error text if any
+                /// </summary>
+                public const string Error = "error";
             }
 
             /// <summary>
@@ -166,7 +181,10 @@ namespace Restless.Panama.Database.Tables
                 { Defs.Columns.Source, ColumnType.Text },
                 { Defs.Columns.Url, ColumnType.Text },
                 { Defs.Columns.Scanned, ColumnType.Timestamp, false, true },
-                { Defs.Columns.Status, ColumnType.Integer, false, false, 0 }
+                { Defs.Columns.Status, ColumnType.Integer, false, false, 0 },
+                { Defs.Columns.StatusText, ColumnType.Text, false, true },
+                { Defs.Columns.Size, ColumnType.Integer, false, false, 0 },
+                { Defs.Columns.Error, ColumnType.Text, false, true }
             };
         }
 
@@ -250,6 +268,7 @@ namespace Restless.Panama.Database.Tables
                 row[Defs.Columns.Source] = source;
                 row[Defs.Columns.Url] = url;
                 row[Defs.Columns.Status] = 0;
+                row[Defs.Columns.Size] = 0;
                 Rows.Add(row);
             }
         }

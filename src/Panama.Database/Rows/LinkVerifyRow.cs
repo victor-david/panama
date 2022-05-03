@@ -1,6 +1,7 @@
 ﻿using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Data;
+using System.Text;
 using Columns = Restless.Panama.Database.Tables.LinkVerifyTable.Defs.Columns;
 
 namespace Restless.Panama.Database.Tables
@@ -42,13 +43,24 @@ namespace Restless.Panama.Database.Tables
         public DateTime? Scanned => GetNullableDateTime(Columns.Scanned);
 
         /// <summary>
-        /// Gets or sets the status
+        /// Gets the status code, ex: 200
         /// </summary>
-        public long Status
-        {
-            get => GetInt64(Columns.Status);
-            set => SetValue(Columns.Status, value);
-        }
+        public long Status => GetInt64(Columns.Status);
+
+        /// <summary>
+        /// Gets the status text, ex: 200
+        /// </summary>
+        public string StatusText => GetString(Columns.StatusText);
+
+        /// <summary>
+        /// Gets the size
+        /// </summary>
+        public long Size => GetInt64(Columns.Size);
+
+        /// <summary>
+        /// Gets the error string if any
+        /// </summary>
+        public string Error => GetString(Columns.Error);
         #endregion
 
         /************************************************************************/
@@ -79,9 +91,55 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Sets <see cref="Scanned"/> to the current date / time, utc
         /// </summary>
-        public void SetScanned()
+        /// <returns>This instance</returns>
+        public LinkVerifyRow SetScanned()
         {
             SetValue(Columns.Scanned, DateTime.UtcNow);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets <see cref="Status"/> to the specified value
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>This instance</returns>
+        public LinkVerifyRow SetStatus(long value)
+        {
+            SetValue(Columns.Status, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets <see cref="StatusText"/> to the specified value
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>This instance</returns>
+        public LinkVerifyRow SetStatusText(string value)
+        {
+            SetValue(Columns.StatusText, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets <see cref="Size"/> to the specified value
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>This instance</returns>
+        public LinkVerifyRow SetSize(long value)
+        {
+            SetValue(Columns.Size, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets <see cref="Error"/> to the specified value
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>This instance</returns>
+        public LinkVerifyRow SetError(Exception value)
+        {
+            SetValue(Columns.Error, GetExceptionMessage(value, 0));
+            return this;
         }
 
         /// <summary>
@@ -91,6 +149,27 @@ namespace Restless.Panama.Database.Tables
         public override string ToString()
         {
             return $"{Source} {Url}";
+        }
+        #endregion
+
+        #region Private methods
+        private string GetExceptionMessage(Exception e, int level)
+        {
+            if (e == null)
+            {
+                return null;
+            }
+            StringBuilder builder = new StringBuilder();
+
+            builder.AppendLine($"Level {level} => {e.GetType().FullName}");
+            builder.AppendLine(e.Message);
+
+            if (e.InnerException != null)
+            {
+                builder.AppendLine();
+                builder.Append(GetExceptionMessage(e.InnerException, level + 1));
+            }
+            return builder.ToString();
         }
         #endregion
     }

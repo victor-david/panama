@@ -48,27 +48,18 @@ namespace Restless.Panama.Network
         /// If this property is true, you cannot use <see cref="HttpResponse"/> or <see cref="ResponseBody"/>,
         /// only the <see cref="Exception"/> property.
         /// </summary>
-        public bool IsFaulted
-        {
-            get => Exception != null;
-        }
+        public bool IsFaulted => Exception != null;
 
         /// <summary>
         /// Gets a boolean value that indicates if this response is successful.
         /// </summary>
-        public bool IsSuccess
-        {
-            get => !IsFaulted && HttpResponse != null && HttpResponse.IsSuccessStatusCode;
-        }
+        public bool IsSuccess => !IsFaulted && HttpResponse != null && HttpResponse.IsSuccessStatusCode;
 
         /// <summary>
         /// Gets a string that describes the Http response.
         /// Concatenates status code and reason.
         /// </summary>
-        public string HttpResponseString
-        {
-            get => $"{(int)HttpResponse.StatusCode} {HttpResponse.ReasonPhrase}";
-        }
+        public string HttpResponseString => $"{(int)HttpResponse.StatusCode} {HttpResponse.ReasonPhrase}";
         #endregion
 
         /************************************************************************/
