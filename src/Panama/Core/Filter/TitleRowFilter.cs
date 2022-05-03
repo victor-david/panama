@@ -1,4 +1,5 @@
 ﻿using Restless.Toolkit.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -17,6 +18,7 @@ namespace Restless.Panama.Core
         private ThreeWayState everSubmittedState;
         private ThreeWayState publishedState;
         private ThreeWayState selfPublishedState;
+        private int wordCount;
         #endregion
 
         /************************************************************************/
@@ -29,7 +31,7 @@ namespace Restless.Panama.Core
         protected override bool IsTextFilterSupported => true;
 
         /// <inheritdoc/>
-        public override bool IsAnyFilterActive => base.IsAnyFilterActive || IsAnyEvaluatorActive();
+        public override bool IsAnyFilterActive => base.IsAnyFilterActive || IsAnyEvaluatorActive() || WordCount != 0;
 
         /// <summary>
         /// Gets or sets the filter state for whether a title is flagged as ready
@@ -114,6 +116,22 @@ namespace Restless.Panama.Core
                 ApplyFilter();
             }
         }
+
+        public string WordCountText => GetWordCountText();
+
+        /// <summary>
+        /// Gets or sets the word count
+        /// </summary>
+        public int WordCount
+        {
+            get => wordCount;
+            set
+            {
+                SetProperty(ref wordCount, value);
+                OnPropertyChanged(nameof(WordCountText));
+                ApplyFilter();
+            }
+        }
         #endregion
 
         /************************************************************************/
@@ -134,6 +152,7 @@ namespace Restless.Panama.Core
                 { TitleRowFilterType.EverSubmitted, new TitleFilterEvaluator(this, TitleRowFilterType.EverSubmitted) },
                 { TitleRowFilterType.Published, new TitleFilterEvaluator(this, TitleRowFilterType.Published) },
                 { TitleRowFilterType.SelfPublished, new TitleFilterEvaluator(this, TitleRowFilterType.SelfPublished) },
+                { TitleRowFilterType.WordCount, new TitleFilterEvaluator(this, TitleRowFilterType.WordCount) },
             };
         }
         #endregion
@@ -149,6 +168,7 @@ namespace Restless.Panama.Core
             IncreaseSuspendLevel();
             base.ClearAll();
             ClearAllPropertyState();
+            WordCount = 0;
             DecreaseSuspendLevel();
         }
 
@@ -203,7 +223,9 @@ namespace Restless.Panama.Core
                 filterEvaluators[TitleRowFilterType.CurrentlySubmitted].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.EverSubmitted].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Published].Evaluate(item) &&
-                filterEvaluators[TitleRowFilterType.SelfPublished].Evaluate(item);
+                filterEvaluators[TitleRowFilterType.SelfPublished].Evaluate(item) &&
+                filterEvaluators[TitleRowFilterType.WordCount].Evaluate(item);
+
         }
         #endregion
 
@@ -241,6 +263,11 @@ namespace Restless.Panama.Core
                 }
             }
             return false;
+        }
+
+        private string GetWordCountText()
+        {
+            return wordCount > 0 ? $"Greater than {wordCount}" : wordCount < 0 ? $"Less than {Math.Abs(wordCount)}" : "any";
         }
         #endregion
     }

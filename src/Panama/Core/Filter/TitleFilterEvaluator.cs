@@ -9,7 +9,7 @@ namespace Restless.Panama.Core
     /// Represents a title filter evaluator. This class provides a series
     /// of predicate evaluator methods that check the incoming DataRow
     /// </summary>
-    public class TitleFilterEvaluator : FilterEvaluator
+    public class TitleFilterEvaluator : FilterEvaluator<TitleRowFilter>
     {
         #region Constructor
         /// <summary>
@@ -17,7 +17,7 @@ namespace Restless.Panama.Core
         /// </summary>
         /// <param name="filter">The filter that owns this evaluator</param>
         /// <param name="filterType">The filter type</param>
-        public TitleFilterEvaluator(RowFilter filter, TitleRowFilterType filterType) : base(filter)
+        public TitleFilterEvaluator(TitleRowFilter filter, TitleRowFilterType filterType) : base(filter)
         {
             Evaluator = GetEvaluator(filterType);
         }
@@ -38,6 +38,7 @@ namespace Restless.Panama.Core
                 TitleRowFilterType.EverSubmitted => EvaluateEverSubmitted,
                 TitleRowFilterType.Published => EvaluatePublished,
                 TitleRowFilterType.SelfPublished => EvaluateSelfPublished,
+                TitleRowFilterType.WordCount => EvaluateWordCount,
                 _ => EvaluateTrue,
             };
         }
@@ -83,6 +84,19 @@ namespace Restless.Panama.Core
         private bool EvaluateSelfPublished(DataRow item)
         {
             return State == ThreeWayState.Neutral || EvaluateBoolColumn(item[Columns.Calculated.IsSelfPublished]);
+        }
+
+        private bool EvaluateWordCount(DataRow item)
+        {
+            if (Filter.WordCount != 0)
+            {
+                if (item[Columns.Calculated.LastestVersionWordCount] is long wordCount)
+                {
+                    return (Filter.WordCount > 0) ? wordCount > Filter.WordCount : wordCount > 0 && wordCount < Math.Abs(Filter.WordCount);
+                }
+                return false;
+            }
+            return true;
         }
         #endregion
     }

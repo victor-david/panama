@@ -9,7 +9,7 @@ namespace Restless.Panama.Core
     /// Represents a publisher filter evaluator. This class provides a series
     /// of predicate evaluator methods that check the incoming DataRow
     /// </summary>
-    public class PublisherFilterEvaluator : FilterEvaluator
+    public class PublisherFilterEvaluator : FilterEvaluator<PublisherRowFilter>
     {
         #region Constructor
         /// <summary>
@@ -17,7 +17,7 @@ namespace Restless.Panama.Core
         /// </summary>
         /// <param name="filter">The filter that owns this evaluator</param>
         /// <param name="filterType">The filter type</param>
-        public PublisherFilterEvaluator(RowFilter filter, PublisherRowFilterType filterType) : base(filter)
+        public PublisherFilterEvaluator(PublisherRowFilter filter, PublisherRowFilterType filterType) : base(filter)
         {
             Evaluator = GetEvaluator(filterType);
         }

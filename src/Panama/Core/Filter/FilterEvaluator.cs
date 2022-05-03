@@ -8,7 +8,7 @@ namespace Restless.Panama.Core
     /// Represents the base class for a filter action. 
     /// This class must be inherited.
     /// </summary>
-    public abstract class FilterEvaluator
+    public abstract class FilterEvaluator<T> where T : RowFilter
     {
         #region Properties
         /// <summary>
@@ -23,7 +23,7 @@ namespace Restless.Panama.Core
         /// <summary>
         /// Gets the filter that owns this evaluator
         /// </summary>
-        protected RowFilter Filter
+        protected T Filter
         {
             get;
         }
@@ -50,7 +50,7 @@ namespace Restless.Panama.Core
         /// Initializes a new instance of the <see cref="TitleFilterEvaluator"/> class
         /// </summary>
         /// <param name="filter">The filter that owns the evaluator</param>
-        public FilterEvaluator(RowFilter filter)
+        public FilterEvaluator(T filter)
         {
             Filter = filter ?? throw new ArgumentNullException(nameof(filter));
             State = ThreeWayState.Neutral;

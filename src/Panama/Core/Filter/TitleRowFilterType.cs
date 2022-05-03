@@ -36,6 +36,10 @@
         /// <summary>
         /// Title has been self published
         /// </summary>
-        SelfPublished
+        SelfPublished,
+        /// <summary>
+        /// Filter according to word count
+        /// </summary>
+        WordCount
     }
 }
