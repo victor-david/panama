@@ -1728,6 +1728,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable link verification tool (experimental).
+        /// </summary>
+        public static string SettingsVerifyLinks {
+            get {
+                return ResourceManager.GetString("SettingsVerifyLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Added / Updated.
         /// </summary>
         public static string TextAddedUpdated {

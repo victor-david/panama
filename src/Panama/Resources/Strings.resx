@@ -1082,4 +1082,7 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolTipVerifyLinks" xml:space="preserve">
     <value>Begin verification of links</value>
   </data>
+  <data name="SettingsVerifyLinks" xml:space="preserve">
+    <value>Enable link verification tool (experimental)</value>
+  </data>
 </root>
