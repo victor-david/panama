@@ -11,6 +11,11 @@ namespace Restless.Panama.Core
     /// </summary>
     public class TitleFilterEvaluator : FilterEvaluator<TitleRowFilter>
     {
+        private readonly TitleRowFilterType filterType;
+
+        /// <inheritdoc/>
+        public override bool IsActive => GetIsEvaluatorActive();
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleFilterEvaluator"/> class
@@ -19,6 +24,7 @@ namespace Restless.Panama.Core
         /// <param name="filterType">The filter type</param>
         public TitleFilterEvaluator(TitleRowFilter filter, TitleRowFilterType filterType) : base(filter)
         {
+            this.filterType = filterType;
             Evaluator = GetEvaluator(filterType);
         }
         #endregion
@@ -39,7 +45,18 @@ namespace Restless.Panama.Core
                 TitleRowFilterType.Published => EvaluatePublished,
                 TitleRowFilterType.SelfPublished => EvaluateSelfPublished,
                 TitleRowFilterType.WordCount => EvaluateWordCount,
+                TitleRowFilterType.Tag => EvaluateTags,
                 _ => EvaluateTrue,
+            };
+        }
+
+        private bool GetIsEvaluatorActive()
+        {
+            return filterType switch
+            {
+                TitleRowFilterType.WordCount => Filter.WordCount != 0,
+                TitleRowFilterType.Tag => Filter.Tags.Count > 0,
+                _ => base.IsActive
             };
         }
 
@@ -97,6 +114,11 @@ namespace Restless.Panama.Core
                 return false;
             }
             return true;
+        }
+
+        private bool EvaluateTags(DataRow item)
+        {
+            return Filter.Tags.IsTitleIdIncluded((long)item[Columns.Id]);
         }
         #endregion
     }

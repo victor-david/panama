@@ -38,9 +38,14 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates if any filter is active
+        /// Gets a boolean value that indicates if the evaulator is active
         /// </summary>
-        public bool IsActive => State != ThreeWayState.Neutral;
+        /// <remarks>
+        /// The base implementation returns true if <see cref="State"/>
+        /// is not <see cref="ThreeWayState.Neutral"/>. Override if you
+        /// need other logic.
+        /// </remarks>
+        public virtual bool IsActive => State != ThreeWayState.Neutral;
         #endregion
 
         /************************************************************************/

@@ -159,6 +159,7 @@ namespace Restless.Panama.ViewModel
                 if (Assigned.GetItem(tagParm.TagSelectorItem.Id) == null)
                 {
                     Assigned.Add(tagParm.TagSelectorItem.Disable().Clone());
+                    Owner.Filters.Tags.Invalidate(tagParm.TagSelectorItem.Id);
                 }
             }
         }
@@ -169,6 +170,7 @@ namespace Restless.Panama.ViewModel
             {
                 Assigned.Remove(tagParm.TagSelectorItem);
                 Available.GetItem(tagParm.TagSelectorItem.Id)?.Enable();
+                Owner.Filters.Tags.Invalidate(tagParm.TagSelectorItem.Id);
             }
         }
         #endregion
