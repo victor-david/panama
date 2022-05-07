@@ -6,13 +6,14 @@
     <Style TargetType="con:TitledSeparator">
 
         <Setter Property="Background" Value="LightGray"/>
-        
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="con:TitledSeparator">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
+                            <ColumnDefinition x:Name="LeftColumn"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
@@ -35,15 +36,17 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Height="{TemplateBinding SeparatorHeight}"/>
-
-
                     </Grid>
 
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HorizontalContentAlignment" Value="Left">
+                            <Setter TargetName="LeftColumn" Property="Width" Value="20"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
 
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
     </Style>
 
 </ResourceDictionary>

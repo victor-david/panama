@@ -1755,6 +1755,42 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigned.
+        /// </summary>
+        public static string TextAssigned {
+            get {
+                return ResourceManager.GetString("TextAssigned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tags to filter.
+        /// </summary>
+        public static string TextAssignedToFilter {
+            get {
+                return ResourceManager.GetString("TextAssignedToFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available.
+        /// </summary>
+        public static string TextAvailable {
+            get {
+                return ResourceManager.GetString("TextAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available tags.
+        /// </summary>
+        public static string TextAvailableTags {
+            get {
+                return ResourceManager.GetString("TextAvailableTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string TextCancel {
@@ -1967,6 +2003,15 @@ namespace Restless.Panama.Resources {
         public static string TextLocked {
             get {
                 return ResourceManager.GetString("TextLocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Combine multiple.
+        /// </summary>
+        public static string TextMultipleTag {
+            get {
+                return ResourceManager.GetString("TextMultipleTag", resourceCulture);
             }
         }
         

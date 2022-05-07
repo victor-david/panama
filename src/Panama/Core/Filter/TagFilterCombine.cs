@@ -12,17 +12,12 @@ namespace Restless.Panama.Core
     public enum TagFilterCombine
     {
         /// <summary>
-        /// Multiple tag selection are combined with OR.
+        /// Any of the tags. Selections are combined with OR.
         /// </summary>
-        Or,
+        Any,
         /// <summary>
-        /// Multiple tag selection are combined with AND.
+        /// All of the tags. Selections are combined with AND.
         /// </summary>
-        And,
-        /// <summary>
-        /// Multiple tag selection are combined with AND NOT.
-        /// </summary>
-        AndNot,
-
+        All,
     }
 }

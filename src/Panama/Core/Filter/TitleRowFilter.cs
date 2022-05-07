@@ -19,6 +19,8 @@ namespace Restless.Panama.Core
         private ThreeWayState publishedState;
         private ThreeWayState selfPublishedState;
         private int wordCount;
+        private bool isTagFilterAny;
+        private bool isTagFilterAll;
         #endregion
 
         /************************************************************************/
@@ -140,6 +142,34 @@ namespace Restless.Panama.Core
         {
             get;
         }
+
+        public bool IsTagFilterAny
+        {
+            get => isTagFilterAny;
+            set
+            {
+                SetProperty(ref isTagFilterAny, value);
+                if (isTagFilterAny)
+                {
+                    IsTagFilterAll = false;
+                    Tags.SetTagFilterCombine(TagFilterCombine.Any);
+                }
+            }
+        }
+
+        public bool IsTagFilterAll
+        {
+            get => isTagFilterAll;
+            set
+            {
+                SetProperty(ref isTagFilterAll, value);
+                if (isTagFilterAll)
+                {
+                    IsTagFilterAny = false;
+                    Tags.SetTagFilterCombine(TagFilterCombine.All);
+                }
+            }
+        }
         #endregion
 
         /************************************************************************/
@@ -165,6 +195,7 @@ namespace Restless.Panama.Core
             };
 
             Tags = new TagFilterCollection(this);
+            IsTagFilterAny = true;
         }
         #endregion
 
@@ -181,6 +212,7 @@ namespace Restless.Panama.Core
             ClearAllPropertyState();
             WordCount = 0;
             Tags.Clear();
+            IsTagFilterAny = true;
             DecreaseSuspendLevel();
         }
 
