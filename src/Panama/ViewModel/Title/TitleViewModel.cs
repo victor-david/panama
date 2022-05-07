@@ -229,11 +229,11 @@ namespace Restless.Panama.ViewModel
 
             Columns.RestoreColumnState(Config.TitleGridColumnState);
 
-            Commands.Add("ReadyFilter", p => Filters.SetToReady());
-            Commands.Add("FlaggedFilter", p => Filters.SetToFlagged());
-            Commands.Add("SubmittedFilter", p => Filters.SetToSubmitted());
-            Commands.Add("PublishedFilter", p => Filters.SetToPublished());
-            Commands.Add("SelfPublishedFilter", p => Filters.SetToSelfPublished());
+            Commands.Add("ReadyFilter", p => SetSingleFilter(() => Filters.SetToReady()));
+            Commands.Add("FlaggedFilter", p => SetSingleFilter(()=> Filters.SetToFlagged()));
+            Commands.Add("SubmittedFilter", p => SetSingleFilter(() => Filters.SetToSubmitted()));
+            Commands.Add("PublishedFilter", p => SetSingleFilter(() => Filters.SetToPublished()));
+            Commands.Add("SelfPublishedFilter", p => SetSingleFilter(() => Filters.SetToSelfPublished()));
             Commands.Add("ExtractTitle", RunExtractTitle, CanRunExtractTitle);
             Commands.Add("ToggleFlag", RunToggleTitleFlagCommand, p => IsSelectedRowAccessible);
             Commands.Add("ClearFlags", RunClearTitleFlagsCommand);
@@ -471,6 +471,12 @@ namespace Restless.Panama.ViewModel
                 { TableColumns.Calculated.IsSelfPublished, Config.Colors.TitleSelfPublished.ToBindingPath() },
                 { TableColumns.Calculated.IsSubmitted, Config.Colors.TitleSubmitted.ToBindingPath() }
             };
+        }
+
+        private void SetSingleFilter(Action setter)
+        {
+            setter();
+            FilterTags.ClearAssigned();
         }
         #endregion
     }
