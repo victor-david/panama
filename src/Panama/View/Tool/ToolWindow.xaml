@@ -148,7 +148,8 @@
                     PreviewImageSource="{Binding OrphanImageSource}"
                     SelectedUpdatedItem="{Binding SelectedOrphan}"
                     UpdatedItemsSource="{Binding Adapter.Updated[4]}"
-                    Command="{Binding Commands[RunOrphan]}"/>                
+                    Command="{Binding Commands[RunOrphan]}"
+                    UpdatedContextMenu="{Binding OrphanContextMenu}"/>                
                 
             </HeaderedContentControl>
 

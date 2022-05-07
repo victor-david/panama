@@ -598,9 +598,7 @@ Do you want to continue?</value>
     <value>Alerts</value>
   </data>
   <data name="ConfirmationCreateTitleFromOrphan" xml:space="preserve">
-    <value>This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.
-
-Do you want to continue?</value>
+    <value>This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.</value>
   </data>
   <data name="SettingsOrphanDirectoryExclusion" xml:space="preserve">
     <value>Orphan directory exclusions, separated by semi-colon</value>
@@ -1102,5 +1100,20 @@ Changes will take effect after you restart the application.</value>
   </data>
   <data name="TextMultipleTag" xml:space="preserve">
     <value>Combine multiple</value>
+  </data>
+  <data name="ConfirmationAddOrphanDirectoryExclusion" xml:space="preserve">
+    <value>This operation excludes the directory of the selected file from further orphan search</value>
+  </data>
+  <data name="ConfirmationAddOrphanFileExclusion" xml:space="preserve">
+    <value>This operation excludes the selected file type from further orphan search</value>
+  </data>
+  <data name="MenuItemCreateTitleFromEntry" xml:space="preserve">
+    <value>Create a title entry from this file</value>
+  </data>
+  <data name="MenuItemExcludeOrphanDirectory" xml:space="preserve">
+    <value>Exclude this directory from orphan search</value>
+  </data>
+  <data name="MenuItemExcludeOrphanFileType" xml:space="preserve">
+    <value>Exclude this file type from orphan search</value>
   </data>
 </root>

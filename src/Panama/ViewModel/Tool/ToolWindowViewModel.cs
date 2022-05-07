@@ -2,11 +2,14 @@
 using Restless.Panama.Resources;
 using Restless.Panama.Tools;
 using Restless.Toolkit.Controls;
+using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Restless.Panama.ViewModel
@@ -70,6 +73,14 @@ namespace Restless.Panama.ViewModel
             get;
         }
 
+        /// <summary>
+        /// Gets the orphan context menu
+        /// </summary>
+        public ContextMenu OrphanContextMenu
+        {
+            get;
+        }
+
         public FileScanItem SelectedOrphan
         {
             get => selectedOrphan;
@@ -128,6 +139,24 @@ namespace Restless.Panama.ViewModel
             Commands.Add("RunOrphan", RunOrphanCommand);
 
             Commands.Add("ResetWindow", RunResetWindowCommand);
+
+            OrphanContextMenu = new ContextMenu();
+            OrphanContextMenu.Items.Add(CreateMenuItem(
+                Strings.MenuItemExcludeOrphanFileType,
+                RelayCommand.Create(RunSetOrphanFileExclusion, CanRunOrphanCommand))
+                .AddIconResource(ResourceKeys.Icon.SquareSmallRedIconKey));
+
+            OrphanContextMenu.Items.Add(CreateMenuItem(
+                Strings.MenuItemExcludeOrphanDirectory,
+                RelayCommand.Create(RunSetOrphanDirectoryExclusion, CanRunOrphanCommand))
+                .AddIconResource(ResourceKeys.Icon.SquareSmallRedIconKey));
+
+            OrphanContextMenu.Items.Add(new Separator());
+            
+            OrphanContextMenu.Items.Add(CreateMenuItem(
+                Strings.MenuItemCreateTitleFromEntry,
+                RelayCommand.Create(RunCreateTitleFromOrphan, CanRunOrphanCommand))
+                .AddIconResource(ResourceKeys.Icon.PlusIconKey));
 
             versionUpdater = new VersionUpdater();
             submissionUpdater = new SubmissionUpdater();
@@ -242,9 +271,44 @@ namespace Restless.Panama.ViewModel
             WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
             WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
             WindowOwner.WindowState = WindowState.Normal;
+        }
 
-            //Config.ToolWindowWidth = Config.ToolWindow.DefaultWidth;
-            //Config.ToolWindowHeight = Config.ToolWindow.DefaultHeight;
+        private void RunSetOrphanFileExclusion(object parm)
+        {
+            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationAddOrphanFileExclusion))
+            {
+            }
+        }
+
+        private void RunSetOrphanDirectoryExclusion(object parm)
+        {
+            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationAddOrphanDirectoryExclusion))
+            {
+            }
+        }
+
+        private void RunCreateTitleFromOrphan(object parm)
+        {
+            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationCreateTitleFromOrphan))
+            {
+            }
+        }
+
+        private bool CanRunOrphanCommand(object parm)
+        {
+            return SelectedOrphan != null;
+        }
+
+        private MenuItem CreateMenuItem(string header, ICommand command)
+        {
+            MenuItem item = new()
+            {
+                Header = header,
+                Command = command,
+                HorizontalContentAlignment = HorizontalAlignment.Left,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+            return item;
         }
         #endregion
     }

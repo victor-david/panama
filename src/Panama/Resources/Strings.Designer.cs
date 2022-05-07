@@ -225,6 +225,24 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation excludes the directory of the selected file from further orphan search.
+        /// </summary>
+        public static string ConfirmationAddOrphanDirectoryExclusion {
+            get {
+                return ResourceManager.GetString("ConfirmationAddOrphanDirectoryExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation excludes the selected file type from further orphan search.
+        /// </summary>
+        public static string ConfirmationAddOrphanFileExclusion {
+            get {
+                return ResourceManager.GetString("ConfirmationAddOrphanFileExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation will add a new publisher record. If any publisher filters are in effect, they will be removed so that the new publisher displays in the list. 
         ///
         ///Do you want to continue?.
@@ -305,9 +323,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.
-        ///
-        ///Do you want to continue?.
+        ///   Looks up a localized string similar to This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file..
         /// </summary>
         public static string ConfirmationCreateTitleFromOrphan {
             get {
@@ -1249,6 +1265,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a title entry from this file.
+        /// </summary>
+        public static string MenuItemCreateTitleFromEntry {
+            get {
+                return ResourceManager.GetString("MenuItemCreateTitleFromEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credentials.
         /// </summary>
         public static string MenuItemCredentials {
@@ -1335,6 +1360,24 @@ namespace Restless.Panama.Resources {
         public static string MenuItemDeleteTitle {
             get {
                 return ResourceManager.GetString("MenuItemDeleteTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude this directory from orphan search.
+        /// </summary>
+        public static string MenuItemExcludeOrphanDirectory {
+            get {
+                return ResourceManager.GetString("MenuItemExcludeOrphanDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude this file type from orphan search.
+        /// </summary>
+        public static string MenuItemExcludeOrphanFileType {
+            get {
+                return ResourceManager.GetString("MenuItemExcludeOrphanFileType", resourceCulture);
             }
         }
         
