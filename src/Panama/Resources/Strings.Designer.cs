@@ -658,6 +658,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tag filter.
+        /// </summary>
+        public static string HeaderTagFilter {
+            get {
+                return ResourceManager.GetString("HeaderTagFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Titles.
         /// </summary>
         public static string HeaderTitles {

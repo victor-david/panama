@@ -1085,4 +1085,7 @@ Changes will take effect after you restart the application.</value>
   <data name="SettingsVerifyLinks" xml:space="preserve">
     <value>Enable link verification tool (experimental)</value>
   </data>
+  <data name="HeaderTagFilter" xml:space="preserve">
+    <value>Tag filter</value>
+  </data>
 </root>
