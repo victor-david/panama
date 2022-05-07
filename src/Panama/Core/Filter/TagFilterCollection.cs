@@ -40,26 +40,30 @@ namespace Restless.Panama.Core
         /// Adds a tag to the filter
         /// </summary>
         /// <param name="tagId">The tag id</param>
-        public new void Add(long tagId)
+        public new bool Add(long tagId)
         {
             if (!Contains(tagId))
             {
                 base.Add(tagId);
                 owner.ApplyFilter();
+                return true;
             }
+            return false;
         }
 
         /// <summary>
         /// Removes a tag from the filter
         /// </summary>
         /// <param name="tagId"></param>
-        public new void Remove(long tagId)
+        public new bool Remove(long tagId)
         {
             if (Contains(tagId))
             {
                 base.Remove(tagId);
                 owner.ApplyFilter();
+                return true;
             }
+            return false;
         }
 
         /// <summary>

@@ -7,7 +7,8 @@
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:conl="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="240"
     Style="{StaticResource BorderEditContainerStyle}">
@@ -22,12 +23,12 @@
             Grid.Row="1"
             Margin="{StaticResource DataEntryPanelDefaultControlMargin}"
             Id="{x:Static vm:TitleTagController.AssignedSelectorId}"
-            TagItemClickedCommand="{Binding Tags.Commands[TagItemClick]}"
-            ItemsSource="{Binding Tags.Assigned}"/>
+            TagItemClickedCommand="{Binding TitleTags.TagItemClickCommand}"
+            ItemsSource="{Binding TitleTags.Assigned}"/>
 
         <TextBlock
             Grid.Row="1"
-            tk:Property.IsCollapsed="{Binding Tags.HasTags}"
+            tk:Property.IsCollapsed="{Binding TitleTags.HasAssignedTags}"
             Margin="0,6"
             Foreground="{StaticResource DefaultForegroundBrush}"
             VerticalAlignment="Top"
@@ -39,7 +40,7 @@
             Grid.Column="1"
             Margin="{StaticResource DataEntryPanelDefaultControlMargin}"
             Id="{x:Static vm:TitleTagController.AvailableSelectorId}"
-            TagItemClickedCommand="{Binding Tags.Commands[TagItemClick]}"
-            ItemsSource="{Binding Tags.Available}"/>
+            TagItemClickedCommand="{Binding TitleTags.TagItemClickCommand}"
+            ItemsSource="{Binding TitleTags.Available}"/>
     </Grid>
 </Border>

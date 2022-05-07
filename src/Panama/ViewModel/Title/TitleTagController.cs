@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2019 Victor D. Sandiego
  * This file is part of Panama.
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
@@ -7,20 +7,17 @@
 using Restless.Panama.Controls;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Mvvm;
+using System;
+using System.Windows.Input;
 
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides a controller that manages the tags that may be assigned to a title.
     /// </summary>
-    public class TitleTagController : BaseController<TitleViewModel, TitleTable>
+    public class TitleTagController : ObservableObject
     {
-        #region Private
-        private long selectedTitleId;
-        #endregion
-
-        /************************************************************************/
-
         #region Properties
         private TagTable TagTable => DatabaseController.Instance.GetTable<TagTable>();
         private TitleTagTable TitleTagTable => DatabaseController.Instance.GetTable<TitleTagTable>();
@@ -36,12 +33,20 @@ namespace Restless.Panama.ViewModel
         public const int AvailableSelectorId = 1001;
 
         /// <summary>
-        /// Gets a boolean value that indicates if there is at least one tag assigned to the associated title.
+        /// Gets a boolean value that indicates if there is at least one tag in <see cref="Assigned"/>
         /// </summary>
-        public bool HasTags => Assigned.Count > 0;
+        public bool HasAssignedTags => Assigned.Count > 0;
 
         /// <summary>
-        /// Gets the list of available tags.
+        /// Gets the <see cref="TitleViewModel"/> that owns this controller
+        /// </summary>
+        protected TitleViewModel Owner
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the collection of available tags.
         /// </summary>
         public TagSelectorItemCollection Available
         {
@@ -49,9 +54,17 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets the list of currently assigned tags.
+        /// Gets the collection of currently assigned tags.
         /// </summary>
         public TagSelectorItemCollection Assigned
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the command to execute when a tag item is clicked
+        /// </summary>
+        public ICommand TagItemClickCommand
         {
             get;
         }
@@ -61,27 +74,23 @@ namespace Restless.Panama.ViewModel
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="TitleTagController"/> class.
+        /// Initializes a new instance of the <see cref="TitleTagController"/> class
         /// </summary>
-        /// <param name="owner">The view model that owns this controller.</param>
-        public TitleTagController(TitleViewModel owner) : base(owner)
+        public TitleTagController(TitleViewModel owner)
         {
+            Owner = owner ?? throw new ArgumentNullException(nameof(owner));
             Available = new TagSelectorItemCollection();
             Assigned = new TagSelectorItemCollection();
-            Commands.Add("TagItemClick", RunTagSelectorItemClickedCommand);
+            TagItemClickCommand = RelayCommand.Create(RunTagItemClickCommand);
         }
         #endregion
 
         /************************************************************************/
-        
+
         #region Public methods
         /// <summary>
-        /// Causes the list of available tags to be refreshed
+        /// Refreshes the available tag collection
         /// </summary>
-        /// <remarks>
-        /// This method is called by <see cref="TitleViewModel"/> upon its activation
-        /// because the user may have updated / added tags.
-        /// </remarks>
         public void RefreshAvailable()
         {
             Available.Clear();
@@ -90,32 +99,105 @@ namespace Restless.Panama.ViewModel
                 Available.Add(GetTagSelectorItem(tagRow));
             }
         }
+
+        /// <summary>
+        /// Enables all entries in <see cref="Available"/> 
+        /// and assigns entries to <see cref="Assigned"/>.
+        /// </summary>
+        public virtual void PopulateAssigned()
+        {
+            Assigned.Clear();
+            Available.EnableAll();
+            long titleId = Owner.SelectedTitle?.Id ?? 0;
+
+            foreach (TitleTagRow tagRow in TitleTagTable.EnumerateAll(titleId))
+            {
+                if (Available.GetItem(tagRow.TagId) is TagSelectorItem item)
+                {
+                    Assigned.Add(item.Disable().Clone());
+                }
+            }
+            OnPropertyChanged(nameof(HasAssignedTags));
+        }
         #endregion
 
         /************************************************************************/
 
         #region Protected methods
         /// <summary>
-        /// Called by the <see cref=" ControllerBase{VM,T}.Owner"/> of this controller
-        /// in order to update the controller values.
+        /// Adds a tag to the underlying data
         /// </summary>
-        protected override void OnUpdate()
+        /// <param name="tagParm">The tag selector</param>
+        /// <returns>true if added; otherwise, false</returns>
+        protected virtual bool AddTag(TagSelectorParm tagParm)
         {
-            selectedTitleId = Owner.SelectedTitle?.Id ?? 0;
-            Assigned.Clear();
-            Available.EnableAll();
-            foreach (TitleTagRow tagRow in TitleTagTable.EnumerateAll(selectedTitleId))
+            long titleId = Owner.SelectedTitle?.Id ?? 0;
+
+            if (TitleTagTable.AddIfNotExist(titleId, tagParm.TagSelectorItem.Id))
             {
-                Assigned.Add(GetTagSelectorItem(tagRow));
-                Available.GetItem(tagRow.TagId)?.Disable();
+                Owner.Filters.Tags.Invalidate(tagParm.TagSelectorItem.Id);
+                return true;
             }
-            OnPropertyChanged(nameof(HasTags));
+            return false;
+        }
+
+        /// <summary>
+        /// Removes a tag from the underlying data
+        /// </summary>
+        /// <param name="tagParm">The tag selector</param>
+        /// <returns>true if removed; otherwise, false</returns>
+        protected virtual bool RemoveTag(TagSelectorParm tagParm)
+        {
+            long titleId = Owner.SelectedTitle?.Id ?? 0;
+            
+            if (TitleTagTable.RemoveIfExist(titleId, tagParm.TagSelectorItem.Id))
+            {
+                Owner.Filters.Tags.Invalidate(tagParm.TagSelectorItem.Id);
+                return true;
+            }
+            return false;
         }
         #endregion
 
         /************************************************************************/
 
         #region Private methods
+        private void RunTagItemClickCommand(object parm)
+        {
+            if (parm is TagSelectorParm tagParm)
+            {
+                if (tagParm.SelectorControlId == AvailableSelectorId)
+                {
+                    if (AddTag(tagParm))
+                    {
+                        AddToAssignedList(tagParm.TagSelectorItem);
+                    }
+                }
+                else
+                {
+                    if (RemoveTag(tagParm))
+                    {
+                        RemoveFromAssignedList(tagParm.TagSelectorItem);
+                    }
+                }
+                OnPropertyChanged(nameof(HasAssignedTags));
+            }
+        }
+
+        private void AddToAssignedList(TagSelectorItem item)
+        {
+            if (Assigned.GetItem(item.Id) == null)
+            {
+                Assigned.Add(item.Disable().Clone());
+            }
+        }
+
+        private void RemoveFromAssignedList(TagSelectorItem item)
+        {
+            Assigned.Remove(item);
+            Available.GetItem(item.Id)?.Enable();
+        }
+
         private static TagSelectorItem GetTagSelectorItem(TagRow tagRow)
         {
             return new TagSelectorItem()
@@ -124,54 +206,6 @@ namespace Restless.Panama.ViewModel
                 Content = tagRow.Tag,
                 ToolTip = tagRow.Description
             };
-        }
-
-        private static TagSelectorItem GetTagSelectorItem(TitleTagRow tagRow)
-        {
-            return new TagSelectorItem()
-            {
-                Id = tagRow.TagId,
-                Content = tagRow.TagName,
-                ToolTip = tagRow.TagDescription,
-            };
-        }
-
-        private void RunTagSelectorItemClickedCommand(object parm)
-        {
-            if (parm is TagSelectorParm tagParm)
-            {
-                if (tagParm.SelectorControlId == AvailableSelectorId)
-                {
-                    AddTag(tagParm);
-                }
-                else
-                {
-                    RemoveTag(tagParm);
-                }
-                OnPropertyChanged(nameof(HasTags));
-            }
-        }
-
-        private void AddTag(TagSelectorParm tagParm)
-        {
-            if (TitleTagTable.AddIfNotExist(selectedTitleId, tagParm.TagSelectorItem.Id))
-            {
-                if (Assigned.GetItem(tagParm.TagSelectorItem.Id) == null)
-                {
-                    Assigned.Add(tagParm.TagSelectorItem.Disable().Clone());
-                    Owner.Filters.Tags.Invalidate(tagParm.TagSelectorItem.Id);
-                }
-            }
-        }
-
-        private void RemoveTag(TagSelectorParm tagParm)
-        {
-            if (TitleTagTable.RemoveIfExist(selectedTitleId, tagParm.TagSelectorItem.Id))
-            {
-                Assigned.Remove(tagParm.TagSelectorItem);
-                Available.GetItem(tagParm.TagSelectorItem.Id)?.Enable();
-                Owner.Filters.Tags.Invalidate(tagParm.TagSelectorItem.Id);
-            }
         }
         #endregion
     }

@@ -5,6 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:conl="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
@@ -17,9 +18,15 @@
         BorderBrush="{StaticResource DefaultBorderBrush}"
         Background="{StaticResource DefaultBackgroundBrush}">
 
+        <Border.Resources>
+            <Style TargetType="tk:ThreeWay" BasedOn="{StaticResource DefaultThreeWayStyle}">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+        </Border.Resources>
+
         <Grid
             tk:Property.ColumnWidths="*,*"
-            tk:Property.RowHeights="Auto,Auto,*"
+            tk:Property.RowHeights="Auto,Auto,Auto,*"
             Style="{StaticResource DataEntryPanelStyle}">
 
             <StackPanel Grid.ColumnSpan="2">
@@ -56,6 +63,40 @@
 
             </StackPanel>
 
+            <Grid
+                Grid.Row="3" Grid.ColumnSpan="2"
+                tk:Property.RowHeights="Auto,*"
+                tk:Property.ColumnWidths="232,232">
+                
+                <TextBlock Text="{x:Static r:Strings.HeaderAssignedTags}"/>
+
+                <conl:TagSelectorControl
+                    Grid.Row="2"
+                    Margin="{StaticResource DataEntryPanelDefaultControlMargin}"
+                    Id="{x:Static vm:TitleTagController.AssignedSelectorId}"
+                    TagItemClickedCommand="{Binding FilterTags.TagItemClickCommand}"
+                    ItemsSource="{Binding FilterTags.Assigned}"/>
+
+                <TextBlock
+                    Grid.Row="2"
+                    tk:Property.IsCollapsed="{Binding FilterTags.HasAssignedTags}"
+                    Margin="0,6"
+                    Foreground="{StaticResource DefaultForegroundBrush}"
+                    VerticalAlignment="Top"
+                    Text="{x:Static r:Strings.TextNone}"/>
+
+                <TextBlock
+                    Grid.Column="1"
+                    Text="{x:Static r:Strings.HeaderAvailableTags}"/>
+
+                <conl:TagSelectorControl
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="{StaticResource DataEntryPanelDefaultControlMargin}"
+                    Id="{x:Static vm:TitleTagController.AvailableSelectorId}"
+                    TagItemClickedCommand="{Binding FilterTags.TagItemClickCommand}"
+                    ItemsSource="{Binding FilterTags.Available}"/>
+            </Grid>
         </Grid>
     </Border>
 </Popup>
