@@ -1492,11 +1492,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset windows.
+        ///   Looks up a localized string similar to Reset window.
         /// </summary>
-        public static string MenuItemResetWindows {
+        public static string MenuItemResetWindow {
             get {
-                return ResourceManager.GetString("MenuItemResetWindows", resourceCulture);
+                return ResourceManager.GetString("MenuItemResetWindow", resourceCulture);
             }
         }
         
@@ -2565,11 +2565,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resets all application windows to their default sizes.
+        ///   Looks up a localized string similar to Reset this window to its default size.
         /// </summary>
-        public static string ToolTipResetWindows {
+        public static string ToolTipResetWindow {
             get {
-                return ResourceManager.GetString("ToolTipResetWindows", resourceCulture);
+                return ResourceManager.GetString("ToolTipResetWindow", resourceCulture);
             }
         }
         

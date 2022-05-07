@@ -6,11 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace Restless.Panama.ViewModel
 {
-    public class ToolWindowViewModel : ApplicationViewModel
+    public class ToolWindowViewModel : WindowViewModel
     {
         #region Private
         private bool isOperationInProgress;
@@ -126,6 +127,8 @@ namespace Restless.Panama.ViewModel
             Commands.Add("RunTitleList", RunTitleListCommand);
             Commands.Add("RunOrphan", RunOrphanCommand);
 
+            Commands.Add("ResetWindow", RunResetWindowCommand);
+
             versionUpdater = new VersionUpdater();
             submissionUpdater = new SubmissionUpdater();
 
@@ -230,6 +233,18 @@ namespace Restless.Panama.ViewModel
                         break;
                 }
             }
+        }
+
+        private void RunResetWindowCommand(object parm)
+        {
+            WindowOwner.Width = Config.ToolWindow.DefaultWidth;
+            WindowOwner.Height = Config.ToolWindow.DefaultHeight;
+            WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
+            WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
+            WindowOwner.WindowState = WindowState.Normal;
+
+            //Config.ToolWindowWidth = Config.ToolWindow.DefaultWidth;
+            //Config.ToolWindowHeight = Config.ToolWindow.DefaultHeight;
         }
         #endregion
     }

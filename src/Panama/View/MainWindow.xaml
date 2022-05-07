@@ -77,10 +77,10 @@
                     Command="{Binding Commands[NavigateSearch]}"/>
 
                 <MenuItem
-                    Header="{x:Static r:Strings.MenuItemResetWindows}"
+                    Header="{x:Static r:Strings.MenuItemResetWindow}"
                     Icon="{StaticResource SquareSmallGrayIconKey}"
                     Command="{Binding Commands[ResetWindow]}"
-                    ToolTip="{x:Static r:Strings.ToolTipResetWindows}"/>
+                    ToolTip="{x:Static r:Strings.ToolTipResetWindow}"/>
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem

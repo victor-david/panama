@@ -16,6 +16,18 @@
     Height="{Binding Config.ToolWindowHeight, Mode=TwoWay}" 
     Width="{Binding Config.ToolWindowWidth, Mode=TwoWay}">
 
+    <tk:AppWindow.Menu>
+        <Menu>
+            <MenuItem Header="Tools">
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemResetWindow}"
+                    Icon="{StaticResource SquareSmallGrayIconKey}"
+                    Command="{Binding Commands[ResetWindow]}"
+                    ToolTip="{x:Static r:Strings.ToolTipResetWindow}"/>
+            </MenuItem>            
+        </Menu>
+    </tk:AppWindow.Menu>
+    
     <Grid
         tk:Property.ColumnWidths="126,*"
         tk:Property.RowHeights="*"

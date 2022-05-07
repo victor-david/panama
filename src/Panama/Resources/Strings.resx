@@ -797,8 +797,8 @@ Do you want to continue?</value>
   <data name="MenuItemNotes" xml:space="preserve">
     <value>Notes</value>
   </data>
-  <data name="MenuItemResetWindows" xml:space="preserve">
-    <value>Reset windows</value>
+  <data name="MenuItemResetWindow" xml:space="preserve">
+    <value>Reset window</value>
   </data>
   <data name="MenuItemTools" xml:space="preserve">
     <value>Tools</value>
@@ -824,8 +824,8 @@ Do you want to continue?</value>
   <data name="ToolSubmissionMetadataDetail" xml:space="preserve">
     <value>This operation verfies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time.</value>
   </data>
-  <data name="ToolTipResetWindows" xml:space="preserve">
-    <value>Resets all application windows to their default sizes</value>
+  <data name="ToolTipResetWindow" xml:space="preserve">
+    <value>Reset this window to its default size</value>
   </data>
   <data name="TextAddedUpdated" xml:space="preserve">
     <value>Added / Updated</value>

@@ -236,16 +236,13 @@ namespace Restless.Panama.ViewModel
             NotificationMessage = "All data successfully saved to the database";
         }
 
-        private void RunResetWindowCommand(object o)
+        private void RunResetWindowCommand(object parm)
         {
             WindowOwner.Width = Config.MainWindow.DefaultWidth;
             WindowOwner.Height = Config.MainWindow.DefaultHeight;
             WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
             WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
             WindowOwner.WindowState = WindowState.Normal;
-
-            Config.ToolWindowWidth = Config.ToolWindow.DefaultWidth;
-            Config.ToolWindowHeight = Config.ToolWindow.DefaultHeight;
         }
 
         private bool CanRunToolConvertCommand(object o)
