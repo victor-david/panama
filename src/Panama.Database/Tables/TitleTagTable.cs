@@ -5,7 +5,6 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Toolkit.Core.Database.SQLite;
-using Restless.Toolkit.Core.Utility;
 using System.Collections.Generic;
 using System.Data;
 
@@ -113,6 +112,20 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Provides an enumerable that enumerates all title ids associated with the sepcified tag id
+        /// </summary>
+        /// <param name="tagId">The tag id</param>
+        /// <returns>An enumerable</returns>
+        public IEnumerable<long> EnumerateTitleIdsForTag(long tagId)
+        {
+            DataRow[] rows = Select($"{Defs.Columns.TagId}={tagId}");
+            foreach (DataRow row in rows)
+            {
+                yield return (long)row[Defs.Columns.TitleId];
+            }
+        }
+
+        /// <summary>
         /// Adds the specified tag to the specified title if it doesn't already exist
         /// </summary>
         /// <param name="titleId">The title id</param>
@@ -146,22 +159,6 @@ namespace Restless.Panama.Database.Tables
         public bool TagExists(long titleId, long tagId)
         {
             return GetRow(titleId, tagId) != null;
-        }
-
-        /// <summary>
-        /// Gets a string list of title id values associated with the specified tag id. Adds -1 even if empty.
-        /// </summary>
-        /// <param name="tagId">The tag id</param>
-        /// <returns>A string ready for filter use.</returns>
-        public string GetTitleIdsForTag(long tagId)
-        {
-            Integer64List ids = new Integer64List();
-            DataRow[] rows = Select(string.Format("{0}={1}", Defs.Columns.TagId, tagId));
-            foreach (DataRow row in rows)
-            {
-                ids.Add((long)row[Defs.Columns.TitleId]);
-            }
-            return ids.ToString(Integer64List.DefaultDelimter, Integer64List.ToStringDisposition.AddNegativeOneEvenIfEmpty);
         }
         #endregion
 

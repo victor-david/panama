@@ -109,10 +109,17 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the controller for the title tags.
         /// </summary>
-        public TitleTagController Tags
+        public TitleTagController TitleTags
         {
             get;
-            private set;
+        }
+
+        /// <summary>
+        /// Gets the controller for the title filter tags
+        /// </summary>
+        public TitleTagFilterController FilterTags
+        {
+            get;
         }
 
         /// <summary>
@@ -243,7 +250,8 @@ namespace Restless.Panama.ViewModel
             Submissions = new TitleSubmissionController(this);
             Published = new TitlePublishedController(this);
             SelfPublished = new TitleSelfPublishedController(this);
-            Tags = new TitleTagController(this);
+            TitleTags = new TitleTagController(this);
+            FilterTags = new TitleTagFilterController(this);
 
             ListView.IsLiveSorting = true;
             ListView.LiveSortingProperties.Add(TableColumns.Written);
@@ -260,25 +268,24 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected Methods
-        /// <summary>
-        /// Called when this view model is activated.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void OnActivated()
         {
             base.OnActivated();
-            Tags.RefreshAvailable();
-            Tags.Update();
+            TitleTags.RefreshAvailable();
+            TitleTags.PopulateAssigned();
+            FilterTags.RefreshAvailable();
+            FilterTags.PopulateAssigned();
+            
         }
 
-        /// <summary>
-        /// Called when the selected item on the associated data grid has changed.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
             SelectedTitle = TitleRow.Create(SelectedRow);
             SelectedTitle?.SetDateFormat(Config.DateFormat);
-            Tags.Update();
+            TitleTags.PopulateAssigned();
             Versions.Update();
             Submissions.Update();
             Published.Update();
@@ -307,11 +314,10 @@ namespace Restless.Panama.ViewModel
         protected override void RunClearFilterCommand()
         {
             Filters.ClearAll();
+            FilterTags.ClearAssigned();
         }
 
-        /// <summary>
-        /// Runs the add command to add a new record to the data table
-        /// </summary>
+        /// <inheritdoc/>
         protected override void RunAddCommand()
         {
             if (MessageWindow.ShowYesNo(Strings.ConfirmationAddTitle))
@@ -348,9 +354,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        /// <summary>
-        /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> to open the latest version of the selected title.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void RunOpenRowCommand()
         {
             if (SelectedTitle != null)

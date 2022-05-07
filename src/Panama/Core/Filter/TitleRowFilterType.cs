@@ -40,6 +40,10 @@
         /// <summary>
         /// Filter according to word count
         /// </summary>
-        WordCount
+        WordCount,
+        /// <summary>
+        /// Filter according to title tag or tags
+        /// </summary>
+        Tag
     }
 }

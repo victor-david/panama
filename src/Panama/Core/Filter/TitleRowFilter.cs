@@ -19,6 +19,8 @@ namespace Restless.Panama.Core
         private ThreeWayState publishedState;
         private ThreeWayState selfPublishedState;
         private int wordCount;
+        private bool isTagFilterAny;
+        private bool isTagFilterAll;
         #endregion
 
         /************************************************************************/
@@ -31,7 +33,7 @@ namespace Restless.Panama.Core
         protected override bool IsTextFilterSupported => true;
 
         /// <inheritdoc/>
-        public override bool IsAnyFilterActive => base.IsAnyFilterActive || IsAnyEvaluatorActive() || WordCount != 0;
+        public override bool IsAnyFilterActive => base.IsAnyFilterActive || IsAnyEvaluatorActive();
 
         /// <summary>
         /// Gets or sets the filter state for whether a title is flagged as ready
@@ -132,6 +134,42 @@ namespace Restless.Panama.Core
                 ApplyFilter();
             }
         }
+
+        /// <summary>
+        /// Gets the tags ids that are applied to the filter.
+        /// </summary>
+        public TagFilterCollection Tags
+        {
+            get;
+        }
+
+        public bool IsTagFilterAny
+        {
+            get => isTagFilterAny;
+            set
+            {
+                SetProperty(ref isTagFilterAny, value);
+                if (isTagFilterAny)
+                {
+                    IsTagFilterAll = false;
+                    Tags.SetTagFilterCombine(TagFilterCombine.Any);
+                }
+            }
+        }
+
+        public bool IsTagFilterAll
+        {
+            get => isTagFilterAll;
+            set
+            {
+                SetProperty(ref isTagFilterAll, value);
+                if (isTagFilterAll)
+                {
+                    IsTagFilterAny = false;
+                    Tags.SetTagFilterCombine(TagFilterCombine.All);
+                }
+            }
+        }
         #endregion
 
         /************************************************************************/
@@ -153,7 +191,11 @@ namespace Restless.Panama.Core
                 { TitleRowFilterType.Published, new TitleFilterEvaluator(this, TitleRowFilterType.Published) },
                 { TitleRowFilterType.SelfPublished, new TitleFilterEvaluator(this, TitleRowFilterType.SelfPublished) },
                 { TitleRowFilterType.WordCount, new TitleFilterEvaluator(this, TitleRowFilterType.WordCount) },
+                { TitleRowFilterType.Tag, new TitleFilterEvaluator(this, TitleRowFilterType.Tag) },
             };
+
+            Tags = new TagFilterCollection(this);
+            IsTagFilterAny = true;
         }
         #endregion
 
@@ -169,6 +211,8 @@ namespace Restless.Panama.Core
             base.ClearAll();
             ClearAllPropertyState();
             WordCount = 0;
+            Tags.Clear();
+            IsTagFilterAny = true;
             DecreaseSuspendLevel();
         }
 
@@ -224,8 +268,8 @@ namespace Restless.Panama.Core
                 filterEvaluators[TitleRowFilterType.EverSubmitted].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Published].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.SelfPublished].Evaluate(item) &&
-                filterEvaluators[TitleRowFilterType.WordCount].Evaluate(item);
-
+                filterEvaluators[TitleRowFilterType.WordCount].Evaluate(item) &&
+                filterEvaluators[TitleRowFilterType.Tag].Evaluate(item);
         }
         #endregion
 

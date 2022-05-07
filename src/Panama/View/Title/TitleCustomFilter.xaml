@@ -5,6 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:conl="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
@@ -17,9 +18,19 @@
         BorderBrush="{StaticResource DefaultBorderBrush}"
         Background="{StaticResource DefaultBackgroundBrush}">
 
+        <Border.Resources>
+            <Style TargetType="tk:ThreeWay" BasedOn="{StaticResource DefaultThreeWayStyle}">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="conl:TitledSeparator">
+                <Setter Property="Margin" Value="2,8"/>
+                <Setter Property="TextElement.Foreground" Value="{StaticResource AlertForegroundBrush}"/>
+            </Style>
+        </Border.Resources>
+
         <Grid
             tk:Property.ColumnWidths="*,*"
-            tk:Property.RowHeights="Auto,Auto,*"
+            tk:Property.RowHeights="Auto,Auto,Auto,Auto,*"
             Style="{StaticResource DataEntryPanelStyle}">
 
             <StackPanel Grid.ColumnSpan="2">
@@ -43,12 +54,14 @@
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+                
                 <TextBlock>
                     <Run Text="Word Count"/>
                     <Run
                         Foreground="{StaticResource DarkAlertForegroundBrush}"
                         Text="{Binding Filters.WordCountText, Mode=OneWay}"/>
                 </TextBlock>
+                
                 <Slider
                     Minimum="-4000" Maximum="4000" 
                     TickFrequency="100"
@@ -56,6 +69,62 @@
 
             </StackPanel>
 
+            <Grid
+                Grid.Row="4" Grid.ColumnSpan="2"
+                tk:Property.RowHeights="Auto,*,Auto,Auto"
+                tk:Property.ColumnWidths="232,232">
+
+                <conl:TitledSeparator
+                    Title="{x:Static r:Strings.TextAssignedToFilter}"/>
+
+                <conl:TitledSeparator
+                    Grid.Column="1"
+                    Title="{x:Static r:Strings.TextAvailableTags}"/>
+
+                <conl:TagSelectorControl
+                    Grid.Row="1"
+                    Margin="{StaticResource DataEntryPanelDefaultControlMargin}"
+                    Id="{x:Static vm:TitleTagController.AssignedSelectorId}"
+                    TagItemClickedCommand="{Binding FilterTags.TagItemClickCommand}"
+                    ItemsSource="{Binding FilterTags.Assigned}"/>
+
+                <TextBlock
+                    Grid.Row="1"
+                    tk:Property.IsCollapsed="{Binding FilterTags.HasAssignedTags}"
+                    Margin="0,6"
+                    Foreground="{StaticResource DefaultForegroundBrush}"
+                    VerticalAlignment="Top"
+                    Text="{x:Static r:Strings.TextNone}"/>
+
+                <conl:TagSelectorControl
+                    Grid.Row="1" Grid.Column="1"
+                    Margin="{StaticResource DataEntryPanelDefaultControlMargin}"
+                    Id="{x:Static vm:TitleTagController.AvailableSelectorId}"
+                    TagItemClickedCommand="{Binding FilterTags.TagItemClickCommand}"
+                    ItemsSource="{Binding FilterTags.Available}"/>
+
+                <conl:TitledSeparator
+                    Grid.Row="2" Grid.ColumnSpan="2"
+                    HorizontalContentAlignment="Left"
+                    Title="{x:Static r:Strings.TextMultipleTag}"/>
+
+                <StatusBar
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource ToolStatusBarStyle}">
+
+                    <CheckBox
+                        Style="{StaticResource RadioCheckBoxStyle}"
+                        Content="Any"
+                        IsChecked="{Binding Filters.IsTagFilterAny}"/>
+
+                    <CheckBox
+                        Style="{StaticResource RadioCheckBoxStyle}"
+                        Content="All"
+                        IsChecked="{Binding Filters.IsTagFilterAll}"/>
+
+                </StatusBar>
+            </Grid>
         </Grid>
     </Border>
 </Popup>

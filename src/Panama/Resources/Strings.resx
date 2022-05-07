@@ -1085,4 +1085,22 @@ Changes will take effect after you restart the application.</value>
   <data name="SettingsVerifyLinks" xml:space="preserve">
     <value>Enable link verification tool (experimental)</value>
   </data>
+  <data name="HeaderTagFilter" xml:space="preserve">
+    <value>Tag filter</value>
+  </data>
+  <data name="TextAssigned" xml:space="preserve">
+    <value>Assigned</value>
+  </data>
+  <data name="TextAvailable" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="TextAssignedToFilter" xml:space="preserve">
+    <value>Tags to filter</value>
+  </data>
+  <data name="TextAvailableTags" xml:space="preserve">
+    <value>Available tags</value>
+  </data>
+  <data name="TextMultipleTag" xml:space="preserve">
+    <value>Combine multiple</value>
+  </data>
 </root>
