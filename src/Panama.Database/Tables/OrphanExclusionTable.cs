@@ -1,6 +1,7 @@
 ﻿using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -75,6 +76,21 @@ namespace Restless.Panama.Database.Tables
         {
             Load(null, Defs.Columns.Id);
         }
+
+        public void AddFileExclusion(string value)
+        {
+            Add(Defs.Values.FileType, value);
+        }
+
+        public void AddFileExtensionExclusion(string value)
+        {
+            Add(Defs.Values.FileExtensionType, value);
+        }
+
+        public void AddDirectoryExclusion(string value)
+        {
+            Add(Defs.Values.DirectoryType, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -103,6 +119,28 @@ namespace Restless.Panama.Database.Tables
         {
             yield return new object[] { 1, Defs.Values.FileExtensionType, ".cmd", DateTime.UtcNow };
             yield return new object[] { 2, Defs.Values.FileExtensionType, ".bat", DateTime.UtcNow };
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+        private void Add(long exclusionType, string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value) && !HaveExclusion(exclusionType, value))
+            {
+                DataRow row = NewRow();
+                row[Defs.Columns.Type] = exclusionType;
+                row[Defs.Columns.Value] = value;
+                row[Defs.Columns.Created] = DateTime.UtcNow;
+                Rows.Add(row);
+                Save();
+            }
+        }
+
+        private bool HaveExclusion(long exclusionType, string value)
+        {
+            return Select($"{Defs.Columns.Type}={exclusionType} AND {Defs.Columns.Value}='{value}'").Length > 0;
         }
         #endregion
     }

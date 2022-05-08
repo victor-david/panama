@@ -37,6 +37,8 @@ namespace Restless.Panama.ViewModel
         #region Properties
         private TitleTable TitleTable => DatabaseController.Instance.GetTable<TitleTable>();
         private TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
+        private OrphanExclusionTable OrphanExclusionTable => DatabaseController.Instance.GetTable<OrphanExclusionTable>();
+
         /// <summary>
         /// Gets the list of settings sections
         /// </summary>
@@ -287,6 +289,7 @@ namespace Restless.Panama.ViewModel
         {
             if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanFileExclusion, SelectedOrphan.FileName)))
             {
+                OrphanExclusionTable.AddFileExclusion(Paths.Title.WithoutRoot(SelectedOrphan.FullName));
             }
         }
 
@@ -294,6 +297,7 @@ namespace Restless.Panama.ViewModel
         {
             if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanFileTypeExclusion, SelectedOrphan.FileExtension)))
             {
+                OrphanExclusionTable.AddFileExtensionExclusion(SelectedOrphan.FileExtension);
             }
         }
 
@@ -301,6 +305,7 @@ namespace Restless.Panama.ViewModel
         {
             if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanDirectoryExclusion, SelectedOrphan.DirectoryName)))
             {
+                OrphanExclusionTable.AddDirectoryExclusion(Path.GetDirectoryName(Paths.Title.WithoutRoot(SelectedOrphan.FullName)));
             }
         }
 
