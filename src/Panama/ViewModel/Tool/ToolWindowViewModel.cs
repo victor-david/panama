@@ -1,4 +1,6 @@
 ﻿using Restless.Panama.Core;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Panama.Tools;
 using Restless.Toolkit.Controls;
@@ -33,6 +35,8 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Properties
+        private TitleTable TitleTable => DatabaseController.Instance.GetTable<TitleTable>();
+        private TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
         /// <summary>
         /// Gets the list of settings sections
         /// </summary>
@@ -289,8 +293,22 @@ namespace Restless.Panama.ViewModel
 
         private void RunCreateTitleFromOrphan(object parm)
         {
-            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationCreateTitleFromOrphan))
+            if (CanRunOrphanCommand(parm) && MessageWindow.ShowContinueCancel(Strings.ConfirmationCreateTitleFromOrphan))
             {
+                TitleRow row = new(TitleTable.AddDefaultRow())
+                {
+                    Title = "Title created from orphaned file",
+                    Written = SelectedOrphan.LastWriteTimeUtc,
+                    Notes = $"This entry was created from orphaned file {SelectedOrphan.FileName}"
+                };
+
+                TitleVersionTable.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(SelectedOrphan.FullName));
+
+                TitleVersionTable.Save();
+                TitleTable.Save();
+                Adapter.Updated[4].Remove(SelectedOrphan);
+                SelectedOrphan = null;
+                MainWindowViewModel.Instance.NotifyUpdate<TitleViewModel>();
             }
         }
 
