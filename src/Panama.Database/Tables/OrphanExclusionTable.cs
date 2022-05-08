@@ -91,6 +91,19 @@ namespace Restless.Panama.Database.Tables
         {
             Add(Defs.Values.DirectoryType, value);
         }
+
+        /// <summary>
+        /// Provides an enumerable that enumerates all entries of the specified type
+        /// </summary>
+        /// <param name="exclusionType">The type to enumerate</param>
+        /// <returns>An enumerable</returns>
+        public IEnumerable<OrphanExclusionRow> EnumerateExclusion(long exclusionType)
+        {
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.Type}={exclusionType}"))
+            {
+                yield return new OrphanExclusionRow(row);
+            }
+        }
         #endregion
 
         /************************************************************************/
@@ -119,6 +132,8 @@ namespace Restless.Panama.Database.Tables
         {
             yield return new object[] { 1, Defs.Values.FileExtensionType, ".cmd", DateTime.UtcNow };
             yield return new object[] { 2, Defs.Values.FileExtensionType, ".bat", DateTime.UtcNow };
+            yield return new object[] { 3, Defs.Values.FileExtensionType, ".lnk", DateTime.UtcNow };
+
         }
         #endregion
 

@@ -14,6 +14,7 @@ namespace Restless.Panama.Tools
     {
         protected TitleTable TitleTable => DatabaseController.Instance.GetTable<TitleTable>();
         protected TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
+        protected OrphanExclusionTable OrphanExclusionTable => DatabaseController.Instance.GetTable<OrphanExclusionTable>();
 
         /// <summary>
         /// Gets or sets the output directory
