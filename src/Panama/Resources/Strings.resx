@@ -1104,8 +1104,8 @@ Changes will take effect after you restart the application.</value>
   <data name="ConfirmationAddOrphanDirectoryExclusion" xml:space="preserve">
     <value>This operation excludes the directory of the selected file from further orphan search</value>
   </data>
-  <data name="ConfirmationAddOrphanFileExclusion" xml:space="preserve">
-    <value>This operation excludes the selected file type from further orphan search</value>
+  <data name="ConfirmationAddOrphanFileTypeExclusion" xml:space="preserve">
+    <value>This operation excludes all files of the selected file type from further orphan search</value>
   </data>
   <data name="MenuItemCreateTitleFromEntry" xml:space="preserve">
     <value>Create a title entry from this file</value>
@@ -1114,6 +1114,18 @@ Changes will take effect after you restart the application.</value>
     <value>Exclude this directory from orphan search</value>
   </data>
   <data name="MenuItemExcludeOrphanFileType" xml:space="preserve">
-    <value>Exclude this file type from orphan search</value>
+    <value>Exclude all files of this type from orphan search</value>
+  </data>
+  <data name="ConfirmationAddOrphanFileExclusion" xml:space="preserve">
+    <value>This operation excludes the selected file from further orphan search</value>
+  </data>
+  <data name="MenuItemExcludeOrphanFile" xml:space="preserve">
+    <value>Exclude this file from orphan search</value>
+  </data>
+  <data name="TextCreatedFromOrphan" xml:space="preserve">
+    <value>This entry was created from orphan file</value>
+  </data>
+  <data name="TextOrphan" xml:space="preserve">
+    <value>Orphan</value>
   </data>
 </root>

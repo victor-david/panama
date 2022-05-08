@@ -145,9 +145,15 @@ namespace Restless.Panama.ViewModel
             Commands.Add("ResetWindow", RunResetWindowCommand);
 
             OrphanContextMenu = new ContextMenu();
+
+            OrphanContextMenu.Items.Add(CreateMenuItem(
+                Strings.MenuItemExcludeOrphanFile,
+                RelayCommand.Create(RunSetOrphanFileExclusion, CanRunOrphanCommand))
+                .AddIconResource(ResourceKeys.Icon.SquareSmallRedIconKey));
+
             OrphanContextMenu.Items.Add(CreateMenuItem(
                 Strings.MenuItemExcludeOrphanFileType,
-                RelayCommand.Create(RunSetOrphanFileExclusion, CanRunOrphanCommand))
+                RelayCommand.Create(RunSetOrphanFileTypeExclusion, CanRunOrphanCommand))
                 .AddIconResource(ResourceKeys.Icon.SquareSmallRedIconKey));
 
             OrphanContextMenu.Items.Add(CreateMenuItem(
@@ -279,27 +285,34 @@ namespace Restless.Panama.ViewModel
 
         private void RunSetOrphanFileExclusion(object parm)
         {
-            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationAddOrphanFileExclusion))
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanFileExclusion, SelectedOrphan.FileName)))
+            {
+            }
+        }
+
+        private void RunSetOrphanFileTypeExclusion(object parm)
+        {
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanFileTypeExclusion, SelectedOrphan.FileExtension)))
             {
             }
         }
 
         private void RunSetOrphanDirectoryExclusion(object parm)
         {
-            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationAddOrphanDirectoryExclusion))
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanDirectoryExclusion, SelectedOrphan.DirectoryName)))
             {
             }
         }
 
         private void RunCreateTitleFromOrphan(object parm)
         {
-            if (CanRunOrphanCommand(parm) && MessageWindow.ShowContinueCancel(Strings.ConfirmationCreateTitleFromOrphan))
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationCreateTitleFromOrphan, SelectedOrphan.FullName)))
             {
                 TitleRow row = new(TitleTable.AddDefaultRow())
                 {
-                    Title = "Title created from orphaned file",
+                    Title = $"{Strings.TextOrphan} {SelectedOrphan.FullName}",
                     Written = SelectedOrphan.LastWriteTimeUtc,
-                    Notes = $"This entry was created from orphaned file {SelectedOrphan.FileName}"
+                    Notes = $"{Strings.TextCreatedFromOrphan} {SelectedOrphan.FullName}"
                 };
 
                 TitleVersionTable.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(SelectedOrphan.FullName));
@@ -315,6 +328,11 @@ namespace Restless.Panama.ViewModel
         private bool CanRunOrphanCommand(object parm)
         {
             return SelectedOrphan != null;
+        }
+
+        private string GetOrphanDetailMessage(string message, string detail)
+        {
+            return $"{message}{Environment.NewLine}{Environment.NewLine}{detail}";
         }
 
         private MenuItem CreateMenuItem(string header, ICommand command)

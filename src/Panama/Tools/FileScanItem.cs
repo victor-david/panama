@@ -64,6 +64,9 @@ namespace Restless.Panama.Tools
             private set;
         }
 
+        /// <summary>
+        /// Gets a string that contains concatenated version and revision
+        /// </summary>
         public string VersionRevision => $"{Version}{(char)Revision}";
 
 
@@ -84,6 +87,16 @@ namespace Restless.Panama.Tools
             get;
             private set;
         }
+
+        /// <summary>
+        /// Gets the file extension
+        /// </summary>
+        public string FileExtension => Path.GetExtension(FullName);
+
+        /// <summary>
+        /// Gest the directory name of the file
+        /// </summary>
+        public string DirectoryName => Path.GetDirectoryName(FullName);
         #endregion
 
         /************************************************************************/

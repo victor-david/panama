@@ -234,11 +234,20 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation excludes the selected file type from further orphan search.
+        ///   Looks up a localized string similar to This operation excludes the selected file from further orphan search.
         /// </summary>
         public static string ConfirmationAddOrphanFileExclusion {
             get {
                 return ResourceManager.GetString("ConfirmationAddOrphanFileExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation excludes all files of the selected file type from further orphan search.
+        /// </summary>
+        public static string ConfirmationAddOrphanFileTypeExclusion {
+            get {
+                return ResourceManager.GetString("ConfirmationAddOrphanFileTypeExclusion", resourceCulture);
             }
         }
         
@@ -1373,7 +1382,16 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exclude this file type from orphan search.
+        ///   Looks up a localized string similar to Exclude this file from orphan search.
+        /// </summary>
+        public static string MenuItemExcludeOrphanFile {
+            get {
+                return ResourceManager.GetString("MenuItemExcludeOrphanFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude all files of this type from orphan search.
         /// </summary>
         public static string MenuItemExcludeOrphanFileType {
             get {
@@ -1861,6 +1879,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This entry was created from orphan file.
+        /// </summary>
+        public static string TextCreatedFromOrphan {
+            get {
+                return ResourceManager.GetString("TextCreatedFromOrphan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create submission document.
         /// </summary>
         public static string TextCreateSubmissionDocument0 {
@@ -2145,6 +2172,15 @@ namespace Restless.Panama.Resources {
         public static string TextNotOpenXmlDocument {
             get {
                 return ResourceManager.GetString("TextNotOpenXmlDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orphan.
+        /// </summary>
+        public static string TextOrphan {
+            get {
+                return ResourceManager.GetString("TextOrphan", resourceCulture);
             }
         }
         
