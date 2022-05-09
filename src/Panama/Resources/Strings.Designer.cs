@@ -1481,6 +1481,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove this exclusion.
+        /// </summary>
+        public static string MenuItemRemoveExclusion {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove this published record.
         /// </summary>
         public static string MenuItemRemovePublished {
@@ -1771,20 +1780,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Orphan directory exclusions, separated by semi-colon.
+        ///   Looks up a localized string similar to The orphan tool enables you to exclude certain files, file types, and directories from its search. You add exclusions in the tool window and can remove them here if needed.
         /// </summary>
-        public static string SettingsOrphanDirectoryExclusion {
+        public static string SettingsOrphanExclusionDetail {
             get {
-                return ResourceManager.GetString("SettingsOrphanDirectoryExclusion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Orphan file exclusions, separated by semi-colon.
-        /// </summary>
-        public static string SettingsOrphanFileExclusion {
-            get {
-                return ResourceManager.GetString("SettingsOrphanFileExclusion", resourceCulture);
+                return ResourceManager.GetString("SettingsOrphanExclusionDetail", resourceCulture);
             }
         }
         
@@ -2428,7 +2428,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation verfies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time..
+        ///   Looks up a localized string similar to This operation verifies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time..
         /// </summary>
         public static string ToolSubmissionMetadataDetail {
             get {
@@ -2887,7 +2887,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation verfies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count..
+        ///   Looks up a localized string similar to This operation verifies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count..
         /// </summary>
         public static string ToolTitleMetadataDetail {
             get {

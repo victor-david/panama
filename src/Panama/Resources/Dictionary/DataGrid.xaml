@@ -23,6 +23,11 @@
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
         <Setter Property="Foreground" Value="{StaticResource DarkForegroundBrush}"/>
         <Setter Property="MinRowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
+        <Style.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+        </Style.Resources>
     </Style>
 
     <Style TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>

@@ -63,6 +63,14 @@ namespace Restless.Panama.ViewModel
         {
             get;
         }
+
+        /// <summary>
+        /// Gets the orphan exclusion controller
+        /// </summary>
+        public OrphanExclusionController Orphan
+        {
+            get;
+        }
         #endregion
 
         /************************************************************************/
@@ -83,6 +91,8 @@ namespace Restless.Panama.ViewModel
             };
 
             SetInitialSection();
+
+            Orphan = new OrphanExclusionController();
 
             Commands.Add("SelectPath", RunSelectPathCommand);
             Commands.Add("ResetColors", p => Config.Colors.Reset());

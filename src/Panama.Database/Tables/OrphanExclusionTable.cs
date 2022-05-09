@@ -39,11 +39,15 @@ namespace Restless.Panama.Database.Tables
                 public const string Value = "value";
 
                 /// <summary>
+                /// Holds whether a system generated exclusion
+                /// </summary>
+                public const string IsSystem = "sys";
+
+                /// <summary>
                 /// Holds the created date / time
                 /// </summary>
                 public const string Created = "created";
             }
-
 
             /// <summary>
             /// Provides static values for the <see cref="Columns.Type"/>  column.
@@ -117,6 +121,7 @@ namespace Restless.Panama.Database.Tables
                 { Defs.Columns.Id, ColumnType.Integer, true },
                 { Defs.Columns.Type, ColumnType.Integer },
                 { Defs.Columns.Value, ColumnType.Text },
+                { Defs.Columns.IsSystem, ColumnType.Boolean },
                 { Defs.Columns.Created, ColumnType.Timestamp },
             };
         }
@@ -124,15 +129,15 @@ namespace Restless.Panama.Database.Tables
         /// <inheritdoc/>
         protected override List<string> GetPopulateColumnList()
         {
-            return new List<string>() { Defs.Columns.Id, Defs.Columns.Type, Defs.Columns.Value, Defs.Columns.Created };
+            return new List<string>() { Defs.Columns.Id, Defs.Columns.Type, Defs.Columns.Value, Defs.Columns.IsSystem, Defs.Columns.Created };
         }
 
         /// <inheritdoc/>
         protected override IEnumerable<object[]> EnumeratePopulateValues()
         {
-            yield return new object[] { 1, Defs.Values.FileExtensionType, ".cmd", DateTime.UtcNow };
-            yield return new object[] { 2, Defs.Values.FileExtensionType, ".bat", DateTime.UtcNow };
-            yield return new object[] { 3, Defs.Values.FileExtensionType, ".lnk", DateTime.UtcNow };
+            yield return new object[] { 1, Defs.Values.FileExtensionType, ".cmd", true, DateTime.UtcNow };
+            yield return new object[] { 2, Defs.Values.FileExtensionType, ".bat", true, DateTime.UtcNow };
+            yield return new object[] { 3, Defs.Values.FileExtensionType, ".lnk", true, DateTime.UtcNow };
 
         }
         #endregion
@@ -147,6 +152,7 @@ namespace Restless.Panama.Database.Tables
                 DataRow row = NewRow();
                 row[Defs.Columns.Type] = exclusionType;
                 row[Defs.Columns.Value] = value;
+                row[Defs.Columns.IsSystem] = false;
                 row[Defs.Columns.Created] = DateTime.UtcNow;
                 Rows.Add(row);
                 Save();

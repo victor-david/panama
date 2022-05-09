@@ -19,6 +19,11 @@ namespace Restless.Panama.Database.Tables
         public long Type => GetInt64(Columns.Type);
 
         /// <summary>
+        /// Gets a boolean that indicates whether this is a system generated exclusion
+        /// </summary>
+        public bool IsSystem => GetBoolean(Columns.IsSystem);
+
+        /// <summary>
         /// Gets the value
         /// </summary>
         public string Value => GetString(Columns.Value);
