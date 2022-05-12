@@ -289,6 +289,50 @@ namespace Restless.Panama.View
 
         /************************************************************************/
 
+        #region ContextMenu
+        /// <summary>
+        /// Gets or sets a context menu for the updated list
+        /// </summary>
+        public ContextMenu UpdatedContextMenu
+        {
+            get => (ContextMenu)GetValue(UpdatedContextMenuProperty);
+            set => SetValue(UpdatedContextMenuProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="UpdatedContextMenu"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty UpdatedContextMenuProperty = DependencyProperty.Register
+            (
+                nameof(UpdatedContextMenu), typeof(ContextMenu), typeof(ToolDetail), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = null
+                }
+            );
+
+        /// <summary>
+        /// Gets or sets a context menu for the not found list
+        /// </summary>
+        public ContextMenu NotFoundContextMenu
+        {
+            get => (ContextMenu)GetValue(NotFoundContextMenuProperty);
+            set => SetValue(NotFoundContextMenuProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="NotFoundContextMenu"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty NotFoundContextMenuProperty = DependencyProperty.Register
+            (
+                nameof(NotFoundContextMenu), typeof(ContextMenu), typeof(ToolDetail), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = null
+                }
+            );
+        #endregion
+
+        /************************************************************************/
+
         #region Command
         /// <summary>
         /// Gets or sets the tool start command

@@ -140,7 +140,7 @@
                 <vw:ToolDetail
                     Mode="Preview"
                     ExplanationText="{x:Static r:Strings.ToolOrphanDetail}"
-                    FolderDisplay="{Binding Config.FolderTitleRoot, Mode=OneTime}"
+                    FolderDisplay="{Binding SelectedOrphan.FullName}"
                     StatusText="{Binding Adapter.Status[4]}"
                     UpdatedText="{x:Static r:Strings.TextOrphans}"
                     PreviewMode="{Binding OrphanPreviewMode}"
@@ -148,7 +148,8 @@
                     PreviewImageSource="{Binding OrphanImageSource}"
                     SelectedUpdatedItem="{Binding SelectedOrphan}"
                     UpdatedItemsSource="{Binding Adapter.Updated[4]}"
-                    Command="{Binding Commands[RunOrphan]}"/>                
+                    Command="{Binding Commands[RunOrphan]}"
+                    UpdatedContextMenu="{Binding OrphanContextMenu}"/>                
                 
             </HeaderedContentControl>
 

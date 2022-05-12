@@ -317,7 +317,7 @@ does not exist. Correct this by selecting the correct file and then try again.</
     <value>This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted.</value>
   </data>
   <data name="ToolTitleMetadataDetail" xml:space="preserve">
-    <value>This operation verfies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count.</value>
+    <value>This operation verifies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count.</value>
   </data>
   <data name="InvalidOpOutputFolderNotSet" xml:space="preserve">
     <value>The folder for this operation hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
@@ -598,12 +598,7 @@ Do you want to continue?</value>
     <value>Alerts</value>
   </data>
   <data name="ConfirmationCreateTitleFromOrphan" xml:space="preserve">
-    <value>This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.
-
-Do you want to continue?</value>
-  </data>
-  <data name="SettingsOrphanDirectoryExclusion" xml:space="preserve">
-    <value>Orphan directory exclusions, separated by semi-colon</value>
+    <value>This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.</value>
   </data>
   <data name="ToolTipSubmissionContest" xml:space="preserve">
     <value>Submission is for a contest</value>
@@ -822,7 +817,7 @@ Do you want to continue?</value>
     <value>Submission Data</value>
   </data>
   <data name="ToolSubmissionMetadataDetail" xml:space="preserve">
-    <value>This operation verfies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time.</value>
+    <value>This operation verifies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time.</value>
   </data>
   <data name="ToolTipResetWindow" xml:space="preserve">
     <value>Reset this window to its default size</value>
@@ -844,9 +839,6 @@ Do you want to continue?</value>
   </data>
   <data name="TextImage" xml:space="preserve">
     <value>Image</value>
-  </data>
-  <data name="SettingsOrphanFileExclusion" xml:space="preserve">
-    <value>Orphan file exclusions, separated by semi-colon</value>
   </data>
   <data name="TextZeroSearchResults" xml:space="preserve">
     <value>Search returned no results</value>
@@ -1102,5 +1094,38 @@ Changes will take effect after you restart the application.</value>
   </data>
   <data name="TextMultipleTag" xml:space="preserve">
     <value>Combine multiple</value>
+  </data>
+  <data name="ConfirmationAddOrphanDirectoryExclusion" xml:space="preserve">
+    <value>This operation excludes the directory of the selected file from further orphan search</value>
+  </data>
+  <data name="ConfirmationAddOrphanFileTypeExclusion" xml:space="preserve">
+    <value>This operation excludes all files of the selected file type from further orphan search</value>
+  </data>
+  <data name="MenuItemCreateTitleFromEntry" xml:space="preserve">
+    <value>Create a title entry from this file</value>
+  </data>
+  <data name="MenuItemExcludeOrphanDirectory" xml:space="preserve">
+    <value>Exclude this directory from orphan search</value>
+  </data>
+  <data name="MenuItemExcludeOrphanFileType" xml:space="preserve">
+    <value>Exclude all files of this type from orphan search</value>
+  </data>
+  <data name="ConfirmationAddOrphanFileExclusion" xml:space="preserve">
+    <value>This operation excludes the selected file from further orphan search</value>
+  </data>
+  <data name="MenuItemExcludeOrphanFile" xml:space="preserve">
+    <value>Exclude this file from orphan search</value>
+  </data>
+  <data name="TextCreatedFromOrphan" xml:space="preserve">
+    <value>This entry was created from orphan file</value>
+  </data>
+  <data name="TextOrphan" xml:space="preserve">
+    <value>Orphan</value>
+  </data>
+  <data name="SettingsOrphanExclusionDetail" xml:space="preserve">
+    <value>The orphan tool enables you to exclude certain files, file types, and directories from its search. You add exclusions in the tool window and can remove them here if needed</value>
+  </data>
+  <data name="MenuItemRemoveExclusion" xml:space="preserve">
+    <value>Remove this exclusion</value>
   </data>
 </root>

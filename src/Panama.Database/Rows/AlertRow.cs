@@ -9,7 +9,6 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using Columns = Restless.Panama.Database.Tables.AlertTable.Defs.Columns;
 
 namespace Restless.Panama.Database.Tables
@@ -93,7 +92,7 @@ namespace Restless.Panama.Database.Tables
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="RowObject"/> class.
+        /// Initializes a new instance of the <see cref="AlertRow"/> class.
         /// </summary>
         /// <param name="row">The data row</param>
         public AlertRow(DataRow row) : base(row)

@@ -51,7 +51,8 @@
         Visibility="{Binding UpdatedVisibility, ElementName=ToolControl}"
         Style="{StaticResource FileScanItemListBoxStyle}"
         SelectedItem="{Binding SelectedUpdatedItem, ElementName=ToolControl}"
-        ItemsSource="{Binding UpdatedItemsSource, ElementName=ToolControl}"/>
+        ItemsSource="{Binding UpdatedItemsSource, ElementName=ToolControl}"
+        ContextMenu="{Binding UpdatedContextMenu, ElementName=ToolControl}"/>
 
     <TextBlock
         Grid.Row="2" Grid.Column="1"
@@ -63,7 +64,8 @@
         Visibility="{Binding NotFoundVisibility, ElementName=ToolControl}"
         Style="{StaticResource FileScanItemListBoxStyle}"
         SelectedItem="{Binding SelectedNotFoundItem, ElementName=ToolControl}"
-        ItemsSource="{Binding NotFoundItemsSource, ElementName=ToolControl}"/>
+        ItemsSource="{Binding NotFoundItemsSource, ElementName=ToolControl}"
+        ContextMenu="{Binding NotFoundContextMenu, ElementName=ToolControl}"/>
 
     <vw:PreviewPanel
         Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"

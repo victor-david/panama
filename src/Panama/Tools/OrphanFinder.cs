@@ -8,8 +8,9 @@ using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
+using System.Linq;
+using OrphanValues = Restless.Panama.Database.Tables.OrphanExclusionTable.Defs.Values;
 
 namespace Restless.Panama.Tools
 {
@@ -19,9 +20,6 @@ namespace Restless.Panama.Tools
     /// </summary>
     public class OrphanFinder : TitleScanner
     {
-        private string[] directoryExclusions;
-        private string[] fileExclusions;
-
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="OrphanFinder"/> class.
@@ -42,29 +40,24 @@ namespace Restless.Panama.Tools
             FileScanResult result = new();
             List<string> files = new();
 
-            directoryExclusions = Config.Instance.OrphanDirectoryExclusions.ToLower(CultureInfo.InvariantCulture).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            fileExclusions = Config.Instance.OrphanFileExclusions.ToLower(CultureInfo.InvariantCulture).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-
-            files.AddRange(Directory.EnumerateFiles(Config.Instance.FolderTitleRoot));
-
             foreach (string dir in Directory.EnumerateDirectories(Config.Instance.FolderTitleRoot, "*", SearchOption.AllDirectories))
             {
-                if (!IsDirectoryAutoExcluded(dir))
+                if (!IsDirectoryAutoExcluded(dir) && !IsDirectoryExcluded(dir))
                 {
                     files.AddRange(Directory.EnumerateFiles(dir, "*", SearchOption.TopDirectoryOnly));
                 }
             }
 
-            foreach (string fullPath in files)
+            foreach (string file in files)
             {
                 result.ScanCount++;
-
-                if (!IsDirectoryUserExcluded(Path.GetDirectoryName(fullPath)) && !IsFileUserExcluded(Path.GetFileName(fullPath)))
+                if (!IsFileExtensionExcluded(Path.GetExtension(file)) && !IsFileExcluded(Path.GetFileName(file)))
                 {
-                    if (!TitleVersionTable.VersionWithFileExists(Paths.Title.WithoutRoot(fullPath)))
+                    if (!TitleVersionTable.VersionWithFileExists(Paths.Title.WithoutRoot(file)))
                     {
-                        result.Updated.Add(FileScanItem.Create(fullPath));
+                        result.Updated.Add(FileScanItem.Create(file));
                     }
+
                 }
             }
             return result;
@@ -74,20 +67,20 @@ namespace Restless.Panama.Tools
         /************************************************************************/
 
         #region Private methods
-        private bool IsDirectoryAutoExcluded(string directory)
+        private bool IsDirectoryAutoExcluded(string value)
         {
             return
-                directory == Config.Instance.FolderSubmissionDocument ||
-                directory == Config.Instance.FolderExport ||
-                directory == Config.Instance.FolderSubmissionMessage ||
-                directory == Config.Instance.FolderSubmissionMessageAttachment;
+                value == Config.Instance.FolderSubmissionDocument ||
+                value == Config.Instance.FolderExport ||
+                value == Config.Instance.FolderSubmissionMessage ||
+                value == Config.Instance.FolderSubmissionMessageAttachment;
         }
 
-        private bool IsDirectoryUserExcluded(string directory)
+        private bool IsDirectoryExcluded(string value)
         {
-            foreach (string ex in directoryExclusions)
+            foreach (string directory in OrphanExclusionTable.EnumerateExclusion(OrphanValues.DirectoryType).Select(p => Paths.Title.WithRoot(p.Value)))
             {
-                if (directory.ToLower(CultureInfo.InvariantCulture).Contains(ex.ToLower(CultureInfo.InvariantCulture)))
+                if (value.StartsWith(directory, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }
@@ -95,11 +88,23 @@ namespace Restless.Panama.Tools
             return false;
         }
 
-        private bool IsFileUserExcluded(string file)
+        private bool IsFileExtensionExcluded(string value)
         {
-            foreach (string ex in fileExclusions)
+            foreach (OrphanExclusionRow item in OrphanExclusionTable.EnumerateExclusion(OrphanValues.FileExtensionType))
             {
-                if (file.ToLower(CultureInfo.InvariantCulture).Contains(ex.ToLower(CultureInfo.InvariantCulture)))
+                if (value.Equals(item.Value, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool IsFileExcluded(string value)
+        {
+            foreach (string file in OrphanExclusionTable.EnumerateExclusion(OrphanValues.FileType).Select(p => Paths.Title.WithRoot(p.Value)))
+            {
+                if (value.Equals(file, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }

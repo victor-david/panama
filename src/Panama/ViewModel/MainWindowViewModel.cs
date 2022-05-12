@@ -9,6 +9,7 @@ using Restless.Panama.Database.Core;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -150,6 +151,18 @@ namespace Restless.Panama.ViewModel
         public void NavigateTo<T>() where T : ApplicationViewModel
         {
             NavigatorItems.Select<T>();
+        }
+
+        /// <summary>
+        /// Notifies all active view models of the specified type to update
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
+        public void NotifyUpdate<T>() where T : ApplicationViewModel
+        {
+            foreach (T item in viewModelCache.OfType<T>().Where(p => p.IsActivated))
+            {
+                item.Update();
+            }
         }
         #endregion
 

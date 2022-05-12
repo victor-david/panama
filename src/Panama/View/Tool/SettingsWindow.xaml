@@ -275,7 +275,7 @@
                 Header="{x:Static r:Strings.HeaderSettingsAdvanced}"
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
                 tk:Property.IsLongVisibleValue="5">
-                <StackPanel>
+                <Grid tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,*">
                     
                     <con:PathSelector
                         Title="{x:Static r:Strings.SettingsTextViewer}"
@@ -283,27 +283,40 @@
                         SelectorFileType="{x:Static table:DocumentTypeTable+Defs+Values.ExecutableFileType}"
                         Path="{Binding Config.TextViewerFile}"
                         SelectCommand="{Binding Commands[SelectPath]}"/>                    
-                    
-                    <TextBlock Text="{x:Static r:Strings.SettingsOrphanDirectoryExclusion}"/>
-                    <TextBox Text="{Binding Config.OrphanDirectoryExclusions}"/>
-
-                    <TextBlock Text="{x:Static r:Strings.SettingsOrphanFileExclusion}"/>
-                    <TextBox Text="{Binding Config.OrphanFileExclusions}"/>
                    
-                    <con:PathSelector 
+                    <con:PathSelector
+                        Grid.Row="1"
                         Title="{x:Static r:Strings.SettingsDatabaseLocation}"
                         Path="{Binding DatabaseLocation}"
                         SelectCommand="{Binding Commands[SelectPath]}"/>
 
-                    <TextBlock Text="{x:Static r:Strings.SettingsDatabaseLocationText}"/>
+                    <TextBlock
+                        Grid.Row="2"
+                        Text="{x:Static r:Strings.SettingsDatabaseLocationText}"/>
 
-                    <Separator Margin="0,12"/>
+                    <Separator Grid.Row="3" Margin="0,12"/>
 
                     <CheckBox
+                        Grid.Row="4"
                         Content="{x:Static r:Strings.SettingsVerifyLinks}"
                         IsChecked="{Binding Config.IsVerifyLinkEnabled}"/>
 
-                </StackPanel>
+                    <TextBlock Grid.Row="5" Text="{x:Static r:Strings.SettingsOrphanExclusionDetail}"/>
+
+                    <tk:DataGrid
+                        Grid.Row="6"
+                        ItemsSource="{Binding Orphan.ListView}"
+                        SelectedItem="{Binding Orphan.SelectedItem}"
+                        RowHeight="{x:Static core:Config+DataGrid.MinRowHeight}"
+                        tk:DataGridColumns.Columns="{Binding Orphan.Columns}">
+                        
+                        <DataGrid.ContextMenu>
+                            <ContextMenu ItemsSource="{Binding Orphan.MenuItems}"/>
+                        </DataGrid.ContextMenu>
+                        
+                    </tk:DataGrid>
+
+                </Grid>
             </HeaderedContentControl>
             
         </Grid>

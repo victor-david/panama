@@ -30,12 +30,7 @@ namespace Restless.Panama.Core
         /// <returns>An <see cref="ApplicationViewModel"/> object.</returns>
         public ApplicationViewModel GetByNavigationItem(NavigatorItem navItem)
         {
-            if (navItem == null)
-            {
-                throw new ArgumentNullException(nameof(navItem));
-            }
-
-            return GetStandardItem(navItem);
+            return navItem == null ? throw new ArgumentNullException(nameof(navItem)) : GetStandardItem(navItem);
         }
 
         /// <summary>
@@ -43,10 +38,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public void SignalSave()
         {
-            foreach (ApplicationViewModel item in this)
-            {
-                item.SignalSave();
-            }
+            ForEach(item => item.SignalSave());
         }
 
         /// <summary>
@@ -54,10 +46,7 @@ namespace Restless.Panama.Core
         /// </summary>
         public void SignalClosing()
         {
-            foreach (ApplicationViewModel item in this)
-            {
-                item.SignalClosing();
-            }
+            ForEach(item => item.SignalClosing());
         }
         #endregion
 

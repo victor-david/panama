@@ -225,6 +225,33 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation excludes the directory of the selected file from further orphan search.
+        /// </summary>
+        public static string ConfirmationAddOrphanDirectoryExclusion {
+            get {
+                return ResourceManager.GetString("ConfirmationAddOrphanDirectoryExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation excludes the selected file from further orphan search.
+        /// </summary>
+        public static string ConfirmationAddOrphanFileExclusion {
+            get {
+                return ResourceManager.GetString("ConfirmationAddOrphanFileExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation excludes all files of the selected file type from further orphan search.
+        /// </summary>
+        public static string ConfirmationAddOrphanFileTypeExclusion {
+            get {
+                return ResourceManager.GetString("ConfirmationAddOrphanFileTypeExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation will add a new publisher record. If any publisher filters are in effect, they will be removed so that the new publisher displays in the list. 
         ///
         ///Do you want to continue?.
@@ -305,9 +332,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.
-        ///
-        ///Do you want to continue?.
+        ///   Looks up a localized string similar to This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file..
         /// </summary>
         public static string ConfirmationCreateTitleFromOrphan {
             get {
@@ -1249,6 +1274,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a title entry from this file.
+        /// </summary>
+        public static string MenuItemCreateTitleFromEntry {
+            get {
+                return ResourceManager.GetString("MenuItemCreateTitleFromEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credentials.
         /// </summary>
         public static string MenuItemCredentials {
@@ -1339,6 +1373,33 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exclude this directory from orphan search.
+        /// </summary>
+        public static string MenuItemExcludeOrphanDirectory {
+            get {
+                return ResourceManager.GetString("MenuItemExcludeOrphanDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude this file from orphan search.
+        /// </summary>
+        public static string MenuItemExcludeOrphanFile {
+            get {
+                return ResourceManager.GetString("MenuItemExcludeOrphanFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude all files of this type from orphan search.
+        /// </summary>
+        public static string MenuItemExcludeOrphanFileType {
+            get {
+                return ResourceManager.GetString("MenuItemExcludeOrphanFileType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter list to display only submissions to this publisher.
         /// </summary>
         public static string MenuItemFilterToPublisher {
@@ -1416,6 +1477,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemPublishers {
             get {
                 return ResourceManager.GetString("MenuItemPublishers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this exclusion.
+        /// </summary>
+        public static string MenuItemRemoveExclusion {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveExclusion", resourceCulture);
             }
         }
         
@@ -1710,20 +1780,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Orphan directory exclusions, separated by semi-colon.
+        ///   Looks up a localized string similar to The orphan tool enables you to exclude certain files, file types, and directories from its search. You add exclusions in the tool window and can remove them here if needed.
         /// </summary>
-        public static string SettingsOrphanDirectoryExclusion {
+        public static string SettingsOrphanExclusionDetail {
             get {
-                return ResourceManager.GetString("SettingsOrphanDirectoryExclusion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Orphan file exclusions, separated by semi-colon.
-        /// </summary>
-        public static string SettingsOrphanFileExclusion {
-            get {
-                return ResourceManager.GetString("SettingsOrphanFileExclusion", resourceCulture);
+                return ResourceManager.GetString("SettingsOrphanExclusionDetail", resourceCulture);
             }
         }
         
@@ -1814,6 +1875,15 @@ namespace Restless.Panama.Resources {
         public static string TextConfirm {
             get {
                 return ResourceManager.GetString("TextConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This entry was created from orphan file.
+        /// </summary>
+        public static string TextCreatedFromOrphan {
+            get {
+                return ResourceManager.GetString("TextCreatedFromOrphan", resourceCulture);
             }
         }
         
@@ -2106,6 +2176,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Orphan.
+        /// </summary>
+        public static string TextOrphan {
+            get {
+                return ResourceManager.GetString("TextOrphan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Orphans.
         /// </summary>
         public static string TextOrphans {
@@ -2349,7 +2428,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation verfies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time..
+        ///   Looks up a localized string similar to This operation verifies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time..
         /// </summary>
         public static string ToolSubmissionMetadataDetail {
             get {
@@ -2808,7 +2887,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation verfies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count..
+        ///   Looks up a localized string similar to This operation verifies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count..
         /// </summary>
         public static string ToolTitleMetadataDetail {
             get {

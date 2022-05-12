@@ -1,12 +1,17 @@
 ﻿using Restless.Panama.Core;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Panama.Tools;
 using Restless.Toolkit.Controls;
+using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Restless.Panama.ViewModel
@@ -30,6 +35,10 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Properties
+        private TitleTable TitleTable => DatabaseController.Instance.GetTable<TitleTable>();
+        private TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
+        private OrphanExclusionTable OrphanExclusionTable => DatabaseController.Instance.GetTable<OrphanExclusionTable>();
+
         /// <summary>
         /// Gets the list of settings sections
         /// </summary>
@@ -66,6 +75,14 @@ namespace Restless.Panama.ViewModel
         /// Gets the title list file name
         /// </summary>
         public string TitleListFileName
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the orphan context menu
+        /// </summary>
+        public ContextMenu OrphanContextMenu
         {
             get;
         }
@@ -128,6 +145,30 @@ namespace Restless.Panama.ViewModel
             Commands.Add("RunOrphan", RunOrphanCommand);
 
             Commands.Add("ResetWindow", RunResetWindowCommand);
+
+            OrphanContextMenu = new ContextMenu();
+
+            OrphanContextMenu.Items.Add(CreateMenuItem(
+                Strings.MenuItemExcludeOrphanFile,
+                RelayCommand.Create(RunSetOrphanFileExclusion, CanRunOrphanCommand))
+                .AddIconResource(ResourceKeys.Icon.SquareSmallRedIconKey));
+
+            OrphanContextMenu.Items.Add(CreateMenuItem(
+                Strings.MenuItemExcludeOrphanFileType,
+                RelayCommand.Create(RunSetOrphanFileTypeExclusion, CanRunOrphanCommand))
+                .AddIconResource(ResourceKeys.Icon.SquareSmallRedIconKey));
+
+            OrphanContextMenu.Items.Add(CreateMenuItem(
+                Strings.MenuItemExcludeOrphanDirectory,
+                RelayCommand.Create(RunSetOrphanDirectoryExclusion, CanRunOrphanCommand))
+                .AddIconResource(ResourceKeys.Icon.SquareSmallRedIconKey));
+
+            OrphanContextMenu.Items.Add(new Separator());
+            
+            OrphanContextMenu.Items.Add(CreateMenuItem(
+                Strings.MenuItemCreateTitleFromEntry,
+                RelayCommand.Create(RunCreateTitleFromOrphan, CanRunOrphanCommand))
+                .AddIconResource(ResourceKeys.Icon.PlusIconKey));
 
             versionUpdater = new VersionUpdater();
             submissionUpdater = new SubmissionUpdater();
@@ -242,9 +283,73 @@ namespace Restless.Panama.ViewModel
             WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
             WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
             WindowOwner.WindowState = WindowState.Normal;
+        }
 
-            //Config.ToolWindowWidth = Config.ToolWindow.DefaultWidth;
-            //Config.ToolWindowHeight = Config.ToolWindow.DefaultHeight;
+        private void RunSetOrphanFileExclusion(object parm)
+        {
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanFileExclusion, SelectedOrphan.FileName)))
+            {
+                OrphanExclusionTable.AddFileExclusion(Paths.Title.WithoutRoot(SelectedOrphan.FullName));
+            }
+        }
+
+        private void RunSetOrphanFileTypeExclusion(object parm)
+        {
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanFileTypeExclusion, SelectedOrphan.FileExtension)))
+            {
+                OrphanExclusionTable.AddFileExtensionExclusion(SelectedOrphan.FileExtension);
+            }
+        }
+
+        private void RunSetOrphanDirectoryExclusion(object parm)
+        {
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanDirectoryExclusion, SelectedOrphan.DirectoryName)))
+            {
+                OrphanExclusionTable.AddDirectoryExclusion(Path.GetDirectoryName(Paths.Title.WithoutRoot(SelectedOrphan.FullName)));
+            }
+        }
+
+        private void RunCreateTitleFromOrphan(object parm)
+        {
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationCreateTitleFromOrphan, SelectedOrphan.FullName)))
+            {
+                TitleRow row = new(TitleTable.AddDefaultRow())
+                {
+                    Title = $"{Strings.TextOrphan} {SelectedOrphan.FullName}",
+                    Written = SelectedOrphan.LastWriteTimeUtc,
+                    Notes = $"{Strings.TextCreatedFromOrphan} {SelectedOrphan.FullName}"
+                };
+
+                TitleVersionTable.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(SelectedOrphan.FullName));
+
+                TitleVersionTable.Save();
+                TitleTable.Save();
+                Adapter.Updated[4].Remove(SelectedOrphan);
+                SelectedOrphan = null;
+                MainWindowViewModel.Instance.NotifyUpdate<TitleViewModel>();
+            }
+        }
+
+        private bool CanRunOrphanCommand(object parm)
+        {
+            return SelectedOrphan != null;
+        }
+
+        private string GetOrphanDetailMessage(string message, string detail)
+        {
+            return $"{message}{Environment.NewLine}{Environment.NewLine}{detail}";
+        }
+
+        private MenuItem CreateMenuItem(string header, ICommand command)
+        {
+            MenuItem item = new()
+            {
+                Header = header,
+                Command = command,
+                HorizontalContentAlignment = HorizontalAlignment.Left,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+            return item;
         }
         #endregion
     }
