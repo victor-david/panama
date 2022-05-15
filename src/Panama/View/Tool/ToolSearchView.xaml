@@ -6,20 +6,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:ToolSearchViewModel}"
     mc:Ignorable="d" 
     d:DesignHeight="250" d:DesignWidth="930">
-    <con:SplitterGrid
+    <tk:SplitterGrid
         MinDetailWidth="{x:Static core:Config+Grid.MinSearchDetailWidth}"
         MaxDetailWidth="{x:Static core:Config+Grid.MaxSearchDetailWidth}"
         IsDetailExpanded="{Binding IsDetailExpanded}"
         DetailWidth="{Binding Config.SearchDetailWidth}">
 
-        <con:SplitterGrid.HeaderLeft>
+        <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
                 <TextBlock Text="Search:"/>
                 <TextBox Width="100" Text="{Binding SearchText}"/>
@@ -37,17 +36,17 @@
                     Command="{Binding Commands[ClearSearch]}"/>
 
             </StatusBar>
-        </con:SplitterGrid.HeaderLeft>
+        </tk:SplitterGrid.HeaderLeft>
 
-        <con:SplitterGrid.HeaderRight>
+        <tk:SplitterGrid.HeaderRight>
             <StatusBar>
                 <TextBlock
                     Style="{StaticResource TitleDisplayTextBlockStyle}"
                     Text="{Binding SelectedSearch.File}"/>
             </StatusBar>
-        </con:SplitterGrid.HeaderRight>
+        </tk:SplitterGrid.HeaderRight>
 
-        <con:SplitterGrid.ContentLeft>
+        <tk:SplitterGrid.ContentLeft>
             <Grid>
                 <DataGrid
                     Style="{StaticResource DataGridEditLockedStretchedStyle}"
@@ -71,15 +70,15 @@
                     Text="{x:Static r:Strings.TextZeroSearchResults}"/>
 
             </Grid>
-        </con:SplitterGrid.ContentLeft>
+        </tk:SplitterGrid.ContentLeft>
 
-        <con:SplitterGrid.ContentRight>
+        <tk:SplitterGrid.ContentRight>
             <vw:PreviewPanel
                 HeaderVisibility="Collapsed"
                 PreviewMode="{Binding PreviewMode}"
                 PreviewText="{Binding PreviewText}"
                 PreviewImageSource="{Binding PreviewImageSource}"/>
-        </con:SplitterGrid.ContentRight>
+        </tk:SplitterGrid.ContentRight>
 
-    </con:SplitterGrid>
+    </tk:SplitterGrid>
 </UserControl>

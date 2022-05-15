@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vw="clr-namespace:Restless.Panama.View"
@@ -13,13 +12,13 @@
     d:DataContext="{d:DesignInstance Type=vm:LinkVerifyViewModel}"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
-    <con:SplitterGrid
+    <tk:SplitterGrid
         MinDetailWidth="{x:Static core:Config+Grid.MinLinkVerifyDetailWidth}"
         MaxDetailWidth="{x:Static core:Config+Grid.MaxLinkVerifyDetailWidth}"
         IsDetailExpanded="{Binding Config.LinkVerifyDetailExpanded}"
         DetailWidth="{Binding Config.LinkVerifyDetailWidth}">
 
-        <con:SplitterGrid.HeaderLeft>
+        <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
                 
                 <StatusBar.Resources>
@@ -59,25 +58,25 @@
                     tk:Property.IsVisible="{Binding OperationInProgress}"/>
 
             </StatusBar>
-        </con:SplitterGrid.HeaderLeft>
+        </tk:SplitterGrid.HeaderLeft>
 
-        <con:SplitterGrid.HeaderRight>
+        <tk:SplitterGrid.HeaderRight>
             <StatusBar>
                 <TextBlock 
                     Style="{StaticResource TitleDisplayTextBlockStyle}"
                     Text="{Binding SelectedLink.Url}"/>
             </StatusBar>
-        </con:SplitterGrid.HeaderRight>
+        </tk:SplitterGrid.HeaderRight>
 
-        <con:SplitterGrid.ContentLeft>
+        <tk:SplitterGrid.ContentLeft>
             <tk:DataGrid
                 ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
                 tk:DataGridColumns.Columns="{Binding Columns}"/>
 
-        </con:SplitterGrid.ContentLeft>
+        </tk:SplitterGrid.ContentLeft>
 
-        <con:SplitterGrid.ContentRight>
+        <tk:SplitterGrid.ContentRight>
             <StackPanel
                 Style="{StaticResource DataEntryPanelStyle}"
                 Visibility="{Binding EditVisibility}">
@@ -104,7 +103,7 @@
 
             </StackPanel>
 
-        </con:SplitterGrid.ContentRight>
+        </tk:SplitterGrid.ContentRight>
         
-    </con:SplitterGrid>
+    </tk:SplitterGrid>
 </UserControl>

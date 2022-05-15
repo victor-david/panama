@@ -107,13 +107,13 @@
         <Setter Property="ValueHorizontalAlignment" Value="Right"/>
     </Style>
     
-    <Style x:Key="DefaultSplitterGridStyle" TargetType="con:SplitterGrid">
+    <Style x:Key="DefaultSplitterGridStyle" TargetType="tk:SplitterGrid">
         <Setter Property="MarginHeaderLeft" Value="0,0,4,0"/>
         <Setter Property="MarginHeaderRight" Value="4,0,0,0"/>
         <Setter Property="MarginContentLeft" Value="{StaticResource DefaultPadding}"/>
         <Setter Property="MarginContentRight" Value="{StaticResource DefaultPadding}"/>
     </Style>
 
-    <Style TargetType="con:SplitterGrid" BasedOn="{StaticResource DefaultSplitterGridStyle}"/>
+    <Style TargetType="tk:SplitterGrid" BasedOn="{StaticResource DefaultSplitterGridStyle}"/>
 
 </ResourceDictionary>
