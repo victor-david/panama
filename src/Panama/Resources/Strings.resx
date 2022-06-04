@@ -1128,4 +1128,7 @@ Changes will take effect after you restart the application.</value>
   <data name="MenuItemRemoveExclusion" xml:space="preserve">
     <value>Remove this exclusion</value>
   </data>
+  <data name="HeaderTables" xml:space="preserve">
+    <value>Tables</value>
+  </data>
 </root>
