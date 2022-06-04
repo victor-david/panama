@@ -1,0 +1,106 @@
+﻿<UserControl
+    x:Class="Restless.Panama.View.SubmissionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
+    mc:Ignorable="d"
+    d:DesignWidth="860" d:DesignHeight="400">
+    <tk:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinSubmissionDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxSubmissionDetailWidth}"
+        IsDetailExpanded="{Binding Config.SubmissionDetailExpanded}"
+        DetailWidth="{Binding Config.SubmissionDetailWidth}">
+
+        <tk:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <TextBlock Text="Filters"/>
+                <Button
+                    Content="Active"
+                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterActive}"
+                    Command="{Binding Commands[ActiveFilter]}"/>
+
+                <Button 
+                    Content="Try Again"
+                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterTryAgain}"
+                    Command="{Binding Commands[TryAgainFilter]}"/>
+
+                <Button 
+                    Content="Personal"
+                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterPersonal}"
+                    Command="{Binding Commands[PersonalFilter]}"/>
+
+                <Button 
+                    Content="Accepted"
+                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterAccepted}"
+                    Command="{Binding Commands[AcceptedFilter]}"/>
+                
+                <Separator/>
+
+                <Button
+                    Content="{x:Static r:Strings.MenuItemClear}"
+                    ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
+                    Command="{Binding ClearFilterCommand}"/>
+
+                <Separator/>
+
+                <TextBlock>
+                    <Run
+                        Foreground="{StaticResource DarkAlertForegroundBrush}" 
+                        Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
+                    <Run Text="records"/>
+                </TextBlock>
+
+                <TextBlock
+                    tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
+                    Foreground="{StaticResource DarkAlertForegroundBrush}"
+                    Text="(row filter in effect)"/>
+            </StatusBar>
+        </tk:SplitterGrid.HeaderLeft>
+
+        <tk:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock 
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SubmissionHeader}"/>
+
+                <Separator
+                    tk:Property.IsVisible="{Binding SelectedBatch.IsLocked, FallbackValue=False}"/>
+
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    tk:Property.IsVisible="{Binding SelectedBatch.IsLocked, FallbackValue=False}"
+                    Text="{x:Static r:Strings.TextLocked}"/>
+            </StatusBar>
+        </tk:SplitterGrid.HeaderRight>
+
+        <tk:SplitterGrid.ContentLeft>
+            <tk:DataGrid
+                CanUserReorderColumns="True"
+                HeaderMode="ColumnSelector"
+                ColumnSelectorMinimumVisible="3"                
+                RowHeight="{Binding Config.DataGridRowHeight}"
+                ItemsSource="{Binding ListView}"
+                SelectedItem="{Binding SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Columns}">
+                
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                </DataGrid.ContextMenu>
+                
+            </tk:DataGrid>
+        </tk:SplitterGrid.ContentLeft>
+
+        <tk:SplitterGrid.ContentRight>
+            <vw:SubmissionEditContainer Visibility="{Binding EditVisibility}"/>
+        </tk:SplitterGrid.ContentRight>
+
+    </tk:SplitterGrid>
+
+</UserControl>

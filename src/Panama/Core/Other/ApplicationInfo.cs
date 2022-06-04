@@ -4,25 +4,17 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database;
-using Restless.Tools.Utility;
 using System;
-using System.IO;
+using System.Reflection;
+using System.Runtime.Versioning;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// A singleton class that provides information about the application.
     /// </summary>
     public sealed class ApplicationInfo
     {
-        #region Private
-        private const string DefaultRootFileName = "DevelopmentRoot.txt";
-        private const string DefaultRootEntry = "DevelopmentRoot=";
-        #endregion
-
-        /************************************************************************/
-
         #region Public properties
         /// <summary>
         /// Gets the singleton instance of this class.
@@ -32,75 +24,57 @@ namespace Restless.App.Panama.Core
         /// <summary>
         /// Gets the assembly information object.
         /// </summary>
-        public AssemblyInfo Assembly
-        {
-            get;
-            private set;
-        }
+        public Assembly Assembly { get; }
 
         /// <summary>
-        /// Gets the build date for the assembly.
+        /// Gets the assembly product
         /// </summary>
-        public DateTime BuildDate
-        {
-            get
-            {
-                var version = Assembly.VersionRaw;
-                DateTime buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
-                return buildDate;
-            }
-        }
+        public string Product => Assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
 
         /// <summary>
-        /// Gets the root folder for the application.
+        /// Gets the assembly title
         /// </summary>
-        /// <remarks>
-        /// <para>
-        /// This property is used to locate the database file. The sub-directory "db" is always appended.
-        /// </para>
-        /// <para>
-        /// During normal execution, this property returns the location of the application executable.
-        /// During development, you can specify a folder to be used by modifying DevelopmentRoot.txt.
-        /// That way, you can use a database located outside of the development environment.
-        /// </para>
-        /// </remarks>
-        public string RootFolder
-        {
-            get;
-            private set;
-        }
+        public string Title => Assembly.GetCustomAttribute<AssemblyTitleAttribute>()?.Title; 
 
         /// <summary>
-        /// Gets the name of the reference help file.
+        /// Gets the company
         /// </summary>
-        public string ReferenceFileName
-        {
-            get => Path.Combine(RootFolder, "Panama.Reference.chm");
-        }
+        public string Company => Assembly.GetCustomAttribute<AssemblyCompanyAttribute>()?.Company;
 
         /// <summary>
-        /// Gets the database file name
+        /// Gets the description
         /// </summary>
-        public string DatabaseFileName
-        {
-            get => DatabaseController.Instance.DatabaseFileName;
-        }
+        public string Description => Assembly.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description;
 
         /// <summary>
-        /// Gets a boolean value that indicates if the database importer is enabled
+        /// Gets the copyright
         /// </summary>
-        public bool DatabaseImportEnabled
-        {
-            get => DatabaseImporter.Instance.IsEnabled;
-        }
+        public string Copyright => Assembly.GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright;
+
+        /// <summary>
+        /// Gets the framework
+        /// </summary>
+        public string Framework => Assembly.GetCustomAttribute<TargetFrameworkAttribute>().FrameworkName;
+
+        /// <summary>
+        /// Gets the raw version property for the assmebly.
+        /// </summary>
+        public Version VersionRaw => Assembly.GetName().Version;
+
+        /// <summary>
+        /// Gets the full version of the assembly as a string.
+        /// </summary>
+        public string Version => VersionRaw.ToString();
+
+        /// <summary>
+        /// Gets the major version of the calling assembly.
+        /// </summary>
+        public string VersionMajor => $"{VersionRaw.Major}.{VersionRaw.Minor}";
 
         /// <summary>
         /// Gets a boolean value that indicates if the current process is a 64 bit process.
         /// </summary>
-        public bool Is64Bit
-        {
-            get => Environment.Is64BitProcess;
-        }
+        public bool Is64Bit => Environment.Is64BitProcess;
         #endregion
 
         /************************************************************************/
@@ -109,30 +83,7 @@ namespace Restless.App.Panama.Core
 
         private ApplicationInfo()
         {
-            Assembly = new AssemblyInfo(AssemblyInfoType.Entry);
-
-            RootFolder = Path.GetDirectoryName(Assembly.Location);
-            string loc = RootFolder.ToLower();
-            if (
-                loc.Contains(@"bin\debug") || loc.Contains(@"bin\release") ||
-                loc.Contains(@"bin\x86\debug") || loc.Contains(@"bin\x86\release") ||
-                loc.Contains(@"bin\x64\debug") || loc.Contains(@"bin\x64\release")
-               )
-            {
-                string devName = Path.Combine(RootFolder, DefaultRootFileName);
-                if (File.Exists(devName))
-                {
-                    string[] lines = File.ReadAllLines(devName);
-                    foreach (string line in lines)
-                    {
-                        if (line.StartsWith(DefaultRootEntry))
-                        {
-                            RootFolder = line.Substring(DefaultRootEntry.Length);
-                        }
-                    }
-                }
-            }
-
+            Assembly = Assembly.GetEntryAssembly();
         }
         #endregion
     }

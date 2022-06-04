@@ -1,0 +1,170 @@
+﻿<tk:AppWindow
+    x:Class="Restless.Panama.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
+    d:DesignHeight="300" d:DesignWidth="610"
+    mc:Ignorable="d" 
+    Style="{StaticResource DefaultAppWindowStyle}"
+    Title="{Binding Path=DisplayName, Mode=OneTime}" 
+    TextOptions.TextRenderingMode="ClearType"
+    WindowStartupLocation="CenterScreen">
+
+    <tk:AppWindow.Menu>
+        <Menu KeyboardNavigation.TabNavigation="Cycle">
+            <MenuItem Header="_File">
+                <MenuItem Header="Save" Icon="{StaticResource SaveIconKey}" Command="{Binding Commands[Save]}" />
+                <Separator />
+                <MenuItem Header="E_xit" Icon="{StaticResource ExitIconKey}" Command="{Binding Commands[Close]}" />
+            </MenuItem>
+            
+            <MenuItem Header="_Settings">
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemAuthors}"
+                    Icon="{StaticResource UserIconKey}"
+                    Command="{Binding Commands[NavigateAuthor]}"/>
+                
+                <!--<MenuItem
+                    Header="Credentials" 
+                    Icon="{StaticResource LockIconKey}" 
+                    Command="{Binding Commands[NavigateCredential]}"/>-->
+                
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemTags}"
+                    Icon="{StaticResource TagIconKey}"
+                    Command="{Binding Commands[NavigateTag]}"/>
+                
+                <Separator />
+                
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemSettings}"
+                    Icon="{StaticResource SettingsIconKey}"
+                    Command="{Binding Commands[OpenSettingsWindow]}" />
+            </MenuItem>
+
+            <MenuItem Header="_Tools">
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemUpdateTools}"
+                    Icon="{StaticResource ToolIconKey}"
+                    Command="{Binding Commands[OpenToolWindow]}"/>
+
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemLinkVerify}"
+                    Icon="{StaticResource LinkIconKey}"
+                    Command="{Binding Commands[NavigateLinkVerify]}"
+                    tk:Property.IsVisible="{Binding Config.IsVerifyLinkEnabled}"/>
+
+                <Separator/>
+
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemTableInfo}"
+                    Icon="{StaticResource TableIconKey}"
+                    Command="{Binding Commands[NavigateTable]}"/>
+
+                <!--<MenuItem Header="Message Sync" Icon="{StaticResource ImageToolMessageSyncMenu}" Command="{Binding Commands[ToolMessageSync]}"/>-->
+                <!--<MenuItem Header="Convert" Icon="{StaticResource ImageToolConvertMenu}" Command="{Binding Commands[ToolConvert]}"/>-->
+                <!--<MenuItem Header="Scramble" Command="{Binding Commands[ToolScramble]}"/>-->
+                <Separator/>
+
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemSearch}"
+                    Icon="{StaticResource SearchIconKey}"
+                    Command="{Binding Commands[NavigateSearch]}"/>
+
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemResetWindow}"
+                    Icon="{StaticResource SquareSmallGrayIconKey}"
+                    Command="{Binding Commands[ResetWindow]}"
+                    ToolTip="{x:Static r:Strings.ToolTipResetWindow}"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem
+                    Header="About"
+                    Icon="{StaticResource ImageInformationMenu}"
+                    Command="{Binding Commands[OpenAboutWindow]}"/>
+            </MenuItem>
+        </Menu>
+    </tk:AppWindow.Menu>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                MinWidth="{x:Static core:Config+MainNavigation.MinWidth}"
+                MaxWidth="{x:Static core:Config+MainNavigation.MaxWidth}"
+                Width="{Binding MainNavigationWidth, Mode=TwoWay}"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="32"/>
+        </Grid.RowDefinitions>
+
+        <!-- Main navigator -->
+        <StackPanel>
+            <TextBlock
+                Style="{StaticResource NavTitleTextBlockStyle}"
+                Text="{Binding AppInfo.Product}"/>
+
+            <tk:MainNavigator
+                IsExpanded="{Binding Config.NavTitlesExpander}"
+                HeaderText="{x:Static r:Strings.NavHeaderMain}"
+                ItemsSource="{Binding NavigatorItems.Groups[0]}" 
+                SelectedItem="{Binding NavigatorItems.SelectedItems[0]}"/>
+
+            <tk:MainNavigator
+                IsExpanded="{Binding Config.NavSettingsExpander}"
+                HeaderText="{x:Static r:Strings.NavHeaderSettings}"
+                ItemsSource="{Binding NavigatorItems.Groups[1]}"
+                SelectedItem="{Binding NavigatorItems.SelectedItems[1]}"/>
+
+            <tk:MainNavigator
+                IsExpanded="{Binding Config.NavOtherExpander}"
+                HeaderText="{x:Static r:Strings.NavHeaderOther}"
+                ItemsSource="{Binding NavigatorItems.Groups[2]}"
+                SelectedItem="{Binding NavigatorItems.SelectedItems[2]}"/>
+
+        </StackPanel>
+
+        <!-- Navigator splitter -->
+        <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitterStyle}"/>
+
+        <!-- Pages go inside the border -->
+        <Border Grid.Column="2" Style="{StaticResource MainContentBorderStyle}">
+            <ContentControl Content="{Binding SelectedViewModel}"/>
+        </Border>
+
+        <!-- Status bar (bottom) -->
+        <StatusBar Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource MainStatusBarStyle}"/>
+        
+        
+
+
+        <!-- ItemsControl to hold the main toolbar buttons -->
+        <!--<ItemsControl DockPanel.Dock="Top" Style="{StaticResource ItemsControlMenu}" ItemsSource="{Binding Path=VisualCommands}"/>
+        <Border DockPanel.Dock="Top" Style="{StaticResource MainBorderSeparator}" />-->
+
+        <!--<Grid Margin="4" DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="24" />
+            </Grid.RowDefinitions>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock  Style="{StaticResource TextBlockOpener}" Text="{Binding AppInfo.Assembly.Title}" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="{StaticResource ImageDotBlue}" Style="{StaticResource ImageOpener}" />
+                    <Image Source="{StaticResource ImageDotRed}" Style="{StaticResource ImageOpener}" />
+                    <Image Source="{StaticResource ImageDotGreen}" Style="{StaticResource ImageOpener}" />
+                </StackPanel>
+            </StackPanel>
+            <ContentControl Content="{Binding Path=Workspaces}" ContentTemplate="{StaticResource WorkspacesTemplate}" />
+            <StatusBar Grid.Row="1">
+                <TextBlock Style="{StaticResource StatusBarNotificationMessage}"/>
+            </StatusBar>
+        </Grid>-->
+    </Grid>
+</tk:AppWindow>

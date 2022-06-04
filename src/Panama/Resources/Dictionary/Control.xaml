@@ -1,0 +1,95 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021">
+
+    <!-- Default (base) style for all controls   -->
+    <Style x:Key="DefaultControlStyle" TargetType="Control">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}"/>
+        <Setter Property="Foreground" Value="{StaticResource DefaultForegroundBrush}"/>
+    </Style>
+
+    <!-- Base style for TextBox  -->
+    <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource DefaultControlStyle}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{StaticResource TextBoxBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBoxForegroundBrush}"/>
+        <Style.Triggers>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter Property="Opacity" Value="0.85"/>
+                <Setter Property="BorderBrush" Value="{StaticResource LightBorderBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}"/>
+
+    <!-- Base style for CheckBox -->
+    <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultControlStyle}">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="4,0,4,0" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+    <!-- Base style for RadioButton -->
+    <Style TargetType="RadioButton" BasedOn="{StaticResource DefaultControlStyle}">
+        <Setter Property="FontSize" Value="12.5" />
+        <Setter Property="Margin" Value="8,4" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+    <!-- Base style for ComboBox-->
+    <Style TargetType="ComboBox" BasedOn="{StaticResource DefaultControlStyle}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <!-- Base style for ListBox -->
+    <Style TargetType="ListBox" BasedOn="{StaticResource DefaultControlStyle}">
+        <Setter Property="FontSize" Value="11.0"/>
+        <Setter Property="MinHeight" Value="80"/>
+    </Style>
+
+    <!-- Base style for GroupBox -->
+    <Style TargetType="GroupBox">
+        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Border>
+                        <TextBlock Text="{Binding}" Foreground="{StaticResource LabelBrush}"/>
+                    </Border>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DefaultRadioButtonPanelStyle" TargetType="tk:RadioButtonPanel">
+        <Setter Property="TemplateStyle" Value="Underline"/>
+        <Setter Property="UnderlineHeight" Value="3"/>
+    </Style>
+
+    <Style TargetType="tk:RadioButtonPanel" BasedOn="{StaticResource DefaultRadioButtonPanelStyle}"/>
+    
+    <Style x:Key="DefaultRadioButtonStyle" TargetType="tk:RadioButton">
+        <Setter Property="Margin" Value="8,0"/>
+        <Setter Property="Padding" Value="0,2"/>
+        <Setter Property="Foreground" Value="{StaticResource SelectorForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource SelectorBackgroundBrush}"/>
+    </Style>
+
+    <Style TargetType="tk:RadioButton" BasedOn="{StaticResource DefaultRadioButtonStyle}"/>
+
+    <Style TargetType="MenuItem">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+</ResourceDictionary>

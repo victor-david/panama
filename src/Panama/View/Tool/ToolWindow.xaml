@@ -1,0 +1,158 @@
+﻿<tk:AppWindow
+    x:Class="Restless.Panama.View.ToolWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:ToolWindowViewModel}"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="610"
+    ResizeMode="CanResizeWithGrip"
+    Title="{x:Static r:Strings.MenuItemTools}"
+    Style="{StaticResource DefaultAppWindowStyle}"
+    Height="{Binding Config.ToolWindowHeight, Mode=TwoWay}" 
+    Width="{Binding Config.ToolWindowWidth, Mode=TwoWay}">
+
+    <tk:AppWindow.Menu>
+        <Menu>
+            <MenuItem Header="Tools">
+                <MenuItem
+                    Header="{x:Static r:Strings.MenuItemResetWindow}"
+                    Icon="{StaticResource SquareSmallGrayIconKey}"
+                    Command="{Binding Commands[ResetWindow]}"
+                    ToolTip="{x:Static r:Strings.ToolTipResetWindow}"/>
+            </MenuItem>            
+        </Menu>
+    </tk:AppWindow.Menu>
+    
+    <Grid
+        tk:Property.ColumnWidths="126,*"
+        tk:Property.RowHeights="*"
+        Style="{StaticResource DataEntryPanelStyle}">
+        
+        <ListBox
+            BorderThickness="0,0,1,0"
+            ItemsSource="{Binding Sections}"
+            DisplayMemberPath="Name"
+            SelectedItem="{Binding SelectedSection}"/>
+
+        <!-- Wait panel for any operation -->
+        <tk:WaitPanel
+            Margin="0,10"
+            BorderThickness="0"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Center"
+            tk:Property.IsVisible="{Binding IsOperationInProgress}"/>
+
+        <Grid
+            Grid.Column="1"
+            Grid.RowSpan="2"
+            Margin="{StaticResource TightPadding}">
+
+            <Panel.Resources>
+                <Style TargetType="tk:IconButton" BasedOn="{StaticResource DefaultIconButtonStyle}">
+                    <Setter Property="Margin" Value="0,5"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="Width" Value="60"/>
+                    <Setter Property="Content" Value="{x:Static r:Strings.TextStart}"/>
+                    <Setter Property="Icon" Value="{StaticResource SquareSmallGreenIconKey}"/>
+                    <Setter Property="tk:Property.IsInverseEnabled" Value="{Binding IsOperationInProgress}"/>
+                </Style>
+            </Panel.Resources>
+
+            <!-- Section 1 (title metadata) -->
+            <HeaderedContentControl
+                Header="{x:Static r:Strings.HeaderToolTitleMetadata}"
+                tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
+                tk:Property.IsLongVisibleValue="1">
+
+                <vw:ToolDetail
+                    Mode="Standard"
+                    ExplanationText="{x:Static r:Strings.ToolTitleMetadataDetail}"
+                    FolderDisplay="{Binding Config.FolderTitleRoot, Mode=OneTime}"
+                    StatusText="{Binding Adapter.Status[0]}"
+                    UpdatedItemsSource="{Binding Adapter.Updated[0]}"
+                    NotFoundItemsSource="{Binding Adapter.NotFound[0]}"
+                    Command="{Binding Commands[RunTitleMetadata]}"/>
+
+            </HeaderedContentControl>
+
+            <!-- Section 2 (submission metadata) -->
+            <HeaderedContentControl
+                Header="{x:Static r:Strings.HeaderToolSubmissionMetadata}"
+                tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
+                tk:Property.IsLongVisibleValue="2">
+
+                <vw:ToolDetail
+                    Mode="Standard"
+                    ExplanationText="{x:Static r:Strings.ToolSubmissionMetadataDetail}"
+                    FolderDisplay="{Binding Config.FolderSubmissionDocument, Mode=OneTime}"
+                    StatusText="{Binding Adapter.Status[1]}"
+                    UpdatedItemsSource="{Binding Adapter.Updated[1]}"
+                    NotFoundItemsSource="{Binding Adapter.NotFound[1]}"
+                    Command="{Binding Commands[RunSubmissionMetadata]}"/>
+
+            </HeaderedContentControl>
+
+            <!-- Section 3 (export) -->
+            <HeaderedContentControl
+                Header="{x:Static r:Strings.HeaderToolExport}"
+                tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
+                tk:Property.IsLongVisibleValue="3">
+
+                <vw:ToolDetail
+                    Mode="Standard"
+                    ExplanationText="{x:Static r:Strings.ToolExportDetail}"
+                    FolderDisplay="{Binding Config.FolderExport, Mode=OneTime}"
+                    StatusText="{Binding Adapter.Status[2]}"
+                    UpdatedText="{x:Static r:Strings.TextAddedUpdated}"
+                    NotFoundText="{x:Static r:Strings.TextRemoved}"
+                    UpdatedItemsSource="{Binding Adapter.Updated[2]}"
+                    NotFoundItemsSource="{Binding Adapter.NotFound[2]}"
+                    Command="{Binding Commands[RunExport]}"/>
+
+            </HeaderedContentControl>
+
+            <!-- Section 4 (title list) -->
+            <HeaderedContentControl
+                Header="{x:Static r:Strings.HeaderToolTitleList}"
+                tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
+                tk:Property.IsLongVisibleValue="4">
+
+                <vw:ToolDetail
+                    Mode="Bare"
+                    ExplanationText="{x:Static r:Strings.ToolTitleListDetail}"
+                    FolderDisplay="{Binding TitleListFileName, Mode=OneTime}"
+                    StatusText="{Binding Adapter.Status[3]}"
+                    Command="{Binding Commands[RunTitleList]}"/>
+
+            </HeaderedContentControl>
+            
+            <!-- Section 5 (orphans) -->
+            <HeaderedContentControl
+                Header="{x:Static r:Strings.HeaderToolOrphan}"
+                tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
+                tk:Property.IsLongVisibleValue="5">
+
+                <vw:ToolDetail
+                    Mode="Preview"
+                    ExplanationText="{x:Static r:Strings.ToolOrphanDetail}"
+                    FolderDisplay="{Binding SelectedOrphan.FullName}"
+                    StatusText="{Binding Adapter.Status[4]}"
+                    UpdatedText="{x:Static r:Strings.TextOrphans}"
+                    PreviewMode="{Binding OrphanPreviewMode}"
+                    PreviewText="{Binding OrphanPreviewText}"
+                    PreviewImageSource="{Binding OrphanImageSource}"
+                    SelectedUpdatedItem="{Binding SelectedOrphan}"
+                    UpdatedItemsSource="{Binding Adapter.Updated[4]}"
+                    Command="{Binding Commands[RunOrphan]}"
+                    UpdatedContextMenu="{Binding OrphanContextMenu}"/>                
+                
+            </HeaderedContentControl>
+
+        </Grid>
+    </Grid>
+</tk:AppWindow>

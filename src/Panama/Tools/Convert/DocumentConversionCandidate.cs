@@ -5,7 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 #if DOCX
-using Restless.App.Panama.Core;
+using Restless.Panama.Core;
 using Restless.App.Panama.Database;
 using Restless.App.Panama.Database.Tables;
 using Restless.Tools.Mvvm;
@@ -14,7 +14,7 @@ using Restless.Tools.Utility;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Restless.App.Panama.Tools
+namespace Restless.Panama.Tools
 {
     /// <summary>
     /// Represents a single candidate for the file conversion operation.

@@ -4,15 +4,15 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.OpenXml;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Utility;
+using Restless.Toolkit.Core.OpenXml;
 using System;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides static methods to preview a document
@@ -27,18 +27,14 @@ namespace Restless.App.Panama.Core
         /// <returns>The preview mode</returns>
         public static PreviewMode GetPreviewMode(string fileName)
         {
-            Validations.ValidateNullEmpty(fileName, "Preview.FileName");
+            Throw.IfEmpty(fileName);
             long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
-            switch (docType)
+            return docType switch
             {
-                case DocumentTypeTable.Defs.Values.WordOpenXmlFileType:
-                case DocumentTypeTable.Defs.Values.TextFileType:
-                case DocumentTypeTable.Defs.Values.HtmlFileType:
-                    return PreviewMode.Text;
-                case DocumentTypeTable.Defs.Values.ImageFileType:
-                    return PreviewMode.Image;
-            }
-            return PreviewMode.Unsupported;
+                DocumentTypeTable.Defs.Values.WordOpenXmlFileType or DocumentTypeTable.Defs.Values.TextFileType or DocumentTypeTable.Defs.Values.HtmlFileType => PreviewMode.Text,
+                DocumentTypeTable.Defs.Values.ImageFileType => PreviewMode.Image,
+                _ => PreviewMode.Unsupported,
+            };
         }
 
         /// <summary>
@@ -48,19 +44,15 @@ namespace Restless.App.Panama.Core
         /// <returns>The text.</returns>
         public static string GetText(string fileName)
         {
-            Validations.ValidateNullEmpty(fileName, "Preview.FileName");
+            Throw.IfEmpty(fileName);
             long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
-            switch (docType)
+            return docType switch
             {
-                case DocumentTypeTable.Defs.Values.WordOpenXmlFileType:
-                    return PreviewWordOpenXml(fileName);
-                case DocumentTypeTable.Defs.Values.TextFileType:
-                    return PreviewText(fileName);
-                case DocumentTypeTable.Defs.Values.HtmlFileType:
-                    return PreviewHtml(fileName);
-                default:
-                    return "Unsupported document type";
-            }
+                DocumentTypeTable.Defs.Values.WordOpenXmlFileType => PreviewWordOpenXml(fileName),
+                DocumentTypeTable.Defs.Values.TextFileType => PreviewText(fileName),
+                DocumentTypeTable.Defs.Values.HtmlFileType => PreviewHtml(fileName),
+                _ => "Unsupported document type",
+            };
         }
 
         /// <summary>
@@ -70,14 +62,16 @@ namespace Restless.App.Panama.Core
         /// <returns>The image</returns>
         public static BitmapImage GetImage(string fileName)
         {
+            Throw.IfEmpty(fileName);
+
             int width = 250;
-            using (var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (FileStream stream = new(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                var bitmapFrame = BitmapFrame.Create(stream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
+                BitmapFrame bitmapFrame = BitmapFrame.Create(stream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
                 width = bitmapFrame.PixelWidth;
             }
 
-            BitmapImage img = new BitmapImage();
+            BitmapImage img = new();
             img.BeginInit();
             img.UriSource = new Uri(fileName);
             img.DecodePixelWidth = width;
@@ -92,31 +86,29 @@ namespace Restless.App.Panama.Core
 
         private static string PreviewWordOpenXml(string fileName)
         {
-            try
-            {
-                return OpenXmlDocument.Reader.GetText(fileName);
-            }
-            catch(Exception ex)
-            {
-                return ex.Message;
-            }
+            return GetPreviewText(fileName, f => OpenXmlDocument.Reader.GetText(f));
         }
 
         private static string PreviewText(string fileName)
         {
-            try
-            {
-                return File.ReadAllText(fileName);
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            return GetPreviewText(fileName, f => File.ReadAllText(f));
         }
 
         private static string PreviewHtml(string fileName)
         {
             return PreviewText(fileName);
+        }
+
+        private static string GetPreviewText(string fileName, Func<string, string> evaluator)
+        {
+            try
+            {
+                return evaluator(fileName);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
         #endregion
     }

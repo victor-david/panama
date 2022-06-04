@@ -112,107 +112,32 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CommandPublisher" xml:space="preserve">
-    <value>Publishers</value>
+  <data name="TextPublisher" xml:space="preserve">
+    <value>Publisher</value>
     <comment>Command text to view publishers</comment>
   </data>
-  <data name="CommandPublisherTooltip" xml:space="preserve">
-    <value>Manage existing publishers, create new publishers, etc.</value>
-    <comment>Tooltip text used for publisher command</comment>
-  </data>
-  <data name="CommandConfig" xml:space="preserve">
+  <data name="MenuItemSettings" xml:space="preserve">
     <value>Settings</value>
     <comment>Command text to enter the settings view</comment>
-  </data>
-  <data name="CommandConfigTooltip" xml:space="preserve">
-    <value>View and modify application settings</value>
-    <comment>Tooltip used for settings command</comment>
-  </data>
-  <data name="CommandTitle" xml:space="preserve">
-    <value>Titles</value>
-    <comment>Command text to view titles</comment>
-  </data>
-  <data name="CommandTitleTooltip" xml:space="preserve">
-    <value>Manage existing titles, create new titles, etc.</value>
-    <comment>Tooltip text used for title command</comment>
-  </data>
-  <data name="ValidationOperationIntegerNeeded" xml:space="preserve">
-    <value>An integer value is required</value>
-    <comment>Used during data validation when an integer is needed</comment>
-  </data>
-  <data name="CommandSave" xml:space="preserve">
-    <value>Save</value>
-    <comment>Command text for save command</comment>
-  </data>
-  <data name="CommandSaveTooltip" xml:space="preserve">
-    <value>Save all modifications to data</value>
-    <comment>Tooltip used for save command</comment>
-  </data>
-  <data name="CommandAddPublisher" xml:space="preserve">
-    <value>Add publisher</value>
-    <comment>Command text for add publisher</comment>
-  </data>
-  <data name="CommandAddPublisherTooltip" xml:space="preserve">
-    <value>Add a new publisher to the list</value>
-    <comment>Tooltip text for add publisher</comment>
-  </data>
-  <data name="CommandAddTitle" xml:space="preserve">
-    <value>Add title</value>
-    <comment>Command text for add title</comment>
-  </data>
-  <data name="CommandAddTitleTooltip" xml:space="preserve">
-    <value>Add a new title to the list</value>
-    <comment>Tooltip text for add title</comment>
-  </data>
-  <data name="CommandApplyConfig" xml:space="preserve">
-    <value>Apply</value>
-    <comment>Command text for config apply</comment>
-  </data>
-  <data name="CommandApplyConfigTooltip" xml:space="preserve">
-    <value>Apply the changed application settings</value>
-    <comment>Tooltip used for config apply</comment>
-  </data>
-  <data name="CommandRevertConfig" xml:space="preserve">
-    <value>Revert</value>
-    <comment>Command text for config revert</comment>
-  </data>
-  <data name="CommandRevertConfigTooltip" xml:space="preserve">
-    <value>Restore the changed application settings to their previous values</value>
-    <comment>Tooltip used for config revert</comment>
-  </data>
-  <data name="CommandAddSubmission" xml:space="preserve">
-    <value>Add submission</value>
-  </data>
-  <data name="CommandSubmission" xml:space="preserve">
-    <value>Submissions</value>
-    <comment>Command text for submissions</comment>
-  </data>
-  <data name="CommandSubmissionTooltip" xml:space="preserve">
-    <value>Add, view and modify submission information</value>
-    <comment>Tooltip text used for submissions</comment>
-  </data>
-  <data name="CommandAddSubmissionTooltip" xml:space="preserve">
-    <value>Create a new submission</value>
-    <comment>Tooltip text for add submission</comment>
   </data>
   <data name="InvalidOpCommandNotSupported" xml:space="preserve">
     <value>This command is not supported</value>
     <comment>Used for certain default commands that aren't supported in some VMs</comment>
   </data>
-  <data name="CommandDeletePublisher" xml:space="preserve">
+  <data name="MenuItemDeletePublisher" xml:space="preserve">
     <value>Delete this publisher</value>
     <comment>Used on context menu to delete a publisher</comment>
   </data>
-  <data name="CommandDeleteSubmission" xml:space="preserve">
+  <data name="MenuItemDeleteSubmission" xml:space="preserve">
     <value>Delete this submission</value>
     <comment>Used on context menu to delete a submission</comment>
   </data>
-  <data name="CommandDeleteTitle" xml:space="preserve">
+  <data name="MenuItemDeleteTitle" xml:space="preserve">
     <value>Delete this title</value>
     <comment>Used on context menu to delete a title</comment>
   </data>
@@ -232,11 +157,7 @@
     <value>This publisher cannot be deleted. It is participating in {0} submissions. </value>
     <comment>Used when a publisher cannot be deleted b/c it's involved in submissions</comment>
   </data>
-  <data name="CommandAuthor" xml:space="preserve">
-    <value>Authors</value>
-    <comment>Command text for author view</comment>
-  </data>
-  <data name="CommandDeleteAuthor" xml:space="preserve">
+  <data name="MenuItemDeleteAuthor" xml:space="preserve">
     <value>Delete this author</value>
   </data>
   <data name="ConfirmationDeleteAuthor" xml:space="preserve">
@@ -244,16 +165,12 @@
     <comment>Used to confirm author deletion</comment>
   </data>
   <data name="InvalidOpCannotDeleteAuthor" xml:space="preserve">
-    <value>This author cannot be deleted. He or she is participating in {0} titles. </value>
+    <value>This author cannot be deleted. They are participating in {0} titles. </value>
     <comment>Used when an author cannot be deleted b/c it's involved in titles</comment>
   </data>
-  <data name="CommandAddAuthor" xml:space="preserve">
-    <value>Add author</value>
+  <data name="MenuItemAddAuthor" xml:space="preserve">
+    <value>Add an author</value>
     <comment>Command text for add author</comment>
-  </data>
-  <data name="CommandAddAuthorTooltip" xml:space="preserve">
-    <value>Add a new author</value>
-    <comment>Tooltip text for add author</comment>
   </data>
   <data name="TextNone" xml:space="preserve">
     <value>(none)</value>
@@ -276,14 +193,11 @@ Please make sure that {1} is set correctly in configuration settings. File speci
     <value>This document type is obsolete and is no longer supported</value>
     <comment>Used when attempting to view obsolete Outlook direct reference in submission documents</comment>
   </data>
-  <data name="CommandCreateSubmission" xml:space="preserve">
-    <value>Create a submission to this publisher</value>
+  <data name="MenuItemCreateSubmission" xml:space="preserve">
+    <value>Create a submission</value>
     <comment>Command text for create a submission</comment>
   </data>
-  <data name="CommandAddTitleToSubmission" xml:space="preserve">
-    <value>Add this title to a submission</value>
-  </data>
-  <data name="CommandBrowseToPublisherUrlOrClick" xml:space="preserve">
+  <data name="MenuItemBrowseToPublisherUrlOrClick" xml:space="preserve">
     <value>Browse to this publisher's web site (or double click the row)</value>
   </data>
   <data name="FormatStringCreateSubmission" xml:space="preserve">
@@ -297,28 +211,13 @@ Please make sure that {1} is set correctly in configuration settings. File speci
   <data name="ResultSubmissionCreated" xml:space="preserve">
     <value>Submission created</value>
   </data>
-  <data name="FilterPromptPublisher" xml:space="preserve">
-    <value>Publisher name</value>
-  </data>
-  <data name="FilterPromptSubmission" xml:space="preserve">
-    <value>Publisher or response type</value>
-  </data>
-  <data name="FilterPromptTitle" xml:space="preserve">
-    <value>Title</value>
-  </data>
   <data name="CommandAddTag" xml:space="preserve">
     <value>Add a tag</value>
   </data>
-  <data name="CommandAddTagTooltip" xml:space="preserve">
-    <value>Add a tag to be used with titles</value>
-  </data>
-  <data name="CommandTag" xml:space="preserve">
+  <data name="MenuItemTags" xml:space="preserve">
     <value>Tags</value>
   </data>
-  <data name="FilterPromptTag" xml:space="preserve">
-    <value>Tag name</value>
-  </data>
-  <data name="CommandDeleteTag" xml:space="preserve">
+  <data name="MenuItemDeleteTag" xml:space="preserve">
     <value>Delete this tag</value>
   </data>
   <data name="ConfirmationDeleteTag" xml:space="preserve">
@@ -329,53 +228,29 @@ Please make sure that {1} is set correctly in configuration settings. File speci
     <value>This tag cannot be deleted. It is being used by {0} titles. </value>
     <comment>Used when a tag cannot be deleted b/c it's being used</comment>
   </data>
-  <data name="CommandRefreshTagUsage" xml:space="preserve">
-    <value>Refresh usage</value>
-  </data>
-  <data name="CommandRefreshTagUsageTooltip" xml:space="preserve">
-    <value>Refresh tag usage. This gets automatically refreshed when you restart the application, but you can do it manually if needed</value>
-  </data>
   <data name="ConfirmationRemoveTitleFromSubmission" xml:space="preserve">
     <value>Remove title from this submission?</value>
-  </data>
-  <data name="CommandTitleFilter" xml:space="preserve">
-    <value>Filter options</value>
-  </data>
-  <data name="CommandTitleFilterTooltip" xml:space="preserve">
-    <value>View or hide the title filter options</value>
   </data>
   <data name="TextSubmitted" xml:space="preserve">
     <value>Submitted</value>
   </data>
-  <data name="CommandTable" xml:space="preserve">
-    <value>Tables</value>
-  </data>
-  <data name="FilterPromptTable" xml:space="preserve">
-    <value>Table name</value>
+  <data name="MenuItemTableInfo" xml:space="preserve">
+    <value>Table info</value>
   </data>
   <data name="CommandLink" xml:space="preserve">
     <value>Links</value>
   </data>
-  <data name="FilterPromptLink" xml:space="preserve">
-    <value>Link name or note</value>
-  </data>
-  <data name="CommandAddLink" xml:space="preserve">
+  <data name="MenuItemAddLink" xml:space="preserve">
     <value>Add link</value>
   </data>
-  <data name="CommandAddLinkTooltip" xml:space="preserve">
-    <value>Add a link to a resource</value>
-  </data>
-  <data name="CommandDeleteLink" xml:space="preserve">
+  <data name="MenuItemDeleteLink" xml:space="preserve">
     <value>Delete this link</value>
   </data>
-  <data name="CommandDeleteNote" xml:space="preserve">
+  <data name="MenuItemDeleteNote" xml:space="preserve">
     <value>Delete this note</value>
   </data>
   <data name="ConfirmationDeleteLink" xml:space="preserve">
     <value>Delete this link?</value>
-  </data>
-  <data name="ConfirmationDeleteNote" xml:space="preserve">
-    <value>Delete this note?</value>
   </data>
   <data name="HeaderDocuments" xml:space="preserve">
     <value>Documents</value>
@@ -415,13 +290,10 @@ does not exist. Correct this by selecting the correct file and then try again.</
     <value>records</value>
   </data>
   <data name="ConfirmationRemoveTitleVersion" xml:space="preserve">
-    <value>This operation will remove the selected version from this title. It does not delete the file on disk. Do you want to continue?</value>
+    <value>This operation will remove the selected version from this title. It does not delete the file on disk.</value>
   </data>
   <data name="CaptionSelectTitleVersionReplaceByFile" xml:space="preserve">
     <value>Select a file to replace the file of the selected version</value>
-  </data>
-  <data name="CommandTool" xml:space="preserve">
-    <value>Tools</value>
   </data>
   <data name="NotificationCannotExitTasksAreRunning" xml:space="preserve">
     <value>Cannot exit at this time. Background tasks are still running.</value>
@@ -441,14 +313,14 @@ does not exist. Correct this by selecting the correct file and then try again.</
   <data name="CaptionSelectSubmissionDocument" xml:space="preserve">
     <value>Select a submission document</value>
   </data>
-  <data name="HeaderToolOperationExport" xml:space="preserve">
-    <value>This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted. Files are exported to: {0}</value>
+  <data name="ToolExportDetail" xml:space="preserve">
+    <value>This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted.</value>
   </data>
-  <data name="HeaderToolOperationMetaUpdate" xml:space="preserve">
-    <value>This operation first compacts the database file, and then verfies that all files associated with title versions and submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count.</value>
+  <data name="ToolTitleMetadataDetail" xml:space="preserve">
+    <value>This operation verifies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count.</value>
   </data>
-  <data name="InvalidOpExportFolderNotSet" xml:space="preserve">
-    <value>The folder for the export operation hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
+  <data name="InvalidOpOutputFolderNotSet" xml:space="preserve">
+    <value>The folder for this operation hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
   </data>
   <data name="FormatTextExport" xml:space="preserve">
     <value>This folder contains exported versions of each title tracked by {0}.
@@ -458,11 +330,11 @@ Usually, the individual files are kept in different sub directories; this direct
 
 Last exported: {1}</value>
   </data>
-  <data name="CommandFilterToPublisher" xml:space="preserve">
+  <data name="MenuItemFilterToPublisher" xml:space="preserve">
     <value>Filter list to display only submissions to this publisher</value>
   </data>
-  <data name="ConfirmationTitleSubmittedPreviouslyToPublisher" xml:space="preserve">
-    <value>This title has been previously submitted to the same publisher. Do you want to continue and submit it to the same publisher again?</value>
+  <data name="TitleStatusPreviousToPublisher" xml:space="preserve">
+    <value>Previously submitted to the same publisher</value>
   </data>
   <data name="TooltipTitleCurrentSubmissionCount" xml:space="preserve">
     <value>Current submission count - the number of submissions that are still open for this title</value>
@@ -483,10 +355,7 @@ Last exported: {1}</value>
     <value>Version count - the number of versions that this title has</value>
   </data>
   <data name="ConfirmationRemoveTitlePublished" xml:space="preserve">
-    <value>Remove this record of publication for this title?</value>
-  </data>
-  <data name="HeaderPublished" xml:space="preserve">
-    <value>Published</value>
+    <value>This operation removes the record of publication for this title. You can add a new record back at any time.</value>
   </data>
   <data name="WindowTitleSelectPublisherForPublished" xml:space="preserve">
     <value>Select a publisher for this published record</value>
@@ -494,67 +363,42 @@ Last exported: {1}</value>
   <data name="WindowTitleSelectPublisherGeneric" xml:space="preserve">
     <value>Select a publisher</value>
   </data>
-  <data name="TooltipPublisherAdded" xml:space="preserve">
+  <data name="ToolTipPublisherAdded" xml:space="preserve">
     <value>The date this publisher was added to the database</value>
   </data>
   <data name="TooltipPublisherLastSubmission" xml:space="preserve">
     <value>The date that the last submission was created for this publisher</value>
   </data>
-  <data name="TooltipPublisherSubmissionCount" xml:space="preserve">
+  <data name="ToolTipPublisherSubmissionCount" xml:space="preserve">
     <value>Submission count - the total number of times a submission has been made to this publisher</value>
   </data>
   <data name="ConfirmationDeleteSubmissionDocument" xml:space="preserve">
     <value>Getting ready to delete this submission document. This only deletes the entry in the database, not the associated document. Do you want to continue?</value>
     <comment>Used to confirm title deletion</comment>
   </data>
-  <data name="CommandAddUserNote" xml:space="preserve">
-    <value>Add note</value>
+  <data name="MenuItemAddUserNote" xml:space="preserve">
+    <value>Add a note</value>
     <comment>Command text for add user note</comment>
   </data>
-  <data name="CommandAddUserNoteTooltip" xml:space="preserve">
-    <value>Add a new note</value>
-    <comment>Tooltip text for add user note</comment>
-  </data>
-  <data name="CommandDeleteUserNote" xml:space="preserve">
-    <value>Delete this note</value>
-  </data>
-  <data name="CommandUserNote" xml:space="preserve">
+  <data name="TextNotes" xml:space="preserve">
     <value>Notes</value>
-  </data>
-  <data name="FilterPromptAuthor" xml:space="preserve">
-    <value>Author name</value>
-  </data>
-  <data name="FilterPromptUserNote" xml:space="preserve">
-    <value>Note title</value>
   </data>
   <data name="ConfirmationDeleteUserNote" xml:space="preserve">
     <value>Delete this note?</value>
   </data>
-  <data name="CommandClearFilter" xml:space="preserve">
+  <data name="TextClear" xml:space="preserve">
     <value>Clear</value>
-  </data>
-  <data name="CommandClearFilterTooltip" xml:space="preserve">
-    <value>Clear all filters</value>
   </data>
   <data name="ConfirmationRemoveSubmissionPeriod" xml:space="preserve">
     <value>Remove this submission period for this publisher?</value>
   </data>
-  <data name="TooltipPublisherSubmissionPeriodCount" xml:space="preserve">
+  <data name="ToolTipPublisherSubmissionPeriodCount" xml:space="preserve">
     <value>Submission period count - the total number of submission periods that have been assigned to this publisher</value>
   </data>
   <data name="ConfirmationDeleteSubmission" xml:space="preserve">
     <value>Getting ready to delete this submission. This will remove the submission record and all associated records such as submission documents and messages. It does not remove any documents from disk. Do you want to continue?</value>
   </data>
-  <data name="CommandToolExport" xml:space="preserve">
-    <value>Export</value>
-  </data>
-  <data name="CommandToolMeta" xml:space="preserve">
-    <value>Update</value>
-  </data>
-  <data name="CommandToolOrphan" xml:space="preserve">
-    <value>Find Orphans</value>
-  </data>
-  <data name="HeaderToolOperationOrphan" xml:space="preserve">
+  <data name="ToolOrphanDetail" xml:space="preserve">
     <value>This operation searches all files beneath the title root directory to find those files that are not associated with a title entry. The submission document folder and title export folder are automatically excluded from the search if they exist beneath title root. You can exclude other folders in configuration.</value>
   </data>
   <data name="InvalidOpTitleRootFolderNotSet" xml:space="preserve">
@@ -566,7 +410,7 @@ Last exported: {1}</value>
   <data name="HeaderToolOperationSearch" xml:space="preserve">
     <value>This operation searches all files beneath the title root directory to find all files that contain the specified search term.</value>
   </data>
-  <data name="CommandToolSearch" xml:space="preserve">
+  <data name="MenuItemSearch" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="ConfirmationRemoveSubmissionMessage" xml:space="preserve">
@@ -584,22 +428,19 @@ Last exported: {1}</value>
   <data name="InvalidOpTitleListOutputFolder" xml:space="preserve">
     <value>The output folder for the title list operation does not exist.</value>
   </data>
-  <data name="CommandToolTitleList" xml:space="preserve">
-    <value>Title list</value>
-  </data>
-  <data name="HeaderToolOperationTitleList" xml:space="preserve">
-    <value>This operation creates a text file that has a list of all titles and their corresponding versions. The text file is placed in the TitleRoot folder.</value>
+  <data name="ToolTitleListDetail" xml:space="preserve">
+    <value>This operation creates a text file that has a list of all titles and their corresponding versions.</value>
   </data>
   <data name="TooltipTitleWordCount" xml:space="preserve">
     <value>Word count - the number of words in the latest version of this title</value>
   </data>
-  <data name="CommandOpenItemOrDoubleClick" xml:space="preserve">
+  <data name="MenuItemOpenItemOrDoubleClick" xml:space="preserve">
     <value>Open this item (or double click the row)</value>
   </data>
-  <data name="CommandOpenTitleOrDoubleClick" xml:space="preserve">
+  <data name="MenuItemOpenTitleOrDoubleClick" xml:space="preserve">
     <value>Open the latest version of this title (or double click the row)</value>
   </data>
-  <data name="CommandBrowseToPublisherUrl" xml:space="preserve">
+  <data name="MenuItemBrowseToPublisherUrl" xml:space="preserve">
     <value>Browse to this publisher's web site</value>
   </data>
   <data name="CommandToolScramble" xml:space="preserve">
@@ -617,18 +458,6 @@ Last exported: {1}</value>
   <data name="HeaderToolOperationSearchFoundFormat" xml:space="preserve">
     <value>Results - {0}</value>
   </data>
-  <data name="HeaderToolOperationMetaSubmissionNotFoundFormat" xml:space="preserve">
-    <value>Submission documents (not found) - {0}</value>
-  </data>
-  <data name="HeaderToolOperationMetaSubmissionUpdatedFormat" xml:space="preserve">
-    <value>Submission documents (updated) - {0}</value>
-  </data>
-  <data name="HeaderToolOperationMetaTitleNotFoundFormat" xml:space="preserve">
-    <value>Title documents (not found) - {0}</value>
-  </data>
-  <data name="HeaderToolOperationMetaTitleUpdatedFormat" xml:space="preserve">
-    <value>Title documents (updated) - {0}</value>
-  </data>
   <data name="ConfirmationApplyExtractedTitleFormat" xml:space="preserve">
     <value>The title extracted from the latest version is:
 
@@ -641,9 +470,6 @@ Do you want to set the title to this value?</value>
 
 When you save properties here however, the document's file  modification date is not set to the current date / time as it is when you make the changes from within Word. Instead,  the modification date is incremented by 15 seconds from its original.</value>
   </data>
-  <data name="HeaderVersionPropertiesNotOpenXml" xml:space="preserve">
-    <value>The properties for this version cannot be displayed. Only Open Xml documents are supported.</value>
-  </data>
   <data name="CommandToolConvert" xml:space="preserve">
     <value>Convert</value>
   </data>
@@ -653,13 +479,10 @@ When you save properties here however, the document's file  modification date is
   <data name="HeaderToolOperationConvertFoundFormat" xml:space="preserve">
     <value>{0} eligible files, {1} converted</value>
   </data>
-  <data name="CommandStatistics" xml:space="preserve">
+  <data name="MenuItemStatistics" xml:space="preserve">
     <value>Statistics</value>
   </data>
-  <data name="CommandAddCredential" xml:space="preserve">
-    <value>Add credential</value>
-  </data>
-  <data name="CommandAddCredentialTooltip" xml:space="preserve">
+  <data name="MenuItemAddCredential" xml:space="preserve">
     <value>Add a credential set</value>
   </data>
   <data name="CommandCopyLoginId" xml:space="preserve">
@@ -668,7 +491,7 @@ When you save properties here however, the document's file  modification date is
   <data name="CommandCopyPassword" xml:space="preserve">
     <value>Copy password to clipboard</value>
   </data>
-  <data name="CommandCredential" xml:space="preserve">
+  <data name="MenuItemCredentials" xml:space="preserve">
     <value>Credentials</value>
   </data>
   <data name="CommandDeleteCredential" xml:space="preserve">
@@ -676,9 +499,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="ConfirmationDeleteCredential" xml:space="preserve">
     <value>This operation will remove the selected credential and remove its association with any publishers that are using it. Do you want to continue?</value>
-  </data>
-  <data name="FilterPromptCredential" xml:space="preserve">
-    <value>Credential name</value>
   </data>
   <data name="CaptionSelectTitleFilterFolder" xml:space="preserve">
     <value>Select the folder to filter the title list by</value>
@@ -698,20 +518,10 @@ When you save properties here however, the document's file  modification date is
   <data name="ConfirmationAllVersionFilesRenamed" xml:space="preserve">
     <value>Success. All eligible version files renamed.</value>
   </data>
-  <data name="ApplicationFatalExceptionFormat" xml:space="preserve">
-    <value>A fatal error occured.
-
-{0}
-
-The application cannot continue.</value>
-  </data>
-  <data name="CaptionFatalError" xml:space="preserve">
-    <value>Fatal Error</value>
-  </data>
   <data name="InstallationCaption" xml:space="preserve">
     <value>Select the directory that will hold the database files</value>
   </data>
-  <data name="CommandBrowseToUrlOrClick" xml:space="preserve">
+  <data name="MenuItemBrowseToUrlOrClick" xml:space="preserve">
     <value>Browse to this url (or double click the row)</value>
   </data>
   <data name="CaptionIconsDesigned1" xml:space="preserve">
@@ -723,17 +533,14 @@ The application cannot continue.</value>
   <data name="HeaderDates" xml:space="preserve">
     <value>Dates</value>
   </data>
-  <data name="HeaderPreview" xml:space="preserve">
+  <data name="TextPreview" xml:space="preserve">
     <value>Preview</value>
   </data>
-  <data name="HeaderSettingsSectionColor" xml:space="preserve">
+  <data name="HeaderSettingsColor" xml:space="preserve">
     <value>Colors</value>
   </data>
-  <data name="HeaderSettingsSectionFolder" xml:space="preserve">
-    <value>Folders</value>
-  </data>
-  <data name="HeaderSettingsSectionGeneral" xml:space="preserve">
-    <value>General</value>
+  <data name="HeaderSettingsDisplay" xml:space="preserve">
+    <value>Display</value>
   </data>
   <data name="HeaderSettingsDateFormat" xml:space="preserve">
     <value>Date Format</value>
@@ -741,31 +548,19 @@ The application cannot continue.</value>
   <data name="HeaderSettingsFolder" xml:space="preserve">
     <value>Folders</value>
   </data>
-  <data name="HeaderSettingsSectionSubmission" xml:space="preserve">
+  <data name="HeaderSettingsSubmission" xml:space="preserve">
     <value>Submission</value>
   </data>
-  <data name="ConfigDataGridRowHeight" xml:space="preserve">
+  <data name="SettingsDataGridRowHeight" xml:space="preserve">
     <value>Data grid row height</value>
   </data>
-  <data name="TooltipColorAlpha" xml:space="preserve">
-    <value>Display drop down colors in alphabetical order</value>
-  </data>
-  <data name="TooltipColorHSB" xml:space="preserve">
-    <value>Display drop down colors in order of hue, saturation and brightness</value>
-  </data>
-  <data name="TooltipColorReset" xml:space="preserve">
-    <value>Reset all colors to their default values</value>
-  </data>
-  <data name="ConfigDataGridRowAlternation" xml:space="preserve">
+  <data name="SettingsDataGridRowAlternation" xml:space="preserve">
     <value>Data grid row alternation</value>
   </data>
-  <data name="ConfigDataGrid" xml:space="preserve">
-    <value>Data Grid</value>
-  </data>
-  <data name="TooltipPublisherInPeriod" xml:space="preserve">
+  <data name="ToolTipPublisherInPeriod" xml:space="preserve">
     <value>Publisher is currently in one of its submission periods</value>
   </data>
-  <data name="TooltipPublisherPay" xml:space="preserve">
+  <data name="ToolTipPublisherPay" xml:space="preserve">
     <value>Publisher is a paying market</value>
   </data>
   <data name="ConfirmationAddTitle" xml:space="preserve">
@@ -778,123 +573,55 @@ Do you want to continue?</value>
 
 Do you want to continue?</value>
   </data>
-  <data name="CommandFilterAdvanced" xml:space="preserve">
-    <value>Advanced</value>
-  </data>
-  <data name="CommandFilterAdvancedTooltip" xml:space="preserve">
-    <value>Display / hide the advanced filters</value>
-  </data>
-  <data name="CommandTitleFilterPublished" xml:space="preserve">
-    <value>Published</value>
-  </data>
-  <data name="CommandTitleFilterPublishedTooltip" xml:space="preserve">
-    <value>Filter title list to display only titles that are published</value>
-  </data>
-  <data name="CommandTitleFilterReady" xml:space="preserve">
-    <value>Ready</value>
-  </data>
-  <data name="CommandTitleFilterReadyTooltip" xml:space="preserve">
-    <value>Filter title list to display only titles marked ready</value>
-  </data>
-  <data name="CommandTitleFilterSubmitted" xml:space="preserve">
-    <value>Submitted</value>
-  </data>
-  <data name="CommandTitleFilterSubmittedTooltip" xml:space="preserve">
-    <value>Filter title list to display only titles that are currently submitted</value>
-  </data>
-  <data name="CommandPublisherFilterFollowup" xml:space="preserve">
-    <value>Follow Up</value>
-  </data>
-  <data name="CommandPublisherFilterFollowupTooltip" xml:space="preserve">
+  <data name="ToolTipPublisherFilterFollowup" xml:space="preserve">
     <value>Filter publisher list to display only publishers that are active and flagged for follow up</value>
   </data>
-  <data name="CommandPublisherFilterInPeriod" xml:space="preserve">
-    <value>In Period</value>
-  </data>
-  <data name="CommandPublisherFilterInPeriodTooltip" xml:space="preserve">
+  <data name="ToolTipPublisherFilterInPeriod" xml:space="preserve">
     <value>Filter publisher list to display only publishers that are active and currently within a submission period</value>
   </data>
-  <data name="CommandPublisherFilterPaying" xml:space="preserve">
-    <value>Paying</value>
-  </data>
-  <data name="CommandPublisherFilterPayingTooltip" xml:space="preserve">
+  <data name="ToolTipPublisherFilterPaying" xml:space="preserve">
     <value>Filter publisher list to display only publishers that are active and are a paying market</value>
   </data>
-  <data name="CommandPublisherFilterActive" xml:space="preserve">
-    <value>Active</value>
-  </data>
-  <data name="CommandPublisherFilterActiveTooltip" xml:space="preserve">
+  <data name="ToolTipPublisherFilterActive" xml:space="preserve">
     <value>Filter publisher list to display only publishers that are active, i.e. not flagged as a goner</value>
   </data>
-  <data name="CommandAddAlert" xml:space="preserve">
-    <value>Add alert</value>
+  <data name="MenuItemAddAlert" xml:space="preserve">
+    <value>Add an alert</value>
   </data>
-  <data name="CommandAddAlertTooltip" xml:space="preserve">
-    <value>Add a new alert with default value</value>
-  </data>
-  <data name="CommandDeleteAlert" xml:space="preserve">
+  <data name="MenuItemDeleteAlert" xml:space="preserve">
     <value>Delete this alert</value>
   </data>
   <data name="ConfirmationDeleteAlert" xml:space="preserve">
     <value>Delete this alert?</value>
   </data>
-  <data name="FilterPromptAlert" xml:space="preserve">
-    <value>Alert title</value>
-  </data>
-  <data name="CommandAlert" xml:space="preserve">
+  <data name="MenuItemAlerts" xml:space="preserve">
     <value>Alerts</value>
   </data>
   <data name="ConfirmationCreateTitleFromOrphan" xml:space="preserve">
-    <value>This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.
-
-Do you want to continue?</value>
+    <value>This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.</value>
   </data>
-  <data name="ConfigOrphanExclusion" xml:space="preserve">
-    <value>Orphan exclusions. This value specifies folder exclusions used during orphan detection. Values are separated by semi-colon and if found within a folder name indicate that the folder is ignored.</value>
-  </data>
-  <data name="TooltipSubmissionContest" xml:space="preserve">
+  <data name="ToolTipSubmissionContest" xml:space="preserve">
     <value>Submission is for a contest</value>
   </data>
-  <data name="TooltipSubmissionLocked" xml:space="preserve">
+  <data name="ToolTipSubmissionLocked" xml:space="preserve">
     <value>Submission is locked</value>
   </data>
-  <data name="TooltipSubmissionOnline" xml:space="preserve">
+  <data name="ToolTipSubmissionOnline" xml:space="preserve">
     <value>Submission is online</value>
   </data>
-  <data name="TooltipTitleReady" xml:space="preserve">
+  <data name="ToolTipTitleFilterReady" xml:space="preserve">
     <value>Title is flagged as ready</value>
   </data>
-  <data name="TooltipPublisherExclusive" xml:space="preserve">
+  <data name="ToolTipPublisherExclusive" xml:space="preserve">
     <value>Publisher wants an exclusive submission, i.e. does not accept simultaneous</value>
   </data>
-  <data name="ConfirmationTitleSubmittedToExclusivePublisher" xml:space="preserve">
-    <value>This title is currently submitted to a publisher that does not accept simultaneous submissions. Do you want to continue and submit the title to another publisher?</value>
+  <data name="TitleStatusSubmittedToExclusive" xml:space="preserve">
+    <value>Currently submitted to a publisher that does not accept simultaneous submissions</value>
   </data>
-  <data name="CommandSubmissionFilterActive" xml:space="preserve">
-    <value>Active</value>
-  </data>
-  <data name="CommandSubmissionFilterActiveTooltip" xml:space="preserve">
-    <value>Filter submission list to display only submissions that are active, i.e. have not yet received a response</value>
-  </data>
-  <data name="CommandSubmissionFilterPersonalNote" xml:space="preserve">
-    <value>Personal</value>
-  </data>
-  <data name="CommandSubmissionFilterPersonalNoteTooltip" xml:space="preserve">
-    <value>Filter submission list to display submissions with a response type of Personal Note</value>
-  </data>
-  <data name="CommandSubmissionFilterTryAgain" xml:space="preserve">
-    <value>Try Again</value>
-  </data>
-  <data name="CommandSubmissionFilterTryAgainTooltip" xml:space="preserve">
-    <value>Filter submission list to display submissions with a response type of Try Again</value>
-  </data>
-  <data name="TooltipPublisherHasActive" xml:space="preserve">
+  <data name="ToolTipPublisherHasActive" xml:space="preserve">
     <value>Publisher currently has at least one submission that is active</value>
   </data>
-  <data name="CommandPublisherFilterHaveSub" xml:space="preserve">
-    <value>Open</value>
-  </data>
-  <data name="CommandPublisherFilterHaveSubTooltip" xml:space="preserve">
+  <data name="ToolTipPublisherFilterHaveSub" xml:space="preserve">
     <value>Filter publisher list to display only publishers that currently have an open submission</value>
   </data>
   <data name="InvalidOpSubmissionMessageFolderNotSet" xml:space="preserve">
@@ -918,25 +645,13 @@ Do you want to continue?</value>
   <data name="HeaderToolOperationMessageSync" xml:space="preserve">
     <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
   </data>
-  <data name="CommandClearTitleFlags" xml:space="preserve">
-    <value>Clear Flags</value>
-  </data>
-  <data name="CommandClearTitleFlagsTooltip" xml:space="preserve">
-    <value>Clear flag from all titles</value>
-  </data>
-  <data name="CommandFlagTitle" xml:space="preserve">
+  <data name="MenuItemFlagTitle" xml:space="preserve">
     <value>Toggle flag for this title</value>
-  </data>
-  <data name="CommandTitleFilterFlagged" xml:space="preserve">
-    <value>Flagged</value>
-  </data>
-  <data name="CommandTitleFilterFlaggedTooltip" xml:space="preserve">
-    <value>Filter title list to display only titles that are flagged</value>
   </data>
   <data name="ConfirmationClearTitleFlags" xml:space="preserve">
     <value>This operation will clear the quick flag from all titles. Do you want to continue?</value>
   </data>
-  <data name="TooltipTitleQuickFlag" xml:space="preserve">
+  <data name="ToolTipTitleFilterFlag" xml:space="preserve">
     <value>Title is flagged</value>
   </data>
   <data name="InvalidOpCannotAddVersionFile" xml:space="preserve">
@@ -966,10 +681,451 @@ Do you want to continue?</value>
   <data name="HeaderSelfPublished" xml:space="preserve">
     <value>Self Published</value>
   </data>
-  <data name="CommandTitleFilterSelfPublished" xml:space="preserve">
+  <data name="InvalidOperationNoSearchScope" xml:space="preserve">
+    <value>No search scope specified</value>
+  </data>
+  <data name="NavHeaderOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="NavHeaderMain" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="NavHeaderSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MenuItemPublishers" xml:space="preserve">
+    <value>Publishers</value>
+  </data>
+  <data name="MenuItemSelfPublishers" xml:space="preserve">
+    <value>Self publishers</value>
+  </data>
+  <data name="MenuItemSubmissions" xml:space="preserve">
+    <value>Submissions</value>
+  </data>
+  <data name="MenuItemTitles" xml:space="preserve">
+    <value>Titles</value>
+  </data>
+  <data name="MenuItemAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="MenuItemClear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="MenuItemCustom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="ToolTipFilterCustom" xml:space="preserve">
+    <value>Establish filter(s) on the collection</value>
+  </data>
+  <data name="ToolTipFilterClear" xml:space="preserve">
+    <value>Clear all filters</value>
+  </data>
+  <data name="MenuItemAddTitle" xml:space="preserve">
+    <value>Add a title to the collection</value>
+  </data>
+  <data name="ToolTipTitleFilterPublished" xml:space="preserve">
+    <value>Title has been published</value>
+  </data>
+  <data name="ToolTipTitleFilterSubmitted" xml:space="preserve">
+    <value>Title is currently submitted</value>
+  </data>
+  <data name="TextDocumentPreviewNotSupported" xml:space="preserve">
+    <value>Document Preview Not Supported</value>
+  </data>
+  <data name="TextNoTitleVersions" xml:space="preserve">
+    <value>No versions for this title</value>
+  </data>
+  <data name="HeaderAssignedTags" xml:space="preserve">
+    <value>Assigned Tags</value>
+  </data>
+  <data name="HeaderAvailableTags" xml:space="preserve">
+    <value>Available Tags</value>
+  </data>
+  <data name="HeaderSettingsAdvanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="MenuItemCreatePublisher" xml:space="preserve">
+    <value>Create a new publisher record</value>
+  </data>
+  <data name="TextEverSubmitted" xml:space="preserve">
+    <value>Ever Submitted</value>
+  </data>
+  <data name="TextFlagged" xml:space="preserve">
+    <value>Flagged</value>
+  </data>
+  <data name="TextPublished" xml:space="preserve">
+    <value>Published</value>
+  </data>
+  <data name="TextReady" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="TextSelfPublished" xml:space="preserve">
     <value>Self Published</value>
   </data>
-  <data name="CommandTitleFilterSelfPublishedTooltip" xml:space="preserve">
-    <value>Filter title list to display only titles that are self published</value>
+  <data name="TextTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="TextName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TextExtract" xml:space="preserve">
+    <value>Extract</value>
+  </data>
+  <data name="ToolTipExtract" xml:space="preserve">
+    <value>Extract title from latest version</value>
+  </data>
+  <data name="TextUrl" xml:space="preserve">
+    <value>Url</value>
+  </data>
+  <data name="MenuItemAuthors" xml:space="preserve">
+    <value>Authors</value>
+  </data>
+  <data name="ToolTipAuthorDefault" xml:space="preserve">
+    <value>This is the default author when creating new titles</value>
+  </data>
+  <data name="TextDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="MenuItemLinks" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="MenuItemNotes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="MenuItemResetWindow" xml:space="preserve">
+    <value>Reset window</value>
+  </data>
+  <data name="MenuItemTools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="MenuItemUpdateTools" xml:space="preserve">
+    <value>Update Tools</value>
+  </data>
+  <data name="HeaderToolExport" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="HeaderToolTitleMetadata" xml:space="preserve">
+    <value>Title Data</value>
+  </data>
+  <data name="HeaderToolTitleList" xml:space="preserve">
+    <value>Title List</value>
+  </data>
+  <data name="TextStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="HeaderToolSubmissionMetadata" xml:space="preserve">
+    <value>Submission Data</value>
+  </data>
+  <data name="ToolSubmissionMetadataDetail" xml:space="preserve">
+    <value>This operation verifies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time.</value>
+  </data>
+  <data name="ToolTipResetWindow" xml:space="preserve">
+    <value>Reset this window to its default size</value>
+  </data>
+  <data name="TextAddedUpdated" xml:space="preserve">
+    <value>Added / Updated</value>
+  </data>
+  <data name="TextRemoved" xml:space="preserve">
+    <value>Removed</value>
+  </data>
+  <data name="HeaderToolOrphan" xml:space="preserve">
+    <value>Orphan</value>
+  </data>
+  <data name="TextOrphans" xml:space="preserve">
+    <value>Orphans</value>
+  </data>
+  <data name="TextNotOpenXmlDocument" xml:space="preserve">
+    <value>Not an Open Xml Document</value>
+  </data>
+  <data name="TextImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="TextZeroSearchResults" xml:space="preserve">
+    <value>Search returned no results</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="MenuItemCreateSubmissionToPublisher" xml:space="preserve">
+    <value>Create a submission to this publisher</value>
+    <comment>Command text for create a submission</comment>
+  </data>
+  <data name="HeaderMain" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="MenuItemAddTitleToSubmission" xml:space="preserve">
+    <value>Add title(s) to this submission</value>
+  </data>
+  <data name="MenuItemRemoveTitleFromSubmission" xml:space="preserve">
+    <value>Remove title from submission</value>
+  </data>
+  <data name="MenuItemSetTitleStatusAccepted" xml:space="preserve">
+    <value>Set status to accepted</value>
+  </data>
+  <data name="MenuItemSetTitleStatusNone" xml:space="preserve">
+    <value>Set status to none</value>
+  </data>
+  <data name="MenuItemSetTitleStatusWithdrawn" xml:space="preserve">
+    <value>Set status to withdrawn</value>
+  </data>
+  <data name="TextLocked" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="ToolTipSubmissionFilterAccepted" xml:space="preserve">
+    <value>Submission has been accepted</value>
+  </data>
+  <data name="ToolTipSubmissionFilterActive" xml:space="preserve">
+    <value>Submission is active (has not yet received a response)</value>
+  </data>
+  <data name="ToolTipSubmissionFilterPersonal" xml:space="preserve">
+    <value>Submission received a personal response</value>
+  </data>
+  <data name="ToolTipSubmissionFilterTryAgain" xml:space="preserve">
+    <value>Submission received a try again response</value>
+  </data>
+  <data name="WindowTitleSelectTitlesGeneric" xml:space="preserve">
+    <value>Select titles</value>
+  </data>
+  <data name="MenuItemAddDocumentToSubmission" xml:space="preserve">
+    <value>Add a document to this submission</value>
+  </data>
+  <data name="MenuItemRemoveSubmissionDocument" xml:space="preserve">
+    <value>Remove this document from submission</value>
+  </data>
+  <data name="MenuItemReplaceSubmissionDocument" xml:space="preserve">
+    <value>Replace this submission document</value>
+  </data>
+  <data name="TextCreateSubmissionDocument0" xml:space="preserve">
+    <value>Create submission document</value>
+  </data>
+  <data name="TextCreateSubmissionDocument1" xml:space="preserve">
+    <value>Getting ready to create a submission document. You may:</value>
+  </data>
+  <data name="TextCreateSubmissionDocument2" xml:space="preserve">
+    <value>Create a .docx document compatible with Microsoft Word and other word processors that support the Open XML specification.</value>
+  </data>
+  <data name="TextCreateSubmissionDocument3" xml:space="preserve">
+    <value>Create a placeholder entry in the submission documents. After, you can select an existing file to associate with this entry.</value>
+  </data>
+  <data name="TextCreateSubmissionDocument4" xml:space="preserve">
+    <value>Create .docx</value>
+  </data>
+  <data name="TextCreateSubmissionDocument5" xml:space="preserve">
+    <value>Create placeholder</value>
+  </data>
+  <data name="MenuItemAddSubmissionMessage" xml:space="preserve">
+    <value>Add a message to this submission</value>
+  </data>
+  <data name="MenuItemRemoveSubmissionMessage" xml:space="preserve">
+    <value>Remove this message from submission</value>
+  </data>
+  <data name="WindowTitleSelectMessagesGeneric" xml:space="preserve">
+    <value>Select messages</value>
+  </data>
+  <data name="TextRename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="TextNoPublisherSubmissions" xml:space="preserve">
+    <value>No submissions to this publisher</value>
+  </data>
+  <data name="TextNoTitles" xml:space="preserve">
+    <value>No titles</value>
+  </data>
+  <data name="MenuItemAddSubmissionPeriod" xml:space="preserve">
+    <value>Add a submission period</value>
+  </data>
+  <data name="MenuItemRemoveSubmissionPeriod" xml:space="preserve">
+    <value>Remove this submission period</value>
+  </data>
+  <data name="TextNoPublisherPeriods" xml:space="preserve">
+    <value>No submission periods defined for this publisher</value>
+  </data>
+  <data name="ConfirmationAddSubmissionPeriod" xml:space="preserve">
+    <value>This operation adds a submission period that runs from January 1 - December 31, i.e. all year. Once added, you can change the range of the submission period if needed.</value>
+  </data>
+  <data name="ConfirmationResetSubmissionPeriod" xml:space="preserve">
+    <value>This operation sets the submission period to January 1 - December 31, i.e. all year.</value>
+  </data>
+  <data name="TextCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TextConfirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="TitleStatusHeader" xml:space="preserve">
+    <value>Please confirm that you want to submit the following titles</value>
+  </data>
+  <data name="TitleStatusOkay" xml:space="preserve">
+    <value>No conflict</value>
+  </data>
+  <data name="TitleStatusUnknown" xml:space="preserve">
+    <value>Unknown status</value>
+  </data>
+  <data name="WindowTitleConfirmTitleSubmission" xml:space="preserve">
+    <value>Confirm title submission</value>
+  </data>
+  <data name="SettingsDatabaseLocation" xml:space="preserve">
+    <value>Database Location</value>
+  </data>
+  <data name="SettingsDatabaseLocationText" xml:space="preserve">
+    <value>Changing the database location will create a new database. No data will be copied. If you want to preserve your data, copy all files from the previous location to the new one.
+
+Changes will take effect after you restart the application.</value>
+  </data>
+  <data name="SettingsTextViewer" xml:space="preserve">
+    <value>Text Viewer</value>
+  </data>
+  <data name="ConfirmationAddAlert" xml:space="preserve">
+    <value>This operation will add a new alert record. If any filters are in effect, they will be removed so that the new alert displays in the list.</value>
+  </data>
+  <data name="TextDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="TextEnabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="ToolTipAlertEnabled" xml:space="preserve">
+    <value>This alert is currently enabled</value>
+  </data>
+  <data name="TextDays01" xml:space="preserve">
+    <value>1 day</value>
+  </data>
+  <data name="TextDays03" xml:space="preserve">
+    <value>3 days</value>
+  </data>
+  <data name="TextDays05" xml:space="preserve">
+    <value>5 days</value>
+  </data>
+  <data name="TextDays07" xml:space="preserve">
+    <value>7 days</value>
+  </data>
+  <data name="TextDays10" xml:space="preserve">
+    <value>10 days</value>
+  </data>
+  <data name="TextDismiss" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
+  <data name="WindowTitleActiveAlerts" xml:space="preserve">
+    <value>Active Alerts</value>
+  </data>
+  <data name="TextSendReport" xml:space="preserve">
+    <value>Send report</value>
+  </data>
+  <data name="ToolTipSendReport" xml:space="preserve">
+    <value>Send problem report. No personal information is included</value>
+  </data>
+  <data name="WindowTitleFatalError" xml:space="preserve">
+    <value>A fatal error has occured</value>
+  </data>
+  <data name="TextNoTitleSubmissions" xml:space="preserve">
+    <value>No submissions for this title</value>
+  </data>
+  <data name="MenuItemAddPublished" xml:space="preserve">
+    <value>Add a published record to this title</value>
+  </data>
+  <data name="MenuItemAddSelfPublished" xml:space="preserve">
+    <value>Add a self published record to this title</value>
+  </data>
+  <data name="MenuItemRemovePublished" xml:space="preserve">
+    <value>Remove this published record</value>
+  </data>
+  <data name="ConfirmationClearPublishedDate" xml:space="preserve">
+    <value>This operation clears the published date for this item. You can set the date again at any time.</value>
+  </data>
+  <data name="MenuItemClearPublishedDate" xml:space="preserve">
+    <value>Clear the published date</value>
+  </data>
+  <data name="MenuItemSummary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="MenuItemAddTitleVersion" xml:space="preserve">
+    <value>Add an existing file as a version</value>
+  </data>
+  <data name="MenuItemRemoveTitleVersion" xml:space="preserve">
+    <value>Remove this title version</value>
+  </data>
+  <data name="ToolTipSynchonizeTitles" xml:space="preserve">
+    <value>Synchronize file names to title and version</value>
+  </data>
+  <data name="MenuItemMakeSeparateVersion" xml:space="preserve">
+    <value>Make this a separate version</value>
+  </data>
+  <data name="MenuItemReplaceTitleVersion" xml:space="preserve">
+    <value>Replace the file for this version with another file</value>
+  </data>
+  <data name="ToolTipCopyTitles" xml:space="preserve">
+    <value>Copy the list of titles to the clipboard</value>
+  </data>
+  <data name="MenuItemLinkVerify" xml:space="preserve">
+    <value>Verify links</value>
+  </data>
+  <data name="TextRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="TextVerify" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="ToolTipCancel" xml:space="preserve">
+    <value>Cancel the operation</value>
+  </data>
+  <data name="ToolTipRefreshLinkVerify" xml:space="preserve">
+    <value>Refresh the link list, adding new entries and removing any state entries</value>
+  </data>
+  <data name="ToolTipVerifyLinks" xml:space="preserve">
+    <value>Begin verification of links</value>
+  </data>
+  <data name="SettingsVerifyLinks" xml:space="preserve">
+    <value>Enable link verification tool (experimental)</value>
+  </data>
+  <data name="HeaderTagFilter" xml:space="preserve">
+    <value>Tag filter</value>
+  </data>
+  <data name="TextAssigned" xml:space="preserve">
+    <value>Assigned</value>
+  </data>
+  <data name="TextAvailable" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="TextAssignedToFilter" xml:space="preserve">
+    <value>Tags to filter</value>
+  </data>
+  <data name="TextAvailableTags" xml:space="preserve">
+    <value>Available tags</value>
+  </data>
+  <data name="TextMultipleTag" xml:space="preserve">
+    <value>Combine multiple</value>
+  </data>
+  <data name="ConfirmationAddOrphanDirectoryExclusion" xml:space="preserve">
+    <value>This operation excludes the directory of the selected file from further orphan search</value>
+  </data>
+  <data name="ConfirmationAddOrphanFileTypeExclusion" xml:space="preserve">
+    <value>This operation excludes all files of the selected file type from further orphan search</value>
+  </data>
+  <data name="MenuItemCreateTitleFromEntry" xml:space="preserve">
+    <value>Create a title entry from this file</value>
+  </data>
+  <data name="MenuItemExcludeOrphanDirectory" xml:space="preserve">
+    <value>Exclude this directory from orphan search</value>
+  </data>
+  <data name="MenuItemExcludeOrphanFileType" xml:space="preserve">
+    <value>Exclude all files of this type from orphan search</value>
+  </data>
+  <data name="ConfirmationAddOrphanFileExclusion" xml:space="preserve">
+    <value>This operation excludes the selected file from further orphan search</value>
+  </data>
+  <data name="MenuItemExcludeOrphanFile" xml:space="preserve">
+    <value>Exclude this file from orphan search</value>
+  </data>
+  <data name="TextCreatedFromOrphan" xml:space="preserve">
+    <value>This entry was created from orphan file</value>
+  </data>
+  <data name="TextOrphan" xml:space="preserve">
+    <value>Orphan</value>
+  </data>
+  <data name="SettingsOrphanExclusionDetail" xml:space="preserve">
+    <value>The orphan tool enables you to exclude certain files, file types, and directories from its search. You add exclusions in the tool window and can remove them here if needed</value>
+  </data>
+  <data name="MenuItemRemoveExclusion" xml:space="preserve">
+    <value>Remove this exclusion</value>
   </data>
 </root>

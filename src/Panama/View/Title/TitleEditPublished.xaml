@@ -1,0 +1,125 @@
+﻿<StackPanel
+    x:Class="Restless.Panama.View.TitleEditPublished"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    mc:Ignorable="d"
+    d:DesignHeight="600" d:DesignWidth="360">
+
+    <!-- Published -->
+    <Expander
+        IsExpanded="{Binding Config.IsTitlePublishedExpanded}"
+        Header="{x:Static r:Strings.TextPublished}">
+        
+        <Grid tk:Property.RowHeights="*,*">
+            
+            <tk:DataGrid
+                Style="{StaticResource DataGridStackStyle}"
+                ItemsSource="{Binding Published.ListView}"
+                SelectedItem="{Binding Published.SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Published.Columns}">
+
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Published.OpenRowCommand}"/>
+                </DataGrid.InputBindings>
+
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding Published.MenuItems}"/>
+                </DataGrid.ContextMenu>
+
+            </tk:DataGrid>
+
+            <Grid
+                Grid.Row="1"
+                tk:Property.ColumnWidths="Auto,*"
+                tk:Property.RowHeights="Auto,*"
+                Style="{StaticResource DataEntryPanelStyle}"
+                Visibility="{Binding Published.EditVisibility}">
+
+                <TextBlock Text="Published"/>
+                <tk:Calendar
+                    Grid.Row="1"
+                    Margin="0,-3,8,0"
+                    SelectedDateUtc="{Binding Published.PublishedDate}"/>
+
+                <StackPanel Grid.Column="1" Grid.RowSpan="2">
+
+                    <TextBlock Text="Url"/>
+                    <TextBox Text="{Binding Published.SelectedPublished.Url}"/>
+
+                    <TextBlock Text="Note"/>
+                    <TextBox
+                        Style="{StaticResource TextBoxMultiStyle}"
+                        MinHeight="106"
+                        MaxHeight="106"
+                        Text="{Binding Published.SelectedPublished.Notes}"/>
+
+                </StackPanel>
+
+            </Grid>
+
+        </Grid>
+    </Expander>
+
+    <!-- Self published -->
+    <Expander
+        Grid.Row="1"
+        Margin="0,8,0,0"
+        IsExpanded="{Binding Config.IsTitleSelfPublishedExpanded}"
+        Header="{x:Static r:Strings.TextSelfPublished}">
+
+        <Grid tk:Property.RowHeights="*,*">
+            
+            <tk:DataGrid
+                Style="{StaticResource DataGridStackStyle}"
+                ItemsSource="{Binding SelfPublished.ListView}"
+                SelectedItem="{Binding SelfPublished.SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding SelfPublished.Columns}">
+
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding SelfPublished.OpenRowCommand}"/>
+                </DataGrid.InputBindings>
+
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding SelfPublished.MenuItems}"/>
+                </DataGrid.ContextMenu>
+            </tk:DataGrid>
+
+            <Grid
+                Grid.Row="1"
+                tk:Property.ColumnWidths="Auto,*"
+                tk:Property.RowHeights="Auto,*"
+                Style="{StaticResource DataEntryPanelStyle}"
+                Visibility="{Binding SelfPublished.EditVisibility}">
+
+                <TextBlock Text="Published"/>
+                <tk:Calendar
+                    Grid.Row="1"
+                    Margin="0,-3,8,0"
+                    SelectedDateUtc="{Binding SelfPublished.PublishedDate}"/>
+                
+                <StackPanel Grid.Column="1" Grid.RowSpan="2">
+
+                    <TextBlock Text="Url"/>
+                    <TextBox Text="{Binding SelfPublished.SelectedPublished.Url}"/>
+
+                    <TextBlock Text="Note"/>
+                    <TextBox
+                        Style="{StaticResource TextBoxMultiStyle}"
+                        MinHeight="106"
+                        MaxHeight="106"
+                        Text="{Binding SelfPublished.SelectedPublished.Notes}"/>
+                    
+                </StackPanel>
+
+            </Grid>            
+            
+        </Grid>
+    </Expander>
+
+</StackPanel>

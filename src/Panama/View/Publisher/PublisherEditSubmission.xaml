@@ -1,0 +1,58 @@
+﻿<Grid
+    x:Class="Restless.Panama.View.PublisherEditSubmission"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
+    mc:Ignorable="d" 
+    d:DesignHeight="450" d:DesignWidth="400"
+    tk:Property.RowHeights="Auto,*,Auto,2*">
+
+    <TextBlock
+        Style="{StaticResource DataEntryPanelDefaultTextBlockStyle}"
+        Text="{x:Static r:Strings.HeaderSubmissions}"/>
+
+    <tk:DataGrid
+        Grid.Row="1"
+        ItemsSource="{Binding Submissions.ListView}"
+        SelectedItem="{Binding Submissions.SelectedItem}"
+        tk:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
+
+    <TextBlock
+        Grid.Row="1"
+        Style="{StaticResource TextBlockZeroResultStyle}"
+        tk:Property.IsCollapsed="{Binding Submissions.HaveItems}"
+        Text="{x:Static r:Strings.TextNoPublisherSubmissions}"/>
+
+    <TextBlock
+        Grid.Row="2"
+        Style="{StaticResource DataEntryPanelDefaultTextBlockStyle}"
+        Text="{x:Static r:Strings.HeaderTitles}"/>
+
+    <tk:DataGrid
+        Grid.Row="3"
+        ItemsSource="{Binding Titles.ListView}"
+        SelectedItem="{Binding Titles.SelectedItem}"
+        tk:DataGridColumns.Columns="{Binding Titles.Columns}">
+        
+        <DataGrid.ContextMenu>
+            <ContextMenu ItemsSource="{Binding Titles.MenuItems}"  />
+        </DataGrid.ContextMenu>
+        
+        <DataGrid.InputBindings>
+            <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Titles.OpenRowCommand}"/>
+        </DataGrid.InputBindings>
+        
+    </tk:DataGrid>
+
+    <TextBlock
+        Grid.Row="3"
+        Style="{StaticResource TextBlockZeroResultStyle}"
+        tk:Property.IsCollapsed="{Binding Titles.HaveItems}"
+        Text="{x:Static r:Strings.TextNoTitles}"/>
+
+</Grid>

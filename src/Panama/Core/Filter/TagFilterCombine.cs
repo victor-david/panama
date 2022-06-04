@@ -4,7 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides enumeration values that describe how multiple tag selections in a title filter are combined.
@@ -12,17 +12,12 @@ namespace Restless.App.Panama.Core
     public enum TagFilterCombine
     {
         /// <summary>
-        /// Multiple tag selection are combined with OR.
+        /// Any of the tags. Selections are combined with OR.
         /// </summary>
-        Or,
+        Any,
         /// <summary>
-        /// Multiple tag selection are combined with AND.
+        /// All of the tags. Selections are combined with AND.
         /// </summary>
-        And,
-        /// <summary>
-        /// Multiple tag selection are combined with AND NOT.
-        /// </summary>
-        AndNot,
-
+        All,
     }
 }

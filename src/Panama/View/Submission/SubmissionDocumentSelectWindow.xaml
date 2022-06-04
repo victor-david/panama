@@ -1,0 +1,54 @@
+﻿<tk:AppWindow 
+    x:Class="Restless.Panama.View.SubmissionDocumentSelectWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"    
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:SubmissionDocumentSelectWindowViewModel}"
+    mc:Ignorable="d"
+    Style="{StaticResource DefaultAppWindowStyle}"
+    ResizeMode="NoResize"
+    Title="{x:Static r:Strings.TextCreateSubmissionDocument0}" 
+    Height="212" Width="400">
+  
+    <Grid
+        Margin="10,0"
+        Style="{StaticResource DataEntryPanelStyle}"
+        tk:Property.RowHeights="Auto,Auto,*">
+        <Grid.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource BorderedButtonStyle}">
+                <Setter Property="MinWidth" Value="150"/>
+            </Style>
+        </Grid.Resources>
+
+        <TextBlock
+            Text="{x:Static r:Strings.TextCreateSubmissionDocument1}"/>
+
+        <StackPanel
+            Grid.Row="1"
+            Margin="{StaticResource DefaultPadding}">
+            
+            <TextBlock Text="{x:Static r:Strings.TextCreateSubmissionDocument2}"/>
+            <TextBlock Text="{x:Static r:Strings.TextCreateSubmissionDocument3}"/>
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="2"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+
+            <Button
+                Content="{x:Static r:Strings.TextCreateSubmissionDocument4}"
+                Command="{Binding Commands[CreateDocX]}"/>
+            
+            <Button
+                Content="{x:Static r:Strings.TextCreateSubmissionDocument5}"
+                Command="{Binding Commands[CreatePlaceholder]}"/>
+            
+        </StackPanel>
+
+    </Grid>
+</tk:AppWindow>

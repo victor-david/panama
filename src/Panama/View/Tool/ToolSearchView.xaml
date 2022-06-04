@@ -1,0 +1,84 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.ToolSearchView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:ToolSearchViewModel}"
+    mc:Ignorable="d" 
+    d:DesignHeight="250" d:DesignWidth="930">
+    <tk:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinSearchDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxSearchDetailWidth}"
+        IsDetailExpanded="{Binding IsDetailExpanded}"
+        DetailWidth="{Binding Config.SearchDetailWidth}">
+
+        <tk:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <TextBlock Text="Search:"/>
+                <TextBox Width="100" Text="{Binding SearchText}"/>
+                <CheckBox IsChecked="{Binding VersionOnly}" Content="Version only"/>
+                <tk:IconButton
+                    Icon="{StaticResource SquareSmallGreenIconKey}"
+                    Content="Begin"
+                    Command="{Binding Commands[StartSearch]}"/>
+
+                <Separator/>
+
+                <tk:IconButton
+                    Icon="{StaticResource SquareSmallRedIconKey}"
+                    Content="Clear"
+                    Command="{Binding Commands[ClearSearch]}"/>
+
+            </StatusBar>
+        </tk:SplitterGrid.HeaderLeft>
+
+        <tk:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedSearch.File}"/>
+            </StatusBar>
+        </tk:SplitterGrid.HeaderRight>
+
+        <tk:SplitterGrid.ContentLeft>
+            <Grid>
+                <DataGrid
+                    Style="{StaticResource DataGridEditLockedStretchedStyle}"
+                    ItemsSource="{Binding Path=ListView}"
+                    SelectedItem="{Binding SelectedItem}"
+                    tk:DataGridColumns.Columns="{Binding Columns}">
+
+                    <DataGrid.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                    </DataGrid.ContextMenu>
+
+                    <DataGrid.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                    </DataGrid.InputBindings>
+
+                </DataGrid>
+
+                <TextBlock
+                    Style="{StaticResource TextBlockZeroResultStyle}"
+                    tk:Property.IsCollapsed="{Binding HaveResults}"
+                    Text="{x:Static r:Strings.TextZeroSearchResults}"/>
+
+            </Grid>
+        </tk:SplitterGrid.ContentLeft>
+
+        <tk:SplitterGrid.ContentRight>
+            <vw:PreviewPanel
+                HeaderVisibility="Collapsed"
+                PreviewMode="{Binding PreviewMode}"
+                PreviewText="{Binding PreviewText}"
+                PreviewImageSource="{Binding PreviewImageSource}"/>
+        </tk:SplitterGrid.ContentRight>
+
+    </tk:SplitterGrid>
+</UserControl>

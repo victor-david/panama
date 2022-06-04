@@ -1,0 +1,51 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.TableView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:TableViewModel}"
+    mc:Ignorable="d"
+    d:DesignWidth="860" d:DesignHeight="400">
+    <tk:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinTableDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxTableDetailWidth}"
+        IsDetailExpanded="{Binding Config.TableDetailExpanded}"
+        DetailWidth="{Binding Config.TableDetailWidth}">
+
+        <tk:SplitterGrid.Resources>
+            <Style TargetType="DataGrid" BasedOn="{StaticResource DataGridEditLockedStretchedStyle}">
+                <Setter Property="RowHeight" Value="28"/>
+            </Style>
+        </tk:SplitterGrid.Resources>
+
+        <tk:SplitterGrid.HeaderLeft>
+            <StatusBar/>
+        </tk:SplitterGrid.HeaderLeft>
+
+        <tk:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock 
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedTable.TableName}"/>
+            </StatusBar>
+        </tk:SplitterGrid.HeaderRight>
+
+        <tk:SplitterGrid.ContentLeft>
+            <tk:DataGrid
+                ItemsSource="{Binding ListView}"
+                SelectedItem="{Binding SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Columns}"/>
+
+        </tk:SplitterGrid.ContentLeft>
+
+        <tk:SplitterGrid.ContentRight>
+            <vw:TableDetail Visibility="{Binding EditVisibility}"/>
+        </tk:SplitterGrid.ContentRight>
+        
+    </tk:SplitterGrid>
+</UserControl>

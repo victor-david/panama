@@ -1,0 +1,52 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.SubmissionEditDocument"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
+    mc:Ignorable="d" 
+    d:DesignHeight="900" d:DesignWidth="400">
+    <Grid tk:Property.RowHeights="200,Auto,*">
+        <tk:DataGrid 
+            Style="{StaticResource DataGridEditLockedStyle}"
+            ItemsSource="{Binding Documents.ListView}"
+            SelectedItem="{Binding Documents.SelectedItem}"
+            tk:DataGridColumns.Columns="{Binding Documents.Columns}">
+            
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Documents.OpenRowCommand}"/>
+            </DataGrid.InputBindings>
+
+            <DataGrid.ContextMenu>
+                <ContextMenu ItemsSource="{Binding Documents.MenuItems}"/>
+            </DataGrid.ContextMenu>
+            
+        </tk:DataGrid>
+
+        <StackPanel
+            Grid.Row="1"
+            Style="{StaticResource DataEntryPanelStyle}"
+            Visibility="{Binding Documents.EditVisibility}">
+            <TextBlock Text="Document title"/>
+            <TextBox Text="{Binding Documents.SelectedDocument.Title}"/>
+        </StackPanel>
+
+        <Expander
+            Grid.Row="2"
+            Margin="0,8"
+            Header="{x:Static r:Strings.TextPreview}"
+            IsExpanded="{Binding Documents.IsPreviewMode}">
+
+            <vw:PreviewPanel
+                HeaderVisibility="Collapsed"
+                PreviewMode="{Binding Documents.PreviewMode}"
+                PreviewText="{Binding Documents.PreviewText}"/>
+
+        </Expander>
+    </Grid>
+</UserControl>

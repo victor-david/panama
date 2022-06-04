@@ -1,0 +1,126 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021">
+
+    <ControlTemplate x:Key="DefaultCheckBoxControlTemplate" TargetType="CheckBox">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Border
+                x:Name="Outer"
+                Width="16"
+                Height="16"
+                Background="{TemplateBinding Background}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                CornerRadius="0">
+
+                <Border 
+                    x:Name="Inner"
+                    Height="8" Width="8"
+                    CornerRadius="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="{StaticResource GreenIconBrush}"
+                    Visibility="Collapsed">
+                </Border>
+            </Border>
+
+            <ContentPresenter Grid.Column="1" Margin="8,0" VerticalAlignment="Center"/>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="Inner" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="{x:Null}">
+                <Setter TargetName="Outer" Property="Background" Value="{StaticResource DisabledBackgroundBrush}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <Style x:Key="DefaultCheckBoxStyle" TargetType="CheckBox">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template" Value="{StaticResource DefaultCheckBoxControlTemplate}"/>
+        <Setter Property="Foreground" Value="{StaticResource DefaultForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultCheckBoxStyle}"/>
+
+    <ControlTemplate x:Key="RadioCheckBoxControlTemplate" TargetType="CheckBox">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Border
+                x:Name="Outer"
+                Width="16"
+                Height="16"
+                Background="{TemplateBinding Background}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                CornerRadius="8">
+
+                <Border 
+                    x:Name="Inner"
+                    Height="8" Width="8"
+                    CornerRadius="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="{StaticResource GreenIconBrush}"
+                    Visibility="Collapsed">
+                </Border>
+            </Border>
+
+            <ContentPresenter Grid.Column="1" Margin="8,0" VerticalAlignment="Center"/>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="Inner" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="{x:Null}">
+                <Setter TargetName="Outer" Property="Background" Value="{StaticResource DisabledBackgroundBrush}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <Style x:Key="RadioCheckBoxStyle" TargetType="CheckBox" BasedOn="{StaticResource DefaultCheckBoxStyle}">
+        <Setter Property="Template" Value="{StaticResource RadioCheckBoxControlTemplate}"/>
+    </Style>
+
+    <Style x:Key="DefaultThreeWayStyle" TargetType="tk:ThreeWay">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="SelectorHeight" Value="20"/>
+        <Setter Property="SelectorRadius" Value="2"/>
+        <Setter Property="MinSelectorAreaWidth" Value="120"/>
+        <Setter Property="OnText" Value="Yes"/>
+        <Setter Property="OffText" Value="No"/>
+        <Setter Property="HeaderStyle">
+            <Setter.Value>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Static tk:ThreeWay.HeaderStyleKey}}">
+                    <Setter Property="Foreground" Value="{StaticResource AlertForegroundBrush}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="OnOffStyle">
+            <Setter.Value>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Static tk:ThreeWay.OnOffStyleKey}}">
+                    <Setter Property="Foreground" Value="{StaticResource DefaultForegroundBrush}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="tk:ThreeWay" BasedOn="{StaticResource DefaultThreeWayStyle}"/>
+
+</ResourceDictionary>

@@ -12,7 +12,7 @@ using System.Text;
 using Restless.Tools.OfficeAutomation;
 using Restless.Tools.Utility;
 
-namespace Restless.App.Panama.Tools
+namespace Restless.Panama.Tools
 {
     /// <summary>
     /// Represents the event argumenets that are sent with the <see cref="DocumentConverter.ItemCompleted"/> event

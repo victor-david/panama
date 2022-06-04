@@ -1,0 +1,45 @@
+﻿<Grid
+    x:Class="Restless.Panama.View.SubmissionFlagsToolTip"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
+    mc:Ignorable="d"
+    tk:Property.ColumnWidths="Auto,*"
+    tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto"
+    d:DesignHeight="135" d:DesignWidth="180">
+
+    <Grid.Resources>
+        <Style TargetType="Border" BasedOn="{StaticResource ToolTipBorderIconStyle}"/>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource ToolTipTextBlockStyle}"/>
+    </Grid.Resources>
+
+    <Border
+        Grid.Row="1"
+        Background="{Binding Config.Colors.SubmissionOnline.ColorBrush}"/>
+    
+    <Border
+        Grid.Row="2"
+        Background="{Binding Config.Colors.SubmissionContest.ColorBrush}"/>
+
+    <Border
+        Grid.Row="3"
+        Background="{Binding Config.Colors.SubmissionLocked.ColorBrush}"/>
+
+    <Border
+        Grid.Row="4"
+        Background="{Binding Config.Colors.PublisherExclusive.ColorBrush}"/>
+
+    <TextBlock
+        Grid.ColumnSpan="2"
+        Style="{StaticResource ToolTipTextBlockHeaderStyle}"
+        Text="Submission flags"/>
+
+    <TextBlock Grid.Row="1" Grid.Column="1" Text="Online"/>
+    <TextBlock Grid.Row="2" Grid.Column="1" Text="Contest"/>
+    <TextBlock Grid.Row="3" Grid.Column="1" Text="Locked"/>
+    <TextBlock Grid.Row="4" Grid.Column="1" Text="Publisher exclusive"/>
+</Grid>

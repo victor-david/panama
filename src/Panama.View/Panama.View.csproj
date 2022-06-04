@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Description>Application to validate Panama database</Description>
+    <Company>Restless Animal Development</Company>
+    <Product>Logite</Product>
+    <Copyright>2022 Restless Animal Development</Copyright>
+    <RootNamespace>Restless.Panama</RootNamespace>
+    <PackageProjectUrl>https://github.com/victor-david/panama</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/victor-david/panama</RepositoryUrl>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Panama.Database\Panama.Database.csproj" />
+    <ProjectReference Include="..\Panama.Utility\Panama.Utility.csproj" />
+  </ItemGroup>
+
+</Project>

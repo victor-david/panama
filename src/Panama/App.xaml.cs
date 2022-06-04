@@ -4,16 +4,17 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Core;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.Resources;
-using Restless.App.Panama.ViewModel;
-using Restless.Tools.Utility;
+using Restless.Panama.ViewModel;
+using Restless.Panama.Core;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Resources;
+using Restless.Panama.Utility;
 using System;
 using System.Windows;
+using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Controls;
 
-namespace Restless.App.Panama
+namespace Restless.Panama
 {
     /// <summary>
     /// Main application class. Provides starup and shutdown logic.
@@ -38,7 +39,7 @@ namespace Restless.App.Panama
 
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format(Strings.ApplicationFatalExceptionFormat, ex.Message), Strings.CaptionFatalError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageWindow.ShowError(ex.Message, null, false);
                 Environment.Exit(0);
             }
         }
@@ -67,46 +68,32 @@ namespace Restless.App.Panama
         private void RunApplication(StartupEventArgs e)
         {
 #if !DEBUG
-            TopLevelExceptionHandler.Initialize();
+            TopLevelException.Initialize();
 #endif
-            Validations.ThrowIfNotWindows7();
-            ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
-            StartupOptions ops = new StartupOptions(e.Args);
-            DatabaseController.Instance.Init(ApplicationInfo.Instance.RootFolder, ops.DatabaseFileName);
+            // Validations.ThrowIfNotWindows7();
+            ShutdownMode = ShutdownMode.OnMainWindowClose;
+            StartupOptions ops = new(e.Args);
+            DatabaseController.Instance.Init(RegistryManager.DatabaseDirectory);
 
             if (ops.IsAnyOperationRequested)
             {
-                Window tools = WindowFactory.CommandTools.Create(ops);
-                if (tools.DataContext is CommandToolsWindowViewModel vm)
-                {
-                    tools.Show();
-                    vm.PerformOperations();
-                }
+                Window tools = WindowFactory.StartupTool.Create();
+                tools.Show();
+                (tools.DataContext as StartupToolWindowViewModel)?.PerformOperations(ops);
             }
             else
             {
-                // These are applied one time only. They don't change.
-                Restless.Tools.Controls.Default.Style.DataGridHeaderCenter = ResourceHelper.StyleDataGridHeaderCenter;
-                Restless.Tools.Controls.Default.Style.TextBlockCenter = ResourceHelper.StyleTextBlockCenter;
-
-                Window main = WindowFactory.Main.Create();
-                main.MinWidth = Config.Default.MainWindow.MinWidth;
-                main.MinHeight = Config.Default.MainWindow.MinHeight;
-                main.Width = Config.Instance.MainWindowWidth;
-                main.Height = Config.Instance.MainWindowHeight;
-                main.WindowState = Config.Instance.MainWindowState;
-                main.Show();
+                DataGridColumnExtensions.UseDeferredToolTip = true;
+                WindowFactory.Main.Create().Show();
                 DisplayAlertsIf();
             }
         }
 
         private void DisplayAlertsIf()
         {
-            var alerts = DatabaseController.Instance.GetTable<AlertTable>().GetReadyAlerts();
-            if (alerts.Count > 0)
+            if (DatabaseController.Instance.GetTable<AlertTable>().HaveAlertsReady())
             {
-                Window alert = WindowFactory.Alert.Create(alerts);
-                alert.Show();
+                WindowFactory.Alert.Create().Show();
             }
         }
         #endregion

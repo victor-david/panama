@@ -1,0 +1,76 @@
+﻿<tk:AppWindow 
+    x:Class="Restless.Panama.View.AlertWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:AlertWindowViewModel}"
+    mc:Ignorable="d"
+    ResizeMode="NoResize"
+    Title="{x:Static r:Strings.WindowTitleActiveAlerts}"
+    Style="{StaticResource DefaultAppWindowStyle}"    
+    Height="360" Width="584" >
+    
+    <Grid
+        tk:Property.RowHeights="*,Auto">
+
+        <Grid.Resources>
+            <Style TargetType="tk:IconButton" BasedOn="{StaticResource DefaultIconButtonStyle}">
+                <Setter Property="Icon" Value="{StaticResource SquareSmallBlueIconKey}"/>
+                <Setter Property="Command" Value="{Binding PostponeCommand}"/>
+            </Style>
+        </Grid.Resources>
+
+        <tk:DataGrid
+            BorderThickness="0,0,0,1"
+            RowHeight="{Binding Config.DataGridRowHeight}"
+            ItemsSource="{Binding ListView}"
+            SelectedItem="{Binding SelectedItem}"
+            tk:DataGridColumns.Columns="{Binding Columns}">
+
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+            </DataGrid.InputBindings>
+
+            <DataGrid.ContextMenu>
+                <ContextMenu ItemsSource="{Binding MenuItems}"/>
+            </DataGrid.ContextMenu>
+            
+        </tk:DataGrid>
+
+        <StatusBar Grid.Row="1">
+            <TextBlock Text="Postpone"/>
+            <tk:IconButton
+                Content="{x:Static r:Strings.TextDays01}"
+                CommandParameter="1"/>
+            
+            <tk:IconButton
+                Content="{x:Static r:Strings.TextDays03}"
+                CommandParameter="3"/>
+            
+            <tk:IconButton
+                Content="{x:Static r:Strings.TextDays05}"
+                CommandParameter="5"/>
+            
+            <tk:IconButton
+                Content="{x:Static r:Strings.TextDays07}"
+                CommandParameter="7"/>
+            
+            <tk:IconButton
+                Content="{x:Static r:Strings.TextDays10}"
+                CommandParameter="10"/>
+            
+            <Separator/>
+            
+            <tk:IconButton
+                Icon="{StaticResource SquareSmallRedIconKey}"
+                Content="{x:Static r:Strings.TextDismiss}"
+                Command="{Binding DismissCommand}"/>
+
+        </StatusBar>
+        
+    </Grid>
+</tk:AppWindow>

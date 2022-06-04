@@ -1,0 +1,76 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.SelfPublisherView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:SelfPublisherViewModel}"
+    mc:Ignorable="d"
+    d:DesignWidth="860" d:DesignHeight="400">
+    <tk:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinSelfPublisherDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxSelfPublisherDetailWidth}"
+        IsDetailExpanded="{Binding Config.SelfPublisherDetailExpanded}"
+        DetailWidth="{Binding Config.SelfPublisherDetailWidth}">
+
+        <tk:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <TextBlock Text="Self publishers"/>
+                <!-- no filters for now -->
+            </StatusBar>
+        </tk:SplitterGrid.HeaderLeft>
+
+        <tk:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedPublisher.Name}"/>
+            </StatusBar>
+        </tk:SplitterGrid.HeaderRight>
+
+        <tk:SplitterGrid.ContentLeft>
+            <tk:DataGrid
+                CanUserReorderColumns="True"
+                HeaderMode="ColumnSelector"
+                ColumnSelectorMinimumVisible="2"
+                RowHeight="{Binding Config.DataGridRowHeight}"
+                ItemsSource="{Binding ListView}" 
+                SelectedItem="{Binding SelectedItem}"
+                RestoreStateBehavior="RestoreLastSelection"
+                tk:DataGridColumns.Columns="{Binding Columns}">
+
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                </DataGrid.InputBindings>
+
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                </DataGrid.ContextMenu>
+            </tk:DataGrid>            
+        </tk:SplitterGrid.ContentLeft>
+
+        <tk:SplitterGrid.ContentRight>
+
+            <StackPanel 
+                Style="{StaticResource DataEntryPanelStyle}"
+                Visibility="{Binding EditVisibility}">
+                
+                <TextBlock Text="{x:Static r:Strings.TextName}"/>
+                <TextBox Text="{Binding SelectedPublisher.Name}"/>
+
+                <TextBlock Text="{x:Static r:Strings.TextUrl}"/>
+                <TextBox Text="{Binding SelectedPublisher.Url}"/>
+
+                <TextBlock Text="{x:Static r:Strings.TextNotes}"/>
+                <TextBox
+                    Style="{StaticResource TextBoxMultiStyle}"
+                    Text="{Binding SelectedPublisher.Notes}"/>
+            </StackPanel>
+            
+        </tk:SplitterGrid.ContentRight>
+        
+    </tk:SplitterGrid>
+</UserControl>

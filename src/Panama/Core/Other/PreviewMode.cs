@@ -5,7 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides enumeration values that describe the possible preview modes.

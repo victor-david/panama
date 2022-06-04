@@ -1,0 +1,46 @@
+﻿<Border
+    x:Class="Restless.Panama.View.TitleEditTag"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:conl="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    mc:Ignorable="d" 
+    d:DesignHeight="450" d:DesignWidth="240"
+    Style="{StaticResource BorderEditContainerStyle}">
+    <!-- Title edit (add and remove tags ) -->
+    <Grid
+        Style="{StaticResource DataEntryPanelStyle}"
+        tk:Property.ColumnWidths="*,*"
+        tk:Property.RowHeights="Auto,*">
+    
+        <TextBlock Text="{x:Static r:Strings.HeaderAssignedTags}"/>
+        <conl:TagSelectorControl
+            Grid.Row="1"
+            Margin="{StaticResource DataEntryPanelDefaultControlMargin}"
+            Id="{x:Static vm:TitleTagController.AssignedSelectorId}"
+            TagItemClickedCommand="{Binding TitleTags.TagItemClickCommand}"
+            ItemsSource="{Binding TitleTags.Assigned}"/>
+
+        <TextBlock
+            Grid.Row="1"
+            tk:Property.IsCollapsed="{Binding TitleTags.HasAssignedTags}"
+            Margin="0,6"
+            Foreground="{StaticResource DefaultForegroundBrush}"
+            VerticalAlignment="Top"
+            Text="{x:Static r:Strings.TextNone}"/>
+
+        <TextBlock Grid.Column="1" Text="{x:Static r:Strings.HeaderAvailableTags}"/>
+        <conl:TagSelectorControl
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="{StaticResource DataEntryPanelDefaultControlMargin}"
+            Id="{x:Static vm:TitleTagController.AvailableSelectorId}"
+            TagItemClickedCommand="{Binding TitleTags.TagItemClickCommand}"
+            ItemsSource="{Binding TitleTags.Available}"/>
+    </Grid>
+</Border>

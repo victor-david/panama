@@ -1,0 +1,77 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.AlertView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:AlertViewModel}"
+    mc:Ignorable="d"
+    d:DesignWidth="300" d:DesignHeight="400">
+    <tk:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinAlertDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxAlertDetailWidth}"
+        IsDetailExpanded="{Binding Config.AlertDetailExpanded}"
+        DetailWidth="{Binding Config.AlertDetailWidth}">
+
+        <tk:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <TextBlock Text="{x:Static r:Strings.MenuItemAlerts}"/>
+                <!-- no filters for now -->
+            </StatusBar>
+        </tk:SplitterGrid.HeaderLeft>
+
+        <tk:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedAlert.Title}"/>
+            </StatusBar>
+        </tk:SplitterGrid.HeaderRight>
+
+        <tk:SplitterGrid.ContentLeft>
+            <tk:DataGrid
+                RowHeight="{Binding Config.DataGridRowHeight}"
+                ItemsSource="{Binding ListView}"
+                SelectedItem="{Binding SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Columns}">
+                
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                </DataGrid.ContextMenu>
+                
+            </tk:DataGrid>            
+        </tk:SplitterGrid.ContentLeft>
+
+        <tk:SplitterGrid.ContentRight>
+            <StackPanel
+                Style="{StaticResource DataEntryPanelStyle}"
+                Visibility="{Binding EditVisibility}">
+
+                <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
+                <TextBox Text="{Binding SelectedAlert.Title}"/>
+
+                <TextBlock Text="{x:Static r:Strings.TextUrl}"/>
+                <TextBox Text="{Binding SelectedAlert.Url}"/>
+
+                <TextBlock>
+                    <Run Text="{x:Static r:Strings.TextDate}"/>
+                    <Run
+                        Foreground="{StaticResource DarkAlertForegroundBrush}" 
+                        Text="{Binding SelectedAlert.DateLocal, Mode=OneWay}"/>
+                </TextBlock>
+
+                <tk:Calendar SelectedDateUtc="{Binding SelectedAlert.Date}"/>
+
+                <CheckBox
+                    IsChecked="{Binding SelectedAlert.Enabled}"
+                    Content="{x:Static r:Strings.TextEnabled}"/>
+
+            </StackPanel>
+        </tk:SplitterGrid.ContentRight>
+
+    </tk:SplitterGrid>
+</UserControl>

@@ -1,0 +1,45 @@
+﻿<StackPanel
+    x:Class="Restless.Panama.View.TitleEditMain"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    mc:Ignorable="d" 
+    d:DesignHeight="450" d:DesignWidth="400"
+    Style="{StaticResource DataEntryPanelStyle}">
+
+    <Grid tk:Property.ColumnWidths="*,*">
+        <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
+        <tk:LinkedTextBlock 
+            Grid.Column="1"
+            Text="{x:Static r:Strings.TextExtract}"
+            ToolTip="{x:Static r:Strings.ToolTipExtract}"
+            Command="{Binding Commands[ExtractTitle]}"/>
+    </Grid>
+    <TextBox Text="{Binding SelectedTitle.Title}"/>
+
+    <!-- Written date -->
+    <Expander>
+        <Expander.Header>
+            <TextBlock Margin="0">
+                <Run Text="{x:Static r:Strings.TextWritten}"/>
+                <Run
+                    Foreground="{StaticResource DarkAlertForegroundBrush}"
+                    Text="{Binding SelectedTitle.WrittenLocal, Mode=OneWay}"/>
+            </TextBlock>
+        </Expander.Header>
+        <tk:Calendar SelectedDateUtc="{Binding SelectedTitle.Written}"/>
+    </Expander>
+
+    <TextBlock Text="{x:Static r:Strings.TextNotes}"/>
+    <TextBox
+        Style="{StaticResource TextBoxMultiStyle}"
+        Text="{Binding SelectedTitle.Notes}"/>
+
+    <CheckBox 
+        Content="{x:Static r:Strings.TextReady}"
+        IsChecked="{Binding SelectedTitle.Ready}"/>
+</StackPanel>

@@ -1,0 +1,35 @@
+﻿<Grid
+    x:Class="Restless.Panama.View.SubmissionTitleStatusToolTip"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:SubmissionTitleController}"
+    mc:Ignorable="d" 
+    tk:Property.ColumnWidths="Auto,*"
+    tk:Property.RowHeights="Auto,Auto,Auto"
+    d:DesignHeight="85" d:DesignWidth="180">
+
+    <Grid.Resources>
+        <Style TargetType="Border" BasedOn="{StaticResource ToolTipBorderIconStyle}"/>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource ToolTipTextBlockStyle}"/>
+    </Grid.Resources>
+
+    <Border
+        Grid.Row="1"
+        Background="{StaticResource GrayIconBrush}"/>
+    
+    <Border
+        Grid.Row="2"
+        Background="{StaticResource GreenIconBrush}"/>
+    
+    <TextBlock
+        Grid.ColumnSpan="2"
+        Style="{StaticResource ToolTipTextBlockHeaderStyle}"
+        Text="Submission status of title"/>
+    
+    <TextBlock Grid.Row="1" Grid.Column="1" Text="Withdrawn"/>
+    <TextBlock Grid.Row="2" Grid.Column="1" Text="Accepted"/>
+</Grid>

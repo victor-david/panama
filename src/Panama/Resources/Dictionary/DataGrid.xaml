@@ -1,208 +1,70 @@
 ﻿<ResourceDictionary 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:con="clr-namespace:Restless.Tools.Controls;assembly=Restless.Tools.Controls">
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core">
 
-    <!-- Min data grid row height. See also: Config.DataGrid.MinRowHeight -->
-    <sys:Double x:Key="DataGridMinRowHeight">24</sys:Double>
-    <!-- Max data grid row height. Not used in XAML. See also: Config.DataGrid.MaxRowHeight -->
-    <sys:Double x:Key="DataGridMaxRowHeight">42</sys:Double>
-
-    <SolidColorBrush x:Key="DataGridAlternationBrushSolid" Color="#FFCBE4EC"/>
-    
-    <!-- Brush used for the data grid alternation -->
-    <LinearGradientBrush x:Key="DataGridAlternationBrush" StartPoint="0.00,1.00" EndPoint="1.00,0.01">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#FFD6D6D5" Offset="0.069"/>
-                <GradientStop Color="#FFF4F4FA" Offset="1.000"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <Style x:Key="TitleDataGridRowStyle" TargetType="DataGridRow">
+    <Style x:Key="TitleConfirmDataGridRowStyle" TargetType="DataGridRow">
         <Style.Triggers>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsPublished}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitlePublished.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding DataContext.Config.Colors.TitlePublished.BackgroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsPublished}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitlePublished.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{Binding DataContext.Config.Colors.TitlePublished.ForegroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />                    
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsSelfPublished}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSelfPublished.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding DataContext.Config.Colors.TitleSelfPublished.BackgroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsSelfPublished}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSelfPublished.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{Binding DataContext.Config.Colors.TitleSelfPublished.ForegroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsSubmitted}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSubmitted.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding DataContext.Config.Colors.TitleSubmitted.BackgroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcIsSubmitted}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.TitleSubmitted.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{Binding DataContext.Config.Colors.TitleSubmitted.ForegroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
+            <DataTrigger Binding="{Binding Status}" Value="SamePublisher">
+                <Setter Property="Foreground" Value="{StaticResource BrightForegroundBrush}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Status}" Value="Exclusive">
+                <Setter Property="Foreground" Value="{StaticResource AlertForegroundBrush}"/>
+            </DataTrigger>            
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="PublisherDataGridRowStyle" TargetType="DataGridRow">
-        <Style.Triggers>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcInPeriod}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherPeriod.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding DataContext.Config.Colors.PublisherPeriod.BackgroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CalcInPeriod}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherPeriod.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{Binding DataContext.Config.Colors.PublisherPeriod.ForegroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding goner}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherGoner.HasBackground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{Binding DataContext.Config.Colors.PublisherGoner.BackgroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>            
-            
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding goner}" Value="True"/>
-                    <Condition Binding="{Binding Path=DataContext.Config.Colors.PublisherGoner.HasForeground,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{Binding DataContext.Config.Colors.PublisherGoner.ForegroundBrush,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <!-- Defines a style to use for all DataGrid elements -->
-    <Style TargetType="DataGrid" BasedOn="{StaticResource BaseControl}">
-        <Setter Property="FontSize" Value="11"/>
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="ColumnWidth" Value="*" />
-        <Setter Property="MinRowHeight" Value="{StaticResource DataGridMinRowHeight}" />
-        <Setter Property="Background" Value="White" />
-        <Setter Property="BorderBrush" Value="DarkGray" />
-        <Setter Property="GridLinesVisibility" Value="None"/>
-        <Setter Property="HeadersVisibility" Value="Column"/>
-        <Setter Property="IsReadOnly" Value="True" />
-        <Setter Property="AutoGenerateColumns" Value="False" />
-        <Setter Property="SelectionMode" Value="Single" />
-        <Setter Property="SelectionUnit" Value="FullRow" />
-        <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Style x:Key="DefaultDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource {x:Static tk:DataGrid.DataGridStyleKey}}">
         <Setter Property="AlternationCount" Value="{Binding Config.DataGridAlternationCount}"/>
-        <Setter Property="AlternatingRowBackground" Value="{Binding Config.Colors.DataGridAlternation.BackgroundBrush}"/>
-        <!--<Setter Property="RowStyle" Value="{StaticResource DataGridRowStyle}"/>-->
-        <!--<Setter Property="ColumnHeaderStyle">
-            <Setter.Value>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Foreground" Value="Blue"/>
-                </Style>
-            </Setter.Value>
-        </Setter>-->
-        <Setter Property="CellStyle">
-            <Setter.Value>
-                <Style TargetType="DataGridCell">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type DataGridCell}">
-                                <Grid Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="AlternatingRowBackground" Value="{Binding Config.Colors.DataGridAlternation.ColorBrush}"/>
+        <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}" />
+        <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkForegroundBrush}"/>
+        <Setter Property="MinRowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
         <Style.Resources>
-            <!-- This enables the selected row to retain a highlight when the data grid loses focus. Has a problem with .Net 4.0 -->
-            <!--<SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightSalmon"/>-->
-            <!-- This works in .Net 4.0 -->
-            <!--<SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="{StaticResource InactiveSelectionColor}" />-->
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="0"/>
+            </Style>
         </Style.Resources>
     </Style>
 
-    <Style TargetType="DataGrid" x:Key="DataGridEdit" BasedOn="{StaticResource {x:Type DataGrid}}">
-        <Setter Property="Margin" Value="4,2,4,4" />
+    <Style TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
+    <Style TargetType="tk:DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}"/>
+    
+    <Style x:Key="DataGridLockedStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="RowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
+    </Style>
+    
+    <Style x:Key="DataGridEditStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
+        <Setter Property="AlternationCount" Value="2"/>
+        <Setter Property="MaxHeight" Value="260" />
         <Setter Property="MinHeight" Value="100" />
-        <Setter Property="MaxHeight" Value="200" />
-        <Setter Property="AlternatingRowBackground" Value="#FFDFDFDF"/>
+        <Setter Property="RowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
     </Style>
 
-    <Style TargetType="{x:Type con:RestlessDataGrid}" BasedOn="{StaticResource {x:Type DataGrid}}">
-
+    <Style x:Key="DataGridStackStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
+        <Setter Property="AlternationCount" Value="2"/>
+        <Setter Property="MinHeight" Value="128"/>
+        <Setter Property="RowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
     </Style>
 
-    <!-- Bit of a kluge. But otherwise, the DataGrid's context menu also pops up if you right click the header row-->
-    <Style TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="ContextMenu">
-            <Setter.Value>
-                <ContextMenu Visibility="Collapsed" IsEnabled="False"/>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground" Value="DarkBlue"/>
+    <Style x:Key="DataGridEditLockedStyle" TargetType="DataGrid" BasedOn="{StaticResource DataGridEditStyle}">
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
     </Style>
 
-    <!-- This style exists to have a named style same as default style (above). Used when dynamically adding a style -->
-    <Style TargetType="DataGridColumnHeader" x:Key="DataGridHeaderDefault" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+    <Style x:Key="DataGridEditLockedStretchedStyle" TargetType="DataGrid" BasedOn="{StaticResource DefaultDataGridStyle}">
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
     </Style>
 
-    <Style TargetType="DataGridColumnHeader" x:Key="DataGridHeaderCenter" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+    <!-- Backward compatibility TODO: remove -->
+    <Style x:Key="DataGridHeaderCenter" TargetType="DataGridColumnHeader" BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
+
 </ResourceDictionary>

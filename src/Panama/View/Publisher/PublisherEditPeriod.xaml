@@ -1,0 +1,73 @@
+﻿<Grid
+    x:Class="Restless.Panama.View.PublisherEditPeriod"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
+    mc:Ignorable="d" 
+    d:DesignHeight="480" d:DesignWidth="460"
+    tk:Property.RowHeights="*,3*">
+
+    <Grid.Resources>
+        <Style TargetType="con:MonthDaySelector">
+            <Setter Property="Margin" Value="0,0,8,0"/>
+        </Style>
+    </Grid.Resources>
+
+    <DataGrid
+        ItemsSource="{Binding Periods.ListView}"
+        SelectedItem="{Binding Periods.SelectedItem}"
+        tk:DataGridColumns.Columns="{Binding Periods.Columns}">
+        
+        <DataGrid.ContextMenu>
+            <ContextMenu ItemsSource="{Binding Periods.MenuItems}"  />
+        </DataGrid.ContextMenu>
+        
+    </DataGrid>
+
+    <TextBlock
+        Style="{StaticResource TextBlockZeroResultStyle}"
+        tk:Property.IsCollapsed="{Binding Periods.HaveItems}"
+        Text="{x:Static r:Strings.TextNoPublisherPeriods}"/>
+
+    <Grid
+        Grid.Row="1"
+        tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,*"
+        tk:Property.ColumnWidths="*,*"
+        Style="{StaticResource DataEntryPanelStyle}"
+        Visibility="{Binding Periods.EditVisibility}">
+
+        <TextBlock Grid.ColumnSpan="2" Text="Note"/>
+        
+        <TextBox
+            Grid.Row="1" Grid.ColumnSpan="2"
+            Text="{Binding Periods.SelectedPeriod.Notes}"/>
+
+        <TextBlock Grid.Row="2" Text="Start"/>
+
+        <con:MonthDaySelector
+            Grid.Row="3"
+            SelectedMonth="{Binding Periods.SelectedPeriod.MonthStart}"
+            SelectedDay="{Binding Periods.SelectedPeriod.DayStart}"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="End"/>
+        <con:MonthDaySelector
+            Grid.Row="3" Grid.Column="1"
+            SelectedMonth="{Binding Periods.SelectedPeriod.MonthEnd}"
+            SelectedDay="{Binding Periods.SelectedPeriod.DayEnd}"/>
+        
+        <StatusBar Grid.Row="4" Grid.ColumnSpan="2">
+            <tk:IconButton
+                Icon="{StaticResource SquareSmallGreenIconKey}"
+                Content="All year"
+                Command="{Binding Periods.Commands[MakeAllYear]}"/>
+        </StatusBar>
+
+    </Grid>
+
+</Grid>

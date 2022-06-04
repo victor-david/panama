@@ -1,0 +1,191 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:con="clr-namespace:Restless.Panama.Controls">
+
+    <Style x:Key="ColorItemControlButtonStyle" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border 
+                        Name="ButtonBorder"
+                        Height="{TemplateBinding Height}"
+                        Width="{TemplateBinding Width}"
+                        Padding="1"
+                        BorderThickness="1"
+                        BorderBrush="Transparent">
+                        
+                        <Border
+                            BorderThickness="1"
+                            BorderBrush="Black"
+                            Background="{TemplateBinding Background}">
+                        </Border>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="Crimson"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+    
+    <Style TargetType="con:ColorItemControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="con:ColorItemControl">
+                    <Button
+                        x:Name="BAB3DCA3_DE3F_4C8B_927E_BE59F836C64A"
+                        Style="{StaticResource ColorItemControlButtonStyle}"
+                        Height="{x:Static con:ColorItemControl.ItemRawSize}"
+                        Width="{x:Static con:ColorItemControl.ItemRawSize}"
+                        Background="{TemplateBinding Background}"
+                        ToolTip="{TemplateBinding DisplayName}"
+                        Tag="{TemplateBinding Color}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DrawingBrush x:Key="{x:Static con:SimpleColorPicker.TransparentBrushKey}" Viewport="0,0,10,10" ViewportUnits="Absolute" TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="White">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,0 100,100" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="LightGray">
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <RectangleGeometry Rect="0,0 50,50" />
+                            <RectangleGeometry Rect="50,50 50,50" />
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <Style x:Key="SimpleColorPickerToggleButtonStyle" TargetType="ToggleButton">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border
+                        Height="{TemplateBinding Height}"
+                        Width="{TemplateBinding Width}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SimpleColorPickerListBoxStyle" TargetType="ListBox">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel Width="{x:Static con:SimpleColorPicker.DefaultPanelWidth}"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="1"/>
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="con:SimpleColorPicker">
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="RolloverBorderBrush" Value="DarkSlateGray"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="con:SimpleColorPicker">
+                    <Grid>
+                        <ToggleButton
+                            x:Name="ToggleButton"
+                            Style="{StaticResource SimpleColorPickerToggleButtonStyle}"
+                            Height="{TemplateBinding SelectorSize}"
+                            Width="{TemplateBinding SelectorSize}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding SelectedColorBrush}"/>
+
+                        <Popup 
+                            x:Name="Popup"
+                            Placement="Bottom"
+                            PlacementTarget="{Binding ElementName=ToggleButton}"
+                            IsOpen="{Binding ElementName=ToggleButton, Path=IsChecked}" 
+                            StaysOpen="False"
+                            AllowsTransparency="True" 
+                            Focusable="False" 
+                            HorizontalOffset="{TemplateBinding PopupHorizontalOffset}"
+                            VerticalOffset="{TemplateBinding PopupVerticalOffset}" 
+                            PopupAnimation="Fade">
+                            <Border
+                                Padding="5"
+                                BorderBrush="{TemplateBinding PopupBorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding PopupBackground}">
+                                <StackPanel>
+                                    <ListBox
+                                        Style="{StaticResource SimpleColorPickerListBoxStyle}"
+                                        ItemsSource="{TemplateBinding AvailableColors}"/>
+                                </StackPanel>
+                            </Border>
+                        </Popup>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ToggleButton" Property="BorderBrush" Value="{Binding RolloverBorderBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="con:SimpleColorPickerWrapper">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="con:SimpleColorPickerWrapper">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <con:SimpleColorPicker
+                            Margin="0,0,0,4"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            SelectedColor="{Binding Color, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        
+                         <TextBlock
+                            Grid.Row="1"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Text="{TemplateBinding Header}"/>                       
+                        
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

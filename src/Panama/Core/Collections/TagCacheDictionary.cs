@@ -4,12 +4,12 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Utility;
+using Restless.Panama.Database.Tables;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Represents a dictionary of TagCache objects
@@ -63,7 +63,10 @@ namespace Restless.App.Panama.Core
         /// <param name="item">The item</param>
         public void Add(long tagId, TagCache item)
         {
-            Validations.ValidateNull(item, "Add.Item");
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
             cache.Add(tagId, item);
         }
 
@@ -73,7 +76,10 @@ namespace Restless.App.Panama.Core
         /// <param name="tagRow">A DataRow from the tag table</param>
         public void Add(DataRow tagRow)
         {
-            Validations.ValidateNull(tagRow, "Add.TagRow");
+            if (tagRow == null)
+            {
+                throw new ArgumentNullException(nameof(tagRow));
+            }
             long tagId = (long)tagRow[TagTable.Defs.Columns.Id];
             string tagName = tagRow[TagTable.Defs.Columns.Tag].ToString();
             string tagDesc = tagRow[TagTable.Defs.Columns.Description].ToString();

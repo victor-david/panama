@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Restless.App.Panama.Resources {
+namespace Restless.Panama.Resources {
     using System;
     
     
@@ -19,7 +19,7 @@ namespace Restless.App.Panama.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -39,7 +39,7 @@ namespace Restless.App.Panama.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Restless.App.Panama.Resources.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Restless.Panama.Resources.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,28 +57,6 @@ namespace Restless.App.Panama.Resources {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A fatal error occured.
-        ///
-        ///{0}
-        ///
-        ///The application cannot continue..
-        /// </summary>
-        public static string ApplicationFatalExceptionFormat {
-            get {
-                return ResourceManager.GetString("ApplicationFatalExceptionFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fatal Error.
-        /// </summary>
-        public static string CaptionFatalError {
-            get {
-                return ResourceManager.GetString("CaptionFatalError", resourceCulture);
             }
         }
         
@@ -146,290 +124,11 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add alert.
-        /// </summary>
-        public static string CommandAddAlert {
-            get {
-                return ResourceManager.GetString("CommandAddAlert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a new alert with default value.
-        /// </summary>
-        public static string CommandAddAlertTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddAlertTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add author.
-        /// </summary>
-        public static string CommandAddAuthor {
-            get {
-                return ResourceManager.GetString("CommandAddAuthor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a new author.
-        /// </summary>
-        public static string CommandAddAuthorTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddAuthorTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add credential.
-        /// </summary>
-        public static string CommandAddCredential {
-            get {
-                return ResourceManager.GetString("CommandAddCredential", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a credential set.
-        /// </summary>
-        public static string CommandAddCredentialTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddCredentialTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add link.
-        /// </summary>
-        public static string CommandAddLink {
-            get {
-                return ResourceManager.GetString("CommandAddLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a link to a resource.
-        /// </summary>
-        public static string CommandAddLinkTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddLinkTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add publisher.
-        /// </summary>
-        public static string CommandAddPublisher {
-            get {
-                return ResourceManager.GetString("CommandAddPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a new publisher to the list.
-        /// </summary>
-        public static string CommandAddPublisherTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddPublisherTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add submission.
-        /// </summary>
-        public static string CommandAddSubmission {
-            get {
-                return ResourceManager.GetString("CommandAddSubmission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create a new submission.
-        /// </summary>
-        public static string CommandAddSubmissionTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddSubmissionTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add a tag.
         /// </summary>
         public static string CommandAddTag {
             get {
                 return ResourceManager.GetString("CommandAddTag", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a tag to be used with titles.
-        /// </summary>
-        public static string CommandAddTagTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddTagTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add title.
-        /// </summary>
-        public static string CommandAddTitle {
-            get {
-                return ResourceManager.GetString("CommandAddTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a new title to the list.
-        /// </summary>
-        public static string CommandAddTitleTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddTitleTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add this title to a submission.
-        /// </summary>
-        public static string CommandAddTitleToSubmission {
-            get {
-                return ResourceManager.GetString("CommandAddTitleToSubmission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add note.
-        /// </summary>
-        public static string CommandAddUserNote {
-            get {
-                return ResourceManager.GetString("CommandAddUserNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a new note.
-        /// </summary>
-        public static string CommandAddUserNoteTooltip {
-            get {
-                return ResourceManager.GetString("CommandAddUserNoteTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Alerts.
-        /// </summary>
-        public static string CommandAlert {
-            get {
-                return ResourceManager.GetString("CommandAlert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Apply.
-        /// </summary>
-        public static string CommandApplyConfig {
-            get {
-                return ResourceManager.GetString("CommandApplyConfig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Apply the changed application settings.
-        /// </summary>
-        public static string CommandApplyConfigTooltip {
-            get {
-                return ResourceManager.GetString("CommandApplyConfigTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authors.
-        /// </summary>
-        public static string CommandAuthor {
-            get {
-                return ResourceManager.GetString("CommandAuthor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Browse to this publisher&apos;s web site.
-        /// </summary>
-        public static string CommandBrowseToPublisherUrl {
-            get {
-                return ResourceManager.GetString("CommandBrowseToPublisherUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Browse to this publisher&apos;s web site (or double click the row).
-        /// </summary>
-        public static string CommandBrowseToPublisherUrlOrClick {
-            get {
-                return ResourceManager.GetString("CommandBrowseToPublisherUrlOrClick", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Browse to this url (or double click the row).
-        /// </summary>
-        public static string CommandBrowseToUrlOrClick {
-            get {
-                return ResourceManager.GetString("CommandBrowseToUrlOrClick", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clear.
-        /// </summary>
-        public static string CommandClearFilter {
-            get {
-                return ResourceManager.GetString("CommandClearFilter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clear all filters.
-        /// </summary>
-        public static string CommandClearFilterTooltip {
-            get {
-                return ResourceManager.GetString("CommandClearFilterTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clear Flags.
-        /// </summary>
-        public static string CommandClearTitleFlags {
-            get {
-                return ResourceManager.GetString("CommandClearTitleFlags", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clear flag from all titles.
-        /// </summary>
-        public static string CommandClearTitleFlagsTooltip {
-            get {
-                return ResourceManager.GetString("CommandClearTitleFlagsTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Settings.
-        /// </summary>
-        public static string CommandConfig {
-            get {
-                return ResourceManager.GetString("CommandConfig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View and modify application settings.
-        /// </summary>
-        public static string CommandConfigTooltip {
-            get {
-                return ResourceManager.GetString("CommandConfigTooltip", resourceCulture);
             }
         }
         
@@ -452,146 +151,11 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a submission to this publisher.
-        /// </summary>
-        public static string CommandCreateSubmission {
-            get {
-                return ResourceManager.GetString("CommandCreateSubmission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Credentials.
-        /// </summary>
-        public static string CommandCredential {
-            get {
-                return ResourceManager.GetString("CommandCredential", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this alert.
-        /// </summary>
-        public static string CommandDeleteAlert {
-            get {
-                return ResourceManager.GetString("CommandDeleteAlert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this author.
-        /// </summary>
-        public static string CommandDeleteAuthor {
-            get {
-                return ResourceManager.GetString("CommandDeleteAuthor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Delete this credential.
         /// </summary>
         public static string CommandDeleteCredential {
             get {
                 return ResourceManager.GetString("CommandDeleteCredential", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this link.
-        /// </summary>
-        public static string CommandDeleteLink {
-            get {
-                return ResourceManager.GetString("CommandDeleteLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this note.
-        /// </summary>
-        public static string CommandDeleteNote {
-            get {
-                return ResourceManager.GetString("CommandDeleteNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this publisher.
-        /// </summary>
-        public static string CommandDeletePublisher {
-            get {
-                return ResourceManager.GetString("CommandDeletePublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this submission.
-        /// </summary>
-        public static string CommandDeleteSubmission {
-            get {
-                return ResourceManager.GetString("CommandDeleteSubmission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this tag.
-        /// </summary>
-        public static string CommandDeleteTag {
-            get {
-                return ResourceManager.GetString("CommandDeleteTag", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this title.
-        /// </summary>
-        public static string CommandDeleteTitle {
-            get {
-                return ResourceManager.GetString("CommandDeleteTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this note.
-        /// </summary>
-        public static string CommandDeleteUserNote {
-            get {
-                return ResourceManager.GetString("CommandDeleteUserNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Advanced.
-        /// </summary>
-        public static string CommandFilterAdvanced {
-            get {
-                return ResourceManager.GetString("CommandFilterAdvanced", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Display / hide the advanced filters.
-        /// </summary>
-        public static string CommandFilterAdvancedTooltip {
-            get {
-                return ResourceManager.GetString("CommandFilterAdvancedTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter list to display only submissions to this publisher.
-        /// </summary>
-        public static string CommandFilterToPublisher {
-            get {
-                return ResourceManager.GetString("CommandFilterToPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Toggle flag for this title.
-        /// </summary>
-        public static string CommandFlagTitle {
-            get {
-                return ResourceManager.GetString("CommandFlagTitle", resourceCulture);
             }
         }
         
@@ -605,425 +169,11 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open this item (or double click the row).
-        /// </summary>
-        public static string CommandOpenItemOrDoubleClick {
-            get {
-                return ResourceManager.GetString("CommandOpenItemOrDoubleClick", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open the latest version of this title (or double click the row).
-        /// </summary>
-        public static string CommandOpenTitleOrDoubleClick {
-            get {
-                return ResourceManager.GetString("CommandOpenTitleOrDoubleClick", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Publishers.
-        /// </summary>
-        public static string CommandPublisher {
-            get {
-                return ResourceManager.GetString("CommandPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Active.
-        /// </summary>
-        public static string CommandPublisherFilterActive {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterActive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active, i.e. not flagged as a goner.
-        /// </summary>
-        public static string CommandPublisherFilterActiveTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterActiveTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Follow Up.
-        /// </summary>
-        public static string CommandPublisherFilterFollowup {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterFollowup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and flagged for follow up.
-        /// </summary>
-        public static string CommandPublisherFilterFollowupTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterFollowupTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open.
-        /// </summary>
-        public static string CommandPublisherFilterHaveSub {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterHaveSub", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter publisher list to display only publishers that currently have an open submission.
-        /// </summary>
-        public static string CommandPublisherFilterHaveSubTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterHaveSubTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to In Period.
-        /// </summary>
-        public static string CommandPublisherFilterInPeriod {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterInPeriod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and currently within a submission period.
-        /// </summary>
-        public static string CommandPublisherFilterInPeriodTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterInPeriodTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Paying.
-        /// </summary>
-        public static string CommandPublisherFilterPaying {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterPaying", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and are a paying market.
-        /// </summary>
-        public static string CommandPublisherFilterPayingTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherFilterPayingTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Manage existing publishers, create new publishers, etc..
-        /// </summary>
-        public static string CommandPublisherTooltip {
-            get {
-                return ResourceManager.GetString("CommandPublisherTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refresh usage.
-        /// </summary>
-        public static string CommandRefreshTagUsage {
-            get {
-                return ResourceManager.GetString("CommandRefreshTagUsage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refresh tag usage. This gets automatically refreshed when you restart the application, but you can do it manually if needed.
-        /// </summary>
-        public static string CommandRefreshTagUsageTooltip {
-            get {
-                return ResourceManager.GetString("CommandRefreshTagUsageTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Revert.
-        /// </summary>
-        public static string CommandRevertConfig {
-            get {
-                return ResourceManager.GetString("CommandRevertConfig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Restore the changed application settings to their previous values.
-        /// </summary>
-        public static string CommandRevertConfigTooltip {
-            get {
-                return ResourceManager.GetString("CommandRevertConfigTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save.
-        /// </summary>
-        public static string CommandSave {
-            get {
-                return ResourceManager.GetString("CommandSave", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save all modifications to data.
-        /// </summary>
-        public static string CommandSaveTooltip {
-            get {
-                return ResourceManager.GetString("CommandSaveTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Self Publishers.
         /// </summary>
         public static string CommandSelfPublisher {
             get {
                 return ResourceManager.GetString("CommandSelfPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Statistics.
-        /// </summary>
-        public static string CommandStatistics {
-            get {
-                return ResourceManager.GetString("CommandStatistics", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Submissions.
-        /// </summary>
-        public static string CommandSubmission {
-            get {
-                return ResourceManager.GetString("CommandSubmission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Active.
-        /// </summary>
-        public static string CommandSubmissionFilterActive {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterActive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter submission list to display only submissions that are active, i.e. have not yet received a response.
-        /// </summary>
-        public static string CommandSubmissionFilterActiveTooltip {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterActiveTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Personal.
-        /// </summary>
-        public static string CommandSubmissionFilterPersonalNote {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterPersonalNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter submission list to display submissions with a response type of Personal Note.
-        /// </summary>
-        public static string CommandSubmissionFilterPersonalNoteTooltip {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterPersonalNoteTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Try Again.
-        /// </summary>
-        public static string CommandSubmissionFilterTryAgain {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterTryAgain", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter submission list to display submissions with a response type of Try Again.
-        /// </summary>
-        public static string CommandSubmissionFilterTryAgainTooltip {
-            get {
-                return ResourceManager.GetString("CommandSubmissionFilterTryAgainTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add, view and modify submission information.
-        /// </summary>
-        public static string CommandSubmissionTooltip {
-            get {
-                return ResourceManager.GetString("CommandSubmissionTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tables.
-        /// </summary>
-        public static string CommandTable {
-            get {
-                return ResourceManager.GetString("CommandTable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tags.
-        /// </summary>
-        public static string CommandTag {
-            get {
-                return ResourceManager.GetString("CommandTag", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Titles.
-        /// </summary>
-        public static string CommandTitle {
-            get {
-                return ResourceManager.GetString("CommandTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter options.
-        /// </summary>
-        public static string CommandTitleFilter {
-            get {
-                return ResourceManager.GetString("CommandTitleFilter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Flagged.
-        /// </summary>
-        public static string CommandTitleFilterFlagged {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterFlagged", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only titles that are flagged.
-        /// </summary>
-        public static string CommandTitleFilterFlaggedTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterFlaggedTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Published.
-        /// </summary>
-        public static string CommandTitleFilterPublished {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterPublished", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only titles that are published.
-        /// </summary>
-        public static string CommandTitleFilterPublishedTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterPublishedTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ready.
-        /// </summary>
-        public static string CommandTitleFilterReady {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterReady", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only titles marked ready.
-        /// </summary>
-        public static string CommandTitleFilterReadyTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterReadyTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Self Published.
-        /// </summary>
-        public static string CommandTitleFilterSelfPublished {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterSelfPublished", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only titles that are self published.
-        /// </summary>
-        public static string CommandTitleFilterSelfPublishedTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterSelfPublishedTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Submitted.
-        /// </summary>
-        public static string CommandTitleFilterSubmitted {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterSubmitted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter title list to display only titles that are currently submitted.
-        /// </summary>
-        public static string CommandTitleFilterSubmittedTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterSubmittedTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View or hide the title filter options.
-        /// </summary>
-        public static string CommandTitleFilterTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleFilterTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Manage existing titles, create new titles, etc..
-        /// </summary>
-        public static string CommandTitleTooltip {
-            get {
-                return ResourceManager.GetString("CommandTitleTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tools.
-        /// </summary>
-        public static string CommandTool {
-            get {
-                return ResourceManager.GetString("CommandTool", resourceCulture);
             }
         }
         
@@ -1037,38 +187,11 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export.
-        /// </summary>
-        public static string CommandToolExport {
-            get {
-                return ResourceManager.GetString("CommandToolExport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Message Sync.
         /// </summary>
         public static string CommandToolMessageSync {
             get {
                 return ResourceManager.GetString("CommandToolMessageSync", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update.
-        /// </summary>
-        public static string CommandToolMeta {
-            get {
-                return ResourceManager.GetString("CommandToolMeta", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Find Orphans.
-        /// </summary>
-        public static string CommandToolOrphan {
-            get {
-                return ResourceManager.GetString("CommandToolOrphan", resourceCulture);
             }
         }
         
@@ -1082,65 +205,11 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search.
+        ///   Looks up a localized string similar to This operation will add a new alert record. If any filters are in effect, they will be removed so that the new alert displays in the list..
         /// </summary>
-        public static string CommandToolSearch {
+        public static string ConfirmationAddAlert {
             get {
-                return ResourceManager.GetString("CommandToolSearch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title list.
-        /// </summary>
-        public static string CommandToolTitleList {
-            get {
-                return ResourceManager.GetString("CommandToolTitleList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Notes.
-        /// </summary>
-        public static string CommandUserNote {
-            get {
-                return ResourceManager.GetString("CommandUserNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Data Grid.
-        /// </summary>
-        public static string ConfigDataGrid {
-            get {
-                return ResourceManager.GetString("ConfigDataGrid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Data grid row alternation.
-        /// </summary>
-        public static string ConfigDataGridRowAlternation {
-            get {
-                return ResourceManager.GetString("ConfigDataGridRowAlternation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Data grid row height.
-        /// </summary>
-        public static string ConfigDataGridRowHeight {
-            get {
-                return ResourceManager.GetString("ConfigDataGridRowHeight", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Orphan exclusions. This value specifies folder exclusions used during orphan detection. Values are separated by semi-colon and if found within a folder name indicate that the folder is ignored..
-        /// </summary>
-        public static string ConfigOrphanExclusion {
-            get {
-                return ResourceManager.GetString("ConfigOrphanExclusion", resourceCulture);
+                return ResourceManager.GetString("ConfirmationAddAlert", resourceCulture);
             }
         }
         
@@ -1156,6 +225,33 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation excludes the directory of the selected file from further orphan search.
+        /// </summary>
+        public static string ConfirmationAddOrphanDirectoryExclusion {
+            get {
+                return ResourceManager.GetString("ConfirmationAddOrphanDirectoryExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation excludes the selected file from further orphan search.
+        /// </summary>
+        public static string ConfirmationAddOrphanFileExclusion {
+            get {
+                return ResourceManager.GetString("ConfirmationAddOrphanFileExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation excludes all files of the selected file type from further orphan search.
+        /// </summary>
+        public static string ConfirmationAddOrphanFileTypeExclusion {
+            get {
+                return ResourceManager.GetString("ConfirmationAddOrphanFileTypeExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation will add a new publisher record. If any publisher filters are in effect, they will be removed so that the new publisher displays in the list. 
         ///
         ///Do you want to continue?.
@@ -1163,6 +259,15 @@ namespace Restless.App.Panama.Resources {
         public static string ConfirmationAddPublisher {
             get {
                 return ResourceManager.GetString("ConfirmationAddPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation adds a submission period that runs from January 1 - December 31, i.e. all year. Once added, you can change the range of the submission period if needed..
+        /// </summary>
+        public static string ConfirmationAddSubmissionPeriod {
+            get {
+                return ResourceManager.GetString("ConfirmationAddSubmissionPeriod", resourceCulture);
             }
         }
         
@@ -1200,6 +305,15 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation clears the published date for this item. You can set the date again at any time..
+        /// </summary>
+        public static string ConfirmationClearPublishedDate {
+            get {
+                return ResourceManager.GetString("ConfirmationClearPublishedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation will clear the quick flag from all titles. Do you want to continue?.
         /// </summary>
         public static string ConfirmationClearTitleFlags {
@@ -1218,9 +332,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.
-        ///
-        ///Do you want to continue?.
+        ///   Looks up a localized string similar to This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file..
         /// </summary>
         public static string ConfirmationCreateTitleFromOrphan {
             get {
@@ -1270,15 +382,6 @@ namespace Restless.App.Panama.Resources {
         public static string ConfirmationDeleteLink {
             get {
                 return ResourceManager.GetString("ConfirmationDeleteLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this note?.
-        /// </summary>
-        public static string ConfirmationDeleteNote {
-            get {
-                return ResourceManager.GetString("ConfirmationDeleteNote", resourceCulture);
             }
         }
         
@@ -1364,7 +467,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove this record of publication for this title?.
+        ///   Looks up a localized string similar to This operation removes the record of publication for this title. You can add a new record back at any time..
         /// </summary>
         public static string ConfirmationRemoveTitlePublished {
             get {
@@ -1373,11 +476,20 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will remove the selected version from this title. It does not delete the file on disk. Do you want to continue?.
+        ///   Looks up a localized string similar to This operation will remove the selected version from this title. It does not delete the file on disk..
         /// </summary>
         public static string ConfirmationRemoveTitleVersion {
             get {
                 return ResourceManager.GetString("ConfirmationRemoveTitleVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation sets the submission period to January 1 - December 31, i.e. all year..
+        /// </summary>
+        public static string ConfirmationResetSubmissionPeriod {
+            get {
+                return ResourceManager.GetString("ConfirmationResetSubmissionPeriod", resourceCulture);
             }
         }
         
@@ -1387,114 +499,6 @@ namespace Restless.App.Panama.Resources {
         public static string ConfirmationTitlesCopiedToClipboard {
             get {
                 return ResourceManager.GetString("ConfirmationTitlesCopiedToClipboard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This title has been previously submitted to the same publisher. Do you want to continue and submit it to the same publisher again?.
-        /// </summary>
-        public static string ConfirmationTitleSubmittedPreviouslyToPublisher {
-            get {
-                return ResourceManager.GetString("ConfirmationTitleSubmittedPreviouslyToPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This title is currently submitted to a publisher that does not accept simultaneous submissions. Do you want to continue and submit the title to another publisher?.
-        /// </summary>
-        public static string ConfirmationTitleSubmittedToExclusivePublisher {
-            get {
-                return ResourceManager.GetString("ConfirmationTitleSubmittedToExclusivePublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Alert title.
-        /// </summary>
-        public static string FilterPromptAlert {
-            get {
-                return ResourceManager.GetString("FilterPromptAlert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Author name.
-        /// </summary>
-        public static string FilterPromptAuthor {
-            get {
-                return ResourceManager.GetString("FilterPromptAuthor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Credential name.
-        /// </summary>
-        public static string FilterPromptCredential {
-            get {
-                return ResourceManager.GetString("FilterPromptCredential", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Link name or note.
-        /// </summary>
-        public static string FilterPromptLink {
-            get {
-                return ResourceManager.GetString("FilterPromptLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Publisher name.
-        /// </summary>
-        public static string FilterPromptPublisher {
-            get {
-                return ResourceManager.GetString("FilterPromptPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Publisher or response type.
-        /// </summary>
-        public static string FilterPromptSubmission {
-            get {
-                return ResourceManager.GetString("FilterPromptSubmission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Table name.
-        /// </summary>
-        public static string FilterPromptTable {
-            get {
-                return ResourceManager.GetString("FilterPromptTable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tag name.
-        /// </summary>
-        public static string FilterPromptTag {
-            get {
-                return ResourceManager.GetString("FilterPromptTag", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title.
-        /// </summary>
-        public static string FilterPromptTitle {
-            get {
-                return ResourceManager.GetString("FilterPromptTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Note title.
-        /// </summary>
-        public static string FilterPromptUserNote {
-            get {
-                return ResourceManager.GetString("FilterPromptUserNote", resourceCulture);
             }
         }
         
@@ -1544,6 +548,24 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigned Tags.
+        /// </summary>
+        public static string HeaderAssignedTags {
+            get {
+                return ResourceManager.GetString("HeaderAssignedTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available Tags.
+        /// </summary>
+        public static string HeaderAvailableTags {
+            get {
+                return ResourceManager.GetString("HeaderAvailableTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data.
         /// </summary>
         public static string HeaderData {
@@ -1571,29 +593,20 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Main.
+        /// </summary>
+        public static string HeaderMain {
+            get {
+                return ResourceManager.GetString("HeaderMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Messages.
         /// </summary>
         public static string HeaderMessages {
             get {
                 return ResourceManager.GetString("HeaderMessages", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preview.
-        /// </summary>
-        public static string HeaderPreview {
-            get {
-                return ResourceManager.GetString("HeaderPreview", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Published.
-        /// </summary>
-        public static string HeaderPublished {
-            get {
-                return ResourceManager.GetString("HeaderPublished", resourceCulture);
             }
         }
         
@@ -1607,11 +620,38 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        public static string HeaderSettingsAdvanced {
+            get {
+                return ResourceManager.GetString("HeaderSettingsAdvanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colors.
+        /// </summary>
+        public static string HeaderSettingsColor {
+            get {
+                return ResourceManager.GetString("HeaderSettingsColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date Format.
         /// </summary>
         public static string HeaderSettingsDateFormat {
             get {
                 return ResourceManager.GetString("HeaderSettingsDateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display.
+        /// </summary>
+        public static string HeaderSettingsDisplay {
+            get {
+                return ResourceManager.GetString("HeaderSettingsDisplay", resourceCulture);
             }
         }
         
@@ -1625,38 +665,11 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Colors.
-        /// </summary>
-        public static string HeaderSettingsSectionColor {
-            get {
-                return ResourceManager.GetString("HeaderSettingsSectionColor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Folders.
-        /// </summary>
-        public static string HeaderSettingsSectionFolder {
-            get {
-                return ResourceManager.GetString("HeaderSettingsSectionFolder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to General.
-        /// </summary>
-        public static string HeaderSettingsSectionGeneral {
-            get {
-                return ResourceManager.GetString("HeaderSettingsSectionGeneral", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Submission.
         /// </summary>
-        public static string HeaderSettingsSectionSubmission {
+        public static string HeaderSettingsSubmission {
             get {
-                return ResourceManager.GetString("HeaderSettingsSectionSubmission", resourceCulture);
+                return ResourceManager.GetString("HeaderSettingsSubmission", resourceCulture);
             }
         }
         
@@ -1670,11 +683,29 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tag filter.
+        /// </summary>
+        public static string HeaderTagFilter {
+            get {
+                return ResourceManager.GetString("HeaderTagFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Titles.
         /// </summary>
         public static string HeaderTitles {
             get {
                 return ResourceManager.GetString("HeaderTitles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string HeaderToolExport {
+            get {
+                return ResourceManager.GetString("HeaderToolExport", resourceCulture);
             }
         }
         
@@ -1697,74 +728,11 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted. Files are exported to: {0}.
-        /// </summary>
-        public static string HeaderToolOperationExport {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationExport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject..
         /// </summary>
         public static string HeaderToolOperationMessageSync {
             get {
                 return ResourceManager.GetString("HeaderToolOperationMessageSync", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Submission documents (not found) - {0}.
-        /// </summary>
-        public static string HeaderToolOperationMetaSubmissionNotFoundFormat {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationMetaSubmissionNotFoundFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Submission documents (updated) - {0}.
-        /// </summary>
-        public static string HeaderToolOperationMetaSubmissionUpdatedFormat {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationMetaSubmissionUpdatedFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title documents (not found) - {0}.
-        /// </summary>
-        public static string HeaderToolOperationMetaTitleNotFoundFormat {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationMetaTitleNotFoundFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title documents (updated) - {0}.
-        /// </summary>
-        public static string HeaderToolOperationMetaTitleUpdatedFormat {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationMetaTitleUpdatedFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This operation first compacts the database file, and then verfies that all files associated with title versions and submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count..
-        /// </summary>
-        public static string HeaderToolOperationMetaUpdate {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationMetaUpdate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This operation searches all files beneath the title root directory to find those files that are not associated with a title entry. The submission document folder and title export folder are automatically excluded from the search if they exist beneath title root. You can exclude other folders in configuration..
-        /// </summary>
-        public static string HeaderToolOperationOrphan {
-            get {
-                return ResourceManager.GetString("HeaderToolOperationOrphan", resourceCulture);
             }
         }
         
@@ -1805,11 +773,38 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation creates a text file that has a list of all titles and their corresponding versions. The text file is placed in the TitleRoot folder..
+        ///   Looks up a localized string similar to Orphan.
         /// </summary>
-        public static string HeaderToolOperationTitleList {
+        public static string HeaderToolOrphan {
             get {
-                return ResourceManager.GetString("HeaderToolOperationTitleList", resourceCulture);
+                return ResourceManager.GetString("HeaderToolOrphan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission Data.
+        /// </summary>
+        public static string HeaderToolSubmissionMetadata {
+            get {
+                return ResourceManager.GetString("HeaderToolSubmissionMetadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title List.
+        /// </summary>
+        public static string HeaderToolTitleList {
+            get {
+                return ResourceManager.GetString("HeaderToolTitleList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title Data.
+        /// </summary>
+        public static string HeaderToolTitleMetadata {
+            get {
+                return ResourceManager.GetString("HeaderToolTitleMetadata", resourceCulture);
             }
         }
         
@@ -1821,15 +816,6 @@ namespace Restless.App.Panama.Resources {
         public static string HeaderVersionProperties {
             get {
                 return ResourceManager.GetString("HeaderVersionProperties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The properties for this version cannot be displayed. Only Open Xml documents are supported..
-        /// </summary>
-        public static string HeaderVersionPropertiesNotOpenXml {
-            get {
-                return ResourceManager.GetString("HeaderVersionPropertiesNotOpenXml", resourceCulture);
             }
         }
         
@@ -1861,7 +847,7 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This author cannot be deleted. He or she is participating in {0} titles. .
+        ///   Looks up a localized string similar to This author cannot be deleted. They are participating in {0} titles. .
         /// </summary>
         public static string InvalidOpCannotDeleteAuthor {
             get {
@@ -1933,11 +919,11 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The folder for the export operation hasn&apos;t been set or doesn&apos;t exist. Fix the configuration setting and try again..
+        ///   Looks up a localized string similar to No search scope specified.
         /// </summary>
-        public static string InvalidOpExportFolderNotSet {
+        public static string InvalidOperationNoSearchScope {
             get {
-                return ResourceManager.GetString("InvalidOpExportFolderNotSet", resourceCulture);
+                return ResourceManager.GetString("InvalidOperationNoSearchScope", resourceCulture);
             }
         }
         
@@ -1965,6 +951,15 @@ namespace Restless.App.Panama.Resources {
         public static string InvalidOpNotEnoughTextToScramble {
             get {
                 return ResourceManager.GetString("InvalidOpNotEnoughTextToScramble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The folder for this operation hasn&apos;t been set or doesn&apos;t exist. Fix the configuration setting and try again..
+        /// </summary>
+        public static string InvalidOpOutputFolderNotSet {
+            get {
+                return ResourceManager.GetString("InvalidOpOutputFolderNotSet", resourceCulture);
             }
         }
         
@@ -2063,6 +1058,672 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string MenuItemAdd {
+            get {
+                return ResourceManager.GetString("MenuItemAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an alert.
+        /// </summary>
+        public static string MenuItemAddAlert {
+            get {
+                return ResourceManager.GetString("MenuItemAddAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an author.
+        /// </summary>
+        public static string MenuItemAddAuthor {
+            get {
+                return ResourceManager.GetString("MenuItemAddAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a credential set.
+        /// </summary>
+        public static string MenuItemAddCredential {
+            get {
+                return ResourceManager.GetString("MenuItemAddCredential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a document to this submission.
+        /// </summary>
+        public static string MenuItemAddDocumentToSubmission {
+            get {
+                return ResourceManager.GetString("MenuItemAddDocumentToSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add link.
+        /// </summary>
+        public static string MenuItemAddLink {
+            get {
+                return ResourceManager.GetString("MenuItemAddLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a published record to this title.
+        /// </summary>
+        public static string MenuItemAddPublished {
+            get {
+                return ResourceManager.GetString("MenuItemAddPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a self published record to this title.
+        /// </summary>
+        public static string MenuItemAddSelfPublished {
+            get {
+                return ResourceManager.GetString("MenuItemAddSelfPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a message to this submission.
+        /// </summary>
+        public static string MenuItemAddSubmissionMessage {
+            get {
+                return ResourceManager.GetString("MenuItemAddSubmissionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a submission period.
+        /// </summary>
+        public static string MenuItemAddSubmissionPeriod {
+            get {
+                return ResourceManager.GetString("MenuItemAddSubmissionPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a title to the collection.
+        /// </summary>
+        public static string MenuItemAddTitle {
+            get {
+                return ResourceManager.GetString("MenuItemAddTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add title(s) to this submission.
+        /// </summary>
+        public static string MenuItemAddTitleToSubmission {
+            get {
+                return ResourceManager.GetString("MenuItemAddTitleToSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an existing file as a version.
+        /// </summary>
+        public static string MenuItemAddTitleVersion {
+            get {
+                return ResourceManager.GetString("MenuItemAddTitleVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a note.
+        /// </summary>
+        public static string MenuItemAddUserNote {
+            get {
+                return ResourceManager.GetString("MenuItemAddUserNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alerts.
+        /// </summary>
+        public static string MenuItemAlerts {
+            get {
+                return ResourceManager.GetString("MenuItemAlerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authors.
+        /// </summary>
+        public static string MenuItemAuthors {
+            get {
+                return ResourceManager.GetString("MenuItemAuthors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse to this publisher&apos;s web site.
+        /// </summary>
+        public static string MenuItemBrowseToPublisherUrl {
+            get {
+                return ResourceManager.GetString("MenuItemBrowseToPublisherUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse to this publisher&apos;s web site (or double click the row).
+        /// </summary>
+        public static string MenuItemBrowseToPublisherUrlOrClick {
+            get {
+                return ResourceManager.GetString("MenuItemBrowseToPublisherUrlOrClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse to this url (or double click the row).
+        /// </summary>
+        public static string MenuItemBrowseToUrlOrClick {
+            get {
+                return ResourceManager.GetString("MenuItemBrowseToUrlOrClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string MenuItemClear {
+            get {
+                return ResourceManager.GetString("MenuItemClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear the published date.
+        /// </summary>
+        public static string MenuItemClearPublishedDate {
+            get {
+                return ResourceManager.GetString("MenuItemClearPublishedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new publisher record.
+        /// </summary>
+        public static string MenuItemCreatePublisher {
+            get {
+                return ResourceManager.GetString("MenuItemCreatePublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a submission.
+        /// </summary>
+        public static string MenuItemCreateSubmission {
+            get {
+                return ResourceManager.GetString("MenuItemCreateSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a submission to this publisher.
+        /// </summary>
+        public static string MenuItemCreateSubmissionToPublisher {
+            get {
+                return ResourceManager.GetString("MenuItemCreateSubmissionToPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a title entry from this file.
+        /// </summary>
+        public static string MenuItemCreateTitleFromEntry {
+            get {
+                return ResourceManager.GetString("MenuItemCreateTitleFromEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credentials.
+        /// </summary>
+        public static string MenuItemCredentials {
+            get {
+                return ResourceManager.GetString("MenuItemCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        public static string MenuItemCustom {
+            get {
+                return ResourceManager.GetString("MenuItemCustom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this alert.
+        /// </summary>
+        public static string MenuItemDeleteAlert {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this author.
+        /// </summary>
+        public static string MenuItemDeleteAuthor {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this link.
+        /// </summary>
+        public static string MenuItemDeleteLink {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this note.
+        /// </summary>
+        public static string MenuItemDeleteNote {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this publisher.
+        /// </summary>
+        public static string MenuItemDeletePublisher {
+            get {
+                return ResourceManager.GetString("MenuItemDeletePublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this submission.
+        /// </summary>
+        public static string MenuItemDeleteSubmission {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this tag.
+        /// </summary>
+        public static string MenuItemDeleteTag {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this title.
+        /// </summary>
+        public static string MenuItemDeleteTitle {
+            get {
+                return ResourceManager.GetString("MenuItemDeleteTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude this directory from orphan search.
+        /// </summary>
+        public static string MenuItemExcludeOrphanDirectory {
+            get {
+                return ResourceManager.GetString("MenuItemExcludeOrphanDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude this file from orphan search.
+        /// </summary>
+        public static string MenuItemExcludeOrphanFile {
+            get {
+                return ResourceManager.GetString("MenuItemExcludeOrphanFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude all files of this type from orphan search.
+        /// </summary>
+        public static string MenuItemExcludeOrphanFileType {
+            get {
+                return ResourceManager.GetString("MenuItemExcludeOrphanFileType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter list to display only submissions to this publisher.
+        /// </summary>
+        public static string MenuItemFilterToPublisher {
+            get {
+                return ResourceManager.GetString("MenuItemFilterToPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle flag for this title.
+        /// </summary>
+        public static string MenuItemFlagTitle {
+            get {
+                return ResourceManager.GetString("MenuItemFlagTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Links.
+        /// </summary>
+        public static string MenuItemLinks {
+            get {
+                return ResourceManager.GetString("MenuItemLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verify links.
+        /// </summary>
+        public static string MenuItemLinkVerify {
+            get {
+                return ResourceManager.GetString("MenuItemLinkVerify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make this a separate version.
+        /// </summary>
+        public static string MenuItemMakeSeparateVersion {
+            get {
+                return ResourceManager.GetString("MenuItemMakeSeparateVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notes.
+        /// </summary>
+        public static string MenuItemNotes {
+            get {
+                return ResourceManager.GetString("MenuItemNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open this item (or double click the row).
+        /// </summary>
+        public static string MenuItemOpenItemOrDoubleClick {
+            get {
+                return ResourceManager.GetString("MenuItemOpenItemOrDoubleClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open the latest version of this title (or double click the row).
+        /// </summary>
+        public static string MenuItemOpenTitleOrDoubleClick {
+            get {
+                return ResourceManager.GetString("MenuItemOpenTitleOrDoubleClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publishers.
+        /// </summary>
+        public static string MenuItemPublishers {
+            get {
+                return ResourceManager.GetString("MenuItemPublishers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this exclusion.
+        /// </summary>
+        public static string MenuItemRemoveExclusion {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this published record.
+        /// </summary>
+        public static string MenuItemRemovePublished {
+            get {
+                return ResourceManager.GetString("MenuItemRemovePublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this document from submission.
+        /// </summary>
+        public static string MenuItemRemoveSubmissionDocument {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveSubmissionDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this message from submission.
+        /// </summary>
+        public static string MenuItemRemoveSubmissionMessage {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveSubmissionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this submission period.
+        /// </summary>
+        public static string MenuItemRemoveSubmissionPeriod {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveSubmissionPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove title from submission.
+        /// </summary>
+        public static string MenuItemRemoveTitleFromSubmission {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveTitleFromSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this title version.
+        /// </summary>
+        public static string MenuItemRemoveTitleVersion {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveTitleVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace this submission document.
+        /// </summary>
+        public static string MenuItemReplaceSubmissionDocument {
+            get {
+                return ResourceManager.GetString("MenuItemReplaceSubmissionDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace the file for this version with another file.
+        /// </summary>
+        public static string MenuItemReplaceTitleVersion {
+            get {
+                return ResourceManager.GetString("MenuItemReplaceTitleVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset window.
+        /// </summary>
+        public static string MenuItemResetWindow {
+            get {
+                return ResourceManager.GetString("MenuItemResetWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string MenuItemSearch {
+            get {
+                return ResourceManager.GetString("MenuItemSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Self publishers.
+        /// </summary>
+        public static string MenuItemSelfPublishers {
+            get {
+                return ResourceManager.GetString("MenuItemSelfPublishers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string MenuItemSettings {
+            get {
+                return ResourceManager.GetString("MenuItemSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set status to accepted.
+        /// </summary>
+        public static string MenuItemSetTitleStatusAccepted {
+            get {
+                return ResourceManager.GetString("MenuItemSetTitleStatusAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set status to none.
+        /// </summary>
+        public static string MenuItemSetTitleStatusNone {
+            get {
+                return ResourceManager.GetString("MenuItemSetTitleStatusNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set status to withdrawn.
+        /// </summary>
+        public static string MenuItemSetTitleStatusWithdrawn {
+            get {
+                return ResourceManager.GetString("MenuItemSetTitleStatusWithdrawn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        public static string MenuItemStatistics {
+            get {
+                return ResourceManager.GetString("MenuItemStatistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submissions.
+        /// </summary>
+        public static string MenuItemSubmissions {
+            get {
+                return ResourceManager.GetString("MenuItemSubmissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summary.
+        /// </summary>
+        public static string MenuItemSummary {
+            get {
+                return ResourceManager.GetString("MenuItemSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table info.
+        /// </summary>
+        public static string MenuItemTableInfo {
+            get {
+                return ResourceManager.GetString("MenuItemTableInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tags.
+        /// </summary>
+        public static string MenuItemTags {
+            get {
+                return ResourceManager.GetString("MenuItemTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Titles.
+        /// </summary>
+        public static string MenuItemTitles {
+            get {
+                return ResourceManager.GetString("MenuItemTitles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        public static string MenuItemTools {
+            get {
+                return ResourceManager.GetString("MenuItemTools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Tools.
+        /// </summary>
+        public static string MenuItemUpdateTools {
+            get {
+                return ResourceManager.GetString("MenuItemUpdateTools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Main.
+        /// </summary>
+        public static string NavHeaderMain {
+            get {
+                return ResourceManager.GetString("NavHeaderMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        public static string NavHeaderOther {
+            get {
+                return ResourceManager.GetString("NavHeaderOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string NavHeaderSettings {
+            get {
+                return ResourceManager.GetString("NavHeaderSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot exit at this time. Background tasks are still running..
         /// </summary>
         public static string NotificationCannotExitTasksAreRunning {
@@ -2081,11 +1742,490 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Database Location.
+        /// </summary>
+        public static string SettingsDatabaseLocation {
+            get {
+                return ResourceManager.GetString("SettingsDatabaseLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changing the database location will create a new database. No data will be copied. If you want to preserve your data, copy all files from the previous location to the new one.
+        ///
+        ///Changes will take effect after you restart the application..
+        /// </summary>
+        public static string SettingsDatabaseLocationText {
+            get {
+                return ResourceManager.GetString("SettingsDatabaseLocationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data grid row alternation.
+        /// </summary>
+        public static string SettingsDataGridRowAlternation {
+            get {
+                return ResourceManager.GetString("SettingsDataGridRowAlternation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data grid row height.
+        /// </summary>
+        public static string SettingsDataGridRowHeight {
+            get {
+                return ResourceManager.GetString("SettingsDataGridRowHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The orphan tool enables you to exclude certain files, file types, and directories from its search. You add exclusions in the tool window and can remove them here if needed.
+        /// </summary>
+        public static string SettingsOrphanExclusionDetail {
+            get {
+                return ResourceManager.GetString("SettingsOrphanExclusionDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text Viewer.
+        /// </summary>
+        public static string SettingsTextViewer {
+            get {
+                return ResourceManager.GetString("SettingsTextViewer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable link verification tool (experimental).
+        /// </summary>
+        public static string SettingsVerifyLinks {
+            get {
+                return ResourceManager.GetString("SettingsVerifyLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Added / Updated.
+        /// </summary>
+        public static string TextAddedUpdated {
+            get {
+                return ResourceManager.GetString("TextAddedUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assigned.
+        /// </summary>
+        public static string TextAssigned {
+            get {
+                return ResourceManager.GetString("TextAssigned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tags to filter.
+        /// </summary>
+        public static string TextAssignedToFilter {
+            get {
+                return ResourceManager.GetString("TextAssignedToFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available.
+        /// </summary>
+        public static string TextAvailable {
+            get {
+                return ResourceManager.GetString("TextAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available tags.
+        /// </summary>
+        public static string TextAvailableTags {
+            get {
+                return ResourceManager.GetString("TextAvailableTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string TextCancel {
+            get {
+                return ResourceManager.GetString("TextCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string TextClear {
+            get {
+                return ResourceManager.GetString("TextClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string TextConfirm {
+            get {
+                return ResourceManager.GetString("TextConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This entry was created from orphan file.
+        /// </summary>
+        public static string TextCreatedFromOrphan {
+            get {
+                return ResourceManager.GetString("TextCreatedFromOrphan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create submission document.
+        /// </summary>
+        public static string TextCreateSubmissionDocument0 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Getting ready to create a submission document. You may:.
+        /// </summary>
+        public static string TextCreateSubmissionDocument1 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a .docx document compatible with Microsoft Word and other word processors that support the Open XML specification..
+        /// </summary>
+        public static string TextCreateSubmissionDocument2 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a placeholder entry in the submission documents. After, you can select an existing file to associate with this entry..
+        /// </summary>
+        public static string TextCreateSubmissionDocument3 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create .docx.
+        /// </summary>
+        public static string TextCreateSubmissionDocument4 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create placeholder.
+        /// </summary>
+        public static string TextCreateSubmissionDocument5 {
+            get {
+                return ResourceManager.GetString("TextCreateSubmissionDocument5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string TextDate {
+            get {
+                return ResourceManager.GetString("TextDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 day.
+        /// </summary>
+        public static string TextDays01 {
+            get {
+                return ResourceManager.GetString("TextDays01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3 days.
+        /// </summary>
+        public static string TextDays03 {
+            get {
+                return ResourceManager.GetString("TextDays03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5 days.
+        /// </summary>
+        public static string TextDays05 {
+            get {
+                return ResourceManager.GetString("TextDays05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 7 days.
+        /// </summary>
+        public static string TextDays07 {
+            get {
+                return ResourceManager.GetString("TextDays07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10 days.
+        /// </summary>
+        public static string TextDays10 {
+            get {
+                return ResourceManager.GetString("TextDays10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string TextDescription {
+            get {
+                return ResourceManager.GetString("TextDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dismiss.
+        /// </summary>
+        public static string TextDismiss {
+            get {
+                return ResourceManager.GetString("TextDismiss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Preview Not Supported.
+        /// </summary>
+        public static string TextDocumentPreviewNotSupported {
+            get {
+                return ResourceManager.GetString("TextDocumentPreviewNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string TextEnabled {
+            get {
+                return ResourceManager.GetString("TextEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ever Submitted.
+        /// </summary>
+        public static string TextEverSubmitted {
+            get {
+                return ResourceManager.GetString("TextEverSubmitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extract.
+        /// </summary>
+        public static string TextExtract {
+            get {
+                return ResourceManager.GetString("TextExtract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flagged.
+        /// </summary>
+        public static string TextFlagged {
+            get {
+                return ResourceManager.GetString("TextFlagged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
+        /// </summary>
+        public static string TextImage {
+            get {
+                return ResourceManager.GetString("TextImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locked.
+        /// </summary>
+        public static string TextLocked {
+            get {
+                return ResourceManager.GetString("TextLocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Combine multiple.
+        /// </summary>
+        public static string TextMultipleTag {
+            get {
+                return ResourceManager.GetString("TextMultipleTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string TextName {
+            get {
+                return ResourceManager.GetString("TextName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (none).
         /// </summary>
         public static string TextNone {
             get {
                 return ResourceManager.GetString("TextNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No submission periods defined for this publisher.
+        /// </summary>
+        public static string TextNoPublisherPeriods {
+            get {
+                return ResourceManager.GetString("TextNoPublisherPeriods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No submissions to this publisher.
+        /// </summary>
+        public static string TextNoPublisherSubmissions {
+            get {
+                return ResourceManager.GetString("TextNoPublisherSubmissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note.
+        /// </summary>
+        public static string TextNote {
+            get {
+                return ResourceManager.GetString("TextNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notes.
+        /// </summary>
+        public static string TextNotes {
+            get {
+                return ResourceManager.GetString("TextNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No titles.
+        /// </summary>
+        public static string TextNoTitles {
+            get {
+                return ResourceManager.GetString("TextNoTitles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No submissions for this title.
+        /// </summary>
+        public static string TextNoTitleSubmissions {
+            get {
+                return ResourceManager.GetString("TextNoTitleSubmissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No versions for this title.
+        /// </summary>
+        public static string TextNoTitleVersions {
+            get {
+                return ResourceManager.GetString("TextNoTitleVersions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not an Open Xml Document.
+        /// </summary>
+        public static string TextNotOpenXmlDocument {
+            get {
+                return ResourceManager.GetString("TextNotOpenXmlDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orphan.
+        /// </summary>
+        public static string TextOrphan {
+            get {
+                return ResourceManager.GetString("TextOrphan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orphans.
+        /// </summary>
+        public static string TextOrphans {
+            get {
+                return ResourceManager.GetString("TextOrphans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
+        public static string TextPreview {
+            get {
+                return ResourceManager.GetString("TextPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published.
+        /// </summary>
+        public static string TextPublished {
+            get {
+                return ResourceManager.GetString("TextPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publisher.
+        /// </summary>
+        public static string TextPublisher {
+            get {
+                return ResourceManager.GetString("TextPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        public static string TextReady {
+            get {
+                return ResourceManager.GetString("TextReady", resourceCulture);
             }
         }
         
@@ -2108,11 +2248,65 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string TextRefresh {
+            get {
+                return ResourceManager.GetString("TextRefresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed.
+        /// </summary>
+        public static string TextRemoved {
+            get {
+                return ResourceManager.GetString("TextRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename.
+        /// </summary>
+        public static string TextRename {
+            get {
+                return ResourceManager.GetString("TextRename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Response.
         /// </summary>
         public static string TextResponse {
             get {
                 return ResourceManager.GetString("TextResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Self Published.
+        /// </summary>
+        public static string TextSelfPublished {
+            get {
+                return ResourceManager.GetString("TextSelfPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send report.
+        /// </summary>
+        public static string TextSendReport {
+            get {
+                return ResourceManager.GetString("TextSendReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string TextStart {
+            get {
+                return ResourceManager.GetString("TextStart", resourceCulture);
             }
         }
         
@@ -2126,6 +2320,33 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string TextTitle {
+            get {
+                return ResourceManager.GetString("TextTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Url.
+        /// </summary>
+        public static string TextUrl {
+            get {
+                return ResourceManager.GetString("TextUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verify.
+        /// </summary>
+        public static string TextVerify {
+            get {
+                return ResourceManager.GetString("TextVerify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Written.
         /// </summary>
         public static string TextWritten {
@@ -2135,29 +2356,146 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Display drop down colors in alphabetical order.
+        ///   Looks up a localized string similar to Search returned no results.
         /// </summary>
-        public static string TooltipColorAlpha {
+        public static string TextZeroSearchResults {
             get {
-                return ResourceManager.GetString("TooltipColorAlpha", resourceCulture);
+                return ResourceManager.GetString("TextZeroSearchResults", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Display drop down colors in order of hue, saturation and brightness.
+        ///   Looks up a localized string similar to Please confirm that you want to submit the following titles.
         /// </summary>
-        public static string TooltipColorHSB {
+        public static string TitleStatusHeader {
             get {
-                return ResourceManager.GetString("TooltipColorHSB", resourceCulture);
+                return ResourceManager.GetString("TitleStatusHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset all colors to their default values.
+        ///   Looks up a localized string similar to No conflict.
         /// </summary>
-        public static string TooltipColorReset {
+        public static string TitleStatusOkay {
             get {
-                return ResourceManager.GetString("TooltipColorReset", resourceCulture);
+                return ResourceManager.GetString("TitleStatusOkay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previously submitted to the same publisher.
+        /// </summary>
+        public static string TitleStatusPreviousToPublisher {
+            get {
+                return ResourceManager.GetString("TitleStatusPreviousToPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently submitted to a publisher that does not accept simultaneous submissions.
+        /// </summary>
+        public static string TitleStatusSubmittedToExclusive {
+            get {
+                return ResourceManager.GetString("TitleStatusSubmittedToExclusive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown status.
+        /// </summary>
+        public static string TitleStatusUnknown {
+            get {
+                return ResourceManager.GetString("TitleStatusUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted..
+        /// </summary>
+        public static string ToolExportDetail {
+            get {
+                return ResourceManager.GetString("ToolExportDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation searches all files beneath the title root directory to find those files that are not associated with a title entry. The submission document folder and title export folder are automatically excluded from the search if they exist beneath title root. You can exclude other folders in configuration..
+        /// </summary>
+        public static string ToolOrphanDetail {
+            get {
+                return ResourceManager.GetString("ToolOrphanDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation verifies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time..
+        /// </summary>
+        public static string ToolSubmissionMetadataDetail {
+            get {
+                return ResourceManager.GetString("ToolSubmissionMetadataDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This alert is currently enabled.
+        /// </summary>
+        public static string ToolTipAlertEnabled {
+            get {
+                return ResourceManager.GetString("ToolTipAlertEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is the default author when creating new titles.
+        /// </summary>
+        public static string ToolTipAuthorDefault {
+            get {
+                return ResourceManager.GetString("ToolTipAuthorDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel the operation.
+        /// </summary>
+        public static string ToolTipCancel {
+            get {
+                return ResourceManager.GetString("ToolTipCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy the list of titles to the clipboard.
+        /// </summary>
+        public static string ToolTipCopyTitles {
+            get {
+                return ResourceManager.GetString("ToolTipCopyTitles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extract title from latest version.
+        /// </summary>
+        public static string ToolTipExtract {
+            get {
+                return ResourceManager.GetString("ToolTipExtract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear all filters.
+        /// </summary>
+        public static string ToolTipFilterClear {
+            get {
+                return ResourceManager.GetString("ToolTipFilterClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Establish filter(s) on the collection.
+        /// </summary>
+        public static string ToolTipFilterCustom {
+            get {
+                return ResourceManager.GetString("ToolTipFilterCustom", resourceCulture);
             }
         }
         
@@ -2182,36 +2520,81 @@ namespace Restless.App.Panama.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The date this publisher was added to the database.
         /// </summary>
-        public static string TooltipPublisherAdded {
+        public static string ToolTipPublisherAdded {
             get {
-                return ResourceManager.GetString("TooltipPublisherAdded", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherAdded", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Publisher wants an exclusive submission, i.e. does not accept simultaneous.
         /// </summary>
-        public static string TooltipPublisherExclusive {
+        public static string ToolTipPublisherExclusive {
             get {
-                return ResourceManager.GetString("TooltipPublisherExclusive", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherExclusive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active, i.e. not flagged as a goner.
+        /// </summary>
+        public static string ToolTipPublisherFilterActive {
+            get {
+                return ResourceManager.GetString("ToolTipPublisherFilterActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and flagged for follow up.
+        /// </summary>
+        public static string ToolTipPublisherFilterFollowup {
+            get {
+                return ResourceManager.GetString("ToolTipPublisherFilterFollowup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that currently have an open submission.
+        /// </summary>
+        public static string ToolTipPublisherFilterHaveSub {
+            get {
+                return ResourceManager.GetString("ToolTipPublisherFilterHaveSub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and currently within a submission period.
+        /// </summary>
+        public static string ToolTipPublisherFilterInPeriod {
+            get {
+                return ResourceManager.GetString("ToolTipPublisherFilterInPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and are a paying market.
+        /// </summary>
+        public static string ToolTipPublisherFilterPaying {
+            get {
+                return ResourceManager.GetString("ToolTipPublisherFilterPaying", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Publisher currently has at least one submission that is active.
         /// </summary>
-        public static string TooltipPublisherHasActive {
+        public static string ToolTipPublisherHasActive {
             get {
-                return ResourceManager.GetString("TooltipPublisherHasActive", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherHasActive", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Publisher is currently in one of its submission periods.
         /// </summary>
-        public static string TooltipPublisherInPeriod {
+        public static string ToolTipPublisherInPeriod {
             get {
-                return ResourceManager.GetString("TooltipPublisherInPeriod", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherInPeriod", resourceCulture);
             }
         }
         
@@ -2227,27 +2610,45 @@ namespace Restless.App.Panama.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Publisher is a paying market.
         /// </summary>
-        public static string TooltipPublisherPay {
+        public static string ToolTipPublisherPay {
             get {
-                return ResourceManager.GetString("TooltipPublisherPay", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherPay", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Submission count - the total number of times a submission has been made to this publisher.
         /// </summary>
-        public static string TooltipPublisherSubmissionCount {
+        public static string ToolTipPublisherSubmissionCount {
             get {
-                return ResourceManager.GetString("TooltipPublisherSubmissionCount", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherSubmissionCount", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Submission period count - the total number of submission periods that have been assigned to this publisher.
         /// </summary>
-        public static string TooltipPublisherSubmissionPeriodCount {
+        public static string ToolTipPublisherSubmissionPeriodCount {
             get {
-                return ResourceManager.GetString("TooltipPublisherSubmissionPeriodCount", resourceCulture);
+                return ResourceManager.GetString("ToolTipPublisherSubmissionPeriodCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh the link list, adding new entries and removing any state entries.
+        /// </summary>
+        public static string ToolTipRefreshLinkVerify {
+            get {
+                return ResourceManager.GetString("ToolTipRefreshLinkVerify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset this window to its default size.
+        /// </summary>
+        public static string ToolTipResetWindow {
+            get {
+                return ResourceManager.GetString("ToolTipResetWindow", resourceCulture);
             }
         }
         
@@ -2288,29 +2689,83 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send problem report. No personal information is included.
+        /// </summary>
+        public static string ToolTipSendReport {
+            get {
+                return ResourceManager.GetString("ToolTipSendReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submission is for a contest.
         /// </summary>
-        public static string TooltipSubmissionContest {
+        public static string ToolTipSubmissionContest {
             get {
-                return ResourceManager.GetString("TooltipSubmissionContest", resourceCulture);
+                return ResourceManager.GetString("ToolTipSubmissionContest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission has been accepted.
+        /// </summary>
+        public static string ToolTipSubmissionFilterAccepted {
+            get {
+                return ResourceManager.GetString("ToolTipSubmissionFilterAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission is active (has not yet received a response).
+        /// </summary>
+        public static string ToolTipSubmissionFilterActive {
+            get {
+                return ResourceManager.GetString("ToolTipSubmissionFilterActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission received a personal response.
+        /// </summary>
+        public static string ToolTipSubmissionFilterPersonal {
+            get {
+                return ResourceManager.GetString("ToolTipSubmissionFilterPersonal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission received a try again response.
+        /// </summary>
+        public static string ToolTipSubmissionFilterTryAgain {
+            get {
+                return ResourceManager.GetString("ToolTipSubmissionFilterTryAgain", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Submission is locked.
         /// </summary>
-        public static string TooltipSubmissionLocked {
+        public static string ToolTipSubmissionLocked {
             get {
-                return ResourceManager.GetString("TooltipSubmissionLocked", resourceCulture);
+                return ResourceManager.GetString("ToolTipSubmissionLocked", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Submission is online.
         /// </summary>
-        public static string TooltipSubmissionOnline {
+        public static string ToolTipSubmissionOnline {
             get {
-                return ResourceManager.GetString("TooltipSubmissionOnline", resourceCulture);
+                return ResourceManager.GetString("ToolTipSubmissionOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronize file names to title and version.
+        /// </summary>
+        public static string ToolTipSynchonizeTitles {
+            get {
+                return ResourceManager.GetString("ToolTipSynchonizeTitles", resourceCulture);
             }
         }
         
@@ -2324,29 +2779,47 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Published count - the number of times this title has been published..
+        ///   Looks up a localized string similar to Title is flagged.
         /// </summary>
-        public static string TooltipTitlePublishedCount {
+        public static string ToolTipTitleFilterFlag {
             get {
-                return ResourceManager.GetString("TooltipTitlePublishedCount", resourceCulture);
+                return ResourceManager.GetString("ToolTipTitleFilterFlag", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title is flagged.
+        ///   Looks up a localized string similar to Title has been published.
         /// </summary>
-        public static string TooltipTitleQuickFlag {
+        public static string ToolTipTitleFilterPublished {
             get {
-                return ResourceManager.GetString("TooltipTitleQuickFlag", resourceCulture);
+                return ResourceManager.GetString("ToolTipTitleFilterPublished", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Title is flagged as ready.
         /// </summary>
-        public static string TooltipTitleReady {
+        public static string ToolTipTitleFilterReady {
             get {
-                return ResourceManager.GetString("TooltipTitleReady", resourceCulture);
+                return ResourceManager.GetString("ToolTipTitleFilterReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title is currently submitted.
+        /// </summary>
+        public static string ToolTipTitleFilterSubmitted {
+            get {
+                return ResourceManager.GetString("ToolTipTitleFilterSubmitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published count - the number of times this title has been published..
+        /// </summary>
+        public static string TooltipTitlePublishedCount {
+            get {
+                return ResourceManager.GetString("TooltipTitlePublishedCount", resourceCulture);
             }
         }
         
@@ -2396,11 +2869,65 @@ namespace Restless.App.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An integer value is required.
+        ///   Looks up a localized string similar to Begin verification of links.
         /// </summary>
-        public static string ValidationOperationIntegerNeeded {
+        public static string ToolTipVerifyLinks {
             get {
-                return ResourceManager.GetString("ValidationOperationIntegerNeeded", resourceCulture);
+                return ResourceManager.GetString("ToolTipVerifyLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation creates a text file that has a list of all titles and their corresponding versions..
+        /// </summary>
+        public static string ToolTitleListDetail {
+            get {
+                return ResourceManager.GetString("ToolTitleListDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation verifies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count..
+        /// </summary>
+        public static string ToolTitleMetadataDetail {
+            get {
+                return ResourceManager.GetString("ToolTitleMetadataDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Alerts.
+        /// </summary>
+        public static string WindowTitleActiveAlerts {
+            get {
+                return ResourceManager.GetString("WindowTitleActiveAlerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm title submission.
+        /// </summary>
+        public static string WindowTitleConfirmTitleSubmission {
+            get {
+                return ResourceManager.GetString("WindowTitleConfirmTitleSubmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A fatal error has occured.
+        /// </summary>
+        public static string WindowTitleFatalError {
+            get {
+                return ResourceManager.GetString("WindowTitleFatalError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select messages.
+        /// </summary>
+        public static string WindowTitleSelectMessagesGeneric {
+            get {
+                return ResourceManager.GetString("WindowTitleSelectMessagesGeneric", resourceCulture);
             }
         }
         
@@ -2419,6 +2946,15 @@ namespace Restless.App.Panama.Resources {
         public static string WindowTitleSelectPublisherGeneric {
             get {
                 return ResourceManager.GetString("WindowTitleSelectPublisherGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select titles.
+        /// </summary>
+        public static string WindowTitleSelectTitlesGeneric {
+            get {
+                return ResourceManager.GetString("WindowTitleSelectTitlesGeneric", resourceCulture);
             }
         }
         

@@ -1,0 +1,50 @@
+﻿<Grid
+    x:Class="Restless.Panama.View.SubmissionEditTitle"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"    
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
+    mc:Ignorable="d"
+    tk:Property.RowHeights="*,2*"
+    tk:Property.ColumnWidths="Auto,*"
+    d:DesignHeight="650" d:DesignWidth="400">
+    
+    <tk:DataGrid
+        Grid.Column="1"
+        Style="{StaticResource DataGridLockedStyle}"
+        ItemsSource="{Binding Titles.ListView}"
+        SelectedItem="{Binding Titles.SelectedItem}"
+        tk:DataGridColumns.Columns="{Binding Titles.Columns}">
+
+        <DataGrid.InputBindings>
+            <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Titles.OpenRowCommand}"/>
+        </DataGrid.InputBindings>
+
+        <DataGrid.ContextMenu>
+            <ContextMenu ItemsSource="{Binding Titles.MenuItems}"/>
+        </DataGrid.ContextMenu>
+
+    </tk:DataGrid>
+
+    <StackPanel Style="{StaticResource SidePanelStyle}">
+
+        <Button
+            Content="{StaticResource ArrowUpIconKey}"
+            Command="{Binding Titles.Commands[TitleMoveUp]}"/>
+
+        <Button
+            Content="{StaticResource ArrowDownIconKey}"
+            Command="{Binding Titles.Commands[TitleMoveDown]}"/>
+
+        <Button
+            Content="{StaticResource SubmissionIconKey}"
+            Command="{Binding Titles.Commands[CopyToClipboard]}"
+            ToolTip="{x:Static r:Strings.ToolTipCopyTitles}"/>
+
+    </StackPanel>       
+
+</Grid>

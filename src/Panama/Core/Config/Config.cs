@@ -4,17 +4,15 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Controls;
-using Restless.App.Panama.Database;
-using Restless.App.Panama.Database.Tables;
-using Restless.Tools.Database.SQLite;
-using Restless.Tools.Utility;
-using System;
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
+using Restless.Toolkit.Core.Database.SQLite;
+using Restless.Toolkit.Core.Utility;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides configuration services for the application.
@@ -28,21 +26,14 @@ namespace Restless.App.Panama.Core
         public static Config Instance { get; } = new Config();
 
         private Config() : base(DatabaseController.Instance.GetTable<ConfigTable>())
-
         {
-            TitleFilter = GetItem(null, nameof(TitleFilter)).Deserialize<TitleFilter>();
-            PublisherFilter = GetItem(null, nameof(PublisherFilter)).Deserialize<PublisherFilter>();
+            TitleFilter = GetItem(null, nameof(TitleFilter)).Deserialize<TitleRowFilter>();
+            PublisherFilter = GetItem(null, nameof(PublisherFilter)).Deserialize<PublisherRowFilter>();
+            SubmissionFilter = GetItem(null, nameof(SubmissionFilter)).Deserialize<SubmissionRowFilter>();
             Colors = new ConfigColors();
+            // TODO
             // This is applied at when config is first created and when the DateFormat property is changed by the user in settings.
-            Restless.Tools.Controls.Default.Format.Date = DateFormat;
-        }
-
-        /// <summary>
-        /// Static constructor. Tells C# compiler not to mark type as beforefieldinit.
-        /// </summary>
-        static Config()
-        {
-            // not sure if this is still needed in .NET 4.x
+            //Restless.Tools.Controls.Default.Format.Date = DateFormat;
         }
         #endregion
 
@@ -50,129 +41,380 @@ namespace Restless.App.Panama.Core
 
         #region Public fields
         /// <summary>
-        /// Provides static default values for properties
+        /// Provides static values for the main navigation pane.
         /// </summary>
-        public static class Default
+        public static class MainNavigation
         {
             /// <summary>
-            /// Provides default property values for DataGrid
+            /// Gets the minimum width of the main navigation pane.
             /// </summary>
-            public static class DataGrid
-            {
-                /// <summary>
-                /// Gets the default value for data grid row height.
-                /// </summary>
-                public const int RowHeight = 24;
-
-                /// <summary>
-                /// Gets the default value for data grid alternation count;
-                /// </summary>
-                public const int AlternationCount = 2;
-
-                /// <summary>
-                /// Gets the minimum value for data grid row height.
-                /// </summary>
-                public const int MinRowHeight = 24;
-
-                /// <summary>
-                /// Gets the maximum value for data grid row height.
-                /// </summary>
-                public const int MaxRowHeight = 42;
-
-                /// <summary>
-                /// Gets the minimum value for data grid alternation count.
-                /// </summary>
-                public const int MinAlternationCount = 2;
-
-                /// <summary>
-                /// Gets the maximum value for data grid alternation count.
-                /// </summary>
-                public const int MaxAlternationCount = 5;
-
-            }
+            public const double MinWidth = 146.0;
 
             /// <summary>
-            /// Gets default settings for the main window
+            /// Gets the maximum width of the main navigation pane.
             /// </summary>
-            public static class MainWindow
-            {
-                /// <summary>
-                /// Gets the default width for the main window.
-                /// </summary>
-                public const int Width = 1420;
-
-                /// <summary>
-                /// Gets the default height for the main window.
-                /// </summary>
-                public const int Height = 860;
-
-                /// <summary>
-                /// Gets the minimum width for the main window.
-                /// </summary>
-                public const int MinWidth = 960;
-
-                /// <summary>
-                /// Gets the minimum height for the main window.
-                /// </summary>
-                public const int MinHeight = 760;
-            }
+            public const double MaxWidth = 292.0;
 
             /// <summary>
-            /// Provides default property values for miscellaneous properties.
+            /// Gets the default width of the main navigation pane.
             /// </summary>
-            public static class Other
-            {
-                /// <summary>
-                /// Gets the default folder for title root, versions, etc.
-                /// </summary>
-                public const string Folder = @"C:\";
+            public const double DefaultWidth = 150.0;
+        }
 
+        /// <summary>
+        /// Provides static values for the main window
+        /// </summary>
+        public static class MainWindow
+        {
+            /// <summary>
+            /// Gets the default width for the main window.
+            /// </summary>
+            public const int DefaultWidth = 1420;
 
-                /// <summary>
-                /// Gets the default value for grid splitter.
-                /// </summary>
-                public const double SplitterWidth = 684;
+            /// <summary>
+            /// Gets the default height for the main window.
+            /// </summary>
+            public const int DefaultHeight = 860;
 
-                /// <summary>
-                /// Gets the default value for a submission document footer.
-                /// </summary>
-                public const string DocumentFooter = "Submissions to [publisher] - [author] - [month], [year]";
-            }
+            /// <summary>
+            /// Gets the minimum width for the main window.
+            /// </summary>
+            public const int MinWidth = 960;
 
+            /// <summary>
+            /// Gets the minimum height for the main window.
+            /// </summary>
+            public const int MinHeight = 760;
+        }
+
+        /// <summary>
+        /// Provides static values for the tools window
+        /// </summary>
+        public static class ToolWindow
+        {
+            /// <summary>
+            /// Gets the default width for the tool window.
+            /// </summary>
+            public const int DefaultWidth = 856;
+
+            /// <summary>
+            /// Gets the default height for the tool window.
+            /// </summary>
+            public const int DefaultHeight = 526;
+
+            /// <summary>
+            /// Gets the minimum width for the tool window.
+            /// </summary>
+            public const int MinWidth = 560;
+
+            /// <summary>
+            /// Gets the minimum height for the tool window.
+            /// </summary>
+            public const int MinHeight = 392;
+        }
+
+        /// <summary>
+        /// Provides static values for the startup tool window
+        /// </summary>
+        public static class StartupToolWindow
+        {
+            /// <summary>
+            /// Gets the default width for the tool window.
+            /// </summary>
+            public const int DefaultWidth = 480;
+
+            /// <summary>
+            /// Gets the default height for the tool window.
+            /// </summary>
+            public const int DefaultHeight = 260;
+        }
+
+        /// <summary>
+        /// Provides static values for grid detail
+        /// </summary>
+        public static class Grid
+        {
+            public const double MinAlertDetailWidth = 250;
+            public const double MaxAlertDetailWidth = 460;
+            public const double DefaultAlertDetailWidth = MinAlertDetailWidth;
+
+            public const double MinAuthorDetailWidth = 250;
+            public const double MaxAuthorDetailWidth = 460;
+            public const double DefaultAuthorDetailWidth = MinAuthorDetailWidth;
+
+            public const double MinCredentialDetailWidth = 302;
+            public const double MaxCredentialDetailWidth = 582;
+            public const double DefaultCredentialDetailWidth = MinCredentialDetailWidth;
+
+            public const double MinLinkDetailWidth = 280;
+            public const double MaxLinkDetailWidth = 480;
+            public const double DefaultLinkDetailWidth = MinLinkDetailWidth;
+            
+            public const double MinLinkVerifyDetailWidth = 280;
+            public const double MaxLinkVerifyDetailWidth = 380;
+            public const double DefaultLinkVerifyDetailWidth = MinLinkVerifyDetailWidth;
+
+            public const double MinNoteDetailWidth = 520;
+            public const double MaxNoteDetailWidth = 720;
+            public const double DefaultNoteDetailWidth = MinNoteDetailWidth;
+
+            public const double MinPublisherDetailWidth = 390;
+            public const double MaxPublisherDetailWidth = 520;
+            public const double DefaultPublisherDetailWidth = MinPublisherDetailWidth;
+
+            public const double MinSearchDetailWidth = 240;
+            public const double MaxSearchDetailWidth = 520;
+            public const double DefaultSearchDetailWidth = MinSearchDetailWidth;
+
+            public const double MinSelfPublisherDetailWidth = 360;
+            public const double MaxSelfPublisherDetailWidth = 520;
+            public const double DefaultSelfPublisherDetailWidth = MinSelfPublisherDetailWidth;
+
+            public const double MinSubmissionDetailWidth = 366;
+            public const double MaxSubmissionDetailWidth = 620;
+            public const double DefaultSubmissionDetailWidth = MinSubmissionDetailWidth;
+
+            public const double MinTableDetailWidth = 302;
+            public const double MaxTableDetailWidth = 716;
+            public const double DefaultTableDetailWidth = MinTableDetailWidth;
+
+            public const double MinTagDetailWidth = 302;
+            public const double MaxTagDetailWidth = 582;
+            public const double DefaultTagDetailWidth = MinTagDetailWidth;
+
+            public const double MinTitleDetailWidth = 432;
+            public const double MaxTitleDetailWidth = 560;
+            public const double DefaultTitleDetailWidth = MinTitleDetailWidth;
+        }
+
+        /// <summary>
+        /// Provides static values for DataGrid
+        /// </summary>
+        public static class DataGrid
+        {            
+            /// <summary>
+            /// Gets the minimum value for data grid row height.
+            /// </summary>
+            public const double MinRowHeight = 24;
+
+            /// <summary>
+            /// Gets the maximum value for data grid row height.
+            /// </summary>
+            public const double MaxRowHeight = 42;
+
+            /// <summary>
+            /// Gets the default value for data grid row height.
+            /// </summary>
+            public const int DefaultRowHeight = 24;
+
+            /// <summary>
+            /// Gets the minimum value for data grid alternation count.
+            /// </summary>
+            public const double MinAlternationCount = 2;
+
+            /// <summary>
+            /// Gets the maximum value for data grid alternation count.
+            /// </summary>
+            public const double MaxAlternationCount = 5;
+
+            /// <summary>
+            /// Gets the default value for data grid alternation count;
+            /// </summary>
+            public const int DefaultAlternationCount = 2;
+        }
+
+        /// <summary>
+        /// Provides static values for miscellaneous properties.
+        /// </summary>
+        public static class Other
+        {
+            /// <summary>
+            /// Gets the default folder for title root, versions, etc.
+            /// </summary>
+            public const string Folder = @"C:\";
+
+            /// <summary>
+            /// Gets the default value for grid splitter.
+            /// </summary>
+            public const double SplitterWidth = 684;
+
+            /// <summary>
+            /// Gets the default value for a submission document footer.
+            /// </summary>
+            public const string DocumentFooter = "Submissions to [publisher] - [author] - [month], [year]";
         }
         #endregion
 
         /************************************************************************/
 
-        #region Public properties
+        #region Navigator
         /// <summary>
-        /// Gets or sets the selected configuration section.
+        /// Gets or sets the width of the main navigation panel.
         /// </summary>
-        public int SelectedConfigSection
+        public int MainNavigationWidth
         {
-            get => GetItem(1);
+            get => GetItem((int)MainNavigation.DefaultWidth);
             set => SetItem(value);
         }
 
         /// <summary>
-        /// Gets or sets the date format for the application.
+        /// Gets or sets whether the titles navigator is expanded.
         /// </summary>
-        public string DateFormat
+        public bool NavTitlesExpander
         {
-            get => GetItem("MMM dd, yyyy");
-            set
-            {
-                SetItem(value);
-                Restless.Tools.Controls.Default.Format.Date = value;
-            }
+            get => GetItem(true);
+            set => SetItem(value);
         }
 
+        /// <summary>
+        /// Gets or sets whether the settings navigator is expanded.
+        /// </summary>
+        public bool NavSettingsExpander
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the other navigator is expanded.
+        /// </summary>
+        public bool NavOtherExpander
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Other expanders
+        /// <summary>
+        /// Gets or sets whether the statistic title expander is expanded.
+        /// </summary>
+        public bool IsStatisticTitleExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the statistic version expander is expanded.
+        /// </summary>
+        public bool IsStatisticVersionExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the statistic submission expander is expanded.
+        /// </summary>
+        public bool IsStatisticSubmissionExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the statistic publisher expander is expanded.
+        /// </summary>
+        public bool IsStatisticPublisherExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the statistic reply expander is expanded.
+        /// </summary>
+        public bool IsStatisticReplyExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the title published expander is expanded
+        /// </summary>
+        public bool IsTitlePublishedExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the title self published expander is expanded
+        /// </summary>
+        public bool IsTitleSelfPublishedExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the submission and response dates are expanded
+        /// </summary>
+        public bool IsSubmissionSubmittedDateExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the submission response date is expanded
+        /// </summary>
+        public bool IsSubmissionResponseDateExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the settings title color is expanded
+        /// </summary>
+        public bool IsSettingTitleColorExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the settings publisher color is expanded
+        /// </summary>
+        public bool IsSettingPublisherColorExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the settings submission color is expanded
+        /// </summary>
+        public bool IsSettingSubmissionColorExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the settings other color is expanded
+        /// </summary>
+        public bool IsSettingOtherColorExpanded
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Main Window
         /// <summary>
         /// Gets or sets the width of the main window
         /// </summary>
         public int MainWindowWidth
         {
-            get => GetItem(Default.MainWindow.Width);
+            get => GetItem(MainWindow.DefaultWidth);
             set => SetItem(value);
         }
 
@@ -181,7 +423,7 @@ namespace Restless.App.Panama.Core
         /// </summary>
         public int MainWindowHeight
         {
-            get => GetItem(Default.MainWindow.Height);
+            get => GetItem(MainWindow.DefaultHeight);
             set => SetItem(value);
         }
 
@@ -193,25 +435,91 @@ namespace Restless.App.Panama.Core
             get => (WindowState)GetItem((int)WindowState.Normal);
             set => SetItem((int)value);
         }
+        #endregion
+
+        /************************************************************************/
+
+        #region Tool Window
+        /// <summary>
+        /// Gets or sets the width of the tool window
+        /// </summary>
+        public int ToolWindowWidth
+        {
+            get => GetItem(ToolWindow.DefaultWidth);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the height of the tool window
+        /// </summary>
+        public int ToolWindowHeight
+        {
+            get => GetItem(ToolWindow.DefaultHeight);
+            set => SetItem(value);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Data Grid
+        /// <summary>
+        /// Gets or sets the row height used in various data grids.
+        /// </summary>
+        public int DataGridRowHeight
+        {
+            get => GetItem(DataGrid.DefaultRowHeight);
+            set => SetItem(value);
+        }
 
         /// <summary>
         /// Gets or sets the alternation count for data grids.
         /// </summary>
         public int DataGridAlternationCount
         {
-            get => GetItem(Default.DataGrid.AlternationCount);
+            get => GetItem(DataGrid.DefaultAlternationCount);
             set => SetItem(value);
         }
 
         /// <summary>
-        /// Gets or sets the row height used in various data grids.
+        /// Gets or sets the state of the title grid columns
         /// </summary>
-        public int DataGridRowHeight
+        public string TitleGridColumnState
         {
-            get => GetItem(Default.DataGrid.RowHeight);
+            get => GetItem(null);
             set => SetItem(value);
         }
 
+        /// <summary>
+        /// Gets or sets the state of the publisher grid columns
+        /// </summary>
+        public string PublisherGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the state of the self publisher grid columns
+        /// </summary>
+        public string SelfPublisherGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the state of the submission grid columns
+        /// </summary>
+        public string SubmissionGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Colors
         /// <summary>
         /// Gets the set of configuration colors.
         /// </summary>
@@ -220,29 +528,17 @@ namespace Restless.App.Panama.Core
             get;
             private set;
         }
+        #endregion
 
-        /// <summary>
-        /// Gets or sets the mode used to sort the color pallete.
-        /// </summary>
-        public ColorSortingMode ColorSortingMode
-        {
-            get
-            {
-                Enum.TryParse(GetItem(ColorSortingMode.Alpha.ToString()), out ColorSortingMode mode);
-                return mode;
-            }
-            set
-            {
-                SetItem(value.ToString());
-            }
-        }
+        /************************************************************************/
 
+        #region Folders
         /// <summary>
         /// Gets or sets the folder for the export operation.
         /// </summary>
         public string FolderExport
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
 
@@ -260,7 +556,7 @@ namespace Restless.App.Panama.Core
         /// </summary>
         public string FolderSubmissionDocument
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
 
@@ -269,7 +565,7 @@ namespace Restless.App.Panama.Core
         /// </summary>
         public string FolderSubmissionMessage
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
 
@@ -278,7 +574,7 @@ namespace Restless.App.Panama.Core
         /// </summary>
         public string FolderSubmissionMessageAttachment
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
 
@@ -287,7 +583,7 @@ namespace Restless.App.Panama.Core
         /// </summary>
         public string FolderTitleVersion
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
 
@@ -296,19 +592,174 @@ namespace Restless.App.Panama.Core
         /// </summary>
         public string FolderTitleRoot
         {
-            get => GetItem(Default.Other.Folder);
+            get => GetItem(Other.Folder);
             set => SetItem(value);
         }
+        #endregion
 
-        /// <summary>
-        /// Gets or sets the plain text viewer file.
-        /// </summary>
-        public string TextViewerFile
+        /************************************************************************/
+
+        #region Grid
+        public bool AlertDetailExpanded
         {
-            get => GetItem(null);
+            get => GetItem(true);
             set => SetItem(value);
         }
 
+        public double AlertDetailWidth
+        {
+            get => GetItem(Grid.DefaultAlertDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool AuthorDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double AuthorDetailWidth
+        {
+            get => GetItem(Grid.DefaultAuthorDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool CredentialDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double CredentialDetailWidth
+        {
+            get => GetItem(Grid.DefaultCredentialDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool LinkDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double LinkDetailWidth
+        {
+            get => GetItem(Grid.DefaultLinkDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool LinkVerifyDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double LinkVerifyDetailWidth
+        {
+            get => GetItem(Grid.DefaultLinkVerifyDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool NoteDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double NoteDetailWidth
+        {
+            get => GetItem(Grid.DefaultNoteDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool PublisherDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double PublisherDetailWidth
+        {
+            get => GetItem(Grid.DefaultPublisherDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool SearchDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double SearchDetailWidth
+        {
+            get => GetItem(Grid.DefaultSearchDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool SelfPublisherDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double SelfPublisherDetailWidth
+        {
+            get => GetItem(Grid.DefaultSelfPublisherDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool SubmissionDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double SubmissionDetailWidth
+        {
+            get => GetItem(Grid.DefaultSubmissionDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool TableDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double TableDetailWidth
+        {
+            get => GetItem(Grid.DefaultTableDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool TagDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double TagDetailWidth
+        {
+            get => GetItem(Grid.DefaultTitleDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool TitleDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double TitleDetailWidth
+        {
+            get => GetItem(Grid.DefaultTitleDetailWidth);
+            set => SetItem(value);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Submission
         /// <summary>
         /// Gets or sets the template file that is used when creating a new submission document.
         /// Styles from this document are copied into the new document.
@@ -318,67 +769,6 @@ namespace Restless.App.Panama.Core
             get => GetItem(null);
             set => SetItem(value);
         }
-
-        /// <summary>
-        /// Gets or sets the grid splitter location for the table grid
-        /// </summary>
-        /// <remarks>
-        /// This is a hidden internal value, used to remember the grid position.
-        /// </remarks>
-        public GridLength LeftColumnTable
-        {
-            get => GetGridLength(Default.Other.SplitterWidth);
-            set => SetGridLength(value);
-        }
-
-        /// <summary>
-        /// Gets or sets the grid splitter location for the title grid
-        /// </summary>
-        /// <remarks>
-        /// This is a hidden internal value, used to remember the grid position.
-        /// </remarks>
-        public GridLength LeftColumnTitle
-        {
-            get => GetGridLength(Default.Other.SplitterWidth);
-            set => SetGridLength(value);
-        }
-
-        /// <summary>
-        /// Gets or sets the grid splitter location for the publisher grid
-        /// </summary>
-        /// <remarks>
-        /// This is a hidden internal value, used to remember the grid position.
-        /// </remarks>
-        public GridLength LeftColumnPublisher
-        {
-            get => GetGridLength(Default.Other.SplitterWidth);
-            set => SetGridLength(value);
-        }
-
-        /// <summary>
-        /// Gets or sets the grid splitter location for the self publisher grid
-        /// </summary>
-        /// <remarks>
-        /// This is a hidden internal value, used to remember the grid position.
-        /// </remarks>
-        public GridLength LeftColumnSelfPublisher
-        {
-            get => GetGridLength(Default.Other.SplitterWidth);
-            set => SetGridLength(value);
-        }
-
-        /// <summary>
-        /// Gets or sets the grid splitter location for the submission grid
-        /// </summary>
-        /// <remarks>
-        /// This is a hidden internal value, used to remember the grid position.
-        /// </remarks>
-        public GridLength LeftColumnSubmission
-        {
-            get => GetGridLength(Default.Other.SplitterWidth);
-            set => SetGridLength(value);
-        }
-
         /// <summary>
         /// Gets the options for creating a submission document.
         /// </summary>
@@ -431,7 +821,7 @@ namespace Restless.App.Panama.Core
         /// </summary>
         public string SubmissionDocFooter
         {
-            get => GetItem(Default.Other.DocumentFooter);
+            get => GetItem(Other.DocumentFooter);
             set => SetItem(value);
         }
 
@@ -452,6 +842,110 @@ namespace Restless.App.Panama.Core
             get => GetItem(null);
             set => SetItem(value);
         }
+        #endregion
+
+        /************************************************************************/
+
+        #region Filters
+        /// <summary>
+        /// Gets the title filter object which describes how to filter title rows.
+        /// </summary>
+        public TitleRowFilter TitleFilter
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the publisher filter object which describes how to filter publisher rows.
+        /// </summary>
+        public PublisherRowFilter PublisherFilter
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the submission filter object which describes how to filter submission rows.
+        /// </summary>
+        public SubmissionRowFilter SubmissionFilter
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets or sets a value that determines if the title list is filtered by the ready flag
+        /// </summary>
+        public bool SubmissionTitleReady
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets a value that determines if the title list is filtered by the quick flag
+        /// </summary>
+        public bool SubmissionTitleFlagged
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets a value that determines whether search
+        /// results are filtered to those associated with a title version.
+        /// </summary>
+        public bool SearchVersionOnly
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Misc (selected config, text viewer, others)
+        /// <summary>
+        /// Gets or sets the selected configuration section.
+        /// </summary>
+        public int SelectedConfigSection
+        {
+            get => GetItem(1);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the selected tool section.
+        /// </summary>
+        public int SelectedToolSection
+        {
+            get => GetItem(1);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the date format for the application.
+        /// </summary>
+        public string DateFormat
+        {
+            get => GetItem("MMM dd, yyyy");
+            set
+            {
+                SetItem(value);
+                // TODO
+                //Restless.Tools.Controls.Default.Format.Date = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the plain text viewer file.
+        /// </summary>
+        public string TextViewerFile
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
 
         /// <summary>
         /// Gets a boolean value that indicates if document internal dates (created, modified)
@@ -461,36 +955,6 @@ namespace Restless.App.Panama.Core
         public bool SyncDocumentInternalDates
         {
             get => GetItem(true);
-        }
-
-        /// <summary>
-        /// Gets the title filter object which describes how to filter title rows.
-        /// </summary>
-        public TitleFilter TitleFilter
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the publisher filter object which describes how to filter publisher rows.
-        /// </summary>
-        public PublisherFilter PublisherFilter
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets or sets the filter value used on the submission tab.
-        /// This value is matched against either the name of the publisher
-        /// or the name of the response type. When this value starts with "-",
-        /// it filters for submissions that are active (no response date)
-        /// </summary>
-        public string SubmissionFilter
-        {
-            get => GetItem(null);
-            set => SetItem(value);
         }
 
         /// <summary>
@@ -508,17 +972,6 @@ namespace Restless.App.Panama.Core
         public int SubmissionMessageDisplay
         {
             get => GetItem(0);
-            set => SetItem(value);
-        }
-
-        /// <summary>
-        /// Gets or sets a value that specifies folder exclusions used during orphan detection.
-        /// Values are separated by semi-colon and if found within a folder name indicate that
-        /// the folder is not considered when looking for orphans.
-        /// </summary>
-        public string OrphanExclusions
-        {
-            get => GetItem(null);
             set => SetItem(value);
         }
 
@@ -543,6 +996,16 @@ namespace Restless.App.Panama.Core
             get => GetItem(true);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets a value that determines if the verify link feature
+        /// (experimental) is enabled
+        /// </summary>
+        public bool IsVerifyLinkEnabled
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/
@@ -559,12 +1022,12 @@ namespace Restless.App.Panama.Core
         #region Public methods
         /// <summary>
         /// Saves the filter objects by serializing them into their rows.
-        /// This method is called at shutdown.
         /// </summary>
         public void SaveFilterObjects()
         {
             SetItem(TitleFilter.Serialize(), nameof(TitleFilter));
             SetItem(PublisherFilter.Serialize(), nameof(PublisherFilter));
+            SetItem(SubmissionFilter.Serialize(), nameof(SubmissionFilter));
         }
         #endregion
 
@@ -579,9 +1042,13 @@ namespace Restless.App.Panama.Core
         {
             switch (propertyId)
             {
+                case nameof(DataGridRowHeight):
                 case nameof(DataGridAlternationCount):
                 case nameof(IsTitleAuthorVisible):
+                case nameof(IsVerifyLinkEnabled):
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
+                    break;
+                default:
                     break;
             }
         }
@@ -598,10 +1065,7 @@ namespace Restless.App.Panama.Core
 
         private void SetGridLength(GridLength value, [CallerMemberName] string id = null)
         {
-            if (value != null)
-            {
-                SetItem(value.Value, id);
-            }
+            SetItem(value.Value, id);
         }
         #endregion
     }

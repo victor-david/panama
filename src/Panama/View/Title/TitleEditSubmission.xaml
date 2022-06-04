@@ -1,0 +1,65 @@
+﻿<Grid
+    x:Class="Restless.Panama.View.TitleEditSubmission"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    mc:Ignorable="d"
+    tk:Property.RowHeights="*,*"
+    d:DesignHeight="450" d:DesignWidth="400">
+
+    <tk:DataGrid
+        ItemsSource="{Binding Submissions.ListView}"
+        SelectedItem="{Binding Submissions.SelectedItem}"
+        tk:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
+    
+    <TextBlock
+            Style="{StaticResource TextBlockZeroResultStyle}"
+            tk:Property.IsCollapsed="{Binding Submissions.HaveItems}"
+            Text="{x:Static r:Strings.TextNoTitleSubmissions}"/>
+
+    <HeaderedContentControl
+        Grid.Row="1"
+        Margin="0,5,0,0"
+        Visibility="{Binding Submissions.EditVisibility}"
+        Header="{Binding Submissions.SelectedBatch.PublisherName}">
+
+        <HeaderedContentControl.Resources>
+            <Style TargetType="tk:LineItem">
+                <Setter Property="Margin" Value="4"/>
+                <Setter Property="ItemForeground" Value="{StaticResource DefaultForegroundBrush}"/>
+                <Setter Property="ValueForeground" Value="{StaticResource DarkForegroundBrush}"/>
+                <Setter Property="ItemDisplayWidth" Value="80"/>
+                <Setter Property="ItemVerticalAlignment" Value="Top"/>
+                <Setter Property="ValueVerticalAlignment" Value="Top"/>
+            </Style>
+        </HeaderedContentControl.Resources>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <tk:LineItem
+                    Item="Submitted"
+                    Value="{Binding Submissions.SelectedBatch.SubmittedLocal}"/>
+
+                <tk:LineItem
+                    Item="Response"
+                    Value="{Binding Submissions.SelectedBatch.ResponseLocal}"/>
+
+                <tk:LineItem
+                    Item="Type"
+                    Value="{Binding Submissions.SelectedBatch.ResponseTypeName}"/>
+
+                <tk:LineItem
+                    Item="Note"
+                    Value="{Binding Submissions.SelectedBatch.Notes}"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </HeaderedContentControl>
+
+</Grid>

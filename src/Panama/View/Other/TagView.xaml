@@ -1,0 +1,61 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.TagView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TagViewModel}"
+    mc:Ignorable="d"
+    d:DesignWidth="400" d:DesignHeight="200">
+    <tk:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinTagDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxTagDetailWidth}"
+        IsDetailExpanded="{Binding Config.TagDetailExpanded}"
+        DetailWidth="{Binding Config.TagDetailWidth}">
+
+        <tk:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <TextBlock Text="{x:Static r:Strings.MenuItemTags}"/>
+                <!-- no filters for now -->
+            </StatusBar>           
+        </tk:SplitterGrid.HeaderLeft>
+
+        <tk:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedTag.Tag}"/>
+            </StatusBar>
+        </tk:SplitterGrid.HeaderRight>
+
+        <tk:SplitterGrid.ContentLeft>
+            <tk:DataGrid
+                RowHeight="{Binding Config.DataGridRowHeight}"
+                ItemsSource="{Binding ListView}" 
+                SelectedItem="{Binding SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Columns}">
+                
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                </DataGrid.ContextMenu>
+                
+            </tk:DataGrid>            
+        </tk:SplitterGrid.ContentLeft>
+
+        <tk:SplitterGrid.ContentRight>
+            <StackPanel 
+                Style="{StaticResource DataEntryPanelStyle}"
+                Visibility="{Binding EditVisibility}">
+                
+                <TextBlock Text="{x:Static r:Strings.TextName}"/>
+                <TextBox Text="{Binding SelectedTag.Tag}"/>
+                <TextBlock Text="{x:Static r:Strings.TextDescription}"/>
+                <TextBox Text="{Binding SelectedTag.Description}"/>
+                
+            </StackPanel>
+        </tk:SplitterGrid.ContentRight>
+    </tk:SplitterGrid>
+</UserControl>

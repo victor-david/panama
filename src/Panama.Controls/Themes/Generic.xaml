@@ -1,0 +1,14 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/SimpleColorPicker.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/PathSelector.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/TagSelectorControl.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/TagSelectorItem.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/MonthDaySelector.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/TitledSeparator.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>

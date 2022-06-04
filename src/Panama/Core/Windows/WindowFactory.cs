@@ -4,15 +4,17 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.App.Panama.Database.Tables;
-using Restless.App.Panama.View;
-using Restless.App.Panama.ViewModel;
+using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
+using Restless.Panama.View;
+using Restless.Panama.ViewModel;
+using Restless.Toolkit.Mvvm;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Restless.App.Panama.Core
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides static methods for creating application windows.
@@ -31,11 +33,14 @@ namespace Restless.App.Panama.Core
             /// <returns>The window</returns>
             public static MainWindow Create()
             {
-                var window = new MainWindow()
+                MainWindow window = new()
                 {
                     Owner = null, // this is a top level window
-                    MinWidth = Core.Config.Default.MainWindow.MinWidth,
-                    MinHeight = Core.Config.Default.MainWindow.MinHeight,
+                    MinWidth = Config.MainWindow.MinWidth,
+                    MinHeight = Config.MainWindow.MinHeight,
+                    Width = Config.Instance.MainWindowWidth,
+                    Height = Config.Instance.MainWindowHeight,
+                    WindowState = Config.Instance.MainWindowState,
                     DataContext = MainWindowViewModel.Instance,
                 };
                 SetWindowOwner(window);
@@ -46,7 +51,65 @@ namespace Restless.App.Panama.Core
         #endregion
 
         /************************************************************************/
-        
+
+        #region Settings
+        /// <summary>
+        /// Provides static methods for creating the settings window
+        /// </summary>
+        public static class Settings
+        {
+            /// <summary>
+            /// Creates an instance of SettingsWindow and its corresponding view model
+            /// </summary>
+            /// <returns>The window</returns>
+            public static SettingsWindow Create()
+            {
+                SettingsWindow window = new()
+                {
+                    Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    DataContext = new SettingsWindowViewModel()
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
+                return window;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Tool
+        /// <summary>
+        /// Provides static methods for creating the tool window
+        /// </summary>
+        public static class Tool
+        {
+            /// <summary>
+            /// Creates an instance of ToolWindow and its corresponding view model
+            /// </summary>
+            /// <returns>The window</returns>
+            public static ToolWindow Create()
+            {
+                ToolWindow window = new()
+                {
+                    Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    MinHeight = Config.ToolWindow.MinHeight,
+                    MinWidth = Config.ToolWindow.MinWidth,
+                    Height = Config.Instance.ToolWindowHeight,
+                    Width = Config.Instance.ToolWindowWidth,
+                    DataContext = new ToolWindowViewModel()
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
+                return window;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region About
         /// <summary>
         /// Provides static methods for creating the application's About window.
@@ -59,9 +122,10 @@ namespace Restless.App.Panama.Core
             /// <returns>The window</returns>
             public static AboutWindow Create()
             {
-                var window = new AboutWindow()
+                AboutWindow window = new()
                 {
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new AboutWindowViewModel(),
                 };
                 SetWindowOwner(window);
@@ -72,7 +136,63 @@ namespace Restless.App.Panama.Core
         #endregion
 
         /************************************************************************/
-        
+
+        #region TitleSelect
+        /// <summary>
+        /// Provides static methods for creating a title select window.
+        /// </summary>
+        public static class TitleSelect
+        {
+            /// <summary>
+            /// Creates an instance of TitleSelectWindow and its corresponding view model.
+            /// </summary>
+            /// <returns>The window</returns>
+            public static TitleSelectWindow Create()
+            {
+                TitleSelectWindow window = new()
+                {
+                    Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
+                    DataContext = new TitleSelectWindowViewModel(),
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
+                return window;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region TitleConfirm
+        /// <summary>
+        /// Provides static methods for creating a title submission confirmation window.
+        /// </summary>
+        public static class TitleConfirm
+        {
+            /// <summary>
+            /// Creates an instance of TitleSelectWindow and its corresponding view model.
+            /// </summary>
+            /// <returns>The window</returns>
+            public static TitleConfirmWindow Create(SubmissionBatchRow submissionBatch, List<TitleRow> titles)
+            {
+                TitleConfirmWindow window = new()
+                {
+                    Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
+                    DataContext = new TitleConfirmWindowViewModel(submissionBatch, titles),
+                };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
+                return window;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region PublisherSelect
         /// <summary>
         /// Provides static methods for creating a publisher select window.
@@ -82,14 +202,14 @@ namespace Restless.App.Panama.Core
             /// <summary>
             /// Creates an instance of PublisherSelectWindow and its corresponding view model.
             /// </summary>
-            /// <param name="title">The text to use for the window title.</param>
             /// <returns>The window</returns>
-            public static PublisherSelectWindow Create(string title)
+            public static PublisherSelectWindow Create()
             {
-                var window = new PublisherSelectWindow
+                PublisherSelectWindow window = new()
                 {
-                    Title = title,
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
                     DataContext = new PublisherSelectWindowViewModel(),
                 };
                 SetWindowOwner(window);
@@ -108,16 +228,16 @@ namespace Restless.App.Panama.Core
         public static class SelfPublisherSelect
         {
             /// <summary>
-            /// Creates an instance of PublisherSelectWindow and its corresponding view model.
+            /// Creates an instance of SelfPublisherSelectWindow and its corresponding view model.
             /// </summary>
-            /// <param name="title">The text to use for the window title.</param>
             /// <returns>The window</returns>
-            public static PublisherSelectWindow Create(string title)
+            public static SelfPublisherSelectWindow Create()
             {
-                var window = new PublisherSelectWindow
+                SelfPublisherSelectWindow window = new()
                 {
-                    Title = title,
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
                     DataContext = new SelfPublisherSelectWindowViewModel(),
                 };
                 SetWindowOwner(window);
@@ -129,55 +249,24 @@ namespace Restless.App.Panama.Core
 
         /************************************************************************/
 
-        #region MessageSelect
+        #region SubmissionMessageSelect
         /// <summary>
-        /// Provides static methods for creating a message select window.
+        /// Provides static methods for creating a submission message select window.
         /// </summary>
-        public static class MessageSelect
+        public static class SubmissionMessageSelect
         {
             /// <summary>
             /// Creates an instance of MessageSelectWindow and its corresponding view model.
             /// </summary>
-            /// <param name="title">The title of the window.</param>
-            /// <param name="options">Options that affect the use and layout of the window.</param>
             /// <returns>The window</returns>
-            [Obsolete("Use MessageFileSelect instead")]
-            public static MessageSelectWindow Create(string title, MessageSelectOptions options)
+            public static SubmissionMessageSelectWindow Create()
             {
-                var window = new MessageSelectWindow
+                SubmissionMessageSelectWindow window = new()
                 {
-                    Title = title,
                     Owner = Application.Current.MainWindow,
-                    DataContext = new MessageSelectWindowViewModel(options)
-                };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
-                return window;
-            }
-        }
-        #endregion
-        
-        /************************************************************************/
-
-        #region MessageFileSelect
-        /// <summary>
-        /// Provides static methods for creating a message file select window.
-        /// </summary>
-        public static class MessageFileSelect
-        {
-            /// <summary>
-            /// Creates an instance of MessageSelectWindow and its corresponding view model.
-            /// </summary>
-            /// <param name="title">The title of the window.</param>
-            /// <param name="folder">The name of the folder in which to look for messages.</param>
-            /// <returns>The window</returns>
-            public static MessageFileSelectWindow Create(string title, string folder)
-            {
-                var window = new MessageFileSelectWindow
-                {
-                    Title = title,
-                    Owner = Application.Current.MainWindow,
-                    DataContext = new MessageFileSelectWindowViewModel(folder),
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
+                    DataContext = new SubmissionMessageSelectWindowViewModel(),
                 };
                 SetWindowOwner(window);
                 SetTextFormattingMode(window);
@@ -200,9 +289,11 @@ namespace Restless.App.Panama.Core
             /// <returns>The window</returns>
             public static SubmissionDocumentSelectWindow Create()
             {
-                var window = new SubmissionDocumentSelectWindow()
+                SubmissionDocumentSelectWindow window = new()
                 {
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
                     DataContext = new SubmissionDocumentSelectWindowViewModel()
                 };
                 SetWindowOwner(window);
@@ -214,23 +305,25 @@ namespace Restless.App.Panama.Core
 
         /************************************************************************/
 
-        #region CommandTools
+        #region StartupTool
         /// <summary>
-        /// Provides static methods for creating a command tools window.
+        /// Provides static methods for creating a startup tool window.
         /// </summary>
-        public static class CommandTools
+        public static class StartupTool
         {
             /// <summary>
-            /// Creates an instance of CommandToolsWindow and its corresponding view model.
+            /// Creates an instance of StartupToolWindow and its corresponding view model.
             /// </summary>
-            /// <param name="ops">The startup options.</param>
             /// <returns>The window</returns>
-            public static CommandToolsWindow Create(StartupOptions ops)
+            public static StartupToolWindow Create()
             {
-                var window = new CommandToolsWindow()
+                StartupToolWindow window = new()
                 {
                     Owner = null, // this is a top level window
-                    DataContext = new CommandToolsWindowViewModel(ops)
+                    Width = Config.StartupToolWindow.DefaultWidth,
+                    Height = Config.StartupToolWindow.DefaultHeight,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    DataContext = new StartupToolWindowViewModel()
                 };
                 SetWindowOwner(window);
                 SetTextFormattingMode(window);
@@ -240,7 +333,7 @@ namespace Restless.App.Panama.Core
         #endregion
 
         /************************************************************************/
-        
+
         #region TitleVersionRename
         /// <summary>
         /// Provides static methods for creating a title version rename window.
@@ -254,10 +347,12 @@ namespace Restless.App.Panama.Core
             /// <returns>The window</returns>
             public static TitleVersionRenameWindow Create(long titleId)
             {
-                var window = new TitleVersionRenameWindow
+                TitleVersionRenameWindow window = new()
                 {
-                    Title = Resources.Strings.WindowTitleVersionRename,
+                    Title = Strings.WindowTitleVersionRename,
                     Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
                     DataContext = new TitleVersionRenameWindowViewModel(titleId),
 
                 };
@@ -279,15 +374,48 @@ namespace Restless.App.Panama.Core
             /// <summary>
             /// Creates an instance of AlertWindow and its corresponding view model.
             /// </summary>
-            /// <param name="alerts">The list of alerts to display.</param>
             /// <returns>The window</returns>
-            public static AlertWindow Create(ObservableCollection<AlertTable.RowObject> alerts)
+            public static AlertWindow Create()
             {
-                var window = new AlertWindow()
+                AlertWindow window = new()
                 {
                     Owner = Application.Current.MainWindow,
-                    DataContext = new AlertWindowViewModel(alerts)
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false,
+                    DataContext = new AlertWindowViewModel()
                 };
+                SetWindowOwner(window);
+                SetTextFormattingMode(window);
+                return window;
+            }
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Terminate
+        /// <summary>
+        /// Provides static methods for creating a fatal terminate window.
+        /// </summary>
+        public static class Terminate
+        {
+            /// <summary>
+            /// Creates an instance of TerminateWindow and its corresponding view model.
+            /// </summary>
+            /// <param name="e">The exception</param>
+            /// <returns>The window</returns>
+            public static TerminateWindow Create(Exception e)
+            {
+                int windowCount = Application.Current.Windows.Count;
+
+                TerminateWindow window = new()
+                {
+                    Owner = windowCount > 0 ? Application.Current.MainWindow : null,
+                    WindowStartupLocation = windowCount > 0 ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen,
+                    ShowInTaskbar = windowCount == 0,
+                    DataContext = new TerminateWindowViewModel(e)
+                };
+
                 SetWindowOwner(window);
                 SetTextFormattingMode(window);
                 return window;
@@ -303,6 +431,7 @@ namespace Restless.App.Panama.Core
             if (window.DataContext is IWindowOwner owner)
             {
                 owner.WindowOwner = window;
+                owner.CloseWindowCommand = RelayCommand.Create(p => owner.WindowOwner?.Close());
             }
         }
 

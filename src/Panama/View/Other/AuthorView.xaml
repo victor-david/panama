@@ -1,0 +1,60 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.AuthorView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:AuthorViewModel}"
+    mc:Ignorable="d"
+    d:DesignWidth="360" d:DesignHeight="200">
+    <tk:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinAuthorDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxAuthorDetailWidth}"
+        IsDetailExpanded="{Binding Config.AuthorDetailExpanded}"
+        DetailWidth="{Binding Config.AuthorDetailWidth}">
+
+        <tk:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <TextBlock Text="{x:Static r:Strings.MenuItemAuthors}"/>
+                <!-- no filters for now -->
+            </StatusBar>           
+        </tk:SplitterGrid.HeaderLeft>
+
+        <tk:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock
+                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Text="{Binding SelectedAuthor.Name}"/>
+            </StatusBar>
+        </tk:SplitterGrid.HeaderRight>
+
+        <tk:SplitterGrid.ContentLeft>
+            <tk:DataGrid
+                ItemsSource="{Binding ListView}"
+                SelectedItem="{Binding SelectedItem}"
+                tk:DataGridColumns.Columns="{Binding Columns}">
+
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                </DataGrid.ContextMenu>
+
+            </tk:DataGrid>
+        </tk:SplitterGrid.ContentLeft>
+
+        <tk:SplitterGrid.ContentRight>
+            <StackPanel 
+                Style="{StaticResource DataEntryPanelStyle}"
+                Visibility="{Binding EditVisibility}">
+                
+                <TextBlock Text="{x:Static r:Strings.TextName}"/>
+                <TextBox Text="{Binding SelectedAuthor.Name}"/>
+                <CheckBox IsChecked="{Binding SelectedAuthor.IsDefault}" Content="Default author"/>
+                
+            </StackPanel>            
+        </tk:SplitterGrid.ContentRight>
+
+    </tk:SplitterGrid>
+</UserControl>

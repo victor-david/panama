@@ -1,0 +1,45 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.ToolConvertView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    mc:Ignorable="d" 
+    d:DesignHeight="250" d:DesignWidth="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Tool explanation text -->
+        <TextBlock Style="{StaticResource TextBlockMessage}" Text="{x:Static r:Strings.HeaderToolOperationConvert}"/>
+
+        <!-- Tool bar -->
+        <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">
+            <ToolBar Style="{StaticResource ToolBarCommandHolder}">
+                <!-- Folder to be converted -->
+                <TextBlock Text="Folder"/>
+                <TextBox Text="{Binding SelectedFolder}" Width="280" IsReadOnly="True"/>
+                <!-- Select folder button -->
+                <Button Width="70" Command="{Binding Commands[SelectFolder]}" Content="Select" />
+                <!-- Begin conversion button -->
+                <Button Width="70" Command="{Binding Commands[Convert]}" Content="Convert" IsEnabled="{Binding IsReadyToRun}" />
+                <!-- Cancel conversion button -->
+                <Button Width="70" Command="{Binding Commands[Cancel]}" Content="Cancel" IsEnabled="{Binding IsRunning}" />
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- Grid to show conversion candidates and progress as they are converted -->
+        <HeaderedContentControl Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource HCCTool}" Header="{Binding FoundHeader}" Margin="4">
+            <DataGrid ItemsSource="{Binding Path=MainSource.View}" SelectedItem="{Binding SelectedItem}" tk:DataGridColumns.Columns="{Binding Columns}"/>
+        </HeaderedContentControl>
+    </Grid>
+</UserControl>

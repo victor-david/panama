@@ -1,0 +1,53 @@
+﻿<Grid
+    x:Class="Restless.Panama.View.PreviewPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources" 
+    xmlns:vw="clr-namespace:Restless.Panama.View" 
+    d:DataContext="{d:DesignInstance Type=vw:PreviewPanel}"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="260"
+    tk:Property.RowHeights="Auto,*"
+    Name="ToolControl">
+    
+    <TextBlock
+        Text="{x:Static r:Strings.TextPreview}"
+        Visibility="{Binding HeaderVisibility, ElementName=ToolControl}"/>
+    
+    <!-- Text preview -->
+    <TextBox
+        Grid.Row="1"
+        Text="{Binding PreviewText, ElementName=ToolControl}"
+        Style="{StaticResource TextBoxMultiStretchStyle}" 
+        Visibility="{Binding TextPreviewVisibility, ElementName=ToolControl}"/>
+
+    <!-- Image preview -->
+    <Grid
+        Grid.Row="1"
+        tk:Property.RowHeights="*,Auto"
+        Visibility="{Binding ImagePreviewVisibility, ElementName=ToolControl}">
+        
+        <Image
+            Source="{Binding PreviewImageSource, ElementName=ToolControl}"/>      
+
+        <TextBlock
+            Grid.Row="1"
+            Margin="0,8"
+            HorizontalAlignment="Center"
+            Text="{x:Static r:Strings.TextImage}"/>
+    </Grid>
+
+    <!-- Unsupported notice -->
+    <TextBlock
+         Grid.Row="1"
+         FontSize="14"
+         Foreground="{StaticResource DarkAlertForegroundBrush}"
+         HorizontalAlignment="Center"
+         VerticalAlignment="Center"
+         Visibility="{Binding UnsupportedVisibility, ElementName=ToolControl}"
+         Text="{x:Static r:Strings.TextDocumentPreviewNotSupported}"/>   
+    
+</Grid>
