@@ -152,7 +152,7 @@ namespace Restless.Panama.Core
             
             public const double MinLinkVerifyDetailWidth = 280;
             public const double MaxLinkVerifyDetailWidth = 380;
-            public const double DefaultLinkVerifyDetailWidth = MinLinkDetailWidth;
+            public const double DefaultLinkVerifyDetailWidth = MinLinkVerifyDetailWidth;
 
             public const double MinNoteDetailWidth = 520;
             public const double MaxNoteDetailWidth = 720;
@@ -176,7 +176,7 @@ namespace Restless.Panama.Core
 
             public const double MinTableDetailWidth = 302;
             public const double MaxTableDetailWidth = 716;
-            public const double DefaultTableDetailWidth = MinTagDetailWidth;
+            public const double DefaultTableDetailWidth = MinTableDetailWidth;
 
             public const double MinTagDetailWidth = 302;
             public const double MaxTagDetailWidth = 582;
