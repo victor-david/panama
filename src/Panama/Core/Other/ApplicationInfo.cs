@@ -47,6 +47,11 @@ namespace Restless.Panama.Core
         public string Description => Assembly.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description;
 
         /// <summary>
+        /// Gets the copyright
+        /// </summary>
+        public string Copyright => Assembly.GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright;
+
+        /// <summary>
         /// Gets the framework
         /// </summary>
         public string Framework => Assembly.GetCustomAttribute<TargetFrameworkAttribute>().FrameworkName;

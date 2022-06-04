@@ -8,7 +8,7 @@
     <Company>Restless Animal Development</Company>
     <Product>Panama</Product>
     <AssemblyTitle>Panama ∑en</AssemblyTitle>
-    <Copyright>2022 Restless Animal Development</Copyright>
+    <Copyright>(c) 2022 Restless Animal Development</Copyright>
     <RootNamespace>Restless.Panama</RootNamespace>
     <PackageProjectUrl>https://github.com/victor-david/panama</PackageProjectUrl>
     <RepositoryUrl>https://github.com/victor-david/panama</RepositoryUrl>    

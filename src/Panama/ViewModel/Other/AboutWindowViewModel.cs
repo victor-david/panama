@@ -12,9 +12,7 @@ namespace Restless.Panama.ViewModel
     /// </summary>
     public class AboutWindowViewModel : WindowViewModel
     {
-        #region Private
-        #endregion
-       
+
         /************************************************************************/
 
         #region Constructor
@@ -23,6 +21,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AboutWindowViewModel()
         {
+            DisplayName = $"About {AppInfo.Title}";
         }
         #endregion
     }
