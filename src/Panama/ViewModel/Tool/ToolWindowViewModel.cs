@@ -25,6 +25,7 @@ namespace Restless.Panama.ViewModel
         private readonly SubmissionUpdater submissionUpdater;
         private readonly TitleExporter titleExporter;
         private readonly TitleLister titleLister;
+        private readonly MessageSync messageSync;
         private readonly OrphanFinder orphanFinder;
         private FileScanItem selectedOrphan;
         private PreviewMode orphanPreviewMode;
@@ -185,6 +186,8 @@ namespace Restless.Panama.ViewModel
                 OutputDirectory = Config.FolderTitleRoot
             };
 
+            messageSync = new MessageSync();
+
             orphanFinder = new OrphanFinder();
 
             TitleListFileName = Path.Combine(Config.FolderTitleRoot, TitleLister.ListFile);
@@ -230,7 +233,7 @@ namespace Restless.Panama.ViewModel
 
         private async void RunMessageSyncCommand(object parm)
         {
-
+            await RunTool(4, messageSync);
         }
 
         private async void RunOrphanCommand(object parm)
