@@ -6,7 +6,9 @@
 */
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -229,6 +231,27 @@ namespace Restless.Panama.Database.Tables
             entryId = entryId.Replace("'", "''");
             DataRow[] rows = Select($"{Defs.Columns.Protocol}='{protocol}' AND {Defs.Columns.EntryId}='{entryId}'");
             return rows.Length > 0;
+        }
+
+        /// <summary>
+        /// Gets an enumerator that enumerates all submission messages
+        /// </summary>
+        /// <returns>An enumerator</returns>
+        public IEnumerable<SubmissionMessageRow> EnumerateAll()
+        {
+            foreach (DataRow row in EnumerateRows(null, Defs.Columns.Id))
+            {
+                yield return new SubmissionMessageRow(row);
+            }
+        }
+
+        /// <summary>
+        /// Gets an enumerator that enumerates all submission messages of type: file system
+        /// </summary>
+        /// <returns>An enumerator</returns>
+        public IEnumerable<SubmissionMessageRow> EnumerateFileSystem()
+        {
+            return EnumerateAll().Where(m => m.Protocol == Defs.Values.Protocol.FileSystem);
         }
         #endregion
 

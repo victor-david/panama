@@ -123,31 +123,48 @@
                 tk:Property.IsLongVisibleValue="4">
 
                 <vw:ToolDetail
-                    Mode="Bare"
+                    Mode="TextOutput"
                     ExplanationText="{x:Static r:Strings.ToolTitleListDetail}"
                     FolderDisplay="{Binding TitleListFileName, Mode=OneTime}"
+                    OutputText="{Binding Adapter.OutputText[3]}"
                     StatusText="{Binding Adapter.Status[3]}"
                     Command="{Binding Commands[RunTitleList]}"/>
 
             </HeaderedContentControl>
             
-            <!-- Section 5 (orphans) -->
+            <!-- Section 5 (messages) -->
+            <HeaderedContentControl
+                Header="{x:Static r:Strings.HeaderToolMessage}"
+                tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
+                tk:Property.IsLongVisibleValue="5">
+
+                <vw:ToolDetail
+                    Mode="TextOutput"
+                    ExplanationText="{x:Static r:Strings.ToolMessageDetail}"
+                    FolderDisplay="{Binding Config.FolderSubmissionMessage}"
+                    OutputText="{Binding Adapter.OutputText[4]}"
+                    StatusText="{Binding Adapter.Status[4]}"
+                    Command="{Binding Commands[RunMessageSync]}"/>
+                
+            </HeaderedContentControl>
+            
+            <!-- Section 6 (orphans) -->
             <HeaderedContentControl
                 Header="{x:Static r:Strings.HeaderToolOrphan}"
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
-                tk:Property.IsLongVisibleValue="5">
+                tk:Property.IsLongVisibleValue="6">
 
                 <vw:ToolDetail
                     Mode="Preview"
                     ExplanationText="{x:Static r:Strings.ToolOrphanDetail}"
                     FolderDisplay="{Binding SelectedOrphan.FullName}"
-                    StatusText="{Binding Adapter.Status[4]}"
+                    StatusText="{Binding Adapter.Status[5]}"
                     UpdatedText="{x:Static r:Strings.TextOrphans}"
                     PreviewMode="{Binding OrphanPreviewMode}"
                     PreviewText="{Binding OrphanPreviewText}"
                     PreviewImageSource="{Binding OrphanImageSource}"
                     SelectedUpdatedItem="{Binding SelectedOrphan}"
-                    UpdatedItemsSource="{Binding Adapter.Updated[4]}"
+                    UpdatedItemsSource="{Binding Adapter.Updated[5]}"
                     Command="{Binding Commands[RunOrphan]}"
                     UpdatedContextMenu="{Binding OrphanContextMenu}"/>                
                 

@@ -40,6 +40,10 @@
                 <Run
                     Foreground="{StaticResource AlertForegroundBrush}"
                     Text="{Binding AppInfo.VersionMajor, Mode=OneTime}"/>
+                <Run Text="Build"/>
+                <Run
+                    Foreground="{StaticResource AlertForegroundBrush}"
+                    Text="{Binding AppInfo.VersionRaw.Build, Mode=OneTime}"/>
             </TextBlock>
         </Grid>
 

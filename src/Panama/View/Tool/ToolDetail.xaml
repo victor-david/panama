@@ -74,6 +74,12 @@
         PreviewImageSource="{Binding PreviewImageSource, ElementName=ToolControl}"
         Visibility="{Binding PreviewVisibility, ElementName=ToolControl}"/>
 
+    <TextBox
+        Grid.Row="3" Grid.ColumnSpan="2"
+        Style="{StaticResource TextBoxMultiStretchReadOnlyStyle}"
+        Text="{Binding OutputText, ElementName=ToolControl}"
+        Visibility="{Binding OutputVisibility, ElementName=ToolControl}"/>
+
     <StatusBar
         Grid.Row="4"
         Grid.ColumnSpan="2">

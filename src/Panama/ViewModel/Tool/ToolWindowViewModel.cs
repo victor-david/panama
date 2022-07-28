@@ -25,6 +25,7 @@ namespace Restless.Panama.ViewModel
         private readonly SubmissionUpdater submissionUpdater;
         private readonly TitleExporter titleExporter;
         private readonly TitleLister titleLister;
+        private readonly MessageSync messageSync;
         private readonly OrphanFinder orphanFinder;
         private FileScanItem selectedOrphan;
         private PreviewMode orphanPreviewMode;
@@ -130,18 +131,20 @@ namespace Restless.Panama.ViewModel
                 new NavigatorSection(Strings.HeaderToolSubmissionMetadata, 2),
                 new NavigatorSection(Strings.HeaderToolExport, 3),
                 new NavigatorSection(Strings.HeaderToolTitleList, 4),
-                new NavigatorSection(Strings.HeaderToolOrphan, 5),
+                new NavigatorSection(Strings.HeaderToolMessage, 5),
+                new NavigatorSection(Strings.HeaderToolOrphan, 6),
             };
 
             SetInitialSection();
 
-            Adapter = new ToolResultAdapter(5);
+            Adapter = new ToolResultAdapter(6);
 
             Commands.Add("RunTitleMetadata", RunTitleMetadataCommand);
             Commands.Add("RunSubmissionMetadata", RunSubmissionMetadataCommand);
 
             Commands.Add("RunExport", RunExportCommand);
             Commands.Add("RunTitleList", RunTitleListCommand);
+            Commands.Add("RunMessageSync", RunMessageSyncCommand);
             Commands.Add("RunOrphan", RunOrphanCommand);
 
             Commands.Add("ResetWindow", RunResetWindowCommand);
@@ -182,6 +185,8 @@ namespace Restless.Panama.ViewModel
             {
                 OutputDirectory = Config.FolderTitleRoot
             };
+
+            messageSync = new MessageSync();
 
             orphanFinder = new OrphanFinder();
 
@@ -226,9 +231,14 @@ namespace Restless.Panama.ViewModel
             await RunTool(3, titleLister);
         }
 
+        private async void RunMessageSyncCommand(object parm)
+        {
+            await RunTool(4, messageSync);
+        }
+
         private async void RunOrphanCommand(object parm)
         {
-            await RunTool(4, orphanFinder);
+            await RunTool(5, orphanFinder);
         }
 
         private async Task RunTool(int index, Scanner scanner)
@@ -253,6 +263,7 @@ namespace Restless.Panama.ViewModel
         {
             Adapter.AddToUpdate(index, result.Updated);
             Adapter.AddToNotFound(index, result.NotFound);
+            Adapter.SetOutputText(index, result.OutputText.ToString());
             Adapter.SetStatus(index, $"{result.ScanCount} items processed | {result.Updated.Count} updated | {result.NotFound.Count} not found");
         }
 

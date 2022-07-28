@@ -17,6 +17,11 @@
         <Setter Property="MaxHeight" Value="{x:Static sys:Double.PositiveInfinity}"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
     </Style>
+
+    <Style x:Key="TextBoxMultiStretchReadOnlyStyle" TargetType="TextBox" BasedOn="{StaticResource TextBoxMultiStretchStyle}">
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="IsReadOnlyCaretVisible" Value="True"/>
+    </Style>
     
     <!-- Styles a read-only text box so it's like a label. -->
     <Style x:Key="TextBoxLabel" TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">

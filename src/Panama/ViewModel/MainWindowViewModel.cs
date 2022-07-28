@@ -98,10 +98,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         private MainWindowViewModel()
         {
-#if DEBUG
-            DisplayName = $"{AppInfo.Title} {AppInfo.VersionMajor} (DEBUG)";
-#else
             DisplayName = $"{AppInfo.Title} {AppInfo.VersionMajor}";
+#if DEBUG
+            DisplayName += " (DEBUG)";
 #endif
             Commands.Add("OpenAboutWindow", p => WindowFactory.About.Create().ShowDialog());
             Commands.Add("OpenSettingsWindow", p => WindowFactory.Settings.Create().ShowDialog());
