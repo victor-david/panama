@@ -207,6 +207,23 @@ namespace Restless.Panama.View
             (
                 nameof(StatusText), typeof(string), typeof(ToolDetail), new FrameworkPropertyMetadata()
             );
+
+        /// <summary>
+        /// Gets or sets the output text
+        /// </summary>
+        public string OutputText
+        {
+            get => (string)GetValue(OutputTextProperty);
+            set => SetValue(OutputTextProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="OutputText"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty OutputTextProperty = DependencyProperty.Register
+            (
+                nameof(OutputText), typeof(string), typeof(ToolDetail), new FrameworkPropertyMetadata()
+            );
         #endregion
 
         /************************************************************************/
@@ -421,6 +438,29 @@ namespace Restless.Panama.View
         /// Identifies the <see cref="PreviewVisibility"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty PreviewVisibilityProperty = PreviewVisibilityPropertyKey.DependencyProperty;
+
+        /// <summary>
+        /// Gets the visibility of the output text box
+        /// </summary>
+        public Visibility OutputVisibility
+        {
+            get => (Visibility)GetValue(OutputVisibilityProperty);
+            private set => SetValue(OutputVisibilityPropertyKey, value);
+        }
+
+        private static readonly DependencyPropertyKey OutputVisibilityPropertyKey = DependencyProperty.RegisterReadOnly
+            (
+                nameof(OutputVisibility), typeof(Visibility), typeof(ToolDetail), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = Visibility.Collapsed
+                }
+            );
+
+        /// <summary>
+        /// Identifies the <see cref="OutputVisibility"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty OutputVisibilityProperty = OutputVisibilityPropertyKey.DependencyProperty;
+
         #endregion
 
         /************************************************************************/
@@ -431,6 +471,7 @@ namespace Restless.Panama.View
             UpdatedVisibility = (Mode is ToolDetailMode.Standard or ToolDetailMode.Preview) ? Visibility.Visible : Visibility.Collapsed;
             NotFoundVisibility = (Mode is ToolDetailMode.Standard) ? Visibility.Visible : Visibility.Collapsed;
             PreviewVisibility = (Mode is ToolDetailMode.Preview) ? Visibility.Visible : Visibility.Collapsed;
+            OutputVisibility = (Mode is ToolDetailMode.TextOutput) ? Visibility.Visible : Visibility.Collapsed;
         }
         #endregion
     }

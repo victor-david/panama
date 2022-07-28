@@ -1,6 +1,7 @@
 ﻿using Restless.Panama.Utility;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text;
 
 namespace Restless.Panama.Tools
 {
@@ -34,6 +35,14 @@ namespace Restless.Panama.Tools
         }
 
         /// <summary>
+        /// Gets the collection of output messages
+        /// </summary>
+        public ObservableCollection<string> OutputText
+        {
+            get;
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ToolResultAdapter"/> class
         /// </summary>
         /// <param name="size">The size of the collections</param>
@@ -42,12 +51,14 @@ namespace Restless.Panama.Tools
             Updated = new ObservableCollection<FileScanItem>[size];
             NotFound = new ObservableCollection<FileScanItem>[size];
             Status = new ObservableCollection<string>();
+            OutputText = new ObservableCollection<string>();
 
             for (int idx = 0; idx < size; idx++)
             {
                 Updated[idx] = new ObservableCollection<FileScanItem>();
                 NotFound[idx] = new ObservableCollection<FileScanItem>();
                 Status.Add(null);
+                OutputText.Add(null);
             }
         }
 
@@ -60,6 +71,7 @@ namespace Restless.Panama.Tools
             Updated[index].Clear();
             NotFound[index].Clear();
             Status[index] = null;
+            OutputText[index] = null;
         }
 
         /// <summary>
@@ -93,13 +105,23 @@ namespace Restless.Panama.Tools
         }
 
         /// <summary>
-        /// Sest status message for the specified index.
+        /// Sets status message for the specified index.
         /// </summary>
         /// <param name="index">The index</param>
         /// <param name="status">The status message</param>
         public void SetStatus(int index, string status)
         {
             Status[index] = status;
+        }
+
+        /// <summary>
+        /// Sets the output text for the specified index
+        /// </summary>
+        /// <param name="index">The index</param>
+        /// <param name="text">Text to set</param>
+        public void SetOutputText(int index, string text)
+        {
+            OutputText[index] = text;
         }
     }
 }

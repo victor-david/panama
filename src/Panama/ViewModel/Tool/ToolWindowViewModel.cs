@@ -263,6 +263,7 @@ namespace Restless.Panama.ViewModel
         {
             Adapter.AddToUpdate(index, result.Updated);
             Adapter.AddToNotFound(index, result.NotFound);
+            Adapter.SetOutputText(index, result.OutputText.ToString());
             Adapter.SetStatus(index, $"{result.ScanCount} items processed | {result.Updated.Count} updated | {result.NotFound.Count} not found");
         }
 

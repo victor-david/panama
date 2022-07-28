@@ -7,20 +7,15 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+using Restless.Toolkit.Core.Utility;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Restless.Panama.Tools
 {
     public class MessageSync : Scanner
     {
         private SubmissionMessageTable SubmissionMessageTable => DatabaseController.Instance.GetTable<SubmissionMessageTable>();
-
 
         /// <inheritdoc/>
         protected override FileScanResult ExecuteTask()
@@ -31,10 +26,33 @@ namespace Restless.Panama.Tools
             {
                 result.ScanCount++;
                 string fileName = Path.Combine(Config.Instance.FolderSubmissionMessage, message.EntryId);
+
                 MimeKitMessage msg = new(fileName);
                 if (!msg.IsError)
                 {
-                    // TODO
+                    string newFileName = GetSynchronizedFileName(msg, fileName);
+                    if (message.EntryId != newFileName)
+                    {
+                        result.Updated.Add(FileScanItem.Create(newFileName));
+                        result.AppendOutputText($"Update {message.EntryId} to {newFileName}");
+                    }
+
+
+                    //                {
+                    //                    AppendOutput($"Update {entryId} to {newFileName}");
+                    //                    string newFileNameFull = Path.Combine(Config.FolderSubmissionMessage, newFileName);
+                    //                    try
+                    //                    {
+                    //                        File.Move(fileName, newFileNameFull);
+                    //                        row[SubmissionMessageTable.Defs.Columns.EntryId] = newFileName;
+                    //                        TaskManager.Instance.DispatchTask(() => ProcessCount++);
+                    //                    }
+                    //                    catch (Exception ex)
+                    //                    {
+                    //                        AppendOutput(ex.Message);
+                    //                        TaskManager.Instance.DispatchTask(() => ErrorCount++);
+                    //                    }
+                    //                }
                 }
                 else
                 {
@@ -42,6 +60,32 @@ namespace Restless.Panama.Tools
                 }
             }
             return result;
+        }
+
+        private string GetSynchronizedFileName(MimeKitMessage msg, string fileName)
+        {
+            string cleanSubject = GetCleanStr(msg.Subject);
+            string cleanSender = GetCleanStr(msg.FromName, msg.FromName == msg.FromEmail);
+
+            // MessageDate_Subject.ext
+            // 2022-07-28_17.21.09_Subject.eml
+            return
+                string.Format(CultureInfo.InvariantCulture, "{0}_{1}_{2}{3}",
+                msg.MessageDateUtc.ToString("yyyy-MM-dd_HH.mm.ss", CultureInfo.InvariantCulture),
+                Format.ValidFileName(cleanSender),
+                Format.ValidFileName(cleanSubject),
+                Path.GetExtension(fileName));
+        }
+
+        private string GetCleanStr(string str, bool allowDot = false)
+        {
+            str = str.Replace(":", "-").Replace(" ", "").Replace(",", "").Replace("'", "");
+            if (!allowDot)
+            {
+                str = str.Replace(".", "");
+            }
+
+            return Format.ValidFileName(str);
         }
     }
 }

@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using System.Collections.Generic;
+using System.Text;
 
 namespace Restless.Panama.Tools
 {
@@ -39,12 +40,26 @@ namespace Restless.Panama.Tools
         }
 
         /// <summary>
+        /// Gets the output text
+        /// </summary>
+        public StringBuilder OutputText
+        {
+            get;
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="FileScanResult"/> class
         /// </summary>
         public FileScanResult()
         {
             Updated = new List<FileScanItem>();
             NotFound = new List<FileScanItem>();
+            OutputText = new StringBuilder();
+        }
+
+        public void AppendOutputText(string text)
+        {
+            OutputText.AppendLine(text);
         }
     }
 }
