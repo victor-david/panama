@@ -123,9 +123,10 @@
                 tk:Property.IsLongVisibleValue="4">
 
                 <vw:ToolDetail
-                    Mode="Bare"
+                    Mode="TextOutput"
                     ExplanationText="{x:Static r:Strings.ToolTitleListDetail}"
                     FolderDisplay="{Binding TitleListFileName, Mode=OneTime}"
+                    OutputText="{Binding Adapter.OutputText[3]}"
                     StatusText="{Binding Adapter.Status[3]}"
                     Command="{Binding Commands[RunTitleList]}"/>
 

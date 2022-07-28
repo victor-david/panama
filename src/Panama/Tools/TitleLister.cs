@@ -7,7 +7,6 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
@@ -47,23 +46,23 @@ namespace Restless.Panama.Tools
             ThrowIfOutputDirectoryNotSet();
             FileScanResult result = new();
 
-            List<string> lines = new();
+            string separator = string.Empty.PadLeft(60, '-');
 
             foreach (TitleRow title in TitleTable.EnumerateTitles())
             {
-                lines.Add(string.Format(CultureInfo.InvariantCulture, "{0} - {1}", title.Written.ToString(Config.Instance.DateFormat, CultureInfo.InvariantCulture), title.Title));
+                result.AppendOutputText(string.Format(CultureInfo.InvariantCulture, "{0} - {1}", title.Written.ToString(Config.Instance.DateFormat, CultureInfo.InvariantCulture), title.Title));
 
                 foreach (TitleVersionRow ver in TitleVersionTable.EnumerateVersions(title.Id, SortDirection.Ascending))
                 {
                     result.ScanCount++;
                     string note = !string.IsNullOrEmpty(ver.Note) ? $"[{ver.Note}]" : string.Empty;
-                    lines.Add($"  v{ver.Version}.{(char)ver.Revision} {ver.LanguageId} {ver.FileName} {note}".TrimEnd());
+                    result.AppendOutputText($"  v{ver.Version}.{(char)ver.Revision} {ver.LanguageId} {ver.FileName} {note}".TrimEnd());
                 }
 
-                lines.Add("----------------------------------------------------------------------------------------------------");
+                result.AppendOutputText(separator);
             }
 
-            File.WriteAllLines(Path.Combine(OutputDirectory, ListFile), lines);
+            File.WriteAllText(Path.Combine(OutputDirectory, ListFile), result.OutputText.ToString());
             return result;
         }
         #endregion
