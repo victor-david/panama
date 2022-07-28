@@ -719,6 +719,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message Sync.
+        /// </summary>
+        public static string HeaderToolMessage {
+            get {
+                return ResourceManager.GetString("HeaderToolMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation converts all .doc files in the specified folder to Open Xml (.docx ) files. If the converted file belongs to a title version, the version record will be updated to reflect the change. If a corresponding .docx file exists in the folder (for example, Report.doc and Report.docx), the .docx file will be overwritten. After the conversion, the .doc file will be deleted..
         /// </summary>
         public static string HeaderToolOperationConvert {
@@ -2424,6 +2433,15 @@ namespace Restless.Panama.Resources {
         public static string ToolExportDetail {
             get {
                 return ResourceManager.GetString("ToolExportDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject..
+        /// </summary>
+        public static string ToolMessageDetail {
+            get {
+                return ResourceManager.GetString("ToolMessageDetail", resourceCulture);
             }
         }
         

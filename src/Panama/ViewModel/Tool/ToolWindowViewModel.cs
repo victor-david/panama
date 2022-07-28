@@ -130,18 +130,20 @@ namespace Restless.Panama.ViewModel
                 new NavigatorSection(Strings.HeaderToolSubmissionMetadata, 2),
                 new NavigatorSection(Strings.HeaderToolExport, 3),
                 new NavigatorSection(Strings.HeaderToolTitleList, 4),
-                new NavigatorSection(Strings.HeaderToolOrphan, 5),
+                new NavigatorSection(Strings.HeaderToolMessage, 5),
+                new NavigatorSection(Strings.HeaderToolOrphan, 6),
             };
 
             SetInitialSection();
 
-            Adapter = new ToolResultAdapter(5);
+            Adapter = new ToolResultAdapter(6);
 
             Commands.Add("RunTitleMetadata", RunTitleMetadataCommand);
             Commands.Add("RunSubmissionMetadata", RunSubmissionMetadataCommand);
 
             Commands.Add("RunExport", RunExportCommand);
             Commands.Add("RunTitleList", RunTitleListCommand);
+            Commands.Add("RunMessageSync", RunMessageSyncCommand);
             Commands.Add("RunOrphan", RunOrphanCommand);
 
             Commands.Add("ResetWindow", RunResetWindowCommand);
@@ -226,9 +228,14 @@ namespace Restless.Panama.ViewModel
             await RunTool(3, titleLister);
         }
 
+        private async void RunMessageSyncCommand(object parm)
+        {
+
+        }
+
         private async void RunOrphanCommand(object parm)
         {
-            await RunTool(4, orphanFinder);
+            await RunTool(5, orphanFinder);
         }
 
         private async Task RunTool(int index, Scanner scanner)
