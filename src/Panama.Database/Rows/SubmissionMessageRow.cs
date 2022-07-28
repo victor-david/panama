@@ -144,6 +144,14 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Public methods
+        /// <summary>
+        /// Updates <see cref="EntryId"/> with the specified value
+        /// </summary>
+        /// <param name="value">The updated value</param>
+        public void UpdateEntryId(string value)
+        {
+            Row[Columns.EntryId] = value;
+        }
         #endregion
     }
 }

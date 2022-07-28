@@ -8,6 +8,7 @@ using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Core.Utility;
+using System;
 using System.Globalization;
 using System.IO;
 
@@ -33,32 +34,28 @@ namespace Restless.Panama.Tools
                     string newFileName = GetSynchronizedFileName(msg, fileName);
                     if (message.EntryId != newFileName)
                     {
-                        result.Updated.Add(FileScanItem.Create(newFileName));
-                        result.AppendOutputText($"Update {message.EntryId} to {newFileName}");
+                        try
+                        {
+                            string newFileNameFull = Path.Combine(Config.Instance.FolderSubmissionMessage, newFileName);
+                            File.Move(fileName, newFileNameFull);
+                            message.UpdateEntryId(newFileName);
+                            result.AppendOutputText($"Update {message.EntryId} to {newFileName}");
+                            result.Updated.Add(FileScanItem.Create(newFileName));
+                        }
+                        catch (Exception ex)
+                        {
+                            result.AppendOutputText(ex.Message);
+                        }
+
                     }
-
-
-                    //                {
-                    //                    AppendOutput($"Update {entryId} to {newFileName}");
-                    //                    string newFileNameFull = Path.Combine(Config.FolderSubmissionMessage, newFileName);
-                    //                    try
-                    //                    {
-                    //                        File.Move(fileName, newFileNameFull);
-                    //                        row[SubmissionMessageTable.Defs.Columns.EntryId] = newFileName;
-                    //                        TaskManager.Instance.DispatchTask(() => ProcessCount++);
-                    //                    }
-                    //                    catch (Exception ex)
-                    //                    {
-                    //                        AppendOutput(ex.Message);
-                    //                        TaskManager.Instance.DispatchTask(() => ErrorCount++);
-                    //                    }
-                    //                }
                 }
                 else
                 {
                     result.NotFound.Add(FileScanItem.Create(fileName));
                 }
             }
+
+            SubmissionMessageTable.Save();
             return result;
         }
 
