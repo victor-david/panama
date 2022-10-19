@@ -183,7 +183,7 @@ namespace Restless.Panama.Core
             public const double DefaultTagDetailWidth = MinTagDetailWidth;
 
             public const double MinTitleDetailWidth = 432;
-            public const double MaxTitleDetailWidth = 560;
+            public const double MaxTitleDetailWidth = 700;
             public const double DefaultTitleDetailWidth = MinTitleDetailWidth;
         }
 
