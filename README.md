@@ -17,6 +17,20 @@ through its submission process until publication.
 **Panama ∑en** includes many other features. You can create various notes and links to writing resources; search the text of files;
 consolidate files to a single export directory; create a list of titles; view title and submission statistics, etc.
 
+## Downloading
+If you want to simply download and start using Panana, grab the zip file (binaries) from the latest release, unzip everything to the
+directory of your choice, and run **Panama.exe**
+
+By default the database file (which is created on first run) will be created here:
+
+~~~
+C:\Users\<user>\AppData\Roaming\RestlessAnimal\Panama
+~~~
+
+You can change the database location in settings, but keep in mind that it doesn't copy the previous data. You must copy manually
+or (for a brand new setup) change the database location before you add any data. When you change the database
+location, it takes effect once you close and reopen the app.
+
 ## Dependencies
 **Panama ∑en** references various Nuget packages. They should download and install automatically when 
 you build the solution.
