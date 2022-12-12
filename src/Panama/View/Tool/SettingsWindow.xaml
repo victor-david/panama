@@ -275,9 +275,19 @@
                 Header="{x:Static r:Strings.HeaderSettingsAdvanced}"
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
                 tk:Property.IsLongVisibleValue="5">
-                <Grid tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,*">
+                <Grid tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*">
+
+                    <CheckBox
+                        Content="{x:Static r:Strings.SettingsQueue}"
+                        IsChecked="{Binding Config.IsQueueFeatureEnabled}"/>
+
+                    <CheckBox
+                        Grid.Row="1"
+                        Content="{x:Static r:Strings.SettingsVerifyLinks}"
+                        IsChecked="{Binding Config.IsVerifyLinkEnabled}"/>
                     
                     <con:PathSelector
+                        Grid.Row="2"
                         Title="{x:Static r:Strings.SettingsTextViewer}"
                         SelectorType="File"
                         SelectorFileType="{x:Static table:DocumentTypeTable+Defs+Values.ExecutableFileType}"
@@ -285,26 +295,21 @@
                         SelectCommand="{Binding Commands[SelectPath]}"/>                    
                    
                     <con:PathSelector
-                        Grid.Row="1"
+                        Grid.Row="3"
                         Title="{x:Static r:Strings.SettingsDatabaseLocation}"
                         Path="{Binding DatabaseLocation}"
                         SelectCommand="{Binding Commands[SelectPath]}"/>
 
                     <TextBlock
-                        Grid.Row="2"
+                        Grid.Row="4"
                         Text="{x:Static r:Strings.SettingsDatabaseLocationText}"/>
 
-                    <Separator Grid.Row="3" Margin="0,12"/>
+                    <Separator Grid.Row="5" Margin="0,12"/>
 
-                    <CheckBox
-                        Grid.Row="4"
-                        Content="{x:Static r:Strings.SettingsVerifyLinks}"
-                        IsChecked="{Binding Config.IsVerifyLinkEnabled}"/>
-
-                    <TextBlock Grid.Row="5" Text="{x:Static r:Strings.SettingsOrphanExclusionDetail}"/>
+                    <TextBlock Grid.Row="6" Text="{x:Static r:Strings.SettingsOrphanExclusionDetail}"/>
 
                     <tk:DataGrid
-                        Grid.Row="6"
+                        Grid.Row="7"
                         ItemsSource="{Binding Orphan.ListView}"
                         SelectedItem="{Binding Orphan.SelectedItem}"
                         RowHeight="{x:Static core:Config+DataGrid.MinRowHeight}"
