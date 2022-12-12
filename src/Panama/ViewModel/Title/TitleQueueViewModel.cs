@@ -107,11 +107,13 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Status", TableColumns.Status);
 
-            Columns.Create("Published", TableColumns.Date)
+            Columns.Create("Date", TableColumns.Date)
                 .MakeDate();
 
             Commands.Add("CloseQueueEdit", p => QueueEditMode = false);
             QueueEditMode = false;
+
+            Commands.Add("ClearDate", p => SelectedTitle.ClearDate());
 
             QueueMenuItems = new MenuItemCollection();
             QueueMenuItems.AddItem(Strings.MenuItemAddQueue, RelayCommand.Create(RunAddQueueCommand))
@@ -157,7 +159,7 @@ namespace Restless.Panama.ViewModel
         {
             base.OnSelectedItemChanged();
             SelectedTitle = QueueTitleRow.Create(SelectedRow);
-
+            SelectedTitle?.SetDateFormat(Config.DateFormat);
         }
 
         /// <inheritdoc/>

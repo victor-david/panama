@@ -1,6 +1,7 @@
 ﻿using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Data;
+using System.Globalization;
 using Columns = Restless.Panama.Database.Tables.QueueTitleTable.Defs.Columns;
 
 namespace Restless.Panama.Database.Tables
@@ -8,7 +9,7 @@ namespace Restless.Panama.Database.Tables
     /// <summary>
     /// Encapsulates a single row from the <see cref="QueueTitleTable"/>
     /// </summary>
-    public class QueueTitleRow : RowObjectBase<QueueTitleTable>
+    public class QueueTitleRow : DateRowObject<QueueTitleTable>
     {
         #region Properties
         /// <summary>
@@ -48,6 +49,11 @@ namespace Restless.Panama.Database.Tables
             get => GetNullableDateTime(Columns.Date);
             set => SetValue(Columns.Date, value);
         }
+
+        /// <summary>
+        /// Gets a formatted value for <see cref="Date"/> converted to local time.
+        /// </summary>
+        public string DateLocal => Date?.ToLocalTime().ToString(DateFormat, CultureInfo.InvariantCulture);
         #endregion
 
         /************************************************************************/
@@ -82,6 +88,24 @@ namespace Restless.Panama.Database.Tables
         public override string ToString()
         {
             return $"{QueueId} => {TitleId} {Status}";
+        }
+
+        public void ClearDate()
+        {
+            Date = null;
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Protected methods
+        /// <inheritdoc/>
+        protected override void OnSetValue(string columnName, object value)
+        {
+            if (columnName == Columns.Date)
+            {
+                InvokePropertyChanged(nameof(DateLocal));
+            }
         }
         #endregion
     }

@@ -83,9 +83,9 @@
                 </tk:DataGrid>
             </tk:SplitterGrid.ContentLeft>
 
-            <!--<tk:SplitterGrid.ContentRight>-->
-                <!--<vw:TitleEditContainer Visibility="{Binding EditVisibility}"/>-->
-            <!--</tk:SplitterGrid.ContentRight>-->
+            <tk:SplitterGrid.ContentRight>
+                <vw:TitleQueueEdit Visibility="{Binding EditVisibility}"/>
+            </tk:SplitterGrid.ContentRight>
 
         </tk:SplitterGrid>
 

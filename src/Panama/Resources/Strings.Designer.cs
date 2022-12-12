@@ -1951,6 +1951,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear date.
+        /// </summary>
+        public static string TextClearDate {
+            get {
+                return ResourceManager.GetString("TextClearDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm.
         /// </summary>
         public static string TextConfirm {

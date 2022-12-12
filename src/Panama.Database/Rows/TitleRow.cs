@@ -16,13 +16,8 @@ namespace Restless.Panama.Database.Tables
     /// <summary>
     /// Encapsulates a single row from the <see cref="TitleTable"/>.
     /// </summary>
-    public class TitleRow : RowObjectBase<TitleTable>, INotifyPropertyChanged
+    public class TitleRow : DateRowObject<TitleTable>
     {
-        #region Private
-        private string dateFormat;
-        #endregion
-
-        /************************************************************************/
 
         #region Public properties
         /// <summary>
@@ -97,13 +92,7 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Gets a formatted value for <see cref="Written"/> converted to local time.
         /// </summary>
-        public string WrittenLocal => Written.ToLocalTime().ToString(dateFormat, CultureInfo.InvariantCulture);
-        #endregion
-
-        /************************************************************************/
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+        public string WrittenLocal => Written.ToLocalTime().ToString(DateFormat, CultureInfo.InvariantCulture);
         #endregion
 
         /************************************************************************/
@@ -115,7 +104,6 @@ namespace Restless.Panama.Database.Tables
         /// <param name="row">The data row</param>
         public TitleRow(DataRow row) : base(row)
         {
-            dateFormat = "MMM dd, yyyy";
         }
 
         /// <summary>
@@ -132,18 +120,6 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Public methods
-        /// <summary>
-        /// Sets the date format used for <see cref="DateLocal"/>
-        /// </summary>
-        /// <param name="value"></param>
-        public void SetDateFormat(string value)
-        {
-            if (!string.IsNullOrWhiteSpace(value))
-            {
-                dateFormat = value;
-            }
-        }
-
         /// <summary>
         /// Toggles the value of the <see cref="QuickFlag"/> property.
         /// </summary>
@@ -170,7 +146,7 @@ namespace Restless.Panama.Database.Tables
         {
             if (columnName == Columns.Written)
             {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(WrittenLocal)));
+                InvokePropertyChanged(nameof(WrittenLocal));
             }
         }
         #endregion
