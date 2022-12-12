@@ -449,6 +449,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation removes the selected title from the queue. It does not affect the title itself..
+        /// </summary>
+        public static string ConfirmationRemoveQueueTitle {
+            get {
+                return ResourceManager.GetString("ConfirmationRemoveQueueTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Getting ready to remove this message. This does not delete any external files or resources, only the database entry. Do you want to continue?.
         /// </summary>
         public static string ConfirmationRemoveSubmissionMessage {
@@ -1549,6 +1558,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemRemoveQueue {
             get {
                 return ResourceManager.GetString("MenuItemRemoveQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this title from queue.
+        /// </summary>
+        public static string MenuItemRemoveQueueTitle {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveQueueTitle", resourceCulture);
             }
         }
         

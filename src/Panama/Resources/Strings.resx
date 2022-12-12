@@ -1152,4 +1152,10 @@ Changes will take effect after you restart the application.</value>
   <data name="MenuItemRenameQueue" xml:space="preserve">
     <value>Rename this queue</value>
   </data>
+  <data name="ConfirmationRemoveQueueTitle" xml:space="preserve">
+    <value>This operation removes the selected title from the queue. It does not affect the title itself.</value>
+  </data>
+  <data name="MenuItemRemoveQueueTitle" xml:space="preserve">
+    <value>Remove this title from queue</value>
+  </data>
 </root>

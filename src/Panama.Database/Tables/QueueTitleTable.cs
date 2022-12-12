@@ -128,6 +128,29 @@ namespace Restless.Panama.Database.Tables
                 yield return new QueueTitleRow(row);
             }
         }
+
+        /// <summary>
+        /// Adds the specified titles to the specified queue
+        /// </summary>
+        /// <param name="queueId">The queue id</param>
+        /// <param name="titles">The titles to add</param>
+        public void AddTitles(long queueId, List<TitleRow> titles)
+        {
+            _ = titles ?? throw new ArgumentNullException(nameof(titles));
+            titles.ForEach(title =>
+            {
+                if (!QueueTitleExists(queueId, title.Id))
+                {
+                    DataRow row = NewRow();
+                    row[Defs.Columns.QueueId] = queueId;
+                    row[Defs.Columns.TitleId] = title.Id;
+                    row[Defs.Columns.Status] = 0;
+                    row[Defs.Columns.Date] = DBNull.Value;
+                    Rows.Add(row);
+                }
+            });
+            Save();
+        }
         #endregion
 
         /************************************************************************/
@@ -195,6 +218,16 @@ namespace Restless.Panama.Database.Tables
                 row.Delete();
             }
             Save();
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+        private bool QueueTitleExists(long queueId, long titleId)
+        {
+            long len = Select($"{Defs.Columns.QueueId}={queueId} and {Defs.Columns.TitleId}={titleId}").Length;
+            return len > 0;
         }
         #endregion
     }

@@ -4,6 +4,7 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Windows;
@@ -31,6 +32,7 @@ namespace Restless.Panama.ViewModel
         #region Properties
         public override bool OpenRowCommandEnabled => false;
         public override bool AddCommandEnabled => true;
+        public override bool DeleteCommandEnabled => SelectedQueue != null && SelectedTitle != null;
 
         /// <summary>
         /// Gets the queues.
@@ -122,6 +124,8 @@ namespace Restless.Panama.ViewModel
                 .AddIconResource(ResourceKeys.Icon.XRedIconKey);
 
             MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemRemoveQueueTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.XIconKey);
 
             queues = new ObservableCollection<QueueRow>();
             PopulateQueues();
@@ -165,6 +169,22 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunAddCommand()
         {
+            if (SelectedQueue != null && WindowFactory.TitleSelect.Create().GetTitles() is List<TitleRow> titles)
+            {
+                Table.AddTitles(SelectedQueue.Id, titles);
+                ListView.Refresh();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void RunDeleteCommand()
+        {
+            if (DeleteCommandEnabled && MessageWindow.ShowContinueCancel(Strings.ConfirmationRemoveQueueTitle))
+            {
+                SelectedTitle.Row.Delete();
+                Table.Save();
+                ListView.Refresh();
+            }
         }
         #endregion
 
