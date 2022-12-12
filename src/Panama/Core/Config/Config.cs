@@ -941,6 +941,15 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets the selected queue id
+        /// </summary>
+        public long SelectedQueueId
+        {
+            get => GetItem(0);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets or sets the date format for the application.
         /// </summary>
         public string DateFormat

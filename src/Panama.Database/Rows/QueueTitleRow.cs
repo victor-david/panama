@@ -27,6 +27,11 @@ namespace Restless.Panama.Database.Tables
         public long TitleId => GetInt64(Columns.TitleId);
 
         /// <summary>
+        /// Gets the title
+        /// </summary>
+        public string Title => GetString(Columns.Joined.Title);
+
+        /// <summary>
         /// Gets or sets the status.
         /// </summary>
         public long Status

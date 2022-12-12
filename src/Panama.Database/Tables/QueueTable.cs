@@ -79,14 +79,14 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Provides an enumerable that gets all records in order of id.
+        /// Provides an enumerable that gets all records in order of name.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<LinkRow> EnumerateAll()
+        public IEnumerable<QueueRow> EnumerateAll()
         {
-            foreach (DataRow row in EnumerateRows(null, Defs.Columns.Id))
+            foreach (DataRow row in EnumerateRows(null, Defs.Columns.Name))
             {
-                yield return LinkRow.Create(row);
+                yield return QueueRow.Create(row);
             }
         }
         #endregion

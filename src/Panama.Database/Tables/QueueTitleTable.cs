@@ -65,7 +65,12 @@ namespace Restless.Panama.Database.Tables
                     /// <summary>
                     /// Title name. This column gets its value from the <see cref="TitleTable"/>.
                     /// </summary>
-                    public const string TitleName = "JoinTitleName";
+                    public const string Title = "JoinTitle";
+
+                    /// <summary>
+                    /// Title written data. This column gets its value from the <see cref="TitleTable"/>.
+                    /// </summary>
+                    public const string Written = "JoinTitleWritten";
                 }
             }
         }
@@ -118,7 +123,7 @@ namespace Restless.Panama.Database.Tables
         /// <returns>An enumerable</returns>
         public IEnumerable<QueueTitleRow> EnumerateAll(long queueId)
         {
-            foreach (DataRow row in EnumerateRows($"{Defs.Columns.TitleId}={queueId}", Defs.Columns.Joined.TitleName))
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.TitleId}={queueId}", Defs.Columns.Joined.Title))
             {
                 yield return new QueueTitleRow(row);
             }
@@ -170,7 +175,8 @@ namespace Restless.Panama.Database.Tables
         protected override void UseDataRelations()
         {
             CreateChildToParentColumn(Defs.Columns.Joined.QueueName, QueueTable.Defs.Relations.ToQueueTitle, QueueTable.Defs.Columns.Name);
-            CreateChildToParentColumn(Defs.Columns.Joined.TitleName, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Title);
+            CreateChildToParentColumn(Defs.Columns.Joined.Title, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Title);
+            CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Written, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Written);
         }
         #endregion
     }
