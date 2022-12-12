@@ -6,6 +6,7 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Windows;
 using System.Windows.Data;
 using TableColumns = Restless.Panama.Database.Tables.QueueTitleTable.Defs.Columns;
 
@@ -21,6 +22,7 @@ namespace Restless.Panama.ViewModel
         private readonly ObservableCollection<QueueRow> queues;
         private QueueRow selectedQueue;
         private bool queueEditMode;
+        private Thickness statusPadding;
         private QueueTitleRow selectedTitle;
         #endregion
 
@@ -30,8 +32,14 @@ namespace Restless.Panama.ViewModel
         public override bool OpenRowCommandEnabled => false;
         public override bool AddCommandEnabled => true;
 
+        /// <summary>
+        /// Gets the queues.
+        /// </summary>
         public ListCollectionView Queues { get; }
 
+        /// <summary>
+        /// Gets or sets the selected queue.
+        /// </summary>
         public QueueRow SelectedQueue
         {
             get => selectedQueue;
@@ -44,10 +52,26 @@ namespace Restless.Panama.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets a boolean value that determines if queue editing mode is enabled.
+        /// </summary>
         public bool QueueEditMode
         {
             get => queueEditMode;
-            private set => SetProperty(ref queueEditMode, value);
+            private set
+            {
+                SetProperty(ref queueEditMode, value);
+                StatusPadding = new Thickness(queueEditMode ? 0 : 4);
+            }
+        }
+
+        /// <summary>
+        /// Gets the padding used for the status.
+        /// </summary>
+        public Thickness StatusPadding
+        {
+            get => statusPadding;
+            private set => SetProperty(ref statusPadding, value);
         }
 
         /// <summary>
@@ -85,6 +109,7 @@ namespace Restless.Panama.ViewModel
                 .MakeDate();
 
             Commands.Add("CloseQueueEdit", p => QueueEditMode = false);
+            QueueEditMode = false;
 
             QueueMenuItems = new MenuItemCollection();
             QueueMenuItems.AddItem(Strings.MenuItemAddQueue, RelayCommand.Create(RunAddQueueCommand))

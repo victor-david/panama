@@ -40,7 +40,7 @@
             DetailWidth="{Binding Config.TitleQueueDetailWidth}">
 
             <tk:SplitterGrid.HeaderLeft>
-                <StatusBar Margin="4,0,0,0">
+                <StatusBar Margin="4,0,0,0" Padding="{Binding StatusPadding}">
                     <TextBlock 
                         Style="{StaticResource TitleDisplayTextBlockStyle}"
                         tk:Property.IsCollapsed="{Binding QueueEditMode}"
