@@ -153,6 +153,8 @@ namespace Restless.Panama.Database.Core
                 CreateAndRegisterTable<TagTable>();
                 CreateAndRegisterTable<TitleTable>();
                 CreateAndRegisterTable<TitleTagTable>();
+                CreateAndRegisterTable<QueueTable>();
+                CreateAndRegisterTable<QueueTitleTable>();
                 CreateAndRegisterTable<TitleVersionTable>();
                 CreateAndRegisterTable<UserNoteTable>();
                 TableRegistrationComplete(MainAppSchemaName);

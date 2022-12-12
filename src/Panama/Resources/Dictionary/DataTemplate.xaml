@@ -52,7 +52,11 @@
     <DataTemplate DataType="{x:Type vm:TitleViewModel}">
         <vw:TitleView />
     </DataTemplate>
-    
+
+    <DataTemplate DataType="{x:Type vm:TitleQueueViewModel}">
+        <vw:TitleQueueView />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vm:ToolConvertViewModel}">
         <vw:ToolConvertView />
     </DataTemplate>

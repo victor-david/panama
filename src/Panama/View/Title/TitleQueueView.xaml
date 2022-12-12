@@ -1,0 +1,78 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.TitleQueueView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    mc:Ignorable="d"
+    d:DesignWidth="860" d:DesignHeight="355">
+
+    <Grid
+        tk:Property.ColumnWidths="126,*"
+        tk:Property.RowHeights="Auto,*">
+
+        <StatusBar Margin="0,0,4,0">Queues</StatusBar>
+
+        <ListBox
+            Grid.Row="1"
+            BorderThickness="0,0,0,0"
+            ItemsSource="{Binding Sections}"
+            DisplayMemberPath="Name"
+            SelectedItem="{Binding SelectedSection}"/>
+
+
+        <tk:SplitterGrid
+            Grid.Column="1"
+            Grid.RowSpan="2"
+            MinDetailWidth="{x:Static core:Config+Grid.MinTitleQueueDetailWidth}"
+            MaxDetailWidth="{x:Static core:Config+Grid.MaxTitleQueueDetailWidth}"
+            IsDetailExpanded="{Binding Config.TitleQueueDetailExpanded}"
+            DetailWidth="{Binding Config.TitleQueueDetailWidth}">
+
+            <tk:SplitterGrid.HeaderLeft>
+                <StatusBar Margin="4,0,0,0">Titles</StatusBar>
+            </tk:SplitterGrid.HeaderLeft>
+
+            <tk:SplitterGrid.HeaderRight>
+                <StatusBar>
+                    <TextBlock
+                        Style="{StaticResource TitleDisplayTextBlockStyle}"
+                        Text="{Binding SelectedTitle.Title}"/>
+                </StatusBar>
+            </tk:SplitterGrid.HeaderRight>
+
+            <tk:SplitterGrid.ContentLeft>
+                <tk:DataGrid
+                    CanUserReorderColumns="True"
+                    HeaderMode="ColumnSelector"
+                    ColumnSelectorMinimumVisible="3"
+                    RowHeight="{Binding Config.DataGridRowHeight}"
+                    ItemsSource="{Binding ListView}"
+                    SelectedItem="{Binding SelectedItem}"
+                    RestoreStateBehavior="RestoreLastSelection"
+                    tk:DataGridColumns.Columns="{Binding Columns}">
+
+                    <DataGrid.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                    </DataGrid.InputBindings>
+
+                    <DataGrid.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                    </DataGrid.ContextMenu>
+
+                </tk:DataGrid>
+            </tk:SplitterGrid.ContentLeft>
+
+            <tk:SplitterGrid.ContentRight>
+                <vw:TitleEditContainer Visibility="{Binding EditVisibility}"/>
+            </tk:SplitterGrid.ContentRight>
+
+        </tk:SplitterGrid>
+
+    </Grid>
+</UserControl>

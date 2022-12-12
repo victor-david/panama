@@ -185,6 +185,10 @@ namespace Restless.Panama.Core
             public const double MinTitleDetailWidth = 432;
             public const double MaxTitleDetailWidth = 700;
             public const double DefaultTitleDetailWidth = MinTitleDetailWidth;
+
+            public const double MinTitleQueueDetailWidth = 332;
+            public const double MaxTitleQueueDetailWidth = 502;
+            public const double DefaultTitleQueueDetailWidth = MinTitleQueueDetailWidth;
         }
 
         /// <summary>
@@ -753,6 +757,18 @@ namespace Restless.Panama.Core
         public double TitleDetailWidth
         {
             get => GetItem(Grid.DefaultTitleDetailWidth);
+            set => SetItem(value);
+        }
+
+        public bool TitleQueueDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double TitleQueueDetailWidth
+        {
+            get => GetItem(Grid.DefaultTitleQueueDetailWidth);
             set => SetItem(value);
         }
         #endregion
