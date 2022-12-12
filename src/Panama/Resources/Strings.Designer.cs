@@ -1499,6 +1499,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Queues.
+        /// </summary>
+        public static string MenuItemQueues {
+            get {
+                return ResourceManager.GetString("MenuItemQueues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove this exclusion.
         /// </summary>
         public static string MenuItemRemoveExclusion {

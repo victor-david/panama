@@ -1137,4 +1137,7 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolMessageDetail" xml:space="preserve">
     <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
   </data>
+  <data name="MenuItemQueues" xml:space="preserve">
+    <value>Queues</value>
+  </data>
 </root>
