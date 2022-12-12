@@ -21,6 +21,7 @@
     <SolidColorBrush x:Key="SelectorForegroundBrush" Color="#808080"/>
     <SolidColorBrush x:Key="AlertForegroundBrush" Color="Red"/>
     <SolidColorBrush x:Key="DarkAlertForegroundBrush" Color="#A00000"/>
+    <SolidColorBrush x:Key="EnabledAlertForegroundBrush" Color="#008000"/>
 
     <!-- Border -->
     <SolidColorBrush x:Key="DefaultBorderBrush" Color="#a0a0a0"/>
