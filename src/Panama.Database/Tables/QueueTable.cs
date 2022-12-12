@@ -89,6 +89,26 @@ namespace Restless.Panama.Database.Tables
                 yield return QueueRow.Create(row);
             }
         }
+
+        /// <summary>
+        /// Removes the specified queue and all its associated queue/title records
+        /// </summary>
+        /// <param name="id">The queue id to remove</param>
+        public void RemoveQueue(long id)
+        {
+            Controller.GetTable<QueueTitleTable>().RemoveQueue(id);
+            DataRow[] rows = Select($"{Defs.Columns.Id}={id}");
+            if (rows.Length > 1)
+            {
+                throw new InvalidOperationException($"Multiple results for queue id {id}");
+            }
+
+            if (rows.Length == 1)
+            {
+                rows[0].Delete();
+            }
+            Save();
+        }
         #endregion
 
         /************************************************************************/

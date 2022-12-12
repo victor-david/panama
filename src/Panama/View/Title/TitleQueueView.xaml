@@ -22,9 +22,13 @@
             Grid.Row="1"
             BorderThickness="0,0,0,0"
             ItemsSource="{Binding Queues}"
-            DisplayMemberPath="name"
-            SelectedValue="{Binding SelectedQueueId}"
-            SelectedValuePath="id"/>
+            DisplayMemberPath="Name"
+            SelectedItem="{Binding SelectedQueue}">
+
+            <ListBox.ContextMenu>
+                <ContextMenu ItemsSource="{Binding QueueMenuItems}"/>
+            </ListBox.ContextMenu>
+        </ListBox>
 
         <tk:SplitterGrid
             Grid.Column="1"
@@ -38,7 +42,7 @@
                 <StatusBar Margin="4,0,0,0">
                     <TextBlock 
                         Style="{StaticResource TitleDisplayTextBlockStyle}"
-                        Text="{Binding SelectedQueueName}"/>
+                        Text="{Binding SelectedQueue.Name}"/>
                 </StatusBar>
             </tk:SplitterGrid.HeaderLeft>
 

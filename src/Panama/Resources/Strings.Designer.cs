@@ -440,6 +440,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation removes the selected queue. It does not affect any title record themselves..
+        /// </summary>
+        public static string ConfirmationRemoveQueue {
+            get {
+                return ResourceManager.GetString("ConfirmationRemoveQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Getting ready to remove this message. This does not delete any external files or resources, only the database entry. Do you want to continue?.
         /// </summary>
         public static string ConfirmationRemoveSubmissionMessage {
@@ -1139,6 +1148,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a queue.
+        /// </summary>
+        public static string MenuItemAddQueue {
+            get {
+                return ResourceManager.GetString("MenuItemAddQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a self published record to this title.
         /// </summary>
         public static string MenuItemAddSelfPublished {
@@ -1522,6 +1540,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemRemovePublished {
             get {
                 return ResourceManager.GetString("MenuItemRemovePublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this queue.
+        /// </summary>
+        public static string MenuItemRemoveQueue {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveQueue", resourceCulture);
             }
         }
         

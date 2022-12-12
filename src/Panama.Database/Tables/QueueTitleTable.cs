@@ -179,5 +179,23 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Written, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Written);
         }
         #endregion
+
+        /************************************************************************/
+
+        #region Internal methods
+        /// <summary>
+        /// Removes all queue/title records for the specified queue.
+        /// </summary>
+        /// <param name="queueId">The queue id</param>
+        internal void RemoveQueue(long queueId)
+        {
+            DataRow[] rows = Select($"{Defs.Columns.QueueId}={queueId}");
+            foreach(DataRow row in rows)
+            {
+                row.Delete();
+            }
+            Save();
+        }
+        #endregion
     }
 }
