@@ -519,6 +519,15 @@ namespace Restless.Panama.Core
             get => GetItem(null);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets the state for the queue/title grid columns.
+        /// </summary>
+        public string QueueTitleGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/

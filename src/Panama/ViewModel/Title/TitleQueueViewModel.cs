@@ -111,7 +111,10 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Status", TableColumns.Joined.Status);
 
             Columns.Create("Date", TableColumns.Date)
-                .MakeDate();
+                .MakeDate()
+                .MakeInitialSortDescending();
+
+            Columns.RestoreColumnState(Config.QueueTitleGridColumnState);
 
             Commands.Add("CloseQueueEdit", p => QueueEditMode = false);
             QueueEditMode = false;
@@ -144,6 +147,9 @@ namespace Restless.Panama.ViewModel
             }
 
             SetSelectedQueue(Config.SelectedQueueId);
+
+            ListView.IsLiveSorting = true;
+            ListView.LiveSortingProperties.Add(TableColumns.Date);
         }
         #endregion
 
@@ -190,6 +196,19 @@ namespace Restless.Panama.ViewModel
                 Table.Save();
                 ListView.Refresh();
             }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnSave()
+        {
+            Config.QueueTitleGridColumnState = Columns.GetColumnState();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnClosing()
+        {
+            base.OnClosing();
+            SignalSave();
         }
         #endregion
 
