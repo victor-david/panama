@@ -1598,6 +1598,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rename this queue.
+        /// </summary>
+        public static string MenuItemRenameQueue {
+            get {
+                return ResourceManager.GetString("MenuItemRenameQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Replace this submission document.
         /// </summary>
         public static string MenuItemReplaceSubmissionDocument {

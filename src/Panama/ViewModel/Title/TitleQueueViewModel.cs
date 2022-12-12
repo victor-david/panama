@@ -18,8 +18,9 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private QueueTable QueueTable => DatabaseController.Instance.GetTable<QueueTable>();
-        private ObservableCollection<QueueRow> queues;
+        private readonly ObservableCollection<QueueRow> queues;
         private QueueRow selectedQueue;
+        private bool queueEditMode;
         private QueueTitleRow selectedTitle;
         #endregion
 
@@ -38,8 +39,15 @@ namespace Restless.Panama.ViewModel
             {
                 SetProperty(ref selectedQueue, value);
                 Config.SelectedQueueId = selectedQueue?.Id ?? 0;
+                QueueEditMode = false;
                 ListView.Refresh();
             }
+        }
+
+        public bool QueueEditMode
+        {
+            get => queueEditMode;
+            private set => SetProperty(ref queueEditMode, value);
         }
 
         /// <summary>
@@ -76,10 +84,13 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Published", TableColumns.Date)
                 .MakeDate();
 
+            Commands.Add("CloseQueueEdit", p => QueueEditMode = false);
+
             QueueMenuItems = new MenuItemCollection();
             QueueMenuItems.AddItem(Strings.MenuItemAddQueue, RelayCommand.Create(RunAddQueueCommand))
                 .AddIconResource(ResourceKeys.Icon.PlusIconKey);
 
+            QueueMenuItems.AddItem(Strings.MenuItemRenameQueue, RelayCommand.Create(p => QueueEditMode = true, p => SelectedQueue != null));
             QueueMenuItems.AddSeparator();
 
             QueueMenuItems.AddItem(Strings.MenuItemRemoveQueue, RelayCommand.Create(RunRemoveQueueCommand, p => SelectedQueue != null))
@@ -94,6 +105,8 @@ namespace Restless.Panama.ViewModel
             using (Queues.DeferRefresh())
             {
                 Queues.CustomSort = new GenericComparer<QueueRow>((x, y) => OnQueueDataRowCompare(x, y));
+                Queues.IsLiveSorting = true;
+                Queues.LiveSortingProperties.Add(nameof(QueueRow.Name));
             }
 
             SetSelectedQueue(Config.SelectedQueueId);
@@ -103,6 +116,13 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected methods
+        /// <inheritdoc/>
+        protected override void OnActivated()
+        {
+            base.OnActivated();
+            QueueEditMode = false;
+        }
+
         /// <inheritdoc/>
         protected override void OnSelectedItemChanged()
         {

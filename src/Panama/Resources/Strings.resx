@@ -1149,4 +1149,7 @@ Changes will take effect after you restart the application.</value>
   <data name="MenuItemRemoveQueue" xml:space="preserve">
     <value>Remove this queue</value>
   </data>
+  <data name="MenuItemRenameQueue" xml:space="preserve">
+    <value>Rename this queue</value>
+  </data>
 </root>
