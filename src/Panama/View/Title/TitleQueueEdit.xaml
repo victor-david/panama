@@ -31,8 +31,10 @@
     <!-- Status -->
     <TextBlock Text="Status"/>
     <ListBox 
-        ItemsSource="{Binding}"
-        />
+        ItemsSource="{Binding TitleStatus}"
+        SelectedValue="{Binding SelectedTitle.Status}"
+        SelectedValuePath="id"
+        DisplayMemberPath="name"/>
 
 
 </StackPanel>

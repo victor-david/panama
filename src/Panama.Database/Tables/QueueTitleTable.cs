@@ -71,6 +71,11 @@ namespace Restless.Panama.Database.Tables
                     /// Title written data. This column gets its value from the <see cref="TitleTable"/>.
                     /// </summary>
                     public const string Written = "JoinTitleWritten";
+
+                    /// <summary>
+                    /// Status friendly string. This column gets it value from <see cref="QueueTitleStatusTable"/>.
+                    /// </summary>
+                    public const string Status = "JoinStatus";
                 }
             }
         }
@@ -200,6 +205,7 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn(Defs.Columns.Joined.QueueName, QueueTable.Defs.Relations.ToQueueTitle, QueueTable.Defs.Columns.Name);
             CreateChildToParentColumn(Defs.Columns.Joined.Title, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Title);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Written, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Written);
+            CreateChildToParentColumn(Defs.Columns.Joined.Status, QueueTitleStatusTable.Defs.Relations.ToQueueTitle, QueueTitleStatusTable.Defs.Columns.Name);
         }
         #endregion
 

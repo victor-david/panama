@@ -20,6 +20,7 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private QueueTable QueueTable => DatabaseController.Instance.GetTable<QueueTable>();
+        private QueueTitleStatusTable QueueTitleStatusTable => DatabaseController.Instance.GetTable<QueueTitleStatusTable>();
         private readonly ObservableCollection<QueueRow> queues;
         private QueueRow selectedQueue;
         private bool queueEditMode;
@@ -86,6 +87,8 @@ namespace Restless.Panama.ViewModel
             get => selectedTitle;
             private set => SetProperty(ref selectedTitle, value);
         }
+
+        public DataView TitleStatus => QueueTitleStatusTable.DefaultView;
         #endregion
 
         /************************************************************************/
@@ -105,7 +108,7 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Title", TableColumns.Joined.Title);
 
-            Columns.Create("Status", TableColumns.Status);
+            Columns.Create("Status", TableColumns.Joined.Status);
 
             Columns.Create("Date", TableColumns.Date)
                 .MakeDate();
