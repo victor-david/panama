@@ -101,17 +101,19 @@ namespace Restless.Panama.ViewModel
         {
             Columns.Create("Id", TableColumns.TitleId)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W042);
+                .MakeFixedWidth(FixedWidth.W042)
+                .CanUserSort = false;
 
             Columns.Create("Written", TableColumns.Joined.Written)
                 .MakeDate();
 
             Columns.Create("Title", TableColumns.Joined.Title);
 
-            Columns.Create("Status", TableColumns.Joined.Status);
+            Columns.Create("Status", TableColumns.Joined.Status).CanUserSort = false;
 
             Columns.Create("Date", TableColumns.Date)
                 .MakeDate()
+                .AddCustomSort(null, TableColumns.Joined.Written, DataGridColumnSortBehavior.AlwaysDescending)
                 .MakeInitialSortDescending();
 
             Columns.RestoreColumnState(Config.QueueTitleGridColumnState);
