@@ -112,10 +112,17 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W042)
                 .CanUserSort = false;
 
-            Columns.Create("Written", TableColumns.Joined.Written)
-                .MakeDate();
-
             Columns.Create("Title", TableColumns.Joined.Title);
+            
+            Columns.Create("Written", TableColumns.Joined.Written).MakeDate();
+            Columns.Create("Updated", TableColumns.Joined.Updated)
+                .MakeDate()
+                .AddToolTip(Strings.TooltipTitleUpdated);
+
+            Columns.Create("WC", TableColumns.Joined.WordCount)
+                .MakeFixedWidth(FixedWidth.W042)
+                .AddToolTip(Strings.TooltipTitleWordCount)
+                .SetSelectorName("Word Count");
 
             Columns.Create("Status", TableColumns.Joined.Status).CanUserSort = false;
 

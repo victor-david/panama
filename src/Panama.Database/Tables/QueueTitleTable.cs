@@ -68,9 +68,19 @@ namespace Restless.Panama.Database.Tables
                     public const string Title = "JoinTitle";
 
                     /// <summary>
-                    /// Title written data. This column gets its value from the <see cref="TitleTable"/>.
+                    /// Title written date. This column gets its value from the <see cref="TitleTable"/>.
                     /// </summary>
                     public const string Written = "JoinTitleWritten";
+                    
+                    /// <summary>
+                    /// Title updated date. This column gets its value from the <see cref="TitleTable"/>.
+                    /// </summary>
+                    public const string Updated = "JoinTitleUpdated";
+
+                    /// <summary>
+                    /// Title word count (latest version). This column gets its value from the <see cref="TitleTable"/>.
+                    /// </summary>
+                    public const string WordCount = "JoinTitleWordCount";
 
                     /// <summary>
                     /// Status friendly string. This column gets it value from <see cref="QueueTitleStatusTable"/>.
@@ -205,6 +215,8 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn(Defs.Columns.Joined.QueueName, QueueTable.Defs.Relations.ToQueueTitle, QueueTable.Defs.Columns.Name);
             CreateChildToParentColumn(Defs.Columns.Joined.Title, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Title);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Written, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Written);
+            CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Updated, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Calculated.LastestVersionDate);
+            CreateChildToParentColumn(Defs.Columns.Joined.WordCount, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Calculated.LastestVersionWordCount);
             CreateChildToParentColumn(Defs.Columns.Joined.Status, QueueTitleStatusTable.Defs.Relations.ToQueueTitle, QueueTitleStatusTable.Defs.Columns.Name);
         }
         #endregion
