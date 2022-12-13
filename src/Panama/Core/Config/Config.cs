@@ -243,6 +243,11 @@ namespace Restless.Panama.Core
             public const double SplitterWidth = 684;
 
             /// <summary>
+            /// Gets the default value for queue/title filter
+            /// </summary>
+            public const long DefaultQueueTitleFilterValue = -1;
+
+            /// <summary>
             /// Gets the default value for a submission document footer.
             /// </summary>
             public const string DocumentFooter = "Submissions to [publisher] - [author] - [month], [year]";
@@ -924,6 +929,15 @@ namespace Restless.Panama.Core
         public bool SearchVersionOnly
         {
             get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the queu/title status filter value
+        /// </summary>
+        public long QueueStatusFilter
+        {
+            get => GetItem(Other.DefaultQueueTitleFilterValue);
             set => SetItem(value);
         }
         #endregion

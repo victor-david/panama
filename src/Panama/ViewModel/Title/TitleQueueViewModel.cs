@@ -26,6 +26,7 @@ namespace Restless.Panama.ViewModel
         private bool queueEditMode;
         private Thickness statusPadding;
         private QueueTitleRow selectedTitle;
+        private string statusFilterText;
         #endregion
 
         /************************************************************************/
@@ -33,6 +34,7 @@ namespace Restless.Panama.ViewModel
         #region Properties
         public override bool OpenRowCommandEnabled => false;
         public override bool AddCommandEnabled => true;
+        public override bool ClearFilterCommandEnabled => IsCustomFilterActive();
         public override bool DeleteCommandEnabled => SelectedQueue != null && SelectedTitle != null;
 
         /// <summary>
@@ -88,6 +90,12 @@ namespace Restless.Panama.ViewModel
             private set => SetProperty(ref selectedTitle, value);
         }
 
+        public string StatusFilterText
+        {
+            get => statusFilterText;
+            private set => SetProperty(ref statusFilterText, value);
+        }
+
         public DataView TitleStatus => QueueTitleStatusTable.DefaultView;
         #endregion
 
@@ -122,6 +130,9 @@ namespace Restless.Panama.ViewModel
             QueueEditMode = false;
 
             Commands.Add("ClearDate", p => SelectedTitle.ClearDate());
+            Commands.Add("StatusFilter", RunCustomFilterCommand);
+
+            StatusFilterText = GetStatusFilterText();
 
             QueueMenuItems = new MenuItemCollection();
             QueueMenuItems.AddItem(Strings.MenuItemAddQueue, RelayCommand.Create(RunAddQueueCommand))
@@ -176,7 +187,9 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override bool OnDataRowFilter(DataRow item)
         {
-            return (long)item[TableColumns.QueueId] == (SelectedQueue?.Id ?? 0);
+            return
+                (long)item[TableColumns.QueueId] == (SelectedQueue?.Id ?? 0) &&
+                (Config.QueueStatusFilter == Config.Other.DefaultQueueTitleFilterValue || (long)item[TableColumns.Status] == Config.QueueStatusFilter);
         }
 
         /// <inheritdoc/>
@@ -198,6 +211,12 @@ namespace Restless.Panama.ViewModel
                 Table.Save();
                 ListView.Refresh();
             }
+        }
+
+        /// <inheritdoc/>
+        protected override void RunClearFilterCommand()
+        {
+            SetStatusFilterValue(Config.Other.DefaultQueueTitleFilterValue);
         }
 
         /// <inheritdoc/>
@@ -258,6 +277,37 @@ namespace Restless.Panama.ViewModel
                 QueueTable.RemoveQueue(SelectedQueue.Id);
                 PopulateQueues();
                 Queues.Refresh();
+            }
+        }
+
+        private void SetStatusFilterValue(long value)
+        {
+            Config.QueueStatusFilter = value;
+            StatusFilterText = GetStatusFilterText();
+            ListView.Refresh();
+        }
+
+        private string GetStatusFilterText()
+        {
+            return Config.QueueStatusFilter switch
+            {
+                QueueTitleStatusTable.Defs.Values.StatusIdle => "Idle",
+                QueueTitleStatusTable.Defs.Values.StatusPending => "Scheduled",
+                QueueTitleStatusTable.Defs.Values.StatusPublished => "Published",
+                _ => null,
+            };
+        }
+
+        private bool IsCustomFilterActive()
+        {
+            return Config.QueueStatusFilter != Config.Other.DefaultQueueTitleFilterValue;
+        }
+
+        private void RunCustomFilterCommand(object parm)
+        {
+            if (parm is long value)
+            {
+                SetStatusFilterValue(value);
             }
         }
         #endregion

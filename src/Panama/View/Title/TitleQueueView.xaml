@@ -6,6 +6,7 @@
     xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:table="clr-namespace:Restless.Panama.Database.Tables;assembly=Panama.Database"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleQueueViewModel}"
@@ -53,6 +54,38 @@
                         Content="Close"
                         Command="{Binding Commands[CloseQueueEdit]}"
                         tk:Property.IsVisible="{Binding QueueEditMode}"/>
+
+                    <Separator/>
+                    
+                    <TextBlock Text="Filters"/>
+                    
+                    <Button
+                        Content="Idle"
+                        CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusIdle}"
+                        Command="{Binding Commands[StatusFilter]}"/>
+
+                    <Button
+                        Content="Scheduled"
+                        CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPending}"
+                        ToolTip="{x:Static r:Strings.ToolTipTitleFilterFlag}"
+                        Command="{Binding Commands[StatusFilter]}"/>
+
+                    <Button
+                        Content="Published"
+                        CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPublished}"
+                        Command="{Binding Commands[StatusFilter]}"/>
+
+                    <Separator/>
+
+                    <Button
+                        Content="{x:Static r:Strings.MenuItemClear}"
+                        ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
+                        Command="{Binding ClearFilterCommand}"/>
+
+                    <TextBlock
+                        Margin="60,0,0,0"
+                        Foreground="{StaticResource DarkAlertForegroundBrush}"
+                        Text="{Binding StatusFilterText}"/>
 
                 </StatusBar>
             </tk:SplitterGrid.HeaderLeft>
