@@ -24,7 +24,6 @@ namespace Restless.Panama.ViewModel
         private readonly ObservableCollection<QueueRow> queues;
         private QueueRow selectedQueue;
         private bool queueEditMode;
-        private Thickness statusPadding;
         private QueueTitleRow selectedTitle;
         private string statusFilterText;
         #endregion
@@ -63,20 +62,7 @@ namespace Restless.Panama.ViewModel
         public bool QueueEditMode
         {
             get => queueEditMode;
-            private set
-            {
-                SetProperty(ref queueEditMode, value);
-                StatusPadding = new Thickness(queueEditMode ? 0 : 4);
-            }
-        }
-
-        /// <summary>
-        /// Gets the padding used for the status.
-        /// </summary>
-        public Thickness StatusPadding
-        {
-            get => statusPadding;
-            private set => SetProperty(ref statusPadding, value);
+            private set => SetProperty(ref queueEditMode, value);
         }
 
         /// <summary>

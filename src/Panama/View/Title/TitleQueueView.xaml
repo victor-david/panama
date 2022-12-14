@@ -17,7 +17,7 @@
         tk:Property.ColumnWidths="126,*"
         tk:Property.RowHeights="Auto,*">
 
-        <StatusBar Margin="0,0,4,0">Queues</StatusBar>
+        <StatusBar Margin="0,0,4,0" Padding="4,8">Queues</StatusBar>
 
         <ListBox
             Grid.Row="1"
@@ -41,7 +41,7 @@
             DetailWidth="{Binding Config.TitleQueueDetailWidth}">
 
             <tk:SplitterGrid.HeaderLeft>
-                <StatusBar Margin="4,0,0,0" Padding="{Binding StatusPadding}">
+                <StatusBar Margin="4,0,0,0">
                     <TextBlock 
                         Style="{StaticResource TitleDisplayTextBlockStyle}"
                         tk:Property.IsCollapsed="{Binding QueueEditMode}"
