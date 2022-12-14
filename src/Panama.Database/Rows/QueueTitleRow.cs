@@ -33,6 +33,21 @@ namespace Restless.Panama.Database.Tables
         public string Title => GetString(Columns.Joined.Title);
 
         /// <summary>
+        /// Gets the written date
+        /// </summary>
+        public DateTime Written => GetDateTime(Columns.Joined.Written);
+
+        /// <summary>
+        /// Gets the title updated date
+        /// </summary>
+        public DateTime Updated => GetDateTime(Columns.Joined.Updated);
+
+        /// <summary>
+        /// Gets the title word count
+        /// </summary>
+        public long WordCount => GetInt64(Columns.Joined.WordCount);
+
+        /// <summary>
         /// Gets or sets the status.
         /// </summary>
         public long Status
