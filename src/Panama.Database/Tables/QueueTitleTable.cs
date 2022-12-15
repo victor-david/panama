@@ -145,24 +145,44 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Adds the specified title to the specified queue
+        /// </summary>
+        /// <param name="queueId">The queue id</param>
+        /// <param name="titleId">The title id</param>
+        /// <remarks>
+        /// A title cannot be added to the same queue more than once. 
+        /// This method checks whether the title is already in the queue.
+        /// If so, the title is ignored.
+        /// </remarks>
+        public void AddTitle(long queueId, long titleId)
+        {
+            if (!QueueTitleExists(queueId, titleId))
+            {
+                DataRow row = NewRow();
+                row[Defs.Columns.QueueId] = queueId;
+                row[Defs.Columns.TitleId] = titleId;
+                row[Defs.Columns.Status] = 0;
+                row[Defs.Columns.Date] = DBNull.Value;
+                Rows.Add(row);
+            }
+        }
+
+        /// <summary>
         /// Adds the specified titles to the specified queue
         /// </summary>
         /// <param name="queueId">The queue id</param>
         /// <param name="titles">The titles to add</param>
+        /// <remarks>
+        /// A title cannot be added to the same queue more than once. 
+        /// This method checks each title to see if it is already in the queue.
+        /// If so, the title is ignored.
+        /// </remarks>/// 
         public void AddTitles(long queueId, List<TitleRow> titles)
         {
             _ = titles ?? throw new ArgumentNullException(nameof(titles));
             titles.ForEach(title =>
             {
-                if (!QueueTitleExists(queueId, title.Id))
-                {
-                    DataRow row = NewRow();
-                    row[Defs.Columns.QueueId] = queueId;
-                    row[Defs.Columns.TitleId] = title.Id;
-                    row[Defs.Columns.Status] = 0;
-                    row[Defs.Columns.Date] = DBNull.Value;
-                    Rows.Add(row);
-                }
+                AddTitle(queueId, title.Id);
             });
             Save();
         }
