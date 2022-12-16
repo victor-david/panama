@@ -1870,7 +1870,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable title queues (requires restart).
+        ///   Looks up a localized string similar to Enable title queues.
         /// </summary>
         public static string SettingsQueue {
             get {

@@ -1162,6 +1162,6 @@ Changes will take effect after you restart the application.</value>
     <value>Clear date</value>
   </data>
   <data name="SettingsQueue" xml:space="preserve">
-    <value>Enable title queues (requires restart)</value>
+    <value>Enable title queues</value>
   </data>
 </root>
