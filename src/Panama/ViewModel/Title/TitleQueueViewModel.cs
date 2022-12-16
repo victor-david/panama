@@ -261,6 +261,7 @@ namespace Restless.Panama.ViewModel
             PopulateQueues();
             SetSelectedQueue(temp);
             Queues.Refresh();
+            MainWindowViewModel.Instance.SynchronizeTitleQueue();
         }
 
         private void RunRemoveQueueCommand(object parm)
@@ -270,6 +271,7 @@ namespace Restless.Panama.ViewModel
                 QueueTable.RemoveQueue(SelectedQueue.Id);
                 PopulateQueues();
                 Queues.Refresh();
+                MainWindowViewModel.Instance.SynchronizeTitleQueue();
             }
         }
 

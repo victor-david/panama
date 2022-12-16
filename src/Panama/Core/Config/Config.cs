@@ -6,6 +6,7 @@
 */
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
+using Restless.Panama.ViewModel;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Core.Utility;
 using System.ComponentModel;
@@ -1046,9 +1047,9 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
-        /// Gets or sets a value that determines if the queue feature is enabled
+        /// Gets or sets a value that determines if the title queue feature is visible
         /// </summary>
-        public bool IsQueueFeatureEnabled
+        public bool IsTitleQueueVisible
         {
             get => GetItem(false);
             set => SetItem(value);
@@ -1104,6 +1105,9 @@ namespace Restless.Panama.Core
                 case nameof(IsTitleAuthorVisible):
                 case nameof(IsVerifyLinkEnabled):
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
+                    break;
+                case nameof(IsTitleQueueVisible):
+                    MainWindowViewModel.Instance.SynchronizeTitleQueue();
                     break;
                 default:
                     break;

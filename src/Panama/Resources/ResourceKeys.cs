@@ -87,6 +87,7 @@ namespace Restless.Panama.Resources
             public const string SubmissionMediumIconKey = nameof(SubmissionMediumIconKey);
             public const string TableIconKey = nameof(TableIconKey);
             public const string TagIconKey = nameof(TagIconKey);
+            public const string TitleQueueIconKey = nameof(TitleQueueIconKey);
             public const string ToggleIconKey = nameof(ToggleIconKey);
             public const string ToolIconKey = nameof(ToolIconKey);
             public const string UserIconKey = nameof(UserIconKey);

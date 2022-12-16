@@ -279,7 +279,7 @@
 
                     <CheckBox
                         Content="{x:Static r:Strings.SettingsQueue}"
-                        IsChecked="{Binding Config.IsQueueFeatureEnabled}"/>
+                        IsChecked="{Binding Config.IsTitleQueueVisible}"/>
 
                     <CheckBox
                         Grid.Row="1"
