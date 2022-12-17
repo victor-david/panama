@@ -29,6 +29,7 @@ namespace Restless.Panama.Core
         private Config() : base(DatabaseController.Instance.GetTable<ConfigTable>())
         {
             TitleFilter = GetItem(null, nameof(TitleFilter)).Deserialize<TitleRowFilter>();
+            TitleQueueFilter = GetItem(null, nameof(TitleQueueFilter)).Deserialize<TitleQueueRowFilter>();
             PublisherFilter = GetItem(null, nameof(PublisherFilter)).Deserialize<PublisherRowFilter>();
             SubmissionFilter = GetItem(null, nameof(SubmissionFilter)).Deserialize<SubmissionRowFilter>();
             Colors = new ConfigColors();
@@ -886,6 +887,15 @@ namespace Restless.Panama.Core
             get;
             private set;
         }
+        
+        /// <summary>
+        /// Gets the title queue filter object which describes how to filter queue/title rows.
+        /// </summary>
+        public TitleQueueRowFilter TitleQueueFilter
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Gets the publisher filter object which describes how to filter publisher rows.
@@ -930,15 +940,6 @@ namespace Restless.Panama.Core
         public bool SearchVersionOnly
         {
             get => GetItem(false);
-            set => SetItem(value);
-        }
-
-        /// <summary>
-        /// Gets or sets the queu/title status filter value
-        /// </summary>
-        public long QueueStatusFilter
-        {
-            get => GetItem(Other.DefaultQueueTitleFilterValue);
             set => SetItem(value);
         }
         #endregion
@@ -1084,6 +1085,7 @@ namespace Restless.Panama.Core
         public void SaveFilterObjects()
         {
             SetItem(TitleFilter.Serialize(), nameof(TitleFilter));
+            SetItem(TitleQueueFilter.Serialize(), nameof(TitleQueueFilter));
             SetItem(PublisherFilter.Serialize(), nameof(PublisherFilter));
             SetItem(SubmissionFilter.Serialize(), nameof(SubmissionFilter));
         }

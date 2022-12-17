@@ -56,8 +56,11 @@
                         tk:Property.IsVisible="{Binding QueueEditMode}"/>
 
                     <Separator/>
+
+                    <TextBlock Text="Title"/>
+                    <TextBox Width="160" Text="{Binding Filters.Text, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
                     
-                    <TextBlock Text="Filters"/>
+                    <TextBlock Text="State"/>
                     
                     <Button
                         Content="Idle"

@@ -4,11 +4,12 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Windows;
 using System.Windows.Data;
+using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.QueueTitleTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
@@ -33,7 +34,7 @@ namespace Restless.Panama.ViewModel
         #region Properties
         public override bool OpenRowCommandEnabled => false;
         public override bool AddCommandEnabled => true;
-        public override bool ClearFilterCommandEnabled => IsCustomFilterActive();
+        public override bool ClearFilterCommandEnabled => Filters.IsAnyFilterActive;
         public override bool DeleteCommandEnabled => SelectedQueue != null && SelectedTitle != null;
 
         /// <summary>
@@ -75,6 +76,11 @@ namespace Restless.Panama.ViewModel
             get => selectedTitle;
             private set => SetProperty(ref selectedTitle, value);
         }
+
+        /// <summary>
+        /// Gets the filter object
+        /// </summary>
+        public TitleQueueRowFilter Filters => Config.TitleQueueFilter;
 
         public string StatusFilterText
         {
@@ -156,6 +162,12 @@ namespace Restless.Panama.ViewModel
 
             ListView.IsLiveSorting = true;
             ListView.LiveSortingProperties.Add(TableColumns.Date);
+
+            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
+            {
+                Filters.SetListView(ListView);
+                Filters.ApplyFilter();
+            }));
         }
         #endregion
 
@@ -182,7 +194,7 @@ namespace Restless.Panama.ViewModel
         {
             return
                 (long)item[TableColumns.QueueId] == (SelectedQueue?.Id ?? 0) &&
-                (Config.QueueStatusFilter == Config.Other.DefaultQueueTitleFilterValue || (long)item[TableColumns.Status] == Config.QueueStatusFilter);
+                (Filters?.OnDataRowFilter(item) ?? false);
         }
 
         /// <inheritdoc/>
@@ -209,7 +221,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunClearFilterCommand()
         {
-            SetStatusFilterValue(Config.Other.DefaultQueueTitleFilterValue);
+            Filters.ClearAll();
         }
 
         /// <inheritdoc/>
@@ -275,16 +287,9 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void SetStatusFilterValue(long value)
-        {
-            Config.QueueStatusFilter = value;
-            StatusFilterText = GetStatusFilterText();
-            ListView.Refresh();
-        }
-
         private string GetStatusFilterText()
         {
-            return Config.QueueStatusFilter switch
+            return (Filters?.QueueStatus ?? Config.Other.DefaultQueueTitleFilterValue) switch
             {
                 QueueTitleStatusTable.Defs.Values.StatusIdle => "Idle",
                 QueueTitleStatusTable.Defs.Values.StatusPending => "Scheduled",
@@ -293,16 +298,12 @@ namespace Restless.Panama.ViewModel
             };
         }
 
-        private bool IsCustomFilterActive()
-        {
-            return Config.QueueStatusFilter != Config.Other.DefaultQueueTitleFilterValue;
-        }
-
         private void RunCustomFilterCommand(object parm)
         {
             if (parm is long value)
             {
-                SetStatusFilterValue(value);
+                Filters?.SetQueueStatus(value);
+                StatusFilterText = GetStatusFilterText();
             }
         }
         #endregion
