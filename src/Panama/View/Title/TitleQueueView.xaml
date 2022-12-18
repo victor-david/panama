@@ -113,6 +113,10 @@
                     RestoreStateBehavior="RestoreLastSelection"
                     tk:DataGridColumns.Columns="{Binding Columns}">
 
+                    <DataGrid.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                    </DataGrid.InputBindings>
+
                     <DataGrid.ContextMenu>
                         <ContextMenu ItemsSource="{Binding MenuItems}"/>
                     </DataGrid.ContextMenu>

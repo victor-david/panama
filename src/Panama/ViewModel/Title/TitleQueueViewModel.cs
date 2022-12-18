@@ -32,7 +32,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Properties
-        public override bool OpenRowCommandEnabled => false;
         public override bool AddCommandEnabled => true;
         public override bool ClearFilterCommandEnabled => Filters.IsAnyFilterActive;
         public override bool DeleteCommandEnabled => SelectedQueue != null && SelectedTitle != null;
@@ -145,6 +144,8 @@ namespace Restless.Panama.ViewModel
 
             MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemRemoveQueueTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.XIconKey);
 
             queues = new ObservableCollection<QueueRow>();
@@ -215,6 +216,19 @@ namespace Restless.Panama.ViewModel
                 SelectedTitle.Row.Delete();
                 Table.Save();
                 ListView.Refresh();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void RunOpenRowCommand()
+        {
+            if (SelectedTitle != null)
+            {
+                Database.Tables.TitleVersionController verController = TitleVersionTable.GetVersionController(SelectedTitle.TitleId);
+                if (verController.Versions.Count > 0)
+                {
+                    Open.TitleVersionFile(verController.Versions[0].FileName);
+                }
             }
         }
 
