@@ -51,6 +51,7 @@
     <Geometry x:Key="TableGeometryKey">M5,4H19A2,2 0 0,1 21,6V18A2,2 0 0,1 19,20H5A2,2 0 0,1 3,18V6A2,2 0 0,1 5,4M5,8V12H11V8H5M13,8V12H19V8H13M5,14V18H11V14H5M13,14V18H19V14H13Z</Geometry>
     <Geometry x:Key="TagGeometryKey">M6.5 5C5.67 5 5 5.67 5 6.5S5.67 8 6.5 8 8 7.33 8 6.5 7.33 5 6.5 5M6.5 5C5.67 5 5 5.67 5 6.5S5.67 8 6.5 8 8 7.33 8 6.5 7.33 5 6.5 5M21.41 11.58L12.41 2.58C12.04 2.21 11.53 2 11 2H4C2.9 2 2 2.9 2 4V11C2 11.53 2.21 12.04 2.59 12.42L3 12.82C3.64 12.44 4.35 12.19 5.08 12.08L4 11V4H11L20 13L13 20L11.92 18.92C11.82 19.66 11.56 20.36 11.18 21L11.59 21.41C11.96 21.79 12.47 22 13 22C13.53 22 14.04 21.79 14.41 21.41L21.41 14.41C21.79 14.04 22 13.53 22 13C22 12.47 21.79 11.96 21.41 11.58M6.5 5C5.67 5 5 5.67 5 6.5S5.67 8 6.5 8 8 7.33 8 6.5 7.33 5 6.5 5M6 17H2V19H6V21L9 18L6 15V17Z</Geometry>
     <Geometry x:Key="TitleGeometryKey">M4 20H18V22H4C2.9 22 2 21.1 2 20V6H4V20M22 4V16C22 17.1 21.1 18 20 18H8C6.9 18 6 17.1 6 16V4C6 2.9 6.9 2 8 2H20C21.1 2 22 2.9 22 4M20 4H8V16H20V4M18 6H13V13L15.5 11.5L18 13V6Z</Geometry>
+    <Geometry x:Key="TitleQueueGeometryKey">M18 5H6V7H18M6 9H18V11H6M2 12H4V17H20V12H22V17A2 2 0 0 1 20 19H4A2 2 0 0 1 2 17M18 13H6V15H18Z</Geometry>
     <Geometry x:Key="ToggleGeometryKey">M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z</Geometry>
     <Geometry x:Key="ToolGeometryKey">M21.71 20.29L20.29 21.71A1 1 0 0 1 18.88 21.71L7 9.85A3.81 3.81 0 0 1 6 10A4 4 0 0 1 2.22 4.7L4.76 7.24L5.29 6.71L6.71 5.29L7.24 4.76L4.7 2.22A4 4 0 0 1 10 6A3.81 3.81 0 0 1 9.85 7L21.71 18.88A1 1 0 0 1 21.71 20.29M2.29 18.88A1 1 0 0 0 2.29 20.29L3.71 21.71A1 1 0 0 0 5.12 21.71L10.59 16.25L7.76 13.42M20 2L16 4V6L13.83 8.17L15.83 10.17L18 8H20L22 4Z</Geometry>
     <Geometry x:Key="UserGeometryKey">M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z</Geometry>
@@ -102,6 +103,7 @@
     <Path x:Key="TableIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource TableGeometryKey}"/>
     <Path x:Key="TagIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource TagGeometryKey}"/>
     <Path x:Key="TitleIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource TitleGeometryKey}"/>
+    <Path x:Key="TitleQueueIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource TitleQueueGeometryKey}"/>
     <Path x:Key="ToggleIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ToggleGeometryKey}"/>
     <Path x:Key="ToolIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource ToolGeometryKey}"/>
     <Path x:Key="UserIconKey" x:Shared="False" Style="{StaticResource StandardPathStyle}" Data="{StaticResource UserGeometryKey}"/>

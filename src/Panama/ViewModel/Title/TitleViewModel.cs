@@ -18,6 +18,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
 
@@ -34,6 +36,10 @@ namespace Restless.Panama.ViewModel
         private PreviewMode previewMode;
         private string previewText;
         private const int SectionPreviewId = 6;
+        private readonly int queueTitleMenuIndex;
+        private bool haveQueueTitleItems;
+        private QueueTable QueueTable => DatabaseController.Instance.GetTable<QueueTable>();
+        private QueueTitleTable QueueTitleTable => DatabaseController.Instance.GetTable<QueueTitleTable>();
         #endregion
 
         /************************************************************************/
@@ -237,14 +243,19 @@ namespace Restless.Panama.ViewModel
             Commands.Add("ExtractTitle", RunExtractTitle, CanRunExtractTitle);
             Commands.Add("ToggleFlag", RunToggleTitleFlagCommand, p => IsSelectedRowAccessible);
             Commands.Add("ClearFlags", RunClearTitleFlagsCommand);
+            Commands.Add("AddToQueue", RunAddTitleToQueueCommand, p => SelectedTitle != null);
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
             MenuItems.AddItem(Strings.MenuItemFlagTitle, Commands["ToggleFlag"]).AddIconResource(ResourceKeys.Icon.ToggleIconKey);
+            queueTitleMenuIndex = MenuItems.Count;
+
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemDeleteTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+
+            SynchronizeQueueTitleMenuItems();
 
             Versions = new TitleVersionController(this);
             Submissions = new TitleSubmissionController(this);
@@ -262,6 +273,35 @@ namespace Restless.Panama.ViewModel
                 Filters.SetListView(ListView);
                 Filters.ApplyFilter();
             }));
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Public methods
+        /// <summary>
+        /// Synchonizes the queue/title menu items upon changes external to this class.
+        /// </summary>
+        public void SynchronizeQueueTitleMenuItems()
+        {
+            RemoveQueueMenuItemsIf();
+
+            haveQueueTitleItems = false;
+            if (Config.IsTitleQueueVisible && QueueTable.Rows.Count > 0)
+            {
+                int insertIdx = queueTitleMenuIndex;
+                MenuItems.InsertSeparator(insertIdx);
+                insertIdx++;
+
+                foreach (QueueRow row in QueueTable.EnumerateAll())
+                {
+                    MenuItems.InsertItem(insertIdx, $"Add to queue {row.Name}", Commands["AddToQueue"])
+                        .AddCommandParm(row)
+                        .AddIconResource(ResourceKeys.Icon.TitleQueueIconKey);
+                    insertIdx++;
+                }
+                haveQueueTitleItems = true;
+            }
         }
         #endregion
 
@@ -438,6 +478,36 @@ namespace Restless.Panama.ViewModel
                 {
                     title.QuickFlag = false;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Removes queue menu items if they exist
+        /// </summary>
+        private void RemoveQueueMenuItemsIf()
+        {
+            if (haveQueueTitleItems)
+            {
+                List<Control> remove = new();
+                /* remove the separator */
+                remove.Add(MenuItems[queueTitleMenuIndex]);
+
+                foreach (MenuItem item in MenuItems.OfType<MenuItem>().Where(p => p.CommandParameter is QueueRow))
+                {
+                    item.Command = null;
+                    item.CommandParameter = null;
+                    remove.Add(item);
+                }
+                remove.ForEach(item => MenuItems.Remove(item));
+            }
+        }
+
+        private void RunAddTitleToQueueCommand(object parm)
+        {
+            if (parm is QueueRow queue && SelectedTitle != null)
+            {
+                QueueTitleTable.AddTitle(queue.Id, SelectedTitle.Id);
+                QueueTable.Save();
             }
         }
 

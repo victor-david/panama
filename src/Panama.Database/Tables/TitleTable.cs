@@ -181,6 +181,11 @@ namespace Restless.Panama.Database.Tables
                 /// </summary>
                 public const string ToSelfPublished = "TitleToSelfPublished";
 
+                /// <summary>
+                /// The name of the relation that relates the <see cref="TitleTable"/> to the <see cref="QueueTitleTable"/>
+                /// </summary>
+                public const string ToQueueTitle = "TitleToQueueTitle";
+
             }
         }
         #endregion
@@ -269,6 +274,7 @@ namespace Restless.Panama.Database.Tables
             CreateParentChildRelation<TitleTagTable>(Defs.Relations.ToTitleTag, Defs.Columns.Id, TitleTagTable.Defs.Columns.TitleId);
             CreateParentChildRelation<PublishedTable>(Defs.Relations.ToPublished, Defs.Columns.Id, PublishedTable.Defs.Columns.TitleId);
             CreateParentChildRelation<SelfPublishedTable>(Defs.Relations.ToSelfPublished, Defs.Columns.Id, SelfPublishedTable.Defs.Columns.TitleId);
+            CreateParentChildRelation<QueueTitleTable>(Defs.Relations.ToQueueTitle, Defs.Columns.Id, QueueTitleTable.Defs.Columns.TitleId);
         }
 
         /// <summary>

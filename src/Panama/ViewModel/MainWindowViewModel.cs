@@ -163,6 +163,16 @@ namespace Restless.Panama.ViewModel
                 item.Update();
             }
         }
+
+        /// <summary>
+        /// Synchronizes the queue title menu items in <see cref="TitleViewModel"/>
+        /// if it has been created.
+        /// </summary>
+        public void SynchronizeTitleQueue()
+        {
+            SetNavigatorItemVisibility<TitleQueueViewModel>(Config.IsTitleQueueVisible);
+            viewModelCache.Get<TitleViewModel>()?.SynchronizeQueueTitleMenuItems();
+        }
         #endregion
 
         /************************************************************************/
@@ -194,6 +204,7 @@ namespace Restless.Panama.ViewModel
         {
             // NavigatorItems.Add<HomeViewModel>(NavigationGroup.Title, Strings.MenuItemSummary, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.ReportGeometryKey));
             NavigatorItems.Add<TitleViewModel>(NavigationGroup.Title, Strings.MenuItemTitles, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TitleGeometryKey));
+            NavigatorItems.Add<TitleQueueViewModel>(NavigationGroup.Title, Strings.MenuItemQueues, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TitleQueueGeometryKey));
             NavigatorItems.Add<PublisherViewModel>(NavigationGroup.Title, Strings.MenuItemPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));
             NavigatorItems.Add<SelfPublisherViewModel>(NavigationGroup.Title, Strings.MenuItemSelfPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));
             NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.SubmissionGeometryKey));
@@ -210,6 +221,16 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<TableViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemStatistics);
             NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemSearch);
             NavigatorItems.Add<LinkVerifyViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemAddLink);
+
+            SetNavigatorItemVisibility<TitleQueueViewModel>(Config.IsTitleQueueVisible);
+        }
+
+        private void SetNavigatorItemVisibility<T>(bool isItemVisible) where T : ApplicationViewModel
+        {
+            if (NavigatorItems.TryGet<T>() is NavigatorItem item)
+            {
+                item.IsItemVisible = isItemVisible;
+            }
         }
 
         private void NavigatorItemsSelectedItemChanged(object sender, NavigatorItem navItem)

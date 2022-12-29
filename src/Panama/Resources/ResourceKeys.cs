@@ -40,6 +40,7 @@ namespace Restless.Panama.Resources
             public const string TableGeometryKey = nameof(TableGeometryKey);
             public const string TagGeometryKey = nameof(TagGeometryKey);
             public const string TitleGeometryKey = nameof(TitleGeometryKey);
+            public const string TitleQueueGeometryKey = nameof(TitleQueueGeometryKey);
             public const string ToggleGeometryKey = nameof(ToggleGeometryKey);
             public const string ToolGeometryKey = nameof(ToolGeometryKey);
             public const string UserGeometryKey = nameof(UserGeometryKey);
@@ -86,6 +87,7 @@ namespace Restless.Panama.Resources
             public const string SubmissionMediumIconKey = nameof(SubmissionMediumIconKey);
             public const string TableIconKey = nameof(TableIconKey);
             public const string TagIconKey = nameof(TagIconKey);
+            public const string TitleQueueIconKey = nameof(TitleQueueIconKey);
             public const string ToggleIconKey = nameof(ToggleIconKey);
             public const string ToolIconKey = nameof(ToolIconKey);
             public const string UserIconKey = nameof(UserIconKey);

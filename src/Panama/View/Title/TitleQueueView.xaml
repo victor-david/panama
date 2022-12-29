@@ -1,0 +1,139 @@
+﻿<UserControl 
+    x:Class="Restless.Panama.View.TitleQueueView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:table="clr-namespace:Restless.Panama.Database.Tables;assembly=Panama.Database"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleQueueViewModel}"
+    mc:Ignorable="d"
+    d:DesignWidth="860" d:DesignHeight="355">
+
+    <Grid
+        tk:Property.ColumnWidths="126,*"
+        tk:Property.RowHeights="Auto,*">
+
+        <StatusBar Margin="0,0,4,0" Padding="4,8">Queues</StatusBar>
+
+        <ListBox
+            Grid.Row="1"
+            Margin="0,10"
+            BorderThickness="0"
+            ItemsSource="{Binding Queues}"
+            DisplayMemberPath="Name"
+            SelectedItem="{Binding SelectedQueue}">
+
+            <ListBox.ContextMenu>
+                <ContextMenu ItemsSource="{Binding QueueMenuItems}"/>
+            </ListBox.ContextMenu>
+        </ListBox>
+
+        <tk:SplitterGrid
+            Grid.Column="1"
+            Grid.RowSpan="2"
+            MinDetailWidth="{x:Static core:Config+Grid.MinTitleQueueDetailWidth}"
+            MaxDetailWidth="{x:Static core:Config+Grid.MaxTitleQueueDetailWidth}"
+            IsDetailExpanded="{Binding Config.TitleQueueDetailExpanded}"
+            DetailWidth="{Binding Config.TitleQueueDetailWidth}">
+
+            <tk:SplitterGrid.HeaderLeft>
+                <StatusBar Margin="4,0,0,0">
+                    <TextBlock 
+                        Style="{StaticResource TitleDisplayTextBlockStyle}"
+                        tk:Property.IsCollapsed="{Binding QueueEditMode}"
+                        Text="{Binding SelectedQueue.Name}"/>
+                    <TextBox
+                        Width="240"
+                        tk:Property.IsVisible="{Binding QueueEditMode}"
+                        Text="{Binding SelectedQueue.Name}"/>
+                    <Button
+                        Content="Close"
+                        Command="{Binding Commands[CloseQueueEdit]}"
+                        tk:Property.IsVisible="{Binding QueueEditMode}"/>
+
+                    <Separator/>
+
+                    <TextBlock Text="Title"/>
+                    <TextBox Width="160" Text="{Binding Filters.Text, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
+                    
+                    <TextBlock Text="State"/>
+                    
+                    <Button
+                        Content="Idle"
+                        CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusIdle}"
+                        Command="{Binding Commands[StatusFilter]}"/>
+
+                    <Button
+                        Content="Scheduled"
+                        CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPending}"
+                        ToolTip="{x:Static r:Strings.ToolTipTitleFilterFlag}"
+                        Command="{Binding Commands[StatusFilter]}"/>
+
+                    <Button
+                        Content="Published"
+                        CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPublished}"
+                        Command="{Binding Commands[StatusFilter]}"/>
+
+                    <Separator/>
+
+                    <Button
+                        Content="{x:Static r:Strings.MenuItemClear}"
+                        ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
+                        Command="{Binding ClearFilterCommand}"/>
+
+                    <TextBlock
+                        Margin="48,0,0,0"
+                        Foreground="{StaticResource DarkAlertForegroundBrush}"
+                        Text="{Binding StatusFilterText}"/>
+
+                    <TextBlock
+                        Margin="12,0,0,0"
+                        Foreground="{StaticResource DefaultForegroundBrush}"
+                        Text="{Binding ListView.Count}"/>
+
+                </StatusBar>
+            </tk:SplitterGrid.HeaderLeft>
+
+            <tk:SplitterGrid.HeaderRight>
+                <StatusBar>
+                    <TextBlock
+                        Style="{StaticResource TitleDisplayTextBlockStyle}"
+                        Text="{Binding SelectedTitle.Title}"/>
+                </StatusBar>
+            </tk:SplitterGrid.HeaderRight>
+
+            <tk:SplitterGrid.ContentLeft>
+                <tk:DataGrid
+                    CanUserReorderColumns="True"
+                    HeaderMode="ColumnSelector"
+                    ColumnSelectorMinimumVisible="3"
+                    RowHeight="{Binding Config.DataGridRowHeight}"
+                    RowStyle="{StaticResource QueueTitleDataGridRowStyle}"
+                    ItemsSource="{Binding ListView}"
+                    SelectedItem="{Binding SelectedItem}"
+                    RestoreStateBehavior="RestoreLastSelection"
+                    tk:DataGridColumns.Columns="{Binding Columns}">
+
+                    <DataGrid.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                    </DataGrid.InputBindings>
+
+                    <DataGrid.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                    </DataGrid.ContextMenu>
+
+                </tk:DataGrid>
+            </tk:SplitterGrid.ContentLeft>
+
+            <tk:SplitterGrid.ContentRight>
+                <vw:TitleQueueEdit Visibility="{Binding EditVisibility}"/>
+            </tk:SplitterGrid.ContentRight>
+
+        </tk:SplitterGrid>
+
+    </Grid>
+</UserControl>

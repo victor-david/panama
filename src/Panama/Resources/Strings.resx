@@ -1137,4 +1137,31 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolMessageDetail" xml:space="preserve">
     <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
   </data>
+  <data name="MenuItemQueues" xml:space="preserve">
+    <value>Queues</value>
+  </data>
+  <data name="ConfirmationRemoveQueue" xml:space="preserve">
+    <value>This operation removes the selected queue. It does not affect any title record themselves.</value>
+  </data>
+  <data name="MenuItemAddQueue" xml:space="preserve">
+    <value>Add a queue</value>
+  </data>
+  <data name="MenuItemRemoveQueue" xml:space="preserve">
+    <value>Remove this queue</value>
+  </data>
+  <data name="MenuItemRenameQueue" xml:space="preserve">
+    <value>Rename this queue</value>
+  </data>
+  <data name="ConfirmationRemoveQueueTitle" xml:space="preserve">
+    <value>This operation removes the selected title from the queue. It does not affect the title itself.</value>
+  </data>
+  <data name="MenuItemRemoveQueueTitle" xml:space="preserve">
+    <value>Remove this title from queue</value>
+  </data>
+  <data name="TextClearDate" xml:space="preserve">
+    <value>Clear date</value>
+  </data>
+  <data name="SettingsQueue" xml:space="preserve">
+    <value>Enable title queues</value>
+  </data>
 </root>

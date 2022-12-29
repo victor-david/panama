@@ -13,13 +13,13 @@
     <PackageProjectUrl>https://github.com/victor-david/panama</PackageProjectUrl>
     <RepositoryUrl>https://github.com/victor-david/panama</RepositoryUrl>    
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
-    <Version>4.0.32</Version>
+    <Version>4.0.33</Version>
     <ApplicationIcon>App.Main.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MimeKitLite" Version="3.1.1" />
-    <PackageReference Include="Restless.Toolkit" Version="2.5.13" />
+    <PackageReference Include="Restless.Toolkit" Version="2.5.15" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
     <PackageReference Include="System.Data.OleDb" Version="6.0.0" />
   </ItemGroup>
@@ -44,6 +44,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\Title\TitleQueueEdit.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>

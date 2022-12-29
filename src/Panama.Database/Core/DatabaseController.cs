@@ -141,6 +141,9 @@ namespace Restless.Panama.Database.Core
                 CreateAndRegisterTable<OrphanExclusionTable>();
                 CreateAndRegisterTable<PublishedTable>();
                 CreateAndRegisterTable<PublisherTable>();
+                CreateAndRegisterTable<QueueTable>();
+                CreateAndRegisterTable<QueueTitleTable>();
+                CreateAndRegisterTable<QueueTitleStatusTable>();
                 CreateAndRegisterTable<ResponseTable>();
                 CreateAndRegisterTable<SubmissionTable>();
                 CreateAndRegisterTable<SubmissionBatchTable>();

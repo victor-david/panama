@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/victor-david/panama</RepositoryUrl>
     <Authors>Restless Animal Development</Authors>
     <Company>Restless Animal Development</Company>
-    <Version>2.5.0</Version>
+    <Version>2.5.33</Version>
     <Product>Panama Database</Product>
     <Title>Panama Database</Title>
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Restless.Toolkit.Core" Version="2.5.5" />
+    <PackageReference Include="Restless.Toolkit.Core" Version="2.5.6" />
   </ItemGroup>
 
 </Project>

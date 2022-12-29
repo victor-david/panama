@@ -6,6 +6,7 @@
 */
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
+using Restless.Panama.ViewModel;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Core.Utility;
 using System.ComponentModel;
@@ -28,6 +29,7 @@ namespace Restless.Panama.Core
         private Config() : base(DatabaseController.Instance.GetTable<ConfigTable>())
         {
             TitleFilter = GetItem(null, nameof(TitleFilter)).Deserialize<TitleRowFilter>();
+            TitleQueueFilter = GetItem(null, nameof(TitleQueueFilter)).Deserialize<TitleQueueRowFilter>();
             PublisherFilter = GetItem(null, nameof(PublisherFilter)).Deserialize<PublisherRowFilter>();
             SubmissionFilter = GetItem(null, nameof(SubmissionFilter)).Deserialize<SubmissionRowFilter>();
             Colors = new ConfigColors();
@@ -185,6 +187,10 @@ namespace Restless.Panama.Core
             public const double MinTitleDetailWidth = 432;
             public const double MaxTitleDetailWidth = 700;
             public const double DefaultTitleDetailWidth = MinTitleDetailWidth;
+
+            public const double MinTitleQueueDetailWidth = 332;
+            public const double MaxTitleQueueDetailWidth = 502;
+            public const double DefaultTitleQueueDetailWidth = MinTitleQueueDetailWidth;
         }
 
         /// <summary>
@@ -237,6 +243,11 @@ namespace Restless.Panama.Core
             /// Gets the default value for grid splitter.
             /// </summary>
             public const double SplitterWidth = 684;
+
+            /// <summary>
+            /// Gets the default value for queue/title filter
+            /// </summary>
+            public const long DefaultQueueTitleFilterValue = -1;
 
             /// <summary>
             /// Gets the default value for a submission document footer.
@@ -515,6 +526,15 @@ namespace Restless.Panama.Core
             get => GetItem(null);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets the state for the queue/title grid columns.
+        /// </summary>
+        public string QueueTitleGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/
@@ -755,6 +775,18 @@ namespace Restless.Panama.Core
             get => GetItem(Grid.DefaultTitleDetailWidth);
             set => SetItem(value);
         }
+
+        public bool TitleQueueDetailExpanded
+        {
+            get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        public double TitleQueueDetailWidth
+        {
+            get => GetItem(Grid.DefaultTitleQueueDetailWidth);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/
@@ -855,6 +887,15 @@ namespace Restless.Panama.Core
             get;
             private set;
         }
+        
+        /// <summary>
+        /// Gets the title queue filter object which describes how to filter queue/title rows.
+        /// </summary>
+        public TitleQueueRowFilter TitleQueueFilter
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Gets the publisher filter object which describes how to filter publisher rows.
@@ -921,6 +962,15 @@ namespace Restless.Panama.Core
         public int SelectedToolSection
         {
             get => GetItem(1);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets the selected queue id
+        /// </summary>
+        public long SelectedQueueId
+        {
+            get => GetItem(0);
             set => SetItem(value);
         }
 
@@ -998,6 +1048,15 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets a value that determines if the title queue feature is visible
+        /// </summary>
+        public bool IsTitleQueueVisible
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets or sets a value that determines if the verify link feature
         /// (experimental) is enabled
         /// </summary>
@@ -1026,6 +1085,7 @@ namespace Restless.Panama.Core
         public void SaveFilterObjects()
         {
             SetItem(TitleFilter.Serialize(), nameof(TitleFilter));
+            SetItem(TitleQueueFilter.Serialize(), nameof(TitleQueueFilter));
             SetItem(PublisherFilter.Serialize(), nameof(PublisherFilter));
             SetItem(SubmissionFilter.Serialize(), nameof(SubmissionFilter));
         }
@@ -1047,6 +1107,9 @@ namespace Restless.Panama.Core
                 case nameof(IsTitleAuthorVisible):
                 case nameof(IsVerifyLinkEnabled):
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
+                    break;
+                case nameof(IsTitleQueueVisible):
+                    MainWindowViewModel.Instance.SynchronizeTitleQueue();
                     break;
                 default:
                     break;
