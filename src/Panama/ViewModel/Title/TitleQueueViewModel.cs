@@ -81,6 +81,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TitleQueueRowFilter Filters => Config.TitleQueueFilter;
 
+        /// <summary>
+        /// Gets text that describes the filter status (idle, published, etc.)
+        /// </summary>
         public string StatusFilterText
         {
             get => statusFilterText;
@@ -130,7 +133,7 @@ namespace Restless.Panama.ViewModel
             Commands.Add("ClearDate", p => SelectedTitle.ClearDate());
             Commands.Add("StatusFilter", RunCustomFilterCommand);
 
-            StatusFilterText = GetStatusFilterText();
+            SetStatusFilterText();
 
             QueueMenuItems = new MenuItemCollection();
             QueueMenuItems.AddItem(Strings.MenuItemAddQueue, RelayCommand.Create(RunAddQueueCommand))
@@ -236,6 +239,7 @@ namespace Restless.Panama.ViewModel
         protected override void RunClearFilterCommand()
         {
             Filters.ClearAll();
+            SetStatusFilterText();
         }
 
         /// <inheritdoc/>
@@ -301,15 +305,16 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private string GetStatusFilterText()
+        private void SetStatusFilterText()
         {
-            return (Filters?.QueueStatus ?? Config.Other.DefaultQueueTitleFilterValue) switch
-            {
-                QueueTitleStatusTable.Defs.Values.StatusIdle => "Idle",
-                QueueTitleStatusTable.Defs.Values.StatusPending => "Scheduled",
-                QueueTitleStatusTable.Defs.Values.StatusPublished => "Published",
-                _ => null,
-            };
+            StatusFilterText =
+                (Filters?.QueueStatus ?? Config.Other.DefaultQueueTitleFilterValue) switch
+                {
+                    QueueTitleStatusTable.Defs.Values.StatusIdle => "Idle",
+                    QueueTitleStatusTable.Defs.Values.StatusPending => "Scheduled",
+                    QueueTitleStatusTable.Defs.Values.StatusPublished => "Published",
+                    _ => null,
+                };
         }
 
         private void RunCustomFilterCommand(object parm)
@@ -317,7 +322,7 @@ namespace Restless.Panama.ViewModel
             if (parm is long value)
             {
                 Filters?.SetQueueStatus(value);
-                StatusFilterText = GetStatusFilterText();
+                SetStatusFilterText();
             }
         }
         #endregion
