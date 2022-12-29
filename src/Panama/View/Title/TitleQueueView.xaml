@@ -86,9 +86,14 @@
                         Command="{Binding ClearFilterCommand}"/>
 
                     <TextBlock
-                        Margin="60,0,0,0"
+                        Margin="48,0,0,0"
                         Foreground="{StaticResource DarkAlertForegroundBrush}"
                         Text="{Binding StatusFilterText}"/>
+
+                    <TextBlock
+                        Margin="12,0,0,0"
+                        Foreground="{StaticResource DefaultForegroundBrush}"
+                        Text="{Binding ListView.Count}"/>
 
                 </StatusBar>
             </tk:SplitterGrid.HeaderLeft>
