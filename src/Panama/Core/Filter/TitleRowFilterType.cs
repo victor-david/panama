@@ -14,6 +14,10 @@
         /// </summary>
         Text,
         /// <summary>
+        /// Filter according to the directory where a title is stored
+        /// </summary>
+        Directory,
+        /// <summary>
         /// Title is flagged as ready
         /// </summary>
         Ready,
