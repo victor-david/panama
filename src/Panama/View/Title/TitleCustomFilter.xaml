@@ -44,7 +44,7 @@
 
             <!-- Directory -->
             <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
-                <TextBlock Text="Directory"/>
+                <TextBlock Text="Path"/>
                 <TextBox
                     Text="{Binding Filters.Directory, 
                     UpdateSourceTrigger=PropertyChanged,
