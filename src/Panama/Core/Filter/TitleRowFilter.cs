@@ -36,6 +36,15 @@ namespace Restless.Panama.Core
         public override bool IsAnyFilterActive => base.IsAnyFilterActive || IsAnyEvaluatorActive();
 
         /// <summary>
+        /// Gets or sets a partial or whole directory name
+        /// </summary>
+        public string Directory
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the filter state for whether a title is flagged as ready
         /// </summary>
         public ThreeWayState ReadyState
