@@ -38,6 +38,7 @@ namespace Restless.Panama.Core
             {
                 TitleRowFilterType.Id => EvaluateId,
                 TitleRowFilterType.Text => EvaluateText,
+                TitleRowFilterType.Directory => EvaluateDirectory,
                 TitleRowFilterType.Ready => EvaluateReady,
                 TitleRowFilterType.Flagged => EvaluateFlagged,
                 TitleRowFilterType.CurrentlySubmitted => EvaluateCurrentlySubmitted,
@@ -54,6 +55,7 @@ namespace Restless.Panama.Core
         {
             return filterType switch
             {
+                TitleRowFilterType.Directory => !string.IsNullOrWhiteSpace(Filter.Directory),
                 TitleRowFilterType.WordCount => Filter.WordCount != 0,
                 TitleRowFilterType.Tag => Filter.Tags.Count > 0,
                 _ => base.IsActive
@@ -71,6 +73,13 @@ namespace Restless.Panama.Core
             return
                 string.IsNullOrWhiteSpace(Filter.Text) ||
                 item[Columns.Title].ToString().Contains(Filter.Text, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        private bool EvaluateDirectory(DataRow item)
+        {
+            return
+                string.IsNullOrWhiteSpace(Filter.Directory) ||
+                item[Columns.Calculated.LastestVersionPath].ToString().Contains(Filter.Directory, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private bool EvaluateReady(DataRow item)

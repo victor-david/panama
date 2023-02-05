@@ -33,6 +33,7 @@
             tk:Property.RowHeights="Auto,Auto,Auto,Auto,*"
             Style="{StaticResource DataEntryPanelStyle}">
 
+            <!-- Title -->
             <StackPanel Grid.ColumnSpan="2">
                 <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
                 <TextBox
@@ -41,20 +42,29 @@
                     Delay=500}"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="1">
+            <!-- Directory -->
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+                <TextBlock Text="Path"/>
+                <TextBox
+                    Text="{Binding Filters.Directory, 
+                    UpdateSourceTrigger=PropertyChanged,
+                    Delay=500}"/>                
+            </StackPanel>
+            
+            <!-- Flags -->
+            <StackPanel Grid.Row="2">
                 <tk:ThreeWay Header="{x:Static r:Strings.TextReady}" State="{Binding Filters.ReadyState}"/>
                 <tk:ThreeWay Header="{x:Static r:Strings.TextFlagged}" State="{Binding Filters.FlaggedState}"/>
                 <tk:ThreeWay Header="{x:Static r:Strings.TextPublished}" State="{Binding Filters.PublishedState}"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel Grid.Row="2" Grid.Column="1">
                 <tk:ThreeWay Header="{x:Static r:Strings.TextSubmitted}" State="{Binding Filters.CurrentlySubmittedState}"/>
                 <tk:ThreeWay Header="{x:Static r:Strings.TextEverSubmitted}" State="{Binding Filters.EverSubmittedState}"/>
                 <tk:ThreeWay Header="{x:Static r:Strings.TextSelfPublished}" State="{Binding Filters.SelfPublishedState}"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
-                
+            <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
                 <TextBlock>
                     <Run Text="Word Count"/>
                     <Run
@@ -72,7 +82,7 @@
             <Grid
                 Grid.Row="4" Grid.ColumnSpan="2"
                 tk:Property.RowHeights="Auto,*,Auto,Auto"
-                tk:Property.ColumnWidths="232,232">
+                tk:Property.ColumnWidths="340,340">
 
                 <conl:TitledSeparator
                     Title="{x:Static r:Strings.TextAssignedToFilter}"/>

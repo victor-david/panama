@@ -18,6 +18,7 @@ namespace Restless.Panama.Core
         private ThreeWayState everSubmittedState;
         private ThreeWayState publishedState;
         private ThreeWayState selfPublishedState;
+        private string directory;
         private int wordCount;
         private bool isTagFilterAny;
         private bool isTagFilterAll;
@@ -34,6 +35,21 @@ namespace Restless.Panama.Core
 
         /// <inheritdoc/>
         public override bool IsAnyFilterActive => base.IsAnyFilterActive || IsAnyEvaluatorActive();
+
+        /// <summary>
+        /// Gets or sets a partial or whole directory name
+        /// </summary>
+        public string Directory
+        {
+            get => directory;
+            set
+            {
+                if (SetProperty(ref directory, value))
+                {
+                    ApplyFilter();
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the filter state for whether a title is flagged as ready
@@ -184,6 +200,7 @@ namespace Restless.Panama.Core
             {
                 { TitleRowFilterType.Id, new TitleFilterEvaluator(this, TitleRowFilterType.Id) },
                 { TitleRowFilterType.Text, new TitleFilterEvaluator(this, TitleRowFilterType.Text) },
+                { TitleRowFilterType.Directory, new TitleFilterEvaluator(this, TitleRowFilterType.Directory) },
                 { TitleRowFilterType.Ready, new TitleFilterEvaluator(this, TitleRowFilterType.Ready) },
                 { TitleRowFilterType.Flagged, new TitleFilterEvaluator(this, TitleRowFilterType.Flagged) },
                 { TitleRowFilterType.CurrentlySubmitted, new TitleFilterEvaluator(this, TitleRowFilterType.CurrentlySubmitted) },
@@ -210,6 +227,7 @@ namespace Restless.Panama.Core
             IncreaseSuspendLevel();
             base.ClearAll();
             ClearAllPropertyState();
+            Directory = null;
             WordCount = 0;
             Tags.Clear();
             IsTagFilterAny = true;
@@ -262,6 +280,7 @@ namespace Restless.Panama.Core
             return
                 filterEvaluators[TitleRowFilterType.Id].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Text].Evaluate(item) &&
+                filterEvaluators[TitleRowFilterType.Directory].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Ready].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Flagged].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.CurrentlySubmitted].Evaluate(item) &&
