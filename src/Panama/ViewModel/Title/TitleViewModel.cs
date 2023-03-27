@@ -35,7 +35,7 @@ namespace Restless.Panama.ViewModel
         private TitleRow selectedTitle;
         private PreviewMode previewMode;
         private string previewText;
-        private const int SectionPreviewId = 6;
+        private const int SectionPreviewId = 7;
         private readonly int queueTitleMenuIndex;
         private bool haveQueueTitleItems;
         private QueueTable QueueTable => DatabaseController.Instance.GetTable<QueueTable>();
