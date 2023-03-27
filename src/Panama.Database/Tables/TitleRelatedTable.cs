@@ -47,14 +47,19 @@ namespace Restless.Panama.Database.Tables
                 public static class Joined
                 {
                     /// <summary>
-                    /// The name of the title column. This column gets its value from the <see cref="TitleTable"/>.
+                    /// The name of the related title column. This column gets its value from the <see cref="TitleTable"/>.
                     /// </summary>
                     public const string Title = "JoinTitle";
 
                     /// <summary>
-                    /// The name of the related title column. This column gets its value from the <see cref="TitleTable"/>.
+                    /// The name of the related date written column. This column gets its value from the <see cref="TitleTable"/>.
                     /// </summary>
-                    public const string RelatedTitle = "JoinRelatedTitle";
+                    public const string Written = "JoinDateWritten";
+
+                    /// <summary>
+                    /// The name of the related date updated column. This column gets its value from the <see cref="TitleTable"/>.
+                    /// </summary>
+                    public const string Updated = "JoinDateUpdated";
                 }
             }
         }
@@ -106,7 +111,7 @@ namespace Restless.Panama.Database.Tables
         /// <returns>An enumerable</returns>
         public IEnumerable<TitleRelatedRow> EnumerateAll(long titleId)
         {
-            foreach (DataRow row in EnumerateRows($"{Defs.Columns.TitleId}={titleId}", Defs.Columns.Joined.RelatedTitle))
+            foreach (DataRow row in EnumerateRows($"{Defs.Columns.TitleId}={titleId}", Defs.Columns.Joined.Title))
             {
                 yield return new TitleRelatedRow(row);
             }
@@ -199,8 +204,9 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         protected override void UseDataRelations()
         {
-            CreateChildToParentColumn(Defs.Columns.Joined.Title, TitleTable.Defs.Relations.ToTitleRelatedTitle, TitleTable.Defs.Columns.Title);
-            CreateChildToParentColumn(Defs.Columns.Joined.RelatedTitle, TitleTable.Defs.Relations.ToTitleRelatedRelated, TitleTable.Defs.Columns.Title);
+            CreateChildToParentColumn(Defs.Columns.Joined.Title, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Title);
+            CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Written, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Written);
+            CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Updated, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LastestVersionDate);
         }
         #endregion
 

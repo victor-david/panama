@@ -174,12 +174,7 @@ namespace Restless.Panama.Database.Tables
                 /// <summary>
                 /// The name of the relation that relates the <see cref="TitleTable"/> to the <see cref="TitleRelatedTable"/>.
                 /// </summary>
-                public const string ToTitleRelatedTitle = "TitleToTitleRelated1";
-
-                /// <summary>
-                /// The name of the relation that relates the <see cref="TitleTable"/> to the <see cref="TitleRelatedTable"/>.
-                /// </summary>
-                public const string ToTitleRelatedRelated = "TitleToTitleRelated2";
+                public const string ToTitleRelated = "TitleToTitleRelated";
 
                 /// <summary>
                 /// The name of the relation that relates the <see cref="TitleTable"/> to the <see cref="PublishedTable"/>.
@@ -282,8 +277,7 @@ namespace Restless.Panama.Database.Tables
             CreateParentChildRelation<SubmissionTable>(Defs.Relations.ToSubmission, Defs.Columns.Id, SubmissionTable.Defs.Columns.TitleId);
             CreateParentChildRelation<TitleVersionTable>(Defs.Relations.ToVersion, Defs.Columns.Id, TitleVersionTable.Defs.Columns.TitleId);
             CreateParentChildRelation<TitleTagTable>(Defs.Relations.ToTitleTag, Defs.Columns.Id, TitleTagTable.Defs.Columns.TitleId);
-            CreateParentChildRelation<TitleRelatedTable>(Defs.Relations.ToTitleRelatedTitle, Defs.Columns.Id, TitleRelatedTable.Defs.Columns.TitleId);
-            CreateParentChildRelation<TitleRelatedTable>(Defs.Relations.ToTitleRelatedRelated, Defs.Columns.Id, TitleRelatedTable.Defs.Columns.RelatedId);
+            CreateParentChildRelation<TitleRelatedTable>(Defs.Relations.ToTitleRelated, Defs.Columns.Id, TitleRelatedTable.Defs.Columns.RelatedId);
             CreateParentChildRelation<PublishedTable>(Defs.Relations.ToPublished, Defs.Columns.Id, PublishedTable.Defs.Columns.TitleId);
             CreateParentChildRelation<SelfPublishedTable>(Defs.Relations.ToSelfPublished, Defs.Columns.Id, SelfPublishedTable.Defs.Columns.TitleId);
             CreateParentChildRelation<QueueTitleTable>(Defs.Relations.ToQueueTitle, Defs.Columns.Id, QueueTitleTable.Defs.Columns.TitleId);

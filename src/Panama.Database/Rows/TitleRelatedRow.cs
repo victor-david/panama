@@ -1,4 +1,5 @@
 ﻿using Restless.Toolkit.Core.Database.SQLite;
+using System;
 using System.Data;
 using Columns = Restless.Panama.Database.Tables.TitleRelatedTable.Defs.Columns;
 
@@ -21,14 +22,19 @@ namespace Restless.Panama.Database.Tables
         public long RelatedId => GetInt64(Columns.RelatedId);
 
         /// <summary>
-        /// Gets the title
+        /// Gets the related title
         /// </summary>
         public string Title => GetString(Columns.Joined.Title);
 
         /// <summary>
-        /// Gets the related title
+        /// Gets the related title's date written
         /// </summary>
-        public string RelatedTitle => GetString(Columns.Joined.RelatedTitle);
+        public DateTime Written => GetDateTime(Columns.Joined.Written);
+
+        /// <summary>
+        /// Gets the related title's date updated
+        /// </summary>
+        public DateTime Updated => GetDateTime(Columns.Joined.Updated);
         #endregion
 
         /************************************************************************/
@@ -52,7 +58,7 @@ namespace Restless.Panama.Database.Tables
         /// <returns>A string</returns>
         public override string ToString()
         {
-            return $"{Title} => {RelatedTitle}";
+            return $"{RelatedId} => {Title}";
         }
         #endregion
     }
