@@ -1,5 +1,6 @@
 ﻿using Restless.Toolkit.Mvvm;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Data;
 
@@ -12,6 +13,7 @@ namespace Restless.Panama.Core
     {
         #region Private
         private long id;
+        private readonly List<long> ids;
         private string text;
         private int applyFilterSuspendLevel;
         #endregion
@@ -39,6 +41,11 @@ namespace Restless.Panama.Core
         protected virtual bool IsIdFilterSupported => false;
 
         /// <summary>
+        /// Gets a boolean value that determines if filtering by multiple id values is supported
+        /// </summary>
+        protected virtual bool IsMultipleIdFilterSupported => false;
+
+        /// <summary>
         /// Gets a boolean value that determines if filtering by text is supported
         /// </summary>
         protected virtual bool IsTextFilterSupported => false;
@@ -50,7 +57,7 @@ namespace Restless.Panama.Core
         /// When you override this property in a derived class, always call the base implementation also
         /// to check the base filter properties.
         /// </remarks>
-        public virtual bool IsAnyFilterActive => id != -1 || !string.IsNullOrEmpty(Text);
+        public virtual bool IsAnyFilterActive => id != -1 || ids.Count > 0 || !string.IsNullOrEmpty(Text);
 
         /// <summary>
         /// Gets or sets a text value.
@@ -77,7 +84,10 @@ namespace Restless.Panama.Core
         /// </summary>
         protected RowFilter()
         {
+            //FilterId = -1;
+            //FilterIds = new List<long>();
             id = -1;
+            ids = new List<long>();
         }
         #endregion
 
@@ -94,7 +104,7 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
-        /// Sets the <see cref="Id"/> filter property and calls <see cref="OnSetIdFilter"/>
+        /// Sets the <see cref="Id"/> filter property and calls <see cref="ApplyFilter"/>
         /// </summary>
         /// <param name="id">The id</param>
         /// <remarks>
@@ -113,6 +123,19 @@ namespace Restless.Panama.Core
             }
         }
 
+        public void SetMultipleIdFilter(List<long> ids)
+        {
+            _ = ids ?? throw new ArgumentNullException(nameof(ids));
+            if (IsMultipleIdFilterSupported)
+            {
+                IncreaseSuspendLevel();
+                ClearAll();
+                DecreaseSuspendLevel();
+                this.ids.AddRange(ids);
+                ApplyFilter();
+            }
+        }
+
         /// <summary>
         /// Gets the current value of the id filter
         /// </summary>
@@ -120,6 +143,15 @@ namespace Restless.Panama.Core
         public long GetIdFilter()
         {
             return id;
+        }
+
+        /// <summary>
+        /// Gets the multiple id filter list
+        /// </summary>
+        /// <returns></returns>
+        public List<long> GetMultipleIdFilter()
+        {
+            return ids;
         }
 
         /// <summary>
@@ -143,6 +175,7 @@ namespace Restless.Panama.Core
         {
             IncreaseSuspendLevel();
             id = -1;
+            ids.Clear();
             Text = null;
             DecreaseSuspendLevel();
         }

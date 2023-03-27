@@ -2,6 +2,7 @@
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
+using Restless.Toolkit.Mvvm;
 using System.Collections.Generic;
 using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.TitleRelatedTable.Defs.Columns;
@@ -19,7 +20,7 @@ namespace Restless.Panama.ViewModel
         public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
 
         /// <inheritdoc/>
-        public override bool OpenRowCommandEnabled => true;
+        public override bool OpenRowCommandEnabled => IsSelectedRowAccessible;
 
         /// <summary>
         /// Gets the selected related row
@@ -55,6 +56,9 @@ namespace Restless.Panama.ViewModel
 
             MenuItems.AddItem(Strings.MenuItemAddRelated, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemFilterTitleListToRelated, RelayCommand.Create(RunFilterToRelatedCommand, p => !ListView.IsEmpty))
+                .AddIconResource(ResourceKeys.Icon.FilterIconKey);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemRemoveRelated, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
         }
@@ -110,6 +114,22 @@ namespace Restless.Panama.ViewModel
             {
                 Open.TitleVersionFile(SelectedRelated.LatestVersionPath);
             }
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+        private void RunFilterToRelatedCommand(object parm)
+        {
+            List<long> ids = new();
+            foreach (DataRowView view in ListView)
+            {
+                long id = (long)view.Row[TableColumns.RelatedId];
+                ids.Add(id);
+            }
+            ids.Add(Owner.SelectedTitle?.Id ?? 0);
+            Owner.Filters.SetMultipleIdFilter(ids);
         }
         #endregion
     }

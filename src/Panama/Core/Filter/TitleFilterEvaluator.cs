@@ -1,5 +1,6 @@
 ﻿using Restless.Toolkit.Controls;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using Columns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
 
@@ -37,6 +38,7 @@ namespace Restless.Panama.Core
             return filterType switch
             {
                 TitleRowFilterType.Id => EvaluateId,
+                TitleRowFilterType.MultipleId => EvaluateMultipleId,
                 TitleRowFilterType.Text => EvaluateText,
                 TitleRowFilterType.Directory => EvaluateDirectory,
                 TitleRowFilterType.Ready => EvaluateReady,
@@ -66,6 +68,12 @@ namespace Restless.Panama.Core
         {
             long id = Filter.GetIdFilter();
             return id == -1 || id == (long)item[Columns.Id];
+        }
+
+        private bool EvaluateMultipleId(DataRow item)
+        {
+            List<long> ids = Filter.GetMultipleIdFilter();
+            return ids.Count == 0 || ids.Contains((long)item[Columns.Id]);
         }
 
         private bool EvaluateText(DataRow item)

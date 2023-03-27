@@ -1463,6 +1463,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter title list to selected title and its related titles.
+        /// </summary>
+        public static string MenuItemFilterTitleListToRelated {
+            get {
+                return ResourceManager.GetString("MenuItemFilterTitleListToRelated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter list to display only submissions to this publisher.
         /// </summary>
         public static string MenuItemFilterToPublisher {

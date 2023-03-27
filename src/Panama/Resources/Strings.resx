@@ -1173,4 +1173,7 @@ Changes will take effect after you restart the application.</value>
   <data name="MenuItemRemoveRelated" xml:space="preserve">
     <value>Remove this related title</value>
   </data>
+  <data name="MenuItemFilterTitleListToRelated" xml:space="preserve">
+    <value>Filter title list to selected title and its related titles</value>
+  </data>
 </root>
