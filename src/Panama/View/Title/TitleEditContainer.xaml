@@ -44,6 +44,12 @@
         tk:Property.IsLongVisible="{Binding SelectedEditSection}"
         tk:Property.IsLongVisibleValue="3"/>
 
+    <!-- Related -->
+    <vw:TitleEditRelated
+        Grid.Row="1"
+        tk:Property.IsLongVisible="{Binding SelectedEditSection}"
+        tk:Property.IsLongVisibleValue="4"/>
+    
     <!-- Submissions -->
     <vw:TitleEditSubmission
         Grid.Row="1"

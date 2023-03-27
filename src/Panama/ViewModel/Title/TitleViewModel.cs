@@ -82,7 +82,14 @@ namespace Restless.Panama.ViewModel
         public TitleVersionController Versions
         {
             get;
-            private set;
+        }
+
+        /// <summary>
+        /// Gets the controller for the related titles
+        /// </summary>
+        public TitleRelatedController Related
+        {
+            get;
         }
 
         /// <summary>
@@ -91,7 +98,6 @@ namespace Restless.Panama.ViewModel
         public TitleSubmissionController Submissions
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -100,7 +106,6 @@ namespace Restless.Panama.ViewModel
         public TitlePublishedController Published
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -109,7 +114,6 @@ namespace Restless.Panama.ViewModel
         public TitleSelfPublishedController SelfPublished
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -258,6 +262,7 @@ namespace Restless.Panama.ViewModel
             SynchronizeQueueTitleMenuItems();
 
             Versions = new TitleVersionController(this);
+            Related = new TitleRelatedController(this);
             Submissions = new TitleSubmissionController(this);
             Published = new TitlePublishedController(this);
             SelfPublished = new TitleSelfPublishedController(this);
@@ -327,6 +332,7 @@ namespace Restless.Panama.ViewModel
             SelectedTitle?.SetDateFormat(Config.DateFormat);
             TitleTags.PopulateAssigned();
             Versions.Update();
+            Related.Update();
             Submissions.Update();
             Published.Update();
             SelfPublished.Update();
