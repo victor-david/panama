@@ -13,7 +13,6 @@ namespace Restless.Panama.Core
     {
         #region Private
         private long id;
-        private readonly List<long> ids;
         private string text;
         private int applyFilterSuspendLevel;
         #endregion
@@ -25,6 +24,19 @@ namespace Restless.Panama.Core
         /// Gets the count of currently filtered records
         /// </summary>
         public int RecordCount => ListView?.Count ?? 0;
+
+        /// <summary>
+        /// Gets the list of multiple ids to filter on.
+        /// </summary>
+        /// <remarks>
+        /// This property is public in order to be able to serialize it.
+        /// However, do not add items directly to this collection. 
+        /// Instead use <see cref="SetMultipleIdFilter(List{long})"/>
+        /// </remarks>
+        public List<long> Ids
+        {
+            get;
+        }
 
         /// <summary>
         /// Gets the list view associated with the filter
@@ -57,7 +69,7 @@ namespace Restless.Panama.Core
         /// When you override this property in a derived class, always call the base implementation also
         /// to check the base filter properties.
         /// </remarks>
-        public virtual bool IsAnyFilterActive => id != -1 || ids.Count > 0 || !string.IsNullOrEmpty(Text);
+        public virtual bool IsAnyFilterActive => id != -1 || Ids.Count > 0 || !string.IsNullOrEmpty(Text);
 
         /// <summary>
         /// Gets or sets a text value.
@@ -84,10 +96,8 @@ namespace Restless.Panama.Core
         /// </summary>
         protected RowFilter()
         {
-            //FilterId = -1;
-            //FilterIds = new List<long>();
             id = -1;
-            ids = new List<long>();
+            Ids = new List<long>();
         }
         #endregion
 
@@ -123,6 +133,10 @@ namespace Restless.Panama.Core
             }
         }
 
+        /// <summary>
+        /// Sets multiple id filter and calls <see cref="ApplyFilter"/>
+        /// </summary>
+        /// <param name="ids">The list of ids</param>
         public void SetMultipleIdFilter(List<long> ids)
         {
             _ = ids ?? throw new ArgumentNullException(nameof(ids));
@@ -131,7 +145,7 @@ namespace Restless.Panama.Core
                 IncreaseSuspendLevel();
                 ClearAll();
                 DecreaseSuspendLevel();
-                this.ids.AddRange(ids);
+                Ids.AddRange(ids);
                 ApplyFilter();
             }
         }
@@ -143,15 +157,6 @@ namespace Restless.Panama.Core
         public long GetIdFilter()
         {
             return id;
-        }
-
-        /// <summary>
-        /// Gets the multiple id filter list
-        /// </summary>
-        /// <returns></returns>
-        public List<long> GetMultipleIdFilter()
-        {
-            return ids;
         }
 
         /// <summary>
@@ -175,7 +180,7 @@ namespace Restless.Panama.Core
         {
             IncreaseSuspendLevel();
             id = -1;
-            ids.Clear();
+            Ids.Clear();
             Text = null;
             DecreaseSuspendLevel();
         }

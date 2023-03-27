@@ -72,8 +72,7 @@ namespace Restless.Panama.Core
 
         private bool EvaluateMultipleId(DataRow item)
         {
-            List<long> ids = Filter.GetMultipleIdFilter();
-            return ids.Count == 0 || ids.Contains((long)item[Columns.Id]);
+            return Filter.Ids.Count == 0 || Filter.Ids.Contains((long)item[Columns.Id]);
         }
 
         private bool EvaluateText(DataRow item)
