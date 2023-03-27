@@ -1168,7 +1168,7 @@ Changes will take effect after you restart the application.</value>
     <value>This operation removes the related title from this title. It does not affect the related title itself.</value>
   </data>
   <data name="MenuItemAddRelated" xml:space="preserve">
-    <value>Add a related title to this title</value>
+    <value>Add related titles to this title</value>
   </data>
   <data name="MenuItemRemoveRelated" xml:space="preserve">
     <value>Remove this related title</value>

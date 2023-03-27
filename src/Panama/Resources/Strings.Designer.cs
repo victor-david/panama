@@ -1175,7 +1175,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a related title to this title.
+        ///   Looks up a localized string similar to Add related titles to this title.
         /// </summary>
         public static string MenuItemAddRelated {
             get {
