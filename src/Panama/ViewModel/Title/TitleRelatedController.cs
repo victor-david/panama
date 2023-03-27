@@ -2,18 +2,37 @@
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TableColumns = Restless.Panama.Database.Tables.TitleRelatedTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
     public class TitleRelatedController : BaseController<TitleViewModel, TitleRelatedTable>
     {
+        private TitleRelatedRow selectedRelated;
+
+        #region Public properties
+        public override bool AddCommandEnabled => true;
+
+        /// <inheritdoc/>
+        public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
+
+        /// <inheritdoc/>
+        public override bool OpenRowCommandEnabled => true;
+
+        /// <summary>
+        /// Gets the selected related row
+        /// </summary>
+        public TitleRelatedRow SelectedRelated
+        {
+            get => selectedRelated;
+            private set => SetProperty(ref selectedRelated, value);
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleRelatedController"/> class.
@@ -33,6 +52,11 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Updated", TableColumns.Joined.Updated)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
+
+            MenuItems.AddItem(Strings.MenuItemAddRelated, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemRemoveRelated, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
         }
         #endregion
 
@@ -43,8 +67,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
-            //SelectedPublished = PublishedRow.Create(SelectedRow);
-            //OnPropertyChanged(nameof(PublishedDate));
+            SelectedRelated = TitleRelatedRow.Create(SelectedRow);
         }
 
         /// <inheritdoc/>
@@ -57,6 +80,36 @@ namespace Restless.Panama.ViewModel
         protected override bool OnDataRowFilter(DataRow item)
         {
             return (long)item[TableColumns.TitleId] == (Owner?.SelectedTitle?.Id ?? 0);
+        }
+
+        /// <inheritdoc/>
+        protected override void RunAddCommand()
+        {
+            long titleId = Owner?.SelectedTitle?.Id ?? 0;
+            if (titleId > 0 && WindowFactory.TitleSelect.Create().GetTitles() is List<TitleRow> titles)
+            {
+                Table.AddIfNotExist(titleId, titles);
+                ListView.Refresh();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void RunDeleteCommand()
+        {
+            if (IsSelectedRowAccessible && MessageWindow.ShowContinueCancel(Strings.ConfirmationRemoveRelatedTitle))
+            {
+                Table.RemoveIfExist(Owner?.SelectedTitle?.Id ?? 0, SelectedRelated.RelatedId);
+                ListView.Refresh();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void RunOpenRowCommand()
+        {
+            if (!string.IsNullOrWhiteSpace(SelectedRelated?.LatestVersionPath))
+            {
+                Open.TitleVersionFile(SelectedRelated.LatestVersionPath);
+            }
         }
         #endregion
     }

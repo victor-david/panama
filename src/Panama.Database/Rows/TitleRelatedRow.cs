@@ -35,6 +35,11 @@ namespace Restless.Panama.Database.Tables
         /// Gets the related title's date updated
         /// </summary>
         public DateTime Updated => GetDateTime(Columns.Joined.Updated);
+
+        /// <summary>
+        /// Gets the related title's latest version path
+        /// </summary>
+        public string LatestVersionPath => GetString(Columns.Joined.LatestVersionPath);
         #endregion
 
         /************************************************************************/
@@ -46,6 +51,16 @@ namespace Restless.Panama.Database.Tables
         /// <param name="row">The data row</param>
         public TitleRelatedRow(DataRow row) : base(row)
         {
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="TitleRelatedRow"/> object if <paramref name="row"/> is not null
+        /// </summary>
+        /// <param name="row">The row</param>
+        /// <returns>A new row, or null.</returns>
+        public static TitleRelatedRow Create(DataRow row)
+        {
+            return row != null ? new  TitleRelatedRow(row) : null;
         }
         #endregion
 

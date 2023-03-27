@@ -60,6 +60,11 @@ namespace Restless.Panama.Database.Tables
                     /// The name of the related date updated column. This column gets its value from the <see cref="TitleTable"/>.
                     /// </summary>
                     public const string Updated = "JoinDateUpdated";
+
+                    /// <summary>
+                    /// The name of the latest version path. This column gets its value from the <see cref="TitleTable"/>.
+                    /// </summary>
+                    public const string LatestVersionPath = "JoinLatestVerPath";
                 }
             }
         }
@@ -118,18 +123,27 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Adds the specifed related titles to the specified title
+        /// </summary>
+        /// <param name="titleId">The title id</param>
+        /// <param name="titles">The related titles to add</param>
+        public void AddIfNotExist(long titleId, List<TitleRow> titles)
+        {
+            _ = titles ?? throw new ArgumentNullException(nameof(titles));
+            titles.ForEach(title => AddIfNotExist(titleId, title.Id));
+        }
+
+        /// <summary>
         /// Adds the specified related title to the specified title if it doesn't already exist
         /// </summary>
         /// <param name="titleId">The title id</param>
         /// <param name="relatedId">The related id to add</param>
-        /// <returns>true if added; false if tag already exists</returns>
-        public bool AddIfNotExist(long titleId, long relatedId)
+        public void AddIfNotExist(long titleId, long relatedId)
         {
             if (titleId != relatedId && !RelatedExists(titleId, relatedId))
             {
-                return AddRelatedRowPair(titleId, relatedId);
+                AddRelatedRowPair(titleId, relatedId);
             }
-            return false;
         }
 
         /// <summary>
@@ -137,17 +151,11 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         /// <param name="titleId">The title id</param>
         /// <param name="relatedId">The related id to remove</param>
-        /// <returns>true if removed; false if related does not exist</returns>
-        public bool RemoveIfExist(long titleId, long relatedId)
+        public void RemoveIfExist(long titleId, long relatedId)
         {
             RelatedRowPair pair = GetRelatedRowPair(titleId, relatedId);
-            if (pair.Exists())
-            {
-                pair.DeleteIfExists();
-                Save();
-                return true;
-            }
-            return false;
+            pair.DeleteIfExists();
+            Save();
         }
 
         /// <summary>
@@ -207,6 +215,7 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn(Defs.Columns.Joined.Title, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Title);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Written, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Written);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Updated, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LastestVersionDate);
+            CreateChildToParentColumn(Defs.Columns.Joined.LatestVersionPath, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LastestVersionPath);
         }
         #endregion
 
@@ -222,7 +231,7 @@ namespace Restless.Panama.Database.Tables
                 );
         }
 
-        private bool AddRelatedRowPair(long titleId, long relatedId)
+        private void AddRelatedRowPair(long titleId, long relatedId)
         {
             RelatedRowPair pair = new RelatedRowPair(NewRow(), NewRow());
 
@@ -234,7 +243,6 @@ namespace Restless.Panama.Database.Tables
             Rows.Add(pair.TitleRow);
             Rows.Add(pair.RelatedRow);
             Save();
-            return true;
         }
         #endregion
 
