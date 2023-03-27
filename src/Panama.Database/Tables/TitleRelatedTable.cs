@@ -125,7 +125,7 @@ namespace Restless.Panama.Database.Tables
         /// <returns>true if added; false if tag already exists</returns>
         public bool AddIfNotExist(long titleId, long relatedId)
         {
-            if (!RelatedExists(titleId, relatedId))
+            if (titleId != relatedId && !RelatedExists(titleId, relatedId))
             {
                 return AddRelatedRowPair(titleId, relatedId);
             }
@@ -224,7 +224,7 @@ namespace Restless.Panama.Database.Tables
 
         private bool AddRelatedRowPair(long titleId, long relatedId)
         {
-            var pair = new RelatedRowPair(NewRow(), NewRow());
+            RelatedRowPair pair = new RelatedRowPair(NewRow(), NewRow());
 
             pair.TitleRow[Defs.Columns.TitleId] = titleId;
             pair.TitleRow[Defs.Columns.RelatedId] = relatedId;
@@ -251,14 +251,6 @@ namespace Restless.Panama.Database.Tables
                 RelatedRow = relatedRow;
             }
 
-            public void Validate()
-            {
-                if ((TitleRow == null && RelatedRow != null) || (RelatedRow == null && TitleRow != null))
-                {
-                    throw new InvalidOperationException("Title related mismatch");
-                }
-            }
-
             public bool Exists()
             {
                 Validate();
@@ -271,6 +263,14 @@ namespace Restless.Panama.Database.Tables
                 {
                     TitleRow.Delete();
                     RelatedRow.Delete();
+                }
+            }
+
+            private void Validate()
+            {
+                if ((TitleRow == null && RelatedRow != null) || (RelatedRow == null && TitleRow != null))
+                {
+                    throw new InvalidOperationException("Title related mismatch");
                 }
             }
         }

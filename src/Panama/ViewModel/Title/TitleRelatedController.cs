@@ -25,7 +25,9 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Title", TableColumns.Joined.Title);
+            Columns.Create("Title", TableColumns.Joined.Title)
+                .MakeInitialSortAscending();
+
             Columns.Create("Written", TableColumns.Joined.Written).MakeDate();
 
             Columns.Create("Updated", TableColumns.Joined.Updated)
@@ -48,7 +50,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareString(item2, item1, TableColumns.Joined.Title);
+            return DataRowCompareString(item1, item2, TableColumns.Joined.Title);
         }
 
         /// <inheritdoc/>
