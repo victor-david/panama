@@ -2968,6 +2968,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Related count - the number of related titles this title contains.
+        /// </summary>
+        public static string ToolTipTitleRelatedCount {
+            get {
+                return ResourceManager.GetString("ToolTipTitleRelatedCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submission count - the total number of times this title has been submitted.
         /// </summary>
         public static string TooltipTitleSubmissionCount {

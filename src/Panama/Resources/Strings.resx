@@ -1176,4 +1176,7 @@ Changes will take effect after you restart the application.</value>
   <data name="MenuItemFilterTitleListToRelated" xml:space="preserve">
     <value>Filter title list to selected title and its related titles</value>
   </data>
+  <data name="ToolTipTitleRelatedCount" xml:space="preserve">
+    <value>Related count - the number of related titles this title contains</value>
+  </data>
 </root>

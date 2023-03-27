@@ -230,6 +230,13 @@ namespace Restless.Panama.ViewModel
                 .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
                 .SetSelectorName("Tag Count");
 
+            Columns.Create("RC", TableColumns.Calculated.RelatedCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
+                .AddToolTip(Strings.ToolTipTitleRelatedCount)
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Related Count");
+
             Columns.Create("PC", TableColumns.Calculated.PublishedCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)

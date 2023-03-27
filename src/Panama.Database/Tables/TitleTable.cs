@@ -108,6 +108,12 @@ namespace Restless.Panama.Database.Tables
                     public const string TagCount = "CalcTagCount";
 
                     /// <summary>
+                    /// The name of the related count column. This claculated column
+                    /// holds the number of related records from the <see cref="TitleRelatedTable"/>
+                    /// </summary>
+                    public const string RelatedCount = "CalcRelatedCount";
+
+                    /// <summary>
                     /// The name of the submission count column. This calculated column
                     /// holds the number of related records from the <see cref="SubmissionTable"/>.
                     /// </summary>
@@ -293,6 +299,9 @@ namespace Restless.Panama.Database.Tables
 
             expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToTitleTag, TitleTagTable.Defs.Columns.TagId);
             CreateExpressionColumn<long>(Defs.Columns.Calculated.TagCount, expr);
+
+            expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToTitleRelated, TitleRelatedTable.Defs.Columns.TitleId);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.RelatedCount, expr);
 
             expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Id);
             CreateExpressionColumn<long>(Defs.Columns.Calculated.SubCount, expr);
