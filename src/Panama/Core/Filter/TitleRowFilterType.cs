@@ -10,6 +10,10 @@
         /// </summary>
         Id,
         /// <summary>
+        /// Filter to a collection of specified ids
+        /// </summary>
+        MultipleId,
+        /// <summary>
         /// Filter according to the specified text
         /// </summary>
         Text,

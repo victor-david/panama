@@ -35,7 +35,7 @@ namespace Restless.Panama.ViewModel
         private TitleRow selectedTitle;
         private PreviewMode previewMode;
         private string previewText;
-        private const int SectionPreviewId = 6;
+        private const int SectionPreviewId = 7;
         private readonly int queueTitleMenuIndex;
         private bool haveQueueTitleItems;
         private QueueTable QueueTable => DatabaseController.Instance.GetTable<QueueTable>();
@@ -82,7 +82,14 @@ namespace Restless.Panama.ViewModel
         public TitleVersionController Versions
         {
             get;
-            private set;
+        }
+
+        /// <summary>
+        /// Gets the controller for the related titles
+        /// </summary>
+        public TitleRelatedController Related
+        {
+            get;
         }
 
         /// <summary>
@@ -91,7 +98,6 @@ namespace Restless.Panama.ViewModel
         public TitleSubmissionController Submissions
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -100,7 +106,6 @@ namespace Restless.Panama.ViewModel
         public TitlePublishedController Published
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -109,7 +114,6 @@ namespace Restless.Panama.ViewModel
         public TitleSelfPublishedController SelfPublished
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -189,11 +193,11 @@ namespace Restless.Panama.ViewModel
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("Updated", TableColumns.Calculated.LastestVersionDate)
+            Columns.Create("Updated", TableColumns.Calculated.LatestVersionDate)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
 
-            Columns.Create("WC", TableColumns.Calculated.LastestVersionWordCount)
+            Columns.Create("WC", TableColumns.Calculated.LatestVersionWordCount)
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleWordCount)
                 .SetSelectorName("Word Count");
@@ -225,6 +229,13 @@ namespace Restless.Panama.ViewModel
                 .AddToolTip(Strings.TooltipTitleTagCount)
                 .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
                 .SetSelectorName("Tag Count");
+
+            Columns.Create("RC", TableColumns.Calculated.RelatedCount)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
+                .AddToolTip(Strings.ToolTipTitleRelatedCount)
+                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetSelectorName("Related Count");
 
             Columns.Create("PC", TableColumns.Calculated.PublishedCount)
                 .MakeCentered()
@@ -258,6 +269,7 @@ namespace Restless.Panama.ViewModel
             SynchronizeQueueTitleMenuItems();
 
             Versions = new TitleVersionController(this);
+            Related = new TitleRelatedController(this);
             Submissions = new TitleSubmissionController(this);
             Published = new TitlePublishedController(this);
             SelfPublished = new TitleSelfPublishedController(this);
@@ -327,6 +339,7 @@ namespace Restless.Panama.ViewModel
             SelectedTitle?.SetDateFormat(Config.DateFormat);
             TitleTags.PopulateAssigned();
             Versions.Update();
+            Related.Update();
             Submissions.Update();
             Published.Update();
             SelfPublished.Update();

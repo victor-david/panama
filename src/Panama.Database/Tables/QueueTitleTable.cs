@@ -235,8 +235,8 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn(Defs.Columns.Joined.QueueName, QueueTable.Defs.Relations.ToQueueTitle, QueueTable.Defs.Columns.Name);
             CreateChildToParentColumn(Defs.Columns.Joined.Title, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Title);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Written, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Written);
-            CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Updated, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Calculated.LastestVersionDate);
-            CreateChildToParentColumn(Defs.Columns.Joined.WordCount, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Calculated.LastestVersionWordCount);
+            CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Updated, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Calculated.LatestVersionDate);
+            CreateChildToParentColumn(Defs.Columns.Joined.WordCount, TitleTable.Defs.Relations.ToQueueTitle, TitleTable.Defs.Columns.Calculated.LatestVersionWordCount);
             CreateChildToParentColumn(Defs.Columns.Joined.Status, QueueTitleStatusTable.Defs.Relations.ToQueueTitle, QueueTitleStatusTable.Defs.Columns.Name);
         }
         #endregion

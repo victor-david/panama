@@ -87,25 +87,31 @@ namespace Restless.Panama.Database.Tables
                     /// The name of the latest version date column. This calculated column
                     /// holds the modified date of the latest title version per the <see cref="TitleVersionTable"/>.
                     /// </summary>
-                    public const string LastestVersionDate = "CalcVerDate";
+                    public const string LatestVersionDate = "CalcVerDate";
 
                     /// <summary>
                     /// The name of the latest version word count column. This calculated column
                     /// holds the word count of the latest title version per the <see cref="TitleVersionTable"/>.
                     /// </summary>
-                    public const string LastestVersionWordCount = "CalcVerWordCount";
+                    public const string LatestVersionWordCount = "CalcVerWordCount";
 
                     /// <summary>
                     /// The name of the latest version path column. This calculated column
                     /// holds the path of the latest title version per the <see cref="TitleVersionTable"/>.
                     /// </summary>
-                    public const string LastestVersionPath = "CalcVerPath";
+                    public const string LatestVersionPath = "CalcVerPath";
 
                     /// <summary>
                     /// The name of the tag count column. This calculated column
                     /// holds the number of related records from the <see cref="TitleTagTable"/>.
                     /// </summary>
                     public const string TagCount = "CalcTagCount";
+
+                    /// <summary>
+                    /// The name of the related count column. This claculated column
+                    /// holds the number of related records from the <see cref="TitleRelatedTable"/>
+                    /// </summary>
+                    public const string RelatedCount = "CalcRelatedCount";
 
                     /// <summary>
                     /// The name of the submission count column. This calculated column
@@ -170,6 +176,11 @@ namespace Restless.Panama.Database.Tables
                 /// The name of the relation that relates the <see cref="TitleTable"/> to the <see cref="TitleTagTable"/>.
                 /// </summary>
                 public const string ToTitleTag = "TitleToTitleTag";
+
+                /// <summary>
+                /// The name of the relation that relates the <see cref="TitleTable"/> to the <see cref="TitleRelatedTable"/>.
+                /// </summary>
+                public const string ToTitleRelated = "TitleToTitleRelated";
 
                 /// <summary>
                 /// The name of the relation that relates the <see cref="TitleTable"/> to the <see cref="PublishedTable"/>.
@@ -272,6 +283,7 @@ namespace Restless.Panama.Database.Tables
             CreateParentChildRelation<SubmissionTable>(Defs.Relations.ToSubmission, Defs.Columns.Id, SubmissionTable.Defs.Columns.TitleId);
             CreateParentChildRelation<TitleVersionTable>(Defs.Relations.ToVersion, Defs.Columns.Id, TitleVersionTable.Defs.Columns.TitleId);
             CreateParentChildRelation<TitleTagTable>(Defs.Relations.ToTitleTag, Defs.Columns.Id, TitleTagTable.Defs.Columns.TitleId);
+            CreateParentChildRelation<TitleRelatedTable>(Defs.Relations.ToTitleRelated, Defs.Columns.Id, TitleRelatedTable.Defs.Columns.RelatedId);
             CreateParentChildRelation<PublishedTable>(Defs.Relations.ToPublished, Defs.Columns.Id, PublishedTable.Defs.Columns.TitleId);
             CreateParentChildRelation<SelfPublishedTable>(Defs.Relations.ToSelfPublished, Defs.Columns.Id, SelfPublishedTable.Defs.Columns.TitleId);
             CreateParentChildRelation<QueueTitleTable>(Defs.Relations.ToQueueTitle, Defs.Columns.Id, QueueTitleTable.Defs.Columns.TitleId);
@@ -287,6 +299,9 @@ namespace Restless.Panama.Database.Tables
 
             expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToTitleTag, TitleTagTable.Defs.Columns.TagId);
             CreateExpressionColumn<long>(Defs.Columns.Calculated.TagCount, expr);
+
+            expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToTitleRelated, TitleRelatedTable.Defs.Columns.TitleId);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.RelatedCount, expr);
 
             expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Id);
             CreateExpressionColumn<long>(Defs.Columns.Calculated.SubCount, expr);
@@ -311,7 +326,7 @@ namespace Restless.Panama.Database.Tables
 
             CreateActionExpressionColumn<DateTime>
                 (
-                    Defs.Columns.Calculated.LastestVersionDate,
+                    Defs.Columns.Calculated.LatestVersionDate,
                     Controller.GetTable<TitleVersionTable>(),
                     UpdateLatestVersionDate,
                     TitleVersionTable.Defs.Columns.Updated,
@@ -320,7 +335,7 @@ namespace Restless.Panama.Database.Tables
 
             CreateActionExpressionColumn<long>
                 (
-                    Defs.Columns.Calculated.LastestVersionWordCount,
+                    Defs.Columns.Calculated.LatestVersionWordCount,
                     Controller.GetTable<TitleVersionTable>(),
                     UpdateLatestVersionWordCount,
                     TitleVersionTable.Defs.Columns.WordCount,
@@ -329,7 +344,7 @@ namespace Restless.Panama.Database.Tables
 
             CreateActionExpressionColumn<string>
                 (
-                    Defs.Columns.Calculated.LastestVersionPath,
+                    Defs.Columns.Calculated.LatestVersionPath,
                     Controller.GetTable<TitleVersionTable>(),
                     UpdateLatestVersionPath,
                     TitleVersionTable.Defs.Columns.FileName
@@ -337,7 +352,7 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Called when database initialization is complete to populate the <see cref="Defs.Columns.Calculated.LastestVersionWordCount"/> column.
+        /// Called when database initialization is complete to populate the <see cref="Defs.Columns.Calculated.LatestVersionWordCount"/> column.
         /// </summary>
         protected override void OnInitializationComplete()
         {
@@ -347,9 +362,9 @@ namespace Restless.Panama.Database.Tables
                 TitleVersionController verController = TitleVersionTable.GetVersionController(titleId);
                 if (verController.Versions.Count > 0)
                 {
-                    row[Defs.Columns.Calculated.LastestVersionWordCount] = verController.Versions[0].WordCount;
-                    row[Defs.Columns.Calculated.LastestVersionDate] = verController.Versions[0].Updated;
-                    row[Defs.Columns.Calculated.LastestVersionPath] = verController.Versions[0].FileName;
+                    row[Defs.Columns.Calculated.LatestVersionWordCount] = verController.Versions[0].WordCount;
+                    row[Defs.Columns.Calculated.LatestVersionDate] = verController.Versions[0].Updated;
+                    row[Defs.Columns.Calculated.LatestVersionPath] = verController.Versions[0].FileName;
                 }
             }
             AcceptChanges();
@@ -375,17 +390,17 @@ namespace Restless.Panama.Database.Tables
         #region Private methods
         private void UpdateLatestVersionDate(ActionDataColumn col, DataRowChangeEventArgs e)
         {
-            UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LastestVersionDate, TitleVersionTable.Defs.Columns.Updated);
+            UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LatestVersionDate, TitleVersionTable.Defs.Columns.Updated);
         }
 
         private void UpdateLatestVersionWordCount(ActionDataColumn col, DataRowChangeEventArgs e)
         {
-            UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LastestVersionWordCount, TitleVersionTable.Defs.Columns.WordCount);
+            UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LatestVersionWordCount, TitleVersionTable.Defs.Columns.WordCount);
         }
         
         private void UpdateLatestVersionPath(ActionDataColumn col, DataRowChangeEventArgs e)
         {
-            UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LastestVersionPath, TitleVersionTable.Defs.Columns.FileName);
+            UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LatestVersionPath, TitleVersionTable.Defs.Columns.FileName);
         }
 
         private void UpdateFromLatestVersionCalculated(DataRowChangeEventArgs e, string titleColumn, string titleVersionColumn)

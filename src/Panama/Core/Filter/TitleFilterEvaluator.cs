@@ -1,5 +1,6 @@
 ﻿using Restless.Toolkit.Controls;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using Columns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
 
@@ -37,6 +38,7 @@ namespace Restless.Panama.Core
             return filterType switch
             {
                 TitleRowFilterType.Id => EvaluateId,
+                TitleRowFilterType.MultipleId => EvaluateMultipleId,
                 TitleRowFilterType.Text => EvaluateText,
                 TitleRowFilterType.Directory => EvaluateDirectory,
                 TitleRowFilterType.Ready => EvaluateReady,
@@ -68,6 +70,11 @@ namespace Restless.Panama.Core
             return id == -1 || id == (long)item[Columns.Id];
         }
 
+        private bool EvaluateMultipleId(DataRow item)
+        {
+            return Filter.Ids.Count == 0 || Filter.Ids.Contains((long)item[Columns.Id]);
+        }
+
         private bool EvaluateText(DataRow item)
         {
             return
@@ -79,7 +86,7 @@ namespace Restless.Panama.Core
         {
             return
                 string.IsNullOrWhiteSpace(Filter.Directory) ||
-                item[Columns.Calculated.LastestVersionPath].ToString().Contains(Filter.Directory, StringComparison.InvariantCultureIgnoreCase);
+                item[Columns.Calculated.LatestVersionPath].ToString().Contains(Filter.Directory, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private bool EvaluateReady(DataRow item)
@@ -116,7 +123,7 @@ namespace Restless.Panama.Core
         {
             if (Filter.WordCount != 0)
             {
-                if (item[Columns.Calculated.LastestVersionWordCount] is long wordCount)
+                if (item[Columns.Calculated.LatestVersionWordCount] is long wordCount)
                 {
                     return (Filter.WordCount > 0) ? wordCount > Filter.WordCount : wordCount > 0 && wordCount < Math.Abs(Filter.WordCount);
                 }

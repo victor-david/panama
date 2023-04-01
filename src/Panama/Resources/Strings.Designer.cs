@@ -458,6 +458,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation removes the related title from this title. It does not affect the related title itself..
+        /// </summary>
+        public static string ConfirmationRemoveRelatedTitle {
+            get {
+                return ResourceManager.GetString("ConfirmationRemoveRelatedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Getting ready to remove this message. This does not delete any external files or resources, only the database entry. Do you want to continue?.
         /// </summary>
         public static string ConfirmationRemoveSubmissionMessage {
@@ -1166,6 +1175,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add related titles to this title.
+        /// </summary>
+        public static string MenuItemAddRelated {
+            get {
+                return ResourceManager.GetString("MenuItemAddRelated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a self published record to this title.
         /// </summary>
         public static string MenuItemAddSelfPublished {
@@ -1445,6 +1463,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter title list to selected title and its related titles.
+        /// </summary>
+        public static string MenuItemFilterTitleListToRelated {
+            get {
+                return ResourceManager.GetString("MenuItemFilterTitleListToRelated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter list to display only submissions to this publisher.
         /// </summary>
         public static string MenuItemFilterToPublisher {
@@ -1567,6 +1594,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemRemoveQueueTitle {
             get {
                 return ResourceManager.GetString("MenuItemRemoveQueueTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this related title.
+        /// </summary>
+        public static string MenuItemRemoveRelated {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveRelated", resourceCulture);
             }
         }
         
@@ -2928,6 +2964,15 @@ namespace Restless.Panama.Resources {
         public static string TooltipTitlePublishedCount {
             get {
                 return ResourceManager.GetString("TooltipTitlePublishedCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Related count - the number of related titles this title contains.
+        /// </summary>
+        public static string ToolTipTitleRelatedCount {
+            get {
+                return ResourceManager.GetString("ToolTipTitleRelatedCount", resourceCulture);
             }
         }
         
