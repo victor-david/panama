@@ -103,7 +103,7 @@ namespace Restless.Panama.ViewModel
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("Updated", TableColumns.Calculated.LastestVersionDate).MakeDate();
+            Columns.Create("Updated", TableColumns.Calculated.LatestVersionDate).MakeDate();
 
             Commands.Add("Select", RunSelectCommand, p => IsSelectedRowAccessible);
 

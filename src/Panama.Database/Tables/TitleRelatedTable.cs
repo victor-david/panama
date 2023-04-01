@@ -219,9 +219,9 @@ namespace Restless.Panama.Database.Tables
         {
             CreateChildToParentColumn(Defs.Columns.Joined.Title, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Title);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Written, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Written);
-            CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Updated, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LastestVersionDate);
-            CreateChildToParentColumn(Defs.Columns.Joined.LatestVersionPath, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LastestVersionPath);
-            CreateChildToParentColumn(Defs.Columns.Joined.LatestVersionWordCount, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LastestVersionWordCount);
+            CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Updated, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LatestVersionDate);
+            CreateChildToParentColumn(Defs.Columns.Joined.LatestVersionPath, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LatestVersionPath);
+            CreateChildToParentColumn(Defs.Columns.Joined.LatestVersionWordCount, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LatestVersionWordCount);
         }
         #endregion
 

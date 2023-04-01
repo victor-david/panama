@@ -193,11 +193,11 @@ namespace Restless.Panama.ViewModel
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("Updated", TableColumns.Calculated.LastestVersionDate)
+            Columns.Create("Updated", TableColumns.Calculated.LatestVersionDate)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
 
-            Columns.Create("WC", TableColumns.Calculated.LastestVersionWordCount)
+            Columns.Create("WC", TableColumns.Calculated.LatestVersionWordCount)
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleWordCount)
                 .SetSelectorName("Word Count");
