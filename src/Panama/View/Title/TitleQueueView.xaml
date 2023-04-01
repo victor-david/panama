@@ -58,30 +58,34 @@
                     <Separator/>
 
                     <TextBlock Text="Title"/>
-                    <TextBox Width="160" Text="{Binding Filters.Text, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Width="160" Margin="0,0,16,0" Text="{Binding Filters.Text, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
                     
-                    <TextBlock Text="State"/>
-                    
-                    <Button
+                    <!--<TextBlock Text="State"/>-->
+
+                    <CheckBox Content="Idle" IsChecked="{Binding IsIdleFilterChecked}"/>
+                    <CheckBox Content="Scheduled" IsChecked="{Binding IsScheduledFilterChecked}"/>
+                    <CheckBox Content="Published" IsChecked="{Binding IsPublishedFilterChecked}"/>
+
+                    <!--<Button
                         Content="Idle"
                         CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusIdle}"
-                        Command="{Binding Commands[StatusFilter]}"/>
+                        Command="{Binding Commands[StatusFilter]}"/>-->
 
-                    <Button
+                    <!--<Button
                         Content="Scheduled"
                         CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPending}"
                         ToolTip="{x:Static r:Strings.ToolTipTitleFilterFlag}"
-                        Command="{Binding Commands[StatusFilter]}"/>
+                        Command="{Binding Commands[StatusFilter]}"/>-->
 
-                    <Button
+                    <!--<Button
                         Content="Published"
                         CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPublished}"
-                        Command="{Binding Commands[StatusFilter]}"/>
+                        Command="{Binding Commands[StatusFilter]}"/>-->
 
                     <Separator/>
 
                     <Button
-                        Content="{x:Static r:Strings.MenuItemClear}"
+                        Content="{x:Static r:Strings.MenuItemReset}"
                         ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
                         Command="{Binding ClearFilterCommand}"/>
 

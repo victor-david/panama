@@ -1179,4 +1179,7 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolTipTitleRelatedCount" xml:space="preserve">
     <value>Related count - the number of related titles this title contains</value>
   </data>
+  <data name="MenuItemReset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
 </root>

@@ -1679,6 +1679,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string MenuItemReset {
+            get {
+                return ResourceManager.GetString("MenuItemReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset window.
         /// </summary>
         public static string MenuItemResetWindow {

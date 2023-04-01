@@ -1,42 +1,52 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.QueueTitleTable.Defs.Columns;
+using QueueStatusValues = Restless.Panama.Database.Tables.QueueTitleStatusTable.Defs.Values;
 
 namespace Restless.Panama.Core
 {
     public class TitleQueueRowFilter : RowFilter
     {
-        private long queueStatus;
-        private const long QueueStatusAny = Config.Other.DefaultQueueTitleFilterValue;
+        // private long queueStatus;
+        //private readonly List<long> activeValues;
+        //private const long QueueStatusAny = Config.Other.DefaultQueueTitleFilterValue;
 
         protected override bool IsTextFilterSupported => true;
-        public override bool IsAnyFilterActive => base.IsAnyFilterActive || QueueStatus != QueueStatusAny;
+        public override bool IsAnyFilterActive => base.IsAnyFilterActive || QueueStatus.Count < 3;
 
-        public long QueueStatus
-        {
-            get => queueStatus;
-            set
-            {
-                SetProperty(ref queueStatus, value);
-                ApplyFilter();
-            }
-        }
+        public List<long> QueueStatus { get; }
 
         public TitleQueueRowFilter()
         {
-            QueueStatus = QueueStatusAny;
+            QueueStatus = new List<long>()
+            {
+                QueueStatusValues.StatusIdle,
+                QueueStatusValues.StatusPending,
+                QueueStatusValues.StatusPublished
+            };
         }
 
-        public void SetQueueStatus(long value)
+        public void SetQueueStatus(long value, bool enabled)
         {
-            QueueStatus = value;
+            if (enabled && !QueueStatus.Contains(value))
+            {
+                QueueStatus.Add(value);
+            }
+
+            if (!enabled && QueueStatus.Contains(value))
+            {
+                QueueStatus.Remove(value);
+            }
+            ApplyFilter();
         }
 
         public override void ClearAll()
         {
             IncreaseSuspendLevel();
             base.ClearAll();
-            QueueStatus = QueueStatusAny;
+            QueueStatus.Clear();
+            // queueStatus = QueueStatusAny;
             DecreaseSuspendLevel();
         }
 
@@ -48,7 +58,7 @@ namespace Restless.Panama.Core
 
         private bool EvaluateStatus(DataRow item)
         {
-            return QueueStatus == QueueStatusAny || (long)item[TableColumns.Status] == QueueStatus;
+            return QueueStatus.Contains((long)item[TableColumns.Status]);
         }
 
         private bool EvaluateText(DataRow item)
