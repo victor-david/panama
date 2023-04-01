@@ -54,6 +54,10 @@ namespace Restless.Panama.ViewModel
                 .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
 
+            Columns.Create("WC", TableColumns.Joined.LatestVersionWordCount)
+                .MakeFixedWidth(FixedWidth.W042)
+                .AddToolTip(Strings.TooltipTitleWordCount);
+
             MenuItems.AddItem(Strings.MenuItemAddRelated, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
             MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
             MenuItems.AddSeparator();

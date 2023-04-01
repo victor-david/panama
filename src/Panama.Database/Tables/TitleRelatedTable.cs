@@ -65,6 +65,11 @@ namespace Restless.Panama.Database.Tables
                     /// The name of the latest version path. This column gets its value from the <see cref="TitleTable"/>.
                     /// </summary>
                     public const string LatestVersionPath = "JoinLatestVerPath";
+
+                    /// <summary>
+                    /// The name of the latest version word count. This column gets its value from the <see cref="TitleTable"/>.
+                    /// </summary>
+                    public const string LatestVersionWordCount = "JoinLatestVerWordCount";
                 }
             }
         }
@@ -216,6 +221,7 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Written, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Written);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Updated, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LastestVersionDate);
             CreateChildToParentColumn(Defs.Columns.Joined.LatestVersionPath, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LastestVersionPath);
+            CreateChildToParentColumn(Defs.Columns.Joined.LatestVersionWordCount, TitleTable.Defs.Relations.ToTitleRelated, TitleTable.Defs.Columns.Calculated.LastestVersionWordCount);
         }
         #endregion
 
