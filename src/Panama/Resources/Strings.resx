@@ -1182,4 +1182,7 @@ Changes will take effect after you restart the application.</value>
   <data name="MenuItemReset" xml:space="preserve">
     <value>Reset</value>
   </data>
+  <data name="ToolTipFilterReset" xml:space="preserve">
+    <value>Reset all filters to default</value>
+  </data>
 </root>

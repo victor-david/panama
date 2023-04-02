@@ -2653,6 +2653,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset all filters to default.
+        /// </summary>
+        public static string ToolTipFilterReset {
+            get {
+                return ResourceManager.GetString("ToolTipFilterReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occured parsing the message file..
         /// </summary>
         public static string TooltipMessageError {
