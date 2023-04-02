@@ -8,23 +8,16 @@ namespace Restless.Panama.Core
 {
     public class TitleQueueRowFilter : RowFilter
     {
-        // private long queueStatus;
-        //private readonly List<long> activeValues;
-        //private const long QueueStatusAny = Config.Other.DefaultQueueTitleFilterValue;
+        private const int MaxQueueStatus = 3;
 
         protected override bool IsTextFilterSupported => true;
-        public override bool IsAnyFilterActive => base.IsAnyFilterActive || QueueStatus.Count < 3;
+        public override bool IsAnyFilterActive => base.IsAnyFilterActive || QueueStatus.Count < MaxQueueStatus;
 
         public List<long> QueueStatus { get; }
 
         public TitleQueueRowFilter()
         {
-            QueueStatus = new List<long>()
-            {
-                QueueStatusValues.StatusIdle,
-                QueueStatusValues.StatusPending,
-                QueueStatusValues.StatusPublished
-            };
+            QueueStatus = new List<long>();
         }
 
         public void SetQueueStatus(long value, bool enabled)
@@ -45,8 +38,7 @@ namespace Restless.Panama.Core
         {
             IncreaseSuspendLevel();
             base.ClearAll();
-            QueueStatus.Clear();
-            // queueStatus = QueueStatusAny;
+            ResetQueueStatus();
             DecreaseSuspendLevel();
         }
 
@@ -66,6 +58,14 @@ namespace Restless.Panama.Core
             return
                 string.IsNullOrWhiteSpace(Text) ||
                 item[TableColumns.Joined.Title].ToString().Contains(Text, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        private void ResetQueueStatus()
+        {
+            QueueStatus.Clear();
+            QueueStatus.Add(QueueStatusValues.StatusIdle);
+            QueueStatus.Add(QueueStatusValues.StatusPending);
+            QueueStatus.Add(QueueStatusValues.StatusPublished);
         }
     }
 }

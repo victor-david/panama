@@ -31,6 +31,7 @@ namespace Restless.Panama.ViewModel
         private bool isIdleFilterChecked;
         private bool isScheduledFilterChecked;
         private bool isPublishedFilterChecked;
+        private bool isFilterSuspended;
         #endregion
 
         /************************************************************************/
@@ -89,7 +90,10 @@ namespace Restless.Panama.ViewModel
             set
             {
                 SetProperty(ref isIdleFilterChecked, value);
-                Filters?.SetQueueStatus(QueueStatusValues.StatusIdle, isIdleFilterChecked);
+                if (!isFilterSuspended)
+                {
+                    Filters?.SetQueueStatus(QueueStatusValues.StatusIdle, isIdleFilterChecked);
+                }
             }
         }
 
@@ -102,7 +106,10 @@ namespace Restless.Panama.ViewModel
             set
             {
                 SetProperty(ref isScheduledFilterChecked, value);
-                Filters?.SetQueueStatus(QueueStatusValues.StatusPending, isScheduledFilterChecked);
+                if (!isFilterSuspended)
+                {
+                    Filters?.SetQueueStatus(QueueStatusValues.StatusPending, isScheduledFilterChecked);
+                }
             }
         }
 
@@ -115,7 +122,10 @@ namespace Restless.Panama.ViewModel
             set
             {
                 SetProperty(ref isPublishedFilterChecked, value);
-                Filters?.SetQueueStatus(QueueStatusValues.StatusPublished, isPublishedFilterChecked);
+                if (!isFilterSuspended)
+                {
+                    Filters?.SetQueueStatus(QueueStatusValues.StatusPublished, isPublishedFilterChecked);
+                }
             }
         }
 
@@ -175,11 +185,7 @@ namespace Restless.Panama.ViewModel
 
             Commands.Add("ClearDate", p => SelectedTitle.ClearDate());
 
-            isIdleFilterChecked = Filters.QueueStatus.Contains(QueueStatusValues.StatusIdle);
-            isScheduledFilterChecked = Filters.QueueStatus.Contains(QueueStatusValues.StatusPending);
-            isPublishedFilterChecked = Filters.QueueStatus.Contains(QueueStatusValues.StatusPublished);
-
-            SetStatusFilterText();
+            SyncQueueFilterChecked();
 
             QueueMenuItems = new MenuItemCollection();
             QueueMenuItems.AddItem(Strings.MenuItemAddQueue, RelayCommand.Create(RunAddQueueCommand))
@@ -285,7 +291,7 @@ namespace Restless.Panama.ViewModel
         protected override void RunClearFilterCommand()
         {
             Filters.ClearAll();
-            SetStatusFilterText();
+            SyncQueueFilterChecked();
         }
 
         /// <inheritdoc/>
@@ -351,26 +357,14 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void SetStatusFilterText()
+        private void SyncQueueFilterChecked()
         {
-            //StatusFilterText =
-            //    (Filters?.QueueStatus ?? Config.Other.DefaultQueueTitleFilterValue) switch
-            //    {
-            //        QueueTitleStatusTable.Defs.Values.StatusIdle => "Idle",
-            //        QueueTitleStatusTable.Defs.Values.StatusPending => "Scheduled",
-            //        QueueTitleStatusTable.Defs.Values.StatusPublished => "Published",
-            //        _ => null,
-            //    };
+            isFilterSuspended = true;
+            IsIdleFilterChecked = Filters.QueueStatus.Contains(QueueStatusValues.StatusIdle);
+            IsScheduledFilterChecked = Filters.QueueStatus.Contains(QueueStatusValues.StatusPending);
+            IsPublishedFilterChecked = Filters.QueueStatus.Contains(QueueStatusValues.StatusPublished);
+            isFilterSuspended = false;
         }
-
-        //private void RunCustomFilterCommand(object parm)
-        //{
-        //    if (parm is long value)
-        //    {
-        //        //Filters?.SetQueueStatus(value);
-        //        //SetStatusFilterText();
-        //    }
-        //}
         #endregion
     }
 }
