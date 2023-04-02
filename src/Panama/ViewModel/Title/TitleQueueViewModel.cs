@@ -27,7 +27,6 @@ namespace Restless.Panama.ViewModel
         private QueueRow selectedQueue;
         private bool queueEditMode;
         private QueueTitleRow selectedTitle;
-        private string statusFilterText;
         private bool isIdleFilterChecked;
         private bool isScheduledFilterChecked;
         private bool isPublishedFilterChecked;
@@ -133,15 +132,6 @@ namespace Restless.Panama.ViewModel
         /// Gets the filter object
         /// </summary>
         public TitleQueueRowFilter Filters => Config.TitleQueueFilter;
-
-        /// <summary>
-        /// Gets text that describes the filter status (idle, published, etc.)
-        /// </summary>
-        public string StatusFilterText
-        {
-            get => statusFilterText;
-            private set => SetProperty(ref statusFilterText, value);
-        }
 
         public DataView TitleStatus => QueueTitleStatusTable.DefaultView;
         #endregion
