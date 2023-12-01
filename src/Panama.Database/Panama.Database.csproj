@@ -1,23 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <OutputType>Library</OutputType>
-    <PackageId>Panama.Database</PackageId>
     <AssemblyName>Panama.Database</AssemblyName>
-    <RootNamespace>Restless.Panama.Database</RootNamespace>
-    <Description>Provides database operations specific to the Panama application.</Description>
-    <PackageProjectUrl>https://github.com/victor-david/panama</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/victor-david/panama</RepositoryUrl>
     <Authors>Restless Animal Development</Authors>
     <Company>Restless Animal Development</Company>
-    <Version>2.5.35</Version>
-    <Product>Panama Database</Product>
-    <Title>Panama Database</Title>
-    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
     <Copyright>Copyright © 2022</Copyright>
-    <PackageTags>database</PackageTags>
+    <Description>Provides database operations specific to the Panama application.</Description>
+    <OutputType>Library</OutputType>
+    <PackageId>Panama.Database</PackageId>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/victor-david/panama</PackageProjectUrl>
     <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageTags>database</PackageTags>
+    <Product>Panama Database</Product>
+    <RepositoryUrl>https://github.com/victor-david/panama</RepositoryUrl>
+    <RootNamespace>Restless.Panama.Database</RootNamespace>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Title>Panama Database</Title>
+    <Version>2.5.35</Version>
   </PropertyGroup>
 
   <ItemGroup>
