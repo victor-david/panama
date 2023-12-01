@@ -58,40 +58,21 @@
                     <Separator/>
 
                     <TextBlock Text="Title"/>
-                    <TextBox Width="160" Text="{Binding Filters.Text, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
-                    
-                    <TextBlock Text="State"/>
-                    
-                    <Button
-                        Content="Idle"
-                        CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusIdle}"
-                        Command="{Binding Commands[StatusFilter]}"/>
+                    <TextBox Width="180" Margin="0,0,16,0" Text="{Binding Filters.Text, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <Button
-                        Content="Scheduled"
-                        CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPending}"
-                        ToolTip="{x:Static r:Strings.ToolTipTitleFilterFlag}"
-                        Command="{Binding Commands[StatusFilter]}"/>
-
-                    <Button
-                        Content="Published"
-                        CommandParameter="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPublished}"
-                        Command="{Binding Commands[StatusFilter]}"/>
+                    <CheckBox Content="Idle" IsChecked="{Binding IsIdleFilterChecked}"/>
+                    <CheckBox Content="Scheduled" IsChecked="{Binding IsScheduledFilterChecked}"/>
+                    <CheckBox Content="Published" IsChecked="{Binding IsPublishedFilterChecked}"/>
 
                     <Separator/>
 
                     <Button
-                        Content="{x:Static r:Strings.MenuItemClear}"
-                        ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
+                        Content="{x:Static r:Strings.MenuItemReset}"
+                        ToolTip="{x:Static r:Strings.ToolTipFilterReset}"
                         Command="{Binding ClearFilterCommand}"/>
 
                     <TextBlock
-                        Margin="48,0,0,0"
-                        Foreground="{StaticResource DarkAlertForegroundBrush}"
-                        Text="{Binding StatusFilterText}"/>
-
-                    <TextBlock
-                        Margin="12,0,0,0"
+                        Margin="36,0,0,0"
                         Foreground="{StaticResource DefaultForegroundBrush}"
                         Text="{Binding ListView.Count}"/>
 

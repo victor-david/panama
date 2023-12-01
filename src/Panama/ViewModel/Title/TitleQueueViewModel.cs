@@ -11,6 +11,7 @@ using System.Data;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.QueueTitleTable.Defs.Columns;
+using QueueStatusValues = Restless.Panama.Database.Tables.QueueTitleStatusTable.Defs.Values;
 
 namespace Restless.Panama.ViewModel
 {
@@ -26,7 +27,10 @@ namespace Restless.Panama.ViewModel
         private QueueRow selectedQueue;
         private bool queueEditMode;
         private QueueTitleRow selectedTitle;
-        private string statusFilterText;
+        private bool isIdleFilterChecked;
+        private bool isScheduledFilterChecked;
+        private bool isPublishedFilterChecked;
+        private bool isFilterSuspended;
         #endregion
 
         /************************************************************************/
@@ -77,18 +81,57 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
+        /// Gets or sets a value that indicates if the idle filter is checked
+        /// </summary>
+        public bool IsIdleFilterChecked
+        {
+            get => isIdleFilterChecked;
+            set
+            {
+                SetProperty(ref isIdleFilterChecked, value);
+                if (!isFilterSuspended)
+                {
+                    Filters?.SetQueueStatus(QueueStatusValues.StatusIdle, isIdleFilterChecked);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value that indicates if the scheduled filter is checked
+        /// </summary>
+        public bool IsScheduledFilterChecked
+        {
+            get => isScheduledFilterChecked;
+            set
+            {
+                SetProperty(ref isScheduledFilterChecked, value);
+                if (!isFilterSuspended)
+                {
+                    Filters?.SetQueueStatus(QueueStatusValues.StatusPending, isScheduledFilterChecked);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value that indicates if the published filter is checked
+        /// </summary>
+        public bool IsPublishedFilterChecked
+        {
+            get => isPublishedFilterChecked;
+            set
+            {
+                SetProperty(ref isPublishedFilterChecked, value);
+                if (!isFilterSuspended)
+                {
+                    Filters?.SetQueueStatus(QueueStatusValues.StatusPublished, isPublishedFilterChecked);
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets the filter object
         /// </summary>
         public TitleQueueRowFilter Filters => Config.TitleQueueFilter;
-
-        /// <summary>
-        /// Gets text that describes the filter status (idle, published, etc.)
-        /// </summary>
-        public string StatusFilterText
-        {
-            get => statusFilterText;
-            private set => SetProperty(ref statusFilterText, value);
-        }
 
         public DataView TitleStatus => QueueTitleStatusTable.DefaultView;
         #endregion
@@ -131,9 +174,8 @@ namespace Restless.Panama.ViewModel
             QueueEditMode = false;
 
             Commands.Add("ClearDate", p => SelectedTitle.ClearDate());
-            Commands.Add("StatusFilter", RunCustomFilterCommand);
 
-            SetStatusFilterText();
+            SyncQueueFilterChecked();
 
             QueueMenuItems = new MenuItemCollection();
             QueueMenuItems.AddItem(Strings.MenuItemAddQueue, RelayCommand.Create(RunAddQueueCommand))
@@ -239,7 +281,7 @@ namespace Restless.Panama.ViewModel
         protected override void RunClearFilterCommand()
         {
             Filters.ClearAll();
-            SetStatusFilterText();
+            SyncQueueFilterChecked();
         }
 
         /// <inheritdoc/>
@@ -305,25 +347,13 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void SetStatusFilterText()
+        private void SyncQueueFilterChecked()
         {
-            StatusFilterText =
-                (Filters?.QueueStatus ?? Config.Other.DefaultQueueTitleFilterValue) switch
-                {
-                    QueueTitleStatusTable.Defs.Values.StatusIdle => "Idle",
-                    QueueTitleStatusTable.Defs.Values.StatusPending => "Scheduled",
-                    QueueTitleStatusTable.Defs.Values.StatusPublished => "Published",
-                    _ => null,
-                };
-        }
-
-        private void RunCustomFilterCommand(object parm)
-        {
-            if (parm is long value)
-            {
-                Filters?.SetQueueStatus(value);
-                SetStatusFilterText();
-            }
+            isFilterSuspended = true;
+            IsIdleFilterChecked = Filters.QueueStatus.Contains(QueueStatusValues.StatusIdle);
+            IsScheduledFilterChecked = Filters.QueueStatus.Contains(QueueStatusValues.StatusPending);
+            IsPublishedFilterChecked = Filters.QueueStatus.Contains(QueueStatusValues.StatusPublished);
+            isFilterSuspended = false;
         }
         #endregion
     }

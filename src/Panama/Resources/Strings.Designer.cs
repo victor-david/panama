@@ -1679,6 +1679,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string MenuItemReset {
+            get {
+                return ResourceManager.GetString("MenuItemReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset window.
         /// </summary>
         public static string MenuItemResetWindow {
@@ -2640,6 +2649,15 @@ namespace Restless.Panama.Resources {
         public static string ToolTipFilterCustom {
             get {
                 return ResourceManager.GetString("ToolTipFilterCustom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset all filters to default.
+        /// </summary>
+        public static string ToolTipFilterReset {
+            get {
+                return ResourceManager.GetString("ToolTipFilterReset", resourceCulture);
             }
         }
         

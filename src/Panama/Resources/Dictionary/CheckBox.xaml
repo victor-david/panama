@@ -4,7 +4,7 @@
     xmlns:tk="http://schemas.restless.toolkit.com/2021">
 
     <ControlTemplate x:Key="DefaultCheckBoxControlTemplate" TargetType="CheckBox">
-        <Grid>
+        <Grid Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
