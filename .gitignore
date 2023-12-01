@@ -4,3 +4,5 @@
 obj/
 bin/
 launchSettings.json
+desktop.ini
+*.csproj.user
