@@ -8,10 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
-using TableColumns = Restless.Panama.Database.Tables.QueueTitleTable.Defs.Columns;
 using QueueStatusValues = Restless.Panama.Database.Tables.QueueTitleStatusTable.Defs.Values;
+using TableColumns = Restless.Panama.Database.Tables.QueueTitleTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -150,7 +151,7 @@ namespace Restless.Panama.ViewModel
                 .CanUserSort = false;
 
             Columns.Create("Title", TableColumns.Joined.Title);
-            
+
             Columns.Create("Written", TableColumns.Joined.Written).MakeDate();
             Columns.Create("Updated", TableColumns.Joined.Updated)
                 .MakeDate()
@@ -178,6 +179,7 @@ namespace Restless.Panama.ViewModel
             SyncQueueFilterChecked();
 
             QueueMenuItems = new MenuItemCollection();
+
             QueueMenuItems.AddItem(Strings.MenuItemAddQueue, RelayCommand.Create(RunAddQueueCommand))
                 .AddIconResource(ResourceKeys.Icon.PlusIconKey);
 
@@ -187,7 +189,10 @@ namespace Restless.Panama.ViewModel
             QueueMenuItems.AddItem(Strings.MenuItemRemoveQueue, RelayCommand.Create(RunRemoveQueueCommand, p => SelectedQueue != null))
                 .AddIconResource(ResourceKeys.Icon.XRedIconKey);
 
-            MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand)
+                .AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemCopyTitle, RelayCommand.Create(RunCopyTitleCommand))
+                .AddIconResource(ResourceKeys.Icon.CircleSmallIconKey);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
             MenuItems.AddSeparator();
@@ -344,6 +349,20 @@ namespace Restless.Panama.ViewModel
                 PopulateQueues();
                 Queues.Refresh();
                 MainWindowViewModel.Instance.SynchronizeTitleQueue();
+            }
+        }
+
+        private void RunCopyTitleCommand(object parm)
+        {
+            if (SelectedTitle != null)
+            {
+                try
+                {
+                    Clipboard.SetText(SelectedTitle.Title);
+                }
+                catch
+                {
+                }
             }
         }
 

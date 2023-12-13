@@ -13,12 +13,14 @@ using Restless.Panama.View;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.OpenXml;
 using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
 using Restless.Toolkit.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
@@ -261,6 +263,9 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
             MenuItems.AddItem(Strings.MenuItemFlagTitle, Commands["ToggleFlag"]).AddIconResource(ResourceKeys.Icon.ToggleIconKey);
+            MenuItems.AddItem(Strings.MenuItemCopyTitle, RelayCommand.Create(RunCopyTitleCommand))
+                .AddIconResource(ResourceKeys.Icon.CircleSmallIconKey);
+
             queueTitleMenuIndex = MenuItems.Count;
 
             MenuItems.AddSeparator();
@@ -328,7 +333,7 @@ namespace Restless.Panama.ViewModel
             TitleTags.PopulateAssigned();
             FilterTags.RefreshAvailable();
             FilterTags.PopulateAssigned();
-            
+
         }
 
         /// <inheritdoc/>
@@ -490,6 +495,20 @@ namespace Restless.Panama.ViewModel
                 foreach (TitleRow title in Table.EnumerateTitles())
                 {
                     title.QuickFlag = false;
+                }
+            }
+        }
+
+        private void RunCopyTitleCommand(object parm)
+        {
+            if (SelectedTitle != null)
+            {
+                try
+                {
+                    Clipboard.SetText(SelectedTitle.Title);
+                }
+                catch
+                {
                 }
             }
         }

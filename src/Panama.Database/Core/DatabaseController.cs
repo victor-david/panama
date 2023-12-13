@@ -97,7 +97,7 @@ namespace Restless.Panama.Database.Core
 
         #region Public methods
         /// <summary>
-        /// Initializes the database controller by creating and registering 
+        /// Initializes the database controller by creating and registering
         /// all of the tables for the application.
         /// </summary>
         /// <param name="databaseRoot">The database root folder.</param>
@@ -202,7 +202,7 @@ namespace Restless.Panama.Database.Core
 
         private bool TryAttach(string fullFileName)
         {
-            try 
+            try
             {
                 Attach(PrivateSchema, fullFileName, () => { });
                 return true;
