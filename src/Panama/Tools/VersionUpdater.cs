@@ -48,36 +48,42 @@ namespace Restless.Panama.Tools
 
                     if (version.Info.Exists)
                     {
-                        long foundWordCount = 0;
-                        if (version.DocType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType)
+                        // checks only last updated date and size
+                        if (version.RequireSynchonization())
                         {
-                            foundWordCount = OpenXmlDocument.Reader.TryGetWordCount(version.Info.FullName);
-                            if (Config.Instance.SyncDocumentInternalDates)
+                            long foundWordCount = 0;
+                            if (version.DocType == DocumentTypeTable.Defs.Values.WordOpenXmlFileType)
                             {
-                                PropertiesAdapter props = OpenXmlDocument.Reader.GetProperties(version.Info.FullName);
-                                // we can't use LastWriteTimeUtc here because props.Core.Modified converts it
-                                // back to a local time. If we use Utc, it means that docs would update every time we run update
-                                // because props.Core.Modified is never equal to verObj.Info.LastWriteTimeUtc.
-                                //
-                                // titleObj.WrittenUtc comes from the database. The DateTime.Kind property is not stored, therefore
-                                // we don't know for sure if it's local or utc. With new entries / changes to Written, we store Utc.
-                                if (props.Core.Created != title.Written.ToLocalTime() || props.Core.Modified != version.Info.LastWriteTime)
+                                foundWordCount = OpenXmlDocument.Reader.TryGetWordCount(version.Info.FullName);
+                                if (Config.Instance.SyncDocumentInternalDates)
                                 {
-                                    props.Core.Created = title.Written.ToLocalTime();
-                                    // we need to add the same number of seconds that props.Save() does.
-                                    props.Core.Modified = version.Info.LastWriteTime.AddSeconds(OpenXmlDocument.SecondsToAdd);
-                                    props.Save();
-                                    // we need to obtain the file info again to reflect the new modified date
-                                    version.SetFileInfo(Paths.Title.WithRoot(version.FileName));
+                                    PropertiesAdapter props = OpenXmlDocument.Reader.GetProperties(version.Info.FullName);
+                                    // we can't use LastWriteTimeUtc here because props.Core.Modified converts it
+                                    // back to a local time. If we use Utc, it means that docs would update every time we run update
+                                    // because props.Core.Modified is never equal to verObj.Info.LastWriteTimeUtc.
+                                    //
+                                    // titleObj.WrittenUtc comes from the database. The DateTime.Kind property is not stored, therefore
+                                    // we don't know for sure if it's local or utc. With new entries / changes to Written, we store Utc.
+                                    if (props.Core.Created != title.Written.ToLocalTime() || props.Core.Modified != version.Info.LastWriteTime)
+                                    {
+                                        props.Core.Created = title.Written.ToLocalTime();
+                                        // we need to add the same number of seconds that props.Save() does.
+                                        props.Core.Modified = version.Info.LastWriteTime.AddSeconds(OpenXmlDocument.SecondsToAdd);
+                                        props.Save();
+                                        // we need to obtain the file info again to reflect the new modified date
+                                        version.SetFileInfo(Paths.Title.WithRoot(version.FileName));
+                                    }
                                 }
                             }
-                        }
 
-                        if (version.RequireSynchonization(foundWordCount))
-                        {
-                            version.Synchronize(foundWordCount);
-                            DatabaseController.Instance.GetTable<TitleVersionTable>().Save();
-                            result.Updated.Add(FileScanItem.Create(title.Title, version.Info.FullName, version.Version, version.Revision));
+                            // checks last updated date, size, and word count
+                            // this code path has already determined that last updated and/or size has changed
+                            if (version.RequireSynchonization(foundWordCount))
+                            {
+                                version.Synchronize(foundWordCount);
+                                DatabaseController.Instance.GetTable<TitleVersionTable>().Save();
+                                result.Updated.Add(FileScanItem.Create(title.Title, version.Info.FullName, version.Version, version.Revision));
+                            }
                         }
                     }
                     else
