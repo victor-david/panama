@@ -13,7 +13,7 @@
     ResizeMode="CanResizeWithGrip"
     Title="{x:Static r:Strings.MenuItemTools}"
     Style="{StaticResource DefaultAppWindowStyle}"
-    Height="{Binding Config.ToolWindowHeight, Mode=TwoWay}" 
+    Height="{Binding Config.ToolWindowHeight, Mode=TwoWay}"
     Width="{Binding Config.ToolWindowWidth, Mode=TwoWay}">
 
     <tk:AppWindow.Menu>
@@ -24,15 +24,15 @@
                     Icon="{StaticResource SquareSmallGrayIconKey}"
                     Command="{Binding Commands[ResetWindow]}"
                     ToolTip="{x:Static r:Strings.ToolTipResetWindow}"/>
-            </MenuItem>            
+            </MenuItem>
         </Menu>
     </tk:AppWindow.Menu>
-    
+
     <Grid
         tk:Property.ColumnWidths="126,*"
         tk:Property.RowHeights="*"
         Style="{StaticResource DataEntryPanelStyle}">
-        
+
         <ListBox
             BorderThickness="0,0,1,0"
             ItemsSource="{Binding Sections}"
@@ -131,7 +131,7 @@
                     Command="{Binding Commands[RunTitleList]}"/>
 
             </HeaderedContentControl>
-            
+
             <!-- Section 5 (messages) -->
             <HeaderedContentControl
                 Header="{x:Static r:Strings.HeaderToolMessage}"
@@ -145,9 +145,9 @@
                     OutputText="{Binding Adapter.OutputText[4]}"
                     StatusText="{Binding Adapter.Status[4]}"
                     Command="{Binding Commands[RunMessageSync]}"/>
-                
+
             </HeaderedContentControl>
-            
+
             <!-- Section 6 (orphans) -->
             <HeaderedContentControl
                 Header="{x:Static r:Strings.HeaderToolOrphan}"
@@ -166,8 +166,8 @@
                     SelectedUpdatedItem="{Binding SelectedOrphan}"
                     UpdatedItemsSource="{Binding Adapter.Updated[5]}"
                     Command="{Binding Commands[RunOrphan]}"
-                    UpdatedContextMenu="{Binding OrphanContextMenu}"/>                
-                
+                    UpdatedContextMenu="{Binding OrphanContextMenu}"/>
+
             </HeaderedContentControl>
 
         </Grid>

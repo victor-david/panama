@@ -167,7 +167,7 @@ namespace Restless.Panama.ViewModel
                 .AddIconResource(ResourceKeys.Icon.SquareSmallRedIconKey));
 
             OrphanContextMenu.Items.Add(new Separator());
-            
+
             OrphanContextMenu.Items.Add(CreateMenuItem(
                 Strings.MenuItemCreateTitleFromEntry,
                 RelayCommand.Create(RunCreateTitleFromOrphan, CanRunOrphanCommand))
@@ -327,8 +327,8 @@ namespace Restless.Panama.ViewModel
                 TitleRow row = new(TitleTable.AddDefaultRow())
                 {
                     Title = $"{Strings.TextOrphan} {SelectedOrphan.FullName}",
-                    Written = SelectedOrphan.LastWriteTimeUtc,
-                    Notes = $"{Strings.TextCreatedFromOrphan} {SelectedOrphan.FullName}"
+                    Written = SelectedOrphan.LastWriteTimeUtc.ToUtcZero(),
+                    Notes = $"{Strings.TextCreatedFromOrphan} {SelectedOrphan.FullName}, {SelectedOrphan.LastWriteTimeUtc}"
                 };
 
                 TitleVersionTable.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(SelectedOrphan.FullName));
