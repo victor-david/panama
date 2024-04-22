@@ -58,17 +58,17 @@ namespace Restless.Panama.Database.Tables
                 public const string AuthorId = "authorid";
 
                 /// <summary>
-                /// The name of the ready column. 
+                /// The name of the ready column.
                 /// </summary>
                 public const string Ready = "ready";
 
                 /// <summary>
-                /// The name of the quick flag column. 
+                /// The name of the quick flag column.
                 /// </summary>
                 public const string QuickFlag = "qflag";
 
                 /// <summary>
-                /// The name of the notes column. 
+                /// The name of the notes column.
                 /// </summary>
                 public const string Notes = "notes";
 
@@ -397,7 +397,7 @@ namespace Restless.Panama.Database.Tables
         {
             UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LatestVersionWordCount, TitleVersionTable.Defs.Columns.WordCount);
         }
-        
+
         private void UpdateLatestVersionPath(ActionDataColumn col, DataRowChangeEventArgs e)
         {
             UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LatestVersionPath, TitleVersionTable.Defs.Columns.FileName);
