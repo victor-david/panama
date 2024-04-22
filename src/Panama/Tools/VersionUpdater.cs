@@ -41,6 +41,8 @@ namespace Restless.Panama.Tools
 
             foreach (TitleRow title in TitleTable.EnumerateTitles())
             {
+                title.Written = title.Written.ToUtcZero();
+
                 foreach (TitleVersionRow version in TitleVersionTable.EnumerateVersions(title.Id, SortDirection.Ascending))
                 {
                     result.ScanCount++;
