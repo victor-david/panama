@@ -193,6 +193,7 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Written", TableColumns.Written)
                 .MakeDate()
+                .AddCustomSort(null, TableColumns.Id, DataGridColumnSortBehavior.FollowPrimary)
                 .MakeInitialSortDescending();
 
             Columns.Create("Updated", TableColumns.Calculated.LatestVersionDate)
@@ -363,6 +364,7 @@ namespace Restless.Panama.ViewModel
             int value = DataRowCompareDateTime(item2, item1, TableColumns.Written);
             if (value == 0)
             {
+                //value = DataRowCompareLong(item2, item1, TableColumns.Id);
                 value = DataRowCompareString(item1, item2, TableColumns.Title);
             }
             return value;
