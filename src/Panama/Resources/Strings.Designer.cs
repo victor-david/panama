@@ -2212,6 +2212,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Has Related Title.
+        /// </summary>
+        public static string TextHasRelated {
+            get {
+                return ResourceManager.GetString("TextHasRelated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image.
         /// </summary>
         public static string TextImage {

@@ -1188,4 +1188,7 @@ Changes will take effect after you restart the application.</value>
   <data name="MenuItemCopyTitle" xml:space="preserve">
     <value>Copy title to clipboard</value>
   </data>
+  <data name="TextHasRelated" xml:space="preserve">
+    <value>Has Related Title</value>
+  </data>
 </root>

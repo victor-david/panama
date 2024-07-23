@@ -30,6 +30,10 @@
         /// </summary>
         Flagged,
         /// <summary>
+        /// Title has at leat one related title
+        /// </summary>
+        Related,
+        /// <summary>
         /// Title is currently submitted
         /// </summary>
         CurrentlySubmitted,

@@ -43,6 +43,7 @@ namespace Restless.Panama.Core
                 TitleRowFilterType.Directory => EvaluateDirectory,
                 TitleRowFilterType.Ready => EvaluateReady,
                 TitleRowFilterType.Flagged => EvaluateFlagged,
+                TitleRowFilterType.Related => EvaluateRelated,
                 TitleRowFilterType.CurrentlySubmitted => EvaluateCurrentlySubmitted,
                 TitleRowFilterType.EverSubmitted => EvaluateEverSubmitted,
                 TitleRowFilterType.Published => EvaluatePublished,
@@ -97,6 +98,11 @@ namespace Restless.Panama.Core
         private bool EvaluateFlagged(DataRow item)
         {
             return State == ThreeWayState.Neutral || EvaluateBoolColumn(item[Columns.QuickFlag]);
+        }
+
+        private bool EvaluateRelated(DataRow item)
+        {
+            return State == ThreeWayState.Neutral || EvaluateLongColumn(item[Columns.Calculated.RelatedCount]);
         }
 
         private bool EvaluateCurrentlySubmitted(DataRow item)

@@ -14,6 +14,7 @@ namespace Restless.Panama.Core
         private readonly Dictionary<TitleRowFilterType, TitleFilterEvaluator> filterEvaluators;
         private ThreeWayState readyState;
         private ThreeWayState flaggedState;
+        private ThreeWayState relatedState;
         private ThreeWayState currentlySubmittedState;
         private ThreeWayState everSubmittedState;
         private ThreeWayState publishedState;
@@ -69,7 +70,7 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
-        /// Gets or sets the filter state for wheter a title is flagged with the aux quick flag
+        /// Gets or sets the filter state for whether a title is flagged with the aux quick flag
         /// </summary>
         public ThreeWayState FlaggedState
         {
@@ -78,6 +79,20 @@ namespace Restless.Panama.Core
             {
                 SetProperty(ref flaggedState, value);
                 SetFilterEvaluatorState(TitleRowFilterType.Flagged, value);
+                ApplyFilter();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the filter state for whether a title has at least one related title
+        /// </summary>
+        public ThreeWayState RelatedState
+        {
+            get => relatedState;
+            set
+            {
+                SetProperty(ref relatedState, value);
+                SetFilterEvaluatorState(TitleRowFilterType.Related, value);
                 ApplyFilter();
             }
         }
@@ -207,6 +222,7 @@ namespace Restless.Panama.Core
                 { TitleRowFilterType.Directory, new TitleFilterEvaluator(this, TitleRowFilterType.Directory) },
                 { TitleRowFilterType.Ready, new TitleFilterEvaluator(this, TitleRowFilterType.Ready) },
                 { TitleRowFilterType.Flagged, new TitleFilterEvaluator(this, TitleRowFilterType.Flagged) },
+                { TitleRowFilterType.Related, new TitleFilterEvaluator(this, TitleRowFilterType.Related) },
                 { TitleRowFilterType.CurrentlySubmitted, new TitleFilterEvaluator(this, TitleRowFilterType.CurrentlySubmitted) },
                 { TitleRowFilterType.EverSubmitted, new TitleFilterEvaluator(this, TitleRowFilterType.EverSubmitted) },
                 { TitleRowFilterType.Published, new TitleFilterEvaluator(this, TitleRowFilterType.Published) },
@@ -288,6 +304,7 @@ namespace Restless.Panama.Core
                 filterEvaluators[TitleRowFilterType.Directory].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Ready].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Flagged].Evaluate(item) &&
+                filterEvaluators[TitleRowFilterType.Related].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.CurrentlySubmitted].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.EverSubmitted].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Published].Evaluate(item) &&
@@ -302,16 +319,14 @@ namespace Restless.Panama.Core
         #region Private methods
         private void SetFilterEvaluatorState(TitleRowFilterType key, ThreeWayState state)
         {
-            if (filterEvaluators != null)
-            {
-                filterEvaluators[key].SetState(state);
-            }
+            filterEvaluators?[key].SetState(state);
         }
 
         private void ClearAllPropertyState()
         {
             ReadyState = ThreeWayState.Neutral;
             FlaggedState = ThreeWayState.Neutral;
+            RelatedState = ThreeWayState.Neutral;
             CurrentlySubmittedState = ThreeWayState.Neutral;
             EverSubmittedState = ThreeWayState.Neutral;
             PublishedState = ThreeWayState.Neutral;
