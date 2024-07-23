@@ -14,7 +14,7 @@
     <RootNamespace>Restless.Panama</RootNamespace>
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>4.0.37</Version>
+    <Version>4.0.38</Version>
   </PropertyGroup>
 
   <ItemGroup>
