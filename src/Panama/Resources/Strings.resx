@@ -1191,4 +1191,7 @@ Changes will take effect after you restart the application.</value>
   <data name="TextHasRelated" xml:space="preserve">
     <value>Has Related Title</value>
   </data>
+  <data name="SettingsAutoSortOnUpdated" xml:space="preserve">
+    <value>Auto sort title list on updated (requires restart)</value>
+  </data>
 </root>

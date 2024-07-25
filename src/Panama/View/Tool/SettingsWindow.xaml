@@ -17,7 +17,7 @@
     Style="{StaticResource DefaultAppWindowStyle}"
     Height="702" Width="602">
 
-    <Grid 
+    <Grid
         tk:Property.ColumnWidths="126,*"
         Style="{StaticResource DataEntryPanelStyle}">
         <ListBox
@@ -36,7 +36,7 @@
                 Header="{x:Static r:Strings.HeaderSettingsDisplay}"
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
                 tk:Property.IsLongVisibleValue="1">
-                
+
                 <StackPanel>
                     <TextBlock Text="{x:Static r:Strings.SettingsDataGridRowHeight}"/>
                     <Slider
@@ -58,9 +58,9 @@
                 Header="{x:Static r:Strings.HeaderSettingsFolder}"
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
                 tk:Property.IsLongVisibleValue="2">
-                
+
                 <StackPanel>
-                    <con:PathSelector 
+                    <con:PathSelector
                         Title="Title Root"
                         Path="{Binding Config.FolderTitleRoot}"
                         SelectCommand="{Binding Commands[SelectPath]}"/>
@@ -145,9 +145,9 @@
                         Grid.Row="1"
                         Header="Publisher"
                         IsExpanded="{Binding Config.IsSettingPublisherColorExpanded}">
-                        
+
                         <Grid tk:Property.ColumnWidths="*,*,*,*,*">
-                            
+
                             <con:SimpleColorPickerWrapper
                                 Header="Exclusive"
                                 Color="{Binding Config.Colors.PublisherExclusive.Color}"/>
@@ -161,17 +161,17 @@
                                 Grid.Column="2"
                                 Header="Goner"
                                 Color="{Binding Config.Colors.PublisherGoner.Color}"/>
-                            
+
                             <con:SimpleColorPickerWrapper
                                 Grid.Column="3"
                                 Header="Submission"
                                 Color="{Binding Config.Colors.PublisherActiveSubmission.Color}"/>
-                            
+
                             <con:SimpleColorPickerWrapper
                                 Grid.Column="4"
                                 Header="In Period"
-                                Color="{Binding Config.Colors.PublisherPeriod.Color}"/>                            
-                            
+                                Color="{Binding Config.Colors.PublisherPeriod.Color}"/>
+
                         </Grid>
 
                     </Expander>
@@ -180,37 +180,37 @@
                         Grid.Row="2"
                         Header="Submission"
                         IsExpanded="{Binding Config.IsSettingSubmissionColorExpanded}">
-                        
+
                         <Grid tk:Property.ColumnWidths="*,*,*,*,*">
-                            
+
                             <con:SimpleColorPickerWrapper
                                 Header="Online"
                                 Color="{Binding Config.Colors.SubmissionOnline.Color}"/>
-                            
+
                             <con:SimpleColorPickerWrapper
                                 Grid.Column="1"
                                 Header="Contest"
                                 Color="{Binding Config.Colors.SubmissionContest.Color}"/>
-                            
+
                             <con:SimpleColorPickerWrapper
                                 Grid.Column="2"
                                 Header="Locked"
                                 Color="{Binding Config.Colors.SubmissionLocked.Color}"/>
                         </Grid>
-                        
+
                     </Expander>
 
                     <Expander
                         Grid.Row="3"
                         Header="Other"
                         IsExpanded="{Binding Config.IsSettingOtherColorExpanded}">
-                        
+
                         <Grid tk:Property.ColumnWidths="*,*,*,*,*">
-                            
+
                             <con:SimpleColorPickerWrapper
                                 Header="Alternation"
                                 Color="{Binding Config.Colors.DataGridAlternation.Color}"/>
-                            
+
                         </Grid>
                     </Expander>
 
@@ -225,18 +225,18 @@
 
                 </Grid>
             </HeaderedContentControl>
-            
+
             <!-- Section 4 -->
             <HeaderedContentControl
                 Grid.Row="3"
                 Header="{x:Static r:Strings.HeaderSettingsSubmission}"
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
                 tk:Property.IsLongVisibleValue="4">
-                
+
                 <StackPanel>
                     <TextBlock Text="Company"/>
                     <TextBox Text="{Binding Config.SubmissionDocCompany}"/>
-                    
+
                     <!-- Header -->
                     <TextBlock Text="Header"/>
                     <CheckBox
@@ -246,7 +246,7 @@
 
                     <!-- Footer -->
                     <TextBlock Text="Footer"/>
-                    <CheckBox 
+                    <CheckBox
                         Content="Include page#"
                         IsChecked="{Binding Config.SubmissionDocFooterPages}"/>
                     <TextBox Text="{Binding Config.SubmissionDocFooter}"/>
@@ -263,7 +263,7 @@
                     <TextBlock Text="Document Text"/>
                     <TextBox
                         MinHeight="292"
-                        Style="{StaticResource TextBoxMultiStyle}" 
+                        Style="{StaticResource TextBoxMultiStyle}"
                         Text="{Binding Config.SubmissionDocBody}"/>
 
                 </StackPanel>
@@ -275,7 +275,7 @@
                 Header="{x:Static r:Strings.HeaderSettingsAdvanced}"
                 tk:Property.IsLongVisible="{Binding SelectedSection.Id}"
                 tk:Property.IsLongVisibleValue="5">
-                <Grid tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*">
+                <Grid tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*">
 
                     <CheckBox
                         Content="{x:Static r:Strings.SettingsQueue}"
@@ -283,47 +283,52 @@
 
                     <CheckBox
                         Grid.Row="1"
+                        Content="{x:Static r:Strings.SettingsAutoSortOnUpdated}"
+                        IsChecked="{Binding Config.AutoSortOnTitleUpdated}"/>
+
+                    <CheckBox
+                        Grid.Row="2"
                         Content="{x:Static r:Strings.SettingsVerifyLinks}"
                         IsChecked="{Binding Config.IsVerifyLinkEnabled}"/>
-                    
+
                     <con:PathSelector
-                        Grid.Row="2"
+                        Grid.Row="3"
                         Title="{x:Static r:Strings.SettingsTextViewer}"
                         SelectorType="File"
                         SelectorFileType="{x:Static table:DocumentTypeTable+Defs+Values.ExecutableFileType}"
                         Path="{Binding Config.TextViewerFile}"
-                        SelectCommand="{Binding Commands[SelectPath]}"/>                    
-                   
+                        SelectCommand="{Binding Commands[SelectPath]}"/>
+
                     <con:PathSelector
-                        Grid.Row="3"
+                        Grid.Row="4"
                         Title="{x:Static r:Strings.SettingsDatabaseLocation}"
                         Path="{Binding DatabaseLocation}"
                         SelectCommand="{Binding Commands[SelectPath]}"/>
 
                     <TextBlock
-                        Grid.Row="4"
+                        Grid.Row="5"
                         Text="{x:Static r:Strings.SettingsDatabaseLocationText}"/>
 
-                    <Separator Grid.Row="5" Margin="0,12"/>
+                    <Separator Grid.Row="6" Margin="0,12"/>
 
-                    <TextBlock Grid.Row="6" Text="{x:Static r:Strings.SettingsOrphanExclusionDetail}"/>
+                    <TextBlock Grid.Row="7" Text="{x:Static r:Strings.SettingsOrphanExclusionDetail}"/>
 
                     <tk:DataGrid
-                        Grid.Row="7"
+                        Grid.Row="8"
                         ItemsSource="{Binding Orphan.ListView}"
                         SelectedItem="{Binding Orphan.SelectedItem}"
                         RowHeight="{x:Static core:Config+DataGrid.MinRowHeight}"
                         tk:DataGridColumns.Columns="{Binding Orphan.Columns}">
-                        
+
                         <DataGrid.ContextMenu>
                             <ContextMenu ItemsSource="{Binding Orphan.MenuItems}"/>
                         </DataGrid.ContextMenu>
-                        
+
                     </tk:DataGrid>
 
                 </Grid>
             </HeaderedContentControl>
-            
+
         </Grid>
     </Grid>
 </tk:AppWindow>

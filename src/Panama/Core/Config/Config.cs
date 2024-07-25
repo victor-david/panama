@@ -151,7 +151,7 @@ namespace Restless.Panama.Core
             public const double MinLinkDetailWidth = 280;
             public const double MaxLinkDetailWidth = 480;
             public const double DefaultLinkDetailWidth = MinLinkDetailWidth;
-            
+
             public const double MinLinkVerifyDetailWidth = 280;
             public const double MaxLinkVerifyDetailWidth = 380;
             public const double DefaultLinkVerifyDetailWidth = MinLinkVerifyDetailWidth;
@@ -197,7 +197,7 @@ namespace Restless.Panama.Core
         /// Provides static values for DataGrid
         /// </summary>
         public static class DataGrid
-        {            
+        {
             /// <summary>
             /// Gets the minimum value for data grid row height.
             /// </summary>
@@ -887,7 +887,7 @@ namespace Restless.Panama.Core
             get;
             private set;
         }
-        
+
         /// <summary>
         /// Gets the title queue filter object which describes how to filter queue/title rows.
         /// </summary>
@@ -1031,6 +1031,15 @@ namespace Restless.Panama.Core
         public bool GroupTitleVersion
         {
             get => GetItem(true);
+            set => SetItem(value);
+        }
+
+        /// <summary>
+        /// Gets or sets a value that determines if the title list automatically sorts when title is updated
+        /// </summary>
+        public bool AutoSortOnTitleUpdated
+        {
+            get => GetItem(false);
             set => SetItem(value);
         }
 

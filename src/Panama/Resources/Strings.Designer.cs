@@ -1877,6 +1877,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto sort title list on updated (requires restart).
+        /// </summary>
+        public static string SettingsAutoSortOnUpdated {
+            get {
+                return ResourceManager.GetString("SettingsAutoSortOnUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database Location.
         /// </summary>
         public static string SettingsDatabaseLocation {

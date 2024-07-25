@@ -284,7 +284,10 @@ namespace Restless.Panama.ViewModel
 
             ListView.IsLiveSorting = true;
             ListView.LiveSortingProperties.Add(TableColumns.Written);
-            ListView.LiveSortingProperties.Add(TableColumns.Calculated.LatestVersionDate);
+            if (Config.AutoSortOnTitleUpdated)
+            {
+                ListView.LiveSortingProperties.Add(TableColumns.Calculated.LatestVersionDate);
+            }
 
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {
