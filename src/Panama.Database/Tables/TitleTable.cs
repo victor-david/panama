@@ -224,12 +224,12 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Provides an enumerable that gets all titles in order of written DESC.
+        /// Provides an enumerable that gets all titles in order of written desc, id desc.
         /// </summary>
         /// <returns>A <see cref="TitleRow"/></returns>
         public IEnumerable<TitleRow> EnumerateTitles()
         {
-            DataRow[] rows = Select(null, $"{Defs.Columns.Written} DESC");
+            DataRow[] rows = Select(null, $"{Defs.Columns.Written} desc, {Defs.Columns.Id} desc");
             foreach (DataRow row in rows)
             {
                 yield return new TitleRow(row);
