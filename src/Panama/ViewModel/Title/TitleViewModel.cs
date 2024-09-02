@@ -526,9 +526,11 @@ namespace Restless.Panama.ViewModel
         {
             if (haveQueueTitleItems)
             {
-                List<Control> remove = new();
-                /* remove the separator */
-                remove.Add(MenuItems[queueTitleMenuIndex]);
+                List<Control> remove = new()
+                {
+                    /* remove the separator */
+                    MenuItems[queueTitleMenuIndex]
+                };
 
                 foreach (MenuItem item in MenuItems.OfType<MenuItem>().Where(p => p.CommandParameter is QueueRow))
                 {
