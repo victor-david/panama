@@ -186,7 +186,7 @@ namespace Restless.Panama.ViewModel
 
             Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W076)
+                .MakeFixedWidth(FixedWidth.W086)
                 .AddToolTip(TitleFlagsToolTip.Create(this)));
 
             Columns.Create("Title", TableColumns.Title).MakeFlexWidth(4);
@@ -576,6 +576,7 @@ namespace Restless.Panama.ViewModel
             return new FlagGridColumnCollection(this)
             {
                 { TableColumns.Ready, Config.Colors.TitleReady.ToBindingPath() },
+                { TableColumns.Calculated.IsQueued, Config.Colors.TitleQueued.ToBindingPath() },
                 { TableColumns.QuickFlag, Config.Colors.TitleFlagged.ToBindingPath() },
                 { TableColumns.Calculated.IsPublished, Config.Colors.TitlePublished.ToBindingPath() },
                 { TableColumns.Calculated.IsSelfPublished, Config.Colors.TitleSelfPublished.ToBindingPath() },
