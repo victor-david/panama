@@ -4,7 +4,7 @@
     <ApplicationIcon>App.Main.ico</ApplicationIcon>
     <AssemblyTitle>Panama ∑en</AssemblyTitle>
     <Company>Restless Animal Development</Company>
-    <Copyright>(c) 2023 Restless Animal Development</Copyright>
+    <Copyright>(c) 2020-2024 Restless Animal Development</Copyright>
     <Description>Provides overall tracking services for titles (date written, updated, multiple version support, search, analysis), publications, submissions, associated submission documents and submission email messages.</Description>
     <OutputType>WinExe</OutputType>
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
@@ -12,7 +12,7 @@
     <Product>Panama</Product>
     <RepositoryUrl>https://github.com/victor-david/panama</RepositoryUrl>
     <RootNamespace>Restless.Panama</RootNamespace>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Version>4.0.38</Version>
   </PropertyGroup>

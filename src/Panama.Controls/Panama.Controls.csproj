@@ -14,7 +14,7 @@
     <Product>Panama Controls</Product>
     <RepositoryUrl>https://github.com/victor-david/panama</RepositoryUrl>
     <RootNamespace>Restless.Panama.Controls</RootNamespace>
-    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net7.0-windows</TargetFrameworks>
     <Title>Panama Controls</Title>
     <UseWpf>true</UseWpf>
     <Version>1.0.1</Version>

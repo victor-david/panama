@@ -3,7 +3,7 @@ rem Provides a simple means of installing the app.
 rem You just need to get the executable and .dlls in one directory.
 setlocal
 set ROOT=%~dp0
-set BIN=%ROOT%src\Panama\bin\Release\net6.0-windows
+set BIN=%ROOT%src\Panama\bin\Release\net7.0-windows
 
 rem Change the destination path as needed and use this file to install.
 set DEST=D:\Writing\Panama4.0
