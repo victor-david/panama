@@ -15,7 +15,7 @@
     ResizeMode="NoResize"
     Title="{x:Static r:Strings.MenuItemSettings}"
     Style="{StaticResource DefaultAppWindowStyle}"
-    Height="702" Width="602">
+    Height="702" Width="622">
 
     <Grid
         tk:Property.ColumnWidths="126,*"
@@ -112,29 +112,34 @@
                         Header="Title"
                         IsExpanded="{Binding Config.IsSettingTitleColorExpanded}">
 
-                        <Grid tk:Property.ColumnWidths="*,*,*,*,*">
+                        <Grid tk:Property.ColumnWidths="*,*,*,*,*,*">
 
                             <con:SimpleColorPickerWrapper
                                 Header="Ready"
                                 Color="{Binding Config.Colors.TitleReady.Color}"/>
-
+                            
                             <con:SimpleColorPickerWrapper
                                 Grid.Column="1"
+                                Header="Queued"
+                                Color="{Binding Config.Colors.TitleQueued.Color}"/>
+                            
+                            <con:SimpleColorPickerWrapper
+                                Grid.Column="2"
                                 Header="Flagged"
                                 Color="{Binding Config.Colors.TitleFlagged.Color}"/>
 
                             <con:SimpleColorPickerWrapper
-                                Grid.Column="2"
+                                Grid.Column="3"
                                 Header="Published"
                                 Color="{Binding Config.Colors.TitlePublished.Color}"/>
 
                             <con:SimpleColorPickerWrapper
-                                Grid.Column="3"
-                                Header="Self Published"
+                                Grid.Column="4"
+                                Header="Self"
                                 Color="{Binding Config.Colors.TitleSelfPublished.Color}"/>
 
                             <con:SimpleColorPickerWrapper
-                                Grid.Column="4"
+                                Grid.Column="5"
                                 Header="Submitted"
                                 Color="{Binding Config.Colors.TitleSubmitted.Color}"/>
                         </Grid>
@@ -146,7 +151,7 @@
                         Header="Publisher"
                         IsExpanded="{Binding Config.IsSettingPublisherColorExpanded}">
 
-                        <Grid tk:Property.ColumnWidths="*,*,*,*,*">
+                        <Grid tk:Property.ColumnWidths="*,*,*,*,*,*">
 
                             <con:SimpleColorPickerWrapper
                                 Header="Exclusive"
@@ -181,7 +186,7 @@
                         Header="Submission"
                         IsExpanded="{Binding Config.IsSettingSubmissionColorExpanded}">
 
-                        <Grid tk:Property.ColumnWidths="*,*,*,*,*">
+                        <Grid tk:Property.ColumnWidths="*,*,*,*,*,*">
 
                             <con:SimpleColorPickerWrapper
                                 Header="Online"
@@ -205,7 +210,7 @@
                         Header="Other"
                         IsExpanded="{Binding Config.IsSettingOtherColorExpanded}">
 
-                        <Grid tk:Property.ColumnWidths="*,*,*,*,*">
+                        <Grid tk:Property.ColumnWidths="*,*,*,*,*,*">
 
                             <con:SimpleColorPickerWrapper
                                 Header="Alternation"

@@ -108,6 +108,7 @@ namespace Restless.Panama.Core
             DataGridAlternation.ResetToDefault();
 
             TitleReady.ResetToDefault();
+            TitleQueued.ResetToDefault();
             TitleFlagged.ResetToDefault();
             TitlePublished.ResetToDefault();
             TitleSelfPublished.ResetToDefault();
