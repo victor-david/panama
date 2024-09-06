@@ -485,6 +485,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation removes the title from the selected queue. It does not affect the title itself..
+        /// </summary>
+        public static string ConfirmationRemoveTitleFromQueue {
+            get {
+                return ResourceManager.GetString("ConfirmationRemoveTitleFromQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove title from this submission?.
         /// </summary>
         public static string ConfirmationRemoveTitleFromSubmission {
@@ -1576,6 +1585,15 @@ namespace Restless.Panama.Resources {
         public static string MenuItemRemoveExclusion {
             get {
                 return ResourceManager.GetString("MenuItemRemoveExclusion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove title from selected queue.
+        /// </summary>
+        public static string MenuItemRemoveFromQueue {
+            get {
+                return ResourceManager.GetString("MenuItemRemoveFromQueue", resourceCulture);
             }
         }
         

@@ -1194,4 +1194,10 @@ Changes will take effect after you restart the application.</value>
   <data name="SettingsAutoSortOnUpdated" xml:space="preserve">
     <value>Auto sort title list on updated (requires restart)</value>
   </data>
+  <data name="ConfirmationRemoveTitleFromQueue" xml:space="preserve">
+    <value>This operation removes the title from the selected queue. It does not affect the title itself.</value>
+  </data>
+  <data name="MenuItemRemoveFromQueue" xml:space="preserve">
+    <value>Remove title from selected queue</value>
+  </data>
 </root>
