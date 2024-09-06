@@ -37,7 +37,7 @@ namespace Restless.Panama.ViewModel
         private TitleRow selectedTitle;
         private PreviewMode previewMode;
         private string previewText;
-        private const int SectionPreviewId = 7;
+        private const int SectionPreviewId = 8;
         private readonly int queueTitleMenuIndex;
         private bool haveQueueTitleItems;
         private QueueTable QueueTable => DatabaseController.Instance.GetTable<QueueTable>();
@@ -81,58 +81,42 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the controller for the title versions.
         /// </summary>
-        public TitleVersionController Versions
-        {
-            get;
-        }
+        public TitleVersionController Versions { get; }
 
         /// <summary>
         /// Gets the controller for the related titles
         /// </summary>
-        public TitleRelatedController Related
-        {
-            get;
-        }
+        public TitleRelatedController Related { get;}
+
+        /// <summary>
+        /// Gets the controller for the queues
+        /// </summary>
+        public TitleQueueController Queue { get; }
 
         /// <summary>
         /// Gets the controller for the title submissions.
         /// </summary>
-        public TitleSubmissionController Submissions
-        {
-            get;
-        }
+        public TitleSubmissionController Submissions { get; }
 
         /// <summary>
         /// Gets the controller for title published records.
         /// </summary>
-        public TitlePublishedController Published
-        {
-            get;
-        }
+        public TitlePublishedController Published { get; }
 
         /// <summary>
         /// Gets the controller for title published records.
         /// </summary>
-        public TitleSelfPublishedController SelfPublished
-        {
-            get;
-        }
+        public TitleSelfPublishedController SelfPublished { get; }
 
         /// <summary>
         /// Gets the controller for the title tags.
         /// </summary>
-        public TitleTagController TitleTags
-        {
-            get;
-        }
+        public TitleTagController TitleTags { get; }
 
         /// <summary>
         /// Gets the controller for the title filter tags
         /// </summary>
-        public TitleTagFilterController FilterTags
-        {
-            get;
-        }
+        public TitleTagFilterController FilterTags { get; }
 
         /// <summary>
         /// Gets the title filter object.
@@ -276,6 +260,7 @@ namespace Restless.Panama.ViewModel
 
             Versions = new TitleVersionController(this);
             Related = new TitleRelatedController(this);
+            Queue = new TitleQueueController(this);
             Submissions = new TitleSubmissionController(this);
             Published = new TitlePublishedController(this);
             SelfPublished = new TitleSelfPublishedController(this);
@@ -350,6 +335,7 @@ namespace Restless.Panama.ViewModel
             TitleTags.PopulateAssigned();
             Versions.Update();
             Related.Update();
+            Queue.Update();
             Submissions.Update();
             Published.Update();
             SelfPublished.Update();
@@ -368,7 +354,6 @@ namespace Restless.Panama.ViewModel
             int value = DataRowCompareDateTime(item2, item1, TableColumns.Written);
             if (value == 0)
             {
-                //value = DataRowCompareLong(item2, item1, TableColumns.Id);
                 value = DataRowCompareString(item1, item2, TableColumns.Title);
             }
             return value;
@@ -548,6 +533,7 @@ namespace Restless.Panama.ViewModel
             {
                 QueueTitleTable.AddTitle(queue.Id, SelectedTitle.Id);
                 QueueTable.Save();
+                Queue.Update();
             }
         }
 
