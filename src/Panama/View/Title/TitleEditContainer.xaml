@@ -21,7 +21,7 @@
         <tk:RadioButton Grid.Column="1" Value="2" Content="Tags"/>
         <tk:RadioButton Grid.Column="2" Value="3" Content="Version"/>
         <tk:RadioButton Grid.Column="3" Value="4" Content="Related"/>
-        <tk:RadioButton Grid.Column="4" Value="5" Content="Queues"/>
+        <tk:RadioButton Grid.Column="4" Value="5" Content="Queues" tk:Property.IsVisible="{Binding Config.IsTitleQueueVisible}"/>
         <tk:RadioButton Grid.Column="5" Value="6" Content="Submission"/>
         <tk:RadioButton Grid.Column="6" Value="7" Content="Published"/>
         <tk:RadioButton Grid.Column="7" Value="8" Content="Preview"/>

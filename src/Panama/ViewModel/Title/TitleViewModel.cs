@@ -37,6 +37,8 @@ namespace Restless.Panama.ViewModel
         private TitleRow selectedTitle;
         private PreviewMode previewMode;
         private string previewText;
+        // The next two must correspond to the defs in TitleEditContainer.xaml
+        private const int SectionQueueId = 5; 
         private const int SectionPreviewId = 8;
         private readonly int queueTitleMenuIndex;
         private bool haveQueueTitleItems;
@@ -308,6 +310,14 @@ namespace Restless.Panama.ViewModel
                     insertIdx++;
                 }
                 haveQueueTitleItems = true;
+            }
+
+            // Set selected section to main (1) if title queue turned off
+            // and selected section is currently Queues
+            // The visibility of the section item itself is handled by property changed event in Config
+            if (!Config.IsTitleQueueVisible && SelectedEditSection == SectionQueueId)
+            {
+                SelectedEditSection = 1;
             }
         }
         #endregion
