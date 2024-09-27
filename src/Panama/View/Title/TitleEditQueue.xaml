@@ -1,0 +1,25 @@
+﻿<Grid
+    x:Class="Restless.Panama.View.TitleEditQueue"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    mc:Ignorable="d"
+    tk:Property.RowHeights="*"
+    d:DesignHeight="600" d:DesignWidth="360">
+            
+    <tk:DataGrid
+        ItemsSource="{Binding Queue.ListView}"
+        SelectedItem="{Binding Queue.SelectedItem}"
+        tk:DataGridColumns.Columns="{Binding Queue.Columns}">
+
+        <DataGrid.ContextMenu>
+            <ContextMenu ItemsSource="{Binding Queue.MenuItems}"/>
+        </DataGrid.ContextMenu>
+
+    </tk:DataGrid>
+
+</Grid>

@@ -114,6 +114,16 @@ namespace Restless.Panama.Database.Tables
                     public const string RelatedCount = "CalcRelatedCount";
 
                     /// <summary>
+                    /// Calculated column that holds the number of queues this title belongs to.
+                    /// </summary>
+                    public const string QueuedCount = "CalcQueuedCount";
+
+                    /// <summary>
+                    /// Calculated column that indicates if this title belongs to at least one queue.
+                    /// </summary>
+                    public const string IsQueued = "CalcIsQueued";
+
+                    /// <summary>
                     /// The name of the submission count column. This calculated column
                     /// holds the number of related records from the <see cref="SubmissionTable"/>.
                     /// </summary>
@@ -302,6 +312,12 @@ namespace Restless.Panama.Database.Tables
 
             expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToTitleRelated, TitleRelatedTable.Defs.Columns.TitleId);
             CreateExpressionColumn<long>(Defs.Columns.Calculated.RelatedCount, expr);
+
+            expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToQueueTitle, QueueTitleTable.Defs.Columns.TitleId);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.QueuedCount, expr);
+
+            expr = string.Format("Count(Child({0}).{1}) > 0", Defs.Relations.ToQueueTitle, QueueTitleTable.Defs.Columns.TitleId);
+            CreateExpressionColumn<bool>(Defs.Columns.Calculated.IsQueued, expr);
 
             expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Id);
             CreateExpressionColumn<long>(Defs.Columns.Calculated.SubCount, expr);

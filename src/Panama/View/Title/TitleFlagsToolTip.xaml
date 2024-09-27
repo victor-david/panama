@@ -9,7 +9,7 @@
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d" 
     tk:Property.ColumnWidths="Auto,*"
-    tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto"
+    tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
     d:DesignHeight="135" d:DesignWidth="180">
 
     <Grid.Resources>
@@ -23,18 +23,22 @@
     
     <Border
         Grid.Row="2"
+        Background="{Binding Config.Colors.TitleQueued.ColorBrush}"/>
+    
+    <Border
+        Grid.Row="3"
         Background="{Binding Config.Colors.TitleFlagged.ColorBrush}"/>
 
     <Border
-        Grid.Row="3"
+        Grid.Row="4"
         Background="{Binding Config.Colors.TitlePublished.ColorBrush}"/>
 
     <Border
-        Grid.Row="4"
+        Grid.Row="5"
         Background="{Binding Config.Colors.TitleSelfPublished.ColorBrush}"/>
 
     <Border
-        Grid.Row="5"
+        Grid.Row="6"
         Background="{Binding Config.Colors.TitleSubmitted.ColorBrush}"/>
 
     <TextBlock
@@ -43,8 +47,9 @@
         Text="Title flags"/>
 
     <TextBlock Grid.Row="1" Grid.Column="1" Text="Ready"/>
-    <TextBlock Grid.Row="2" Grid.Column="1" Text="Flagged"/>
-    <TextBlock Grid.Row="3" Grid.Column="1" Text="Published"/>
-    <TextBlock Grid.Row="4" Grid.Column="1" Text="Self published"/>
-    <TextBlock Grid.Row="5" Grid.Column="1" Text="Submitted"/>
+    <TextBlock Grid.Row="2" Grid.Column="1" Text="Queued"/>
+    <TextBlock Grid.Row="3" Grid.Column="1" Text="Flagged"/>
+    <TextBlock Grid.Row="4" Grid.Column="1" Text="Published"/>
+    <TextBlock Grid.Row="5" Grid.Column="1" Text="Self published"/>
+    <TextBlock Grid.Row="6" Grid.Column="1" Text="Submitted"/>
 </Grid>

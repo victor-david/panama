@@ -23,7 +23,9 @@ namespace Restless.Panama.Core
             public static readonly Color DataGridAlternationDefault = (Color)ColorConverter.ConvertFromString("#FFCBE4EC");
 
             public static readonly Color TitleReadyDefault = SystemColors.Green;
+            public static readonly Color TitleQueuedDefault = SystemColors.DodgerBlue;
             public static readonly Color TitleFlaggedDefault = SystemColors.Blue;
+            
             public static readonly Color TitlePublishedDefault = SystemColors.Red;
             public static readonly Color TitleSelfPublishedDefault = SystemColors.Coral;
             public static readonly Color TitleSubmittedDefault = SystemColors.Black;
@@ -47,7 +49,9 @@ namespace Restless.Panama.Core
 
         #region Public properties
         public ConfigColor DataGridAlternation { get; }
+
         public ConfigColor TitleReady { get; }
+        public ConfigColor TitleQueued { get; }
         public ConfigColor TitleFlagged { get; }
         public ConfigColor TitlePublished { get; }
         public ConfigColor TitleSelfPublished { get; }
@@ -75,6 +79,7 @@ namespace Restless.Panama.Core
             DataGridAlternation = new ConfigColor(nameof(DataGridAlternation), Values.DataGridAlternationDefault);
 
             TitleReady = new ConfigColor(nameof(TitleReady), Values.TitleReadyDefault);
+            TitleQueued = new ConfigColor(nameof(TitleQueued), Values.TitleQueuedDefault);
             TitleFlagged = new ConfigColor(nameof(TitleFlagged), Values.TitleFlaggedDefault);
             TitlePublished = new ConfigColor(nameof(TitlePublished), Values.TitlePublishedDefault);
             TitleSelfPublished = new ConfigColor(nameof(TitleSelfPublished), Values.TitleSelfPublishedDefault);
@@ -103,6 +108,7 @@ namespace Restless.Panama.Core
             DataGridAlternation.ResetToDefault();
 
             TitleReady.ResetToDefault();
+            TitleQueued.ResetToDefault();
             TitleFlagged.ResetToDefault();
             TitlePublished.ResetToDefault();
             TitleSelfPublished.ResetToDefault();

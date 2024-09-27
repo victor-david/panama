@@ -1118,6 +1118,7 @@ namespace Restless.Panama.Core
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
                     break;
                 case nameof(IsTitleQueueVisible):
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
                     MainWindowViewModel.Instance.SynchronizeTitleQueue();
                     break;
                 default:
