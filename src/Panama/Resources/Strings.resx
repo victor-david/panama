@@ -1200,4 +1200,7 @@ Changes will take effect after you restart the application.</value>
   <data name="MenuItemRemoveFromQueue" xml:space="preserve">
     <value>Remove title from selected queue</value>
   </data>
+  <data name="TextStartup" xml:space="preserve">
+    <value>Startup</value>
+  </data>
 </root>

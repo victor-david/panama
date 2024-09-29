@@ -2500,6 +2500,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Startup.
+        /// </summary>
+        public static string TextStartup {
+            get {
+                return ResourceManager.GetString("TextStartup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submitted.
         /// </summary>
         public static string TextSubmitted {

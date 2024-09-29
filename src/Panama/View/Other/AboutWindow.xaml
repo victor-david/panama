@@ -53,6 +53,12 @@
         <TextBlock Text="{Binding AppInfo.Company, Mode=OneTime}"/>
         <TextBlock Text="{Binding AppInfo.Copyright, Mode=OneTime}"/>
         <TextBlock Text="{Binding AppInfo.Framework, Mode=OneTime}"/>
+        <TextBlock>
+            <Run Text="{x:Static r:Strings.TextStartup}"/>
+            <Run
+                Foreground="{StaticResource AlertForegroundBrush}"
+                Text="{Binding Config.StartupCount, Mode=OneTime, StringFormat='{}{0:#,0}'}"/>
+        </TextBlock>
 
         <Separator Margin="0,6"/>
 
