@@ -1074,6 +1074,15 @@ namespace Restless.Panama.Core
             get => GetItem(false);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets the startup count, call <see cref="IncrementStartupCount"/> to update.
+        /// </summary>
+        public long StartupCount
+        {
+            get => GetItem(0);
+            private set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/
@@ -1088,6 +1097,14 @@ namespace Restless.Panama.Core
         /************************************************************************/
 
         #region Public methods
+        /// <summary>
+        /// Increments the startup count.
+        /// </summary>
+        public void IncrementStartupCount()
+        {
+            StartupCount++;
+        }
+
         /// <summary>
         /// Saves the filter objects by serializing them into their rows.
         /// </summary>

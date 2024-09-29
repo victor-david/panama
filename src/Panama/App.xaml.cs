@@ -97,6 +97,7 @@ namespace Restless.Panama
             }
             else
             {
+                Config.Instance.IncrementStartupCount();
                 DataGridColumnExtensions.UseDeferredToolTip = true;
                 WindowFactory.Main.Create().Show();
                 DisplayAlertsIf();
