@@ -18,6 +18,10 @@
         /// </summary>
         Text,
         /// <summary>
+        /// Filter according to the specified title note
+        /// </summary>
+        Note,
+        /// <summary>
         /// Filter according to the directory where a title is stored
         /// </summary>
         Directory,

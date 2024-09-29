@@ -34,12 +34,21 @@
             Style="{StaticResource DataEntryPanelStyle}">
 
             <!-- Title -->
-            <StackPanel Grid.ColumnSpan="2">
+            <StackPanel>
                 <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
                 <TextBox
                     Text="{Binding Filters.Text,
                     UpdateSourceTrigger=PropertyChanged,
                     Delay=500}"/>
+            </StackPanel>
+
+            <!-- Title note -->
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="{x:Static r:Strings.TextNote}"/>
+                <TextBox
+                    Text="{Binding Filters.Note,
+                    UpdateSourceTrigger=PropertyChanged,
+                    Delay=500}"/>                
             </StackPanel>
 
             <!-- Directory -->

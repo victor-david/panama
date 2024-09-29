@@ -1,6 +1,5 @@
 ﻿using Restless.Toolkit.Controls;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using Columns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
 
@@ -40,6 +39,7 @@ namespace Restless.Panama.Core
                 TitleRowFilterType.Id => EvaluateId,
                 TitleRowFilterType.MultipleId => EvaluateMultipleId,
                 TitleRowFilterType.Text => EvaluateText,
+                TitleRowFilterType.Note => EvaluateNote,
                 TitleRowFilterType.Directory => EvaluateDirectory,
                 TitleRowFilterType.Ready => EvaluateReady,
                 TitleRowFilterType.Flagged => EvaluateFlagged,
@@ -58,6 +58,7 @@ namespace Restless.Panama.Core
         {
             return filterType switch
             {
+                TitleRowFilterType.Note => !string.IsNullOrWhiteSpace(Filter.Note),
                 TitleRowFilterType.Directory => !string.IsNullOrWhiteSpace(Filter.Directory),
                 TitleRowFilterType.WordCount => Filter.WordCount != 0,
                 TitleRowFilterType.Tag => Filter.Tags.Count > 0,
@@ -81,6 +82,13 @@ namespace Restless.Panama.Core
             return
                 string.IsNullOrWhiteSpace(Filter.Text) ||
                 item[Columns.Title].ToString().Contains(Filter.Text, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        private bool EvaluateNote(DataRow item)
+        {
+            return
+                string.IsNullOrWhiteSpace(Filter.Note) ||
+                item[Columns.Notes].ToString().Contains(Filter.Note, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private bool EvaluateDirectory(DataRow item)

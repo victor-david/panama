@@ -19,6 +19,7 @@ namespace Restless.Panama.Core
         private ThreeWayState everSubmittedState;
         private ThreeWayState publishedState;
         private ThreeWayState selfPublishedState;
+        private string note;
         private string directory;
         private int wordCount;
         private bool isTagFilterAny;
@@ -39,6 +40,21 @@ namespace Restless.Panama.Core
 
         /// <inheritdoc/>
         public override bool IsAnyFilterActive => base.IsAnyFilterActive || IsAnyEvaluatorActive();
+
+        /// <summary>
+        /// Gets or sets the filter text used to check in the notes of a title.
+        /// </summary>
+        public string Note
+        {
+            get => note;
+            set
+            {
+                if (SetProperty(ref note, value))
+                {
+                    ApplyFilter();
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets a partial or whole directory name
@@ -219,6 +235,7 @@ namespace Restless.Panama.Core
                 { TitleRowFilterType.Id, new TitleFilterEvaluator(this, TitleRowFilterType.Id) },
                 { TitleRowFilterType.MultipleId, new TitleFilterEvaluator(this, TitleRowFilterType.MultipleId) },
                 { TitleRowFilterType.Text, new TitleFilterEvaluator(this, TitleRowFilterType.Text) },
+                { TitleRowFilterType.Note, new TitleFilterEvaluator(this, TitleRowFilterType.Note) },
                 { TitleRowFilterType.Directory, new TitleFilterEvaluator(this, TitleRowFilterType.Directory) },
                 { TitleRowFilterType.Ready, new TitleFilterEvaluator(this, TitleRowFilterType.Ready) },
                 { TitleRowFilterType.Flagged, new TitleFilterEvaluator(this, TitleRowFilterType.Flagged) },
@@ -247,6 +264,7 @@ namespace Restless.Panama.Core
             IncreaseSuspendLevel();
             base.ClearAll();
             ClearAllPropertyState();
+            Note = null;
             Directory = null;
             WordCount = 0;
             Tags.Clear();
@@ -301,6 +319,7 @@ namespace Restless.Panama.Core
                 filterEvaluators[TitleRowFilterType.Id].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.MultipleId].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Text].Evaluate(item) &&
+                filterEvaluators[TitleRowFilterType.Note].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Directory].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Ready].Evaluate(item) &&
                 filterEvaluators[TitleRowFilterType.Flagged].Evaluate(item) &&
