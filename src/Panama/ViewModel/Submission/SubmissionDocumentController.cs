@@ -95,7 +95,7 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public SubmissionDocumentController(SubmissionViewModel owner) : base(owner)
         {
-            Columns.CreateImage<Int64ToPathConverter>("T", TableColumns.DocType, "ImageFileType", 20.0);
+            //Columns.CreateImage<Int64ToPathConverter>("T", TableColumns.DocType, "ImageFileType", 20.0);
             Columns.Create("Updated", TableColumns.Updated).MakeDate();
             Columns.Create("Title", TableColumns.Title).MakeInitialSortAscending();
             Columns.Create("Id", TableColumns.DocId);
