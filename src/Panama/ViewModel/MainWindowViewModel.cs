@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using IconKind = MahApps.Metro.IconPacks.PackIconMaterialKind;
 
 namespace Restless.Panama.ViewModel
 {
@@ -202,21 +203,19 @@ namespace Restless.Panama.ViewModel
         #region Private methods (navigator)
         private void RegisterStandardNavigatorItems()
         {
-            // NavigatorItems.Add<HomeViewModel>(NavigationGroup.Title, Strings.MenuItemSummary, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.ReportGeometryKey));
-            NavigatorItems.Add<TitleViewModel>(NavigationGroup.Title, Strings.MenuItemTitles, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TitleGeometryKey));
-            NavigatorItems.Add<TitleQueueViewModel>(NavigationGroup.Title, Strings.MenuItemQueues, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TitleQueueGeometryKey));
-            NavigatorItems.Add<PublisherViewModel>(NavigationGroup.Title, Strings.MenuItemPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));
-            NavigatorItems.Add<SelfPublisherViewModel>(NavigationGroup.Title, Strings.MenuItemSelfPublishers, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.PublisherGeometryKey));
-            NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.SubmissionGeometryKey));
+            NavigatorItems.Add<TitleViewModel>(NavigationGroup.Title, Strings.MenuItemTitles, false, Icons.Get(IconKind.SubtitlesOutline));
+            NavigatorItems.Add<TitleQueueViewModel>(NavigationGroup.Title, Strings.MenuItemQueues, false, Icons.Get(IconKind.TrayFull));
+            NavigatorItems.Add<PublisherViewModel>(NavigationGroup.Title, Strings.MenuItemPublishers, false, Icons.Get(IconKind.MessageCheckOutline));
+            NavigatorItems.Add<SelfPublisherViewModel>(NavigationGroup.Title, Strings.MenuItemSelfPublishers, false, Icons.Get(IconKind.MessageFlashOutline));
+            NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, Icons.Get(IconKind.MessageReplyTextOutline));
 
-            NavigatorItems.Add<AuthorViewModel>(NavigationGroup.Settings, Strings.MenuItemAuthors, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.UserGeometryKey));
-            //NavigatorItems.Add<CredentialViewModel>(NavigationGroup.Settings, Strings.MenuItemCredentials, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.LockGeometryKey));
-            NavigatorItems.Add<TagViewModel>(NavigationGroup.Settings, Strings.MenuItemTags, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.TagGeometryKey));
+            NavigatorItems.Add<AuthorViewModel>(NavigationGroup.Settings, Strings.MenuItemAuthors, false, Icons.Get(IconKind.Account));
+            NavigatorItems.Add<TagViewModel>(NavigationGroup.Settings, Strings.MenuItemTags, false, Icons.Get(IconKind.TagOutline));
 
-            NavigatorItems.Add<AlertViewModel>(NavigationGroup.Other, Strings.MenuItemAlerts, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.AlertGeometryKey));
-            NavigatorItems.Add<UserNoteViewModel>(NavigationGroup.Other, Strings.MenuItemNotes, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.NoteGeometryKey));
-            NavigatorItems.Add<LinkViewModel>(NavigationGroup.Other, Strings.MenuItemLinks, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.LinkGeometryKey));
-            NavigatorItems.Add<StatisticsViewModel>(NavigationGroup.Other, Strings.MenuItemStatistics, false, LocalResources.Get<Geometry>(ResourceKeys.Geometry.StatisticGeometryKey));
+            NavigatorItems.Add<AlertViewModel>(NavigationGroup.Other, Strings.MenuItemAlerts, false, Icons.Get(IconKind.TimerOutline));
+            NavigatorItems.Add<UserNoteViewModel>(NavigationGroup.Other, Strings.MenuItemNotes, false, Icons.Get(IconKind.NoteTextOutline));
+            NavigatorItems.Add<LinkViewModel>(NavigationGroup.Other, Strings.MenuItemLinks, false, Icons.Get(IconKind.LinkVariant));
+            NavigatorItems.Add<StatisticsViewModel>(NavigationGroup.Other, Strings.MenuItemStatistics, false, Icons.Get(IconKind.Numeric));
 
             NavigatorItems.Add<TableViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemStatistics);
             NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemSearch);

@@ -1,4 +1,4 @@
-﻿<Application 
+﻿<Application
     x:Class="Restless.Panama.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -18,19 +18,20 @@
                 <ResourceDictionary Source="Resources/Dictionary/Panel.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/TextBox.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Border.xaml"/>
-                
+                <ResourceDictionary Source="Resources/Dictionary/Styles.xaml"/>
+
                 <ResourceDictionary Source="Resources/Dictionary/Navigator.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/TextBlock.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/PathSelector.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Window.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/Images.xaml"/>
+                <!--<ResourceDictionary Source="Resources/Dictionary/Images.xaml"/>-->
                 <ResourceDictionary Source="Resources/Dictionary/ToolTip.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/ScrollBar.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Slider.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/DataTemplate.xaml"/>
                 <!--
                 <ResourceDictionary Source="Resources/Dictionary/Converters.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/ItemsControl.xaml"/>                
+                <ResourceDictionary Source="Resources/Dictionary/ItemsControl.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Grid.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/StackPanel.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/ToolBar.xaml"/>
