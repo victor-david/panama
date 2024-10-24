@@ -17,6 +17,20 @@
     TextOptions.TextRenderingMode="ClearType"
     WindowStartupLocation="CenterScreen">
 
+
+    <mah:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <ico:PackIconMaterial
+                Kind="TextBoxOutline"
+                Width="24"
+                Height="24"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="4"
+                Foreground="{DynamicResource MahApps.Brushes.IdealForeground}"/>
+        </DataTemplate>
+    </mah:MetroWindow.IconTemplate>
+
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands Margin="16,0" ShowSeparators="False">
             <Button
