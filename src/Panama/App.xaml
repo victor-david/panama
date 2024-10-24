@@ -5,7 +5,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Dictionary/Value.xaml"/>
+
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <!--<ResourceDictionary Source="Resources/Dictionary/Value.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Brush.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Control.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/CheckBox.xaml"/>
@@ -17,17 +20,24 @@
                 <ResourceDictionary Source="Resources/Dictionary/Button.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/Panel.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/TextBox.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/Border.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/Styles.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/Border.xaml"/>-->
 
-                <ResourceDictionary Source="Resources/Dictionary/Navigator.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/Value.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/Brush.xaml"/>
+
+                <ResourceDictionary Source="Resources/Dictionary/Panel.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/TextBlock.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/Styles.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/Border.xaml"/>
+
+                <!--<ResourceDictionary Source="Resources/Dictionary/Navigator.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/TextBlock.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/PathSelector.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/Window.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/Window.xaml"/>-->
                 <!--<ResourceDictionary Source="Resources/Dictionary/Images.xaml"/>-->
-                <ResourceDictionary Source="Resources/Dictionary/ToolTip.xaml"/>
+                <!--<ResourceDictionary Source="Resources/Dictionary/ToolTip.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionary/ScrollBar.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/Slider.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionary/Slider.xaml"/>-->
                 <ResourceDictionary Source="Resources/Dictionary/DataTemplate.xaml"/>
                 <!--
                 <ResourceDictionary Source="Resources/Dictionary/Converters.xaml"/>

@@ -1,7 +1,15 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:ico="http://metro.mahapps.com/winfx/xaml/iconpacks">
+
+    <!-- Window -->
+    <Style x:Key="Panama.Styles.MetroWindow" TargetType="mah:MetroWindow">
+        <Setter Property="TitleAlignment" Value="Center"/>
+        <Setter Property="TitleCharacterCasing" Value="Normal"/>
+        <Setter Property="TitleBarHeight" Value="{DynamicResource Jupiter.Layout.TitleBar.Height}"/>
+    </Style>
 
     <!-- Icons -->
     <Style x:Key="Panama.Styles.Icon" TargetType="ico:PackIconMaterial">

@@ -6,6 +6,7 @@
 */
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
 using Restless.Panama.ViewModel;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Core.Utility;
@@ -540,6 +541,14 @@ namespace Restless.Panama.Core
         /************************************************************************/
 
         #region Colors
+        /// <summary>
+        /// Gets or sets the theme id
+        /// </summary>
+        public string ThemeId
+        {
+            get => GetItem(ThemeManager.DefaultTheme);
+            set => SetItem(value);
+        }
         /// <summary>
         /// Gets the set of configuration colors.
         /// </summary>

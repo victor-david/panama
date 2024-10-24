@@ -4,15 +4,15 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using MahApps.Metro.Controls;
 using Restless.Panama.Core;
-using Restless.Toolkit.Controls;
 using System;
 using System.Windows;
 using System.Windows.Interop;
 
 namespace Restless.Panama.View
 {
-    public partial class MainWindow : AppWindow
+    public partial class MainWindow : MetroWindow
     {
         #region Private
         private static MainWindow staticMain;
