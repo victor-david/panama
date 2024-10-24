@@ -1203,4 +1203,7 @@ Changes will take effect after you restart the application.</value>
   <data name="TextStartup" xml:space="preserve">
     <value>Startup</value>
   </data>
+  <data name="ToolTipAbout" xml:space="preserve">
+    <value>Information about the app</value>
+  </data>
 </root>

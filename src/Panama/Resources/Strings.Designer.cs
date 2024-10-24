@@ -2644,6 +2644,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Information about the app.
+        /// </summary>
+        public static string ToolTipAbout {
+            get {
+                return ResourceManager.GetString("ToolTipAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This alert is currently enabled.
         /// </summary>
         public static string ToolTipAlertEnabled {

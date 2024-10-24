@@ -17,7 +17,17 @@
     TextOptions.TextRenderingMode="ClearType"
     WindowStartupLocation="CenterScreen">
 
-<!--
+    <mah:MetroWindow.LeftWindowCommands>
+        <mah:WindowCommands Margin="16,0" ShowSeparators="False">
+            <Button
+                Command="{Binding Commands[OpenAboutWindow]}"
+                ToolTip="{x:Static r:Strings.ToolTipAbout}">
+                <ico:PackIconMaterial Kind="InformationVariant"/>
+            </Button>
+        </mah:WindowCommands>
+    </mah:MetroWindow.LeftWindowCommands>
+
+    <!--
     <tk:AppWindow.Menu>
         <Menu KeyboardNavigation.TabNavigation="Cycle">
             <MenuItem Header="_File">
