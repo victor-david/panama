@@ -1,0 +1,51 @@
+﻿<mah:MetroWindow
+    x:Class="Restless.Panama.View.SettingsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:SettingsWindowViewModel}"
+    mc:Ignorable="d"
+    d:DesignHeight="2260" d:DesignWidth="602"
+    ResizeMode="NoResize"
+    Title="{x:Static r:Strings.MenuItemSettings}"
+    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Height="702" Width="622">
+
+    <Grid tk:Property.ColumnWidths="126,*">
+
+        <ListBox
+            BorderThickness="0,0,1,0"
+            ItemsSource="{Binding Sections}"
+            DisplayMemberPath="Name"
+            SelectedItem="{Binding SelectedSection}"/>
+
+        <Grid
+            Grid.Column="1"
+            Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+            Margin="{StaticResource Panama.Layout.DefaultPadding}"
+            tk:Property.RowHeights="Auto,Auto,Auto,Auto,*">
+
+            <!-- Section 1 (display) -->
+            <vw:SettingsDisplay Grid.Row="0" tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="1"/>
+
+            <!-- Section 2 (folders) -->
+            <vw:SettingsFolder Grid.Row="1" tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="2"/>
+
+            <!-- Section 3 (colors) -->
+            <vw:SettingsColor Grid.Row="2" tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="3"/>
+
+            <!-- Section 4 (submissions) -->
+            <vw:SettingsSubmission Grid.Row="3" tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="4"/>
+
+            <!-- Section 5 (advanced) -->
+            <vw:SettingsSubmission Grid.Row="4" tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="5"/>
+
+        </Grid>
+    </Grid>
+</mah:MetroWindow>

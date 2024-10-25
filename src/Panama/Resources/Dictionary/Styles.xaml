@@ -3,7 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-    xmlns:ico="http://metro.mahapps.com/winfx/xaml/iconpacks">
+    xmlns:ico="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls">
 
     <!-- Window -->
     <Style x:Key="Panama.Styles.MetroWindow" TargetType="mah:MetroWindow">
@@ -49,6 +50,10 @@
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.IdealForeground}"/>
     </Style>
 
+    <!-- Named icons -->
+    <ico:Material x:Key="Panama.Icon.Chevron.Right" x:Shared="False"  Kind="ChevronRight"/>
+    <ico:Material x:Key="Panama.Icon.Chevron.Down" x:Shared="False"  Kind="ChevronDown"/>
+
     <!-- Main navigator-->
     <Style TargetType="tk:MainNavigator">
         <Setter Property="Margin" Value="10,0,0,10"/>
@@ -56,16 +61,61 @@
         <Setter Property="HideWhenEmpty" Value="False"/>
     </Style>
 
-    <!-- Navigator expanders -->
-    <ico:Material x:Key="Panama.NavigatorExpander.Icon" x:Shared="False"  Kind="ChevronRight"/>
-    <ico:Material x:Key="Panama.NavigatorExpander.ExpandedIcon" x:Shared="False"  Kind="ChevronDown"/>
-
+    <!-- Navigator expander -->
     <Style x:Key="Panama.Styles.NavigatorExpander" TargetType="tk:NavigatorExpander" BasedOn="{StaticResource {x:Static tk:ResourceKeys.DefaultNavigatorExpanderStyleKey}}">
-        <Setter Property="Icon" Value="{DynamicResource Panama.NavigatorExpander.Icon}"/>
-        <Setter Property="ExpandedIcon" Value="{DynamicResource Panama.NavigatorExpander.ExpandedIcon}"/>
+        <Setter Property="Icon" Value="{DynamicResource Panama.Icon.Chevron.Right}"/>
+        <Setter Property="ExpandedIcon" Value="{DynamicResource Panama.Icon.Chevron.Down}"/>
     </Style>
 
     <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource Panama.Styles.NavigatorExpander}"/>
+
+    <!-- Path selector -->
+    <Style x:Key="{x:Static con:PathSelector.ButtonStyleKey}" TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button.Flat}">
+        <Setter Property="Margin" Value="2,0,0,0"/>
+        <Setter Property="Padding" Value="4,0"/>
+    </Style>
+
+    <Style x:Key="Panana.Styles.PathSelector" TargetType="con:PathSelector">
+        <Setter Property="ButtonContent" Value="{DynamicResource Panama.Icon.Chevron.Right}"/>
+    </Style>
+
+    <Style TargetType="con:PathSelector" BasedOn="{StaticResource Panana.Styles.PathSelector}"/>
+
+    <!-- Data panel -->
+    <Style x:Key="Panama.Styles.TextBlock.DataEntry" TargetType="TextBlock">
+        <Setter Property="Margin" Value="{StaticResource Panama.Layout.DataEntry.Margin}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="Panama.Styles.Panel.DataEntry" TargetType="Panel">
+        <Style.Resources>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource Panama.Styles.TextBlock.DataEntry}"/>
+
+            <Style TargetType="TextBox" BasedOn="{StaticResource MahApps.Styles.TextBox}">
+                <Setter Property="Margin" Value="{StaticResource Panama.Layout.DataEntry.Margin}"/>
+            </Style>
+
+            <Style TargetType="CheckBox" BasedOn="{StaticResource MahApps.Styles.CheckBox}">
+                <Setter Property="Margin" Value="2,6"/>
+            </Style>
+
+            <Style TargetType="ListBox" BasedOn="{StaticResource MahApps.Styles.ListBox}">
+                <Setter Property="Margin" Value="{StaticResource Panama.Layout.DataEntry.Margin}"/>
+            </Style>
+
+            <Style x:Key="{x:Static con:PathSelector.TextBlockStyleKey}" TargetType="TextBlock" BasedOn="{StaticResource Panama.Styles.TextBlock.DataEntry}"/>
+
+            <Style TargetType="con:PathSelector" BasedOn="{StaticResource Panana.Styles.PathSelector}">
+                <Setter Property="Margin" Value="{StaticResource Panama.Layout.DataEntry.Margin}"/>
+            </Style>
+
+            <Style TargetType="Slider" BasedOn="{StaticResource MahApps.Styles.Slider}">
+                <Setter Property="Margin" Value="{StaticResource Panama.Layout.DataEntry.Margin}"/>
+            </Style>
+        </Style.Resources>
+    </Style>
 
     <!-- Main title text block -->
     <Style x:Key="Panama.Styles.NavTitle" TargetType="TextBlock">

@@ -11,6 +11,7 @@
     <Thickness x:Key="Panama.Layout.DefaultPadding">10</Thickness>
     <Thickness x:Key="Panama.Layout.DefaultVerticalPadding">0,10</Thickness>
     <Thickness x:Key="Panama.Layout.DefaultHorizontalPadding">10,0</Thickness>
+    <Thickness x:Key="Panama.Layout.DataEntry.Margin">0,0,6,6</Thickness>
 
     <Thickness x:Key="Panama.Layout.StackedControlMargin">0,0,0,14</Thickness>
     <!-- This one not in the normal/compact dictionaries. It's fixed -->

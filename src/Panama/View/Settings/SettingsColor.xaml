@@ -1,0 +1,66 @@
+﻿<HeaderedContentControl
+    x:Class="Restless.Panama.View.SettingsColor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:SettingsWindowViewModel}"
+    mc:Ignorable="d"
+    d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid tk:Property.RowHeights="Auto,Auto,Auto,Auto,*">
+
+        <Grid.Resources>
+            <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource Panama.Styles.NavigatorExpander}">
+                <Setter Property="Margin" Value="0,0,0,12"/>
+            </Style>
+        </Grid.Resources>
+
+        <tk:NavigatorExpander Header="Title" IsExpanded="{Binding Config.IsSettingTitleColorExpanded}">
+            <Grid tk:Property.ColumnWidths="*,*,*,*,*,*">
+                <con:SimpleColorPickerWrapper Grid.Column="0" Header="Ready" Color="{Binding Config.Colors.TitleReady.Color}"/>
+                <con:SimpleColorPickerWrapper Grid.Column="1" Header="Queued" Color="{Binding Config.Colors.TitleQueued.Color}"/>
+                <con:SimpleColorPickerWrapper Grid.Column="2" Header="Flagged" Color="{Binding Config.Colors.TitleFlagged.Color}"/>
+                <con:SimpleColorPickerWrapper Grid.Column="3" Header="Published" Color="{Binding Config.Colors.TitlePublished.Color}"/>
+                <con:SimpleColorPickerWrapper Grid.Column="4" Header="Self" Color="{Binding Config.Colors.TitleSelfPublished.Color}"/>
+                <con:SimpleColorPickerWrapper Grid.Column="5" Header="Submitted" Color="{Binding Config.Colors.TitleSubmitted.Color}"/>
+            </Grid>
+        </tk:NavigatorExpander>
+
+        <tk:NavigatorExpander Grid.Row="1" Header="Publisher" IsExpanded="{Binding Config.IsSettingPublisherColorExpanded}">
+            <Grid tk:Property.ColumnWidths="*,*,*,*,*,*">
+                <con:SimpleColorPickerWrapper Grid.Column="0" Header="Exclusive" Color="{Binding Config.Colors.PublisherExclusive.Color}"/>
+                <con:SimpleColorPickerWrapper Grid.Column="1" Header="Paying" Color="{Binding Config.Colors.PublisherPaying.Color}"/>
+                <con:SimpleColorPickerWrapper Grid.Column="2" Header="Goner"  Color="{Binding Config.Colors.PublisherGoner.Color}"/>
+                <con:SimpleColorPickerWrapper Grid.Column="3" Header="Submission" Color="{Binding Config.Colors.PublisherActiveSubmission.Color}"/>
+                <con:SimpleColorPickerWrapper Grid.Column="4" Header="In Period" Color="{Binding Config.Colors.PublisherPeriod.Color}"/>
+            </Grid>
+        </tk:NavigatorExpander>
+
+        <tk:NavigatorExpander Grid.Row="2" Header="Submission" IsExpanded="{Binding Config.IsSettingSubmissionColorExpanded}">
+            <Grid tk:Property.ColumnWidths="*,*,*,*,*,*">
+                <con:SimpleColorPickerWrapper Grid.Column="0" Header="Online" Color="{Binding Config.Colors.SubmissionOnline.Color}"/>
+                <con:SimpleColorPickerWrapper Grid.Column="1" Header="Contest" Color="{Binding Config.Colors.SubmissionContest.Color}"/>
+                <con:SimpleColorPickerWrapper Grid.Column="2" Header="Locked" Color="{Binding Config.Colors.SubmissionLocked.Color}"/>
+            </Grid>
+        </tk:NavigatorExpander>
+
+        <tk:NavigatorExpander Grid.Row="3" Header="Other" IsExpanded="{Binding Config.IsSettingOtherColorExpanded}">
+            <Grid tk:Property.ColumnWidths="*,*,*,*,*,*">
+                <con:SimpleColorPickerWrapper Grid.Column="0" Header="Alternation" Color="{Binding Config.Colors.DataGridAlternation.Color}"/>
+            </Grid>
+        </tk:NavigatorExpander>
+
+        <Button
+            Grid.Row="4"
+            Style="{StaticResource MahApps.Styles.Button.ToolBar}"
+            Content="Reset colors"
+            Margin="0,8"
+            HorizontalAlignment="Left"
+            ToolTip="Reset all colors to their default values. No confirmation."
+            Command="{Binding Commands[ResetColors]}"/>
+    </Grid>
+</HeaderedContentControl>
