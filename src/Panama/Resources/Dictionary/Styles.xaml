@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:ico="http://metro.mahapps.com/winfx/xaml/iconpacks">
 
@@ -8,7 +9,21 @@
     <Style x:Key="Panama.Styles.MetroWindow" TargetType="mah:MetroWindow">
         <Setter Property="TitleAlignment" Value="Center"/>
         <Setter Property="TitleCharacterCasing" Value="Normal"/>
-        <Setter Property="TitleBarHeight" Value="{DynamicResource Jupiter.Layout.TitleBar.Height}"/>
+        <Setter Property="TitleBarHeight" Value="{DynamicResource Panama.Layout.TitleBar.Height}"/>
+    </Style>
+
+    <!-- Main splitter -->
+    <Style x:Key="Panama.Styles.MainSplitter" TargetType="tk:MultiSplitterGrid">
+        <Setter Property="CanCollapseDetail" Value="False"/>
+        <Setter Property="DetailContentMargin" Value="{DynamicResource Panama.Layout.DefaultVerticalPadding}"/>
+        <Setter Property="DetailHeaderMargin" Value="0"/>
+        <Setter Property="MainContentMargin" Value="{DynamicResource Panama.Layout.DefaultPadding}"/>
+        <Setter Property="MainHeaderMargin" Value="0"/>
+        <Setter Property="SplitterPosition" Value="Left"/>
+    </Style>
+
+    <Style TargetType="Expander">
+
     </Style>
 
     <!-- Icons -->

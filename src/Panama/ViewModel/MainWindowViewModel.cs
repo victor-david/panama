@@ -40,21 +40,6 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets or sets the width of the main navigation pane.
-        /// </summary>
-        public GridLength MainNavigationWidth
-        {
-            get => mainNavigationWidth;
-            set
-            {
-                if (SetProperty(ref mainNavigationWidth, value))
-                {
-                    Config.MainNavigationWidth = (int)value.Value;
-                }
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the selected view model.
         /// </summary>
         public ApplicationViewModel SelectedViewModel
@@ -123,7 +108,7 @@ namespace Restless.Panama.ViewModel
             Commands.Add("ToolMessageSync", p => NavigatorItems.Select<ToolMessageSyncViewModel>());
             //Commands.Add("ToolScramble", p => NavigatorItems.Select<ToolScrambleViewModel>());
 
-            MainNavigationWidth = new GridLength(Config.MainNavigationWidth, GridUnitType.Pixel);
+            //MainNavigationWidth = new GridLength(Config.MainNavigationWidth, GridUnitType.Pixel);
 
             NavigatorItems = new NavigatorItemCollection(NavigationGroup.TotalNumberOfGroups);
             NavigatorItems.SelectedItemChanged += NavigatorItemsSelectedItemChanged;

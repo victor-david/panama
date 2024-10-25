@@ -1206,4 +1206,10 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolTipAbout" xml:space="preserve">
     <value>Information about the app</value>
   </data>
+  <data name="ToolTipSaveAll" xml:space="preserve">
+    <value>Save all data (saves automatcially on exit)</value>
+  </data>
+  <data name="ToolTipSettings" xml:space="preserve">
+    <value>Open application settings</value>
+  </data>
 </root>

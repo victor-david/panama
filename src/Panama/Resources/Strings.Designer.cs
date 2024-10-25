@@ -2878,6 +2878,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save all data (saves automatcially on exit).
+        /// </summary>
+        public static string ToolTipSaveAll {
+            get {
+                return ResourceManager.GetString("ToolTipSaveAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scramble the text in the text area.
         /// </summary>
         public static string TooltipScrambleBegin {
@@ -2919,6 +2928,15 @@ namespace Restless.Panama.Resources {
         public static string ToolTipSendReport {
             get {
                 return ResourceManager.GetString("ToolTipSendReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open application settings.
+        /// </summary>
+        public static string ToolTipSettings {
+            get {
+                return ResourceManager.GetString("ToolTipSettings", resourceCulture);
             }
         }
         

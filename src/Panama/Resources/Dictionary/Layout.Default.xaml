@@ -1,0 +1,24 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Default values for layout -->
+    <!-- These get superseded by the current layout dictionary (normal, compact) -->
+
+    <!-- Local -->
+    <sys:Int32 x:Key="Panama.Layout.TitleBar.Height">34</sys:Int32>
+    <Thickness x:Key="Panama.Layout.DefaultPadding">10</Thickness>
+    <Thickness x:Key="Panama.Layout.DefaultVerticalPadding">0,10</Thickness>
+    <Thickness x:Key="Panama.Layout.DefaultHorizontalPadding">10,0</Thickness>
+
+    <Thickness x:Key="Panama.Layout.StackedControlMargin">0,0,0,14</Thickness>
+    <!-- This one not in the normal/compact dictionaries. It's fixed -->
+    <Thickness x:Key="Panama.Layout.LabelControlMargin">0,0,0,3</Thickness>
+
+    <!-- These items are related -->
+    <sys:Double x:Key="Panama.Layout.Item.Height">32</sys:Double>
+    <!-- Make top value same as values above -->
+    <Thickness x:Key="Panama.Layout.MainSplitter.Margin">0,32,0,0</Thickness>
+
+</ResourceDictionary>
