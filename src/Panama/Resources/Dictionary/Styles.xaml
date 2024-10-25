@@ -36,13 +36,6 @@
         <Setter Property="SplitterPosition" Value="Left"/>
     </Style>
 
-    <!-- Main navigator-->
-    <Style TargetType="tk:MainNavigator">
-        <Setter Property="Margin" Value="10,0,0,10"/>
-        <Setter Property="ItemIndent" Value="20"/>
-        <Setter Property="HideWhenEmpty" Value="False"/>
-    </Style>
-
     <!-- Icons -->
     <Style x:Key="Panama.Styles.Icon" TargetType="ico:PackIconMaterial">
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
@@ -56,14 +49,23 @@
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.IdealForeground}"/>
     </Style>
 
+    <!-- Main navigator-->
+    <Style TargetType="tk:MainNavigator">
+        <Setter Property="Margin" Value="10,0,0,10"/>
+        <Setter Property="ItemIndent" Value="20"/>
+        <Setter Property="HideWhenEmpty" Value="False"/>
+    </Style>
+
     <!-- Navigator expanders -->
     <ico:Material x:Key="Panama.NavigatorExpander.Icon" x:Shared="False"  Kind="ChevronRight"/>
     <ico:Material x:Key="Panama.NavigatorExpander.ExpandedIcon" x:Shared="False"  Kind="ChevronDown"/>
 
-    <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource {x:Static tk:ResourceKeys.DefaultNavigatorExpanderStyleKey}}">
+    <Style x:Key="Panama.Styles.NavigatorExpander" TargetType="tk:NavigatorExpander" BasedOn="{StaticResource {x:Static tk:ResourceKeys.DefaultNavigatorExpanderStyleKey}}">
         <Setter Property="Icon" Value="{DynamicResource Panama.NavigatorExpander.Icon}"/>
         <Setter Property="ExpandedIcon" Value="{DynamicResource Panama.NavigatorExpander.ExpandedIcon}"/>
     </Style>
+
+    <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource Panama.Styles.NavigatorExpander}"/>
 
     <!-- Main title text block -->
     <Style x:Key="Panama.Styles.NavTitle" TargetType="TextBlock">
@@ -74,4 +76,13 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
 
+    <!-- TextBox -->
+    <Style x:Key="Panama.Styles.TextBox.Multiline" TargetType="TextBox" BasedOn="{StaticResource MahApps.Styles.TextBox}">
+        <Setter Property="AcceptsReturn" Value="True" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="MinHeight" Value="198"/>
+        <Setter Property="MaxHeight" Value="198"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+    </Style>
 </ResourceDictionary>
