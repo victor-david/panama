@@ -10,9 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Restless.Panama.ViewModel
 {
@@ -26,11 +24,6 @@ namespace Restless.Panama.ViewModel
         private readonly TitleExporter titleExporter;
         private readonly TitleLister titleLister;
         private readonly MessageSync messageSync;
-        private readonly OrphanFinder orphanFinder;
-        private FileScanItem selectedOrphan;
-        private PreviewMode orphanPreviewMode;
-        private string orphanPreviewText;
-        private ImageSource orphanImageSource;
         #endregion
 
         /************************************************************************/
@@ -38,15 +31,11 @@ namespace Restless.Panama.ViewModel
         #region Properties
         private TitleTable TitleTable => DatabaseController.Instance.GetTable<TitleTable>();
         private TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
-        private OrphanExclusionTable OrphanExclusionTable => DatabaseController.Instance.GetTable<OrphanExclusionTable>();
 
         /// <summary>
         /// Gets the list of settings sections
         /// </summary>
-        public List<NavigatorSection> Sections
-        {
-            get;
-        }
+        public List<NavigatorSection> Sections { get; }
 
         /// <summary>
         /// Gets or sets the selection section
@@ -67,10 +56,7 @@ namespace Restless.Panama.ViewModel
             private set => SetProperty(ref isOperationInProgress, value);
         }
 
-        public ToolResultAdapter Adapter
-        {
-            get;
-        }
+        public ToolResultAdapter Adapter { get; }
 
         /// <summary>
         /// Gets the title list file name
@@ -80,41 +66,12 @@ namespace Restless.Panama.ViewModel
             get;
         }
 
-        /// <summary>
-        /// Gets the orphan context menu
-        /// </summary>
-        public ContextMenu OrphanContextMenu
-        {
-            get;
-        }
-
-        public FileScanItem SelectedOrphan
-        {
-            get => selectedOrphan;
-            set
-            {
-                SetProperty(ref selectedOrphan, value);
-                PreviewOrphan();
-            }
-        }
-
-        public PreviewMode OrphanPreviewMode
-        {
-            get => orphanPreviewMode;
-            private set => SetProperty(ref orphanPreviewMode, value);
-        }
-
-        public string OrphanPreviewText
-        {
-            get => orphanPreviewText;
-            private set => SetProperty(ref orphanPreviewText, value);
-        }
-
-        public ImageSource OrphanImageSource
-        {
-            get => orphanImageSource;
-            private set => SetProperty(ref orphanImageSource, value);
-        }
+        public ICommand TitleMetaCommand { get; }
+        public ICommand SubmissionMetaCommand { get; }
+        public ICommand TitleExportCommand { get; }
+        public ICommand TitleListCommand { get; }
+        public ICommand MessageSyncCommand { get; }
+        public ICommand ResetWindowCommand { get; }
         #endregion
 
         /************************************************************************/
@@ -132,46 +89,18 @@ namespace Restless.Panama.ViewModel
                 new NavigatorSection(Strings.HeaderToolExport, 3),
                 new NavigatorSection(Strings.HeaderToolTitleList, 4),
                 new NavigatorSection(Strings.HeaderToolMessage, 5),
-                new NavigatorSection(Strings.HeaderToolOrphan, 6),
             };
 
             SetInitialSection();
 
             Adapter = new ToolResultAdapter(6);
 
-            Commands.Add("RunTitleMetadata", RunTitleMetadataCommand);
-            Commands.Add("RunSubmissionMetadata", RunSubmissionMetadataCommand);
-
-            Commands.Add("RunExport", RunExportCommand);
-            Commands.Add("RunTitleList", RunTitleListCommand);
-            Commands.Add("RunMessageSync", RunMessageSyncCommand);
-            Commands.Add("RunOrphan", RunOrphanCommand);
-
-            Commands.Add("ResetWindow", RunResetWindowCommand);
-
-            OrphanContextMenu = new ContextMenu();
-
-            OrphanContextMenu.Items.Add(CreateMenuItem(
-                Strings.MenuItemExcludeOrphanFile,
-                RelayCommand.Create(RunSetOrphanFileExclusion, CanRunOrphanCommand))
-                .AddIconResource(ResourceKeys.Icon.SquareSmallRedIconKey));
-
-            OrphanContextMenu.Items.Add(CreateMenuItem(
-                Strings.MenuItemExcludeOrphanFileType,
-                RelayCommand.Create(RunSetOrphanFileTypeExclusion, CanRunOrphanCommand))
-                .AddIconResource(ResourceKeys.Icon.SquareSmallRedIconKey));
-
-            OrphanContextMenu.Items.Add(CreateMenuItem(
-                Strings.MenuItemExcludeOrphanDirectory,
-                RelayCommand.Create(RunSetOrphanDirectoryExclusion, CanRunOrphanCommand))
-                .AddIconResource(ResourceKeys.Icon.SquareSmallRedIconKey));
-
-            OrphanContextMenu.Items.Add(new Separator());
-
-            OrphanContextMenu.Items.Add(CreateMenuItem(
-                Strings.MenuItemCreateTitleFromEntry,
-                RelayCommand.Create(RunCreateTitleFromOrphan, CanRunOrphanCommand))
-                .AddIconResource(ResourceKeys.Icon.PlusIconKey));
+            TitleMetaCommand = RelayCommand.Create(p => RunTitleMetaCommand());
+            SubmissionMetaCommand = RelayCommand.Create(p => RunSubmissionMetaCommand());
+            TitleExportCommand = RelayCommand.Create(p => RunTitleExportCommand());
+            TitleListCommand = RelayCommand.Create(p => RunTitleListCommand());
+            MessageSyncCommand = RelayCommand.Create(p => RunMessageSyncCommand());
+            ResetWindowCommand = RelayCommand.Create(p => RunResetWindowCommand());
 
             versionUpdater = new VersionUpdater();
             submissionUpdater = new SubmissionUpdater();
@@ -187,8 +116,6 @@ namespace Restless.Panama.ViewModel
             };
 
             messageSync = new MessageSync();
-
-            orphanFinder = new OrphanFinder();
 
             TitleListFileName = Path.Combine(Config.FolderTitleRoot, TitleLister.ListFile);
         }
@@ -211,34 +138,29 @@ namespace Restless.Panama.ViewModel
             });
         }
 
-        private async void RunTitleMetadataCommand(object parm)
+        private async void RunTitleMetaCommand()
         {
             await RunTool(0, versionUpdater);
         }
 
-        private async void RunSubmissionMetadataCommand(object parm)
+        private async void RunSubmissionMetaCommand()
         {
             await RunTool(1, submissionUpdater);
         }
 
-        private async void RunExportCommand(object parm)
+        private async void RunTitleExportCommand()
         {
             await RunTool(2, titleExporter);
         }
 
-        private async void RunTitleListCommand(object parm)
+        private async void RunTitleListCommand()
         {
             await RunTool(3, titleLister);
         }
 
-        private async void RunMessageSyncCommand(object parm)
+        private async void RunMessageSyncCommand()
         {
             await RunTool(4, messageSync);
-        }
-
-        private async void RunOrphanCommand(object parm)
-        {
-            await RunTool(5, orphanFinder);
         }
 
         private async Task RunTool(int index, Scanner scanner)
@@ -267,100 +189,13 @@ namespace Restless.Panama.ViewModel
             Adapter.SetStatus(index, $"{result.ScanCount} items processed | {result.Updated.Count} updated | {result.NotFound.Count} not found");
         }
 
-        private void PreviewOrphan()
-        {
-            if (SelectedOrphan != null)
-            {
-                OrphanPreviewMode = DocumentPreviewer.GetPreviewMode(SelectedOrphan.FullName);
-                switch (OrphanPreviewMode)
-                {
-                    case PreviewMode.Text:
-                        OrphanPreviewText = DocumentPreviewer.GetText(SelectedOrphan.FullName);
-                        break;
-                    case PreviewMode.Image:
-                        OrphanImageSource = DocumentPreviewer.GetImage(SelectedOrphan.FullName);
-                        break;
-                    case PreviewMode.None:
-                    case PreviewMode.Unsupported:
-                        break;
-                }
-            }
-        }
-
-        private void RunResetWindowCommand(object parm)
+        private void RunResetWindowCommand()
         {
             WindowOwner.Width = Config.ToolWindow.DefaultWidth;
             WindowOwner.Height = Config.ToolWindow.DefaultHeight;
             WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
             WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
             WindowOwner.WindowState = WindowState.Normal;
-        }
-
-        private void RunSetOrphanFileExclusion(object parm)
-        {
-            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanFileExclusion, SelectedOrphan.FileName)))
-            {
-                OrphanExclusionTable.AddFileExclusion(Paths.Title.WithoutRoot(SelectedOrphan.FullName));
-            }
-        }
-
-        private void RunSetOrphanFileTypeExclusion(object parm)
-        {
-            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanFileTypeExclusion, SelectedOrphan.FileExtension)))
-            {
-                OrphanExclusionTable.AddFileExtensionExclusion(SelectedOrphan.FileExtension);
-            }
-        }
-
-        private void RunSetOrphanDirectoryExclusion(object parm)
-        {
-            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanDirectoryExclusion, SelectedOrphan.DirectoryName)))
-            {
-                OrphanExclusionTable.AddDirectoryExclusion(Path.GetDirectoryName(Paths.Title.WithoutRoot(SelectedOrphan.FullName)));
-            }
-        }
-
-        private void RunCreateTitleFromOrphan(object parm)
-        {
-            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationCreateTitleFromOrphan, SelectedOrphan.FullName)))
-            {
-                TitleRow row = new(TitleTable.AddDefaultRow())
-                {
-                    Title = $"{Strings.TextOrphan} {SelectedOrphan.FullName}",
-                    Written = SelectedOrphan.LastWriteTimeUtc.ToUtcZero(),
-                    Notes = $"{Strings.TextCreatedFromOrphan} {SelectedOrphan.FullName}, {SelectedOrphan.LastWriteTimeUtc}"
-                };
-
-                TitleVersionTable.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(SelectedOrphan.FullName));
-
-                TitleVersionTable.Save();
-                TitleTable.Save();
-                Adapter.Updated[4].Remove(SelectedOrphan);
-                SelectedOrphan = null;
-                MainWindowViewModel.Instance.NotifyUpdate<TitleViewModel>();
-            }
-        }
-
-        private bool CanRunOrphanCommand(object parm)
-        {
-            return SelectedOrphan != null;
-        }
-
-        private string GetOrphanDetailMessage(string message, string detail)
-        {
-            return $"{message}{Environment.NewLine}{Environment.NewLine}{detail}";
-        }
-
-        private MenuItem CreateMenuItem(string header, ICommand command)
-        {
-            MenuItem item = new()
-            {
-                Header = header,
-                Command = command,
-                HorizontalContentAlignment = HorizontalAlignment.Left,
-                VerticalContentAlignment = VerticalAlignment.Center
-            };
-            return item;
         }
         #endregion
     }

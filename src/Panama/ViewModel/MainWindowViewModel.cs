@@ -116,7 +116,7 @@ namespace Restless.Panama.ViewModel
 
             Commands.Add("Close", p => WindowOwner.Close());
             Commands.Add("ResetWindow", RunResetWindowCommand);
-            Commands.Add("ToolMessageSync", p => NavigatorItems.Select<ToolMessageSyncViewModel>());
+            //Commands.Add("ToolMessageSync", p => NavigatorItems.Select<ToolMessageSyncViewModel>());
 
             NavigatorItems = new NavigatorItemCollection(NavigationGroup.TotalNumberOfGroups);
             NavigatorItems.SelectedItemChanged += NavigatorItemsSelectedItemChanged;

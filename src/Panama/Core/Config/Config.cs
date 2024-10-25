@@ -98,7 +98,7 @@ namespace Restless.Panama.Core
             /// <summary>
             /// Gets the default width for the tool window.
             /// </summary>
-            public const int DefaultWidth = 856;
+            public const int DefaultWidth = 986;
 
             /// <summary>
             /// Gets the default height for the tool window.
@@ -108,7 +108,7 @@ namespace Restless.Panama.Core
             /// <summary>
             /// Gets the minimum width for the tool window.
             /// </summary>
-            public const int MinWidth = 560;
+            public const int MinWidth = 680;
 
             /// <summary>
             /// Gets the minimum height for the tool window.

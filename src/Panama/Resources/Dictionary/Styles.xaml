@@ -135,4 +135,19 @@
         <Setter Property="VerticalContentAlignment" Value="Top"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
     </Style>
+
+
+    <Style x:Key="Panama.Styles.StatusBar" TargetType="StatusBar">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
+        <Setter Property="FontSize" Value="{DynamicResource MahApps.Font.Size.StatusBar}"/>
+        <Setter Property="Padding" Value="3"/>
+    </Style>
+
+    <Style x:Key="Panama.Styles.StatusBar.Selector" TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}">
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <Style TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}"/>
+
 </ResourceDictionary>

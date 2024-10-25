@@ -4,26 +4,26 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     xmlns:vw="clr-namespace:Restless.Panama.View">
-    
+
     <DataTemplate DataType="{x:Type vm:AlertViewModel}">
         <vw:AlertView />
     </DataTemplate>
-    
+
     <DataTemplate DataType="{x:Type vm:AuthorViewModel}">
         <vw:AuthorView />
-    </DataTemplate>    
-    
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vm:CredentialViewModel}">
         <vw:CredentialView />
     </DataTemplate>
-    
+
     <DataTemplate DataType="{x:Type vm:LinkViewModel}">
         <vw:LinkView />
     </DataTemplate>
-    
+
     <DataTemplate DataType="{x:Type vm:LinkVerifyViewModel}">
         <vw:LinkVerifyView />
-    </DataTemplate>    
+    </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:PublisherViewModel}">
         <vw:PublisherView />
@@ -44,7 +44,7 @@
     <DataTemplate DataType="{x:Type vm:TableViewModel}">
         <vw:TableView />
     </DataTemplate>
-    
+
     <DataTemplate DataType="{x:Type vm:TagViewModel}">
         <vw:TagView />
     </DataTemplate>
@@ -57,18 +57,6 @@
         <vw:TitleQueueView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ToolConvertViewModel}">
-        <vw:ToolConvertView />
-    </DataTemplate>
-    
-    <DataTemplate DataType="{x:Type vm:ToolMessageSyncViewModel}">
-        <vw:ToolMessageSyncView />
-    </DataTemplate>
-    
-    <DataTemplate DataType="{x:Type vm:ToolScrambleViewModel}">
-        <vw:ToolScrambleView />
-    </DataTemplate>
-    
     <DataTemplate DataType="{x:Type vm:ToolSearchViewModel}">
         <vw:ToolSearchView />
     </DataTemplate>
