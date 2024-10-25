@@ -61,43 +61,56 @@
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>
 
-    <tk:MultiSplitterGrid
-        Style="{StaticResource Panama.Styles.MainSplitter}"
-        MinDetailSize="{x:Static core:Config+MainNavigation.MinWidth}"
-        MaxDetailSize="{x:Static core:Config+MainNavigation.MaxWidth}"
-        DetailSize="{Binding Config.MainNavigationWidth , Mode=TwoWay}">
+    <Grid tk:Property.RowHeights="*,Auto">
+        <tk:MultiSplitterGrid
+            Style="{StaticResource Panama.Styles.MainSplitter}"
+            MinDetailSize="{x:Static core:Config+MainNavigation.MinWidth}"
+            MaxDetailSize="{x:Static core:Config+MainNavigation.MaxWidth}"
+            DetailSize="{Binding Config.MainNavigationWidth , Mode=TwoWay}">
 
-        <tk:MultiSplitterGrid.DetailContent>
-            <StackPanel>
-                <TextBlock Style="{StaticResource Panama.Styles.NavTitle}" Text="{Binding AppInfo.Product, Mode=OneTime}"/>
+            <tk:MultiSplitterGrid.DetailContent>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource Panama.Styles.TextBlock.NavTitle}" Text="{Binding AppInfo.Product, Mode=OneTime}"/>
 
-                <tk:MainNavigator
-                    IsExpanded="{Binding Config.NavTitlesExpander}"
-                    HeaderText="{x:Static r:Strings.NavHeaderMain}"
-                    ItemsSource="{Binding NavigatorItems.Groups[0]}"
-                    SelectedItem="{Binding NavigatorItems.SelectedItems[0]}"/>
+                    <tk:MainNavigator
+                        IsExpanded="{Binding Config.NavTitlesExpander}"
+                        HeaderText="{x:Static r:Strings.NavHeaderMain}"
+                        ItemsSource="{Binding NavigatorItems.Groups[0]}"
+                        SelectedItem="{Binding NavigatorItems.SelectedItems[0]}"/>
 
-                <tk:MainNavigator
-                    IsExpanded="{Binding Config.NavSettingsExpander}"
-                    HeaderText="{x:Static r:Strings.NavHeaderSettings}"
-                    ItemsSource="{Binding NavigatorItems.Groups[1]}"
-                    SelectedItem="{Binding NavigatorItems.SelectedItems[1]}"/>
+                    <tk:MainNavigator
+                        IsExpanded="{Binding Config.NavSettingsExpander}"
+                        HeaderText="{x:Static r:Strings.NavHeaderSettings}"
+                        ItemsSource="{Binding NavigatorItems.Groups[1]}"
+                        SelectedItem="{Binding NavigatorItems.SelectedItems[1]}"/>
 
-                <tk:MainNavigator
-                    IsExpanded="{Binding Config.NavOtherExpander}"
-                    HeaderText="{x:Static r:Strings.NavHeaderOther}"
-                    ItemsSource="{Binding NavigatorItems.Groups[2]}"
-                    SelectedItem="{Binding NavigatorItems.SelectedItems[2]}"/>
+                    <tk:MainNavigator
+                        IsExpanded="{Binding Config.NavOtherExpander}"
+                        HeaderText="{x:Static r:Strings.NavHeaderOther}"
+                        ItemsSource="{Binding NavigatorItems.Groups[2]}"
+                        SelectedItem="{Binding NavigatorItems.SelectedItems[2]}"/>
 
-            </StackPanel>
-        </tk:MultiSplitterGrid.DetailContent>
+                </StackPanel>
+            </tk:MultiSplitterGrid.DetailContent>
 
-        <tk:MultiSplitterGrid.MainContent>
-            <TextBlock Text="Main Content"/>
-        </tk:MultiSplitterGrid.MainContent>
-    </tk:MultiSplitterGrid>
+            <tk:MultiSplitterGrid.MainContent>
+                <TextBlock Text="Main Content"/>
+            </tk:MultiSplitterGrid.MainContent>
+        </tk:MultiSplitterGrid>
 
+        <StatusBar Grid.Row="1">
+            <StatusBarItem>
+                <TextBlock
+                    Style="{StaticResource Panama.Styles.TextBlock.NotificationMessage}"
+                    Text="{Binding NotificationMessage, NotifyOnTargetUpdated=True}"/>
+            </StatusBarItem>
 
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Text="{Binding DisplayName, Mode=OneTime}"/>
+            </StatusBarItem>
+
+        </StatusBar>
+    </Grid>
     <!--
     <tk:AppWindow.Menu>
         <Menu KeyboardNavigation.TabNavigation="Cycle">

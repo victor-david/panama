@@ -118,12 +118,35 @@
     </Style>
 
     <!-- Main title text block -->
-    <Style x:Key="Panama.Styles.NavTitle" TargetType="TextBlock">
+    <Style x:Key="Panama.Styles.TextBlock.NavTitle" TargetType="TextBlock">
         <Setter Property="Margin" Value="5,0,0,5"/>
         <Setter Property="FontSize" Value="21"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <!-- Notification message text block -->
+    <Style x:Key="Panama.Styles.TextBlock.NotificationMessage" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:5" Value="1"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:7.5" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                        <ThicknessAnimation From="180,0" To="0" Duration="0:0:1" Storyboard.TargetProperty="Margin">
+                            <ThicknessAnimation.EasingFunction>
+                                <BounceEase Bounces="10" Bounciness="1.5"/>
+                            </ThicknessAnimation.EasingFunction>
+                        </ThicknessAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
     </Style>
 
     <!-- TextBox -->
