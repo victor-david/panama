@@ -25,29 +25,39 @@
             </mah:WindowCommands.Resources>
 
             <Button
-                Command="{Binding Commands[Save]}"
+                Command="{Binding SaveAllCommand}"
                 ToolTip="{x:Static r:Strings.ToolTipSaveAll}">
                 <ico:PackIconMaterial Kind="ContentSaveAllOutline"/>
             </Button>
 
             <Button
-                Command="{Binding Commands[OpenSettingsWindow]}"
+                Command="{Binding OpenSettingsCommand}"
                 ToolTip="{x:Static r:Strings.ToolTipOpenWindowSettings}">
                 <ico:PackIconMaterial Kind="CogOutline"/>
             </Button>
 
             <Button
-                Command="{Binding Commands[OpenToolWindow]}"
+                Command="{Binding OpenToolsCommand}"
                 ToolTip="{x:Static r:Strings.ToolTipOpenWindowTool}">
                 <ico:PackIconMaterial Kind="Tools"/>
             </Button>
 
             <Button
-                Command="{Binding Commands[OpenAboutWindow]}"
+                Command="{Binding OpenAboutCommand}"
                 ToolTip="{x:Static r:Strings.ToolTipOpenWindowAbout}">
                 <ico:PackIconMaterial Kind="InformationVariant"/>
             </Button>
 
+            <mah:DropDownButton Content="{ico:Material Kind=PaletteOutline}" ItemsSource="{Binding ThemeIds}">
+
+                <mah:DropDownButton.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
+                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=mah:DropDownButton}, Path=DataContext.SwitchThemeCommand}" />
+                        <Setter Property="CommandParameter" Value="{Binding}" />
+                    </Style>
+                </mah:DropDownButton.ItemContainerStyle>
+
+            </mah:DropDownButton>
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>
 

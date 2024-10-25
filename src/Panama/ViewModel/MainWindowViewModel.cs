@@ -8,10 +8,12 @@ using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
+using Restless.Toolkit.Mvvm;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media;
+using System.Windows.Input;
 using IconKind = MahApps.Metro.IconPacks.PackIconMaterialKind;
 
 namespace Restless.Panama.ViewModel
@@ -34,10 +36,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the navigator items
         /// </summary>
-        public NavigatorItemCollection NavigatorItems
-        {
-            get;
-        }
+        public NavigatorItemCollection NavigatorItems { get; }
 
         /// <summary>
         /// Gets or sets the selected view model.
@@ -69,6 +68,18 @@ namespace Restless.Panama.ViewModel
                 notificationMessage = null;
             }
         }
+
+        /// <summary>
+        /// Gets the list of theme ids
+        /// </summary>
+        public static List<string> ThemeIds => ThemeManager.Themes;
+
+        public ICommand OpenAboutCommand { get; }
+        public ICommand OpenSettingsCommand { get; }
+        public ICommand OpenToolsCommand { get; }
+        public ICommand SwitchThemeCommand { get; }
+        public ICommand SaveAllCommand { get; }
+
         #endregion
 
         /************************************************************************/
@@ -88,9 +99,13 @@ namespace Restless.Panama.ViewModel
 #if DEBUG
             DisplayName += " (DEBUG)";
 #endif
-            Commands.Add("OpenAboutWindow", p => WindowFactory.About.Create().ShowDialog());
-            Commands.Add("OpenSettingsWindow", p => WindowFactory.Settings.Create().ShowDialog());
-            Commands.Add("OpenToolWindow", p => WindowFactory.Tool.Create().ShowDialog());
+
+            OpenAboutCommand = RelayCommand.Create(p => WindowFactory.About.Create().ShowDialog());
+            OpenSettingsCommand = RelayCommand.Create(p => WindowFactory.Settings.Create().ShowDialog());
+            OpenToolsCommand = RelayCommand.Create(p => WindowFactory.Tool.Create().ShowDialog());
+            SwitchThemeCommand = RelayCommand.Create(RunSwitchThemeCommand);
+            SaveAllCommand = RelayCommand.Create(p => RunSaveCommand());
+
 
             Commands.Add("NavigateAuthor", p => NavigatorItems.Select<AuthorViewModel>());
             Commands.Add("NavigateCredential", p => NavigatorItems.Select<CredentialViewModel>());
@@ -100,15 +115,8 @@ namespace Restless.Panama.ViewModel
             Commands.Add("NavigateTag", p => NavigatorItems.Select<TagViewModel>());
 
             Commands.Add("Close", p => WindowOwner.Close());
-
             Commands.Add("ResetWindow", RunResetWindowCommand);
-            Commands.Add("Save", RunSaveCommand);
-
-            //Commands.Add("ToolConvert", p => NavigatorItems.Select<ToolConvertViewModel>(), CanRunToolConvertCommand);
             Commands.Add("ToolMessageSync", p => NavigatorItems.Select<ToolMessageSyncViewModel>());
-            //Commands.Add("ToolScramble", p => NavigatorItems.Select<ToolScrambleViewModel>());
-
-            //MainNavigationWidth = new GridLength(Config.MainNavigationWidth, GridUnitType.Pixel);
 
             NavigatorItems = new NavigatorItemCollection(NavigationGroup.TotalNumberOfGroups);
             NavigatorItems.SelectedItemChanged += NavigatorItemsSelectedItemChanged;
@@ -245,7 +253,17 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods (other)
-        private void RunSaveCommand(object parm)
+
+        private void RunSwitchThemeCommand(object parm)
+        {
+            if (parm is string themeId)
+            {
+                ThemeManager.SetTheme(themeId);
+                Config.ThemeId = themeId;
+            }
+        }
+
+        private void RunSaveCommand()
         {
             viewModelCache.SignalSave();
             Config.Instance.SaveFilterObjects();
