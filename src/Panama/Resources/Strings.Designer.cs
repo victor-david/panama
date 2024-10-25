@@ -2644,15 +2644,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Information about the app.
-        /// </summary>
-        public static string ToolTipAbout {
-            get {
-                return ResourceManager.GetString("ToolTipAbout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This alert is currently enabled.
         /// </summary>
         public static string ToolTipAlertEnabled {
@@ -2739,6 +2730,33 @@ namespace Restless.Panama.Resources {
         public static string TooltipMessageInUse {
             get {
                 return ResourceManager.GetString("TooltipMessageInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information about the app.
+        /// </summary>
+        public static string ToolTipOpenWindowAbout {
+            get {
+                return ResourceManager.GetString("ToolTipOpenWindowAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open application settings.
+        /// </summary>
+        public static string ToolTipOpenWindowSettings {
+            get {
+                return ResourceManager.GetString("ToolTipOpenWindowSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open tool window.
+        /// </summary>
+        public static string ToolTipOpenWindowTool {
+            get {
+                return ResourceManager.GetString("ToolTipOpenWindowTool", resourceCulture);
             }
         }
         
@@ -2928,15 +2946,6 @@ namespace Restless.Panama.Resources {
         public static string ToolTipSendReport {
             get {
                 return ResourceManager.GetString("ToolTipSendReport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open application settings.
-        /// </summary>
-        public static string ToolTipSettings {
-            get {
-                return ResourceManager.GetString("ToolTipSettings", resourceCulture);
             }
         }
         

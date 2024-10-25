@@ -17,39 +17,37 @@
     TextOptions.TextRenderingMode="ClearType"
     WindowStartupLocation="CenterScreen">
 
-    <mah:MetroWindow.IconTemplate>
-        <DataTemplate>
-            <ico:PackIconMaterial
-                Kind="TextBoxOutline"
-                Width="24"
-                Height="24"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Margin="4"
-                Foreground="{DynamicResource MahApps.Brushes.IdealForeground}"/>
-        </DataTemplate>
-    </mah:MetroWindow.IconTemplate>
-
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands Margin="16,0" ShowSeparators="False">
+
             <mah:WindowCommands.Resources>
                 <Style TargetType="ico:PackIconMaterial" BasedOn="{StaticResource Panama.Styles.Icon.TitleBar}"/>
             </mah:WindowCommands.Resources>
+
             <Button
                 Command="{Binding Commands[Save]}"
                 ToolTip="{x:Static r:Strings.ToolTipSaveAll}">
                 <ico:PackIconMaterial Kind="ContentSaveAllOutline"/>
             </Button>
+
             <Button
                 Command="{Binding Commands[OpenSettingsWindow]}"
-                ToolTip="{x:Static r:Strings.ToolTipSettings}">
+                ToolTip="{x:Static r:Strings.ToolTipOpenWindowSettings}">
                 <ico:PackIconMaterial Kind="CogOutline"/>
             </Button>
+
+            <Button
+                Command="{Binding Commands[OpenToolWindow]}"
+                ToolTip="{x:Static r:Strings.ToolTipOpenWindowTool}">
+                <ico:PackIconMaterial Kind="Tools"/>
+            </Button>
+
             <Button
                 Command="{Binding Commands[OpenAboutWindow]}"
-                ToolTip="{x:Static r:Strings.ToolTipAbout}">
+                ToolTip="{x:Static r:Strings.ToolTipOpenWindowAbout}">
                 <ico:PackIconMaterial Kind="InformationVariant"/>
             </Button>
+
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>
 

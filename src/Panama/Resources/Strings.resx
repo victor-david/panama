@@ -1203,13 +1203,16 @@ Changes will take effect after you restart the application.</value>
   <data name="TextStartup" xml:space="preserve">
     <value>Startup</value>
   </data>
-  <data name="ToolTipAbout" xml:space="preserve">
+  <data name="ToolTipOpenWindowAbout" xml:space="preserve">
     <value>Information about the app</value>
   </data>
   <data name="ToolTipSaveAll" xml:space="preserve">
     <value>Save all data (saves automatcially on exit)</value>
   </data>
-  <data name="ToolTipSettings" xml:space="preserve">
+  <data name="ToolTipOpenWindowSettings" xml:space="preserve">
     <value>Open application settings</value>
+  </data>
+  <data name="ToolTipOpenWindowTool" xml:space="preserve">
+    <value>Open tool window</value>
   </data>
 </root>

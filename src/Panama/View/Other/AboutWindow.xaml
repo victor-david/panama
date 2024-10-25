@@ -17,12 +17,12 @@
     SizeToContent="Height"
     ShowInTaskbar="False">
 
-    <StackPanel Margin="{StaticResource DefaultPadding}">
+    <StackPanel Margin="{StaticResource Panama.Layout.DefaultPadding}">
 
         <StackPanel.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="Margin" Value="0,0,0,12"/>
-                <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource MahApps.Brushes.ThemeForeground}"/>
                 <Setter Property="FontSize" Value="13"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="TextWrapping" Value="Wrap"/>
@@ -33,17 +33,17 @@
             <TextBlock
                 Margin="0"
                 VerticalAlignment="Center"
-                Style="{StaticResource NavTitleTextBlockStyle}"
-                Text="{Binding AppInfo.Title, FallbackValue=Panama}"/>
+                Style="{StaticResource Panama.Styles.NavTitle}"
+                Text="{Binding AppInfo.Title, Mode=OneTime}"/>
 
             <TextBlock Grid.Column="2" Margin="0" HorizontalAlignment="Right">
                 <Run Text="Version"/>
                 <Run
-                    Foreground="{StaticResource AlertForegroundBrush}"
+                    Foreground="{StaticResource MahApps.Brushes.Highlight}"
                     Text="{Binding AppInfo.VersionMajor, Mode=OneTime}"/>
                 <Run Text="Build"/>
                 <Run
-                    Foreground="{StaticResource AlertForegroundBrush}"
+                    Foreground="{StaticResource MahApps.Brushes.Highlight}"
                     Text="{Binding AppInfo.VersionRaw.Build, Mode=OneTime}"/>
             </TextBlock>
         </Grid>
@@ -57,7 +57,7 @@
         <TextBlock>
             <Run Text="{x:Static r:Strings.TextStartup}"/>
             <Run
-                Foreground="{StaticResource AlertForegroundBrush}"
+                Foreground="{StaticResource MahApps.Brushes.Highlight}"
                 Text="{Binding Config.StartupCount, Mode=OneTime, StringFormat='{}{0:#,0}'}"/>
         </TextBlock>
 

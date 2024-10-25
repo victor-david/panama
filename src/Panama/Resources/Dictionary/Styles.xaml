@@ -10,6 +10,20 @@
         <Setter Property="TitleAlignment" Value="Center"/>
         <Setter Property="TitleCharacterCasing" Value="Normal"/>
         <Setter Property="TitleBarHeight" Value="{DynamicResource Panama.Layout.TitleBar.Height}"/>
+        <Setter Property="IconTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ico:PackIconMaterial
+                        Kind="TextBoxOutline"
+                        Width="24"
+                        Height="24"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="4"
+                        Foreground="{DynamicResource MahApps.Brushes.IdealForeground}"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Main splitter -->
