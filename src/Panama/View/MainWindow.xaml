@@ -32,6 +32,9 @@
 
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands Margin="16,0" ShowSeparators="False">
+            <mah:WindowCommands.Resources>
+                <Style TargetType="ico:PackIconMaterial" BasedOn="{StaticResource Panama.Styles.Icon.TitleBar}"/>
+            </mah:WindowCommands.Resources>
             <Button
                 Command="{Binding Commands[Save]}"
                 ToolTip="{x:Static r:Strings.ToolTipSaveAll}">
@@ -58,30 +61,28 @@
 
         <tk:MultiSplitterGrid.DetailContent>
             <StackPanel>
-                <TextBlock Text="{Binding AppInfo.Product, Mode=OneTime}"/>
-
-
-                <tk:MainNavigator
-                IsExpanded="{Binding Config.NavTitlesExpander}"
-                HeaderText="{x:Static r:Strings.NavHeaderMain}"
-                ItemsSource="{Binding NavigatorItems.Groups[0]}"
-                SelectedItem="{Binding NavigatorItems.SelectedItems[0]}"/>
+                <TextBlock Style="{StaticResource Panama.Styles.NavTitle}" Text="{Binding AppInfo.Product, Mode=OneTime}"/>
 
                 <tk:MainNavigator
-                IsExpanded="{Binding Config.NavSettingsExpander}"
-                HeaderText="{x:Static r:Strings.NavHeaderSettings}"
-                ItemsSource="{Binding NavigatorItems.Groups[1]}"
-                SelectedItem="{Binding NavigatorItems.SelectedItems[1]}"/>
+                    IsExpanded="{Binding Config.NavTitlesExpander}"
+                    HeaderText="{x:Static r:Strings.NavHeaderMain}"
+                    ItemsSource="{Binding NavigatorItems.Groups[0]}"
+                    SelectedItem="{Binding NavigatorItems.SelectedItems[0]}"/>
 
                 <tk:MainNavigator
-                IsExpanded="{Binding Config.NavOtherExpander}"
-                HeaderText="{x:Static r:Strings.NavHeaderOther}"
-                ItemsSource="{Binding NavigatorItems.Groups[2]}"
-                SelectedItem="{Binding NavigatorItems.SelectedItems[2]}"/>
+                    IsExpanded="{Binding Config.NavSettingsExpander}"
+                    HeaderText="{x:Static r:Strings.NavHeaderSettings}"
+                    ItemsSource="{Binding NavigatorItems.Groups[1]}"
+                    SelectedItem="{Binding NavigatorItems.SelectedItems[1]}"/>
+
+                <tk:MainNavigator
+                    IsExpanded="{Binding Config.NavOtherExpander}"
+                    HeaderText="{x:Static r:Strings.NavHeaderOther}"
+                    ItemsSource="{Binding NavigatorItems.Groups[2]}"
+                    SelectedItem="{Binding NavigatorItems.SelectedItems[2]}"/>
 
             </StackPanel>
         </tk:MultiSplitterGrid.DetailContent>
-
 
         <tk:MultiSplitterGrid.MainContent>
             <TextBlock Text="Main Content"/>

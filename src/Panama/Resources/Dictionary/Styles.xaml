@@ -15,24 +15,49 @@
     <!-- Main splitter -->
     <Style x:Key="Panama.Styles.MainSplitter" TargetType="tk:MultiSplitterGrid">
         <Setter Property="CanCollapseDetail" Value="False"/>
-        <Setter Property="DetailContentMargin" Value="{DynamicResource Panama.Layout.DefaultVerticalPadding}"/>
+        <Setter Property="DetailContentMargin" Value="0"/>
         <Setter Property="DetailHeaderMargin" Value="0"/>
         <Setter Property="MainContentMargin" Value="{DynamicResource Panama.Layout.DefaultPadding}"/>
         <Setter Property="MainHeaderMargin" Value="0"/>
         <Setter Property="SplitterPosition" Value="Left"/>
     </Style>
 
-    <Style TargetType="Expander">
-
+    <!-- Main navigator-->
+    <Style TargetType="tk:MainNavigator">
+        <Setter Property="Margin" Value="10,0,0,10"/>
+        <Setter Property="ItemIndent" Value="20"/>
+        <Setter Property="HideWhenEmpty" Value="False"/>
     </Style>
 
     <!-- Icons -->
     <Style x:Key="Panama.Styles.Icon" TargetType="ico:PackIconMaterial">
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style TargetType="ico:PackIconMaterial" BasedOn="{StaticResource Panama.Styles.Icon}"/>
+
+    <Style x:Key="Panama.Styles.Icon.TitleBar" TargetType="ico:PackIconMaterial" BasedOn="{StaticResource Panama.Styles.Icon}">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.IdealForeground}"/>
+    </Style>
+
+    <!-- Navigator expanders -->
+    <ico:Material x:Key="Panama.NavigatorExpander.Icon" x:Shared="False"  Kind="ChevronRight"/>
+    <ico:Material x:Key="Panama.NavigatorExpander.ExpandedIcon" x:Shared="False"  Kind="ChevronDown"/>
+
+    <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource {x:Static tk:ResourceKeys.DefaultNavigatorExpanderStyleKey}}">
+        <Setter Property="Icon" Value="{DynamicResource Panama.NavigatorExpander.Icon}"/>
+        <Setter Property="ExpandedIcon" Value="{DynamicResource Panama.NavigatorExpander.ExpandedIcon}"/>
+    </Style>
+
+    <!-- Main title text block -->
+    <Style x:Key="Panama.Styles.NavTitle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="5,0,0,5"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
 
 </ResourceDictionary>
