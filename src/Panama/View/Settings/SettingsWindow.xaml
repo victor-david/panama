@@ -25,27 +25,27 @@
             DisplayMemberPath="Name"
             SelectedItem="{Binding SelectedSection}"/>
 
-        <Grid
+         <Grid
             Grid.Column="1"
             Style="{StaticResource Panama.Styles.Panel.DataEntry}"
             Margin="{StaticResource Panama.Layout.Padding.Full}"
-            tk:Property.RowHeights="Auto,Auto,Auto,Auto,*">
+            tk:Property.RowHeights="*">
 
-            <!-- Section 1 (display) -->
-            <vw:SettingsDisplay Grid.Row="0" tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="1"/>
+                <!-- Section 1 (display) -->
+                <vw:SettingsDisplay tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="1"/>
 
-            <!-- Section 2 (folders) -->
-            <vw:SettingsFolder Grid.Row="1" tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="2"/>
+                <!-- Section 2 (folders) -->
+                <vw:SettingsFolder tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="2"/>
 
-            <!-- Section 3 (colors) -->
-            <vw:SettingsColor Grid.Row="2" tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="3"/>
+                <!-- Section 3 (colors) -->
+                <vw:SettingsColor tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="3"/>
 
-            <!-- Section 4 (submissions) -->
-            <vw:SettingsSubmission Grid.Row="3" tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="4"/>
+                <!-- Section 4 (submissions) -->
+                <vw:SettingsSubmission tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="4"/>
 
-            <!-- Section 5 (advanced) -->
-            <vw:SettingsSubmission Grid.Row="4" tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="5"/>
+                <!-- Section 5 (advanced) -->
+                <vw:SettingsAdvanced tk:Property.IsLongVisible="{Binding SelectedSection.Id}" tk:Property.IsLongVisibleValue="5"/>
 
-        </Grid>
+            </Grid>
     </Grid>
 </mah:MetroWindow>

@@ -5,7 +5,7 @@ namespace Restless.Panama.View
     /// <summary>
     /// Interaction logic for SettingAdvanced.xaml
     /// </summary>
-    public partial class SettingsAdvanced : HeaderedContentControl
+    public partial class SettingsAdvanced : DockPanel
     {
         public SettingsAdvanced()
         {

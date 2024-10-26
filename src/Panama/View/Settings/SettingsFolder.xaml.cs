@@ -5,7 +5,7 @@ namespace Restless.Panama.View
     /// <summary>
     /// Interaction logic for SettingFolder.xaml
     /// </summary>
-    public partial class SettingsFolder : HeaderedContentControl
+    public partial class SettingsFolder : StackPanel
     {
         public SettingsFolder()
         {

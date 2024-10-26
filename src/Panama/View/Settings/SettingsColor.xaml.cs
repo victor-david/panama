@@ -5,7 +5,7 @@ namespace Restless.Panama.View
     /// <summary>
     /// Interaction logic for SettingsColor.xaml
     /// </summary>
-    public partial class SettingsColor : HeaderedContentControl
+    public partial class SettingsColor : StackPanel
     {
         public SettingsColor()
         {
