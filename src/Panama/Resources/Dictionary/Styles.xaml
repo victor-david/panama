@@ -188,12 +188,12 @@
     <Style x:Key="Panama.Styles.TextBox.Multiline" TargetType="TextBox" BasedOn="{StaticResource MahApps.Styles.TextBox}">
         <Setter Property="AcceptsReturn" Value="True" />
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="MinHeight" Value="198"/>
-        <Setter Property="MaxHeight" Value="198"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
     </Style>
 
+    <!-- StatusBar-->
     <Style x:Key="Panama.Styles.StatusBar" TargetType="StatusBar">
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
         <Setter Property="FontSize" Value="{DynamicResource MahApps.Font.Size.StatusBar}"/>
