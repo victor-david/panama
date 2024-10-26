@@ -32,10 +32,20 @@
         <Setter Property="CanCollapseDetail" Value="False"/>
         <Setter Property="DetailContentMargin" Value="0"/>
         <Setter Property="DetailHeaderMargin" Value="0"/>
-        <Setter Property="MainContentMargin" Value="{DynamicResource Panama.Layout.DefaultPadding}"/>
+        <Setter Property="MainContentMargin" Value="{DynamicResource Panama.Layout.Padding.Full}"/>
         <Setter Property="MainHeaderMargin" Value="0"/>
         <Setter Property="SplitterPosition" Value="Left"/>
     </Style>
+
+    <!-- Splitter Grid-->
+    <Style x:Key="Panama.Styles.SplitterGrid" TargetType="tk:SplitterGrid">
+        <Setter Property="MarginContentLeft" Value="{DynamicResource Panama.Layout.Padding.Top.Right.Bottom}"/>
+        <Setter Property="MarginContentRight" Value="{DynamicResource Panama.Layout.Padding.Full}"/>
+        <Setter Property="MarginHeaderLeft" Value="0,0,2,0"/>
+        <Setter Property="MarginHeaderRight" Value="2,0,0,0"/>
+    </Style>
+
+    <Style TargetType="tk:SplitterGrid" BasedOn="{StaticResource Panama.Styles.SplitterGrid}"/>
 
     <!-- Icons -->
     <Style x:Key="Panama.Styles.Icon" TargetType="ico:PackIconMaterial">
@@ -81,6 +91,11 @@
 
     <Style TargetType="con:PathSelector" BasedOn="{StaticResource Panana.Styles.PathSelector}"/>
 
+    <!-- Data grid-->
+    <Style x:Key="Panama.Styles.DataGrid" TargetType="DataGrid" BasedOn="{StaticResource {x:Static tk:ResourceKeys.DefaultDataGridStyleKey}}"/>
+    <Style TargetType="DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid}"/>
+    <Style TargetType="tk:DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid}"/>
+
     <!-- Display grid (used in statistics) -->
     <Style x:Key="Panama.Styles.DisplayGrid" TargetType="con:DisplayGrid">
         <Setter Property="Margin" Value="0,3"/>
@@ -94,9 +109,16 @@
 
     <Style TargetType="con:DisplayGrid" BasedOn="{StaticResource Panama.Styles.DisplayGrid}"/>
 
+    <!-- List box-->
+    <Style x:Key="Panama.Styles.ListBox" TargetType="ListBox" BasedOn="{StaticResource MahApps.Styles.ListBox}">
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
+    </Style>
+
+    <Style TargetType="ListBox" BasedOn="{StaticResource Panama.Styles.ListBox}"/>
+
     <!-- Data panel -->
     <Style x:Key="Panama.Styles.TextBlock.DataEntry" TargetType="TextBlock">
-        <Setter Property="Margin" Value="{StaticResource Panama.Layout.DataEntry.Margin}"/>
+        <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -107,7 +129,7 @@
             <Style TargetType="TextBlock" BasedOn="{StaticResource Panama.Styles.TextBlock.DataEntry}"/>
 
             <Style TargetType="TextBox" BasedOn="{StaticResource MahApps.Styles.TextBox}">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.DataEntry.Margin}"/>
+                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
             </Style>
 
             <Style TargetType="CheckBox" BasedOn="{StaticResource MahApps.Styles.CheckBox}">
@@ -115,17 +137,17 @@
             </Style>
 
             <Style TargetType="ListBox" BasedOn="{StaticResource MahApps.Styles.ListBox}">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.DataEntry.Margin}"/>
+                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
             </Style>
 
             <Style x:Key="{x:Static con:PathSelector.TextBlockStyleKey}" TargetType="TextBlock" BasedOn="{StaticResource Panama.Styles.TextBlock.DataEntry}"/>
 
             <Style TargetType="con:PathSelector" BasedOn="{StaticResource Panana.Styles.PathSelector}">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.DataEntry.Margin}"/>
+                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
             </Style>
 
             <Style TargetType="Slider" BasedOn="{StaticResource MahApps.Styles.Slider}">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.DataEntry.Margin}"/>
+                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
             </Style>
         </Style.Resources>
     </Style>

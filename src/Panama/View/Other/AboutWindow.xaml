@@ -17,7 +17,7 @@
     SizeToContent="Height"
     ShowInTaskbar="False">
 
-    <StackPanel Margin="{StaticResource Panama.Layout.DefaultPadding}">
+    <StackPanel Margin="{StaticResource Panama.Layout.Padding.Full}">
 
         <StackPanel.Resources>
             <Style TargetType="TextBlock">

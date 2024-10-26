@@ -14,12 +14,12 @@
 
     <Grid.Resources>
         <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource Panama.Styles.NavigatorExpander}">
-            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.DefaultBottomPadding}"/>
+            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom}"/>
             <Setter Property="Padding" Value="10,0,0,0"/>
         </Style>
 
         <Style TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}">
-            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.DefaultBottomPadding}"/>
+            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom}"/>
         </Style>
 
         <Style TargetType="tk:LineItem">
@@ -35,7 +35,7 @@
     </Grid.Resources>
 
     <!-- Basic-->
-    <Grid Grid.Column="0" tk:Property.RowHeights="Auto,*" Margin="{DynamicResource Panama.Layout.DefaultHorizontalPadding}">
+    <Grid Grid.Column="0" tk:Property.RowHeights="Auto,*" Margin="{DynamicResource Panama.Layout.Padding.Right}">
         <StatusBar>
             <TextBlock Text="Basic Stats"/>
         </StatusBar>
@@ -89,7 +89,7 @@
     </Grid>
 
     <!-- Folders -->
-    <Grid Grid.Column="1" tk:Property.RowHeights="Auto,*" Margin="{StaticResource Panama.Layout.DefaultHorizontalPadding}">
+    <Grid Grid.Column="1" tk:Property.RowHeights="Auto,*" Margin="{StaticResource Panama.Layout.Padding.Left}">
         <StatusBar>
             <TextBlock Text="Folders"/>
         </StatusBar>

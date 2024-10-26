@@ -8,12 +8,18 @@
 
     <!-- Local -->
     <sys:Int32 x:Key="Panama.Layout.TitleBar.Height">34</sys:Int32>
-    <Thickness x:Key="Panama.Layout.DefaultPadding">10</Thickness>
-    <Thickness x:Key="Panama.Layout.DefaultVerticalPadding">0,10</Thickness>
-    <Thickness x:Key="Panama.Layout.DefaultHorizontalPadding">10,0</Thickness>
-    <Thickness x:Key="Panama.Layout.DefaultBottomPadding">0,0,0,10</Thickness>
-    <Thickness x:Key="Panama.Layout.DefaultTopPadding">0,10,0,0</Thickness>
-    <Thickness x:Key="Panama.Layout.DataEntry.Margin">0,0,6,6</Thickness>
+
+    <Thickness x:Key="Panama.Layout.Padding.Full">10</Thickness>
+    <Thickness x:Key="Panama.Layout.Padding.Vertical">0,10</Thickness>
+    <Thickness x:Key="Panama.Layout.Padding.Horizontal">10,0</Thickness>
+    <Thickness x:Key="Panama.Layout.Padding.Bottom">0,0,0,10</Thickness>
+    <Thickness x:Key="Panama.Layout.Padding.Top">0,10,0,0</Thickness>
+    <Thickness x:Key="Panama.Layout.Padding.Top.Right">0,10,10,0</Thickness>
+    <Thickness x:Key="Panama.Layout.Padding.Top.Right.Bottom">0,10,10,10</Thickness>
+    <Thickness x:Key="Panama.Layout.Padding.Right">0,0,10,0</Thickness>
+    <Thickness x:Key="Panama.Layout.Padding.Left">10,0,0,0</Thickness>
+
+    <Thickness x:Key="Panama.Layout.Margin.DataEntry">0,0,6,6</Thickness>
 
     <Thickness x:Key="Panama.Layout.StackedControlMargin">0,0,0,14</Thickness>
     <!-- This one not in the normal/compact dictionaries. It's fixed -->

@@ -28,7 +28,7 @@
         <Grid
             Grid.Column="1"
             Style="{StaticResource Panama.Styles.Panel.DataEntry}"
-            Margin="{StaticResource Panama.Layout.DefaultPadding}"
+            Margin="{StaticResource Panama.Layout.Padding.Full}"
             tk:Property.RowHeights="Auto,Auto,Auto,Auto,*">
 
             <!-- Section 1 (display) -->
