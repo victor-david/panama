@@ -10,7 +10,6 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Utility;
-using System.ComponentModel;
 using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.AlertTable.Defs.Columns;
 
