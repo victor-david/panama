@@ -20,48 +20,46 @@
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
                 <TextBlock Text="{x:Static r:Strings.TextNotes}"/>
-                <!-- no filters for now -->                
+                <!-- no filters for now -->
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
 
         <tk:SplitterGrid.HeaderRight>
             <StatusBar>
-                <TextBlock
-                    Style="{StaticResource TitleDisplayTextBlockStyle}"
-                    Text="{Binding SelectedNote.Title}"/>                
+                <TextBlock Text="{Binding SelectedNote.Title}"/>
             </StatusBar>
         </tk:SplitterGrid.HeaderRight>
-        
+
         <tk:SplitterGrid.ContentLeft>
             <tk:DataGrid
                 RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
                 tk:DataGridColumns.Columns="{Binding Columns}">
-                
+
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
-                
+
             </tk:DataGrid>
         </tk:SplitterGrid.ContentLeft>
 
         <tk:SplitterGrid.ContentRight>
             <DockPanel
                 tk:Property.DefaultDock="Top"
-                Style="{StaticResource DataEntryPanelStyle}"
+                Style="{StaticResource Panama.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
                 <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
                 <TextBox Text="{Binding SelectedNote.Title}" />
                 <TextBlock Text="{x:Static r:Strings.TextNote}"/>
-                <TextBox 
-                    Style="{StaticResource TextBoxMultiStretchStyle}"
+                <TextBox
+                    Style="{StaticResource Panama.Styles.TextBox.Multiline}"
                     Text="{Binding SelectedNote.Note}"/>
-                
+
             </DockPanel>
         </tk:SplitterGrid.ContentRight>
-        
+
     </tk:SplitterGrid>
 
 </UserControl>

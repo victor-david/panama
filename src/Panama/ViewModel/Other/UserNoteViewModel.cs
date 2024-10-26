@@ -50,8 +50,8 @@ namespace Restless.Panama.ViewModel
         public UserNoteViewModel()
         {
             Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Created", TableColumns.Created).MakeDate();
-            Columns.Create("Title", TableColumns.Title).MakeInitialSortAscending();
+            Columns.Create("Created", TableColumns.Created).MakeDate().MakeInitialSortDescending();
+            Columns.Create("Title", TableColumns.Title);
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemAddUserNote, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
@@ -71,7 +71,7 @@ namespace Restless.Panama.ViewModel
 
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareString(item1, item2, TableColumns.Title);
+            return DataRowCompareDateTime(item2, item1, TableColumns.Created);
         }
 
         /// <summary>
