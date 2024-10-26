@@ -14,8 +14,8 @@
         <Setter Property="IconTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <ico:PackIconMaterial
-                        Kind="TextBoxOutline"
+                    <ico:PackIconPhosphorIcons
+                        Kind="Notebook"
                         Width="24"
                         Height="24"
                         HorizontalAlignment="Center"
