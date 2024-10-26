@@ -33,7 +33,7 @@
             <TextBlock
                 Margin="0"
                 VerticalAlignment="Center"
-                Style="{StaticResource Panama.Styles.NavTitle}"
+                Style="{StaticResource Panama.Styles.TextBlock.NavTitle}"
                 Text="{Binding AppInfo.Title, Mode=OneTime}"/>
 
             <TextBlock Grid.Column="2" Margin="0" HorizontalAlignment="Right">
