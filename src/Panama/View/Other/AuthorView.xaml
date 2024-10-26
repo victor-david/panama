@@ -1,4 +1,4 @@
-﻿<UserControl 
+﻿<UserControl
     x:Class="Restless.Panama.View.AuthorView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,7 +6,7 @@
     xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:AuthorViewModel}"
     mc:Ignorable="d"
     d:DesignWidth="360" d:DesignHeight="200">
@@ -20,14 +20,12 @@
             <StatusBar>
                 <TextBlock Text="{x:Static r:Strings.MenuItemAuthors}"/>
                 <!-- no filters for now -->
-            </StatusBar>           
+            </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
 
         <tk:SplitterGrid.HeaderRight>
             <StatusBar>
-                <TextBlock
-                    Style="{StaticResource TitleDisplayTextBlockStyle}"
-                    Text="{Binding SelectedAuthor.Name}"/>
+                <TextBlock Text="{Binding SelectedAuthor.Name}"/>
             </StatusBar>
         </tk:SplitterGrid.HeaderRight>
 
@@ -45,15 +43,15 @@
         </tk:SplitterGrid.ContentLeft>
 
         <tk:SplitterGrid.ContentRight>
-            <StackPanel 
-                Style="{StaticResource DataEntryPanelStyle}"
+            <StackPanel
+                Style="{StaticResource Panama.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
-                
+
                 <TextBlock Text="{x:Static r:Strings.TextName}"/>
                 <TextBox Text="{Binding SelectedAuthor.Name}"/>
                 <CheckBox IsChecked="{Binding SelectedAuthor.IsDefault}" Content="Default author"/>
-                
-            </StackPanel>            
+
+            </StackPanel>
         </tk:SplitterGrid.ContentRight>
 
     </tk:SplitterGrid>

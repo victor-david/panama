@@ -50,7 +50,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AuthorViewModel()
         {
-            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042)
+            Columns.Create("Id", TableColumns.Id)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
                 .MakeInitialSortAscending();
 
             Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.IsDefault, ResourceKeys.Icon.SquareSmallGreenIconKey)
