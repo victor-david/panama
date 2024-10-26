@@ -31,7 +31,7 @@
         </tk:SplitterGrid.HeaderRight>
 
         <tk:SplitterGrid.ContentLeft>
-            <DataGrid
+            <tk:DataGrid
                 RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
@@ -45,7 +45,7 @@
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
 
-            </DataGrid>
+            </tk:DataGrid>
         </tk:SplitterGrid.ContentLeft>
 
         <tk:SplitterGrid.ContentRight>
