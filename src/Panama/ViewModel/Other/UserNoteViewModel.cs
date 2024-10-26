@@ -49,7 +49,9 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public UserNoteViewModel()
         {
-            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create("Id", TableColumns.Id)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042);
             Columns.Create("Created", TableColumns.Created).MakeDate().MakeInitialSortDescending();
             Columns.Create("Title", TableColumns.Title);
 
