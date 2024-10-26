@@ -94,8 +94,9 @@
             </tk:MultiSplitterGrid.DetailContent>
 
             <tk:MultiSplitterGrid.MainContent>
-                <TextBlock Text="Main Content"/>
+                <ContentControl Content="{Binding SelectedViewModel}"/>
             </tk:MultiSplitterGrid.MainContent>
+
         </tk:MultiSplitterGrid>
 
         <StatusBar Grid.Row="1">

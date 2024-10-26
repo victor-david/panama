@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,7 +18,7 @@ namespace Restless.Panama.Controls
     /// <remarks>
     /// This class extends <see cref="Grid"/> for a special use case in which
     /// the control is created programaticly, not created via XAML.
-    /// You can properties in a style, but the columns are created at run time.
+    /// You can set properties in a style, but the columns are created at run time.
     /// </remarks>
     public class DisplayGrid : Grid
     {
@@ -122,7 +123,8 @@ namespace Restless.Panama.Controls
             (
                 nameof(HeaderForeground), typeof(Brush), typeof(DisplayGrid), new FrameworkPropertyMetadata()
                 {
-                    DefaultValue = Brushes.Black
+                    DefaultValue = Brushes.Black,
+                    PropertyChangedCallback = OnTextPropertyChanged
                 }
             );
 
@@ -143,6 +145,27 @@ namespace Restless.Panama.Controls
                 nameof(HeaderFontSize), typeof(double), typeof(DisplayGrid), new FrameworkPropertyMetadata()
                 {
                     DefaultValue = DefaultHeaderFontSize
+                }
+            );
+
+        /// <summary>
+        /// Gets or sets the header font weight
+        /// </summary>
+        public FontWeight HeaderFontWeight
+        {
+            get => (FontWeight)GetValue(HeaderFontWeightProperty);
+            set => SetValue(HeaderFontWeightProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="HeaderFontWeight"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty HeaderFontWeightProperty = DependencyProperty.Register
+            (
+                nameof(HeaderFontWeight), typeof(FontWeight), typeof(DisplayGrid), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = FontWeights.Normal,
+                    PropertyChangedCallback = OnTextPropertyChanged
                 }
             );
         #endregion
@@ -198,7 +221,8 @@ namespace Restless.Panama.Controls
             (
                 nameof(ValueForeground), typeof(Brush), typeof(DisplayGrid), new FrameworkPropertyMetadata()
                 {
-                    DefaultValue = Brushes.Blue
+                    DefaultValue = Brushes.Black,
+                    PropertyChangedCallback = OnTextPropertyChanged
                 }
             );
 
@@ -219,6 +243,27 @@ namespace Restless.Panama.Controls
                 nameof(ValueFontSize), typeof(double), typeof(DisplayGrid), new FrameworkPropertyMetadata()
                 {
                     DefaultValue = DefaultValueFontSize
+                }
+            );
+
+        /// <summary>
+        /// Gets or sets the value font weight
+        /// </summary>
+        public FontWeight ValueFontWeight
+        {
+            get => (FontWeight)GetValue(ValueFontWeightProperty);
+            set => SetValue(ValueFontWeightProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="ValueFontWeight"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ValueFontWeightProperty = DependencyProperty.Register
+            (
+                nameof(ValueFontWeight), typeof(FontWeight), typeof(DisplayGrid), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = FontWeights.Normal,
+                    PropertyChangedCallback = OnTextPropertyChanged
                 }
             );
 
@@ -283,11 +328,12 @@ namespace Restless.Panama.Controls
 
         private void SetHeaderValue()
         {
-            TextBlock header = new TextBlock()
+            TextBlock header = new()
             {
                 Text = Header,
                 Foreground = HeaderForeground,
                 FontSize = HeaderFontSize,
+                FontWeight = HeaderFontWeight,
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Left
             };
@@ -320,15 +366,16 @@ namespace Restless.Panama.Controls
 
             for (int idx = 0; idx < values.Length; idx++)
             {
-                ColumnDefinitions.Add(new ColumnDefinition() 
+                ColumnDefinitions.Add(new ColumnDefinition()
                 {
                     Width = new GridLength(ValueColumnWidth, GridUnitType.Pixel)
                 });
 
-                TextBlock item = new TextBlock()
+                TextBlock item = new()
                 {
                     Text = values[idx].ToString(),
                     Foreground = ValueForeground,
+                    FontWeight = ValueFontWeight,
                     FontSize = ValueFontSize,
                     VerticalAlignment = VerticalAlignment.Center,
                     HorizontalAlignment = ValueHorizontalAlignment
@@ -336,6 +383,21 @@ namespace Restless.Panama.Controls
 
                 SetColumn(item, idx + 1);
                 Children.Add(item);
+            }
+        }
+
+        private static void OnTextPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as DisplayGrid)?.UpdateTextProperties();
+        }
+
+        private void UpdateTextProperties()
+        {
+            foreach (TextBlock child in Children.OfType<TextBlock>())
+            {
+                int col = GetColumn(child);
+                child.Foreground = (col == 0) ? HeaderForeground : ValueForeground;
+                child.FontWeight = (col == 0) ? HeaderFontWeight : ValueFontWeight;
             }
         }
         #endregion

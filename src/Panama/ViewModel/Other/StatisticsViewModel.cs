@@ -6,14 +6,13 @@
 */
 using Restless.Panama.Controls;
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Tools;
 using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Restless.Panama.ViewModel
 {
@@ -23,9 +22,6 @@ namespace Restless.Panama.ViewModel
     public class StatisticsViewModel : ApplicationViewModel
     {
         #region Private
-        private const int HeaderColumnWidth = 216;
-        private const int ValueColumnWidth = 68;
-        private const int MagicFactor = 20;
         private bool haveTitleRoot;
         private bool isFolderOperationInProgress;
         private FolderStatisticItem rootStat;
@@ -37,45 +33,30 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the title statistics object.
         /// </summary>
-        public TableStatisticBase Title
-        {
-            get;
-        }
+        public TableStatisticBase Title { get; }
 
         /// <summary>
         /// Gets the title version statistics object.
         /// </summary>
-        public TitleVersionTableStats Version
-        {
-            get;
-        }
+        public TitleVersionTableStats Version { get; }
 
         /// <summary>
         /// Gets the submission statistics object.
         /// </summary>
-        public SubmissionBatchTableStats Submission
-        {
-            get;
-        }
+        public SubmissionBatchTableStats Submission { get; }
 
         /// <summary>
         /// Gets the publisher statistics object.
         /// </summary>
-        public PublisherTableStats Publisher
-        {
-            get;
-        }
+        public PublisherTableStats Publisher { get; }
 
         /// <summary>
         /// Gets the folder view that displays folder statistics.
         /// </summary>
-        public ObservableCollection<TreeViewItem> FolderView
-        {
-            get;
-        }
+        public ObservableCollection<TreeViewItem> FolderView { get; }
 
         /// <summary>
-        /// Gets a boolean value that indicates if the title root folder 
+        /// Gets a boolean value that indicates if the title root folder
         /// is set and points to a valid path.
         /// </summary>
         public bool HaveTitleRoot
@@ -102,10 +83,10 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public StatisticsViewModel()
         {
-            Title = new TableStatisticBase(DatabaseController.Instance.GetTable<TitleTable>());
-            Version = new TitleVersionTableStats(DatabaseController.Instance.GetTable<TitleVersionTable>());
-            Submission = new SubmissionBatchTableStats(DatabaseController.Instance.GetTable<SubmissionBatchTable>());
-            Publisher = new PublisherTableStats(DatabaseController.Instance.GetTable<PublisherTable>());
+            Title = new TableStatisticBase(TitleTable);
+            Version = new TitleVersionTableStats(TitleVersionTable);
+            Submission = new SubmissionBatchTableStats(SubmissionBatchTable);
+            Publisher = new PublisherTableStats(PublisherTable);
             FolderView = new ObservableCollection<TreeViewItem>();
             HaveTitleRoot = !string.IsNullOrEmpty(Config.FolderTitleRoot) && Directory.Exists(Config.FolderTitleRoot);
         }
@@ -140,6 +121,11 @@ namespace Restless.Panama.ViewModel
             IsFolderOperationInProgress = false;
         }
 
+        private const int HeaderColumnWidth = 216;
+        private const int ValueColumnWidth = 66;
+        // was 20, changed for mah apps with different tree item style
+        private const int TreeIndentFactor = 13;
+
         /// <summary>
         /// When folder statistics are created, creates the TreeViewItem objects. Runs on the UI thread.
         /// </summary>
@@ -148,12 +134,12 @@ namespace Restless.Panama.ViewModel
             DisplayGrid rootDisplay = new()
             {
                 HeaderFontSize = 14,
-                HeaderForeground = Brushes.DimGray,
+                HeaderFontWeight = FontWeights.SemiBold,
                 Header = $"Title root: {Config.FolderTitleRoot}",
-                HeaderColumnWidth = HeaderColumnWidth + MagicFactor - 1,
+                HeaderColumnWidth = HeaderColumnWidth + TreeIndentFactor - 1,
                 ValueColumnWidth = ValueColumnWidth,
                 ValueFontSize = 13,
-                ValueForeground = Brushes.MediumBlue
+                ValueFontWeight = FontWeights.SemiBold
             };
 
             rootDisplay.SetValues("Total", ".docx", ".doc", ".pdf", ".txt", "Other");
@@ -181,7 +167,7 @@ namespace Restless.Panama.ViewModel
                 DisplayGrid display = new()
                 {
                     Header = child.FolderDisplay,
-                    HeaderColumnWidth = HeaderColumnWidth - ((child.Depth - 1) * MagicFactor),
+                    HeaderColumnWidth = HeaderColumnWidth - ((child.Depth - 1) * TreeIndentFactor),
                     ValueColumnWidth = ValueColumnWidth
                 };
 

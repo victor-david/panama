@@ -4,6 +4,8 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
 
@@ -24,6 +26,27 @@ namespace Restless.Panama.ViewModel
         /// Gets the singleton instance of the configuration object.
         /// </summary>
         public Core.Config Config => Core.Config.Instance;
+        #endregion
+
+        /************************************************************************/
+
+        #region Tables
+        /// <summary>
+        /// Gets the publisher table
+        /// </summary>
+        protected PublisherTable PublisherTable => DatabaseController.Instance.GetTable<PublisherTable>();
+        /// <summary>
+        /// Gets the submission batch table
+        /// </summary>
+        protected SubmissionBatchTable SubmissionBatchTable => DatabaseController.Instance.GetTable<SubmissionBatchTable>();
+        /// <summary>
+        /// Gets the title table
+        /// </summary>
+        protected TitleTable TitleTable => DatabaseController.Instance.GetTable<TitleTable>();
+        /// <summary>
+        /// Gets the title version table
+        /// </summary>
+        protected TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
         #endregion
 
         /************************************************************************/

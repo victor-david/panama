@@ -81,6 +81,19 @@
 
     <Style TargetType="con:PathSelector" BasedOn="{StaticResource Panana.Styles.PathSelector}"/>
 
+    <!-- Display grid (used in statistics) -->
+    <Style x:Key="Panama.Styles.DisplayGrid" TargetType="con:DisplayGrid">
+        <Setter Property="Margin" Value="0,3"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HeaderFontSize" Value="13"/>
+        <Setter Property="HeaderForeground" Value="{DynamicResource MahApps.Brushes.WindowTitle}"/>
+        <Setter Property="ValueFontSize" Value="12"/>
+        <Setter Property="ValueForeground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="ValueHorizontalAlignment" Value="Right"/>
+    </Style>
+
+    <Style TargetType="con:DisplayGrid" BasedOn="{StaticResource Panama.Styles.DisplayGrid}"/>
+
     <!-- Data panel -->
     <Style x:Key="Panama.Styles.TextBlock.DataEntry" TargetType="TextBlock">
         <Setter Property="Margin" Value="{StaticResource Panama.Layout.DataEntry.Margin}"/>
@@ -158,7 +171,6 @@
         <Setter Property="VerticalContentAlignment" Value="Top"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
     </Style>
-
 
     <Style x:Key="Panama.Styles.StatusBar" TargetType="StatusBar">
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
