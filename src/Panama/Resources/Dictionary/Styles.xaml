@@ -6,6 +6,8 @@
     xmlns:ico="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls">
 
+
+
     <!-- Window -->
     <Style x:Key="Panama.Styles.MetroWindow" TargetType="mah:MetroWindow">
         <Setter Property="TitleAlignment" Value="Center"/>
@@ -92,7 +94,51 @@
     <Style TargetType="con:PathSelector" BasedOn="{StaticResource Panana.Styles.PathSelector}"/>
 
     <!-- Data grid-->
-    <Style x:Key="Panama.Styles.DataGrid" TargetType="DataGrid" BasedOn="{StaticResource {x:Static tk:ResourceKeys.DefaultDataGridStyleKey}}"/>
+    <Style x:Key="Panama.Styles.DataGridRow" TargetType="DataGridRow">
+        <Style.Triggers>
+            <!-- IsSelected -->
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.DataGrid.Selection.Background}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.DataGrid.Selection.BorderBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.DataGrid.Selection.Text}" />
+            </Trigger>
+            <!--  IsSelected and !Selector.IsSelectionActive -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="True" />
+                    <Condition Property="Selector.IsSelectionActive" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.DataGrid.Selection.Background.Inactive}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.DataGrid.Selection.BorderBrush.Inactive}" />
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.DataGrid.Selection.Text.Inactive}" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- External keys -->
+    <!-- These are transparent, otherwise the triggers (above) don't have an effect -->
+    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#00000000"/>
+    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#00000000"/>
+
+    <Style x:Key="Panama.Styles.DataGrid" TargetType="DataGrid" BasedOn="{StaticResource {x:Static tk:ResourceKeys.DefaultDataGridStyleKey}}">
+        <Setter Property="AlternatingRowBackground" Value="{DynamicResource MahApps.Brushes.Accent4}"/>
+        <Setter Property="AlternationCount" Value="{Binding Config.DataGridAlternationCount}"/>
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="MinRowHeight" Value="28"/>
+        <Setter Property="RowHeight" Value="{Binding Config.DataGridRowHeight}"/>
+        <Setter Property="RowStyle" Value="{StaticResource Panama.Styles.DataGridRow}"/>
+        <Style.Triggers>
+            <!--<Trigger Property="AlternationCount" Value="2">
+                <Setter Property="AlternatingRowBackground" Value="{DynamicResource MahApps.Brushes.Accent4}"/>
+            </Trigger>-->
+            <Trigger Property="AlternationCount" Value="10">
+                <Setter Property="AlternatingRowBackground" Value="Transparent"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style TargetType="DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid}"/>
     <Style TargetType="tk:DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid}"/>
 

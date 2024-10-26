@@ -4,12 +4,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SettingsWindowViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800">
+
+    <StackPanel.Resources>
+        <Style TargetType="tk:RadioButton">
+            <Setter Property="Width" Value="48"/>
+        </Style>
+    </StackPanel.Resources>
 
     <TextBlock Text="{x:Static r:Strings.SettingsDataGridRowHeight}"/>
     <Slider
@@ -18,9 +25,20 @@
         Value="{Binding Config.DataGridRowHeight}"/>
 
     <TextBlock Text="{x:Static r:Strings.SettingsDataGridRowAlternation}"/>
-    <Slider
-        Minimum="{x:Static core:Config+DataGrid.MinAlternationCount}"
-        Maximum="{x:Static core:Config+DataGrid.MaxAlternationCount}"
-        Value="{Binding Config.DataGridAlternationCount}"/>
+
+    <tk:RadioButtonPanel
+        TemplateStyle="Button"
+        tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+        SelectedValue="{Binding Config.DataGridAlternationCount}">
+
+        <tk:RadioButton Grid.Column="0" Value="10" Content="Off"/>
+        <tk:RadioButton Grid.Column="1" Value="2" Content="2"/>
+        <tk:RadioButton Grid.Column="2" Value="3" Content="3"/>
+        <tk:RadioButton Grid.Column="3" Value="4" Content="4"/>
+        <tk:RadioButton Grid.Column="4" Value="5" Content="5"/>
+        <tk:RadioButton Grid.Column="5" Value="6" Content="6"/>
+        <tk:RadioButton Grid.Column="6" Value="7" Content="7"/>
+        <tk:RadioButton Grid.Column="7" Value="8" Content="8"/>
+    </tk:RadioButtonPanel>
 
 </StackPanel>

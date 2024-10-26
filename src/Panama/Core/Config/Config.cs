@@ -202,22 +202,22 @@ namespace Restless.Panama.Core
             /// <summary>
             /// Gets the minimum value for data grid row height.
             /// </summary>
-            public const double MinRowHeight = 24;
+            public const double MinRowHeight = 28;
 
             /// <summary>
             /// Gets the maximum value for data grid row height.
             /// </summary>
-            public const double MaxRowHeight = 42;
+            public const double MaxRowHeight = 58;
 
             /// <summary>
             /// Gets the default value for data grid row height.
             /// </summary>
-            public const int DefaultRowHeight = 24;
+            public const int DefaultRowHeight = 28;
 
             /// <summary>
             /// Gets the minimum value for data grid alternation count.
             /// </summary>
-            public const double MinAlternationCount = 2;
+            public const double MinAlternationCount = 0;
 
             /// <summary>
             /// Gets the maximum value for data grid alternation count.
@@ -484,7 +484,8 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
-        /// Gets or sets the alternation count for data grids.
+        /// Gets the alternation count for data grids.
+        /// When this value is set to 10, the trigger in the style turns off alternation display
         /// </summary>
         public int DataGridAlternationCount
         {

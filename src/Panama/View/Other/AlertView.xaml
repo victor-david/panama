@@ -32,7 +32,6 @@
 
         <tk:SplitterGrid.ContentLeft>
             <tk:DataGrid
-                RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
                 tk:DataGridColumns.Columns="{Binding Columns}">
