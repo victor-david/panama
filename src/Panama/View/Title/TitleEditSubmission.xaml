@@ -2,11 +2,11 @@
     x:Class="Restless.Panama.View.TitleEditSubmission"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d"
     tk:Property.RowHeights="*,*"
@@ -16,9 +16,9 @@
         ItemsSource="{Binding Submissions.ListView}"
         SelectedItem="{Binding Submissions.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
-    
+
     <TextBlock
-            Style="{StaticResource TextBlockZeroResultStyle}"
+            Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
             tk:Property.IsCollapsed="{Binding Submissions.HaveItems}"
             Text="{x:Static r:Strings.TextNoTitleSubmissions}"/>
 
@@ -31,14 +31,14 @@
         <HeaderedContentControl.Resources>
             <Style TargetType="tk:LineItem">
                 <Setter Property="Margin" Value="4"/>
-                <Setter Property="ItemForeground" Value="{StaticResource DefaultForegroundBrush}"/>
-                <Setter Property="ValueForeground" Value="{StaticResource DarkForegroundBrush}"/>
+                <!--<Setter Property="ItemForeground" Value="{StaticResource DefaultForegroundBrush}"/>-->
+                <!--<Setter Property="ValueForeground" Value="{StaticResource DarkForegroundBrush}"/>-->
                 <Setter Property="ItemDisplayWidth" Value="80"/>
                 <Setter Property="ItemVerticalAlignment" Value="Top"/>
                 <Setter Property="ValueVerticalAlignment" Value="Top"/>
             </Style>
         </HeaderedContentControl.Resources>
-        
+
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel>
 

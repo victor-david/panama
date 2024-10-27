@@ -12,26 +12,22 @@
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800">
 
-    <Border
-        Style="{StaticResource BorderEditContainerStyle}"
-        BorderThickness="2"
-        BorderBrush="{StaticResource DefaultBorderBrush}"
-        Background="{StaticResource DefaultBackgroundBrush}">
+    <Border Style="{StaticResource Panama.Styles.Border.Container}">
 
         <Border.Resources>
-            <Style TargetType="tk:ThreeWay" BasedOn="{StaticResource DefaultThreeWayStyle}">
+            <!--<Style TargetType="tk:ThreeWay" BasedOn="{StaticResource DefaultThreeWayStyle}">
                 <Setter Property="HorizontalAlignment" Value="Center"/>
-            </Style>
-            <Style TargetType="conl:TitledSeparator">
+            </Style>-->
+            <!--<Style TargetType="conl:TitledSeparator">
                 <Setter Property="Margin" Value="2,8"/>
                 <Setter Property="TextElement.Foreground" Value="{StaticResource AlertForegroundBrush}"/>
-            </Style>
+            </Style>-->
         </Border.Resources>
 
         <Grid
+            Style="{StaticResource Panama.Styles.Panel.DataEntry}"
             tk:Property.ColumnWidths="*,*"
-            tk:Property.RowHeights="Auto,Auto,Auto,Auto,*"
-            Style="{StaticResource DataEntryPanelStyle}">
+            tk:Property.RowHeights="Auto,Auto,Auto,Auto,*">
 
             <!-- Title -->
             <StackPanel>
@@ -48,7 +44,7 @@
                 <TextBox
                     Text="{Binding Filters.Note,
                     UpdateSourceTrigger=PropertyChanged,
-                    Delay=500}"/>                
+                    Delay=500}"/>
             </StackPanel>
 
             <!-- Directory -->
@@ -78,7 +74,7 @@
                 <TextBlock>
                     <Run Text="Word Count"/>
                     <Run
-                        Foreground="{StaticResource DarkAlertForegroundBrush}"
+                        Foreground="{DynamicResource MahApps.Brushes.Accent}"
                         Text="{Binding Filters.WordCountText, Mode=OneWay}"/>
                 </TextBlock>
 
@@ -103,7 +99,6 @@
 
                 <conl:TagSelectorControl
                     Grid.Row="1"
-                    Margin="{StaticResource DataEntryPanelDefaultControlMargin}"
                     Id="{x:Static vm:TitleTagController.AssignedSelectorId}"
                     TagItemClickedCommand="{Binding FilterTags.TagItemClickCommand}"
                     ItemsSource="{Binding FilterTags.Assigned}"/>
@@ -112,13 +107,11 @@
                     Grid.Row="1"
                     tk:Property.IsCollapsed="{Binding FilterTags.HasAssignedTags}"
                     Margin="0,6"
-                    Foreground="{StaticResource DefaultForegroundBrush}"
                     VerticalAlignment="Top"
                     Text="{x:Static r:Strings.TextNone}"/>
 
                 <conl:TagSelectorControl
                     Grid.Row="1" Grid.Column="1"
-                    Margin="{StaticResource DataEntryPanelDefaultControlMargin}"
                     Id="{x:Static vm:TitleTagController.AvailableSelectorId}"
                     TagItemClickedCommand="{Binding FilterTags.TagItemClickCommand}"
                     ItemsSource="{Binding FilterTags.Available}"/>
@@ -128,18 +121,17 @@
                     HorizontalContentAlignment="Left"
                     Title="{x:Static r:Strings.TextMultipleTag}"/>
 
+                <!-- Style="{StaticResource ToolStatusBarStyle}" -->
                 <StatusBar
                     Grid.Row="3"
                     Grid.ColumnSpan="2"
-                    Style="{StaticResource ToolStatusBarStyle}">
+                    >
 
                     <CheckBox
-                        Style="{StaticResource RadioCheckBoxStyle}"
                         Content="Any"
                         IsChecked="{Binding Filters.IsTagFilterAny}"/>
 
                     <CheckBox
-                        Style="{StaticResource RadioCheckBoxStyle}"
                         Content="All"
                         IsChecked="{Binding Filters.IsTagFilterAll}"/>
 

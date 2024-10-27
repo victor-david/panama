@@ -2,7 +2,7 @@
     x:Class="Restless.Panama.View.TitleEditVersion"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:core="clr-namespace:Restless.Panama.Core"
@@ -13,33 +13,33 @@
     d:DesignHeight="650" d:DesignWidth="400">
 
     <Grid tk:Property.ColumnWidths="Auto,*">
-        
+
         <tk:DataGrid
             Grid.Column="1"
-            Style="{StaticResource DataGridLockedStyle}"
+            Style="{StaticResource Panama.Styles.DataGrid.Locked}"
             ItemsSource="{Binding Versions.ListView}"
             SelectedItem="{Binding Versions.SelectedItem}"
-            tk:DataGridColumns.Columns="{Binding Versions.Columns}" 
+            tk:DataGridColumns.Columns="{Binding Versions.Columns}"
             ContextMenuOpeningCommand="{Binding Versions.Commands[ContextMenuOpening]}">
-            
+
             <DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Versions.MenuItems}"  />
             </DataGrid.ContextMenu>
-            
+
             <DataGrid.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Versions.OpenRowCommand}"/>
             </DataGrid.InputBindings>
-            
+
         </tk:DataGrid>
-        
+
         <TextBlock
             Grid.Column="1"
-            Style="{StaticResource TextBlockZeroResultStyle}"
+            Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
             tk:Property.IsCollapsed="{Binding Versions.HaveVersion}"
             Text="{x:Static r:Strings.TextNoTitleVersions}"/>
-        
-        <StackPanel Style="{StaticResource SidePanelStyle}">
-            
+
+        <!--<StackPanel Style="{StaticResource SidePanelStyle}">
+
             <Button
                 Content="{StaticResource ArrowUpIconKey}"
                 Command="{Binding Versions.Commands[VersionMoveUp]}"/>
@@ -47,27 +47,27 @@
             <Button
                 Content="{StaticResource ArrowDownIconKey}"
                 Command="{Binding Versions.Commands[VersionMoveDown]}"/>
-            
+
             <Button
                 Content="{StaticResource SubmissionIconKey}"
                 Command="{Binding Versions.Commands[VersionSync]}"
                 ToolTip="{x:Static r:Strings.ToolTipSynchonizeTitles}"/>
 
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
-   
+
     <StackPanel
         Grid.Row="1"
-        Style="{StaticResource DataEntryPanelStyle}"
+        Style="{StaticResource Panama.Styles.Panel.DataEntry}"
         tk:Property.IsNullCollapsed="{Binding Versions.SelectedVersion}">
         <TextBlock Text="Note"/>
         <TextBox Text="{Binding Versions.SelectedVersion.Note}"/>
 
         <Expander Header="Internal File Properties" IsExpanded="False">
-            
+
             <Grid tk:Property.RowHeights="*,Auto">
                 <!-- Only displays when the selected version is Open Xml -->
-                <Grid 
+                <Grid
                     tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
                     tk:Property.ColumnWidths="*,*"
                     tk:Property.IsVisible="{Binding Versions.IsOpenXml}">
@@ -90,7 +90,7 @@
                     <TextBlock Grid.Row="5" Grid.Column="1" Text="Company"/>
                     <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Versions.Properties.Extended.Company}"/>
 
-                    <tk:IconButton
+                    <!--<tk:IconButton
                         Grid.Row="7"
                         Grid.Column="1"
                         Margin="{StaticResource DataEntryPanelAltControlMargin}"
@@ -99,19 +99,19 @@
                         HorizontalAlignment="Right"
                         Icon="{StaticResource SaveMediumIconKey}"
                         Content="Save"
-                        Command="{Binding Versions.Commands[SaveProperty]}"/>
+                        Command="{Binding Versions.Commands[SaveProperty]}"/>-->
 
-                    <TextBlock
+                    <!--<TextBlock
                         Grid.Row="8"
                         Grid.ColumnSpan="2"
                         FontSize="{StaticResource MediumFontSize}"
-                        Text="{x:Static r:Strings.HeaderVersionProperties}"/>
+                        Text="{x:Static r:Strings.HeaderVersionProperties}"/>-->
                 </Grid>
                 <!-- Only displays when the selected version is not Open Xml -->
                 <TextBlock
                     Grid.Row="1"
                     HorizontalAlignment="Center"
-                    Style="{StaticResource TextBlockError}" Margin="8"
+                    Style="{StaticResource Panama.Styles.TextBlock.Error}"
                     Text="{x:Static r:Strings.TextNotOpenXmlDocument}"
                     tk:Property.IsCollapsed="{Binding Versions.IsOpenXml}"/>
             </Grid>

@@ -2,24 +2,25 @@
     x:Class="Restless.Panama.View.TitleEditPublished"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="360">
 
     <!-- Published -->
-    <Expander
+    <tk:NavigatorExpander
         IsExpanded="{Binding Config.IsTitlePublishedExpanded}"
         Header="{x:Static r:Strings.TextPublished}">
-        
+
         <Grid tk:Property.RowHeights="*,*">
-            
+
+            <!--Style="{StaticResource DataGridStackStyle}" -->
             <tk:DataGrid
-                Style="{StaticResource DataGridStackStyle}"
+
                 ItemsSource="{Binding Published.ListView}"
                 SelectedItem="{Binding Published.SelectedItem}"
                 tk:DataGridColumns.Columns="{Binding Published.Columns}">
@@ -38,7 +39,7 @@
                 Grid.Row="1"
                 tk:Property.ColumnWidths="Auto,*"
                 tk:Property.RowHeights="Auto,*"
-                Style="{StaticResource DataEntryPanelStyle}"
+                Style="{StaticResource Panama.Styles.Panel.DataEntry}"
                 Visibility="{Binding Published.EditVisibility}">
 
                 <TextBlock Text="Published"/>
@@ -54,7 +55,7 @@
 
                     <TextBlock Text="Note"/>
                     <TextBox
-                        Style="{StaticResource TextBoxMultiStyle}"
+                        Style="{StaticResource Panama.Styles.TextBox.Multiline}"
                         MinHeight="106"
                         MaxHeight="106"
                         Text="{Binding Published.SelectedPublished.Notes}"/>
@@ -64,19 +65,20 @@
             </Grid>
 
         </Grid>
-    </Expander>
+    </tk:NavigatorExpander>
 
     <!-- Self published -->
-    <Expander
+    <tk:NavigatorExpander
         Grid.Row="1"
         Margin="0,8,0,0"
         IsExpanded="{Binding Config.IsTitleSelfPublishedExpanded}"
         Header="{x:Static r:Strings.TextSelfPublished}">
 
         <Grid tk:Property.RowHeights="*,*">
-            
+
+            <!-- Style="{StaticResource DataGridStackStyle}" -->
             <tk:DataGrid
-                Style="{StaticResource DataGridStackStyle}"
+
                 ItemsSource="{Binding SelfPublished.ListView}"
                 SelectedItem="{Binding SelfPublished.SelectedItem}"
                 tk:DataGridColumns.Columns="{Binding SelfPublished.Columns}">
@@ -94,7 +96,7 @@
                 Grid.Row="1"
                 tk:Property.ColumnWidths="Auto,*"
                 tk:Property.RowHeights="Auto,*"
-                Style="{StaticResource DataEntryPanelStyle}"
+                Style="{StaticResource Panama.Styles.Panel.DataEntry}"
                 Visibility="{Binding SelfPublished.EditVisibility}">
 
                 <TextBlock Text="Published"/>
@@ -102,7 +104,7 @@
                     Grid.Row="1"
                     Margin="0,-3,8,0"
                     SelectedDateUtc="{Binding SelfPublished.PublishedDate}"/>
-                
+
                 <StackPanel Grid.Column="1" Grid.RowSpan="2">
 
                     <TextBlock Text="Url"/>
@@ -110,16 +112,16 @@
 
                     <TextBlock Text="Note"/>
                     <TextBox
-                        Style="{StaticResource TextBoxMultiStyle}"
+                        Style="{StaticResource Panama.Styles.TextBox.Multiline}"
                         MinHeight="106"
                         MaxHeight="106"
                         Text="{Binding SelfPublished.SelectedPublished.Notes}"/>
-                    
+
                 </StackPanel>
 
-            </Grid>            
-            
+            </Grid>
+
         </Grid>
-    </Expander>
+    </tk:NavigatorExpander>
 
 </StackPanel>

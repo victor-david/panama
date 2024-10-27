@@ -2,29 +2,29 @@
     x:Class="Restless.Panama.View.TitleFlagsToolTip"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" 
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
-    mc:Ignorable="d" 
+    mc:Ignorable="d"
     tk:Property.ColumnWidths="Auto,*"
     tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
     d:DesignHeight="135" d:DesignWidth="180">
 
-    <Grid.Resources>
-        <Style TargetType="Border" BasedOn="{StaticResource ToolTipBorderIconStyle}"/>
-        <Style TargetType="TextBlock" BasedOn="{StaticResource ToolTipTextBlockStyle}"/>
-    </Grid.Resources>
+    <!--<Grid.Resources>-->
+        <!--<Style TargetType="Border" BasedOn="{StaticResource ToolTipBorderIconStyle}"/>-->
+        <!--<Style TargetType="TextBlock" BasedOn="{StaticResource ToolTipTextBlockStyle}"/>-->
+    <!--</Grid.Resources>-->
 
     <Border
         Grid.Row="1"
         Background="{Binding Config.Colors.TitleReady.ColorBrush}"/>
-    
+
     <Border
         Grid.Row="2"
         Background="{Binding Config.Colors.TitleQueued.ColorBrush}"/>
-    
+
     <Border
         Grid.Row="3"
         Background="{Binding Config.Colors.TitleFlagged.ColorBrush}"/>
@@ -41,9 +41,10 @@
         Grid.Row="6"
         Background="{Binding Config.Colors.TitleSubmitted.ColorBrush}"/>
 
+    <!--Style="{StaticResource ToolTipTextBlockHeaderStyle}" -->
     <TextBlock
         Grid.ColumnSpan="2"
-        Style="{StaticResource ToolTipTextBlockHeaderStyle}"
+
         Text="Title flags"/>
 
     <TextBlock Grid.Row="1" Grid.Column="1" Text="Ready"/>
