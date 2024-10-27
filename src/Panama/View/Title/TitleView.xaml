@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:core="clr-namespace:Restless.Panama.Core"
-    xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -20,64 +19,7 @@
         DetailWidth="{Binding Config.TitleDetailWidth}">
 
         <tk:SplitterGrid.HeaderLeft>
-            <StatusBar>
-                <TextBlock Text="Filters"/>
-                <Button
-                    Content="Ready"
-                    ToolTip="{x:Static r:Strings.ToolTipTitleFilterReady}"
-                    Command="{Binding Commands[ReadyFilter]}"/>
-
-                <Button
-                    Content="Flagged"
-                    ToolTip="{x:Static r:Strings.ToolTipTitleFilterFlag}"
-                    Command="{Binding Commands[FlaggedFilter]}"/>
-
-                <Button
-                    Content="Submitted"
-                    ToolTip="{x:Static r:Strings.ToolTipTitleFilterSubmitted}"
-                    Command="{Binding Commands[SubmittedFilter]}"/>
-
-                <Button
-                    Content="Published"
-                    ToolTip="{x:Static r:Strings.ToolTipTitleFilterPublished}"
-                    Command="{Binding Commands[PublishedFilter]}"/>
-
-                <Separator/>
-
-                <Button
-                    x:Name="CustomFilterButton"
-                    Content="{x:Static r:Strings.MenuItemCustom}"
-                    ToolTip="{x:Static r:Strings.ToolTipFilterCustom}"
-                    Command="{Binding ToggleCustomFilterCommand}"/>
-
-                <Button
-                    Content="{x:Static r:Strings.MenuItemClear}"
-                    ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
-                    Command="{Binding ClearFilterCommand}"/>
-
-                <Separator/>
-
-                <TextBlock>
-                    <Run
-                        Foreground="{DynamicResource MahApps.Brushes.Accent}"
-                        Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
-                    <Run Text="records"/>
-                </TextBlock>
-
-                <TextBlock
-                    tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
-                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
-                    Text="(row filter in effect)"/>
-
-                <vw:TitleCustomFilter
-                    Placement="Bottom"
-                    PlacementTarget="{Binding ElementName=CustomFilterButton}"
-                    VerticalOffset="6"
-                    HorizontalOffset="6"
-                    IsOpen="{Binding IsCustomFilterOpen}"
-                    StaysOpen="False" />
-
-            </StatusBar>
+            <vw:TitleFilterToolBar/>
         </tk:SplitterGrid.HeaderLeft>
 
         <tk:SplitterGrid.HeaderRight>
