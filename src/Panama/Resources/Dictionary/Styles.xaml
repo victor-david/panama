@@ -172,9 +172,6 @@
         <Setter Property="RowHeight" Value="{Binding Config.DataGridRowHeight}"/>
         <Setter Property="RowStyle" Value="{StaticResource Panama.Styles.DataGridRow}"/>
         <Style.Triggers>
-            <!--<Trigger Property="AlternationCount" Value="2">
-                <Setter Property="AlternatingRowBackground" Value="{DynamicResource MahApps.Brushes.Accent4}"/>
-            </Trigger>-->
             <Trigger Property="AlternationCount" Value="10">
                 <Setter Property="AlternatingRowBackground" Value="Transparent"/>
             </Trigger>
@@ -319,11 +316,51 @@
 
     <Style TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}"/>
 
+    <!-- Border -->
     <Style x:Key="Panama.Styles.Border.Container" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Padding" Value="{DynamicResource Panama.Layout.Padding.Full}"/>
     </Style>
+
+    <!-- ToolTip -->
+    <Style TargetType="ToolTip">
+        <Setter Property="Background" Value="AliceBlue"/>
+        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HasDropShadow" Value="True"/>
+        <Setter Property="Padding" Value="4,2"/>
+    </Style>
+
+    <Style x:Key="Panama.Styles.Panel.ToolTip" TargetType="Panel">
+        <Style.Resources>
+            <Style TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.IdealForeground}"/>
+                <Setter Property="Margin" Value="-4,-2,-4,3"/>
+                <Setter Property="Padding" Value="0"/>
+                <Style.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.IdealForeground}"/>
+                    </Style>
+                </Style.Resources>
+
+            </Style>
+            <Style TargetType="Border">
+                <Setter Property="Margin" Value="6,3"/>
+                <Setter Property="Height" Value="12"/>
+                <Setter Property="Width" Value="12"/>
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontWeight" Value="DemiBold"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
+                <Setter Property="Margin" Value="6,0"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+
+            </Style>
+        </Style.Resources>
+    </Style>
+
 
 </ResourceDictionary>

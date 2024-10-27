@@ -10,42 +10,19 @@
     mc:Ignorable="d"
     tk:Property.ColumnWidths="Auto,*"
     tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+    Style="{StaticResource Panama.Styles.Panel.ToolTip}"
     d:DesignHeight="135" d:DesignWidth="180">
 
-    <!--<Grid.Resources>-->
-        <!--<Style TargetType="Border" BasedOn="{StaticResource ToolTipBorderIconStyle}"/>-->
-        <!--<Style TargetType="TextBlock" BasedOn="{StaticResource ToolTipTextBlockStyle}"/>-->
-    <!--</Grid.Resources>-->
+    <Border Grid.Row="1" Background="{Binding Config.Colors.TitleReady.ColorBrush}"/>
+    <Border Grid.Row="2" Background="{Binding Config.Colors.TitleQueued.ColorBrush}"/>
+    <Border Grid.Row="3" Background="{Binding Config.Colors.TitleFlagged.ColorBrush}"/>
+    <Border Grid.Row="4" Background="{Binding Config.Colors.TitlePublished.ColorBrush}"/>
+    <Border Grid.Row="5" Background="{Binding Config.Colors.TitleSelfPublished.ColorBrush}"/>
+    <Border Grid.Row="6" Background="{Binding Config.Colors.TitleSubmitted.ColorBrush}"/>
 
-    <Border
-        Grid.Row="1"
-        Background="{Binding Config.Colors.TitleReady.ColorBrush}"/>
-
-    <Border
-        Grid.Row="2"
-        Background="{Binding Config.Colors.TitleQueued.ColorBrush}"/>
-
-    <Border
-        Grid.Row="3"
-        Background="{Binding Config.Colors.TitleFlagged.ColorBrush}"/>
-
-    <Border
-        Grid.Row="4"
-        Background="{Binding Config.Colors.TitlePublished.ColorBrush}"/>
-
-    <Border
-        Grid.Row="5"
-        Background="{Binding Config.Colors.TitleSelfPublished.ColorBrush}"/>
-
-    <Border
-        Grid.Row="6"
-        Background="{Binding Config.Colors.TitleSubmitted.ColorBrush}"/>
-
-    <!--Style="{StaticResource ToolTipTextBlockHeaderStyle}" -->
-    <TextBlock
-        Grid.ColumnSpan="2"
-
-        Text="Title flags"/>
+    <StatusBar Grid.ColumnSpan="2">
+        <TextBlock Text="Title flags"/>
+    </StatusBar>
 
     <TextBlock Grid.Row="1" Grid.Column="1" Text="Ready"/>
     <TextBlock Grid.Row="2" Grid.Column="1" Text="Queued"/>
