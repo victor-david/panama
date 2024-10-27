@@ -1,4 +1,4 @@
-﻿<StackPanel
+﻿<Grid
     x:Class="Restless.Panama.View.TitleEditMain"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,37 +10,48 @@
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="400"
-    Style="{StaticResource Panama.Styles.Panel.DataEntry}">
+    Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+    tk:Property.RowHeights="Auto,Auto,Auto,Auto,*" >
 
-    <Grid tk:Property.ColumnWidths="*,*">
+    <!-- Title -->
+    <Grid tk:Property.ColumnWidths="*,*" tk:Property.RowHeights="Auto,Auto">
         <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
         <tk:LinkedTextBlock
             Grid.Column="1"
             Text="{x:Static r:Strings.TextExtract}"
             ToolTip="{x:Static r:Strings.ToolTipExtract}"
             Command="{Binding Commands[ExtractTitle]}"/>
+
+        <TextBox Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding SelectedTitle.Title}"/>
     </Grid>
-    <TextBox Text="{Binding SelectedTitle.Title}"/>
+
+    <!-- Ready -->
+    <CheckBox
+        Grid.Row="1"
+        Content="{x:Static r:Strings.TextReady}"
+        IsChecked="{Binding SelectedTitle.Ready}"/>
 
     <!-- Written date -->
-    <Expander>
-        <Expander.Header>
+    <tk:NavigatorExpander Grid.Row="2">
+        <tk:NavigatorExpander.Header>
+            <!-- Override margin inherited from Panama.Styles.Panel.DataEntry -->
             <TextBlock Margin="0">
                 <Run Text="{x:Static r:Strings.TextWritten}"/>
                 <Run
-                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
+                    Style="{StaticResource Panama.Styles.Run.Highlight}"
                     Text="{Binding SelectedTitle.WrittenLocal, Mode=OneWay}"/>
             </TextBlock>
-        </Expander.Header>
-        <tk:Calendar SelectedDateUtc="{Binding SelectedTitle.Written}"/>
-    </Expander>
+        </tk:NavigatorExpander.Header>
 
-    <TextBlock Text="{x:Static r:Strings.TextNotes}"/>
+        <tk:Calendar SelectedDateUtc="{Binding SelectedTitle.Written}"/>
+
+    </tk:NavigatorExpander>
+
+    <!-- Title notes -->
+    <TextBlock Grid.Row="3" Text="{x:Static r:Strings.TextNotes}"/>
     <TextBox
+        Grid.Row="4"
         Style="{StaticResource Panama.Styles.TextBox.Multiline}"
         Text="{Binding SelectedTitle.Notes}"/>
 
-    <CheckBox
-        Content="{x:Static r:Strings.TextReady}"
-        IsChecked="{Binding SelectedTitle.Ready}"/>
-</StackPanel>
+</Grid>

@@ -52,7 +52,7 @@
 
     <TextBlock>
         <Run
-            Foreground="{DynamicResource MahApps.Brushes.Accent}"
+            Style="{StaticResource Panama.Styles.Run.Highlight}"
             Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
         <Run Text="records"/>
     </TextBlock>

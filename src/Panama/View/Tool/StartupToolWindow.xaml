@@ -72,7 +72,7 @@
 
         <TextBlock Grid.Row="4" Style="{StaticResource Panama.Styles.TextBlock.Closing}" tk:Property.IsVisible="{Binding IsCompleted}">
             <Run Text="Closing in"/>
-            <Run Foreground="{DynamicResource MahApps.Brushes.Accent}" Text="{Binding SecondsToClose, Mode=OneWay}"/>
+            <Run Style="{StaticResource Panama.Styles.Run.Highlight}" Text="{Binding SecondsToClose, Mode=OneWay}"/>
             <Run Text="seconds"/>
         </TextBlock>
 

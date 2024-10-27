@@ -39,11 +39,11 @@
             <TextBlock Grid.Column="2" Margin="0" HorizontalAlignment="Right">
                 <Run Text="Version"/>
                 <Run
-                    Foreground="{StaticResource MahApps.Brushes.Highlight}"
+                    Style="{StaticResource Panama.Styles.Run.Highlight}"
                     Text="{Binding AppInfo.VersionMajor, Mode=OneTime}"/>
                 <Run Text="Build"/>
                 <Run
-                    Foreground="{StaticResource MahApps.Brushes.Highlight}"
+                    Style="{StaticResource Panama.Styles.Run.Highlight}"
                     Text="{Binding AppInfo.VersionRaw.Build, Mode=OneTime}"/>
             </TextBlock>
         </Grid>
@@ -57,7 +57,7 @@
         <TextBlock>
             <Run Text="{x:Static r:Strings.TextStartup}"/>
             <Run
-                Foreground="{StaticResource MahApps.Brushes.Highlight}"
+                Style="{StaticResource Panama.Styles.Run.Highlight}"
                 Text="{Binding Config.StartupCount, Mode=OneTime, StringFormat='{}{0:#,0}'}"/>
         </TextBlock>
 

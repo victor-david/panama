@@ -224,7 +224,7 @@
             </Style>
 
             <Style TargetType="CheckBox" BasedOn="{StaticResource MahApps.Styles.CheckBox}">
-                <Setter Property="Margin" Value="2,6"/>
+                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
             </Style>
 
             <Style TargetType="ListBox" BasedOn="{StaticResource MahApps.Styles.ListBox}">
@@ -238,6 +238,10 @@
             </Style>
 
             <Style TargetType="Slider" BasedOn="{StaticResource MahApps.Styles.Slider}">
+                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+            </Style>
+
+            <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource Panama.Styles.NavigatorExpander}">
                 <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
             </Style>
         </Style.Resources>
@@ -288,6 +292,12 @@
         <Setter Property="FontSize" Value="11.5"/>
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
         <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <!-- Run-->
+    <Style x:Key="Panama.Styles.Run.Highlight" TargetType="Run">
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
     </Style>
 
     <!-- TextBox -->
@@ -369,7 +379,7 @@
                 <Setter Property="Width" Value="12"/>
             </Style>
             <Style TargetType="TextBlock">
-                <Setter Property="FontWeight" Value="DemiBold"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
                 <Setter Property="Margin" Value="6,0"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
@@ -377,6 +387,5 @@
             </Style>
         </Style.Resources>
     </Style>
-
 
 </ResourceDictionary>
