@@ -1,4 +1,4 @@
-﻿<Border
+﻿<Grid
     x:Class="Restless.Panama.View.TitleEditTag"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -11,33 +11,34 @@
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="240"
-    Style="{StaticResource Panama.Styles.Border.Container}">
+    tk:Property.ColumnWidths="*,*"
+    tk:Property.RowHeights="Auto,*">
+
+    <Grid.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource Panama.Styles.TextBlock.Highlight}">
+            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.StackedControl}"/>
+        </Style>
+    </Grid.Resources>
+
     <!-- Title edit (add and remove tags ) -->
-    <Grid
-        Style="{StaticResource Panama.Styles.Panel.DataEntry}"
-        tk:Property.ColumnWidths="*,*"
-        tk:Property.RowHeights="Auto,*">
+    <TextBlock Text="{x:Static r:Strings.HeaderAssignedTags}"/>
+    <conl:TagSelectorControl
+        Grid.Row="1"
+        Id="{x:Static vm:TitleTagController.AssignedSelectorId}"
+        TagItemClickedCommand="{Binding TitleTags.TagItemClickCommand}"
+        ItemsSource="{Binding TitleTags.Assigned}"/>
 
-        <TextBlock Text="{x:Static r:Strings.HeaderAssignedTags}"/>
-        <conl:TagSelectorControl
-            Grid.Row="1"
-            Id="{x:Static vm:TitleTagController.AssignedSelectorId}"
-            TagItemClickedCommand="{Binding TitleTags.TagItemClickCommand}"
-            ItemsSource="{Binding TitleTags.Assigned}"/>
+    <TextBlock
+        Grid.Row="1"
+        tk:Property.IsCollapsed="{Binding TitleTags.HasAssignedTags}"
+        Text="{x:Static r:Strings.TextNone}"/>
 
-        <TextBlock
-            Grid.Row="1"
-            tk:Property.IsCollapsed="{Binding TitleTags.HasAssignedTags}"
-            Margin="0,6"
-            VerticalAlignment="Top"
-            Text="{x:Static r:Strings.TextNone}"/>
+    <TextBlock Grid.Column="1" Text="{x:Static r:Strings.HeaderAvailableTags}"/>
+    <conl:TagSelectorControl
+        Grid.Row="1"
+        Grid.Column="1"
+        Id="{x:Static vm:TitleTagController.AvailableSelectorId}"
+        TagItemClickedCommand="{Binding TitleTags.TagItemClickCommand}"
+        ItemsSource="{Binding TitleTags.Available}"/>
 
-        <TextBlock Grid.Column="1" Text="{x:Static r:Strings.HeaderAvailableTags}"/>
-        <conl:TagSelectorControl
-            Grid.Row="1"
-            Grid.Column="1"
-            Id="{x:Static vm:TitleTagController.AvailableSelectorId}"
-            TagItemClickedCommand="{Binding TitleTags.TagItemClickCommand}"
-            ItemsSource="{Binding TitleTags.Available}"/>
-    </Grid>
-</Border>
+</Grid>

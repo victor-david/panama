@@ -279,12 +279,15 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="Panama.Styles.TextBlock.Highlight" TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
+    </Style>
+
     <!-- TextBlock: Zero result -->
-    <Style x:Key="Panama.Styles.TextBlock.ZeroResult" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0"/>
+    <Style x:Key="Panama.Styles.TextBlock.ZeroResult" TargetType="TextBlock" BasedOn="{StaticResource Panama.Styles.TextBlock.Highlight}">
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
     </Style>
 
     <!-- TextBlock: Error-->
