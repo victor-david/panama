@@ -90,6 +90,8 @@ namespace Restless.Panama
             StartupOptions ops = new(e.Args);
             DatabaseController.Instance.Init(RegistryManager.DatabaseDirectory);
 
+            ThemeManager.SetTheme(Config.Instance.ThemeId);
+
             if (ops.IsAnyOperationRequested)
             {
                 Window tools = WindowFactory.StartupTool.Create();
@@ -99,7 +101,6 @@ namespace Restless.Panama
             else
             {
                 Config.Instance.IncrementStartupCount();
-                ThemeManager.SetTheme(Config.Instance.ThemeId);
                 DataGridColumnExtensions.UseDeferredToolTip = true;
                 WindowFactory.Main.Create().Show();
                 DisplayAlertsIf();

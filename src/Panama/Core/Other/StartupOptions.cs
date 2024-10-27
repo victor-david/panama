@@ -5,7 +5,6 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 
-using System.Globalization;
 using System;
 
 namespace Restless.Panama.Core
@@ -46,7 +45,7 @@ namespace Restless.Panama.Core
 
         /// <summary>
         /// Gets a boolean value that indicates if an update of title version and submission documents
-        /// was specifed in the startup arguments. 
+        /// was specifed in the startup arguments.
         /// This corresponds to the <see cref="Update"/> argument.
         /// </summary>
         public bool IsUpdateRequested

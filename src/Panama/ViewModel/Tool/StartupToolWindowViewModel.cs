@@ -13,7 +13,7 @@ using System.Windows;
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
-    /// Provides the operation logic for <see cref="View.CommandToolsWindow"/>.
+    /// Provides the operation logic for <see cref="View.StartupToolWindow"/>.
     /// </summary>
     public class StartupToolWindowViewModel : ApplicationViewModel
     {
@@ -35,20 +35,9 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Public properties
-        public ObservableCollection<bool> RequestedOps
-        {
-            get;
-        }
-
-        public ObservableCollection<bool> InProgressOps
-        {
-            get;
-        }
-
-        public ObservableCollection<bool> CompletedOps
-        {
-            get;
-        }
+        public ObservableCollection<bool> RequestedOps { get; }
+        public ObservableCollection<bool> InProgressOps { get; }
+        public ObservableCollection<bool> CompletedOps { get; }
 
         /// <summary>
         /// Gets a boolean value that indicates if all operations are completed.
@@ -67,15 +56,15 @@ namespace Restless.Panama.ViewModel
             get => secondsToClose;
             private set => SetProperty(ref secondsToClose, value);
         }
-        #endregion
+    #endregion
 
-        /************************************************************************/
+    /************************************************************************/
 
-        #region Constructor
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CommandToolsWindowViewModel"/> class.
-        /// </summary>
-        public StartupToolWindowViewModel()
+    #region Constructor
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StartupToolWindowViewModel"/> class.
+    /// </summary>
+    public StartupToolWindowViewModel()
         {
             DisplayName = $"{AppInfo.Title} {AppInfo.VersionMajor} Command Tools";
 
@@ -91,9 +80,8 @@ namespace Restless.Panama.ViewModel
 
             CompletedOps = new ObservableCollection<bool>()
             {
-                false, false, false, false
+               false, false, false, false
             };
-
 
             versionUpdater = new();
             submissionUpdater = new();
@@ -107,6 +95,8 @@ namespace Restless.Panama.ViewModel
             {
                 OutputDirectory = Config.FolderTitleRoot
             };
+
+            SecondsToClose = 5;
 
             Application.Current.MainWindow.Closing += MainWindowClosing;
         }
@@ -125,7 +115,7 @@ namespace Restless.Panama.ViewModel
                 SetInProgress(VersionIdx);
                 await versionUpdater.ExecuteAsync();
                 SetCompleted(VersionIdx);
-                
+
                 SetInProgress(SubmissionIdx);
                 await submissionUpdater.ExecuteAsync();
                 SetCompleted(SubmissionIdx);
@@ -169,8 +159,9 @@ namespace Restless.Panama.ViewModel
 
         private async Task WaitForCloseAsync()
         {
-            SecondsToClose = 5;
-            for (int k = 1; k <= 5; k++)
+            int loopMax = SecondsToClose;
+
+            for (int k = 1; k <= loopMax; k++)
             {
                 await Task.Delay(1000);
                 SecondsToClose--;
