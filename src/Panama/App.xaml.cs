@@ -23,7 +23,11 @@ namespace Restless.Panama
     public partial class App : Application
     {
         #region Private
+#if DEBUG
+        private const string ApplicationId = "Panama.33f0e909-530e-4746-8986-bc27d189a475";
+#else
         private const string ApplicationId = "Panama.d9c20b23-f278-4349-a292-17e5a6abb15a";
+#endif
         private static readonly Mutex AppMutex = new(true, ApplicationId);
         #endregion
 
