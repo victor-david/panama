@@ -4,6 +4,7 @@
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:ico="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls">
 
     <!-- Window -->
@@ -63,6 +64,49 @@
     <!-- Named icons -->
     <ico:Material x:Key="Panama.Icon.Chevron.Right" x:Shared="False"  Kind="ChevronRight"/>
     <ico:Material x:Key="Panama.Icon.Chevron.Down" x:Shared="False"  Kind="ChevronDown"/>
+
+    <!-- Buttons -->
+    <Style x:Key="Panama.Styles.Button.StatusBar" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0,1,0,1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.IdealForeground}"/>
+        <Setter Property="Margin" Value="2,0"/>
+        <Setter Property="MinWidth" Value="48"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Padding="{TemplateBinding Padding}">
+
+                        <ContentPresenter
+                            TextElement.Foreground="{TemplateBinding Foreground}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <!-- Main navigator-->
     <Style TargetType="tk:MainNavigator">
@@ -140,6 +184,12 @@
     <Style TargetType="DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid}"/>
     <Style TargetType="tk:DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid}"/>
 
+    <Style x:Key="Panama.Styles.DataGrid.Locked" TargetType="DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid}">
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="RowHeight" Value="{x:Static core:Config+DataGrid.MinRowHeight}"/>
+    </Style>
+
     <!-- Display grid (used in statistics) -->
     <Style x:Key="Panama.Styles.DisplayGrid" TargetType="con:DisplayGrid">
         <Setter Property="Margin" Value="0,3"/>
@@ -196,7 +246,7 @@
         </Style.Resources>
     </Style>
 
-    <!-- Main title text block -->
+    <!-- TextBlock: Main Title -->
     <Style x:Key="Panama.Styles.TextBlock.NavTitle" TargetType="TextBlock">
         <Setter Property="Margin" Value="5,0,0,5"/>
         <Setter Property="FontSize" Value="21"/>
@@ -205,7 +255,7 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
 
-    <!-- Notification message text block -->
+    <!-- TextBlock: Notification message -->
     <Style x:Key="Panama.Styles.TextBlock.NotificationMessage" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
         <Style.Triggers>
@@ -228,6 +278,21 @@
         </Style.Triggers>
     </Style>
 
+    <!-- TextBlock: Zero result -->
+    <Style x:Key="Panama.Styles.TextBlock.ZeroResult" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+    </Style>
+
+    <!-- TextBlock: Error-->
+    <Style x:Key="Panama.Styles.TextBlock.Error" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="11.5"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
     <!-- TextBox -->
     <Style x:Key="Panama.Styles.TextBox.Multiline" TargetType="TextBox" BasedOn="{StaticResource MahApps.Styles.TextBox}">
         <Setter Property="AcceptsReturn" Value="True" />
@@ -242,6 +307,9 @@
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}"/>
         <Setter Property="FontSize" Value="{DynamicResource MahApps.Font.Size.StatusBar}"/>
         <Setter Property="Padding" Value="3"/>
+        <Style.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource Panama.Styles.Button.StatusBar}"/>
+        </Style.Resources>
     </Style>
 
     <Style x:Key="Panama.Styles.StatusBar.Selector" TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}">
@@ -250,5 +318,12 @@
     </Style>
 
     <Style TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}"/>
+
+    <Style x:Key="Panama.Styles.Border.Container" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="{DynamicResource Panama.Layout.Padding.Full}"/>
+    </Style>
 
 </ResourceDictionary>
