@@ -34,11 +34,12 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private int selectedEditSection;
+        private int selectedPublishedEditSection;
         private TitleRow selectedTitle;
         private PreviewMode previewMode;
         private string previewText;
         // The next two must correspond to the defs in TitleEditContainer.xaml
-        private const int SectionQueueId = 5; 
+        private const int SectionQueueId = 5;
         private const int SectionPreviewId = 8;
         private readonly int queueTitleMenuIndex;
         private bool haveQueueTitleItems;
@@ -69,6 +70,15 @@ namespace Restless.Panama.ViewModel
                 SetProperty(ref selectedEditSection, value);
                 PrepareDocumentPreview();
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected published edit section
+        /// </summary>
+        public int SelectedPublishedEditSection
+        {
+            get => selectedPublishedEditSection;
+            set => SetProperty(ref selectedPublishedEditSection, value);
         }
 
         /// <summary>
@@ -279,6 +289,7 @@ namespace Restless.Panama.ViewModel
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {
                 SelectedEditSection = 1;
+                SelectedPublishedEditSection = 1;
                 Filters.SetListView(ListView);
                 Filters.ApplyFilter();
             }));

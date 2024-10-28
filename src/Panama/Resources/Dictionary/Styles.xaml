@@ -134,6 +134,7 @@
     <Style x:Key="Panama.Styles.NavigatorExpander" TargetType="tk:NavigatorExpander" BasedOn="{StaticResource {x:Static tk:ResourceKeys.DefaultNavigatorExpanderStyleKey}}">
         <Setter Property="Icon" Value="{DynamicResource Panama.Icon.Chevron.Right}"/>
         <Setter Property="ExpandedIcon" Value="{DynamicResource Panama.Icon.Chevron.Down}"/>
+        <Setter Property="Padding" Value="0,2,0,0"/>
     </Style>
 
     <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource Panama.Styles.NavigatorExpander}"/>
