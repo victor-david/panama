@@ -5,6 +5,7 @@
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:ico="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls">
 
     <!-- Window -->
@@ -219,6 +220,10 @@
         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
     </Style>
 
+    <Style x:Key="Panama.Styles.Slider" TargetType="Slider" BasedOn="{StaticResource MahApps.Styles.Slider}">
+        <Setter Property="IsSnapToTickEnabled" Value="True"/>
+    </Style>
+
     <Style TargetType="ListBox" BasedOn="{StaticResource Panama.Styles.ListBox}"/>
 
     <!-- Data panel -->
@@ -251,7 +256,7 @@
                 <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
             </Style>
 
-            <Style TargetType="Slider" BasedOn="{StaticResource MahApps.Styles.Slider}">
+            <Style TargetType="Slider" BasedOn="{StaticResource Panama.Styles.Slider}">
                 <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
             </Style>
 
@@ -309,6 +314,7 @@
         </Style.Triggers>
     </Style>
 
+    <!-- TextBlock: Highlight -->
     <Style x:Key="Panama.Styles.TextBlock.Highlight" TargetType="TextBlock">
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
@@ -374,6 +380,34 @@
 
     <Style TargetType="tk:RadioButtonPanel" BasedOn="{StaticResource Panama.Styles.RadioButtonPanel}"/>
     <Style TargetType="tk:RadioButton" BasedOn="{StaticResource Panama.Styles.RadioButton}"/>
+
+    <!-- tk:ThreeWay -->
+    <Style x:Key="Panama.Styles.ThreeWay" TargetType="tk:ThreeWay">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="SelectorHeight" Value="20"/>
+        <Setter Property="SelectorRadius" Value="2"/>
+        <Setter Property="MinSelectorAreaWidth" Value="120"/>
+        <Setter Property="OnText" Value="{x:Static r:Strings.TextYes}"/>
+        <Setter Property="OffText" Value="{x:Static r:Strings.TextNo}"/>
+        <Setter Property="HeaderStyle">
+            <Setter.Value>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Static tk:ThreeWay.HeaderStyleKey}}">
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="OnOffStyle">
+            <Setter.Value>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Static tk:ThreeWay.OnOffStyleKey}}">
+                    <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="tk:ThreeWay" BasedOn="{StaticResource Panama.Styles.ThreeWay}"/>
 
     <!-- Border -->
     <Style x:Key="Panama.Styles.Border.Container" TargetType="Border">

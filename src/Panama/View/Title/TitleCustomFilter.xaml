@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:conl="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
@@ -15,13 +16,10 @@
     <Border Style="{StaticResource Panama.Styles.Border.Container}">
 
         <Border.Resources>
-            <!--<Style TargetType="tk:ThreeWay" BasedOn="{StaticResource DefaultThreeWayStyle}">
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-            </Style>-->
-            <!--<Style TargetType="conl:TitledSeparator">
+            <Style TargetType="conl:TitledSeparator">
                 <Setter Property="Margin" Value="2,8"/>
-                <Setter Property="TextElement.Foreground" Value="{StaticResource AlertForegroundBrush}"/>
-            </Style>-->
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
+            </Style>
         </Border.Resources>
 
         <Grid
@@ -30,7 +28,7 @@
             tk:Property.RowHeights="Auto,Auto,Auto,Auto,*">
 
             <!-- Title -->
-            <StackPanel>
+            <StackPanel Margin="{StaticResource Panama.Layout.Margin.Control.Stacked.Right}">
                 <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
                 <TextBox
                     Text="{Binding Filters.Text,
@@ -57,13 +55,13 @@
             </StackPanel>
 
             <!-- Flags -->
-            <StackPanel Grid.Row="2">
+            <StackPanel Grid.Row="2" Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}">
                 <tk:ThreeWay Header="{x:Static r:Strings.TextReady}" State="{Binding Filters.ReadyState}"/>
                 <tk:ThreeWay Header="{x:Static r:Strings.TextFlagged}" State="{Binding Filters.FlaggedState}"/>
                 <tk:ThreeWay Header="{x:Static r:Strings.TextHasRelated}" State="{Binding Filters.RelatedState}"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="2" Grid.Column="1">
+            <StackPanel Grid.Row="2" Grid.Column="1" Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}">
                 <tk:ThreeWay Header="{x:Static r:Strings.TextSubmitted}" State="{Binding Filters.CurrentlySubmittedState}"/>
                 <tk:ThreeWay Header="{x:Static r:Strings.TextEverSubmitted}" State="{Binding Filters.EverSubmittedState}"/>
                 <tk:ThreeWay Header="{x:Static r:Strings.TextPublished}" State="{Binding Filters.PublishedState}"/>
@@ -79,10 +77,10 @@
                 </TextBlock>
 
                 <Slider
-                    Minimum="-4000" Maximum="4000"
+                    Minimum="{x:Static core:Config+Other.MinFilterWordCount}"
+                    Maximum="{x:Static core:Config+Other.MaxFilterWordCount}"
                     TickFrequency="100"
                     Value="{Binding Filters.WordCount, Mode=TwoWay, Delay=500}"/>
-
             </StackPanel>
 
             <Grid
@@ -122,20 +120,10 @@
                     Title="{x:Static r:Strings.TextMultipleTag}"/>
 
                 <!-- Style="{StaticResource ToolStatusBarStyle}" -->
-                <StatusBar
-                    Grid.Row="3"
-                    Grid.ColumnSpan="2"
-                    >
-
-                    <CheckBox
-                        Content="Any"
-                        IsChecked="{Binding Filters.IsTagFilterAny}"/>
-
-                    <CheckBox
-                        Content="All"
-                        IsChecked="{Binding Filters.IsTagFilterAll}"/>
-
-                </StatusBar>
+                <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
+                    <CheckBox Content="Any" Margin="5,0" IsChecked="{Binding Filters.IsTagFilterAny}"/>
+                    <CheckBox Content="All" Margin="5,0" IsChecked="{Binding Filters.IsTagFilterAll}"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>

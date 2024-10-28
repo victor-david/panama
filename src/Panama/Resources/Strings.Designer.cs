@@ -2284,6 +2284,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string TextNo {
+            get {
+                return ResourceManager.GetString("TextNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (none).
         /// </summary>
         public static string TextNone {
@@ -2550,6 +2559,15 @@ namespace Restless.Panama.Resources {
         public static string TextWritten {
             get {
                 return ResourceManager.GetString("TextWritten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string TextYes {
+            get {
+                return ResourceManager.GetString("TextYes", resourceCulture);
             }
         }
         

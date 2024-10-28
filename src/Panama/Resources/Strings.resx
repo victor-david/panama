@@ -1221,4 +1221,10 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolTipMoveTitleVersionUp" xml:space="preserve">
     <value>Move this title version up</value>
   </data>
+  <data name="TextNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="TextYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

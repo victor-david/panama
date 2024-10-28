@@ -22,6 +22,7 @@
 
     <Thickness x:Key="Panama.Layout.Margin.DataEntry">0,0,0,6</Thickness>
     <Thickness x:Key="Panama.Layout.Margin.Control.Stacked">0,0,0,6</Thickness>
+    <Thickness x:Key="Panama.Layout.Margin.Control.Stacked.Right">0,0,6,0</Thickness>
 
     <!-- This one not in the normal/compact dictionaries. It's fixed -->
     <Thickness x:Key="Panama.Layout.LabelControlMargin">0,0,0,3</Thickness>

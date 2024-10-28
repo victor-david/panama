@@ -42,7 +42,7 @@ namespace Restless.Panama.Core
 
         /************************************************************************/
 
-        #region Public fields
+        #region Fields (MainNavigation)
         /// <summary>
         /// Provides static values for the main navigation pane.
         /// </summary>
@@ -63,7 +63,11 @@ namespace Restless.Panama.Core
             /// </summary>
             public const double DefaultWidth = 150.0;
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Fields (MainWindow)
         /// <summary>
         /// Provides static values for the main window
         /// </summary>
@@ -89,7 +93,11 @@ namespace Restless.Panama.Core
             /// </summary>
             public const int MinHeight = 760;
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Fields (ToolWindow)
         /// <summary>
         /// Provides static values for the tools window
         /// </summary>
@@ -115,7 +123,11 @@ namespace Restless.Panama.Core
             /// </summary>
             public const int MinHeight = 392;
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Fields (StartupToolWindow)
         /// <summary>
         /// Provides static values for the startup tool window
         /// </summary>
@@ -131,7 +143,11 @@ namespace Restless.Panama.Core
             /// </summary>
             public const int DefaultHeight = 260;
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Fields (SplitterGrid)
         /// <summary>
         /// Provides static values for grid detail
         /// </summary>
@@ -193,7 +209,11 @@ namespace Restless.Panama.Core
             public const double MaxTitleQueueDetailWidth = 502;
             public const double DefaultTitleQueueDetailWidth = MinTitleQueueDetailWidth;
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Fields (DataGrid)
         /// <summary>
         /// Provides static values for DataGrid
         /// </summary>
@@ -229,7 +249,11 @@ namespace Restless.Panama.Core
             /// </summary>
             public const int DefaultAlternationCount = 2;
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Fields (Other)
         /// <summary>
         /// Provides static values for miscellaneous properties.
         /// </summary>
@@ -241,9 +265,14 @@ namespace Restless.Panama.Core
             public const string Folder = @"C:\";
 
             /// <summary>
-            /// Gets the default value for grid splitter.
+            /// Gets the minimum word count for title filter
             /// </summary>
-            public const double SplitterWidth = 684;
+            public const double MinFilterWordCount = -8000;
+
+            /// <summary>
+            /// Gets the maximum word count for title filter
+            /// </summary>
+            public const double MaxFilterWordCount = 8000;
 
             /// <summary>
             /// Gets the default value for queue/title filter
