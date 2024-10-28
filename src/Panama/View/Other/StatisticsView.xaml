@@ -14,8 +14,7 @@
 
     <Grid.Resources>
         <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource Panama.Styles.NavigatorExpander}">
-            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom}"/>
-            <Setter Property="Padding" Value="10,0,0,0"/>
+            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom.Tight}"/>
         </Style>
 
         <Style TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}">
@@ -23,7 +22,7 @@
         </Style>
 
         <Style TargetType="tk:LineItem">
-            <Setter Property="Margin" Value="0,4"/>
+            <Setter Property="Margin" Value="4,0,0,2"/>
             <Setter Property="ItemDisplayWidth" Value="160"/>
             <Setter Property="IndentLevel" Value="2"/>
             <Setter Property="ItemFontSize" Value="12"/>

@@ -9,6 +9,7 @@
     <!-- Local -->
     <sys:Int32 x:Key="Panama.Layout.TitleBar.Height">34</sys:Int32>
 
+    <!-- Standard -->
     <Thickness x:Key="Panama.Layout.Padding.Full">10</Thickness>
     <Thickness x:Key="Panama.Layout.Padding.Vertical">0,10</Thickness>
     <Thickness x:Key="Panama.Layout.Padding.Horizontal">10,0</Thickness>
@@ -18,8 +19,12 @@
     <Thickness x:Key="Panama.Layout.Padding.Top.Right.Bottom">0,10,10,10</Thickness>
     <Thickness x:Key="Panama.Layout.Padding.Right">0,0,10,0</Thickness>
     <Thickness x:Key="Panama.Layout.Padding.Left">10,0,0,0</Thickness>
-    <Thickness x:Key="Panama.Layout.Padding.Right.Tight">0,0,5,0</Thickness>
 
+    <!-- Tight -->
+    <Thickness x:Key="Panama.Layout.Padding.Right.Tight">0,0,5,0</Thickness>
+    <Thickness x:Key="Panama.Layout.Padding.Bottom.Tight">0,0,0,5</Thickness>
+
+    <!-- Data Entry -->
     <Thickness x:Key="Panama.Layout.Margin.DataEntry">0,0,0,6</Thickness>
     <Thickness x:Key="Panama.Layout.Margin.Control.Stacked">0,0,0,6</Thickness>
     <Thickness x:Key="Panama.Layout.Margin.Control.Stacked.Right">0,0,6,0</Thickness>
