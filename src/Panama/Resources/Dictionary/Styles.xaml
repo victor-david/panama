@@ -62,8 +62,13 @@
     </Style>
 
     <!-- Named icons -->
-    <ico:Material x:Key="Panama.Icon.Chevron.Right" x:Shared="False"  Kind="ChevronRight"/>
+    <ico:Material x:Key="Panama.Icon.Arrow.Down" x:Shared="False"  Kind="ArrowDownBold"/>
+    <ico:Material x:Key="Panama.Icon.Arrow.Up" x:Shared="False"  Kind="ArrowUpBold"/>
     <ico:Material x:Key="Panama.Icon.Chevron.Down" x:Shared="False"  Kind="ChevronDown"/>
+    <ico:Material x:Key="Panama.Icon.Chevron.Left" x:Shared="False"  Kind="ChevronLeft"/>
+    <ico:Material x:Key="Panama.Icon.Chevron.Right" x:Shared="False"  Kind="ChevronRight"/>
+    <ico:Material x:Key="Panama.Icon.Chevron.Up" x:Shared="False"  Kind="ChevronUp"/>
+    <ico:Material x:Key="Panama.Icon.Synchronize" x:Shared="False"  Kind="ArrowURightTopBold"/>
 
     <!-- Buttons -->
     <Style x:Key="Panama.Styles.Button.StatusBar" TargetType="Button">
@@ -104,6 +109,15 @@
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="Panama.Styles.Button.Bordered.Accent" TargetType="Button" BasedOn="{StaticResource Panama.Styles.Button.StatusBar}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -243,6 +257,22 @@
 
             <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource Panama.Styles.NavigatorExpander}">
                 <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <!-- StackPanel -->
+    <Style x:Key="Panama.Styles.StackPanel.ToolBar.Vertical" TargetType="StackPanel">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent4}"/>
+        <Setter Property="Orientation" Value="Vertical"/>
+        <Setter Property="Width" Value="38"/>
+        <Style.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource Panama.Styles.Button.Bordered.Accent}">
+                <Setter Property="Height" Value="32"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="0,3,0,0"/>
+                <Setter Property="MinWidth" Value="32"/>
+                <Setter Property="Width" Value="32"/>
             </Style>
         </Style.Resources>
     </Style>

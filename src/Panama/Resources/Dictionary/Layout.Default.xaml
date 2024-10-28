@@ -18,9 +18,10 @@
     <Thickness x:Key="Panama.Layout.Padding.Top.Right.Bottom">0,10,10,10</Thickness>
     <Thickness x:Key="Panama.Layout.Padding.Right">0,0,10,0</Thickness>
     <Thickness x:Key="Panama.Layout.Padding.Left">10,0,0,0</Thickness>
+    <Thickness x:Key="Panama.Layout.Padding.Right.Tight">0,0,5,0</Thickness>
 
-    <Thickness x:Key="Panama.Layout.Margin.DataEntry">0,0,6,6</Thickness>
-    <Thickness x:Key="Panama.Layout.Margin.StackedControl">0,0,0,6</Thickness>
+    <Thickness x:Key="Panama.Layout.Margin.DataEntry">0,0,0,6</Thickness>
+    <Thickness x:Key="Panama.Layout.Margin.Control.Stacked">0,0,0,6</Thickness>
 
     <!-- This one not in the normal/compact dictionaries. It's fixed -->
     <Thickness x:Key="Panama.Layout.LabelControlMargin">0,0,0,3</Thickness>

@@ -5,14 +5,40 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d"
-    tk:Property.RowHeights="*,2*"
+    Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+    tk:Property.RowHeights="*,Auto,2*"
     d:DesignHeight="650" d:DesignWidth="400">
 
-    <Grid tk:Property.ColumnWidths="Auto,*">
+    <!-- Version list and its controls (move up, move down, sync file names) -->
+    <Grid
+        tk:Property.ColumnWidths="Auto,*"
+        Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}">
+
+        <StackPanel
+            Margin="{DynamicResource Panama.Layout.Padding.Right.Tight}"
+            Style="{StaticResource Panama.Styles.StackPanel.ToolBar.Vertical}">
+
+            <Button
+                Margin="0,30,0,0"
+                Content="{StaticResource Panama.Icon.Arrow.Up}"
+                Command="{Binding Versions.Commands[VersionMoveUp]}"
+                ToolTip="{x:Static r:Strings.ToolTipMoveTitleVersionUp}"/>
+
+            <Button
+                Content="{StaticResource Panama.Icon.Arrow.Down}"
+                Command="{Binding Versions.Commands[VersionMoveDown]}"
+                ToolTip="{x:Static r:Strings.ToolTipMoveTitleVersionDown}"/>
+
+            <Button
+                Content="{StaticResource Panama.Icon.Synchronize}"
+                Command="{Binding Versions.Commands[VersionSync]}"
+                ToolTip="{x:Static r:Strings.ToolTipSynchonizeTitles}"/>
+
+        </StackPanel>
 
         <tk:DataGrid
             Grid.Column="1"
@@ -37,97 +63,72 @@
             Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
             tk:Property.IsCollapsed="{Binding Versions.HaveVersion}"
             Text="{x:Static r:Strings.TextNoTitleVersions}"/>
-
-        <!--<StackPanel Style="{StaticResource SidePanelStyle}">
-
-            <Button
-                Content="{StaticResource ArrowUpIconKey}"
-                Command="{Binding Versions.Commands[VersionMoveUp]}"/>
-
-            <Button
-                Content="{StaticResource ArrowDownIconKey}"
-                Command="{Binding Versions.Commands[VersionMoveDown]}"/>
-
-            <Button
-                Content="{StaticResource SubmissionIconKey}"
-                Command="{Binding Versions.Commands[VersionSync]}"
-                ToolTip="{x:Static r:Strings.ToolTipSynchonizeTitles}"/>
-
-        </StackPanel>-->
     </Grid>
 
+    <!-- Selected version note -->
     <StackPanel
         Grid.Row="1"
-        Style="{StaticResource Panama.Styles.Panel.DataEntry}"
         tk:Property.IsNullCollapsed="{Binding Versions.SelectedVersion}">
+
         <TextBlock Text="Note"/>
         <TextBox Text="{Binding Versions.SelectedVersion.Note}"/>
 
-        <Expander Header="Internal File Properties" IsExpanded="False">
-
-            <Grid tk:Property.RowHeights="*,Auto">
-                <!-- Only displays when the selected version is Open Xml -->
-                <Grid
-                    tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
-                    tk:Property.ColumnWidths="*,*"
-                    tk:Property.IsVisible="{Binding Versions.IsOpenXml}">
-
-                    <TextBlock Text="Created"/>
-                    <TextBlock Grid.Row="1" Text="{Binding Versions.Properties.Core.Created}"/>
-
-                    <TextBlock Grid.Column="1" Text="Modified"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Versions.Properties.Core.Modified}"/>
-
-                    <TextBlock Grid.Row="3" Text="Title"/>
-                    <TextBox Grid.Row="4" Text="{Binding Versions.Properties.Core.Title}"/>
-
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Description / Comment"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Versions.Properties.Core.Description}"/>
-
-                    <TextBlock Grid.Row="5" Text="Subject"/>
-                    <TextBox Grid.Row="6" Text="{Binding Versions.Properties.Core.Subject}"/>
-
-                    <TextBlock Grid.Row="5" Grid.Column="1" Text="Company"/>
-                    <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Versions.Properties.Extended.Company}"/>
-
-                    <!--<tk:IconButton
-                        Grid.Row="7"
-                        Grid.Column="1"
-                        Margin="{StaticResource DataEntryPanelAltControlMargin}"
-                        Style="{StaticResource SmallIconButtonStyle}"
-                        Width="62"
-                        HorizontalAlignment="Right"
-                        Icon="{StaticResource SaveMediumIconKey}"
-                        Content="Save"
-                        Command="{Binding Versions.Commands[SaveProperty]}"/>-->
-
-                    <!--<TextBlock
-                        Grid.Row="8"
-                        Grid.ColumnSpan="2"
-                        FontSize="{StaticResource MediumFontSize}"
-                        Text="{x:Static r:Strings.HeaderVersionProperties}"/>-->
-                </Grid>
-                <!-- Only displays when the selected version is not Open Xml -->
-                <TextBlock
-                    Grid.Row="1"
-                    HorizontalAlignment="Center"
-                    Style="{StaticResource Panama.Styles.TextBlock.Error}"
-                    Text="{x:Static r:Strings.TextNotOpenXmlDocument}"
-                    tk:Property.IsCollapsed="{Binding Versions.IsOpenXml}"/>
-            </Grid>
-        </Expander>
-
-
-
-
-
-
-
-
-
-
-
-
-
     </StackPanel>
+
+    <!-- Selected version internal properties Style="{StaticResource Panama.Styles.Panel.DataEntry}"-->
+    <tk:NavigatorExpander
+        Grid.Row="2"
+        Header="Internal File Properties"
+        Padding="{DynamicResource Panama.Layout.Padding.Vertical}"
+        tk:Property.IsNullCollapsed="{Binding Versions.SelectedVersion}">
+
+        <Grid tk:Property.RowHeights="Auto,*">
+            <!-- Only displays when the selected version is Open Xml -->
+            <Grid
+                tk:Property.ColumnWidths="*,*"
+                tk:Property.RowHeights="Auto,Auto,Auto"
+                tk:Property.IsVisible="{Binding Versions.IsOpenXml}">
+
+                <TextBlock Text="Created"/>
+                <TextBlock Grid.Row="1">
+                    <Run Style="{StaticResource Panama.Styles.Run.Highlight}" Text="{Binding Versions.Properties.Core.Created, Mode=OneWay}"/>
+                </TextBlock>
+
+                <TextBlock Grid.Column="1" Text="Modified"/>
+                <TextBlock Grid.Row="1" Grid.Column="1">
+                    <Run Style="{StaticResource Panama.Styles.Run.Highlight}" Text="{Binding Versions.Properties.Core.Modified, Mode=OneWay}"/>
+                </TextBlock>
+
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+                    <TextBlock Text="Title"/>
+                    <TextBox Text="{Binding Versions.Properties.Core.Title}"/>
+
+                    <TextBlock Text="Description / Comment"/>
+                    <TextBox Text="{Binding Versions.Properties.Core.Description}"/>
+
+                    <TextBlock Text="Subject"/>
+                    <TextBox Text="{Binding Versions.Properties.Core.Subject}"/>
+
+                    <TextBlock Text="Company"/>
+                    <TextBox Text="{Binding Versions.Properties.Extended.Company}"/>
+
+                    <Button
+                        Content="Save"
+                        Margin="{StaticResource Panama.Layout.Margin.Control.Stacked}"
+                        Command="{Binding Versions.Commands[SaveProperty]}"/>
+
+                    <TextBlock Text="{x:Static r:Strings.HeaderVersionProperties}"/>
+
+                </StackPanel>
+            </Grid>
+
+             <!-- Only displays when the selected version is not Open Xml -->
+            <TextBlock
+                Grid.Row="1"
+                Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
+                Text="{x:Static r:Strings.TextNotOpenXmlDocument}"
+                tk:Property.IsCollapsed="{Binding Versions.IsOpenXml}"/>
+        </Grid>
+    </tk:NavigatorExpander>
+
 </Grid>
