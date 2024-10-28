@@ -2734,6 +2734,24 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Move this title version down.
+        /// </summary>
+        public static string ToolTipMoveTitleVersionDown {
+            get {
+                return ResourceManager.GetString("ToolTipMoveTitleVersionDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move this title version up.
+        /// </summary>
+        public static string ToolTipMoveTitleVersionUp {
+            get {
+                return ResourceManager.GetString("ToolTipMoveTitleVersionUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information about the app.
         /// </summary>
         public static string ToolTipOpenWindowAbout {

@@ -1215,4 +1215,10 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolTipOpenWindowTool" xml:space="preserve">
     <value>Open tool window</value>
   </data>
+  <data name="ToolTipMoveTitleVersionDown" xml:space="preserve">
+    <value>Move this title version down</value>
+  </data>
+  <data name="ToolTipMoveTitleVersionUp" xml:space="preserve">
+    <value>Move this title version up</value>
+  </data>
 </root>
