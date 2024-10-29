@@ -69,7 +69,7 @@ namespace Restless.Panama.ViewModel
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Joined.PublisherExclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
+            Columns.CreateResource<BooleanToResourceConverter>("E", TableColumns.Joined.PublisherExclusive, ResourceKeys.Icon.SquareSmallRedIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipPublisherExclusive);

@@ -81,7 +81,7 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         public override void Load()
         {
-            Load(null, string.Format("{0} DESC",Defs. Columns.Date));
+            Load(null, $"{Defs.Columns.Date} desc");
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Restless.Panama.Database.Tables
         {
             foreach (AlertRow alert in EnumerateAll())
             {
-                if (alert.Enabled && DateTime.Compare(alert.Date, DateTime.UtcNow) <= 0)
+                if (alert.Enabled && DateTime.Compare(alert.Date, DateTime.Now) <= 0)
                 {
                     yield return alert;
                 }
@@ -148,7 +148,7 @@ namespace Restless.Panama.Database.Tables
         {
             row[Defs.Columns.Title] = "(new alert)";
             row[Defs.Columns.Url] = DBNull.Value;
-            row[Defs.Columns.Date] = Utility.GetUtcNowZero().AddDays(7);
+            row[Defs.Columns.Date] = Utility.GetNowZero().AddDays(7);
             row[Defs.Columns.Enabled] = true;
         }
         #endregion

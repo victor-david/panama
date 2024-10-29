@@ -66,20 +66,22 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AlertWindowViewModel()
         {
-            Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Enabled, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            DisplayName = Strings.WindowTitleActiveAlerts;
+
+            Columns.CreateResource<BooleanToResourceConverter>("E", TableColumns.Enabled, ResourceKeys.Icon.IconSquare)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipAlertEnabled);
 
             Columns.Create("Date", TableColumns.Date)
                 .MakeDate()
-                .MakeInitialSortAscending();
+                .MakeInitialSortDescending();
 
             Columns.Create("Title", TableColumns.Title);
             Columns.Create("Url", TableColumns.Url);
 
             PostponeCommand = RelayCommand.Create(RunPostponeCommand, p => SelectedAlert != null);
-            DismissCommand = RelayCommand.Create(RunDismissCommand, p => SelectedAlert != null);
+            DismissCommand = RelayCommand.Create(p => RunDismissCommand(), p => SelectedAlert != null);
 
             MenuItems.AddItem(Strings.MenuItemOpenItemOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
         }
@@ -99,7 +101,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareDateTime(item1, item2, TableColumns.Date);
+            return DataRowCompareDateTime(item2, item1, TableColumns.Date);
         }
 
         /// <inheritdoc/>
@@ -131,7 +133,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void RunDismissCommand(object parm)
+        private void RunDismissCommand()
         {
             SelectedAlert?.Dismiss();
         }

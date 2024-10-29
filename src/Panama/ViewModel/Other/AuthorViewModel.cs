@@ -55,7 +55,7 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W042)
                 .MakeInitialSortAscending();
 
-            Columns.CreateResource<BooleanToPathConverter>("R", TableColumns.IsDefault, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.CreateResource<BooleanToResourceConverter>("R", TableColumns.IsDefault, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipAuthorDefault);

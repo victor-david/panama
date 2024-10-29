@@ -59,7 +59,7 @@
                     <Run Text="{Binding SelectedAlert.DateLocal, Mode=OneWay}"/>
                 </TextBlock>
 
-                <tk:Calendar SelectedDateUtc="{Binding SelectedAlert.Date}"/>
+                <DatePicker SelectedDate="{Binding SelectedAlert.Date}"/>
 
                 <CheckBox
                     IsChecked="{Binding SelectedAlert.Enabled}"

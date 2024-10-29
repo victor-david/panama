@@ -132,7 +132,7 @@ namespace Restless.Panama.Database.Tables
         /// <param name="days">Number of days to postpone</param>
         public void Postpone(int days)
         {
-            Date = Utility.GetUtcNowZero().AddDays(days);
+            Date = Utility.GetNowZero().AddDays(days);
         }
 
         /// <summary>

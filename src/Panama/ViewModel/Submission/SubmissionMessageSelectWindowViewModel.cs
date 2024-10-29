@@ -70,12 +70,12 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SubmissionMessageSelectWindowViewModel()
         {
-            Columns.CreateResource<BooleanToPathConverter>("E", nameof(MimeKitMessage.IsError), ResourceKeys.Icon.SquareSmallRedIconKey)
+            Columns.CreateResource<BooleanToResourceConverter>("E", nameof(MimeKitMessage.IsError), ResourceKeys.Icon.SquareSmallRedIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.TooltipMessageError);
 
-            Columns.CreateResource<BooleanToPathConverter>("U", nameof(MimeKitMessage.InUse), ResourceKeys.Icon.SquareSmallBlueIconKey)
+            Columns.CreateResource<BooleanToResourceConverter>("U", nameof(MimeKitMessage.InUse), ResourceKeys.Icon.SquareSmallBlueIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.TooltipMessageInUse);

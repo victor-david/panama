@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Media.Media3D;
 using SubmissionValues = Restless.Panama.Database.Tables.SubmissionTable.Defs.Values;
 
 namespace Restless.Panama.Resources
@@ -62,6 +63,17 @@ namespace Restless.Panama.Resources
                 { SubmissionValues.StatusAccepted, SquareSmallGreenIconKey },
             };
 
+            //  Named icons as resources. Names must correspond
+            public const string IconArrowDown = "Panama.Icon.Arrow.Down";
+            public const string IconArrowUp = "Panama.Icon.Arrow.Up";
+            public const string IconChevronDown = "Panama.Icon.Chevron.Down";
+            public const string IconChevronLeft = "Panama.Icon.Chevron.Left";
+            public const string IconChevronRight = "Panama.Icon.Chevron.Right";
+            public const string IconChevronUp = "Panama.Icon.Chevron.Up";
+            public const string IconSquare = "Panama.Icon.Square";
+            public const string IconSynchronize = "Panama.Icon.Synchronize";
+
+            // Old names. These will be removed
             public const string AlertIconKey = nameof(AlertIconKey);
             public const string ChevronRightIconKey = nameof(ChevronRightIconKey);
             public const string CircleIconKey = nameof(CircleIconKey);

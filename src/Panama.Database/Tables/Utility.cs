@@ -17,15 +17,18 @@ namespace Restless.Panama.Database.Tables
         /// </returns>
         public static string ToDefaultValue(this string value, string defaultValue) => string.IsNullOrWhiteSpace(value) ? defaultValue : value;
 
+
+        /// <summary>
+        /// Gets the current date with time portion zeroed.
+        /// </summary>
+        /// <returns>A date time</returns>
+        public static DateTime GetNowZero() => DateTime.Now.ToZero();
+
         /// <summary>
         /// Gets the current date as UTC with hours offset, but without any minutes / seconds.
         /// </summary>
         /// <returns>A date time</returns>
-        public static DateTime GetUtcNowZero()
-        {
-            DateTime now = DateTime.Now;
-            return new DateTime(now.Year, now.Month, now.Day).ToUniversalTime();
-        }
+        public static DateTime GetUtcNowZero() =>  DateTime.Now.ToUtcZero();
 
         /// <summary>
         /// Gets a DateTime based on the specified DateTime time portion zeroed.

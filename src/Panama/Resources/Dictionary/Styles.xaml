@@ -62,13 +62,14 @@
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.IdealForeground}"/>
     </Style>
 
-    <!-- Named icons -->
+    <!-- Named icons (see ResourceKeys also, names must correspond ) -->
     <ico:Material x:Key="Panama.Icon.Arrow.Down" x:Shared="False"  Kind="ArrowDownBold"/>
     <ico:Material x:Key="Panama.Icon.Arrow.Up" x:Shared="False"  Kind="ArrowUpBold"/>
     <ico:Material x:Key="Panama.Icon.Chevron.Down" x:Shared="False"  Kind="ChevronDown"/>
     <ico:Material x:Key="Panama.Icon.Chevron.Left" x:Shared="False"  Kind="ChevronLeft"/>
     <ico:Material x:Key="Panama.Icon.Chevron.Right" x:Shared="False"  Kind="ChevronRight"/>
     <ico:Material x:Key="Panama.Icon.Chevron.Up" x:Shared="False"  Kind="ChevronUp"/>
+    <ico:Material x:Key="Panama.Icon.Square" x:Shared="False"  Kind="Square"/>
     <ico:Material x:Key="Panama.Icon.Synchronize" x:Shared="False"  Kind="ArrowURightTopBold"/>
 
     <!-- Buttons -->

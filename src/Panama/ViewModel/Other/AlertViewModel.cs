@@ -9,7 +9,6 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
-using Restless.Toolkit.Utility;
 using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.AlertTable.Defs.Columns;
 
@@ -55,14 +54,14 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<BooleanToPathConverter>("E", TableColumns.Enabled, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.CreateResource<BooleanToResourceConverter>("E", TableColumns.Enabled, ResourceKeys.Icon.IconSquare)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipAlertEnabled);
 
             Columns.Create("Date", TableColumns.Date)
                 .MakeDate()
-                .MakeInitialSortAscending();
+                .MakeInitialSortDescending();
 
             Columns.Create("Title", TableColumns.Title);
 
@@ -92,7 +91,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareDateTime(item1, item2, TableColumns.Date);
+            return DataRowCompareDateTime(item2, item1, TableColumns.Date);
         }
 
         /// <inheritdoc/>
@@ -110,7 +109,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (IsSelectedRowAccessible && Messages.ShowYesNo(Strings.ConfirmationDeleteAlert))
+            if (IsSelectedRowAccessible && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteAlert))
             {
                 DeleteSelectedRow();
             }

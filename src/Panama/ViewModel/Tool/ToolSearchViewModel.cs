@@ -130,7 +130,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public ToolSearchViewModel()
         {
-            Columns.CreateResource<BooleanToPathConverter>("V", SearchTable.Defs.Columns.IsVersion, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.CreateResource<BooleanToResourceConverter>("V", SearchTable.Defs.Columns.IsVersion, ResourceKeys.Icon.SquareSmallGreenIconKey)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028);
             Columns.Create("Type", SearchTable.Defs.Columns.Type).MakeFixedWidth(FixedWidth.W048);
