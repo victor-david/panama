@@ -55,6 +55,12 @@
         <TextBlock Text="{Binding AppInfo.Copyright, Mode=OneTime}"/>
         <TextBlock Text="{Binding AppInfo.Framework, Mode=OneTime}"/>
         <TextBlock>
+            <Run Text="{x:Static r:Strings.SettingsDatabaseLocation}"/>
+            <Run
+                Style="{StaticResource Panama.Styles.Run.Highlight}"
+                Text="{Binding DatabaseLocation, Mode=OneTime}"/>
+        </TextBlock>
+        <TextBlock>
             <Run Text="{x:Static r:Strings.TextStartup}"/>
             <Run
                 Style="{StaticResource Panama.Styles.Run.Highlight}"

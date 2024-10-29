@@ -2,6 +2,7 @@
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Restless.Panama.Database.Core
 {
@@ -11,70 +12,44 @@ namespace Restless.Panama.Database.Core
     public sealed class DatabaseController : DatabaseControllerBase
     {
         #region Private
-        private const string PrivateSchema = "private";
+        private const string MainFileNameV4 = "MAIN0-13D729DF-6EAC-40CD-946B-094685DA8638";
+        private const string MainFileNameV5 = "panama.dat";
+
+#if DEBUG
+        private const string DataSetV4 = "SETD-V400-65E6-4964-8087-6B05";
+        private const string DataSetV5 = "SETD-V500";
+#else
+        private const string DataSetV4 = "SETR-V400-65E6-4964-8087-6B05";
+        private const string DataSetV5 = "SETR-V500";
+#endif
         #endregion
 
         /************************************************************************/
 
         #region Public
-#if DEBUG
-        public const string DefaultDataSet = "SETD-V400-65E6-4964-8087-6B05";
-#else
-        public const string DefaultDataSet = "SETR-V400-65E6-4964-8087-6B05";
-#endif
         /// <summary>
-        /// Gets the default alias for the main (system default) data
-        /// </summary>
-        public const string MainFileAlias = "Main data";
-
-        /// <summary>
-        /// Gets the file id for the main (system default) data
-        /// </summary>
-        public const string MainFileId    = "MAIN0-13D729DF-6EAC-40CD-946B-094685DA8638";
-
-        /// <summary>
-        /// Gets the name for the attached data schema. This schema holds all the main tables.
-        /// </summary>
-        public const string MainAppSchemaName = "panama";
-
-        /// <summary>
-        /// Gets the name for the attached memory only schema
-        /// </summary>
-        public const string MemorySchemaName = "mem";
-
-        /// <summary>
-        /// Gets the alias for a memory file.
-        /// </summary>
-        public const string MemoryFileAlias = "Memory only data";
-
-        /// <summary>
-        /// Gets the database root location. If the user changes the location,
-        /// the new value is not used and this property does not change, until
-        /// the application is restarted.
+        /// Gets the database root location. This value is passed to the <see cref="Init(string)"/>
+        /// method at application startup, and may be changed by the user (requires app restart)
         /// </summary>
         public string DatabaseRoot
         {
             get;
             private set;
         }
+        #endregion
+
+        /************************************************************************/
+
+        #region Internal
+        /// <summary>
+        /// Gets the name for the attached data schema. This schema holds all the main tables.
+        /// </summary>
+        internal const string MainAppSchemaName = "panama";
 
         /// <summary>
-        /// Gets the alias of the current database.
+        /// Gets the name for the attached memory only schema
         /// </summary>
-        public string MainDatabaseAlias
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the id of the current database.
-        /// </summary>
-        public string MainDatabaseId
-        {
-            get;
-            private set;
-        }
+        internal const string MemorySchemaName = "mem";
         #endregion
 
         /************************************************************************/
@@ -103,28 +78,34 @@ namespace Restless.Panama.Database.Core
         /// <param name="databaseRoot">The database root folder.</param>
         public void Init(string databaseRoot)
         {
-            if (string.IsNullOrEmpty(databaseRoot))
-            {
-                throw new ArgumentNullException(nameof(databaseRoot));
-            }
+            ThrowIfEmpty(databaseRoot);
             DatabaseRoot = databaseRoot;
+            CopyDatabaseIfNeeded();
             CreateAndOpen(MemoryDatabase);
             AttachMemorySchema();
-            AttachMainSchema(MainFileAlias, MainFileId);
+            AttachMainSchema(DataSetV5, MainFileNameV5);
+            PerformSchemaUpdate();
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+        private void CopyDatabaseIfNeeded()
+        {
+            string fileNameV4 = GetFullFileName(DataSetV4, MainFileNameV4);
+            string fileNameV5 = GetFullFileName(DataSetV5, MainFileNameV5);
+            Directory.CreateDirectory(Path.GetDirectoryName(fileNameV5));
+            if (!File.Exists(fileNameV5))
+            {
+                File.Copy(fileNameV4, fileNameV5);
+            }
         }
 
-        /// <summary>
-        /// Attaches the main finance database
-        /// </summary>
-        /// <param name="databaseFileId">The database name (not path)</param>
-        public void AttachMainSchema(string alias, string databaseFileId)
+        private void AttachMainSchema(string dataSet, string fileName)
         {
-            if (string.IsNullOrEmpty(databaseFileId))
-            {
-                throw new ArgumentNullException(nameof(databaseFileId));
-            }
-
-            string fullFileName =  GetFileNameFromId(databaseFileId);
+            // throws if either is empty
+            string fullFileName =  GetFullFileName(dataSet, fileName);
 
             Attach(MainAppSchemaName, fullFileName, () =>
             {
@@ -160,60 +141,26 @@ namespace Restless.Panama.Database.Core
                 CreateAndRegisterTable<TitleVersionTable>();
                 CreateAndRegisterTable<UserNoteTable>();
                 TableRegistrationComplete(MainAppSchemaName);
-                MainDatabaseAlias = alias;
-                MainDatabaseId = databaseFileId;
             });
         }
 
-        /// <summary>
-        /// Detaches the main finance database.
-        /// </summary>
-        public void DetachMainDatabase()
+        private string GetFullFileName(string dataSet, string fileName)
         {
-            Detach(MainAppSchemaName);
-            MainDatabaseAlias = MainDatabaseId = null;
+            ThrowIfEmpty(dataSet);
+            ThrowIfEmpty(fileName);
+
+            if (fileName != MemoryDatabase)
+            {
+                return Path.Combine(DatabaseRoot, dataSet, fileName);
+            }
+            return fileName;
         }
 
-        ///// <summary>
-        /// <summary>
-        /// Gets the full file name from the file id.
-        /// </summary>
-        /// <param name="fileId">The file id</param>
-        /// <returns><paramref name="fileId"/> if memory file; otherwise, prepends database root and data set.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="fileId"/> is null or empty</exception>
-        public string GetFileNameFromId(string fileId)
+        private static void ThrowIfEmpty(string s)
         {
-            if (string.IsNullOrEmpty(fileId))
+            if (string.IsNullOrWhiteSpace(s))
             {
-                throw new ArgumentNullException(nameof(fileId));
-            }
-
-            if (fileId != MemoryDatabase)
-            {
-                return Path.Combine(DatabaseRoot, DefaultDataSet, fileId);
-            }
-            return fileId;
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Private methods
-
-        private bool TryAttach(string fullFileName)
-        {
-            try
-            {
-                Attach(PrivateSchema, fullFileName, () => { });
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-            finally
-            {
-                Detach(PrivateSchema);
+                throw new ArgumentException("Argument cannot be empty");
             }
         }
 
@@ -225,6 +172,17 @@ namespace Restless.Panama.Database.Core
                 CreateAndRegisterTable<SearchTable>();
                 TableRegistrationComplete(MemorySchemaName);
             });
+        }
+
+        /// <summary>
+        /// Performs schema updates if needed
+        /// </summary>
+        private void PerformSchemaUpdate()
+        {
+            foreach (ApplicationTableBase table in DataSet.Tables.OfType<ApplicationTableBase>())
+            {
+                table.PerformSchemaUpdate();
+            }
         }
         #endregion
     }

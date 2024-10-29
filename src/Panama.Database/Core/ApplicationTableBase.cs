@@ -25,5 +25,9 @@ namespace Restless.Panama.Database.Core
         {
         }
         #endregion
+
+        public virtual void PerformSchemaUpdate()
+        {
+        }
     }
 }

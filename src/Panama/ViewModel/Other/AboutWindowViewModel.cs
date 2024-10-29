@@ -12,10 +12,8 @@ namespace Restless.Panama.ViewModel
     /// </summary>
     public class AboutWindowViewModel : WindowViewModel
     {
+        public string DatabaseLocation => Database.Core.DatabaseController.Instance.DatabaseRoot;
 
-        /************************************************************************/
-
-        #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="AboutWindowViewModel"/> class.
         /// </summary>
@@ -23,6 +21,5 @@ namespace Restless.Panama.ViewModel
         {
             DisplayName = $"About {AppInfo.Title}";
         }
-        #endregion
     }
 }
