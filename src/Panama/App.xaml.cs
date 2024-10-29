@@ -44,11 +44,7 @@ namespace Restless.Panama
             base.OnStartup(e);
 
             /* Prevent app from being run more than once */
-            if (!AppMutex.WaitOne(TimeSpan.Zero, true))
-            {
-                NativeMethods.PostMessage((IntPtr)NativeMethods.HWND_BROADCAST, NativeMethods.WM_SHOW_ACTIVE_WIN, IntPtr.Zero, IntPtr.Zero);
-                Environment.Exit(0);
-            }
+            CheckMutex();
 
             try
             {
@@ -109,6 +105,15 @@ namespace Restless.Panama
                 Toolkit.Core.Default.Format.ConvertToLocal = false;
                 WindowFactory.Main.Create().Show();
                 DisplayAlertsIf();
+            }
+        }
+
+        private static void CheckMutex()
+        {
+            if (!AppMutex.WaitOne(TimeSpan.Zero, true))
+            {
+                NativeMethods.ShowActiveWindow();
+                Environment.Exit(0);
             }
         }
 

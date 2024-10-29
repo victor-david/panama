@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationIcon>App.Main.ico</ApplicationIcon>
     <AssemblyTitle>Panama ∑en</AssemblyTitle>
     <Company>Restless Animal Development</Company>

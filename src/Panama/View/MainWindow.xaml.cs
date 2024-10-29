@@ -76,6 +76,7 @@ namespace Restless.Panama.View
             bool top = Topmost;
             Topmost = true;
             Topmost = top;
+            Focus();
         }
         #endregion
     }

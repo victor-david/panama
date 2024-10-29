@@ -43,8 +43,7 @@ namespace Restless.Panama.Core
                     WindowState = Config.Instance.MainWindowState,
                     DataContext = MainWindowViewModel.Instance,
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -70,8 +69,7 @@ namespace Restless.Panama.Core
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new SettingsWindowViewModel()
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -101,8 +99,7 @@ namespace Restless.Panama.Core
                     Width = Config.Instance.ToolWindowWidth,
                     DataContext = new ToolWindowViewModel()
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -128,8 +125,7 @@ namespace Restless.Panama.Core
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new AboutWindowViewModel(),
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -156,8 +152,7 @@ namespace Restless.Panama.Core
                     ShowInTaskbar = false,
                     DataContext = new TitleSelectWindowViewModel(),
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -184,8 +179,7 @@ namespace Restless.Panama.Core
                     ShowInTaskbar = false,
                     DataContext = new TitleConfirmWindowViewModel(submissionBatch, titles),
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -212,8 +206,7 @@ namespace Restless.Panama.Core
                     ShowInTaskbar = false,
                     DataContext = new PublisherSelectWindowViewModel(),
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -240,8 +233,7 @@ namespace Restless.Panama.Core
                     ShowInTaskbar = false,
                     DataContext = new SelfPublisherSelectWindowViewModel(),
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -268,8 +260,7 @@ namespace Restless.Panama.Core
                     ShowInTaskbar = false,
                     DataContext = new SubmissionMessageSelectWindowViewModel(),
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -296,8 +287,7 @@ namespace Restless.Panama.Core
                     ShowInTaskbar = false,
                     DataContext = new SubmissionDocumentSelectWindowViewModel()
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -325,8 +315,7 @@ namespace Restless.Panama.Core
                     WindowStartupLocation = WindowStartupLocation.CenterScreen,
                     DataContext = new StartupToolWindowViewModel()
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -356,8 +345,7 @@ namespace Restless.Panama.Core
                     DataContext = new TitleVersionRenameWindowViewModel(titleId),
 
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -384,8 +372,7 @@ namespace Restless.Panama.Core
                     ShowInTaskbar = false,
                     DataContext = new AlertWindowViewModel()
                 };
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -415,9 +402,7 @@ namespace Restless.Panama.Core
                     ShowInTaskbar = windowCount == 0,
                     DataContext = new TerminateWindowViewModel(e)
                 };
-
-                SetWindowOwner(window);
-                SetTextFormattingMode(window);
+                SetWindowProperties(window);
                 return window;
             }
         }
@@ -426,6 +411,13 @@ namespace Restless.Panama.Core
         /************************************************************************/
 
         #region Private methods
+        private static void SetWindowProperties(Window window)
+        {
+            SetWindowOwner(window);
+            SetTextFormattingMode(window);
+            NativeMethods.ApplyRoundedCorners(window);
+        }
+
         private static void SetWindowOwner(Window window)
         {
             if (window.DataContext is IWindowOwner owner)
