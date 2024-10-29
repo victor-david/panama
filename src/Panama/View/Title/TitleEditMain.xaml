@@ -11,7 +11,7 @@
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="400"
     Style="{StaticResource Panama.Styles.Panel.DataEntry}"
-    tk:Property.RowHeights="Auto,Auto,Auto,Auto,*" >
+    tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,*" >
 
     <!-- Title -->
     <Grid tk:Property.ColumnWidths="*,*" tk:Property.RowHeights="Auto,Auto">
@@ -32,25 +32,15 @@
         IsChecked="{Binding SelectedTitle.Ready}"/>
 
     <!-- Written date -->
-    <tk:NavigatorExpander Grid.Row="2">
-        <tk:NavigatorExpander.Header>
-            <!-- Override margin inherited from Panama.Styles.Panel.DataEntry -->
-            <TextBlock Margin="0">
-                <Run Text="{x:Static r:Strings.TextWritten}"/>
-                <Run
-                    Style="{StaticResource Panama.Styles.Run.Highlight}"
-                    Text="{Binding SelectedTitle.WrittenLocal, Mode=OneWay}"/>
-            </TextBlock>
-        </tk:NavigatorExpander.Header>
-
-        <tk:Calendar SelectedDateUtc="{Binding SelectedTitle.Written}"/>
-
-    </tk:NavigatorExpander>
+    <TextBlock Grid.Row="2" Text="{x:Static r:Strings.TextWritten}"/>
+    <DatePicker
+        Grid.Row="3"
+        SelectedDate="{Binding SelectedTitle.Written}"/>
 
     <!-- Title notes -->
-    <TextBlock Grid.Row="3" Text="{x:Static r:Strings.TextNotes}"/>
+    <TextBlock Grid.Row="4" Text="{x:Static r:Strings.TextNotes}"/>
     <TextBox
-        Grid.Row="4"
+        Grid.Row="5"
         Style="{StaticResource Panama.Styles.TextBox.Multiline}"
         Text="{Binding SelectedTitle.Notes}"/>
 

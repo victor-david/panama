@@ -61,10 +61,9 @@
             Visibility="{Binding Published.EditVisibility}">
 
             <TextBlock Grid.Row="0" Text="Published"/>
-            <tk:Calendar
+            <DatePicker
                 Grid.Row="1"
-                Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
-                SelectedDateUtc="{Binding Published.PublishedDate}"/>
+                SelectedDate="{Binding Published.PublishedDate}"/>
 
             <TextBlock Grid.Row="2" Text="Url"/>
             <TextBox Grid.Row="3" Text="{Binding Published.SelectedPublished.Url}"/>
@@ -107,10 +106,9 @@
             Visibility="{Binding SelfPublished.EditVisibility}">
 
             <TextBlock Grid.Row="0" Text="Published"/>
-            <tk:Calendar
+            <DatePicker
                 Grid.Row="1"
-                Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
-                SelectedDateUtc="{Binding SelfPublished.PublishedDate}"/>
+                SelectedDate="{Binding SelfPublished.PublishedDate}"/>
 
             <TextBlock Grid.Row="2" Text="Url"/>
             <TextBox Grid.Row="3" Text="{Binding SelfPublished.SelectedPublished.Url}"/>

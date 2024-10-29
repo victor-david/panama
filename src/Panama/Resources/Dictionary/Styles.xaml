@@ -221,11 +221,29 @@
         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
     </Style>
 
+    <Style TargetType="ListBox" BasedOn="{StaticResource Panama.Styles.ListBox}"/>
+
+    <!-- Slider -->
     <Style x:Key="Panama.Styles.Slider" TargetType="Slider" BasedOn="{StaticResource MahApps.Styles.Slider}">
         <Setter Property="IsSnapToTickEnabled" Value="True"/>
     </Style>
 
-    <Style TargetType="ListBox" BasedOn="{StaticResource Panama.Styles.ListBox}"/>
+    <Style TargetType="Slider" BasedOn="{StaticResource Panama.Styles.Slider}"/>
+
+    <!-- DatePicker -->
+    <Style x:Key="Panama.Styles.DatePicker" TargetType="DatePicker" BasedOn="{StaticResource MahApps.Styles.DatePicker}">
+        <Setter Property="SelectedDateFormat" Value="Long"/>
+    </Style>
+
+    <Style TargetType="DatePicker" BasedOn="{StaticResource Panama.Styles.DatePicker}"/>
+
+    <Style x:Key="Panama.Styles.DatePickerTextBox" TargetType="DatePickerTextBox" BasedOn="{StaticResource MahApps.Styles.DatePickerTextBox}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="IsReadOnlyCaretVisible" Value="True"/>
+    </Style>
+
+    <Style TargetType="DatePickerTextBox" BasedOn="{StaticResource Panama.Styles.DatePickerTextBox}"/>
 
     <!-- Data panel -->
     <Style x:Key="Panama.Styles.TextBlock.DataEntry" TargetType="TextBlock">
@@ -254,6 +272,10 @@
             <Style x:Key="{x:Static con:PathSelector.TextBlockStyleKey}" TargetType="TextBlock" BasedOn="{StaticResource Panama.Styles.TextBlock.DataEntry}"/>
 
             <Style TargetType="con:PathSelector" BasedOn="{StaticResource Panana.Styles.PathSelector}">
+                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+            </Style>
+
+            <Style TargetType="DatePicker" BasedOn="{StaticResource Panama.Styles.DatePicker}">
                 <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
             </Style>
 
