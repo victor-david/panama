@@ -1,4 +1,4 @@
-﻿using System.Data;
+﻿using Restless.Panama.Database.Tables;
 
 namespace Restless.Panama.Database.Core
 {
@@ -26,8 +26,17 @@ namespace Restless.Panama.Database.Core
         }
         #endregion
 
-        public virtual void PerformSchemaUpdate()
+        /************************************************************************/
+
+        #region Internal / Protected
+        internal virtual long DataVersion => 1;
+        internal virtual void PerformSchemaUpdate()
         {
         }
+        internal virtual void PerformDataUpdate()
+        {
+        }
+        protected SchemaTable SchemaTable => Controller.GetTable<SchemaTable>();
+        #endregion
     }
 }

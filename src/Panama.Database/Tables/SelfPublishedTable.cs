@@ -8,6 +8,7 @@ using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -125,11 +126,10 @@ namespace Restless.Panama.Database.Tables
             DataRow row = NewRow();
             row[Defs.Columns.TitleId] = titleId;
             row[Defs.Columns.SelfPublisherId] = selfPublisherId;
-            row[Defs.Columns.Added] = DateTime.UtcNow;
+            row[Defs.Columns.Added] = DateTime.Now.ToZero();
             Rows.Add(row);
             Save();
         }
-
         #endregion
 
         /************************************************************************/
@@ -159,6 +159,40 @@ namespace Restless.Panama.Database.Tables
         protected override void UseDataRelations()
         {
             CreateChildToParentColumn(Defs.Columns.Joined.SelfPublisher, SelfPublisherTable.Defs.Relations.ToPublished, SelfPublisherTable.Defs.Columns.Name);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Update (Internal)
+        internal override long DataVersion => 2;
+        internal override void PerformSchemaUpdate()
+        {
+        }
+
+        internal override void PerformDataUpdate()
+        {
+            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
+            {
+                switch (DataVersion)
+                {
+                    case 2:
+                        UpdateDates();
+                        break;
+                }
+                Save();
+                SchemaTable.Save();
+            }
+        }
+
+        private void UpdateDates()
+        {
+            foreach (SelfPublishedRow item in EnumerateAll().Where(p => p.HasPublishedDate))
+            {
+                item.SetPublishedDate(item.Published.Value.ToZero());
+                item.Row[Defs.Columns.Added] = item.Added.ToZero();
+            }
+            SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Set dates to zeroed time");
         }
         #endregion
     }

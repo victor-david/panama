@@ -1,5 +1,4 @@
-﻿using Restless.Panama.Database.Core;
-using Restless.Toolkit.Core.Database.SQLite;
+﻿using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Data;
 using Columns = Restless.Panama.Database.Tables.PublishedTable.Defs.Columns;
@@ -48,7 +47,7 @@ namespace Restless.Panama.Database.Tables
             get => GetNullableDateTime(Columns.Published);
             private set => SetValue(Columns.Published, value);
         }
-        
+
         /// <summary>
         /// Gets a boolean value that indicates if <see cref="Published"/> has a value
         /// </summary>
@@ -103,8 +102,6 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Public methods
-
-
         /// <summary>
         /// Sets <see cref="Published"/>
         /// </summary>
@@ -113,15 +110,6 @@ namespace Restless.Panama.Database.Tables
         {
             Published = value;
         }
-
-        ///// <summary>
-        ///// Gets a boolean value that indicates if <see cref="Url"/> is populated.
-        ///// </summary>
-        ///// <returns></returns>
-        //public bool HasUrl()
-        //{
-        //    return !string.IsNullOrEmpty(Url);
-        //}
 
         /// <summary>
         /// Gets a string representation of this object

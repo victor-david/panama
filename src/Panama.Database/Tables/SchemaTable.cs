@@ -5,10 +5,10 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 
-using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
-using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -39,14 +39,29 @@ namespace Restless.Panama.Database.Tables
                 public const string Id = DefaultPrimaryKeyName;
 
                 /// <summary>
-                /// The name of the version column.
+                /// Table name
                 /// </summary>
-                public const string Version = "version";
+                public const string TableName = "name";
 
                 /// <summary>
-                /// The name of the timestamp column.
+                /// Schema version.
                 /// </summary>
-                public const string Timestamp = "timestamp";
+                public const string SchemaVersion = "schemaversion";
+
+                /// <summary>
+                /// Data version
+                /// </summary>
+                public const string DataVersion = "dataversion";
+
+                /// <summary>
+                /// Updated date / time
+                /// </summary>
+                public const string Updated = "updated";
+
+                /// <summary>
+                /// Note about schema update
+                /// </summary>
+                public const string Note = "note";
             }
         }
         #endregion
@@ -57,7 +72,7 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Initializes a new instance of the <see cref="SchemaTable"/> class.
         /// </summary>
-        public SchemaTable() : base(DatabaseController.MemorySchemaName, Defs.TableName)
+        public SchemaTable() : base(Defs.TableName)
         {
         }
         #endregion
@@ -86,28 +101,47 @@ namespace Restless.Panama.Database.Tables
             return new ColumnDefinitionCollection()
             {
                 { Defs.Columns.Id, ColumnType.Integer, true },
-                { Defs.Columns.Version, ColumnType.Integer },
-                { Defs.Columns.Timestamp, ColumnType.Timestamp },
+                { Defs.Columns.TableName, ColumnType.Text },
+                { Defs.Columns.SchemaVersion, ColumnType.Integer },
+                { Defs.Columns.DataVersion, ColumnType.Integer },
+                { Defs.Columns.Updated, ColumnType.Timestamp },
+                { Defs.Columns.Note, ColumnType.Text }
             };
         }
+        #endregion
 
-        /// <summary>
-        /// Gets a list of column names to use in subsequent initial insert operations.
-        /// These are used only when the table is empty, i.e. upon first creation.
-        /// </summary>
-        /// <returns>A list of column names</returns>
-        protected override List<string> GetPopulateColumnList()
+        /************************************************************************/
+
+        #region Internal methods
+        internal bool HaveSchemaRecord(string tableName, long schemaVersion, long dataVersion)
         {
-            return new List<string>() { Defs.Columns.Id, Defs.Columns.Version, Defs.Columns.Timestamp };
+            DataRow[] rows =
+                Select($"{Defs.Columns.TableName}='{tableName}' and {Defs.Columns.SchemaVersion}= {schemaVersion} and {Defs.Columns.DataVersion}={dataVersion}");
+            return rows.Length != 0;
         }
 
-        /// <summary>
-        /// Provides an enumerable that returns values for each row to be populated.
-        /// </summary>
-        /// <returns>An IEnumerable</returns>
-        protected override IEnumerable<object[]> EnumeratePopulateValues()
+        internal void AddSchemaRecord(string tableName, long schemaVersion, long dataVersion, string note)
         {
-            yield return new object[] { 1, 101, new DateTime(2022, 3, 1) };
+            DataRow row = NewRow();
+            row[Defs.Columns.TableName] = tableName;
+            row[Defs.Columns.SchemaVersion] = schemaVersion;
+            row[Defs.Columns.DataVersion] = dataVersion;
+            row[Defs.Columns.Note] = note;
+            row[Defs.Columns.Updated] = DateTime.UtcNow;
+            Rows.Add(row);
+        }
+
+        internal void RegisterSchema(long schemaVersion)
+        {
+            foreach (Core.ApplicationTableBase table in Controller.DataSet.Tables.OfType<Core.ApplicationTableBase>())
+            {
+                DataRow[] rows = Select($"{Defs.Columns.TableName}='{table.TableName}'");
+                if (rows.Length == 0)
+                {
+                    AddSchemaRecord(table.TableName, schemaVersion, 1, "---Init");
+                }
+            }
+            Save();
         }
         #endregion
     }

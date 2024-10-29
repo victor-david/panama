@@ -4,11 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -126,11 +126,10 @@ namespace Restless.Panama.Database.Tables
             DataRow row = NewRow();
             row[Defs.Columns.TitleId] = titleId;
             row[Defs.Columns.PublisherId] = publisherId;
-            row[Defs.Columns.Added] = DateTime.UtcNow;
+            row[Defs.Columns.Added] = DateTime.Now.ToZero();
             Rows.Add(row);
             Save();
         }
-
         #endregion
 
         /************************************************************************/
@@ -160,6 +159,37 @@ namespace Restless.Panama.Database.Tables
         protected override void UseDataRelations()
         {
             CreateChildToParentColumn(Defs.Columns.Joined.Publisher, PublisherTable.Defs.Relations.ToPublished, PublisherTable.Defs.Columns.Name);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Update (Internal)
+        internal override long DataVersion => 2;
+
+        internal override void PerformDataUpdate()
+        {
+            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
+            {
+                switch (DataVersion)
+                {
+                    case 2:
+                        UpdateDates();
+                        break;
+                }
+                Save();
+                SchemaTable.Save();
+            }
+        }
+
+        private void UpdateDates()
+        {
+            foreach (PublishedRow item in EnumerateAll().Where(p => p.HasPublishedDate))
+            {
+                item.SetPublishedDate(item.Published.Value.ToZero());
+                item.Row[Defs.Columns.Added] = item.Added.ToZero();
+            }
+            SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Set dates to zeroed time");
         }
         #endregion
     }

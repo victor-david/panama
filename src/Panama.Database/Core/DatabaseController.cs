@@ -24,9 +24,16 @@ namespace Restless.Panama.Database.Core
 #endif
         #endregion
 
+
+
         /************************************************************************/
 
         #region Public
+        /// <summary>
+        /// Gets the schema version
+        /// </summary>
+        public override long DefaultSchemaVersion => 500;
+
         /// <summary>
         /// Gets the database root location. This value is passed to the <see cref="Init(string)"/>
         /// method at application startup, and may be changed by the user (requires app restart)
@@ -84,7 +91,8 @@ namespace Restless.Panama.Database.Core
             CreateAndOpen(MemoryDatabase);
             AttachMemorySchema();
             AttachMainSchema(DataSetV5, MainFileNameV5);
-            PerformSchemaUpdate();
+            RegisterSchema();
+            PerformTableUpdate();
         }
         #endregion
 
@@ -126,6 +134,7 @@ namespace Restless.Panama.Database.Core
                 CreateAndRegisterTable<QueueTitleTable>();
                 CreateAndRegisterTable<QueueTitleStatusTable>();
                 CreateAndRegisterTable<ResponseTable>();
+                CreateAndRegisterTable<SchemaTable>();
                 CreateAndRegisterTable<SubmissionTable>();
                 CreateAndRegisterTable<SubmissionBatchTable>();
                 CreateAndRegisterTable<SubmissionDocumentTable>();
@@ -168,20 +177,25 @@ namespace Restless.Panama.Database.Core
         {
             Attach(MemorySchemaName, MemoryDatabase, () =>
             {
-                CreateAndRegisterTable<SchemaTable>();
                 CreateAndRegisterTable<SearchTable>();
                 TableRegistrationComplete(MemorySchemaName);
             });
         }
 
+        private void RegisterSchema()
+        {
+            GetTable<SchemaTable>().RegisterSchema(DefaultSchemaVersion);
+        }
+
         /// <summary>
-        /// Performs schema updates if needed
+        /// Performs table schema / data updates if needed
         /// </summary>
-        private void PerformSchemaUpdate()
+        private void PerformTableUpdate()
         {
             foreach (ApplicationTableBase table in DataSet.Tables.OfType<ApplicationTableBase>())
             {
                 table.PerformSchemaUpdate();
+                table.PerformDataUpdate();
             }
         }
         #endregion

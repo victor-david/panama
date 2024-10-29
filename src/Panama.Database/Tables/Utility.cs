@@ -28,7 +28,14 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets a date / time based on the specified date / time without andy minutes / seconds, and in universal time.
+        /// Gets a DateTime based on the specified DateTime time portion zeroed.
+        /// </summary>
+        /// <param name="dateTime">The date time</param>
+        /// <returns>A new date / time</returns>
+        public static DateTime ToZero(this DateTime dateTime) => new DateTime(dateTime.Year, dateTime.Month, dateTime.Day);
+
+        /// <summary>
+        /// Gets a DateTime based on the specified DateTime time portion zeroed, UTC.
         /// </summary>
         /// <param name="dateTime">The date time</param>
         /// <returns>A new date / time</returns>
