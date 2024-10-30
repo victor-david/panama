@@ -7,7 +7,7 @@
     xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
@@ -26,21 +26,21 @@
                     ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterActive}"
                     Command="{Binding Commands[ActiveFilter]}"/>
 
-                <Button 
+                <Button
                     Content="Try Again"
                     ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterTryAgain}"
                     Command="{Binding Commands[TryAgainFilter]}"/>
 
-                <Button 
+                <Button
                     Content="Personal"
                     ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterPersonal}"
                     Command="{Binding Commands[PersonalFilter]}"/>
 
-                <Button 
+                <Button
                     Content="Accepted"
                     ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterAccepted}"
                     Command="{Binding Commands[AcceptedFilter]}"/>
-                
+
                 <Separator/>
 
                 <Button
@@ -52,29 +52,27 @@
 
                 <TextBlock>
                     <Run
-                        Foreground="{StaticResource DarkAlertForegroundBrush}" 
+                        Style="{StaticResource Panama.Styles.Run.Highlight}"
                         Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
                     <Run Text="records"/>
                 </TextBlock>
 
                 <TextBlock
+                    Style="{StaticResource Panama.Styles.TextBlock.Accent}"
                     tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
-                    Foreground="{StaticResource DarkAlertForegroundBrush}"
                     Text="(row filter in effect)"/>
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
 
         <tk:SplitterGrid.HeaderRight>
             <StatusBar>
-                <TextBlock 
-                    Style="{StaticResource TitleDisplayTextBlockStyle}"
-                    Text="{Binding SubmissionHeader}"/>
+                <TextBlock Text="{Binding SubmissionHeader}"/>
 
                 <Separator
                     tk:Property.IsVisible="{Binding SelectedBatch.IsLocked, FallbackValue=False}"/>
 
                 <TextBlock
-                    Style="{StaticResource TitleDisplayTextBlockStyle}"
+                    Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
                     tk:Property.IsVisible="{Binding SelectedBatch.IsLocked, FallbackValue=False}"
                     Text="{x:Static r:Strings.TextLocked}"/>
             </StatusBar>
@@ -84,16 +82,16 @@
             <tk:DataGrid
                 CanUserReorderColumns="True"
                 HeaderMode="ColumnSelector"
-                ColumnSelectorMinimumVisible="3"                
+                ColumnSelectorMinimumVisible="3"
                 RowHeight="{Binding Config.DataGridRowHeight}"
                 ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
                 tk:DataGridColumns.Columns="{Binding Columns}">
-                
+
                 <DataGrid.ContextMenu>
                     <ContextMenu ItemsSource="{Binding MenuItems}"/>
                 </DataGrid.ContextMenu>
-                
+
             </tk:DataGrid>
         </tk:SplitterGrid.ContentLeft>
 

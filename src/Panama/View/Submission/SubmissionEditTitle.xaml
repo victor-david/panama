@@ -5,17 +5,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:r="clr-namespace:Restless.Panama.Resources"    
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
     tk:Property.RowHeights="*,2*"
     tk:Property.ColumnWidths="Auto,*"
     d:DesignHeight="650" d:DesignWidth="400">
-    
+
     <tk:DataGrid
         Grid.Column="1"
-        Style="{StaticResource DataGridLockedStyle}"
+        Style="{StaticResource Panama.Styles.DataGrid.Locked}"
         ItemsSource="{Binding Titles.ListView}"
         SelectedItem="{Binding Titles.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Titles.Columns}">
@@ -30,21 +30,23 @@
 
     </tk:DataGrid>
 
-    <StackPanel Style="{StaticResource SidePanelStyle}">
+    <StackPanel
+        Margin="{DynamicResource Panama.Layout.Padding.Right.Tight}"
+        Style="{StaticResource Panama.Styles.StackPanel.ToolBar.Vertical}">
 
         <Button
-            Content="{StaticResource ArrowUpIconKey}"
+            Content="{StaticResource Panama.Icon.Arrow.Up}"
             Command="{Binding Titles.Commands[TitleMoveUp]}"/>
 
         <Button
-            Content="{StaticResource ArrowDownIconKey}"
+            Content="{StaticResource Panama.Icon.Arrow.Down}"
             Command="{Binding Titles.Commands[TitleMoveDown]}"/>
 
         <Button
-            Content="{StaticResource SubmissionIconKey}"
+            Content="{StaticResource Panama.Icon.Copy}"
             Command="{Binding Titles.Commands[CopyToClipboard]}"
             ToolTip="{x:Static r:Strings.ToolTipCopyTitles}"/>
 
-    </StackPanel>       
+    </StackPanel>
 
 </Grid>

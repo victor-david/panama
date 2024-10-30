@@ -10,9 +10,10 @@
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="400">
+
     <Grid tk:Property.RowHeights="200,*">
-        <tk:DataGrid 
-            Style="{StaticResource DataGridEditLockedStyle}"
+        <tk:DataGrid
+            Style="{StaticResource Panama.Styles.DataGrid.Locked}"
             ItemsSource="{Binding Messages.ListView}"
             SelectedItem="{Binding Messages.SelectedItem}"
             tk:DataGridColumns.Columns="{Binding Messages.Columns}">
@@ -34,7 +35,7 @@
             Visibility="{Binding Messages.EditVisibility}">
 
             <Grid
-                Style="{StaticResource DataEntryPanelStyle}"
+                Style="{StaticResource Panama.Styles.Panel.DataEntry}"
                 tk:Property.RowHeights="Auto,*">
 
                 <StackPanel>
@@ -44,21 +45,21 @@
                     <TextBlock>
                         <Run Text="Date:"/>
                         <Run
-                            Foreground="{StaticResource AlertForegroundBrush}"
+                            Style="{StaticResource Panama.Styles.Run.Highlight}"
                             Text="{Binding Messages.SelectedMessage.MessageDate, Mode=OneWay}"/>
                     </TextBlock>
 
                     <TextBlock>
                         <Run Text="From:"/>
                         <Run
-                            Foreground="{StaticResource AlertForegroundBrush}"
+                            Style="{StaticResource Panama.Styles.Run.Highlight}"
                             Text="{Binding Messages.SelectedMessage.SenderName, Mode=OneWay}"/>
                     </TextBlock>
 
                     <TextBlock>
                         <Run Text="To:"/>
                         <Run
-                            Foreground="{StaticResource AlertForegroundBrush}"
+                            Style="{StaticResource Panama.Styles.Run.Highlight}"
                             Text="{Binding Messages.SelectedMessage.RecipientName, Mode=OneWay}"/>
                     </TextBlock>
 
@@ -67,12 +68,12 @@
 
                 <TextBox
                     Grid.Row="1"
-                    Style="{StaticResource TextBoxMultiStretchStyle}"
+                    Style="{StaticResource Panama.Styles.TextBox.Multiline}"
                     IsReadOnly="True"
                     Text="{Binding Messages.MessageText, Mode=OneWay}"/>
 
             </Grid>
-            
+
         </HeaderedContentControl>
 
     </Grid>

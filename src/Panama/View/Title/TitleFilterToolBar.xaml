@@ -58,8 +58,8 @@
     </TextBlock>
 
     <TextBlock
+        Style="{StaticResource Panama.Styles.TextBlock.Accent}"
         tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
-        Foreground="{DynamicResource MahApps.Brushes.Accent}"
         Text="(row filter in effect)"/>
 
     <vw:TitleCustomFilter

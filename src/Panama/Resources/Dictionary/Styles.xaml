@@ -367,6 +367,11 @@
         </Style.Triggers>
     </Style>
 
+    <!-- TextBlock: Accent -->
+    <Style x:Key="Panama.Styles.TextBlock.Accent" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+    </Style>
+
     <!-- TextBlock: Highlight -->
     <Style x:Key="Panama.Styles.TextBlock.Highlight" TargetType="TextBlock">
         <Setter Property="FontWeight" Value="SemiBold"/>
