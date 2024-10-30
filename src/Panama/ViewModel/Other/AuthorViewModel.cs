@@ -55,7 +55,7 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W042)
                 .MakeInitialSortAscending();
 
-            Columns.CreateResource<BooleanToResourceConverter>("R", TableColumns.IsDefault, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.CreateResource<BooleanToResourceConverter>("R", TableColumns.IsDefault, ResourceKeys.Icon.IconSquare)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipAuthorDefault);
@@ -63,9 +63,9 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Name", TableColumns.Name);
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.MenuItemAddAuthor, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemAddAuthor, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemDeleteAuthor, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            MenuItems.AddItem(Strings.MenuItemDeleteAuthor, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
         }
         #endregion
 

@@ -5,13 +5,11 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
-using Restless.Toolkit.Utility;
 using System;
 using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.SelfPublishedTable.Defs.Columns;
@@ -80,15 +78,15 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Publisher", TableColumns.Joined.SelfPublisher);
 
-            MenuItems.AddItem(Strings.MenuItemAddSelfPublished, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
-            MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemAddSelfPublished, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
+            MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
             MenuItems.AddSeparator();
             MenuItems.AddItem(
                 Strings.MenuItemClearPublishedDate,
                 RelayCommand.Create(RunClearPublishedDateCommand, p => SelectedPublished?.HasPublishedDate ?? false)
-                );
+                ).AddIconResource(ResourceKeys.Icon.IconCalendarClear);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemRemovePublished, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
+            MenuItems.AddItem(Strings.MenuItemRemovePublished, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
             Commands.Add("ClearPublishedDate", p => PublishedDate = null);
         }

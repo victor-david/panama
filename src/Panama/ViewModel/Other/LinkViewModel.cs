@@ -64,11 +64,11 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Note", TableColumns.Notes).MakeSingleLine();
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.MenuItemAddLink, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemAddLink, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemDeleteLink, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            MenuItems.AddItem(Strings.MenuItemDeleteLink, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
         }
         #endregion
 

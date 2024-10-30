@@ -68,9 +68,9 @@ namespace Restless.Panama.ViewModel
             Commands.Add("Browse", RunBrowseCommand, CanRunBrowseCommand);
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.MenuItemAddAlert, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemAddAlert, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemDeleteAlert, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
+            MenuItems.AddItem(Strings.MenuItemDeleteAlert, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
             ListView.IsLiveSorting = true;
             ListView.LiveSortingProperties.Add(TableColumns.Date);

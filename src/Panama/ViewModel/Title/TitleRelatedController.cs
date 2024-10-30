@@ -58,13 +58,13 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleWordCount);
 
-            MenuItems.AddItem(Strings.MenuItemAddRelated, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
-            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemAddRelated, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
+            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemFilterTitleListToRelated, RelayCommand.Create(RunFilterToRelatedCommand, p => !ListView.IsEmpty))
-                .AddIconResource(ResourceKeys.Icon.FilterIconKey);
+                .AddIconResource(ResourceKeys.Icon.IconFilter);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemRemoveRelated, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
+            MenuItems.AddItem(Strings.MenuItemRemoveRelated, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
         }
         #endregion
 

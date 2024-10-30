@@ -256,17 +256,16 @@ namespace Restless.Panama.ViewModel
             Commands.Add("AddToQueue", RunAddTitleToQueueCommand, p => SelectedTitle != null);
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
-            MenuItems.AddItem(Strings.MenuItemFlagTitle, Commands["ToggleFlag"]).AddIconResource(ResourceKeys.Icon.ToggleIconKey);
-            MenuItems.AddItem(Strings.MenuItemCopyTitle, RelayCommand.Create(RunCopyTitleCommand))
-                .AddIconResource(ResourceKeys.Icon.CircleSmallIconKey);
+            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
+            MenuItems.AddItem(Strings.MenuItemFlagTitle, Commands["ToggleFlag"]).AddIconResource(ResourceKeys.Icon.IconToggle);
+            MenuItems.AddItem(Strings.MenuItemCopyTitle, RelayCommand.Create(RunCopyTitleCommand)).AddIconResource(ResourceKeys.Icon.IconCopy);
 
             queueTitleMenuIndex = MenuItems.Count;
 
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemDeleteTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            MenuItems.AddItem(Strings.MenuItemDeleteTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
             SynchronizeQueueTitleMenuItems();
 

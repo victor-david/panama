@@ -60,7 +60,7 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<Int64ToPathConverter>("S", TableColumns.Status, ResourceKeys.Icon.TitleStatusIconMap)
+            Columns.CreateResource<Int64ToResourceConverter>("S", TableColumns.Status, ResourceKeys.Icon.TitleStatusIconMap)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(LocalResources.Get(ResourceKeys.ToolTip.SubmissionTitleStatusToolTip));

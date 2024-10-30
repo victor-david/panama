@@ -61,7 +61,7 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip("Ordering");
 
-            Columns.CreateResource<Int64ToPathConverter>("S", TableColumns.Status, ResourceKeys.Icon.TitleStatusIconMap)
+            Columns.CreateResource<Int64ToResourceConverter>("S", TableColumns.Status, ResourceKeys.Icon.TitleStatusIconMap)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(SubmissionTitleStatusToolTip.Create(this));
@@ -100,7 +100,7 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddSeparator();
 
             MenuItems.AddItem(
-                Strings.MenuItemRemoveTitleFromSubmission, 
+                Strings.MenuItemRemoveTitleFromSubmission,
                 RelayCommand.Create(RunRemoveTitleFromSubmissionCommand, p => CanRunIfNotLocked()))
                 .AddIconResource(ResourceKeys.Icon.XMediumIconKey);
 
@@ -208,7 +208,7 @@ namespace Restless.Panama.ViewModel
         private bool CanRunSetTitleStatusCommand(object parm)
         {
             return
-                parm is long status && 
+                parm is long status &&
                 SelectedSubmission != null &&
                 (status != SubmissionValues.StatusAccepted || Owner.SelectedBatch?.ResponseType == ResponseValues.ResponseAccepted);
         }

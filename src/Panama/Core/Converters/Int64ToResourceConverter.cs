@@ -9,18 +9,17 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Shapes;
 
 namespace Restless.Panama.Core
 {
     /// <summary>
-    /// Provides a converter that accepts a long integer value and returns a path resource
+    /// Provides a converter that accepts a long integer value and returns a resource
     /// </summary>
-    public class Int64ToPathConverter : IValueConverter
+    public class Int64ToResourceConverter : IValueConverter
     {
         #region Public methods
         /// <summary>
-        /// Converts a long integer value to a path resource
+        /// Converts a long integer value to a resource
         /// </summary>
         /// <param name="value">The value</param>
         /// <param name="targetType">Not used.</param>
@@ -30,7 +29,7 @@ namespace Restless.Panama.Core
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return value is long key && parameter is Dictionary<long, string> map && map.ContainsKey(key)
-                ? LocalResources.Get<Path>(map[key])
+                ? LocalResources.Get(map[key])
                 : null;
         }
 

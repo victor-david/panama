@@ -78,15 +78,15 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Publisher", TableColumns.Joined.Publisher);
 
-            MenuItems.AddItem(Strings.MenuItemAddPublished, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
-            MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemAddPublished, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
+            MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
             MenuItems.AddSeparator();
             MenuItems.AddItem(
                 Strings.MenuItemClearPublishedDate,
                 RelayCommand.Create(RunClearPublishedDateCommand, p => SelectedPublished?.HasPublishedDate ?? false)
-                );
+                ).AddIconResource(ResourceKeys.Icon.IconCalendarClear);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemRemovePublished, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
+            MenuItems.AddItem(Strings.MenuItemRemovePublished, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
         }
         #endregion
 

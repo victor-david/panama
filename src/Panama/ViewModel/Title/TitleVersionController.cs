@@ -118,8 +118,9 @@ namespace Restless.Panama.ViewModel
             Commands.Add("SaveProperty", RunSavePropertyCommand, CanRunSavePropertyCommand);
             Commands.Add("SetLanguage", RunSetLanguageCommand, o => IsSelectedRowAccessible);
 
-            MenuItems.AddItem(Strings.MenuItemAddTitleVersion, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
-            MenuItems.AddItem(Strings.MenuItemReplaceTitleVersion, RelayCommand.Create(RunReplaceVersionCommand, p => CanRunVersionCommand()));
+            MenuItems.AddItem(Strings.MenuItemAddTitleVersion, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
+            MenuItems.AddItem(Strings.MenuItemReplaceTitleVersion, RelayCommand.Create(RunReplaceVersionCommand, p => CanRunVersionCommand()))
+                .AddIconResource(ResourceKeys.Icon.IconFileReplace);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemMakeSeparateVersion, RelayCommand.Create(RunConvertToVersionCommand, CanRunConvertToVersionCommand));
             MenuItems.AddSeparator();
@@ -133,7 +134,7 @@ namespace Restless.Panama.ViewModel
             }
 
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemRemoveTitleVersion, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
+            MenuItems.AddItem(Strings.MenuItemRemoveTitleVersion, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
             ListView.IsLiveSorting = true;
             ListView.LiveSortingProperties.Add(TitleVersionTable.Defs.Columns.Version);
@@ -225,7 +226,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
-
         private void RunConvertToVersionCommand(object parm)
         {
             if (CanRunVersionCommand())

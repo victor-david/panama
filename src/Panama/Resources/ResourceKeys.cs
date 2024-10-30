@@ -59,19 +59,34 @@ namespace Restless.Panama.Resources
             /// </summary>
             public static readonly Dictionary<long, string> TitleStatusIconMap = new()
             {
-                { SubmissionValues.StatusWithdrawn, SquareSmallGrayIconKey },
-                { SubmissionValues.StatusAccepted, SquareSmallGreenIconKey },
+                { SubmissionValues.StatusWithdrawn, IconStatusWithdrawn },
+                { SubmissionValues.StatusAccepted, IconStatusAccepted },
             };
 
             //  Named icons as resources. Names must correspond
+            public const string IconAdd = "Panama.Icon.Plus";
             public const string IconArrowDown = "Panama.Icon.Arrow.Down";
             public const string IconArrowUp = "Panama.Icon.Arrow.Up";
+            public const string IconCalendar = "Panama.Icon.Calendar";
+            public const string IconCalendarClear = "Panama.Icon.Calendar.Clear";
+            public const string IconCheck = "Panama.Icon.Check";
             public const string IconChevronDown = "Panama.Icon.Chevron.Down";
             public const string IconChevronLeft = "Panama.Icon.Chevron.Left";
             public const string IconChevronRight = "Panama.Icon.Chevron.Right";
             public const string IconChevronUp = "Panama.Icon.Chevron.Up";
+            public const string IconCopy = "Panama.Icon.Copy";
+            public const string IconDelete = "Panama.Icon.Delete";
+            public const string IconFileReplace = "Panama.Icon.File.Replace";
+            public const string IconFilter = "Panama.Icon.Filter";
+            public const string IconMinus = "Panama.Icon.Minus";
+            public const string IconOpenWebSite = IconChevronRight;
             public const string IconSquare = "Panama.Icon.Square";
+            public const string IconStatusAccepted = IconCheck;
+            public const string IconStatusWithdrawn = IconMinus;
+
             public const string IconSynchronize = "Panama.Icon.Synchronize";
+            public const string IconToggle = "Panama.Icon.Toggle";
+
 
             // Old names. These will be removed
             public const string AlertIconKey = nameof(AlertIconKey);
