@@ -14,6 +14,7 @@
 
     <Grid tk:Property.RowHeights="200,Auto,*">
         <tk:DataGrid
+            Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
             Style="{StaticResource Panama.Styles.DataGrid.Locked}"
             ItemsSource="{Binding Documents.ListView}"
             SelectedItem="{Binding Documents.SelectedItem}"
@@ -37,9 +38,8 @@
             <TextBox Text="{Binding Documents.SelectedDocument.Title}"/>
         </StackPanel>
 
-        <Expander
+        <tk:NavigatorExpander
             Grid.Row="2"
-            Margin="0,8"
             Header="{x:Static r:Strings.TextPreview}"
             IsExpanded="{Binding Documents.IsPreviewMode}">
 
@@ -48,6 +48,6 @@
                 PreviewMode="{Binding Documents.PreviewMode}"
                 PreviewText="{Binding Documents.PreviewText}"/>
 
-        </Expander>
+        </tk:NavigatorExpander>
     </Grid>
 </UserControl>

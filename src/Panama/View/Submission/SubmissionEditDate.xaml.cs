@@ -5,7 +5,7 @@ namespace Restless.Panama.View
     /// <summary>
     /// Interaction logic for SubmissionEditDate.xaml
     /// </summary>
-    public partial class SubmissionEditDate : UserControl
+    public partial class SubmissionEditDate : Grid
     {
         public SubmissionEditDate()
         {

@@ -181,6 +181,18 @@
 
     <Style TargetType="con:PathSelector" BasedOn="{StaticResource Panana.Styles.PathSelector}"/>
 
+    <!-- Titled Separator-->
+    <Style x:Key="Panama.Styles.TitledSeparator" TargetType="con:TitledSeparator">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray7}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
+        <Setter Property="SeparatorHeight" Value="2"/>
+        <Setter Property="TextElement.FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <Style TargetType="con:TitledSeparator" BasedOn="{StaticResource Panama.Styles.TitledSeparator}"/>
+
     <!-- Data grid-->
     <Style x:Key="Panama.Styles.DataGridRow" TargetType="DataGridRow">
         <Style.Triggers>
@@ -281,6 +293,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextElement.FontWeight" Value="SemiBold"/>
     </Style>
 
     <Style x:Key="Panama.Styles.Panel.DataEntry" TargetType="Panel">
@@ -295,8 +308,12 @@
                 <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
             </Style>
 
-            <Style TargetType="ListBox" BasedOn="{StaticResource MahApps.Styles.ListBox}">
+            <Style TargetType="ListBox" BasedOn="{StaticResource Panama.Styles.ListBox}">
                 <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+                <Style.Resources>
+                    <!-- Prevent the text block style from falling into the list box -->
+                    <Style TargetType="TextBlock"/>
+                </Style.Resources>
             </Style>
 
             <Style x:Key="{x:Static con:PathSelector.TextBlockStyleKey}" TargetType="TextBlock" BasedOn="{StaticResource Panama.Styles.TextBlock.DataEntry}"/>

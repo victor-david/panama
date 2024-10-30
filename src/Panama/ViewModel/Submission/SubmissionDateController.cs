@@ -118,7 +118,7 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private string GetDateString(object parm)
         {
-            return parm is DateTime date ? date.ToLocalTime().ToString(Config.Instance.DateFormat, CultureInfo.InvariantCulture) : Strings.TextNone;
+            return parm is DateTime date ? date.ToString(Config.Instance.DateFormat, CultureInfo.InvariantCulture) : Strings.TextNone;
         }
 
         private void OnSubmittedPropertiesChanged()

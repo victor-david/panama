@@ -16,10 +16,9 @@
     <Border Style="{StaticResource Panama.Styles.Border.Container}">
 
         <Border.Resources>
-            <Style TargetType="conl:TitledSeparator">
+            <!--<Style TargetType="conl:TitledSeparator" BasedOn="{StaticResource Panama.Styles.TitledSeparator}">
                 <Setter Property="Margin" Value="2,8"/>
-                <Setter Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
-            </Style>
+            </Style>-->
         </Border.Resources>
 
         <Grid
