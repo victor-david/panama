@@ -401,12 +401,17 @@
         </Style.Resources>
     </Style>
 
-    <Style x:Key="Panama.Styles.StatusBar.Selector" TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}">
-        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-    </Style>
-
     <Style TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}"/>
+
+    <Style x:Key="Panama.Styles.StatusBar.Selector" TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}">
+        <Style.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button}">
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="MinWidth" Value="82"/>
+                <Setter Property="Padding" Value="2"/>
+            </Style>
+        </Style.Resources>
+    </Style>
 
     <!-- tk:RadioButtonPanel / tk:RadioButton -->
     <Style x:Key="Panama.Styles.RadioButtonPanel" TargetType="tk:RadioButtonPanel">
