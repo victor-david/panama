@@ -1,8 +1,6 @@
 ﻿using Restless.Toolkit.Core.Database.SQLite;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using Columns = Restless.Panama.Database.Tables.SubmissionTable.Defs.Columns;
 
 namespace Restless.Panama.Database.Tables

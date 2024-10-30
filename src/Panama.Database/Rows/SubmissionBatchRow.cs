@@ -114,6 +114,11 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Gets a boolean value that indicates if <see cref="Response"/> has a value
+        /// </summary>
+        public bool HasResponseDate => Response != null;
+
+        /// <summary>
         /// Gets a formatted value for <see cref="Submitted"/>.
         /// </summary>
         public string SubmittedFormatted => Submitted.ToString(dateFormat, CultureInfo.InvariantCulture);
@@ -186,7 +191,7 @@ namespace Restless.Panama.Database.Tables
                 IsOnline = false,
                 IsContest = false,
                 IsLocked = false,
-                Submitted = Utility.GetUtcNowZero(),
+                Submitted = Utility.GetNowZero(),
                 Response = null,
                 ResponseType = ResponseTable.Defs.Values.NoResponse,
                 Notes = null

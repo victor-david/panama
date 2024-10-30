@@ -84,7 +84,7 @@ namespace Restless.Panama.Database.Tables
                     public const string Submitted = "JoinBatchSubmitted";
 
                     /// <summary>
-                    /// The name of the column that holds the calculated submission date. 
+                    /// The name of the column that holds the calculated submission date.
                     /// This column is used for custom sorting.
                     /// </summary>
                     public const string SubmittedCalc = "JoinBatchSubmittedCalc";
@@ -186,7 +186,19 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Provides an enumerable that enumerates all record with the specified batch in order of ordering.
+        /// Provides an enumerable that enumerates all records.
+        /// </summary>
+        /// <returns>An enumerable</returns>
+        public IEnumerable<SubmissionRow> EnumerateAll()
+        {
+            foreach (DataRow row in EnumerateRows())
+            {
+                yield return SubmissionRow.Create(row);
+            }
+        }
+
+        /// <summary>
+        /// Provides an enumerable that enumerates all records with the specified batch in order of ordering.
         /// </summary>
         /// <param name="batchId">The batch id</param>
         /// <returns>An enumerable</returns>
@@ -212,7 +224,7 @@ namespace Restless.Panama.Database.Tables
                 row[Defs.Columns.TitleId] = titleId;
                 row[Defs.Columns.Ordering] = NextOrdering(batchId);
                 row[Defs.Columns.Status] = Defs.Values.StatusNotSpecified;
-                row[Defs.Columns.Added] = DateTime.UtcNow;
+                row[Defs.Columns.Added] = DateTime.Now.ToZero();
                 Rows.Add(row);
                 Save();
             }
@@ -301,7 +313,6 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn(Defs.Columns.Joined.Title, TitleTable.Defs.Relations.ToSubmission, TitleTable.Defs.Columns.Title);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Written, TitleTable.Defs.Relations.ToSubmission, TitleTable.Defs.Columns.Written);
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Submitted, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Submitted);
-            // CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.SubmittedCalc, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Calculated.Submitted);
 
             CreateExpressionColumn<long>(Defs.Columns.Calculated.CurrentSubCount, string.Format("IIF(Parent({0}).{1} IS NULL, 1, 0)", SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Response));
             CreateChildToParentColumn<DateTime>(Defs.Columns.Joined.Response, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Response);
@@ -366,5 +377,39 @@ namespace Restless.Panama.Database.Tables
             }
         }
         #endregion
+
+        /************************************************************************/
+
+        #region Update (Internal)
+        internal override long DataVersion => 2;
+        internal override void PerformSchemaUpdate()
+        {
+        }
+
+        internal override void PerformDataUpdate()
+        {
+            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
+            {
+                switch (DataVersion)
+                {
+                    case 2:
+                        UpdateDates();
+                        break;
+                }
+                Save();
+                SchemaTable.Save();
+            }
+        }
+
+        private void UpdateDates()
+        {
+            foreach (SubmissionRow item in EnumerateAll())
+            {
+                item.Row[Defs.Columns.Added] = item.Added.ToZero();
+            }
+            SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Set dates to zeroed time");
+        }
+        #endregion
+
     }
 }

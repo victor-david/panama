@@ -7,12 +7,13 @@
 using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Restless.Panama.Database.Tables
 {
     /// <summary>
-    /// Represents the table that contains information about a submission batch. A batch is associated 
+    /// Represents the table that contains information about a submission batch. A batch is associated
     /// with a single publisher and may reference various titles, documents, and messages.
     /// </summary>
     public class SubmissionBatchTable : Core.ApplicationTableBase
@@ -64,7 +65,7 @@ namespace Restless.Panama.Database.Tables
                 public const string Contest = "contest";
 
                 /// <summary>
-                /// The name of the locked column. This column holds whether a submssion is locked. 
+                /// The name of the locked column. This column holds whether a submssion is locked.
                 /// When a submission is locked, only certain operations are allowed.
                 /// </summary>
                 public const string Locked = "locked";
@@ -172,6 +173,18 @@ namespace Restless.Panama.Database.Tables
         public override void Load()
         {
             Load(null, $"{Defs.Columns.Submitted} DESC");
+        }
+
+        /// <summary>
+        /// Provides an enumerable that enumerates all records.
+        /// </summary>
+        /// <returns>An enumerable</returns>
+        public IEnumerable<SubmissionBatchRow> EnumerateAll()
+        {
+            foreach (DataRow row in EnumerateRows())
+            {
+                yield return SubmissionBatchRow.Create(row);
+            }
         }
 
         /// <summary>
@@ -380,26 +393,39 @@ namespace Restless.Panama.Database.Tables
 
         /************************************************************************/
 
-        #region Private methods
-        //private void UpdateCalculatedSubmitted(ActionDataColumn col, DataRowChangeEventArgs e)
-        //{
-        //    UpdateCalculatedSubmitted(e.Row);
-        //}
+        #region Update (Internal)
+        internal override long DataVersion => 2;
+        internal override void PerformSchemaUpdate()
+        {
+        }
 
-        //private void UpdateCalculatedSubmitted(DataRow row)
-        //{
-        //    DateTime baseDate = new DateTime(DateTime.UtcNow.Year + 10, 1, 1);
-        //    if (row[Defs.Columns.Response] == DBNull.Value)
-        //    {
-        //        DateTime submitted = (DateTime)row[Defs.Columns.Submitted];
-        //        row[Defs.Columns.Calculated.Submitted] = baseDate.AddTicks(submitted.Ticks);
-        //    }
-        //    else
-        //    {
-        //        row[Defs.Columns.Calculated.Submitted] = row[Defs.Columns.Submitted];
-        //    }
-        //}
+        internal override void PerformDataUpdate()
+        {
+            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
+            {
+                switch (DataVersion)
+                {
+                    case 2:
+                        UpdateDates();
+                        break;
+                }
+                Save();
+                SchemaTable.Save();
+            }
+        }
+
+        private void UpdateDates()
+        {
+            foreach (SubmissionBatchRow item in EnumerateAll())
+            {
+                item.Submitted = item.Submitted.ToZero();
+                if (item.HasResponseDate)
+                {
+                    item.Response = item.Response.Value.ToZero();
+                }
+            }
+            SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Set dates to zeroed time");
+        }
         #endregion
-
     }
 }
