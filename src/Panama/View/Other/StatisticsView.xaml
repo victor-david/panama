@@ -21,14 +21,10 @@
             <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom}"/>
         </Style>
 
-        <Style TargetType="tk:LineItem">
-            <Setter Property="Margin" Value="4,0,0,2"/>
+        <Style TargetType="tk:LineItem" BasedOn="{StaticResource Panama.Styles.LineItem}">
+            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked.Tight}"/>
             <Setter Property="ItemDisplayWidth" Value="160"/>
-            <Setter Property="IndentLevel" Value="2"/>
-            <Setter Property="ItemFontSize" Value="12"/>
-            <Setter Property="ValueFontSize" Value="11"/>
-            <Setter Property="ItemForeground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
-            <Setter Property="ValueForeground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+            <Setter Property="IndentLevel" Value="3"/>
         </Style>
 
     </Grid.Resources>

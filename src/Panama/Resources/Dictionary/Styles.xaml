@@ -467,6 +467,20 @@
 
     <Style TargetType="tk:ThreeWay" BasedOn="{StaticResource Panama.Styles.ThreeWay}"/>
 
+    <!-- tk:LineItem -->
+    <Style x:Key="Panama.Styles.LineItem" TargetType="tk:LineItem">
+        <Setter Property="ItemDisplayWidth" Value="100"/>
+        <Setter Property="ItemFontSize" Value="12"/>
+        <Setter Property="IndentLevel" Value="0"/>
+        <Setter Property="ValueFontSize" Value="11"/>
+        <Setter Property="ItemVerticalAlignment" Value="Top"/>
+        <Setter Property="ValueVerticalAlignment" Value="Top"/>
+        <Setter Property="ItemForeground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="ValueForeground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+    </Style>
+
+    <Style TargetType="tk:LineItem" BasedOn="{StaticResource Panama.Styles.LineItem}"/>
+
     <!-- Border -->
     <Style x:Key="Panama.Styles.Border.Container" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>

@@ -27,7 +27,7 @@ namespace Restless.Panama.Database.Tables
         /// Gets the publisher id.
         /// </summary>
         public long PublisherId
-        { 
+        {
             get => GetInt64(Columns.PublisherId);
             private set => SetValue(Columns.PublisherId, value);
         }
@@ -114,14 +114,14 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets a formatted value for <see cref="Submitted"/> converted to local time.
+        /// Gets a formatted value for <see cref="Submitted"/>.
         /// </summary>
-        public string SubmittedLocal => Submitted.ToLocalTime().ToString(dateFormat, CultureInfo.InvariantCulture);
+        public string SubmittedFormatted => Submitted.ToString(dateFormat, CultureInfo.InvariantCulture);
 
         /// <summary>
-        /// Gets a formatted value for <see cref="Response"/> converted to local time.
+        /// Gets a formatted value for <see cref="Response"/>.
         /// </summary>
-        public string ResponseLocal => Response?.ToLocalTime().ToString(dateFormat, CultureInfo.InvariantCulture) ?? "--";
+        public string ResponseFormatted => Response?.ToString(dateFormat, CultureInfo.InvariantCulture) ?? "--";
 
         /// <summary>
         /// Gets the response type descriptive name

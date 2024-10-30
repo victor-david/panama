@@ -13,42 +13,41 @@
     d:DesignHeight="450" d:DesignWidth="400">
 
     <tk:DataGrid
+        Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
         ItemsSource="{Binding Submissions.ListView}"
         SelectedItem="{Binding Submissions.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
 
     <TextBlock
-            Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
-            tk:Property.IsCollapsed="{Binding Submissions.HaveItems}"
-            Text="{x:Static r:Strings.TextNoTitleSubmissions}"/>
+        Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
+        tk:Property.IsCollapsed="{Binding Submissions.HaveItems}"
+        Text="{x:Static r:Strings.TextNoTitleSubmissions}"/>
 
-    <HeaderedContentControl
+    <Grid
         Grid.Row="1"
-        Margin="0,5,0,0"
         Visibility="{Binding Submissions.EditVisibility}"
-        Header="{Binding Submissions.SelectedBatch.PublisherName}">
+        tk:Property.RowHeights="Auto,*">
 
-        <HeaderedContentControl.Resources>
-            <Style TargetType="tk:LineItem">
-                <Setter Property="Margin" Value="4"/>
-                <!--<Setter Property="ItemForeground" Value="{StaticResource DefaultForegroundBrush}"/>-->
-                <!--<Setter Property="ValueForeground" Value="{StaticResource DarkForegroundBrush}"/>-->
-                <Setter Property="ItemDisplayWidth" Value="80"/>
-                <Setter Property="ItemVerticalAlignment" Value="Top"/>
-                <Setter Property="ValueVerticalAlignment" Value="Top"/>
-            </Style>
-        </HeaderedContentControl.Resources>
+        <StatusBar>
+            <TextBlock Text="{Binding Submissions.SelectedBatch.PublisherName}"/>
+        </StatusBar>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1" Margin="5" VerticalScrollBarVisibility="Auto">
             <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="tk:LineItem" BasedOn="{StaticResource Panama.Styles.LineItem}">
+                        <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked.Tight}"/>
+                        <Setter Property="ItemDisplayWidth" Value="80"/>
+                    </Style>
+                </StackPanel.Resources>
 
                 <tk:LineItem
                     Item="Submitted"
-                    Value="{Binding Submissions.SelectedBatch.SubmittedLocal}"/>
+                    Value="{Binding Submissions.SelectedBatch.SubmittedFormatted}"/>
 
                 <tk:LineItem
                     Item="Response"
-                    Value="{Binding Submissions.SelectedBatch.ResponseLocal}"/>
+                    Value="{Binding Submissions.SelectedBatch.ResponseFormatted}"/>
 
                 <tk:LineItem
                     Item="Type"
@@ -57,9 +56,7 @@
                 <tk:LineItem
                     Item="Note"
                     Value="{Binding Submissions.SelectedBatch.Notes}"/>
-
             </StackPanel>
         </ScrollViewer>
-    </HeaderedContentControl>
-
+    </Grid>
 </Grid>
