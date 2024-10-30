@@ -61,7 +61,7 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Old name", nameof(TitleVersionRenameItem.OriginalNameDisplay));
             Columns.Create("New name", nameof(TitleVersionRenameItem.NewNameDisplay));
-            Columns.Create("Status", nameof(TitleVersionRenameItem.Status));
+            Columns.Create("Status", nameof(TitleVersionRenameItem.Status)).MakeFlexWidth(0.5);
             Commands.Add("Rename", RunRenameCommand, p => canRename);
 
             PopulateRenameItems(titleId);
