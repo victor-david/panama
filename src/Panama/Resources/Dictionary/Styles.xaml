@@ -29,6 +29,25 @@
         </Setter>
     </Style>
 
+    <!-- tk:MessageWindow (used for dialogs) -->
+    <Style TargetType="tk:MessageWindow">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.WindowTitle}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForegound}"/>
+        <Setter Property="TitleBarButtonBrush" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="TitleBarBackground" Value="{DynamicResource MahApps.Brushes.WindowTitle}"/>
+        <Setter Property="TitleBarForeground" Value="{DynamicResource MahApps.Brushes.IdealForeground}"/>
+        <Setter Property="ButtonStyle">
+            <Setter.Value>
+                <Style TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button}">
+                    <Setter Property="Margin" Value="4,2"/>
+                    <Setter Property="MinWidth" Value="92"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- Main splitter -->
     <Style x:Key="Panama.Styles.MainSplitter" TargetType="tk:MultiSplitterGrid">
         <Setter Property="CanCollapseDetail" Value="False"/>
