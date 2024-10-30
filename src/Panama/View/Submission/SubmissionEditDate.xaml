@@ -20,11 +20,9 @@
     </StackPanel>
 
     <StackPanel Grid.Row="1">
-        <conl:TitledSeparator Title="Response"/>
+        <conl:TitledSeparator Title="{Binding Dates.Header2}"/>
 
         <DatePicker SelectedDate="{Binding Dates.ResponseDate}"/>
-
-        <TextBlock Text="Response type"/>
 
         <ListBox
             BorderThickness="1"

@@ -155,7 +155,7 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Note", TableColumns.Notes)
                 .MakeSingleLine();
-            
+
             Columns.RestoreColumnState(Config.SubmissionGridColumnState);
 
             Commands.Add("ActiveFilter", p => Filters.SetToActive());
@@ -165,22 +165,22 @@ namespace Restless.Panama.ViewModel
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemCreateSubmission, AddCommand)
-                .AddIconResource(ResourceKeys.Icon.PlusIconKey);
+                .AddIconResource(ResourceKeys.Icon.IconAdd);
 
             MenuItems.AddSeparator();
-            
+
             MenuItems.AddItem(Strings.MenuItemBrowseToPublisherUrl, OpenRowCommand)
-                .AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
-            
+                .AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
+
             MenuItems.AddItem(
                 Strings.MenuItemFilterToPublisher,
                 RelayCommand.Create(RunFilterToPublisherCommand, p => SelectedBatch != null))
-                .AddIconResource(ResourceKeys.Icon.FilterIconKey);
+                .AddIconResource(ResourceKeys.Icon.IconFilter);
 
             MenuItems.AddSeparator();
-            
+
             MenuItems.AddItem(Strings.MenuItemDeleteSubmission, DeleteCommand)
-                .AddIconResource(ResourceKeys.Icon.XRedIconKey);
+                .AddIconResource(ResourceKeys.Icon.IconDelete);
 
             Titles = new SubmissionTitleController(this);
             Documents = new SubmissionDocumentController(this);
@@ -188,7 +188,7 @@ namespace Restless.Panama.ViewModel
             Dates = new SubmissionDateController(this);
 
             ListView.IsLiveSorting = true;
-            ListView.LiveSortingProperties.Add(SubmissionBatchTable.Defs.Columns.Submitted);
+            ListView.LiveSortingProperties.Add(TableColumns.Submitted);
 
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {

@@ -35,14 +35,22 @@ namespace Restless.Panama.ViewModel
         /// Gets the publisher table
         /// </summary>
         protected PublisherTable PublisherTable => DatabaseController.Instance.GetTable<PublisherTable>();
+
+        /// <summary>
+        /// Gets the response table
+        /// </summary>
+        protected ResponseTable ResponseTable => DatabaseController.Instance.GetTable<ResponseTable>();
+
         /// <summary>
         /// Gets the submission batch table
         /// </summary>
         protected SubmissionBatchTable SubmissionBatchTable => DatabaseController.Instance.GetTable<SubmissionBatchTable>();
+
         /// <summary>
         /// Gets the title table
         /// </summary>
         protected TitleTable TitleTable => DatabaseController.Instance.GetTable<TitleTable>();
+
         /// <summary>
         /// Gets the title version table
         /// </summary>

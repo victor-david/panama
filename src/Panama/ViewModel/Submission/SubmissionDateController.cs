@@ -4,14 +4,11 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Windows.Input;
 
 namespace Restless.Panama.ViewModel
@@ -21,14 +18,7 @@ namespace Restless.Panama.ViewModel
     /// </summary>
     public class SubmissionDateController : BaseController<SubmissionViewModel, DummyTable>
     {
-        private ResponseTable ResponseTable => DatabaseController.Instance.GetTable<ResponseTable>();
-
         #region Public properties
-        /// <summary>
-        /// Gets a the header for the submitted date
-        /// </summary>
-        public override string Header1 => $"{Strings.TextSubmitted}: {GetDateString(Owner.SelectedBatch?.Submitted)}";
-
         /// <summary>
         /// Gets or sets the submitted date.
         /// </summary>
@@ -46,10 +36,9 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a the header for the response date
+        /// Gets a the header for the response
         /// </summary>
-        public override string Header2 => $"{Strings.TextResponse}: {GetDateString(Owner.SelectedBatch?.Response)}";
-
+        public override string Header2 => $"{Strings.TextResponse}: {GetResponseTypeString()}";
 
         public DateTime? ResponseDate
         {
@@ -75,15 +64,16 @@ namespace Restless.Panama.ViewModel
         public long ResponseType
         {
             get => Owner.SelectedBatch?.ResponseType ?? ResponseTable.Defs.Values.NoResponse;
-            set => Owner.SelectedBatch?.SetResponseType(value);
+            set
+            {
+                Owner.SelectedBatch?.SetResponseType(value);
+                OnResponseHeaderChanged();
+            }
         }
 
         public IEnumerable<ResponseRow> Responses => ResponseTable.EnumerateResponses();
 
-        public ICommand ClearResponseCommand
-        {
-            get;
-        }
+        public ICommand ClearResponseCommand { get; }
         #endregion
 
         /************************************************************************/
@@ -116,9 +106,9 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
-        private string GetDateString(object parm)
+        private string GetResponseTypeString()
         {
-            return parm is DateTime date ? date.ToString(Config.Instance.DateFormat, CultureInfo.InvariantCulture) : Strings.TextNone;
+            return string.IsNullOrEmpty(Owner.SelectedBatch?.ResponseTypeName) ? Strings.TextNone : Owner.SelectedBatch.ResponseTypeName;
         }
 
         private void OnSubmittedPropertiesChanged()
@@ -137,7 +127,10 @@ namespace Restless.Panama.ViewModel
             OnPropertyChanged(nameof(ResponseType));
         }
 
-
+        private void OnResponseHeaderChanged()
+        {
+            OnPropertyChanged(nameof(Header2));
+        }
         #endregion
     }
 }
