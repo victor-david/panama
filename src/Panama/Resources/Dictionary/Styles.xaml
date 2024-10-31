@@ -200,6 +200,15 @@
 
     <Style TargetType="con:TitledSeparator" BasedOn="{StaticResource Panama.Styles.TitledSeparator}"/>
 
+    <!-- Month/Day selector -->
+    <Style x:Key="Panama.Styles.MonthDaySelector" TargetType="con:MonthDaySelector">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Setter Property="SelectedBackgroundBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="SelectedForegroundBrush" Value="{DynamicResource MahApps.Brushes.Selected.Foreground}"/>
+    </Style>
+
+    <Style TargetType="con:MonthDaySelector" BasedOn="{StaticResource Panama.Styles.MonthDaySelector}"/>
+
     <!-- Data grid-->
     <Style x:Key="Panama.Styles.DataGridRow" TargetType="DataGridRow">
         <Style.Triggers>

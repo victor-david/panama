@@ -38,7 +38,7 @@
         Visibility="{Binding Periods.EditVisibility}">
 
         <Grid.Resources>
-            <Style TargetType="con:MonthDaySelector">
+            <Style TargetType="con:MonthDaySelector" BasedOn="{StaticResource Panama.Styles.MonthDaySelector}">
                 <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
             </Style>
         </Grid.Resources>

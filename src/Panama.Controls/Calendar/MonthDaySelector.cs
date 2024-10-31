@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Restless.Panama.Controls
 {
@@ -22,10 +23,9 @@ namespace Restless.Panama.Controls
         #region Private
         private const long DefaultSelectedMonth = 1;
         private const long DefaultSelectedDay = 1;
-        private const double DefaultMonthMinWidth = 96;
 
         private readonly ObservableCollection<long> days;
-        private static readonly Dictionary<long, long> MonthDayMap = new Dictionary<long, long>()
+        private static readonly Dictionary<long, long> MonthDayMap = new()
         {
             { 1, 31 }, { 2, 28 }, { 3, 31 }, { 4, 30 },
             { 5, 31 }, { 6, 30 }, { 7, 31 }, { 8, 31 },
@@ -110,22 +110,42 @@ namespace Restless.Panama.Controls
             );
 
         /// <summary>
-        /// Gets or sets the minimum width for the month selector
+        /// Gets or sets the brush for selected foreground
         /// </summary>
-        public double MonthMinWidth
+        public Brush SelectedForegroundBrush
         {
-            get => (double)GetValue(MonthMinWidthProperty);
-            set => SetValue(MonthMinWidthProperty, value);
+            get => (Brush)GetValue(SelectedForegroundBrushProperty);
+            set => SetValue(SelectedForegroundBrushProperty, value);
         }
 
         /// <summary>
-        /// Identifies the <see cref="MonthMinWidth"/> dependency property.
+        /// Identifies the <see cref="SelectedForegroundBrush"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty MonthMinWidthProperty = DependencyProperty.Register
+        public static readonly DependencyProperty SelectedForegroundBrushProperty = DependencyProperty.Register
             (
-                nameof(MonthMinWidth), typeof(double), typeof(MonthDaySelector), new FrameworkPropertyMetadata()
+                nameof(SelectedForegroundBrush), typeof(Brush), typeof(MonthDaySelector), new FrameworkPropertyMetadata()
                 {
-                    DefaultValue = DefaultMonthMinWidth
+                    DefaultValue = Brushes.DarkBlue
+                }
+            );
+
+        /// <summary>
+        /// Gets or sets the brush for selected background
+        /// </summary>
+        public Brush SelectedBackgroundBrush
+        {
+            get => (Brush)GetValue(SelectedBackgroundBrushProperty);
+            set => SetValue(SelectedBackgroundBrushProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="SelectedBackgroundBrush"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty SelectedBackgroundBrushProperty = DependencyProperty.Register
+            (
+                nameof(SelectedBackgroundBrush), typeof(Brush), typeof(MonthDaySelector), new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = Brushes.LightGray
                 }
             );
 
