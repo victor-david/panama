@@ -25,7 +25,8 @@
         <DatePicker SelectedDate="{Binding Dates.ResponseDate}"/>
 
         <ListBox
-            BorderThickness="1"
+            Style="{StaticResource Panama.Styles.ListBox.Radio}"
+            Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
             IsEnabled="{Binding Dates.HaveResponseDate}"
             ItemsSource="{Binding Dates.Responses}"
             SelectedValue="{Binding Dates.ResponseType}"

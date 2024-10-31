@@ -265,6 +265,48 @@
 
     <Style TargetType="ListBox" BasedOn="{StaticResource Panama.Styles.ListBox}"/>
 
+    <!-- List box (radio choices) -->
+    <Style x:Key="Panama.Styles.ListBox.Radio" TargetType="ListBox" BasedOn="{StaticResource Panama.Styles.ListBox}">
+        <Setter Property="Padding" Value="6,0"/>
+
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <RadioButton
+                        GroupName="props.e59c9231"
+                        Content="{Binding}"
+                        Margin="0,3"
+                        IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}, Mode=TwoWay}"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+            </Style>
+        </Style.Resources>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.60"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!-- Slider -->
     <Style x:Key="Panama.Styles.Slider" TargetType="Slider" BasedOn="{StaticResource MahApps.Styles.Slider}">
         <Setter Property="IsSnapToTickEnabled" Value="True"/>
