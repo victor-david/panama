@@ -3049,6 +3049,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set the submission period to the entire year.
+        /// </summary>
+        public static string ToolTipSubmissionPeriodAllYear {
+            get {
+                return ResourceManager.GetString("ToolTipSubmissionPeriodAllYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Synchronize file names to title and version.
         /// </summary>
         public static string ToolTipSynchonizeTitles {

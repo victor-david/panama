@@ -5,7 +5,7 @@ namespace Restless.Panama.View
     /// <summary>
     /// Interaction logic for PublisherEditMain.xaml
     /// </summary>
-    public partial class PublisherEditMain : StackPanel
+    public partial class PublisherEditMain : Grid
     {
         public PublisherEditMain()
         {

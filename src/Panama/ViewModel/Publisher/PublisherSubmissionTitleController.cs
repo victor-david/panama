@@ -9,7 +9,6 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System.Data;
-using System.Windows.Data;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
@@ -57,9 +56,7 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Written", TableColumns.Joined.Written).MakeDate();
 
-            //ListView.GroupDescriptions.Add(new PropertyGroupDescription(TableColumns.Joined.Submitted));
-
-            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
         }
         #endregion
 

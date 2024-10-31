@@ -1,0 +1,73 @@
+﻿<StatusBar
+    x:Class="Restless.Panama.View.PublisherFilterToolBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
+    mc:Ignorable="d"
+    Style="{StaticResource Panama.Styles.StatusBar}"
+    d:DesignHeight="450" d:DesignWidth="800">
+
+    <TextBlock Text="Filters"/>
+
+    <Button
+        Content="Active"
+        ToolTip="{x:Static r:Strings.ToolTipPublisherFilterActive}"
+        Command="{Binding Commands[ActiveFilter]}"/>
+
+    <Button
+        Content="Open"
+        ToolTip="{x:Static r:Strings.ToolTipPublisherFilterHaveSub}"
+        Command="{Binding Commands[HaveSubFilter]}"/>
+
+    <Button
+        Content="In Period"
+        ToolTip="{x:Static r:Strings.ToolTipPublisherFilterInPeriod}"
+        Command="{Binding Commands[InPeriodFilter]}"/>
+
+    <Button
+        Content="Paying"
+        ToolTip="{x:Static r:Strings.ToolTipPublisherFilterPaying}"
+        Command="{Binding Commands[PayingFilter]}"/>
+
+    <Separator/>
+
+    <Button
+        x:Name="CustomFilterButton"
+        Content="{x:Static r:Strings.MenuItemCustom}"
+        ToolTip="{x:Static r:Strings.ToolTipFilterCustom}"
+        Command="{Binding ToggleCustomFilterCommand}"/>
+
+    <Button
+        Content="{x:Static r:Strings.MenuItemClear}"
+        ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
+        Command="{Binding ClearFilterCommand}"/>
+
+    <Separator/>
+
+    <TextBlock>
+        <Run
+            Style="{StaticResource Panama.Styles.Run.Highlight}"
+            Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
+        <Run Text="records"/>
+    </TextBlock>
+
+    <TextBlock
+        Style="{StaticResource Panama.Styles.TextBlock.Accent}"
+        tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
+        Text="(row filter in effect)"/>
+
+    <vw:PublisherCustomFilter
+        Placement="Bottom"
+        PlacementTarget="{Binding ElementName=CustomFilterButton}"
+        VerticalOffset="6"
+        HorizontalOffset="6"
+        IsOpen="{Binding IsCustomFilterOpen}"
+        StaysOpen="False"/>
+
+</StatusBar>

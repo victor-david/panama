@@ -15,12 +15,6 @@
 
     <Border Style="{StaticResource Panama.Styles.Border.Container}">
 
-        <Border.Resources>
-            <!--<Style TargetType="conl:TitledSeparator" BasedOn="{StaticResource Panama.Styles.TitledSeparator}">
-                <Setter Property="Margin" Value="2,8"/>
-            </Style>-->
-        </Border.Resources>
-
         <Grid
             Style="{StaticResource Panama.Styles.Panel.DataEntry}"
             tk:Property.ColumnWidths="*,*"

@@ -241,6 +241,10 @@
                 <Setter Property="AlternatingRowBackground" Value="Transparent"/>
             </Trigger>
         </Style.Triggers>
+        <Style.Resources>
+            <!-- Prevent another text block style from falling into the list box -->
+            <Style TargetType="TextBlock"/>
+        </Style.Resources>
     </Style>
 
     <Style TargetType="DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid}"/>

@@ -19,7 +19,6 @@ namespace Restless.Panama.ViewModel
     public class PublisherPeriodController : BaseController<PublisherViewModel, SubmissionPeriodTable>
     {
         #region Private
-        private const string DateColumnFormat = "MMMM dd";
         private SubmissionPeriodRow selectedPeriod;
         #endregion
 
@@ -69,11 +68,11 @@ namespace Restless.Panama.ViewModel
             Columns.Create<MonthDayMultiConverter>("End", TableColumns.MonthEnd, TableColumns.DayEnd);
             Columns.Create("Note", TableColumns.Notes).MakeSingleLine();
 
-            MenuItems.AddItem(Strings.MenuItemAddSubmissionPeriod, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemAddSubmissionPeriod, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemRemoveSubmissionPeriod, DeleteCommand).AddIconResource(ResourceKeys.Icon.XMediumIconKey);
+            MenuItems.AddItem(Strings.MenuItemRemoveSubmissionPeriod, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
-            Commands.Add("MakeAllYear", RunMakeAllYearCommand, p => !(SelectedPeriod?.IsAllYear ?? true));
+            Commands.Add("MakeAllYear", p =>RunMakeAllYearCommand(), p => !(SelectedPeriod?.IsAllYear ?? true));
         }
         #endregion
 
@@ -124,13 +123,7 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
-        private void UpdateSelectedDisplay()
-        {
-            //SelectedDisplay = string.Format("Period: {0} - {1}", AddStart.ToString(DateColumnFormat), AddEnd.ToString(DateColumnFormat));
-            //OnPropertyChanged(nameof(SelectedDisplay));
-        }
-
-        private void RunMakeAllYearCommand(object parm)
+        private void RunMakeAllYearCommand()
         {
             if (SelectedPeriod != null && MessageWindow.ShowContinueCancel(Strings.ConfirmationResetSubmissionPeriod))
             {

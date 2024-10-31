@@ -19,49 +19,7 @@
         DetailWidth="{Binding Config.SubmissionDetailWidth}">
 
         <tk:SplitterGrid.HeaderLeft>
-            <StatusBar>
-                <TextBlock Text="Filters"/>
-                <Button
-                    Content="Active"
-                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterActive}"
-                    Command="{Binding Commands[ActiveFilter]}"/>
-
-                <Button
-                    Content="Try Again"
-                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterTryAgain}"
-                    Command="{Binding Commands[TryAgainFilter]}"/>
-
-                <Button
-                    Content="Personal"
-                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterPersonal}"
-                    Command="{Binding Commands[PersonalFilter]}"/>
-
-                <Button
-                    Content="Accepted"
-                    ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterAccepted}"
-                    Command="{Binding Commands[AcceptedFilter]}"/>
-
-                <Separator/>
-
-                <Button
-                    Content="{x:Static r:Strings.MenuItemClear}"
-                    ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
-                    Command="{Binding ClearFilterCommand}"/>
-
-                <Separator/>
-
-                <TextBlock>
-                    <Run
-                        Style="{StaticResource Panama.Styles.Run.Highlight}"
-                        Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
-                    <Run Text="records"/>
-                </TextBlock>
-
-                <TextBlock
-                    Style="{StaticResource Panama.Styles.TextBlock.Accent}"
-                    tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
-                    Text="(row filter in effect)"/>
-            </StatusBar>
+            <vw:SubmissionFilterToolBar/>
         </tk:SplitterGrid.HeaderLeft>
 
         <tk:SplitterGrid.HeaderRight>

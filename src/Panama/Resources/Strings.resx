@@ -1227,4 +1227,7 @@ Changes will take effect after you restart the application.</value>
   <data name="TextYes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="ToolTipSubmissionPeriodAllYear" xml:space="preserve">
+    <value>Set the submission period to the entire year</value>
+  </data>
 </root>
