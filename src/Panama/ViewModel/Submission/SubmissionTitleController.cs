@@ -76,7 +76,7 @@ namespace Restless.Panama.ViewModel
             Commands.Add("CopyToClipboard", RunCopyToClipboardCommand);
 
             MenuItems.AddItem(Strings.MenuItemAddTitleToSubmission, AddCommand)
-                .AddIconResource(ResourceKeys.Icon.PlusIconKey);
+                .AddIconResource(ResourceKeys.Icon.IconAdd);
 
             MenuItems.AddSeparator();
 
@@ -102,7 +102,7 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddItem(
                 Strings.MenuItemRemoveTitleFromSubmission,
                 RelayCommand.Create(RunRemoveTitleFromSubmissionCommand, p => CanRunIfNotLocked()))
-                .AddIconResource(ResourceKeys.Icon.XMediumIconKey);
+                .AddIconResource(ResourceKeys.Icon.IconDelete);
 
             ListView.IsLiveSorting = true;
             ListView.LiveSortingProperties.Add(TableColumns.Ordering);

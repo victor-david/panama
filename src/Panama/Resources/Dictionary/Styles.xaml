@@ -102,6 +102,11 @@
     <ico:Material x:Key="Panama.Icon.Toggle" x:Shared="False"  Kind="ToggleSwitchOutline"/>
 
     <!-- Buttons -->
+    <Style x:Key="Panama.Styles.Button.Dialog" TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button}">
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="MinWidth" Value="128"/>
+    </Style>
+
     <Style x:Key="Panama.Styles.Button.StatusBar" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Background" Value="Transparent"/>

@@ -5,9 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
-using Restless.Panama.Utility;
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
@@ -26,7 +24,6 @@ namespace Restless.Panama.ViewModel
         #region Private
         private readonly SubmissionBatchRow submissionBatch;
         private readonly ObservableCollection<TitleSubmission> titles;
-        private SubmissionBatchTable SubmissionBatchTable => DatabaseController.Instance.GetTable<SubmissionBatchTable>();
         #endregion
 
         /************************************************************************/
@@ -53,14 +50,16 @@ namespace Restless.Panama.ViewModel
         {
             this.submissionBatch = submissionBatch ?? throw new ArgumentNullException(nameof(submissionBatch));
 
-            Throw.IfNull(selectedTitles);
+            ArgumentNullException.ThrowIfNull(selectedTitles);
 
             Columns.Create("Id", nameof(TitleSubmission.Id))
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Title", nameof(TitleSubmission.Title));
-            Columns.Create("Status", nameof(TitleSubmission.StatusString)).MakeFlexWidth(1.5);
+            Columns.Create("Title", nameof(TitleSubmission.Title))
+                .MakeFlexWidth(1.5)
+                .MakeInitialSortAscending();
+            Columns.Create("Status", nameof(TitleSubmission.StatusString));
 
             Commands.Add("Confirm", RunConfirmCommand);
 
