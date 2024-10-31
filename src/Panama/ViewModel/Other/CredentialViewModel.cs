@@ -5,7 +5,6 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
@@ -23,8 +22,6 @@ namespace Restless.Panama.ViewModel
     public class CredentialViewModel : DataRowViewModel<CredentialTable>
     {
         #region Private
-        private PublisherTable PublisherTable => DatabaseController.Instance.GetTable<PublisherTable>();
-        private LinkTable LinkTable => DatabaseController.Instance.GetTable<LinkTable>();
         private CredentialRow selectedCredential;
         #endregion
 

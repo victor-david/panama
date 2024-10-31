@@ -1,6 +1,4 @@
 ﻿using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
-using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Panama.Tools;
 using Restless.Toolkit.Controls;
@@ -29,9 +27,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Properties
-        private TitleTable TitleTable => DatabaseController.Instance.GetTable<TitleTable>();
-        private TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
-
         /// <summary>
         /// Gets the list of settings sections
         /// </summary>

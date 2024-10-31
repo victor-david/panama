@@ -32,6 +32,11 @@ namespace Restless.Panama.ViewModel
 
         #region Tables
         /// <summary>
+        /// Gets the link table
+        /// </summary>
+        protected LinkTable LinkTable => DatabaseController.Instance.GetTable<LinkTable>();
+
+        /// <summary>
         /// Gets the publisher table
         /// </summary>
         protected PublisherTable PublisherTable => DatabaseController.Instance.GetTable<PublisherTable>();
@@ -40,6 +45,11 @@ namespace Restless.Panama.ViewModel
         /// Gets the response table
         /// </summary>
         protected ResponseTable ResponseTable => DatabaseController.Instance.GetTable<ResponseTable>();
+
+        /// <summary>
+        /// Gets the search table
+        /// </summary>
+        protected SearchTable SearchTable => DatabaseController.Instance.GetTable<SearchTable>();
 
         /// <summary>
         /// Gets the submission batch table

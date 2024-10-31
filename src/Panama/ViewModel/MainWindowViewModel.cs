@@ -26,7 +26,6 @@ namespace Restless.Panama.ViewModel
         #region Private
         private readonly ViewModelCache viewModelCache;
         private ApplicationViewModel selectedViewModel;
-        private GridLength mainNavigationWidth;
         private string notificationMessage;
         #endregion
 
@@ -278,15 +277,6 @@ namespace Restless.Panama.ViewModel
             WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
             WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
             WindowOwner.WindowState = WindowState.Normal;
-        }
-
-        private bool CanRunToolConvertCommand(object o)
-        {
-#if DOCX
-            return true;
-#else
-            return false;
-#endif
         }
         #endregion
     }
