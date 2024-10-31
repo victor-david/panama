@@ -14,7 +14,7 @@
     d:DesignHeight="1000" d:DesignWidth="300">
 
     <tk:RadioButtonPanel
-        Margin="0,0,0,8"
+        Margin="{DynamicResource Panama.Layout.Padding.Bottom}"
         tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto"
         SelectedValue="{Binding SelectedEditSection}">
 
@@ -29,7 +29,7 @@
         Grid.Row="1"
         tk:Property.IsLongVisible="{Binding SelectedEditSection}"
         tk:Property.IsLongVisibleValue="1"/>
-        
+
     <vw:SubmissionEditDate
         Grid.Row="1"
         tk:Property.IsLongVisible="{Binding SelectedEditSection}"
@@ -39,7 +39,7 @@
         Grid.Row="1"
         tk:Property.IsLongVisible="{Binding SelectedEditSection}"
         tk:Property.IsLongVisibleValue="3"/>
-        
+
     <vw:SubmissionEditDocument
         Grid.Row="1"
         tk:Property.IsLongVisible="{Binding SelectedEditSection}"

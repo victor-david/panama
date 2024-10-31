@@ -1,26 +1,24 @@
-﻿<tk:AppWindow
+﻿<mah:MetroWindow
     x:Class="Restless.Panama.View.SubmissionMessageSelectWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:r="clr-namespace:Restless.Panama.Resources"    
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SubmissionMessageSelectWindowViewModel}"
     mc:Ignorable="d"
-    Style="{StaticResource DefaultAppWindowStyle}"    
-    ResizeMode="NoResize"
-    Title="{x:Static r:Strings.WindowTitleSelectMessagesGeneric}" 
-    Height="600" Width="1060">
-    
-    <Grid 
-        Margin="{StaticResource DefaultPadding}"
-        tk:Property.RowHeights="Auto,*,Auto">
-        
+    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Title="{x:Static r:Strings.WindowTitleSelectMessagesGeneric}"
+    Height="460" Width="780">
+
+    <Grid tk:Property.RowHeights="Auto,*,Auto">
+
         <!-- Filter options -->
         <tk:RadioButtonPanel
-            Margin="0,0,0,8"
+            Margin="{StaticResource Panama.Layout.Padding.Vertical}"
             tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto,Auto"
             SelectedValue="{Binding SelectedFilterValue}">
 
@@ -30,23 +28,24 @@
             <tk:RadioButton Grid.Column="3" Value="21" Content="21 days"/>
             <tk:RadioButton Grid.Column="4" Value="30" Content="30 days"/>
             <tk:RadioButton Grid.Column="5" Value="0" Content="All"/>
-            
+
         </tk:RadioButtonPanel>
 
         <tk:DataGrid
             Grid.Row="1"
+            BorderThickness="0,1,0,1"
             SelectionMode="Extended"
             SelectedItemsList="{Binding SelectedItems, Mode=OneWayToSource}"
             ItemsSource="{Binding ListView}"
-            SelectedItem="{Binding SelectedItem}" 
+            SelectedItem="{Binding SelectedItem}"
             tk:DataGridColumns.Columns="{Binding Columns}">
         </tk:DataGrid>
 
         <Button
             Grid.Row="2"
-            Style="{StaticResource BorderedButtonStyle}"
+            Style="{StaticResource Panama.Styles.Button.Dialog}"
             Content="Okay"
             Command="{Binding Commands[Select]}"/>
 
     </Grid>
-</tk:AppWindow>
+</mah:MetroWindow>

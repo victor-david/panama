@@ -67,17 +67,17 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create("Type", TableColumns.Protocol).MakeFixedWidth(FixedWidth.W048);
             Columns.Create("Subject", TableColumns.Display);
-           
+
             MenuItems.AddItem(Strings.MenuItemAddSubmissionMessage, AddCommand)
-                .AddIconResource(ResourceKeys.Icon.PlusIconKey);
+                .AddIconResource(ResourceKeys.Icon.IconAdd);
 
             MenuItems.AddItem(Strings.MenuItemOpenItemOrDoubleClick, OpenRowCommand)
-                .AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+                .AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
 
             MenuItems.AddSeparator();
 
             MenuItems.AddItem(Strings.MenuItemRemoveSubmissionMessage, DeleteCommand)
-                .AddIconResource(ResourceKeys.Icon.XMediumIconKey);
+                .AddIconResource(ResourceKeys.Icon.IconDelete);
         }
         #endregion
 

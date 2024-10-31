@@ -65,6 +65,7 @@ namespace Restless.Panama.Resources
 
             //  Named icons as resources. Names must correspond
             public const string IconAdd = "Panama.Icon.Plus";
+            public const string IconAlert = "Panama.Icon.Alert";
             public const string IconArrowDown = "Panama.Icon.Arrow.Down";
             public const string IconArrowUp = "Panama.Icon.Arrow.Up";
             public const string IconCalendar = "Panama.Icon.Calendar";
@@ -76,17 +77,18 @@ namespace Restless.Panama.Resources
             public const string IconChevronUp = "Panama.Icon.Chevron.Up";
             public const string IconCopy = "Panama.Icon.Copy";
             public const string IconDelete = "Panama.Icon.Delete";
+            public const string IconError = IconAlert;
             public const string IconFileReplace = "Panama.Icon.File.Replace";
             public const string IconFilter = "Panama.Icon.Filter";
+            public const string IconInUse = IconTrayFull;
             public const string IconMinus = "Panama.Icon.Minus";
             public const string IconOpenWebSite = IconChevronRight;
             public const string IconSquare = "Panama.Icon.Square";
             public const string IconStatusAccepted = IconCheck;
             public const string IconStatusWithdrawn = IconMinus;
-
             public const string IconSynchronize = "Panama.Icon.Synchronize";
             public const string IconToggle = "Panama.Icon.Toggle";
-
+            public const string IconTrayFull = "Panama.Icon.Tray.Full";
 
             // Old names. These will be removed
             public const string AlertIconKey = nameof(AlertIconKey);
