@@ -3,11 +3,11 @@
 namespace Restless.Panama.View
 {
     /// <summary>
-    /// Interaction logic for TitleCustomFilter.xaml
+    /// Interaction logic for TitleFilterPopup.xaml
     /// </summary>
-    public partial class TitleCustomFilter : Popup
+    public partial class TitleFilterPopup : Popup
     {
-        public TitleCustomFilter()
+        public TitleFilterPopup()
         {
             InitializeComponent();
         }

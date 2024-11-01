@@ -62,12 +62,4 @@
         tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
         Text="(row filter in effect)"/>
 
-    <vw:TitleCustomFilter
-        Placement="Bottom"
-        PlacementTarget="{Binding ElementName=CustomFilterButton}"
-        VerticalOffset="6"
-        HorizontalOffset="6"
-        IsOpen="{Binding IsCustomFilterOpen}"
-        StaysOpen="False" />
-
 </StatusBar>

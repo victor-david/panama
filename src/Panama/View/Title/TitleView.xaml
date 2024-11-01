@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -29,24 +30,44 @@
         </tk:SplitterGrid.HeaderRight>
 
         <tk:SplitterGrid.ContentLeft>
-            <tk:DataGrid
-                CanUserReorderColumns="True"
-                HeaderMode="ColumnSelector"
-                ColumnSelectorMinimumVisible="3"
-                ItemsSource="{Binding ListView}"
-                SelectedItem="{Binding SelectedItem}"
-                RestoreStateBehavior="RestoreLastSelection"
-                tk:DataGridColumns.Columns="{Binding Columns}">
+            <Grid>
+                <tk:DataGrid
+                    CanUserReorderColumns="True"
+                    HeaderMode="ColumnSelector"
+                    ColumnSelectorMinimumVisible="3"
+                    ItemsSource="{Binding ListView}"
+                    SelectedItem="{Binding SelectedItem}"
+                    RestoreStateBehavior="RestoreLastSelection"
+                    tk:DataGridColumns.Columns="{Binding Columns}">
 
-                <DataGrid.InputBindings>
-                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
-                </DataGrid.InputBindings>
+                    <DataGrid.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                    </DataGrid.InputBindings>
 
-                <DataGrid.ContextMenu>
-                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
-                </DataGrid.ContextMenu>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                    </DataGrid.ContextMenu>
 
-            </tk:DataGrid>
+                </tk:DataGrid>
+
+                <con:Flyout Width="592" IsOpen="{Binding IsCustomFilterOpen}">
+                    <con:Flyout.Header>
+                        <StatusBar Margin="{DynamicResource Panama.Layout.Padding.Bottom}">
+                            <TextBlock Text="Titler filter"/>
+                            <StatusBarItem HorizontalAlignment="Right">
+                                <Button
+                                    Style="{StaticResource MahApps.Styles.Button.Chromeless}"
+                                    Content="{StaticResource Panama.Icon.Close}"
+                                    Command="{Binding ToggleCustomFilterCommand}"/>
+                            </StatusBarItem>
+                        </StatusBar>
+                    </con:Flyout.Header>
+
+                    <vw:TitleFilter/>
+
+                </con:Flyout>
+
+            </Grid>
         </tk:SplitterGrid.ContentLeft>
 
         <tk:SplitterGrid.ContentRight>
