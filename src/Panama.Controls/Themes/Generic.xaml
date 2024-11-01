@@ -10,6 +10,7 @@
         <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/MonthDaySelector.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/TitledSeparator.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/UpdateToolControl.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Panama.Controls;component/Themes/Generic/Flyout.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -5,9 +5,9 @@ namespace Restless.Panama.View
     /// <summary>
     /// Interaction logic for PublisherCustomFilter.xaml
     /// </summary>
-    public partial class PublisherCustomFilter : Popup
+    public partial class PublisherFilterPopup : Popup
     {
-        public PublisherCustomFilter()
+        public PublisherFilterPopup()
         {
             InitializeComponent();
         }

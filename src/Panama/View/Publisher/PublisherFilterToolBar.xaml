@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
-    xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
     mc:Ignorable="d"
@@ -61,13 +60,5 @@
         Style="{StaticResource Panama.Styles.TextBlock.Accent}"
         tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
         Text="(row filter in effect)"/>
-
-    <vw:PublisherCustomFilter
-        Placement="Bottom"
-        PlacementTarget="{Binding ElementName=CustomFilterButton}"
-        VerticalOffset="6"
-        HorizontalOffset="6"
-        IsOpen="{Binding IsCustomFilterOpen}"
-        StaysOpen="False"/>
 
 </StatusBar>

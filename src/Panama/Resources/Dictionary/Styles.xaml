@@ -92,6 +92,7 @@
     <ico:Material x:Key="Panama.Icon.Chevron.Left" x:Shared="False"  Kind="ChevronLeft"/>
     <ico:Material x:Key="Panama.Icon.Chevron.Right" x:Shared="False"  Kind="ChevronRight"/>
     <ico:Material x:Key="Panama.Icon.Chevron.Up" x:Shared="False"  Kind="ChevronUp"/>
+    <ico:Material x:Key="Panama.Icon.Close" x:Shared="False"  Kind="CloseThick"/>
     <ico:Material x:Key="Panama.Icon.Copy" x:Shared="False"  Kind="ContentCopy"/>
     <ico:Material x:Key="Panama.Icon.Delete" x:Shared="False"  Kind="TrashCanOutline"/>
     <ico:Material x:Key="Panama.Icon.File.Replace" x:Shared="False"  Kind="FileReplaceOutline"/>
@@ -208,6 +209,16 @@
     </Style>
 
     <Style TargetType="con:MonthDaySelector" BasedOn="{StaticResource Panama.Styles.MonthDaySelector}"/>
+
+    <!-- Flyout -->
+    <Style x:Key="Panama.Styles.Flyout" TargetType="con:Flyout">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="Padding" Value="{DynamicResource Panama.Layout.Padding.Full}"/>
+        <Setter Property="Placement" Value="TopRight"/>
+    </Style>
+
+    <Style TargetType="con:Flyout" BasedOn="{StaticResource Panama.Styles.Flyout}"/>
 
     <!-- Data grid-->
     <Style x:Key="Panama.Styles.DataGridRow" TargetType="DataGridRow">

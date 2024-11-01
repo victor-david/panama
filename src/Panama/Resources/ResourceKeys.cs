@@ -75,6 +75,7 @@ namespace Restless.Panama.Resources
             public const string IconChevronLeft = "Panama.Icon.Chevron.Left";
             public const string IconChevronRight = "Panama.Icon.Chevron.Right";
             public const string IconChevronUp = "Panama.Icon.Chevron.Up";
+            public const string IconClose = "Panama.Icon.Close";
             public const string IconCopy = "Panama.Icon.Copy";
             public const string IconDelete = "Panama.Icon.Delete";
             public const string IconError = IconAlert;
