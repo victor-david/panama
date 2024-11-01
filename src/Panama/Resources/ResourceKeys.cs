@@ -81,6 +81,7 @@ namespace Restless.Panama.Resources
             public const string IconError = IconAlert;
             public const string IconFileReplace = "Panama.Icon.File.Replace";
             public const string IconFilter = "Panama.Icon.Filter";
+            public const string IconFilterOff = "Panama.Icon.Filter.Off";
             public const string IconInUse = IconTrayFull;
             public const string IconMinus = "Panama.Icon.Minus";
             public const string IconOpenWebSite = IconChevronRight;

@@ -6,6 +6,7 @@
     xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:vw="clr-namespace:Restless.Panama.View"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
@@ -51,15 +52,7 @@
 
                 <con:Flyout Width="440" IsOpen="{Binding IsCustomFilterOpen}">
                     <con:Flyout.Header>
-                        <StatusBar Margin="{DynamicResource Panama.Layout.Padding.Bottom}">
-                            <TextBlock Text="Publisher filter"/>
-                            <StatusBarItem HorizontalAlignment="Right">
-                                <Button
-                                    Style="{StaticResource MahApps.Styles.Button.Chromeless}"
-                                    Content="{StaticResource Panama.Icon.Close}"
-                                    Command="{Binding ToggleCustomFilterCommand}"/>
-                            </StatusBarItem>
-                        </StatusBar>
+                        <vw:FilterHeader Title="{x:Static r:Strings.HeaderPublisherFilter}"/>
                     </con:Flyout.Header>
 
                     <vw:PublisherFilter/>

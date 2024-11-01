@@ -647,6 +647,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Publisher Filter.
+        /// </summary>
+        public static string HeaderPublisherFilter {
+            get {
+                return ResourceManager.GetString("HeaderPublisherFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Self Published.
         /// </summary>
         public static string HeaderSelfPublished {
@@ -733,6 +742,15 @@ namespace Restless.Panama.Resources {
         public static string HeaderTagFilter {
             get {
                 return ResourceManager.GetString("HeaderTagFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title Filter.
+        /// </summary>
+        public static string HeaderTitleFilter {
+            get {
+                return ResourceManager.GetString("HeaderTitleFilter", resourceCulture);
             }
         }
         

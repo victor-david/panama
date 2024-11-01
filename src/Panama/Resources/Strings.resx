@@ -1230,4 +1230,10 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolTipSubmissionPeriodAllYear" xml:space="preserve">
     <value>Set the submission period to the entire year</value>
   </data>
+  <data name="HeaderTitleFilter" xml:space="preserve">
+    <value>Title Filter</value>
+  </data>
+  <data name="HeaderPublisherFilter" xml:space="preserve">
+    <value>Publisher Filter</value>
+  </data>
 </root>

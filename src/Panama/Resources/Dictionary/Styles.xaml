@@ -97,6 +97,7 @@
     <ico:Material x:Key="Panama.Icon.Delete" x:Shared="False"  Kind="TrashCanOutline"/>
     <ico:Material x:Key="Panama.Icon.File.Replace" x:Shared="False"  Kind="FileReplaceOutline"/>
     <ico:Material x:Key="Panama.Icon.Filter" x:Shared="False"  Kind="FilterOutline"/>
+    <ico:Material x:Key="Panama.Icon.Filter.Off" x:Shared="False"  Kind="FilterOffOutline"/>
     <ico:Material x:Key="Panama.Icon.Minus" x:Shared="False"  Kind="Minus"/>
     <ico:Material x:Key="Panama.Icon.Plus" x:Shared="False"  Kind="Plus"/>
     <ico:Material x:Key="Panama.Icon.Square" x:Shared="False"  Kind="Square"/>
