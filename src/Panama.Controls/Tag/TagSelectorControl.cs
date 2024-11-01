@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace Restless.Panama.Controls
@@ -9,7 +10,7 @@ namespace Restless.Panama.Controls
         #region Constructor
         public TagSelectorControl()
         {
-            AddHandler(Button.ClickEvent, new RoutedEventHandler(ClickedEventHandler));
+            AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ClickedEventHandler));
         }
 
         static TagSelectorControl()

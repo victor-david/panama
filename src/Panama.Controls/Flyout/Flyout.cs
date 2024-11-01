@@ -242,24 +242,18 @@ namespace Restless.Panama.Controls
         {
             if (IsOpen)
             {
-                AnimateOpen();
+                Animate(0, Width, 150);
             }
             else
             {
-                AnimateClose();
+                Animate(Width, 0, 150);
             }
         }
 
-        private void AnimateOpen()
+        private void Animate(double from, double to, double milliSeconds)
         {
-            DoubleAnimation test = new(0, Width, TimeSpan.FromMilliseconds(150));
-            BeginAnimation(InternalWidthProperty, test);
-        }
-
-        private void AnimateClose()
-        {
-            DoubleAnimation test = new(Width, 0, TimeSpan.FromMilliseconds(150));
-            BeginAnimation(InternalWidthProperty, test);
+            DoubleAnimation da = new(from, to, TimeSpan.FromMilliseconds(milliSeconds));
+            BeginAnimation(InternalWidthProperty, da);
         }
 
         private void HandlePlacementChanged()
