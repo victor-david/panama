@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Media.Media3D;
 using SubmissionValues = Restless.Panama.Database.Tables.SubmissionTable.Defs.Values;
 
 namespace Restless.Panama.Resources
@@ -57,11 +56,31 @@ namespace Restless.Panama.Resources
             /// <summary>
             /// Provides an icon map for the status of submitted titles
             /// </summary>
-            public static readonly Dictionary<long, string> TitleStatusIconMap = new()
+            private static readonly Dictionary<long, string> TitleStatusIconMap = new()
             {
                 { SubmissionValues.StatusWithdrawn, IconStatusWithdrawn },
                 { SubmissionValues.StatusAccepted, IconStatusAccepted },
             };
+
+            /// <summary>
+            /// Gets the title status icon map
+            /// </summary>
+            /// <returns>The map</returns>
+            public static object GetTitleStatusIconMap() => TitleStatusIconMap;
+
+            /// <summary>
+            /// Gets the title status resource key for the specified status
+            /// </summary>
+            /// <param name="status">The status value</param>
+            /// <returns>The resource key, or null if status doesn't exist in the map</returns>
+            public static object GetTitleStatusIconKey(long status) => TitleStatusIconMap.ContainsKey(status) ? TitleStatusIconMap[status] : null;
+
+            /// <summary>
+            /// Gets the title status resource for the specified key
+            /// </summary>
+            /// <param name="status">The status value</param>
+            /// <returns>The resource, or null</returns>
+            public static object GetTitleStatusIcon(long status) => LocalResources.Get(GetTitleStatusIconKey(status));
 
             //  Named icons as resources. Names must correspond
             public const string IconAdd = "Panama.Icon.Plus";
@@ -85,9 +104,10 @@ namespace Restless.Panama.Resources
             public const string IconInUse = IconTrayFull;
             public const string IconMinus = "Panama.Icon.Minus";
             public const string IconOpenWebSite = IconChevronRight;
+            public const string IconRemove = "Panama.Icon.Remove";
             public const string IconSquare = "Panama.Icon.Square";
             public const string IconStatusAccepted = IconCheck;
-            public const string IconStatusWithdrawn = IconMinus;
+            public const string IconStatusWithdrawn = IconRemove;
             public const string IconSynchronize = "Panama.Icon.Synchronize";
             public const string IconToggle = "Panama.Icon.Toggle";
             public const string IconTrayFull = "Panama.Icon.Tray.Full";
@@ -125,11 +145,6 @@ namespace Restless.Panama.Resources
             public const string XIconKey = nameof(XIconKey);
             public const string XMediumIconKey = nameof(XMediumIconKey);
             public const string XRedIconKey = nameof(XRedIconKey);
-        }
-
-        public static class ToolTip
-        {
-            public const string SubmissionTitleStatusToolTip = nameof(SubmissionTitleStatusToolTip);
         }
     }
 }

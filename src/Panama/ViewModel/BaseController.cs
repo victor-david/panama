@@ -1,6 +1,8 @@
-﻿using Restless.Toolkit.Core.Database.SQLite;
+﻿using Restless.Panama.Resources;
+using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Mvvm;
 using System;
+using SubmissionValues = Restless.Panama.Database.Tables.SubmissionTable.Defs.Values;
 
 namespace Restless.Panama.ViewModel
 {
@@ -25,5 +27,15 @@ namespace Restless.Panama.ViewModel
         {
             Owner = owner ?? throw new ArgumentNullException(nameof(owner));
         }
+
+        /// <summary>
+        /// Gets the accepted icon, used in the tool tip
+        /// </summary>
+        public object AcceptedIcon => ResourceKeys.Icon.GetTitleStatusIcon(SubmissionValues.StatusAccepted);
+
+        /// <summary>
+        /// Gets the withdrawn icon, used in the tool tip
+        /// </summary>
+        public object WithdrawnIcon => ResourceKeys.Icon.GetTitleStatusIcon(SubmissionValues.StatusWithdrawn);
     }
 }

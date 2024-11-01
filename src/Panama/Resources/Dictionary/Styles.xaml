@@ -100,6 +100,7 @@
     <ico:Material x:Key="Panama.Icon.Filter.Off" x:Shared="False"  Kind="FilterOffOutline"/>
     <ico:Material x:Key="Panama.Icon.Minus" x:Shared="False"  Kind="Minus"/>
     <ico:Material x:Key="Panama.Icon.Plus" x:Shared="False"  Kind="Plus"/>
+    <ico:Material x:Key="Panama.Icon.Remove" x:Shared="False"  Kind="SelectionRemove"/>
     <ico:Material x:Key="Panama.Icon.Square" x:Shared="False"  Kind="Square"/>
     <ico:Material x:Key="Panama.Icon.Synchronize" x:Shared="False"  Kind="ArrowURightTopBold"/>
     <ico:Material x:Key="Panama.Icon.Toggle" x:Shared="False"  Kind="ToggleSwitchOutline"/>
@@ -613,6 +614,11 @@
                 <Setter Property="Height" Value="12"/>
                 <Setter Property="Width" Value="12"/>
             </Style>
+
+            <Style TargetType="ContentControl">
+                <Setter Property="Margin" Value="6,3"/>
+            </Style>
+
             <Style TargetType="TextBlock">
                 <Setter Property="FontWeight" Value="SemiBold"/>
                 <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>

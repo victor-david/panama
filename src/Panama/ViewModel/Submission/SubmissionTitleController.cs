@@ -61,7 +61,7 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip("Ordering");
 
-            Columns.CreateResource<Int64ToResourceConverter>("S", TableColumns.Status, ResourceKeys.Icon.TitleStatusIconMap)
+            Columns.CreateResource<Int64ToResourceConverter>("S", TableColumns.Status, ResourceKeys.Icon.GetTitleStatusIconMap())
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(SubmissionTitleStatusToolTip.Create(this));
@@ -84,13 +84,13 @@ namespace Restless.Panama.ViewModel
                 Strings.MenuItemSetTitleStatusAccepted,
                 RelayCommand.Create(RunSetTitleStatusCommand, CanRunSetTitleStatusCommand))
                 .AddCommandParm(SubmissionValues.StatusAccepted)
-                .AddIconResource(ResourceKeys.Icon.SquareSmallGreenIconKey);
+                .AddIconResource(ResourceKeys.Icon.GetTitleStatusIconKey(SubmissionValues.StatusAccepted));
 
             MenuItems.AddItem(
                 Strings.MenuItemSetTitleStatusWithdrawn,
                 RelayCommand.Create(RunSetTitleStatusCommand, CanRunSetTitleStatusCommand))
                 .AddCommandParm(SubmissionValues.StatusWithdrawn)
-                .AddIconResource(ResourceKeys.Icon.SquareSmallGrayIconKey);
+                .AddIconResource(ResourceKeys.Icon.GetTitleStatusIconKey(SubmissionValues.StatusWithdrawn));
 
             MenuItems.AddItem(
                 Strings.MenuItemSetTitleStatusNone,

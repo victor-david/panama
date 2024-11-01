@@ -7,6 +7,7 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
+using Restless.Panama.View;
 using Restless.Toolkit.Controls;
 using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionTable.Defs.Columns;
@@ -58,10 +59,10 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<Int64ToResourceConverter>("S", TableColumns.Status, ResourceKeys.Icon.TitleStatusIconMap)
+            Columns.CreateResource<Int64ToResourceConverter>("S", TableColumns.Status, ResourceKeys.Icon.GetTitleStatusIconMap())
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(LocalResources.Get(ResourceKeys.ToolTip.SubmissionTitleStatusToolTip));
+                .AddToolTip(SubmissionTitleStatusToolTip.Create(this));
 
             Columns.Create("Submitted", TableColumns.Joined.Submitted)
                 .MakeDate()

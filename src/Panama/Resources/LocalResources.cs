@@ -20,7 +20,7 @@ namespace Restless.Panama.Resources
         /// <returns>The resource object, or null if no such resource.</returns>
         public static object Get(object key)
         {
-            return Application.Current.TryFindResource(key);
+            return key is not null ? Application.Current.TryFindResource(key) : null;
         }
 
         /// <summary>

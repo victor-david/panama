@@ -10,11 +10,12 @@
     mc:Ignorable="d"
     tk:Property.ColumnWidths="Auto,*"
     tk:Property.RowHeights="Auto,Auto,Auto"
+    Name="Me"
     Style="{StaticResource Panama.Styles.Panel.ToolTip}"
     d:DesignHeight="85" d:DesignWidth="180">
 
-    <Border Grid.Row="1" Background="Gray"/>
-    <Border Grid.Row="2" Background="Green"/>
+    <ContentControl Grid.Row="1" Content="{Binding WithdrawnIcon}"/>
+    <ContentControl Grid.Row="2" Content="{Binding AcceptedIcon}"/>
 
     <StatusBar Grid.ColumnSpan="2">
         <TextBlock Text="Submission status of title"/>
