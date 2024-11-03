@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Threading;
 using QueueStatusValues = Restless.Panama.Database.Tables.QueueTitleStatusTable.Defs.Values;
 using TableColumns = Restless.Panama.Database.Tables.QueueTitleTable.Defs.Columns;
@@ -26,7 +27,7 @@ namespace Restless.Panama.ViewModel
         private QueueTitleStatusTable QueueTitleStatusTable => DatabaseController.Instance.GetTable<QueueTitleStatusTable>();
         private readonly ObservableCollection<QueueRow> queues;
         private QueueRow selectedQueue;
-        private bool queueEditMode;
+        private bool isQueueEditActive;
         private QueueTitleRow selectedTitle;
         private bool isIdleFilterChecked;
         private bool isScheduledFilterChecked;
@@ -56,7 +57,7 @@ namespace Restless.Panama.ViewModel
             {
                 SetProperty(ref selectedQueue, value);
                 Config.SelectedQueueId = selectedQueue?.Id ?? 0;
-                QueueEditMode = false;
+                IsQueueEditActive = false;
                 ListView.Refresh();
             }
         }
@@ -64,10 +65,10 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets a boolean value that determines if queue editing mode is enabled.
         /// </summary>
-        public bool QueueEditMode
+        public bool IsQueueEditActive
         {
-            get => queueEditMode;
-            private set => SetProperty(ref queueEditMode, value);
+            get => isQueueEditActive;
+            set => SetProperty(ref isQueueEditActive, value);
         }
 
         /// <summary>
@@ -135,6 +136,9 @@ namespace Restless.Panama.ViewModel
         public TitleQueueRowFilter Filters => Config.TitleQueueFilter;
 
         public DataView TitleStatus => QueueTitleStatusTable.DefaultView;
+
+        public ICommand ClearDateCommand { get; }
+        public ICommand CloseQueueEditCommand { get; }
         #endregion
 
         /************************************************************************/
@@ -145,58 +149,17 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TitleQueueViewModel()
         {
-            Columns.Create("Id", TableColumns.TitleId)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W042)
-                .CanUserSort = false;
+            InitColumns();
 
-            Columns.Create("Title", TableColumns.Joined.Title);
-
-            Columns.Create("Written", TableColumns.Joined.Written).MakeDate();
-            Columns.Create("Updated", TableColumns.Joined.Updated)
-                .MakeDate()
-                .AddToolTip(Strings.TooltipTitleUpdated);
-
-            Columns.Create("WC", TableColumns.Joined.WordCount)
-                .MakeFixedWidth(FixedWidth.W042)
-                .AddToolTip(Strings.TooltipTitleWordCount)
-                .SetSelectorName("Word Count");
-
-            Columns.Create("Status", TableColumns.Joined.Status).CanUserSort = false;
-
-            Columns.Create("Date", TableColumns.Date)
-                .MakeDate()
-                .AddCustomSort(null, TableColumns.Joined.Written, DataGridColumnSortBehavior.AlwaysDescending)
-                .MakeInitialSortDescending();
-
-            Columns.RestoreColumnState(Config.QueueTitleGridColumnState);
-
-            Commands.Add("CloseQueueEdit", p => QueueEditMode = false);
-            QueueEditMode = false;
-
-            Commands.Add("ClearDate", p => SelectedTitle.ClearDate());
+            IsQueueEditActive = false;
+            ClearDateCommand = RelayCommand.Create(p => RunClearDateCommand());
+            CloseQueueEditCommand = RelayCommand.Create(p => IsQueueEditActive = false);
 
             SyncQueueFilterChecked();
 
             QueueMenuItems = new MenuItemCollection();
-
-            QueueMenuItems.AddItem(Strings.MenuItemAddQueue, RelayCommand.Create(RunAddQueueCommand))
-                .AddIconResource(ResourceKeys.Icon.PlusIconKey);
-
-            QueueMenuItems.AddItem(Strings.MenuItemRenameQueue, RelayCommand.Create(p => QueueEditMode = true, p => SelectedQueue != null));
-            QueueMenuItems.AddSeparator();
-
-            QueueMenuItems.AddItem(Strings.MenuItemRemoveQueue, RelayCommand.Create(RunRemoveQueueCommand, p => SelectedQueue != null))
-                .AddIconResource(ResourceKeys.Icon.XRedIconKey);
-
-            MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand)
-                .AddIconResource(ResourceKeys.Icon.PlusIconKey);
-            MenuItems.AddItem(Strings.MenuItemCopyTitle, RelayCommand.Create(RunCopyTitleCommand))
-                .AddIconResource(ResourceKeys.Icon.CircleSmallIconKey);
-            MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
-            MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemRemoveQueueTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.XIconKey);
+            InitQueueMenuItems();
+            InitMenuItems();
 
             queues = new ObservableCollection<QueueRow>();
             PopulateQueues();
@@ -229,7 +192,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnActivated()
         {
             base.OnActivated();
-            QueueEditMode = false;
+            IsQueueEditActive = false;
         }
 
         /// <inheritdoc/>
@@ -306,6 +269,62 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
+        private void InitColumns()
+        {
+            Columns.Create("Id", TableColumns.TitleId)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042)
+                .CanUserSort = false;
+
+            Columns.Create("Title", TableColumns.Joined.Title);
+
+            Columns.Create("Written", TableColumns.Joined.Written).MakeDate();
+            Columns.Create("Updated", TableColumns.Joined.Updated)
+                .MakeDate()
+                .AddToolTip(Strings.TooltipTitleUpdated);
+
+            Columns.Create("WC", TableColumns.Joined.WordCount)
+                .MakeFixedWidth(FixedWidth.W042)
+                .AddToolTip(Strings.TooltipTitleWordCount)
+                .SetSelectorName("Word Count");
+
+            Columns.Create("Status", TableColumns.Joined.Status).CanUserSort = false;
+
+            Columns.Create("Date", TableColumns.Date)
+                .MakeDate()
+                .AddCustomSort(null, TableColumns.Joined.Written, DataGridColumnSortBehavior.AlwaysDescending)
+                .MakeInitialSortDescending();
+
+            Columns.RestoreColumnState(Config.QueueTitleGridColumnState);
+        }
+
+        private void InitMenuItems()
+        {
+            MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand)
+                .AddIconResource(ResourceKeys.Icon.IconAdd);
+
+            MenuItems.AddItem(Strings.MenuItemCopyTitle, RelayCommand.Create(p => RunCopyTitleCommand()))
+                .AddIconResource(ResourceKeys.Icon.IconCopy);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
+            MenuItems.AddSeparator();
+            MenuItems.AddItem(Strings.MenuItemRemoveQueueTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
+        }
+
+        private void InitQueueMenuItems()
+        {
+            QueueMenuItems.AddItem(Strings.MenuItemAddQueue, RelayCommand.Create(p => RunAddQueueCommand()))
+                .AddIconResource(ResourceKeys.Icon.IconAdd);
+
+            QueueMenuItems.AddItem(Strings.MenuItemRenameQueue, RelayCommand.Create(p => IsQueueEditActive = true, p => SelectedQueue != null))
+                .AddIconResource(ResourceKeys.Icon.IconFileReplace);
+
+            QueueMenuItems.AddSeparator();
+
+            QueueMenuItems.AddItem(Strings.MenuItemRemoveQueue, RelayCommand.Create(p => RunRemoveQueueCommand(), p => SelectedQueue != null))
+                .AddIconResource(ResourceKeys.Icon.IconDelete);
+        }
+
         private void PopulateQueues()
         {
             queues.Clear();
@@ -331,7 +350,7 @@ namespace Restless.Panama.ViewModel
             return DataRowCompareString(item1.Row, item2.Row, QueueTable.Defs.Columns.Name);
         }
 
-        private void RunAddQueueCommand(object parm)
+        private void RunAddQueueCommand()
         {
             long temp = Config.SelectedQueueId;
             QueueTable.AddDefaultRow();
@@ -341,7 +360,7 @@ namespace Restless.Panama.ViewModel
             MainWindowViewModel.Instance.SynchronizeTitleQueue();
         }
 
-        private void RunRemoveQueueCommand(object parm)
+        private void RunRemoveQueueCommand()
         {
             if (SelectedQueue != null && MessageWindow.ShowContinueCancel(Strings.ConfirmationRemoveQueue))
             {
@@ -352,18 +371,18 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void RunCopyTitleCommand(object parm)
+        private void RunCopyTitleCommand()
         {
             if (SelectedTitle != null)
             {
-                try
-                {
-                    Clipboard.SetText(SelectedTitle.Title);
-                }
-                catch
-                {
-                }
+                Toolkit.Core.Utility.Execution.TryCatchSwallow(() => Clipboard.SetText(SelectedTitle.Title));
             }
+        }
+
+        private void RunClearDateCommand()
+        {
+            SelectedTitle?.ClearDate();
+            OnPropertyChanged(nameof(SelectedTitle));
         }
 
         private void SyncQueueFilterChecked()

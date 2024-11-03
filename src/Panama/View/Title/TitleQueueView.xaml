@@ -1,120 +1,169 @@
-﻿<UserControl 
+﻿<UserControl
     x:Class="Restless.Panama.View.TitleQueueView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:table="clr-namespace:Restless.Panama.Database.Tables;assembly=Panama.Database"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TitleQueueViewModel}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:TitleQueueViewModel}"
     mc:Ignorable="d"
-    d:DesignWidth="860" d:DesignHeight="355">
+    d:DesignWidth="650" d:DesignHeight="350">
 
-    <Grid
-        tk:Property.ColumnWidths="126,*"
-        tk:Property.RowHeights="Auto,*">
+    <!-- MainGrid -->
+    <Grid tk:Property.ColumnWidths="126,*">
 
-        <StatusBar Margin="0,0,4,0" Padding="4,8">Queues</StatusBar>
+        <!-- MainGrid.Left (list of queues) -->
+        <Grid tk:Property.RowHeights="38,*">
+            <StatusBar>
+                <TextBlock Text="Queues"/>
+            </StatusBar>
 
-        <ListBox
-            Grid.Row="1"
-            Margin="0,10"
-            BorderThickness="0"
-            ItemsSource="{Binding Queues}"
-            DisplayMemberPath="Name"
-            SelectedItem="{Binding SelectedQueue}">
+            <ListBox
+                Grid.Row="1"
+                BorderThickness="0"
+                Margin="{DynamicResource Panama.Layout.Padding.Top.Right.Tight}"
+                ItemsSource="{Binding Queues}"
+                DisplayMemberPath="Name"
+                SelectedItem="{Binding SelectedQueue}">
 
-            <ListBox.ContextMenu>
-                <ContextMenu ItemsSource="{Binding QueueMenuItems}"/>
-            </ListBox.ContextMenu>
-        </ListBox>
+                <ListBox.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding QueueMenuItems}"/>
+                </ListBox.ContextMenu>
+            </ListBox>
+        </Grid>
+        <!-- End: MainGrid.Left -->
 
+        <!-- MainGrid.Right (splitter) -->
         <tk:SplitterGrid
             Grid.Column="1"
-            Grid.RowSpan="2"
             MinDetailWidth="{x:Static core:Config+Grid.MinTitleQueueDetailWidth}"
             MaxDetailWidth="{x:Static core:Config+Grid.MaxTitleQueueDetailWidth}"
             IsDetailExpanded="{Binding Config.TitleQueueDetailExpanded}"
-            DetailWidth="{Binding Config.TitleQueueDetailWidth}">
+            DetailWidth="{Binding Config.TitleQueueDetailWidth, FallbackValue=0}">
 
+            <!-- Splitter.HeaderLeft (controls) -->
             <tk:SplitterGrid.HeaderLeft>
-                <StatusBar Margin="4,0,0,0">
-                    <TextBlock 
-                        Style="{StaticResource TitleDisplayTextBlockStyle}"
-                        tk:Property.IsCollapsed="{Binding QueueEditMode}"
-                        Text="{Binding SelectedQueue.Name}"/>
-                    <TextBox
-                        Width="240"
-                        tk:Property.IsVisible="{Binding QueueEditMode}"
-                        Text="{Binding SelectedQueue.Name}"/>
-                    <Button
-                        Content="Close"
-                        Command="{Binding Commands[CloseQueueEdit]}"
-                        tk:Property.IsVisible="{Binding QueueEditMode}"/>
+                <StatusBar>
+                    <TextBlock Text="{Binding SelectedQueue.Name}"/>
 
-                    <Separator/>
+                    <Separator Margin="16,0"/>
 
                     <TextBlock Text="Title"/>
-                    <TextBox Width="180" Margin="0,0,16,0" Text="{Binding Filters.Text, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox
+                        Width="140"
+                        Text="{Binding Filters.Text, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
 
+                    <Separator Margin="16,0"/>
+
+                    <!-- Status filter -->
                     <CheckBox Content="Idle" IsChecked="{Binding IsIdleFilterChecked}"/>
                     <CheckBox Content="Scheduled" IsChecked="{Binding IsScheduledFilterChecked}"/>
                     <CheckBox Content="Published" IsChecked="{Binding IsPublishedFilterChecked}"/>
 
-                    <Separator/>
+                    <Separator Margin="16,0"/>
 
                     <Button
                         Content="{x:Static r:Strings.MenuItemReset}"
                         ToolTip="{x:Static r:Strings.ToolTipFilterReset}"
                         Command="{Binding ClearFilterCommand}"/>
 
+                    <Separator Margin="16,0"/>
+
                     <TextBlock
-                        Margin="36,0,0,0"
-                        Foreground="{StaticResource DefaultForegroundBrush}"
+                        Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
                         Text="{Binding ListView.Count}"/>
 
                 </StatusBar>
             </tk:SplitterGrid.HeaderLeft>
+            <!-- End: Splitter.HeaderLeft -->
 
             <tk:SplitterGrid.HeaderRight>
                 <StatusBar>
-                    <TextBlock
-                        Style="{StaticResource TitleDisplayTextBlockStyle}"
-                        Text="{Binding SelectedTitle.Title}"/>
+                    <TextBlock Text="{Binding SelectedTitle.Title}"/>
                 </StatusBar>
             </tk:SplitterGrid.HeaderRight>
 
+            <!-- Splitter.ContentLeft (title list, edit flyout) -->
             <tk:SplitterGrid.ContentLeft>
-                <tk:DataGrid
-                    CanUserReorderColumns="True"
-                    HeaderMode="ColumnSelector"
-                    ColumnSelectorMinimumVisible="3"
-                    RowHeight="{Binding Config.DataGridRowHeight}"
-                    RowStyle="{StaticResource QueueTitleDataGridRowStyle}"
-                    ItemsSource="{Binding ListView}"
-                    SelectedItem="{Binding SelectedItem}"
-                    RestoreStateBehavior="RestoreLastSelection"
-                    tk:DataGridColumns.Columns="{Binding Columns}">
+                <Grid>
+                    <tk:DataGrid
+                        CanUserReorderColumns="True"
+                        HeaderMode="ColumnSelector"
+                        ColumnSelectorMinimumVisible="3"
+                        ItemsSource="{Binding ListView}"
+                        SelectedItem="{Binding SelectedItem}"
+                        RestoreStateBehavior="RestoreLastSelection"
+                        ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                        tk:DataGridColumns.Columns="{Binding Columns}">
 
-                    <DataGrid.InputBindings>
-                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
-                    </DataGrid.InputBindings>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow" BasedOn="{StaticResource Panama.Styles.DataGridRow}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding status}" Value="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPending}">
+                                        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
+                                        <Setter Property="BorderThickness" Value="4,0,0,0"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding status}" Value="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPublished}">
+                                        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
 
-                    <DataGrid.ContextMenu>
-                        <ContextMenu ItemsSource="{Binding MenuItems}"/>
-                    </DataGrid.ContextMenu>
+                        <DataGrid.InputBindings>
+                            <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                        </DataGrid.InputBindings>
 
-                </tk:DataGrid>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                        </DataGrid.ContextMenu>
+
+                    </tk:DataGrid>
+
+                    <con:Flyout
+                        Placement="TopLeft"
+                        IsOpen="{Binding IsQueueEditActive}"
+                        Width="360"
+                        Height="120">
+                        <con:Flyout.Header>
+                            <StatusBar Margin="{DynamicResource Panama.Layout.Padding.Bottom}">
+
+                                <StatusBarItem DockPanel.Dock="Right">
+                                    <Button
+                                        Style="{StaticResource MahApps.Styles.Button.Reveal}"
+                                        Content="{StaticResource Panama.Icon.Close}"
+                                        Command="{Binding CloseQueueEditCommand}"/>
+                                </StatusBarItem>
+
+                                <TextBlock Text="Edit Queue"/>
+                            </StatusBar>
+                        </con:Flyout.Header>
+
+                        <StackPanel Style="{StaticResource Panama.Styles.Panel.DataEntry}">
+                            <TextBlock Text="Name"/>
+                            <TextBox MaxLength="32" Text="{Binding SelectedQueue.Name}"/>
+                        </StackPanel>
+
+                    </con:Flyout>
+                </Grid>
             </tk:SplitterGrid.ContentLeft>
+            <!-- End: Splitter.ContentLeft -->
 
             <tk:SplitterGrid.ContentRight>
                 <vw:TitleQueueEdit Visibility="{Binding EditVisibility}"/>
             </tk:SplitterGrid.ContentRight>
 
         </tk:SplitterGrid>
-
+        <!-- End: MainGrid.Right -->
     </Grid>
+    <!-- End: MainGrid -->
 </UserControl>
