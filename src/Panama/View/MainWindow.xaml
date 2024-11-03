@@ -31,22 +31,61 @@
             </Button>
 
             <Button
-                Command="{Binding ResetWindowCommand}"
-                ToolTip="{x:Static r:Strings.ToolTipResetWindow}">
-                <ico:PackIconMaterial Kind="Monitor"/>
-            </Button>
-
-            <Button
                 Command="{Binding OpenSettingsCommand}"
                 ToolTip="{x:Static r:Strings.ToolTipOpenWindowSettings}">
                 <ico:PackIconMaterial Kind="CogOutline"/>
             </Button>
 
-            <Button
-                Command="{Binding OpenToolsCommand}"
-                ToolTip="{x:Static r:Strings.ToolTipOpenWindowTool}">
-                <ico:PackIconMaterial Kind="Tools"/>
-            </Button>
+            <mah:DropDownButton Content="{ico:Material Kind=Tools}">
+                <mah:DropDownButton.Resources>
+                    <Style TargetType="MenuItem" BasedOn="{StaticResource MahApps.Styles.MenuItem}">
+                        <Style.Resources>
+                            <Style TargetType="ico:PackIconMaterial" BasedOn="{StaticResource Panama.Styles.Icon}"/>
+                        </Style.Resources>
+                    </Style>
+                </mah:DropDownButton.Resources>
+
+                <mah:DropDownButton.Items>
+                    <MenuItem
+                        Header="{x:Static r:Strings.MenuItemUpdateTools}"
+                        Icon="{ico:Material Kind=ToolboxOutline}"
+                        ToolTip="{x:Static r:Strings.ToolTipOpenWindowTool}"
+                        Command="{Binding OpenToolsCommand}"/>
+
+                    <MenuItem
+                        Header="{x:Static r:Strings.MenuItemLinkVerify}"
+                        Icon="{ico:Material Kind=LinkVariant}"
+                        Command="{Binding Commands[NavigateLinkVerify]}"
+                        tk:Property.IsVisible="{Binding Config.IsVerifyLinkEnabled}"/>
+
+                    <Separator/>
+
+                    <MenuItem
+                        Header="{x:Static r:Strings.MenuItemSearch}"
+                        Icon="{ico:Material Kind=Magnify}"
+                        Command="{Binding Commands[NavigateSearch]}"/>
+
+                    <Separator/>
+
+                    <MenuItem
+                        Header="{x:Static r:Strings.MenuItemResetWindow}"
+                        Icon="{ico:Material Kind=Monitor}"
+                        ToolTip="{x:Static r:Strings.ToolTipResetWindow}"
+                        Command="{Binding ResetWindowCommand}"/>
+                </mah:DropDownButton.Items>
+
+            </mah:DropDownButton>
+
+            <mah:DropDownButton Content="{ico:Material Kind=PaletteOutline}" ItemsSource="{Binding ThemeIds}">
+
+                <mah:DropDownButton.ItemContainerStyle>
+                    <Style TargetType="MenuItem" BasedOn="{StaticResource MahApps.Styles.MenuItem}">
+                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=mah:DropDownButton}, Path=DataContext.SwitchThemeCommand}" />
+                        <Setter Property="CommandParameter" Value="{Binding}" />
+                    </Style>
+                </mah:DropDownButton.ItemContainerStyle>
+
+            </mah:DropDownButton>
 
             <Button
                 Command="{Binding OpenAboutCommand}"
@@ -54,16 +93,7 @@
                 <ico:PackIconMaterial Kind="InformationVariant"/>
             </Button>
 
-            <mah:DropDownButton Content="{ico:Material Kind=PaletteOutline}" ItemsSource="{Binding ThemeIds}">
 
-                <mah:DropDownButton.ItemContainerStyle>
-                    <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
-                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=mah:DropDownButton}, Path=DataContext.SwitchThemeCommand}" />
-                        <Setter Property="CommandParameter" Value="{Binding}" />
-                    </Style>
-                </mah:DropDownButton.ItemContainerStyle>
-
-            </mah:DropDownButton>
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>
 
@@ -118,81 +148,5 @@
 
         </StatusBar>
     </Grid>
-    <!--
-    <tk:AppWindow.Menu>
-        <Menu KeyboardNavigation.TabNavigation="Cycle">
-            <MenuItem Header="_File">
-                <MenuItem
-                    Header="Save"
-                    Icon="{ico:Material Kind=ContentSaveAllOutline}"
-                    Command="{Binding Commands[Save]}" />
 
-                <Separator />
-
-                <MenuItem
-                    Header="E_xit"
-                    Icon="{ico:Material Kind=ExitToApp}"
-                    Command="{Binding Commands[Close]}" />
-            </MenuItem>
-
-            <MenuItem Header="_Settings">
-                <MenuItem
-                    Header="{x:Static r:Strings.MenuItemAuthors}"
-                    Icon="{ico:Material Kind=Account}"
-                    Command="{Binding Commands[NavigateAuthor]}"/>
-
-                <MenuItem
-                    Header="{x:Static r:Strings.MenuItemTags}"
-                    Icon="{ico:Material Kind=TagOutline}"
-                    Command="{Binding Commands[NavigateTag]}"/>
-
-                <Separator />
-
-                <MenuItem
-                    Header="{x:Static r:Strings.MenuItemSettings}"
-                    Icon="{ico:Material Kind=CogOutline}"
-                    Command="{Binding Commands[OpenSettingsWindow]}" />
-            </MenuItem>
-
-            <MenuItem Header="_Tools">
-                <MenuItem
-                    Header="{x:Static r:Strings.MenuItemUpdateTools}"
-                    Icon="{ico:Material Kind=Tools}"
-                    Command="{Binding Commands[OpenToolWindow]}"/>
-
-                <MenuItem
-                    Header="{x:Static r:Strings.MenuItemLinkVerify}"
-                    Icon="{ico:Material Kind=LinkVariant}"
-                    Command="{Binding Commands[NavigateLinkVerify]}"
-                    tk:Property.IsVisible="{Binding Config.IsVerifyLinkEnabled}"/>
-
-                <Separator/>
-
-                <MenuItem
-                    Header="{x:Static r:Strings.MenuItemTableInfo}"
-                    Icon="{ico:Material Kind=Table}"
-                    Command="{Binding Commands[NavigateTable]}"/>
-
-                <Separator/>
-
-                <MenuItem
-                    Header="{x:Static r:Strings.MenuItemSearch}"
-                    Icon="{ico:Material Kind=Magnify}"
-                    Command="{Binding Commands[NavigateSearch]}"/>
-
-                <MenuItem
-                    Header="{x:Static r:Strings.MenuItemResetWindow}"
-                    Icon="{ico:Material Kind=Monitor}"
-                    Command="{Binding Commands[ResetWindow]}"
-                    ToolTip="{x:Static r:Strings.ToolTipResetWindow}"/>
-            </MenuItem>
-            <MenuItem Header="_Help">
-                <MenuItem
-                    Header="About"
-                    Icon="{ico:Material Kind=InformationVariant}"
-                    Command="{Binding Commands[OpenAboutWindow]}"/>
-            </MenuItem>
-        </Menu>
-    </tk:AppWindow.Menu>
--->
 </mah:MetroWindow>
