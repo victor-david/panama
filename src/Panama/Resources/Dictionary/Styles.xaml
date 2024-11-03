@@ -578,6 +578,14 @@
 
     <Style TargetType="tk:LineItem" BasedOn="{StaticResource Panama.Styles.LineItem}"/>
 
+    <!-- tk:LinkedTextBlock -->
+    <Style x:Key="Panama.Styles.LinkedTextBlock" TargetType="tk:LinkedTextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+        <Setter Property="RolloverBrush" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
+    </Style>
+
+    <Style TargetType="tk:LinkedTextBlock" BasedOn="{StaticResource Panama.Styles.LinkedTextBlock}"/>
+
     <!-- Border -->
     <Style x:Key="Panama.Styles.Border.Container" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
