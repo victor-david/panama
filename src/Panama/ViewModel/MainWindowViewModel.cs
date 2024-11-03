@@ -105,7 +105,6 @@ namespace Restless.Panama.ViewModel
             SwitchThemeCommand = RelayCommand.Create(RunSwitchThemeCommand);
             SaveAllCommand = RelayCommand.Create(p => RunSaveCommand());
 
-
             Commands.Add("NavigateAuthor", p => NavigatorItems.Select<AuthorViewModel>());
             Commands.Add("NavigateCredential", p => NavigatorItems.Select<CredentialViewModel>());
             Commands.Add("NavigateLinkVerify", p => NavigatorItems.Select<LinkVerifyViewModel>());
@@ -114,7 +113,6 @@ namespace Restless.Panama.ViewModel
             Commands.Add("NavigateTag", p => NavigatorItems.Select<TagViewModel>());
 
             Commands.Add("Close", p => WindowOwner.Close());
-            Commands.Add("ResetWindow", RunResetWindowCommand);
             //Commands.Add("ToolMessageSync", p => NavigatorItems.Select<ToolMessageSyncViewModel>());
 
             NavigatorItems = new NavigatorItemCollection(NavigationGroup.TotalNumberOfGroups);
@@ -187,6 +185,16 @@ namespace Restless.Panama.ViewModel
                     Config.Instance.MainWindowState = WindowOwner.WindowState;
                 }
             }
+        }
+
+        /// <inheritdoc/>
+        protected override void RunResetWindowCommand()
+        {
+            WindowOwner.Width = Config.MainWindow.DefaultWidth;
+            WindowOwner.Height = Config.MainWindow.DefaultHeight;
+            WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
+            WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
+            WindowOwner.WindowState = WindowState.Normal;
         }
         #endregion
 
@@ -268,15 +276,6 @@ namespace Restless.Panama.ViewModel
             Config.Instance.SaveFilterObjects();
             DatabaseController.Instance.Save();
             NotificationMessage = "All data successfully saved to the database";
-        }
-
-        private void RunResetWindowCommand(object parm)
-        {
-            WindowOwner.Width = Config.MainWindow.DefaultWidth;
-            WindowOwner.Height = Config.MainWindow.DefaultHeight;
-            WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
-            WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
-            WindowOwner.WindowState = WindowState.Normal;
         }
         #endregion
     }

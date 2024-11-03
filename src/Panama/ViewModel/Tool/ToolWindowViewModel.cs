@@ -66,7 +66,6 @@ namespace Restless.Panama.ViewModel
         public ICommand TitleExportCommand { get; }
         public ICommand TitleListCommand { get; }
         public ICommand MessageSyncCommand { get; }
-        public ICommand ResetWindowCommand { get; }
         #endregion
 
         /************************************************************************/
@@ -95,7 +94,6 @@ namespace Restless.Panama.ViewModel
             TitleExportCommand = RelayCommand.Create(p => RunTitleExportCommand());
             TitleListCommand = RelayCommand.Create(p => RunTitleListCommand());
             MessageSyncCommand = RelayCommand.Create(p => RunMessageSyncCommand());
-            ResetWindowCommand = RelayCommand.Create(p => RunResetWindowCommand());
 
             versionUpdater = new VersionUpdater();
             submissionUpdater = new SubmissionUpdater();
@@ -114,7 +112,20 @@ namespace Restless.Panama.ViewModel
 
             TitleListFileName = Path.Combine(Config.FolderTitleRoot, TitleLister.ListFile);
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Protected methods
+        /// <inheritdoc/>
+        protected override void RunResetWindowCommand()
+        {
+            WindowOwner.Width = Config.ToolWindow.DefaultWidth;
+            WindowOwner.Height = Config.ToolWindow.DefaultHeight;
+            WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
+            WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
+            WindowOwner.WindowState = WindowState.Normal;
+        }
         #endregion
 
         /************************************************************************/
@@ -182,15 +193,6 @@ namespace Restless.Panama.ViewModel
             Adapter.AddToNotFound(index, result.NotFound);
             Adapter.SetOutputText(index, result.OutputText.ToString());
             Adapter.SetStatus(index, $"{result.ScanCount} items processed | {result.Updated.Count} updated | {result.NotFound.Count} not found");
-        }
-
-        private void RunResetWindowCommand()
-        {
-            WindowOwner.Width = Config.ToolWindow.DefaultWidth;
-            WindowOwner.Height = Config.ToolWindow.DefaultHeight;
-            WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
-            WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
-            WindowOwner.WindowState = WindowState.Normal;
         }
         #endregion
     }

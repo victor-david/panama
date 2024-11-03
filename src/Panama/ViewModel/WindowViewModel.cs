@@ -7,6 +7,7 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Core.Database.SQLite;
+using Restless.Toolkit.Mvvm;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -62,12 +63,22 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
+        #region Commands
+        /// <summary>
+        /// Gets the command to reset the window.
+        /// </summary>
+        public ICommand ResetWindowCommand { get; }
+        #endregion
+
+        /************************************************************************/
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowViewModel"/> class.
         /// </summary>
         public WindowViewModel()
         {
+            ResetWindowCommand = RelayCommand.Create(p => RunResetWindowCommand());
         }
         #endregion
 
@@ -90,6 +101,15 @@ namespace Restless.Panama.ViewModel
         /// The base implementation does nothing.
         /// </summary>
         protected virtual void OnWindowClosed()
+        {
+        }
+
+        /// <summary>
+        /// A derived class can bind to <see cref="ResetWindowCommand"/>  and override
+        /// this method to provide logic to reset the window.
+        /// The base implementation does nothing.
+        /// </summary>
+        protected virtual void RunResetWindowCommand()
         {
         }
         #endregion

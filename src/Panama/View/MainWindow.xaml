@@ -31,6 +31,12 @@
             </Button>
 
             <Button
+                Command="{Binding ResetWindowCommand}"
+                ToolTip="{x:Static r:Strings.ToolTipResetWindow}">
+                <ico:PackIconMaterial Kind="Monitor"/>
+            </Button>
+
+            <Button
                 Command="{Binding OpenSettingsCommand}"
                 ToolTip="{x:Static r:Strings.ToolTipOpenWindowSettings}">
                 <ico:PackIconMaterial Kind="CogOutline"/>
@@ -189,57 +195,4 @@
         </Menu>
     </tk:AppWindow.Menu>
 -->
-
-    <!--<Grid>-->
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition
-                MinWidth="{x:Static core:Config+MainNavigation.MinWidth}"
-                MaxWidth="{x:Static core:Config+MainNavigation.MaxWidth}"
-                Width="{Binding MainNavigationWidth, Mode=TwoWay}"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="32"/>
-        </Grid.RowDefinitions>-->
-
-        <!-- Main navigator -->
-        <!--<StackPanel>
-            <TextBlock
-                Style="{StaticResource NavTitleTextBlockStyle}"
-                Text="{Binding AppInfo.Product}"/>
-
-            <tk:MainNavigator
-                IsExpanded="{Binding Config.NavTitlesExpander}"
-                HeaderText="{x:Static r:Strings.NavHeaderMain}"
-                ItemsSource="{Binding NavigatorItems.Groups[0]}"
-                SelectedItem="{Binding NavigatorItems.SelectedItems[0]}"/>
-
-            <tk:MainNavigator
-                IsExpanded="{Binding Config.NavSettingsExpander}"
-                HeaderText="{x:Static r:Strings.NavHeaderSettings}"
-                ItemsSource="{Binding NavigatorItems.Groups[1]}"
-                SelectedItem="{Binding NavigatorItems.SelectedItems[1]}"/>
-
-            <tk:MainNavigator
-                IsExpanded="{Binding Config.NavOtherExpander}"
-                HeaderText="{x:Static r:Strings.NavHeaderOther}"
-                ItemsSource="{Binding NavigatorItems.Groups[2]}"
-                SelectedItem="{Binding NavigatorItems.SelectedItems[2]}"/>
-
-        </StackPanel>-->
-
-        <!-- Navigator splitter -->
-        <!--<GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitterStyle}"/>-->
-
-        <!-- Pages go inside the border -->
-        <!--<Border Grid.Column="2" Style="{StaticResource MainContentBorderStyle}">
-            <ContentControl Content="{Binding SelectedViewModel}"/>
-        </Border>-->
-
-        <!-- Status bar (bottom) -->
-        <!--<StatusBar Grid.Row="1" Grid.ColumnSpan="3"/>-->
-
-    <!--</Grid>-->
 </mah:MetroWindow>
