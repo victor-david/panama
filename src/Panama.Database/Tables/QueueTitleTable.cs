@@ -8,6 +8,7 @@ using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -71,7 +72,7 @@ namespace Restless.Panama.Database.Tables
                     /// Title written date. This column gets its value from the <see cref="TitleTable"/>.
                     /// </summary>
                     public const string Written = "JoinTitleWritten";
-                    
+
                     /// <summary>
                     /// Title updated date. This column gets its value from the <see cref="TitleTable"/>.
                     /// </summary>
@@ -104,7 +105,7 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         public QueueTitleTable() : base(Defs.TableName)
         {
-            
+
         }
         #endregion
 
@@ -150,7 +151,7 @@ namespace Restless.Panama.Database.Tables
         /// <param name="queueId">The queue id</param>
         /// <param name="titleId">The title id</param>
         /// <remarks>
-        /// A title cannot be added to the same queue more than once. 
+        /// A title cannot be added to the same queue more than once.
         /// This method checks whether the title is already in the queue.
         /// If so, the title is ignored.
         /// </remarks>
@@ -173,10 +174,10 @@ namespace Restless.Panama.Database.Tables
         /// <param name="queueId">The queue id</param>
         /// <param name="titles">The titles to add</param>
         /// <remarks>
-        /// A title cannot be added to the same queue more than once. 
+        /// A title cannot be added to the same queue more than once.
         /// This method checks each title to see if it is already in the queue.
         /// If so, the title is ignored.
-        /// </remarks>/// 
+        /// </remarks>///
         public void AddTitles(long queueId, List<TitleRow> titles)
         {
             _ = titles ?? throw new ArgumentNullException(nameof(titles));
@@ -256,6 +257,38 @@ namespace Restless.Panama.Database.Tables
                 row.Delete();
             }
             Save();
+        }
+        #endregion
+
+        /************************************************************************/
+        #region Update (Internal)
+        internal override long DataVersion => 2;
+        internal override void PerformSchemaUpdate()
+        {
+        }
+
+        internal override void PerformDataUpdate()
+        {
+            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
+            {
+                switch (DataVersion)
+                {
+                    case 2:
+                        UpdateDates();
+                        break;
+                }
+                Save();
+                SchemaTable.Save();
+            }
+        }
+
+        private void UpdateDates()
+        {
+            foreach (QueueTitleRow item in EnumerateAll().Where(p => p.HasDate))
+            {
+                item.Date = item.Date.Value.ToZero();
+            }
+            SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Set dates to zeroed time");
         }
         #endregion
 

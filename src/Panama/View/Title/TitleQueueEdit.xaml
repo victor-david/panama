@@ -12,13 +12,7 @@
     Style="{StaticResource Panama.Styles.Panel.DataEntry}">
 
     <!-- Date -->
-    <TextBlock>
-        <Run Text="{x:Static r:Strings.TextDate}"/>
-        <Run
-            Style="{StaticResource Panama.Styles.Run.Highlight}"
-            Text="{Binding SelectedTitle.Date, Mode=OneWay}"/>
-    </TextBlock>
-
+    <TextBlock Text="{x:Static r:Strings.TextDate}"/>
     <DatePicker SelectedDate="{Binding SelectedTitle.Date}"/>
 
     <!-- Clear date -->

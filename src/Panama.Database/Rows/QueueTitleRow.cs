@@ -1,5 +1,4 @@
-﻿using Restless.Toolkit.Core.Database.SQLite;
-using System;
+﻿using System;
 using System.Data;
 using System.Globalization;
 using Columns = Restless.Panama.Database.Tables.QueueTitleTable.Defs.Columns;
@@ -69,6 +68,11 @@ namespace Restless.Panama.Database.Tables
         /// Gets a formatted value for <see cref="Date"/> converted to local time.
         /// </summary>
         public string DateLocal => Date?.ToLocalTime().ToString(DateFormat, CultureInfo.InvariantCulture);
+
+        /// <summary>
+        /// Gets a boolean value that indicates if <see cref="Date"/> has a value
+        /// </summary>
+        public bool HasDate => Date != null;
         #endregion
 
         /************************************************************************/
@@ -80,6 +84,7 @@ namespace Restless.Panama.Database.Tables
         /// <param name="row">The data row</param>
         public QueueTitleRow(DataRow row) : base(row)
         {
+
         }
         #endregion
 
