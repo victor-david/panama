@@ -1,7 +1,5 @@
 ﻿using Restless.Panama.Utility;
-using Restless.Toolkit.Controls;
 using System;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -72,7 +70,7 @@ namespace Restless.Panama.Core
         private void HandleException(string source, Exception exception)
         {
             Logger.Instance.LogException(source, exception);
-            WindowFactory.Terminate.Create(exception);
+            WindowFactory.Terminate.Create(exception).ShowDialog();
             Shutdown();
             Environment.Exit(0);
         }

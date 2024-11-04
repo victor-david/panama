@@ -2014,6 +2014,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The application will now terminate.
+        /// </summary>
+        public static string TextApplicationTerminate {
+            get {
+                return ResourceManager.GetString("TextApplicationTerminate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assigned.
         /// </summary>
         public static string TextAssigned {
@@ -2208,6 +2217,15 @@ namespace Restless.Panama.Resources {
         public static string TextDescription {
             get {
                 return ResourceManager.GetString("TextDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detail.
+        /// </summary>
+        public static string TextDetail {
+            get {
+                return ResourceManager.GetString("TextDetail", resourceCulture);
             }
         }
         
@@ -3247,7 +3265,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A fatal error has occured.
+        ///   Looks up a localized string similar to Fatal Error.
         /// </summary>
         public static string WindowTitleFatalError {
             get {

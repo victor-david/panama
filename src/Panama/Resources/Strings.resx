@@ -1015,7 +1015,7 @@ Changes will take effect after you restart the application.</value>
     <value>Send problem report. No personal information is included</value>
   </data>
   <data name="WindowTitleFatalError" xml:space="preserve">
-    <value>A fatal error has occured</value>
+    <value>Fatal Error</value>
   </data>
   <data name="TextNoTitleSubmissions" xml:space="preserve">
     <value>No submissions for this title</value>
@@ -1238,5 +1238,11 @@ Changes will take effect after you restart the application.</value>
   </data>
   <data name="SettingsSearch" xml:space="preserve">
     <value>Enable search tool</value>
+  </data>
+  <data name="TextDetail" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="TextApplicationTerminate" xml:space="preserve">
+    <value>The application will now terminate</value>
   </data>
 </root>

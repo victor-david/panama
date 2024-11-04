@@ -4,6 +4,7 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
+using Restless.Panama.Resources;
 using Restless.Panama.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
@@ -58,7 +59,7 @@ namespace Restless.Panama.ViewModel
         {
             exception = e;
             Message = GetFullMessage(exception);
-            SendCommand = RelayCommand.Create(RunSendCommand);
+            SendCommand = RelayCommand.Create(p => RunSendCommand());
         }
         #endregion
 
@@ -68,16 +69,16 @@ namespace Restless.Panama.ViewModel
         private string GetFullMessage(Exception exception)
         {
             StringBuilder builder = new();
-            builder.AppendLine("A fatal error has occured");
+            builder.AppendLine(Strings.WindowTitleFatalError);
             builder.AppendLine();
             builder.AppendLine(Logger.Instance.GetExceptionMessage(exception));
-            builder.AppendLine($"Details in {Logger.Instance.LogFile}");
+            builder.AppendLine($"{Strings.TextDetail}: {Logger.Instance.LogFile}");
             builder.AppendLine();
-            builder.AppendLine("The application will now terminate");
+            builder.AppendLine(Strings.TextApplicationTerminate);
             return builder.ToString();
         }
 
-        private void RunSendCommand(object parm)
+        private void RunSendCommand()
         {
         }
         #endregion
