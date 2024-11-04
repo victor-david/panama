@@ -13,6 +13,7 @@ using Restless.Toolkit.Core.Utility;
 using System.Data;
 using System.Windows.Media;
 using SysProps = Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties;
+using TableColumns = Restless.Panama.Database.Tables.SearchTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
@@ -127,26 +128,26 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public ToolSearchViewModel()
         {
-            Columns.CreateResource<BooleanToResourceConverter>("V", SearchTable.Defs.Columns.IsVersion, ResourceKeys.Icon.SquareSmallGreenIconKey)
+            Columns.CreateResource<BooleanToResourceConverter>("V", TableColumns.IsVersion, ResourceKeys.Icon.IconCheck)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028);
-            Columns.Create("Type", SearchTable.Defs.Columns.Type).MakeFixedWidth(FixedWidth.W048);
-            Columns.Create("Size", SearchTable.Defs.Columns.Size).MakeNumeric(null, FixedWidth.W076);
-            Columns.Create("Created", SearchTable.Defs.Columns.Created).MakeDate();
-            Columns.Create("Modified", SearchTable.Defs.Columns.Modified).MakeDate();
-            Columns.Create("File", SearchTable.Defs.Columns.File).MakeFlexWidth(2.0);
-            Columns.Create("Title", SearchTable.Defs.Columns.Title).MakeFlexWidth(1.25);
-            Columns.Create("Author", SearchTable.Defs.Columns.Author).MakeFixedWidth(FixedWidth.W180);
-            Columns.Create("Company", SearchTable.Defs.Columns.Company);
+            Columns.Create("Type", TableColumns.Type).MakeFixedWidth(FixedWidth.W048);
+            Columns.Create("Size", TableColumns.Size).MakeNumeric(null, FixedWidth.W076);
+            Columns.Create("Created", TableColumns.Created).MakeDate();
+            Columns.Create("Modified", TableColumns.Modified).MakeDate();
+            Columns.Create("File", TableColumns.File).MakeFlexWidth(2.0);
+            Columns.Create("Title", TableColumns.Title).MakeFlexWidth(1.25);
+            Columns.Create("Author", TableColumns.Author).MakeFixedWidth(FixedWidth.W180);
+            Columns.Create("Company", TableColumns.Company);
 
             Commands.Add("StartSearch", RunSearchCommand);
             Commands.Add("ClearSearch", RunClearSearchCommand);
             Commands.Add("DeleteItem", RunDeleteItemCommand, CanRunDeleteItemCommand);
 
-            MenuItems.AddItem(Strings.MenuItemOpenItemOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemOpenItemOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
             //MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"]).AddImageResource("ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
-            MenuItems.AddItem("Delete this item", Commands["DeleteItem"]).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            MenuItems.AddItem("Delete this item", Commands["DeleteItem"]).AddIconResource(ResourceKeys.Icon.IconDelete);
 
             // init the search provider
             provider = new WindowsFileSearch();
@@ -173,7 +174,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override bool OnDataRowFilter(DataRow item)
         {
-            return !VersionOnly || (bool)item[SearchTable.Defs.Columns.IsVersion];
+            return !VersionOnly || (bool)item[TableColumns.IsVersion];
         }
 
         /// <inheritdoc/>

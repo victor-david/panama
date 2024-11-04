@@ -1,8 +1,8 @@
-﻿<UserControl 
+﻿<UserControl
     x:Class="Restless.Panama.View.ToolSearchView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:r="clr-namespace:Restless.Panama.Resources"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
@@ -10,8 +10,9 @@
     xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:ToolSearchViewModel}"
-    mc:Ignorable="d" 
-    d:DesignHeight="250" d:DesignWidth="930">
+    mc:Ignorable="d"
+    d:DesignHeight="250" d:DesignWidth="830">
+
     <tk:SplitterGrid
         MinDetailWidth="{x:Static core:Config+Grid.MinSearchDetailWidth}"
         MaxDetailWidth="{x:Static core:Config+Grid.MaxSearchDetailWidth}"
@@ -23,33 +24,24 @@
                 <TextBlock Text="Search:"/>
                 <TextBox Width="100" Text="{Binding SearchText}"/>
                 <CheckBox IsChecked="{Binding VersionOnly}" Content="Version only"/>
-                <tk:IconButton
-                    Icon="{StaticResource SquareSmallGreenIconKey}"
-                    Content="Begin"
-                    Command="{Binding Commands[StartSearch]}"/>
+                <Button Content="Begin" Command="{Binding Commands[StartSearch]}"/>
 
                 <Separator/>
 
-                <tk:IconButton
-                    Icon="{StaticResource SquareSmallRedIconKey}"
-                    Content="Clear"
-                    Command="{Binding Commands[ClearSearch]}"/>
+                <Button Content="Clear" Command="{Binding Commands[ClearSearch]}"/>
 
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
 
         <tk:SplitterGrid.HeaderRight>
             <StatusBar>
-                <TextBlock
-                    Style="{StaticResource TitleDisplayTextBlockStyle}"
-                    Text="{Binding SelectedSearch.File}"/>
+                <TextBlock Text="{Binding SelectedSearch.File}"/>
             </StatusBar>
         </tk:SplitterGrid.HeaderRight>
 
         <tk:SplitterGrid.ContentLeft>
             <Grid>
                 <DataGrid
-                    Style="{StaticResource DataGridEditLockedStretchedStyle}"
                     ItemsSource="{Binding Path=ListView}"
                     SelectedItem="{Binding SelectedItem}"
                     tk:DataGridColumns.Columns="{Binding Columns}">
@@ -65,7 +57,7 @@
                 </DataGrid>
 
                 <TextBlock
-                    Style="{StaticResource TextBlockZeroResultStyle}"
+                    Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
                     tk:Property.IsCollapsed="{Binding HaveResults}"
                     Text="{x:Static r:Strings.TextZeroSearchResults}"/>
 
