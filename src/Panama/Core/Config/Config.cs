@@ -324,6 +324,15 @@ namespace Restless.Panama.Core
             get => GetItem(false);
             set => SetItem(value);
         }
+
+        /// <summary>
+        /// Gets or sets whether the tools navigator is expanded.
+        /// </summary>
+        public bool NavToolsExpander
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
         #endregion
 
         /************************************************************************/
@@ -1179,12 +1188,18 @@ namespace Restless.Panama.Core
                 case nameof(DataGridRowHeight):
                 case nameof(DataGridAlternationCount):
                 case nameof(IsTitleAuthorVisible):
-                case nameof(IsVerifyLinkEnabled):
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
                     break;
                 case nameof(IsTitleQueueVisible):
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
+                    MainWindowViewModel.Instance.SynchronizeNavigatorVisibility();
                     MainWindowViewModel.Instance.SynchronizeTitleQueue();
+                    break;
+
+                case nameof(IsSearchEnabled):
+                case nameof(IsVerifyLinkEnabled):
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
+                    MainWindowViewModel.Instance.SynchronizeNavigatorVisibility();
                     break;
                 default:
                     break;

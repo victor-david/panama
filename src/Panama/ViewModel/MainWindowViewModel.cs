@@ -27,6 +27,7 @@ namespace Restless.Panama.ViewModel
         private readonly ViewModelCache viewModelCache;
         private ApplicationViewModel selectedViewModel;
         private string notificationMessage;
+        private bool haveToolItems;
         #endregion
 
         /************************************************************************/
@@ -73,12 +74,26 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public static List<string> ThemeIds => ThemeManager.Themes;
 
+        /// <summary>
+        /// Gets a boolean value that indicates if there are any tools items visible
+        /// </summary>
+        public bool HaveToolItems
+        {
+            get => haveToolItems;
+            set => SetProperty(ref haveToolItems, value);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Commands
+        public ICommand NavigateLinkVerifyCommand { get; }
+        public ICommand NavigateSearchCommand { get; }
         public ICommand OpenAboutCommand { get; }
         public ICommand OpenSettingsCommand { get; }
         public ICommand OpenToolsCommand { get; }
         public ICommand SwitchThemeCommand { get; }
         public ICommand SaveAllCommand { get; }
-
         #endregion
 
         /************************************************************************/
@@ -98,26 +113,18 @@ namespace Restless.Panama.ViewModel
 #if DEBUG
             DisplayName += " (DEBUG)";
 #endif
-
+            NavigateLinkVerifyCommand = RelayCommand.Create(p => NavigatorItems.Select<LinkVerifyViewModel>());
+            NavigateSearchCommand = RelayCommand.Create(p => NavigatorItems.Select<ToolSearchViewModel>());
             OpenAboutCommand = RelayCommand.Create(p => WindowFactory.About.Create().ShowDialog());
             OpenSettingsCommand = RelayCommand.Create(p => WindowFactory.Settings.Create().ShowDialog());
             OpenToolsCommand = RelayCommand.Create(p => WindowFactory.Tool.Create().ShowDialog());
             SwitchThemeCommand = RelayCommand.Create(RunSwitchThemeCommand);
             SaveAllCommand = RelayCommand.Create(p => RunSaveCommand());
 
-            Commands.Add("NavigateAuthor", p => NavigatorItems.Select<AuthorViewModel>());
-            Commands.Add("NavigateCredential", p => NavigatorItems.Select<CredentialViewModel>());
-            Commands.Add("NavigateLinkVerify", p => NavigatorItems.Select<LinkVerifyViewModel>());
-            Commands.Add("NavigateSearch", p => NavigatorItems.Select<ToolSearchViewModel>());
-            Commands.Add("NavigateTable", p => NavigatorItems.Select<TableViewModel>());
-            Commands.Add("NavigateTag", p => NavigatorItems.Select<TagViewModel>());
-
-            Commands.Add("Close", p => WindowOwner.Close());
-            //Commands.Add("ToolMessageSync", p => NavigatorItems.Select<ToolMessageSyncViewModel>());
-
             NavigatorItems = new NavigatorItemCollection(NavigationGroup.TotalNumberOfGroups);
             NavigatorItems.SelectedItemChanged += NavigatorItemsSelectedItemChanged;
-            RegisterStandardNavigatorItems();
+
+            RegisterNavigatorItems();
             viewModelCache = new ViewModelCache();
         }
         #endregion
@@ -156,12 +163,22 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
+        /// Synchonizes the state of configuration with corresponding navigator items
+        /// </summary>
+        public void SynchronizeNavigatorVisibility()
+        {
+            SetNavigatorItemVisibility<TitleQueueViewModel>(Config.IsTitleQueueVisible);
+            SetNavigatorItemVisibility<LinkVerifyViewModel>(Config.IsVerifyLinkEnabled);
+            SetNavigatorItemVisibility<ToolSearchViewModel>(Config.IsSearchEnabled);
+            HaveToolItems = NavigatorItems.HaveVisibleItems(NavigationGroup.Tool);
+        }
+
+        /// <summary>
         /// Synchronizes the queue title menu items in <see cref="TitleViewModel"/>
         /// if it has been created.
         /// </summary>
         public void SynchronizeTitleQueue()
         {
-            SetNavigatorItemVisibility<TitleQueueViewModel>(Config.IsTitleQueueVisible);
             viewModelCache.Get<TitleViewModel>()?.SynchronizeQueueTitleMenuItems();
         }
         #endregion
@@ -201,27 +218,32 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods (navigator)
-        private void RegisterStandardNavigatorItems()
+        private void RegisterNavigatorItems()
         {
+            // Group: title
             NavigatorItems.Add<TitleViewModel>(NavigationGroup.Title, Strings.MenuItemTitles, false, Icons.Get(IconKind.SubtitlesOutline));
             NavigatorItems.Add<TitleQueueViewModel>(NavigationGroup.Title, Strings.MenuItemQueues, false, Icons.Get(IconKind.TrayFull));
             NavigatorItems.Add<PublisherViewModel>(NavigationGroup.Title, Strings.MenuItemPublishers, false, Icons.Get(IconKind.MessageCheckOutline));
             NavigatorItems.Add<SelfPublisherViewModel>(NavigationGroup.Title, Strings.MenuItemSelfPublishers, false, Icons.Get(IconKind.MessageFlashOutline));
             NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, Icons.Get(IconKind.MessageReplyTextOutline));
 
+            // Group: Settings
             NavigatorItems.Add<AuthorViewModel>(NavigationGroup.Settings, Strings.MenuItemAuthors, false, Icons.Get(IconKind.Account));
             NavigatorItems.Add<TagViewModel>(NavigationGroup.Settings, Strings.MenuItemTags, false, Icons.Get(IconKind.TagOutline));
 
+            // Group: Other
             NavigatorItems.Add<AlertViewModel>(NavigationGroup.Other, Strings.MenuItemAlerts, false, Icons.Get(IconKind.TimerOutline));
             NavigatorItems.Add<UserNoteViewModel>(NavigationGroup.Other, Strings.MenuItemNotes, false, Icons.Get(IconKind.NoteTextOutline));
             NavigatorItems.Add<LinkViewModel>(NavigationGroup.Other, Strings.MenuItemLinks, false, Icons.Get(IconKind.LinkVariant));
             NavigatorItems.Add<StatisticsViewModel>(NavigationGroup.Other, Strings.MenuItemStatistics, false, Icons.Get(IconKind.Numeric));
 
-            NavigatorItems.Add<TableViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemStatistics);
-            NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemSearch);
-            NavigatorItems.Add<LinkVerifyViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemAddLink);
+            // Group: Tool
+            NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.Tool, Strings.MenuItemSearch, false, Icons.Get(IconKind.Magnify));
+            NavigatorItems.Add<LinkVerifyViewModel>(NavigationGroup.Tool, Strings.MenuItemLinkVerify, false, Icons.Get(IconKind.LinkVariant));
 
-            SetNavigatorItemVisibility<TitleQueueViewModel>(Config.IsTitleQueueVisible);
+            //NavigatorItems.Add<TableViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemStatistics);
+
+            SynchronizeNavigatorVisibility();
         }
 
         private void SetNavigatorItemVisibility<T>(bool isItemVisible) where T : ApplicationViewModel

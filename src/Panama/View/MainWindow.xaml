@@ -55,13 +55,13 @@
                     <MenuItem
                         Header="{x:Static r:Strings.MenuItemLinkVerify}"
                         Icon="{ico:Material Kind=LinkVariant}"
-                        Command="{Binding Commands[NavigateLinkVerify]}"
+                        Command="{Binding NavigateLinkVerifyCommand}"
                         tk:Property.IsVisible="{Binding Config.IsVerifyLinkEnabled}"/>
 
                     <MenuItem
                         Header="{x:Static r:Strings.MenuItemSearch}"
                         Icon="{ico:Material Kind=Magnify}"
-                        Command="{Binding Commands[NavigateSearch]}"
+                        Command="{Binding NavigateSearchCommand}"
                         tk:Property.IsVisible="{Binding Config.IsSearchEnabled}"/>
 
                     <Separator/>
@@ -124,6 +124,14 @@
                         HeaderText="{x:Static r:Strings.NavHeaderOther}"
                         ItemsSource="{Binding NavigatorItems.Groups[2]}"
                         SelectedItem="{Binding NavigatorItems.SelectedItems[2]}"/>
+
+                    <tk:MainNavigator
+                        HideWhenEmpty="True"
+                        tk:Property.IsVisible="{Binding HaveToolItems}"
+                        IsExpanded="{Binding Config.NavToolsExpander}"
+                        HeaderText="{x:Static r:Strings.NavHeaderTools}"
+                        ItemsSource="{Binding NavigatorItems.Groups[3]}"
+                        SelectedItem="{Binding NavigatorItems.SelectedItems[3]}"/>
 
                 </StackPanel>
             </tk:MultiSplitterGrid.DetailContent>

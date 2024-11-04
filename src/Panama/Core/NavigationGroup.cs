@@ -24,14 +24,19 @@
         public const int Other = 2;
 
         /// <summary>
+        /// Tools
+        /// </summary>
+        public const int Tool = 3;
+
+        /// <summary>
         /// Only in a menu (not in a navigation control)
         /// </summary>
-        public const int OnlyMenu = 3;
+        public const int OnlyMenu = 4;
 
         /// <summary>
         /// Not a navigation group; used to intitialize the navigator collection.
         /// If adding another group, increase this value
         /// </summary>
-        public const int TotalNumberOfGroups = 4;
+        public const int TotalNumberOfGroups = 5;
     }
 }

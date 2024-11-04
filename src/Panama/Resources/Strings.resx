@@ -1245,4 +1245,7 @@ Changes will take effect after you restart the application.</value>
   <data name="TextApplicationTerminate" xml:space="preserve">
     <value>The application will now terminate</value>
   </data>
+  <data name="NavHeaderTools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
 </root>

@@ -1895,6 +1895,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        public static string NavHeaderTools {
+            get {
+                return ResourceManager.GetString("NavHeaderTools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot exit at this time. Background tasks are still running..
         /// </summary>
         public static string NotificationCannotExitTasksAreRunning {
