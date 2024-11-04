@@ -58,12 +58,11 @@
                         Command="{Binding Commands[NavigateLinkVerify]}"
                         tk:Property.IsVisible="{Binding Config.IsVerifyLinkEnabled}"/>
 
-                    <Separator/>
-
                     <MenuItem
                         Header="{x:Static r:Strings.MenuItemSearch}"
                         Icon="{ico:Material Kind=Magnify}"
-                        Command="{Binding Commands[NavigateSearch]}"/>
+                        Command="{Binding Commands[NavigateSearch]}"
+                        tk:Property.IsVisible="{Binding Config.IsSearchEnabled}"/>
 
                     <Separator/>
 

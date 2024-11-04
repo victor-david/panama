@@ -1978,6 +1978,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable search tool.
+        /// </summary>
+        public static string SettingsSearch {
+            get {
+                return ResourceManager.GetString("SettingsSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Text Viewer.
         /// </summary>
         public static string SettingsTextViewer {

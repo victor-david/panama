@@ -17,6 +17,7 @@
 
     <CheckBox Content="{x:Static r:Strings.SettingsQueue}" IsChecked="{Binding Config.IsTitleQueueVisible}"/>
     <CheckBox Content="{x:Static r:Strings.SettingsAutoSortOnUpdated}" IsChecked="{Binding Config.AutoSortOnTitleUpdated}"/>
+    <CheckBox Content="{x:Static r:Strings.SettingsSearch}" IsChecked="{Binding Config.IsSearchEnabled}"/>
     <CheckBox Content="{x:Static r:Strings.SettingsVerifyLinks}" IsChecked="{Binding Config.IsVerifyLinkEnabled}"/>
 
     <con:PathSelector

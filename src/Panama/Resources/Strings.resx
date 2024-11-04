@@ -1236,4 +1236,7 @@ Changes will take effect after you restart the application.</value>
   <data name="HeaderPublisherFilter" xml:space="preserve">
     <value>Publisher Filter</value>
   </data>
+  <data name="SettingsSearch" xml:space="preserve">
+    <value>Enable search tool</value>
+  </data>
 </root>

@@ -1105,6 +1105,15 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets a value that determines if the search feature is enabled
+        /// </summary>
+        public bool IsSearchEnabled
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets or sets a value that determines if the verify link feature
         /// (experimental) is enabled
         /// </summary>
