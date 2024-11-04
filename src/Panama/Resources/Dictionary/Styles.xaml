@@ -166,8 +166,16 @@
     <!-- Main navigator-->
     <Style TargetType="tk:MainNavigator">
         <Setter Property="Margin" Value="10,0,0,10"/>
-        <Setter Property="ItemIndent" Value="20"/>
+        <Setter Property="ItemIndent" Value="25"/>
         <Setter Property="HideWhenEmpty" Value="False"/>
+        <Style.Resources>
+            <Style TargetType="ListBoxItem" BasedOn="{StaticResource MahApps.Styles.ListBoxItem}">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="MinHeight" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            </Style>
+        </Style.Resources>
     </Style>
 
     <!-- Navigator expander -->
