@@ -4,10 +4,102 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:ico="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
+    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    xmlns:vw="clr-namespace:Restless.Panama.View"
+    d:DataContext="{d:DesignInstance Type=vm:ToolOrphanViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
 
-        <TextBlock Text="Orphan"/>
-    </Grid>
+
+
+    <tk:SplitterGrid>
+
+        <tk:SplitterGrid.HeaderLeft>
+            <StatusBar>
+                <StatusBarItem DockPanel.Dock="Right">
+                    <TextBlock>
+                    <Run
+                        Style="{StaticResource Panama.Styles.Run.Highlight}"
+                        Text="{Binding ListView.Count, Mode=OneWay}"/>
+                    <Run Text="orphans"/>
+                    </TextBlock>
+                </StatusBarItem>
+
+                <StatusBarItem DockPanel.Dock="Right" Margin="0,0,50,0">
+                    <Button
+                        Style="{StaticResource MahApps.Styles.Button.Reveal}"
+                        Command="{Binding ToggleCustomFilterCommand}"
+                        ToolTip="{x:Static r:Strings.ToolTipOrphanExclusions}">
+
+                        <ico:PackIconMaterial Kind="CogOutline"/>
+
+                    </Button>
+                </StatusBarItem>
+
+                <TextBlock Text="Orphans"/>
+                <Button Content="Start" Command="{Binding StartScanCommand}"/>
+            </StatusBar>
+        </tk:SplitterGrid.HeaderLeft>
+
+        <tk:SplitterGrid.HeaderRight>
+            <StatusBar>
+                <TextBlock Text="{Binding SelectedItem}"/>
+
+            </StatusBar>
+        </tk:SplitterGrid.HeaderRight>
+
+        <tk:SplitterGrid.ContentLeft>
+            <Grid>
+                <DataGrid
+                    ItemsSource="{Binding Path=ListView}"
+                    SelectedItem="{Binding SelectedItem}"
+                    tk:DataGridColumns.Columns="{Binding Columns}">
+
+                    <DataGrid.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                    </DataGrid.ContextMenu>
+
+                    <DataGrid.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                    </DataGrid.InputBindings>
+
+                </DataGrid>
+
+                <con:Flyout Placement="Right" Width="530" IsOpen="{Binding IsCustomFilterOpen}">
+
+                    <con:Flyout.Header>
+                        <vw:FlyoutHeader Title="Exclusions" ShowClearButton="False"/>
+                    </con:Flyout.Header>
+
+                    <DataGrid
+                        ItemsSource="{Binding Exclusions.ListView}"
+                        SelectedItem="{Binding Exclusions.SelectedItem}"
+                        RowHeight="{x:Static core:Config+DataGrid.MinRowHeight}"
+                        tk:DataGridColumns.Columns="{Binding Exclusions.Columns}">
+
+                        <DataGrid.ContextMenu>
+                            <ContextMenu ItemsSource="{Binding Exclusions.MenuItems}"/>
+                        </DataGrid.ContextMenu>
+
+                    </DataGrid>
+
+                </con:Flyout>
+
+            </Grid>
+        </tk:SplitterGrid.ContentLeft>
+
+        <tk:SplitterGrid.ContentRight>
+            <Grid tk:Property.RowHeights="*,*">
+
+
+            </Grid>
+        </tk:SplitterGrid.ContentRight>
+
+    </tk:SplitterGrid>
+
 </UserControl>

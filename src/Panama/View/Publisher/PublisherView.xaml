@@ -52,7 +52,7 @@
 
                 <con:Flyout Width="440" IsOpen="{Binding IsCustomFilterOpen}">
                     <con:Flyout.Header>
-                        <vw:FilterHeader Title="{x:Static r:Strings.HeaderPublisherFilter}"/>
+                        <vw:FlyoutHeader Title="{x:Static r:Strings.HeaderPublisherFilter}"/>
                     </con:Flyout.Header>
 
                     <vw:PublisherFilter/>

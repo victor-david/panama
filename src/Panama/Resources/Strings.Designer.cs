@@ -2869,6 +2869,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage exclusions for orphan search.
+        /// </summary>
+        public static string ToolTipOrphanExclusions {
+            get {
+                return ResourceManager.GetString("ToolTipOrphanExclusions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The date this publisher was added to the database.
         /// </summary>
         public static string ToolTipPublisherAdded {

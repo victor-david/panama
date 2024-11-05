@@ -239,8 +239,8 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<StatisticsViewModel>(NavigationGroup.Other, Strings.MenuItemStatistics, false, Icons.Get(IconKind.Numeric));
 
             // Group: Tool
-            NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.Tool, Strings.MenuItemSearch, false, Icons.Get(IconKind.Magnify));
             NavigatorItems.Add<ToolOrphanViewModel>(NavigationGroup.Tool, Strings.MenuItemOrphanFinder, false, Icons.Get(IconKind.ClipboardSearchOutline));
+            NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.Tool, Strings.MenuItemSearch, false, Icons.Get(IconKind.Magnify));
             NavigatorItems.Add<LinkVerifyViewModel>(NavigationGroup.Tool, Strings.MenuItemLinkVerify, false, Icons.Get(IconKind.LinkVariant));
 
             SynchronizeNavigatorVisibility();

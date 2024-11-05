@@ -37,6 +37,11 @@ namespace Restless.Panama.ViewModel
         protected LinkTable LinkTable => DatabaseController.Instance.GetTable<LinkTable>();
 
         /// <summary>
+        /// Gets the orphan exclusion table
+        /// </summary>
+        protected OrphanExclusionTable OrphanExclusionTable => DatabaseController.Instance.GetTable<OrphanExclusionTable>();
+
+        /// <summary>
         /// Gets the publisher table
         /// </summary>
         protected PublisherTable PublisherTable => DatabaseController.Instance.GetTable<PublisherTable>();

@@ -1254,4 +1254,7 @@ Changes will take effect after you restart the application.</value>
   <data name="SettingsOrphanFinder" xml:space="preserve">
     <value>Enable orphan finder tool</value>
   </data>
+  <data name="ToolTipOrphanExclusions" xml:space="preserve">
+    <value>Manage exclusions for orphan search</value>
+  </data>
 </root>
