@@ -15,7 +15,11 @@
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800">
 
-    <tk:SplitterGrid>
+    <tk:SplitterGrid
+        MinDetailWidth="{x:Static core:Config+Grid.MinOrphanDetailWidth}"
+        MaxDetailWidth="{x:Static core:Config+Grid.MaxOrphanDetailWidth}"
+        IsDetailExpanded="{Binding Config.OrphanDetailExpanded}"
+        DetailWidth="{Binding Config.OrphanDetailWidth}">
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
