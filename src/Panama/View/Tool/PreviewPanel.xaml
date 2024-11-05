@@ -43,10 +43,7 @@
     <!-- Unsupported notice -->
     <TextBlock
         Grid.Row="1"
-        FontSize="14"
-        Style="{StaticResource Panama.Styles.TextBlock.Error}"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
+        Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
         Visibility="{Binding UnsupportedVisibility, ElementName=ToolControl}"
         Text="{x:Static r:Strings.TextDocumentPreviewNotSupported}"/>
 

@@ -9,12 +9,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Restless.Panama.ViewModel
 {
     public class ToolOrphanViewModel : DataViewModel<FileScanItem>
     {
         #region Private
+        private PreviewMode previewMode;
+        private string previewText;
+        private ImageSource previewImageSource;
         private readonly ObservableCollection<FileScanItem> orphans;
         #endregion
 
@@ -24,6 +28,24 @@ namespace Restless.Panama.ViewModel
         public OrphanExclusionController Exclusions { get; }
         public FileScanItem SelectedOrphan => SelectedItem as FileScanItem;
         public ICommand StartScanCommand { get; }
+
+        public PreviewMode PreviewMode
+        {
+            get => previewMode;
+            private set => SetProperty(ref previewMode, value);
+        }
+
+        public string PreviewText
+        {
+            get => previewText;
+            private set => SetProperty(ref previewText, value);
+        }
+
+        public ImageSource PreviewImageSource
+        {
+            get => previewImageSource;
+            private set => SetProperty(ref previewImageSource, value);
+        }
         #endregion
 
         /************************************************************************/
@@ -63,6 +85,12 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected methods
+        protected override void OnSelectedItemChanged()
+        {
+            base.OnSelectedItemChanged();
+            PrepareDocumentPreview();
+        }
+
         /// <inheritdoc/>
         protected override int OnDataRowCompare(FileScanItem item1, FileScanItem item2)
         {
@@ -157,5 +185,31 @@ namespace Restless.Panama.ViewModel
         }
         #endregion
 
+        /************************************************************************/
+
+        #region Private methods (preview)
+        private void PrepareDocumentPreview()
+        {
+            PreviewText = null;
+            PreviewMode = PreviewMode.Unsupported;
+
+            if (SelectedOrphan != null)
+            {
+                PreviewMode = DocumentPreviewer.GetPreviewMode(SelectedOrphan.FullName);
+                switch (PreviewMode)
+                {
+                    case PreviewMode.Text:
+                        PreviewText = DocumentPreviewer.GetText(SelectedOrphan.FullName);
+                        break;
+                    case PreviewMode.Image:
+                        PreviewImageSource = DocumentPreviewer.GetImage(SelectedOrphan.FullName);
+                        break;
+                    case PreviewMode.None:
+                    case PreviewMode.Unsupported:
+                        break;
+                }
+            }
+        }
+        #endregion
     }
 }

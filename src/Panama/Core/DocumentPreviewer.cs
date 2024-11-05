@@ -86,12 +86,12 @@ namespace Restless.Panama.Core
 
         private static string PreviewWordOpenXml(string fileName)
         {
-            return GetPreviewText(fileName, f => OpenXmlDocument.Reader.GetText(f));
+            return GetPreviewText(fileName, OpenXmlDocument.Reader.GetText);
         }
 
         private static string PreviewText(string fileName)
         {
-            return GetPreviewText(fileName, f => File.ReadAllText(f));
+            return GetPreviewText(fileName, File.ReadAllText);
         }
 
         private static string PreviewHtml(string fileName)

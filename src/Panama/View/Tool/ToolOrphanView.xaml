@@ -94,10 +94,12 @@
         </tk:SplitterGrid.ContentLeft>
 
         <tk:SplitterGrid.ContentRight>
-            <Grid tk:Property.RowHeights="*,*">
-
-
-            </Grid>
+            <vw:PreviewPanel
+                HeaderVisibility="Collapsed"
+                PreviewMode="{Binding PreviewMode}"
+                PreviewText="{Binding PreviewText}"
+                PreviewImageSource="{Binding PreviewImageSource}"
+                Visibility="{Binding EditVisibility}"/>
         </tk:SplitterGrid.ContentRight>
 
     </tk:SplitterGrid>
