@@ -57,6 +57,10 @@
         <vw:TitleQueueView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:ToolOrphanViewModel}">
+        <vw:ToolOrphanView />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vm:ToolSearchViewModel}">
         <vw:ToolSearchView />
     </DataTemplate>

@@ -1123,6 +1123,15 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets a value that determines if the orphan feature is enabled
+        /// </summary>
+        public bool IsOrphanEnabled
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets or sets a value that determines if the verify link feature
         /// (experimental) is enabled
         /// </summary>
@@ -1196,6 +1205,7 @@ namespace Restless.Panama.Core
                     MainWindowViewModel.Instance.SynchronizeTitleQueue();
                     break;
 
+                case nameof(IsOrphanEnabled):
                 case nameof(IsSearchEnabled):
                 case nameof(IsVerifyLinkEnabled):
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));

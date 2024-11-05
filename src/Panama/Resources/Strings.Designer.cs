@@ -1580,6 +1580,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Orphan.
+        /// </summary>
+        public static string MenuItemOrphanFinder {
+            get {
+                return ResourceManager.GetString("MenuItemOrphanFinder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Publishers.
         /// </summary>
         public static string MenuItemPublishers {
@@ -1974,6 +1983,15 @@ namespace Restless.Panama.Resources {
         public static string SettingsOrphanExclusionDetail {
             get {
                 return ResourceManager.GetString("SettingsOrphanExclusionDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable orphan finder tool.
+        /// </summary>
+        public static string SettingsOrphanFinder {
+            get {
+                return ResourceManager.GetString("SettingsOrphanFinder", resourceCulture);
             }
         }
         

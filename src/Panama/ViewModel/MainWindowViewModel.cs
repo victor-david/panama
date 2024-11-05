@@ -170,6 +170,7 @@ namespace Restless.Panama.ViewModel
             SetNavigatorItemVisibility<TitleQueueViewModel>(Config.IsTitleQueueVisible);
             SetNavigatorItemVisibility<LinkVerifyViewModel>(Config.IsVerifyLinkEnabled);
             SetNavigatorItemVisibility<ToolSearchViewModel>(Config.IsSearchEnabled);
+            SetNavigatorItemVisibility<ToolOrphanViewModel>(Config.IsOrphanEnabled);
             HaveToolItems = NavigatorItems.HaveVisibleItems(NavigationGroup.Tool);
         }
 
@@ -228,7 +229,7 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, Icons.Get(IconKind.MessageReplyTextOutline));
 
             // Group: Settings
-            NavigatorItems.Add<AuthorViewModel>(NavigationGroup.Settings, Strings.MenuItemAuthors, false, Icons.Get(IconKind.Account));
+            NavigatorItems.Add<AuthorViewModel>(NavigationGroup.Settings, Strings.MenuItemAuthors, false, Icons.Get(IconKind.AccountOutline));
             NavigatorItems.Add<TagViewModel>(NavigationGroup.Settings, Strings.MenuItemTags, false, Icons.Get(IconKind.TagOutline));
 
             // Group: Other
@@ -239,9 +240,8 @@ namespace Restless.Panama.ViewModel
 
             // Group: Tool
             NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.Tool, Strings.MenuItemSearch, false, Icons.Get(IconKind.Magnify));
+            NavigatorItems.Add<ToolOrphanViewModel>(NavigationGroup.Tool, Strings.MenuItemOrphanFinder, false, Icons.Get(IconKind.ClipboardSearchOutline));
             NavigatorItems.Add<LinkVerifyViewModel>(NavigationGroup.Tool, Strings.MenuItemLinkVerify, false, Icons.Get(IconKind.LinkVariant));
-
-            //NavigatorItems.Add<TableViewModel>(NavigationGroup.OnlyMenu, Strings.MenuItemStatistics);
 
             SynchronizeNavigatorVisibility();
         }

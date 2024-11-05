@@ -1248,4 +1248,10 @@ Changes will take effect after you restart the application.</value>
   <data name="NavHeaderTools" xml:space="preserve">
     <value>Tools</value>
   </data>
+  <data name="MenuItemOrphanFinder" xml:space="preserve">
+    <value>Orphan</value>
+  </data>
+  <data name="SettingsOrphanFinder" xml:space="preserve">
+    <value>Enable orphan finder tool</value>
+  </data>
 </root>

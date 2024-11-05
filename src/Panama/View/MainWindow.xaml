@@ -52,18 +52,6 @@
                         ToolTip="{x:Static r:Strings.ToolTipOpenWindowTool}"
                         Command="{Binding OpenToolsCommand}"/>
 
-                    <MenuItem
-                        Header="{x:Static r:Strings.MenuItemLinkVerify}"
-                        Icon="{ico:Material Kind=LinkVariant}"
-                        Command="{Binding NavigateLinkVerifyCommand}"
-                        tk:Property.IsVisible="{Binding Config.IsVerifyLinkEnabled}"/>
-
-                    <MenuItem
-                        Header="{x:Static r:Strings.MenuItemSearch}"
-                        Icon="{ico:Material Kind=Magnify}"
-                        Command="{Binding NavigateSearchCommand}"
-                        tk:Property.IsVisible="{Binding Config.IsSearchEnabled}"/>
-
                     <Separator/>
 
                     <MenuItem
