@@ -83,7 +83,7 @@ namespace Restless.Panama.ViewModel
             PostponeCommand = RelayCommand.Create(RunPostponeCommand, p => SelectedAlert != null);
             DismissCommand = RelayCommand.Create(p => RunDismissCommand(), p => SelectedAlert != null);
 
-            MenuItems.AddItem(Strings.MenuItemOpenItemOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemOpenItemOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
         }
         #endregion
 

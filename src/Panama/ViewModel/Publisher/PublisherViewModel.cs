@@ -149,7 +149,7 @@ namespace Restless.Panama.ViewModel
                 .SetSelectorName("Submission Count");
 
             Columns.RestoreColumnState(Config.PublisherGridColumnState);
-            
+
             Commands.Add("ActiveFilter", p => Filters.SetToActive());
             Commands.Add("HaveSubFilter", p => Filters.SetToOpenSubmission());
             Commands.Add("InPeriodFilter", p => Filters.SetToInPeriod());
@@ -166,14 +166,14 @@ namespace Restless.Panama.ViewModel
             // Credentials = DatabaseController.Instance.GetTable<CredentialTable>().GetCredentialList();
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.MenuItemCreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.PlusIconKey);
+            MenuItems.AddItem(Strings.MenuItemCreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemBrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.ChevronRightIconKey);
+            MenuItems.AddItem(Strings.MenuItemBrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
             MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemDeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.XRedIconKey);
+            MenuItems.AddItem(Strings.MenuItemDeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
             {

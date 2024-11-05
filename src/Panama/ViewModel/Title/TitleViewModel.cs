@@ -316,7 +316,7 @@ namespace Restless.Panama.ViewModel
                 {
                     MenuItems.InsertItem(insertIdx, $"Add to queue {row.Name}", Commands["AddToQueue"])
                         .AddCommandParm(row)
-                        .AddIconResource(ResourceKeys.Icon.TitleQueueIconKey);
+                        .AddIconResource(ResourceKeys.Icon.IconTrayPlus);
                     insertIdx++;
                 }
                 haveQueueTitleItems = true;

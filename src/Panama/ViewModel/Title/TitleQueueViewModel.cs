@@ -308,7 +308,7 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddSeparator();
             MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemRemoveQueueTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
+            MenuItems.AddItem(Strings.MenuItemRemoveQueueTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconTrayRemove);
         }
 
         private void InitQueueMenuItems()

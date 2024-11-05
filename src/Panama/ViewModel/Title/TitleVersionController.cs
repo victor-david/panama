@@ -337,7 +337,7 @@ namespace Restless.Panama.ViewModel
                         item.Icon = null;
                         if (langId.Equals(menuLangId, StringComparison.Ordinal))
                         {
-                            item.Icon = LocalResources.Get<System.Windows.Shapes.Path>(ResourceKeys.Icon.SquareSmallRedIconKey);
+                            item.Icon = LocalResources.Get<System.Windows.Shapes.Path>(ResourceKeys.Icon.IconCheck);
                         }
                     }
                 }
