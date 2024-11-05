@@ -13,10 +13,6 @@
         <vw:AuthorView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:CredentialViewModel}">
-        <vw:CredentialView />
-    </DataTemplate>
-
     <DataTemplate DataType="{x:Type vm:LinkViewModel}">
         <vw:LinkView />
     </DataTemplate>
