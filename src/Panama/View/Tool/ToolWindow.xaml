@@ -37,14 +37,15 @@
 
     <Grid tk:Property.ColumnWidths="126,*" tk:Property.RowHeights="*">
         <ListBox
+            Margin="{StaticResource Panama.Layout.Padding.Vertical}"
             BorderThickness="0,0,1,0"
             ItemsSource="{Binding Sections}"
             DisplayMemberPath="Name"
             SelectedItem="{Binding SelectedSection}"/>
 
-        <!-- Wait panel for any operation Margin="{DynamicResource Panama.Layout.Padding.Full}"-->
+        <!-- Wait panel for any operation -->
         <tk:WaitPanel
-            Margin="0,10"
+            Margin="{StaticResource Panama.Layout.Padding.Bottom}"
             BorderThickness="0"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
@@ -59,7 +60,8 @@
                 <Style TargetType="con:UpdateToolControl">
                     <Setter Property="ButtonStyle">
                         <Setter.Value>
-                            <Style TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button.Flat}">
+                            <Style TargetType="Button" BasedOn="{StaticResource Panama.Styles.Button.Dialog}">
+                                <Setter Property="MinWidth" Value="0"/>
                                 <Setter Property="tk:Property.IsInverseEnabled" Value="{Binding IsOperationInProgress}"/>
                             </Style>
 
