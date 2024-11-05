@@ -94,12 +94,40 @@
         </tk:SplitterGrid.ContentLeft>
 
         <tk:SplitterGrid.ContentRight>
-            <vw:PreviewPanel
-                HeaderVisibility="Collapsed"
-                PreviewMode="{Binding PreviewMode}"
-                PreviewText="{Binding PreviewText}"
-                PreviewImageSource="{Binding PreviewImageSource}"
-                Visibility="{Binding EditVisibility}"/>
+            <Grid
+                tk:Property.RowHeights="Auto,Auto,*"
+                tk:Property.ColumnWidths="Auto,*"
+                Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+                Visibility="{Binding EditVisibility}">
+
+                <TextBlock
+                    Grid.Row="0" Grid.Column="0"
+                    Margin="{StaticResource Panama.Layout.Padding.Right}"
+                    Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
+                    Text="Size"/>
+
+                <TextBlock
+                    Grid.Row="0" Grid.Column="1"
+                    Text="{Binding SelectedOrphan.Size,StringFormat=N0}"/>
+
+                <TextBlock
+                    Grid.Row="1" Grid.Column="0"
+                    Margin="{StaticResource Panama.Layout.Padding.Right}"
+                    Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
+                    Text="Updated"/>
+
+                <TextBlock
+                    Grid.Row="1" Grid.Column="1"
+                    Text="{Binding SelectedOrphan.LastWriteTimeUtc,StringFormat='MMMM, dd, yyyy HHH:MM'}"/>
+
+                <vw:PreviewPanel
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    HeaderVisibility="Collapsed"
+                    PreviewMode="{Binding PreviewMode}"
+                    PreviewText="{Binding PreviewText}"
+                    PreviewImageSource="{Binding PreviewImageSource}"/>
+            </Grid>
         </tk:SplitterGrid.ContentRight>
 
     </tk:SplitterGrid>
