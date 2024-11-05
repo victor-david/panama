@@ -61,47 +61,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Icons designed by Linear Color SEO (Freepik), Smashicons, Swifticons, Maxim Basinski, and Eleonor Wang from Flaticon.
-        /// </summary>
-        public static string CaptionIconsDesigned1 {
-            get {
-                return ResourceManager.GetString("CaptionIconsDesigned1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the folder to be used for submission messages.
-        /// </summary>
-        public static string CaptionSelectMapiFolder {
-            get {
-                return ResourceManager.GetString("CaptionSelectMapiFolder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select a submission document.
         /// </summary>
         public static string CaptionSelectSubmissionDocument {
             get {
                 return ResourceManager.GetString("CaptionSelectSubmissionDocument", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the message(s) to add to this submission.
-        /// </summary>
-        public static string CaptionSelectSubmissionMessage {
-            get {
-                return ResourceManager.GetString("CaptionSelectSubmissionMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the folder to filter the title list by.
-        /// </summary>
-        public static string CaptionSelectTitleFilterFolder {
-            get {
-                return ResourceManager.GetString("CaptionSelectTitleFilterFolder", resourceCulture);
             }
         }
         

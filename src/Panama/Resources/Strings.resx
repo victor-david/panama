@@ -419,12 +419,6 @@ Last exported: {1}</value>
   <data name="InvalidOpMapiFolderNotSet" xml:space="preserve">
     <value>The Outlook folder  from which to select submission messages hasn't been set. Fix the configuration and try again.</value>
   </data>
-  <data name="CaptionSelectMapiFolder" xml:space="preserve">
-    <value>Select the folder to be used for submission messages</value>
-  </data>
-  <data name="CaptionSelectSubmissionMessage" xml:space="preserve">
-    <value>Select the message(s) to add to this submission</value>
-  </data>
   <data name="InvalidOpTitleListOutputFolder" xml:space="preserve">
     <value>The output folder for the title list operation does not exist.</value>
   </data>
@@ -500,9 +494,6 @@ When you save properties here however, the document's file  modification date is
   <data name="ConfirmationDeleteCredential" xml:space="preserve">
     <value>This operation will remove the selected credential and remove its association with any publishers that are using it. Do you want to continue?</value>
   </data>
-  <data name="CaptionSelectTitleFilterFolder" xml:space="preserve">
-    <value>Select the folder to filter the title list by</value>
-  </data>
   <data name="InvalidOpDirectoryDoesNotExist" xml:space="preserve">
     <value>The specified directory does not exist</value>
   </data>
@@ -523,9 +514,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="MenuItemBrowseToUrlOrClick" xml:space="preserve">
     <value>Browse to this url (or double click the row)</value>
-  </data>
-  <data name="CaptionIconsDesigned1" xml:space="preserve">
-    <value>Icons designed by Linear Color SEO (Freepik), Smashicons, Swifticons, Maxim Basinski, and Eleonor Wang from Flaticon</value>
   </data>
   <data name="HeaderData" xml:space="preserve">
     <value>Data</value>

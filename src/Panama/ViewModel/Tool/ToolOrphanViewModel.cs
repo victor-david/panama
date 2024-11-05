@@ -76,6 +76,13 @@ namespace Restless.Panama.ViewModel
                 RelayCommand.Create(p => RunSetOrphanDirectoryExclusion(), p => CanRunOrphanCommand()))
                 .AddIconResource(ResourceKeys.Icon.IconFolder);
 
+            MenuItems.AddSeparator();
+
+            MenuItems.AddItem(
+                Strings.MenuItemCreateTitleFromEntry,
+                RelayCommand.Create(p => RunCreateTitleFromOrphan(), p => CanRunOrphanCommand()))
+                .AddIconResource(ResourceKeys.Icon.IconAdd);
+
             StartScanCommand = RelayCommand.Create(p => RunScanCommand());
 
             orphans = new ObservableCollection<FileScanItem>();
@@ -173,26 +180,26 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        //private void RunCreateTitleFromOrphan(object parm)
-        //{
-        //    if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationCreateTitleFromOrphan, SelectedOrphan.FullName)))
-        //    {
-        //        TitleRow row = new(TitleTable.AddDefaultRow())
-        //        {
-        //            Title = $"{Strings.TextOrphan} {SelectedOrphan.FullName}",
-        //            Written = SelectedOrphan.LastWriteTimeUtc.ToUtcZero(),
-        //            Notes = $"{Strings.TextCreatedFromOrphan} {SelectedOrphan.FullName}, {SelectedOrphan.LastWriteTimeUtc}"
-        //        };
+        private void RunCreateTitleFromOrphan()
+        {
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationCreateTitleFromOrphan, SelectedOrphan.FullName)))
+            {
+                TitleRow row = new(TitleTable.AddDefaultRow())
+                {
+                    Title = $"{Strings.TextOrphan} {SelectedOrphan.FullName}",
+                    Written = SelectedOrphan.LastWriteTimeUtc.ToUtcZero(),
+                    Notes = $"{Strings.TextCreatedFromOrphan} {SelectedOrphan.FullName}, {SelectedOrphan.LastWriteTimeUtc}"
+                };
 
-        //        TitleVersionTable.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(SelectedOrphan.FullName));
+                TitleVersionTable.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(SelectedOrphan.FullName));
 
-        //        TitleVersionTable.Save();
-        //        TitleTable.Save();
-        //        Adapter.Updated[4].Remove(SelectedOrphan);
-        //        SelectedOrphan = null;
-        //        MainWindowViewModel.Instance.NotifyUpdate<TitleViewModel>();
-        //    }
-        //}
+                TitleVersionTable.Save();
+                TitleTable.Save();
+                orphans.Remove(SelectedOrphan);
+                SelectedItem = null;
+                MainWindowViewModel.Instance.NotifyUpdate<TitleViewModel>();
+            }
+        }
 
         private bool CanRunOrphanCommand()
         {
