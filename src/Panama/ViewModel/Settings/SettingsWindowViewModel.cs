@@ -3,7 +3,6 @@ using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Resources;
 using Restless.Panama.Utility;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -63,14 +62,6 @@ namespace Restless.Panama.ViewModel
         {
             get;
         }
-
-        /// <summary>
-        /// Gets the orphan exclusion controller
-        /// </summary>
-        public OrphanExclusionController Orphan
-        {
-            get;
-        }
         #endregion
 
         /************************************************************************/
@@ -91,8 +82,6 @@ namespace Restless.Panama.ViewModel
             };
 
             SetInitialSection();
-
-            Orphan = new OrphanExclusionController();
 
             Commands.Add("SelectPath", RunSelectPathCommand);
             Commands.Add("ResetColors", p => Config.Colors.Reset());
