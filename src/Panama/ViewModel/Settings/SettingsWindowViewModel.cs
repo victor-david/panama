@@ -4,7 +4,6 @@ using Restless.Panama.Core;
 using Restless.Panama.Resources;
 using Restless.Panama.Utility;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Restless.Panama.ViewModel
 {
@@ -46,22 +45,6 @@ namespace Restless.Panama.ViewModel
             get => RegistryManager.DatabaseDirectory;
             set => RegistryManager.SetDatabaseDirectory(value);
         }
-
-        /// <summary>
-        /// Gets the list of sample titles used to preview color selections.
-        /// </summary>
-        public ObservableCollection<SampleTitle> SampleTitles
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the list of sample publishers used to preview color selections.
-        /// </summary>
-        public ObservableCollection<SamplePublisher> SamplePublishers
-        {
-            get;
-        }
         #endregion
 
         /************************************************************************/
@@ -85,24 +68,6 @@ namespace Restless.Panama.ViewModel
 
             Commands.Add("SelectPath", RunSelectPathCommand);
             Commands.Add("ResetColors", p => Config.Colors.Reset());
-
-            SampleTitles = new ObservableCollection<SampleTitle>()
-            {
-                new SampleTitle(1, "Title #1", -10, false, false, false),
-                new SampleTitle(2, "Title #2 (published)", -20, true, false, false),
-                new SampleTitle(3, "Title #3", -30, false, false, false),
-                new SampleTitle(4, "Title #4 (submitted)", -40, false, false, true),
-                new SampleTitle(5, "Title #5", -43, false, false, false),
-                new SampleTitle(6, "Title #6 (self published)", -48, false, true, false),
-            };
-
-            SamplePublishers = new ObservableCollection<SamplePublisher>()
-            {
-                new SamplePublisher(1, "Publisher #1", -60, -10, false, false),
-                new SamplePublisher(2, "Publisher #2 (in period)", -90, -80, true, false),
-                new SamplePublisher(3, "Publisher #3", -110,  -90, false, false),
-                new SamplePublisher(4, "Publisher #4 (goner)", -150, -148, false, true),
-            };
         }
         #endregion
 
