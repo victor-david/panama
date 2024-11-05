@@ -95,13 +95,13 @@
                 BorderThickness="0"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 ItemsSource="{Binding FolderView}"
-                tk:Property.IsCollapsed="{Binding IsFolderOperationInProgress}"/>
+                tk:Property.IsCollapsed="{Binding IsOperationInProgress}"/>
 
             <ProgressBar
                 DockPanel.Dock="Top"
                 Height="18"
                 IsIndeterminate="True"
-                tk:Property.IsVisible="{Binding IsFolderOperationInProgress}"/>
+                tk:Property.IsVisible="{Binding IsOperationInProgress}"/>
 
             <TextBlock
                 DockPanel.Dock="Top"

@@ -15,7 +15,6 @@ namespace Restless.Panama.ViewModel
     public class ToolWindowViewModel : WindowViewModel
     {
         #region Private
-        private bool isOperationInProgress;
         private NavigatorSection selectedSection;
         private readonly VersionUpdater versionUpdater;
         private readonly SubmissionUpdater submissionUpdater;
@@ -43,12 +42,6 @@ namespace Restless.Panama.ViewModel
                 SetProperty(ref selectedSection, value);
                 Config.SelectedToolSection = (int)selectedSection.Id;
             }
-        }
-
-        public bool IsOperationInProgress
-        {
-            get => isOperationInProgress;
-            private set => SetProperty(ref isOperationInProgress, value);
         }
 
         public ToolResultAdapter Adapter { get; }

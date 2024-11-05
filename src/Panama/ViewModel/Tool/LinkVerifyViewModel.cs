@@ -15,7 +15,6 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private LinkVerifyRow selectedLink;
-        private bool operationInProgress;
         private bool isCanceling;
         private CancellationTokenSource tokenSource;
         #endregion
@@ -30,15 +29,6 @@ namespace Restless.Panama.ViewModel
         {
             get => selectedLink;
             private set => SetProperty(ref selectedLink, value);
-        }
-
-        /// <summary>
-        /// Gets a boolean value that indicates whether the verification operation is in progress
-        /// </summary>
-        public bool OperationInProgress
-        {
-            get => operationInProgress;
-            private set => SetProperty(ref operationInProgress, value);
         }
 
         /// <summary>
@@ -120,12 +110,12 @@ namespace Restless.Panama.ViewModel
 
         private async void RunVerifyCommand(object parm)
         {
-            OperationInProgress = true;
+            IsOperationInProgress = true;
             IsCanceling = false;
             tokenSource = new CancellationTokenSource();
             await Task.WhenAll(EnumerateTasks());
             Table.Save();
-            OperationInProgress = false;
+            IsOperationInProgress = false;
             IsCanceling = false;
         }
 

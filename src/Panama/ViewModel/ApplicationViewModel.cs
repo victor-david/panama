@@ -16,6 +16,12 @@ namespace Restless.Panama.ViewModel
     /// </summary>
     public abstract class ApplicationViewModel : ViewModelBase, INavigator
     {
+        #region
+        private bool isOperationInProgress;
+        #endregion
+
+        /************************************************************************/
+
         #region Public properties
         /// <summary>
         /// Gets the singletom instance of the application information object.
@@ -26,6 +32,15 @@ namespace Restless.Panama.ViewModel
         /// Gets the singleton instance of the configuration object.
         /// </summary>
         public Core.Config Config => Core.Config.Instance;
+
+        /// <summary>
+        /// Gets or (from a derived class) sets a boolean value that indicates in an async operation is in progress
+        /// </summary>
+        public bool IsOperationInProgress
+        {
+            get => isOperationInProgress;
+            protected set => SetProperty(ref isOperationInProgress, value);
+        }
         #endregion
 
         /************************************************************************/

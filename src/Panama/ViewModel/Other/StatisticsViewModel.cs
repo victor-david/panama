@@ -23,7 +23,6 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private bool haveTitleRoot;
-        private bool isFolderOperationInProgress;
         private FolderStatisticItem rootStat;
         #endregion
 
@@ -63,15 +62,6 @@ namespace Restless.Panama.ViewModel
         {
             get => haveTitleRoot;
             private set => SetProperty(ref haveTitleRoot, value);
-        }
-
-        /// <summary>
-        /// Gets a boolean value that indicates if the folder operation is in progress
-        /// </summary>
-        public bool IsFolderOperationInProgress
-        {
-            get => isFolderOperationInProgress;
-            private set => SetProperty(ref isFolderOperationInProgress, value);
         }
         #endregion
 
@@ -113,12 +103,12 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         private async void InitFolderView()
         {
-            IsFolderOperationInProgress = true;
+            IsOperationInProgress = true;
             FolderView.Clear();
             rootStat = new FolderStatisticItem(Config.FolderTitleRoot);
             await rootStat.PopulateAsync();
             CreateTreeViewItems();
-            IsFolderOperationInProgress = false;
+            IsOperationInProgress = false;
         }
 
         private const int HeaderColumnWidth = 216;
