@@ -36,32 +36,17 @@
                 <ico:PackIconMaterial Kind="CogOutline"/>
             </Button>
 
-            <mah:DropDownButton Content="{ico:Material Kind=Tools}">
-                <mah:DropDownButton.Resources>
-                    <Style TargetType="MenuItem" BasedOn="{StaticResource MahApps.Styles.MenuItem}">
-                        <Style.Resources>
-                            <Style TargetType="ico:PackIconMaterial" BasedOn="{StaticResource Panama.Styles.Icon}"/>
-                        </Style.Resources>
-                    </Style>
-                </mah:DropDownButton.Resources>
+            <Button
+                Command="{Binding ResetWindowCommand}"
+                ToolTip="{x:Static r:Strings.ToolTipResetWindow}">
+                <ico:Material Kind="Monitor"/>
+            </Button>
 
-                <mah:DropDownButton.Items>
-                    <MenuItem
-                        Header="{x:Static r:Strings.MenuItemUpdateTools}"
-                        Icon="{ico:Material Kind=ToolboxOutline}"
-                        ToolTip="{x:Static r:Strings.ToolTipOpenWindowTool}"
-                        Command="{Binding OpenToolsCommand}"/>
-
-                    <Separator/>
-
-                    <MenuItem
-                        Header="{x:Static r:Strings.MenuItemResetWindow}"
-                        Icon="{ico:Material Kind=Monitor}"
-                        ToolTip="{x:Static r:Strings.ToolTipResetWindow}"
-                        Command="{Binding ResetWindowCommand}"/>
-                </mah:DropDownButton.Items>
-
-            </mah:DropDownButton>
+            <Button
+                Command="{Binding OpenToolsCommand}"
+                ToolTip="{x:Static r:Strings.ToolTipOpenWindowTool}">
+                <ico:Material Kind="Tools"/>
+            </Button>
 
             <mah:DropDownButton Content="{ico:Material Kind=PaletteOutline}" ItemsSource="{Binding ThemeIds}">
 
