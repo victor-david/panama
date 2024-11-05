@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -88,6 +89,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
+            OnPropertyChanged(nameof(SelectedOrphan));
             PrepareDocumentPreview();
         }
 
@@ -101,10 +103,27 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods (scan)
-        private void RunScanCommand()
+        private async void RunScanCommand()
         {
-            orphans.Clear();
+            try
+            {
+                IsOperationInProgress = true;
+                orphans.Clear();
+                List<FileScanItem> results = await PerformOrphanScan();
+                results.ForEach(orphans.Add);
+            }
+            finally
+            {
+                IsOperationInProgress = false;
+            }
+        }
+
+        private async Task<List<FileScanItem>> PerformOrphanScan()
+        {
             List<string> files = new();
+            List<FileScanItem> result = new();
+            await Task.Delay(10);
+
             foreach (string dir in Directory.EnumerateDirectories(Config.FolderTitleRoot, "*", SearchOption.AllDirectories))
             {
                 if (!Exclusions.IsDirectoryExcluded(dir))
@@ -119,10 +138,11 @@ namespace Restless.Panama.ViewModel
                 {
                     if (!TitleVersionTable.VersionWithFileExists(Paths.Title.WithoutRoot(file)))
                     {
-                        orphans.Add(FileScanItem.Create(file));
+                        result.Add(FileScanItem.Create(file));
                     }
                 }
             }
+            return result;
         }
         #endregion
 

@@ -15,8 +15,6 @@
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800">
 
-
-
     <tk:SplitterGrid>
 
         <tk:SplitterGrid.HeaderLeft>
@@ -48,7 +46,7 @@
 
         <tk:SplitterGrid.HeaderRight>
             <StatusBar>
-                <TextBlock Text="{Binding SelectedItem}"/>
+                <TextBlock Text="{Binding SelectedOrphan.FileName}"/>
 
             </StatusBar>
         </tk:SplitterGrid.HeaderRight>
@@ -89,6 +87,8 @@
                     </DataGrid>
 
                 </con:Flyout>
+
+                <tk:WaitSpinner Height="64" tk:Property.IsVisible="{Binding IsOperationInProgress}"/>
 
             </Grid>
         </tk:SplitterGrid.ContentLeft>
