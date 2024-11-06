@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32126.315
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panama", "Panama\Panama.csproj", "{892CBB68-0608-4210-855C-4EDBB9703C0F}"
 EndProject
@@ -17,6 +17,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panama.Controls", "Panama.Controls\Panama.Controls.csproj", "{C832D0CC-549D-4C1F-9A3C-282772902871}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panama.Network", "Panama.Network\Panama.Network.csproj", "{7FA125CE-8D56-49BA-B035-885D8DE3D71A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panama.Resources", "Panama.Resources\Panama.Resources.csproj", "{61D71783-5B6F-49F5-8287-63BD82A059B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{7FA125CE-8D56-49BA-B035-885D8DE3D71A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FA125CE-8D56-49BA-B035-885D8DE3D71A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FA125CE-8D56-49BA-B035-885D8DE3D71A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61D71783-5B6F-49F5-8287-63BD82A059B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D71783-5B6F-49F5-8287-63BD82A059B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D71783-5B6F-49F5-8287-63BD82A059B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D71783-5B6F-49F5-8287-63BD82A059B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

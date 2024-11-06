@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using SubmissionValues = Restless.Panama.Database.Tables.SubmissionTable.Defs.Values;
 
-namespace Restless.Panama.Resources
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides static values for resource keys

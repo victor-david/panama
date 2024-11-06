@@ -6,7 +6,7 @@
 */
 using System.Windows;
 
-namespace Restless.Panama.Resources
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides static convienance methods to assist with application resources.

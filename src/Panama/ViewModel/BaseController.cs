@@ -1,4 +1,4 @@
-﻿using Restless.Panama.Resources;
+﻿using Restless.Panama.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Mvvm;
 using System;

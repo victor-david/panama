@@ -1,7 +1,7 @@
 ﻿using MahApps.Metro.IconPacks;
 using System.Windows.Media;
 
-namespace Restless.Panama.Resources
+namespace Restless.Panama.Core
 {
     public static class Icons
     {
