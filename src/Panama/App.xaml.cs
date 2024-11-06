@@ -7,7 +7,6 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
-using Restless.Panama.Resources;
 using Restless.Panama.Utility;
 using Restless.Panama.ViewModel;
 using Restless.Toolkit.Controls;

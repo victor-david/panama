@@ -6,7 +6,6 @@
 */
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
-using Restless.Panama.Resources;
 using Restless.Panama.ViewModel;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Core.Utility;
