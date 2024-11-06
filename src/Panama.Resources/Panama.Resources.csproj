@@ -14,14 +14,14 @@
     <PackageTags>resources</PackageTags>
     <Product>Panama Resources</Product>
     <RepositoryUrl>https://github.com/victor-david/panama</RepositoryUrl>
-    <RootNamespace>Restless.Panama</RootNamespace>
+    <RootNamespace>Restless.Panama.Resources</RootNamespace>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Title>Panama Resources</Title>
     <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\Strings.Designer.cs">
+    <Compile Update="Strings.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Strings.resx</DependentUpon>
@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Strings.resx">
+    <EmbeddedResource Update="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
