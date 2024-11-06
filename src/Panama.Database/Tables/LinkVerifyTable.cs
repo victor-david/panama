@@ -40,7 +40,7 @@ namespace Restless.Panama.Database.Tables
                 /// Id from other table
                 /// </summary>
                 public const string Xid = "xid";
-                
+
                 /// <summary>
                 /// Source of the link (publisher, published, user links, etc.)
                 /// </summary>
@@ -160,54 +160,13 @@ namespace Restless.Panama.Database.Tables
             }
             Save();
             Clear();
-            PopulateLinks();
-            Save();
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Protected methods
-        /// <summary>
-        /// Gets the column definitions for this table.
-        /// </summary>
-        /// <returns>A <see cref="ColumnDefinitionCollection"/>.</returns>
-        protected override ColumnDefinitionCollection GetColumnDefinitions()
-        {
-            return new ColumnDefinitionCollection()
-            {
-                { Defs.Columns.Id, ColumnType.Integer, true },
-                { Defs.Columns.Xid, ColumnType.Integer },
-                { Defs.Columns.Source, ColumnType.Text },
-                { Defs.Columns.Url, ColumnType.Text },
-                { Defs.Columns.Scanned, ColumnType.Timestamp, false, true },
-                { Defs.Columns.Status, ColumnType.Integer, false, false, 0 },
-                { Defs.Columns.StatusText, ColumnType.Text, false, true },
-                { Defs.Columns.Size, ColumnType.Integer, false, false, 0 },
-                { Defs.Columns.Error, ColumnType.Text, false, true }
-            };
+            PopulateFromAllSources();
         }
 
         /// <summary>
-        /// Establishes parent / child relationships with other tables.
+        /// Populates the table from the various other tables that use links. Saves when finished.
         /// </summary>
-        protected override void SetDataRelations()
-        {
-        }
-
-        /// <inheritdoc/>
-        protected override void OnInitializationComplete()
-        {
-            base.OnInitializationComplete();
-            PopulateLinks();
-            Save();
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Private methods
-        private void PopulateLinks()
+        public void PopulateFromAllSources()
         {
             foreach (AlertRow alert in Controller.GetTable<AlertTable>().EnumerateAll())
             {
@@ -256,7 +215,45 @@ namespace Restless.Panama.Database.Tables
                     AddRow(Defs.Values.SelfPublisherSource, publisher.Id, publisher.Url);
                 }
             }
+            Save();
         }
+        #endregion
+
+        /************************************************************************/
+
+        #region Protected methods
+        /// <summary>
+        /// Gets the column definitions for this table.
+        /// </summary>
+        /// <returns>A <see cref="ColumnDefinitionCollection"/>.</returns>
+        protected override ColumnDefinitionCollection GetColumnDefinitions()
+        {
+            return new ColumnDefinitionCollection()
+            {
+                { Defs.Columns.Id, ColumnType.Integer, true },
+                { Defs.Columns.Xid, ColumnType.Integer },
+                { Defs.Columns.Source, ColumnType.Text },
+                { Defs.Columns.Url, ColumnType.Text },
+                { Defs.Columns.Scanned, ColumnType.Timestamp, false, true },
+                { Defs.Columns.Status, ColumnType.Integer, false, false, 0 },
+                { Defs.Columns.StatusText, ColumnType.Text, false, true },
+                { Defs.Columns.Size, ColumnType.Integer, false, false, 0 },
+                { Defs.Columns.Error, ColumnType.Text, false, true }
+            };
+        }
+
+        /// <summary>
+        /// Establishes parent / child relationships with other tables.
+        /// </summary>
+        protected override void SetDataRelations()
+        {
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+
 
         private void AddRow(string source, long xid, string url)
         {

@@ -12,6 +12,7 @@
     d:DataContext="{d:DesignInstance Type=vm:LinkVerifyViewModel}"
     mc:Ignorable="d"
     d:DesignWidth="860" d:DesignHeight="400">
+
     <tk:SplitterGrid
         MinDetailWidth="{x:Static core:Config+Grid.MinLinkVerifyDetailWidth}"
         MaxDetailWidth="{x:Static core:Config+Grid.MaxLinkVerifyDetailWidth}"
@@ -20,34 +21,26 @@
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-
-                <StatusBar.Resources>
-                    <Style TargetType="Button" BasedOn="{StaticResource BorderedButtonStyle}">
-                        <Setter Property="Margin" Value="0"/>
-                        <Setter Property="Height" Value="24"/>
-                        <Setter Property="MinWidth" Value="70"/>
-                        <Setter Property="Width" Value="70"/>
-                    </Style>
-                </StatusBar.Resources>
-
                 <TextBlock Text="{x:Static r:Strings.MenuItemLinkVerify}"/>
+
                 <Separator/>
+
                 <Button
                     Content="{x:Static r:Strings.TextRefresh}"
-                    Command="{Binding Commands[Refresh]}"
+                    Command="{Binding RefreshCommand}"
                     ToolTip="{x:Static r:Strings.ToolTipRefreshLinkVerify}"
                     tk:Property.IsInverseEnabled="{Binding IsOperationInProgress}"/>
 
                 <Button
                     Content="{x:Static r:Strings.TextVerify}"
-                    Command="{Binding Commands[Verify]}"
+                    Command="{Binding VerifyCommand}"
                     ToolTip="{x:Static r:Strings.ToolTipVerifyLinks}"
                     tk:Property.IsCollapsed="{Binding IsOperationInProgress}"
                     tk:Property.IsInverseEnabled="{Binding IsOperationInProgress}"/>
 
                 <Button
                     Content="{x:Static r:Strings.TextCancel}"
-                    Command="{Binding Commands[Cancel]}"
+                    Command="{Binding CancelCommand}"
                     ToolTip="{x:Static r:Strings.ToolTipCancel}"
                     tk:Property.IsVisible="{Binding IsOperationInProgress}"
                     tk:Property.IsInverseEnabled="{Binding IsCanceling}"/>
@@ -62,9 +55,7 @@
 
         <tk:SplitterGrid.HeaderRight>
             <StatusBar>
-                <TextBlock
-                    Style="{StaticResource TitleDisplayTextBlockStyle}"
-                    Text="{Binding SelectedLink.Url}"/>
+                <TextBlock Text="{Binding SelectedLink.Url}"/>
             </StatusBar>
         </tk:SplitterGrid.HeaderRight>
 
@@ -78,19 +69,12 @@
 
         <tk:SplitterGrid.ContentRight>
             <StackPanel
-                Style="{StaticResource DataEntryPanelStyle}"
+                Style="{StaticResource Panama.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
                 <StackPanel.Resources>
-                    <Style TargetType="tk:LineItem">
-                        <Setter Property="Margin" Value="4"/>
-                        <Setter Property="ItemDisplayWidth" Value="52"/>
-                        <Setter Property="ItemFontSize" Value="12"/>
-                        <Setter Property="ValueFontSize" Value="12"/>
-                        <Setter Property="ItemVerticalAlignment" Value="Top"/>
-                        <Setter Property="ValueVerticalAlignment" Value="Top"/>
-                        <Setter Property="ItemForeground" Value="{StaticResource DarkAlertForegroundBrush}"/>
-                        <Setter Property="ValueForeground" Value="{StaticResource DefaultForegroundBrush}"/>
+                    <Style TargetType="tk:LineItem" BasedOn="{StaticResource Panama.Styles.LineItem}">
+                        <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
                     </Style>
                 </StackPanel.Resources>
 

@@ -1057,7 +1057,7 @@ Changes will take effect after you restart the application.</value>
     <value>Cancel the operation</value>
   </data>
   <data name="ToolTipRefreshLinkVerify" xml:space="preserve">
-    <value>Refresh the link list, adding new entries and removing any state entries</value>
+    <value>Refresh the link list, adding new entries and removing any stale entries</value>
   </data>
   <data name="ToolTipVerifyLinks" xml:space="preserve">
     <value>Begin verification of links</value>

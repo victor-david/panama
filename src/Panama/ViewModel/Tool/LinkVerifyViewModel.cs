@@ -2,11 +2,13 @@
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Network;
 using Restless.Toolkit.Controls;
+using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TableColumns = Restless.Panama.Database.Tables.LinkVerifyTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
@@ -23,7 +25,7 @@ namespace Restless.Panama.ViewModel
 
         #region Properties
         /// <summary>
-        /// Gets the currently selected author
+        /// Gets the currently selected link
         /// </summary>
         public LinkVerifyRow SelectedLink
         {
@@ -39,6 +41,11 @@ namespace Restless.Panama.ViewModel
             get => isCanceling;
             private set => SetProperty(ref isCanceling, value);
         }
+
+        public ICommand RefreshCommand { get; }
+        public ICommand VerifyCommand { get; }
+        public ICommand CancelCommand { get; }
+
         #endregion
 
         /************************************************************************/
@@ -70,9 +77,13 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Size", TableColumns.Size)
                 .MakeFixedWidth(FixedWidth.W064);
 
-            Commands.Add("Refresh", RunRefreshCommand);
-            Commands.Add("Verify", RunVerifyCommand);
-            Commands.Add("Cancel", RunCancelVerifyCommand);
+            RefreshCommand = RelayCommand.Create(p => RunRefreshCommand());
+            VerifyCommand = RelayCommand.Create(p => RunVerifyCommand());
+            CancelCommand = RelayCommand.Create(p => RunCancelVerifyCommand());
+
+            //Commands.Add("Refresh", RunRefreshCommand);
+            //Commands.Add("Verify", RunVerifyCommand);
+            //Commands.Add("Cancel", RunCancelVerifyCommand);
         }
         #endregion
 
@@ -96,22 +107,24 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
-        private void RunRefreshCommand(object parm)
+        private void RunRefreshCommand()
         {
             Table.Refresh();
             ListView.Refresh();
         }
 
-        private void RunCancelVerifyCommand(object parm)
+        private void RunCancelVerifyCommand()
         {
             IsCanceling = true;
             tokenSource?.Cancel();
         }
 
-        private async void RunVerifyCommand(object parm)
+        private async void RunVerifyCommand()
         {
             IsOperationInProgress = true;
             IsCanceling = false;
+            Table.PopulateFromAllSources();
+            ListView.Refresh();
             tokenSource = new CancellationTokenSource();
             await Task.WhenAll(EnumerateTasks());
             Table.Save();
@@ -170,7 +183,7 @@ namespace Restless.Panama.ViewModel
         /// <returns>A string with http://</returns>
         private string MakeHttp(string s)
         {
-            s = ((!s.Contains("://", System.StringComparison.CurrentCulture)) ? "http://" : string.Empty) + s;
+            s = ((!s.Contains("://", StringComparison.CurrentCulture)) ? "http://" : string.Empty) + s;
             return s;
         }
         #endregion

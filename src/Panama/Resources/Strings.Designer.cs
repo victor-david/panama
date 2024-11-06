@@ -2959,7 +2959,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Refresh the link list, adding new entries and removing any state entries.
+        ///   Looks up a localized string similar to Refresh the link list, adding new entries and removing any stale entries.
         /// </summary>
         public static string ToolTipRefreshLinkVerify {
             get {
