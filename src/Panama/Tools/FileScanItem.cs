@@ -5,7 +5,6 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Database.Tables;
-using Restless.Panama.Utility;
 using System;
 using System.IO;
 
@@ -108,8 +107,9 @@ namespace Restless.Panama.Tools
 
         protected FileScanItem(TitleRow title, TitleVersionRow version)
         {
-            Throw.IfNull(title);
-            Throw.IfNull(version);
+            ArgumentNullException.ThrowIfNull(title, nameof(title));
+            ArgumentNullException.ThrowIfNull(version, nameof(version));
+
             Title = title.Title;
             FileName = version.FileName;
             Version = version.Version;

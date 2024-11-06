@@ -6,7 +6,6 @@
 */
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
-using Restless.Panama.Utility;
 using Restless.Toolkit.Core.Utility;
 using System;
 using System.Globalization;
@@ -47,7 +46,7 @@ namespace Restless.Panama.Tools
         /// <param name="exportDirectory">The export directory</param>
         public TitleExportCandidate(TitleRow title, TitleVersionRow version, string exportDirectory) : base(title, version)
         {
-            Throw.IfEmpty(exportDirectory);
+            ArgumentException.ThrowIfNullOrEmpty(exportDirectory, nameof(exportDirectory));
 
             FullName = Paths.Title.WithRoot(version.FileName);
             ExportFullName = System.IO.Path.Combine(exportDirectory, GetExportName(title, version));

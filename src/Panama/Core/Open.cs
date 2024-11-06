@@ -1,5 +1,4 @@
 ﻿using Restless.Panama.Resources;
-using Restless.Panama.Utility;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using System;
@@ -25,7 +24,7 @@ namespace Restless.Panama.Core
         {
             try
             {
-                Throw.IfEmpty(file);
+                ArgumentException.ThrowIfNullOrEmpty(file, nameof(file));
                 file = Paths.Title.WithRoot(file);
                 if (!File.Exists(file))
                 {
@@ -52,7 +51,7 @@ namespace Restless.Panama.Core
         {
             try
             {
-                Throw.IfEmpty(file);
+                ArgumentException.ThrowIfNullOrEmpty(file, nameof(file));
                 file = Paths.SubmissionDocument.WithRoot(file);
                 if (!File.Exists(file))
                 {
@@ -79,7 +78,7 @@ namespace Restless.Panama.Core
         {
             try
             {
-                Throw.IfEmpty(file);
+                ArgumentException.ThrowIfNullOrEmpty(file, nameof(file));
                 file = Paths.SubmissionMessage.WithRoot(file);
                 if (!File.Exists(file))
                 {

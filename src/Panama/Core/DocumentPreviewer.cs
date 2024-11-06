@@ -6,7 +6,6 @@
 */
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
-using Restless.Panama.Utility;
 using Restless.Toolkit.Core.OpenXml;
 using System;
 using System.IO;
@@ -27,7 +26,7 @@ namespace Restless.Panama.Core
         /// <returns>The preview mode</returns>
         public static PreviewMode GetPreviewMode(string fileName)
         {
-            Throw.IfEmpty(fileName);
+            ArgumentException.ThrowIfNullOrEmpty(fileName, nameof(fileName));
             long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
             return docType switch
             {
@@ -44,7 +43,7 @@ namespace Restless.Panama.Core
         /// <returns>The text.</returns>
         public static string GetText(string fileName)
         {
-            Throw.IfEmpty(fileName);
+            ArgumentException.ThrowIfNullOrEmpty(fileName, nameof(fileName));
             long docType = DatabaseController.Instance.GetTable<DocumentTypeTable>().GetDocTypeFromFileName(fileName);
             return docType switch
             {
@@ -62,7 +61,7 @@ namespace Restless.Panama.Core
         /// <returns>The image</returns>
         public static BitmapImage GetImage(string fileName)
         {
-            Throw.IfEmpty(fileName);
+            ArgumentException.ThrowIfNullOrEmpty(fileName, nameof(fileName));
 
             int width = 250;
             using (FileStream stream = new(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))

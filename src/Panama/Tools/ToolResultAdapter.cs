@@ -1,7 +1,6 @@
-﻿using Restless.Panama.Utility;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace Restless.Panama.Tools
 {
@@ -81,7 +80,7 @@ namespace Restless.Panama.Tools
         /// <param name="source">The source</param>
         public void AddToUpdate(int index, IEnumerable<FileScanItem> source)
         {
-            Throw.IfNull(source);
+            ArgumentNullException.ThrowIfNull(source, nameof(source));
 
             foreach (FileScanItem item in source)
             {
@@ -96,7 +95,7 @@ namespace Restless.Panama.Tools
         /// <param name="source">The source</param>
         public void AddToNotFound(int index, IEnumerable<FileScanItem> source)
         {
-            Throw.IfNull(source);
+            ArgumentNullException.ThrowIfNull(source, nameof(source));
 
             foreach (FileScanItem item in source)
             {
