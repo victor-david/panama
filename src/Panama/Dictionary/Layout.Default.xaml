@@ -4,10 +4,9 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <!-- Default values for layout -->
-    <!-- These get superseded by the current layout dictionary (normal, compact) -->
 
     <!-- Local -->
-    <sys:Int32 x:Key="Panama.Layout.TitleBar.Height">34</sys:Int32>
+    <sys:Int32 x:Key="Panama.Layout.TitleBar.Height">36</sys:Int32>
 
     <!-- Standard -->
     <Thickness x:Key="Panama.Layout.Padding.Full">10</Thickness>

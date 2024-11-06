@@ -29,6 +29,24 @@
         </Setter>
     </Style>
 
+    <!-- Window buttons (min, max, close) -->
+    <Style x:Key="Panama.Styles.Button.Window.Light" TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button.MetroWindow.Light}">
+        <Setter Property="MaxHeight" Value="42"/>
+    </Style>
+
+    <Style x:Key="Panama.Styles.Button.Window.Dark" TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button.MetroWindow.Dark}">
+        <Setter Property="MaxHeight" Value="42"/>
+    </Style>
+
+    <Style TargetType="mah:WindowButtonCommands">
+        <Setter Property="DarkCloseButtonStyle" Value="{StaticResource Panama.Styles.Button.Window.Dark}"/>
+        <Setter Property="DarkMaxButtonStyle" Value="{StaticResource Panama.Styles.Button.Window.Dark}"/>
+        <Setter Property="DarkMinButtonStyle" Value="{StaticResource Panama.Styles.Button.Window.Dark}"/>
+        <Setter Property="LightCloseButtonStyle" Value="{StaticResource Panama.Styles.Button.Window.Light}"/>
+        <Setter Property="LightMaxButtonStyle" Value="{StaticResource Panama.Styles.Button.Window.Light}"/>
+        <Setter Property="LightMinButtonStyle" Value="{StaticResource Panama.Styles.Button.Window.Light}"/>
+    </Style>
+
     <!-- tk:MessageWindow (used for dialogs) -->
     <Style TargetType="tk:MessageWindow">
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
