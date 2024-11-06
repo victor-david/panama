@@ -1245,4 +1245,10 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolTipOrphanExclusions" xml:space="preserve">
     <value>Manage exclusions for orphan search</value>
   </data>
+  <data name="HeaderSettingsTheme" xml:space="preserve">
+    <value>Themes</value>
+  </data>
+  <data name="ToolTipThemeEnabled" xml:space="preserve">
+    <value>Theme is enabled for use</value>
+  </data>
 </root>

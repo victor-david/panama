@@ -683,6 +683,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Themes.
+        /// </summary>
+        public static string HeaderSettingsTheme {
+            get {
+                return ResourceManager.GetString("HeaderSettingsTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submissions.
         /// </summary>
         public static string HeaderSubmissions {
@@ -3108,6 +3117,15 @@ namespace Restless.Panama.Resources {
         public static string ToolTipSynchonizeTitles {
             get {
                 return ResourceManager.GetString("ToolTipSynchonizeTitles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theme is enabled for use.
+        /// </summary>
+        public static string ToolTipThemeEnabled {
+            get {
+                return ResourceManager.GetString("ToolTipThemeEnabled", resourceCulture);
             }
         }
         

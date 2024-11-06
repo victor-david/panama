@@ -4,6 +4,7 @@ using Restless.Panama.Core;
 using Restless.Panama.Resources;
 using Restless.Panama.Utility;
 using System.Collections.Generic;
+using Mah = ControlzEx.Theming;
 
 namespace Restless.Panama.ViewModel
 {
@@ -11,6 +12,7 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private NavigatorSection selectedSection;
+        private Mah.Theme selectedTheme;
         #endregion
 
         /************************************************************************/
@@ -45,6 +47,9 @@ namespace Restless.Panama.ViewModel
             get => RegistryManager.DatabaseDirectory;
             set => RegistryManager.SetDatabaseDirectory(value);
         }
+
+        public SettingsThemeController Themes { get; }
+
         #endregion
 
         /************************************************************************/
@@ -59,10 +64,13 @@ namespace Restless.Panama.ViewModel
             {
                 new NavigatorSection(Strings.HeaderSettingsDisplay, 1),
                 new NavigatorSection(Strings.HeaderSettingsFolder, 2),
-                new NavigatorSection(Strings.HeaderSettingsColor, 3),
-                new NavigatorSection(Strings.HeaderSettingsSubmission, 4),
-                new NavigatorSection(Strings.HeaderSettingsAdvanced, 5),
+                new NavigatorSection(Strings.HeaderSettingsTheme, 3),
+                new NavigatorSection(Strings.HeaderSettingsColor, 4),
+                new NavigatorSection(Strings.HeaderSettingsSubmission, 5),
+                new NavigatorSection(Strings.HeaderSettingsAdvanced, 6),
             };
+
+            Themes = new SettingsThemeController();
 
             SetInitialSection();
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Restless.Panama.Database.Core;
+using Restless.Panama.Database.Tables;
 using System.Linq;
 using System.Windows;
 using Mah = ControlzEx.Theming;
@@ -7,25 +8,21 @@ namespace Restless.Panama.Core
 {
     public static class ThemeManager
     {
-        public static readonly List<string> Themes;
-
         public const string DefaultTheme = "Light.Blue";
 
         static ThemeManager()
         {
-            Themes = new List<string>()
+        }
+
+        public static void Init()
+        {
+            ThemeTable table = DatabaseController.Instance.GetTable<ThemeTable>();
+
+            foreach (Mah.Theme theme in Mah.ThemeManager.Current.Themes)
             {
-                DefaultTheme,
-                "Light.Red",
-                "Light.Teal",
-                "Light.Olive",
-                "Light.Yellow",
-                "Light.Steel",
-                "Dark.Blue",
-                "Dark.Red",
-                "Dark.Steel",
-                "Dark.Taupe"
-            };
+                table.InsertTheme(theme.BaseColorScheme,theme.ColorScheme, theme.DisplayName, theme.Name);
+            }
+            table.Save();
         }
 
         public static void SetTheme(string themeId)
@@ -38,7 +35,6 @@ namespace Restless.Panama.Core
             {
                 Mah.ThemeManager.Current.ChangeTheme(Application.Current, DefaultTheme);
             }
-
         }
     }
 }

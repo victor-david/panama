@@ -70,11 +70,6 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets the list of theme ids
-        /// </summary>
-        public static List<string> ThemeIds => ThemeManager.Themes;
-
-        /// <summary>
         /// Gets a boolean value that indicates if there are any tools items visible
         /// </summary>
         public bool HaveToolItems
@@ -92,7 +87,6 @@ namespace Restless.Panama.ViewModel
         public ICommand OpenAboutCommand { get; }
         public ICommand OpenSettingsCommand { get; }
         public ICommand OpenToolsCommand { get; }
-        public ICommand SwitchThemeCommand { get; }
         public ICommand SaveAllCommand { get; }
         #endregion
 
@@ -118,7 +112,6 @@ namespace Restless.Panama.ViewModel
             OpenAboutCommand = RelayCommand.Create(p => WindowFactory.About.Create().ShowDialog());
             OpenSettingsCommand = RelayCommand.Create(p => WindowFactory.Settings.Create().ShowDialog());
             OpenToolsCommand = RelayCommand.Create(p => WindowFactory.Tool.Create().ShowDialog());
-            SwitchThemeCommand = RelayCommand.Create(RunSwitchThemeCommand);
             SaveAllCommand = RelayCommand.Create(p => RunSaveCommand());
 
             NavigatorItems = new NavigatorItemCollection(NavigationGroup.TotalNumberOfGroups);
@@ -282,16 +275,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods (other)
-
-        private void RunSwitchThemeCommand(object parm)
-        {
-            if (parm is string themeId)
-            {
-                ThemeManager.SetTheme(themeId);
-                Config.ThemeId = themeId;
-            }
-        }
-
         private void RunSaveCommand()
         {
             viewModelCache.SignalSave();

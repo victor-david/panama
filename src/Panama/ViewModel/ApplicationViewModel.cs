@@ -77,6 +77,11 @@ namespace Restless.Panama.ViewModel
         protected SubmissionBatchTable SubmissionBatchTable => DatabaseController.Instance.GetTable<SubmissionBatchTable>();
 
         /// <summary>
+        /// Gets the theme table
+        /// </summary>
+        protected ThemeTable ThemeTable => DatabaseController.Instance.GetTable<ThemeTable>();
+
+        /// <summary>
         /// Gets the title table
         /// </summary>
         protected TitleTable TitleTable => DatabaseController.Instance.GetTable<TitleTable>();

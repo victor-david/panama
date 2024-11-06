@@ -49,17 +49,6 @@
                 <ico:Material Kind="Tools"/>
             </Button>
 
-            <mah:DropDownButton Content="{ico:Material Kind=PaletteOutline}" ItemsSource="{Binding ThemeIds}">
-
-                <mah:DropDownButton.ItemContainerStyle>
-                    <Style TargetType="MenuItem" BasedOn="{StaticResource MahApps.Styles.MenuItem}">
-                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=mah:DropDownButton}, Path=DataContext.SwitchThemeCommand}" />
-                        <Setter Property="CommandParameter" Value="{Binding}" />
-                    </Style>
-                </mah:DropDownButton.ItemContainerStyle>
-
-            </mah:DropDownButton>
-
             <Button
                 Command="{Binding OpenAboutCommand}"
                 ToolTip="{x:Static r:Strings.ToolTipOpenWindowAbout}">

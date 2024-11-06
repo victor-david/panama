@@ -30,6 +30,8 @@ namespace Restless.Panama
         private static readonly Mutex AppMutex = new(true, ApplicationId);
         #endregion
 
+        /************************************************************************/
+
         #region Protected methods
         /// <summary>
         /// Called when the application is starting.
@@ -89,6 +91,7 @@ namespace Restless.Panama
             StartupOptions ops = new(e.Args);
             DatabaseController.Instance.Init(RegistryManager.DatabaseDirectory);
 
+            ThemeManager.Init();
             ThemeManager.SetTheme(Config.Instance.ThemeId);
 
             if (ops.IsAnyOperationRequested)
