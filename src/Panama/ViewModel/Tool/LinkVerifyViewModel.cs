@@ -1,7 +1,9 @@
 ﻿using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Network;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -77,13 +79,11 @@ namespace Restless.Panama.ViewModel
             Columns.Create("Size", TableColumns.Size)
                 .MakeFixedWidth(FixedWidth.W064);
 
+            MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
+
             RefreshCommand = RelayCommand.Create(p => RunRefreshCommand());
             VerifyCommand = RelayCommand.Create(p => RunVerifyCommand());
             CancelCommand = RelayCommand.Create(p => RunCancelVerifyCommand());
-
-            //Commands.Add("Refresh", RunRefreshCommand);
-            //Commands.Add("Verify", RunVerifyCommand);
-            //Commands.Add("Cancel", RunCancelVerifyCommand);
         }
         #endregion
 
@@ -101,6 +101,14 @@ namespace Restless.Panama.ViewModel
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
             return DataRowCompareString(item1, item2, TableColumns.Source);
+        }
+
+        /// <summary>
+        /// Runs the open row command to browse to the row's url.
+        /// </summary>
+        protected override void RunOpenRowCommand()
+        {
+            OpenHelper.OpenWebSite(null, SelectedLink.Url);
         }
         #endregion
 
