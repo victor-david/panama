@@ -1,27 +1,17 @@
 ﻿using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
-using Restless.Panama.Resources;
-using Restless.Toolkit.Controls;
+using Restless.Toolkit.Mvvm;
 using System.Data;
 using System.Linq;
+using System.Windows.Input;
 using TableColumns = Restless.Panama.Database.Tables.ThemeTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
     public class SettingsThemeController : DataRowViewModel<ThemeTable>
     {
-        #region Private
-        private ThemeRow selectedTheme;
-        #endregion
-
-        /************************************************************************/
-
         #region Properties
-        public ThemeRow SelectedTheme
-        {
-            get => selectedTheme;
-            private set => SetProperty(ref selectedTheme, value);
-        }
+        public ICommand ResetThemeCommand { get; }
         #endregion
 
         /************************************************************************/
@@ -32,15 +22,12 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SettingsThemeController()
         {
-            Columns.CreateResource<BooleanToResourceConverter>("E", TableColumns.IsEnabled, ResourceKeys.Icon.IconCheck)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipThemeEnabled);
-
             Columns.Create("Base", TableColumns.ThemeBase);
             Columns.Create("Color", TableColumns.ThemeColor);
 
-            SetInitialSelectedTheme();
+            ResetThemeCommand = RelayCommand.Create(p => RunResetThemeCommand());
+
+            SetSelectedTheme();
         }
         #endregion
 
@@ -50,13 +37,7 @@ namespace Restless.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
-            SelectedTheme = ThemeRow.Create(SelectedRow);
             SetTheme();
-        }
-
-        protected override bool OnDataRowFilter(DataRow item)
-        {
-            return base.OnDataRowFilter(item);
         }
 
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
@@ -75,14 +56,15 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private void SetTheme()
         {
-            if (SelectedTheme != null)
+            if (SelectedRow != null)
             {
-                ThemeManager.SetTheme(SelectedTheme.ThemeId);
-                Config.ThemeId = SelectedTheme.ThemeId;
+                string themeId = SelectedRow[TableColumns.ThemeId].ToString();
+                ThemeManager.SetTheme(themeId);
+                Config.ThemeId = themeId;
             }
         }
 
-        private void SetInitialSelectedTheme()
+        private void SetSelectedTheme()
         {
             DataRowView selected = null;
             foreach (DataRowView view in ListView.OfType<DataRowView>())
@@ -94,6 +76,13 @@ namespace Restless.Panama.ViewModel
                 }
             }
             SelectedItem = selected;
+        }
+
+        private void RunResetThemeCommand()
+        {
+            Config.ThemeId = ThemeManager.DefaultTheme;
+            ThemeManager.SetTheme(Config.ThemeId);
+            SetSelectedTheme();
         }
         #endregion
     }

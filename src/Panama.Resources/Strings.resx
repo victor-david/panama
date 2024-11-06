@@ -1251,4 +1251,16 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolTipThemeEnabled" xml:space="preserve">
     <value>Theme is enabled for use</value>
   </data>
+  <data name="TextDark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="TextHidden" xml:space="preserve">
+    <value>Hidden</value>
+  </data>
+  <data name="TextLight" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="ToolTipThemeReset" xml:space="preserve">
+    <value>Reset to default theme</value>
+  </data>
 </root>

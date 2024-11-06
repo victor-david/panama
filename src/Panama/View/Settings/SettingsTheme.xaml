@@ -5,22 +5,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
-    xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
-    xmlns:table="clr-namespace:Restless.Panama.Database.Tables;assembly=Panama.Database"
     xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SettingsWindowViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid tk:Property.RowHeights="*,Auto">
+    <Grid tk:Property.RowHeights="Auto,*">
+
+        <StatusBar Margin="{StaticResource Panama.Layout.Padding.Bottom.Tight}">
+            <Button
+                Content="{x:Static r:Strings.MenuItemReset}"
+                ToolTip="{x:Static r:Strings.ToolTipThemeReset}"
+                Command="{Binding Themes.ResetThemeCommand}"/>
+
+        </StatusBar>
+
         <tk:DataGrid
+            Grid.Row="1"
             ItemsSource="{Binding Themes.ListView}"
             SelectedItem="{Binding Themes.SelectedItem,Mode=TwoWay}"
-            tk:DataGridColumns.Columns="{Binding Themes.Columns}">
+            tk:DataGridColumns.Columns="{Binding Themes.Columns}"/>
 
-        </tk:DataGrid>
     </Grid>
-
 
 </UserControl>

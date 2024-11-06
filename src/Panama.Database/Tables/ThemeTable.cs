@@ -5,7 +5,6 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Toolkit.Core.Database.SQLite;
-using System.Collections.Generic;
 using System.Data;
 
 namespace Restless.Panama.Database.Tables
@@ -55,11 +54,6 @@ namespace Restless.Panama.Database.Tables
                 /// The theme display name
                 /// </summary>
                 public const string ThemeDisplay = "name";
-
-                /// <summary>
-                /// Whether the theme is enabled
-                /// </summary>
-                public const string IsEnabled = "enabled";
             }
         }
         #endregion
@@ -92,14 +86,12 @@ namespace Restless.Panama.Database.Tables
             if (rows.Length == 0)
             {
                 DataRow newRow = NewRow();
-                newRow[Defs.Columns.IsEnabled] = true;
                 newRow[Defs.Columns.ThemeBase] = baseScheme;
                 newRow[Defs.Columns.ThemeColor] = colorScheme;
                 newRow[Defs.Columns.ThemeId] = themeId;
                 newRow[Defs.Columns.ThemeDisplay] = themeDisplay;
                 Rows.Add(newRow);
             }
-
         }
         #endregion
 
@@ -119,15 +111,8 @@ namespace Restless.Panama.Database.Tables
                 { Defs.Columns.ThemeBase, ColumnType.Text },
                 { Defs.Columns.ThemeColor, ColumnType.Text },
                 { Defs.Columns.ThemeDisplay, ColumnType.Text,false },
-                { Defs.Columns.IsEnabled, ColumnType.Boolean, false, false, 1 }
             };
         }
-        #endregion
-
-        /************************************************************************/
-
-        #region Internal methods
-
         #endregion
     }
 }

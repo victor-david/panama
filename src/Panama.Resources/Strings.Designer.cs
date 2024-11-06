@@ -2158,6 +2158,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dark.
+        /// </summary>
+        public static string TextDark {
+            get {
+                return ResourceManager.GetString("TextDark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string TextDate {
@@ -2293,11 +2302,29 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hidden.
+        /// </summary>
+        public static string TextHidden {
+            get {
+                return ResourceManager.GetString("TextHidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image.
         /// </summary>
         public static string TextImage {
             get {
                 return ResourceManager.GetString("TextImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light.
+        /// </summary>
+        public static string TextLight {
+            get {
+                return ResourceManager.GetString("TextLight", resourceCulture);
             }
         }
         
@@ -3126,6 +3153,15 @@ namespace Restless.Panama.Resources {
         public static string ToolTipThemeEnabled {
             get {
                 return ResourceManager.GetString("ToolTipThemeEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset to default theme.
+        /// </summary>
+        public static string ToolTipThemeReset {
+            get {
+                return ResourceManager.GetString("ToolTipThemeReset", resourceCulture);
             }
         }
         
