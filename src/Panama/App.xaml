@@ -7,9 +7,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="Resources/Dictionary/Layout.Default.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/Styles.xaml"/>
-                <ResourceDictionary Source="Resources/Dictionary/Data.Template.xaml"/>
+                <ResourceDictionary Source="Dictionary/Layout.Default.xaml"/>
+                <ResourceDictionary Source="Dictionary/Styles.xaml"/>
+                <ResourceDictionary Source="Dictionary/Data.Template.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
