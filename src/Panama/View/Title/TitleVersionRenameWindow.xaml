@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleVersionRenameWindowViewModel}"
     mc:Ignorable="d"

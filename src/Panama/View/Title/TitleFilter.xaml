@@ -7,7 +7,7 @@
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:conl="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:core="clr-namespace:Restless.Panama.Core"
-    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d"

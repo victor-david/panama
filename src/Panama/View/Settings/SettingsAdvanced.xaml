@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
     xmlns:table="clr-namespace:Restless.Panama.Database.Tables;assembly=Panama.Database"
-    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SettingsWindowViewModel}"
     mc:Ignorable="d"

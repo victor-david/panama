@@ -8,7 +8,7 @@
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:ico="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:con="clr-namespace:Restless.Panama.Controls;assembly=Panama.Controls"
-    xmlns:r="clr-namespace:Restless.Panama.Resources"
+    xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:ToolWindowViewModel}"
     mc:Ignorable="d"
