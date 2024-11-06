@@ -66,7 +66,16 @@
         <Setter Property="MarginHeaderRight" Value="2,0,0,0"/>
     </Style>
 
-    <Style TargetType="tk:SplitterGrid" BasedOn="{StaticResource Panama.Styles.SplitterGrid}"/>
+    <Style TargetType="tk:SplitterGrid" BasedOn="{StaticResource Panama.Styles.SplitterGrid}" />
+
+    <!-- Toggle button for tk:SplitterGrid -->
+    <Style
+        x:Key="{x:Static tk:ResourceKeys.SplitterGridToggleButtonStyleKey}"
+        TargetType="ToggleButton"
+        BasedOn="{StaticResource {x:Static tk:ResourceKeys.SplitterGridToggleButtonStyleKey}}">
+
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
+    </Style>
 
     <!-- Icons -->
     <Style x:Key="Panama.Styles.Icon" TargetType="ico:PackIconMaterial">
