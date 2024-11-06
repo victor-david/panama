@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using Mah = ControlzEx.Theming;
 
-namespace Restless.Panama.Resources
+namespace Restless.Panama.Core
 {
     public static class ThemeManager
     {
