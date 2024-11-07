@@ -196,11 +196,38 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exclusive.
+        /// </summary>
+        public static string Exclusive {
+            get {
+                return ResourceManager.GetString("Exclusive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E.
+        /// </summary>
+        public static string ExclusiveShort {
+            get {
+                return ResourceManager.GetString("ExclusiveShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fee.
         /// </summary>
         public static string Fee {
             get {
                 return ResourceManager.GetString("Fee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        public static string File {
+            get {
+                return ResourceManager.GetString("File", resourceCulture);
             }
         }
         
@@ -241,6 +268,24 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lang.
+        /// </summary>
+        public static string LanguageShort {
+            get {
+                return ResourceManager.GetString("LanguageShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Submission.
         /// </summary>
         public static string LastSubmission {
@@ -268,11 +313,29 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Name.
+        /// </summary>
+        public static string NewName {
+            get {
+                return ResourceManager.GetString("NewName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Note.
         /// </summary>
         public static string Note {
             get {
                 return ResourceManager.GetString("Note", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old Name.
+        /// </summary>
+        public static string OldName {
+            get {
+                return ResourceManager.GetString("OldName", resourceCulture);
             }
         }
         
@@ -331,6 +394,51 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Queue.
+        /// </summary>
+        public static string Queue {
+            get {
+                return ResourceManager.GetString("Queue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick.
+        /// </summary>
+        public static string Quick {
+            get {
+                return ResourceManager.GetString("Quick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Q.
+        /// </summary>
+        public static string QuickShort {
+            get {
+                return ResourceManager.GetString("QuickShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        public static string Ready {
+            get {
+                return ResourceManager.GetString("Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to R.
+        /// </summary>
+        public static string ReadyShort {
+            get {
+                return ResourceManager.GetString("ReadyShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Related Count.
         /// </summary>
         public static string RelatedCount {
@@ -372,6 +480,24 @@ namespace Restless.Panama.Resources {
         public static string ResponseType {
             get {
                 return ResourceManager.GetString("ResponseType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Revision.
+        /// </summary>
+        public static string Revision {
+            get {
+                return ResourceManager.GetString("Revision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rev.
+        /// </summary>
+        public static string RevisionShort {
+            get {
+                return ResourceManager.GetString("RevisionShort", resourceCulture);
             }
         }
         
@@ -565,6 +691,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version Count.
         /// </summary>
         public static string VersionCount {
@@ -579,6 +714,15 @@ namespace Restless.Panama.Resources {
         public static string VersionCountShort {
             get {
                 return ResourceManager.GetString("VersionCountShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to V.
+        /// </summary>
+        public static string VersionShort {
+            get {
+                return ResourceManager.GetString("VersionShort", resourceCulture);
             }
         }
         

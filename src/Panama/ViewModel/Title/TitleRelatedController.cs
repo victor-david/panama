@@ -41,20 +41,20 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public TitleRelatedController(TitleViewModel owner) : base(owner)
         {
-            Columns.Create("Id", TableColumns.RelatedId)
+            Columns.Create(Header.Id, TableColumns.RelatedId)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Title", TableColumns.Joined.Title)
+            Columns.Create(Header.Title, TableColumns.Joined.Title)
                 .MakeInitialSortAscending();
 
-            Columns.Create("Written", TableColumns.Joined.Written).MakeDate();
+            Columns.Create(Header.Written, TableColumns.Joined.Written).MakeDate();
 
-            Columns.Create("Updated", TableColumns.Joined.Updated)
+            Columns.Create(Header.Updated, TableColumns.Joined.Updated)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
 
-            Columns.Create("WC", TableColumns.Joined.LatestVersionWordCount)
+            Columns.Create(Header.WordCountShort, TableColumns.Joined.LatestVersionWordCount)
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleWordCount);
 

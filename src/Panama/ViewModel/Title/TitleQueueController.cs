@@ -34,10 +34,10 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public TitleQueueController(TitleViewModel owner) : base(owner)
         {
-            Columns.Create("Queue", TableColumns.Joined.QueueName)
+            Columns.Create(Header.Queue, TableColumns.Joined.QueueName)
                 .MakeInitialSortAscending();
 
-            Columns.Create("Status", TableColumns.Joined.Status);
+            Columns.Create(Header.Status, TableColumns.Joined.Status);
 
             MenuItems.AddItem(Strings.MenuItemRemoveFromQueue, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
         }

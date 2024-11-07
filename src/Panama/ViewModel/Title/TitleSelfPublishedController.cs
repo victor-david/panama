@@ -69,14 +69,14 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public TitleSelfPublishedController(TitleViewModel owner) : base(owner)
         {
-            Columns.Create("Added", TableColumns.Added)
+            Columns.Create(Header.Added, TableColumns.Added)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("Published", TableColumns.Published)
+            Columns.Create(Header.Published, TableColumns.Published)
                 .MakeDate();
 
-            Columns.Create("Publisher", TableColumns.Joined.SelfPublisher);
+            Columns.Create(Header.Publisher, TableColumns.Joined.SelfPublisher);
 
             MenuItems.AddItem(Strings.MenuItemAddSelfPublished, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);

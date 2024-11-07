@@ -92,24 +92,24 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public TitleVersionController(TitleViewModel owner) : base(owner)
         {
-            Columns.Create("V", TitleVersionTable.Defs.Columns.Version)
+            Columns.Create(Header.VersionShort, TitleVersionTable.Defs.Columns.Version)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create<IntegerToCharConverter>("Rev", TitleVersionTable.Defs.Columns.Revision)
+            Columns.Create<IntegerToCharConverter>(Header.RevisionShort, TitleVersionTable.Defs.Columns.Revision)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Updated", TitleVersionTable.Defs.Columns.Updated)
+            Columns.Create(Header.Updated, TitleVersionTable.Defs.Columns.Updated)
                 .MakeDate();
 
-            Columns.Create("WC", TitleVersionTable.Defs.Columns.WordCount)
+            Columns.Create(Header.WordCountShort, TitleVersionTable.Defs.Columns.WordCount)
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Lang", TitleVersionTable.Defs.Columns.LangId)
+            Columns.Create(Header.LanguageShort, TitleVersionTable.Defs.Columns.LangId)
                 .MakeFixedWidth(FixedWidth.W048);
 
-            Columns.Create("File", TitleVersionTable.Defs.Columns.FileName);
+            Columns.Create(Header.File, TitleVersionTable.Defs.Columns.FileName);
 
             Commands.Add("VersionMoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
             Commands.Add("VersionMoveDown", RunMoveDownCommand, CanRunMoveDownCommand);

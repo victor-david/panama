@@ -162,8 +162,17 @@
   <data name="ErrorShort" xml:space="preserve">
     <value>E</value>
   </data>
+  <data name="Exclusive" xml:space="preserve">
+    <value>Exclusive</value>
+  </data>
+  <data name="ExclusiveShort" xml:space="preserve">
+    <value>E</value>
+  </data>
   <data name="Fee" xml:space="preserve">
     <value>Fee</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
   </data>
   <data name="Flags" xml:space="preserve">
     <value>Flags</value>
@@ -177,6 +186,12 @@
   <data name="InUseShort" xml:space="preserve">
     <value>U</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LanguageShort" xml:space="preserve">
+    <value>Lang</value>
+  </data>
   <data name="LastSubmission" xml:space="preserve">
     <value>Last Submission</value>
   </data>
@@ -186,8 +201,14 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NewName" xml:space="preserve">
+    <value>New Name</value>
+  </data>
   <data name="Note" xml:space="preserve">
     <value>Note</value>
+  </data>
+  <data name="OldName" xml:space="preserve">
+    <value>Old Name</value>
   </data>
   <data name="Ordering" xml:space="preserve">
     <value>Ordering</value>
@@ -207,6 +228,21 @@
   <data name="Publisher" xml:space="preserve">
     <value>Publisher</value>
   </data>
+  <data name="Queue" xml:space="preserve">
+    <value>Queue</value>
+  </data>
+  <data name="Quick" xml:space="preserve">
+    <value>Quick</value>
+  </data>
+  <data name="QuickShort" xml:space="preserve">
+    <value>Q</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="ReadyShort" xml:space="preserve">
+    <value>R</value>
+  </data>
   <data name="RelatedCount" xml:space="preserve">
     <value>Related Count</value>
   </data>
@@ -221,6 +257,12 @@
   </data>
   <data name="ResponseType" xml:space="preserve">
     <value>Response Type</value>
+  </data>
+  <data name="Revision" xml:space="preserve">
+    <value>Revision</value>
+  </data>
+  <data name="RevisionShort" xml:space="preserve">
+    <value>Rev</value>
   </data>
   <data name="Scanned" xml:space="preserve">
     <value>Scanned</value>
@@ -285,11 +327,17 @@
   <data name="Usage" xml:space="preserve">
     <value>Usage</value>
   </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
   <data name="VersionCount" xml:space="preserve">
     <value>Version Count</value>
   </data>
   <data name="VersionCountShort" xml:space="preserve">
     <value>VC</value>
+  </data>
+  <data name="VersionShort" xml:space="preserve">
+    <value>V</value>
   </data>
   <data name="WordCount" xml:space="preserve">
     <value>Word Count</value>

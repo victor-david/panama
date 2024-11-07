@@ -84,26 +84,27 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TitleSelectWindowViewModel()
         {
-            Columns.Create("Id", TableColumns.Id)
+            Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<BooleanToResourceConverter>("R", TableColumns.Ready, ResourceKeys.Icon.IconCheck)
+            Columns.CreateResource<BooleanToResourceConverter>(Header.ReadyShort, TableColumns.Ready, ResourceKeys.Icon.IconCheck)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipTitleFilterReady);
 
-            Columns.CreateResource<BooleanToResourceConverter>("Q", TableColumns.QuickFlag, ResourceKeys.Icon.IconCheck)
+            Columns.CreateResource<BooleanToResourceConverter>(Header.QuickShort, TableColumns.QuickFlag, ResourceKeys.Icon.IconCheck)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipTitleFilterFlag);
 
-            Columns.Create("Title", TableColumns.Title);
-            Columns.Create("Written", TableColumns.Written)
+            Columns.Create(Header.Title, TableColumns.Title);
+
+            Columns.Create(Header.Written, TableColumns.Written)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("Updated", TableColumns.Calculated.LatestVersionDate).MakeDate();
+            Columns.Create(Header.Updated, TableColumns.Calculated.LatestVersionDate).MakeDate();
 
             Commands.Add("Select", RunSelectCommand, p => IsSelectedRowAccessible);
 

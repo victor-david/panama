@@ -55,26 +55,26 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public TitleSubmissionController(TitleViewModel owner) : base(owner)
         {
-            Columns.Create("Id", TableColumns.TitleId)
+            Columns.Create(Header.Id, TableColumns.TitleId)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<Int64ToResourceConverter>("S", TableColumns.Status, ResourceKeys.Icon.GetTitleStatusIconMap())
+            Columns.CreateResource<Int64ToResourceConverter>(Header.StatusShort, TableColumns.Status, ResourceKeys.Icon.GetTitleStatusIconMap())
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(SubmissionTitleStatusToolTip.Create(this));
 
-            Columns.Create("Submitted", TableColumns.Joined.Submitted)
+            Columns.Create(Header.Submitted, TableColumns.Joined.Submitted)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.CreateResource<BooleanToResourceConverter>("E", TableColumns.Joined.PublisherExclusive, ResourceKeys.Icon.IconCheck)
+            Columns.CreateResource<BooleanToResourceConverter>(Header.ExclusiveShort, TableColumns.Joined.PublisherExclusive, ResourceKeys.Icon.IconCheck)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipPublisherExclusive);
 
-            Columns.Create("Publisher", TableColumns.Joined.Publisher);
-            Columns.Create("Response", TableColumns.Joined.ResponseTypeName);
+            Columns.Create(Header.Publisher, TableColumns.Joined.Publisher);
+            Columns.Create(Header.Response, TableColumns.Joined.ResponseTypeName);
         }
         #endregion
 
