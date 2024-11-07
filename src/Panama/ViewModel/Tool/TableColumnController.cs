@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections.ObjectModel;
@@ -30,12 +31,12 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public TableColumnController(TableViewModel owner) : base (owner)
         {
-            Columns.Create("Name", nameof(DataColumn.ColumnName))
+            Columns.Create(Header.Name, nameof(DataColumn.ColumnName))
                 .MakeFixedWidth(FixedWidth.W180);
 
-            Columns.Create("Type", nameof(DataColumn.DataType));
+            Columns.Create(Header.Type, nameof(DataColumn.DataType));
 
-            Columns.Create("Expression", nameof(DataColumn.Expression))
+            Columns.Create(Header.Expression, nameof(DataColumn.Expression))
                 .MakeFlexWidth(2.5);
 
             dataColumns = new ObservableCollection<DataColumn>();

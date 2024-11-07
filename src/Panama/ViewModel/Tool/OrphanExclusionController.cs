@@ -46,16 +46,16 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public OrphanExclusionController()
         {
-            Columns.Create("Id", TableColumns.Id)
+            Columns.Create(Header.Id, TableColumns.Id)
                 .MakeFixedWidth(FixedWidth.W042)
                 .MakeInitialSortAscending();
 
-            Columns.Create<OrphanTypeConverter>("Type", TableColumns.Type)
+            Columns.Create<OrphanTypeConverter>(Header.Type, TableColumns.Type)
                 .MakeFixedWidth(FixedWidth.W076);
 
-            Columns.Create("Value", TableColumns.Value);
+            Columns.Create(Header.Value, TableColumns.Value);
 
-            Columns.Create("Created", TableColumns.Created)
+            Columns.Create(Header.Created, TableColumns.Created)
                 .MakeDate();
 
             MenuItems.AddItem(Strings.MenuItemRemoveExclusion, DeleteCommand)

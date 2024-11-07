@@ -6,6 +6,7 @@
 */
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections.ObjectModel;
@@ -92,28 +93,28 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TableViewModel()
         {
-            Columns.Create("Namespace", nameof(DataTable.Namespace))
+            Columns.Create(Header.Namespace, nameof(DataTable.Namespace))
                 .MakeFixedWidth(FixedWidth.W096);
 
-            Columns.Create("Name", nameof(DataTable.TableName)).MakeInitialSortAscending();
+            Columns.Create(Header.Name, nameof(DataTable.TableName)).MakeInitialSortAscending();
 
-            Columns.Create("Cols", $"{nameof(DataTable.Columns)}.{nameof(DataTable.Columns.Count)}")
+            Columns.Create(Header.ColumnsShort, $"{nameof(DataTable.Columns)}.{nameof(DataTable.Columns.Count)}")
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052);
 
-            Columns.Create("Rows", $"{nameof(DataTable.Rows)}.{nameof(DataTable.Rows.Count)}")
+            Columns.Create(Header.Rows, $"{nameof(DataTable.Rows)}.{nameof(DataTable.Rows.Count)}")
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052);
 
-            Columns.Create("PR", $"{nameof(DataTable.ParentRelations)}.{nameof(DataTable.ParentRelations.Count)}")
+            Columns.Create(Header.ParentRelationShort, $"{nameof(DataTable.ParentRelations)}.{nameof(DataTable.ParentRelations.Count)}")
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052);
 
-            Columns.Create("CR", $"{nameof(DataTable.ChildRelations)}.{nameof(DataTable.ChildRelations.Count)}")
+            Columns.Create(Header.ChildRelationShort, $"{nameof(DataTable.ChildRelations)}.{nameof(DataTable.ChildRelations.Count)}")
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052);
 
-            Columns.Create("C", $"{nameof(DataTable.Constraints)}.{nameof(DataTable.Constraints.Count)}")
+            Columns.Create(Header.ConstraintShort, $"{nameof(DataTable.Constraints)}.{nameof(DataTable.Constraints.Count)}")
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052);
 

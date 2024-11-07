@@ -5,6 +5,7 @@
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
 using Restless.Panama.Core;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections.ObjectModel;
@@ -32,12 +33,12 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public TableConstraintController(TableViewModel owner) : base(owner)
         {
-            Columns.Create("Name", nameof(Constraint.ConstraintName)).MakeFixedWidth(FixedWidth.W180);
-            Columns.Create("Table", $"{nameof(Constraint.Table)}.{nameof(Constraint.Table.TableName)}");
-            Columns.Create("Column", "Columns[0].ColumnName");
+            Columns.Create(Header.Name, nameof(Constraint.ConstraintName)).MakeFixedWidth(FixedWidth.W180);
+            Columns.Create(Header.Table, $"{nameof(Constraint.Table)}.{nameof(Constraint.Table.TableName)}");
+            Columns.Create(Header.Column, "Columns[0].ColumnName");
             if (typeof(T) == typeof(ForeignKeyConstraint))
             {
-                Columns.Create("Delete Rule", nameof(ForeignKeyConstraint.DeleteRule));
+                Columns.Create(Header.DeleteRule, nameof(ForeignKeyConstraint.DeleteRule));
             }
 
             constraints = new ObservableCollection<T>();

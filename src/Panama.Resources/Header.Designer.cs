@@ -70,6 +70,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Author.
+        /// </summary>
+        public static string Author {
+            get {
+                return ResourceManager.GetString("Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Award.
         /// </summary>
         public static string Award {
@@ -97,11 +106,83 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Child Column.
+        /// </summary>
+        public static string ChildColumn {
+            get {
+                return ResourceManager.GetString("ChildColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CR.
+        /// </summary>
+        public static string ChildRelationShort {
+            get {
+                return ResourceManager.GetString("ChildRelationShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Child Table.
+        /// </summary>
+        public static string ChildTable {
+            get {
+                return ResourceManager.GetString("ChildTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color.
         /// </summary>
         public static string Color {
             get {
                 return ResourceManager.GetString("Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Column.
+        /// </summary>
+        public static string Column {
+            get {
+                return ResourceManager.GetString("Column", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Columns.
+        /// </summary>
+        public static string Columns {
+            get {
+                return ResourceManager.GetString("Columns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cols.
+        /// </summary>
+        public static string ColumnsShort {
+            get {
+                return ResourceManager.GetString("ColumnsShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company.
+        /// </summary>
+        public static string Company {
+            get {
+                return ResourceManager.GetString("Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C.
+        /// </summary>
+        public static string ConstraintShort {
+            get {
+                return ResourceManager.GetString("ConstraintShort", resourceCulture);
             }
         }
         
@@ -138,6 +219,15 @@ namespace Restless.Panama.Resources {
         public static string DefaultShort {
             get {
                 return ResourceManager.GetString("DefaultShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Rule.
+        /// </summary>
+        public static string DeleteRule {
+            get {
+                return ResourceManager.GetString("DeleteRule", resourceCulture);
             }
         }
         
@@ -210,6 +300,15 @@ namespace Restless.Panama.Resources {
         public static string ExclusiveShort {
             get {
                 return ResourceManager.GetString("ExclusiveShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expression.
+        /// </summary>
+        public static string Expression {
+            get {
+                return ResourceManager.GetString("Expression", resourceCulture);
             }
         }
         
@@ -313,6 +412,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Namespace.
+        /// </summary>
+        public static string Namespace {
+            get {
+                return ResourceManager.GetString("Namespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Name.
         /// </summary>
         public static string NewName {
@@ -354,6 +462,33 @@ namespace Restless.Panama.Resources {
         public static string OrderingShort {
             get {
                 return ResourceManager.GetString("OrderingShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parent Column.
+        /// </summary>
+        public static string ParentColumn {
+            get {
+                return ResourceManager.GetString("ParentColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PR.
+        /// </summary>
+        public static string ParentRelationShort {
+            get {
+                return ResourceManager.GetString("ParentRelationShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parent Table.
+        /// </summary>
+        public static string ParentTable {
+            get {
+                return ResourceManager.GetString("ParentTable", resourceCulture);
             }
         }
         
@@ -502,6 +637,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rows.
+        /// </summary>
+        public static string Rows {
+            get {
+                return ResourceManager.GetString("Rows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scanned.
         /// </summary>
         public static string Scanned {
@@ -610,6 +754,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Table.
+        /// </summary>
+        public static string Table {
+            get {
+                return ResourceManager.GetString("Table", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tag.
         /// </summary>
         public static string Tag {
@@ -687,6 +840,15 @@ namespace Restless.Panama.Resources {
         public static string Usage {
             get {
                 return ResourceManager.GetString("Usage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string Value {
+            get {
+                return ResourceManager.GetString("Value", resourceCulture);
             }
         }
         

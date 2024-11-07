@@ -120,6 +120,9 @@
   <data name="Added" xml:space="preserve">
     <value>Added</value>
   </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
   <data name="Award" xml:space="preserve">
     <value>Award</value>
   </data>
@@ -129,8 +132,32 @@
   <data name="Batch" xml:space="preserve">
     <value>Batch</value>
   </data>
+  <data name="ChildColumn" xml:space="preserve">
+    <value>Child Column</value>
+  </data>
+  <data name="ChildRelationShort" xml:space="preserve">
+    <value>CR</value>
+  </data>
+  <data name="ChildTable" xml:space="preserve">
+    <value>Child Table</value>
+  </data>
   <data name="Color" xml:space="preserve">
     <value>Color</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="Columns" xml:space="preserve">
+    <value>Columns</value>
+  </data>
+  <data name="ColumnsShort" xml:space="preserve">
+    <value>Cols</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="ConstraintShort" xml:space="preserve">
+    <value>C</value>
   </data>
   <data name="Created" xml:space="preserve">
     <value>Created</value>
@@ -143,6 +170,9 @@
   </data>
   <data name="DefaultShort" xml:space="preserve">
     <value>D</value>
+  </data>
+  <data name="DeleteRule" xml:space="preserve">
+    <value>Delete Rule</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
@@ -167,6 +197,9 @@
   </data>
   <data name="ExclusiveShort" xml:space="preserve">
     <value>E</value>
+  </data>
+  <data name="Expression" xml:space="preserve">
+    <value>Expression</value>
   </data>
   <data name="Fee" xml:space="preserve">
     <value>Fee</value>
@@ -201,6 +234,9 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="Namespace" xml:space="preserve">
+    <value>Namespace</value>
+  </data>
   <data name="NewName" xml:space="preserve">
     <value>New Name</value>
   </data>
@@ -215,6 +251,15 @@
   </data>
   <data name="OrderingShort" xml:space="preserve">
     <value>O</value>
+  </data>
+  <data name="ParentColumn" xml:space="preserve">
+    <value>Parent Column</value>
+  </data>
+  <data name="ParentRelationShort" xml:space="preserve">
+    <value>PR</value>
+  </data>
+  <data name="ParentTable" xml:space="preserve">
+    <value>Parent Table</value>
   </data>
   <data name="Published" xml:space="preserve">
     <value>Published</value>
@@ -264,6 +309,9 @@
   <data name="RevisionShort" xml:space="preserve">
     <value>Rev</value>
   </data>
+  <data name="Rows" xml:space="preserve">
+    <value>Rows</value>
+  </data>
   <data name="Scanned" xml:space="preserve">
     <value>Scanned</value>
   </data>
@@ -300,6 +348,9 @@
   <data name="Submitted" xml:space="preserve">
     <value>Submitted</value>
   </data>
+  <data name="Table" xml:space="preserve">
+    <value>Table</value>
+  </data>
   <data name="Tag" xml:space="preserve">
     <value>Tag</value>
   </data>
@@ -326,6 +377,9 @@
   </data>
   <data name="Usage" xml:space="preserve">
     <value>Usage</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version</value>

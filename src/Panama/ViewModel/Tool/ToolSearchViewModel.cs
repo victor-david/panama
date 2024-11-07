@@ -128,17 +128,17 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public ToolSearchViewModel()
         {
-            Columns.CreateResource<BooleanToResourceConverter>("V", TableColumns.IsVersion, ResourceKeys.Icon.IconCheck)
+            Columns.CreateResource<BooleanToResourceConverter>(Header.VersionShort, TableColumns.IsVersion, ResourceKeys.Icon.IconCheck)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028);
-            Columns.Create("Type", TableColumns.Type).MakeFixedWidth(FixedWidth.W048);
-            Columns.Create("Size", TableColumns.Size).MakeNumeric(null, FixedWidth.W076);
-            Columns.Create("Created", TableColumns.Created).MakeDate();
-            Columns.Create("Modified", TableColumns.Modified).MakeDate();
-            Columns.Create("File", TableColumns.File).MakeFlexWidth(2.0);
-            Columns.Create("Title", TableColumns.Title).MakeFlexWidth(1.25);
-            Columns.Create("Author", TableColumns.Author).MakeFixedWidth(FixedWidth.W180);
-            Columns.Create("Company", TableColumns.Company);
+            Columns.Create(Header.Type, TableColumns.Type).MakeFixedWidth(FixedWidth.W048);
+            Columns.Create(Header.Size, TableColumns.Size).MakeNumeric(null, FixedWidth.W076);
+            Columns.Create(Header.Created, TableColumns.Created).MakeDate();
+            Columns.Create(Header.Updated, TableColumns.Modified).MakeDate();
+            Columns.Create(Header.File, TableColumns.File).MakeFlexWidth(2.0);
+            Columns.Create(Header.Title, TableColumns.Title).MakeFlexWidth(1.25);
+            Columns.Create(Header.Author, TableColumns.Author).MakeFixedWidth(FixedWidth.W180);
+            Columns.Create(Header.Company, TableColumns.Company);
 
             Commands.Add("StartSearch", RunSearchCommand);
             Commands.Add("ClearSearch", RunClearSearchCommand);

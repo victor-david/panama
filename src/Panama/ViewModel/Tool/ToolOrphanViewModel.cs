@@ -59,7 +59,7 @@ namespace Restless.Panama.ViewModel
         {
             Exclusions = new OrphanExclusionController();
 
-            Columns.Create("File", nameof(FileScanItem.FullName)).MakeInitialSortAscending();
+            Columns.Create(Header.File, nameof(FileScanItem.FullName)).MakeInitialSortAscending();
 
             MenuItems.AddItem(
                 Strings.MenuItemExcludeOrphanFile,
