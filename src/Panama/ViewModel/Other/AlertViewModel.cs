@@ -50,20 +50,20 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AlertViewModel()
         {
-            Columns.Create("Id", TableColumns.Id)
+            Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.CreateResource<BooleanToResourceConverter>("E", TableColumns.Enabled, ResourceKeys.Icon.IconSquare)
+            Columns.CreateResource<BooleanToResourceConverter>(Header.EnabledShort, TableColumns.Enabled, ResourceKeys.Icon.IconSquare)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipAlertEnabled);
 
-            Columns.Create("Date", TableColumns.Date)
+            Columns.Create(Header.Date, TableColumns.Date)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("Title", TableColumns.Title);
+            Columns.Create(Header.Title, TableColumns.Title);
 
             Commands.Add("Browse", RunBrowseCommand, CanRunBrowseCommand);
 

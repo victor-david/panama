@@ -68,17 +68,17 @@ namespace Restless.Panama.ViewModel
         {
             DisplayName = Strings.WindowTitleActiveAlerts;
 
-            Columns.CreateResource<BooleanToResourceConverter>("E", TableColumns.Enabled, ResourceKeys.Icon.IconSquare)
+            Columns.CreateResource<BooleanToResourceConverter>(Header.EnabledShort, TableColumns.Enabled, ResourceKeys.Icon.IconSquare)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipAlertEnabled);
 
-            Columns.Create("Date", TableColumns.Date)
+            Columns.Create(Header.Date, TableColumns.Date)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("Title", TableColumns.Title);
-            Columns.Create("Url", TableColumns.Url);
+            Columns.Create(Header.Title, TableColumns.Title);
+            Columns.Create(Header.Url, TableColumns.Url);
 
             PostponeCommand = RelayCommand.Create(RunPostponeCommand, p => SelectedAlert != null);
             DismissCommand = RelayCommand.Create(p => RunDismissCommand(), p => SelectedAlert != null);

@@ -123,11 +123,32 @@
   <data name="Award" xml:space="preserve">
     <value>Award</value>
   </data>
+  <data name="Batch" xml:space="preserve">
+    <value>Batch</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Created</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
   <data name="Days" xml:space="preserve">
     <value>Days</value>
+  </data>
+  <data name="DefaultShort" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="EnabledShort" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>End</value>
   </data>
   <data name="Fee" xml:space="preserve">
     <value>Fee</value>
@@ -177,6 +198,9 @@
   <data name="ResponseTypeShort" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
@@ -195,6 +219,9 @@
   <data name="Submitted" xml:space="preserve">
     <value>Submitted</value>
   </data>
+  <data name="Tag" xml:space="preserve">
+    <value>Tag</value>
+  </data>
   <data name="TagCount" xml:space="preserve">
     <value>Tag Count</value>
   </data>
@@ -209,6 +236,9 @@
   </data>
   <data name="Url" xml:space="preserve">
     <value>Url</value>
+  </data>
+  <data name="Usage" xml:space="preserve">
+    <value>Usage</value>
   </data>
   <data name="VersionCount" xml:space="preserve">
     <value>Version Count</value>

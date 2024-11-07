@@ -6,6 +6,7 @@
 */
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionBatchTable.Defs.Columns;
@@ -24,21 +25,21 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public PublisherSubmissionController(PublisherViewModel owner): base(owner)
         {
-            Columns.Create("Id", TableColumns.Id)
+            Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Submitted", TableColumns.Submitted)
+            Columns.Create(Header.Submitted, TableColumns.Submitted)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("Response", TableColumns.Response)
+            Columns.Create(Header.Response, TableColumns.Response)
                 .MakeDate();
 
-            Columns.Create("Type", TableColumns.Joined.ResponseTypeName)
+            Columns.Create(Header.ResponseTypeShort, TableColumns.Joined.ResponseTypeName)
                 .MakeFixedWidth(FixedWidth.W096);
 
-            Columns.Create("Note", TableColumns.Notes).MakeSingleLine();
+            Columns.Create(Header.Note, TableColumns.Notes).MakeSingleLine();
         }
         #endregion
 

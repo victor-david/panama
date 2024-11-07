@@ -52,12 +52,12 @@ namespace Restless.Panama.ViewModel
         public TagViewModel()
         {
             DisplayName = Strings.MenuItemTags;
-            Columns.Create("Id", TableColumns.Id)
+            Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Tag", TableColumns.Tag).MakeInitialSortAscending();
-            Columns.Create("Description", TableColumns.Description).MakeFlexWidth(2.5);
-            Columns.Create("Usage", TableColumns.Calculated.UsageCount)
+            Columns.Create(Header.Tag, TableColumns.Tag).MakeInitialSortAscending();
+            Columns.Create(Header.Description, TableColumns.Description).MakeFlexWidth(2.5);
+            Columns.Create(Header.Usage, TableColumns.Calculated.UsageCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W076);
 

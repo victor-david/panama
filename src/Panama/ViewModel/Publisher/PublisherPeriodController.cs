@@ -60,13 +60,13 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public PublisherPeriodController(PublisherViewModel owner) : base(owner)
         {
-            Columns.Create("Id", TableColumns.Id)
+            Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create<MonthDayMultiConverter>("Start", TableColumns.MonthStart, TableColumns.DayStart);
-            Columns.Create<MonthDayMultiConverter>("End", TableColumns.MonthEnd, TableColumns.DayEnd);
-            Columns.Create("Note", TableColumns.Notes).MakeSingleLine();
+            Columns.Create<MonthDayMultiConverter>(Header.Start, TableColumns.MonthStart, TableColumns.DayStart);
+            Columns.Create<MonthDayMultiConverter>(Header.End, TableColumns.MonthEnd, TableColumns.DayEnd);
+            Columns.Create(Header.Note, TableColumns.Notes).MakeSingleLine();
 
             MenuItems.AddItem(Strings.MenuItemAddSubmissionPeriod, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();

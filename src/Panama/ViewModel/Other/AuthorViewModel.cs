@@ -50,17 +50,17 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AuthorViewModel()
         {
-            Columns.Create("Id", TableColumns.Id)
+            Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .MakeInitialSortAscending();
 
-            Columns.CreateResource<BooleanToResourceConverter>("R", TableColumns.IsDefault, ResourceKeys.Icon.IconSquare)
+            Columns.CreateResource<BooleanToResourceConverter>(Header.DefaultShort, TableColumns.IsDefault, ResourceKeys.Icon.IconSquare)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(Strings.ToolTipAuthorDefault);
 
-            Columns.Create("Name", TableColumns.Name);
+            Columns.Create(Header.Name, TableColumns.Name);
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemAddAuthor, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);

@@ -54,14 +54,14 @@ namespace Restless.Panama.ViewModel
         public LinkViewModel()
         {
             DisplayName = Strings.CommandLink;
-            Columns.Create("Id", TableColumns.Id)
+            Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Added", TableColumns.Added).MakeDate();
-            Columns.Create("Name", TableColumns.Name).MakeInitialSortAscending();
-            Columns.Create("Url", TableColumns.Url).MakeFlexWidth(2.5);
-            Columns.Create("Note", TableColumns.Notes).MakeSingleLine();
+            Columns.Create(Header.Added, TableColumns.Added).MakeDate();
+            Columns.Create(Header.Name, TableColumns.Name).MakeInitialSortAscending();
+            Columns.Create(Header.Url, TableColumns.Url).MakeFlexWidth(2.5);
+            Columns.Create(Header.Note, TableColumns.Notes).MakeSingleLine();
 
             /* Context menu items */
             MenuItems.AddItem(Strings.MenuItemAddLink, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);

@@ -44,17 +44,17 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public PublisherSubmissionTitleController(PublisherViewModel owner) : base(owner)
         {
-            Columns.Create("Id", TableColumns.Id)
+            Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Batch", TableColumns.BatchId)
+            Columns.Create(Header.Batch, TableColumns.BatchId)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W048);
 
-            Columns.Create("Title", TableColumns.Joined.Title);
+            Columns.Create(Header.Title, TableColumns.Joined.Title);
 
-            Columns.Create("Written", TableColumns.Joined.Written).MakeDate();
+            Columns.Create(Header.Written, TableColumns.Joined.Written).MakeDate();
 
             MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
         }
