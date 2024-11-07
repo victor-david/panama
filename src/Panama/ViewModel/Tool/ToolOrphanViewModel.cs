@@ -62,24 +62,24 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.File, nameof(FileScanItem.FullName)).MakeInitialSortAscending();
 
             MenuItems.AddItem(
-                Strings.MenuItemExcludeOrphanFile,
+                Menu.ExcludeOrphanFile,
                 RelayCommand.Create(p => RunSetOrphanFileExclusion(), p => CanRunOrphanCommand()))
                 .AddIconResource(ResourceKeys.Icon.IconFile);
 
             MenuItems.AddItem(
-                Strings.MenuItemExcludeOrphanFileType,
+                Menu.ExcludeOrphanFileType,
                 RelayCommand.Create(p => RunSetOrphanFileTypeExclusion(), p => CanRunOrphanCommand()))
                 .AddIconResource(ResourceKeys.Icon.IconFileExtension);
 
             MenuItems.AddItem(
-                Strings.MenuItemExcludeOrphanDirectory,
+                Menu.ExcludeOrphanDirectory,
                 RelayCommand.Create(p => RunSetOrphanDirectoryExclusion(), p => CanRunOrphanCommand()))
                 .AddIconResource(ResourceKeys.Icon.IconFolder);
 
             MenuItems.AddSeparator();
 
             MenuItems.AddItem(
-                Strings.MenuItemCreateTitleFromEntry,
+                Menu.CreateTitleFromEntry,
                 RelayCommand.Create(p => RunCreateTitleFromOrphan(), p => CanRunOrphanCommand()))
                 .AddIconResource(ResourceKeys.Icon.IconAdd);
 

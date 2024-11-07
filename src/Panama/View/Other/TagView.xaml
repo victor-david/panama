@@ -18,7 +18,7 @@
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-                <TextBlock Text="{x:Static r:Strings.MenuItemTags}"/>
+                <TextBlock Text="{x:Static r:Menu.Tags}"/>
                 <!-- no filters for now -->
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>

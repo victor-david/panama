@@ -100,19 +100,19 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.Title, TableColumns.Title).MakeInitialSortAscending();
             Columns.Create(Header.Id, TableColumns.DocId);
 
-            MenuItems.AddItem(Strings.MenuItemAddDocumentToSubmission, AddCommand)
+            MenuItems.AddItem(Menu.AddDocumentToSubmission, AddCommand)
                 .AddIconResource(ResourceKeys.Icon.IconAdd);
 
             MenuItems.AddSeparator();
 
             MenuItems.AddItem(
-                Strings.MenuItemReplaceSubmissionDocument,
+                Menu.ReplaceSubmissionDocument,
                 RelayCommand.Create(RunReplaceDocumentCommand, p => AddCommandEnabled && SelectedDocument != null))
                 .AddIconResource(ResourceKeys.Icon.IconFileReplace);
 
             MenuItems.AddSeparator();
 
-            MenuItems.AddItem(Strings.MenuItemRemoveSubmissionDocument, DeleteCommand)
+            MenuItems.AddItem(Menu.RemoveSubmissionDocument, DeleteCommand)
                 .AddIconResource(ResourceKeys.Icon.IconDelete);
 
             ListView.IsLiveSorting = true;

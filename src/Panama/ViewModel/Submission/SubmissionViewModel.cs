@@ -166,22 +166,22 @@ namespace Restless.Panama.ViewModel
             Commands.Add("AcceptedFilter", p => Filters.SetToAccepted());
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.MenuItemCreateSubmission, AddCommand)
+            MenuItems.AddItem(Menu.CreateSubmission, AddCommand)
                 .AddIconResource(ResourceKeys.Icon.IconAdd);
 
             MenuItems.AddSeparator();
 
-            MenuItems.AddItem(Strings.MenuItemBrowseToPublisherUrl, OpenRowCommand)
+            MenuItems.AddItem(Menu.BrowseToPublisherUrl, OpenRowCommand)
                 .AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
 
             MenuItems.AddItem(
-                Strings.MenuItemFilterToPublisher,
+                Menu.FilterToPublisher,
                 RelayCommand.Create(RunFilterToPublisherCommand, p => SelectedBatch != null))
                 .AddIconResource(ResourceKeys.Icon.IconFilter);
 
             MenuItems.AddSeparator();
 
-            MenuItems.AddItem(Strings.MenuItemDeleteSubmission, DeleteCommand)
+            MenuItems.AddItem(Menu.DeleteSubmission, DeleteCommand)
                 .AddIconResource(ResourceKeys.Icon.IconDelete);
 
             Titles = new SubmissionTitleController(this);

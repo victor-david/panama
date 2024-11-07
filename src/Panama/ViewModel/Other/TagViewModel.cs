@@ -51,7 +51,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TagViewModel()
         {
-            DisplayName = Strings.MenuItemTags;
+            DisplayName = Menu.Tags;
             Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
@@ -64,7 +64,7 @@ namespace Restless.Panama.ViewModel
             /* Context menu items */
             MenuItems.AddItem(Strings.CommandAddTag, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemDeleteTag, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
+            MenuItems.AddItem(Menu.DeleteTag, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
             AddCommand.Supported = CommandSupported.Yes;
 

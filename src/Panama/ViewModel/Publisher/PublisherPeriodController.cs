@@ -68,9 +68,9 @@ namespace Restless.Panama.ViewModel
             Columns.Create<MonthDayMultiConverter>(Header.End, TableColumns.MonthEnd, TableColumns.DayEnd);
             Columns.Create(Header.Note, TableColumns.Notes).MakeSingleLine();
 
-            MenuItems.AddItem(Strings.MenuItemAddSubmissionPeriod, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
+            MenuItems.AddItem(Menu.AddSubmissionPeriod, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemRemoveSubmissionPeriod, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
+            MenuItems.AddItem(Menu.RemoveSubmissionPeriod, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
             Commands.Add("MakeAllYear", p =>RunMakeAllYearCommand(), p => !(SelectedPeriod?.IsAllYear ?? true));
         }

@@ -63,9 +63,9 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.Name, TableColumns.Name);
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.MenuItemAddAuthor, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
+            MenuItems.AddItem(Menu.AddAuthor, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemDeleteAuthor, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
+            MenuItems.AddItem(Menu.DeleteAuthor, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
         }
         #endregion
 

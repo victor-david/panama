@@ -18,7 +18,7 @@
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-                <TextBlock Text="{x:Static r:Strings.MenuItemAuthors}"/>
+                <TextBlock Text="{x:Static r:Menu.Authors}"/>
                 <!-- no filters for now -->
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>

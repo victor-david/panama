@@ -300,28 +300,28 @@ namespace Restless.Panama.ViewModel
 
         private void InitMenuItems()
         {
-            MenuItems.AddItem(Strings.MenuItemAddTitle, AddCommand)
+            MenuItems.AddItem(Menu.AddTitle, AddCommand)
                 .AddIconResource(ResourceKeys.Icon.IconAdd);
 
-            MenuItems.AddItem(Strings.MenuItemCopyTitle, RelayCommand.Create(p => RunCopyTitleCommand()))
+            MenuItems.AddItem(Menu.CopyTitle, RelayCommand.Create(p => RunCopyTitleCommand()))
                 .AddIconResource(ResourceKeys.Icon.IconCopy);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
+            MenuItems.AddItem(Menu.OpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemRemoveQueueTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconTrayRemove);
+            MenuItems.AddItem(Menu.RemoveQueueTitle, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconTrayRemove);
         }
 
         private void InitQueueMenuItems()
         {
-            QueueMenuItems.AddItem(Strings.MenuItemAddQueue, RelayCommand.Create(p => RunAddQueueCommand()))
+            QueueMenuItems.AddItem(Menu.AddQueue, RelayCommand.Create(p => RunAddQueueCommand()))
                 .AddIconResource(ResourceKeys.Icon.IconAdd);
 
-            QueueMenuItems.AddItem(Strings.MenuItemRenameQueue, RelayCommand.Create(p => IsQueueEditActive = true, p => SelectedQueue != null))
+            QueueMenuItems.AddItem(Menu.RenameQueue, RelayCommand.Create(p => IsQueueEditActive = true, p => SelectedQueue != null))
                 .AddIconResource(ResourceKeys.Icon.IconFileReplace);
 
             QueueMenuItems.AddSeparator();
 
-            QueueMenuItems.AddItem(Strings.MenuItemRemoveQueue, RelayCommand.Create(p => RunRemoveQueueCommand(), p => SelectedQueue != null))
+            QueueMenuItems.AddItem(Menu.RemoveQueue, RelayCommand.Create(p => RunRemoveQueueCommand(), p => SelectedQueue != null))
                 .AddIconResource(ResourceKeys.Icon.IconDelete);
         }
 

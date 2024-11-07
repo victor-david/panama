@@ -79,7 +79,7 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.Size, TableColumns.Size)
                 .MakeFixedWidth(FixedWidth.W064);
 
-            MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
+            MenuItems.AddItem(Menu.BrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
 
             RefreshCommand = RelayCommand.Create(p => RunRefreshCommand());
             VerifyCommand = RelayCommand.Create(p => RunVerifyCommand());

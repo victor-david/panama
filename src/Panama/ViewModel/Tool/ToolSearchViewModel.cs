@@ -144,7 +144,7 @@ namespace Restless.Panama.ViewModel
             Commands.Add("ClearSearch", RunClearSearchCommand);
             Commands.Add("DeleteItem", RunDeleteItemCommand, CanRunDeleteItemCommand);
 
-            MenuItems.AddItem(Strings.MenuItemOpenItemOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
+            MenuItems.AddItem(Menu.OpenItemOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
             //MenuItems.AddItem("Go to title record for this item", Commands["GoToTitleRecord"]).AddImageResource("ImageBrowseToUrlMenu");
             MenuItems.AddSeparator();
             MenuItems.AddItem("Delete this item", Commands["DeleteItem"]).AddIconResource(ResourceKeys.Icon.IconDelete);

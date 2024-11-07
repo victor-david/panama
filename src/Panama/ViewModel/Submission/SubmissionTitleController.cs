@@ -75,32 +75,32 @@ namespace Restless.Panama.ViewModel
             Commands.Add("TitleMoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
             Commands.Add("CopyToClipboard", RunCopyToClipboardCommand);
 
-            MenuItems.AddItem(Strings.MenuItemAddTitleToSubmission, AddCommand)
+            MenuItems.AddItem(Menu.AddTitleToSubmission, AddCommand)
                 .AddIconResource(ResourceKeys.Icon.IconAdd);
 
             MenuItems.AddSeparator();
 
             MenuItems.AddItem(
-                Strings.MenuItemSetTitleStatusAccepted,
+                Menu.SetTitleStatusAccepted,
                 RelayCommand.Create(RunSetTitleStatusCommand, CanRunSetTitleStatusCommand))
                 .AddCommandParm(SubmissionValues.StatusAccepted)
                 .AddIconResource(ResourceKeys.Icon.GetTitleStatusIconKey(SubmissionValues.StatusAccepted));
 
             MenuItems.AddItem(
-                Strings.MenuItemSetTitleStatusWithdrawn,
+                Menu.SetTitleStatusWithdrawn,
                 RelayCommand.Create(RunSetTitleStatusCommand, CanRunSetTitleStatusCommand))
                 .AddCommandParm(SubmissionValues.StatusWithdrawn)
                 .AddIconResource(ResourceKeys.Icon.GetTitleStatusIconKey(SubmissionValues.StatusWithdrawn));
 
             MenuItems.AddItem(
-                Strings.MenuItemSetTitleStatusNone,
+                Menu.SetTitleStatusNone,
                 RelayCommand.Create(RunSetTitleStatusCommand, CanRunSetTitleStatusCommand))
                 .AddCommandParm(SubmissionValues.StatusNotSpecified);
 
             MenuItems.AddSeparator();
 
             MenuItems.AddItem(
-                Strings.MenuItemRemoveTitleFromSubmission,
+                Menu.RemoveTitleFromSubmission,
                 RelayCommand.Create(RunRemoveTitleFromSubmissionCommand, p => CanRunIfNotLocked()))
                 .AddIconResource(ResourceKeys.Icon.IconDelete);
 

@@ -210,32 +210,32 @@ namespace Restless.Panama.ViewModel
         #region Private methods (navigator)
         private void RegisterNavigatorItems()
         {
-            NavigatorItems.AddHeader(Strings.NavHeaderMain);
+            NavigatorItems.AddHeader(Header.Main);
 
-            NavigatorItems.AddNavigator<TitleViewModel>(Strings.MenuItemTitles, IconKind.SubtitlesOutline);
-            NavigatorItems.AddNavigator<TitleQueueViewModel>(Strings.MenuItemQueues, IconKind.TrayFull);
-            NavigatorItems.AddNavigator<PublisherViewModel>(Strings.MenuItemPublishers, IconKind.MessageCheckOutline);
-            NavigatorItems.AddNavigator<SelfPublisherViewModel>(Strings.MenuItemSelfPublishers, IconKind.MessageFlashOutline);
-            NavigatorItems.AddNavigator<SubmissionViewModel>(Strings.MenuItemSubmissions, IconKind.MessageReplyTextOutline);
+            NavigatorItems.AddNavigator<TitleViewModel>(Menu.Titles, IconKind.SubtitlesOutline);
+            NavigatorItems.AddNavigator<TitleQueueViewModel>(Menu.Queues, IconKind.TrayFull);
+            NavigatorItems.AddNavigator<PublisherViewModel>(Menu.Publishers, IconKind.MessageCheckOutline);
+            NavigatorItems.AddNavigator<SelfPublisherViewModel>(Menu.SelfPublishers, IconKind.MessageFlashOutline);
+            NavigatorItems.AddNavigator<SubmissionViewModel>(Menu.Submissions, IconKind.MessageReplyTextOutline);
 
-            NavigatorItems.AddHeader(Strings.NavHeaderSettings);
+            NavigatorItems.AddHeader(Header.Settings);
 
-            NavigatorItems.AddNavigator<AuthorViewModel>(Strings.MenuItemAuthors, IconKind.AccountOutline);
-            NavigatorItems.AddNavigator<TagViewModel>(Strings.MenuItemTags, IconKind.TagOutline);
+            NavigatorItems.AddNavigator<AuthorViewModel>(Menu.Authors, IconKind.AccountOutline);
+            NavigatorItems.AddNavigator<TagViewModel>(Menu.Tags, IconKind.TagOutline);
 
-            NavigatorItems.AddHeader(Strings.NavHeaderOther);
+            NavigatorItems.AddHeader(Header.Other);
 
-            NavigatorItems.AddNavigator<AlertViewModel>(Strings.MenuItemAlerts, IconKind.TimerOutline);
-            NavigatorItems.AddNavigator<UserNoteViewModel>(Strings.MenuItemNotes, IconKind.NoteTextOutline);
-            NavigatorItems.AddNavigator<LinkViewModel>(Strings.MenuItemLinks, IconKind.LinkVariant);
-            NavigatorItems.AddNavigator<StatisticsViewModel>(Strings.MenuItemStatistics, IconKind.Numeric);
+            NavigatorItems.AddNavigator<AlertViewModel>(Menu.Alerts, IconKind.TimerOutline);
+            NavigatorItems.AddNavigator<UserNoteViewModel>(Menu.Notes, IconKind.NoteTextOutline);
+            NavigatorItems.AddNavigator<LinkViewModel>(Menu.Links, IconKind.LinkVariant);
+            NavigatorItems.AddNavigator<StatisticsViewModel>(Menu.Statistics, IconKind.Numeric);
 
-            NavigatorItems.AddHeader(Strings.NavHeaderTools, ToolHeaderId);
+            NavigatorItems.AddHeader(Header.Tools, ToolHeaderId);
 
-            NavigatorItems.AddNavigator<ToolOrphanViewModel>(Strings.MenuItemOrphanFinder, IconKind.ClipboardSearchOutline);
-            NavigatorItems.AddNavigator<ToolSearchViewModel>(Strings.MenuItemSearch, IconKind.Magnify);
-            NavigatorItems.AddNavigator<LinkVerifyViewModel>(Strings.MenuItemLinkVerify, IconKind.LinkVariant);
-            NavigatorItems.AddNavigator<TableViewModel>(Strings.MenuItemDeveloper, IconKind.CodeBraces);
+            NavigatorItems.AddNavigator<ToolOrphanViewModel>(Menu.OrphanFinder, IconKind.ClipboardSearchOutline);
+            NavigatorItems.AddNavigator<ToolSearchViewModel>(Menu.Search, IconKind.Magnify);
+            NavigatorItems.AddNavigator<LinkVerifyViewModel>(Menu.LinkVerify, IconKind.LinkVariant);
+            NavigatorItems.AddNavigator<TableViewModel>(Menu.Developer, IconKind.CodeBraces);
 
             SynchronizeNavigatorVisibility();
         }

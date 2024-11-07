@@ -18,6 +18,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+using Menu = Restless.Panama.Resources.Menu;
 
 namespace Restless.Panama.ViewModel
 {
@@ -118,11 +119,11 @@ namespace Restless.Panama.ViewModel
             Commands.Add("SaveProperty", RunSavePropertyCommand, CanRunSavePropertyCommand);
             Commands.Add("SetLanguage", RunSetLanguageCommand, o => IsSelectedRowAccessible);
 
-            MenuItems.AddItem(Strings.MenuItemAddTitleVersion, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
-            MenuItems.AddItem(Strings.MenuItemReplaceTitleVersion, RelayCommand.Create(RunReplaceVersionCommand, p => CanRunVersionCommand()))
+            MenuItems.AddItem(Menu.AddTitleVersion, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
+            MenuItems.AddItem(Menu.ReplaceTitleVersion, RelayCommand.Create(RunReplaceVersionCommand, p => CanRunVersionCommand()))
                 .AddIconResource(ResourceKeys.Icon.IconFileReplace);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemMakeSeparateVersion, RelayCommand.Create(RunConvertToVersionCommand, CanRunConvertToVersionCommand));
+            MenuItems.AddItem(Menu.MakeSeparateVersion, RelayCommand.Create(RunConvertToVersionCommand, CanRunConvertToVersionCommand));
             MenuItems.AddSeparator();
 
             foreach (DataRow row in DatabaseController.Instance.GetTable<LanguageTable>().Rows)
@@ -134,7 +135,7 @@ namespace Restless.Panama.ViewModel
             }
 
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.MenuItemRemoveTitleVersion, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
+            MenuItems.AddItem(Menu.RemoveTitleVersion, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
             ListView.IsLiveSorting = true;
             ListView.LiveSortingProperties.Add(TitleVersionTable.Defs.Columns.Version);

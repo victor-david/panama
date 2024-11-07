@@ -13,7 +13,7 @@
     mc:Ignorable="d"
     d:DesignHeight="2260" d:DesignWidth="602"
     ResizeMode="NoResize"
-    Title="{x:Static r:Strings.MenuItemSettings}"
+    Title="{x:Static r:Menu.Settings}"
     Style="{StaticResource Panama.Styles.MetroWindow}"
     Height="702" Width="622">
 

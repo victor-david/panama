@@ -37,7 +37,7 @@
     <Separator/>
 
     <Button
-        Content="{x:Static r:Strings.MenuItemClear}"
+        Content="{x:Static r:Menu.Clear}"
         ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
         Command="{Binding ClearFilterCommand}"/>
 

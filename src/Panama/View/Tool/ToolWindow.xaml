@@ -14,7 +14,7 @@
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="610"
     ResizeMode="CanResizeWithGrip"
-    Title="{x:Static r:Strings.MenuItemTools}"
+    Title="{x:Static r:Menu.Tools}"
     Style="{StaticResource Panama.Styles.MetroWindow}"
     Height="{Binding Config.ToolWindowHeight, Mode=TwoWay}"
     Width="{Binding Config.ToolWindowWidth, Mode=TwoWay}">

@@ -21,7 +21,7 @@
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-                <TextBlock Text="{x:Static r:Strings.MenuItemLinkVerify}"/>
+                <TextBlock Text="{x:Static r:Menu.LinkVerify}"/>
 
                 <Separator/>
 

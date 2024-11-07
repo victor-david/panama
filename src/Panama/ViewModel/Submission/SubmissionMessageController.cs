@@ -68,15 +68,15 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.Type, TableColumns.Protocol).MakeFixedWidth(FixedWidth.W048);
             Columns.Create(Header.Subject, TableColumns.Display);
 
-            MenuItems.AddItem(Strings.MenuItemAddSubmissionMessage, AddCommand)
+            MenuItems.AddItem(Menu.AddSubmissionMessage, AddCommand)
                 .AddIconResource(ResourceKeys.Icon.IconAdd);
 
-            MenuItems.AddItem(Strings.MenuItemOpenItemOrDoubleClick, OpenRowCommand)
+            MenuItems.AddItem(Menu.OpenItemOrDoubleClick, OpenRowCommand)
                 .AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
 
             MenuItems.AddSeparator();
 
-            MenuItems.AddItem(Strings.MenuItemRemoveSubmissionMessage, DeleteCommand)
+            MenuItems.AddItem(Menu.RemoveSubmissionMessage, DeleteCommand)
                 .AddIconResource(ResourceKeys.Icon.IconDelete);
         }
         #endregion

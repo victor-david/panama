@@ -231,6 +231,9 @@
   <data name="LastSubmissionShort" xml:space="preserve">
     <value>Last Sub</value>
   </data>
+  <data name="Main" xml:space="preserve">
+    <value>Main</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -251,6 +254,9 @@
   </data>
   <data name="OrderingShort" xml:space="preserve">
     <value>O</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Other</value>
   </data>
   <data name="ParentColumn" xml:space="preserve">
     <value>Parent Column</value>
@@ -315,6 +321,9 @@
   <data name="Scanned" xml:space="preserve">
     <value>Scanned</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="Size" xml:space="preserve">
     <value>Size</value>
   </data>
@@ -365,6 +374,9 @@
   </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>

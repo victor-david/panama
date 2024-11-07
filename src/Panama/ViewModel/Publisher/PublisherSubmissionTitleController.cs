@@ -56,7 +56,7 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.Written, TableColumns.Joined.Written).MakeDate();
 
-            MenuItems.AddItem(Strings.MenuItemOpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
+            MenuItems.AddItem(Menu.OpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
         }
         #endregion
 

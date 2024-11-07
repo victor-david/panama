@@ -39,7 +39,7 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.Status, TableColumns.Joined.Status);
 
-            MenuItems.AddItem(Strings.MenuItemRemoveFromQueue, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
+            MenuItems.AddItem(Menu.RemoveFromQueue, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
         }
         #endregion
 

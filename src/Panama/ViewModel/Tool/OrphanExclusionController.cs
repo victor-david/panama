@@ -58,7 +58,7 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.Created, TableColumns.Created)
                 .MakeDate();
 
-            MenuItems.AddItem(Strings.MenuItemRemoveExclusion, DeleteCommand)
+            MenuItems.AddItem(Menu.RemoveExclusion, DeleteCommand)
                 .AddIconResource(ResourceKeys.Icon.IconDelete);
 
             excludedDirs = new List<string>();

@@ -38,12 +38,12 @@
 
     <Button
         x:Name="CustomFilterButton"
-        Content="{x:Static r:Strings.MenuItemCustom}"
+        Content="{x:Static r:Menu.Custom}"
         ToolTip="{x:Static r:Strings.ToolTipFilterCustom}"
         Command="{Binding ToggleCustomFilterCommand}"/>
 
     <Button
-        Content="{x:Static r:Strings.MenuItemClear}"
+        Content="{x:Static r:Menu.Clear}"
         ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
         Command="{Binding ClearFilterCommand}"/>
 

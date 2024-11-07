@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddAlert" xml:space="preserve">
+    <value>Add an alert</value>
+  </data>
+  <data name="AddAuthor" xml:space="preserve">
+    <value>Add an author</value>
+    <comment>Command text for add author</comment>
+  </data>
+  <data name="AddCredential" xml:space="preserve">
+    <value>Add a credential set</value>
+  </data>
+  <data name="AddDocumentToSubmission" xml:space="preserve">
+    <value>Add a document to this submission</value>
+  </data>
+  <data name="AddLink" xml:space="preserve">
+    <value>Add link</value>
+  </data>
+  <data name="AddPublished" xml:space="preserve">
+    <value>Add a published record to this title</value>
+  </data>
+  <data name="AddQueue" xml:space="preserve">
+    <value>Add a queue</value>
+  </data>
+  <data name="AddRelated" xml:space="preserve">
+    <value>Add related titles to this title</value>
+  </data>
+  <data name="AddSelfPublished" xml:space="preserve">
+    <value>Add a self published record to this title</value>
+  </data>
+  <data name="AddSubmissionMessage" xml:space="preserve">
+    <value>Add a message to this submission</value>
+  </data>
+  <data name="AddSubmissionPeriod" xml:space="preserve">
+    <value>Add a submission period</value>
+  </data>
+  <data name="AddTitle" xml:space="preserve">
+    <value>Add a title to the collection</value>
+  </data>
+  <data name="AddTitleToSubmission" xml:space="preserve">
+    <value>Add title(s) to this submission</value>
+  </data>
+  <data name="AddTitleVersion" xml:space="preserve">
+    <value>Add an existing file as a version</value>
+  </data>
+  <data name="AddUserNote" xml:space="preserve">
+    <value>Add a note</value>
+    <comment>Command text for add user note</comment>
+  </data>
+  <data name="Alerts" xml:space="preserve">
+    <value>Alerts</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>Authors</value>
+  </data>
+  <data name="BrowseToPublisherUrl" xml:space="preserve">
+    <value>Browse to this publisher's web site</value>
+  </data>
+  <data name="BrowseToPublisherUrlOrClick" xml:space="preserve">
+    <value>Browse to this publisher's web site (or double click the row)</value>
+  </data>
+  <data name="BrowseToUrlOrClick" xml:space="preserve">
+    <value>Browse to this url (or double click the row)</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="ClearPublishedDate" xml:space="preserve">
+    <value>Clear the published date</value>
+  </data>
+  <data name="CopyTitle" xml:space="preserve">
+    <value>Copy title to clipboard</value>
+  </data>
+  <data name="CreatePublisher" xml:space="preserve">
+    <value>Create a new publisher record</value>
+  </data>
+  <data name="CreateSubmission" xml:space="preserve">
+    <value>Create a submission</value>
+    <comment>Command text for create a submission</comment>
+  </data>
+  <data name="CreateSubmissionToPublisher" xml:space="preserve">
+    <value>Create a submission to this publisher</value>
+    <comment>Command text for create a submission</comment>
+  </data>
+  <data name="CreateTitleFromEntry" xml:space="preserve">
+    <value>Create a title entry from this file</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Credentials</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="DeleteAlert" xml:space="preserve">
+    <value>Delete this alert</value>
+  </data>
+  <data name="DeleteAuthor" xml:space="preserve">
+    <value>Delete this author</value>
+  </data>
+  <data name="DeleteLink" xml:space="preserve">
+    <value>Delete this link</value>
+  </data>
+  <data name="DeleteNote" xml:space="preserve">
+    <value>Delete this note</value>
+  </data>
+  <data name="DeletePublisher" xml:space="preserve">
+    <value>Delete this publisher</value>
+    <comment>Used on context menu to delete a publisher</comment>
+  </data>
+  <data name="DeleteSubmission" xml:space="preserve">
+    <value>Delete this submission</value>
+    <comment>Used on context menu to delete a submission</comment>
+  </data>
+  <data name="DeleteTag" xml:space="preserve">
+    <value>Delete this tag</value>
+  </data>
+  <data name="DeleteTitle" xml:space="preserve">
+    <value>Delete this title</value>
+    <comment>Used on context menu to delete a title</comment>
+  </data>
+  <data name="Developer" xml:space="preserve">
+    <value>Developer</value>
+  </data>
+  <data name="ExcludeOrphanDirectory" xml:space="preserve">
+    <value>Exclude this directory from orphan search</value>
+  </data>
+  <data name="ExcludeOrphanFile" xml:space="preserve">
+    <value>Exclude this file from orphan search</value>
+  </data>
+  <data name="ExcludeOrphanFileType" xml:space="preserve">
+    <value>Exclude all files of this type from orphan search</value>
+  </data>
+  <data name="FilterTitleListToRelated" xml:space="preserve">
+    <value>Filter title list to selected title and its related titles</value>
+  </data>
+  <data name="FilterToPublisher" xml:space="preserve">
+    <value>Filter list to display only submissions to this publisher</value>
+  </data>
+  <data name="FlagTitle" xml:space="preserve">
+    <value>Toggle flag for this title</value>
+  </data>
+  <data name="Links" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="LinkVerify" xml:space="preserve">
+    <value>Verify links</value>
+  </data>
+  <data name="MakeSeparateVersion" xml:space="preserve">
+    <value>Make this a separate version</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="OpenItemOrDoubleClick" xml:space="preserve">
+    <value>Open this item (or double click the row)</value>
+  </data>
+  <data name="OpenTitleOrDoubleClick" xml:space="preserve">
+    <value>Open the latest version of this title (or double click the row)</value>
+  </data>
+  <data name="OrphanFinder" xml:space="preserve">
+    <value>Orphan</value>
+  </data>
+  <data name="Publishers" xml:space="preserve">
+    <value>Publishers</value>
+  </data>
+  <data name="Queues" xml:space="preserve">
+    <value>Queues</value>
+  </data>
+  <data name="RemoveExclusion" xml:space="preserve">
+    <value>Remove this exclusion</value>
+  </data>
+  <data name="RemoveFromQueue" xml:space="preserve">
+    <value>Remove title from selected queue</value>
+  </data>
+  <data name="RemovePublished" xml:space="preserve">
+    <value>Remove this published record</value>
+  </data>
+  <data name="RemoveQueue" xml:space="preserve">
+    <value>Remove this queue</value>
+  </data>
+  <data name="RemoveQueueTitle" xml:space="preserve">
+    <value>Remove this title from queue</value>
+  </data>
+  <data name="RemoveRelated" xml:space="preserve">
+    <value>Remove this related title</value>
+  </data>
+  <data name="RemoveSubmissionDocument" xml:space="preserve">
+    <value>Remove this document from submission</value>
+  </data>
+  <data name="RemoveSubmissionMessage" xml:space="preserve">
+    <value>Remove this message from submission</value>
+  </data>
+  <data name="RemoveSubmissionPeriod" xml:space="preserve">
+    <value>Remove this submission period</value>
+  </data>
+  <data name="RemoveTitleFromSubmission" xml:space="preserve">
+    <value>Remove title from submission</value>
+  </data>
+  <data name="RemoveTitleVersion" xml:space="preserve">
+    <value>Remove this title version</value>
+  </data>
+  <data name="RenameQueue" xml:space="preserve">
+    <value>Rename this queue</value>
+  </data>
+  <data name="ReplaceSubmissionDocument" xml:space="preserve">
+    <value>Replace this submission document</value>
+  </data>
+  <data name="ReplaceTitleVersion" xml:space="preserve">
+    <value>Replace the file for this version with another file</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="ResetWindow" xml:space="preserve">
+    <value>Reset window</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SelfPublishers" xml:space="preserve">
+    <value>Self publishers</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+    <comment>Command text to enter the settings view</comment>
+  </data>
+  <data name="SetTitleStatusAccepted" xml:space="preserve">
+    <value>Set status to accepted</value>
+  </data>
+  <data name="SetTitleStatusNone" xml:space="preserve">
+    <value>Set status to none</value>
+  </data>
+  <data name="SetTitleStatusWithdrawn" xml:space="preserve">
+    <value>Set status to withdrawn</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="Submissions" xml:space="preserve">
+    <value>Submissions</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="TableInfo" xml:space="preserve">
+    <value>Table info</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="Titles" xml:space="preserve">
+    <value>Titles</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="UpdateTools" xml:space="preserve">
+    <value>Update Tools</value>
+  </data>
+</root>

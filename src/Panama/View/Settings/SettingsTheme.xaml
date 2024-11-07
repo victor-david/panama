@@ -15,7 +15,7 @@
 
         <StatusBar Margin="{StaticResource Panama.Layout.Padding.Bottom.Tight}">
             <Button
-                Content="{x:Static r:Strings.MenuItemReset}"
+                Content="{x:Static r:Menu.Reset}"
                 ToolTip="{x:Static r:Strings.ToolTipThemeReset}"
                 Command="{Binding Themes.ResetThemeCommand}"/>
 
