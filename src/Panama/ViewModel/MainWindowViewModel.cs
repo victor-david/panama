@@ -12,7 +12,6 @@ using Restless.Toolkit.Mvvm;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using IconKind = MahApps.Metro.IconPacks.PackIconMaterialKind;
 
@@ -24,11 +23,12 @@ namespace Restless.Panama.ViewModel
     public class MainWindowViewModel : WindowViewModel
     {
         #region Private
+        private const int ToolHeaderId = 10;
         private readonly ViewModelCache viewModelCache;
         private NavigatorItem selectedNavigatorItem;
         private ApplicationViewModel selectedViewModel;
         private string notificationMessage;
-        private bool haveToolItems;
+        //private bool haveToolItems;
         #endregion
 
         /************************************************************************/
@@ -78,15 +78,6 @@ namespace Restless.Panama.ViewModel
                 // won't display twice in a row because the property hasn't changed.
                 notificationMessage = null;
             }
-        }
-
-        /// <summary>
-        /// Gets a boolean value that indicates if there are any tools items visible
-        /// </summary>
-        public bool HaveToolItems
-        {
-            get => haveToolItems;
-            set => SetProperty(ref haveToolItems, value);
         }
         #endregion
 
@@ -141,15 +132,6 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Navigates to the specified view model
-        /// </summary>
-        /// <typeparam name="T">The type of view model</typeparam>
-        public void NavigateTo<T>() where T : ApplicationViewModel
-        {
-            //NavigatorItems.Select<T>();
-        }
-
-        /// <summary>
         /// Notifies all active view models of the specified type to update
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
@@ -176,7 +158,9 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.SetVisibility<ToolSearchViewModel>(Config.IsSearchEnabled);
             NavigatorItems.SetVisibility<ToolOrphanViewModel>(Config.IsOrphanEnabled);
             NavigatorItems.SetVisibility<TableViewModel>(Config.IsDevToolEnabled);
-            //HaveToolItems = NavigatorItems.HaveVisibleItems(NavigationGroup.Tool);
+
+            bool have = Config.IsVerifyLinkEnabled || Config.IsSearchEnabled || Config.IsOrphanEnabled || Config.IsDevToolEnabled;
+            NavigatorItems.SetHeaderVisibility(ToolHeaderId, have);
         }
 
         /// <summary>
@@ -246,7 +230,7 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.AddNavigator<LinkViewModel>(Strings.MenuItemLinks, IconKind.LinkVariant);
             NavigatorItems.AddNavigator<StatisticsViewModel>(Strings.MenuItemStatistics, IconKind.Numeric);
 
-            NavigatorItems.AddHeader(Strings.NavHeaderTools);
+            NavigatorItems.AddHeader(Strings.NavHeaderTools, ToolHeaderId);
 
             NavigatorItems.AddNavigator<ToolOrphanViewModel>(Strings.MenuItemOrphanFinder, IconKind.ClipboardSearchOutline);
             NavigatorItems.AddNavigator<ToolSearchViewModel>(Strings.MenuItemSearch, IconKind.Magnify);

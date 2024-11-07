@@ -1,8 +1,8 @@
 ﻿using Restless.Panama.Controls;
 using Restless.Panama.ViewModel;
 using Restless.Toolkit.Controls;
+using System;
 using System.Collections.ObjectModel;
-using System.Configuration;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +16,7 @@ namespace Restless.Panama.Core
         private NavigatorHeader header;
         private readonly Thickness navigatorPadding;
         private readonly Thickness separatorMargin;
+        private const int StatusCollapsed = 10;
         #endregion
 
         /************************************************************************/
@@ -64,11 +65,26 @@ namespace Restless.Panama.Core
             Add(item);
         }
 
-        public void AddHeader(string title)
+        public void AddHeader(string title, int id = 0)
         {
-            Add(new Separator() { Margin = separatorMargin });
-            Add(new TitledSeparator() { Title = title, Margin = separatorMargin });
+            Add(new TitledSeparator() { Title = title, Margin = separatorMargin, Id = id });
             AdjustNavigatorHeader();
+        }
+
+        public void SetHeaderVisibility(int headerId, bool isVisible)
+        {
+            ForEachSeparator(item =>
+            {
+                if (item.Id == headerId)
+                {
+                    item.Status = isVisible ? 0 : StatusCollapsed;
+                    if (Header != NavigatorHeader.None)
+                    {
+                        SetItemVisibility(item, isVisible);
+                    }
+                }
+            });
+
         }
 
         public void SetVisibility<T>(bool isVisible) where T : ApplicationViewModel
@@ -77,12 +93,15 @@ namespace Restless.Panama.Core
             {
                 if (item.TargetType == typeof(T))
                 {
-                    item.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
+                    SetItemVisibility(item, isVisible);
                 }
             }
         }
         #endregion
 
+        /************************************************************************/
+
+        #region Private methods
         private void SetNavigatorHeader(NavigatorHeader value)
         {
             header = value;
@@ -94,28 +113,47 @@ namespace Restless.Panama.Core
             switch (header)
             {
                 case NavigatorHeader.None:
-                    SetControlVisibility<Separator>(false);
+                    AdjustNavigatorHeader(false, false);
                     break;
                 case NavigatorHeader.Simple:
-                    SetControlVisibility<Separator>(true);
-                    SetControlVisibility<TitledSeparator>(false);
+                    AdjustNavigatorHeader(true, false);
                     break;
                 case NavigatorHeader.Titled:
-                    SetControlVisibility<Separator>(false);
-                    SetControlVisibility<TitledSeparator>(true);
+                    AdjustNavigatorHeader(true, true);
                     break;
                 default:
-                    SetControlVisibility<Separator>(false);
+                    AdjustNavigatorHeader(false, false);
                     break;
             }
         }
 
-        private void SetControlVisibility<T>(bool isVisible) where T : Control
+        private void AdjustNavigatorHeader(bool isVisible, bool isTitleVisible)
         {
-            foreach (Control control in this.OfType<T>())
+            ForEachSeparator(item =>
             {
-                control.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
+                bool isVisibleOverride = isVisible;
+                if (isVisible && item.Status == StatusCollapsed)
+                {
+                    isVisibleOverride = false;
+                }
+
+                SetItemVisibility(item, isVisibleOverride);
+                item.DisplayTitle = isTitleVisible;
+            });
+        }
+
+        private void ForEachSeparator(Action<TitledSeparator> callback)
+        {
+            foreach (TitledSeparator item in this.OfType<TitledSeparator>())
+            {
+                callback(item);
             }
         }
+
+        private void SetItemVisibility(Control item, bool isVisible)
+        {
+            item.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+        #endregion
     }
 }
