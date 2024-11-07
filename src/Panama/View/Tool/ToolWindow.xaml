@@ -77,7 +77,7 @@
             <!-- Section 1 (title metadata) -->
             <con:UpdateToolControl
                 Mode="Standard"
-                Header="{x:Static r:Strings.HeaderToolTitleMetadata}"
+                Header="{x:Static r:Header.TitleMetadata}"
                 ButtonCommand="{Binding TitleMetaCommand}"
                 ExplanationText="{x:Static r:Strings.ToolTitleMetadataDetail}"
                 FolderText="{Binding Config.FolderTitleRoot, Mode=OneTime}"
@@ -90,7 +90,7 @@
             <!-- Section 2 (submission metadata) -->
             <con:UpdateToolControl
                 Mode="Standard"
-                Header="{x:Static r:Strings.HeaderToolSubmissionMetadata}"
+                Header="{x:Static r:Header.SubmissionMetadata}"
                 ButtonCommand="{Binding SubmissionMetaCommand}"
                 ExplanationText="{x:Static r:Strings.ToolSubmissionMetadataDetail}"
                 FolderText="{Binding Config.FolderSubmissionDocument, Mode=OneTime}"
@@ -103,7 +103,7 @@
             <!-- Section 3 (export) -->
             <con:UpdateToolControl
                 Mode="Standard"
-                Header="{x:Static r:Strings.HeaderToolExport}"
+                Header="{x:Static r:Header.Export}"
                 ButtonCommand="{Binding TitleExportCommand}"
                 ExplanationText="{x:Static r:Strings.ToolExportDetail}"
                 FolderText="{Binding Config.FolderExport, Mode=OneTime}"
@@ -118,7 +118,7 @@
             <!-- Section 4 (title list) -->
             <con:UpdateToolControl
                 Mode="Text"
-                Header="{x:Static r:Strings.HeaderToolTitleList}"
+                Header="{x:Static r:Header.TitleList}"
                 ButtonCommand="{Binding TitleListCommand}"
                 ExplanationText="{x:Static r:Strings.ToolTitleListDetail}"
                 FolderText="{Binding TitleListFileName, Mode=OneTime}"
@@ -130,7 +130,7 @@
             <!-- Section 5 (messages) -->
             <con:UpdateToolControl
                 Mode="Text"
-                Header="{x:Static r:Strings.HeaderToolMessage}"
+                Header="{x:Static r:Header.Messages}"
                 ButtonCommand="{Binding MessageSyncCommand}"
                 ExplanationText="{x:Static r:Strings.ToolMessageDetail}"
                 FolderText="{Binding Config.FolderSubmissionMessage}"

@@ -21,7 +21,7 @@
     </Grid.Resources>
 
     <!-- Title edit (add and remove tags ) -->
-    <TextBlock Text="{x:Static r:Strings.HeaderAssignedTags}"/>
+    <TextBlock Text="{x:Static r:Header.AssignedTags}"/>
     <conl:TagSelectorControl
         Grid.Row="1"
         Id="{x:Static vm:TitleTagController.AssignedSelectorId}"
@@ -33,7 +33,7 @@
         tk:Property.IsCollapsed="{Binding TitleTags.HasAssignedTags}"
         Text="{x:Static r:Strings.TextNone}"/>
 
-    <TextBlock Grid.Column="1" Text="{x:Static r:Strings.HeaderAvailableTags}"/>
+    <TextBlock Grid.Column="1" Text="{x:Static r:Header.AvailableTags}"/>
     <conl:TagSelectorControl
         Grid.Row="1"
         Grid.Column="1"

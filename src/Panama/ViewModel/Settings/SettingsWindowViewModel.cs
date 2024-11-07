@@ -63,12 +63,12 @@ namespace Restless.Panama.ViewModel
         {
             Sections = new List<NavigatorSection>()
             {
-                new NavigatorSection(Strings.HeaderSettingsDisplay, 1),
-                new NavigatorSection(Strings.HeaderSettingsFolder, 2),
-                new NavigatorSection(Strings.HeaderSettingsTheme, 3),
-                new NavigatorSection(Strings.HeaderSettingsColor, 4),
-                new NavigatorSection(Strings.HeaderSettingsSubmission, 5),
-                new NavigatorSection(Strings.HeaderSettingsAdvanced, 6),
+                new NavigatorSection(Settings.Display, 1),
+                new NavigatorSection(Settings.Folder, 2),
+                new NavigatorSection(Settings.Theme, 3),
+                new NavigatorSection(Settings.Color, 4),
+                new NavigatorSection(Settings.Submission, 5),
+                new NavigatorSection(Settings.Advanced, 6),
             };
 
             NavigatorHeaders = new List<NavigatorHeader>()

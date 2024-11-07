@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Advanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
   <data name="AutoSortOnUpdated" xml:space="preserve">
     <value>Auto sort title list on updated (requires restart)</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Color</value>
   </data>
   <data name="DatabaseLocation" xml:space="preserve">
     <value>Database Location</value>
@@ -134,8 +140,17 @@ Changes will take effect after you restart the application.</value>
   <data name="DataGridRowHeight" xml:space="preserve">
     <value>Data grid row height</value>
   </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>Date Format</value>
+  </data>
   <data name="DeveloperTool" xml:space="preserve">
     <value>Enable developer tools</value>
+  </data>
+  <data name="Display" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Folders</value>
   </data>
   <data name="NavigatorHeader" xml:space="preserve">
     <value>Main Navigator Header</value>
@@ -149,8 +164,14 @@ Changes will take effect after you restart the application.</value>
   <data name="Search" xml:space="preserve">
     <value>Enable search tool</value>
   </data>
+  <data name="Submission" xml:space="preserve">
+    <value>Submission</value>
+  </data>
   <data name="TextViewer" xml:space="preserve">
     <value>Text Viewer</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Themes</value>
   </data>
   <data name="VerifyLinks" xml:space="preserve">
     <value>Enable link verification tool (experimental)</value>

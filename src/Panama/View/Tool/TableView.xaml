@@ -19,15 +19,9 @@
         IsDetailExpanded="{Binding Config.TableDetailExpanded}"
         DetailWidth="{Binding Config.TableDetailWidth}">
 
-        <!--<tk:SplitterGrid.Resources>
-            <Style TargetType="DataGrid" BasedOn="{StaticResource DataGridEditLockedStretchedStyle}">
-                <Setter Property="RowHeight" Value="28"/>
-            </Style>
-        </tk:SplitterGrid.Resources>-->
-
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-                <TextBlock Text="{x:Static r:Strings.HeaderTables}"/>
+                <TextBlock Text="{x:Static r:Header.Tables}"/>
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
 

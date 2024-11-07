@@ -176,21 +176,6 @@ Please make sure that {1} is set correctly in configuration settings. File speci
   <data name="TextSubmitted" xml:space="preserve">
     <value>Submitted</value>
   </data>
-  <data name="HeaderDocuments" xml:space="preserve">
-    <value>Documents</value>
-  </data>
-  <data name="HeaderMessages" xml:space="preserve">
-    <value>Messages</value>
-  </data>
-  <data name="HeaderSubmissions" xml:space="preserve">
-    <value>Submissions</value>
-  </data>
-  <data name="HeaderTitles" xml:space="preserve">
-    <value>Titles</value>
-  </data>
-  <data name="HeaderVersions" xml:space="preserve">
-    <value>Versions</value>
-  </data>
   <data name="InvalidOpRenameCandidateListEmpty" xml:space="preserve">
     <value>No versions exist to rename</value>
   </data>
@@ -349,29 +334,8 @@ When you save properties here however, the document's file  modification date is
   <data name="InstallationCaption" xml:space="preserve">
     <value>Select the directory that will hold the database files</value>
   </data>
-  <data name="HeaderData" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="HeaderDates" xml:space="preserve">
-    <value>Dates</value>
-  </data>
   <data name="TextPreview" xml:space="preserve">
     <value>Preview</value>
-  </data>
-  <data name="HeaderSettingsColor" xml:space="preserve">
-    <value>Colors</value>
-  </data>
-  <data name="HeaderSettingsDisplay" xml:space="preserve">
-    <value>Display</value>
-  </data>
-  <data name="HeaderSettingsDateFormat" xml:space="preserve">
-    <value>Date Format</value>
-  </data>
-  <data name="HeaderSettingsFolder" xml:space="preserve">
-    <value>Folders</value>
-  </data>
-  <data name="HeaderSettingsSubmission" xml:space="preserve">
-    <value>Submission</value>
   </data>
   <data name="ToolTipPublisherInPeriod" xml:space="preserve">
     <value>Publisher is currently in one of its submission periods</value>
@@ -452,9 +416,6 @@ When you save properties here however, the document's file  modification date is
   <data name="TooltipSelfPublisherPublishedCount" xml:space="preserve">
     <value>Published count - total number of items published</value>
   </data>
-  <data name="HeaderSelfPublished" xml:space="preserve">
-    <value>Self Published</value>
-  </data>
   <data name="InvalidOperationNoSearchScope" xml:space="preserve">
     <value>No search scope specified</value>
   </data>
@@ -475,15 +436,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="TextNoTitleVersions" xml:space="preserve">
     <value>No versions for this title</value>
-  </data>
-  <data name="HeaderAssignedTags" xml:space="preserve">
-    <value>Assigned Tags</value>
-  </data>
-  <data name="HeaderAvailableTags" xml:space="preserve">
-    <value>Available Tags</value>
-  </data>
-  <data name="HeaderSettingsAdvanced" xml:space="preserve">
-    <value>Advanced</value>
   </data>
   <data name="TextEverSubmitted" xml:space="preserve">
     <value>Ever Submitted</value>
@@ -521,20 +473,8 @@ When you save properties here however, the document's file  modification date is
   <data name="TextDescription" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="HeaderToolExport" xml:space="preserve">
-    <value>Export</value>
-  </data>
-  <data name="HeaderToolTitleMetadata" xml:space="preserve">
-    <value>Title Data</value>
-  </data>
-  <data name="HeaderToolTitleList" xml:space="preserve">
-    <value>Title List</value>
-  </data>
   <data name="TextStart" xml:space="preserve">
     <value>Start</value>
-  </data>
-  <data name="HeaderToolSubmissionMetadata" xml:space="preserve">
-    <value>Submission Data</value>
   </data>
   <data name="ToolSubmissionMetadataDetail" xml:space="preserve">
     <value>This operation verifies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time.</value>
@@ -547,9 +487,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="TextRemoved" xml:space="preserve">
     <value>Removed</value>
-  </data>
-  <data name="HeaderToolOrphan" xml:space="preserve">
-    <value>Orphan</value>
   </data>
   <data name="TextOrphans" xml:space="preserve">
     <value>Orphans</value>
@@ -565,9 +502,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="TextNote" xml:space="preserve">
     <value>Note</value>
-  </data>
-  <data name="HeaderMain" xml:space="preserve">
-    <value>Main</value>
   </data>
   <data name="TextLocked" xml:space="preserve">
     <value>Locked</value>
@@ -701,9 +635,6 @@ When you save properties here however, the document's file  modification date is
   <data name="ToolTipVerifyLinks" xml:space="preserve">
     <value>Begin verification of links</value>
   </data>
-  <data name="HeaderTagFilter" xml:space="preserve">
-    <value>Tag filter</value>
-  </data>
   <data name="TextAssigned" xml:space="preserve">
     <value>Assigned</value>
   </data>
@@ -724,12 +655,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="TextOrphan" xml:space="preserve">
     <value>Orphan</value>
-  </data>
-  <data name="HeaderTables" xml:space="preserve">
-    <value>Tables</value>
-  </data>
-  <data name="HeaderToolMessage" xml:space="preserve">
-    <value>Message Sync</value>
   </data>
   <data name="ToolMessageDetail" xml:space="preserve">
     <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
@@ -776,12 +701,6 @@ When you save properties here however, the document's file  modification date is
   <data name="ToolTipSubmissionPeriodAllYear" xml:space="preserve">
     <value>Set the submission period to the entire year</value>
   </data>
-  <data name="HeaderTitleFilter" xml:space="preserve">
-    <value>Title Filter</value>
-  </data>
-  <data name="HeaderPublisherFilter" xml:space="preserve">
-    <value>Publisher Filter</value>
-  </data>
   <data name="TextDetail" xml:space="preserve">
     <value>Detail</value>
   </data>
@@ -790,9 +709,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="ToolTipOrphanExclusions" xml:space="preserve">
     <value>Manage exclusions for orphan search</value>
-  </data>
-  <data name="HeaderSettingsTheme" xml:space="preserve">
-    <value>Themes</value>
   </data>
   <data name="ToolTipThemeEnabled" xml:space="preserve">
     <value>Theme is enabled for use</value>

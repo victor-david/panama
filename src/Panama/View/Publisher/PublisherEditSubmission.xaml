@@ -14,7 +14,7 @@
     tk:Property.RowHeights="Auto,*,Auto,2*">
 
     <!-- Submissions -->
-    <TextBlock Text="{x:Static r:Strings.HeaderSubmissions}"/>
+    <TextBlock Text="{x:Static r:Header.Submissions}"/>
 
     <tk:DataGrid
         Grid.Row="1"
@@ -30,7 +30,7 @@
         Text="{x:Static r:Strings.TextNoPublisherSubmissions}"/>
 
     <!-- Submission titles -->
-    <TextBlock Grid.Row="2" Text="{x:Static r:Strings.HeaderTitles}"/>
+    <TextBlock Grid.Row="2" Text="{x:Static r:Header.Titles}"/>
 
     <tk:DataGrid
         Grid.Row="3"

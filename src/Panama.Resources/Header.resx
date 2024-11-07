@@ -120,8 +120,14 @@
   <data name="Added" xml:space="preserve">
     <value>Added</value>
   </data>
+  <data name="AssignedTags" xml:space="preserve">
+    <value>Assigned Tags</value>
+  </data>
   <data name="Author" xml:space="preserve">
     <value>Author</value>
+  </data>
+  <data name="AvailableTags" xml:space="preserve">
+    <value>Available Tags</value>
   </data>
   <data name="Award" xml:space="preserve">
     <value>Award</value>
@@ -162,8 +168,14 @@
   <data name="Created" xml:space="preserve">
     <value>Created</value>
   </data>
+  <data name="Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Date</value>
+  </data>
+  <data name="Dates" xml:space="preserve">
+    <value>Dates</value>
   </data>
   <data name="Days" xml:space="preserve">
     <value>Days</value>
@@ -176,6 +188,9 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Documents</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Enabled</value>
@@ -197,6 +212,9 @@
   </data>
   <data name="ExclusiveShort" xml:space="preserve">
     <value>E</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
   </data>
   <data name="Expression" xml:space="preserve">
     <value>Expression</value>
@@ -236,6 +254,9 @@
   </data>
   <data name="Main" xml:space="preserve">
     <value>Main</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Messages</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -282,6 +303,9 @@
   <data name="Publisher" xml:space="preserve">
     <value>Publisher</value>
   </data>
+  <data name="PublisherFilter" xml:space="preserve">
+    <value>Publisher Filter</value>
+  </data>
   <data name="Queue" xml:space="preserve">
     <value>Queue</value>
   </data>
@@ -324,6 +348,9 @@
   <data name="Scanned" xml:space="preserve">
     <value>Scanned</value>
   </data>
+  <data name="SelfPublished" xml:space="preserve">
+    <value>Self Published</value>
+  </data>
   <data name="SelfPublishers" xml:space="preserve">
     <value>Self Publishers</value>
   </data>
@@ -354,6 +381,12 @@
   <data name="SubmissionCurrentCountShort" xml:space="preserve">
     <value>CS</value>
   </data>
+  <data name="SubmissionMetadata" xml:space="preserve">
+    <value>Submission Data</value>
+  </data>
+  <data name="Submissions" xml:space="preserve">
+    <value>Submissions</value>
+  </data>
   <data name="SubmissionTotalCount" xml:space="preserve">
     <value>Total Submission Count</value>
   </data>
@@ -366,6 +399,9 @@
   <data name="Table" xml:space="preserve">
     <value>Table</value>
   </data>
+  <data name="Tables" xml:space="preserve">
+    <value>Tables</value>
+  </data>
   <data name="Tag" xml:space="preserve">
     <value>Tag</value>
   </data>
@@ -375,11 +411,26 @@
   <data name="TagCountShort" xml:space="preserve">
     <value>TC</value>
   </data>
+  <data name="TagFilter" xml:space="preserve">
+    <value>Tag filter</value>
+  </data>
   <data name="Text" xml:space="preserve">
     <value>Text</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="TitleFilter" xml:space="preserve">
+    <value>Title Filter</value>
+  </data>
+  <data name="TitleList" xml:space="preserve">
+    <value>Title List</value>
+  </data>
+  <data name="TitleMetadata" xml:space="preserve">
+    <value>Title Data</value>
+  </data>
+  <data name="Titles" xml:space="preserve">
+    <value>Titles</value>
   </data>
   <data name="Tools" xml:space="preserve">
     <value>Tools</value>
@@ -407,6 +458,9 @@
   </data>
   <data name="VersionCountShort" xml:space="preserve">
     <value>VC</value>
+  </data>
+  <data name="Versions" xml:space="preserve">
+    <value>Versions</value>
   </data>
   <data name="VersionShort" xml:space="preserve">
     <value>V</value>

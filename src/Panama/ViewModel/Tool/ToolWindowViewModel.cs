@@ -71,11 +71,11 @@ namespace Restless.Panama.ViewModel
         {
             Sections = new List<NavigatorSection>()
             {
-                new NavigatorSection(Strings.HeaderToolTitleMetadata, 1),
-                new NavigatorSection(Strings.HeaderToolSubmissionMetadata, 2),
-                new NavigatorSection(Strings.HeaderToolExport, 3),
-                new NavigatorSection(Strings.HeaderToolTitleList, 4),
-                new NavigatorSection(Strings.HeaderToolMessage, 5),
+                new NavigatorSection(Header.TitleMetadata, 1),
+                new NavigatorSection(Header.SubmissionMetadata, 2),
+                new NavigatorSection(Header.Export, 3),
+                new NavigatorSection(Header.TitleList, 4),
+                new NavigatorSection(Header.Messages, 5),
             };
 
             SetInitialSection();

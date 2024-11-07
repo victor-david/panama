@@ -18,11 +18,11 @@
         tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto"
         SelectedValue="{Binding SelectedEditSection}">
 
-        <tk:RadioButton Grid.Column="0" Value="1" Content="{x:Static r:Strings.HeaderMain}"/>
-        <tk:RadioButton Grid.Column="1" Value="2" Content="{x:Static r:Strings.HeaderDates}"/>
-        <tk:RadioButton Grid.Column="2" Value="3" Content="{x:Static r:Strings.HeaderTitles}"/>
-        <tk:RadioButton Grid.Column="3" Value="4" Content="{x:Static r:Strings.HeaderDocuments}"/>
-        <tk:RadioButton Grid.Column="4" Value="5" Content="{x:Static r:Strings.HeaderMessages}"/>
+        <tk:RadioButton Grid.Column="0" Value="1" Content="{x:Static r:Header.Main}"/>
+        <tk:RadioButton Grid.Column="1" Value="2" Content="{x:Static r:Header.Dates}"/>
+        <tk:RadioButton Grid.Column="2" Value="3" Content="{x:Static r:Header.Titles}"/>
+        <tk:RadioButton Grid.Column="3" Value="4" Content="{x:Static r:Header.Documents}"/>
+        <tk:RadioButton Grid.Column="4" Value="5" Content="{x:Static r:Header.Messages}"/>
     </tk:RadioButtonPanel>
 
     <vw:SubmissionEditMain
