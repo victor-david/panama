@@ -52,11 +52,11 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.Updated, TableColumns.Joined.Updated)
                 .MakeDate()
-                .AddToolTip(Strings.TooltipTitleUpdated);
+                .AddToolTip(ToolTip.TitleUpdated);
 
             Columns.Create(Header.WordCountShort, TableColumns.Joined.LatestVersionWordCount)
                 .MakeFixedWidth(FixedWidth.W042)
-                .AddToolTip(Strings.TooltipTitleWordCount);
+                .AddToolTip(ToolTip.TitleWordCount);
 
             MenuItems.AddItem(Menu.AddRelated, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddItem(Menu.OpenTitleOrDoubleClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);

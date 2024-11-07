@@ -26,17 +26,17 @@
                 Margin="0,30,0,0"
                 Content="{StaticResource Panama.Icon.Arrow.Up}"
                 Command="{Binding Versions.Commands[VersionMoveUp]}"
-                ToolTip="{x:Static r:Strings.ToolTipMoveTitleVersionUp}"/>
+                ToolTip="{x:Static r:ToolTip.MoveTitleVersionUp}"/>
 
             <Button
                 Content="{StaticResource Panama.Icon.Arrow.Down}"
                 Command="{Binding Versions.Commands[VersionMoveDown]}"
-                ToolTip="{x:Static r:Strings.ToolTipMoveTitleVersionDown}"/>
+                ToolTip="{x:Static r:ToolTip.MoveTitleVersionDown}"/>
 
             <Button
                 Content="{StaticResource Panama.Icon.Synchronize}"
                 Command="{Binding Versions.Commands[VersionSync]}"
-                ToolTip="{x:Static r:Strings.ToolTipSynchonizeTitles}"/>
+                ToolTip="{x:Static r:ToolTip.SynchonizeTitles}"/>
 
         </StackPanel>
 

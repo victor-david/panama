@@ -57,7 +57,7 @@ namespace Restless.Panama.ViewModel
             Columns.CreateResource<BooleanToResourceConverter>(Header.EnabledShort, TableColumns.Enabled, ResourceKeys.Icon.IconSquare)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipAlertEnabled);
+                .AddToolTip(ToolTip.AlertEnabled);
 
             Columns.Create(Header.Date, TableColumns.Date)
                 .MakeDate()

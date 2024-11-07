@@ -134,19 +134,19 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.Added, TableColumns.Added)
                 .MakeDate()
-                .AddToolTip(Strings.ToolTipPublisherAdded)
+                .AddToolTip(ToolTip.PublisherAdded)
                 .MakeInitialSortDescending();
 
             Columns.Create(Header.LastSubmissionShort, TableColumns.Calculated.LastSub)
                 .MakeDate()
-                .AddToolTip(Strings.TooltipPublisherLastSubmission)
+                .AddToolTip(ToolTip.PublisherLastSubmission)
                 .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending)
                 .SetSelectorName(Header.LastSubmission);
 
             Columns.Create(Header.SubmissionTotalCountShort, TableColumns.Calculated.SubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
-                .AddToolTip(Strings.ToolTipPublisherSubmissionCount)
+                .AddToolTip(ToolTip.PublisherSubmissionCount)
                 .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending)
                 .SetSelectorName(Header.SubmissionTotalCount);
 

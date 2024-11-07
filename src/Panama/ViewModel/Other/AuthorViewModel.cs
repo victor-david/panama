@@ -58,7 +58,7 @@ namespace Restless.Panama.ViewModel
             Columns.CreateResource<BooleanToResourceConverter>(Header.DefaultShort, TableColumns.IsDefault, ResourceKeys.Icon.IconSquare)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipAuthorDefault);
+                .AddToolTip(ToolTip.AuthorDefault);
 
             Columns.Create(Header.Name, TableColumns.Name);
 

@@ -91,12 +91,12 @@ namespace Restless.Panama.ViewModel
             Columns.CreateResource<BooleanToResourceConverter>(Header.ReadyShort, TableColumns.Ready, ResourceKeys.Icon.IconCheck)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipTitleFilterReady);
+                .AddToolTip(ToolTip.TitleFilterReady);
 
             Columns.CreateResource<BooleanToResourceConverter>(Header.QuickShort, TableColumns.QuickFlag, ResourceKeys.Icon.IconCheck)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip(Strings.ToolTipTitleFilterFlag);
+                .AddToolTip(ToolTip.TitleFilterFlag);
 
             Columns.Create(Header.Title, TableColumns.Title);
 

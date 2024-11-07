@@ -19,7 +19,7 @@
         <tk:LinkedTextBlock
             Grid.Column="1"
             Text="{x:Static r:Strings.TextExtract}"
-            ToolTip="{x:Static r:Strings.ToolTipExtract}"
+            ToolTip="{x:Static r:ToolTip.Extract}"
             Command="{Binding Commands[ExtractTitle]}"/>
 
         <TextBox Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding SelectedTitle.Title}"/>

@@ -36,7 +36,7 @@
                     <Button
                         Style="{StaticResource MahApps.Styles.Button.Reveal}"
                         Command="{Binding ToggleCustomFilterCommand}"
-                        ToolTip="{x:Static r:Strings.ToolTipOrphanExclusions}">
+                        ToolTip="{x:Static r:ToolTip.OrphanExclusions}">
 
                         <ico:PackIconMaterial Kind="CogOutline"/>
 

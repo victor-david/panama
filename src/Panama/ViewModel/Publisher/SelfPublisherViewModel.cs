@@ -66,14 +66,14 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.Added, TableColumns.Added)
                 .MakeDate()
-                .AddToolTip(Strings.ToolTipPublisherAdded)
+                .AddToolTip(ToolTip.PublisherAdded)
                 .MakeInitialSortDescending();
 
             Columns.Create(Header.PublishedCountShort, TableColumns.Calculated.PubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .SetSelectorName(Header.PublishedCount)
-                .AddToolTip(Strings.TooltipSelfPublisherPublishedCount)
+                .AddToolTip(ToolTip.SelfPublisherPublishedCount)
                 .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
             Columns.RestoreColumnState(Config.SelfPublisherGridColumnState);

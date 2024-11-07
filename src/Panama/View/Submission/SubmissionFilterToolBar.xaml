@@ -16,29 +16,29 @@
 
     <Button
         Content="Active"
-        ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterActive}"
+        ToolTip="{x:Static r:ToolTip.SubmissionFilterActive}"
         Command="{Binding Commands[ActiveFilter]}"/>
 
     <Button
         Content="Try Again"
-        ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterTryAgain}"
+        ToolTip="{x:Static r:ToolTip.SubmissionFilterTryAgain}"
         Command="{Binding Commands[TryAgainFilter]}"/>
 
     <Button
         Content="Personal"
-        ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterPersonal}"
+        ToolTip="{x:Static r:ToolTip.SubmissionFilterPersonal}"
         Command="{Binding Commands[PersonalFilter]}"/>
 
     <Button
         Content="Accepted"
-        ToolTip="{x:Static r:Strings.ToolTipSubmissionFilterAccepted}"
+        ToolTip="{x:Static r:ToolTip.SubmissionFilterAccepted}"
         Command="{Binding Commands[AcceptedFilter]}"/>
 
     <Separator/>
 
     <Button
         Content="{x:Static r:Menu.Clear}"
-        ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
+        ToolTip="{x:Static r:ToolTip.FilterClear}"
         Command="{Binding ClearFilterCommand}"/>
 
     <Separator/>

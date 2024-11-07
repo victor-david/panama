@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlertEnabled" xml:space="preserve">
+    <value>This alert is currently enabled</value>
+  </data>
+  <data name="AuthorDefault" xml:space="preserve">
+    <value>This is the default author when creating new titles</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel the operation</value>
+  </data>
+  <data name="CopyTitles" xml:space="preserve">
+    <value>Copy the list of titles to the clipboard</value>
+  </data>
+  <data name="Extract" xml:space="preserve">
+    <value>Extract title from latest version</value>
+  </data>
+  <data name="FilterClear" xml:space="preserve">
+    <value>Clear all filters</value>
+  </data>
+  <data name="FilterCustom" xml:space="preserve">
+    <value>Establish filter(s) on the collection</value>
+  </data>
+  <data name="FilterReset" xml:space="preserve">
+    <value>Reset all filters to default</value>
+  </data>
+  <data name="MessageError" xml:space="preserve">
+    <value>An error occured parsing the message file.</value>
+  </data>
+  <data name="MessageInUse" xml:space="preserve">
+    <value>The message file is in use, i.e. it has been selected as an entry for a submission message</value>
+  </data>
+  <data name="MoveTitleVersionDown" xml:space="preserve">
+    <value>Move this title version down</value>
+  </data>
+  <data name="MoveTitleVersionUp" xml:space="preserve">
+    <value>Move this title version up</value>
+  </data>
+  <data name="OpenWindowAbout" xml:space="preserve">
+    <value>Information about the app</value>
+  </data>
+  <data name="OpenWindowSettings" xml:space="preserve">
+    <value>Open application settings</value>
+  </data>
+  <data name="OpenWindowTool" xml:space="preserve">
+    <value>Open tool window</value>
+  </data>
+  <data name="OrphanExclusions" xml:space="preserve">
+    <value>Manage exclusions for orphan search</value>
+  </data>
+  <data name="PublisherAdded" xml:space="preserve">
+    <value>The date this publisher was added to the database</value>
+  </data>
+  <data name="PublisherExclusive" xml:space="preserve">
+    <value>Publisher wants an exclusive submission, i.e. does not accept simultaneous</value>
+  </data>
+  <data name="PublisherFilterActive" xml:space="preserve">
+    <value>Filter publisher list to display only publishers that are active, i.e. not flagged as a goner</value>
+  </data>
+  <data name="PublisherFilterFollowup" xml:space="preserve">
+    <value>Filter publisher list to display only publishers that are active and flagged for follow up</value>
+  </data>
+  <data name="PublisherFilterHaveSub" xml:space="preserve">
+    <value>Filter publisher list to display only publishers that currently have an open submission</value>
+  </data>
+  <data name="PublisherFilterInPeriod" xml:space="preserve">
+    <value>Filter publisher list to display only publishers that are active and currently within a submission period</value>
+  </data>
+  <data name="PublisherFilterPaying" xml:space="preserve">
+    <value>Filter publisher list to display only publishers that are active and are a paying market</value>
+  </data>
+  <data name="PublisherHasActive" xml:space="preserve">
+    <value>Publisher currently has at least one submission that is active</value>
+  </data>
+  <data name="PublisherInPeriod" xml:space="preserve">
+    <value>Publisher is currently in one of its submission periods</value>
+  </data>
+  <data name="PublisherLastSubmission" xml:space="preserve">
+    <value>The date that the last submission was created for this publisher</value>
+  </data>
+  <data name="PublisherPay" xml:space="preserve">
+    <value>Publisher is a paying market</value>
+  </data>
+  <data name="PublisherSubmissionCount" xml:space="preserve">
+    <value>Submission count - the total number of times a submission has been made to this publisher</value>
+  </data>
+  <data name="PublisherSubmissionPeriodCount" xml:space="preserve">
+    <value>Submission period count - the total number of submission periods that have been assigned to this publisher</value>
+  </data>
+  <data name="RefreshLinkVerify" xml:space="preserve">
+    <value>Refresh the link list, adding new entries and removing any stale entries</value>
+  </data>
+  <data name="ResetWindow" xml:space="preserve">
+    <value>Reset this window to its default size</value>
+  </data>
+  <data name="SaveAll" xml:space="preserve">
+    <value>Save all data (saves automatcially on exit)</value>
+  </data>
+  <data name="ScrambleBegin" xml:space="preserve">
+    <value>Scramble the text in the text area</value>
+  </data>
+  <data name="ScramblePaste" xml:space="preserve">
+    <value>Paste text from the clipboard into the text area to be scrambled</value>
+  </data>
+  <data name="ScrambleWord" xml:space="preserve">
+    <value>When activated, words within the lines will be scrambled</value>
+  </data>
+  <data name="SelfPublisherPublishedCount" xml:space="preserve">
+    <value>Published count - total number of items published</value>
+  </data>
+  <data name="SendReport" xml:space="preserve">
+    <value>Send problem report. No personal information is included</value>
+  </data>
+  <data name="SubmissionContest" xml:space="preserve">
+    <value>Submission is for a contest</value>
+  </data>
+  <data name="SubmissionFilterAccepted" xml:space="preserve">
+    <value>Submission has been accepted</value>
+  </data>
+  <data name="SubmissionFilterActive" xml:space="preserve">
+    <value>Submission is active (has not yet received a response)</value>
+  </data>
+  <data name="SubmissionFilterPersonal" xml:space="preserve">
+    <value>Submission received a personal response</value>
+  </data>
+  <data name="SubmissionFilterTryAgain" xml:space="preserve">
+    <value>Submission received a try again response</value>
+  </data>
+  <data name="SubmissionLocked" xml:space="preserve">
+    <value>Submission is locked</value>
+  </data>
+  <data name="SubmissionOnline" xml:space="preserve">
+    <value>Submission is online</value>
+  </data>
+  <data name="SubmissionPeriodAllYear" xml:space="preserve">
+    <value>Set the submission period to the entire year</value>
+  </data>
+  <data name="SynchonizeTitles" xml:space="preserve">
+    <value>Synchronize file names to title and version</value>
+  </data>
+  <data name="ThemeEnabled" xml:space="preserve">
+    <value>Theme is enabled for use</value>
+  </data>
+  <data name="ThemeReset" xml:space="preserve">
+    <value>Reset to default theme</value>
+  </data>
+  <data name="TitleCurrentSubmissionCount" xml:space="preserve">
+    <value>Current submission count - the number of submissions that are still open for this title</value>
+  </data>
+  <data name="TitleFilterFlag" xml:space="preserve">
+    <value>Title is flagged</value>
+  </data>
+  <data name="TitleFilterPublished" xml:space="preserve">
+    <value>Title has been published</value>
+  </data>
+  <data name="TitleFilterReady" xml:space="preserve">
+    <value>Title is flagged as ready</value>
+  </data>
+  <data name="TitleFilterSubmitted" xml:space="preserve">
+    <value>Title is currently submitted</value>
+  </data>
+  <data name="TitlePublishedCount" xml:space="preserve">
+    <value>Published count - the number of times this title has been published.</value>
+  </data>
+  <data name="TitleRelatedCount" xml:space="preserve">
+    <value>Related count - the number of related titles this title contains</value>
+  </data>
+  <data name="TitleSubmissionCount" xml:space="preserve">
+    <value>Submission count - the total number of times this title has been submitted</value>
+  </data>
+  <data name="TitleTagCount" xml:space="preserve">
+    <value>Tag count - the number of tags assigned to this title</value>
+  </data>
+  <data name="TitleUpdated" xml:space="preserve">
+    <value>The updated date for the latest version of this title</value>
+  </data>
+  <data name="TitleVersionCount" xml:space="preserve">
+    <value>Version count - the number of versions that this title has</value>
+  </data>
+  <data name="TitleWordCount" xml:space="preserve">
+    <value>Word count - the number of words in the latest version of this title</value>
+  </data>
+  <data name="VerifyLinks" xml:space="preserve">
+    <value>Begin verification of links</value>
+  </data>
+  <data name="ToolTitleListDetail" xml:space="preserve">
+    <value>This operation creates a text file that has a list of all titles and their corresponding versions.</value>
+  </data>
+  <data name="ToolTitleMetadataDetail" xml:space="preserve">
+    <value>This operation verifies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count.</value>
+  </data>
+</root>

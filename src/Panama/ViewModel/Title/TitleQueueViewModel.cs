@@ -281,11 +281,11 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.Written, TableColumns.Joined.Written).MakeDate();
             Columns.Create(Header.Updated, TableColumns.Joined.Updated)
                 .MakeDate()
-                .AddToolTip(Strings.TooltipTitleUpdated);
+                .AddToolTip(ToolTip.TitleUpdated);
 
             Columns.Create(Header.WordCountShort, TableColumns.Joined.WordCount)
                 .MakeFixedWidth(FixedWidth.W042)
-                .AddToolTip(Strings.TooltipTitleWordCount)
+                .AddToolTip(ToolTip.TitleWordCount)
                 .SetSelectorName(Header.WordCount);
 
             Columns.Create(Header.Status, TableColumns.Joined.Status).CanUserSort = false;

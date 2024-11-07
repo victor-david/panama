@@ -16,22 +16,22 @@
 
     <Button
         Content="Active"
-        ToolTip="{x:Static r:Strings.ToolTipPublisherFilterActive}"
+        ToolTip="{x:Static r:ToolTip.PublisherFilterActive}"
         Command="{Binding Commands[ActiveFilter]}"/>
 
     <Button
         Content="Open"
-        ToolTip="{x:Static r:Strings.ToolTipPublisherFilterHaveSub}"
+        ToolTip="{x:Static r:ToolTip.PublisherFilterHaveSub}"
         Command="{Binding Commands[HaveSubFilter]}"/>
 
     <Button
         Content="In Period"
-        ToolTip="{x:Static r:Strings.ToolTipPublisherFilterInPeriod}"
+        ToolTip="{x:Static r:ToolTip.PublisherFilterInPeriod}"
         Command="{Binding Commands[InPeriodFilter]}"/>
 
     <Button
         Content="Paying"
-        ToolTip="{x:Static r:Strings.ToolTipPublisherFilterPaying}"
+        ToolTip="{x:Static r:ToolTip.PublisherFilterPaying}"
         Command="{Binding Commands[PayingFilter]}"/>
 
     <Separator/>
@@ -39,12 +39,12 @@
     <Button
         x:Name="CustomFilterButton"
         Content="{x:Static r:Menu.Custom}"
-        ToolTip="{x:Static r:Strings.ToolTipFilterCustom}"
+        ToolTip="{x:Static r:ToolTip.FilterCustom}"
         Command="{Binding ToggleCustomFilterCommand}"/>
 
     <Button
         Content="{x:Static r:Menu.Clear}"
-        ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
+        ToolTip="{x:Static r:ToolTip.FilterClear}"
         Command="{Binding ClearFilterCommand}"/>
 
     <Separator/>

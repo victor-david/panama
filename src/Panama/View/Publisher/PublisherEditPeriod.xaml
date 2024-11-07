@@ -63,7 +63,7 @@
             SelectedDay="{Binding Periods.SelectedPeriod.DayEnd}"/>
 
         <StatusBar Grid.Row="4" Grid.ColumnSpan="3">
-            <Button Content="All year" Command="{Binding Periods.Commands[MakeAllYear]}" ToolTip="{x:Static r:Strings.ToolTipSubmissionPeriodAllYear}"/>
+            <Button Content="All year" Command="{Binding Periods.Commands[MakeAllYear]}" ToolTip="{x:Static r:ToolTip.SubmissionPeriodAllYear}"/>
         </StatusBar>
     </Grid>
 </Grid>

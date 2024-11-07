@@ -233,47 +233,17 @@ Last exported: {1}</value>
   <data name="TitleStatusPreviousToPublisher" xml:space="preserve">
     <value>Previously submitted to the same publisher</value>
   </data>
-  <data name="TooltipTitleCurrentSubmissionCount" xml:space="preserve">
-    <value>Current submission count - the number of submissions that are still open for this title</value>
-  </data>
-  <data name="TooltipTitlePublishedCount" xml:space="preserve">
-    <value>Published count - the number of times this title has been published.</value>
-  </data>
-  <data name="TooltipTitleSubmissionCount" xml:space="preserve">
-    <value>Submission count - the total number of times this title has been submitted</value>
-  </data>
-  <data name="TooltipTitleTagCount" xml:space="preserve">
-    <value>Tag count - the number of tags assigned to this title</value>
-  </data>
-  <data name="TooltipTitleUpdated" xml:space="preserve">
-    <value>The updated date for the latest version of this title</value>
-  </data>
-  <data name="TooltipTitleVersionCount" xml:space="preserve">
-    <value>Version count - the number of versions that this title has</value>
-  </data>
   <data name="WindowTitleSelectPublisherForPublished" xml:space="preserve">
     <value>Select a publisher for this published record</value>
   </data>
   <data name="WindowTitleSelectPublisherGeneric" xml:space="preserve">
     <value>Select a publisher</value>
   </data>
-  <data name="ToolTipPublisherAdded" xml:space="preserve">
-    <value>The date this publisher was added to the database</value>
-  </data>
-  <data name="TooltipPublisherLastSubmission" xml:space="preserve">
-    <value>The date that the last submission was created for this publisher</value>
-  </data>
-  <data name="ToolTipPublisherSubmissionCount" xml:space="preserve">
-    <value>Submission count - the total number of times a submission has been made to this publisher</value>
-  </data>
   <data name="TextNotes" xml:space="preserve">
     <value>Notes</value>
   </data>
   <data name="TextClear" xml:space="preserve">
     <value>Clear</value>
-  </data>
-  <data name="ToolTipPublisherSubmissionPeriodCount" xml:space="preserve">
-    <value>Submission period count - the total number of submission periods that have been assigned to this publisher</value>
   </data>
   <data name="ToolOrphanDetail" xml:space="preserve">
     <value>This operation searches all files beneath the title root directory to find those files that are not associated with a title entry. The submission document folder and title export folder are automatically excluded from the search if they exist beneath title root. You can exclude other folders in configuration.</value>
@@ -292,9 +262,6 @@ Last exported: {1}</value>
   </data>
   <data name="ToolTitleListDetail" xml:space="preserve">
     <value>This operation creates a text file that has a list of all titles and their corresponding versions.</value>
-  </data>
-  <data name="TooltipTitleWordCount" xml:space="preserve">
-    <value>Word count - the number of words in the latest version of this title</value>
   </data>
   <data name="HeaderToolOperationScramble" xml:space="preserve">
     <value>This operation enables you to scramble lines of text, and optionally the words within the lines. Paste text to begin.</value>
@@ -337,56 +304,11 @@ When you save properties here however, the document's file  modification date is
   <data name="TextPreview" xml:space="preserve">
     <value>Preview</value>
   </data>
-  <data name="ToolTipPublisherInPeriod" xml:space="preserve">
-    <value>Publisher is currently in one of its submission periods</value>
-  </data>
-  <data name="ToolTipPublisherPay" xml:space="preserve">
-    <value>Publisher is a paying market</value>
-  </data>
-  <data name="ToolTipPublisherFilterFollowup" xml:space="preserve">
-    <value>Filter publisher list to display only publishers that are active and flagged for follow up</value>
-  </data>
-  <data name="ToolTipPublisherFilterInPeriod" xml:space="preserve">
-    <value>Filter publisher list to display only publishers that are active and currently within a submission period</value>
-  </data>
-  <data name="ToolTipPublisherFilterPaying" xml:space="preserve">
-    <value>Filter publisher list to display only publishers that are active and are a paying market</value>
-  </data>
-  <data name="ToolTipPublisherFilterActive" xml:space="preserve">
-    <value>Filter publisher list to display only publishers that are active, i.e. not flagged as a goner</value>
-  </data>
-  <data name="ToolTipSubmissionContest" xml:space="preserve">
-    <value>Submission is for a contest</value>
-  </data>
-  <data name="ToolTipSubmissionLocked" xml:space="preserve">
-    <value>Submission is locked</value>
-  </data>
-  <data name="ToolTipSubmissionOnline" xml:space="preserve">
-    <value>Submission is online</value>
-  </data>
-  <data name="ToolTipTitleFilterReady" xml:space="preserve">
-    <value>Title is flagged as ready</value>
-  </data>
-  <data name="ToolTipPublisherExclusive" xml:space="preserve">
-    <value>Publisher wants an exclusive submission, i.e. does not accept simultaneous</value>
-  </data>
   <data name="TitleStatusSubmittedToExclusive" xml:space="preserve">
     <value>Currently submitted to a publisher that does not accept simultaneous submissions</value>
   </data>
-  <data name="ToolTipPublisherHasActive" xml:space="preserve">
-    <value>Publisher currently has at least one submission that is active</value>
-  </data>
-  <data name="ToolTipPublisherFilterHaveSub" xml:space="preserve">
-    <value>Filter publisher list to display only publishers that currently have an open submission</value>
-  </data>
   <data name="InvalidOpSubmissionMessageFolderNotSet" xml:space="preserve">
     <value>The folder for submission messages has not been set or doesn't exist. Fix the configuration setting and try again.</value>
-  </data>
-  <data name="TooltipMessageError" xml:space="preserve">
-    <value>An error occured parsing the message file.</value>
-  </data>
-  <data name="TooltipMessageInUse" xml:space="preserve">
-    <value>The message file is in use, i.e. it has been selected as an entry for a submission message</value>
   </data>
   <data name="InvalidOpCannotDisplayMapi" xml:space="preserve">
     <value>The message contents can't be displayed here. This message is a direct reference to the item stored in the Outlook message store. Double click the row to open the message.</value>
@@ -397,39 +319,12 @@ When you save properties here however, the document's file  modification date is
   <data name="HeaderToolOperationMessageSync" xml:space="preserve">
     <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
   </data>
-  <data name="ToolTipTitleFilterFlag" xml:space="preserve">
-    <value>Title is flagged</value>
-  </data>
   <data name="InvalidOpCannotAddVersionFile" xml:space="preserve">
     <value>This file has already been added to this title. Please choose a different file.</value>
     <comment>Used when a file can't be added or replaced as a version file because it is already included</comment>
   </data>
-  <data name="TooltipScrambleBegin" xml:space="preserve">
-    <value>Scramble the text in the text area</value>
-  </data>
-  <data name="TooltipScramblePaste" xml:space="preserve">
-    <value>Paste text from the clipboard into the text area to be scrambled</value>
-  </data>
-  <data name="TooltipScrambleWord" xml:space="preserve">
-    <value>When activated, words within the lines will be scrambled</value>
-  </data>
-  <data name="TooltipSelfPublisherPublishedCount" xml:space="preserve">
-    <value>Published count - total number of items published</value>
-  </data>
   <data name="InvalidOperationNoSearchScope" xml:space="preserve">
     <value>No search scope specified</value>
-  </data>
-  <data name="ToolTipFilterCustom" xml:space="preserve">
-    <value>Establish filter(s) on the collection</value>
-  </data>
-  <data name="ToolTipFilterClear" xml:space="preserve">
-    <value>Clear all filters</value>
-  </data>
-  <data name="ToolTipTitleFilterPublished" xml:space="preserve">
-    <value>Title has been published</value>
-  </data>
-  <data name="ToolTipTitleFilterSubmitted" xml:space="preserve">
-    <value>Title is currently submitted</value>
   </data>
   <data name="TextDocumentPreviewNotSupported" xml:space="preserve">
     <value>Document Preview Not Supported</value>
@@ -461,14 +356,8 @@ When you save properties here however, the document's file  modification date is
   <data name="TextExtract" xml:space="preserve">
     <value>Extract</value>
   </data>
-  <data name="ToolTipExtract" xml:space="preserve">
-    <value>Extract title from latest version</value>
-  </data>
   <data name="TextUrl" xml:space="preserve">
     <value>Url</value>
-  </data>
-  <data name="ToolTipAuthorDefault" xml:space="preserve">
-    <value>This is the default author when creating new titles</value>
   </data>
   <data name="TextDescription" xml:space="preserve">
     <value>Description</value>
@@ -478,9 +367,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="ToolSubmissionMetadataDetail" xml:space="preserve">
     <value>This operation verifies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time.</value>
-  </data>
-  <data name="ToolTipResetWindow" xml:space="preserve">
-    <value>Reset this window to its default size</value>
   </data>
   <data name="TextAddedUpdated" xml:space="preserve">
     <value>Added / Updated</value>
@@ -505,18 +391,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="TextLocked" xml:space="preserve">
     <value>Locked</value>
-  </data>
-  <data name="ToolTipSubmissionFilterAccepted" xml:space="preserve">
-    <value>Submission has been accepted</value>
-  </data>
-  <data name="ToolTipSubmissionFilterActive" xml:space="preserve">
-    <value>Submission is active (has not yet received a response)</value>
-  </data>
-  <data name="ToolTipSubmissionFilterPersonal" xml:space="preserve">
-    <value>Submission received a personal response</value>
-  </data>
-  <data name="ToolTipSubmissionFilterTryAgain" xml:space="preserve">
-    <value>Submission received a try again response</value>
   </data>
   <data name="WindowTitleSelectTitlesGeneric" xml:space="preserve">
     <value>Select titles</value>
@@ -578,9 +452,6 @@ When you save properties here however, the document's file  modification date is
   <data name="TextEnabled" xml:space="preserve">
     <value>Enabled</value>
   </data>
-  <data name="ToolTipAlertEnabled" xml:space="preserve">
-    <value>This alert is currently enabled</value>
-  </data>
   <data name="TextDays01" xml:space="preserve">
     <value>1 day</value>
   </data>
@@ -605,35 +476,17 @@ When you save properties here however, the document's file  modification date is
   <data name="TextSendReport" xml:space="preserve">
     <value>Send report</value>
   </data>
-  <data name="ToolTipSendReport" xml:space="preserve">
-    <value>Send problem report. No personal information is included</value>
-  </data>
   <data name="WindowTitleFatalError" xml:space="preserve">
     <value>Fatal Error</value>
   </data>
   <data name="TextNoTitleSubmissions" xml:space="preserve">
     <value>No submissions for this title</value>
   </data>
-  <data name="ToolTipSynchonizeTitles" xml:space="preserve">
-    <value>Synchronize file names to title and version</value>
-  </data>
-  <data name="ToolTipCopyTitles" xml:space="preserve">
-    <value>Copy the list of titles to the clipboard</value>
-  </data>
   <data name="TextRefresh" xml:space="preserve">
     <value>Refresh</value>
   </data>
   <data name="TextVerify" xml:space="preserve">
     <value>Verify</value>
-  </data>
-  <data name="ToolTipCancel" xml:space="preserve">
-    <value>Cancel the operation</value>
-  </data>
-  <data name="ToolTipRefreshLinkVerify" xml:space="preserve">
-    <value>Refresh the link list, adding new entries and removing any stale entries</value>
-  </data>
-  <data name="ToolTipVerifyLinks" xml:space="preserve">
-    <value>Begin verification of links</value>
   </data>
   <data name="TextAssigned" xml:space="preserve">
     <value>Assigned</value>
@@ -662,35 +515,11 @@ When you save properties here however, the document's file  modification date is
   <data name="TextClearDate" xml:space="preserve">
     <value>Clear date</value>
   </data>
-  <data name="ToolTipTitleRelatedCount" xml:space="preserve">
-    <value>Related count - the number of related titles this title contains</value>
-  </data>
-  <data name="ToolTipFilterReset" xml:space="preserve">
-    <value>Reset all filters to default</value>
-  </data>
   <data name="TextHasRelated" xml:space="preserve">
     <value>Has Related Title</value>
   </data>
   <data name="TextStartup" xml:space="preserve">
     <value>Startup</value>
-  </data>
-  <data name="ToolTipOpenWindowAbout" xml:space="preserve">
-    <value>Information about the app</value>
-  </data>
-  <data name="ToolTipSaveAll" xml:space="preserve">
-    <value>Save all data (saves automatcially on exit)</value>
-  </data>
-  <data name="ToolTipOpenWindowSettings" xml:space="preserve">
-    <value>Open application settings</value>
-  </data>
-  <data name="ToolTipOpenWindowTool" xml:space="preserve">
-    <value>Open tool window</value>
-  </data>
-  <data name="ToolTipMoveTitleVersionDown" xml:space="preserve">
-    <value>Move this title version down</value>
-  </data>
-  <data name="ToolTipMoveTitleVersionUp" xml:space="preserve">
-    <value>Move this title version up</value>
   </data>
   <data name="TextNo" xml:space="preserve">
     <value>No</value>
@@ -698,20 +527,11 @@ When you save properties here however, the document's file  modification date is
   <data name="TextYes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="ToolTipSubmissionPeriodAllYear" xml:space="preserve">
-    <value>Set the submission period to the entire year</value>
-  </data>
   <data name="TextDetail" xml:space="preserve">
     <value>Detail</value>
   </data>
   <data name="TextApplicationTerminate" xml:space="preserve">
     <value>The application will now terminate</value>
-  </data>
-  <data name="ToolTipOrphanExclusions" xml:space="preserve">
-    <value>Manage exclusions for orphan search</value>
-  </data>
-  <data name="ToolTipThemeEnabled" xml:space="preserve">
-    <value>Theme is enabled for use</value>
   </data>
   <data name="TextDark" xml:space="preserve">
     <value>Dark</value>
@@ -721,8 +541,5 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="TextLight" xml:space="preserve">
     <value>Light</value>
-  </data>
-  <data name="ToolTipThemeReset" xml:space="preserve">
-    <value>Reset to default theme</value>
   </data>
 </root>

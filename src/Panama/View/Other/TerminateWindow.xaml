@@ -30,7 +30,7 @@
             <StatusBarItem DockPanel.Dock="Right" tk:Property.IsVisible="{Binding IsSendCommandEnabled}">
                 <Button
                     Content="{x:Static r:Strings.TextSendReport}"
-                    ToolTip="{x:Static r:Strings.ToolTipSendReport}"
+                    ToolTip="{x:Static r:ToolTip.SendReport}"
                     Command="{Binding SendCommand}"/>
             </StatusBarItem>
 

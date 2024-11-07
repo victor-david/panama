@@ -28,20 +28,20 @@
                 <Button
                     Content="{x:Static r:Strings.TextRefresh}"
                     Command="{Binding RefreshCommand}"
-                    ToolTip="{x:Static r:Strings.ToolTipRefreshLinkVerify}"
+                    ToolTip="{x:Static r:ToolTip.RefreshLinkVerify}"
                     tk:Property.IsInverseEnabled="{Binding IsOperationInProgress}"/>
 
                 <Button
                     Content="{x:Static r:Strings.TextVerify}"
                     Command="{Binding VerifyCommand}"
-                    ToolTip="{x:Static r:Strings.ToolTipVerifyLinks}"
+                    ToolTip="{x:Static r:ToolTip.VerifyLinks}"
                     tk:Property.IsCollapsed="{Binding IsOperationInProgress}"
                     tk:Property.IsInverseEnabled="{Binding IsOperationInProgress}"/>
 
                 <Button
                     Content="{x:Static r:Strings.TextCancel}"
                     Command="{Binding CancelCommand}"
-                    ToolTip="{x:Static r:Strings.ToolTipCancel}"
+                    ToolTip="{x:Static r:ToolTip.Cancel}"
                     tk:Property.IsVisible="{Binding IsOperationInProgress}"
                     tk:Property.IsInverseEnabled="{Binding IsCanceling}"/>
 

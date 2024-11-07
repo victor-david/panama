@@ -27,31 +27,31 @@
 
             <Button
                 Command="{Binding SaveAllCommand}"
-                ToolTip="{x:Static r:Strings.ToolTipSaveAll}">
+                ToolTip="{x:Static r:ToolTip.SaveAll}">
                 <ico:PackIconMaterial Kind="ContentSaveAllOutline"/>
             </Button>
 
             <Button
                 Command="{Binding OpenSettingsCommand}"
-                ToolTip="{x:Static r:Strings.ToolTipOpenWindowSettings}">
+                ToolTip="{x:Static r:ToolTip.OpenWindowSettings}">
                 <ico:PackIconMaterial Kind="CogOutline"/>
             </Button>
 
             <Button
                 Command="{Binding ResetWindowCommand}"
-                ToolTip="{x:Static r:Strings.ToolTipResetWindow}">
+                ToolTip="{x:Static r:ToolTip.ResetWindow}">
                 <ico:Material Kind="Monitor"/>
             </Button>
 
             <Button
                 Command="{Binding OpenToolsCommand}"
-                ToolTip="{x:Static r:Strings.ToolTipOpenWindowTool}">
+                ToolTip="{x:Static r:ToolTip.OpenWindowTool}">
                 <ico:Material Kind="Tools"/>
             </Button>
 
             <Button
                 Command="{Binding OpenAboutCommand}"
-                ToolTip="{x:Static r:Strings.ToolTipOpenWindowAbout}">
+                ToolTip="{x:Static r:ToolTip.OpenWindowAbout}">
                 <ico:PackIconMaterial Kind="InformationVariant"/>
             </Button>
 

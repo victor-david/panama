@@ -17,22 +17,22 @@
 
     <Button
         Content="Ready"
-        ToolTip="{x:Static r:Strings.ToolTipTitleFilterReady}"
+        ToolTip="{x:Static r:ToolTip.TitleFilterReady}"
         Command="{Binding Commands[ReadyFilter]}"/>
 
     <Button
         Content="Flagged"
-        ToolTip="{x:Static r:Strings.ToolTipTitleFilterFlag}"
+        ToolTip="{x:Static r:ToolTip.TitleFilterFlag}"
         Command="{Binding Commands[FlaggedFilter]}"/>
 
     <Button
         Content="Submitted"
-        ToolTip="{x:Static r:Strings.ToolTipTitleFilterSubmitted}"
+        ToolTip="{x:Static r:ToolTip.TitleFilterSubmitted}"
         Command="{Binding Commands[SubmittedFilter]}"/>
 
     <Button
         Content="Published"
-        ToolTip="{x:Static r:Strings.ToolTipTitleFilterPublished}"
+        ToolTip="{x:Static r:ToolTip.TitleFilterPublished}"
         Command="{Binding Commands[PublishedFilter]}"/>
 
     <Separator/>
@@ -40,12 +40,12 @@
     <Button
         x:Name="CustomFilterButton"
         Content="{x:Static r:Menu.Custom}"
-        ToolTip="{x:Static r:Strings.ToolTipFilterCustom}"
+        ToolTip="{x:Static r:ToolTip.FilterCustom}"
         Command="{Binding ToggleCustomFilterCommand}"/>
 
     <Button
         Content="{x:Static r:Menu.Clear}"
-        ToolTip="{x:Static r:Strings.ToolTipFilterClear}"
+        ToolTip="{x:Static r:ToolTip.FilterClear}"
         Command="{Binding ClearFilterCommand}"/>
 
     <Separator/>

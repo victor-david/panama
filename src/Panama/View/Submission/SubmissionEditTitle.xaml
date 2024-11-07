@@ -45,7 +45,7 @@
         <Button
             Content="{StaticResource Panama.Icon.Copy}"
             Command="{Binding Titles.Commands[CopyToClipboard]}"
-            ToolTip="{x:Static r:Strings.ToolTipCopyTitles}"/>
+            ToolTip="{x:Static r:ToolTip.CopyTitles}"/>
 
     </StackPanel>
 

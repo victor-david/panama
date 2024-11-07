@@ -28,7 +28,7 @@
 
             <Button
                 Command="{Binding ResetWindowCommand}"
-                ToolTip="{x:Static r:Strings.ToolTipResetWindow}">
+                ToolTip="{x:Static r:ToolTip.ResetWindow}">
                 <ico:PackIconMaterial Kind="Monitor"/>
             </Button>
 

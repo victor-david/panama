@@ -70,7 +70,7 @@
 
                     <Button
                         Content="{x:Static r:Menu.Reset}"
-                        ToolTip="{x:Static r:Strings.ToolTipFilterReset}"
+                        ToolTip="{x:Static r:ToolTip.FilterReset}"
                         Command="{Binding ClearFilterCommand}"/>
 
                     <Separator Margin="16,0"/>

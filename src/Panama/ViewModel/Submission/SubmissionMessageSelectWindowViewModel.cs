@@ -73,12 +73,12 @@ namespace Restless.Panama.ViewModel
             Columns.CreateResource<BooleanToResourceConverter>(Header.ErrorShort, nameof(MimeKitMessage.IsError), ResourceKeys.Icon.IconError)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W034)
-                .AddToolTip(Strings.TooltipMessageError);
+                .AddToolTip(ToolTip.MessageError);
 
             Columns.CreateResource<BooleanToResourceConverter>(Header.InUseShort, nameof(MimeKitMessage.InUse), ResourceKeys.Icon.IconInUse)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W034)
-                .AddToolTip(Strings.TooltipMessageInUse);
+                .AddToolTip(ToolTip.MessageInUse);
 
             Columns.Create(Header.Date, nameof(MimeKitMessage.MessageDateUtc))
                 .MakeDate()
