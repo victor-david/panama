@@ -60,13 +60,13 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public SubmissionMessageController(SubmissionViewModel owner) : base(owner)
         {
-            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Date", TableColumns.MessageDate)
+            Columns.Create(Header.Id, TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create(Header.Date, TableColumns.MessageDate)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("Type", TableColumns.Protocol).MakeFixedWidth(FixedWidth.W048);
-            Columns.Create("Subject", TableColumns.Display);
+            Columns.Create(Header.Type, TableColumns.Protocol).MakeFixedWidth(FixedWidth.W048);
+            Columns.Create(Header.Subject, TableColumns.Display);
 
             MenuItems.AddItem(Strings.MenuItemAddSubmissionMessage, AddCommand)
                 .AddIconResource(ResourceKeys.Icon.IconAdd);

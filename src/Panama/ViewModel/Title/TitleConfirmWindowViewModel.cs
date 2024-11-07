@@ -6,6 +6,7 @@
 */
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
@@ -52,14 +53,15 @@ namespace Restless.Panama.ViewModel
 
             ArgumentNullException.ThrowIfNull(selectedTitles);
 
-            Columns.Create("Id", nameof(TitleSubmission.Id))
+            Columns.Create(Header.Id, nameof(TitleSubmission.Id))
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Title", nameof(TitleSubmission.Title))
+            Columns.Create(Header.Title, nameof(TitleSubmission.Title))
                 .MakeFlexWidth(1.5)
                 .MakeInitialSortAscending();
-            Columns.Create("Status", nameof(TitleSubmission.StatusString));
+
+            Columns.Create(Header.Status, nameof(TitleSubmission.StatusString));
 
             Commands.Add("Confirm", RunConfirmCommand);
 

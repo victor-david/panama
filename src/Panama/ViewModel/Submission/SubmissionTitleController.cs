@@ -53,22 +53,22 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public SubmissionTitleController(SubmissionViewModel owner) : base(owner)
         {
-            Columns.Create("Id", TableColumns.Id)
+            Columns.Create(Header.Id, TableColumns.Id)
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("O", TableColumns.Ordering)
+            Columns.Create(Header.OrderingShort, TableColumns.Ordering)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
-                .AddToolTip("Ordering");
+                .AddToolTip(Header.Ordering);
 
-            Columns.CreateResource<Int64ToResourceConverter>("S", TableColumns.Status, ResourceKeys.Icon.GetTitleStatusIconMap())
+            Columns.CreateResource<Int64ToResourceConverter>(Header.StatusShort, TableColumns.Status, ResourceKeys.Icon.GetTitleStatusIconMap())
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W028)
                 .AddToolTip(SubmissionTitleStatusToolTip.Create(this));
 
-            Columns.Create("Title", TableColumns.Joined.Title);
+            Columns.Create(Header.Title, TableColumns.Joined.Title);
 
-            Columns.Create("Written", TableColumns.Joined.Written)
+            Columns.Create(Header.Written, TableColumns.Joined.Written)
                 .MakeDate();
 
             Commands.Add("TitleMoveUp", RunMoveUpCommand, CanRunMoveUpCommand);

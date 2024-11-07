@@ -58,25 +58,25 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public LinkVerifyViewModel()
         {
-            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create(Header.Id, TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Xid", TableColumns.Xid).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create(Header.Xid, TableColumns.Xid).MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create("Source", TableColumns.Source)
+            Columns.Create(Header.Source, TableColumns.Source)
                 .MakeFixedWidth(FixedWidth.W096)
                 .MakeInitialSortAscending();
 
-            Columns.Create("Url", TableColumns.Url);
+            Columns.Create(Header.Url, TableColumns.Url);
 
-            Columns.Create("Scanned", TableColumns.Scanned)
+            Columns.Create(Header.Scanned, TableColumns.Scanned)
                 .MakeDate();
 
-            Columns.Create("Status", TableColumns.Status)
+            Columns.Create(Header.Status, TableColumns.Status)
                 .MakeFixedWidth(FixedWidth.W076);
 
-            Columns.Create("Text", TableColumns.StatusText);
+            Columns.Create(Header.Text, TableColumns.StatusText);
 
-            Columns.Create("Size", TableColumns.Size)
+            Columns.Create(Header.Size, TableColumns.Size)
                 .MakeFixedWidth(FixedWidth.W064);
 
             MenuItems.AddItem(Strings.MenuItemBrowseToUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);

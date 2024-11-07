@@ -123,8 +123,14 @@
   <data name="Award" xml:space="preserve">
     <value>Award</value>
   </data>
+  <data name="Base" xml:space="preserve">
+    <value>Base</value>
+  </data>
   <data name="Batch" xml:space="preserve">
     <value>Batch</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Color</value>
   </data>
   <data name="Created" xml:space="preserve">
     <value>Created</value>
@@ -150,14 +156,26 @@
   <data name="End" xml:space="preserve">
     <value>End</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorShort" xml:space="preserve">
+    <value>E</value>
+  </data>
   <data name="Fee" xml:space="preserve">
     <value>Fee</value>
   </data>
   <data name="Flags" xml:space="preserve">
     <value>Flags</value>
   </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
   <data name="Id" xml:space="preserve">
     <value>Id</value>
+  </data>
+  <data name="InUseShort" xml:space="preserve">
+    <value>U</value>
   </data>
   <data name="LastSubmission" xml:space="preserve">
     <value>Last Submission</value>
@@ -170,6 +188,15 @@
   </data>
   <data name="Note" xml:space="preserve">
     <value>Note</value>
+  </data>
+  <data name="Ordering" xml:space="preserve">
+    <value>Ordering</value>
+  </data>
+  <data name="OrderingShort" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="Published" xml:space="preserve">
+    <value>Published</value>
   </data>
   <data name="PublishedCount" xml:space="preserve">
     <value>Published Count</value>
@@ -195,14 +222,26 @@
   <data name="ResponseType" xml:space="preserve">
     <value>Response Type</value>
   </data>
-  <data name="ResponseTypeShort" xml:space="preserve">
-    <value>Type</value>
+  <data name="Scanned" xml:space="preserve">
+    <value>Scanned</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Start</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="StatusShort" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
   </data>
   <data name="SubmissionCurrentCount" xml:space="preserve">
     <value>Current Submission Count</value>
@@ -228,8 +267,14 @@
   <data name="TagCountShort" xml:space="preserve">
     <value>TC</value>
   </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
   </data>
   <data name="Updated" xml:space="preserve">
     <value>Updated</value>
@@ -254,5 +299,8 @@
   </data>
   <data name="Written" xml:space="preserve">
     <value>Written</value>
+  </data>
+  <data name="Xid" xml:space="preserve">
+    <value>Xid</value>
   </data>
 </root>

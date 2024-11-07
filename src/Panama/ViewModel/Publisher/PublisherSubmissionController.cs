@@ -36,7 +36,7 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.Response, TableColumns.Response)
                 .MakeDate();
 
-            Columns.Create(Header.ResponseTypeShort, TableColumns.Joined.ResponseTypeName)
+            Columns.Create(Header.Type, TableColumns.Joined.ResponseTypeName)
                 .MakeFixedWidth(FixedWidth.W096);
 
             Columns.Create(Header.Note, TableColumns.Notes).MakeSingleLine();

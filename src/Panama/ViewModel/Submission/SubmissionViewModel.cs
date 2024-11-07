@@ -136,7 +136,7 @@ namespace Restless.Panama.ViewModel
                 .MakeDate()
                 .SetSelectorName(Header.ResponseDate);
 
-            Columns.Create(Header.ResponseTypeShort, TableColumns.Joined.ResponseTypeName)
+            Columns.Create(Header.Type, TableColumns.Joined.ResponseTypeName)
                 .MakeFixedWidth(FixedWidth.W096)
                 .SetSelectorName(Header.ResponseType);
 

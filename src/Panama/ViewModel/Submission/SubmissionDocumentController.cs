@@ -96,9 +96,9 @@ namespace Restless.Panama.ViewModel
         public SubmissionDocumentController(SubmissionViewModel owner) : base(owner)
         {
             //Columns.CreateImage<Int64ToPathConverter>("T", TableColumns.DocType, "ImageFileType", 20.0);
-            Columns.Create("Updated", TableColumns.Updated).MakeDate();
-            Columns.Create("Title", TableColumns.Title).MakeInitialSortAscending();
-            Columns.Create("Id", TableColumns.DocId);
+            Columns.Create(Header.Updated, TableColumns.Updated).MakeDate();
+            Columns.Create(Header.Title, TableColumns.Title).MakeInitialSortAscending();
+            Columns.Create(Header.Id, TableColumns.DocId);
 
             MenuItems.AddItem(Strings.MenuItemAddDocumentToSubmission, AddCommand)
                 .AddIconResource(ResourceKeys.Icon.IconAdd);

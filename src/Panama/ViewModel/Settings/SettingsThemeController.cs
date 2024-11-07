@@ -1,5 +1,6 @@
 ﻿using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Mvvm;
 using System.Data;
 using System.Linq;
@@ -22,8 +23,8 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SettingsThemeController()
         {
-            Columns.Create("Base", TableColumns.ThemeBase);
-            Columns.Create("Color", TableColumns.ThemeColor);
+            Columns.Create(Header.Base, TableColumns.ThemeBase);
+            Columns.Create(Header.Color, TableColumns.ThemeColor);
 
             ResetThemeCommand = RelayCommand.Create(p => RunResetThemeCommand());
 

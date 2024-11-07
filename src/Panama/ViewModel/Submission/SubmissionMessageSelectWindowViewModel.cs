@@ -70,22 +70,22 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SubmissionMessageSelectWindowViewModel()
         {
-            Columns.CreateResource<BooleanToResourceConverter>("E", nameof(MimeKitMessage.IsError), ResourceKeys.Icon.IconError)
+            Columns.CreateResource<BooleanToResourceConverter>(Header.ErrorShort, nameof(MimeKitMessage.IsError), ResourceKeys.Icon.IconError)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W034)
                 .AddToolTip(Strings.TooltipMessageError);
 
-            Columns.CreateResource<BooleanToResourceConverter>("U", nameof(MimeKitMessage.InUse), ResourceKeys.Icon.IconInUse)
+            Columns.CreateResource<BooleanToResourceConverter>(Header.InUseShort, nameof(MimeKitMessage.InUse), ResourceKeys.Icon.IconInUse)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W034)
                 .AddToolTip(Strings.TooltipMessageInUse);
 
-            Columns.Create("Date", nameof(MimeKitMessage.MessageDateUtc))
+            Columns.Create(Header.Date, nameof(MimeKitMessage.MessageDateUtc))
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("From", nameof(MimeKitMessage.FromName));
-            Columns.Create("Subject", nameof(MimeKitMessage.Subject));
+            Columns.Create(Header.From, nameof(MimeKitMessage.FromName));
+            Columns.Create(Header.Subject, nameof(MimeKitMessage.Subject));
 
             Commands.Add("Select", RunSelectCommand, p => SelectedCount > 0);
 

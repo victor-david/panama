@@ -6,6 +6,7 @@
 */
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System;
 using System.Data;
@@ -57,13 +58,13 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SelfPublisherSelectWindowViewModel()
         {
-            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
-            Columns.Create("Name", TableColumns.Name);
-            Columns.Create("Added", TableColumns.Added)
+            Columns.Create(Header.Id, TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create(Header.Name, TableColumns.Name);
+            Columns.Create(Header.Added, TableColumns.Added)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("PC", TableColumns.Calculated.PubCount)
+            Columns.Create(Header.PublishedCountShort, TableColumns.Calculated.PubCount)
                 .MakeFixedWidth(FixedWidth.W052)
                 .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
 
