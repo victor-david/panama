@@ -13,26 +13,26 @@
     d:DesignHeight="450" d:DesignWidth="800">
 
     <StackPanel>
-        <CheckBox Content="{x:Static r:Strings.SettingsQueue}" IsChecked="{Binding Config.IsTitleQueueVisible}"/>
-        <CheckBox Content="{x:Static r:Strings.SettingsAutoSortOnUpdated}" IsChecked="{Binding Config.AutoSortOnTitleUpdated}"/>
-        <CheckBox Content="{x:Static r:Strings.SettingsOrphanFinder}" IsChecked="{Binding Config.IsOrphanEnabled}"/>
-        <CheckBox Content="{x:Static r:Strings.SettingsSearch}" IsChecked="{Binding Config.IsSearchEnabled}"/>
-        <CheckBox Content="{x:Static r:Strings.SettingsVerifyLinks}" IsChecked="{Binding Config.IsVerifyLinkEnabled}"/>
-        <CheckBox Content="{x:Static r:Strings.SettingsDeveloperTool}" IsChecked="{Binding Config.IsDevToolEnabled}"/>
+        <CheckBox Content="{x:Static r:Settings.Queue}" IsChecked="{Binding Config.IsTitleQueueVisible}"/>
+        <CheckBox Content="{x:Static r:Settings.AutoSortOnUpdated}" IsChecked="{Binding Config.AutoSortOnTitleUpdated}"/>
+        <CheckBox Content="{x:Static r:Settings.OrphanFinder}" IsChecked="{Binding Config.IsOrphanEnabled}"/>
+        <CheckBox Content="{x:Static r:Settings.Search}" IsChecked="{Binding Config.IsSearchEnabled}"/>
+        <CheckBox Content="{x:Static r:Settings.VerifyLinks}" IsChecked="{Binding Config.IsVerifyLinkEnabled}"/>
+        <CheckBox Content="{x:Static r:Settings.DeveloperTool}" IsChecked="{Binding Config.IsDevToolEnabled}"/>
 
         <con:PathSelector
-            Title="{x:Static r:Strings.SettingsTextViewer}"
+            Title="{x:Static r:Settings.TextViewer}"
             SelectorType="File"
             SelectorFileType="{x:Static table:DocumentTypeTable+Defs+Values.ExecutableFileType}"
             Path="{Binding Config.TextViewerFile}"
             SelectCommand="{Binding Commands[SelectPath]}"/>
 
         <con:PathSelector
-            Title="{x:Static r:Strings.SettingsDatabaseLocation}"
+            Title="{x:Static r:Settings.DatabaseLocation}"
             Path="{Binding DatabaseLocation}"
             SelectCommand="{Binding Commands[SelectPath]}"/>
 
-        <TextBlock Text="{x:Static r:Strings.SettingsDatabaseLocationText}"/>
+        <TextBlock Text="{x:Static r:Settings.DatabaseLocationText}"/>
     </StackPanel>
 
 </UserControl>

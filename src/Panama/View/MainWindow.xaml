@@ -67,36 +67,16 @@
             DetailSize="{Binding Config.MainNavigationWidth , Mode=TwoWay}">
 
             <tk:MultiSplitterGrid.DetailContent>
-                <StackPanel>
+                <Grid tk:Property.RowHeights="Auto,*">
                     <TextBlock Style="{StaticResource Panama.Styles.TextBlock.NavTitle}" Text="{Binding AppInfo.Product, Mode=OneTime}"/>
 
-                    <tk:MainNavigator
-                        IsExpanded="{Binding Config.NavTitlesExpander}"
-                        HeaderText="{x:Static r:Strings.NavHeaderMain}"
-                        ItemsSource="{Binding NavigatorItems.Groups[0]}"
-                        SelectedItem="{Binding NavigatorItems.SelectedItems[0]}"/>
+                    <ListBox
+                        Grid.Row="1"
+                        Style="{StaticResource Panama.Styles.ListBox.Navigator}"
+                        ItemsSource="{Binding NavigatorItems}"
+                        SelectedItem="{Binding SelectedNavigatorItem}"/>
 
-                    <tk:MainNavigator
-                        IsExpanded="{Binding Config.NavSettingsExpander}"
-                        HeaderText="{x:Static r:Strings.NavHeaderSettings}"
-                        ItemsSource="{Binding NavigatorItems.Groups[1]}"
-                        SelectedItem="{Binding NavigatorItems.SelectedItems[1]}"/>
-
-                    <tk:MainNavigator
-                        IsExpanded="{Binding Config.NavOtherExpander}"
-                        HeaderText="{x:Static r:Strings.NavHeaderOther}"
-                        ItemsSource="{Binding NavigatorItems.Groups[2]}"
-                        SelectedItem="{Binding NavigatorItems.SelectedItems[2]}"/>
-
-                    <tk:MainNavigator
-                        HideWhenEmpty="True"
-                        tk:Property.IsVisible="{Binding HaveToolItems}"
-                        IsExpanded="{Binding Config.NavToolsExpander}"
-                        HeaderText="{x:Static r:Strings.NavHeaderTools}"
-                        ItemsSource="{Binding NavigatorItems.Groups[3]}"
-                        SelectedItem="{Binding NavigatorItems.SelectedItems[3]}"/>
-
-                </StackPanel>
+                </Grid>
             </tk:MultiSplitterGrid.DetailContent>
 
             <tk:MultiSplitterGrid.MainContent>

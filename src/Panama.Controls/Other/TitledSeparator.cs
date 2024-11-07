@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace Restless.Panama.Controls
 {
-    public class TitledSeparator : Control
+    public class TitledSeparator : Separator
     {
         public const double DefaultSeparatorHeight = 2.0;
 

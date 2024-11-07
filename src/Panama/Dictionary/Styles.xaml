@@ -331,12 +331,21 @@
 
     <Style TargetType="con:DisplayGrid" BasedOn="{StaticResource Panama.Styles.DisplayGrid}"/>
 
-    <!-- List box-->
+    <!-- List box -->
     <Style x:Key="Panama.Styles.ListBox" TargetType="ListBox" BasedOn="{StaticResource MahApps.Styles.ListBox}">
         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.TextBox.Border}"/>
     </Style>
 
     <Style TargetType="ListBox" BasedOn="{StaticResource Panama.Styles.ListBox}"/>
+
+    <!-- List box (navigator) -->
+    <Style x:Key="Panama.Styles.ListBox.Navigator" TargetType="ListBox" BasedOn="{StaticResource Panama.Styles.ListBox}">
+        <Style.Resources>
+            <Style TargetType="ListBoxItem" BasedOn="{StaticResource MahApps.Styles.ListBoxItem}">
+                <Setter Property="MinHeight" Value="0"/>
+            </Style>
+        </Style.Resources>
+    </Style>
 
     <!-- List box (radio choices) -->
     <Style x:Key="Panama.Styles.ListBox.Radio" TargetType="ListBox" BasedOn="{StaticResource Panama.Styles.ListBox}">
@@ -469,7 +478,7 @@
 
     <!-- TextBlock: Main Title -->
     <Style x:Key="Panama.Styles.TextBlock.NavTitle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="5,0,0,5"/>
+        <Setter Property="Margin" Value="5,0,0,0"/>
         <Setter Property="FontSize" Value="21"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>

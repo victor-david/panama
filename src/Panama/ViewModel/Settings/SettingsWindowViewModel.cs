@@ -12,7 +12,6 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private NavigatorSection selectedSection;
-        private Mah.Theme selectedTheme;
         #endregion
 
         /************************************************************************/
@@ -38,6 +37,8 @@ namespace Restless.Panama.ViewModel
                 Config.SelectedConfigSection = (int)selectedSection.Id;
             }
         }
+
+        public List<NavigatorHeader> NavigatorHeaders { get; }
 
         /// <summary>
         /// Gets or sets the database location
@@ -68,6 +69,13 @@ namespace Restless.Panama.ViewModel
                 new NavigatorSection(Strings.HeaderSettingsColor, 4),
                 new NavigatorSection(Strings.HeaderSettingsSubmission, 5),
                 new NavigatorSection(Strings.HeaderSettingsAdvanced, 6),
+            };
+
+            NavigatorHeaders = new List<NavigatorHeader>()
+            {
+                NavigatorHeader.None,
+                NavigatorHeader.Simple,
+                NavigatorHeader.Titled
             };
 
             Themes = new SettingsThemeController();

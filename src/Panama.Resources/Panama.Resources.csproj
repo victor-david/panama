@@ -26,6 +26,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Header.resx</DependentUpon>
     </Compile>
+    <Compile Update="Settings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.resx</DependentUpon>
+    </Compile>
     <Compile Update="Strings.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -37,6 +42,10 @@
     <EmbeddedResource Update="Header.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Header.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Settings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

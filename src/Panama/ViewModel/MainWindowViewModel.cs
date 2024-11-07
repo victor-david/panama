@@ -9,10 +9,10 @@ using Restless.Panama.Database.Core;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using IconKind = MahApps.Metro.IconPacks.PackIconMaterialKind;
 
@@ -25,6 +25,7 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private readonly ViewModelCache viewModelCache;
+        private NavigatorItem selectedNavigatorItem;
         private ApplicationViewModel selectedViewModel;
         private string notificationMessage;
         private bool haveToolItems;
@@ -36,7 +37,17 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the navigator items
         /// </summary>
-        public NavigatorItemCollection NavigatorItems { get; }
+        public Core.NavigatorItemCollection NavigatorItems { get; }
+
+        public NavigatorItem SelectedNavigatorItem
+        {
+            get => selectedNavigatorItem;
+            set
+            {
+                SetProperty(ref selectedNavigatorItem, value);
+                NavigateTo(selectedNavigatorItem);
+            }
+        }
 
         /// <summary>
         /// Gets or sets the selected view model.
@@ -110,8 +121,7 @@ namespace Restless.Panama.ViewModel
             OpenToolsCommand = RelayCommand.Create(p => WindowFactory.Tool.Create().ShowDialog());
             SaveAllCommand = RelayCommand.Create(p => RunSaveCommand());
 
-            NavigatorItems = new NavigatorItemCollection(NavigationGroup.TotalNumberOfGroups);
-            NavigatorItems.SelectedItemChanged += NavigatorItemsSelectedItemChanged;
+            NavigatorItems = new Core.NavigatorItemCollection(Config.NavigatorHeader, 10, 8);
 
             RegisterNavigatorItems();
             viewModelCache = new ViewModelCache();
@@ -136,7 +146,7 @@ namespace Restless.Panama.ViewModel
         /// <typeparam name="T">The type of view model</typeparam>
         public void NavigateTo<T>() where T : ApplicationViewModel
         {
-            NavigatorItems.Select<T>();
+            //NavigatorItems.Select<T>();
         }
 
         /// <summary>
@@ -151,17 +161,22 @@ namespace Restless.Panama.ViewModel
             }
         }
 
+        public void SynchronizeNavigatorHeaders()
+        {
+            NavigatorItems.Header = Config.NavigatorHeader;
+        }
+
         /// <summary>
         /// Synchonizes the state of configuration with corresponding navigator items
         /// </summary>
         public void SynchronizeNavigatorVisibility()
         {
-            SetNavigatorItemVisibility<TitleQueueViewModel>(Config.IsTitleQueueVisible);
-            SetNavigatorItemVisibility<LinkVerifyViewModel>(Config.IsVerifyLinkEnabled);
-            SetNavigatorItemVisibility<ToolSearchViewModel>(Config.IsSearchEnabled);
-            SetNavigatorItemVisibility<ToolOrphanViewModel>(Config.IsOrphanEnabled);
-            SetNavigatorItemVisibility<TableViewModel>(Config.IsDevToolEnabled);
-            HaveToolItems = NavigatorItems.HaveVisibleItems(NavigationGroup.Tool);
+            NavigatorItems.SetVisibility<TitleQueueViewModel>(Config.IsTitleQueueVisible);
+            NavigatorItems.SetVisibility<LinkVerifyViewModel>(Config.IsVerifyLinkEnabled);
+            NavigatorItems.SetVisibility<ToolSearchViewModel>(Config.IsSearchEnabled);
+            NavigatorItems.SetVisibility<ToolOrphanViewModel>(Config.IsOrphanEnabled);
+            NavigatorItems.SetVisibility<TableViewModel>(Config.IsDevToolEnabled);
+            //HaveToolItems = NavigatorItems.HaveVisibleItems(NavigationGroup.Tool);
         }
 
         /// <summary>
@@ -211,41 +226,37 @@ namespace Restless.Panama.ViewModel
         #region Private methods (navigator)
         private void RegisterNavigatorItems()
         {
-            // Group: title
-            NavigatorItems.Add<TitleViewModel>(NavigationGroup.Title, Strings.MenuItemTitles, false, Icons.Get(IconKind.SubtitlesOutline));
-            NavigatorItems.Add<TitleQueueViewModel>(NavigationGroup.Title, Strings.MenuItemQueues, false, Icons.Get(IconKind.TrayFull));
-            NavigatorItems.Add<PublisherViewModel>(NavigationGroup.Title, Strings.MenuItemPublishers, false, Icons.Get(IconKind.MessageCheckOutline));
-            NavigatorItems.Add<SelfPublisherViewModel>(NavigationGroup.Title, Strings.MenuItemSelfPublishers, false, Icons.Get(IconKind.MessageFlashOutline));
-            NavigatorItems.Add<SubmissionViewModel>(NavigationGroup.Title, Strings.MenuItemSubmissions, false, Icons.Get(IconKind.MessageReplyTextOutline));
+            NavigatorItems.AddHeader(Strings.NavHeaderMain);
 
-            // Group: Settings
-            NavigatorItems.Add<AuthorViewModel>(NavigationGroup.Settings, Strings.MenuItemAuthors, false, Icons.Get(IconKind.AccountOutline));
-            NavigatorItems.Add<TagViewModel>(NavigationGroup.Settings, Strings.MenuItemTags, false, Icons.Get(IconKind.TagOutline));
+            NavigatorItems.AddNavigator<TitleViewModel>(Strings.MenuItemTitles, IconKind.SubtitlesOutline);
+            NavigatorItems.AddNavigator<TitleQueueViewModel>(Strings.MenuItemQueues, IconKind.TrayFull);
+            NavigatorItems.AddNavigator<PublisherViewModel>(Strings.MenuItemPublishers, IconKind.MessageCheckOutline);
+            NavigatorItems.AddNavigator<SelfPublisherViewModel>(Strings.MenuItemSelfPublishers, IconKind.MessageFlashOutline);
+            NavigatorItems.AddNavigator<SubmissionViewModel>(Strings.MenuItemSubmissions, IconKind.MessageReplyTextOutline);
 
-            // Group: Other
-            NavigatorItems.Add<AlertViewModel>(NavigationGroup.Other, Strings.MenuItemAlerts, false, Icons.Get(IconKind.TimerOutline));
-            NavigatorItems.Add<UserNoteViewModel>(NavigationGroup.Other, Strings.MenuItemNotes, false, Icons.Get(IconKind.NoteTextOutline));
-            NavigatorItems.Add<LinkViewModel>(NavigationGroup.Other, Strings.MenuItemLinks, false, Icons.Get(IconKind.LinkVariant));
-            NavigatorItems.Add<StatisticsViewModel>(NavigationGroup.Other, Strings.MenuItemStatistics, false, Icons.Get(IconKind.Numeric));
+            NavigatorItems.AddHeader(Strings.NavHeaderSettings);
 
-            // Group: Tool
-            NavigatorItems.Add<ToolOrphanViewModel>(NavigationGroup.Tool, Strings.MenuItemOrphanFinder, false, Icons.Get(IconKind.ClipboardSearchOutline));
-            NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.Tool, Strings.MenuItemSearch, false, Icons.Get(IconKind.Magnify));
-            NavigatorItems.Add<LinkVerifyViewModel>(NavigationGroup.Tool, Strings.MenuItemLinkVerify, false, Icons.Get(IconKind.LinkVariant));
-            NavigatorItems.Add<TableViewModel>(NavigationGroup.Tool, Strings.MenuItemDeveloper, false, Icons.Get(IconKind.CodeBraces));
+            NavigatorItems.AddNavigator<AuthorViewModel>(Strings.MenuItemAuthors, IconKind.AccountOutline);
+            NavigatorItems.AddNavigator<TagViewModel>(Strings.MenuItemTags, IconKind.TagOutline);
+
+            NavigatorItems.AddHeader(Strings.NavHeaderOther);
+
+            NavigatorItems.AddNavigator<AlertViewModel>(Strings.MenuItemAlerts, IconKind.TimerOutline);
+            NavigatorItems.AddNavigator<UserNoteViewModel>(Strings.MenuItemNotes, IconKind.NoteTextOutline);
+            NavigatorItems.AddNavigator<LinkViewModel>(Strings.MenuItemLinks, IconKind.LinkVariant);
+            NavigatorItems.AddNavigator<StatisticsViewModel>(Strings.MenuItemStatistics, IconKind.Numeric);
+
+            NavigatorItems.AddHeader(Strings.NavHeaderTools);
+
+            NavigatorItems.AddNavigator<ToolOrphanViewModel>(Strings.MenuItemOrphanFinder, IconKind.ClipboardSearchOutline);
+            NavigatorItems.AddNavigator<ToolSearchViewModel>(Strings.MenuItemSearch, IconKind.Magnify);
+            NavigatorItems.AddNavigator<LinkVerifyViewModel>(Strings.MenuItemLinkVerify, IconKind.LinkVariant);
+            NavigatorItems.AddNavigator<TableViewModel>(Strings.MenuItemDeveloper, IconKind.CodeBraces);
 
             SynchronizeNavigatorVisibility();
         }
 
-        private void SetNavigatorItemVisibility<T>(bool isItemVisible) where T : ApplicationViewModel
-        {
-            if (NavigatorItems.TryGet<T>() is NavigatorItem item)
-            {
-                item.IsItemVisible = isItemVisible;
-            }
-        }
-
-        private void NavigatorItemsSelectedItemChanged(object sender, NavigatorItem navItem)
+        private void NavigateTo(NavigatorItem navItem)
         {
             if (navItem != null && navItem.TargetType.IsAssignableTo(typeof(ApplicationViewModel)))
             {

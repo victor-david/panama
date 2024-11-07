@@ -539,12 +539,6 @@ When you save properties here however, the document's file  modification date is
   <data name="HeaderSettingsSubmission" xml:space="preserve">
     <value>Submission</value>
   </data>
-  <data name="SettingsDataGridRowHeight" xml:space="preserve">
-    <value>Data grid row height</value>
-  </data>
-  <data name="SettingsDataGridRowAlternation" xml:space="preserve">
-    <value>Data grid row alternation</value>
-  </data>
   <data name="ToolTipPublisherInPeriod" xml:space="preserve">
     <value>Publisher is currently in one of its submission periods</value>
   </data>
@@ -952,17 +946,6 @@ Do you want to continue?</value>
   <data name="WindowTitleConfirmTitleSubmission" xml:space="preserve">
     <value>Confirm title submission</value>
   </data>
-  <data name="SettingsDatabaseLocation" xml:space="preserve">
-    <value>Database Location</value>
-  </data>
-  <data name="SettingsDatabaseLocationText" xml:space="preserve">
-    <value>Changing the database location will create a new database. No data will be copied. If you want to preserve your data, copy all files from the previous location to the new one.
-
-Changes will take effect after you restart the application.</value>
-  </data>
-  <data name="SettingsTextViewer" xml:space="preserve">
-    <value>Text Viewer</value>
-  </data>
   <data name="ConfirmationAddAlert" xml:space="preserve">
     <value>This operation will add a new alert record. If any filters are in effect, they will be removed so that the new alert displays in the list.</value>
   </data>
@@ -1062,9 +1045,6 @@ Changes will take effect after you restart the application.</value>
   <data name="ToolTipVerifyLinks" xml:space="preserve">
     <value>Begin verification of links</value>
   </data>
-  <data name="SettingsVerifyLinks" xml:space="preserve">
-    <value>Enable link verification tool (experimental)</value>
-  </data>
   <data name="HeaderTagFilter" xml:space="preserve">
     <value>Tag filter</value>
   </data>
@@ -1146,9 +1126,6 @@ Changes will take effect after you restart the application.</value>
   <data name="TextClearDate" xml:space="preserve">
     <value>Clear date</value>
   </data>
-  <data name="SettingsQueue" xml:space="preserve">
-    <value>Enable title queues</value>
-  </data>
   <data name="ConfirmationRemoveRelatedTitle" xml:space="preserve">
     <value>This operation removes the related title from this title. It does not affect the related title itself.</value>
   </data>
@@ -1175,9 +1152,6 @@ Changes will take effect after you restart the application.</value>
   </data>
   <data name="TextHasRelated" xml:space="preserve">
     <value>Has Related Title</value>
-  </data>
-  <data name="SettingsAutoSortOnUpdated" xml:space="preserve">
-    <value>Auto sort title list on updated (requires restart)</value>
   </data>
   <data name="ConfirmationRemoveTitleFromQueue" xml:space="preserve">
     <value>This operation removes the title from the selected queue. It does not affect the title itself.</value>
@@ -1221,9 +1195,6 @@ Changes will take effect after you restart the application.</value>
   <data name="HeaderPublisherFilter" xml:space="preserve">
     <value>Publisher Filter</value>
   </data>
-  <data name="SettingsSearch" xml:space="preserve">
-    <value>Enable search tool</value>
-  </data>
   <data name="TextDetail" xml:space="preserve">
     <value>Detail</value>
   </data>
@@ -1235,9 +1206,6 @@ Changes will take effect after you restart the application.</value>
   </data>
   <data name="MenuItemOrphanFinder" xml:space="preserve">
     <value>Orphan</value>
-  </data>
-  <data name="SettingsOrphanFinder" xml:space="preserve">
-    <value>Enable orphan finder tool</value>
   </data>
   <data name="ToolTipOrphanExclusions" xml:space="preserve">
     <value>Manage exclusions for orphan search</value>
@@ -1259,9 +1227,6 @@ Changes will take effect after you restart the application.</value>
   </data>
   <data name="ToolTipThemeReset" xml:space="preserve">
     <value>Reset to default theme</value>
-  </data>
-  <data name="SettingsDeveloperTool" xml:space="preserve">
-    <value>Enable developer tools</value>
   </data>
   <data name="MenuItemDeveloper" xml:space="preserve">
     <value>Developer</value>

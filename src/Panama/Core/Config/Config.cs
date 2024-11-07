@@ -302,6 +302,15 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets the style of the navigator headers
+        /// </summary>
+        public NavigatorHeader NavigatorHeader
+        {
+            get => (NavigatorHeader)GetItem((int)NavigatorHeader.Titled);
+            set => SetItem((int)value);
+        }
+
+        /// <summary>
         /// Gets or sets whether the titles navigator is expanded.
         /// </summary>
         public bool NavTitlesExpander
@@ -1223,6 +1232,7 @@ namespace Restless.Panama.Core
                 case nameof(IsTitleAuthorVisible):
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
                     break;
+
                 case nameof(IsTitleQueueVisible):
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
                     MainWindowViewModel.Instance.SynchronizeNavigatorVisibility();
@@ -1236,6 +1246,11 @@ namespace Restless.Panama.Core
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
                     MainWindowViewModel.Instance.SynchronizeNavigatorVisibility();
                     break;
+
+                case nameof(NavigatorHeader):
+                    MainWindowViewModel.Instance.SynchronizeNavigatorHeaders();
+                    break;
+
                 default:
                     break;
             }

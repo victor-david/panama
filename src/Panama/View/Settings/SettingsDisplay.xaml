@@ -18,16 +18,17 @@
         </Style>
     </StackPanel.Resources>
 
-    <TextBlock Text="{x:Static r:Strings.SettingsDataGridRowHeight}"/>
+    <TextBlock Text="{x:Static r:Settings.DataGridRowHeight}"/>
     <Slider
         Minimum="{x:Static core:Config+DataGrid.MinRowHeight}"
         Maximum="{x:Static core:Config+DataGrid.MaxRowHeight}"
         Value="{Binding Config.DataGridRowHeight}"/>
 
-    <TextBlock Text="{x:Static r:Strings.SettingsDataGridRowAlternation}"/>
+    <TextBlock Text="{x:Static r:Settings.DataGridRowAlternation}"/>
 
     <tk:RadioButtonPanel
         TemplateStyle="Button"
+        Margin="{StaticResource Panama.Layout.Padding.Bottom}"
         tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
         SelectedValue="{Binding Config.DataGridAlternationCount}">
 
@@ -40,5 +41,12 @@
         <tk:RadioButton Grid.Column="6" Value="7" Content="7"/>
         <tk:RadioButton Grid.Column="7" Value="8" Content="8"/>
     </tk:RadioButtonPanel>
+
+    <TextBlock Text="{x:Static r:Settings.NavigatorHeader}"/>
+
+    <ListBox
+        Style="{StaticResource Panama.Styles.ListBox.Radio}"
+        ItemsSource="{Binding NavigatorHeaders}"
+        SelectedItem="{Binding Config.NavigatorHeader}"/>
 
 </StackPanel>
