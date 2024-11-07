@@ -1445,6 +1445,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Developer.
+        /// </summary>
+        public static string MenuItemDeveloper {
+            get {
+                return ResourceManager.GetString("MenuItemDeveloper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exclude this directory from orphan search.
         /// </summary>
         public static string MenuItemExcludeOrphanDirectory {
@@ -1951,11 +1960,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The orphan tool enables you to exclude certain files, file types, and directories from its search. You add exclusions in the tool window and can remove them here if needed.
+        ///   Looks up a localized string similar to Enable developer tools.
         /// </summary>
-        public static string SettingsOrphanExclusionDetail {
+        public static string SettingsDeveloperTool {
             get {
-                return ResourceManager.GetString("SettingsOrphanExclusionDetail", resourceCulture);
+                return ResourceManager.GetString("SettingsDeveloperTool", resourceCulture);
             }
         }
         

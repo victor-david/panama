@@ -18,6 +18,7 @@
         <CheckBox Content="{x:Static r:Strings.SettingsOrphanFinder}" IsChecked="{Binding Config.IsOrphanEnabled}"/>
         <CheckBox Content="{x:Static r:Strings.SettingsSearch}" IsChecked="{Binding Config.IsSearchEnabled}"/>
         <CheckBox Content="{x:Static r:Strings.SettingsVerifyLinks}" IsChecked="{Binding Config.IsVerifyLinkEnabled}"/>
+        <CheckBox Content="{x:Static r:Strings.SettingsDeveloperTool}" IsChecked="{Binding Config.IsDevToolEnabled}"/>
 
         <con:PathSelector
             Title="{x:Static r:Strings.SettingsTextViewer}"

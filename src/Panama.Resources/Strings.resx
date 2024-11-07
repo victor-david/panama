@@ -1110,9 +1110,6 @@ Changes will take effect after you restart the application.</value>
   <data name="TextOrphan" xml:space="preserve">
     <value>Orphan</value>
   </data>
-  <data name="SettingsOrphanExclusionDetail" xml:space="preserve">
-    <value>The orphan tool enables you to exclude certain files, file types, and directories from its search. You add exclusions in the tool window and can remove them here if needed</value>
-  </data>
   <data name="MenuItemRemoveExclusion" xml:space="preserve">
     <value>Remove this exclusion</value>
   </data>
@@ -1262,5 +1259,11 @@ Changes will take effect after you restart the application.</value>
   </data>
   <data name="ToolTipThemeReset" xml:space="preserve">
     <value>Reset to default theme</value>
+  </data>
+  <data name="SettingsDeveloperTool" xml:space="preserve">
+    <value>Enable developer tools</value>
+  </data>
+  <data name="MenuItemDeveloper" xml:space="preserve">
+    <value>Developer</value>
   </data>
 </root>

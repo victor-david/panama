@@ -82,8 +82,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Commands
-        public ICommand NavigateLinkVerifyCommand { get; }
-        public ICommand NavigateSearchCommand { get; }
         public ICommand OpenAboutCommand { get; }
         public ICommand OpenSettingsCommand { get; }
         public ICommand OpenToolsCommand { get; }
@@ -107,8 +105,6 @@ namespace Restless.Panama.ViewModel
 #if DEBUG
             DisplayName += " (DEBUG)";
 #endif
-            NavigateLinkVerifyCommand = RelayCommand.Create(p => NavigatorItems.Select<LinkVerifyViewModel>());
-            NavigateSearchCommand = RelayCommand.Create(p => NavigatorItems.Select<ToolSearchViewModel>());
             OpenAboutCommand = RelayCommand.Create(p => WindowFactory.About.Create().ShowDialog());
             OpenSettingsCommand = RelayCommand.Create(p => WindowFactory.Settings.Create().ShowDialog());
             OpenToolsCommand = RelayCommand.Create(p => WindowFactory.Tool.Create().ShowDialog());
@@ -164,6 +160,7 @@ namespace Restless.Panama.ViewModel
             SetNavigatorItemVisibility<LinkVerifyViewModel>(Config.IsVerifyLinkEnabled);
             SetNavigatorItemVisibility<ToolSearchViewModel>(Config.IsSearchEnabled);
             SetNavigatorItemVisibility<ToolOrphanViewModel>(Config.IsOrphanEnabled);
+            SetNavigatorItemVisibility<TableViewModel>(Config.IsDevToolEnabled);
             HaveToolItems = NavigatorItems.HaveVisibleItems(NavigationGroup.Tool);
         }
 
@@ -235,6 +232,7 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.Add<ToolOrphanViewModel>(NavigationGroup.Tool, Strings.MenuItemOrphanFinder, false, Icons.Get(IconKind.ClipboardSearchOutline));
             NavigatorItems.Add<ToolSearchViewModel>(NavigationGroup.Tool, Strings.MenuItemSearch, false, Icons.Get(IconKind.Magnify));
             NavigatorItems.Add<LinkVerifyViewModel>(NavigationGroup.Tool, Strings.MenuItemLinkVerify, false, Icons.Get(IconKind.LinkVariant));
+            NavigatorItems.Add<TableViewModel>(NavigationGroup.Tool, Strings.MenuItemDeveloper, false, Icons.Get(IconKind.CodeBraces));
 
             SynchronizeNavigatorVisibility();
         }

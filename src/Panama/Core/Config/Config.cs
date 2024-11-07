@@ -196,8 +196,8 @@ namespace Restless.Panama.Core
             public const double MaxSubmissionDetailWidth = 620;
             public const double DefaultSubmissionDetailWidth = MinSubmissionDetailWidth;
 
-            public const double MinTableDetailWidth = 302;
-            public const double MaxTableDetailWidth = 716;
+            public const double MinTableDetailWidth = 502;
+            public const double MaxTableDetailWidth = 582;
             public const double DefaultTableDetailWidth = MinTableDetailWidth;
 
             public const double MinTagDetailWidth = 302;
@@ -1157,6 +1157,15 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets a value that determines if dev tools are enabled
+        /// </summary>
+        public bool IsDevToolEnabled
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets the startup count, call <see cref="IncrementStartupCount"/> to update.
         /// </summary>
         public long StartupCount
@@ -1223,6 +1232,7 @@ namespace Restless.Panama.Core
                 case nameof(IsOrphanEnabled):
                 case nameof(IsSearchEnabled):
                 case nameof(IsVerifyLinkEnabled):
+                case nameof(IsDevToolEnabled):
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyId));
                     MainWindowViewModel.Instance.SynchronizeNavigatorVisibility();
                     break;
