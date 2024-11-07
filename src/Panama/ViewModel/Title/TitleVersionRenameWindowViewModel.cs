@@ -93,7 +93,7 @@ namespace Restless.Panama.ViewModel
             TitleRow title  = DatabaseController.Instance.GetTable<TitleTable>().GetSingleRecord(titleId);
             if (title == null)
             {
-                throw new InvalidOperationException(Strings.InvalidOpTitleDoesNotExist);
+                throw new InvalidOperationException(Error.TitleDoesNotExist);
             }
 
             foreach (TitleVersionRow ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(titleId, SortDirection.Ascending))
@@ -103,7 +103,7 @@ namespace Restless.Panama.ViewModel
 
             if (renameItems.Count == 0)
             {
-                OperationMessage = Strings.InvalidOpRenameCandidateListEmpty;
+                OperationMessage = Error.RenameCandidateListEmpty;
                 return;
             }
 
@@ -111,11 +111,11 @@ namespace Restless.Panama.ViewModel
 
             if (!renameItems.AllOriginalExist)
             {
-                OperationMessage = Strings.InvalidOpRenameFilesMissing;
+                OperationMessage = Error.RenameFilesMissing;
             }
             else if (renameItems.AllSame)
             {
-                OperationMessage = Strings.InvalidOpRenameAllCandidatesAlreadyRenamed;
+                OperationMessage = Error.RenameAllCandidatesAlreadyRenamed;
             }
             else
             {

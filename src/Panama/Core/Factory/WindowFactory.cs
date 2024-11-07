@@ -338,7 +338,7 @@ namespace Restless.Panama.Core
             {
                 TitleVersionRenameWindow window = new()
                 {
-                    Title = Strings.WindowTitleVersionRename,
+                    Title = Header.TitleVersionRename,
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     ShowInTaskbar = false,

@@ -109,7 +109,7 @@ namespace Restless.Panama.ViewModel
                 int childRowCount = SelectedRow.GetChildRows(AuthorTable.Defs.Relations.ToTitle).Length;
                 if (childRowCount > 0)
                 {
-                    MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.InvalidOpCannotDeleteAuthor, childRowCount));
+                    MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Error.CannotDeleteAuthor, childRowCount));
                     return;
                 }
 

@@ -52,7 +52,7 @@ namespace Restless.Panama.Tools
         #endregion
 
         /************************************************************************/
-        
+
         #region Public methods
         /// <summary>
         /// Gets the search results for the specified expression
@@ -63,7 +63,7 @@ namespace Restless.Panama.Tools
         {
             if (Scopes.Count == 0)
             {
-                throw new InvalidOperationException(Strings.InvalidOperationNoSearchScope);
+                throw new InvalidOperationException(Error.NoSearchScope);
             }
 
             StringBuilder sql = new(512);

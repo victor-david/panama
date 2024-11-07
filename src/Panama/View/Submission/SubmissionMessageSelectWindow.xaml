@@ -11,7 +11,7 @@
     d:DataContext="{d:DesignInstance Type=vm:SubmissionMessageSelectWindowViewModel}"
     mc:Ignorable="d"
     Style="{StaticResource Panama.Styles.MetroWindow}"
-    Title="{x:Static r:Strings.WindowTitleSelectMessagesGeneric}"
+    Title="{x:Static r:Header.SelectMessagesGeneric}"
     Height="460" Width="780">
 
     <Grid tk:Property.RowHeights="Auto,*,Auto">

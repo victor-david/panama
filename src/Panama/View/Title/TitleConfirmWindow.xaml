@@ -11,7 +11,7 @@
     d:DataContext="{d:DesignInstance Type=vm:TitleSelectWindowViewModel}"
     mc:Ignorable="d"
     ResizeMode="NoResize"
-    Title="{x:Static r:Strings.WindowTitleConfirmTitleSubmission}"
+    Title="{x:Static r:Header.ConfirmTitleSubmission}"
     Style="{StaticResource Panama.Styles.MetroWindow}"
     Height="370" Width="760">
 

@@ -414,7 +414,7 @@ namespace Restless.Panama.ViewModel
                 int childRowCount = SelectedRow.GetChildRows(TitleTable.Defs.Relations.ToSubmission).Length;
                 if (childRowCount > 0)
                 {
-                    MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.InvalidOpCannotDeleteTitle, childRowCount));
+                    MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Error.CannotDeleteTitle, childRowCount));
                     return;
                 }
 

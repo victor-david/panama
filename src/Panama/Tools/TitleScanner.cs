@@ -33,7 +33,7 @@ namespace Restless.Panama.Tools
         {
             if (string.IsNullOrWhiteSpace(OutputDirectory) || !Directory.Exists(OutputDirectory))
             {
-                throw new InvalidOperationException(Strings.InvalidOpOutputFolderNotSet);
+                throw new InvalidOperationException(Error.OutputFolderNotSet);
             }
         }
     }

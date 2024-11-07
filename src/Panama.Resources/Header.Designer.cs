@@ -61,6 +61,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active Alerts.
+        /// </summary>
+        public static string ActiveAlerts {
+            get {
+                return ResourceManager.GetString("ActiveAlerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Added.
         /// </summary>
         public static string Added {
@@ -192,6 +201,15 @@ namespace Restless.Panama.Resources {
         public static string Company {
             get {
                 return ResourceManager.GetString("Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm title submission.
+        /// </summary>
+        public static string ConfirmTitleSubmission {
+            get {
+                return ResourceManager.GetString("ConfirmTitleSubmission", resourceCulture);
             }
         }
         
@@ -363,6 +381,15 @@ namespace Restless.Panama.Resources {
         public static string Expression {
             get {
                 return ResourceManager.GetString("Expression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fatal Error.
+        /// </summary>
+        public static string FatalError {
+            get {
+                return ResourceManager.GetString("FatalError", resourceCulture);
             }
         }
         
@@ -754,6 +781,42 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select messages.
+        /// </summary>
+        public static string SelectMessagesGeneric {
+            get {
+                return ResourceManager.GetString("SelectMessagesGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a publisher for this published record.
+        /// </summary>
+        public static string SelectPublisherForPublished {
+            get {
+                return ResourceManager.GetString("SelectPublisherForPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a publisher.
+        /// </summary>
+        public static string SelectPublisherGeneric {
+            get {
+                return ResourceManager.GetString("SelectPublisherGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select titles.
+        /// </summary>
+        public static string SelectTitlesGeneric {
+            get {
+                return ResourceManager.GetString("SelectTitlesGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Self Published.
         /// </summary>
         public static string SelfPublished {
@@ -1002,6 +1065,15 @@ namespace Restless.Panama.Resources {
         public static string Titles {
             get {
                 return ResourceManager.GetString("Titles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename title version files.
+        /// </summary>
+        public static string TitleVersionRename {
+            get {
+                return ResourceManager.GetString("TitleVersionRename", resourceCulture);
             }
         }
         

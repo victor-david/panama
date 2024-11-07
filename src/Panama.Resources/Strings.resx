@@ -121,22 +121,6 @@
     <value>Publisher</value>
     <comment>Command text to view publishers</comment>
   </data>
-  <data name="InvalidOpCommandNotSupported" xml:space="preserve">
-    <value>This command is not supported</value>
-    <comment>Used for certain default commands that aren't supported in some VMs</comment>
-  </data>
-  <data name="InvalidOpCannotDeleteTitle" xml:space="preserve">
-    <value>This title cannot be deleted. It is participating in {0} submissions. </value>
-    <comment>Used when a title cannot be deleted b/c it's involved in submissions</comment>
-  </data>
-  <data name="InvalidOpCannotDeletePublisher" xml:space="preserve">
-    <value>This publisher cannot be deleted. It is participating in {0} submissions. </value>
-    <comment>Used when a publisher cannot be deleted b/c it's involved in submissions</comment>
-  </data>
-  <data name="InvalidOpCannotDeleteAuthor" xml:space="preserve">
-    <value>This author cannot be deleted. They are participating in {0} titles. </value>
-    <comment>Used when an author cannot be deleted b/c it's involved in titles</comment>
-  </data>
   <data name="TextNone" xml:space="preserve">
     <value>(none)</value>
   </data>
@@ -154,10 +138,6 @@
 Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting.</value>
     <comment>Used when attempting to open a submssion document that doesn't exist</comment>
   </data>
-  <data name="InvalidOpDocumentTypeNotSupported" xml:space="preserve">
-    <value>This document type is obsolete and is no longer supported</value>
-    <comment>Used when attempting to view obsolete Outlook direct reference in submission documents</comment>
-  </data>
   <data name="FormatStringCreateSubmission" xml:space="preserve">
     <value>Create a submission to {0}?</value>
     <comment>Used for confirmation when creating a submission</comment>
@@ -169,25 +149,8 @@ Please make sure that {1} is set correctly in configuration settings. File speci
   <data name="ResultSubmissionCreated" xml:space="preserve">
     <value>Submission created</value>
   </data>
-  <data name="InvalidOpCannotDeleteTag" xml:space="preserve">
-    <value>This tag cannot be deleted. It is being used by {0} titles. </value>
-    <comment>Used when a tag cannot be deleted b/c it's being used</comment>
-  </data>
   <data name="TextSubmitted" xml:space="preserve">
     <value>Submitted</value>
-  </data>
-  <data name="InvalidOpRenameCandidateListEmpty" xml:space="preserve">
-    <value>No versions exist to rename</value>
-  </data>
-  <data name="InvalidOpRenameAllCandidatesAlreadyRenamed" xml:space="preserve">
-    <value>All of the version files for this title have already been renamed.</value>
-  </data>
-  <data name="InvalidOpRenameFileDoesNotExistFormat" xml:space="preserve">
-    <value>This operation cannot be completed because the file for version {0}
-
-{1} 
-
-does not exist. Correct this by selecting the correct file and then try again.</value>
   </data>
   <data name="CaptionSelectTitleVersionAddByFile" xml:space="preserve">
     <value>Select a file to add to the versions of this title</value>
@@ -204,17 +167,8 @@ does not exist. Correct this by selecting the correct file and then try again.</
   <data name="NotificationCannotExitTasksAreRunning" xml:space="preserve">
     <value>Cannot exit at this time. Background tasks are still running.</value>
   </data>
-  <data name="InvalidOpSubmissionDocumentFolderNotSet" xml:space="preserve">
-    <value>The folder for submission documents hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
-  </data>
-  <data name="InvalidOpNoDocumentId" xml:space="preserve">
-    <value>Cannot open. There is no document associated with this entry.</value>
-  </data>
   <data name="CaptionSelectSubmissionDocument" xml:space="preserve">
     <value>Select a submission document</value>
-  </data>
-  <data name="InvalidOpOutputFolderNotSet" xml:space="preserve">
-    <value>The folder for this operation hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
   </data>
   <data name="FormatTextExport" xml:space="preserve">
     <value>This folder contains exported versions of each title tracked by {0}.
@@ -227,41 +181,11 @@ Last exported: {1}</value>
   <data name="TitleStatusPreviousToPublisher" xml:space="preserve">
     <value>Previously submitted to the same publisher</value>
   </data>
-  <data name="WindowTitleSelectPublisherForPublished" xml:space="preserve">
-    <value>Select a publisher for this published record</value>
-  </data>
-  <data name="WindowTitleSelectPublisherGeneric" xml:space="preserve">
-    <value>Select a publisher</value>
-  </data>
   <data name="TextNotes" xml:space="preserve">
     <value>Notes</value>
   </data>
   <data name="TextClear" xml:space="preserve">
     <value>Clear</value>
-  </data>
-  <data name="InvalidOpTitleRootFolderNotSet" xml:space="preserve">
-    <value>The title root folder hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
-  </data>
-  <data name="InvalidOpMapiFolderNotSet" xml:space="preserve">
-    <value>The Outlook folder  from which to select submission messages hasn't been set. Fix the configuration and try again.</value>
-  </data>
-  <data name="InvalidOpTitleListOutputFolder" xml:space="preserve">
-    <value>The output folder for the title list operation does not exist.</value>
-  </data>
-  <data name="InvalidOpNotEnoughTextToScramble" xml:space="preserve">
-    <value>Not enough text to scramble. Paste some more text and try again.</value>
-  </data>
-  <data name="InvalidOpDirectoryDoesNotExist" xml:space="preserve">
-    <value>The specified directory does not exist</value>
-  </data>
-  <data name="WindowTitleVersionRename" xml:space="preserve">
-    <value>Rename title version files</value>
-  </data>
-  <data name="InvalidOpTitleDoesNotExist" xml:space="preserve">
-    <value>The specified title record does not exist</value>
-  </data>
-  <data name="InvalidOpRenameFilesMissing" xml:space="preserve">
-    <value>One or more of the version files does not exist</value>
   </data>
   <data name="InstallationCaption" xml:space="preserve">
     <value>Select the directory that will hold the database files</value>
@@ -271,22 +195,6 @@ Last exported: {1}</value>
   </data>
   <data name="TitleStatusSubmittedToExclusive" xml:space="preserve">
     <value>Currently submitted to a publisher that does not accept simultaneous submissions</value>
-  </data>
-  <data name="InvalidOpSubmissionMessageFolderNotSet" xml:space="preserve">
-    <value>The folder for submission messages has not been set or doesn't exist. Fix the configuration setting and try again.</value>
-  </data>
-  <data name="InvalidOpCannotDisplayMapi" xml:space="preserve">
-    <value>The message contents can't be displayed here. This message is a direct reference to the item stored in the Outlook message store. Double click the row to open the message.</value>
-  </data>
-  <data name="InvalidOpTextViewerNotSet" xml:space="preserve">
-    <value>The external text viewer application has not been set. Fix the configuration setting and try again.</value>
-  </data>
-  <data name="InvalidOpCannotAddVersionFile" xml:space="preserve">
-    <value>This file has already been added to this title. Please choose a different file.</value>
-    <comment>Used when a file can't be added or replaced as a version file because it is already included</comment>
-  </data>
-  <data name="InvalidOperationNoSearchScope" xml:space="preserve">
-    <value>No search scope specified</value>
   </data>
   <data name="TextDocumentPreviewNotSupported" xml:space="preserve">
     <value>Document Preview Not Supported</value>
@@ -351,9 +259,6 @@ Last exported: {1}</value>
   <data name="TextLocked" xml:space="preserve">
     <value>Locked</value>
   </data>
-  <data name="WindowTitleSelectTitlesGeneric" xml:space="preserve">
-    <value>Select titles</value>
-  </data>
   <data name="TextCreateSubmissionDocument0" xml:space="preserve">
     <value>Create submission document</value>
   </data>
@@ -371,9 +276,6 @@ Last exported: {1}</value>
   </data>
   <data name="TextCreateSubmissionDocument5" xml:space="preserve">
     <value>Create placeholder</value>
-  </data>
-  <data name="WindowTitleSelectMessagesGeneric" xml:space="preserve">
-    <value>Select messages</value>
   </data>
   <data name="TextRename" xml:space="preserve">
     <value>Rename</value>
@@ -402,9 +304,6 @@ Last exported: {1}</value>
   <data name="TitleStatusUnknown" xml:space="preserve">
     <value>Unknown status</value>
   </data>
-  <data name="WindowTitleConfirmTitleSubmission" xml:space="preserve">
-    <value>Confirm title submission</value>
-  </data>
   <data name="TextDate" xml:space="preserve">
     <value>Date</value>
   </data>
@@ -429,14 +328,8 @@ Last exported: {1}</value>
   <data name="TextDismiss" xml:space="preserve">
     <value>Dismiss</value>
   </data>
-  <data name="WindowTitleActiveAlerts" xml:space="preserve">
-    <value>Active Alerts</value>
-  </data>
   <data name="TextSendReport" xml:space="preserve">
     <value>Send report</value>
-  </data>
-  <data name="WindowTitleFatalError" xml:space="preserve">
-    <value>Fatal Error</value>
   </data>
   <data name="TextNoTitleSubmissions" xml:space="preserve">
     <value>No submissions for this title</value>

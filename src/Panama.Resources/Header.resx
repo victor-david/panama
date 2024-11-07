@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActiveAlerts" xml:space="preserve">
+    <value>Active Alerts</value>
+  </data>
   <data name="Added" xml:space="preserve">
     <value>Added</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="Company" xml:space="preserve">
     <value>Company</value>
+  </data>
+  <data name="ConfirmTitleSubmission" xml:space="preserve">
+    <value>Confirm title submission</value>
   </data>
   <data name="ConstraintShort" xml:space="preserve">
     <value>C</value>
@@ -218,6 +224,9 @@
   </data>
   <data name="Expression" xml:space="preserve">
     <value>Expression</value>
+  </data>
+  <data name="FatalError" xml:space="preserve">
+    <value>Fatal Error</value>
   </data>
   <data name="Fee" xml:space="preserve">
     <value>Fee</value>
@@ -348,6 +357,18 @@
   <data name="Scanned" xml:space="preserve">
     <value>Scanned</value>
   </data>
+  <data name="SelectMessagesGeneric" xml:space="preserve">
+    <value>Select messages</value>
+  </data>
+  <data name="SelectPublisherForPublished" xml:space="preserve">
+    <value>Select a publisher for this published record</value>
+  </data>
+  <data name="SelectPublisherGeneric" xml:space="preserve">
+    <value>Select a publisher</value>
+  </data>
+  <data name="SelectTitlesGeneric" xml:space="preserve">
+    <value>Select titles</value>
+  </data>
   <data name="SelfPublished" xml:space="preserve">
     <value>Self Published</value>
   </data>
@@ -431,6 +452,9 @@
   </data>
   <data name="Titles" xml:space="preserve">
     <value>Titles</value>
+  </data>
+  <data name="TitleVersionRename" xml:space="preserve">
+    <value>Rename title version files</value>
   </data>
   <data name="Tools" xml:space="preserve">
     <value>Tools</value>

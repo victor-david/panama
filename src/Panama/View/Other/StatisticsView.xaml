@@ -106,7 +106,7 @@
             <TextBlock
                 DockPanel.Dock="Top"
                 tk:Property.IsCollapsed="{Binding HaveTitleRoot}"
-                Text="{x:Static r:Strings.InvalidOpTitleRootFolderNotSet}"/>
+                Text="{x:Static r:Error.TitleRootFolderNotSet}"/>
         </DockPanel>
     </Grid>
 </Grid>

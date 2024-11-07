@@ -152,7 +152,7 @@ namespace Restless.Panama.ViewModel
             {
                 if (!Directory.Exists(Config.Instance.FolderSubmissionMessage))
                 {
-                    throw new IOException(Strings.InvalidOpSubmissionMessageFolderNotSet);
+                    throw new IOException(Error.SubmissionMessageFolderNotSet);
                 }
 
                 if (WindowFactory.SubmissionMessageSelect.Create().GetMessages() is List<MimeKitMessage> messages)
@@ -191,7 +191,7 @@ namespace Restless.Panama.ViewModel
                         return StringClean.Clean(SelectedMessage.Body, StringCleanOptions.RemoveHtml);
 
                     case TableValues.Protocol.Mapi:
-                        return Strings.InvalidOpCannotDisplayMapi;
+                        return Error.CannotDisplayMapi;
 
                     case TableValues.Protocol.FileSystem:
                         string file = SelectedMessage.EntryId;

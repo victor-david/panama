@@ -13,7 +13,7 @@
     ResizeMode="NoResize"
     SizeToContent="Height"
     Width="472"
-    Title="{x:Static r:Strings.WindowTitleFatalError}"
+    Title="{x:Static r:Header.FatalError}"
     Style="{StaticResource Panama.Styles.MetroWindow}">
 
     <Grid tk:Property.RowHeights="*,Auto">
@@ -34,7 +34,7 @@
                     Command="{Binding SendCommand}"/>
             </StatusBarItem>
 
-            <TextBlock Text="{x:Static r:Strings.WindowTitleFatalError}"/>
+            <TextBlock Text="{x:Static r:Header.FatalError}"/>
 
         </StatusBar>
 

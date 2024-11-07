@@ -11,7 +11,7 @@
     d:DataContext="{d:DesignInstance Type=vm:SelfPublisherSelectWindowViewModel}"
     mc:Ignorable="d"
     ResizeMode="NoResize"
-    Title="{x:Static r:Strings.WindowTitleSelectPublisherGeneric}"
+    Title="{x:Static r:Header.SelectPublisherGeneric}"
     Style="{StaticResource Panama.Styles.MetroWindow}"
     Height="680" Width="568">
 

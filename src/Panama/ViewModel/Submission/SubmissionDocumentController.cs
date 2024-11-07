@@ -159,7 +159,7 @@ namespace Restless.Panama.ViewModel
         {
             if (!Directory.Exists(Config.Instance.FolderSubmissionDocument))
             {
-                MessageWindow.ShowError(Strings.InvalidOpSubmissionDocumentFolderNotSet);
+                MessageWindow.ShowError(Error.SubmissionDocumentFolderNotSet);
                 return;
             }
 
@@ -198,12 +198,12 @@ namespace Restless.Panama.ViewModel
                 }
                 else
                 {
-                    MessageWindow.ShowError(Strings.InvalidOpDocumentTypeNotSupported);
+                    MessageWindow.ShowError(Error.DocumentTypeNotSupported);
                 }
             }
             else
             {
-                MessageWindow.ShowError(Strings.InvalidOpNoDocumentId);
+                MessageWindow.ShowError(Error.NoDocumentId);
             }
         }
         #endregion

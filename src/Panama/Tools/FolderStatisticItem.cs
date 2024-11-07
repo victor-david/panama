@@ -105,7 +105,7 @@ namespace Restless.Panama.Tools
         #endregion
 
         /************************************************************************/
-        
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="FolderStatisticItem"/> class.
@@ -120,7 +120,7 @@ namespace Restless.Panama.Tools
 
             if (!Directory.Exists(folder))
             {
-                throw new InvalidOperationException(Strings.InvalidOpDirectoryDoesNotExist);
+                throw new InvalidOperationException(Error.DirectoryDoesNotExist);
             }
             Folder = folder;
             Children = new List<FolderStatisticItem>();

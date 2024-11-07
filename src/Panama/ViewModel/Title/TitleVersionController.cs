@@ -276,7 +276,7 @@ namespace Restless.Panama.ViewModel
                     StringBuilder sb = new();
                     sb.AppendLine(fileName);
                     sb.AppendLine();
-                    sb.Append(Strings.InvalidOpCannotAddVersionFile);
+                    sb.Append(Error.CannotAddVersionFile);
                     MessageWindow.ShowError(sb.ToString());
                     return false;
                 }

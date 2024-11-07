@@ -69,7 +69,7 @@ namespace Restless.Panama.ViewModel
         private string GetFullMessage(Exception exception)
         {
             StringBuilder builder = new();
-            builder.AppendLine(Strings.WindowTitleFatalError);
+            builder.AppendLine(Header.FatalError);
             builder.AppendLine();
             builder.AppendLine(Logger.Instance.GetExceptionMessage(exception));
             builder.AppendLine($"{Strings.TextDetail}: {Logger.Instance.LogFile}");

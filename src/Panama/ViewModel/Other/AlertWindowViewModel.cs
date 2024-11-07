@@ -66,7 +66,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public AlertWindowViewModel()
         {
-            DisplayName = Strings.WindowTitleActiveAlerts;
+            DisplayName = Header.ActiveAlerts;
 
             Columns.CreateResource<BooleanToResourceConverter>(Header.EnabledShort, TableColumns.Enabled, ResourceKeys.Icon.IconSquare)
                 .MakeCentered()

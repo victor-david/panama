@@ -148,7 +148,7 @@ namespace Restless.Panama.ViewModel
                 int childRowCount = SelectedRow.GetChildRows(SelfPublisherTable.Defs.Relations.ToPublished).Length;
                 if (childRowCount > 0)
                 {
-                    MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.InvalidOpCannotDeletePublisher, childRowCount));
+                    MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Error.CannotDeletePublisher, childRowCount));
                     return;
                 }
 
