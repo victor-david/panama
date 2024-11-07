@@ -104,7 +104,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (IsSelectedRowAccessible && MessageWindow.ShowContinueCancel(Strings.ConfirmationRemoveRelatedTitle))
+            if (IsSelectedRowAccessible && MessageWindow.ShowContinueCancel(Confirm.RemoveRelatedTitle))
             {
                 Table.RemoveIfExist(Owner?.SelectedTitle?.Id ?? 0, SelectedRelated.RelatedId);
                 ListView.Refresh();

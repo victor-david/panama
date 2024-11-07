@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddAlert" xml:space="preserve">
+    <value>This operation will add a new alert record. If any filters are in effect, they will be removed so that the new alert displays in the list.</value>
+  </data>
+  <data name="AddAuthor" xml:space="preserve">
+    <value>This operation will add a new author record. If any filters are in effect, they will be removed so that the new author displays in the list. 
+
+Do you want to continue?</value>
+  </data>
+  <data name="AddOrphanDirectoryExclusion" xml:space="preserve">
+    <value>This operation excludes the directory of the selected file from further orphan search</value>
+  </data>
+  <data name="AddOrphanFileExclusion" xml:space="preserve">
+    <value>This operation excludes the selected file from further orphan search</value>
+  </data>
+  <data name="AddOrphanFileTypeExclusion" xml:space="preserve">
+    <value>This operation excludes all files of the selected file type from further orphan search</value>
+  </data>
+  <data name="AddPublisher" xml:space="preserve">
+    <value>This operation will add a new publisher record. If any publisher filters are in effect, they will be removed so that the new publisher displays in the list. 
+
+Do you want to continue?</value>
+  </data>
+  <data name="AddSubmissionPeriod" xml:space="preserve">
+    <value>This operation adds a submission period that runs from January 1 - December 31, i.e. all year. Once added, you can change the range of the submission period if needed.</value>
+  </data>
+  <data name="AddTitle" xml:space="preserve">
+    <value>This operation will add a new title record. If any title filters are in effect, they will be removed so that the new title displays in the list. 
+
+Do you want to continue?</value>
+  </data>
+  <data name="AllVersionFilesRenamed" xml:space="preserve">
+    <value>Success. All eligible version files renamed.</value>
+  </data>
+  <data name="ApplyExtractedTitleFormat" xml:space="preserve">
+    <value>The title extracted from the latest version is:
+
+{0}
+
+Do you want to set the title to this value?</value>
+  </data>
+  <data name="ClearPublishedDate" xml:space="preserve">
+    <value>This operation clears the published date for this item. You can set the date again at any time.</value>
+  </data>
+  <data name="ClearTitleFlags" xml:space="preserve">
+    <value>This operation will clear the quick flag from all titles. Do you want to continue?</value>
+  </data>
+  <data name="CreateSubmissionDocument" xml:space="preserve">
+    <value>Create a document (NOT READY)</value>
+  </data>
+  <data name="CreateTitleFromOrphan" xml:space="preserve">
+    <value>This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.</value>
+  </data>
+  <data name="DeleteAlert" xml:space="preserve">
+    <value>Delete this alert?</value>
+  </data>
+  <data name="DeleteAuthor" xml:space="preserve">
+    <value>Delete this author?</value>
+    <comment>Used to confirm author deletion</comment>
+  </data>
+  <data name="DeleteCredential" xml:space="preserve">
+    <value>This operation will remove the selected credential and remove its association with any publishers that are using it. Do you want to continue?</value>
+  </data>
+  <data name="DeleteFile" xml:space="preserve">
+    <value>This will delete the selected file from disk. Do you want to continue?</value>
+  </data>
+  <data name="DeleteLink" xml:space="preserve">
+    <value>Delete this link?</value>
+  </data>
+  <data name="DeletePublisher" xml:space="preserve">
+    <value>Getting ready to delete this publisher. Do you want to continue?</value>
+    <comment>Used to confirm publisher deletion</comment>
+  </data>
+  <data name="DeleteSubmission" xml:space="preserve">
+    <value>Getting ready to delete this submission. This will remove the submission record and all associated records such as submission documents and messages. It does not remove any documents from disk. Do you want to continue?</value>
+  </data>
+  <data name="DeleteSubmissionDocument" xml:space="preserve">
+    <value>Getting ready to delete this submission document. This only deletes the entry in the database, not the associated document. Do you want to continue?</value>
+    <comment>Used to confirm title deletion</comment>
+  </data>
+  <data name="DeleteTag" xml:space="preserve">
+    <value>Delete this tag?</value>
+    <comment>Used to confirm tag deletion</comment>
+  </data>
+  <data name="DeleteTitle" xml:space="preserve">
+    <value>Getting ready to delete this title. This only deletes the entry in the database, not any associated documents (Word, PDF, etc.) Do you  want to continue?</value>
+    <comment>Used to confirm title deletion</comment>
+  </data>
+  <data name="DeleteUserNote" xml:space="preserve">
+    <value>Delete this note?</value>
+  </data>
+  <data name="RemoveQueue" xml:space="preserve">
+    <value>This operation removes the selected queue. It does not affect any title record themselves.</value>
+  </data>
+  <data name="RemoveQueueTitle" xml:space="preserve">
+    <value>This operation removes the selected title from the queue. It does not affect the title itself.</value>
+  </data>
+  <data name="RemoveRelatedTitle" xml:space="preserve">
+    <value>This operation removes the related title from this title. It does not affect the related title itself.</value>
+  </data>
+  <data name="RemoveSubmissionMessage" xml:space="preserve">
+    <value>Getting ready to remove this message. This does not delete any external files or resources, only the database entry. Do you want to continue?</value>
+  </data>
+  <data name="RemoveSubmissionPeriod" xml:space="preserve">
+    <value>Remove this submission period for this publisher?</value>
+  </data>
+  <data name="RemoveTitleFromQueue" xml:space="preserve">
+    <value>This operation removes the title from the selected queue. It does not affect the title itself.</value>
+  </data>
+  <data name="RemoveTitleFromSubmission" xml:space="preserve">
+    <value>Remove title from this submission?</value>
+  </data>
+  <data name="RemoveTitlePublished" xml:space="preserve">
+    <value>This operation removes the record of publication for this title. You can add a new record back at any time.</value>
+  </data>
+  <data name="RemoveTitleVersion" xml:space="preserve">
+    <value>This operation will remove the selected version from this title. It does not delete the file on disk.</value>
+  </data>
+  <data name="ResetSubmissionPeriod" xml:space="preserve">
+    <value>This operation sets the submission period to January 1 - December 31, i.e. all year.</value>
+  </data>
+  <data name="TitlesCopiedToClipboard" xml:space="preserve">
+    <value>The title list has been copied to the clipboard</value>
+  </data>
+</root>

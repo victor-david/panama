@@ -53,7 +53,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public LinkViewModel()
         {
-            DisplayName = Strings.CommandLink;
+            DisplayName = Header.Links;
             Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
@@ -103,7 +103,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunDeleteCommand()
         {
-            if (IsSelectedRowAccessible && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteLink))
+            if (IsSelectedRowAccessible && MessageWindow.ShowYesNo(Confirm.DeleteLink))
             {
                 DeleteSelectedRow();
             }

@@ -128,7 +128,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (IsSelectedRowAccessible && MessageWindow.ShowContinueCancel(Strings.ConfirmationRemoveTitlePublished))
+            if (IsSelectedRowAccessible && MessageWindow.ShowContinueCancel(Confirm.RemoveTitlePublished))
             {
                 DeleteSelectedRow();
             }
@@ -149,7 +149,7 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private void RunClearPublishedDateCommand(object parm)
         {
-            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationClearPublishedDate))
+            if (MessageWindow.ShowContinueCancel(Confirm.ClearPublishedDate))
             {
                 PublishedDate = null;
             }

@@ -68,7 +68,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (IsSelectedRowAccessible && MessageWindow.ShowContinueCancel(Strings.ConfirmationRemoveTitleFromQueue))
+            if (IsSelectedRowAccessible && MessageWindow.ShowContinueCancel(Confirm.RemoveTitleFromQueue))
             {
                 SelectedQueue.Row.Delete();
                 Table.Save();

@@ -97,7 +97,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunAddCommand()
         {
-            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationAddAlert))
+            if (MessageWindow.ShowContinueCancel(Confirm.AddAlert))
             {
                 Table.AddDefaultRow();
                 Table.Save();
@@ -109,7 +109,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (IsSelectedRowAccessible && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteAlert))
+            if (IsSelectedRowAccessible && MessageWindow.ShowYesNo(Confirm.DeleteAlert))
             {
                 DeleteSelectedRow();
             }

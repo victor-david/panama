@@ -62,7 +62,7 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W076);
 
             /* Context menu items */
-            MenuItems.AddItem(Strings.CommandAddTag, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
+            MenuItems.AddItem(Menu.AddTag, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Menu.DeleteTag, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
@@ -111,7 +111,7 @@ namespace Restless.Panama.ViewModel
                 MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Strings.InvalidOpCannotDeleteTag, childRowCount));
                 return;
             }
-            if (MessageWindow.ShowYesNo(Strings.ConfirmationDeleteTag))
+            if (MessageWindow.ShowYesNo(Confirm.DeleteTag))
             {
                 SelectedRow.Delete();
                 Table.Save();

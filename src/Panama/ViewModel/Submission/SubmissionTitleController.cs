@@ -215,7 +215,7 @@ namespace Restless.Panama.ViewModel
 
         private void RunRemoveTitleFromSubmissionCommand(object parm)
         {
-            if (MessageWindow.ShowYesNo(Strings.ConfirmationRemoveTitleFromSubmission))
+            if (MessageWindow.ShowYesNo(Confirm.RemoveTitleFromSubmission))
             {
                 DeleteSelectedRow();
             }
@@ -231,7 +231,7 @@ namespace Restless.Panama.ViewModel
                     builder.AppendLine(row.Title);
                 }
                 System.Windows.Clipboard.SetText(builder.ToString());
-                MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ConfirmationTitlesCopiedToClipboard);
+                MainWindowViewModel.Instance.CreateNotificationMessage(Confirm.TitlesCopiedToClipboard);
             });
         }
 

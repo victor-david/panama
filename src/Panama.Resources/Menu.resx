@@ -154,6 +154,9 @@
   <data name="AddSubmissionPeriod" xml:space="preserve">
     <value>Add a submission period</value>
   </data>
+  <data name="AddTag" xml:space="preserve">
+    <value>Add a tag</value>
+  </data>
   <data name="AddTitle" xml:space="preserve">
     <value>Add a title to the collection</value>
   </data>
@@ -187,6 +190,21 @@
   </data>
   <data name="ClearPublishedDate" xml:space="preserve">
     <value>Clear the published date</value>
+  </data>
+  <data name="CommandDeleteCredential" xml:space="preserve">
+    <value>Delete this credential</value>
+  </data>
+  <data name="CommandSelfPublisher" xml:space="preserve">
+    <value>Self Publishers</value>
+  </data>
+  <data name="CommandToolConvert" xml:space="preserve">
+    <value>Convert</value>
+  </data>
+  <data name="CommandToolMessageSync" xml:space="preserve">
+    <value>Message Sync</value>
+  </data>
+  <data name="CommandToolScramble" xml:space="preserve">
+    <value>Scramble</value>
   </data>
   <data name="CopyTitle" xml:space="preserve">
     <value>Copy title to clipboard</value>

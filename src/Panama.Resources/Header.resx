@@ -231,6 +231,9 @@
   <data name="LastSubmissionShort" xml:space="preserve">
     <value>Last Sub</value>
   </data>
+  <data name="Links" xml:space="preserve">
+    <value>Links</value>
+  </data>
   <data name="Main" xml:space="preserve">
     <value>Main</value>
   </data>
@@ -320,6 +323,9 @@
   </data>
   <data name="Scanned" xml:space="preserve">
     <value>Scanned</value>
+  </data>
+  <data name="SelfPublishers" xml:space="preserve">
+    <value>Self Publishers</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>

@@ -172,9 +172,6 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddSeparator();
             MenuItems.AddItem(Menu.BrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Strings.CommandCopyLoginId, Commands["CopyLoginId"]);
-            MenuItems.AddItem(Strings.CommandCopyPassword, Commands["CopyPassword"]);
-            MenuItems.AddSeparator();
             MenuItems.AddItem(Menu.DeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
@@ -224,7 +221,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunAddCommand()
         {
-            if (MessageWindow.ShowYesNo(Strings.ConfirmationAddPublisher))
+            if (MessageWindow.ShowYesNo(Confirm.AddPublisher))
             {
                 Table.AddDefaultRow();
                 Table.Save();
@@ -259,7 +256,7 @@ namespace Restless.Panama.ViewModel
                     return;
                 }
 
-                if (MessageWindow.ShowYesNo(Strings.ConfirmationDeletePublisher))
+                if (MessageWindow.ShowYesNo(Confirm.DeletePublisher))
                 {
                     DeleteSelectedRow();
                 }

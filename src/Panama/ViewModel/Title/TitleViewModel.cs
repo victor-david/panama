@@ -391,7 +391,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunAddCommand()
         {
-            if (MessageWindow.ShowYesNo(Strings.ConfirmationAddTitle))
+            if (MessageWindow.ShowYesNo(Confirm.AddTitle))
             {
                 Table.AddDefaultRow();
                 Table.Save();
@@ -418,7 +418,7 @@ namespace Restless.Panama.ViewModel
                     return;
                 }
 
-                if (MessageWindow.ShowYesNo(Strings.ConfirmationDeleteTitle))
+                if (MessageWindow.ShowYesNo(Confirm.DeleteTitle))
                 {
                     DeleteSelectedRow();
                 }
@@ -472,7 +472,7 @@ namespace Restless.Panama.ViewModel
                                 title = "(no title)";
                             }
 
-                            if (MessageWindow.ShowYesNo(string.Format(CultureInfo.InvariantCulture, Strings.ConfirmationApplyExtractedTitleFormat, title)))
+                            if (MessageWindow.ShowYesNo(string.Format(CultureInfo.InvariantCulture, Confirm.ApplyExtractedTitleFormat, title)))
                             {
                                 SelectedTitle.Title = title;
                                 /* Needed to update the text box */
@@ -503,7 +503,7 @@ namespace Restless.Panama.ViewModel
 
         private void RunClearTitleFlagsCommand(object parm)
         {
-            if (Messages.ShowYesNo(Strings.ConfirmationClearTitleFlags))
+            if (Messages.ShowYesNo(Confirm.ClearTitleFlags))
             {
                 foreach (TitleRow title in Table.EnumerateTitles())
                 {

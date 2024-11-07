@@ -90,7 +90,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunAddCommand()
         {
-            if (MessageWindow.ShowYesNo(Strings.ConfirmationAddAuthor))
+            if (MessageWindow.ShowYesNo(Confirm.AddAuthor))
             {
                 Table.AddDefaultRow();
                 Table.Save();
@@ -113,7 +113,7 @@ namespace Restless.Panama.ViewModel
                     return;
                 }
 
-                if (MessageWindow.ShowYesNo(Strings.ConfirmationDeleteAuthor))
+                if (MessageWindow.ShowYesNo(Confirm.DeleteAuthor))
                 {
                     DeleteSelectedRow();
                 }

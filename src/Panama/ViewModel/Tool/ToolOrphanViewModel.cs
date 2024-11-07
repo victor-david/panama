@@ -158,7 +158,7 @@ namespace Restless.Panama.ViewModel
         #region Private methods (handlers)
         private void RunSetOrphanFileExclusion()
         {
-            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanFileExclusion, SelectedOrphan.FileName)))
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Confirm.AddOrphanFileExclusion, SelectedOrphan.FileName)))
             {
                 Exclusions.AddFileExclusion(SelectedOrphan);
             }
@@ -166,7 +166,7 @@ namespace Restless.Panama.ViewModel
 
         private void RunSetOrphanFileTypeExclusion()
         {
-            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanFileTypeExclusion, SelectedOrphan.FileExtension)))
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Confirm.AddOrphanFileTypeExclusion, SelectedOrphan.FileExtension)))
             {
                 Exclusions.AddFileExtensionExclusion(SelectedOrphan);
             }
@@ -174,7 +174,7 @@ namespace Restless.Panama.ViewModel
 
         private void RunSetOrphanDirectoryExclusion()
         {
-            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationAddOrphanDirectoryExclusion, SelectedOrphan.DirectoryName)))
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Confirm.AddOrphanDirectoryExclusion, SelectedOrphan.DirectoryName)))
             {
                 Exclusions.AddDirectoryExclusion(SelectedOrphan);
             }
@@ -182,7 +182,7 @@ namespace Restless.Panama.ViewModel
 
         private void RunCreateTitleFromOrphan()
         {
-            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Strings.ConfirmationCreateTitleFromOrphan, SelectedOrphan.FullName)))
+            if (MessageWindow.ShowContinueCancel(GetOrphanDetailMessage(Confirm.CreateTitleFromOrphan, SelectedOrphan.FullName)))
             {
                 TitleRow row = new(TitleTable.AddDefaultRow())
                 {

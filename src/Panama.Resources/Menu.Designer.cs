@@ -169,6 +169,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a tag.
+        /// </summary>
+        public static string AddTag {
+            get {
+                return ResourceManager.GetString("AddTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a title to the collection.
         /// </summary>
         public static string AddTitle {
@@ -264,6 +273,51 @@ namespace Restless.Panama.Resources {
         public static string ClearPublishedDate {
             get {
                 return ResourceManager.GetString("ClearPublishedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this credential.
+        /// </summary>
+        public static string CommandDeleteCredential {
+            get {
+                return ResourceManager.GetString("CommandDeleteCredential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Self Publishers.
+        /// </summary>
+        public static string CommandSelfPublisher {
+            get {
+                return ResourceManager.GetString("CommandSelfPublisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert.
+        /// </summary>
+        public static string CommandToolConvert {
+            get {
+                return ResourceManager.GetString("CommandToolConvert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message Sync.
+        /// </summary>
+        public static string CommandToolMessageSync {
+            get {
+                return ResourceManager.GetString("CommandToolMessageSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scramble.
+        /// </summary>
+        public static string CommandToolScramble {
+            get {
+                return ResourceManager.GetString("CommandToolScramble", resourceCulture);
             }
         }
         

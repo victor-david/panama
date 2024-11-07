@@ -54,7 +54,8 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SelfPublisherViewModel()
         {
-            DisplayName = Strings.CommandSelfPublisher;
+            DisplayName = Header.SelfPublishers;
+
             Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
@@ -116,7 +117,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunAddCommand()
         {
-            if (MessageWindow.ShowYesNo(Strings.ConfirmationAddPublisher))
+            if (MessageWindow.ShowYesNo(Confirm.AddPublisher))
             {
                 Table.AddDefaultRow();
                 Table.Save();
@@ -151,7 +152,7 @@ namespace Restless.Panama.ViewModel
                     return;
                 }
 
-                if (MessageWindow.ShowYesNo(Strings.ConfirmationDeletePublisher))
+                if (MessageWindow.ShowYesNo(Confirm.DeletePublisher))
                 {
                     DeleteSelectedRow();
                 }

@@ -403,6 +403,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Links.
+        /// </summary>
+        public static string Links {
+            get {
+                return ResourceManager.GetString("Links", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Main.
         /// </summary>
         public static string Main {
@@ -669,6 +678,15 @@ namespace Restless.Panama.Resources {
         public static string Scanned {
             get {
                 return ResourceManager.GetString("Scanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Self Publishers.
+        /// </summary>
+        public static string SelfPublishers {
+            get {
+                return ResourceManager.GetString("SelfPublishers", resourceCulture);
             }
         }
         

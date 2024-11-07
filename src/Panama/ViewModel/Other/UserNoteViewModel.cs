@@ -91,7 +91,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunDeleteCommand()
         {
-            if (IsSelectedRowAccessible && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteUserNote))
+            if (IsSelectedRowAccessible && MessageWindow.ShowYesNo(Confirm.DeleteUserNote))
             {
                 DeleteSelectedRow();
             }

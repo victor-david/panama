@@ -101,7 +101,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunAddCommand()
         {
-            if (MessageWindow.ShowContinueCancel(Strings.ConfirmationAddSubmissionPeriod))
+            if (MessageWindow.ShowContinueCancel(Confirm.AddSubmissionPeriod))
             {
                 Table.AddSubmissionPeriod(Owner.SelectedPublisher.Id);
                 Update();
@@ -111,7 +111,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (MessageWindow.ShowYesNo(Strings.ConfirmationRemoveSubmissionPeriod))
+            if (MessageWindow.ShowYesNo(Confirm.RemoveSubmissionPeriod))
             {
                 // Call the specialized Table method instead of DeleteSelectedRow() to update other records
                 Table.DeleteSubmissionPeriod(SelectedRow);
@@ -125,7 +125,7 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private void RunMakeAllYearCommand()
         {
-            if (SelectedPeriod != null && MessageWindow.ShowContinueCancel(Strings.ConfirmationResetSubmissionPeriod))
+            if (SelectedPeriod != null && MessageWindow.ShowContinueCancel(Confirm.ResetSubmissionPeriod))
             {
                 SelectedPeriod.MakeAllYear();
                 OnPropertyChanged(nameof(SelectedPeriod));

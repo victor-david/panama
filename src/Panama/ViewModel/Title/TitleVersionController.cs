@@ -206,7 +206,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (CanRunVersionCommand() && MessageWindow.ShowContinueCancel(Strings.ConfirmationRemoveTitleVersion))
+            if (CanRunVersionCommand() && MessageWindow.ShowContinueCancel(Confirm.RemoveTitleVersion))
             {
                 verController.Remove(SelectedVersion);
                 Table.Save();

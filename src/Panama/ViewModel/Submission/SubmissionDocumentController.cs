@@ -181,7 +181,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (DeleteCommandEnabled && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteSubmissionDocument))
+            if (DeleteCommandEnabled && MessageWindow.ShowYesNo(Confirm.DeleteSubmissionDocument))
             {
                 DeleteSelectedRow();
             }

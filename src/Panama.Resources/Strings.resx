@@ -129,21 +129,9 @@
     <value>This title cannot be deleted. It is participating in {0} submissions. </value>
     <comment>Used when a title cannot be deleted b/c it's involved in submissions</comment>
   </data>
-  <data name="ConfirmationDeleteTitle" xml:space="preserve">
-    <value>Getting ready to delete this title. This only deletes the entry in the database, not any associated documents (Word, PDF, etc.) Do you  want to continue?</value>
-    <comment>Used to confirm title deletion</comment>
-  </data>
-  <data name="ConfirmationDeletePublisher" xml:space="preserve">
-    <value>Getting ready to delete this publisher. Do you want to continue?</value>
-    <comment>Used to confirm publisher deletion</comment>
-  </data>
   <data name="InvalidOpCannotDeletePublisher" xml:space="preserve">
     <value>This publisher cannot be deleted. It is participating in {0} submissions. </value>
     <comment>Used when a publisher cannot be deleted b/c it's involved in submissions</comment>
-  </data>
-  <data name="ConfirmationDeleteAuthor" xml:space="preserve">
-    <value>Delete this author?</value>
-    <comment>Used to confirm author deletion</comment>
   </data>
   <data name="InvalidOpCannotDeleteAuthor" xml:space="preserve">
     <value>This author cannot be deleted. They are participating in {0} titles. </value>
@@ -181,28 +169,12 @@ Please make sure that {1} is set correctly in configuration settings. File speci
   <data name="ResultSubmissionCreated" xml:space="preserve">
     <value>Submission created</value>
   </data>
-  <data name="CommandAddTag" xml:space="preserve">
-    <value>Add a tag</value>
-  </data>
-  <data name="ConfirmationDeleteTag" xml:space="preserve">
-    <value>Delete this tag?</value>
-    <comment>Used to confirm tag deletion</comment>
-  </data>
   <data name="InvalidOpCannotDeleteTag" xml:space="preserve">
     <value>This tag cannot be deleted. It is being used by {0} titles. </value>
     <comment>Used when a tag cannot be deleted b/c it's being used</comment>
   </data>
-  <data name="ConfirmationRemoveTitleFromSubmission" xml:space="preserve">
-    <value>Remove title from this submission?</value>
-  </data>
   <data name="TextSubmitted" xml:space="preserve">
     <value>Submitted</value>
-  </data>
-  <data name="CommandLink" xml:space="preserve">
-    <value>Links</value>
-  </data>
-  <data name="ConfirmationDeleteLink" xml:space="preserve">
-    <value>Delete this link?</value>
   </data>
   <data name="HeaderDocuments" xml:space="preserve">
     <value>Documents</value>
@@ -241,9 +213,6 @@ does not exist. Correct this by selecting the correct file and then try again.</
   <data name="TextRecords" xml:space="preserve">
     <value>records</value>
   </data>
-  <data name="ConfirmationRemoveTitleVersion" xml:space="preserve">
-    <value>This operation will remove the selected version from this title. It does not delete the file on disk.</value>
-  </data>
   <data name="CaptionSelectTitleVersionReplaceByFile" xml:space="preserve">
     <value>Select a file to replace the file of the selected version</value>
   </data>
@@ -253,14 +222,8 @@ does not exist. Correct this by selecting the correct file and then try again.</
   <data name="InvalidOpSubmissionDocumentFolderNotSet" xml:space="preserve">
     <value>The folder for submission documents hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
   </data>
-  <data name="ConfirmationCreateSubmissionDocument" xml:space="preserve">
-    <value>Create a document (NOT READY)</value>
-  </data>
   <data name="InvalidOpNoDocumentId" xml:space="preserve">
     <value>Cannot open. There is no document associated with this entry.</value>
-  </data>
-  <data name="ConfirmationTitlesCopiedToClipboard" xml:space="preserve">
-    <value>The title list has been copied to the clipboard</value>
   </data>
   <data name="CaptionSelectSubmissionDocument" xml:space="preserve">
     <value>Select a submission document</value>
@@ -303,9 +266,6 @@ Last exported: {1}</value>
   <data name="TooltipTitleVersionCount" xml:space="preserve">
     <value>Version count - the number of versions that this title has</value>
   </data>
-  <data name="ConfirmationRemoveTitlePublished" xml:space="preserve">
-    <value>This operation removes the record of publication for this title. You can add a new record back at any time.</value>
-  </data>
   <data name="WindowTitleSelectPublisherForPublished" xml:space="preserve">
     <value>Select a publisher for this published record</value>
   </data>
@@ -321,27 +281,14 @@ Last exported: {1}</value>
   <data name="ToolTipPublisherSubmissionCount" xml:space="preserve">
     <value>Submission count - the total number of times a submission has been made to this publisher</value>
   </data>
-  <data name="ConfirmationDeleteSubmissionDocument" xml:space="preserve">
-    <value>Getting ready to delete this submission document. This only deletes the entry in the database, not the associated document. Do you want to continue?</value>
-    <comment>Used to confirm title deletion</comment>
-  </data>
   <data name="TextNotes" xml:space="preserve">
     <value>Notes</value>
-  </data>
-  <data name="ConfirmationDeleteUserNote" xml:space="preserve">
-    <value>Delete this note?</value>
   </data>
   <data name="TextClear" xml:space="preserve">
     <value>Clear</value>
   </data>
-  <data name="ConfirmationRemoveSubmissionPeriod" xml:space="preserve">
-    <value>Remove this submission period for this publisher?</value>
-  </data>
   <data name="ToolTipPublisherSubmissionPeriodCount" xml:space="preserve">
     <value>Submission period count - the total number of submission periods that have been assigned to this publisher</value>
-  </data>
-  <data name="ConfirmationDeleteSubmission" xml:space="preserve">
-    <value>Getting ready to delete this submission. This will remove the submission record and all associated records such as submission documents and messages. It does not remove any documents from disk. Do you want to continue?</value>
   </data>
   <data name="ToolOrphanDetail" xml:space="preserve">
     <value>This operation searches all files beneath the title root directory to find those files that are not associated with a title entry. The submission document folder and title export folder are automatically excluded from the search if they exist beneath title root. You can exclude other folders in configuration.</value>
@@ -349,14 +296,8 @@ Last exported: {1}</value>
   <data name="InvalidOpTitleRootFolderNotSet" xml:space="preserve">
     <value>The title root folder hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
   </data>
-  <data name="ConfirmationDeleteFile" xml:space="preserve">
-    <value>This will delete the selected file from disk. Do you want to continue?</value>
-  </data>
   <data name="HeaderToolOperationSearch" xml:space="preserve">
     <value>This operation searches all files beneath the title root directory to find all files that contain the specified search term.</value>
-  </data>
-  <data name="ConfirmationRemoveSubmissionMessage" xml:space="preserve">
-    <value>Getting ready to remove this message. This does not delete any external files or resources, only the database entry. Do you want to continue?</value>
   </data>
   <data name="InvalidOpMapiFolderNotSet" xml:space="preserve">
     <value>The Outlook folder  from which to select submission messages hasn't been set. Fix the configuration and try again.</value>
@@ -370,9 +311,6 @@ Last exported: {1}</value>
   <data name="TooltipTitleWordCount" xml:space="preserve">
     <value>Word count - the number of words in the latest version of this title</value>
   </data>
-  <data name="CommandToolScramble" xml:space="preserve">
-    <value>Scramble</value>
-  </data>
   <data name="HeaderToolOperationScramble" xml:space="preserve">
     <value>This operation enables you to scramble lines of text, and optionally the words within the lines. Paste text to begin.</value>
   </data>
@@ -385,38 +323,16 @@ Last exported: {1}</value>
   <data name="HeaderToolOperationSearchFoundFormat" xml:space="preserve">
     <value>Results - {0}</value>
   </data>
-  <data name="ConfirmationApplyExtractedTitleFormat" xml:space="preserve">
-    <value>The title extracted from the latest version is:
-
-{0}
-
-Do you want to set the title to this value?</value>
-  </data>
   <data name="HeaderVersionProperties" xml:space="preserve">
     <value>These properties are the same ones you can change from within Microsoft Word; they are saved within the document itself.
 
 When you save properties here however, the document's file  modification date is not set to the current date / time as it is when you make the changes from within Word. Instead,  the modification date is incremented by 15 seconds from its original.</value>
-  </data>
-  <data name="CommandToolConvert" xml:space="preserve">
-    <value>Convert</value>
   </data>
   <data name="HeaderToolOperationConvert" xml:space="preserve">
     <value>This operation converts all .doc files in the specified folder to Open Xml (.docx ) files. If the converted file belongs to a title version, the version record will be updated to reflect the change. If a corresponding .docx file exists in the folder (for example, Report.doc and Report.docx), the .docx file will be overwritten. After the conversion, the .doc file will be deleted.</value>
   </data>
   <data name="HeaderToolOperationConvertFoundFormat" xml:space="preserve">
     <value>{0} eligible files, {1} converted</value>
-  </data>
-  <data name="CommandCopyLoginId" xml:space="preserve">
-    <value>Copy login id to clipboard</value>
-  </data>
-  <data name="CommandCopyPassword" xml:space="preserve">
-    <value>Copy password to clipboard</value>
-  </data>
-  <data name="CommandDeleteCredential" xml:space="preserve">
-    <value>Delete this credential</value>
-  </data>
-  <data name="ConfirmationDeleteCredential" xml:space="preserve">
-    <value>This operation will remove the selected credential and remove its association with any publishers that are using it. Do you want to continue?</value>
   </data>
   <data name="InvalidOpDirectoryDoesNotExist" xml:space="preserve">
     <value>The specified directory does not exist</value>
@@ -429,9 +345,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="InvalidOpRenameFilesMissing" xml:space="preserve">
     <value>One or more of the version files does not exist</value>
-  </data>
-  <data name="ConfirmationAllVersionFilesRenamed" xml:space="preserve">
-    <value>Success. All eligible version files renamed.</value>
   </data>
   <data name="InstallationCaption" xml:space="preserve">
     <value>Select the directory that will hold the database files</value>
@@ -466,16 +379,6 @@ When you save properties here however, the document's file  modification date is
   <data name="ToolTipPublisherPay" xml:space="preserve">
     <value>Publisher is a paying market</value>
   </data>
-  <data name="ConfirmationAddTitle" xml:space="preserve">
-    <value>This operation will add a new title record. If any title filters are in effect, they will be removed so that the new title displays in the list. 
-
-Do you want to continue?</value>
-  </data>
-  <data name="ConfirmationAddPublisher" xml:space="preserve">
-    <value>This operation will add a new publisher record. If any publisher filters are in effect, they will be removed so that the new publisher displays in the list. 
-
-Do you want to continue?</value>
-  </data>
   <data name="ToolTipPublisherFilterFollowup" xml:space="preserve">
     <value>Filter publisher list to display only publishers that are active and flagged for follow up</value>
   </data>
@@ -487,12 +390,6 @@ Do you want to continue?</value>
   </data>
   <data name="ToolTipPublisherFilterActive" xml:space="preserve">
     <value>Filter publisher list to display only publishers that are active, i.e. not flagged as a goner</value>
-  </data>
-  <data name="ConfirmationDeleteAlert" xml:space="preserve">
-    <value>Delete this alert?</value>
-  </data>
-  <data name="ConfirmationCreateTitleFromOrphan" xml:space="preserve">
-    <value>This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file.</value>
   </data>
   <data name="ToolTipSubmissionContest" xml:space="preserve">
     <value>Submission is for a contest</value>
@@ -533,14 +430,8 @@ Do you want to continue?</value>
   <data name="InvalidOpTextViewerNotSet" xml:space="preserve">
     <value>The external text viewer application has not been set. Fix the configuration setting and try again.</value>
   </data>
-  <data name="CommandToolMessageSync" xml:space="preserve">
-    <value>Message Sync</value>
-  </data>
   <data name="HeaderToolOperationMessageSync" xml:space="preserve">
     <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
-  </data>
-  <data name="ConfirmationClearTitleFlags" xml:space="preserve">
-    <value>This operation will clear the quick flag from all titles. Do you want to continue?</value>
   </data>
   <data name="ToolTipTitleFilterFlag" xml:space="preserve">
     <value>Title is flagged</value>
@@ -548,11 +439,6 @@ Do you want to continue?</value>
   <data name="InvalidOpCannotAddVersionFile" xml:space="preserve">
     <value>This file has already been added to this title. Please choose a different file.</value>
     <comment>Used when a file can't be added or replaced as a version file because it is already included</comment>
-  </data>
-  <data name="ConfirmationAddAuthor" xml:space="preserve">
-    <value>This operation will add a new author record. If any filters are in effect, they will be removed so that the new author displays in the list. 
-
-Do you want to continue?</value>
   </data>
   <data name="TooltipScrambleBegin" xml:space="preserve">
     <value>Scramble the text in the text area</value>
@@ -562,9 +448,6 @@ Do you want to continue?</value>
   </data>
   <data name="TooltipScrambleWord" xml:space="preserve">
     <value>When activated, words within the lines will be scrambled</value>
-  </data>
-  <data name="CommandSelfPublisher" xml:space="preserve">
-    <value>Self Publishers</value>
   </data>
   <data name="TooltipSelfPublisherPublishedCount" xml:space="preserve">
     <value>Published count - total number of items published</value>
@@ -737,12 +620,6 @@ Do you want to continue?</value>
   <data name="TextNoPublisherPeriods" xml:space="preserve">
     <value>No submission periods defined for this publisher</value>
   </data>
-  <data name="ConfirmationAddSubmissionPeriod" xml:space="preserve">
-    <value>This operation adds a submission period that runs from January 1 - December 31, i.e. all year. Once added, you can change the range of the submission period if needed.</value>
-  </data>
-  <data name="ConfirmationResetSubmissionPeriod" xml:space="preserve">
-    <value>This operation sets the submission period to January 1 - December 31, i.e. all year.</value>
-  </data>
   <data name="TextCancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -760,9 +637,6 @@ Do you want to continue?</value>
   </data>
   <data name="WindowTitleConfirmTitleSubmission" xml:space="preserve">
     <value>Confirm title submission</value>
-  </data>
-  <data name="ConfirmationAddAlert" xml:space="preserve">
-    <value>This operation will add a new alert record. If any filters are in effect, they will be removed so that the new alert displays in the list.</value>
   </data>
   <data name="TextDate" xml:space="preserve">
     <value>Date</value>
@@ -806,9 +680,6 @@ Do you want to continue?</value>
   <data name="TextNoTitleSubmissions" xml:space="preserve">
     <value>No submissions for this title</value>
   </data>
-  <data name="ConfirmationClearPublishedDate" xml:space="preserve">
-    <value>This operation clears the published date for this item. You can set the date again at any time.</value>
-  </data>
   <data name="ToolTipSynchonizeTitles" xml:space="preserve">
     <value>Synchronize file names to title and version</value>
   </data>
@@ -848,15 +719,6 @@ Do you want to continue?</value>
   <data name="TextMultipleTag" xml:space="preserve">
     <value>Combine multiple</value>
   </data>
-  <data name="ConfirmationAddOrphanDirectoryExclusion" xml:space="preserve">
-    <value>This operation excludes the directory of the selected file from further orphan search</value>
-  </data>
-  <data name="ConfirmationAddOrphanFileTypeExclusion" xml:space="preserve">
-    <value>This operation excludes all files of the selected file type from further orphan search</value>
-  </data>
-  <data name="ConfirmationAddOrphanFileExclusion" xml:space="preserve">
-    <value>This operation excludes the selected file from further orphan search</value>
-  </data>
   <data name="TextCreatedFromOrphan" xml:space="preserve">
     <value>This entry was created from orphan file</value>
   </data>
@@ -872,17 +734,8 @@ Do you want to continue?</value>
   <data name="ToolMessageDetail" xml:space="preserve">
     <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
   </data>
-  <data name="ConfirmationRemoveQueue" xml:space="preserve">
-    <value>This operation removes the selected queue. It does not affect any title record themselves.</value>
-  </data>
-  <data name="ConfirmationRemoveQueueTitle" xml:space="preserve">
-    <value>This operation removes the selected title from the queue. It does not affect the title itself.</value>
-  </data>
   <data name="TextClearDate" xml:space="preserve">
     <value>Clear date</value>
-  </data>
-  <data name="ConfirmationRemoveRelatedTitle" xml:space="preserve">
-    <value>This operation removes the related title from this title. It does not affect the related title itself.</value>
   </data>
   <data name="ToolTipTitleRelatedCount" xml:space="preserve">
     <value>Related count - the number of related titles this title contains</value>
@@ -892,9 +745,6 @@ Do you want to continue?</value>
   </data>
   <data name="TextHasRelated" xml:space="preserve">
     <value>Has Related Title</value>
-  </data>
-  <data name="ConfirmationRemoveTitleFromQueue" xml:space="preserve">
-    <value>This operation removes the title from the selected queue. It does not affect the title itself.</value>
   </data>
   <data name="TextStartup" xml:space="preserve">
     <value>Startup</value>

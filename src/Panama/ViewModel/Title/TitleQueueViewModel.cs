@@ -224,7 +224,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (DeleteCommandEnabled && MessageWindow.ShowContinueCancel(Strings.ConfirmationRemoveQueueTitle))
+            if (DeleteCommandEnabled && MessageWindow.ShowContinueCancel(Confirm.RemoveQueueTitle))
             {
                 SelectedTitle.Row.Delete();
                 Table.Save();
@@ -362,7 +362,7 @@ namespace Restless.Panama.ViewModel
 
         private void RunRemoveQueueCommand()
         {
-            if (SelectedQueue != null && MessageWindow.ShowContinueCancel(Strings.ConfirmationRemoveQueue))
+            if (SelectedQueue != null && MessageWindow.ShowContinueCancel(Confirm.RemoveQueue))
             {
                 QueueTable.RemoveQueue(SelectedQueue.Id);
                 PopulateQueues();

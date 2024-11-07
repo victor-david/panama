@@ -129,7 +129,7 @@ namespace Restless.Panama.ViewModel
             {
                 renameItems.Rename();
                 DatabaseController.Instance.GetTable<TitleVersionTable>().Save();
-                OperationMessage = Strings.ConfirmationAllVersionFilesRenamed;
+                OperationMessage = Confirm.AllVersionFilesRenamed;
                 canRename = false;
             });
         }

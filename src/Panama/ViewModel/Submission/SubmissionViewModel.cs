@@ -287,7 +287,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
-            if (DeleteCommandEnabled && MessageWindow.ShowYesNo(Strings.ConfirmationDeleteSubmission))
+            if (DeleteCommandEnabled && MessageWindow.ShowYesNo(Confirm.DeleteSubmission))
             {
                 // Call the DeleteSubmission() method to delete and perform other cleanup.
                 Table.DeleteSubmission(SelectedBatch);
