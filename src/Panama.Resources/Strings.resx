@@ -213,12 +213,6 @@ does not exist. Correct this by selecting the correct file and then try again.</
   <data name="CaptionSelectSubmissionDocument" xml:space="preserve">
     <value>Select a submission document</value>
   </data>
-  <data name="ToolExportDetail" xml:space="preserve">
-    <value>This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted.</value>
-  </data>
-  <data name="ToolTitleMetadataDetail" xml:space="preserve">
-    <value>This operation verifies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count.</value>
-  </data>
   <data name="InvalidOpOutputFolderNotSet" xml:space="preserve">
     <value>The folder for this operation hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
   </data>
@@ -245,14 +239,8 @@ Last exported: {1}</value>
   <data name="TextClear" xml:space="preserve">
     <value>Clear</value>
   </data>
-  <data name="ToolOrphanDetail" xml:space="preserve">
-    <value>This operation searches all files beneath the title root directory to find those files that are not associated with a title entry. The submission document folder and title export folder are automatically excluded from the search if they exist beneath title root. You can exclude other folders in configuration.</value>
-  </data>
   <data name="InvalidOpTitleRootFolderNotSet" xml:space="preserve">
     <value>The title root folder hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
-  </data>
-  <data name="HeaderToolOperationSearch" xml:space="preserve">
-    <value>This operation searches all files beneath the title root directory to find all files that contain the specified search term.</value>
   </data>
   <data name="InvalidOpMapiFolderNotSet" xml:space="preserve">
     <value>The Outlook folder  from which to select submission messages hasn't been set. Fix the configuration and try again.</value>
@@ -260,31 +248,8 @@ Last exported: {1}</value>
   <data name="InvalidOpTitleListOutputFolder" xml:space="preserve">
     <value>The output folder for the title list operation does not exist.</value>
   </data>
-  <data name="ToolTitleListDetail" xml:space="preserve">
-    <value>This operation creates a text file that has a list of all titles and their corresponding versions.</value>
-  </data>
-  <data name="HeaderToolOperationScramble" xml:space="preserve">
-    <value>This operation enables you to scramble lines of text, and optionally the words within the lines. Paste text to begin.</value>
-  </data>
   <data name="InvalidOpNotEnoughTextToScramble" xml:space="preserve">
     <value>Not enough text to scramble. Paste some more text and try again.</value>
-  </data>
-  <data name="HeaderToolOperationOrphanNotFoundFormat" xml:space="preserve">
-    <value>Files (not associated with a title entry) - {0}</value>
-  </data>
-  <data name="HeaderToolOperationSearchFoundFormat" xml:space="preserve">
-    <value>Results - {0}</value>
-  </data>
-  <data name="HeaderVersionProperties" xml:space="preserve">
-    <value>These properties are the same ones you can change from within Microsoft Word; they are saved within the document itself.
-
-When you save properties here however, the document's file  modification date is not set to the current date / time as it is when you make the changes from within Word. Instead,  the modification date is incremented by 15 seconds from its original.</value>
-  </data>
-  <data name="HeaderToolOperationConvert" xml:space="preserve">
-    <value>This operation converts all .doc files in the specified folder to Open Xml (.docx ) files. If the converted file belongs to a title version, the version record will be updated to reflect the change. If a corresponding .docx file exists in the folder (for example, Report.doc and Report.docx), the .docx file will be overwritten. After the conversion, the .doc file will be deleted.</value>
-  </data>
-  <data name="HeaderToolOperationConvertFoundFormat" xml:space="preserve">
-    <value>{0} eligible files, {1} converted</value>
   </data>
   <data name="InvalidOpDirectoryDoesNotExist" xml:space="preserve">
     <value>The specified directory does not exist</value>
@@ -315,9 +280,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="InvalidOpTextViewerNotSet" xml:space="preserve">
     <value>The external text viewer application has not been set. Fix the configuration setting and try again.</value>
-  </data>
-  <data name="HeaderToolOperationMessageSync" xml:space="preserve">
-    <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
   </data>
   <data name="InvalidOpCannotAddVersionFile" xml:space="preserve">
     <value>This file has already been added to this title. Please choose a different file.</value>
@@ -364,9 +326,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="TextStart" xml:space="preserve">
     <value>Start</value>
-  </data>
-  <data name="ToolSubmissionMetadataDetail" xml:space="preserve">
-    <value>This operation verifies that all submission documents are present on disk and updates meta data that is stored in the database regarding each file, such as the last updated date/time.</value>
   </data>
   <data name="TextAddedUpdated" xml:space="preserve">
     <value>Added / Updated</value>
@@ -508,9 +467,6 @@ When you save properties here however, the document's file  modification date is
   </data>
   <data name="TextOrphan" xml:space="preserve">
     <value>Orphan</value>
-  </data>
-  <data name="ToolMessageDetail" xml:space="preserve">
-    <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
   </data>
   <data name="TextClearDate" xml:space="preserve">
     <value>Clear date</value>

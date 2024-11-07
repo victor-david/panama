@@ -117,7 +117,7 @@
                         Margin="{StaticResource Panama.Layout.Margin.Control.Stacked}"
                         Command="{Binding Versions.Commands[SaveProperty]}"/>
 
-                    <TextBlock Text="{x:Static r:Strings.HeaderVersionProperties}"/>
+                    <TextBlock Text="{x:Static r:Detail.VersionProperties}"/>
 
                 </StackPanel>
             </Grid>
