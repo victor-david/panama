@@ -119,41 +119,43 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SubmissionViewModel()
         {
-            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create(Header.Id, TableColumns.Id)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
+            Columns.Add(CreateFlagsColumn(Header.Flags, GetFlagGridColumns())
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W076)
                 .AddToolTip(SubmissionFlagsToolTip.Create(this)));
 
-            Columns.Create("Submitted", TableColumns.Submitted)
+            Columns.Create(Header.Submitted, TableColumns.Submitted)
                 .MakeDate()
                 .MakeInitialSortDescending();
 
-            Columns.Create("Response", TableColumns.Response)
+            Columns.Create(Header.Response, TableColumns.Response)
                 .MakeDate()
-                .SetSelectorName("Response Date");
+                .SetSelectorName(Header.ResponseDate);
 
-            Columns.Create("Type", TableColumns.Joined.ResponseTypeName)
+            Columns.Create(Header.ResponseTypeShort, TableColumns.Joined.ResponseTypeName)
                 .MakeFixedWidth(FixedWidth.W096)
-                .SetSelectorName("Response Type");
+                .SetSelectorName(Header.ResponseType);
 
             // string.Empty because VS gets confused and tries to connect to the wrong overload
-            Columns.Create<DatesToDayDiffConverter>("Days", TableColumns.Submitted, TableColumns.Response, string.Empty)
+            Columns.Create<DatesToDayDiffConverter>(Header.Days, TableColumns.Submitted, TableColumns.Response, string.Empty)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W052);
 
-            Columns.Create("Publisher", TableColumns.Joined.Publisher);
+            Columns.Create(Header.Publisher, TableColumns.Joined.Publisher);
 
-            Columns.Create("Fee", TableColumns.Fee)
+            Columns.Create(Header.Fee, TableColumns.Fee)
                 .MakeNumeric("N2", FixedWidth.W058)
                 .MakeRightAligned();
 
-            Columns.Create("Award", TableColumns.Award)
+            Columns.Create(Header.Award, TableColumns.Award)
                 .MakeNumeric("N2", FixedWidth.W058)
                 .MakeRightAligned();
 
-            Columns.Create("Note", TableColumns.Notes)
+            Columns.Create(Header.Note, TableColumns.Notes)
                 .MakeSingleLine();
 
             Columns.RestoreColumnState(Config.SubmissionGridColumnState);

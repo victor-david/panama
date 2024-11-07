@@ -120,33 +120,35 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public PublisherViewModel()
         {
-            Columns.Create("Id", TableColumns.Id).MakeFixedWidth(FixedWidth.W042);
+            Columns.Create(Header.Id, TableColumns.Id)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
+            Columns.Add(CreateFlagsColumn(Header.Flags, GetFlagGridColumns())
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W076)
                 .AddToolTip(PublisherFlagsToolTip.Create(this)));
 
-            Columns.Create("Name", TableColumns.Name);
-            Columns.Create("Url", TableColumns.Url);
+            Columns.Create(Header.Name, TableColumns.Name);
+            Columns.Create(Header.Url, TableColumns.Url);
 
-            Columns.Create("Added", TableColumns.Added)
+            Columns.Create(Header.Added, TableColumns.Added)
                 .MakeDate()
                 .AddToolTip(Strings.ToolTipPublisherAdded)
                 .MakeInitialSortDescending();
 
-            Columns.Create("Last Sub", TableColumns.Calculated.LastSub)
+            Columns.Create(Header.LastSubmissionShort, TableColumns.Calculated.LastSub)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipPublisherLastSubmission)
                 .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending)
-                .SetSelectorName("Last Submission");
+                .SetSelectorName(Header.LastSubmission);
 
-            Columns.Create("SC", TableColumns.Calculated.SubCount)
+            Columns.Create(Header.SubmissionTotalCountShort, TableColumns.Calculated.SubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.ToolTipPublisherSubmissionCount)
                 .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending)
-                .SetSelectorName("Submission Count");
+                .SetSelectorName(Header.SubmissionTotalCount);
 
             Columns.RestoreColumnState(Config.PublisherGridColumnState);
 

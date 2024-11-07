@@ -176,72 +176,72 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TitleViewModel()
         {
-            Columns.Create("Id", TableColumns.Id)
+            Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Add(CreateFlagsColumn("Flags", GetFlagGridColumns())
+            Columns.Add(CreateFlagsColumn(Header.Flags, GetFlagGridColumns())
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W086)
                 .AddToolTip(TitleFlagsToolTip.Create(this)));
 
-            Columns.Create("Title", TableColumns.Title).MakeFlexWidth(4);
+            Columns.Create(Header.Title, TableColumns.Title).MakeFlexWidth(4);
 
-            Columns.Create("Written", TableColumns.Written)
+            Columns.Create(Header.Written, TableColumns.Written)
                 .MakeDate()
                 .AddCustomSort(null, TableColumns.Id, DataGridColumnSortBehavior.FollowPrimary)
                 .MakeInitialSortDescending();
 
-            Columns.Create("Updated", TableColumns.Calculated.LatestVersionDate)
+            Columns.Create(Header.Updated, TableColumns.Calculated.LatestVersionDate)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
 
-            Columns.Create("WC", TableColumns.Calculated.LatestVersionWordCount)
+            Columns.Create(Header.WordCountShort, TableColumns.Calculated.LatestVersionWordCount)
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleWordCount)
-                .SetSelectorName("Word Count");
+                .SetSelectorName(Header.WordCount);
 
-            Columns.Create("SC", TableColumns.Calculated.SubCount)
+            Columns.Create(Header.SubmissionTotalCountShort, TableColumns.Calculated.SubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleSubmissionCount)
                 .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
-                .SetSelectorName("Total Submission Count");
+                .SetSelectorName(Header.SubmissionTotalCount);
 
-            Columns.Create("CS", TableColumns.Calculated.CurrentSubCount)
+            Columns.Create(Header.SubmissionCurrentCountShort, TableColumns.Calculated.CurrentSubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleCurrentSubmissionCount)
                 .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
-                .SetSelectorName("Current Submission Count");
+                .SetSelectorName(Header.SubmissionCurrentCount);
 
-            Columns.Create("VC", TableColumns.Calculated.VersionCount)
+            Columns.Create(Header.VersionCountShort, TableColumns.Calculated.VersionCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleVersionCount)
                 .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
-                .SetSelectorName("Version Count");
+                .SetSelectorName(Header.VersionCount);
 
-            Columns.Create("TC", TableColumns.Calculated.TagCount)
+            Columns.Create(Header.TagCountShort, TableColumns.Calculated.TagCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleTagCount)
                 .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
-                .SetSelectorName("Tag Count");
+                .SetSelectorName(Header.TagCount);
 
-            Columns.Create("RC", TableColumns.Calculated.RelatedCount)
+            Columns.Create(Header.RelatedCountShort, TableColumns.Calculated.RelatedCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.ToolTipTitleRelatedCount)
                 .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
-                .SetSelectorName("Related Count");
+                .SetSelectorName(Header.RelatedCount);
 
-            Columns.Create("PC", TableColumns.Calculated.PublishedCount)
+            Columns.Create(Header.PublishedCountShort, TableColumns.Calculated.PublishedCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitlePublishedCount)
                 .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
-                .SetSelectorName("Published Count");
+                .SetSelectorName(Header.PublishedCount);
 
             Columns.RestoreColumnState(Config.TitleGridColumnState);
 

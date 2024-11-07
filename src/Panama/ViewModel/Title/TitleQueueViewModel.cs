@@ -271,26 +271,26 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private void InitColumns()
         {
-            Columns.Create("Id", TableColumns.TitleId)
+            Columns.Create(Header.Id, TableColumns.TitleId)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .CanUserSort = false;
 
-            Columns.Create("Title", TableColumns.Joined.Title);
+            Columns.Create(Header.Title, TableColumns.Joined.Title);
 
-            Columns.Create("Written", TableColumns.Joined.Written).MakeDate();
-            Columns.Create("Updated", TableColumns.Joined.Updated)
+            Columns.Create(Header.Written, TableColumns.Joined.Written).MakeDate();
+            Columns.Create(Header.Updated, TableColumns.Joined.Updated)
                 .MakeDate()
                 .AddToolTip(Strings.TooltipTitleUpdated);
 
-            Columns.Create("WC", TableColumns.Joined.WordCount)
+            Columns.Create(Header.WordCountShort, TableColumns.Joined.WordCount)
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(Strings.TooltipTitleWordCount)
-                .SetSelectorName("Word Count");
+                .SetSelectorName(Header.WordCount);
 
-            Columns.Create("Status", TableColumns.Joined.Status).CanUserSort = false;
+            Columns.Create(Header.Status, TableColumns.Joined.Status).CanUserSort = false;
 
-            Columns.Create("Date", TableColumns.Date)
+            Columns.Create(Header.Date, TableColumns.Date)
                 .MakeDate()
                 .AddCustomSort(null, TableColumns.Joined.Written, DataGridColumnSortBehavior.AlwaysDescending)
                 .MakeInitialSortDescending();
