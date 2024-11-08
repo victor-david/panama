@@ -23,16 +23,16 @@
     </StackPanel>
 
     <StackPanel Grid.Row="1" Grid.Column="0">
-        <tk:ThreeWay Header="Active" State="{Binding Filters.ActiveState}"/>
-        <tk:ThreeWay Header="Open Submission" State="{Binding Filters.OpenState}"/>
-        <tk:ThreeWay Header="In Period" State="{Binding Filters.InPeriodState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.Active}" State="{Binding Filters.ActiveState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.OpenSubmission}" State="{Binding Filters.OpenState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.InPeriod}" State="{Binding Filters.InPeriodState}"/>
     </StackPanel>
 
     <StackPanel Grid.Row="1" Grid.Column="1">
-        <tk:ThreeWay Header="Exclusive" State="{Binding Filters.ExclusiveState}"/>
-        <tk:ThreeWay Header="Follow Up" State="{Binding Filters.FollowUpState}"/>
-        <tk:ThreeWay Header="Paying" State="{Binding Filters.PayingState}"/>
-        <tk:ThreeWay Header="Goner" State="{Binding Filters.GonerState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.Exclusive}" State="{Binding Filters.ExclusiveState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.FollowUp}" State="{Binding Filters.FollowUpState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.Paying}" State="{Binding Filters.PayingState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.Goner}" State="{Binding Filters.GonerState}"/>
     </StackPanel>
 
 </Grid>

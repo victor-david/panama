@@ -12,25 +12,25 @@
     Style="{StaticResource Panama.Styles.StatusBar}"
     d:DesignHeight="450" d:DesignWidth="800">
 
-    <TextBlock Text="Filters"/>
+    <TextBlock Text="{x:Static r:Text.Filters}"/>
 
     <Button
-        Content="Active"
+        Content="{x:Static r:Menu.Active}"
         ToolTip="{x:Static r:ToolTip.SubmissionFilterActive}"
         Command="{Binding Commands[ActiveFilter]}"/>
 
     <Button
-        Content="Try Again"
+        Content="{x:Static r:Menu.TryAgain}"
         ToolTip="{x:Static r:ToolTip.SubmissionFilterTryAgain}"
         Command="{Binding Commands[TryAgainFilter]}"/>
 
     <Button
-        Content="Personal"
+        Content="{x:Static r:Menu.Personal}"
         ToolTip="{x:Static r:ToolTip.SubmissionFilterPersonal}"
         Command="{Binding Commands[PersonalFilter]}"/>
 
     <Button
-        Content="Accepted"
+        Content="{x:Static r:Menu.Accepted}"
         ToolTip="{x:Static r:ToolTip.SubmissionFilterAccepted}"
         Command="{Binding Commands[AcceptedFilter]}"/>
 
@@ -47,12 +47,12 @@
         <Run
             Style="{StaticResource Panama.Styles.Run.Highlight}"
             Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
-        <Run Text="records"/>
+        <Run Text="{x:Static r:Text.Records}"/>
     </TextBlock>
 
     <TextBlock
         Style="{StaticResource Panama.Styles.TextBlock.Accent}"
         tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
-        Text="(row filter in effect)"/>
+        Text="{x:Static r:Text.RowFilterInEffect}"/>
 
 </StatusBar>

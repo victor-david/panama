@@ -61,11 +61,20 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add.
+        ///   Looks up a localized string similar to Accepted.
         /// </summary>
-        public static string Add {
+        public static string Accepted {
             get {
-                return ResourceManager.GetString("Add", resourceCulture);
+                return ResourceManager.GetString("Accepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string Active {
+            get {
+                return ResourceManager.GetString("Active", resourceCulture);
             }
         }
         
@@ -84,15 +93,6 @@ namespace Restless.Panama.Resources {
         public static string AddAuthor {
             get {
                 return ResourceManager.GetString("AddAuthor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a credential set.
-        /// </summary>
-        public static string AddCredential {
-            get {
-                return ResourceManager.GetString("AddCredential", resourceCulture);
             }
         }
         
@@ -277,51 +277,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete this credential.
-        /// </summary>
-        public static string CommandDeleteCredential {
-            get {
-                return ResourceManager.GetString("CommandDeleteCredential", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Self Publishers.
-        /// </summary>
-        public static string CommandSelfPublisher {
-            get {
-                return ResourceManager.GetString("CommandSelfPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Convert.
-        /// </summary>
-        public static string CommandToolConvert {
-            get {
-                return ResourceManager.GetString("CommandToolConvert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Message Sync.
-        /// </summary>
-        public static string CommandToolMessageSync {
-            get {
-                return ResourceManager.GetString("CommandToolMessageSync", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Scramble.
-        /// </summary>
-        public static string CommandToolScramble {
-            get {
-                return ResourceManager.GetString("CommandToolScramble", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Copy title to clipboard.
         /// </summary>
         public static string CopyTitle {
@@ -349,29 +304,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a submission to this publisher.
-        /// </summary>
-        public static string CreateSubmissionToPublisher {
-            get {
-                return ResourceManager.GetString("CreateSubmissionToPublisher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Create a title entry from this file.
         /// </summary>
         public static string CreateTitleFromEntry {
             get {
                 return ResourceManager.GetString("CreateTitleFromEntry", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Credentials.
-        /// </summary>
-        public static string Credentials {
-            get {
-                return ResourceManager.GetString("Credentials", resourceCulture);
             }
         }
         
@@ -511,11 +448,29 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flagged.
+        /// </summary>
+        public static string Flagged {
+            get {
+                return ResourceManager.GetString("Flagged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle flag for this title.
         /// </summary>
         public static string FlagTitle {
             get {
                 return ResourceManager.GetString("FlagTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In Period.
+        /// </summary>
+        public static string InPeriod {
+            get {
+                return ResourceManager.GetString("InPeriod", resourceCulture);
             }
         }
         
@@ -556,6 +511,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string Open {
+            get {
+                return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open this item (or double click the row).
         /// </summary>
         public static string OpenItemOrDoubleClick {
@@ -583,6 +547,33 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paying.
+        /// </summary>
+        public static string Paying {
+            get {
+                return ResourceManager.GetString("Paying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Personal.
+        /// </summary>
+        public static string Personal {
+            get {
+                return ResourceManager.GetString("Personal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published.
+        /// </summary>
+        public static string Published {
+            get {
+                return ResourceManager.GetString("Published", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Publishers.
         /// </summary>
         public static string Publishers {
@@ -597,6 +588,15 @@ namespace Restless.Panama.Resources {
         public static string Queues {
             get {
                 return ResourceManager.GetString("Queues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        public static string Ready {
+            get {
+                return ResourceManager.GetString("Ready", resourceCulture);
             }
         }
         
@@ -736,15 +736,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset window.
-        /// </summary>
-        public static string ResetWindow {
-            get {
-                return ResourceManager.GetString("ResetWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string Search {
@@ -817,20 +808,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Summary.
+        ///   Looks up a localized string similar to Submitted.
         /// </summary>
-        public static string Summary {
+        public static string Submitted {
             get {
-                return ResourceManager.GetString("Summary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Table info.
-        /// </summary>
-        public static string TableInfo {
-            get {
-                return ResourceManager.GetString("TableInfo", resourceCulture);
+                return ResourceManager.GetString("Submitted", resourceCulture);
             }
         }
         
@@ -862,11 +844,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update Tools.
+        ///   Looks up a localized string similar to Try Again.
         /// </summary>
-        public static string UpdateTools {
+        public static string TryAgain {
             get {
-                return ResourceManager.GetString("UpdateTools", resourceCulture);
+                return ResourceManager.GetString("TryAgain", resourceCulture);
             }
         }
     }

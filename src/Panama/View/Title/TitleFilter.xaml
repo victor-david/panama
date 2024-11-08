@@ -36,7 +36,7 @@
 
     <!-- Directory -->
     <StackPanel Grid.Column="2">
-        <TextBlock Text="Path"/>
+        <TextBlock Text="{x:Static r:Text.Path}"/>
         <TextBox
             Text="{Binding Filters.Directory,
             UpdateSourceTrigger=PropertyChanged,
@@ -62,7 +62,7 @@
     <!-- Word count -->
     <StackPanel Grid.Row="2" Grid.ColumnSpan="3">
         <TextBlock>
-            <Run Text="Word Count"/>
+            <Run Text="{x:Static r:Text.WordCount}"/>
             <Run
                 Style="{StaticResource Panama.Styles.Run.Highlight}"
                 Text="{Binding Filters.WordCountText, Mode=OneWay}"/>
@@ -82,8 +82,7 @@
         tk:Property.ColumnWidths="*,5,*">
 
         <!-- Tags (assigned) -->
-        <conl:TitledSeparator
-            Title="{x:Static r:Text.AssignedToFilter}"/>
+        <conl:TitledSeparator Title="{x:Static r:Text.AssignedToFilter}"/>
 
         <conl:TagSelectorControl
             Grid.Row="1"
@@ -99,9 +98,7 @@
             Text="{x:Static r:Text.None}"/>
 
         <!-- Tags (available) -->
-         <conl:TitledSeparator
-            Grid.Column="2"
-            Title="{x:Static r:Text.AvailableTags}"/>
+         <conl:TitledSeparator Grid.Column="2" Title="{x:Static r:Text.AvailableTags}"/>
 
         <conl:TagSelectorControl
             Grid.Row="1" Grid.Column="2"
@@ -117,8 +114,8 @@
 
         <!-- Style="{StaticResource ToolStatusBarStyle}" -->
         <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
-            <CheckBox Content="Any" Margin="5,0" IsChecked="{Binding Filters.IsTagFilterAny}"/>
-            <CheckBox Content="All" Margin="5,0" IsChecked="{Binding Filters.IsTagFilterAll}"/>
+            <CheckBox Content="{x:Static r:Text.Any}" Margin="5,0" IsChecked="{Binding Filters.IsTagFilterAny}"/>
+            <CheckBox Content="{x:Static r:Text.All}" Margin="5,0" IsChecked="{Binding Filters.IsTagFilterAll}"/>
         </StackPanel>
     </Grid>
 

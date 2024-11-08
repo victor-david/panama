@@ -135,9 +135,6 @@
   <data name="Submitted" xml:space="preserve">
     <value>Submitted</value>
   </data>
-  <data name="Record" xml:space="preserve">
-    <value>record</value>
-  </data>
   <data name="Records" xml:space="preserve">
     <value>records</value>
   </data>
@@ -344,5 +341,44 @@
   </data>
   <data name="Light" xml:space="preserve">
     <value>Light</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Any" xml:space="preserve">
+    <value>Any</value>
+  </data>
+  <data name="Exclusive" xml:space="preserve">
+    <value>Exclusive</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="FollowUp" xml:space="preserve">
+    <value>Follow Up</value>
+  </data>
+  <data name="Goner" xml:space="preserve">
+    <value>Goner</value>
+  </data>
+  <data name="InPeriod" xml:space="preserve">
+    <value>In Period</value>
+  </data>
+  <data name="OpenSubmission" xml:space="preserve">
+    <value>Open Submission</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="Paying" xml:space="preserve">
+    <value>Paying</value>
+  </data>
+  <data name="RowFilterInEffect" xml:space="preserve">
+    <value>[row filter in effect]</value>
+  </data>
+  <data name="WordCount" xml:space="preserve">
+    <value>Word Count</value>
   </data>
 </root>

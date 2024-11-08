@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
-    xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
@@ -13,25 +12,25 @@
     Style="{StaticResource Panama.Styles.StatusBar}"
     d:DesignWidth="860" d:DesignHeight="76">
 
-    <TextBlock Text="Filters"/>
+    <TextBlock Text="{x:Static r:Text.Filters}"/>
 
     <Button
-        Content="Ready"
+        Content="{x:Static r:Menu.Ready}"
         ToolTip="{x:Static r:ToolTip.TitleFilterReady}"
         Command="{Binding Commands[ReadyFilter]}"/>
 
     <Button
-        Content="Flagged"
+        Content="{x:Static r:Menu.Flagged}"
         ToolTip="{x:Static r:ToolTip.TitleFilterFlag}"
         Command="{Binding Commands[FlaggedFilter]}"/>
 
     <Button
-        Content="Submitted"
+        Content="{x:Static r:Menu.Submitted}"
         ToolTip="{x:Static r:ToolTip.TitleFilterSubmitted}"
         Command="{Binding Commands[SubmittedFilter]}"/>
 
     <Button
-        Content="Published"
+        Content="{x:Static r:Menu.Published}"
         ToolTip="{x:Static r:ToolTip.TitleFilterPublished}"
         Command="{Binding Commands[PublishedFilter]}"/>
 
@@ -54,12 +53,12 @@
         <Run
             Style="{StaticResource Panama.Styles.Run.Highlight}"
             Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
-        <Run Text="records"/>
+        <Run Text="{x:Static r:Text.Records}"/>
     </TextBlock>
 
     <TextBlock
         Style="{StaticResource Panama.Styles.TextBlock.Accent}"
         tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
-        Text="(row filter in effect)"/>
+        Text="{x:Static r:Text.RowFilterInEffect}"/>
 
 </StatusBar>
