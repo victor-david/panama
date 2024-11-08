@@ -3,6 +3,7 @@ using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections.Generic;

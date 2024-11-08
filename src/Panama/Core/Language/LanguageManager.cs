@@ -1,5 +1,6 @@
 ﻿using Restless.Panama.Resources;
 using System.Globalization;
+using System.Threading;
 
 namespace Restless.Panama.Core
 {
@@ -68,7 +69,10 @@ namespace Restless.Panama.Core
 
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
+                Thread.CurrentThread.CurrentCulture = culture;
+                Thread.CurrentThread.CurrentUICulture = culture;
                 TranslationSource.Instance.CurrentCulture = culture;
+
                 //Languages.SetDisplayLanguage(item);
             }
         }

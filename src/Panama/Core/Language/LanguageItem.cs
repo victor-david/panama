@@ -4,7 +4,7 @@ namespace Restless.Panama.Core
 {
     public class LanguageItem : INotifyPropertyChanged
     {
-        private readonly string displayName;
+        //private readonly string displayName;
 
         // private readonly LanguageItemCollection alternates;
 
@@ -35,6 +35,11 @@ namespace Restless.Panama.Core
         //}
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+
+        public override string ToString() => $"{DisplayName} [{Id}]";
+
+
 
         //private string GetDisplayName()
         //{
