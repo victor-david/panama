@@ -14,7 +14,7 @@
     Name="ToolControl">
 
     <TextBlock
-        Text="{x:Static r:Strings.TextPreview}"
+        Text="{x:Static r:Text.Preview}"
         Visibility="{Binding HeaderVisibility, ElementName=ToolControl}"/>
 
     <!-- Text preview extBoxMultiStretchStyle -->
@@ -37,7 +37,7 @@
             Grid.Row="1"
             Margin="0,8"
             HorizontalAlignment="Center"
-            Text="{x:Static r:Strings.TextImage}"/>
+            Text="{x:Static r:Text.Image}"/>
     </Grid>
 
     <!-- Unsupported notice -->

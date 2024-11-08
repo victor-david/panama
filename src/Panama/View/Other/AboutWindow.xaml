@@ -61,7 +61,7 @@
                 Text="{Binding DatabaseLocation, Mode=OneTime}"/>
         </TextBlock>
         <TextBlock>
-            <Run Text="{x:Static r:Strings.TextStartup}"/>
+            <Run Text="{x:Static r:Text.Startup}"/>
             <Run
                 Style="{StaticResource Panama.Styles.Run.Highlight}"
                 Text="{Binding Config.StartupCount, Mode=OneTime, StringFormat='{}{0:#,0}'}"/>

@@ -35,11 +35,11 @@
             </StackPanel.Resources>
 
             <Button
-                Content="{x:Static r:Strings.TextConfirm}"
+                Content="{x:Static r:Text.Confirm}"
                 Command="{Binding Commands[Confirm]}"/>
 
             <Button
-                Content="{x:Static r:Strings.TextCancel}"
+                Content="{x:Static r:Text.Cancel}"
                 Command="{Binding CloseWindowCommand}"/>
         </StackPanel>
     </Grid>

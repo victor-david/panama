@@ -38,7 +38,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets a the header for the response
         /// </summary>
-        public override string Header2 => $"{Strings.TextResponse}: {GetResponseTypeString()}";
+        public override string Header2 => $"{Text.Response}: {GetResponseTypeString()}";
 
         public DateTime? ResponseDate
         {
@@ -108,7 +108,7 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private string GetResponseTypeString()
         {
-            return string.IsNullOrEmpty(Owner.SelectedBatch?.ResponseTypeName) ? Strings.TextNone : Owner.SelectedBatch.ResponseTypeName;
+            return string.IsNullOrEmpty(Owner.SelectedBatch?.ResponseTypeName) ? Text.None : Owner.SelectedBatch.ResponseTypeName;
         }
 
         private void OnSubmittedPropertiesChanged()

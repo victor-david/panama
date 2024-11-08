@@ -40,7 +40,7 @@
 
         <tk:NavigatorExpander
             Grid.Row="2"
-            Header="{x:Static r:Strings.TextPreview}"
+            Header="{x:Static r:Text.Preview}"
             IsExpanded="{Binding Documents.IsPreviewMode}">
 
             <vw:PreviewPanel

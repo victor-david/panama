@@ -18,7 +18,7 @@
 
     <!-- Title -->
     <StackPanel Margin="{StaticResource Panama.Layout.Margin.Control.Stacked.Right}">
-        <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
+        <TextBlock Text="{x:Static r:Text.Title}"/>
         <TextBox
             Text="{Binding Filters.Text,
             UpdateSourceTrigger=PropertyChanged,
@@ -27,7 +27,7 @@
 
     <!-- Title note -->
     <StackPanel Grid.Column="1" Margin="{StaticResource Panama.Layout.Margin.Control.Stacked.Right}">
-        <TextBlock Text="{x:Static r:Strings.TextNote}"/>
+        <TextBlock Text="{x:Static r:Text.Note}"/>
         <TextBox
             Text="{Binding Filters.Note,
             UpdateSourceTrigger=PropertyChanged,
@@ -45,18 +45,18 @@
 
     <!-- Three way flags -->
     <StackPanel Grid.Row="1" Grid.Column="0" Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}">
-        <tk:ThreeWay Header="{x:Static r:Strings.TextReady}" State="{Binding Filters.ReadyState}"/>
-        <tk:ThreeWay Header="{x:Static r:Strings.TextSubmitted}" State="{Binding Filters.CurrentlySubmittedState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.Ready}" State="{Binding Filters.ReadyState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.Submitted}" State="{Binding Filters.CurrentlySubmittedState}"/>
     </StackPanel>
 
     <StackPanel Grid.Row="1" Grid.Column="1" Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}">
-        <tk:ThreeWay Header="{x:Static r:Strings.TextFlagged}" State="{Binding Filters.FlaggedState}"/>
-        <tk:ThreeWay Header="{x:Static r:Strings.TextEverSubmitted}" State="{Binding Filters.EverSubmittedState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.Flagged}" State="{Binding Filters.FlaggedState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.EverSubmitted}" State="{Binding Filters.EverSubmittedState}"/>
     </StackPanel>
 
     <StackPanel Grid.Row="1" Grid.Column="2">
-        <tk:ThreeWay Header="{x:Static r:Strings.TextHasRelated}" State="{Binding Filters.RelatedState}"/>
-        <tk:ThreeWay Header="{x:Static r:Strings.TextPublished}" State="{Binding Filters.PublishedState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.HasRelated}" State="{Binding Filters.RelatedState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.Published}" State="{Binding Filters.PublishedState}"/>
     </StackPanel>
 
     <!-- Word count -->
@@ -83,7 +83,7 @@
 
         <!-- Tags (assigned) -->
         <conl:TitledSeparator
-            Title="{x:Static r:Strings.TextAssignedToFilter}"/>
+            Title="{x:Static r:Text.AssignedToFilter}"/>
 
         <conl:TagSelectorControl
             Grid.Row="1"
@@ -96,12 +96,12 @@
             tk:Property.IsCollapsed="{Binding FilterTags.HasAssignedTags}"
             Margin="0,6"
             VerticalAlignment="Top"
-            Text="{x:Static r:Strings.TextNone}"/>
+            Text="{x:Static r:Text.None}"/>
 
         <!-- Tags (available) -->
          <conl:TitledSeparator
             Grid.Column="2"
-            Title="{x:Static r:Strings.TextAvailableTags}"/>
+            Title="{x:Static r:Text.AvailableTags}"/>
 
         <conl:TagSelectorControl
             Grid.Row="1" Grid.Column="2"
@@ -113,7 +113,7 @@
         <conl:TitledSeparator
             Grid.Row="2" Grid.ColumnSpan="3"
             HorizontalContentAlignment="Left"
-            Title="{x:Static r:Strings.TextMultipleTag}"/>
+            Title="{x:Static r:Text.MultipleTag}"/>
 
         <!-- Style="{StaticResource ToolStatusBarStyle}" -->
         <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">

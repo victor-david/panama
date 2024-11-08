@@ -32,7 +32,7 @@
                 <TextBlock
                     Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
                     tk:Property.IsVisible="{Binding SelectedBatch.IsLocked, FallbackValue=False}"
-                    Text="{x:Static r:Strings.TextLocked}"/>
+                    Text="{x:Static r:Text.Locked}"/>
             </StatusBar>
         </tk:SplitterGrid.HeaderRight>
 

@@ -56,13 +56,13 @@
                 Style="{StaticResource Panama.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
-                <TextBlock Text="{x:Static r:Strings.TextName}"/>
+                <TextBlock Text="{x:Static r:Text.Name}"/>
                 <TextBox Text="{Binding SelectedPublisher.Name}"/>
 
-                <TextBlock Text="{x:Static r:Strings.TextUrl}"/>
+                <TextBlock Text="{x:Static r:Text.Url}"/>
                 <TextBox Text="{Binding SelectedPublisher.Url}"/>
 
-                <TextBlock Text="{x:Static r:Strings.TextNotes}"/>
+                <TextBlock Text="{x:Static r:Text.Notes}"/>
                 <TextBox
                     Style="{StaticResource Panama.Styles.TextBox.Multiline}"
                     Text="{Binding SelectedPublisher.Notes}"/>

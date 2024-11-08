@@ -72,9 +72,9 @@ namespace Restless.Panama.ViewModel
             builder.AppendLine(Header.FatalError);
             builder.AppendLine();
             builder.AppendLine(Logger.Instance.GetExceptionMessage(exception));
-            builder.AppendLine($"{Strings.TextDetail}: {Logger.Instance.LogFile}");
+            builder.AppendLine($"{Text.Detail}: {Logger.Instance.LogFile}");
             builder.AppendLine();
-            builder.AppendLine(Strings.TextApplicationTerminate);
+            builder.AppendLine(Text.ApplicationTerminate);
             return builder.ToString();
         }
 

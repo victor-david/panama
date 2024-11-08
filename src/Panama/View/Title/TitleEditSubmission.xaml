@@ -21,7 +21,7 @@
     <TextBlock
         Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
         tk:Property.IsCollapsed="{Binding Submissions.HaveItems}"
-        Text="{x:Static r:Strings.TextNoTitleSubmissions}"/>
+        Text="{x:Static r:Text.NoTitleSubmissions}"/>
 
     <Grid
         Grid.Row="1"

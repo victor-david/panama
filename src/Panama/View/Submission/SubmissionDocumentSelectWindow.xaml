@@ -12,7 +12,7 @@
     Style="{StaticResource Panama.Styles.MetroWindow}"
     ResizeMode="NoResize"
     SizeToContent="Height"
-    Title="{x:Static r:Strings.TextCreateSubmissionDocument0}"
+    Title="{x:Static r:Text.CreateSubmissionDocument0}"
     Height="212" Width="380">
 
     <StackPanel Margin="{DynamicResource Panama.Layout.Padding.Full}">
@@ -28,20 +28,20 @@
         <TextBlock
             Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
             Margin="{StaticResource Panama.Layout.Padding.Bottom}"
-            Text="{x:Static r:Strings.TextCreateSubmissionDocument1}"/>
+            Text="{x:Static r:Text.CreateSubmissionDocument1}"/>
 
-        <TextBlock Text="{x:Static r:Strings.TextCreateSubmissionDocument2}"/>
+        <TextBlock Text="{x:Static r:Text.CreateSubmissionDocument2}"/>
 
-        <TextBlock Text="{x:Static r:Strings.TextCreateSubmissionDocument3}"/>
+        <TextBlock Text="{x:Static r:Text.CreateSubmissionDocument3}"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
             <Button
-                Content="{x:Static r:Strings.TextCreateSubmissionDocument4}"
+                Content="{x:Static r:Text.CreateSubmissionDocument4}"
                 Command="{Binding Commands[CreateDocX]}"/>
 
             <Button
-                Content="{x:Static r:Strings.TextCreateSubmissionDocument5}"
+                Content="{x:Static r:Text.CreateSubmissionDocument5}"
                 Command="{Binding Commands[CreatePlaceholder]}"/>
 
         </StackPanel>

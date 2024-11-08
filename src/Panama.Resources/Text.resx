@@ -117,139 +117,139 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TextPublisher" xml:space="preserve">
+  <data name="Publisher" xml:space="preserve">
     <value>Publisher</value>
   </data>
-  <data name="TextNone" xml:space="preserve">
+  <data name="None" xml:space="preserve">
     <value>(none)</value>
   </data>
-  <data name="TextResponse" xml:space="preserve">
+  <data name="Response" xml:space="preserve">
     <value>Response</value>
   </data>
-  <data name="TextWritten" xml:space="preserve">
+  <data name="Written" xml:space="preserve">
     <value>Written</value>
   </data>
-  <data name="ResultSubmissionCreated" xml:space="preserve">
+  <data name="SubmissionCreated" xml:space="preserve">
     <value>Submission created</value>
   </data>
-  <data name="TextSubmitted" xml:space="preserve">
+  <data name="Submitted" xml:space="preserve">
     <value>Submitted</value>
   </data>
-  <data name="TextRecord" xml:space="preserve">
+  <data name="Record" xml:space="preserve">
     <value>record</value>
   </data>
-  <data name="TextRecords" xml:space="preserve">
+  <data name="Records" xml:space="preserve">
     <value>records</value>
   </data>
   <data name="TitleStatusPreviousToPublisher" xml:space="preserve">
     <value>Previously submitted to the same publisher</value>
   </data>
-  <data name="TextNotes" xml:space="preserve">
+  <data name="Notes" xml:space="preserve">
     <value>Notes</value>
   </data>
-  <data name="TextClear" xml:space="preserve">
+  <data name="Clear" xml:space="preserve">
     <value>Clear</value>
   </data>
-  <data name="TextPreview" xml:space="preserve">
+  <data name="Preview" xml:space="preserve">
     <value>Preview</value>
   </data>
   <data name="TitleStatusSubmittedToExclusive" xml:space="preserve">
     <value>Currently submitted to a publisher that does not accept simultaneous submissions</value>
   </data>
-  <data name="TextNoTitleVersions" xml:space="preserve">
+  <data name="NoTitleVersions" xml:space="preserve">
     <value>No versions for this title</value>
   </data>
-  <data name="TextEverSubmitted" xml:space="preserve">
+  <data name="EverSubmitted" xml:space="preserve">
     <value>Ever Submitted</value>
   </data>
-  <data name="TextFlagged" xml:space="preserve">
+  <data name="Flagged" xml:space="preserve">
     <value>Flagged</value>
   </data>
-  <data name="TextPublished" xml:space="preserve">
+  <data name="Published" xml:space="preserve">
     <value>Published</value>
   </data>
-  <data name="TextReady" xml:space="preserve">
+  <data name="Ready" xml:space="preserve">
     <value>Ready</value>
   </data>
-  <data name="TextSelfPublished" xml:space="preserve">
+  <data name="SelfPublished" xml:space="preserve">
     <value>Self Published</value>
   </data>
-  <data name="TextTitle" xml:space="preserve">
+  <data name="Title" xml:space="preserve">
     <value>Title</value>
   </data>
-  <data name="TextName" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="TextExtract" xml:space="preserve">
+  <data name="Extract" xml:space="preserve">
     <value>Extract</value>
   </data>
-  <data name="TextUrl" xml:space="preserve">
+  <data name="Url" xml:space="preserve">
     <value>Url</value>
   </data>
-  <data name="TextDescription" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="TextStart" xml:space="preserve">
+  <data name="Start" xml:space="preserve">
     <value>Start</value>
   </data>
-  <data name="TextAddedUpdated" xml:space="preserve">
+  <data name="AddedUpdated" xml:space="preserve">
     <value>Added / Updated</value>
   </data>
-  <data name="TextRemoved" xml:space="preserve">
+  <data name="Removed" xml:space="preserve">
     <value>Removed</value>
   </data>
-  <data name="TextOrphans" xml:space="preserve">
+  <data name="Orphans" xml:space="preserve">
     <value>Orphans</value>
   </data>
-  <data name="TextNotOpenXmlDocument" xml:space="preserve">
+  <data name="NotOpenXmlDocument" xml:space="preserve">
     <value>Not an Open Xml Document</value>
   </data>
-  <data name="TextImage" xml:space="preserve">
+  <data name="Image" xml:space="preserve">
     <value>Image</value>
   </data>
-  <data name="TextZeroSearchResults" xml:space="preserve">
+  <data name="ZeroSearchResults" xml:space="preserve">
     <value>Search returned no results</value>
   </data>
-  <data name="TextNote" xml:space="preserve">
+  <data name="Note" xml:space="preserve">
     <value>Note</value>
   </data>
-  <data name="TextLocked" xml:space="preserve">
+  <data name="Locked" xml:space="preserve">
     <value>Locked</value>
   </data>
-  <data name="TextCreateSubmissionDocument0" xml:space="preserve">
+  <data name="CreateSubmissionDocument0" xml:space="preserve">
     <value>Create submission document</value>
   </data>
-  <data name="TextCreateSubmissionDocument1" xml:space="preserve">
+  <data name="CreateSubmissionDocument1" xml:space="preserve">
     <value>Getting ready to create a submission document. You may:</value>
   </data>
-  <data name="TextCreateSubmissionDocument2" xml:space="preserve">
+  <data name="CreateSubmissionDocument2" xml:space="preserve">
     <value>Create a .docx document compatible with Microsoft Word and other word processors that support the Open XML specification.</value>
   </data>
-  <data name="TextCreateSubmissionDocument3" xml:space="preserve">
+  <data name="CreateSubmissionDocument3" xml:space="preserve">
     <value>Create a placeholder entry in the submission documents. After, you can select an existing file to associate with this entry.</value>
   </data>
-  <data name="TextCreateSubmissionDocument4" xml:space="preserve">
+  <data name="CreateSubmissionDocument4" xml:space="preserve">
     <value>Create .docx</value>
   </data>
-  <data name="TextCreateSubmissionDocument5" xml:space="preserve">
+  <data name="CreateSubmissionDocument5" xml:space="preserve">
     <value>Create placeholder</value>
   </data>
-  <data name="TextRename" xml:space="preserve">
+  <data name="Rename" xml:space="preserve">
     <value>Rename</value>
   </data>
-  <data name="TextNoPublisherSubmissions" xml:space="preserve">
+  <data name="NoPublisherSubmissions" xml:space="preserve">
     <value>No submissions to this publisher</value>
   </data>
-  <data name="TextNoTitles" xml:space="preserve">
+  <data name="NoTitles" xml:space="preserve">
     <value>No titles</value>
   </data>
-  <data name="TextNoPublisherPeriods" xml:space="preserve">
+  <data name="NoPublisherPeriods" xml:space="preserve">
     <value>No submission periods defined for this publisher</value>
   </data>
-  <data name="TextCancel" xml:space="preserve">
+  <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="TextConfirm" xml:space="preserve">
+  <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
   <data name="TitleStatusOkay" xml:space="preserve">
@@ -258,91 +258,91 @@
   <data name="TitleStatusUnknown" xml:space="preserve">
     <value>Unknown status</value>
   </data>
-  <data name="TextDate" xml:space="preserve">
+  <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="TextEnabled" xml:space="preserve">
+  <data name="Enabled" xml:space="preserve">
     <value>Enabled</value>
   </data>
-  <data name="TextDays01" xml:space="preserve">
+  <data name="Days01" xml:space="preserve">
     <value>1 day</value>
   </data>
-  <data name="TextDays03" xml:space="preserve">
+  <data name="Days03" xml:space="preserve">
     <value>3 days</value>
   </data>
-  <data name="TextDays05" xml:space="preserve">
+  <data name="Days05" xml:space="preserve">
     <value>5 days</value>
   </data>
-  <data name="TextDays07" xml:space="preserve">
+  <data name="Days07" xml:space="preserve">
     <value>7 days</value>
   </data>
-  <data name="TextDays10" xml:space="preserve">
+  <data name="Days10" xml:space="preserve">
     <value>10 days</value>
   </data>
-  <data name="TextDismiss" xml:space="preserve">
+  <data name="Dismiss" xml:space="preserve">
     <value>Dismiss</value>
   </data>
-  <data name="TextSendReport" xml:space="preserve">
+  <data name="SendReport" xml:space="preserve">
     <value>Send report</value>
   </data>
-  <data name="TextNoTitleSubmissions" xml:space="preserve">
+  <data name="NoTitleSubmissions" xml:space="preserve">
     <value>No submissions for this title</value>
   </data>
-  <data name="TextRefresh" xml:space="preserve">
+  <data name="Refresh" xml:space="preserve">
     <value>Refresh</value>
   </data>
-  <data name="TextVerify" xml:space="preserve">
+  <data name="Verify" xml:space="preserve">
     <value>Verify</value>
   </data>
-  <data name="TextAssigned" xml:space="preserve">
+  <data name="Assigned" xml:space="preserve">
     <value>Assigned</value>
   </data>
-  <data name="TextAvailable" xml:space="preserve">
+  <data name="Available" xml:space="preserve">
     <value>Available</value>
   </data>
-  <data name="TextAssignedToFilter" xml:space="preserve">
+  <data name="AssignedToFilter" xml:space="preserve">
     <value>Tags to filter</value>
   </data>
-  <data name="TextAvailableTags" xml:space="preserve">
+  <data name="AvailableTags" xml:space="preserve">
     <value>Available tags</value>
   </data>
-  <data name="TextMultipleTag" xml:space="preserve">
+  <data name="MultipleTag" xml:space="preserve">
     <value>Combine multiple</value>
   </data>
-  <data name="TextCreatedFromOrphan" xml:space="preserve">
+  <data name="CreatedFromOrphan" xml:space="preserve">
     <value>This entry was created from orphan file</value>
   </data>
-  <data name="TextOrphan" xml:space="preserve">
+  <data name="Orphan" xml:space="preserve">
     <value>Orphan</value>
   </data>
-  <data name="TextClearDate" xml:space="preserve">
+  <data name="ClearDate" xml:space="preserve">
     <value>Clear date</value>
   </data>
-  <data name="TextHasRelated" xml:space="preserve">
+  <data name="HasRelated" xml:space="preserve">
     <value>Has Related Title</value>
   </data>
-  <data name="TextStartup" xml:space="preserve">
+  <data name="Startup" xml:space="preserve">
     <value>Startup</value>
   </data>
-  <data name="TextNo" xml:space="preserve">
+  <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="TextYes" xml:space="preserve">
+  <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="TextDetail" xml:space="preserve">
+  <data name="Detail" xml:space="preserve">
     <value>Detail</value>
   </data>
-  <data name="TextApplicationTerminate" xml:space="preserve">
+  <data name="ApplicationTerminate" xml:space="preserve">
     <value>The application will now terminate</value>
   </data>
-  <data name="TextDark" xml:space="preserve">
+  <data name="Dark" xml:space="preserve">
     <value>Dark</value>
   </data>
-  <data name="TextHidden" xml:space="preserve">
+  <data name="Hidden" xml:space="preserve">
     <value>Hidden</value>
   </data>
-  <data name="TextLight" xml:space="preserve">
+  <data name="Light" xml:space="preserve">
     <value>Light</value>
   </data>
 </root>

@@ -26,8 +26,8 @@
         tk:Property.ColumnWidths="Auto,Auto"
         SelectedValue="{Binding SelectedPublishedEditSection}">
 
-        <tk:RadioButton Grid.Column="0" Value="1" Content="{x:Static r:Strings.TextPublished}"/>
-        <tk:RadioButton Grid.Column="1" Value="2" Content="{x:Static r:Strings.TextSelfPublished}"/>
+        <tk:RadioButton Grid.Column="0" Value="1" Content="{x:Static r:Text.Published}"/>
+        <tk:RadioButton Grid.Column="1" Value="2" Content="{x:Static r:Text.SelfPublished}"/>
     </tk:RadioButtonPanel>
 
     <!-- Published -->

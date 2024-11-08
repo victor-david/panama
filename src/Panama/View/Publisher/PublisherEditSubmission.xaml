@@ -27,7 +27,7 @@
         Grid.Row="1"
         Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
         tk:Property.IsCollapsed="{Binding Submissions.HaveItems}"
-        Text="{x:Static r:Strings.TextNoPublisherSubmissions}"/>
+        Text="{x:Static r:Text.NoPublisherSubmissions}"/>
 
     <!-- Submission titles -->
     <TextBlock Grid.Row="2" Text="{x:Static r:Header.Titles}"/>
@@ -53,6 +53,6 @@
         Grid.Row="3"
         Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
         tk:Property.IsCollapsed="{Binding Titles.HaveItems}"
-        Text="{x:Static r:Strings.TextNoTitles}"/>
+        Text="{x:Static r:Text.NoTitles}"/>
 
 </Grid>

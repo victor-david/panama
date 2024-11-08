@@ -47,9 +47,9 @@
                 Style="{StaticResource Panama.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
-                <TextBlock Text="{x:Static r:Strings.TextName}"/>
+                <TextBlock Text="{x:Static r:Text.Name}"/>
                 <TextBox Text="{Binding SelectedTag.Tag}"/>
-                <TextBlock Text="{x:Static r:Strings.TextDescription}"/>
+                <TextBlock Text="{x:Static r:Text.Description}"/>
                 <TextBox Text="{Binding SelectedTag.Description}"/>
 
             </StackPanel>

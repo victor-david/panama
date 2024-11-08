@@ -26,20 +26,20 @@
                 <Separator/>
 
                 <Button
-                    Content="{x:Static r:Strings.TextRefresh}"
+                    Content="{x:Static r:Text.Refresh}"
                     Command="{Binding RefreshCommand}"
                     ToolTip="{x:Static r:ToolTip.RefreshLinkVerify}"
                     tk:Property.IsInverseEnabled="{Binding IsOperationInProgress}"/>
 
                 <Button
-                    Content="{x:Static r:Strings.TextVerify}"
+                    Content="{x:Static r:Text.Verify}"
                     Command="{Binding VerifyCommand}"
                     ToolTip="{x:Static r:ToolTip.VerifyLinks}"
                     tk:Property.IsCollapsed="{Binding IsOperationInProgress}"
                     tk:Property.IsInverseEnabled="{Binding IsOperationInProgress}"/>
 
                 <Button
-                    Content="{x:Static r:Strings.TextCancel}"
+                    Content="{x:Static r:Text.Cancel}"
                     Command="{Binding CancelCommand}"
                     ToolTip="{x:Static r:ToolTip.Cancel}"
                     tk:Property.IsVisible="{Binding IsOperationInProgress}"

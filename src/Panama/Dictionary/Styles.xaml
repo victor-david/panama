@@ -592,8 +592,8 @@
         <Setter Property="SelectorHeight" Value="20"/>
         <Setter Property="SelectorRadius" Value="2"/>
         <Setter Property="MinSelectorAreaWidth" Value="120"/>
-        <Setter Property="OnText" Value="{x:Static r:Strings.TextYes}"/>
-        <Setter Property="OffText" Value="{x:Static r:Strings.TextNo}"/>
+        <Setter Property="OnText" Value="{x:Static r:Text.Yes}"/>
+        <Setter Property="OffText" Value="{x:Static r:Text.No}"/>
         <Setter Property="HeaderStyle">
             <Setter.Value>
                 <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Static tk:ThreeWay.HeaderStyleKey}}">

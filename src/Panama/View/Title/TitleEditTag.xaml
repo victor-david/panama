@@ -31,7 +31,7 @@
     <TextBlock
         Grid.Row="1"
         tk:Property.IsCollapsed="{Binding TitleTags.HasAssignedTags}"
-        Text="{x:Static r:Strings.TextNone}"/>
+        Text="{x:Static r:Text.None}"/>
 
     <TextBlock Grid.Column="1" Text="{x:Static r:Header.AvailableTags}"/>
     <conl:TagSelectorControl

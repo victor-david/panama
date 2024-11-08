@@ -62,7 +62,7 @@
             Grid.Column="1"
             Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
             tk:Property.IsCollapsed="{Binding Versions.HaveVersion}"
-            Text="{x:Static r:Strings.TextNoTitleVersions}"/>
+            Text="{x:Static r:Text.NoTitleVersions}"/>
     </Grid>
 
     <!-- Selected version note -->
@@ -126,7 +126,7 @@
             <TextBlock
                 Grid.Row="1"
                 Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
-                Text="{x:Static r:Strings.TextNotOpenXmlDocument}"
+                Text="{x:Static r:Text.NotOpenXmlDocument}"
                 tk:Property.IsCollapsed="{Binding Versions.IsOpenXml}"/>
         </Grid>
     </tk:NavigatorExpander>

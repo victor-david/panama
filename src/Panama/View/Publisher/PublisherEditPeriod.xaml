@@ -28,7 +28,7 @@
     <TextBlock
         Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
         tk:Property.IsCollapsed="{Binding Periods.HaveItems}"
-        Text="{x:Static r:Strings.TextNoPublisherPeriods}"/>
+        Text="{x:Static r:Text.NoPublisherPeriods}"/>
 
     <Grid
         Grid.Row="1"

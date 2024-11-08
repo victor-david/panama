@@ -15,10 +15,10 @@
 
     <!-- Title -->
     <Grid tk:Property.ColumnWidths="*,*" tk:Property.RowHeights="Auto,Auto">
-        <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
+        <TextBlock Text="{x:Static r:Text.Title}"/>
         <tk:LinkedTextBlock
             Grid.Column="1"
-            Text="{x:Static r:Strings.TextExtract}"
+            Text="{x:Static r:Text.Extract}"
             ToolTip="{x:Static r:ToolTip.Extract}"
             Command="{Binding Commands[ExtractTitle]}"/>
 
@@ -28,17 +28,17 @@
     <!-- Ready -->
     <CheckBox
         Grid.Row="1"
-        Content="{x:Static r:Strings.TextReady}"
+        Content="{x:Static r:Text.Ready}"
         IsChecked="{Binding SelectedTitle.Ready}"/>
 
     <!-- Written date -->
-    <TextBlock Grid.Row="2" Text="{x:Static r:Strings.TextWritten}"/>
+    <TextBlock Grid.Row="2" Text="{x:Static r:Text.Written}"/>
     <DatePicker
         Grid.Row="3"
         SelectedDate="{Binding SelectedTitle.Written}"/>
 
     <!-- Title notes -->
-    <TextBlock Grid.Row="4" Text="{x:Static r:Strings.TextNotes}"/>
+    <TextBlock Grid.Row="4" Text="{x:Static r:Text.Notes}"/>
     <TextBox
         Grid.Row="5"
         Style="{StaticResource Panama.Styles.TextBox.Multiline}"

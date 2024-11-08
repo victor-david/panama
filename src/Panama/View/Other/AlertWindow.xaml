@@ -37,34 +37,34 @@
         <StatusBar Grid.Row="1">
             <TextBlock Text="Postpone"/>
             <Button
-                Content="{x:Static r:Strings.TextDays01}"
+                Content="{x:Static r:Text.Days01}"
                 Command="{Binding PostponeCommand}"
                 CommandParameter="1"/>
 
             <Button
-                Content="{x:Static r:Strings.TextDays03}"
+                Content="{x:Static r:Text.Days03}"
                 Command="{Binding PostponeCommand}"
                 CommandParameter="3"/>
 
             <Button
-                Content="{x:Static r:Strings.TextDays05}"
+                Content="{x:Static r:Text.Days05}"
                 Command="{Binding PostponeCommand}"
                 CommandParameter="5"/>
 
             <Button
-                Content="{x:Static r:Strings.TextDays07}"
+                Content="{x:Static r:Text.Days07}"
                 Command="{Binding PostponeCommand}"
                 CommandParameter="7"/>
 
             <Button
-                Content="{x:Static r:Strings.TextDays10}"
+                Content="{x:Static r:Text.Days10}"
                 Command="{Binding PostponeCommand}"
                 CommandParameter="10"/>
 
             <Separator/>
 
             <Button
-                Content="{x:Static r:Strings.TextDismiss}"
+                Content="{x:Static r:Text.Dismiss}"
                 Command="{Binding DismissCommand}"/>
 
         </StatusBar>

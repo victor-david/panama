@@ -33,7 +33,7 @@
             SelectedValuePath="Id"/>
 
         <Button
-            Content="{x:Static r:Strings.TextClear}"
+            Content="{x:Static r:Text.Clear}"
             Command="{Binding Dates.ClearResponseCommand}"/>
     </StackPanel>
 </Grid>

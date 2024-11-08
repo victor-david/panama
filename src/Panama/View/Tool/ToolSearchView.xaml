@@ -59,7 +59,7 @@
                 <TextBlock
                     Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
                     tk:Property.IsCollapsed="{Binding HaveResults}"
-                    Text="{x:Static r:Strings.TextZeroSearchResults}"/>
+                    Text="{x:Static r:Text.ZeroSearchResults}"/>
 
             </Grid>
         </tk:SplitterGrid.ContentLeft>

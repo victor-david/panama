@@ -18,7 +18,7 @@
     <Grid tk:Property.RowHeights="Auto,*">
 
         <StatusBar Style="{StaticResource Panama.Styles.StatusBar.Selector}">
-            <TextBlock Text="{x:Static r:Strings.TextPublisher}"/>
+            <TextBlock Text="{x:Static r:Text.Publisher}"/>
             <TextBox Width="100" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
             <Separator/>
             <Button Content="Select" Command="{Binding Commands[Select]}"/>

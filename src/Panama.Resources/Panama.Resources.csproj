@@ -51,10 +51,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strings.Designer.cs">
+    <Compile Update="Text.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Strings.resx</DependentUpon>
+      <DependentUpon>Text.resx</DependentUpon>
     </Compile>
     <Compile Update="ToolTip.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -88,9 +88,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strings.resx">
+    <EmbeddedResource Update="Text.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <LastGenOutput>Text.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="ToolTip.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

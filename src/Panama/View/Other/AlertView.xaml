@@ -48,14 +48,14 @@
                 Style="{StaticResource Panama.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
-                <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
+                <TextBlock Text="{x:Static r:Text.Title}"/>
                 <TextBox Text="{Binding SelectedAlert.Title}"/>
 
-                <TextBlock Text="{x:Static r:Strings.TextUrl}"/>
+                <TextBlock Text="{x:Static r:Text.Url}"/>
                 <TextBox Text="{Binding SelectedAlert.Url}"/>
 
                 <TextBlock>
-                    <Run Text="{x:Static r:Strings.TextDate}"/>
+                    <Run Text="{x:Static r:Text.Date}"/>
                     <Run Text="{Binding SelectedAlert.DateLocal, Mode=OneWay}"/>
                 </TextBlock>
 
@@ -63,7 +63,7 @@
 
                 <CheckBox
                     IsChecked="{Binding SelectedAlert.Enabled}"
-                    Content="{x:Static r:Strings.TextEnabled}"/>
+                    Content="{x:Static r:Text.Enabled}"/>
 
             </StackPanel>
         </tk:SplitterGrid.ContentRight>

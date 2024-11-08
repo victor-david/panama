@@ -12,14 +12,14 @@
     Style="{StaticResource Panama.Styles.Panel.DataEntry}">
 
     <!-- Date -->
-    <TextBlock Text="{x:Static r:Strings.TextDate}"/>
+    <TextBlock Text="{x:Static r:Text.Date}"/>
     <DatePicker SelectedDate="{Binding SelectedTitle.Date}"/>
 
     <!-- Clear date -->
     <Button
         Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
         Command="{Binding ClearDateCommand}"
-        Content="{x:Static r:Strings.TextClearDate}"/>
+        Content="{x:Static r:Text.ClearDate}"/>
 
     <!-- Status -->
     <TextBlock Text="Status"/>

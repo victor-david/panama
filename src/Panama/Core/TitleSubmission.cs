@@ -46,10 +46,10 @@ namespace Restless.Panama.Core
         {
             return Status switch
             {
-                TitleSubmissionStatus.Okay => Strings.TitleStatusOkay,
-                TitleSubmissionStatus.Exclusive => Strings.TitleStatusSubmittedToExclusive,
-                TitleSubmissionStatus.SamePublisher => Strings.TitleStatusPreviousToPublisher,
-                _ => Strings.TitleStatusUnknown
+                TitleSubmissionStatus.Okay => Text.TitleStatusOkay,
+                TitleSubmissionStatus.Exclusive => Text.TitleStatusSubmittedToExclusive,
+                TitleSubmissionStatus.SamePublisher => Text.TitleStatusPreviousToPublisher,
+                _ => Text.TitleStatusUnknown
             };
         }
     }

@@ -19,7 +19,7 @@
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-                <TextBlock Text="{x:Static r:Strings.TextNotes}"/>
+                <TextBlock Text="{x:Static r:Text.Notes}"/>
                 <!-- no filters for now -->
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
@@ -49,9 +49,9 @@
                 Style="{StaticResource Panama.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
-                <TextBlock Text="{x:Static r:Strings.TextTitle}"/>
+                <TextBlock Text="{x:Static r:Text.Title}"/>
                 <TextBox Text="{Binding SelectedNote.Title}" />
-                <TextBlock Text="{x:Static r:Strings.TextNote}"/>
+                <TextBlock Text="{x:Static r:Text.Note}"/>
                 <TextBox
                     Style="{StaticResource Panama.Styles.TextBox.Multiline}"
                     Text="{Binding SelectedNote.Note}"/>

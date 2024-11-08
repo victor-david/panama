@@ -186,9 +186,9 @@ namespace Restless.Panama.ViewModel
             {
                 TitleRow row = new(TitleTable.AddDefaultRow())
                 {
-                    Title = $"{Strings.TextOrphan} {SelectedOrphan.FullName}",
+                    Title = $"{Text.Orphan} {SelectedOrphan.FullName}",
                     Written = SelectedOrphan.LastWriteTimeUtc.ToUtcZero(),
-                    Notes = $"{Strings.TextCreatedFromOrphan} {SelectedOrphan.FullName}, {SelectedOrphan.LastWriteTimeUtc}"
+                    Notes = $"{Text.CreatedFromOrphan} {SelectedOrphan.FullName}, {SelectedOrphan.LastWriteTimeUtc}"
                 };
 
                 TitleVersionTable.GetVersionController(row.Id).Add(Paths.Title.WithoutRoot(SelectedOrphan.FullName));
