@@ -120,6 +120,15 @@
   <data name="Export" xml:space="preserve">
     <value>This operation exports all versions of each title to the specifed folder. Each file will be named in accordance with the date it was written, its title, language and version / revision. Only files that have changed or are not present in the export directory will be exported. Extra files in the export directory will be deleted.</value>
   </data>
+  <data name="ExportFileFormat" xml:space="preserve">
+    <value>This folder contains exported versions of each title tracked by {0}.
+Files are named according to the date they were first written, title, version, and language.
+
+Usually, the individual files are kept in different sub directories; this directory has all files in one place.
+
+Last exported: {1}</value>
+    <comment>Text that is written to the export read me.</comment>
+  </data>
   <data name="Message" xml:space="preserve">
     <value>This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject.</value>
   </data>

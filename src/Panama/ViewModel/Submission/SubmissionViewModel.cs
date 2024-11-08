@@ -271,11 +271,8 @@ namespace Restless.Panama.ViewModel
             if (WindowFactory.PublisherSelect.Create().GetPublisher() is PublisherRow publisher)
             {
                 int openCount = Table.OpenSubmissionCount(publisher.Id);
-                string msg = openCount == 0 ?
-                    string.Format(CultureInfo.InvariantCulture, Strings.FormatStringCreateSubmission, publisher.Name) :
-                    string.Format(CultureInfo.InvariantCulture, Strings.FormatStringCreateSubmissionOpen, publisher.Name);
 
-                if (MessageWindow.ShowYesNo(msg))
+                if (MessageWindow.ShowYesNo(StringHelper.GetSubmissionConfirmation(openCount, publisher.Name)))
                 {
                     Table.CreateSubmission(publisher.Id);
                     MainWindowViewModel.Instance.CreateNotificationMessage(Strings.ResultSubmissionCreated);

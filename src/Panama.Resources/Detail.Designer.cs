@@ -70,6 +70,20 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This folder contains exported versions of each title tracked by {0}.
+        ///Files are named according to the date they were first written, title, version, and language.
+        ///
+        ///Usually, the individual files are kept in different sub directories; this directory has all files in one place.
+        ///
+        ///Last exported: {1}.
+        /// </summary>
+        public static string ExportFileFormat {
+            get {
+                return ResourceManager.GetString("ExportFileFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation renames the files that are used for external submission messages to correspond to the date / time of the message and the message subject..
         /// </summary>
         public static string Message {

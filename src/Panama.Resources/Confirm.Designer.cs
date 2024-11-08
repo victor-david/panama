@@ -188,6 +188,24 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a submission to {0}?.
+        /// </summary>
+        public static string CreateSubmissionFormat {
+            get {
+                return ResourceManager.GetString("CreateSubmissionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: You already have at least one submission to this publisher that has not yet received a response. Do you want to continue and create another submission?.
+        /// </summary>
+        public static string CreateSubmissionOpenFormat {
+            get {
+                return ResourceManager.GetString("CreateSubmissionOpenFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation will create a title entry and use the selected file as the first version that is associated with the title. The written date for the title will be set to the last modified date of the file..
         /// </summary>
         public static string CreateTitleFromOrphan {

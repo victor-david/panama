@@ -61,38 +61,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a submission to {0}?.
-        /// </summary>
-        public static string FormatStringCreateSubmission {
-            get {
-                return ResourceManager.GetString("FormatStringCreateSubmission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: You already have at least one submission to this publisher that has not yet received a response. Do you want to continue and create another submission?.
-        /// </summary>
-        public static string FormatStringCreateSubmissionOpen {
-            get {
-                return ResourceManager.GetString("FormatStringCreateSubmissionOpen", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This folder contains exported versions of each title tracked by {0}.
-        ///Files are named according to the date they were first written, title, version, and language.
-        ///
-        ///Usually, the individual files are kept in different sub directories; this directory has all files in one place.
-        ///
-        ///Last exported: {1}.
-        /// </summary>
-        public static string FormatTextExport {
-            get {
-                return ResourceManager.GetString("FormatTextExport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Submission created.
         /// </summary>
         public static string ResultSubmissionCreated {
@@ -737,15 +705,6 @@ namespace Restless.Panama.Resources {
         public static string TextZeroSearchResults {
             get {
                 return ResourceManager.GetString("TextZeroSearchResults", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please confirm that you want to submit the following titles.
-        /// </summary>
-        public static string TitleStatusHeader {
-            get {
-                return ResourceManager.GetString("TitleStatusHeader", resourceCulture);
             }
         }
         

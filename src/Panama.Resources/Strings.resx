@@ -119,7 +119,6 @@
   </resheader>
   <data name="TextPublisher" xml:space="preserve">
     <value>Publisher</value>
-    <comment>Command text to view publishers</comment>
   </data>
   <data name="TextNone" xml:space="preserve">
     <value>(none)</value>
@@ -129,14 +128,6 @@
   </data>
   <data name="TextWritten" xml:space="preserve">
     <value>Written</value>
-  </data>
-  <data name="FormatStringCreateSubmission" xml:space="preserve">
-    <value>Create a submission to {0}?</value>
-    <comment>Used for confirmation when creating a submission</comment>
-  </data>
-  <data name="FormatStringCreateSubmissionOpen" xml:space="preserve">
-    <value>{0}: You already have at least one submission to this publisher that has not yet received a response. Do you want to continue and create another submission?</value>
-    <comment>Used for confirmation when creating a submssion to a publisher with at leat one opne submission</comment>
   </data>
   <data name="ResultSubmissionCreated" xml:space="preserve">
     <value>Submission created</value>
@@ -149,14 +140,6 @@
   </data>
   <data name="TextRecords" xml:space="preserve">
     <value>records</value>
-  </data>
-  <data name="FormatTextExport" xml:space="preserve">
-    <value>This folder contains exported versions of each title tracked by {0}.
-Files are named according to the date they were first written, title, version, and language.
-
-Usually, the individual files are kept in different sub directories; this directory has all files in one place.
-
-Last exported: {1}</value>
   </data>
   <data name="TitleStatusPreviousToPublisher" xml:space="preserve">
     <value>Previously submitted to the same publisher</value>
@@ -268,9 +251,6 @@ Last exported: {1}</value>
   </data>
   <data name="TextConfirm" xml:space="preserve">
     <value>Confirm</value>
-  </data>
-  <data name="TitleStatusHeader" xml:space="preserve">
-    <value>Please confirm that you want to submit the following titles</value>
   </data>
   <data name="TitleStatusOkay" xml:space="preserve">
     <value>No conflict</value>

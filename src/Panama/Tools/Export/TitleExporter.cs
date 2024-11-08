@@ -122,7 +122,7 @@ namespace Restless.Panama.Tools
             if (result.Updated.Count > 0 || result.NotFound.Count > 0 || !File.Exists(readMeFile))
             {
                 AssemblyInfo a = new(AssemblyInfoType.Entry);
-                File.WriteAllText(readMeFile, string.Format(CultureInfo.InvariantCulture, Strings.FormatTextExport, a.Title, DateTime.UtcNow.ToString("R")));
+                File.WriteAllText(readMeFile, StringHelper.GetExportFileText());
             }
         }
         #endregion
