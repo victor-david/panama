@@ -6,8 +6,6 @@
 */
 using System;
 using System.Windows.Data;
-using System.Windows.Media;
-using Restless.Panama.Resources;
 
 namespace Restless.Panama.Core
 {
@@ -26,22 +24,24 @@ namespace Restless.Panama.Core
         /// <param name="culture">Not used.</param>
         /// <returns>A string that contains the number of days between the two dates.</returns>
         /// <remarks>
-        /// If there is not at least one element in <paramref name="values"/>, this method returns null.
-        /// If there is only one <see cref="DateTime"/> object in <paramref name="values"/>, the difference is
-        /// calculated between today and the supplied date.
+        /// If there is not at least two elements in <paramref name="values"/>, this method returns null.
+        /// If only the first element is a <see cref="DateTime"/>, the difference is calculated between today and the supplied date.
         /// </remarks>
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (values.Length > 1)
             {
-                DateTime date1 = DateTime.UtcNow;
-                DateTime date2 = DateTime.UtcNow;
-                if (values[0] is DateTime) date1 = (DateTime)values[0];
-                if (values[1] is DateTime) date2 = (DateTime)values[1];
+                DateTime date1 = Zeroed(DateTime.Now);
+                DateTime date2 = Zeroed(DateTime.Now);
+
+                if (values[0] is DateTime d1) date1 = Zeroed(d1);
+                if (values[1] is DateTime d2) date2 = Zeroed(d2);
                 return (date2 - date1).Days.ToString();
             }
             return null;
         }
+
+        private DateTime Zeroed(DateTime date) => new(date.Year, date.Month, date.Day);
 
         /// <summary>
         /// This method is not used. It throws a <see cref="NotImplementedException"/>
