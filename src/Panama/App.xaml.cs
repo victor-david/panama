@@ -91,6 +91,8 @@ namespace Restless.Panama
             StartupOptions ops = new(e.Args);
             DatabaseController.Instance.Init(RegistryManager.DatabaseDirectory);
 
+            LanguageManager.Instance.SetLanguage(Config.Instance.LanguageId);
+
             ThemeManager.Init();
             ThemeManager.SetTheme(Config.Instance.ThemeId);
 
