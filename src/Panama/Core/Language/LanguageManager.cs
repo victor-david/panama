@@ -1,0 +1,77 @@
+﻿using Restless.Panama.Resources;
+using System.Globalization;
+
+namespace Restless.Panama.Core
+{
+    public class LanguageManager
+    {
+        #region Private
+        private CultureInfo culture;
+        #endregion
+
+        /************************************************************************/
+
+        #region Properties
+        /// <summary>
+        /// Gets the default language id, en-us
+        /// </summary>
+        public const string DefaultLanguageId = "en-us";
+
+        /// <summary>
+        /// Gets the list of supported languages.
+        /// </summary>
+        public LanguageItemCollection Languages { get; }
+        #endregion
+
+        /************************************************************************/
+
+        #region Constructors
+        /// <summary>
+        /// Gets the singleton instance of this class
+        /// </summary>
+        public static LanguageManager Instance { get; } = new LanguageManager();
+
+        private LanguageManager()
+        {
+            Languages = new LanguageItemCollection()
+            {
+                new LanguageItem(DefaultLanguageId, Language.English),
+                new LanguageItem("es", Language.Spanish)
+            };
+
+            SetLanguage(DefaultLanguageId);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Public methods
+        /// <summary>
+        /// Sets language to the specified id
+        /// </summary>
+        /// <param name="languageId">The id</param>
+        public void SetLanguage(string languageId)
+        {
+            if (Languages.GetLanguageItem(languageId) is LanguageItem item)
+            {
+                culture = new CultureInfo(item.Id);
+
+                Confirm.Culture = culture;
+                Detail.Culture = culture;
+                Error.Culture = culture;
+                Header.Culture = culture;
+                Language.Culture = culture;
+                Menu.Culture = culture;
+                Settings.Culture = culture;
+                Text.Culture = culture;
+                ToolTip.Culture = culture;
+
+                CultureInfo.DefaultThreadCurrentCulture = culture;
+                CultureInfo.DefaultThreadCurrentUICulture = culture;
+                TranslationSource.Instance.CurrentCulture = culture;
+                //Languages.SetDisplayLanguage(item);
+            }
+        }
+        #endregion
+    }
+}

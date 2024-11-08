@@ -1047,6 +1047,15 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets the language id
+        /// </summary>
+        public string LanguageId
+        {
+            get => GetItem(LanguageManager.DefaultLanguageId);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets or sets the date format for the application.
         /// </summary>
         public string DateFormat
