@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Accepted">
+    <value>Aceptado</value>
+  </data>
+  <data name="Active">
+    <value>Activo</value>
+  </data>
+  <data name="AddAlert">
+    <value>Agregar una alerta</value>
+  </data>
+  <data name="AddAuthor">
+    <value>Agregar un autor</value>
+  </data>
+  <data name="AddDocumentToSubmission">
+    <value>Agregar un documento a esta presentación</value>
+  </data>
+  <data name="AddLink">
+    <value>Agregar enlace</value>
+  </data>
+  <data name="AddPublished">
+    <value>Agregar un registro publicado a este título</value>
+  </data>
+  <data name="AddQueue">
+    <value>Agregar una cola</value>
+  </data>
+  <data name="AddRelated">
+    <value>Agregar títulos relacionados a este título</value>
+  </data>
+  <data name="AddSelfPublished">
+    <value>Agregar un registro autoeditado a este título</value>
+  </data>
+  <data name="AddSubmissionMessage">
+    <value>Agregar un mensaje a esta presentación</value>
+  </data>
+  <data name="AddSubmissionPeriod">
+    <value>Agregar un periodo de presentación</value>
+  </data>
+  <data name="AddTag">
+    <value>Agregar una etiqueta</value>
+  </data>
+  <data name="AddTitle">
+    <value>Agregar un título a la colección</value>
+  </data>
+  <data name="AddTitleToSubmission">
+    <value>Agregar título(s) a esta presentación</value>
+  </data>
+  <data name="AddTitleVersion">
+    <value>Agregar un archivo existente como una versión</value>
+  </data>
+  <data name="AddUserNote">
+    <value>Agregar una nota</value>
+  </data>
+  <data name="Alerts">
+    <value>Alertas</value>
+  </data>
+  <data name="Authors">
+    <value>Autores</value>
+  </data>
+  <data name="BrowseToPublisherUrl">
+    <value>Navegar al sitio web de este editor</value>
+  </data>
+  <data name="BrowseToPublisherUrlOrClick">
+    <value>Navegar al sitio web de este editor (o haga doble clic en la fila)</value>
+  </data>
+  <data name="BrowseToUrlOrClick">
+    <value>Navegar a esta url (o haga doble clic en la fila)</value>
+  </data>
+  <data name="Clear">
+    <value>Limpiar</value>
+  </data>
+  <data name="ClearPublishedDate">
+    <value>Borrar la fecha de publicación</value>
+  </data>
+  <data name="CopyTitle">
+    <value>Copiar título al portapapeles</value>
+  </data>
+  <data name="CreatePublisher">
+    <value>Crear un nuevo registro de editor</value>
+  </data>
+  <data name="CreateSubmission">
+    <value>Crear una presentación</value>
+  </data>
+  <data name="CreateTitleFromEntry">
+    <value>Crear una entrada de título desde este archivo</value>
+  </data>
+  <data name="Custom">
+    <value>Personalizado</value>
+  </data>
+  <data name="DeleteAlert">
+    <value>Eliminar esta alerta</value>
+  </data>
+  <data name="DeleteAuthor">
+    <value>Eliminar este autor</value>
+  </data>
+  <data name="DeleteLink">
+    <value>Eliminar este enlace</value>
+  </data>
+  <data name="DeleteNote">
+    <value>Eliminar esta nota</value>
+  </data>
+  <data name="DeletePublisher">
+    <value>Eliminar este editor</value>
+  </data>
+  <data name="DeleteSubmission">
+    <value>Eliminar esta presentación</value>
+  </data>
+  <data name="DeleteTag">
+    <value>Eliminar esta etiqueta</value>
+  </data>
+  <data name="DeleteTitle">
+    <value>Eliminar este título</value>
+  </data>
+  <data name="Developer">
+    <value>Desarrollador</value>
+  </data>
+  <data name="ExcludeOrphanDirectory">
+    <value>Excluir este directorio de la búsqueda de huérfanos</value>
+  </data>
+  <data name="ExcludeOrphanFile">
+    <value>Excluir este archivo de la búsqueda de huérfanos</value>
+  </data>
+  <data name="ExcludeOrphanFileType">
+    <value>Excluir todos los archivos de este tipo de la búsqueda de huérfanos</value>
+  </data>
+  <data name="FilterTitleListToRelated">
+    <value>Filtrar la lista de títulos al título seleccionado y sus títulos relacionados</value>
+  </data>
+  <data name="FilterToPublisher">
+    <value>Filtrar la lista para mostrar solo presentaciones a este editor</value>
+  </data>
+  <data name="Flagged">
+    <value>Marcado</value>
+  </data>
+  <data name="FlagTitle">
+    <value>Alternar marca para este título</value>
+  </data>
+  <data name="InPeriod">
+    <value>En periodo</value>
+  </data>
+  <data name="Links">
+    <value>Enlaces</value>
+  </data>
+  <data name="LinkVerify">
+    <value>Verificar enlaces</value>
+  </data>
+  <data name="MakeSeparateVersion">
+    <value>Hacer de esta una versión separada</value>
+  </data>
+  <data name="Notes">
+    <value>Notas</value>
+  </data>
+  <data name="Open">
+    <value>Abrir</value>
+  </data>
+  <data name="OpenItemOrDoubleClick">
+    <value>Abrir este ítem (o haga doble clic en la fila)</value>
+  </data>
+  <data name="OpenTitleOrDoubleClick">
+    <value>Abrir la última versión de este título (o haga doble clic en la fila)</value>
+  </data>
+  <data name="OrphanFinder">
+    <value>Huérfano</value>
+  </data>
+  <data name="Paying">
+    <value>Pagando</value>
+  </data>
+  <data name="Personal">
+    <value>Personal</value>
+  </data>
+  <data name="Published">
+    <value>Publicado</value>
+  </data>
+  <data name="Publishers">
+    <value>Editores</value>
+  </data>
+  <data name="Queues">
+    <value>Colas</value>
+  </data>
+  <data name="Ready">
+    <value>Listo</value>
+  </data>
+  <data name="RemoveExclusion">
+    <value>Eliminar esta exclusión</value>
+  </data>
+  <data name="RemoveFromQueue">
+    <value>Eliminar título de la cola seleccionada</value>
+  </data>
+  <data name="RemovePublished">
+    <value>Eliminar este registro publicado</value>
+  </data>
+  <data name="RemoveQueue">
+    <value>Eliminar esta cola</value>
+  </data>
+  <data name="RemoveQueueTitle">
+    <value>Eliminar este título de la cola</value>
+  </data>
+  <data name="RemoveRelated">
+    <value>Eliminar este título relacionado</value>
+  </data>
+  <data name="RemoveSubmissionDocument">
+    <value>Eliminar este documento de la presentación</value>
+  </data>
+  <data name="RemoveSubmissionMessage">
+    <value>Eliminar este mensaje de la presentación</value>
+  </data>
+  <data name="RemoveSubmissionPeriod">
+    <value>Eliminar este periodo de presentación</value>
+  </data>
+  <data name="RemoveTitleFromSubmission">
+    <value>Eliminar título de la presentación</value>
+  </data>
+  <data name="RemoveTitleVersion">
+    <value>Eliminar esta versión de título</value>
+  </data>
+  <data name="RenameQueue">
+    <value>Renombrar esta cola</value>
+  </data>
+  <data name="ReplaceSubmissionDocument">
+    <value>Reemplazar este documento de presentación</value>
+  </data>
+  <data name="ReplaceTitleVersion">
+    <value>Reemplazar el archivo para esta versión con otro archivo</value>
+  </data>
+  <data name="Reset">
+    <value>Restablecer</value>
+  </data>
+  <data name="Search">
+    <value>Buscar</value>
+  </data>
+  <data name="SelfPublishers">
+    <value>Autores autoeditados</value>
+  </data>
+  <data name="Settings">
+    <value>Configuraciones</value>
+  </data>
+  <data name="SetTitleStatusAccepted">
+    <value>Establecer estado a aceptado</value>
+  </data>
+  <data name="SetTitleStatusNone">
+    <value>Establecer estado a ninguno</value>
+  </data>
+  <data name="SetTitleStatusWithdrawn">
+    <value>Establecer estado a retirado</value>
+  </data>
+  <data name="Statistics">
+    <value>Estadísticas</value>
+  </data>
+  <data name="Submissions">
+    <value>Envíos</value>
+  </data>
+  <data name="Submitted">
+    <value>Enviado</value>
+  </data>
+  <data name="Tags">
+    <value>Etiquetas</value>
+  </data>
+  <data name="Titles">
+    <value>Títulos</value>
+  </data>
+  <data name="Tools">
+    <value>Herramientas</value>
+  </data>
+  <data name="TryAgain">
+    <value>Intenta de nuevo</value>
+  </data>
+</root>

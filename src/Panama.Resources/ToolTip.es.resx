@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlertEnabled">
+    <value>Esta alerta está actualmente habilitada</value>
+  </data>
+  <data name="AuthorDefault">
+    <value>Este es el autor predeterminado al crear nuevos títulos</value>
+  </data>
+  <data name="Cancel">
+    <value>Cancelar la operación</value>
+  </data>
+  <data name="CopyTitles">
+    <value>Copiar la lista de títulos al portapapeles</value>
+  </data>
+  <data name="Extract">
+    <value>Extraer título de la última versión</value>
+  </data>
+  <data name="FilterClear">
+    <value>Limpiar todos los filtros</value>
+  </data>
+  <data name="FilterCustom">
+    <value>Establecer filtro(s) en la colección</value>
+  </data>
+  <data name="FilterReset">
+    <value>Restablecer todos los filtros al valor predeterminado</value>
+  </data>
+  <data name="MessageError">
+    <value>Ocurrió un error al analizar el archivo de mensaje.</value>
+  </data>
+  <data name="MessageInUse">
+    <value>El archivo de mensaje está en uso, es decir, ha sido seleccionado como una entrada para un mensaje de envío</value>
+  </data>
+  <data name="MoveTitleVersionDown">
+    <value>Mover esta versión del título hacia abajo</value>
+  </data>
+  <data name="MoveTitleVersionUp">
+    <value>Mover esta versión del título hacia arriba</value>
+  </data>
+  <data name="OpenWindowAbout">
+    <value>Información sobre la aplicación</value>
+  </data>
+  <data name="OpenWindowSettings">
+    <value>Abrir la configuración de la aplicación</value>
+  </data>
+  <data name="OpenWindowTool">
+    <value>Abrir ventana de herramientas</value>
+  </data>
+  <data name="OrphanExclusions">
+    <value>Gestionar exclusiones para búsqueda huérfana</value>
+  </data>
+  <data name="PublisherAdded">
+    <value>La fecha en que este editor fue agregado a la base de datos</value>
+  </data>
+  <data name="PublisherExclusive">
+    <value>El editor quiere una presentación exclusiva, es decir, no acepta simultáneas</value>
+  </data>
+  <data name="PublisherFilterActive">
+    <value>Filtrar lista de editores para mostrar solo aquellos que están activos, es decir, no marcados como fuera de servicio</value>
+  </data>
+  <data name="PublisherFilterFollowup">
+    <value>Filtrar lista de editores para mostrar solo aquellos que están activos y marcados para seguimiento</value>
+  </data>
+  <data name="PublisherFilterHaveSub">
+    <value>Filtrar lista de editores para mostrar solo aquellos que actualmente tienen una presentación abierta</value>
+  </data>
+  <data name="PublisherFilterInPeriod">
+    <value>Filtrar lista de editores para mostrar solo aquellos que están activos y actualmente dentro de un período de presentación</value>
+  </data>
+  <data name="PublisherFilterPaying">
+    <value>Filtrar lista de editores para mostrar solo aquellos que están activos y son un mercado que paga</value>
+  </data>
+  <data name="PublisherHasActive">
+    <value>El editor actualmente tiene al menos una presentación que está activa</value>
+  </data>
+  <data name="PublisherInPeriod">
+    <value>El editor actualmente está en uno de sus períodos de presentación</value>
+  </data>
+  <data name="PublisherLastSubmission">
+    <value>La fecha en que se creó la última presentación para este editor</value>
+  </data>
+  <data name="PublisherPay">
+    <value>El editor es un mercado que paga</value>
+  </data>
+  <data name="PublisherSubmissionCount">
+    <value>Conteo de presentaciones - el total de veces que se ha hecho una presentación a este editor</value>
+  </data>
+  <data name="PublisherSubmissionPeriodCount">
+    <value>Conteo de períodos de presentación - el total de períodos de presentación que se le han asignado a este editor</value>
+  </data>
+  <data name="RefreshLinkVerify">
+    <value>Actualizar la lista de enlaces, agregando nuevas entradas y eliminando cualquier entrada obsoleta</value>
+  </data>
+  <data name="ResetWindow">
+    <value>Restablecer esta ventana a su tamaño predeterminado</value>
+  </data>
+  <data name="SaveAll">
+    <value>Guardar todos los datos (se guarda automáticamente al salir)</value>
+  </data>
+  <data name="ScrambleBegin">
+    <value>Mezclar el texto en el área de texto</value>
+  </data>
+  <data name="ScramblePaste">
+    <value>Pegar texto del portapapeles en el área de texto para mezclar</value>
+  </data>
+  <data name="ScrambleWord">
+    <value>Cuando está activado, las palabras dentro de las líneas se mezclarán</value>
+  </data>
+  <data name="SelfPublisherPublishedCount">
+    <value>Conteo de publicaciones - total de ítems publicados</value>
+  </data>
+  <data name="SendReport">
+    <value>Enviar informe de problema. No se incluye información personal</value>
+  </data>
+  <data name="SubmissionContest">
+    <value>La presentación es para un concurso</value>
+  </data>
+  <data name="SubmissionFilterAccepted">
+    <value>La presentación ha sido aceptada</value>
+  </data>
+  <data name="SubmissionFilterActive">
+    <value>La presentación está activa (aún no ha recibido respuesta)</value>
+  </data>
+  <data name="SubmissionFilterPersonal">
+    <value>La presentación recibió una respuesta personal</value>
+  </data>
+  <data name="SubmissionFilterTryAgain">
+    <value>La presentación recibió una respuesta de reintento</value>
+  </data>
+  <data name="SubmissionLocked">
+    <value>La presentación está bloqueada</value>
+  </data>
+  <data name="SubmissionOnline">
+    <value>La presentación está en línea</value>
+  </data>
+  <data name="SubmissionPeriodAllYear">
+    <value>Establecer el período de presentación para todo el año</value>
+  </data>
+  <data name="SynchonizeTitles">
+    <value>Sincronizar nombres de archivos con título y versión</value>
+  </data>
+  <data name="ThemeEnabled">
+    <value>El tema está habilitado para su uso</value>
+  </data>
+  <data name="ThemeReset">
+    <value>Restablecer al tema predeterminado</value>
+  </data>
+  <data name="TitleCurrentSubmissionCount">
+    <value>Conteo de presentaciones actuales - el número de presentaciones que aún están abiertas para este título</value>
+  </data>
+  <data name="TitleFilterFlag">
+    <value>El título está marcado</value>
+  </data>
+  <data name="TitleFilterPublished">
+    <value>El título ha sido publicado</value>
+  </data>
+  <data name="TitleFilterReady">
+    <value>El título está marcado como listo</value>
+  </data>
+  <data name="TitleFilterSubmitted">
+    <value>El título está actualmente enviado</value>
+  </data>
+  <data name="TitlePublishedCount">
+    <value>Conteo de publicaciones - el número de veces que este título ha sido publicado</value>
+  </data>
+  <data name="TitleRelatedCount">
+    <value>Conteo relacionado - el número de títulos relacionados que este título contiene</value>
+  </data>
+  <data name="TitleSubmissionCount">
+    <value>Conteo de presentaciones - el total de veces que este título ha sido enviado</value>
+  </data>
+  <data name="TitleTagCount">
+    <value>Conteo de etiquetas - el número de etiquetas asignadas a este título</value>
+  </data>
+  <data name="TitleUpdated">
+    <value>La fecha de actualización para la última versión de este título</value>
+  </data>
+  <data name="TitleVersionCount">
+    <value>Conteo de versiones - el número de versiones que este título tiene</value>
+  </data>
+  <data name="TitleWordCount">
+    <value>Conteo de palabras - el número de palabras en la última versión de este título</value>
+  </data>
+  <data name="VerifyLinks">
+    <value>Comenzar la verificación de enlaces</value>
+  </data>
+  <data name="ToolTitleListDetail">
+    <value>Esta operación crea un archivo de texto que tiene una lista de todos los títulos y sus correspondientes versiones.</value>
+  </data>
+  <data name="ToolTitleMetadataDetail">
+    <value>Esta operación verifica que todos los archivos asociados con las versiones de título estén presentes en el disco y actualiza los metadatos que se almacenan en la base de datos con respecto a cada archivo, como la última fecha/hora de actualización y el conteo de palabras.</value>
+  </data>
+</root>

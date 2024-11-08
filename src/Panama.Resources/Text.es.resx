@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Publisher">
+    <value>Editor</value>
+  </data>
+  <data name="None">
+    <value>(ninguno)</value>
+  </data>
+  <data name="Response">
+    <value>Respuesta</value>
+  </data>
+  <data name="Written">
+    <value>Escrito</value>
+  </data>
+  <data name="SubmissionCreated">
+    <value>Envío creado</value>
+  </data>
+  <data name="Submitted">
+    <value>Enviado</value>
+  </data>
+  <data name="Records">
+    <value>registros</value>
+  </data>
+  <data name="TitleStatusPreviousToPublisher">
+    <value>Previamente enviado al mismo editor</value>
+  </data>
+  <data name="Notes">
+    <value>Notas</value>
+  </data>
+  <data name="Clear">
+    <value>Borrar</value>
+  </data>
+  <data name="Preview">
+    <value>Vista previa</value>
+  </data>
+  <data name="TitleStatusSubmittedToExclusive">
+    <value>Actualmente enviado a un editor que no acepta envíos simultáneos</value>
+  </data>
+  <data name="NoTitleVersions">
+    <value>No hay versiones para este título</value>
+  </data>
+  <data name="EverSubmitted">
+    <value>Alguna vez enviado</value>
+  </data>
+  <data name="Flagged">
+    <value>Marcado</value>
+  </data>
+  <data name="Published">
+    <value>Publicado</value>
+  </data>
+  <data name="Ready">
+    <value>Listo</value>
+  </data>
+  <data name="SelfPublished">
+    <value>Autopublicado</value>
+  </data>
+  <data name="Title">
+    <value>Título</value>
+  </data>
+  <data name="Name">
+    <value>Nombre</value>
+  </data>
+  <data name="Extract">
+    <value>Extracto</value>
+  </data>
+  <data name="Url">
+    <value>Url</value>
+  </data>
+  <data name="Description">
+    <value>Descripción</value>
+  </data>
+  <data name="Start">
+    <value>Iniciar</value>
+  </data>
+  <data name="AddedUpdated">
+    <value>Añadido / Actualizado</value>
+  </data>
+  <data name="Removed">
+    <value>Eliminado</value>
+  </data>
+  <data name="Orphans">
+    <value>Huérfanos</value>
+  </data>
+  <data name="NotOpenXmlDocument">
+    <value>No es un documento Open Xml</value>
+  </data>
+  <data name="Image">
+    <value>Imagen</value>
+  </data>
+  <data name="ZeroSearchResults">
+    <value>La búsqueda no arrojó resultados</value>
+  </data>
+  <data name="Note">
+    <value>Nota</value>
+  </data>
+  <data name="Locked">
+    <value>Bloqueado</value>
+  </data>
+  <data name="CreateSubmissionDocument0">
+    <value>Crear documento de envío</value>
+  </data>
+  <data name="CreateSubmissionDocument1">
+    <value>Preparándose para crear un documento de envío. Usted puede:</value>
+  </data>
+  <data name="CreateSubmissionDocument2">
+    <value>Crear un documento .docx compatible con Microsoft Word y otros procesadores de texto que soporten la especificación Open XML.</value>
+  </data>
+  <data name="CreateSubmissionDocument3">
+    <value>Crear una entrada de marcador en los documentos de envío. Después, puede seleccionar un archivo existente para asociar con esta entrada.</value>
+  </data>
+  <data name="CreateSubmissionDocument4">
+    <value>Crear .docx</value>
+  </data>
+  <data name="CreateSubmissionDocument5">
+    <value>Crear marcador</value>
+  </data>
+  <data name="Rename">
+    <value>Renombrar</value>
+  </data>
+  <data name="NoPublisherSubmissions">
+    <value>No hay envíos a este editor</value>
+  </data>
+  <data name="NoTitles">
+    <value>No hay títulos</value>
+  </data>
+  <data name="NoPublisherPeriods">
+    <value>No hay períodos de envío definidos para este editor</value>
+  </data>
+  <data name="Cancel">
+    <value>Cancelar</value>
+  </data>
+  <data name="Confirm">
+    <value>Confirmar</value>
+  </data>
+  <data name="TitleStatusOkay">
+    <value>Sin conflicto</value>
+  </data>
+  <data name="TitleStatusUnknown">
+    <value>Estado desconocido</value>
+  </data>
+  <data name="Date">
+    <value>Fecha</value>
+  </data>
+  <data name="Enabled">
+    <value>Habilitado</value>
+  </data>
+  <data name="Days01">
+    <value>1 día</value>
+  </data>
+  <data name="Days03">
+    <value>3 días</value>
+  </data>
+  <data name="Days05">
+    <value>5 días</value>
+  </data>
+  <data name="Days07">
+    <value>7 días</value>
+  </data>
+  <data name="Days10">
+    <value>10 días</value>
+  </data>
+  <data name="Dismiss">
+    <value>Descartar</value>
+  </data>
+  <data name="SendReport">
+    <value>Enviar informe</value>
+  </data>
+  <data name="NoTitleSubmissions">
+    <value>No hay envíos para este título</value>
+  </data>
+  <data name="Refresh">
+    <value>Actualizar</value>
+  </data>
+  <data name="Verify">
+    <value>Verificar</value>
+  </data>
+  <data name="Assigned">
+    <value>Asignado</value>
+  </data>
+  <data name="Available">
+    <value>Disponible</value>
+  </data>
+  <data name="AssignedToFilter">
+    <value>Etiquetas para filtrar</value>
+  </data>
+  <data name="AvailableTags">
+    <value>Etiquetas disponibles</value>
+  </data>
+  <data name="MultipleTag">
+    <value>Combinar múltiples</value>
+  </data>
+  <data name="CreatedFromOrphan">
+    <value>Esta entrada fue creada a partir de un archivo huérfano</value>
+  </data>
+  <data name="Orphan">
+    <value>Huérfano</value>
+  </data>
+  <data name="ClearDate">
+    <value>Borrar fecha</value>
+  </data>
+  <data name="HasRelated">
+    <value>Tiene título relacionado</value>
+  </data>
+  <data name="Startup">
+    <value>Inicio</value>
+  </data>
+  <data name="No">
+    <value>No</value>
+  </data>
+  <data name="Yes">
+    <value>Sí</value>
+  </data>
+  <data name="Detail">
+    <value>Detalle</value>
+  </data>
+  <data name="ApplicationTerminate">
+    <value>La aplicación se cerrará ahora</value>
+  </data>
+  <data name="Dark">
+    <value>Oscuro</value>
+  </data>
+  <data name="Hidden">
+    <value>Oculto</value>
+  </data>
+  <data name="Light">
+    <value>Claro</value>
+  </data>
+  <data name="Active">
+    <value>Activo</value>
+  </data>
+  <data name="All">
+    <value>Todos</value>
+  </data>
+  <data name="Any">
+    <value>Cualquiera</value>
+  </data>
+  <data name="Exclusive">
+    <value>Exclusivo</value>
+  </data>
+  <data name="Filters">
+    <value>Filtros</value>
+  </data>
+  <data name="FollowUp">
+    <value>Seguimiento</value>
+  </data>
+  <data name="Goner">
+    <value>Caso perdido</value>
+  </data>
+  <data name="InPeriod">
+    <value>En periodo</value>
+  </data>
+  <data name="OpenSubmission">
+    <value>Envío abierto</value>
+  </data>
+  <data name="Path">
+    <value>Camino</value>
+  </data>
+  <data name="Paying">
+    <value>Pagando</value>
+  </data>
+  <data name="RowFilterInEffect">
+    <value>[filtro de fila en efecto]</value>
+  </data>
+  <data name="WordCount">
+    <value>Conteo de palabras</value>
+  </data>
+</root>

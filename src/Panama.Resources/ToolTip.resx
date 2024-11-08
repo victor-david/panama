@@ -277,7 +277,7 @@
     <value>Title is currently submitted</value>
   </data>
   <data name="TitlePublishedCount" xml:space="preserve">
-    <value>Published count - the number of times this title has been published.</value>
+    <value>Published count - the number of times this title has been published</value>
   </data>
   <data name="TitleRelatedCount" xml:space="preserve">
     <value>Related count - the number of related titles this title contains</value>

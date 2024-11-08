@@ -538,7 +538,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Published count - the number of times this title has been published..
+        ///   Looks up a localized string similar to Published count - the number of times this title has been published.
         /// </summary>
         public static string TitlePublishedCount {
             get {
