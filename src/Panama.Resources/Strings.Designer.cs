@@ -61,33 +61,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select a submission document.
-        /// </summary>
-        public static string CaptionSelectSubmissionDocument {
-            get {
-                return ResourceManager.GetString("CaptionSelectSubmissionDocument", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select a file to add to the versions of this title.
-        /// </summary>
-        public static string CaptionSelectTitleVersionAddByFile {
-            get {
-                return ResourceManager.GetString("CaptionSelectTitleVersionAddByFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select a file to replace the file of the selected version.
-        /// </summary>
-        public static string CaptionSelectTitleVersionReplaceByFile {
-            get {
-                return ResourceManager.GetString("CaptionSelectTitleVersionReplaceByFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Create a submission to {0}?.
         /// </summary>
         public static string FormatStringCreateSubmission {
@@ -106,19 +79,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The file does not exist.
-        ///
-        ///{0}
-        ///
-        ///Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting..
-        /// </summary>
-        public static string FormatStringFileNotFound {
-            get {
-                return ResourceManager.GetString("FormatStringFileNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This folder contains exported versions of each title tracked by {0}.
         ///Files are named according to the date they were first written, title, version, and language.
         ///
@@ -129,24 +89,6 @@ namespace Restless.Panama.Resources {
         public static string FormatTextExport {
             get {
                 return ResourceManager.GetString("FormatTextExport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the directory that will hold the database files.
-        /// </summary>
-        public static string InstallationCaption {
-            get {
-                return ResourceManager.GetString("InstallationCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot exit at this time. Background tasks are still running..
-        /// </summary>
-        public static string NotificationCannotExitTasksAreRunning {
-            get {
-                return ResourceManager.GetString("NotificationCannotExitTasksAreRunning", resourceCulture);
             }
         }
         
@@ -399,15 +341,6 @@ namespace Restless.Panama.Resources {
         public static string TextDismiss {
             get {
                 return ResourceManager.GetString("TextDismiss", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Document Preview Not Supported.
-        /// </summary>
-        public static string TextDocumentPreviewNotSupported {
-            get {
-                return ResourceManager.GetString("TextDocumentPreviewNotSupported", resourceCulture);
             }
         }
         

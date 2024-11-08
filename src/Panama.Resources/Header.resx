@@ -366,8 +366,17 @@
   <data name="SelectPublisherGeneric" xml:space="preserve">
     <value>Select a publisher</value>
   </data>
+  <data name="SelectSubmissionDocument" xml:space="preserve">
+    <value>Select a submission document</value>
+  </data>
   <data name="SelectTitlesGeneric" xml:space="preserve">
     <value>Select titles</value>
+  </data>
+  <data name="SelectTitleVersionAddByFile" xml:space="preserve">
+    <value>Select a file to add to the versions of this title</value>
+  </data>
+  <data name="SelectTitleVersionReplaceByFile" xml:space="preserve">
+    <value>Select a file to replace the file of the selected version</value>
   </data>
   <data name="SelfPublished" xml:space="preserve">
     <value>Self Published</value>

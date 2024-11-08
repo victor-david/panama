@@ -268,7 +268,7 @@ namespace Restless.Panama.ViewModel
 
         private void RunReplaceDocumentCommand(object o)
         {
-            using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderSubmissionDocument, Strings.CaptionSelectSubmissionDocument))
+            using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderSubmissionDocument, Header.SelectSubmissionDocument))
             {
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {

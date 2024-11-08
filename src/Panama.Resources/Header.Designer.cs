@@ -808,11 +808,38 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a submission document.
+        /// </summary>
+        public static string SelectSubmissionDocument {
+            get {
+                return ResourceManager.GetString("SelectSubmissionDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select titles.
         /// </summary>
         public static string SelectTitlesGeneric {
             get {
                 return ResourceManager.GetString("SelectTitlesGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a file to add to the versions of this title.
+        /// </summary>
+        public static string SelectTitleVersionAddByFile {
+            get {
+                return ResourceManager.GetString("SelectTitleVersionAddByFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a file to replace the file of the selected version.
+        /// </summary>
+        public static string SelectTitleVersionReplaceByFile {
+            get {
+                return ResourceManager.GetString("SelectTitleVersionReplaceByFile", resourceCulture);
             }
         }
         

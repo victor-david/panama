@@ -130,14 +130,6 @@
   <data name="TextWritten" xml:space="preserve">
     <value>Written</value>
   </data>
-  <data name="FormatStringFileNotFound" xml:space="preserve">
-    <value>The file does not exist.
-
-{0}
-
-Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting.</value>
-    <comment>Used when attempting to open a submssion document that doesn't exist</comment>
-  </data>
   <data name="FormatStringCreateSubmission" xml:space="preserve">
     <value>Create a submission to {0}?</value>
     <comment>Used for confirmation when creating a submission</comment>
@@ -152,23 +144,11 @@ Please make sure that {1} is set correctly in configuration settings. File speci
   <data name="TextSubmitted" xml:space="preserve">
     <value>Submitted</value>
   </data>
-  <data name="CaptionSelectTitleVersionAddByFile" xml:space="preserve">
-    <value>Select a file to add to the versions of this title</value>
-  </data>
   <data name="TextRecord" xml:space="preserve">
     <value>record</value>
   </data>
   <data name="TextRecords" xml:space="preserve">
     <value>records</value>
-  </data>
-  <data name="CaptionSelectTitleVersionReplaceByFile" xml:space="preserve">
-    <value>Select a file to replace the file of the selected version</value>
-  </data>
-  <data name="NotificationCannotExitTasksAreRunning" xml:space="preserve">
-    <value>Cannot exit at this time. Background tasks are still running.</value>
-  </data>
-  <data name="CaptionSelectSubmissionDocument" xml:space="preserve">
-    <value>Select a submission document</value>
   </data>
   <data name="FormatTextExport" xml:space="preserve">
     <value>This folder contains exported versions of each title tracked by {0}.
@@ -187,17 +167,11 @@ Last exported: {1}</value>
   <data name="TextClear" xml:space="preserve">
     <value>Clear</value>
   </data>
-  <data name="InstallationCaption" xml:space="preserve">
-    <value>Select the directory that will hold the database files</value>
-  </data>
   <data name="TextPreview" xml:space="preserve">
     <value>Preview</value>
   </data>
   <data name="TitleStatusSubmittedToExclusive" xml:space="preserve">
     <value>Currently submitted to a publisher that does not accept simultaneous submissions</value>
-  </data>
-  <data name="TextDocumentPreviewNotSupported" xml:space="preserve">
-    <value>Document Preview Not Supported</value>
   </data>
   <data name="TextNoTitleVersions" xml:space="preserve">
     <value>No versions for this title</value>

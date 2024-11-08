@@ -180,4 +180,15 @@
   <data name="TitleRootFolderNotSet" xml:space="preserve">
     <value>The title root folder hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
   </data>
+  <data name="FileNotFoundFormat" xml:space="preserve">
+    <value>The file does not exist.
+
+{0}
+
+Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting.</value>
+    <comment>Used when attempting to open a submssion document that doesn't exist</comment>
+  </data>
+  <data name="PreviewNotSupported" xml:space="preserve">
+    <value>Document Preview Not Supported</value>
+  </data>
 </root>

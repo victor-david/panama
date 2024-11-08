@@ -133,6 +133,19 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file does not exist.
+        ///
+        ///{0}
+        ///
+        ///Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting..
+        /// </summary>
+        public static string FileNotFoundFormat {
+            get {
+                return ResourceManager.GetString("FileNotFoundFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot open. There is no document associated with this entry..
         /// </summary>
         public static string NoDocumentId {
@@ -156,6 +169,15 @@ namespace Restless.Panama.Resources {
         public static string OutputFolderNotSet {
             get {
                 return ResourceManager.GetString("OutputFolderNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Preview Not Supported.
+        /// </summary>
+        public static string PreviewNotSupported {
+            get {
+                return ResourceManager.GetString("PreviewNotSupported", resourceCulture);
             }
         }
         

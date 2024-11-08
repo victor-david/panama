@@ -45,6 +45,6 @@
         Grid.Row="1"
         Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
         Visibility="{Binding UnsupportedVisibility, ElementName=ToolControl}"
-        Text="{x:Static r:Strings.TextDocumentPreviewNotSupported}"/>
+        Text="{x:Static r:Error.PreviewNotSupported}"/>
 
 </Grid>

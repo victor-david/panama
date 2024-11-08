@@ -188,7 +188,7 @@ namespace Restless.Panama.ViewModel
         {
             if (verController != null)
             {
-                using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Strings.CaptionSelectTitleVersionAddByFile))
+                using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Header.SelectTitleVersionAddByFile))
                 {
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
@@ -246,7 +246,7 @@ namespace Restless.Panama.ViewModel
         {
             if (SelectedVersion != null)
             {
-                using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Strings.CaptionSelectTitleVersionReplaceByFile))
+                using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Header.SelectTitleVersionReplaceByFile))
                 {
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {

@@ -1,8 +1,6 @@
-﻿using Restless.Panama.Resources;
-using Restless.Toolkit.Controls;
+﻿using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using System;
-using System.Globalization;
 using System.IO;
 
 namespace Restless.Panama.Core
@@ -28,7 +26,7 @@ namespace Restless.Panama.Core
                 file = Paths.Title.WithRoot(file);
                 if (!File.Exists(file))
                 {
-                    throw new IOException(string.Format(CultureInfo.InvariantCulture, Strings.FormatStringFileNotFound, file, nameof(Config.FolderTitleRoot)));
+                    ExceptionHelper.ThrowFileNotFound(file, nameof(Config.FolderTitleRoot));
                 }
 
                 OpenHelper.OpenFile(file);
@@ -55,7 +53,7 @@ namespace Restless.Panama.Core
                 file = Paths.SubmissionDocument.WithRoot(file);
                 if (!File.Exists(file))
                 {
-                    throw new IOException(string.Format(CultureInfo.InvariantCulture, Strings.FormatStringFileNotFound, file, nameof(Config.FolderSubmissionDocument)));
+                    ExceptionHelper.ThrowFileNotFound(file, nameof(Config.FolderSubmissionDocument));
                 }
 
                 OpenHelper.OpenFile(file);
@@ -82,7 +80,7 @@ namespace Restless.Panama.Core
                 file = Paths.SubmissionMessage.WithRoot(file);
                 if (!File.Exists(file))
                 {
-                    throw new IOException(string.Format(CultureInfo.InvariantCulture, Strings.FormatStringFileNotFound, file, nameof(Config.FolderSubmissionMessage)));
+                    ExceptionHelper.ThrowFileNotFound(file, nameof(Config.FolderSubmissionMessage));
                 }
 
                 OpenHelper.OpenFile(file);
