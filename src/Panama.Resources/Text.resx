@@ -423,4 +423,7 @@
   <data name="Unknown" xml:space="preserve">
     <value>Unknown</value>
   </data>
+  <data name="LanguageChangeRequested" xml:space="preserve">
+    <value>Language change requested. Restart the application to apply the new language.</value>
+  </data>
 </root>

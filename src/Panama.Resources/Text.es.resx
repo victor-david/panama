@@ -364,4 +364,7 @@
   <data name="Unknown" xml:space="preserve">
     <value>Desconocido</value>
   </data>
+  <data name="LanguageChangeRequested" xml:space="preserve">
+    <value>Se solicitó cambio de idioma. Reinicie la aplicación para aplicar el nuevo idioma.</value>
+  </data>
 </root>

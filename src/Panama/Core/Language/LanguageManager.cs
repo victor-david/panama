@@ -19,6 +19,15 @@ namespace Restless.Panama.Core
         public const string DefaultLanguageId = "en-us";
 
         /// <summary>
+        /// Gets the current language id
+        /// </summary>
+        public string CurrentLanguageId
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Gets the list of supported languages.
         /// </summary>
         public LanguageItemCollection Languages { get; }
@@ -40,6 +49,7 @@ namespace Restless.Panama.Core
                 new LanguageItem("es", nameof(Language.Spanish))
             };
 
+            CurrentLanguageId = DefaultLanguageId;
             SetLanguage(DefaultLanguageId);
         }
         #endregion
@@ -55,6 +65,8 @@ namespace Restless.Panama.Core
         {
             if (Languages.GetLanguageItem(languageId) is LanguageItem item)
             {
+                CurrentLanguageId = languageId;
+
                 culture = new CultureInfo(item.Id);
 
                 Confirm.Culture = culture;

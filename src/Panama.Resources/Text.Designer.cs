@@ -502,6 +502,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Language change requested. Restart the application to apply the new language..
+        /// </summary>
+        public static string LanguageChangeRequested {
+            get {
+                return ResourceManager.GetString("LanguageChangeRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Light.
         /// </summary>
         public static string Light {

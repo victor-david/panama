@@ -49,6 +49,11 @@ namespace Restless.Panama.ViewModel
             set => RegistryManager.SetDatabaseDirectory(value);
         }
 
+        /// <summary>
+        /// Gets a boolean value that indicates if a language switch is pending
+        /// </summary>
+        public bool IsLanguageChangePending => Config.LanguageId != LanguageManager.Instance.CurrentLanguageId;
+
         public LanguageItem SelectedLanguage
         {
             get => selectedLanguage;
@@ -57,9 +62,15 @@ namespace Restless.Panama.ViewModel
                 if (SetProperty(ref selectedLanguage, value) && selectedLanguage != null)
                 {
                     Config.LanguageId = SelectedLanguage.Id;
-                    LanguageManager.Instance.SetLanguage(Config.LanguageId);
-                    MainWindowViewModel.Instance.SignalLanguageChange();
-                    SignalLanguageChange();
+                    OnPropertyChanged(nameof(IsLanguageChangePending));
+                    /**
+                     * The following can't be used unless live switching is implemented.
+                     * Without live, setting the language causes view models that haven't
+                     * yet been loaded to use the switched language, resulting in mixed.
+                     */
+                    //LanguageManager.Instance.SetLanguage(Config.LanguageId);
+                    //MainWindowViewModel.Instance.SignalLanguageChange();
+                    //SignalLanguageChange();
                 }
             }
         }
