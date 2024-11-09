@@ -1265,20 +1265,5 @@ namespace Restless.Panama.Core
             }
         }
         #endregion
-
-        /************************************************************************/
-
-        #region Private methods
-        private GridLength GetGridLength(double defaultValue, [CallerMemberName] string id = null)
-        {
-            double value = GetItem(defaultValue, id);
-            return new GridLength(value, GridUnitType.Pixel);
-        }
-
-        private void SetGridLength(GridLength value, [CallerMemberName] string id = null)
-        {
-            SetItem(value.Value, id);
-        }
-        #endregion
     }
 }

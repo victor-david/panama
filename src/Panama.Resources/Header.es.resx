@@ -496,4 +496,10 @@
   <data name="Periods" xml:space="preserve">
     <value>Periodos</value>
   </data>
+  <data name="Item" xml:space="preserve">
+    <value>Artículo</value>
+  </data>
+  <data name="Folders" xml:space="preserve">
+    <value>Carpetas</value>
+  </data>
 </root>

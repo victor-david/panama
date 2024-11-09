@@ -337,4 +337,31 @@
   <data name="Email" xml:space="preserve">
     <value>Correo electrónico</value>
   </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>Aceptado</value>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>Rechazado</value>
+  </data>
+  <data name="Fees" xml:space="preserve">
+    <value>Tarifas</value>
+  </data>
+  <data name="AverageDays" xml:space="preserve">
+    <value>Días Promedio</value>
+  </data>
+  <data name="MaxDays" xml:space="preserve">
+    <value>Días Máximos</value>
+  </data>
+  <data name="MinDays" xml:space="preserve">
+    <value>Días Mínimos</value>
+  </data>
+  <data name="Shared" xml:space="preserve">
+    <value>Compartido</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Desconocido</value>
+  </data>
 </root>

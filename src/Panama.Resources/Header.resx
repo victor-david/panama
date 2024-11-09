@@ -555,4 +555,10 @@
   <data name="Periods" xml:space="preserve">
     <value>Periods</value>
   </data>
+  <data name="Folders" xml:space="preserve">
+    <value>Folders</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Item</value>
+  </data>
 </root>
