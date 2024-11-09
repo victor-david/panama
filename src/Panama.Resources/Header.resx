@@ -510,4 +510,13 @@
   <data name="Xid" xml:space="preserve">
     <value>Xid</value>
   </data>
+  <data name="Related" xml:space="preserve">
+    <value>Related</value>
+  </data>
+  <data name="Submission" xml:space="preserve">
+    <value>Submission</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
 </root>

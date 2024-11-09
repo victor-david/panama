@@ -610,6 +610,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
+        public static string Preview {
+            get {
+                return ResourceManager.GetString("Preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Published.
         /// </summary>
         public static string Published {
@@ -696,6 +705,15 @@ namespace Restless.Panama.Resources {
         public static string ReadyShort {
             get {
                 return ResourceManager.GetString("ReadyShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Related.
+        /// </summary>
+        public static string Related {
+            get {
+                return ResourceManager.GetString("Related", resourceCulture);
             }
         }
         
@@ -921,6 +939,15 @@ namespace Restless.Panama.Resources {
         public static string Subject {
             get {
                 return ResourceManager.GetString("Subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission.
+        /// </summary>
+        public static string Submission {
+            get {
+                return ResourceManager.GetString("Submission", resourceCulture);
             }
         }
         

@@ -58,7 +58,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
   <data name="ActiveAlerts">
     <value>Alertas Activas</value>
   </data>
@@ -451,5 +450,14 @@
   </data>
   <data name="Xid">
     <value>Xid</value>
+  </data>
+  <data name="Submission" xml:space="preserve">
+    <value>Envío</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Previas</value>
+  </data>
+  <data name="Related" xml:space="preserve">
+    <value>Relacionado</value>
   </data>
 </root>
