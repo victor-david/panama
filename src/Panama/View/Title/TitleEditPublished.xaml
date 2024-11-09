@@ -33,7 +33,7 @@
     <!-- Published -->
     <Grid
         Grid.Row="1"
-        tk:Property.RowHeights="*,2.5*"
+        tk:Property.RowHeights="*,2*"
         tk:Property.IsLongVisible="{Binding SelectedPublishedEditSection}"
         tk:Property.IsLongVisibleValue="1">
 
@@ -79,7 +79,7 @@
     <!-- Self Published -->
     <Grid
         Grid.Row="1"
-        tk:Property.RowHeights="*,2.5*"
+        tk:Property.RowHeights="*,2*"
         tk:Property.IsLongVisible="{Binding SelectedPublishedEditSection}"
         tk:Property.IsLongVisibleValue="2">
 
