@@ -121,9 +121,7 @@
     <value>This operation will add a new alert record. If any filters are in effect, they will be removed so that the new alert displays in the list.</value>
   </data>
   <data name="AddAuthor" xml:space="preserve">
-    <value>This operation will add a new author record. If any filters are in effect, they will be removed so that the new author displays in the list. 
-
-Do you want to continue?</value>
+    <value>This operation will add a new author record. If any filters are in effect, they will be removed so that the new author displays in the list.</value>
   </data>
   <data name="AddOrphanDirectoryExclusion" xml:space="preserve">
     <value>This operation excludes the directory of the selected file from further orphan search</value>
@@ -135,27 +133,19 @@ Do you want to continue?</value>
     <value>This operation excludes all files of the selected file type from further orphan search</value>
   </data>
   <data name="AddPublisher" xml:space="preserve">
-    <value>This operation will add a new publisher record. If any publisher filters are in effect, they will be removed so that the new publisher displays in the list. 
-
-Do you want to continue?</value>
+    <value>This operation will add a new publisher record. If any publisher filters are in effect, they will be removed so that the new publisher displays in the list.</value>
   </data>
   <data name="AddSubmissionPeriod" xml:space="preserve">
     <value>This operation adds a submission period that runs from January 1 - December 31, i.e. all year. Once added, you can change the range of the submission period if needed.</value>
   </data>
   <data name="AddTitle" xml:space="preserve">
-    <value>This operation will add a new title record. If any title filters are in effect, they will be removed so that the new title displays in the list. 
-
-Do you want to continue?</value>
+    <value>This operation will add a new title record. If any title filters are in effect, they will be removed so that the new title displays in the list.</value>
   </data>
   <data name="AllVersionFilesRenamed" xml:space="preserve">
     <value>Success. All eligible version files renamed.</value>
   </data>
-  <data name="ApplyExtractedTitleFormat" xml:space="preserve">
-    <value>The title extracted from the latest version is:
-
-{0}
-
-Do you want to set the title to this value?</value>
+  <data name="ExtractedTitleFormat" xml:space="preserve">
+    <value>This sets the title of this entry to the value extracted from the latest version: {0}</value>
   </data>
   <data name="ClearPublishedDate" xml:space="preserve">
     <value>This operation clears the published date for this item. You can set the date again at any time.</value>

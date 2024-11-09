@@ -85,8 +85,8 @@
   <data name="AllVersionFilesRenamed">
     <value>Éxito. Todos los archivos de versiones elegibles renombrados.</value>
   </data>
-  <data name="ApplyExtractedTitleFormat">
-    <value>El título extraído de la última versión es:</value>
+  <data name="ExtractedTitleFormat">
+    <value>Esto establece el título de esta entrada con el valor extraído de la última versión: {0}</value>
   </data>
   <data name="ClearPublishedDate">
     <value>Esta operación borra la fecha de publicación de este ítem. Puedes establecer la fecha nuevamente en cualquier momento.</value>
@@ -170,6 +170,6 @@
     <value>Esta operación establece el periodo de presentación del 1 de enero al 31 de diciembre, es decir, todo el año.</value>
   </data>
   <data name="TitlesCopiedToClipboard">
-    <value>La lista de títulos ha sido copiada al portapapeles.</value>
+    <value>La lista de títulos ha sido copiada al portapapeles</value>
   </data>
 </root>

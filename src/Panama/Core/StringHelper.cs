@@ -20,6 +20,11 @@ namespace Restless.Panama.Core
                 string.Format(Confirm.CreateSubmissionOpenFormat, publisherName);
         }
 
+        public static string GetExtractedTitleConfirmation(string title)
+        {
+            return string.Format(Confirm.ExtractedTitleFormat, title);
+        }
+
         /// <summary>
         /// Gets the text that is placed into the export read me file
         /// </summary>

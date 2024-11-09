@@ -133,11 +133,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The file does not exist.
-        ///
-        ///{0}
-        ///
-        ///Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting..
+        ///   Looks up a localized string similar to The file {0} does not exist. Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting..
         /// </summary>
         public static string FileNotFoundFormat {
             get {

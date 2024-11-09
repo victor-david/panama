@@ -391,7 +391,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunAddCommand()
         {
-            if (MessageWindow.ShowYesNo(Confirm.AddTitle))
+            if (MessageWindow.ShowContinueCancel(Confirm.AddTitle))
             {
                 Table.AddDefaultRow();
                 Table.Save();
@@ -469,10 +469,10 @@ namespace Restless.Panama.ViewModel
                             string title = props?.Core.Title;
                             if (string.IsNullOrWhiteSpace(title))
                             {
-                                title = "(no title)";
+                                title = Text.NoTitle;
                             }
 
-                            if (MessageWindow.ShowYesNo(string.Format(CultureInfo.InvariantCulture, Confirm.ApplyExtractedTitleFormat, title)))
+                            if (MessageWindow.ShowContinueCancel(StringHelper.GetExtractedTitleConfirmation(title)))
                             {
                                 SelectedTitle.Title = title;
                                 /* Needed to update the text box */

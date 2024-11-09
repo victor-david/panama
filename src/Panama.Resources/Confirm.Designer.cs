@@ -70,9 +70,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will add a new author record. If any filters are in effect, they will be removed so that the new author displays in the list. 
-        ///
-        ///Do you want to continue?.
+        ///   Looks up a localized string similar to This operation will add a new author record. If any filters are in effect, they will be removed so that the new author displays in the list..
         /// </summary>
         public static string AddAuthor {
             get {
@@ -108,9 +106,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will add a new publisher record. If any publisher filters are in effect, they will be removed so that the new publisher displays in the list. 
-        ///
-        ///Do you want to continue?.
+        ///   Looks up a localized string similar to This operation will add a new publisher record. If any publisher filters are in effect, they will be removed so that the new publisher displays in the list..
         /// </summary>
         public static string AddPublisher {
             get {
@@ -128,9 +124,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will add a new title record. If any title filters are in effect, they will be removed so that the new title displays in the list. 
-        ///
-        ///Do you want to continue?.
+        ///   Looks up a localized string similar to This operation will add a new title record. If any title filters are in effect, they will be removed so that the new title displays in the list..
         /// </summary>
         public static string AddTitle {
             get {
@@ -144,19 +138,6 @@ namespace Restless.Panama.Resources {
         public static string AllVersionFilesRenamed {
             get {
                 return ResourceManager.GetString("AllVersionFilesRenamed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The title extracted from the latest version is:
-        ///
-        ///{0}
-        ///
-        ///Do you want to set the title to this value?.
-        /// </summary>
-        public static string ApplyExtractedTitleFormat {
-            get {
-                return ResourceManager.GetString("ApplyExtractedTitleFormat", resourceCulture);
             }
         }
         
@@ -310,6 +291,15 @@ namespace Restless.Panama.Resources {
         public static string DeleteUserNote {
             get {
                 return ResourceManager.GetString("DeleteUserNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This sets the title of this entry to the value extracted from the latest version: {0}.
+        /// </summary>
+        public static string ExtractedTitleFormat {
+            get {
+                return ResourceManager.GetString("ExtractedTitleFormat", resourceCulture);
             }
         }
         

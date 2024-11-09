@@ -116,9 +116,9 @@
     <value>La carpeta raíz del título no ha sido configurada o no existe. Corrija la configuración e intente de nuevo.</value>
   </data>
   <data name="FileNotFoundFormat">
-    <value>"El archivo no existe.</value>
+    <value>El archivo {0} no existe. Asegúrese de que {1} esté configurado correctamente en la configuración. Las especificaciones del archivo dependen de esta configuración.</value>
   </data>
   <data name="PreviewNotSupported">
-    <value>Vista previa del documento no soportada.</value>
+    <value>Vista previa del documento no soportada</value>
   </data>
 </root>

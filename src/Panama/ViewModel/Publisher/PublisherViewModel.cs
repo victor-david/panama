@@ -221,7 +221,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunAddCommand()
         {
-            if (MessageWindow.ShowYesNo(Confirm.AddPublisher))
+            if (MessageWindow.ShowContinueCancel(Confirm.AddPublisher))
             {
                 Table.AddDefaultRow();
                 Table.Save();
