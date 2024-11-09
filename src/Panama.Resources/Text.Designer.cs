@@ -88,6 +88,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Year.
+        /// </summary>
+        public static string AllYear {
+            get {
+                return ResourceManager.GetString("AllYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Any.
         /// </summary>
         public static string Any {
@@ -331,11 +340,29 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabled.
         /// </summary>
         public static string Enabled {
             get {
                 return ResourceManager.GetString("Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End.
+        /// </summary>
+        public static string End {
+            get {
+                return ResourceManager.GetString("End", resourceCulture);
             }
         }
         
@@ -354,6 +381,15 @@ namespace Restless.Panama.Resources {
         public static string Exclusive {
             get {
                 return ResourceManager.GetString("Exclusive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclusive (no simultaneous).
+        /// </summary>
+        public static string ExclusiveNoSim {
+            get {
+                return ResourceManager.GetString("ExclusiveNoSim", resourceCulture);
             }
         }
         

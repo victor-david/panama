@@ -384,4 +384,16 @@
   <data name="NoTitle" xml:space="preserve">
     <value>(no title)</value>
   </data>
+  <data name="AllYear" xml:space="preserve">
+    <value>All Year</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="ExclusiveNoSim" xml:space="preserve">
+    <value>Exclusive (no simultaneous)</value>
+  </data>
 </root>
