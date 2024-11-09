@@ -52,28 +52,28 @@
                 <StatusBar>
                     <TextBlock Text="{Binding SelectedQueue.Name}"/>
 
-                    <Separator Margin="16,0"/>
+                    <Separator/>
 
                     <TextBlock Text="Title"/>
                     <TextBox
                         Width="140"
                         Text="{Binding Filters.Text, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <Separator Margin="16,0"/>
+                    <Separator/>
 
                     <!-- Status filter -->
                     <CheckBox Content="Idle" IsChecked="{Binding IsIdleFilterChecked}"/>
                     <CheckBox Content="Scheduled" IsChecked="{Binding IsScheduledFilterChecked}"/>
                     <CheckBox Content="Published" IsChecked="{Binding IsPublishedFilterChecked}"/>
 
-                    <Separator Margin="16,0"/>
+                    <Separator/>
 
                     <Button
                         Content="{x:Static r:Menu.Reset}"
                         ToolTip="{x:Static r:ToolTip.FilterReset}"
                         Command="{Binding ClearFilterCommand}"/>
 
-                    <Separator Margin="16,0"/>
+                    <Separator/>
 
                     <TextBlock
                         Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
