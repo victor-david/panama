@@ -455,7 +455,7 @@
     <value>Envío</value>
   </data>
   <data name="Preview" xml:space="preserve">
-    <value>Previas</value>
+    <value>Previa</value>
   </data>
   <data name="Related" xml:space="preserve">
     <value>Relacionado</value>
@@ -492,5 +492,8 @@
   </data>
   <data name="Tags" xml:space="preserve">
     <value>Etiquetas</value>
+  </data>
+  <data name="Periods" xml:space="preserve">
+    <value>Periodos</value>
   </data>
 </root>

@@ -5,6 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
     xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
@@ -17,9 +18,9 @@
         tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto,Auto"
         SelectedValue="{Binding SelectedEditSection}">
 
-        <tk:RadioButton Grid.Column="0" Value="1" Content="Main"/>
-        <tk:RadioButton Grid.Column="1" Value="2" Content="Periods"/>
-        <tk:RadioButton Grid.Column="2" Value="3" Content="Submissions"/>
+        <tk:RadioButton Grid.Column="0" Value="1" Content="{x:Static r:Header.Main}"/>
+        <tk:RadioButton Grid.Column="1" Value="2" Content="{x:Static r:Header.Periods}"/>
+        <tk:RadioButton Grid.Column="2" Value="3" Content="{x:Static r:Header.Submissions}"/>
     </tk:RadioButtonPanel>
 
     <!-- Main publisher data -->

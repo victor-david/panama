@@ -664,6 +664,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Periods.
+        /// </summary>
+        public static string Periods {
+            get {
+                return ResourceManager.GetString("Periods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preview.
         /// </summary>
         public static string Preview {

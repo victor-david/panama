@@ -23,7 +23,7 @@
         <tk:RadioButton Grid.Column="2" Value="3" Content="{x:Static r:Header.Version}"/>
         <tk:RadioButton Grid.Column="3" Value="4" Content="{x:Static r:Header.Related}"/>
         <tk:RadioButton Grid.Column="4" Value="5" Content="{x:Static r:Header.Queue}" tk:Property.IsVisible="{Binding Config.IsTitleQueueVisible}"/>
-        <tk:RadioButton Grid.Column="5" Value="6" Content="{x:Static r:Header.Submission}"/>
+        <tk:RadioButton Grid.Column="5" Value="6" Content="{x:Static r:Header.Submissions}"/>
         <tk:RadioButton Grid.Column="6" Value="7" Content="{x:Static r:Header.Published}"/>
         <tk:RadioButton Grid.Column="7" Value="8" Content="{x:Static r:Header.Preview}"/>
     </tk:RadioButtonPanel>

@@ -552,4 +552,7 @@
   <data name="Tags" xml:space="preserve">
     <value>Tags</value>
   </data>
+  <data name="Periods" xml:space="preserve">
+    <value>Periods</value>
+  </data>
 </root>
