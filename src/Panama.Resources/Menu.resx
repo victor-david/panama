@@ -170,12 +170,6 @@
     <value>Add a note</value>
     <comment>Command text for add user note</comment>
   </data>
-  <data name="Alerts" xml:space="preserve">
-    <value>Alerts</value>
-  </data>
-  <data name="Authors" xml:space="preserve">
-    <value>Authors</value>
-  </data>
   <data name="BrowseToPublisherUrl" xml:space="preserve">
     <value>Browse to this publisher's web site</value>
   </data>
@@ -234,9 +228,6 @@
     <value>Delete this title</value>
     <comment>Used on context menu to delete a title</comment>
   </data>
-  <data name="Developer" xml:space="preserve">
-    <value>Developer</value>
-  </data>
   <data name="ExcludeOrphanDirectory" xml:space="preserve">
     <value>Exclude this directory from orphan search</value>
   </data>
@@ -264,14 +255,8 @@
   <data name="Links" xml:space="preserve">
     <value>Links</value>
   </data>
-  <data name="LinkVerify" xml:space="preserve">
-    <value>Verify links</value>
-  </data>
   <data name="MakeSeparateVersion" xml:space="preserve">
     <value>Make this a separate version</value>
-  </data>
-  <data name="Notes" xml:space="preserve">
-    <value>Notes</value>
   </data>
   <data name="Open" xml:space="preserve">
     <value>Open</value>
@@ -282,9 +267,6 @@
   <data name="OpenTitleOrDoubleClick" xml:space="preserve">
     <value>Open the latest version of this title (or double click the row)</value>
   </data>
-  <data name="OrphanFinder" xml:space="preserve">
-    <value>Orphan</value>
-  </data>
   <data name="Paying" xml:space="preserve">
     <value>Paying</value>
   </data>
@@ -293,12 +275,6 @@
   </data>
   <data name="Published" xml:space="preserve">
     <value>Published</value>
-  </data>
-  <data name="Publishers" xml:space="preserve">
-    <value>Publishers</value>
-  </data>
-  <data name="Queues" xml:space="preserve">
-    <value>Queues</value>
   </data>
   <data name="Ready" xml:space="preserve">
     <value>Ready</value>
@@ -348,16 +324,6 @@
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="SelfPublishers" xml:space="preserve">
-    <value>Self publishers</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
-    <comment>Command text to enter the settings view</comment>
-  </data>
   <data name="SetTitleStatusAccepted" xml:space="preserve">
     <value>Set status to accepted</value>
   </data>
@@ -367,17 +333,8 @@
   <data name="SetTitleStatusWithdrawn" xml:space="preserve">
     <value>Set status to withdrawn</value>
   </data>
-  <data name="Statistics" xml:space="preserve">
-    <value>Statistics</value>
-  </data>
-  <data name="Submissions" xml:space="preserve">
-    <value>Submissions</value>
-  </data>
   <data name="Submitted" xml:space="preserve">
     <value>Submitted</value>
-  </data>
-  <data name="Tags" xml:space="preserve">
-    <value>Tags</value>
   </data>
   <data name="Titles" xml:space="preserve">
     <value>Titles</value>

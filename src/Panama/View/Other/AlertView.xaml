@@ -19,7 +19,7 @@
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-                <TextBlock Text="{x:Static r:Menu.Alerts}"/>
+                <TextBlock Text="{x:Static r:Header.Alerts}"/>
                 <!-- no filters for now -->
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>

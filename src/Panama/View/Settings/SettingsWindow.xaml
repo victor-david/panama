@@ -13,12 +13,11 @@
     mc:Ignorable="d"
     d:DesignHeight="2260" d:DesignWidth="602"
     ResizeMode="NoResize"
-    Title="{x:Static r:Menu.Settings}"
+    Title="{x:Static r:Header.Settings}"
     Style="{StaticResource Panama.Styles.MetroWindow}"
     Height="702" Width="622">
 
     <Grid tk:Property.ColumnWidths="126,*">
-
 
         <ListBox
             BorderThickness="0,0,1,0"

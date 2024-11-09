@@ -58,7 +58,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
   <data name="Accepted">
     <value>Aceptado</value>
   </data>
@@ -109,12 +108,6 @@
   </data>
   <data name="AddUserNote">
     <value>Agregar una nota</value>
-  </data>
-  <data name="Alerts">
-    <value>Alertas</value>
-  </data>
-  <data name="Authors">
-    <value>Autores</value>
   </data>
   <data name="BrowseToPublisherUrl">
     <value>Navegar al sitio web de este editor</value>
@@ -170,9 +163,6 @@
   <data name="DeleteTitle">
     <value>Eliminar este título</value>
   </data>
-  <data name="Developer">
-    <value>Desarrollador</value>
-  </data>
   <data name="ExcludeOrphanDirectory">
     <value>Excluir este directorio de la búsqueda de huérfanos</value>
   </data>
@@ -200,14 +190,8 @@
   <data name="Links">
     <value>Enlaces</value>
   </data>
-  <data name="LinkVerify">
-    <value>Verificar enlaces</value>
-  </data>
   <data name="MakeSeparateVersion">
     <value>Hacer de esta una versión separada</value>
-  </data>
-  <data name="Notes">
-    <value>Notas</value>
   </data>
   <data name="Open">
     <value>Abrir</value>
@@ -218,9 +202,6 @@
   <data name="OpenTitleOrDoubleClick">
     <value>Abrir la última versión de este título (o haga doble clic en la fila)</value>
   </data>
-  <data name="OrphanFinder">
-    <value>Huérfano</value>
-  </data>
   <data name="Paying">
     <value>Pagando</value>
   </data>
@@ -229,12 +210,6 @@
   </data>
   <data name="Published">
     <value>Publicado</value>
-  </data>
-  <data name="Publishers">
-    <value>Editores</value>
-  </data>
-  <data name="Queues">
-    <value>Colas</value>
   </data>
   <data name="Ready">
     <value>Listo</value>
@@ -284,15 +259,6 @@
   <data name="Reset">
     <value>Restablecer</value>
   </data>
-  <data name="Search">
-    <value>Buscar</value>
-  </data>
-  <data name="SelfPublishers">
-    <value>Autores autoeditados</value>
-  </data>
-  <data name="Settings">
-    <value>Configuraciones</value>
-  </data>
   <data name="SetTitleStatusAccepted">
     <value>Establecer estado a aceptado</value>
   </data>
@@ -302,17 +268,8 @@
   <data name="SetTitleStatusWithdrawn">
     <value>Establecer estado a retirado</value>
   </data>
-  <data name="Statistics">
-    <value>Estadísticas</value>
-  </data>
-  <data name="Submissions">
-    <value>Envíos</value>
-  </data>
   <data name="Submitted">
     <value>Enviado</value>
-  </data>
-  <data name="Tags">
-    <value>Etiquetas</value>
   </data>
   <data name="Titles">
     <value>Títulos</value>

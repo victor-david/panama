@@ -7,9 +7,11 @@
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
-    xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TagViewModel}"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:TagViewModel}"
     mc:Ignorable="d"
     d:DesignWidth="400" d:DesignHeight="200">
+
     <tk:SplitterGrid
         MinDetailWidth="{x:Static core:Config+Grid.MinTagDetailWidth}"
         MaxDetailWidth="{x:Static core:Config+Grid.MaxTagDetailWidth}"
@@ -18,7 +20,7 @@
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-                <TextBlock Text="{x:Static r:Menu.Tags}"/>
+                <TextBlock Text="{x:Static r:Header.Tags}"/>
                 <!-- no filters for now -->
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>

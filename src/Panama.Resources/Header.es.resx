@@ -212,7 +212,7 @@
     <value>Nombre</value>
   </data>
   <data name="Namespace">
-    <value>Espacio de nombres</value>
+    <value>Espacio</value>
   </data>
   <data name="NewName">
     <value>Nombre Nuevo</value>
@@ -459,5 +459,38 @@
   </data>
   <data name="Related" xml:space="preserve">
     <value>Relacionado</value>
+  </data>
+  <data name="Orphan" xml:space="preserve">
+    <value>Huérfano</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="LinkVerify" xml:space="preserve">
+    <value>Verificar enlaces</value>
+  </data>
+  <data name="Developer" xml:space="preserve">
+    <value>Desarrollador</value>
+  </data>
+  <data name="Alerts" xml:space="preserve">
+    <value>Alertas</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>Autores</value>
+  </data>
+  <data name="Publishers" xml:space="preserve">
+    <value>Editores</value>
+  </data>
+  <data name="Queues" xml:space="preserve">
+    <value>Colas</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Estadísticas</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Etiquetas</value>
   </data>
 </root>
