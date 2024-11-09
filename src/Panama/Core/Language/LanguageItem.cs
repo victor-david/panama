@@ -1,58 +1,41 @@
-﻿using System.ComponentModel;
+﻿using Restless.Panama.Resources;
+using System.Globalization;
 
 namespace Restless.Panama.Core
 {
-    public class LanguageItem : INotifyPropertyChanged
+    public class LanguageItem
     {
-        //private readonly string displayName;
-
-        // private readonly LanguageItemCollection alternates;
+        private readonly string resourceId;
 
         public string Id { get; }
-        // public string DisplayName => GetDisplayName();
 
         public string DisplayName
         {
             get;
+            private set;
         }
 
-
-        public LanguageItem DisplayLanguage { get; private set; }
-
-        public LanguageItem(string id, string displayName) //, params LanguageItem[] items)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LanguageItem"/> class
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="resourceId"></param>
+        public LanguageItem(string id, string resourceId)
         {
             Id = id;
-            DisplayName = displayName;
-            // this.displayName = displayName;
-            // alternates = new LanguageItemCollection();
-            // alternates.AddRange(items);
+            this.resourceId = resourceId;
+            DisplayName = Language.ResourceManager.GetString(resourceId);
         }
 
-        //public void SetDisplayLanguage(LanguageItem item)
-        //{
-        //    DisplayLanguage = item;
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisplayName)));
-        //}
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// Updates the display name of this item so it shows in the new language
+        /// </summary>
+        /// <param name="culture">The culture to use</param>
+        public void UpdateDisplayName(CultureInfo culture)
+        {
+            DisplayName = Language.ResourceManager.GetString(resourceId, culture);
+        }
 
         public override string ToString() => $"{DisplayName} [{Id}]";
-
-
-
-        //private string GetDisplayName()
-        //{
-        //    if (DisplayLanguage == null || DisplayLanguage.Id == Id)
-        //    {
-        //        return displayName;
-        //    }
-
-        //    if (alternates.GetLanguageItem(DisplayLanguage.Id) is LanguageItem alt)
-        //    {
-        //        return alt.displayName;
-        //    }
-        //    return displayName;
-        //}
     }
 }

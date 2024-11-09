@@ -14,11 +14,5 @@ namespace Restless.Panama.Core
         /// <param name="id">The id</param>
         /// <returns>The item, or null if not found</returns>
         public LanguageItem GetLanguageItem(string id) => this.FirstOrDefault(item => item.Id == id);
-
-
-        //public void SetDisplayLanguage(LanguageItem item)
-        //{
-        //    ForEach(lang => lang.SetDisplayLanguage(item));
-        //}
     }
 }

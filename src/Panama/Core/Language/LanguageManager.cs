@@ -36,8 +36,8 @@ namespace Restless.Panama.Core
         {
             Languages = new LanguageItemCollection()
             {
-                new LanguageItem(DefaultLanguageId, Language.English),
-                new LanguageItem("es", Language.Spanish)
+                new LanguageItem(DefaultLanguageId, nameof(Language.English)),
+                new LanguageItem("es", nameof(Language.Spanish))
             };
 
             SetLanguage(DefaultLanguageId);
@@ -73,7 +73,7 @@ namespace Restless.Panama.Core
                 Thread.CurrentThread.CurrentUICulture = culture;
                 TranslationSource.Instance.CurrentCulture = culture;
 
-                //Languages.SetDisplayLanguage(item);
+                Languages.ForEach(item => item.UpdateDisplayName(culture));
             }
         }
         #endregion
