@@ -426,4 +426,16 @@
   <data name="LanguageChangeRequested" xml:space="preserve">
     <value>Language change requested. Restart the application to apply the new language.</value>
   </data>
+  <data name="Fee" xml:space="preserve">
+    <value>Fee</value>
+  </data>
+  <data name="Contest" xml:space="preserve">
+    <value>Contest</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Award" xml:space="preserve">
+    <value>Award</value>
+  </data>
 </root>

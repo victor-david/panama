@@ -15,7 +15,7 @@
     d:DesignHeight="430" d:DesignWidth="310">
 
     <StackPanel>
-        <conl:TitledSeparator Title="Submitted"/>
+        <conl:TitledSeparator Title="{x:Static r:Text.Submitted}"/>
         <DatePicker SelectedDate="{Binding Dates.SubmittedDate}"/>
     </StackPanel>
 

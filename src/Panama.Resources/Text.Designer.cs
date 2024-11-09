@@ -169,6 +169,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Award.
+        /// </summary>
+        public static string Award {
+            get {
+                return ResourceManager.GetString("Award", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -201,6 +210,15 @@ namespace Restless.Panama.Resources {
         public static string Confirm {
             get {
                 return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contest.
+        /// </summary>
+        public static string Contest {
+            get {
+                return ResourceManager.GetString("Contest", resourceCulture);
             }
         }
         
@@ -417,6 +435,15 @@ namespace Restless.Panama.Resources {
         public static string Extract {
             get {
                 return ResourceManager.GetString("Extract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fee.
+        /// </summary>
+        public static string Fee {
+            get {
+                return ResourceManager.GetString("Fee", resourceCulture);
             }
         }
         
@@ -660,6 +687,15 @@ namespace Restless.Panama.Resources {
         public static string NotOpenXmlDocument {
             get {
                 return ResourceManager.GetString("NotOpenXmlDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        public static string Online {
+            get {
+                return ResourceManager.GetString("Online", resourceCulture);
             }
         }
         

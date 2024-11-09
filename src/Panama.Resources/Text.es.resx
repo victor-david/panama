@@ -367,4 +367,16 @@
   <data name="LanguageChangeRequested" xml:space="preserve">
     <value>Se solicitó cambio de idioma. Reinicie la aplicación para aplicar el nuevo idioma.</value>
   </data>
+  <data name="Fee" xml:space="preserve">
+    <value>Tarifa</value>
+  </data>
+  <data name="Contest" xml:space="preserve">
+    <value>Concurso</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>En línea</value>
+  </data>
+  <data name="Award" xml:space="preserve">
+    <value>Premio</value>
+  </data>
 </root>

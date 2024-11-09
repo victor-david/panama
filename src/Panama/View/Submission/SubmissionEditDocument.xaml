@@ -34,8 +34,10 @@
             Grid.Row="1"
             Style="{StaticResource Panama.Styles.Panel.DataEntry}"
             Visibility="{Binding Documents.EditVisibility}">
-            <TextBlock Text="Document title"/>
+
+            <TextBlock Text="{x:Static r:Text.Title}"/>
             <TextBox Text="{Binding Documents.SelectedDocument.Title}"/>
+
         </StackPanel>
 
         <tk:NavigatorExpander
