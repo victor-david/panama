@@ -14,7 +14,6 @@ using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Data;
-using System.Globalization;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionBatchTable.Defs.Columns;
 

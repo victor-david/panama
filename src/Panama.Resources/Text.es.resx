@@ -322,76 +322,82 @@
   <data name="WordCount">
     <value>Conteo de palabras</value>
   </data>
-  <data name="NoTitle" xml:space="preserve">
+  <data name="NoTitle">
     <value>(sin título)</value>
   </data>
-  <data name="End" xml:space="preserve">
+  <data name="End">
     <value>Fin</value>
   </data>
-  <data name="AllYear" xml:space="preserve">
+  <data name="AllYear">
     <value>Todo el año</value>
   </data>
-  <data name="ExclusiveNoSim" xml:space="preserve">
+  <data name="ExclusiveNoSim">
     <value>Exclusivo (sin simultaneidad)</value>
   </data>
-  <data name="Email" xml:space="preserve">
+  <data name="Email">
     <value>Correo electrónico</value>
   </data>
-  <data name="Total" xml:space="preserve">
+  <data name="Total">
     <value>Total</value>
   </data>
-  <data name="Accepted" xml:space="preserve">
+  <data name="Accepted">
     <value>Aceptado</value>
   </data>
-  <data name="Rejected" xml:space="preserve">
+  <data name="Rejected">
     <value>Rechazado</value>
   </data>
-  <data name="Fees" xml:space="preserve">
+  <data name="Fees">
     <value>Tarifas</value>
   </data>
-  <data name="AverageDays" xml:space="preserve">
+  <data name="AverageDays">
     <value>Días Promedio</value>
   </data>
-  <data name="MaxDays" xml:space="preserve">
+  <data name="MaxDays">
     <value>Días Máximos</value>
   </data>
-  <data name="MinDays" xml:space="preserve">
+  <data name="MinDays">
     <value>Días Mínimos</value>
   </data>
-  <data name="Shared" xml:space="preserve">
+  <data name="Shared">
     <value>Compartido</value>
   </data>
-  <data name="Unknown" xml:space="preserve">
+  <data name="Unknown">
     <value>Desconocido</value>
   </data>
-  <data name="LanguageChangeRequested" xml:space="preserve">
+  <data name="LanguageChangeRequested">
     <value>Se solicitó cambio de idioma. Reinicie la aplicación para aplicar el nuevo idioma.</value>
   </data>
-  <data name="Fee" xml:space="preserve">
+  <data name="Fee">
     <value>Tarifa</value>
   </data>
-  <data name="Contest" xml:space="preserve">
+  <data name="Contest">
     <value>Concurso</value>
   </data>
-  <data name="Online" xml:space="preserve">
+  <data name="Online">
     <value>En línea</value>
   </data>
-  <data name="Award" xml:space="preserve">
+  <data name="Award">
     <value>Premio</value>
   </data>
-  <data name="Continue" xml:space="preserve">
+  <data name="Continue">
     <value>Continuar</value>
   </data>
-  <data name="Subject" xml:space="preserve">
+  <data name="Subject">
     <value>Asunto</value>
   </data>
-  <data name="From" xml:space="preserve">
+  <data name="From">
     <value>De</value>
   </data>
-  <data name="To" xml:space="preserve">
+  <data name="To">
     <value>A</value>
   </data>
-  <data name="Message" xml:space="preserve">
+  <data name="Message">
     <value>Mensaje</value>
+  </data>
+  <data name="DefaultAuthor">
+    <value>Autor predeterminado</value>
+  </data>
+  <data name="Postpone">
+    <value>Posponer</value>
   </data>
 </root>

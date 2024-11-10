@@ -453,4 +453,10 @@
   <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
+  <data name="DefaultAuthor" xml:space="preserve">
+    <value>Default author</value>
+  </data>
+  <data name="Postpone" xml:space="preserve">
+    <value>Postone</value>
+  </data>
 </root>

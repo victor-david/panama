@@ -49,7 +49,7 @@
 
                 <TextBlock Text="{x:Static r:Text.Name}"/>
                 <TextBox Text="{Binding SelectedAuthor.Name}"/>
-                <CheckBox IsChecked="{Binding SelectedAuthor.IsDefault}" Content="Default author"/>
+                <CheckBox IsChecked="{Binding SelectedAuthor.IsDefault}" Content="{x:Static r:Text.DefaultAuthor}"/>
 
             </StackPanel>
         </tk:SplitterGrid.ContentRight>

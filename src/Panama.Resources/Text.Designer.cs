@@ -358,6 +358,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default author.
+        /// </summary>
+        public static string DefaultAuthor {
+            get {
+                return ResourceManager.GetString("DefaultAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
@@ -768,6 +777,15 @@ namespace Restless.Panama.Resources {
         public static string Paying {
             get {
                 return ResourceManager.GetString("Paying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Postone.
+        /// </summary>
+        public static string Postpone {
+            get {
+                return ResourceManager.GetString("Postpone", resourceCulture);
             }
         }
         
