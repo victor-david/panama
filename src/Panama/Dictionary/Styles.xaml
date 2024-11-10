@@ -55,6 +55,10 @@
         <Setter Property="TitleBarButtonBrush" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
         <Setter Property="TitleBarBackground" Value="{DynamicResource MahApps.Brushes.WindowTitle}"/>
         <Setter Property="TitleBarForeground" Value="{DynamicResource MahApps.Brushes.IdealForeground}"/>
+        <!-- Default: Continue / Cancel -->
+        <Setter Property="Title" Value="{x:Static r:Header.Confirmation}"/>
+        <Setter Property="ButtonYesText" Value="{x:Static r:Text.Continue}"/>
+        <Setter Property="ButtonNoText" Value="{x:Static r:Text.Cancel}"/>
         <Setter Property="ButtonStyle">
             <Setter.Value>
                 <Style TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button}">
@@ -64,6 +68,17 @@
                 </Style>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="MessageWindowType" Value="YesNo">
+                <Setter Property="ButtonYesText" Value="{x:Static r:Text.Yes}"/>
+                <Setter Property="ButtonNoText" Value="{x:Static r:Text.No}"/>
+            </Trigger>
+
+            <Trigger Property="MessageWindowType" Value="Error">
+                <Setter Property="Title" Value="{x:Static r:Header.Error}"/>
+                <Setter Property="ButtonNoText" Value="{x:Static r:Text.Continue}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!-- Main splitter -->

@@ -438,4 +438,7 @@
   <data name="Award" xml:space="preserve">
     <value>Award</value>
   </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
 </root>

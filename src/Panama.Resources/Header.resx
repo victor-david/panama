@@ -561,4 +561,7 @@
   <data name="Item" xml:space="preserve">
     <value>Item</value>
   </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
 </root>
