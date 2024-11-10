@@ -213,13 +213,7 @@ namespace Restless.Panama.ViewModel
         /// </remarks>
         public void SetSubmissionHeader()
         {
-            string header = null;
-            if (SelectedBatch?.Submitted is DateTime date)
-            {
-                string dateStr = date.ToLocalTime().ToString(Config.Instance.DateFormat, CultureInfo.InvariantCulture);
-                header = $"{dateStr} to {SelectedBatch.PublisherName}";
-            }
-            SubmissionHeader = header;
+            SubmissionHeader = $"{SelectedBatch?.SubmittedFormatted}: {SelectedBatch?.PublisherName}";
         }
         #endregion
 

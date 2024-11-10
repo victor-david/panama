@@ -1,20 +1,15 @@
 ﻿using Restless.Toolkit.Core.Database.SQLite;
+using System;
 using System.ComponentModel;
 using System.Data;
+using System.Runtime.CompilerServices;
 
 namespace Restless.Panama.Database.Tables
 {
     public abstract class DateRowObject<T> : RowObjectBase<T>, INotifyPropertyChanged where T: TableBase
     {
-        #region Properties
-        /// <summary>
-        /// Gets the date format.
-        /// </summary>
-        protected string DateFormat
-        {
-            get;
-            private set;
-        }
+        #region Private
+        private string dateFormat;
         #endregion
 
         /************************************************************************/
@@ -26,7 +21,7 @@ namespace Restless.Panama.Database.Tables
         /// <param name="row"></param>
         public DateRowObject(DataRow row) : base(row)
         {
-            DateFormat = "MMM dd, yyyy";
+            dateFormat = "MMM dd, yyyy";
         }
         #endregion
 
@@ -40,10 +35,52 @@ namespace Restless.Panama.Database.Tables
 
         #region Protected methods
         /// <summary>
+        /// Gets a formatted date
+        /// </summary>
+        /// <param name="date">A date time</param>
+        /// <returns></returns>
+        protected string GetFormattedDate(DateTime date) => date.ToString(dateFormat);
+
+        /// <summary>
+        /// Gets a formatted date
+        /// </summary>
+        /// <param name="date">A nullable date time</param>
+        /// <returns></returns>
+        protected string GetFormattedDate(DateTime? date) => date?.ToString(dateFormat) ?? "--";
+
+        /// <summary>
+        /// Sets the specified date column to the specified value and optionaly invokes property changed.
+        /// </summary>
+        /// <param name="colName"></param>
+        /// <param name="value"></param>
+        /// <param name="properyName">An optional property name</param>
+        protected void SetDateValue(string colName, DateTime value, string properyName = null)
+        {
+            if (SetValue(colName, value) && !string.IsNullOrEmpty(properyName))
+            {
+                InvokePropertyChanged(properyName);
+            }
+        }
+
+        /// <summary>
+        /// Sets the specified date nullable column to the specified value and optionaly invokes property changed.
+        /// </summary>
+        /// <param name="colName"></param>
+        /// <param name="value"></param>
+        /// <param name="properyName">An optional property name</param>
+        protected void SetDateValue(string colName, DateTime? value, string properyName = null)
+        {
+            if (SetValue(colName, value) && !string.IsNullOrEmpty(properyName))
+            {
+                InvokePropertyChanged(properyName);
+            }
+        }
+
+        /// <summary>
         /// Invokes property changed for the specified property name
         /// </summary>
         /// <param name="propertyName">The name of the property</param>
-        protected void InvokePropertyChanged(string propertyName)
+        protected void InvokePropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -60,7 +97,7 @@ namespace Restless.Panama.Database.Tables
         {
             if (!string.IsNullOrWhiteSpace(value))
             {
-                DateFormat = value;
+                dateFormat = value;
             }
         }
         #endregion

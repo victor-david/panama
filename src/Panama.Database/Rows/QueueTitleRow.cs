@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Globalization;
 using Columns = Restless.Panama.Database.Tables.QueueTitleTable.Defs.Columns;
 
 namespace Restless.Panama.Database.Tables
@@ -57,17 +56,18 @@ namespace Restless.Panama.Database.Tables
 
         /// <summary>
         /// Gets or sets the date.
+        /// When set, invokes property changed on <see cref="DateFormatted"/>.
         /// </summary>
         public DateTime ?Date
         {
             get => GetNullableDateTime(Columns.Date);
-            set => SetValue(Columns.Date, value);
+            set => SetDateValue(Columns.Date, value, nameof(DateFormatted));
         }
 
         /// <summary>
-        /// Gets a formatted value for <see cref="Date"/> converted to local time.
+        /// Gets a formatted value for <see cref="Date"/>.
         /// </summary>
-        public string DateLocal => Date?.ToLocalTime().ToString(DateFormat, CultureInfo.InvariantCulture);
+        public string DateFormatted => GetFormattedDate(Date);
 
         /// <summary>
         /// Gets a boolean value that indicates if <see cref="Date"/> has a value
@@ -113,19 +113,6 @@ namespace Restless.Panama.Database.Tables
         public void ClearDate()
         {
             Date = null;
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Protected methods
-        /// <inheritdoc/>
-        protected override void OnSetValue(string columnName, object value)
-        {
-            if (columnName == Columns.Date)
-            {
-                InvokePropertyChanged(nameof(DateLocal));
-            }
         }
         #endregion
     }

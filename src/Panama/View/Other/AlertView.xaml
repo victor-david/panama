@@ -54,11 +54,7 @@
                 <TextBlock Text="{x:Static r:Text.Url}"/>
                 <TextBox Text="{Binding SelectedAlert.Url}"/>
 
-                <TextBlock>
-                    <Run Text="{x:Static r:Text.Date}"/>
-                    <Run Text="{Binding SelectedAlert.DateLocal, Mode=OneWay}"/>
-                </TextBlock>
-
+                <TextBlock Text="{x:Static r:Text.Date}"/>
                 <DatePicker SelectedDate="{Binding SelectedAlert.Date}"/>
 
                 <CheckBox

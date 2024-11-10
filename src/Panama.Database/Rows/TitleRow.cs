@@ -6,7 +6,6 @@
 */
 using System;
 using System.Data;
-using System.Globalization;
 using Columns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
 
 namespace Restless.Panama.Database.Tables
@@ -44,11 +43,12 @@ namespace Restless.Panama.Database.Tables
 
         /// <summary>
         /// Gets or sets the written date/time value.
+        /// When set, invokes property changed on <see cref="WrittenFormatted"/>.
         /// </summary>
         public DateTime Written
         {
             get => GetDateTime(Columns.Written);
-            set => SetValue(Columns.Written, value);
+            set => SetDateValue(Columns.Written, value, nameof(WrittenFormatted));
         }
 
         /// <summary>
@@ -88,9 +88,9 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets a formatted value for <see cref="Written"/> converted to local time.
+        /// Gets a formatted value for <see cref="Written"/>.
         /// </summary>
-        public string WrittenLocal => Written.ToLocalTime().ToString(DateFormat, CultureInfo.InvariantCulture);
+        public string WrittenFormatted => GetFormattedDate(Written);
         #endregion
 
         /************************************************************************/
@@ -133,19 +133,6 @@ namespace Restless.Panama.Database.Tables
         public override string ToString()
         {
             return $"{nameof(TitleRow)} {Id} {Title}";
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Protected methods
-        /// <inheritdoc/>
-        protected override void OnSetValue(string columnName, object value)
-        {
-            if (columnName == Columns.Written)
-            {
-                InvokePropertyChanged(nameof(WrittenLocal));
-            }
         }
         #endregion
     }
