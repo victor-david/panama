@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.Generic;
 using System.Data;
@@ -129,25 +123,38 @@ namespace Restless.Panama.Database.Tables
 
         /************************************************************************/
 
+        #region Update (Internal)
+        internal override long DataVersion => 2;
+        internal override void PerformSchemaUpdate()
+        {
+        }
 
-        //    /************************************************************************/
-            
-        //    #region Public methods
-        //    /// <summary>
-        //    /// Gets the string representation of this object.
-        //    /// </summary>
-        //    /// <returns>A string with the name and login id concatenated.</returns>
-        //    public override string ToString()
-        //    {
-        //        string loginId = string.Empty;
-        //        if (Id > 0)
-        //        {
-        //            loginId = string.Format(" ({0})", LoginId);
-        //        }
-        //        return string.Format("{0}{1}", Name, loginId);
-        //    }
-        //    #endregion
-        //}
-        //#endregion
+        internal override void PerformDataUpdate()
+        {
+            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
+            {
+                switch (DataVersion)
+                {
+                    case 2:
+                        RemoveAllRows();
+                        break;
+                }
+                Save();
+                SchemaTable.Save();
+            }
+        }
+
+        private void RemoveAllRows()
+        {
+            foreach (CredentialRow item in EnumerateAll())
+            {
+                if (item.Id > 0)
+                {
+                    item.Row.Delete();
+                }
+            }
+            SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Removed all records");
+        }
+        #endregion
     }
 }
