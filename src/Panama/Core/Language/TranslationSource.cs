@@ -24,6 +24,7 @@ namespace Restless.Panama.Core
             resourceManagers = new Dictionary<string, ResourceManager>()
             {
                 { nameof(Confirm), Confirm.ResourceManager },
+                { nameof(Data), Data.ResourceManager },
                 { nameof(Detail), Detail.ResourceManager },
                 { nameof(Error), Error.ResourceManager },
                 { nameof(Header), Header.ResourceManager },
@@ -49,24 +50,29 @@ namespace Restless.Panama.Core
 
         public string GetString(string key)
         {
-            string resManagerKey = "None";
+            string place = "None";
             string[] parts = key.Split('.');
             if (parts.Length > 1)
             {
-                resManagerKey = parts[0];
+                place = parts[0];
                 key = parts[1];
             }
 
-            if (resourceManagers.ContainsKey(resManagerKey))
+            return GetString(place, key);
+        }
+
+        public string GetString(string place, string key)
+        {
+            if (resourceManagers.ContainsKey(place))
             {
-                string str = resourceManagers[resManagerKey].GetString(key, currentCulture);
+                string str = resourceManagers[place].GetString(key, currentCulture);
                 if (!string.IsNullOrEmpty(str))
                 {
                     return str;
                 }
             }
 
-            return $"[{resManagerKey}.{key}]";
+            return $"[{place}.{key}]";
         }
         #endregion
     }

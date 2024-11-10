@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
@@ -92,6 +86,8 @@ namespace Restless.Panama
             DatabaseController.Instance.Init(RegistryManager.DatabaseDirectory);
 
             LanguageManager.Instance.SetLanguage(Config.Instance.LanguageId);
+
+            DataTranslator.TranslateDatabaseTables();
 
             ThemeManager.Init();
             ThemeManager.SetTheme(Config.Instance.ThemeId);

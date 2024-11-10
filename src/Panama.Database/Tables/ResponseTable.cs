@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.Generic;
 using System.Data;
@@ -12,9 +6,9 @@ namespace Restless.Panama.Database.Tables
 {
     /// <summary>
     /// Represents the table that contains information on the type of responses that a submssion batch may have.
-    /// This is a lookup table.
+    /// This is a readonly lookup table.
     /// </summary>
-    public class ResponseTable : Core.ApplicationTableBase
+    public class ResponseTable : Core.ApplicationTableLookupBase
     {
         #region Public properties
         /// <summary>
@@ -122,9 +116,7 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Public methods
-        /// <summary>
-        /// Loads the data from the database into the Data collection for this table.
-        /// </summary>
+        /// <inheritdoc/>
         public override void Load()
         {
             Load(null, Defs.Columns.Id);
@@ -147,10 +139,7 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Protected methods
-        /// <summary>
-        /// Gets the column definitions for this table.
-        /// </summary>
-        /// <returns>A <see cref="ColumnDefinitionCollection"/>.</returns>
+        /// <inheritdoc/>
         protected override ColumnDefinitionCollection GetColumnDefinitions()
         {
             return new ColumnDefinitionCollection()
@@ -161,20 +150,13 @@ namespace Restless.Panama.Database.Tables
             };
         }
 
-        /// <summary>
-        /// Gets a list of column names to use in subsequent initial insert operations.
-        /// These are used only when the table is empty, i.e. upon first creation.
-        /// </summary>
-        /// <returns>A list of column names</returns>
+        /// <inheritdoc/>
         protected override List<string> GetPopulateColumnList()
         {
             return new List<string>() { Defs.Columns.Id, Defs.Columns.Name, Defs.Columns.Description };
         }
 
-        /// <summary>
-        /// Provides an enumerable that returns values for each row to be populated.
-        /// </summary>
-        /// <returns>An IEnumerable</returns>
+        /// <inheritdoc/>
         protected override IEnumerable<object[]> EnumeratePopulateValues()
         {
             yield return new object[] { Defs.Values.NoResponse, null, "None. The submission has not yet received a response." };
@@ -187,9 +169,7 @@ namespace Restless.Panama.Database.Tables
             yield return new object[] { Defs.Values.ResponseAccepted, "Accepted", "Acceptance of one or more pieces in the submission." };
         }
 
-        /// <summary>
-        /// Establishes parent / child relationships with other tables.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void SetDataRelations()
         {
             CreateParentChildRelation<SubmissionBatchTable>(Defs.Relations.ToSubmissionBatch, Defs.Columns.Id, SubmissionBatchTable.Defs.Columns.ResponseType);

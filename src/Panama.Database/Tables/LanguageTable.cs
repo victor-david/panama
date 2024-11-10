@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.Generic;
 
@@ -11,9 +5,9 @@ namespace Restless.Panama.Database.Tables
 {
     /// <summary>
     /// Represents the table that holds the language identifiers that are available when assigning
-    /// a language id to a title version. This is a lookup table.
+    /// a language id to a title version. This is a readonly lookup table.
     /// </summary>
-    public class LanguageTable : Core.ApplicationTableBase
+    public class LanguageTable : Core.ApplicationTableLookupBase
     {
         #region Public properties
         /// <summary>
@@ -81,10 +75,7 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Protected methods
-        /// <summary>
-        /// Gets the column definitions for this table.
-        /// </summary>
-        /// <returns>A <see cref="ColumnDefinitionCollection"/>.</returns>
+        /// <inheritdoc/>
         protected override ColumnDefinitionCollection GetColumnDefinitions()
         {
             return new ColumnDefinitionCollection()
@@ -94,29 +85,20 @@ namespace Restless.Panama.Database.Tables
             };
         }
 
-        /// <summary>
-        /// Gets a list of column names to use in subsequent initial insert operations.
-        /// These are used only when the table is empty, i.e. upon first creation.
-        /// </summary>
-        /// <returns>A list of column names</returns>
+        /// <inheritdoc/>
         protected override List<string> GetPopulateColumnList()
         {
             return new List<string>() { Defs.Columns.Id, Defs.Columns.Name };
         }
 
-        /// <summary>
-        /// Provides an enumerable that returns values for each row to be populated.
-        /// </summary>
-        /// <returns>An IEnumerable</returns>
+        /// <inheritdoc/>
         protected override IEnumerable<object[]> EnumeratePopulateValues()
         {
             yield return new object[] { "en-us", "English (US)" };
             yield return new object[] { "es-mx", "Spanish (Mexico)" };
         }
 
-        /// <summary>
-        /// Sets extended properties on certain columns. See the base implemntation <see cref="TableBase.SetColumnProperties"/> for more information.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void SetColumnProperties()
         {
             // override the base method to do nothing
