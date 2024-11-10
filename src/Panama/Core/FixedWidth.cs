@@ -51,7 +51,7 @@ namespace Restless.Panama.Core
         /// Fixed width of 76.
         /// </summary>
         public const int W076 = 76;
-        
+
         /// <summary>
         /// Fixed width of 86.
         /// </summary>
@@ -61,6 +61,16 @@ namespace Restless.Panama.Core
         /// Fixed width of 96
         /// </summary>
         public const int W096 = 96;
+
+        /// <summary>
+        /// Fixed width of 112
+        /// </summary>
+        public const int W112 = 112;
+
+        /// <summary>
+        /// Fixed width of 128
+        /// </summary>
+        public const int W128 = 128;
 
         /// <summary>
         /// Fixed width of 180

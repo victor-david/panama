@@ -137,7 +137,7 @@ namespace Restless.Panama.ViewModel
                 .SetSelectorName(Header.ResponseDate);
 
             Columns.Create(Header.Type, TableColumns.Joined.ResponseTypeName)
-                .MakeFixedWidth(FixedWidth.W096)
+                .MakeFixedWidth(FixedWidth.W112)
                 .SetSelectorName(Header.ResponseType);
 
             // string.Empty because VS gets confused and tries to connect to the wrong overload
