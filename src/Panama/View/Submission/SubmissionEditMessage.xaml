@@ -5,6 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
@@ -41,16 +42,16 @@
         </Grid.Resources>
 
         <StackPanel>
-            <TextBlock Text="Subject (Display)"/>
+            <TextBlock Text="{x:Static r:Text.Subject}"/>
             <TextBox Text="{Binding Messages.SelectedMessage.Display}"/>
 
-            <tk:LineItem Item="Subject (Orig)" Value="{Binding Messages.SelectedMessage.Subject}"/>
-            <tk:LineItem Item="Date" Value="{Binding Messages.SelectedMessage.MessageDate}"/>
-            <tk:LineItem Item="From" Value="{Binding Messages.SelectedMessage.SenderName}"/>
-            <tk:LineItem Item="To" Value="{Binding Messages.SelectedMessage.RecipientName}"/>
+            <tk:LineItem Item="{x:Static r:Text.Subject}" Value="{Binding Messages.SelectedMessage.Subject}"/>
+            <tk:LineItem Item="{x:Static r:Text.Date}" Value="{Binding Messages.SelectedMessage.MessageDate}"/>
+            <tk:LineItem Item="{x:Static r:Text.From}" Value="{Binding Messages.SelectedMessage.SenderName}"/>
+            <tk:LineItem Item="{x:Static r:Text.To}" Value="{Binding Messages.SelectedMessage.RecipientName}"/>
         </StackPanel>
 
-        <TextBlock Grid.Row="1" Text="Message"/>
+        <TextBlock Grid.Row="1" Text="{x:Static r:Text.Message}"/>
         <TextBox
             Grid.Row="2"
             Style="{StaticResource Panama.Styles.TextBox.Multiline}"
