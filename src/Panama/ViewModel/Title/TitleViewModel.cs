@@ -254,7 +254,6 @@ namespace Restless.Panama.ViewModel
             Commands.Add("SelfPublishedFilter", p => SetSingleFilter(() => Filters.SetToSelfPublished()));
             Commands.Add("ExtractTitle", RunExtractTitle, CanRunExtractTitle);
             Commands.Add("ToggleFlag", RunToggleTitleFlagCommand, p => IsSelectedRowAccessible);
-            Commands.Add("ClearFlags", RunClearTitleFlagsCommand);
             Commands.Add("AddToQueue", RunAddTitleToQueueCommand, p => SelectedTitle != null);
 
             /* Context menu items */
@@ -499,17 +498,6 @@ namespace Restless.Panama.ViewModel
         private void RunToggleTitleFlagCommand(object parm)
         {
             SelectedTitle?.ToggleQuickFlag();
-        }
-
-        private void RunClearTitleFlagsCommand(object parm)
-        {
-            if (Messages.ShowYesNo(Confirm.ClearTitleFlags))
-            {
-                foreach (TitleRow title in Table.EnumerateTitles())
-                {
-                    title.QuickFlag = false;
-                }
-            }
         }
 
         private void RunCopyTitleCommand(object parm)
