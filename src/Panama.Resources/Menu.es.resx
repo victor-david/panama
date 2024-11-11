@@ -58,226 +58,232 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Accepted">
+  <data name="Accepted" xml:space="preserve">
     <value>Aceptado</value>
   </data>
-  <data name="Active">
+  <data name="Active" xml:space="preserve">
     <value>Activo</value>
   </data>
-  <data name="AddAlert">
+  <data name="AddAlert" xml:space="preserve">
     <value>Agregar una alerta</value>
   </data>
-  <data name="AddAuthor">
+  <data name="AddAuthor" xml:space="preserve">
     <value>Agregar un autor</value>
   </data>
-  <data name="AddDocumentToSubmission">
+  <data name="AddDocumentToSubmission" xml:space="preserve">
     <value>Agregar un documento a esta presentación</value>
   </data>
-  <data name="AddLink">
+  <data name="AddLink" xml:space="preserve">
     <value>Agregar enlace</value>
   </data>
-  <data name="AddPublished">
+  <data name="AddPublished" xml:space="preserve">
     <value>Agregar un registro publicado a este título</value>
   </data>
-  <data name="AddQueue">
+  <data name="AddQueue" xml:space="preserve">
     <value>Agregar una cola</value>
   </data>
-  <data name="AddRelated">
+  <data name="AddRelated" xml:space="preserve">
     <value>Agregar títulos relacionados a este título</value>
   </data>
-  <data name="AddSelfPublished">
+  <data name="AddSelfPublished" xml:space="preserve">
     <value>Agregar un registro autoeditado a este título</value>
   </data>
-  <data name="AddSubmissionMessage">
+  <data name="AddSubmissionMessage" xml:space="preserve">
     <value>Agregar un mensaje a esta presentación</value>
   </data>
-  <data name="AddSubmissionPeriod">
+  <data name="AddSubmissionPeriod" xml:space="preserve">
     <value>Agregar un periodo de presentación</value>
   </data>
-  <data name="AddTag">
+  <data name="AddTag" xml:space="preserve">
     <value>Agregar una etiqueta</value>
   </data>
-  <data name="AddTitle">
+  <data name="AddTitle" xml:space="preserve">
     <value>Agregar un título a la colección</value>
   </data>
-  <data name="AddTitleToSubmission">
+  <data name="AddTitleToSubmission" xml:space="preserve">
     <value>Agregar título(s) a esta presentación</value>
   </data>
-  <data name="AddTitleVersion">
+  <data name="AddTitleVersion" xml:space="preserve">
     <value>Agregar un archivo existente como una versión</value>
   </data>
-  <data name="AddUserNote">
+  <data name="AddUserNote" xml:space="preserve">
     <value>Agregar una nota</value>
   </data>
-  <data name="BrowseToPublisherUrl">
+  <data name="BrowseToPublisherUrl" xml:space="preserve">
     <value>Navegar al sitio web de este editor</value>
   </data>
-  <data name="BrowseToPublisherUrlOrClick">
+  <data name="BrowseToPublisherUrlOrClick" xml:space="preserve">
     <value>Navegar al sitio web de este editor (o haga doble clic en la fila)</value>
   </data>
-  <data name="BrowseToUrlOrClick">
+  <data name="BrowseToUrlOrClick" xml:space="preserve">
     <value>Navegar a esta url (o haga doble clic en la fila)</value>
   </data>
-  <data name="Clear">
+  <data name="Clear" xml:space="preserve">
     <value>Limpiar</value>
   </data>
-  <data name="ClearPublishedDate">
+  <data name="ClearPublishedDate" xml:space="preserve">
     <value>Borrar la fecha de publicación</value>
   </data>
-  <data name="CopyTitle">
+  <data name="CopyTitle" xml:space="preserve">
     <value>Copiar título al portapapeles</value>
   </data>
-  <data name="CreatePublisher">
+  <data name="CreatePublisher" xml:space="preserve">
     <value>Crear un nuevo registro de editor</value>
   </data>
-  <data name="CreateSubmission">
+  <data name="CreateSubmission" xml:space="preserve">
     <value>Crear una presentación</value>
   </data>
-  <data name="CreateTitleFromEntry">
+  <data name="CreateTitleFromEntry" xml:space="preserve">
     <value>Crear una entrada de título desde este archivo</value>
   </data>
-  <data name="Custom">
+  <data name="Custom" xml:space="preserve">
     <value>Personalizado</value>
   </data>
-  <data name="DeleteAlert">
+  <data name="DeleteAlert" xml:space="preserve">
     <value>Eliminar esta alerta</value>
   </data>
-  <data name="DeleteAuthor">
+  <data name="DeleteAuthor" xml:space="preserve">
     <value>Eliminar este autor</value>
   </data>
-  <data name="DeleteLink">
+  <data name="DeleteLink" xml:space="preserve">
     <value>Eliminar este enlace</value>
   </data>
-  <data name="DeleteNote">
+  <data name="DeleteNote" xml:space="preserve">
     <value>Eliminar esta nota</value>
   </data>
-  <data name="DeletePublisher">
+  <data name="DeletePublisher" xml:space="preserve">
     <value>Eliminar este editor</value>
   </data>
-  <data name="DeleteSubmission">
+  <data name="DeleteSubmission" xml:space="preserve">
     <value>Eliminar esta presentación</value>
   </data>
-  <data name="DeleteTag">
+  <data name="DeleteTag" xml:space="preserve">
     <value>Eliminar esta etiqueta</value>
   </data>
-  <data name="DeleteTitle">
+  <data name="DeleteTitle" xml:space="preserve">
     <value>Eliminar este título</value>
   </data>
-  <data name="ExcludeOrphanDirectory">
+  <data name="ExcludeOrphanDirectory" xml:space="preserve">
     <value>Excluir este directorio de la búsqueda de huérfanos</value>
   </data>
-  <data name="ExcludeOrphanFile">
+  <data name="ExcludeOrphanFile" xml:space="preserve">
     <value>Excluir este archivo de la búsqueda de huérfanos</value>
   </data>
-  <data name="ExcludeOrphanFileType">
+  <data name="ExcludeOrphanFileType" xml:space="preserve">
     <value>Excluir todos los archivos de este tipo de la búsqueda de huérfanos</value>
   </data>
-  <data name="FilterTitleListToRelated">
+  <data name="FilterTitleListToRelated" xml:space="preserve">
     <value>Filtrar la lista de títulos al título seleccionado y sus títulos relacionados</value>
   </data>
-  <data name="FilterToPublisher">
+  <data name="FilterToPublisher" xml:space="preserve">
     <value>Filtrar la lista para mostrar solo presentaciones a este editor</value>
   </data>
-  <data name="Flagged">
+  <data name="Flagged" xml:space="preserve">
     <value>Marcado</value>
   </data>
-  <data name="FlagTitle">
+  <data name="FlagTitle" xml:space="preserve">
     <value>Alternar marca para este título</value>
   </data>
-  <data name="InPeriod">
+  <data name="InPeriod" xml:space="preserve">
     <value>En periodo</value>
   </data>
-  <data name="Links">
+  <data name="Links" xml:space="preserve">
     <value>Enlaces</value>
   </data>
-  <data name="MakeSeparateVersion">
+  <data name="MakeSeparateVersion" xml:space="preserve">
     <value>Hacer de esta una versión separada</value>
   </data>
-  <data name="Open">
+  <data name="Open" xml:space="preserve">
     <value>Abrir</value>
   </data>
-  <data name="OpenItemOrDoubleClick">
+  <data name="OpenItemOrDoubleClick" xml:space="preserve">
     <value>Abrir este ítem (o haga doble clic en la fila)</value>
   </data>
-  <data name="OpenTitleOrDoubleClick">
+  <data name="OpenTitleOrDoubleClick" xml:space="preserve">
     <value>Abrir la última versión de este título (o haga doble clic en la fila)</value>
   </data>
-  <data name="Paying">
+  <data name="Paying" xml:space="preserve">
     <value>Pagando</value>
   </data>
-  <data name="Personal">
+  <data name="Personal" xml:space="preserve">
     <value>Personal</value>
   </data>
-  <data name="Published">
+  <data name="Published" xml:space="preserve">
     <value>Publicado</value>
   </data>
-  <data name="Ready">
+  <data name="Ready" xml:space="preserve">
     <value>Listo</value>
   </data>
-  <data name="RemoveExclusion">
+  <data name="RemoveExclusion" xml:space="preserve">
     <value>Eliminar esta exclusión</value>
   </data>
-  <data name="RemoveFromQueue">
+  <data name="RemoveFromQueue" xml:space="preserve">
     <value>Eliminar título de la cola seleccionada</value>
   </data>
-  <data name="RemovePublished">
+  <data name="RemovePublished" xml:space="preserve">
     <value>Eliminar este registro publicado</value>
   </data>
-  <data name="RemoveQueue">
+  <data name="RemoveQueue" xml:space="preserve">
     <value>Eliminar esta cola</value>
   </data>
-  <data name="RemoveQueueTitle">
+  <data name="RemoveQueueTitle" xml:space="preserve">
     <value>Eliminar este título de la cola</value>
   </data>
-  <data name="RemoveRelated">
+  <data name="RemoveRelated" xml:space="preserve">
     <value>Eliminar este título relacionado</value>
   </data>
-  <data name="RemoveSubmissionDocument">
+  <data name="RemoveSubmissionDocument" xml:space="preserve">
     <value>Eliminar este documento de la presentación</value>
   </data>
-  <data name="RemoveSubmissionMessage">
+  <data name="RemoveSubmissionMessage" xml:space="preserve">
     <value>Eliminar este mensaje de la presentación</value>
   </data>
-  <data name="RemoveSubmissionPeriod">
+  <data name="RemoveSubmissionPeriod" xml:space="preserve">
     <value>Eliminar este periodo de presentación</value>
   </data>
-  <data name="RemoveTitleFromSubmission">
+  <data name="RemoveTitleFromSubmission" xml:space="preserve">
     <value>Eliminar título de la presentación</value>
   </data>
-  <data name="RemoveTitleVersion">
+  <data name="RemoveTitleVersion" xml:space="preserve">
     <value>Eliminar esta versión de título</value>
   </data>
-  <data name="RenameQueue">
+  <data name="RenameQueue" xml:space="preserve">
     <value>Renombrar esta cola</value>
   </data>
-  <data name="ReplaceSubmissionDocument">
+  <data name="ReplaceSubmissionDocument" xml:space="preserve">
     <value>Reemplazar este documento de presentación</value>
   </data>
-  <data name="ReplaceTitleVersion">
+  <data name="ReplaceTitleVersion" xml:space="preserve">
     <value>Reemplazar el archivo para esta versión con otro archivo</value>
   </data>
-  <data name="Reset">
+  <data name="Reset" xml:space="preserve">
     <value>Restablecer</value>
   </data>
-  <data name="SetTitleStatusAccepted">
+  <data name="SetTitleStatusAccepted" xml:space="preserve">
     <value>Establecer estado a aceptado</value>
   </data>
-  <data name="SetTitleStatusNone">
+  <data name="SetTitleStatusNone" xml:space="preserve">
     <value>Establecer estado a ninguno</value>
   </data>
-  <data name="SetTitleStatusWithdrawn">
+  <data name="SetTitleStatusWithdrawn" xml:space="preserve">
     <value>Establecer estado a retirado</value>
   </data>
-  <data name="Submitted">
+  <data name="Submitted" xml:space="preserve">
     <value>Enviado</value>
   </data>
-  <data name="Titles">
+  <data name="Titles" xml:space="preserve">
     <value>Títulos</value>
   </data>
-  <data name="Tools">
+  <data name="Tools" xml:space="preserve">
     <value>Herramientas</value>
   </data>
-  <data name="TryAgain">
+  <data name="TryAgain" xml:space="preserve">
     <value>Intenta de nuevo</value>
+  </data>
+  <data name="Idle" xml:space="preserve">
+    <value>Inactivo</value>
+  </data>
+  <data name="Scheduled" xml:space="preserve">
+    <value>Programado</value>
   </data>
 </root>

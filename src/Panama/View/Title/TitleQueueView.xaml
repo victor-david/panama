@@ -21,7 +21,7 @@
         <!-- MainGrid.Left (list of queues) -->
         <Grid tk:Property.RowHeights="38,*">
             <StatusBar>
-                <TextBlock Text="Queues"/>
+                <TextBlock Text="{x:Static r:Header.Queues}"/>
             </StatusBar>
 
             <ListBox
@@ -45,41 +45,11 @@
             MinDetailWidth="{x:Static core:Config+Grid.MinTitleQueueDetailWidth}"
             MaxDetailWidth="{x:Static core:Config+Grid.MaxTitleQueueDetailWidth}"
             IsDetailExpanded="{Binding Config.TitleQueueDetailExpanded}"
-            DetailWidth="{Binding Config.TitleQueueDetailWidth, FallbackValue=0}">
+            DetailWidth="{Binding Config.TitleQueueDetailWidth}">
 
             <!-- Splitter.HeaderLeft (controls) -->
             <tk:SplitterGrid.HeaderLeft>
-                <StatusBar>
-                    <TextBlock Text="{Binding SelectedQueue.Name}"/>
-
-                    <Separator/>
-
-                    <TextBlock Text="Title"/>
-                    <TextBox
-                        Width="140"
-                        Text="{Binding Filters.Text, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
-
-                    <Separator/>
-
-                    <!-- Status filter -->
-                    <CheckBox Content="Idle" IsChecked="{Binding IsIdleFilterChecked}"/>
-                    <CheckBox Content="Scheduled" IsChecked="{Binding IsScheduledFilterChecked}"/>
-                    <CheckBox Content="Published" IsChecked="{Binding IsPublishedFilterChecked}"/>
-
-                    <Separator/>
-
-                    <Button
-                        Content="{x:Static r:Menu.Reset}"
-                        ToolTip="{x:Static r:ToolTip.FilterReset}"
-                        Command="{Binding ClearFilterCommand}"/>
-
-                    <Separator/>
-
-                    <TextBlock
-                        Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
-                        Text="{Binding ListView.Count}"/>
-
-                </StatusBar>
+                <vw:TitleQueueFilterToolBar/>
             </tk:SplitterGrid.HeaderLeft>
             <!-- End: Splitter.HeaderLeft -->
 

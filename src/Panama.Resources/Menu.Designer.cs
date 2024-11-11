@@ -439,6 +439,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Idle.
+        /// </summary>
+        public static string Idle {
+            get {
+                return ResourceManager.GetString("Idle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In Period.
         /// </summary>
         public static string InPeriod {
@@ -660,6 +669,15 @@ namespace Restless.Panama.Resources {
         public static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scheduled.
+        /// </summary>
+        public static string Scheduled {
+            get {
+                return ResourceManager.GetString("Scheduled", resourceCulture);
             }
         }
         
