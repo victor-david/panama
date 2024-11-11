@@ -1006,15 +1006,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Submission created.
-        /// </summary>
-        public static string SubmissionCreated {
-            get {
-                return ResourceManager.GetString("SubmissionCreated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Submitted.
         /// </summary>
         public static string Submitted {

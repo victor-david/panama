@@ -268,7 +268,7 @@ namespace Restless.Panama.ViewModel
                 if (MessageWindow.ShowYesNo(StringHelper.GetSubmissionConfirmation(openCount, publisher.Name)))
                 {
                     Table.CreateSubmission(publisher.Id);
-                    MainWindowViewModel.Instance.CreateNotificationMessage(Text.SubmissionCreated);
+                    MainWindowViewModel.Instance.CreateNotificationMessage(Confirm.SubmissionCreated);
                     ForceListViewSort();
                 }
             }

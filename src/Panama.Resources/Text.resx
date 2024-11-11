@@ -129,9 +129,6 @@
   <data name="Written" xml:space="preserve">
     <value>Written</value>
   </data>
-  <data name="SubmissionCreated" xml:space="preserve">
-    <value>Submission created</value>
-  </data>
   <data name="Submitted" xml:space="preserve">
     <value>Submitted</value>
   </data>

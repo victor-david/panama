@@ -172,4 +172,10 @@
   <data name="TitlesCopiedToClipboard">
     <value>La lista de títulos ha sido copiada al portapapeles</value>
   </data>
+  <data name="DataSavedToDatabase" xml:space="preserve">
+    <value>Todos los datos se guardaron correctamente en la base de datos</value>
+  </data>
+  <data name="SubmissionCreated" xml:space="preserve">
+    <value>Envío creado</value>
+  </data>
 </root>

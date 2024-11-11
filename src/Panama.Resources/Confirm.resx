@@ -238,4 +238,10 @@
   <data name="TitlesCopiedToClipboard" xml:space="preserve">
     <value>The title list has been copied to the clipboard</value>
   </data>
+  <data name="DataSavedToDatabase" xml:space="preserve">
+    <value>All data successfully saved to the database</value>
+  </data>
+  <data name="SubmissionCreated" xml:space="preserve">
+    <value>Submission created</value>
+  </data>
 </root>

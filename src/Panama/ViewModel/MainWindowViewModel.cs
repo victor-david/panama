@@ -273,7 +273,7 @@ namespace Restless.Panama.ViewModel
             viewModelCache.SignalSave();
             Config.Instance.SaveFilterObjects();
             DatabaseController.Instance.Save();
-            NotificationMessage = "All data successfully saved to the database";
+            CreateNotificationMessage(Confirm.DataSavedToDatabase);
         }
         #endregion
     }

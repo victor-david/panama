@@ -196,6 +196,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All data successfully saved to the database.
+        /// </summary>
+        public static string DataSavedToDatabase {
+            get {
+                return ResourceManager.GetString("DataSavedToDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete this alert?.
         /// </summary>
         public static string DeleteAlert {
@@ -390,6 +399,15 @@ namespace Restless.Panama.Resources {
         public static string ResetSubmissionPeriod {
             get {
                 return ResourceManager.GetString("ResetSubmissionPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission created.
+        /// </summary>
+        public static string SubmissionCreated {
+            get {
+                return ResourceManager.GetString("SubmissionCreated", resourceCulture);
             }
         }
         
