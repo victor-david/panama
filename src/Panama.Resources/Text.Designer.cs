@@ -79,15 +79,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Added / Updated.
-        /// </summary>
-        public static string AddedUpdated {
-            get {
-                return ResourceManager.GetString("AddedUpdated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
         public static string All {
@@ -858,15 +849,6 @@ namespace Restless.Panama.Resources {
         public static string Rejected {
             get {
                 return ResourceManager.GetString("Rejected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Removed.
-        /// </summary>
-        public static string Removed {
-            get {
-                return ResourceManager.GetString("Removed", resourceCulture);
             }
         }
         

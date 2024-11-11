@@ -189,12 +189,6 @@
   <data name="Start" xml:space="preserve">
     <value>Start</value>
   </data>
-  <data name="AddedUpdated" xml:space="preserve">
-    <value>Added / Updated</value>
-  </data>
-  <data name="Removed" xml:space="preserve">
-    <value>Removed</value>
-  </data>
   <data name="Orphans" xml:space="preserve">
     <value>Orphans</value>
   </data>

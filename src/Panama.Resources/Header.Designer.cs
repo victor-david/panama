@@ -79,6 +79,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added / Updated.
+        /// </summary>
+        public static string AddedUpdated {
+            get {
+                return ResourceManager.GetString("AddedUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alerts.
         /// </summary>
         public static string Alerts {
@@ -628,6 +637,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Found.
+        /// </summary>
+        public static string NotFound {
+            get {
+                return ResourceManager.GetString("NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Old Name.
         /// </summary>
         public static string OldName {
@@ -714,6 +732,15 @@ namespace Restless.Panama.Resources {
         public static string Preview {
             get {
                 return ResourceManager.GetString("Preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processed.
+        /// </summary>
+        public static string Processed {
+            get {
+                return ResourceManager.GetString("Processed", resourceCulture);
             }
         }
         
@@ -849,6 +876,15 @@ namespace Restless.Panama.Resources {
         public static string RelatedCountShort {
             get {
                 return ResourceManager.GetString("RelatedCountShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed.
+        /// </summary>
+        public static string Removed {
+            get {
+                return ResourceManager.GetString("Removed", resourceCulture);
             }
         }
         

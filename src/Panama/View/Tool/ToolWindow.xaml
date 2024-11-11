@@ -67,6 +67,7 @@
 
                         </Setter.Value>
                     </Setter>
+                    <Setter Property="ButtonContent" Value="{x:Static r:Text.Start}"/>
                 </Style>
                 <Style TargetType="ListBox" BasedOn="{StaticResource MahApps.Styles.ListBox}">
                     <Setter Property="BorderThickness" Value="1"/>
@@ -81,6 +82,8 @@
                 ButtonCommand="{Binding TitleMetaCommand}"
                 ExplanationText="{x:Static r:Detail.TitleMetadata}"
                 FolderText="{Binding Config.FolderTitleRoot, Mode=OneTime}"
+                UpdatedText="{x:Static r:Header.Updated}"
+                NotFoundText="{x:Static r:Header.NotFound}"
                 StatusText="{Binding Adapter.Status[0]}"
                 UpdatedItemsSource="{Binding Adapter.Updated[0]}"
                 NotFoundItemsSource="{Binding Adapter.NotFound[0]}"
@@ -94,6 +97,8 @@
                 ButtonCommand="{Binding SubmissionMetaCommand}"
                 ExplanationText="{x:Static r:Detail.SubmissionMetadata}"
                 FolderText="{Binding Config.FolderSubmissionDocument, Mode=OneTime}"
+                UpdatedText="{x:Static r:Header.Updated}"
+                NotFoundText="{x:Static r:Header.NotFound}"
                 StatusText="{Binding Adapter.Status[1]}"
                 UpdatedItemsSource="{Binding Adapter.Updated[1]}"
                 NotFoundItemsSource="{Binding Adapter.NotFound[1]}"
@@ -107,8 +112,8 @@
                 ButtonCommand="{Binding TitleExportCommand}"
                 ExplanationText="{x:Static r:Detail.Export}"
                 FolderText="{Binding Config.FolderExport, Mode=OneTime}"
-                UpdatedText="{x:Static r:Text.AddedUpdated}"
-                NotFoundText="{x:Static r:Text.Removed}"
+                UpdatedText="{x:Static r:Header.AddedUpdated}"
+                NotFoundText="{x:Static r:Header.Removed}"
                 StatusText="{Binding Adapter.Status[2]}"
                 UpdatedItemsSource="{Binding Adapter.Updated[2]}"
                 NotFoundItemsSource="{Binding Adapter.NotFound[2]}"

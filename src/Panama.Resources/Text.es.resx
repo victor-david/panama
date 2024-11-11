@@ -130,12 +130,6 @@
   <data name="Start" xml:space="preserve">
     <value>Iniciar</value>
   </data>
-  <data name="AddedUpdated" xml:space="preserve">
-    <value>Añadido / Actualizado</value>
-  </data>
-  <data name="Removed" xml:space="preserve">
-    <value>Eliminado</value>
-  </data>
   <data name="Orphans" xml:space="preserve">
     <value>Huérfanos</value>
   </data>

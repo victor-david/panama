@@ -567,4 +567,16 @@
   <data name="EditQueue" xml:space="preserve">
     <value>Edit Queue</value>
   </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Not Found</value>
+  </data>
+  <data name="AddedUpdated" xml:space="preserve">
+    <value>Added / Updated</value>
+  </data>
+  <data name="Removed" xml:space="preserve">
+    <value>Removed</value>
+  </data>
+  <data name="Processed" xml:space="preserve">
+    <value>Processed</value>
+  </data>
 </root>

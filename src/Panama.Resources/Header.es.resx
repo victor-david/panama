@@ -508,4 +508,16 @@
   <data name="EditQueue" xml:space="preserve">
     <value>Modificar Cola</value>
   </data>
+  <data name="AddedUpdated" xml:space="preserve">
+    <value>Añadido / Actualizado</value>
+  </data>
+  <data name="Removed" xml:space="preserve">
+    <value>Eliminado</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Extraviado</value>
+  </data>
+  <data name="Processed" xml:space="preserve">
+    <value>Procesado</value>
+  </data>
 </root>
