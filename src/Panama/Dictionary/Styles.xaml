@@ -45,6 +45,11 @@
         <Setter Property="LightCloseButtonStyle" Value="{StaticResource Panama.Styles.Button.Window.Light}"/>
         <Setter Property="LightMaxButtonStyle" Value="{StaticResource Panama.Styles.Button.Window.Light}"/>
         <Setter Property="LightMinButtonStyle" Value="{StaticResource Panama.Styles.Button.Window.Light}"/>
+        <!-- Tooltips for window close / max / min / restore -->
+        <Setter Property="Close" Value="{x:Static r:ToolTip.WindowClose}"/>
+        <Setter Property="Maximize" Value="{x:Static r:ToolTip.WindowMaximize}"/>
+        <Setter Property="Minimize" Value="{x:Static r:ToolTip.WindowMinimize}"/>
+        <Setter Property="Restore" Value="{x:Static r:ToolTip.WindowRestore}"/>
     </Style>
 
     <!-- tk:MessageWindow (used for dialogs) -->

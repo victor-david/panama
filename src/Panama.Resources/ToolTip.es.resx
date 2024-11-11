@@ -196,9 +196,6 @@
   <data name="SynchonizeTitles">
     <value>Sincronizar nombres de archivos con título y versión</value>
   </data>
-  <data name="ThemeEnabled">
-    <value>El tema está habilitado para su uso</value>
-  </data>
   <data name="ThemeReset">
     <value>Restablecer al tema predeterminado</value>
   </data>
@@ -241,10 +238,16 @@
   <data name="VerifyLinks">
     <value>Comenzar la verificación de enlaces</value>
   </data>
-  <data name="ToolTitleListDetail">
-    <value>Esta operación crea un archivo de texto que tiene una lista de todos los títulos y sus correspondientes versiones.</value>
+  <data name="WindowClose" xml:space="preserve">
+    <value>Cerrar</value>
   </data>
-  <data name="ToolTitleMetadataDetail">
-    <value>Esta operación verifica que todos los archivos asociados con las versiones de título estén presentes en el disco y actualiza los metadatos que se almacenan en la base de datos con respecto a cada archivo, como la última fecha/hora de actualización y el conteo de palabras.</value>
+  <data name="WindowMinimize" xml:space="preserve">
+    <value>Minimizar</value>
+  </data>
+  <data name="WindowMaximize" xml:space="preserve">
+    <value>Maximizar</value>
+  </data>
+  <data name="WindowRestore" xml:space="preserve">
+    <value>Restaurar</value>
   </data>
 </root>

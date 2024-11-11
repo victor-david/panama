@@ -475,15 +475,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Theme is enabled for use.
-        /// </summary>
-        public static string ThemeEnabled {
-            get {
-                return ResourceManager.GetString("ThemeEnabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Reset to default theme.
         /// </summary>
         public static string ThemeReset {
@@ -601,29 +592,47 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation creates a text file that has a list of all titles and their corresponding versions..
-        /// </summary>
-        public static string ToolTitleListDetail {
-            get {
-                return ResourceManager.GetString("ToolTitleListDetail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This operation verifies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count..
-        /// </summary>
-        public static string ToolTitleMetadataDetail {
-            get {
-                return ResourceManager.GetString("ToolTitleMetadataDetail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Begin verification of links.
         /// </summary>
         public static string VerifyLinks {
             get {
                 return ResourceManager.GetString("VerifyLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string WindowClose {
+            get {
+                return ResourceManager.GetString("WindowClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximize.
+        /// </summary>
+        public static string WindowMaximize {
+            get {
+                return ResourceManager.GetString("WindowMaximize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimize.
+        /// </summary>
+        public static string WindowMinimize {
+            get {
+                return ResourceManager.GetString("WindowMinimize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore.
+        /// </summary>
+        public static string WindowRestore {
+            get {
+                return ResourceManager.GetString("WindowRestore", resourceCulture);
             }
         }
     }

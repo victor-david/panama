@@ -255,9 +255,6 @@
   <data name="SynchonizeTitles" xml:space="preserve">
     <value>Synchronize file names to title and version</value>
   </data>
-  <data name="ThemeEnabled" xml:space="preserve">
-    <value>Theme is enabled for use</value>
-  </data>
   <data name="ThemeReset" xml:space="preserve">
     <value>Reset to default theme</value>
   </data>
@@ -300,10 +297,16 @@
   <data name="VerifyLinks" xml:space="preserve">
     <value>Begin verification of links</value>
   </data>
-  <data name="ToolTitleListDetail" xml:space="preserve">
-    <value>This operation creates a text file that has a list of all titles and their corresponding versions.</value>
+  <data name="WindowMinimize" xml:space="preserve">
+    <value>Minimize</value>
   </data>
-  <data name="ToolTitleMetadataDetail" xml:space="preserve">
-    <value>This operation verifies that all files associated with title versions are present on disk and updates meta data that is stored in the database regarding each file, such as last updated date/time and word count.</value>
+  <data name="WindowMaximize" xml:space="preserve">
+    <value>Maximize</value>
+  </data>
+  <data name="WindowClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="WindowRestore" xml:space="preserve">
+    <value>Restore</value>
   </data>
 </root>
