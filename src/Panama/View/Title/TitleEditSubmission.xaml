@@ -36,25 +36,25 @@
             <StackPanel>
                 <StackPanel.Resources>
                     <Style TargetType="tk:LineItem" BasedOn="{StaticResource Panama.Styles.LineItem}">
-                        <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked.Tight}"/>
+                        <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
                         <Setter Property="ItemDisplayWidth" Value="80"/>
                     </Style>
                 </StackPanel.Resources>
 
                 <tk:LineItem
-                    Item="Submitted"
+                    Item="{x:Static r:Header.Submitted}"
                     Value="{Binding Submissions.SelectedBatch.SubmittedFormatted}"/>
 
                 <tk:LineItem
-                    Item="Response"
+                    Item="{x:Static r:Header.Response}"
                     Value="{Binding Submissions.SelectedBatch.ResponseFormatted}"/>
 
                 <tk:LineItem
-                    Item="Type"
+                    Item="{x:Static r:Header.Type}"
                     Value="{Binding Submissions.SelectedBatch.ResponseTypeName}"/>
 
                 <tk:LineItem
-                    Item="Note"
+                    Item="{x:Static r:Header.Note}"
                     Value="{Binding Submissions.SelectedBatch.Notes}"/>
             </StackPanel>
         </ScrollViewer>

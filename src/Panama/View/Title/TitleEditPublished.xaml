@@ -60,15 +60,15 @@
             Style="{StaticResource Panama.Styles.Panel.DataEntry}"
             Visibility="{Binding Published.EditVisibility}">
 
-            <TextBlock Grid.Row="0" Text="Published"/>
+            <TextBlock Grid.Row="0" Text="{x:Static r:Text.Published}"/>
             <DatePicker
                 Grid.Row="1"
                 SelectedDate="{Binding Published.PublishedDate}"/>
 
-            <TextBlock Grid.Row="2" Text="Url"/>
+            <TextBlock Grid.Row="2" Text="{x:Static r:Text.Url}"/>
             <TextBox Grid.Row="3" Text="{Binding Published.SelectedPublished.Url}"/>
 
-            <TextBlock Grid.Row="4" Text="Note"/>
+            <TextBlock Grid.Row="4" Text="{x:Static r:Text.Note}"/>
             <TextBox
                 Grid.Row="5"
                 Style="{StaticResource Panama.Styles.TextBox.Multiline}"
@@ -105,15 +105,15 @@
             Style="{StaticResource Panama.Styles.Panel.DataEntry}"
             Visibility="{Binding SelfPublished.EditVisibility}">
 
-            <TextBlock Grid.Row="0" Text="Published"/>
+            <TextBlock Grid.Row="0" Text="{x:Static r:Text.Published}"/>
             <DatePicker
                 Grid.Row="1"
                 SelectedDate="{Binding SelfPublished.PublishedDate}"/>
 
-            <TextBlock Grid.Row="2" Text="Url"/>
+            <TextBlock Grid.Row="2" Text="{x:Static r:Text.Url}"/>
             <TextBox Grid.Row="3" Text="{Binding SelfPublished.SelectedPublished.Url}"/>
 
-            <TextBlock Grid.Row="4" Text="Note"/>
+            <TextBlock Grid.Row="4" Text="{x:Static r:Text.Note}"/>
             <TextBox
                 Grid.Row="5"
                 Style="{StaticResource Panama.Styles.TextBox.Multiline}"
