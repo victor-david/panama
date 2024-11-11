@@ -114,12 +114,12 @@
                                         Command="{Binding CloseQueueEditCommand}"/>
                                 </StatusBarItem>
 
-                                <TextBlock Text="Edit Queue"/>
+                                <TextBlock Text="{x:Static r:Header.EditQueue}"/>
                             </StatusBar>
                         </con:Flyout.Header>
 
                         <StackPanel Style="{StaticResource Panama.Styles.Panel.DataEntry}">
-                            <TextBlock Text="Name"/>
+                            <TextBlock Text="{x:Static r:Text.Name}"/>
                             <TextBox MaxLength="32" Text="{Binding SelectedQueue.Name}"/>
                         </StackPanel>
 

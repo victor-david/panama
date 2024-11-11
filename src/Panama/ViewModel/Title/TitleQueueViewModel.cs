@@ -168,7 +168,7 @@ namespace Restless.Panama.ViewModel
             Queues = new ListCollectionView(queues);
             using (Queues.DeferRefresh())
             {
-                Queues.CustomSort = new GenericComparer<QueueRow>((x, y) => OnQueueDataRowCompare(x, y));
+                Queues.CustomSort = new GenericComparer<QueueRow>(OnQueueDataRowCompare);
                 Queues.IsLiveSorting = true;
                 Queues.LiveSortingProperties.Add(nameof(QueueRow.Name));
             }

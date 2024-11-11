@@ -286,4 +286,7 @@
   <data name="Scheduled" xml:space="preserve">
     <value>Programado</value>
   </data>
+  <data name="AddToQueue" xml:space="preserve">
+    <value>Agregar a la cola</value>
+  </data>
 </root>

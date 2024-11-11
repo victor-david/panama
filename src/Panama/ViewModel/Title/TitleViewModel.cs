@@ -14,7 +14,6 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.OpenXml;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
-using Restless.Toolkit.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -315,7 +314,7 @@ namespace Restless.Panama.ViewModel
 
                 foreach (QueueRow row in QueueTable.EnumerateAll())
                 {
-                    MenuItems.InsertItem(insertIdx, $"Add to queue {row.Name}", Commands["AddToQueue"])
+                    MenuItems.InsertItem(insertIdx, $"{Menu.AddToQueue}: {row.Name}", Commands["AddToQueue"])
                         .AddCommandParm(row)
                         .AddIconResource(ResourceKeys.Icon.IconTrayPlus);
                     insertIdx++;

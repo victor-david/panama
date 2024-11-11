@@ -205,6 +205,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add to queue.
+        /// </summary>
+        public static string AddToQueue {
+            get {
+                return ResourceManager.GetString("AddToQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a note.
         /// </summary>
         public static string AddUserNote {

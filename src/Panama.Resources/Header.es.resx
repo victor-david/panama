@@ -505,4 +505,7 @@
   <data name="Confirmation" xml:space="preserve">
     <value>Confirmación</value>
   </data>
+  <data name="EditQueue" xml:space="preserve">
+    <value>Modificar Cola</value>
+  </data>
 </root>

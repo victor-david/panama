@@ -351,4 +351,7 @@
   <data name="Scheduled" xml:space="preserve">
     <value>Scheduled</value>
   </data>
+  <data name="AddToQueue" xml:space="preserve">
+    <value>Add to queue</value>
+  </data>
 </root>

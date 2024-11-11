@@ -340,6 +340,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Queue.
+        /// </summary>
+        public static string EditQueue {
+            get {
+                return ResourceManager.GetString("EditQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabled.
         /// </summary>
         public static string Enabled {
