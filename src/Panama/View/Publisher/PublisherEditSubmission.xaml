@@ -18,6 +18,7 @@
 
     <tk:DataGrid
         Grid.Row="1"
+        Style="{StaticResource Panama.Styles.DataGrid.Locked}"
         Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
         ItemsSource="{Binding Submissions.ListView}"
         SelectedItem="{Binding Submissions.SelectedItem}"
@@ -34,17 +35,18 @@
 
     <tk:DataGrid
         Grid.Row="3"
+        Style="{StaticResource Panama.Styles.DataGrid.Locked}"
         Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
-        ItemsSource="{Binding Titles.ListView}"
-        SelectedItem="{Binding Titles.SelectedItem}"
-        tk:DataGridColumns.Columns="{Binding Titles.Columns}">
+        ItemsSource="{Binding Submissions.Titles.ListView}"
+        SelectedItem="{Binding Submissions.Titles.SelectedItem}"
+        tk:DataGridColumns.Columns="{Binding Submissions.Titles.Columns}">
 
         <DataGrid.ContextMenu>
-            <ContextMenu ItemsSource="{Binding Titles.MenuItems}"  />
+            <ContextMenu ItemsSource="{Binding Submissions.Titles.MenuItems}"  />
         </DataGrid.ContextMenu>
 
         <DataGrid.InputBindings>
-            <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Titles.OpenRowCommand}"/>
+            <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Submissions.Titles.OpenRowCommand}"/>
         </DataGrid.InputBindings>
 
     </tk:DataGrid>
@@ -52,7 +54,7 @@
     <TextBlock
         Grid.Row="3"
         Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
-        tk:Property.IsCollapsed="{Binding Titles.HaveItems}"
+        tk:Property.IsCollapsed="{Binding Submissions.Titles.HaveItems}"
         Text="{x:Static r:Text.NoTitles}"/>
 
 </Grid>
