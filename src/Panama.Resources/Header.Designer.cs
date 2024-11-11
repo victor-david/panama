@@ -403,6 +403,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exclusions.
+        /// </summary>
+        public static string Exclusions {
+            get {
+                return ResourceManager.GetString("Exclusions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exclusive.
         /// </summary>
         public static string Exclusive {

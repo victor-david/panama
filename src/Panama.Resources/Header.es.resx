@@ -526,4 +526,7 @@
   <data name="To" xml:space="preserve">
     <value>A</value>
   </data>
+  <data name="Exclusions" xml:space="preserve">
+    <value>Exclusiones</value>
+  </data>
 </root>

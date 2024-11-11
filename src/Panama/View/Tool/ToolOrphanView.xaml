@@ -28,7 +28,7 @@
                     <Run
                         Style="{StaticResource Panama.Styles.Run.Highlight}"
                         Text="{Binding ListView.Count, Mode=OneWay}"/>
-                    <Run Text="orphans"/>
+                    <Run Text="{x:Static r:Text.Orphans}"/>
                     </TextBlock>
                 </StatusBarItem>
 
@@ -43,8 +43,8 @@
                     </Button>
                 </StatusBarItem>
 
-                <TextBlock Text="Orphans"/>
-                <Button Content="Start" Command="{Binding StartScanCommand}"/>
+                <TextBlock Text="{x:Static r:Header.Orphan}"/>
+                <Button Content="{x:Static r:Text.Start}" Command="{Binding StartScanCommand}"/>
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
 
@@ -75,7 +75,7 @@
                 <con:Flyout Placement="Right" Width="530" IsOpen="{Binding IsCustomFilterOpen}">
 
                     <con:Flyout.Header>
-                        <vw:FlyoutHeader Title="Exclusions" ShowClearButton="False"/>
+                        <vw:FlyoutHeader Title="{x:Static r:Header.Exclusions}" ShowClearButton="False"/>
                     </con:Flyout.Header>
 
                     <DataGrid
@@ -108,7 +108,7 @@
                     Grid.Row="0" Grid.Column="0"
                     Margin="{StaticResource Panama.Layout.Padding.Right}"
                     Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
-                    Text="Size"/>
+                    Text="{x:Static r:Header.Size}"/>
 
                 <TextBlock
                     Grid.Row="0" Grid.Column="1"
@@ -118,7 +118,7 @@
                     Grid.Row="1" Grid.Column="0"
                     Margin="{StaticResource Panama.Layout.Padding.Right}"
                     Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
-                    Text="Updated"/>
+                    Text="{x:Static r:Header.Updated}"/>
 
                 <TextBlock
                     Grid.Row="1" Grid.Column="1"
