@@ -367,6 +367,33 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 14 days.
+        /// </summary>
+        public static string Days14 {
+            get {
+                return ResourceManager.GetString("Days14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 21 days.
+        /// </summary>
+        public static string Days21 {
+            get {
+                return ResourceManager.GetString("Days21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 30 days.
+        /// </summary>
+        public static string Days30 {
+            get {
+                return ResourceManager.GetString("Days30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default author.
         /// </summary>
         public static string DefaultAuthor {
@@ -507,15 +534,6 @@ namespace Restless.Panama.Resources {
         public static string FollowUp {
             get {
                 return ResourceManager.GetString("FollowUp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to From.
-        /// </summary>
-        public static string From {
-            get {
-                return ResourceManager.GetString("From", resourceCulture);
             }
         }
         
@@ -1087,20 +1105,20 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To.
-        /// </summary>
-        public static string To {
-            get {
-                return ResourceManager.GetString("To", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Total.
         /// </summary>
         public static string Total {
             get {
                 return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unassigned.
+        /// </summary>
+        public static string Unassigned {
+            get {
+                return ResourceManager.GetString("Unassigned", resourceCulture);
             }
         }
         

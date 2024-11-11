@@ -438,12 +438,6 @@
   <data name="Subject" xml:space="preserve">
     <value>Subject</value>
   </data>
-  <data name="From" xml:space="preserve">
-    <value>From</value>
-  </data>
-  <data name="To" xml:space="preserve">
-    <value>To</value>
-  </data>
   <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
@@ -485,5 +479,17 @@
   </data>
   <data name="TitleRenameStatusSuccess" xml:space="preserve">
     <value>Rename successful</value>
+  </data>
+  <data name="Days14" xml:space="preserve">
+    <value>14 days</value>
+  </data>
+  <data name="Days21" xml:space="preserve">
+    <value>21 days</value>
+  </data>
+  <data name="Days30" xml:space="preserve">
+    <value>30 days</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>Unassigned</value>
   </data>
 </root>

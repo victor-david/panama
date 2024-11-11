@@ -22,12 +22,12 @@
             tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto,Auto"
             SelectedValue="{Binding SelectedFilterValue}">
 
-            <tk:RadioButton Grid.Column="0" Value="1" Content="Unassigned"/>
-            <tk:RadioButton Grid.Column="1" Value="7" Content="7 days"/>
-            <tk:RadioButton Grid.Column="2" Value="14" Content="14 days"/>
-            <tk:RadioButton Grid.Column="3" Value="21" Content="21 days"/>
-            <tk:RadioButton Grid.Column="4" Value="30" Content="30 days"/>
-            <tk:RadioButton Grid.Column="5" Value="0" Content="All"/>
+            <tk:RadioButton Grid.Column="0" Value="1" Content="{x:Static r:Text.Unassigned}"/>
+            <tk:RadioButton Grid.Column="1" Value="7" Content="{x:Static r:Text.Days07}"/>
+            <tk:RadioButton Grid.Column="2" Value="14" Content="{x:Static r:Text.Days14}"/>
+            <tk:RadioButton Grid.Column="3" Value="21" Content="{x:Static r:Text.Days21}"/>
+            <tk:RadioButton Grid.Column="4" Value="30" Content="{x:Static r:Text.Days30}"/>
+            <tk:RadioButton Grid.Column="5" Value="0" Content="{x:Static r:Text.All}"/>
 
         </tk:RadioButtonPanel>
 
@@ -44,7 +44,7 @@
         <Button
             Grid.Row="2"
             Style="{StaticResource Panama.Styles.Button.Dialog}"
-            Content="Okay"
+            Content="{x:Static r:Text.Okay}"
             Command="{Binding Commands[Select]}"/>
 
     </Grid>

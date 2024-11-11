@@ -379,12 +379,6 @@
   <data name="Subject" xml:space="preserve">
     <value>Asunto</value>
   </data>
-  <data name="From" xml:space="preserve">
-    <value>De</value>
-  </data>
-  <data name="To" xml:space="preserve">
-    <value>A</value>
-  </data>
   <data name="Message" xml:space="preserve">
     <value>Mensaje</value>
   </data>
@@ -426,5 +420,17 @@
   </data>
   <data name="TitleRenameStatusSuccess" xml:space="preserve">
     <value>Renombrar exitoso</value>
+  </data>
+  <data name="Days14" xml:space="preserve">
+    <value>14 días</value>
+  </data>
+  <data name="Days21" xml:space="preserve">
+    <value>21 días</value>
+  </data>
+  <data name="Days30" xml:space="preserve">
+    <value>30 días</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>Sin asignar</value>
   </data>
 </root>

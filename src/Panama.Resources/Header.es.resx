@@ -523,4 +523,7 @@
   <data name="FileProperties" xml:space="preserve">
     <value>Propiedades del Archivo</value>
   </data>
+  <data name="To" xml:space="preserve">
+    <value>A</value>
+  </data>
 </root>

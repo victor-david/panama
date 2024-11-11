@@ -37,7 +37,7 @@
 
         <Grid.Resources>
             <Style TargetType="tk:LineItem" BasedOn="{StaticResource Panama.Styles.LineItem}">
-                <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked.Tight}"/>
+                <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
             </Style>
         </Grid.Resources>
 
@@ -45,10 +45,10 @@
             <TextBlock Text="{x:Static r:Text.Subject}"/>
             <TextBox Text="{Binding Messages.SelectedMessage.Display}"/>
 
-            <tk:LineItem Item="{x:Static r:Text.Subject}" Value="{Binding Messages.SelectedMessage.Subject}"/>
-            <tk:LineItem Item="{x:Static r:Text.Date}" Value="{Binding Messages.SelectedMessage.MessageDate}"/>
-            <tk:LineItem Item="{x:Static r:Text.From}" Value="{Binding Messages.SelectedMessage.SenderName}"/>
-            <tk:LineItem Item="{x:Static r:Text.To}" Value="{Binding Messages.SelectedMessage.RecipientName}"/>
+            <tk:LineItem Item="{x:Static r:Header.Subject}" Value="{Binding Messages.SelectedMessage.Subject}"/>
+            <tk:LineItem Item="{x:Static r:Header.Date}" Value="{Binding Messages.SelectedMessage.MessageDate}"/>
+            <tk:LineItem Item="{x:Static r:Header.From}" Value="{Binding Messages.SelectedMessage.SenderName}"/>
+            <tk:LineItem Item="{x:Static r:Header.To}" Value="{Binding Messages.SelectedMessage.RecipientName}"/>
         </StackPanel>
 
         <TextBlock Grid.Row="1" Text="{x:Static r:Text.Message}"/>
