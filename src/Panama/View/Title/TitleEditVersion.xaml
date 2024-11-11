@@ -70,15 +70,14 @@
         Grid.Row="1"
         tk:Property.IsNullCollapsed="{Binding Versions.SelectedVersion}">
 
-        <TextBlock Text="Note"/>
+        <TextBlock Text="{x:Static r:Text.Note}"/>
         <TextBox Text="{Binding Versions.SelectedVersion.Note}"/>
 
     </StackPanel>
 
-    <!-- Selected version internal properties Style="{StaticResource Panama.Styles.Panel.DataEntry}"-->
     <tk:NavigatorExpander
         Grid.Row="2"
-        Header="Internal File Properties"
+        Header="{x:Static r:Header.FileProperties}"
         Padding="{DynamicResource Panama.Layout.Padding.Vertical}"
         tk:Property.IsNullCollapsed="{Binding Versions.SelectedVersion}">
 
@@ -89,31 +88,31 @@
                 tk:Property.RowHeights="Auto,Auto,Auto"
                 tk:Property.IsVisible="{Binding Versions.IsOpenXml}">
 
-                <TextBlock Text="Created"/>
+                <TextBlock Text="{x:Static r:Text.Created}"/>
                 <TextBlock Grid.Row="1">
                     <Run Style="{StaticResource Panama.Styles.Run.Highlight}" Text="{Binding Versions.Properties.Core.Created, Mode=OneWay}"/>
                 </TextBlock>
 
-                <TextBlock Grid.Column="1" Text="Modified"/>
+                <TextBlock Grid.Column="1" Text="{x:Static r:Text.Modified}"/>
                 <TextBlock Grid.Row="1" Grid.Column="1">
                     <Run Style="{StaticResource Panama.Styles.Run.Highlight}" Text="{Binding Versions.Properties.Core.Modified, Mode=OneWay}"/>
                 </TextBlock>
 
                 <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
-                    <TextBlock Text="Title"/>
+                    <TextBlock Text="{x:Static r:Text.Title}"/>
                     <TextBox Text="{Binding Versions.Properties.Core.Title}"/>
 
-                    <TextBlock Text="Description / Comment"/>
+                    <TextBlock Text="{x:Static r:Text.Description}"/>
                     <TextBox Text="{Binding Versions.Properties.Core.Description}"/>
 
-                    <TextBlock Text="Subject"/>
+                    <TextBlock Text="{x:Static r:Text.Subject}"/>
                     <TextBox Text="{Binding Versions.Properties.Core.Subject}"/>
 
-                    <TextBlock Text="Company"/>
+                    <TextBlock Text="{x:Static r:Text.Company}"/>
                     <TextBox Text="{Binding Versions.Properties.Extended.Company}"/>
 
                     <Button
-                        Content="Save"
+                        Content="{x:Static r:Text.Save}"
                         Margin="{StaticResource Panama.Layout.Margin.Control.Stacked}"
                         Command="{Binding Versions.Commands[SaveProperty]}"/>
 

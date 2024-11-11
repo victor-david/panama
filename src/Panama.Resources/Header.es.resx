@@ -520,4 +520,7 @@
   <data name="Processed" xml:space="preserve">
     <value>Procesado</value>
   </data>
+  <data name="FileProperties" xml:space="preserve">
+    <value>Propiedades del Archivo</value>
+  </data>
 </root>

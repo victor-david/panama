@@ -466,6 +466,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File Properties.
+        /// </summary>
+        public static string FileProperties {
+            get {
+                return ResourceManager.GetString("FileProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flags.
         /// </summary>
         public static string Flags {

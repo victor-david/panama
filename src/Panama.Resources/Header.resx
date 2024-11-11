@@ -579,4 +579,7 @@
   <data name="Processed" xml:space="preserve">
     <value>Processed</value>
   </data>
+  <data name="FileProperties" xml:space="preserve">
+    <value>File Properties</value>
+  </data>
 </root>
