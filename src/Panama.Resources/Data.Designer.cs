@@ -61,6 +61,33 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Idle.
+        /// </summary>
+        public static string QueueTitleStatus000 {
+            get {
+                return ResourceManager.GetString("QueueTitleStatus000", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scheduled.
+        /// </summary>
+        public static string QueueTitleStatus001 {
+            get {
+                return ResourceManager.GetString("QueueTitleStatus001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published.
+        /// </summary>
+        public static string QueueTitleStatus002 {
+            get {
+                return ResourceManager.GetString("QueueTitleStatus002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (not specified).
         /// </summary>
         public static string SubmissionResponse001 {

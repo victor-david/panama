@@ -79,4 +79,13 @@
   <data name="SubmissionResponse003" xml:space="preserve">
     <value>Intenta de nuevo</value>
   </data>
+  <data name="QueueTitleStatus000" xml:space="preserve">
+    <value>Inactivo</value>
+  </data>
+  <data name="QueueTitleStatus001" xml:space="preserve">
+    <value>Programado</value>
+  </data>
+  <data name="QueueTitleStatus002" xml:space="preserve">
+    <value>Publicado</value>
+  </data>
 </root>
