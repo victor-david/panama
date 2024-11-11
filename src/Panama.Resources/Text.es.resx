@@ -403,4 +403,10 @@
   <data name="Status" xml:space="preserve">
     <value>Estado</value>
   </data>
+  <data name="Okay" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Seleccionado</value>
+  </data>
 </root>
