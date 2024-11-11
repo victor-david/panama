@@ -313,6 +313,7 @@
         <Setter Property="MinRowHeight" Value="28"/>
         <Setter Property="RowHeight" Value="{Binding Config.DataGridRowHeight}"/>
         <Setter Property="RowStyle" Value="{StaticResource Panama.Styles.DataGridRow}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
         <Style.Triggers>
             <Trigger Property="AlternationCount" Value="10">
                 <Setter Property="AlternatingRowBackground" Value="Transparent"/>
