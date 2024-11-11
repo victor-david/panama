@@ -474,4 +474,16 @@
   <data name="Modified" xml:space="preserve">
     <value>Modified</value>
   </data>
+  <data name="TitleRenameStatusMissing" xml:space="preserve">
+    <value>Missing</value>
+  </data>
+  <data name="TitleRenameStatusReady" xml:space="preserve">
+    <value>Ready to rename</value>
+  </data>
+  <data name="TitleRenameStatusAlready" xml:space="preserve">
+    <value>Already renamed</value>
+  </data>
+  <data name="TitleRenameStatusSuccess" xml:space="preserve">
+    <value>Rename successful</value>
+  </data>
 </root>

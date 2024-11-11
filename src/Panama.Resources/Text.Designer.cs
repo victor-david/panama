@@ -1015,6 +1015,42 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Already renamed.
+        /// </summary>
+        public static string TitleRenameStatusAlready {
+            get {
+                return ResourceManager.GetString("TitleRenameStatusAlready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing.
+        /// </summary>
+        public static string TitleRenameStatusMissing {
+            get {
+                return ResourceManager.GetString("TitleRenameStatusMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready to rename.
+        /// </summary>
+        public static string TitleRenameStatusReady {
+            get {
+                return ResourceManager.GetString("TitleRenameStatusReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename successful.
+        /// </summary>
+        public static string TitleRenameStatusSuccess {
+            get {
+                return ResourceManager.GetString("TitleRenameStatusSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No conflict.
         /// </summary>
         public static string TitleStatusOkay {

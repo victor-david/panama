@@ -1,10 +1,5 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Database.Tables;
+using Restless.Panama.Resources;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
@@ -59,18 +54,12 @@ namespace Restless.Panama.Core
         /// <summary>
         /// Gets the original file name.
         /// </summary>
-        public string OriginalName
-        {
-            get;
-        }
+        public string OriginalName { get; }
 
         /// <summary>
         /// Gets the original file name without any path part.
         /// </summary>
-        public string OriginalNameDisplay
-        {
-            get;
-        }
+        public string OriginalNameDisplay { get; }
 
         /// <summary>
         /// Gets a boolean value that indicates if the original file exists.
@@ -80,18 +69,12 @@ namespace Restless.Panama.Core
         /// <summary>
         /// Gets the proposed new name.
         /// </summary>
-        public string NewName
-        {
-            get;
-        }
+        public string NewName { get; }
 
         /// <summary>
         /// Gets the proposed new name without any path part.
         /// </summary>
-        public string NewNameDisplay
-        {
-            get;
-        }
+        public string NewNameDisplay { get; }
         #endregion
 
         /************************************************************************/
@@ -129,7 +112,7 @@ namespace Restless.Panama.Core
             NewName = Path.Combine(Path.GetDirectoryName(OriginalName), newNameWithoutPath);
             NewNameDisplay = Path.GetFileName(NewName);
 
-            Status = !OriginalExists ? "Missing" : Same ? "Already renamed" : "Ready to rename";
+            Status = !OriginalExists ? Text.TitleRenameStatusMissing : Same ? Text.TitleRenameStatusAlready : Text.TitleRenameStatusReady;
         }
         #endregion
 
@@ -149,7 +132,7 @@ namespace Restless.Panama.Core
             {
                 File.Move(OriginalName, NewName);
                 ver.FileName = Paths.Title.WithoutRoot(NewName);
-                Status = "Rename successful";
+                Status = Text.TitleRenameStatusSuccess;
             }
         }
         #endregion
