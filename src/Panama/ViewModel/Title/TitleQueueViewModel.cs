@@ -293,7 +293,7 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.Date, TableColumns.Date)
                 .MakeDate()
-                .AddCustomSort(null, TableColumns.Joined.Written, DataGridColumnSortBehavior.AlwaysDescending)
+                .AddSort(null, TableColumns.Joined.Written, DataGridColumnSortBehavior.AlwaysDescending)
                 .MakeInitialSortDescending();
 
             Columns.RestoreColumnState(Config.QueueTitleGridColumnState);

@@ -190,7 +190,7 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.Written, TableColumns.Written)
                 .MakeDate()
-                .AddCustomSort(null, TableColumns.Id, DataGridColumnSortBehavior.FollowPrimary)
+                .AddSort(null, TableColumns.Id, DataGridColumnSortBehavior.FollowPrimary)
                 .MakeInitialSortDescending();
 
             Columns.Create(Header.Updated, TableColumns.Calculated.LatestVersionDate)
