@@ -414,7 +414,7 @@ namespace Restless.Panama.Core
         private static void SetWindowProperties(Window window)
         {
             SetWindowOwner(window);
-            SetTextFormattingMode(window);
+            SetTextOptions(window);
             NativeMethods.ApplyRoundedCorners(window);
         }
 
@@ -427,9 +427,10 @@ namespace Restless.Panama.Core
             }
         }
 
-        private static void SetTextFormattingMode(DependencyObject element)
+        private static void SetTextOptions(DependencyObject element)
         {
             TextOptions.SetTextFormattingMode(element, TextFormattingMode.Display);
+            TextOptions.SetTextRenderingMode(element, TextRenderingMode.ClearType);
         }
         #endregion
     }
