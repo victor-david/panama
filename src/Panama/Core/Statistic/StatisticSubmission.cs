@@ -41,9 +41,6 @@ namespace Restless.Panama.Core
             yield return Statistic.Create(Text.MaxDays, maxDays);
             yield return Statistic.Create(Text.AverageDays, averageDays);
             yield return Statistic.Create(Text.Fees, fees);
-
-
-            // <tk:LineItem Item = "Fees" Value="{Binding Submission.TotalFees,Mode=OneTime,StringFormat=N2}"/>
         }
         #endregion
 
