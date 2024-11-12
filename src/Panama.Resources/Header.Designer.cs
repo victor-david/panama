@@ -1420,6 +1420,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Version Only.
+        /// </summary>
+        public static string VersionOnly {
+            get {
+                return ResourceManager.GetString("VersionOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Versions.
         /// </summary>
         public static string Versions {

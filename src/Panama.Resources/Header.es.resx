@@ -529,4 +529,7 @@
   <data name="Exclusions" xml:space="preserve">
     <value>Exclusiones</value>
   </data>
+  <data name="VersionOnly" xml:space="preserve">
+    <value>Solo con versión</value>
+  </data>
 </root>

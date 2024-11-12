@@ -21,15 +21,17 @@
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-                <TextBlock Text="Search:"/>
-                <TextBox Width="100" Text="{Binding SearchText}"/>
-                <CheckBox IsChecked="{Binding VersionOnly}" Content="Version only"/>
-                <Button Content="Begin" Command="{Binding Commands[StartSearch]}"/>
+                <TextBlock Text="{x:Static r:Header.Search}"/>
+
+                <TextBox Width="180" Text="{Binding SearchText}"/>
+
+                <CheckBox IsChecked="{Binding VersionOnly}" Content="{x:Static r:Header.VersionOnly}"/>
+
+                <Button Content="{x:Static r:Text.Start}" Command="{Binding Commands[StartSearch]}"/>
 
                 <Separator/>
 
-                <Button Content="Clear" Command="{Binding Commands[ClearSearch]}"/>
-
+                <Button Content="{x:Static r:Text.Clear}" Command="{Binding Commands[ClearSearch]}"/>
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
 
