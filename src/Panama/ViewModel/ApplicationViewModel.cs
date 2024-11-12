@@ -1,13 +1,9 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
+using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
+using System.Windows.Markup;
 
 namespace Restless.Panama.ViewModel
 {
@@ -16,7 +12,7 @@ namespace Restless.Panama.ViewModel
     /// </summary>
     public abstract class ApplicationViewModel : ViewModelBase, INavigator
     {
-        #region
+        #region Private
         private bool isOperationInProgress;
         #endregion
 
@@ -24,14 +20,19 @@ namespace Restless.Panama.ViewModel
 
         #region Public properties
         /// <summary>
+        /// Gets the current Xml language. All windows bind (in style def) to this property
+        /// </summary>
+        public XmlLanguage CurrentXmlLanguage => LanguageManager.Instance.GetCurrentXmlLanguage();
+
+        /// <summary>
         /// Gets the singletom instance of the application information object.
         /// </summary>
-        public Core.ApplicationInfo AppInfo => Core.ApplicationInfo.Instance;
+        public ApplicationInfo AppInfo => ApplicationInfo.Instance;
 
         /// <summary>
         /// Gets the singleton instance of the configuration object.
         /// </summary>
-        public Core.Config Config => Core.Config.Instance;
+        public Config Config => Config.Instance;
 
         /// <summary>
         /// Gets or (from a derived class) sets a boolean value that indicates in an async operation is in progress
@@ -100,6 +101,20 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected ApplicationViewModel()
         {
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Protected methods
+        /// <summary>
+        /// Called in response to a signaled language change.
+        /// When overriding, always call the base method to update <see cref="CurrentXmlLanguage"/>.
+        /// </summary>
+        protected override void OnLanguageChanged()
+        {
+            base.OnLanguageChanged();
+            OnPropertyChanged(nameof(CurrentXmlLanguage));
         }
         #endregion
     }

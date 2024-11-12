@@ -1,6 +1,7 @@
 ﻿using Restless.Panama.Resources;
 using System.Globalization;
 using System.Threading;
+using System.Windows.Markup;
 
 namespace Restless.Panama.Core
 {
@@ -26,6 +27,11 @@ namespace Restless.Panama.Core
             get;
             private set;
         }
+
+        /// <summary>
+        /// Gets the current Xml langauge.
+        /// </summary>
+        public XmlLanguage GetCurrentXmlLanguage() => XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
 
         /// <summary>
         /// Gets the list of supported languages.

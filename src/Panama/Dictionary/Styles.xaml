@@ -10,6 +10,8 @@
 
     <!-- Window -->
     <Style x:Key="Panama.Styles.MetroWindow" TargetType="mah:MetroWindow">
+        <!-- All view models derive from ApplicationViewModel which has CurrentXmlLanguage  -->
+        <Setter Property="Language" Value="{Binding CurrentXmlLanguage}"/>
         <Setter Property="TitleAlignment" Value="Center"/>
         <Setter Property="TitleCharacterCasing" Value="Normal"/>
         <Setter Property="TitleBarHeight" Value="{DynamicResource Panama.Layout.TitleBar.Height}"/>
