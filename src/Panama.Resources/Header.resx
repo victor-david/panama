@@ -156,7 +156,7 @@
   <data name="Column" xml:space="preserve">
     <value>Column</value>
   </data>
-  <data name="Columns" xml:space="preserve">
+  <data name="TableColumns" xml:space="preserve">
     <value>Columns</value>
   </data>
   <data name="ColumnsShort" xml:space="preserve">
@@ -590,5 +590,17 @@
   </data>
   <data name="VersionOnly" xml:space="preserve">
     <value>Version Only</value>
+  </data>
+  <data name="TableRelationsChild" xml:space="preserve">
+    <value>Relations (C)</value>
+  </data>
+  <data name="TableUniqueKey" xml:space="preserve">
+    <value>Unique Key</value>
+  </data>
+  <data name="TableForeignKey" xml:space="preserve">
+    <value>Foreign Key</value>
+  </data>
+  <data name="TableRelationsParent" xml:space="preserve">
+    <value>Relations (P)</value>
   </data>
 </root>

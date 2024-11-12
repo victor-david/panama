@@ -205,15 +205,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Columns.
-        /// </summary>
-        public static string Columns {
-            get {
-                return ResourceManager.GetString("Columns", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cols.
         /// </summary>
         public static string ColumnsShort {
@@ -1213,11 +1204,56 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Columns.
+        /// </summary>
+        public static string TableColumns {
+            get {
+                return ResourceManager.GetString("TableColumns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Foreign Key.
+        /// </summary>
+        public static string TableForeignKey {
+            get {
+                return ResourceManager.GetString("TableForeignKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Relations (C).
+        /// </summary>
+        public static string TableRelationsChild {
+            get {
+                return ResourceManager.GetString("TableRelationsChild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Relations (P).
+        /// </summary>
+        public static string TableRelationsParent {
+            get {
+                return ResourceManager.GetString("TableRelationsParent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tables.
         /// </summary>
         public static string Tables {
             get {
                 return ResourceManager.GetString("Tables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unique Key.
+        /// </summary>
+        public static string TableUniqueKey {
+            get {
+                return ResourceManager.GetString("TableUniqueKey", resourceCulture);
             }
         }
         
