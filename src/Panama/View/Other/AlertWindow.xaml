@@ -35,7 +35,7 @@
         </tk:DataGrid>
 
         <StatusBar Grid.Row="1">
-            <TextBlock Text="Postpone"/>
+            <TextBlock Text="{x:Static r:Text.Postpone}"/>
             <Button
                 Content="{x:Static r:Text.Days01}"
                 Command="{Binding PostponeCommand}"

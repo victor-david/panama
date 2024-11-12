@@ -54,8 +54,6 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public SelfPublisherViewModel()
         {
-            DisplayName = Header.SelfPublishers;
-
             Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);

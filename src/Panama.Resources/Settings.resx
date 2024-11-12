@@ -152,6 +152,9 @@ Changes will take effect after you restart the application.</value>
   <data name="Folder" xml:space="preserve">
     <value>Folders</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
   <data name="NavigatorHeader" xml:space="preserve">
     <value>Main Navigator Header</value>
   </data>

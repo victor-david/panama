@@ -4,8 +4,8 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Panama.Core;
 using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections;
@@ -253,7 +253,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Override in a derived class to perform actions when the selected item changes. 
+        /// Override in a derived class to perform actions when the selected item changes.
         /// Always call the base implementation to perform standard operations.
         /// </summary>
         protected virtual void OnSelectedItemChanged()

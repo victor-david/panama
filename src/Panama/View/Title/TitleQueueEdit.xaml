@@ -22,7 +22,7 @@
         Content="{x:Static r:Text.ClearDate}"/>
 
     <!-- Status -->
-    <TextBlock Text="Status"/>
+    <TextBlock Text="{x:Static r:Text.Status}"/>
     <ListBox
         BorderThickness="1"
         ItemsSource="{Binding TitleStatus}"

@@ -5,7 +5,6 @@
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:core="clr-namespace:Restless.Panama.Core"
     xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
-    xmlns:vw="clr-namespace:Restless.Panama.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
@@ -21,7 +20,7 @@
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-                <TextBlock Text="{x:Static r:Menu.LinkVerify}"/>
+                <TextBlock Text="{x:Static r:Header.LinkVerify}"/>
 
                 <Separator/>
 
@@ -89,12 +88,12 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <tk:LineItem Item="Source" Value="{Binding SelectedLink.Source}"/>
-                <tk:LineItem Item="Url" Value="{Binding SelectedLink.Url}"/>
-                <tk:LineItem Item="Status" Value="{Binding SelectedLink.Status}"/>
-                <tk:LineItem Item="Text" Value="{Binding SelectedLink.StatusText}"/>
-                <tk:LineItem Item="Size" Value="{Binding SelectedLink.Size}"/>
-                <tk:LineItem Item="Error" Value="{Binding SelectedLink.Error}"/>
+                <tk:LineItem Item="{x:Static r:Header.Source}" Value="{Binding SelectedLink.Source}"/>
+                <tk:LineItem Item="{x:Static r:Header.Url}" Value="{Binding SelectedLink.Url}"/>
+                <tk:LineItem Item="{x:Static r:Header.Status}" Value="{Binding SelectedLink.Status}"/>
+                <tk:LineItem Item="{x:Static r:Header.Text}" Value="{Binding SelectedLink.StatusText}"/>
+                <tk:LineItem Item="{x:Static r:Header.Size}" Value="{Binding SelectedLink.Size}"/>
+                <tk:LineItem Item="{x:Static r:Header.Error}" Value="{Binding SelectedLink.Error}"/>
 
             </StackPanel>
 

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Advanced">
+    <value>Avanzado</value>
+  </data>
+  <data name="AutoSortOnUpdated">
+    <value>Ordenación automática de la lista de títulos actualizada (requiere reinicio)</value>
+  </data>
+  <data name="Color">
+    <value>Color</value>
+  </data>
+  <data name="DatabaseLocation">
+    <value>Ubicación de la base de datos</value>
+  </data>
+  <data name="DatabaseLocationText">
+    <value>Cambiar la ubicación de la base de datos creará una nueva base de datos. No se copiarán datos. Si desea preservar sus datos, copie todos los archivos de la ubicación anterior a la nueva. Los cambios se aplicarán después de reiniciar la aplicación.</value>
+  </data>
+  <data name="DataGridRowAlternation">
+    <value>Alternancia de filas en la cuadrícula de datos</value>
+  </data>
+  <data name="DataGridRowHeight">
+    <value>Altura de la fila de la cuadrícula de datos</value>
+  </data>
+  <data name="DateFormat">
+    <value>Formato de fecha</value>
+  </data>
+  <data name="DeveloperTool">
+    <value>Habilitar herramientas de desarrollador</value>
+  </data>
+  <data name="Display">
+    <value>Pantalla</value>
+  </data>
+  <data name="Folder">
+    <value>Carpetas</value>
+  </data>
+  <data name="Language">
+    <value>Idioma</value>
+  </data>
+  <data name="NavigatorHeader">
+    <value>Cabecera Principal del Navegador</value>
+  </data>
+  <data name="OrphanFinder">
+    <value>Habilitar herramienta de búsqueda de huérfanos</value>
+  </data>
+  <data name="Queue">
+    <value>Habilitar colas de títulos</value>
+  </data>
+  <data name="Search">
+    <value>Habilitar herramienta de búsqueda</value>
+  </data>
+  <data name="Submission">
+    <value>Envío</value>
+  </data>
+  <data name="TextViewer">
+    <value>Visor de Texto</value>
+  </data>
+  <data name="Theme">
+    <value>Temas</value>
+  </data>
+  <data name="VerifyLinks">
+    <value>Habilitar herramienta de verificación de enlaces (experimental)</value>
+  </data>
+</root>

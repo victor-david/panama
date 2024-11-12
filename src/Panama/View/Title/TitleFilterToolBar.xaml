@@ -12,7 +12,9 @@
     Style="{StaticResource Panama.Styles.StatusBar}"
     d:DesignWidth="860" d:DesignHeight="76">
 
-    <TextBlock Text="{x:Static r:Text.Filters}"/>
+    <TextBlock Text="{x:Static r:Header.Titles}"/>
+
+    <Separator/>
 
     <Button
         Content="{x:Static r:Menu.Ready}"

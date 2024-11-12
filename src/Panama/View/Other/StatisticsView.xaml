@@ -1,4 +1,4 @@
-﻿<Grid
+﻿<UserControl
     x:Class="Restless.Panama.View.StatisticsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,104 +9,91 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:StatisticsViewModel}"
     mc:Ignorable="d"
-    d:DesignWidth="460" d:DesignHeight="450"
-    tk:Property.ColumnWidths="*,1.25*">
+    d:DesignWidth="460" d:DesignHeight="450">
 
-    <Grid.Resources>
-        <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource Panama.Styles.NavigatorExpander}">
-            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom.Tight}"/>
-        </Style>
+    <Grid tk:Property.ColumnWidths="*,*">
 
-        <Style TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}">
-            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom}"/>
-        </Style>
+        <Grid.Resources>
+            <Style TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}">
+                <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom.Tight}"/>
+            </Style>
 
-        <Style TargetType="tk:LineItem" BasedOn="{StaticResource Panama.Styles.LineItem}">
-            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked.Tight}"/>
-            <Setter Property="ItemDisplayWidth" Value="160"/>
-            <Setter Property="IndentLevel" Value="3"/>
-        </Style>
+            <Style TargetType="DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid.Locked}">
+                <Setter Property="CanUserResizeColumns" Value="False"/>
+                <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom}"/>
+                <Setter Property="MinRowHeight" Value="24"/>
+                <Setter Property="RowHeight" Value="24"/>
+            </Style>
 
-    </Grid.Resources>
+        </Grid.Resources>
 
-    <!-- Basic-->
-    <Grid Grid.Column="0" tk:Property.RowHeights="Auto,*" Margin="{DynamicResource Panama.Layout.Padding.Right}">
-        <StatusBar>
-            <TextBlock Text="Basic Stats"/>
-        </StatusBar>
+        <!-- Basic-->
+        <StackPanel Grid.Column="0" Margin="{DynamicResource Panama.Layout.Padding.Right}">
 
-        <StackPanel Grid.Row="1">
-            <tk:NavigatorExpander Header="Titles" IsExpanded="{Binding Config.IsStatisticTitleExpanded}">
-                <tk:LineItem Item="Total" Value="{Binding Title.RowCount,Mode=OneTime}"/>
-            </tk:NavigatorExpander>
+            <!-- Title versions -->
+            <StatusBar>
+                <TextBlock Text="{x:Static r:Header.Versions}"/>
+            </StatusBar>
 
-            <tk:NavigatorExpander Header="Versions" IsExpanded="{Binding Config.IsStatisticVersionExpanded}">
-                <StackPanel>
-                    <tk:LineItem Item="Total" Value="{Binding Version.RowCount,Mode=OneTime}"/>
-                    <tk:LineItem Item=".docx" Value="{Binding Version.WordOpenXmlCount,Mode=OneTime}"/>
-                    <tk:LineItem Item=".doc" Value="{Binding Version.Word2007Count,Mode=OneTime}"/>
-                    <tk:LineItem Item=".pdf" Value="{Binding Version.PdfCount,Mode=OneTime}"/>
-                    <tk:LineItem Item=".txt" Value="{Binding Version.TextCount,Mode=OneTime}"/>
-                    <tk:LineItem Item=".html" Value="{Binding Version.HtmlCount,Mode=OneTime}"/>
-                    <tk:LineItem Item="shared" Value="{Binding Version.SharedCount,Mode=OneTime}"/>
-                </StackPanel>
-            </tk:NavigatorExpander>
+            <DataGrid ItemsSource="{Binding Version}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{x:Static r:Header.Item}" Binding="{Binding ItemName}" Width="180"/>
+                    <DataGridTextColumn Header="{x:Static r:Header.Value}" Binding="{Binding ItemValue}"/>
+                </DataGrid.Columns>
+            </DataGrid>
 
-            <tk:NavigatorExpander Header="Submissions" IsExpanded="{Binding Config.IsStatisticSubmissionExpanded}">
-                <StackPanel>
-                    <tk:LineItem Item="Total" Value="{Binding Submission.RowCount,Mode=OneTime}"/>
-                    <tk:LineItem Item="Active" Value="{Binding Submission.ActiveCount,Mode=OneTime}"/>
-                    <tk:LineItem Item="Accepted" Value="{Binding Submission.AcceptedCount,Mode=OneTime}"/>
-                    <tk:LineItem Item="Rejected" Value="{Binding Submission.RejectedCount,Mode=OneTime}"/>
-                    <tk:LineItem Item="Fees" Value="{Binding Submission.TotalFees,Mode=OneTime,StringFormat=N2}"/>
-                </StackPanel>
-            </tk:NavigatorExpander>
+            <!-- Submissions -->
+            <StatusBar>
+                <TextBlock Text="{x:Static r:Header.Submissions}"/>
+            </StatusBar>
 
-            <tk:NavigatorExpander Header="Publisher" IsExpanded="{Binding Config.IsStatisticPublisherExpanded}">
-                <StackPanel>
-                    <tk:LineItem Item="Total" Value="{Binding Publisher.RowCount,Mode=OneTime}"/>
-                    <tk:LineItem Item="In Period" Value="{Binding Publisher.InSubmissionPeriodCount,Mode=OneTime}"/>
-                    <tk:LineItem Item="Followup" Value="{Binding Publisher.FollowupCount,Mode=OneTime}"/>
-                    <tk:LineItem Item="Paying" Value="{Binding Publisher.PayingCount,Mode=OneTime}"/>
-                    <tk:LineItem Item="Exclusive" Value="{Binding Publisher.ExclusiveCount,Mode=OneTime}"/>
-                    <tk:LineItem Item="Goner" Value="{Binding Publisher.GonerCount,Mode=OneTime}"/>
-                </StackPanel>
-            </tk:NavigatorExpander>
+            <DataGrid ItemsSource="{Binding Submission}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{x:Static r:Header.Item}" Binding="{Binding ItemName}" Width="180"/>
+                    <DataGridTextColumn Header="{x:Static r:Header.Value}" Binding="{Binding ItemValue}"/>
+                </DataGrid.Columns>
+            </DataGrid>
 
-            <tk:NavigatorExpander Header="Submission replies (days)" IsExpanded="{Binding Config.IsStatisticReplyExpanded}" BorderThickness="0">
-                <StackPanel>
-                    <tk:LineItem Item="Minimum" Value="{Binding Submission.MinimumDays}"/>
-                    <tk:LineItem Item="Maximum" Value="{Binding Submission.MaximumDays}"/>
-                    <tk:LineItem Item="Average" Value="{Binding Submission.AverageDays}"/>
-                </StackPanel>
-            </tk:NavigatorExpander>
+            <!-- Publishers -->
+            <StatusBar>
+                <TextBlock Text="{x:Static r:Header.Publishers}"/>
+            </StatusBar>
+
+            <DataGrid ItemsSource="{Binding Publisher}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{x:Static r:Header.Item}" Binding="{Binding ItemName}" Width="180"/>
+                    <DataGridTextColumn Header="{x:Static r:Header.Value}" Binding="{Binding ItemValue}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
         </StackPanel>
+
+        <!-- Folders -->
+        <Grid Grid.Column="1" tk:Property.RowHeights="Auto,*" Margin="{StaticResource Panama.Layout.Padding.Left}">
+            <StatusBar>
+                <TextBlock Text="{x:Static r:Header.Folders}"/>
+            </StatusBar>
+
+            <DockPanel Grid.Row="1">
+                <TreeView
+                    DockPanel.Dock="Top"
+                    BorderThickness="0"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    ItemsSource="{Binding FolderView}"
+                    tk:Property.IsCollapsed="{Binding IsOperationInProgress}"/>
+
+                <ProgressBar
+                    DockPanel.Dock="Top"
+                    Height="18"
+                    IsIndeterminate="True"
+                    tk:Property.IsVisible="{Binding IsOperationInProgress}"/>
+
+                <TextBlock
+                    DockPanel.Dock="Top"
+                    tk:Property.IsCollapsed="{Binding HaveTitleRoot}"
+                    Text="{x:Static r:Error.TitleRootFolderNotSet}"/>
+            </DockPanel>
+        </Grid>
+
     </Grid>
-
-    <!-- Folders -->
-    <Grid Grid.Column="1" tk:Property.RowHeights="Auto,*" Margin="{StaticResource Panama.Layout.Padding.Left}">
-        <StatusBar>
-            <TextBlock Text="Folders"/>
-        </StatusBar>
-
-        <DockPanel Grid.Row="1">
-            <TreeView
-                DockPanel.Dock="Top"
-                BorderThickness="0"
-                ScrollViewer.VerticalScrollBarVisibility="Auto"
-                ItemsSource="{Binding FolderView}"
-                tk:Property.IsCollapsed="{Binding IsOperationInProgress}"/>
-
-            <ProgressBar
-                DockPanel.Dock="Top"
-                Height="18"
-                IsIndeterminate="True"
-                tk:Property.IsVisible="{Binding IsOperationInProgress}"/>
-
-            <TextBlock
-                DockPanel.Dock="Top"
-                tk:Property.IsCollapsed="{Binding HaveTitleRoot}"
-                Text="{x:Static r:Error.TitleRootFolderNotSet}"/>
-        </DockPanel>
-    </Grid>
-</Grid>
+</UserControl>

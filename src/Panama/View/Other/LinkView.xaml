@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:core="clr-namespace:Restless.Panama.Core"
+    xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
@@ -19,7 +20,7 @@
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-                <TextBlock Text="Links"/>
+                <TextBlock Text="{x:Static r:Header.Links}"/>
                 <!-- no filters for now -->
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
@@ -49,11 +50,11 @@
 
         <tk:SplitterGrid.ContentRight>
             <StackPanel Style="{StaticResource Panama.Styles.Panel.DataEntry}" Visibility="{Binding EditVisibility}">
-                <TextBlock Text="Name"/>
+                <TextBlock Text="{x:Static r:Text.Name}"/>
                 <TextBox Text="{Binding SelectedLink.Name}"/>
-                <TextBlock Text="Url"/>
+                <TextBlock Text="{x:Static r:Text.Url}"/>
                 <TextBox Text="{Binding SelectedLink.Url}"/>
-                <TextBlock Text="Note"/>
+                <TextBlock Text="{x:Static r:Text.Note}"/>
                 <TextBox Text="{Binding SelectedLink.Notes}"/>
             </StackPanel>
         </tk:SplitterGrid.ContentRight>

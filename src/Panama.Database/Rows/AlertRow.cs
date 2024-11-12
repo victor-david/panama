@@ -4,11 +4,8 @@
  * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
  * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
 */
-using Restless.Toolkit.Core.Database.SQLite;
 using System;
-using System.ComponentModel;
 using System.Data;
-using System.Globalization;
 using Columns = Restless.Panama.Database.Tables.AlertTable.Defs.Columns;
 
 namespace Restless.Panama.Database.Tables
@@ -16,14 +13,8 @@ namespace Restless.Panama.Database.Tables
     /// <summary>
     /// Encapsulates a single row from the <see cref="AlertTable"/>.
     /// </summary>
-    public class AlertRow : RowObjectBase<AlertTable>, INotifyPropertyChanged
+    public class AlertRow : DateRowObject<AlertTable>
     {
-        #region Private
-        private string dateFormat;
-        #endregion
-
-        /************************************************************************/
-
         #region Public properties
         /// <summary>
         /// Gets the default title value.
@@ -59,7 +50,7 @@ namespace Restless.Panama.Database.Tables
         public DateTime Date
         {
             get => GetDateTime(Columns.Date);
-            set => SetValue(Columns.Date, value);
+            set => SetDateValue(Columns.Date, value, nameof(DateFormatted));
         }
 
         /// <summary>
@@ -77,15 +68,9 @@ namespace Restless.Panama.Database.Tables
         public bool HasUrl => !string.IsNullOrEmpty(Url);
 
         /// <summary>
-        /// Gets a formatted value for <see cref="Date"/> converted to local time.
+        /// Gets a formatted value for <see cref="Date"/>.
         /// </summary>
-        public string DateLocal => Date.ToLocalTime().ToString(dateFormat, CultureInfo.InvariantCulture);
-        #endregion
-
-        /************************************************************************/
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+        public string DateFormatted => GetFormattedDate(Date);
         #endregion
 
         /************************************************************************/
@@ -97,7 +82,6 @@ namespace Restless.Panama.Database.Tables
         /// <param name="row">The data row</param>
         public AlertRow(DataRow row) : base(row)
         {
-            dateFormat = "MMM dd, yyyy";
         }
 
         /// <summary>
@@ -115,18 +99,6 @@ namespace Restless.Panama.Database.Tables
 
         #region Public methods
         /// <summary>
-        /// Sets the date format used for <see cref="DateLocal"/>
-        /// </summary>
-        /// <param name="value"></param>
-        public void SetDateFormat(string value)
-        {
-            if (!string.IsNullOrWhiteSpace(value))
-            {
-                dateFormat = value;
-            }
-        }
-
-        /// <summary>
         /// Postpones the alert by the specified number of days
         /// </summary>
         /// <param name="days">Number of days to postpone</param>
@@ -141,19 +113,6 @@ namespace Restless.Panama.Database.Tables
         public void Dismiss()
         {
             Enabled = false;
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Protected methods
-        /// <inheritdoc/>
-        protected override void OnSetValue(string columnName, object value)
-        {
-            if (columnName == Columns.Date)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DateLocal)));
-            }
         }
         #endregion
     }

@@ -37,17 +37,17 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the title version statistics object.
         /// </summary>
-        public TitleVersionTableStats Version { get; }
+        public StatisticTitleVersion Version { get; }
 
         /// <summary>
         /// Gets the submission statistics object.
         /// </summary>
-        public SubmissionBatchTableStats Submission { get; }
+        public StatisticSubmission Submission { get; }
 
         /// <summary>
         /// Gets the publisher statistics object.
         /// </summary>
-        public PublisherTableStats Publisher { get; }
+        public StatisticPublisher Publisher { get; }
 
         /// <summary>
         /// Gets the folder view that displays folder statistics.
@@ -74,9 +74,10 @@ namespace Restless.Panama.ViewModel
         public StatisticsViewModel()
         {
             Title = new TableStatisticBase(TitleTable);
-            Version = new TitleVersionTableStats(TitleVersionTable);
-            Submission = new SubmissionBatchTableStats(SubmissionBatchTable);
-            Publisher = new PublisherTableStats(PublisherTable);
+            Version = new StatisticTitleVersion(TitleVersionTable);
+            Submission = new StatisticSubmission(SubmissionBatchTable);
+
+            Publisher = new StatisticPublisher(PublisherTable);
             FolderView = new ObservableCollection<TreeViewItem>();
             HaveTitleRoot = !string.IsNullOrEmpty(Config.FolderTitleRoot) && Directory.Exists(Config.FolderTitleRoot);
         }

@@ -3,11 +3,11 @@
 namespace Restless.Panama.View
 {
     /// <summary>
-    /// Interaction logic for PublisherEditCredentials.xaml
+    /// Interaction logic for SettingLanguage.xaml
     /// </summary>
-    public partial class PublisherEditCredential : StackPanel
+    public partial class SettingsLanguage : UserControl
     {
-        public PublisherEditCredential()
+        public SettingsLanguage()
         {
             InitializeComponent();
         }

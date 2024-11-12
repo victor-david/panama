@@ -1,5 +1,7 @@
 ﻿using Restless.Panama.Resources;
 using System.Globalization;
+using System.Threading;
+using System.Windows.Markup;
 
 namespace Restless.Panama.Core
 {
@@ -16,6 +18,20 @@ namespace Restless.Panama.Core
         /// Gets the default language id, en-us
         /// </summary>
         public const string DefaultLanguageId = "en-us";
+
+        /// <summary>
+        /// Gets the current language id
+        /// </summary>
+        public string CurrentLanguageId
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the current Xml langauge.
+        /// </summary>
+        public XmlLanguage GetCurrentXmlLanguage() => XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
 
         /// <summary>
         /// Gets the list of supported languages.
@@ -35,10 +51,11 @@ namespace Restless.Panama.Core
         {
             Languages = new LanguageItemCollection()
             {
-                new LanguageItem(DefaultLanguageId, Language.English),
-                new LanguageItem("es", Language.Spanish)
+                new LanguageItem(DefaultLanguageId, nameof(Language.English)),
+                new LanguageItem("es", nameof(Language.Spanish))
             };
 
+            CurrentLanguageId = DefaultLanguageId;
             SetLanguage(DefaultLanguageId);
         }
         #endregion
@@ -54,6 +71,8 @@ namespace Restless.Panama.Core
         {
             if (Languages.GetLanguageItem(languageId) is LanguageItem item)
             {
+                CurrentLanguageId = languageId;
+
                 culture = new CultureInfo(item.Id);
 
                 Confirm.Culture = culture;
@@ -68,8 +87,11 @@ namespace Restless.Panama.Core
 
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
+                Thread.CurrentThread.CurrentCulture = culture;
+                Thread.CurrentThread.CurrentUICulture = culture;
                 TranslationSource.Instance.CurrentCulture = culture;
-                //Languages.SetDisplayLanguage(item);
+
+                Languages.ForEach(item => item.UpdateDisplayName(culture));
             }
         }
         #endregion

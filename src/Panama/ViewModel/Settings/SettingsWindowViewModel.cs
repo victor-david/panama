@@ -4,7 +4,6 @@ using Restless.Panama.Core;
 using Restless.Panama.Resources;
 using Restless.Panama.Utility;
 using System.Collections.Generic;
-using Mah = ControlzEx.Theming;
 
 namespace Restless.Panama.ViewModel
 {
@@ -12,6 +11,7 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private NavigatorSection selectedSection;
+        private LanguageItem selectedLanguage;
         #endregion
 
         /************************************************************************/
@@ -49,8 +49,35 @@ namespace Restless.Panama.ViewModel
             set => RegistryManager.SetDatabaseDirectory(value);
         }
 
-        public SettingsThemeController Themes { get; }
+        /// <summary>
+        /// Gets a boolean value that indicates if a language switch is pending
+        /// </summary>
+        public bool IsLanguageChangePending => Config.LanguageId != LanguageManager.Instance.CurrentLanguageId;
 
+        public LanguageItem SelectedLanguage
+        {
+            get => selectedLanguage;
+            set
+            {
+                if (SetProperty(ref selectedLanguage, value) && selectedLanguage != null)
+                {
+                    Config.LanguageId = SelectedLanguage.Id;
+                    OnPropertyChanged(nameof(IsLanguageChangePending));
+                    /**
+                     * The following can't be used unless live switching is implemented.
+                     * Without live, setting the language causes view models that haven't
+                     * yet been loaded to use the switched language, resulting in mixed.
+                     */
+                    //LanguageManager.Instance.SetLanguage(Config.LanguageId);
+                    //MainWindowViewModel.Instance.SignalLanguageChange();
+                    //SignalLanguageChange();
+                }
+            }
+        }
+
+        public LanguageItemCollection Languages => LanguageManager.Instance.Languages;
+
+        public SettingsThemeController Themes { get; }
         #endregion
 
         /************************************************************************/
@@ -66,9 +93,10 @@ namespace Restless.Panama.ViewModel
                 new NavigatorSection(Settings.Display, 1),
                 new NavigatorSection(Settings.Folder, 2),
                 new NavigatorSection(Settings.Theme, 3),
-                new NavigatorSection(Settings.Color, 4),
-                new NavigatorSection(Settings.Submission, 5),
-                new NavigatorSection(Settings.Advanced, 6),
+                new NavigatorSection(Settings.Language, 4),
+                new NavigatorSection(Settings.Color, 5),
+                new NavigatorSection(Settings.Submission, 6),
+                new NavigatorSection(Settings.Advanced, 7),
             };
 
             NavigatorHeaders = new List<NavigatorHeader>()
@@ -77,6 +105,9 @@ namespace Restless.Panama.ViewModel
                 NavigatorHeader.Simple,
                 NavigatorHeader.Titled
             };
+
+            // set the backing store to avoid triggering the setter
+            selectedLanguage = LanguageManager.Instance.Languages.GetLanguageItem(Config.LanguageId);
 
             Themes = new SettingsThemeController();
 

@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
@@ -16,7 +10,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Represents the controller that handles the titles that have been submitted to a publisher.
     /// </summary>
-    public class PublisherSubmissionTitleController : BaseController<PublisherViewModel, SubmissionTable>
+    public class PublisherSubmissionTitleController : BaseController<PublisherSubmissionController, SubmissionTable>
     {
         #region Private
         private SubmissionRow selectedSubmission;
@@ -42,7 +36,7 @@ namespace Restless.Panama.ViewModel
         /// Initializes a new instance of the <see cref="PublisherSubmissionTitleController"/> class.
         /// </summary>
         /// <param name="owner">The view model that owns this controller.</param>
-        public PublisherSubmissionTitleController(PublisherViewModel owner) : base(owner)
+        public PublisherSubmissionTitleController(PublisherSubmissionController owner) : base(owner)
         {
             Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
@@ -52,7 +46,7 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W048);
 
-            Columns.Create(Header.Title, TableColumns.Joined.Title);
+            Columns.Create(Header.Title, TableColumns.Joined.Title).MakeInitialSortAscending();
 
             Columns.Create(Header.Written, TableColumns.Joined.Written).MakeDate();
 
@@ -73,13 +67,13 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {
-            return DataRowCompareDateTime(item2, item1, TableColumns.Joined.Submitted);
+            return DataRowCompareString(item1, item2, TableColumns.Joined.Title);
         }
 
         /// <inheritdoc/>
         protected override bool OnDataRowFilter(DataRow item)
         {
-            return (long)item[TableColumns.Joined.PublisherId] == (Owner?.SelectedPublisher?.Id ?? 0);
+            return (long)item[TableColumns.BatchId] == (Owner?.SelectedBatch?.Id ?? 0);
         }
 
         /// <inheritdoc/>

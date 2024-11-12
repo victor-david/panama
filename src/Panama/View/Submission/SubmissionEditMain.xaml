@@ -5,6 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
@@ -12,17 +13,17 @@
     Style="{StaticResource Panama.Styles.Panel.DataEntry}"
     d:DesignHeight="400" d:DesignWidth="400">
 
-    <CheckBox Grid.Row="0" IsChecked="{Binding SelectedBatch.IsOnline}" Content="Online"/>
-    <CheckBox Grid.Row="1" IsChecked="{Binding SelectedBatch.IsContest}" Content="Contest"/>
-    <CheckBox Grid.Row="2" IsChecked="{Binding SelectedBatch.IsLocked}" Content="Locked"/>
+    <CheckBox Grid.Row="0" IsChecked="{Binding SelectedBatch.IsOnline}" Content="{x:Static r:Text.Online}"/>
+    <CheckBox Grid.Row="1" IsChecked="{Binding SelectedBatch.IsContest}" Content="{x:Static r:Text.Contest}"/>
+    <CheckBox Grid.Row="2" IsChecked="{Binding SelectedBatch.IsLocked}" Content="{x:Static r:Text.Locked}"/>
 
-    <TextBlock Grid.Row="3" Text="Fee"/>
+    <TextBlock Grid.Row="3" Text="{x:Static r:Text.Fee}"/>
     <TextBox Grid.Row="4" Text="{Binding SelectedBatch.Fee, StringFormat=N2}"/>
 
-    <TextBlock Grid.Row="5" Text="Award"/>
+    <TextBlock Grid.Row="5" Text="{x:Static r:Text.Award}"/>
     <TextBox Grid.Row="6" Text="{Binding SelectedBatch.Award, StringFormat=N2}"/>
 
-    <TextBlock Grid.Row="7" Text="Notes"/>
+    <TextBlock Grid.Row="7" Text="{x:Static r:Text.Notes}"/>
     <TextBox
         Grid.Row="8"
         Style="{StaticResource Panama.Styles.TextBox.Multiline}"

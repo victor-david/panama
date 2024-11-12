@@ -15,7 +15,6 @@
     mc:Ignorable="d"
     Style="{StaticResource Panama.Styles.MetroWindow}"
     Title="{Binding Path=DisplayName, Mode=OneTime}"
-    TextOptions.TextRenderingMode="ClearType"
     WindowStartupLocation="CenterScreen">
 
     <mah:MetroWindow.LeftWindowCommands>

@@ -212,30 +212,30 @@ namespace Restless.Panama.ViewModel
         {
             NavigatorItems.AddHeader(Header.Main);
 
-            NavigatorItems.AddNavigator<TitleViewModel>(Menu.Titles, IconKind.SubtitlesOutline);
-            NavigatorItems.AddNavigator<TitleQueueViewModel>(Menu.Queues, IconKind.TrayFull);
-            NavigatorItems.AddNavigator<PublisherViewModel>(Menu.Publishers, IconKind.MessageCheckOutline);
-            NavigatorItems.AddNavigator<SelfPublisherViewModel>(Menu.SelfPublishers, IconKind.MessageFlashOutline);
-            NavigatorItems.AddNavigator<SubmissionViewModel>(Menu.Submissions, IconKind.MessageReplyTextOutline);
+            NavigatorItems.AddNavigator<TitleViewModel>(Header.Titles, IconKind.SubtitlesOutline);
+            NavigatorItems.AddNavigator<TitleQueueViewModel>(Header.Queues, IconKind.TrayFull);
+            NavigatorItems.AddNavigator<PublisherViewModel>(Header.Publishers, IconKind.MessageCheckOutline);
+            NavigatorItems.AddNavigator<SelfPublisherViewModel>(Header.SelfPublishers, IconKind.MessageFlashOutline);
+            NavigatorItems.AddNavigator<SubmissionViewModel>(Header.Submissions, IconKind.MessageReplyTextOutline);
 
             NavigatorItems.AddHeader(Header.Settings);
 
-            NavigatorItems.AddNavigator<AuthorViewModel>(Menu.Authors, IconKind.AccountOutline);
-            NavigatorItems.AddNavigator<TagViewModel>(Menu.Tags, IconKind.TagOutline);
+            NavigatorItems.AddNavigator<AuthorViewModel>(Header.Authors, IconKind.AccountOutline);
+            NavigatorItems.AddNavigator<TagViewModel>(Header.Tags, IconKind.TagOutline);
 
             NavigatorItems.AddHeader(Header.Other);
 
-            NavigatorItems.AddNavigator<AlertViewModel>(Menu.Alerts, IconKind.TimerOutline);
-            NavigatorItems.AddNavigator<UserNoteViewModel>(Menu.Notes, IconKind.NoteTextOutline);
-            NavigatorItems.AddNavigator<LinkViewModel>(Menu.Links, IconKind.LinkVariant);
-            NavigatorItems.AddNavigator<StatisticsViewModel>(Menu.Statistics, IconKind.Numeric);
+            NavigatorItems.AddNavigator<AlertViewModel>(Header.Alerts, IconKind.TimerOutline);
+            NavigatorItems.AddNavigator<UserNoteViewModel>(Header.Notes, IconKind.NoteTextOutline);
+            NavigatorItems.AddNavigator<LinkViewModel>(Header.Links, IconKind.LinkVariant);
+            NavigatorItems.AddNavigator<StatisticsViewModel>(Header.Statistics, IconKind.Numeric);
 
             NavigatorItems.AddHeader(Header.Tools, ToolHeaderId);
 
-            NavigatorItems.AddNavigator<ToolOrphanViewModel>(Menu.OrphanFinder, IconKind.ClipboardSearchOutline);
-            NavigatorItems.AddNavigator<ToolSearchViewModel>(Menu.Search, IconKind.Magnify);
-            NavigatorItems.AddNavigator<LinkVerifyViewModel>(Menu.LinkVerify, IconKind.LinkVariant);
-            NavigatorItems.AddNavigator<TableViewModel>(Menu.Developer, IconKind.CodeBraces);
+            NavigatorItems.AddNavigator<ToolOrphanViewModel>(Header.Orphan, IconKind.ClipboardSearchOutline);
+            NavigatorItems.AddNavigator<ToolSearchViewModel>(Header.Search, IconKind.Magnify);
+            NavigatorItems.AddNavigator<LinkVerifyViewModel>(Header.LinkVerify, IconKind.LinkVariant);
+            NavigatorItems.AddNavigator<TableViewModel>(Header.Developer, IconKind.CodeBraces);
 
             SynchronizeNavigatorVisibility();
         }
@@ -273,7 +273,7 @@ namespace Restless.Panama.ViewModel
             viewModelCache.SignalSave();
             Config.Instance.SaveFilterObjects();
             DatabaseController.Instance.Save();
-            NotificationMessage = "All data successfully saved to the database";
+            CreateNotificationMessage(Confirm.DataSavedToDatabase);
         }
         #endregion
     }

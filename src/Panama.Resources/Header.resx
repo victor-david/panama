@@ -156,7 +156,7 @@
   <data name="Column" xml:space="preserve">
     <value>Column</value>
   </data>
-  <data name="Columns" xml:space="preserve">
+  <data name="TableColumns" xml:space="preserve">
     <value>Columns</value>
   </data>
   <data name="ColumnsShort" xml:space="preserve">
@@ -509,5 +509,98 @@
   </data>
   <data name="Xid" xml:space="preserve">
     <value>Xid</value>
+  </data>
+  <data name="Related" xml:space="preserve">
+    <value>Related</value>
+  </data>
+  <data name="Submission" xml:space="preserve">
+    <value>Submission</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Alerts" xml:space="preserve">
+    <value>Alerts</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>Authors</value>
+  </data>
+  <data name="Developer" xml:space="preserve">
+    <value>Developer</value>
+  </data>
+  <data name="LinkVerify" xml:space="preserve">
+    <value>Link Verify</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Orphan" xml:space="preserve">
+    <value>Orphan</value>
+  </data>
+  <data name="Publishers" xml:space="preserve">
+    <value>Publishers</value>
+  </data>
+  <data name="Queues" xml:space="preserve">
+    <value>Queues</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="Periods" xml:space="preserve">
+    <value>Periods</value>
+  </data>
+  <data name="Folders" xml:space="preserve">
+    <value>Folders</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="EditQueue" xml:space="preserve">
+    <value>Edit Queue</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Not Found</value>
+  </data>
+  <data name="AddedUpdated" xml:space="preserve">
+    <value>Added / Updated</value>
+  </data>
+  <data name="Removed" xml:space="preserve">
+    <value>Removed</value>
+  </data>
+  <data name="Processed" xml:space="preserve">
+    <value>Processed</value>
+  </data>
+  <data name="FileProperties" xml:space="preserve">
+    <value>File Properties</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Exclusions" xml:space="preserve">
+    <value>Exclusions</value>
+  </data>
+  <data name="VersionOnly" xml:space="preserve">
+    <value>Version Only</value>
+  </data>
+  <data name="TableRelationsChild" xml:space="preserve">
+    <value>Relations (C)</value>
+  </data>
+  <data name="TableUniqueKey" xml:space="preserve">
+    <value>Unique Key</value>
+  </data>
+  <data name="TableForeignKey" xml:space="preserve">
+    <value>Foreign Key</value>
+  </data>
+  <data name="TableRelationsParent" xml:space="preserve">
+    <value>Relations (P)</value>
   </data>
 </root>

@@ -122,19 +122,19 @@
     <comment>Used when a file can't be added or replaced as a version file because it is already included</comment>
   </data>
   <data name="CannotDeleteAuthor" xml:space="preserve">
-    <value>This author cannot be deleted. They are participating in {0} titles. </value>
+    <value>This author cannot be deleted. They are participating in {0} titles.</value>
     <comment>Used when an author cannot be deleted b/c it's involved in titles</comment>
   </data>
   <data name="CannotDeletePublisher" xml:space="preserve">
-    <value>This publisher cannot be deleted. It is participating in {0} submissions. </value>
+    <value>This publisher cannot be deleted. It is participating in {0} submissions.</value>
     <comment>Used when a publisher cannot be deleted b/c it's involved in submissions</comment>
   </data>
   <data name="CannotDeleteTag" xml:space="preserve">
-    <value>This tag cannot be deleted. It is being used by {0} titles. </value>
+    <value>This tag cannot be deleted. It is being used by {0} titles.</value>
     <comment>Used when a tag cannot be deleted b/c it's being used</comment>
   </data>
   <data name="CannotDeleteTitle" xml:space="preserve">
-    <value>This title cannot be deleted. It is participating in {0} submissions. </value>
+    <value>This title cannot be deleted. It is participating in {0} submissions.</value>
     <comment>Used when a title cannot be deleted b/c it's involved in submissions</comment>
   </data>
   <data name="CannotDisplayMapi" xml:space="preserve">
@@ -181,11 +181,7 @@
     <value>The title root folder hasn't been set or doesn't exist. Fix the configuration setting and try again.</value>
   </data>
   <data name="FileNotFoundFormat" xml:space="preserve">
-    <value>The file does not exist.
-
-{0}
-
-Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting.</value>
+    <value>The file {0} does not exist. Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting.</value>
     <comment>Used when attempting to open a submssion document that doesn't exist</comment>
   </data>
   <data name="PreviewNotSupported" xml:space="preserve">

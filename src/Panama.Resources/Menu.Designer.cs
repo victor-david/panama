@@ -205,29 +205,20 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add to queue.
+        /// </summary>
+        public static string AddToQueue {
+            get {
+                return ResourceManager.GetString("AddToQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a note.
         /// </summary>
         public static string AddUserNote {
             get {
                 return ResourceManager.GetString("AddUserNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Alerts.
-        /// </summary>
-        public static string Alerts {
-            get {
-                return ResourceManager.GetString("Alerts", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authors.
-        /// </summary>
-        public static string Authors {
-            get {
-                return ResourceManager.GetString("Authors", resourceCulture);
             }
         }
         
@@ -394,15 +385,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Developer.
-        /// </summary>
-        public static string Developer {
-            get {
-                return ResourceManager.GetString("Developer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Exclude this directory from orphan search.
         /// </summary>
         public static string ExcludeOrphanDirectory {
@@ -466,6 +448,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Idle.
+        /// </summary>
+        public static string Idle {
+            get {
+                return ResourceManager.GetString("Idle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In Period.
         /// </summary>
         public static string InPeriod {
@@ -484,29 +475,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verify links.
-        /// </summary>
-        public static string LinkVerify {
-            get {
-                return ResourceManager.GetString("LinkVerify", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Make this a separate version.
         /// </summary>
         public static string MakeSeparateVersion {
             get {
                 return ResourceManager.GetString("MakeSeparateVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Notes.
-        /// </summary>
-        public static string Notes {
-            get {
-                return ResourceManager.GetString("Notes", resourceCulture);
             }
         }
         
@@ -538,15 +511,6 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Orphan.
-        /// </summary>
-        public static string OrphanFinder {
-            get {
-                return ResourceManager.GetString("OrphanFinder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Paying.
         /// </summary>
         public static string Paying {
@@ -570,24 +534,6 @@ namespace Restless.Panama.Resources {
         public static string Published {
             get {
                 return ResourceManager.GetString("Published", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Publishers.
-        /// </summary>
-        public static string Publishers {
-            get {
-                return ResourceManager.GetString("Publishers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Queues.
-        /// </summary>
-        public static string Queues {
-            get {
-                return ResourceManager.GetString("Queues", resourceCulture);
             }
         }
         
@@ -736,29 +682,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search.
+        ///   Looks up a localized string similar to Scheduled.
         /// </summary>
-        public static string Search {
+        public static string Scheduled {
             get {
-                return ResourceManager.GetString("Search", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Self publishers.
-        /// </summary>
-        public static string SelfPublishers {
-            get {
-                return ResourceManager.GetString("SelfPublishers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Settings.
-        /// </summary>
-        public static string Settings {
-            get {
-                return ResourceManager.GetString("Settings", resourceCulture);
+                return ResourceManager.GetString("Scheduled", resourceCulture);
             }
         }
         
@@ -790,38 +718,11 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Statistics.
-        /// </summary>
-        public static string Statistics {
-            get {
-                return ResourceManager.GetString("Statistics", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Submissions.
-        /// </summary>
-        public static string Submissions {
-            get {
-                return ResourceManager.GetString("Submissions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Submitted.
         /// </summary>
         public static string Submitted {
             get {
                 return ResourceManager.GetString("Submitted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tags.
-        /// </summary>
-        public static string Tags {
-            get {
-                return ResourceManager.GetString("Tags", resourceCulture);
             }
         }
         

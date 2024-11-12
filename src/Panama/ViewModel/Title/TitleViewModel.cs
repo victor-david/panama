@@ -14,7 +14,6 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.OpenXml;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
-using Restless.Toolkit.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -254,7 +253,6 @@ namespace Restless.Panama.ViewModel
             Commands.Add("SelfPublishedFilter", p => SetSingleFilter(() => Filters.SetToSelfPublished()));
             Commands.Add("ExtractTitle", RunExtractTitle, CanRunExtractTitle);
             Commands.Add("ToggleFlag", RunToggleTitleFlagCommand, p => IsSelectedRowAccessible);
-            Commands.Add("ClearFlags", RunClearTitleFlagsCommand);
             Commands.Add("AddToQueue", RunAddTitleToQueueCommand, p => SelectedTitle != null);
 
             /* Context menu items */
@@ -316,7 +314,7 @@ namespace Restless.Panama.ViewModel
 
                 foreach (QueueRow row in QueueTable.EnumerateAll())
                 {
-                    MenuItems.InsertItem(insertIdx, $"Add to queue {row.Name}", Commands["AddToQueue"])
+                    MenuItems.InsertItem(insertIdx, $"{Menu.AddToQueue}: {row.Name}", Commands["AddToQueue"])
                         .AddCommandParm(row)
                         .AddIconResource(ResourceKeys.Icon.IconTrayPlus);
                     insertIdx++;
@@ -391,7 +389,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunAddCommand()
         {
-            if (MessageWindow.ShowYesNo(Confirm.AddTitle))
+            if (MessageWindow.ShowContinueCancel(Confirm.AddTitle))
             {
                 Table.AddDefaultRow();
                 Table.Save();
@@ -469,10 +467,10 @@ namespace Restless.Panama.ViewModel
                             string title = props?.Core.Title;
                             if (string.IsNullOrWhiteSpace(title))
                             {
-                                title = "(no title)";
+                                title = Text.NoTitle;
                             }
 
-                            if (MessageWindow.ShowYesNo(string.Format(CultureInfo.InvariantCulture, Confirm.ApplyExtractedTitleFormat, title)))
+                            if (MessageWindow.ShowContinueCancel(StringHelper.GetExtractedTitleConfirmation(title)))
                             {
                                 SelectedTitle.Title = title;
                                 /* Needed to update the text box */
@@ -499,17 +497,6 @@ namespace Restless.Panama.ViewModel
         private void RunToggleTitleFlagCommand(object parm)
         {
             SelectedTitle?.ToggleQuickFlag();
-        }
-
-        private void RunClearTitleFlagsCommand(object parm)
-        {
-            if (Messages.ShowYesNo(Confirm.ClearTitleFlags))
-            {
-                foreach (TitleRow title in Table.EnumerateTitles())
-                {
-                    title.QuickFlag = false;
-                }
-            }
         }
 
         private void RunCopyTitleCommand(object parm)

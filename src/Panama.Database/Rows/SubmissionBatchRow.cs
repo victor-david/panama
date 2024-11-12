@@ -1,7 +1,5 @@
-﻿using Restless.Toolkit.Core.Database.SQLite;
-using System;
+﻿using System;
 using System.Data;
-using System.Globalization;
 using Columns = Restless.Panama.Database.Tables.SubmissionBatchTable.Defs.Columns;
 
 namespace Restless.Panama.Database.Tables
@@ -9,14 +7,8 @@ namespace Restless.Panama.Database.Tables
     /// <summary>
     /// Encapsulates a single row from the <see cref="SubmissionBatchTable"/>
     /// </summary>
-    public class SubmissionBatchRow : RowObjectBase<SubmissionBatchTable>
+    public class SubmissionBatchRow : DateRowObject<SubmissionBatchTable>
     {
-        #region Private
-        private string dateFormat;
-        #endregion
-
-        /************************************************************************/
-
         #region Properties
         /// <summary>
         /// Gets the record id.
@@ -78,21 +70,23 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets or sets the submission date
+        /// Gets or sets the submission date.
+        /// When set, invokes property changed on <see cref="SubmittedFormatted"/>.
         /// </summary>
         public DateTime Submitted
         {
             get => GetDateTime(Columns.Submitted);
-            set => SetValue(Columns.Submitted, value);
+            set => SetDateValue(Columns.Submitted, value, nameof(SubmittedFormatted));
         }
 
         /// <summary>
-        /// Gets or sets the response date
+        /// Gets or sets the response date.
+        /// When set, invokes property changed on <see cref="ResponseFormatted"/>.
         /// </summary>
         public DateTime? Response
         {
             get => GetNullableDateTime(Columns.Response);
-            set => SetValue(Columns.Response, value);
+            set => SetDateValue(Columns.Response, value, nameof(ResponseFormatted));
         }
 
         /// <summary>
@@ -121,12 +115,12 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Gets a formatted value for <see cref="Submitted"/>.
         /// </summary>
-        public string SubmittedFormatted => Submitted.ToString(dateFormat, CultureInfo.InvariantCulture);
+        public string SubmittedFormatted => GetFormattedDate(Submitted);
 
         /// <summary>
         /// Gets a formatted value for <see cref="Response"/>.
         /// </summary>
-        public string ResponseFormatted => Response?.ToString(dateFormat, CultureInfo.InvariantCulture) ?? "--";
+        public string ResponseFormatted => GetFormattedDate(Response);
 
         /// <summary>
         /// Gets the response type descriptive name
@@ -158,7 +152,6 @@ namespace Restless.Panama.Database.Tables
         /// <param name="row">The data row</param>
         private SubmissionBatchRow(DataRow row) : base(row)
         {
-            dateFormat = "MMM dd, yyyy";
         }
 
         /// <summary>
@@ -196,18 +189,6 @@ namespace Restless.Panama.Database.Tables
                 ResponseType = ResponseTable.Defs.Values.NoResponse,
                 Notes = null
             };
-        }
-
-        /// <summary>
-        /// Sets the date format used for <see cref="DateLocal"/>
-        /// </summary>
-        /// <param name="value"></param>
-        public void SetDateFormat(string value)
-        {
-            if (!string.IsNullOrWhiteSpace(value))
-            {
-                dateFormat = value;
-            }
         }
 
         /// <summary>

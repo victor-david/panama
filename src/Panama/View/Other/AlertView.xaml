@@ -19,7 +19,7 @@
 
         <tk:SplitterGrid.HeaderLeft>
             <StatusBar>
-                <TextBlock Text="{x:Static r:Menu.Alerts}"/>
+                <TextBlock Text="{x:Static r:Header.Alerts}"/>
                 <!-- no filters for now -->
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
@@ -54,11 +54,7 @@
                 <TextBlock Text="{x:Static r:Text.Url}"/>
                 <TextBox Text="{Binding SelectedAlert.Url}"/>
 
-                <TextBlock>
-                    <Run Text="{x:Static r:Text.Date}"/>
-                    <Run Text="{Binding SelectedAlert.DateLocal, Mode=OneWay}"/>
-                </TextBlock>
-
+                <TextBlock Text="{x:Static r:Text.Date}"/>
                 <DatePicker SelectedDate="{Binding SelectedAlert.Date}"/>
 
                 <CheckBox

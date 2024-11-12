@@ -1,16 +1,9 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.ViewModel;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Core.Utility;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace Restless.Panama.Core
@@ -181,7 +174,7 @@ namespace Restless.Panama.Core
             public const double DefaultOrphanDetailWidth = MinOrphanDetailWidth;
 
             public const double MinPublisherDetailWidth = 390;
-            public const double MaxPublisherDetailWidth = 520;
+            public const double MaxPublisherDetailWidth = 680;
             public const double DefaultPublisherDetailWidth = MinPublisherDetailWidth;
 
             public const double MinSearchDetailWidth = 240;
@@ -1263,21 +1256,6 @@ namespace Restless.Panama.Core
                 default:
                     break;
             }
-        }
-        #endregion
-
-        /************************************************************************/
-
-        #region Private methods
-        private GridLength GetGridLength(double defaultValue, [CallerMemberName] string id = null)
-        {
-            double value = GetItem(defaultValue, id);
-            return new GridLength(value, GridUnitType.Pixel);
-        }
-
-        private void SetGridLength(GridLength value, [CallerMemberName] string id = null)
-        {
-            SetItem(value.Value, id);
         }
         #endregion
     }

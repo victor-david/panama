@@ -14,7 +14,6 @@ using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Data;
-using System.Globalization;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.SubmissionBatchTable.Defs.Columns;
 
@@ -137,7 +136,7 @@ namespace Restless.Panama.ViewModel
                 .SetSelectorName(Header.ResponseDate);
 
             Columns.Create(Header.Type, TableColumns.Joined.ResponseTypeName)
-                .MakeFixedWidth(FixedWidth.W096)
+                .MakeFixedWidth(FixedWidth.W112)
                 .SetSelectorName(Header.ResponseType);
 
             // string.Empty because VS gets confused and tries to connect to the wrong overload
@@ -213,13 +212,7 @@ namespace Restless.Panama.ViewModel
         /// </remarks>
         public void SetSubmissionHeader()
         {
-            string header = null;
-            if (SelectedBatch?.Submitted is DateTime date)
-            {
-                string dateStr = date.ToLocalTime().ToString(Config.Instance.DateFormat, CultureInfo.InvariantCulture);
-                header = $"{dateStr} to {SelectedBatch.PublisherName}";
-            }
-            SubmissionHeader = header;
+            SubmissionHeader = $"{SelectedBatch?.SubmittedFormatted}: {SelectedBatch?.PublisherName}";
         }
         #endregion
 
@@ -275,7 +268,7 @@ namespace Restless.Panama.ViewModel
                 if (MessageWindow.ShowYesNo(StringHelper.GetSubmissionConfirmation(openCount, publisher.Name)))
                 {
                     Table.CreateSubmission(publisher.Id);
-                    MainWindowViewModel.Instance.CreateNotificationMessage(Text.SubmissionCreated);
+                    MainWindowViewModel.Instance.CreateNotificationMessage(Confirm.SubmissionCreated);
                     ForceListViewSort();
                 }
             }

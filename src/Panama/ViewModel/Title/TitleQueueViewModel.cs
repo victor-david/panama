@@ -3,6 +3,7 @@ using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -167,7 +168,7 @@ namespace Restless.Panama.ViewModel
             Queues = new ListCollectionView(queues);
             using (Queues.DeferRefresh())
             {
-                Queues.CustomSort = new GenericComparer<QueueRow>((x, y) => OnQueueDataRowCompare(x, y));
+                Queues.CustomSort = new GenericComparer<QueueRow>(OnQueueDataRowCompare);
                 Queues.IsLiveSorting = true;
                 Queues.LiveSortingProperties.Add(nameof(QueueRow.Name));
             }

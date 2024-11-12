@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Publisher" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>(ninguno)</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>Respuesta</value>
+  </data>
+  <data name="Written" xml:space="preserve">
+    <value>Escrito</value>
+  </data>
+  <data name="Submitted" xml:space="preserve">
+    <value>Enviado</value>
+  </data>
+  <data name="Records" xml:space="preserve">
+    <value>registros</value>
+  </data>
+  <data name="TitleStatusPreviousToPublisher" xml:space="preserve">
+    <value>Previamente enviado al mismo editor</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Vista previa</value>
+  </data>
+  <data name="TitleStatusSubmittedToExclusive" xml:space="preserve">
+    <value>Actualmente enviado a un editor que no acepta envíos simultáneos</value>
+  </data>
+  <data name="NoTitleVersions" xml:space="preserve">
+    <value>No hay versiones para este título</value>
+  </data>
+  <data name="EverSubmitted" xml:space="preserve">
+    <value>Alguna vez enviado</value>
+  </data>
+  <data name="Flagged" xml:space="preserve">
+    <value>Marcado</value>
+  </data>
+  <data name="Published" xml:space="preserve">
+    <value>Publicado</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Listo</value>
+  </data>
+  <data name="SelfPublished" xml:space="preserve">
+    <value>Autopublicado</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="Extract" xml:space="preserve">
+    <value>Extracto</value>
+  </data>
+  <data name="Url" xml:space="preserve">
+    <value>Url</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Iniciar</value>
+  </data>
+  <data name="Orphans" xml:space="preserve">
+    <value>Huérfanos</value>
+  </data>
+  <data name="NotOpenXmlDocument" xml:space="preserve">
+    <value>No es un documento Open Xml</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Imagen</value>
+  </data>
+  <data name="ZeroSearchResults" xml:space="preserve">
+    <value>La búsqueda no arrojó resultados</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Nota</value>
+  </data>
+  <data name="Locked" xml:space="preserve">
+    <value>Bloqueado</value>
+  </data>
+  <data name="CreateSubmissionDocument0" xml:space="preserve">
+    <value>Crear documento de envío</value>
+  </data>
+  <data name="CreateSubmissionDocument1" xml:space="preserve">
+    <value>Preparándose para crear un documento de envío. Usted puede:</value>
+  </data>
+  <data name="CreateSubmissionDocument2" xml:space="preserve">
+    <value>Crear un documento .docx compatible con Microsoft Word y otros procesadores de texto que soporten la especificación Open XML.</value>
+  </data>
+  <data name="CreateSubmissionDocument3" xml:space="preserve">
+    <value>Crear una entrada de marcador en los documentos de envío. Después, puede seleccionar un archivo existente para asociar con esta entrada.</value>
+  </data>
+  <data name="CreateSubmissionDocument4" xml:space="preserve">
+    <value>Crear .docx</value>
+  </data>
+  <data name="CreateSubmissionDocument5" xml:space="preserve">
+    <value>Crear marcador</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Renombrar</value>
+  </data>
+  <data name="NoPublisherSubmissions" xml:space="preserve">
+    <value>No hay envíos a este editor</value>
+  </data>
+  <data name="NoTitles" xml:space="preserve">
+    <value>No hay títulos</value>
+  </data>
+  <data name="NoPublisherPeriods" xml:space="preserve">
+    <value>No hay períodos de envío definidos para este editor</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="TitleStatusOkay" xml:space="preserve">
+    <value>Sin conflicto</value>
+  </data>
+  <data name="TitleStatusUnknown" xml:space="preserve">
+    <value>Estado desconocido</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Habilitado</value>
+  </data>
+  <data name="Days01" xml:space="preserve">
+    <value>1 día</value>
+  </data>
+  <data name="Days03" xml:space="preserve">
+    <value>3 días</value>
+  </data>
+  <data name="Days05" xml:space="preserve">
+    <value>5 días</value>
+  </data>
+  <data name="Days07" xml:space="preserve">
+    <value>7 días</value>
+  </data>
+  <data name="Days10" xml:space="preserve">
+    <value>10 días</value>
+  </data>
+  <data name="Dismiss" xml:space="preserve">
+    <value>Descartar</value>
+  </data>
+  <data name="SendReport" xml:space="preserve">
+    <value>Enviar informe</value>
+  </data>
+  <data name="NoTitleSubmissions" xml:space="preserve">
+    <value>No hay envíos para este título</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Verificar</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>Asignado</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Disponible</value>
+  </data>
+  <data name="AssignedToFilter" xml:space="preserve">
+    <value>Etiquetas para filtrar</value>
+  </data>
+  <data name="AvailableTags" xml:space="preserve">
+    <value>Etiquetas disponibles</value>
+  </data>
+  <data name="MultipleTag" xml:space="preserve">
+    <value>Combinar múltiples</value>
+  </data>
+  <data name="CreatedFromOrphan" xml:space="preserve">
+    <value>Esta entrada fue creada a partir de un archivo huérfano</value>
+  </data>
+  <data name="Orphan" xml:space="preserve">
+    <value>Huérfano</value>
+  </data>
+  <data name="ClearDate" xml:space="preserve">
+    <value>Borrar fecha</value>
+  </data>
+  <data name="HasRelated" xml:space="preserve">
+    <value>Tiene título relacionado</value>
+  </data>
+  <data name="Startup" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value>Detalle</value>
+  </data>
+  <data name="ApplicationTerminate" xml:space="preserve">
+    <value>La aplicación se cerrará ahora</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Oscuro</value>
+  </data>
+  <data name="Hidden" xml:space="preserve">
+    <value>Oculto</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Claro</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="Any" xml:space="preserve">
+    <value>Cualquiera</value>
+  </data>
+  <data name="Exclusive" xml:space="preserve">
+    <value>Exclusivo</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filtros</value>
+  </data>
+  <data name="FollowUp" xml:space="preserve">
+    <value>Seguimiento</value>
+  </data>
+  <data name="Goner" xml:space="preserve">
+    <value>Caso perdido</value>
+  </data>
+  <data name="InPeriod" xml:space="preserve">
+    <value>En periodo</value>
+  </data>
+  <data name="OpenSubmission" xml:space="preserve">
+    <value>Envío abierto</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Camino</value>
+  </data>
+  <data name="Paying" xml:space="preserve">
+    <value>Pagando</value>
+  </data>
+  <data name="RowFilterInEffect" xml:space="preserve">
+    <value>[filtro de fila en efecto]</value>
+  </data>
+  <data name="WordCount" xml:space="preserve">
+    <value>Conteo de palabras</value>
+  </data>
+  <data name="NoTitle" xml:space="preserve">
+    <value>(sin título)</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Fin</value>
+  </data>
+  <data name="AllYear" xml:space="preserve">
+    <value>Todo el año</value>
+  </data>
+  <data name="ExclusiveNoSim" xml:space="preserve">
+    <value>Exclusivo (sin simultaneidad)</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>Aceptado</value>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>Rechazado</value>
+  </data>
+  <data name="Fees" xml:space="preserve">
+    <value>Tarifas</value>
+  </data>
+  <data name="AverageDays" xml:space="preserve">
+    <value>Días Promedio</value>
+  </data>
+  <data name="MaxDays" xml:space="preserve">
+    <value>Días Máximos</value>
+  </data>
+  <data name="MinDays" xml:space="preserve">
+    <value>Días Mínimos</value>
+  </data>
+  <data name="Shared" xml:space="preserve">
+    <value>Compartido</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Desconocido</value>
+  </data>
+  <data name="LanguageChangeRequested" xml:space="preserve">
+    <value>Se solicitó cambio de idioma. Reinicie la aplicación para aplicar el nuevo idioma.</value>
+  </data>
+  <data name="Fee" xml:space="preserve">
+    <value>Tarifa</value>
+  </data>
+  <data name="Contest" xml:space="preserve">
+    <value>Concurso</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>En línea</value>
+  </data>
+  <data name="Award" xml:space="preserve">
+    <value>Premio</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Asunto</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Mensaje</value>
+  </data>
+  <data name="DefaultAuthor" xml:space="preserve">
+    <value>Autor predeterminado</value>
+  </data>
+  <data name="Postpone" xml:space="preserve">
+    <value>Posponer</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Okay" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Seleccionado</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Compañía</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Creado</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>Modificado</value>
+  </data>
+  <data name="TitleRenameStatusMissing" xml:space="preserve">
+    <value>Desaparecido</value>
+  </data>
+  <data name="TitleRenameStatusReady" xml:space="preserve">
+    <value>Listo para cambiar el nombre</value>
+  </data>
+  <data name="TitleRenameStatusAlready" xml:space="preserve">
+    <value>Ya renombrado</value>
+  </data>
+  <data name="TitleRenameStatusSuccess" xml:space="preserve">
+    <value>Renombrar exitoso</value>
+  </data>
+  <data name="Days14" xml:space="preserve">
+    <value>14 días</value>
+  </data>
+  <data name="Days21" xml:space="preserve">
+    <value>21 días</value>
+  </data>
+  <data name="Days30" xml:space="preserve">
+    <value>30 días</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>Sin asignar</value>
+  </data>
+</root>

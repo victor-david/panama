@@ -51,6 +51,14 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Signals all view models in the collection that language has changed.
+        /// </summary>
+        public void SignalLanguageChange()
+        {
+            ForEach(item => item.SignalLanguageChange());
+        }
+
+        /// <summary>
         /// Signals all view models in the collection to save state
         /// </summary>
         public void SignalSave()

@@ -70,7 +70,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This author cannot be deleted. They are participating in {0} titles. .
+        ///   Looks up a localized string similar to This author cannot be deleted. They are participating in {0} titles..
         /// </summary>
         public static string CannotDeleteAuthor {
             get {
@@ -79,7 +79,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This publisher cannot be deleted. It is participating in {0} submissions. .
+        ///   Looks up a localized string similar to This publisher cannot be deleted. It is participating in {0} submissions..
         /// </summary>
         public static string CannotDeletePublisher {
             get {
@@ -88,7 +88,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This tag cannot be deleted. It is being used by {0} titles. .
+        ///   Looks up a localized string similar to This tag cannot be deleted. It is being used by {0} titles..
         /// </summary>
         public static string CannotDeleteTag {
             get {
@@ -97,7 +97,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This title cannot be deleted. It is participating in {0} submissions. .
+        ///   Looks up a localized string similar to This title cannot be deleted. It is participating in {0} submissions..
         /// </summary>
         public static string CannotDeleteTitle {
             get {
@@ -133,11 +133,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The file does not exist.
-        ///
-        ///{0}
-        ///
-        ///Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting..
+        ///   Looks up a localized string similar to The file {0} does not exist. Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting..
         /// </summary>
         public static string FileNotFoundFormat {
             get {

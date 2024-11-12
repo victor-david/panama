@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CannotAddVersionFile">
+    <value>Este archivo ya ha sido añadido a este título. Por favor, elija un archivo diferente.</value>
+  </data>
+  <data name="CannotDeleteAuthor">
+    <value>Este autor no se puede eliminar. Está participando en {0} títulos.</value>
+  </data>
+  <data name="CannotDeletePublisher">
+    <value>Este editor no se puede eliminar. Está participando en {0} envíos.</value>
+  </data>
+  <data name="CannotDeleteTag">
+    <value>Esta etiqueta no se puede eliminar. Está siendo utilizada por {0} títulos.</value>
+  </data>
+  <data name="CannotDeleteTitle">
+    <value>Este título no se puede eliminar. Está participando en {0} envíos.</value>
+  </data>
+  <data name="CannotDisplayMapi">
+    <value>El contenido del mensaje no se puede mostrar aquí. Este mensaje es una referencia directa al elemento almacenado en el almacén de mensajes de Outlook. Haga doble clic en la fila para abrir el mensaje.</value>
+  </data>
+  <data name="DirectoryDoesNotExist">
+    <value>El directorio especificado no existe</value>
+  </data>
+  <data name="DocumentTypeNotSupported">
+    <value>Este tipo de documento es obsoleto y ya no es compatible</value>
+  </data>
+  <data name="NoDocumentId">
+    <value>No se puede abrir. No hay un documento asociado con esta entrada.</value>
+  </data>
+  <data name="NoSearchScope">
+    <value>Ningún ámbito de búsqueda especificado</value>
+  </data>
+  <data name="TextViewerNotSet">
+    <value>La aplicación de visor de texto externo no ha sido configurada. Corrija la configuración e intente de nuevo.</value>
+  </data>
+  <data name="OutputFolderNotSet">
+    <value>La carpeta para esta operación no ha sido configurada o no existe. Corrija la configuración e intente de nuevo.</value>
+  </data>
+  <data name="RenameAllCandidatesAlreadyRenamed">
+    <value>Todos los archivos de versión para este título ya han sido renombrados.</value>
+  </data>
+  <data name="RenameCandidateListEmpty">
+    <value>No existen versiones para renombrar</value>
+  </data>
+  <data name="RenameFilesMissing">
+    <value>Uno o más de los archivos de versión no existen</value>
+  </data>
+  <data name="SubmissionDocumentFolderNotSet">
+    <value>La carpeta para los documentos de presentación no ha sido configurada o no existe. Corrija la configuración e intente de nuevo.</value>
+  </data>
+  <data name="SubmissionMessageFolderNotSet">
+    <value>La carpeta para los mensajes de presentación no ha sido configurada o no existe. Corrija la configuración e intente de nuevo.</value>
+  </data>
+  <data name="TitleDoesNotExist">
+    <value>El registro de título especificado no existe</value>
+  </data>
+  <data name="TitleRootFolderNotSet">
+    <value>La carpeta raíz del título no ha sido configurada o no existe. Corrija la configuración e intente de nuevo.</value>
+  </data>
+  <data name="FileNotFoundFormat">
+    <value>El archivo {0} no existe. Asegúrese de que {1} esté configurado correctamente en la configuración. Las especificaciones del archivo dependen de esta configuración.</value>
+  </data>
+  <data name="PreviewNotSupported">
+    <value>Vista previa del documento no soportada</value>
+  </data>
+</root>

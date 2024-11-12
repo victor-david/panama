@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
@@ -61,9 +55,9 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.OldName, nameof(TitleVersionRenameItem.OriginalNameDisplay));
             Columns.Create(Header.NewName, nameof(TitleVersionRenameItem.NewNameDisplay));
-            Columns.Create(Header.Status, nameof(TitleVersionRenameItem.Status)).MakeFlexWidth(0.5);
+            Columns.Create(Header.Status, nameof(TitleVersionRenameItem.Status)).MakeFlexWidth(0.75);
 
-            Commands.Add("Rename", RunRenameCommand, p => canRename);
+            Commands.Add("Rename", p => RunRenameCommand(), p => canRename);
 
             PopulateRenameItems(titleId);
             InitListView(renameItems);
@@ -90,11 +84,9 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private void PopulateRenameItems(long titleId)
         {
-            TitleRow title  = DatabaseController.Instance.GetTable<TitleTable>().GetSingleRecord(titleId);
-            if (title == null)
-            {
+            TitleRow title  =
+                DatabaseController.Instance.GetTable<TitleTable>().GetSingleRecord(titleId) ??
                 throw new InvalidOperationException(Error.TitleDoesNotExist);
-            }
 
             foreach (TitleVersionRow ver in DatabaseController.Instance.GetTable<TitleVersionTable>().EnumerateVersions(titleId, SortDirection.Ascending))
             {
@@ -123,7 +115,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void RunRenameCommand(object parm)
+        private void RunRenameCommand()
         {
             Execution.TryCatch(() =>
             {

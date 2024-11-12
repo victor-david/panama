@@ -1,0 +1,43 @@
+﻿<StatusBar
+    x:Class="Restless.Panama.View.TitleQueueFilterToolBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
+    xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:TitleQueueViewModel}"
+    mc:Ignorable="d"
+    Style="{StaticResource Panama.Styles.StatusBar}"
+    d:DesignHeight="450" d:DesignWidth="800">
+
+    <TextBlock Text="{Binding SelectedQueue.Name}"/>
+
+    <Separator/>
+
+    <TextBlock Text="{x:Static r:Text.Title}"/>
+    <TextBox
+        Width="152"
+        Text="{Binding Filters.Text, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
+
+    <Separator/>
+
+    <!-- Status filter -->
+    <CheckBox Content="{x:Static r:Menu.Idle}" IsChecked="{Binding IsIdleFilterChecked}"/>
+    <CheckBox Content="{x:Static r:Menu.Scheduled}" IsChecked="{Binding IsScheduledFilterChecked}"/>
+    <CheckBox Content="{x:Static r:Menu.Published}" IsChecked="{Binding IsPublishedFilterChecked}"/>
+
+    <Separator/>
+
+    <Button
+        Content="{x:Static r:Menu.Reset}"
+        ToolTip="{x:Static r:ToolTip.FilterReset}"
+        Command="{Binding ClearFilterCommand}"/>
+
+    <Separator/>
+
+    <TextBlock
+        Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
+        Text="{Binding ListView.Count}"/>
+
+</StatusBar>

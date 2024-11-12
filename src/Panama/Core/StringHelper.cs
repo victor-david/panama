@@ -1,4 +1,5 @@
 ﻿using Restless.Panama.Resources;
+using Restless.Panama.Tools;
 using Restless.Toolkit.Core.Utility;
 using System;
 
@@ -20,6 +21,11 @@ namespace Restless.Panama.Core
                 string.Format(Confirm.CreateSubmissionOpenFormat, publisherName);
         }
 
+        public static string GetExtractedTitleConfirmation(string title)
+        {
+            return string.Format(Confirm.ExtractedTitleFormat, title);
+        }
+
         /// <summary>
         /// Gets the text that is placed into the export read me file
         /// </summary>
@@ -28,6 +34,16 @@ namespace Restless.Panama.Core
         {
             AssemblyInfo a = new(AssemblyInfoType.Entry);
             return string.Format(Detail.ExportFileFormat, a.Title, DateTime.UtcNow.ToString("R"));
+        }
+
+        /// <summary>
+        /// Gets the text that is displayed when an update tool finishes
+        /// </summary>
+        /// <param name="r">The result</param>
+        /// <returns></returns>
+        public static string GetFileScanResultText(FileScanResult r)
+        {
+            return $"{Header.Processed}: {r.ScanCount} | {Header.Updated}: {r.Updated.Count} | {Header.NotFound}: {r.NotFound.Count}";
         }
     }
 }

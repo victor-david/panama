@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
@@ -18,6 +12,30 @@ namespace Restless.Panama.ViewModel
     /// </summary>
     public class PublisherSubmissionController : BaseController<PublisherViewModel, SubmissionBatchTable>
     {
+        #region Private
+        private SubmissionBatchRow selectedBatch;
+        #endregion
+
+        /************************************************************************/
+
+        #region Properties
+        /// <summary>
+        /// Gets the currently selected submission batch row
+        /// </summary>
+        public SubmissionBatchRow SelectedBatch
+        {
+            get => selectedBatch;
+            private set => SetProperty(ref selectedBatch, value);
+        }
+
+        /// <summary>
+        /// Gets the submission title controller.
+        /// </summary>
+        public PublisherSubmissionTitleController Titles { get; }
+        #endregion
+
+        /************************************************************************/
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="PublisherSubmissionController"/> class.
@@ -37,15 +55,32 @@ namespace Restless.Panama.ViewModel
                 .MakeDate();
 
             Columns.Create(Header.Type, TableColumns.Joined.ResponseTypeName)
-                .MakeFixedWidth(FixedWidth.W096);
+                .MakeFixedWidth(FixedWidth.W112);
 
             Columns.Create(Header.Note, TableColumns.Notes).MakeSingleLine();
+
+            Titles = new PublisherSubmissionTitleController(this);
         }
         #endregion
 
         /************************************************************************/
 
         #region Protected methods
+        /// <inheritdoc/>
+        protected override void OnUpdate()
+        {
+            base.OnUpdate();
+            Titles.Update();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnSelectedItemChanged()
+        {
+            base.OnSelectedItemChanged();
+            SelectedBatch = SubmissionBatchRow.Create(SelectedRow);
+            Titles.Update();
+        }
+
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
         {

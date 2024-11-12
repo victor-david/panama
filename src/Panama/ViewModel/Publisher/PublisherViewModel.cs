@@ -1,22 +1,13 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Controls;
 using Restless.Panama.Core;
-using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Panama.View;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Threading;
 using TableColumns = Restless.Panama.Database.Tables.PublisherTable.Defs.Columns;
 
@@ -68,48 +59,17 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the submission period controller.
         /// </summary>
-        public PublisherPeriodController Periods
-        {
-            get;
-            private set;
-        }
+        public PublisherPeriodController Periods { get; }
 
         /// <summary>
         /// Gets the submission controller for this VM.
         /// </summary>
-        public PublisherSubmissionController Submissions
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the submission titles controller for this VM.
-        /// </summary>
-        public PublisherSubmissionTitleController Titles
-        {
-            get;
-            private set;
-        }
+        public PublisherSubmissionController Submissions { get; }
 
         /// <summary>
         /// Gets the filters
         /// </summary>
         public PublisherRowFilter Filters => Config.PublisherFilter;
-
-        /// <summary>
-        /// Gets an enumerable of <see cref="CredentialRow"/> items.
-        /// </summary>
-        public IEnumerable<CredentialRow> Credentials => DatabaseController.Instance.GetTable<CredentialTable>().EnumerateAll();
-
-        /// <summary>
-        /// Gets or sets the selected credential item.
-        /// </summary>
-        public CredentialRow SelectedCredential
-        {
-            get;
-            set;
-        }
         #endregion
 
         /************************************************************************/
@@ -157,15 +117,9 @@ namespace Restless.Panama.ViewModel
             Commands.Add("InPeriodFilter", p => Filters.SetToInPeriod());
             Commands.Add("PayingFilter", p => Filters.SetToPaying());
             Commands.Add("FollowupFilter", p => Filters.SetToFollowup());
-            Commands.Add("CopyLoginId", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.LoginId); }, CanCopyCredential);
-            Commands.Add("CopyPassword", (o) => { CopyCredentialPart(CredentialTable.Defs.Columns.Password); }, CanCopyCredential);
 
             Periods = new PublisherPeriodController(this);
             Submissions = new PublisherSubmissionController(this);
-            Titles = new PublisherSubmissionTitleController(this);
-
-            // TODO
-            // Credentials = DatabaseController.Instance.GetTable<CredentialTable>().GetCredentialList();
 
             /* Context menu items */
             MenuItems.AddItem(Menu.CreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
@@ -195,7 +149,6 @@ namespace Restless.Panama.ViewModel
             SelectedPublisher = PublisherRow.Create(SelectedRow);
             Periods.Update();
             Submissions.Update();
-            Titles.Update();
         }
 
         /// <inheritdoc/>
@@ -221,7 +174,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunAddCommand()
         {
-            if (MessageWindow.ShowYesNo(Confirm.AddPublisher))
+            if (MessageWindow.ShowContinueCancel(Confirm.AddPublisher))
             {
                 Table.AddDefaultRow();
                 Table.Save();
@@ -280,20 +233,6 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private Methods
-        private bool CanCopyCredential(object o)
-        {
-            return SelectedCredential != null && SelectedCredential.Id != 0;
-        }
-
-        private void CopyCredentialPart(string columnName)
-        {
-            if (SelectedCredential != null && SelectedCredential.Id != 0)
-            {
-                Clipboard.SetText(SelectedCredential.Row[columnName].ToString());
-                MainWindowViewModel.Instance.CreateNotificationMessage($"{columnName} copied to clipboard");
-            }
-        }
-
         private FlagGridColumnCollection GetFlagGridColumns()
         {
             return new FlagGridColumnCollection(this)

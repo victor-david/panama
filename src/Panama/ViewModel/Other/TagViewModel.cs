@@ -51,7 +51,6 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public TagViewModel()
         {
-            DisplayName = Menu.Tags;
             Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);

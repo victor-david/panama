@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddAlert">
+    <value>Esta operación agregará un nuevo registro de alerta. Si hay filtros en efecto, se eliminarán para que la nueva alerta se muestre en la lista.</value>
+  </data>
+  <data name="AddAuthor">
+    <value>Esta operación agregará un nuevo registro de autor. Si hay filtros en efecto, se eliminarán para que el nuevo autor se muestre en la lista.</value>
+  </data>
+  <data name="AddOrphanDirectoryExclusion">
+    <value>Esta operación excluye el directorio del archivo seleccionado de la búsqueda de archivos huérfanos</value>
+  </data>
+  <data name="AddOrphanFileExclusion">
+    <value>Esta operación excluye el archivo seleccionado de la búsqueda de archivos huérfanos</value>
+  </data>
+  <data name="AddOrphanFileTypeExclusion">
+    <value>Esta operación excluye todos los archivos del tipo de archivo seleccionado de la búsqueda de archivos huérfanos</value>
+  </data>
+  <data name="AddPublisher">
+    <value>Esta operación agregará un nuevo registro de editorial. Si hay filtros de editorial en efecto, se eliminarán para que la nueva editorial se muestre en la lista.</value>
+  </data>
+  <data name="AddSubmissionPeriod">
+    <value>Esta operación agrega un período de envío que va del 1 de enero al 31 de diciembre, es decir, todo el año. Una vez agregado, puede cambiar el rango del período de envío si es necesario.</value>
+  </data>
+  <data name="AddTitle">
+    <value>Esta operación agregará un nuevo registro de título. Si hay filtros de título en efecto, se eliminarán para que el nuevo título se muestre en la lista.</value>
+  </data>
+  <data name="AllVersionFilesRenamed">
+    <value>Éxito. Todos los archivos de versiones elegibles renombrados.</value>
+  </data>
+  <data name="ExtractedTitleFormat">
+    <value>Esto establece el título de esta entrada con el valor extraído de la última versión: {0}</value>
+  </data>
+  <data name="ClearPublishedDate">
+    <value>Esta operación borra la fecha de publicación de este ítem. Puedes establecer la fecha nuevamente en cualquier momento.</value>
+  </data>
+  <data name="ClearTitleFlags">
+    <value>Esta operación eliminará la bandera rápida de todos los títulos. ¿Quieres continuar?</value>
+  </data>
+  <data name="CreateSubmissionDocument">
+    <value>Crear un documento (NO LISTO)</value>
+  </data>
+  <data name="CreateSubmissionFormat">
+    <value>¿Crear una presentación a {0}?</value>
+  </data>
+  <data name="CreateSubmissionOpenFormat">
+    <value>{0}: Ya tienes al menos una presentación a este editor que aún no ha recibido una respuesta. ¿Quieres continuar y crear otra presentación?</value>
+  </data>
+  <data name="CreateTitleFromOrphan">
+    <value>Esta operación creará una entrada de título y utilizará el archivo seleccionado como la primera versión asociada con el título. La fecha de escritura para el título se establecerá a la fecha de última modificación del archivo.</value>
+  </data>
+  <data name="DeleteAlert">
+    <value>¿Eliminar esta alerta?</value>
+  </data>
+  <data name="DeleteAuthor">
+    <value>¿Eliminar este autor?</value>
+  </data>
+  <data name="DeleteCredential">
+    <value>Esta operación eliminará la credencial seleccionada y quitará su asociación con cualquier editor que la esté utilizando. ¿Quieres continuar?</value>
+  </data>
+  <data name="DeleteFile">
+    <value>Esto eliminará el archivo seleccionado del disco. ¿Quieres continuar?</value>
+  </data>
+  <data name="DeleteLink">
+    <value>¿Eliminar este enlace?</value>
+  </data>
+  <data name="DeletePublisher">
+    <value>Preparándose para eliminar este editor. ¿Quieres continuar?</value>
+  </data>
+  <data name="DeleteSubmission">
+    <value>Preparándose para eliminar esta presentación. Esto eliminará el registro de presentación y todos los registros asociados como documentos de presentación y mensajes. No eliminará ningún documento del disco. ¿Quieres continuar?</value>
+  </data>
+  <data name="DeleteSubmissionDocument">
+    <value>Preparándose para eliminar este documento de presentación. Esto solo elimina la entrada en la base de datos, no el documento asociado. ¿Quieres continuar?</value>
+  </data>
+  <data name="DeleteTag">
+    <value>¿Eliminar esta etiqueta?</value>
+  </data>
+  <data name="DeleteTitle">
+    <value>Preparándose para eliminar este título. Esto solo elimina la entrada en la base de datos, no ningún documento asociado (Word, PDF, etc.) ¿Quieres continuar?</value>
+  </data>
+  <data name="DeleteUserNote">
+    <value>¿Eliminar esta nota?</value>
+  </data>
+  <data name="RemoveQueue">
+    <value>Esta operación elimina la cola seleccionada. No afecta a ningún registro de títulos en sí.</value>
+  </data>
+  <data name="RemoveQueueTitle">
+    <value>Esta operación elimina el título seleccionado de la cola. No afecta al título en sí.</value>
+  </data>
+  <data name="RemoveRelatedTitle">
+    <value>Esta operación elimina el título relacionado de este título. No afecta al título relacionado en sí.</value>
+  </data>
+  <data name="RemoveSubmissionMessage">
+    <value>Preparándose para eliminar este mensaje. Esto no elimina ningún archivo o recurso externo, solo la entrada en la base de datos. ¿Quieres continuar?</value>
+  </data>
+  <data name="RemoveSubmissionPeriod">
+    <value>¿Eliminar este periodo de presentación para este editor?</value>
+  </data>
+  <data name="RemoveTitleFromQueue">
+    <value>Esta operación elimina el título de la cola seleccionada. No afecta al título en sí.</value>
+  </data>
+  <data name="RemoveTitleFromSubmission">
+    <value>¿Eliminar el título de esta presentación?</value>
+  </data>
+  <data name="RemoveTitlePublished">
+    <value>Esta operación elimina el registro de publicación para este título. Puedes agregar un nuevo registro en cualquier momento.</value>
+  </data>
+  <data name="RemoveTitleVersion">
+    <value>Esta operación eliminará la versión seleccionada de este título. No elimina el archivo en el disco.</value>
+  </data>
+  <data name="ResetSubmissionPeriod">
+    <value>Esta operación establece el periodo de presentación del 1 de enero al 31 de diciembre, es decir, todo el año.</value>
+  </data>
+  <data name="TitlesCopiedToClipboard">
+    <value>La lista de títulos ha sido copiada al portapapeles</value>
+  </data>
+  <data name="DataSavedToDatabase" xml:space="preserve">
+    <value>Todos los datos se guardaron correctamente en la base de datos</value>
+  </data>
+  <data name="SubmissionCreated" xml:space="preserve">
+    <value>Envío creado</value>
+  </data>
+</root>

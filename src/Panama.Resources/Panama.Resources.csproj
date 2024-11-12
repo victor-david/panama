@@ -26,6 +26,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Confirm.resx</DependentUpon>
     </Compile>
+    <Compile Update="Data.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Data.resx</DependentUpon>
+    </Compile>
     <Compile Update="Detail.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -72,6 +77,10 @@
     <EmbeddedResource Update="Confirm.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Confirm.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Data.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Data.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Detail.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

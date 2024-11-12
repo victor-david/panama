@@ -43,27 +43,27 @@
             </Style>
         </Grid.Resources>
 
-        <TextBlock Grid.ColumnSpan="3" Text="Note"/>
+        <TextBlock Grid.ColumnSpan="3" Text="{x:Static r:Text.Note}"/>
 
         <TextBox
             Grid.Row="1" Grid.ColumnSpan="3"
             Text="{Binding Periods.SelectedPeriod.Notes}"/>
 
-        <TextBlock Grid.Row="2" Text="Start"/>
+        <TextBlock Grid.Row="2" Text="{x:Static r:Text.Start}"/>
 
         <con:MonthDaySelector
             Grid.Row="3"
             SelectedMonth="{Binding Periods.SelectedPeriod.MonthStart}"
             SelectedDay="{Binding Periods.SelectedPeriod.DayStart}"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="2" Text="End"/>
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="{x:Static r:Text.End}"/>
         <con:MonthDaySelector
             Grid.Row="3" Grid.Column="2"
             SelectedMonth="{Binding Periods.SelectedPeriod.MonthEnd}"
             SelectedDay="{Binding Periods.SelectedPeriod.DayEnd}"/>
 
         <StatusBar Grid.Row="4" Grid.ColumnSpan="3">
-            <Button Content="All year" Command="{Binding Periods.Commands[MakeAllYear]}" ToolTip="{x:Static r:ToolTip.SubmissionPeriodAllYear}"/>
+            <Button Content="{x:Static r:Text.AllYear}" Command="{Binding Periods.Commands[MakeAllYear]}" ToolTip="{x:Static r:ToolTip.SubmissionPeriodAllYear}"/>
         </StatusBar>
     </Grid>
 </Grid>

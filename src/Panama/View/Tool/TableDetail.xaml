@@ -5,6 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
+    xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TableViewModel}"
     mc:Ignorable="d"
@@ -20,11 +21,11 @@
             tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto"
             SelectedValue="{Binding SelectedSection}">
 
-            <tk:RadioButton Grid.Column="0" Value="1" Content="Columns"/>
-            <tk:RadioButton Grid.Column="1" Value="2" Content="Relations (Child)"/>
-            <tk:RadioButton Grid.Column="2" Value="3" Content="Relations (Parent)"/>
-            <tk:RadioButton Grid.Column="3" Value="4" Content="Unique Key"/>
-            <tk:RadioButton Grid.Column="4" Value="5" Content="Foreign Key"/>
+            <tk:RadioButton Grid.Column="0" Value="1" Content="{x:Static r:Header.TableColumns}"/>
+            <tk:RadioButton Grid.Column="1" Value="2" Content="{x:Static r:Header.TableRelationsChild}"/>
+            <tk:RadioButton Grid.Column="2" Value="3" Content="{x:Static r:Header.TableRelationsParent}"/>
+            <tk:RadioButton Grid.Column="3" Value="4" Content="{x:Static r:Header.TableUniqueKey}"/>
+            <tk:RadioButton Grid.Column="4" Value="5" Content="{x:Static r:Header.TableForeignKey}"/>
         </tk:RadioButtonPanel>
 
         <!-- Columns -->
