@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
@@ -69,13 +63,11 @@ namespace Restless.Panama.ViewModel
                 .MakeInitialSortDescending();
 
             Columns.Create(Header.LastSubmissionShort, TableColumns.Calculated.LastSub)
-                .MakeDate()
-                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+                .MakeDate();
 
             Columns.Create(Header.SubmissionTotalCountShort, TableColumns.Calculated.SubCount)
                 .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W052)
-                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+                .MakeFixedWidth(FixedWidth.W052);
 
             Commands.Add("Select", RunSelectCommand, p => IsSelectedRowAccessible);
         }
