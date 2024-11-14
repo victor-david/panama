@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
@@ -71,8 +65,7 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .SetSelectorName(Header.PublishedCount)
-                .AddToolTip(ToolTip.SelfPublisherPublishedCount)
-                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending);
+                .AddToolTip(ToolTip.SelfPublisherPublishedCount);
 
             Columns.RestoreColumnState(Config.SelfPublisherGridColumnState);
 
@@ -82,7 +75,6 @@ namespace Restless.Panama.ViewModel
             MenuItems.AddItem(Menu.BrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
             MenuItems.AddSeparator();
             MenuItems.AddItem(Menu.DeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
-
         }
         #endregion
 
@@ -119,7 +111,6 @@ namespace Restless.Panama.ViewModel
             {
                 Table.AddDefaultRow();
                 Table.Save();
-                // Filters.ClearAll();
                 ForceListViewSort();
             }
         }
