@@ -1,16 +1,9 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -33,7 +26,7 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Properties
+        #region Properties (List, Selected, Columns, Menu)
         /// <summary>
         /// Gets the list view
         /// </summary>
@@ -93,7 +86,11 @@ namespace Restless.Panama.ViewModel
         {
             get;
         }
+        #endregion
 
+        /************************************************************************/
+
+        #region Properties (Commands)
         /// <summary>
         /// Gets a command to add a new record to the data table
         /// </summary>
@@ -135,14 +132,6 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a custom sorting command. Supported by <see cref="Toolkit.Controls.DataGrid"/>
-        /// </summary>
-        public ICommand SortingCommand
-        {
-            get;
-        }
-
-        /// <summary>
         /// Gets a command for column header. Supported by <see cref="Toolkit.Controls.DataGrid"/>
         /// </summary>
         public ICommand HeaderCommand
@@ -174,7 +163,11 @@ namespace Restless.Panama.ViewModel
         /// Gets a boolean value that determines if <see cref="HeaderCommand"/> is enabled.
         /// </summary>
         public virtual bool HeaderCommandEnabled => false;
+        #endregion
 
+        /************************************************************************/
+
+        #region Properties (other)
         /// <summary>
         /// Gets or sets a boolean value that determines if the custom filter popup is open
         /// </summary>
@@ -207,7 +200,6 @@ namespace Restless.Panama.ViewModel
             DeleteCommand = RelayCommand.Create(p => RunDeleteCommand(), p => DeleteCommandEnabled);
             ClearFilterCommand = RelayCommand.Create(p => RunClearFilterCommand(), p => ClearFilterCommandEnabled);
             OpenRowCommand = RelayCommand.Create(p => RunOpenRowCommand(), p => OpenRowCommandEnabled);
-            SortingCommand = RelayCommand.Create(p => RunSortingCommand(p as DataGridColumn));
             HeaderCommand = RelayCommand.Create(p => RunHeaderCommand(p as DataGridColumnHeader), p => HeaderCommandEnabled);
             ToggleCustomFilterCommand = RelayCommand.Create(p => IsCustomFilterOpen = !IsCustomFilterOpen);
         }
@@ -225,7 +217,7 @@ namespace Restless.Panama.ViewModel
             ListView = new ListCollectionView(list ?? throw new ArgumentNullException(nameof(list)));
             using (ListView.DeferRefresh())
             {
-                ListView.CustomSort = new GenericComparer<T>((x, y) => OnDataRowCompare(x, y));
+                ListView.CustomSort = new GenericComparer<T>(OnDataRowCompare);
                 ListView.Filter = (item) => item is T data && OnDataRowFilter(data);
             }
         }
@@ -237,7 +229,7 @@ namespace Restless.Panama.ViewModel
         {
             using (ListView.DeferRefresh())
             {
-                ListView.CustomSort = new GenericComparer<T>((x, y) => OnDataRowCompare(x, y));
+                ListView.CustomSort = new GenericComparer<T>(OnDataRowCompare);
             }
         }
 
@@ -311,13 +303,6 @@ namespace Restless.Panama.ViewModel
         /// Override in a derived class to provide open row logic. The base implementation does nothing.
         /// </summary>
         protected virtual void RunOpenRowCommand()
-        {
-        }
-
-        /// <summary>
-        /// Override in a derived class to handle the sorting command. The base implementation does nothing.
-        /// </summary>
-        protected virtual void RunSortingCommand(DataGridColumn column)
         {
         }
 

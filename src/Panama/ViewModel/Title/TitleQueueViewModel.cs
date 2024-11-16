@@ -151,6 +151,7 @@ namespace Restless.Panama.ViewModel
         public TitleQueueViewModel()
         {
             InitColumns();
+            //InitColumnComparerMap();
 
             IsQueueEditActive = false;
             ClearDateCommand = RelayCommand.Create(p => RunClearDateCommand());
@@ -287,17 +288,26 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.WordCountShort, TableColumns.Joined.WordCount)
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(ToolTip.TitleWordCount)
+                .MakeNonSortable()
                 .SetSelectorName(Header.WordCount);
 
             Columns.Create(Header.Status, TableColumns.Joined.Status).CanUserSort = false;
 
             Columns.Create(Header.Date, TableColumns.Date)
                 .MakeDate()
-                .AddSort(null, TableColumns.Joined.Written, DataGridColumnSortBehavior.AlwaysDescending)
+                .SetPrimarySort(SortType.NullableDateTime)
+                .SetSecondarySort(TableColumns.Joined.Written, SortType.DateTime, false)
                 .MakeInitialSortDescending();
 
             Columns.RestoreColumnState(Config.QueueTitleGridColumnState);
         }
+
+        //private void InitColumnComparerMap()
+        //{
+        //    ColumnComparerMap.Add(TableColumns.Date, (item1, item2, asc) =>
+        //        SortHelper.CompareNullableDateTime(item1, item2, TableColumns.Date, asc)
+        //        .ThenDateTime(item1, item2, TableColumns.Joined.Written, false));
+        //}
 
         private void InitMenuItems()
         {

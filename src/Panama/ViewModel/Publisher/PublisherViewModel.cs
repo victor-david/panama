@@ -4,6 +4,7 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Panama.View;
 using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core;
 using Restless.Toolkit.Core.Utility;
 using System;
 using System.Data;
@@ -100,14 +101,14 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.LastSubmissionShort, TableColumns.Calculated.LastSub)
                 .MakeDate()
                 .AddToolTip(ToolTip.PublisherLastSubmission)
-                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending)
                 .SetSelectorName(Header.LastSubmission);
 
             Columns.Create(Header.SubmissionTotalCountShort, TableColumns.Calculated.SubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(ToolTip.PublisherSubmissionCount)
-                .AddSort(null, TableColumns.Name, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetPrimarySort(SortType.Long)
+                .SetSecondarySort(TableColumns.Name, SortType.String, true)
                 .SetSelectorName(Header.SubmissionTotalCount);
 
             Columns.RestoreColumnState(Config.PublisherGridColumnState);

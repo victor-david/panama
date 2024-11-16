@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
@@ -11,6 +5,7 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Panama.View;
 using Restless.Toolkit.Controls;
+using Restless.Toolkit.Core;
 using Restless.Toolkit.Core.OpenXml;
 using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
@@ -186,11 +181,12 @@ namespace Restless.Panama.ViewModel
                 .MakeFixedWidth(FixedWidth.W086)
                 .AddToolTip(TitleFlagsToolTip.Create(this)));
 
-            Columns.Create(Header.Title, TableColumns.Title).MakeFlexWidth(4);
+            Columns.Create(Header.Title, TableColumns.Title)
+                .MakeFlexWidth(4)
+                .SetPrimarySort(SortType.String);
 
             Columns.Create(Header.Written, TableColumns.Written)
                 .MakeDate()
-                .AddSort(null, TableColumns.Id, DataGridColumnSortBehavior.FollowPrimary)
                 .MakeInitialSortDescending();
 
             Columns.Create(Header.Updated, TableColumns.Calculated.LatestVersionDate)
@@ -200,48 +196,50 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.WordCountShort, TableColumns.Calculated.LatestVersionWordCount)
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(ToolTip.TitleWordCount)
+                .SetPrimarySort(SortType.Long)
                 .SetSelectorName(Header.WordCount);
 
             Columns.Create(Header.SubmissionTotalCountShort, TableColumns.Calculated.SubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(ToolTip.TitleSubmissionCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .MakeNonSortable()
                 .SetSelectorName(Header.SubmissionTotalCount);
 
             Columns.Create(Header.SubmissionCurrentCountShort, TableColumns.Calculated.CurrentSubCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(ToolTip.TitleCurrentSubmissionCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .MakeNonSortable()
                 .SetSelectorName(Header.SubmissionCurrentCount);
 
             Columns.Create(Header.VersionCountShort, TableColumns.Calculated.VersionCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(ToolTip.TitleVersionCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .SetPrimarySort(SortType.Long)
+                .SetSecondarySort(TableColumns.Title, SortType.String, true)
                 .SetSelectorName(Header.VersionCount);
 
             Columns.Create(Header.TagCountShort, TableColumns.Calculated.TagCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(ToolTip.TitleTagCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .MakeNonSortable()
                 .SetSelectorName(Header.TagCount);
 
             Columns.Create(Header.RelatedCountShort, TableColumns.Calculated.RelatedCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(ToolTip.TitleRelatedCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .MakeNonSortable()
                 .SetSelectorName(Header.RelatedCount);
 
             Columns.Create(Header.PublishedCountShort, TableColumns.Calculated.PublishedCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(ToolTip.TitlePublishedCount)
-                .AddSort(null, TableColumns.Title, DataGridColumnSortBehavior.AlwaysAscending)
+                .MakeNonSortable()
                 .SetSelectorName(Header.PublishedCount);
 
             Columns.RestoreColumnState(Config.TitleGridColumnState);
@@ -366,17 +364,6 @@ namespace Restless.Panama.ViewModel
         protected override bool OnDataRowFilter(DataRow item)
         {
             return Filters?.OnDataRowFilter(item) ?? false;
-        }
-
-        /// <inheritdoc/>
-        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
-        {
-            int value = DataRowCompareDateTime(item2, item1, TableColumns.Written);
-            if (value == 0)
-            {
-                value = DataRowCompareString(item1, item2, TableColumns.Title);
-            }
-            return value;
         }
 
         /// <inheritdoc/>
