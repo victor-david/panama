@@ -187,16 +187,18 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.Written, TableColumns.Written)
                 .MakeDate()
+                .SetPrimarySort(SortType.DateTime)
                 .MakeInitialSortDescending();
 
             Columns.Create(Header.Updated, TableColumns.Calculated.LatestVersionDate)
                 .MakeDate()
+                .SetPrimarySort(SortType.NullableDateTime)
                 .AddToolTip(ToolTip.TitleUpdated);
 
             Columns.Create(Header.WordCountShort, TableColumns.Calculated.LatestVersionWordCount)
                 .MakeFixedWidth(FixedWidth.W042)
                 .AddToolTip(ToolTip.TitleWordCount)
-                .SetPrimarySort(SortType.Long)
+                .SetPrimarySort(SortType.NullableLong)
                 .SetSelectorName(Header.WordCount);
 
             Columns.Create(Header.SubmissionTotalCountShort, TableColumns.Calculated.SubCount)
@@ -206,13 +208,6 @@ namespace Restless.Panama.ViewModel
                 .MakeNonSortable()
                 .SetSelectorName(Header.SubmissionTotalCount);
 
-            Columns.Create(Header.SubmissionCurrentCountShort, TableColumns.Calculated.CurrentSubCount)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W042)
-                .AddToolTip(ToolTip.TitleCurrentSubmissionCount)
-                .MakeNonSortable()
-                .SetSelectorName(Header.SubmissionCurrentCount);
-
             Columns.Create(Header.VersionCountShort, TableColumns.Calculated.VersionCount)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042)
@@ -220,13 +215,6 @@ namespace Restless.Panama.ViewModel
                 .SetPrimarySort(SortType.Long)
                 .SetSecondarySort(TableColumns.Title, SortType.String, true)
                 .SetSelectorName(Header.VersionCount);
-
-            Columns.Create(Header.TagCountShort, TableColumns.Calculated.TagCount)
-                .MakeCentered()
-                .MakeFixedWidth(FixedWidth.W042)
-                .AddToolTip(ToolTip.TitleTagCount)
-                .MakeNonSortable()
-                .SetSelectorName(Header.TagCount);
 
             Columns.Create(Header.RelatedCountShort, TableColumns.Calculated.RelatedCount)
                 .MakeCentered()
