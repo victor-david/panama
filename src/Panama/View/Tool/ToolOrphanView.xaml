@@ -72,11 +72,11 @@
 
                 </DataGrid>
 
-                <con:Flyout Placement="Right" Width="530" IsOpen="{Binding IsCustomFilterOpen}">
+                <tk:Flyout Placement="Right" Width="530" IsOpen="{Binding IsCustomFilterOpen}">
 
-                    <con:Flyout.Header>
+                    <tk:Flyout.Header>
                         <vw:FlyoutHeader Title="{x:Static r:Header.Exclusions}" ShowClearButton="False"/>
-                    </con:Flyout.Header>
+                    </tk:Flyout.Header>
 
                     <DataGrid
                         ItemsSource="{Binding Exclusions.ListView}"
@@ -90,7 +90,7 @@
 
                     </DataGrid>
 
-                </con:Flyout>
+                </tk:Flyout>
 
                 <tk:WaitSpinner Height="64" tk:Property.IsVisible="{Binding IsOperationInProgress}"/>
 

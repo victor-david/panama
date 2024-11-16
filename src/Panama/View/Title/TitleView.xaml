@@ -51,14 +51,14 @@
 
                 </tk:DataGrid>
 
-                <con:Flyout Width="592" IsOpen="{Binding IsCustomFilterOpen}">
-                    <con:Flyout.Header>
+                <tk:Flyout Width="592" IsOpen="{Binding IsCustomFilterOpen}">
+                    <tk:Flyout.Header>
                         <vw:FlyoutHeader Title="{x:Static r:Header.TitleFilter}"/>
-                    </con:Flyout.Header>
+                    </tk:Flyout.Header>
 
                     <vw:TitleFilter/>
 
-                </con:Flyout>
+                </tk:Flyout>
 
             </Grid>
         </tk:SplitterGrid.ContentLeft>

@@ -275,14 +275,14 @@
     <Style TargetType="con:MonthDaySelector" BasedOn="{StaticResource Panama.Styles.MonthDaySelector}"/>
 
     <!-- Flyout -->
-    <Style x:Key="Panama.Styles.Flyout" TargetType="con:Flyout">
+    <Style x:Key="Panama.Styles.Flyout" TargetType="tk:Flyout">
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="Padding" Value="{DynamicResource Panama.Layout.Padding.Full}"/>
         <Setter Property="Placement" Value="TopRight"/>
     </Style>
 
-    <Style TargetType="con:Flyout" BasedOn="{StaticResource Panama.Styles.Flyout}"/>
+    <Style TargetType="tk:Flyout" BasedOn="{StaticResource Panama.Styles.Flyout}"/>
 
     <!-- Data grid-->
     <Style x:Key="Panama.Styles.DataGridRow" TargetType="DataGridRow">

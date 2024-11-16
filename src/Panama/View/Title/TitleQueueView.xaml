@@ -99,12 +99,12 @@
 
                     </tk:DataGrid>
 
-                    <con:Flyout
+                    <tk:Flyout
                         Placement="TopLeft"
                         IsOpen="{Binding IsQueueEditActive}"
                         Width="360"
                         Height="120">
-                        <con:Flyout.Header>
+                        <tk:Flyout.Header>
                             <StatusBar Margin="{DynamicResource Panama.Layout.Padding.Bottom}">
 
                                 <StatusBarItem DockPanel.Dock="Right">
@@ -116,14 +116,14 @@
 
                                 <TextBlock Text="{x:Static r:Header.EditQueue}"/>
                             </StatusBar>
-                        </con:Flyout.Header>
+                        </tk:Flyout.Header>
 
                         <StackPanel Style="{StaticResource Panama.Styles.Panel.DataEntry}">
                             <TextBlock Text="{x:Static r:Text.Name}"/>
                             <TextBox MaxLength="32" Text="{Binding SelectedQueue.Name}"/>
                         </StackPanel>
 
-                    </con:Flyout>
+                    </tk:Flyout>
                 </Grid>
             </tk:SplitterGrid.ContentLeft>
             <!-- End: Splitter.ContentLeft -->

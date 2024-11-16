@@ -50,14 +50,14 @@
                     </DataGrid.ContextMenu>
                 </tk:DataGrid>
 
-                <con:Flyout Width="440" IsOpen="{Binding IsCustomFilterOpen}">
-                    <con:Flyout.Header>
+                <tk:Flyout Width="440" IsOpen="{Binding IsCustomFilterOpen}">
+                    <tk:Flyout.Header>
                         <vw:FlyoutHeader Title="{x:Static r:Header.PublisherFilter}"/>
-                    </con:Flyout.Header>
+                    </tk:Flyout.Header>
 
                     <vw:PublisherFilter/>
 
-                </con:Flyout>
+                </tk:Flyout>
 
             </Grid>
         </tk:SplitterGrid.ContentLeft>
