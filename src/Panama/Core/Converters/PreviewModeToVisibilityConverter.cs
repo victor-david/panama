@@ -1,10 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
-using Restless.Panama.Core;
 using System;
 using System.Windows;
 using System.Windows.Data;
@@ -18,12 +11,9 @@ namespace Restless.Panama.Core
     public class PreviewModeToVisibilityConverter : MarkupExtension, IValueConverter
     {
         #region Constructor
-        #pragma warning disable 1591
         public PreviewModeToVisibilityConverter()
         {
-            // prevents the designer that's referencing this converter directly from going stupid every time you type a character
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/

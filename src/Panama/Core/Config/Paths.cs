@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using System.IO;
 
 namespace Restless.Panama.Core
@@ -40,9 +34,9 @@ namespace Restless.Panama.Core
             }
         }
         #endregion
-        
+
         /************************************************************************/
-        
+
         #region Submission document
         /// <summary>
         /// Provides static methods for handling rooted and non-rooted paths for submission documents.
@@ -132,7 +126,7 @@ namespace Restless.Panama.Core
         #endregion
 
         /************************************************************************/
-        
+
         #region Common handler (private static class)
         private static class Handlers
         {

@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
@@ -48,7 +42,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets the primary key value of the selected row, or null if none 
+        /// Gets the primary key value of the selected row, or null if none
         /// (no selected row or no primary key column on the table)
         /// </summary>
         public object SelectedPrimaryKey => IsSelectedRowAccessible && Table.PrimaryKeyName != null ? SelectedRow[Table.PrimaryKeyName] : null;
@@ -70,7 +64,7 @@ namespace Restless.Panama.ViewModel
 
         #region Protected methods
         /// <summary>
-        /// Override in a derived class to perform actions when the selected item changes. 
+        /// Override in a derived class to perform actions when the selected item changes.
         /// Always call the base implementation to perform standard operations.
         /// </summary>
         protected override void OnSelectedItemChanged()
