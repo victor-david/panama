@@ -14,7 +14,7 @@
         <Setter Property="Language" Value="{Binding CurrentXmlLanguage}"/>
         <Setter Property="TitleAlignment" Value="Center"/>
         <Setter Property="TitleCharacterCasing" Value="Normal"/>
-        <Setter Property="TitleBarHeight" Value="{DynamicResource Panama.Layout.TitleBar.Height}"/>
+        <Setter Property="TitleBarHeight" Value="{DynamicResource App.Layout.TitleBar.Height}"/>
         <Setter Property="IconTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -93,15 +93,15 @@
         <Setter Property="CanCollapseDetail" Value="False"/>
         <Setter Property="DetailContentMargin" Value="0"/>
         <Setter Property="DetailHeaderMargin" Value="0"/>
-        <Setter Property="MainContentMargin" Value="{DynamicResource Panama.Layout.Padding.Full}"/>
+        <Setter Property="MainContentMargin" Value="{DynamicResource App.Layout.Padding.Full}"/>
         <Setter Property="MainHeaderMargin" Value="0"/>
         <Setter Property="SplitterPosition" Value="Left"/>
     </Style>
 
     <!-- Splitter Grid-->
     <Style x:Key="App.Styles.SplitterGrid" TargetType="tk:SplitterGrid">
-        <Setter Property="MarginContentLeft" Value="{DynamicResource Panama.Layout.Padding.Top.Right.Bottom}"/>
-        <Setter Property="MarginContentRight" Value="{DynamicResource Panama.Layout.Padding.Full}"/>
+        <Setter Property="MarginContentLeft" Value="{DynamicResource App.Layout.Padding.Top.Right.Bottom}"/>
+        <Setter Property="MarginContentRight" Value="{DynamicResource App.Layout.Padding.Full}"/>
         <Setter Property="MarginHeaderLeft" Value="0,0,2,0"/>
         <Setter Property="MarginHeaderRight" Value="2,0,0,0"/>
     </Style>
@@ -258,7 +258,7 @@
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray7}"/>
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
+        <Setter Property="Margin" Value="{DynamicResource App.Layout.Margin.Control.Stacked}"/>
         <Setter Property="SeparatorHeight" Value="2"/>
         <Setter Property="TextElement.FontWeight" Value="SemiBold"/>
     </Style>
@@ -278,7 +278,7 @@
     <Style x:Key="App.Styles.Flyout" TargetType="tk:Flyout">
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
-        <Setter Property="Padding" Value="{DynamicResource Panama.Layout.Padding.Full}"/>
+        <Setter Property="Padding" Value="{DynamicResource App.Layout.Padding.Full}"/>
         <Setter Property="Placement" Value="TopRight"/>
     </Style>
 
@@ -436,7 +436,7 @@
 
     <!-- Data panel -->
     <Style x:Key="App.Styles.TextBlock.DataEntry" TargetType="TextBlock">
-        <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+        <Setter Property="Margin" Value="{StaticResource App.Layout.Margin.DataEntry}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -448,15 +448,15 @@
             <Style TargetType="TextBlock" BasedOn="{StaticResource App.Styles.TextBlock.DataEntry}"/>
 
             <Style TargetType="TextBox" BasedOn="{StaticResource MahApps.Styles.TextBox}">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+                <Setter Property="Margin" Value="{StaticResource App.Layout.Margin.DataEntry}"/>
             </Style>
 
             <Style TargetType="CheckBox" BasedOn="{StaticResource MahApps.Styles.CheckBox}">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+                <Setter Property="Margin" Value="{StaticResource App.Layout.Margin.DataEntry}"/>
             </Style>
 
             <Style TargetType="ListBox" BasedOn="{StaticResource App.Styles.ListBox}">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+                <Setter Property="Margin" Value="{StaticResource App.Layout.Margin.DataEntry}"/>
                 <Style.Resources>
                     <!-- Prevent the text block style from falling into the list box -->
                     <Style TargetType="TextBlock"/>
@@ -466,19 +466,19 @@
             <Style x:Key="{x:Static con:PathSelector.TextBlockStyleKey}" TargetType="TextBlock" BasedOn="{StaticResource App.Styles.TextBlock.DataEntry}"/>
 
             <Style TargetType="con:PathSelector" BasedOn="{StaticResource Panana.Styles.PathSelector}">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+                <Setter Property="Margin" Value="{StaticResource App.Layout.Margin.DataEntry}"/>
             </Style>
 
             <Style TargetType="DatePicker" BasedOn="{StaticResource App.Styles.DatePicker}">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+                <Setter Property="Margin" Value="{StaticResource App.Layout.Margin.DataEntry}"/>
             </Style>
 
             <Style TargetType="Slider" BasedOn="{StaticResource App.Styles.Slider}">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+                <Setter Property="Margin" Value="{StaticResource App.Layout.Margin.DataEntry}"/>
             </Style>
 
             <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource App.Styles.NavigatorExpander}">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Margin.DataEntry}"/>
+                <Setter Property="Margin" Value="{StaticResource App.Layout.Margin.DataEntry}"/>
             </Style>
         </Style.Resources>
     </Style>
@@ -670,7 +670,7 @@
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}"/>
         <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="Padding" Value="{DynamicResource Panama.Layout.Padding.Full}"/>
+        <Setter Property="Padding" Value="{DynamicResource App.Layout.Padding.Full}"/>
     </Style>
 
     <!-- ToolTip -->

@@ -13,7 +13,7 @@
 
     <Grid tk:Property.RowHeights="Auto,*">
 
-        <StatusBar Margin="{StaticResource Panama.Layout.Padding.Bottom.Tight}">
+        <StatusBar Margin="{StaticResource App.Layout.Padding.Bottom.Tight}">
             <Button
                 Content="{x:Static r:Menu.Reset}"
                 ToolTip="{x:Static r:ToolTip.ThemeReset}"

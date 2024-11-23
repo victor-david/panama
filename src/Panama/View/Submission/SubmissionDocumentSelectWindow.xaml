@@ -15,19 +15,19 @@
     Title="{x:Static r:Text.CreateSubmissionDocument0}"
     Height="212" Width="380">
 
-    <StackPanel Margin="{DynamicResource Panama.Layout.Padding.Full}">
+    <StackPanel Margin="{DynamicResource App.Layout.Padding.Full}">
         <StackPanel.Resources>
             <Style TargetType="Button" BasedOn="{StaticResource App.Styles.Button.Dialog}"/>
 
             <Style TargetType="TextBlock">
-                <Setter Property="Margin" Value="{StaticResource Panama.Layout.Padding.Bottom}"/>
+                <Setter Property="Margin" Value="{StaticResource App.Layout.Padding.Bottom}"/>
                 <Setter Property="TextWrapping" Value="Wrap"/>
             </Style>
         </StackPanel.Resources>
 
         <TextBlock
             Style="{StaticResource App.Styles.TextBlock.Highlight}"
-            Margin="{StaticResource Panama.Layout.Padding.Bottom}"
+            Margin="{StaticResource App.Layout.Padding.Bottom}"
             Text="{x:Static r:Text.CreateSubmissionDocument1}"/>
 
         <TextBlock Text="{x:Static r:Text.CreateSubmissionDocument2}"/>

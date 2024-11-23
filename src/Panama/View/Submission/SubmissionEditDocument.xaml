@@ -14,7 +14,7 @@
 
     <Grid tk:Property.RowHeights="200,Auto,*">
         <tk:DataGrid
-            Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
+            Margin="{DynamicResource App.Layout.Margin.Control.Stacked}"
             Style="{StaticResource App.Styles.DataGrid.Locked}"
             ItemsSource="{Binding Documents.ListView}"
             SelectedItem="{Binding Documents.SelectedItem}"

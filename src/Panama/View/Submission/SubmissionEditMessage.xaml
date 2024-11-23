@@ -14,7 +14,7 @@
 
     <tk:DataGrid
         Style="{StaticResource App.Styles.DataGrid.Locked}"
-        Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
+        Margin="{DynamicResource App.Layout.Margin.Control.Stacked}"
         ItemsSource="{Binding Messages.ListView}"
         SelectedItem="{Binding Messages.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Messages.Columns}">
@@ -37,7 +37,7 @@
 
         <Grid.Resources>
             <Style TargetType="tk:LineItem" BasedOn="{StaticResource App.Styles.LineItem}">
-                <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
+                <Setter Property="Margin" Value="{DynamicResource App.Layout.Margin.Control.Stacked}"/>
             </Style>
         </Grid.Resources>
 

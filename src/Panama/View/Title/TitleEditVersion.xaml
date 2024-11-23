@@ -16,10 +16,10 @@
     <!-- Version list and its controls (move up, move down, sync file names) -->
     <Grid
         tk:Property.ColumnWidths="Auto,*"
-        Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}">
+        Margin="{DynamicResource App.Layout.Margin.Control.Stacked}">
 
         <StackPanel
-            Margin="{DynamicResource Panama.Layout.Padding.Right.Tight}"
+            Margin="{DynamicResource App.Layout.Padding.Right.Tight}"
             Style="{StaticResource App.Styles.StackPanel.ToolBar.Vertical}">
 
             <Button
@@ -78,7 +78,7 @@
     <tk:NavigatorExpander
         Grid.Row="2"
         Header="{x:Static r:Header.FileProperties}"
-        Padding="{DynamicResource Panama.Layout.Padding.Vertical}"
+        Padding="{DynamicResource App.Layout.Padding.Vertical}"
         tk:Property.IsNullCollapsed="{Binding Versions.SelectedVersion}">
 
         <Grid tk:Property.RowHeights="Auto,*">
@@ -113,7 +113,7 @@
 
                     <Button
                         Content="{x:Static r:Text.Save}"
-                        Margin="{StaticResource Panama.Layout.Margin.Control.Stacked}"
+                        Margin="{StaticResource App.Layout.Margin.Control.Stacked}"
                         Command="{Binding Versions.Commands[SaveProperty]}"/>
 
                     <TextBlock Text="{x:Static r:Detail.VersionProperties}"/>

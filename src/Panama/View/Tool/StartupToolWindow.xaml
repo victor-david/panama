@@ -16,7 +16,7 @@
     Style="{StaticResource App.Styles.MetroWindow}"
     d:DesignHeight="260" d:DesignWidth="480">
 
-    <Grid tk:Property.RowHeights="*,*,*,*,Auto" tk:Property.ColumnWidths="*" Margin="{StaticResource Panama.Layout.Padding.Full}">
+    <Grid tk:Property.RowHeights="*,*,*,*,Auto" tk:Property.ColumnWidths="*" Margin="{StaticResource App.Layout.Padding.Full}">
 
         <Grid.Resources>
             <Style TargetType="Grid">

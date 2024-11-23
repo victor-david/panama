@@ -14,7 +14,7 @@
     tk:Property.RowHeights="*,3*">
 
     <DataGrid
-        Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
+        Margin="{DynamicResource App.Layout.Margin.Control.Stacked}"
         ItemsSource="{Binding Periods.ListView}"
         SelectedItem="{Binding Periods.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Periods.Columns}">
@@ -39,7 +39,7 @@
 
         <Grid.Resources>
             <Style TargetType="con:MonthDaySelector" BasedOn="{StaticResource App.Styles.MonthDaySelector}">
-                <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
+                <Setter Property="Margin" Value="{DynamicResource App.Layout.Margin.Control.Stacked}"/>
             </Style>
         </Grid.Resources>
 

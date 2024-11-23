@@ -13,7 +13,7 @@
     d:DesignHeight="450" d:DesignWidth="400">
 
     <tk:DataGrid
-        Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
+        Margin="{DynamicResource App.Layout.Margin.Control.Stacked}"
         ItemsSource="{Binding Submissions.ListView}"
         SelectedItem="{Binding Submissions.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
@@ -36,7 +36,7 @@
             <StackPanel>
                 <StackPanel.Resources>
                     <Style TargetType="tk:LineItem" BasedOn="{StaticResource App.Styles.LineItem}">
-                        <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
+                        <Setter Property="Margin" Value="{DynamicResource App.Layout.Margin.Control.Stacked}"/>
                         <Setter Property="ItemDisplayWidth" Value="80"/>
                     </Style>
                 </StackPanel.Resources>

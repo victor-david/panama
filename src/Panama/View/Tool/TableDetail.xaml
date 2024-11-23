@@ -17,7 +17,7 @@
         </Grid.Resources>
 
         <tk:RadioButtonPanel
-            Margin="{StaticResource Panama.Layout.Padding.Bottom}"
+            Margin="{StaticResource App.Layout.Padding.Bottom}"
             tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto"
             SelectedValue="{Binding SelectedSection}">
 

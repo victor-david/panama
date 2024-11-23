@@ -11,7 +11,7 @@
     d:DesignHeight="450" d:DesignWidth="800"
     Name="LocalControl">
 
-    <StatusBar Margin="{DynamicResource Panama.Layout.Padding.Bottom}">
+    <StatusBar Margin="{DynamicResource App.Layout.Padding.Bottom}">
         <StatusBar.Resources>
             <Style TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button.Reveal}">
                 <Setter Property="Cursor" Value="Hand"/>

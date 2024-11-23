@@ -84,7 +84,7 @@
 
                 <StackPanel.Resources>
                     <Style TargetType="tk:LineItem" BasedOn="{StaticResource App.Styles.LineItem}">
-                        <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
+                        <Setter Property="Margin" Value="{DynamicResource App.Layout.Margin.Control.Stacked}"/>
                     </Style>
                 </StackPanel.Resources>
 

@@ -20,7 +20,7 @@
 
         <TextBlock
             Style="{StaticResource App.Styles.TextBlock.Highlight}"
-            Margin="{StaticResource Panama.Layout.Padding.Full}"
+            Margin="{StaticResource App.Layout.Padding.Full}"
             VerticalAlignment="Top"
             FontSize="12"
             Text="{Binding Message, FallbackValue=Error}"/>

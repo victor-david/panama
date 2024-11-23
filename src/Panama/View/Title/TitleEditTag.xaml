@@ -16,7 +16,7 @@
 
     <Grid.Resources>
         <Style TargetType="TextBlock" BasedOn="{StaticResource App.Styles.TextBlock.Highlight}">
-            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
+            <Setter Property="Margin" Value="{DynamicResource App.Layout.Margin.Control.Stacked}"/>
         </Style>
     </Grid.Resources>
 

@@ -18,7 +18,7 @@
 
         <!-- Filter options -->
         <tk:RadioButtonPanel
-            Margin="{StaticResource Panama.Layout.Padding.Vertical}"
+            Margin="{StaticResource App.Layout.Padding.Vertical}"
             tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto,Auto"
             SelectedValue="{Binding SelectedFilterValue}">
 

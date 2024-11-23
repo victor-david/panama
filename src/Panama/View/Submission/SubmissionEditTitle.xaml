@@ -31,7 +31,7 @@
     </tk:DataGrid>
 
     <StackPanel
-        Margin="{DynamicResource Panama.Layout.Padding.Right.Tight}"
+        Margin="{DynamicResource App.Layout.Padding.Right.Tight}"
         Style="{StaticResource App.Styles.StackPanel.ToolBar.Vertical}">
 
         <Button

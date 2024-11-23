@@ -15,12 +15,12 @@
 
         <Grid.Resources>
             <Style TargetType="StatusBar" BasedOn="{StaticResource App.Styles.StatusBar}">
-                <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom.Tight}"/>
+                <Setter Property="Margin" Value="{DynamicResource App.Layout.Padding.Bottom.Tight}"/>
             </Style>
 
             <Style TargetType="DataGrid" BasedOn="{StaticResource App.Styles.DataGrid.Locked}">
                 <Setter Property="CanUserResizeColumns" Value="False"/>
-                <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom}"/>
+                <Setter Property="Margin" Value="{DynamicResource App.Layout.Padding.Bottom}"/>
                 <Setter Property="MinRowHeight" Value="24"/>
                 <Setter Property="RowHeight" Value="24"/>
             </Style>
@@ -28,7 +28,7 @@
         </Grid.Resources>
 
         <!-- Basic-->
-        <StackPanel Grid.Column="0" Margin="{DynamicResource Panama.Layout.Padding.Right}">
+        <StackPanel Grid.Column="0" Margin="{DynamicResource App.Layout.Padding.Right}">
 
             <!-- Title versions -->
             <StatusBar>
@@ -69,7 +69,7 @@
         </StackPanel>
 
         <!-- Folders -->
-        <Grid Grid.Column="1" tk:Property.RowHeights="Auto,*" Margin="{StaticResource Panama.Layout.Padding.Left}">
+        <Grid Grid.Column="1" tk:Property.RowHeights="Auto,*" Margin="{StaticResource App.Layout.Padding.Left}">
             <StatusBar>
                 <TextBlock Text="{x:Static r:Header.Folders}"/>
             </StatusBar>

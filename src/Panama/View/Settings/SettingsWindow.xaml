@@ -28,7 +28,7 @@
         <Grid
             Grid.Column="1"
             Style="{StaticResource App.Styles.Panel.DataEntry}"
-            Margin="{StaticResource Panama.Layout.Padding.Full}"
+            Margin="{StaticResource App.Layout.Padding.Full}"
             tk:Property.RowHeights="*">
 
             <!-- Section 1 (display) -->

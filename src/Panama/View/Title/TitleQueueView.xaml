@@ -27,7 +27,7 @@
             <ListBox
                 Grid.Row="1"
                 BorderThickness="0"
-                Margin="{DynamicResource Panama.Layout.Padding.Top.Right.Tight}"
+                Margin="{DynamicResource App.Layout.Padding.Top.Right.Tight}"
                 ItemsSource="{Binding Queues}"
                 DisplayMemberPath="Name"
                 SelectedItem="{Binding SelectedQueue}">
@@ -105,7 +105,7 @@
                         Width="360"
                         Height="120">
                         <tk:Flyout.Header>
-                            <StatusBar Margin="{DynamicResource Panama.Layout.Padding.Bottom}">
+                            <StatusBar Margin="{DynamicResource App.Layout.Padding.Bottom}">
 
                                 <StatusBarItem DockPanel.Dock="Right">
                                     <Button

@@ -17,12 +17,12 @@
             <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent2}"/>
         </Style>
         <Style TargetType="tk:DataGrid" BasedOn="{StaticResource App.Styles.DataGrid}">
-            <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
+            <Setter Property="Margin" Value="{DynamicResource App.Layout.Margin.Control.Stacked}"/>
         </Style>
     </Grid.Resources>
 
     <tk:RadioButtonPanel
-        Margin="{DynamicResource Panama.Layout.Padding.Bottom}"
+        Margin="{DynamicResource App.Layout.Padding.Bottom}"
         tk:Property.ColumnWidths="Auto,Auto"
         SelectedValue="{Binding SelectedPublishedEditSection}">
 

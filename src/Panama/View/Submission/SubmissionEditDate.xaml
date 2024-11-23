@@ -26,7 +26,7 @@
 
         <ListBox
             Style="{StaticResource App.Styles.ListBox.Radio}"
-            Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
+            Margin="{DynamicResource App.Layout.Margin.Control.Stacked}"
             IsEnabled="{Binding Dates.HaveResponseDate}"
             ItemsSource="{Binding Dates.Responses}"
             SelectedValue="{Binding Dates.ResponseType}"

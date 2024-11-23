@@ -37,7 +37,7 @@
 
     <Grid tk:Property.ColumnWidths="126,*" tk:Property.RowHeights="*">
         <ListBox
-            Margin="{StaticResource Panama.Layout.Padding.Vertical}"
+            Margin="{StaticResource App.Layout.Padding.Vertical}"
             BorderThickness="0,0,1,0"
             ItemsSource="{Binding Sections}"
             DisplayMemberPath="Name"
@@ -45,7 +45,7 @@
 
         <!-- Wait panel for any operation -->
         <tk:WaitPanel
-            Margin="{StaticResource Panama.Layout.Padding.Bottom}"
+            Margin="{StaticResource App.Layout.Padding.Bottom}"
             BorderThickness="0"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
@@ -53,7 +53,7 @@
 
         <Grid
             Grid.Column="1"
-            Margin="{DynamicResource Panama.Layout.Padding.Full}"
+            Margin="{DynamicResource App.Layout.Padding.Full}"
             Style="{StaticResource App.Styles.Panel.DataEntry}">
 
             <Panel.Resources>

@@ -20,7 +20,7 @@
         <Border
             Grid.Row="1"
             Background="{DynamicResource MahApps.Brushes.Accent3}"
-            Padding="{StaticResource Panama.Layout.Padding.Full}"
+            Padding="{StaticResource App.Layout.Padding.Full}"
             tk:Property.IsVisible="{Binding IsLanguageChangePending}">
 
             <!-- Override margin from DataEntry style -->

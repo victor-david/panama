@@ -106,7 +106,7 @@
 
                 <TextBlock
                     Grid.Row="0" Grid.Column="0"
-                    Margin="{StaticResource Panama.Layout.Padding.Right}"
+                    Margin="{StaticResource App.Layout.Padding.Right}"
                     Style="{StaticResource App.Styles.TextBlock.Highlight}"
                     Text="{x:Static r:Header.Size}"/>
 
@@ -116,7 +116,7 @@
 
                 <TextBlock
                     Grid.Row="1" Grid.Column="0"
-                    Margin="{StaticResource Panama.Layout.Padding.Right}"
+                    Margin="{StaticResource App.Layout.Padding.Right}"
                     Style="{StaticResource App.Styles.TextBlock.Highlight}"
                     Text="{x:Static r:Header.Updated}"/>
 

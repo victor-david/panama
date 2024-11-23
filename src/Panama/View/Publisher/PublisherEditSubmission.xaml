@@ -19,7 +19,7 @@
     <tk:DataGrid
         Grid.Row="1"
         Style="{StaticResource App.Styles.DataGrid.Locked}"
-        Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
+        Margin="{DynamicResource App.Layout.Margin.Control.Stacked}"
         ItemsSource="{Binding Submissions.ListView}"
         SelectedItem="{Binding Submissions.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
@@ -36,7 +36,7 @@
     <tk:DataGrid
         Grid.Row="3"
         Style="{StaticResource App.Styles.DataGrid.Locked}"
-        Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
+        Margin="{DynamicResource App.Layout.Margin.Control.Stacked}"
         ItemsSource="{Binding Submissions.Titles.ListView}"
         SelectedItem="{Binding Submissions.Titles.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Submissions.Titles.Columns}">

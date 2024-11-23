@@ -17,7 +17,7 @@
 
     <!-- Clear date -->
     <Button
-        Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
+        Margin="{DynamicResource App.Layout.Margin.Control.Stacked}"
         Command="{Binding ClearDateCommand}"
         Content="{x:Static r:Text.ClearDate}"/>
 
