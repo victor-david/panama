@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     tk:Property.ColumnWidths="Auto,*"
     tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto"
-    Style="{StaticResource Panama.Styles.Panel.ToolTip}"
+    Style="{StaticResource App.Styles.Panel.ToolTip}"
     d:DesignHeight="135" d:DesignWidth="180">
 
     <Border Grid.Row="1" Background="{Binding Config.Colors.PublisherExclusive.ColorBrush}"/>

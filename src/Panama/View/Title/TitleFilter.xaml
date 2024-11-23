@@ -11,13 +11,13 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d"
-    Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+    Style="{StaticResource App.Styles.Panel.DataEntry}"
     tk:Property.ColumnWidths="*,*,*"
     tk:Property.RowHeights="Auto,Auto,Auto,*"
     d:DesignHeight="450" d:DesignWidth="592">
 
     <!-- Title -->
-    <StackPanel Margin="{StaticResource Panama.Layout.Margin.Control.Stacked.Right}">
+    <StackPanel Margin="{StaticResource App.Layout.Margin.Control.Stacked.Right}">
         <TextBlock Text="{x:Static r:Text.Title}"/>
         <TextBox
             Text="{Binding Filters.Text,
@@ -26,7 +26,7 @@
     </StackPanel>
 
     <!-- Title note -->
-    <StackPanel Grid.Column="1" Margin="{StaticResource Panama.Layout.Margin.Control.Stacked.Right}">
+    <StackPanel Grid.Column="1" Margin="{StaticResource App.Layout.Margin.Control.Stacked.Right}">
         <TextBlock Text="{x:Static r:Text.Note}"/>
         <TextBox
             Text="{Binding Filters.Note,
@@ -44,12 +44,12 @@
     </StackPanel>
 
     <!-- Three way flags -->
-    <StackPanel Grid.Row="1" Grid.Column="0" Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}">
+    <StackPanel Grid.Row="1" Grid.Column="0" Margin="{DynamicResource App.Layout.Margin.Control.Stacked}">
         <tk:ThreeWay Header="{x:Static r:Text.Ready}" State="{Binding Filters.ReadyState}"/>
         <tk:ThreeWay Header="{x:Static r:Text.Submitted}" State="{Binding Filters.CurrentlySubmittedState}"/>
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Grid.Column="1" Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}">
+    <StackPanel Grid.Row="1" Grid.Column="1" Margin="{DynamicResource App.Layout.Margin.Control.Stacked}">
         <tk:ThreeWay Header="{x:Static r:Text.Flagged}" State="{Binding Filters.FlaggedState}"/>
         <tk:ThreeWay Header="{x:Static r:Text.EverSubmitted}" State="{Binding Filters.EverSubmittedState}"/>
     </StackPanel>
@@ -64,7 +64,7 @@
         <TextBlock>
             <Run Text="{x:Static r:Text.WordCount}"/>
             <Run
-                Style="{StaticResource Panama.Styles.Run.Highlight}"
+                Style="{StaticResource App.Styles.Run.Highlight}"
                 Text="{Binding Filters.WordCountText, Mode=OneWay}"/>
         </TextBlock>
 

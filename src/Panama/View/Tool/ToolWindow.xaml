@@ -15,7 +15,7 @@
     d:DesignHeight="300" d:DesignWidth="610"
     ResizeMode="CanResizeWithGrip"
     Title="{x:Static r:Menu.Tools}"
-    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Style="{StaticResource App.Styles.MetroWindow}"
     Height="{Binding Config.ToolWindowHeight, Mode=TwoWay}"
     Width="{Binding Config.ToolWindowWidth, Mode=TwoWay}">
 
@@ -23,7 +23,7 @@
         <mah:WindowCommands Margin="16,0" ShowSeparators="False">
 
             <mah:WindowCommands.Resources>
-                <Style TargetType="ico:PackIconMaterial" BasedOn="{StaticResource Panama.Styles.Icon.TitleBar}"/>
+                <Style TargetType="ico:PackIconMaterial" BasedOn="{StaticResource App.Styles.Icon.TitleBar}"/>
             </mah:WindowCommands.Resources>
 
             <Button
@@ -37,7 +37,7 @@
 
     <Grid tk:Property.ColumnWidths="126,*" tk:Property.RowHeights="*">
         <ListBox
-            Margin="{StaticResource Panama.Layout.Padding.Vertical}"
+            Margin="{StaticResource App.Layout.Padding.Vertical}"
             BorderThickness="0,0,1,0"
             ItemsSource="{Binding Sections}"
             DisplayMemberPath="Name"
@@ -45,7 +45,7 @@
 
         <!-- Wait panel for any operation -->
         <tk:WaitPanel
-            Margin="{StaticResource Panama.Layout.Padding.Bottom}"
+            Margin="{StaticResource App.Layout.Padding.Bottom}"
             BorderThickness="0"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
@@ -53,14 +53,14 @@
 
         <Grid
             Grid.Column="1"
-            Margin="{DynamicResource Panama.Layout.Padding.Full}"
-            Style="{StaticResource Panama.Styles.Panel.DataEntry}">
+            Margin="{DynamicResource App.Layout.Padding.Full}"
+            Style="{StaticResource App.Styles.Panel.DataEntry}">
 
             <Panel.Resources>
                 <Style TargetType="con:UpdateToolControl">
                     <Setter Property="ButtonStyle">
                         <Setter.Value>
-                            <Style TargetType="Button" BasedOn="{StaticResource Panama.Styles.Button.Dialog}">
+                            <Style TargetType="Button" BasedOn="{StaticResource App.Styles.Button.Dialog}">
                                 <Setter Property="MinWidth" Value="0"/>
                                 <Setter Property="tk:Property.IsInverseEnabled" Value="{Binding IsOperationInProgress}"/>
                             </Style>

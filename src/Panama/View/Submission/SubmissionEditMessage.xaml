@@ -13,8 +13,8 @@
     d:DesignHeight="600" d:DesignWidth="400">
 
     <tk:DataGrid
-        Style="{StaticResource Panama.Styles.DataGrid.Locked}"
-        Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
+        Style="{StaticResource App.Styles.DataGrid.Locked}"
+        Margin="{DynamicResource App.Layout.Margin.Control.Stacked}"
         ItemsSource="{Binding Messages.ListView}"
         SelectedItem="{Binding Messages.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Messages.Columns}">
@@ -31,13 +31,13 @@
 
     <Grid
         Grid.Row="1"
-        Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+        Style="{StaticResource App.Styles.Panel.DataEntry}"
         tk:Property.RowHeights="Auto,Auto,*"
         Visibility="{Binding Messages.EditVisibility}">
 
         <Grid.Resources>
-            <Style TargetType="tk:LineItem" BasedOn="{StaticResource Panama.Styles.LineItem}">
-                <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
+            <Style TargetType="tk:LineItem" BasedOn="{StaticResource App.Styles.LineItem}">
+                <Setter Property="Margin" Value="{DynamicResource App.Layout.Margin.Control.Stacked}"/>
             </Style>
         </Grid.Resources>
 
@@ -54,7 +54,7 @@
         <TextBlock Grid.Row="1" Text="{x:Static r:Text.Message}"/>
         <TextBox
             Grid.Row="2"
-            Style="{StaticResource Panama.Styles.TextBox.Multiline}"
+            Style="{StaticResource App.Styles.TextBox.Multiline}"
             IsReadOnly="True"
             Text="{Binding Messages.MessageText, Mode=OneWay}"/>
     </Grid>

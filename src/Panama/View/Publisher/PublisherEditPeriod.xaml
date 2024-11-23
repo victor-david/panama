@@ -14,7 +14,7 @@
     tk:Property.RowHeights="*,3*">
 
     <DataGrid
-        Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
+        Margin="{DynamicResource App.Layout.Margin.Control.Stacked}"
         ItemsSource="{Binding Periods.ListView}"
         SelectedItem="{Binding Periods.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Periods.Columns}">
@@ -26,7 +26,7 @@
     </DataGrid>
 
     <TextBlock
-        Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
+        Style="{StaticResource App.Styles.TextBlock.ZeroResult}"
         tk:Property.IsCollapsed="{Binding Periods.HaveItems}"
         Text="{x:Static r:Text.NoPublisherPeriods}"/>
 
@@ -34,12 +34,12 @@
         Grid.Row="1"
         tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,*"
         tk:Property.ColumnWidths="*,8,*"
-        Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+        Style="{StaticResource App.Styles.Panel.DataEntry}"
         Visibility="{Binding Periods.EditVisibility}">
 
         <Grid.Resources>
-            <Style TargetType="con:MonthDaySelector" BasedOn="{StaticResource Panama.Styles.MonthDaySelector}">
-                <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
+            <Style TargetType="con:MonthDaySelector" BasedOn="{StaticResource App.Styles.MonthDaySelector}">
+                <Setter Property="Margin" Value="{DynamicResource App.Layout.Margin.Control.Stacked}"/>
             </Style>
         </Grid.Resources>
 

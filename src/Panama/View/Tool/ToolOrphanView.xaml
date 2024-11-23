@@ -26,7 +26,7 @@
                 <StatusBarItem DockPanel.Dock="Right">
                     <TextBlock>
                     <Run
-                        Style="{StaticResource Panama.Styles.Run.Highlight}"
+                        Style="{StaticResource App.Styles.Run.Highlight}"
                         Text="{Binding ListView.Count, Mode=OneWay}"/>
                     <Run Text="{x:Static r:Text.Orphans}"/>
                     </TextBlock>
@@ -101,13 +101,13 @@
             <Grid
                 tk:Property.RowHeights="Auto,Auto,*"
                 tk:Property.ColumnWidths="Auto,*"
-                Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+                Style="{StaticResource App.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
                 <TextBlock
                     Grid.Row="0" Grid.Column="0"
-                    Margin="{StaticResource Panama.Layout.Padding.Right}"
-                    Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
+                    Margin="{StaticResource App.Layout.Padding.Right}"
+                    Style="{StaticResource App.Styles.TextBlock.Highlight}"
                     Text="{x:Static r:Header.Size}"/>
 
                 <TextBlock
@@ -116,8 +116,8 @@
 
                 <TextBlock
                     Grid.Row="1" Grid.Column="0"
-                    Margin="{StaticResource Panama.Layout.Padding.Right}"
-                    Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
+                    Margin="{StaticResource App.Layout.Padding.Right}"
+                    Style="{StaticResource App.Styles.TextBlock.Highlight}"
                     Text="{x:Static r:Header.Updated}"/>
 
                 <TextBlock

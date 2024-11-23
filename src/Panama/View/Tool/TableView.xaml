@@ -33,7 +33,7 @@
 
         <tk:SplitterGrid.ContentLeft>
             <tk:DataGrid
-                Style="{StaticResource Panama.Styles.DataGrid.Locked}"
+                Style="{StaticResource App.Styles.DataGrid.Locked}"
                 ItemsSource="{Binding ListView}"
                 SelectedItem="{Binding SelectedItem}"
                 tk:DataGridColumns.Columns="{Binding Columns}"/>

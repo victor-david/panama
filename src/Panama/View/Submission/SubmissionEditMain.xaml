@@ -10,7 +10,7 @@
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
     tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"
-    Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+    Style="{StaticResource App.Styles.Panel.DataEntry}"
     d:DesignHeight="400" d:DesignWidth="400">
 
     <CheckBox Grid.Row="0" IsChecked="{Binding SelectedBatch.IsOnline}" Content="{x:Static r:Text.Online}"/>
@@ -26,6 +26,6 @@
     <TextBlock Grid.Row="7" Text="{x:Static r:Text.Notes}"/>
     <TextBox
         Grid.Row="8"
-        Style="{StaticResource Panama.Styles.TextBox.Multiline}"
+        Style="{StaticResource App.Styles.TextBox.Multiline}"
         Text="{Binding SelectedBatch.Notes}"/>
 </Grid>

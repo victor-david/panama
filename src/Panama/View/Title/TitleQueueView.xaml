@@ -27,7 +27,7 @@
             <ListBox
                 Grid.Row="1"
                 BorderThickness="0"
-                Margin="{DynamicResource Panama.Layout.Padding.Top.Right.Tight}"
+                Margin="{DynamicResource App.Layout.Padding.Top.Right.Tight}"
                 ItemsSource="{Binding Queues}"
                 DisplayMemberPath="Name"
                 SelectedItem="{Binding SelectedQueue}">
@@ -73,7 +73,7 @@
                         tk:DataGridColumns.Columns="{Binding Columns}">
 
                         <DataGrid.RowStyle>
-                            <Style TargetType="DataGridRow" BasedOn="{StaticResource Panama.Styles.DataGridRow}">
+                            <Style TargetType="DataGridRow" BasedOn="{StaticResource App.Styles.DataGridRow}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding status}" Value="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPending}">
                                         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
@@ -105,7 +105,7 @@
                         Width="360"
                         Height="120">
                         <tk:Flyout.Header>
-                            <StatusBar Margin="{DynamicResource Panama.Layout.Padding.Bottom}">
+                            <StatusBar Margin="{DynamicResource App.Layout.Padding.Bottom}">
 
                                 <StatusBarItem DockPanel.Dock="Right">
                                     <Button
@@ -118,7 +118,7 @@
                             </StatusBar>
                         </tk:Flyout.Header>
 
-                        <StackPanel Style="{StaticResource Panama.Styles.Panel.DataEntry}">
+                        <StackPanel Style="{StaticResource App.Styles.Panel.DataEntry}">
                             <TextBlock Text="{x:Static r:Text.Name}"/>
                             <TextBox MaxLength="32" Text="{Binding SelectedQueue.Name}"/>
                         </StackPanel>

@@ -13,10 +13,10 @@
     ResizeMode="NoResize"
     SizeToContent="Height"
     Title="{Binding DisplayName, Mode=OneTime}"
-    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Style="{StaticResource App.Styles.MetroWindow}"
     d:DesignHeight="260" d:DesignWidth="480">
 
-    <Grid tk:Property.RowHeights="*,*,*,*,Auto" tk:Property.ColumnWidths="*" Margin="{StaticResource Panama.Layout.Padding.Full}">
+    <Grid tk:Property.RowHeights="*,*,*,*,Auto" tk:Property.ColumnWidths="*" Margin="{StaticResource App.Layout.Padding.Full}">
 
         <Grid.Resources>
             <Style TargetType="Grid">
@@ -35,12 +35,12 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
 
-            <Style x:Key="Panama.Styles.TextBlock.Closing" TargetType="TextBlock">
+            <Style x:Key="App.Styles.TextBlock.Closing" TargetType="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="0,6"/>
             </Style>
 
-            <Style TargetType="ico:PackIconMaterial" BasedOn="{StaticResource Panama.Styles.Icon}">
+            <Style TargetType="ico:PackIconMaterial" BasedOn="{StaticResource App.Styles.Icon}">
                 <Setter Property="Width" Value="24"/>
                 <Setter Property="Height" Value="24"/>
             </Style>
@@ -70,9 +70,9 @@
             <TextBlock Grid.Column="1" Text="Creating title list"/>
         </Grid>
 
-        <TextBlock Grid.Row="4" Style="{StaticResource Panama.Styles.TextBlock.Closing}" tk:Property.IsVisible="{Binding IsCompleted}">
+        <TextBlock Grid.Row="4" Style="{StaticResource App.Styles.TextBlock.Closing}" tk:Property.IsVisible="{Binding IsCompleted}">
             <Run Text="Closing in"/>
-            <Run Style="{StaticResource Panama.Styles.Run.Highlight}" Text="{Binding SecondsToClose, Mode=OneWay}"/>
+            <Run Style="{StaticResource App.Styles.Run.Highlight}" Text="{Binding SecondsToClose, Mode=OneWay}"/>
             <Run Text="seconds"/>
         </TextBlock>
 

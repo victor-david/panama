@@ -14,7 +14,7 @@
     d:DesignHeight="800" d:DesignWidth="330">
 
     <tk:RadioButtonPanel
-        Margin="{DynamicResource Panama.Layout.Padding.Bottom}"
+        Margin="{DynamicResource App.Layout.Padding.Bottom}"
         tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
         SelectedValue="{Binding SelectedEditSection}">
 

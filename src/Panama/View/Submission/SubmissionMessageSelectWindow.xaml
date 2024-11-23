@@ -10,7 +10,7 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SubmissionMessageSelectWindowViewModel}"
     mc:Ignorable="d"
-    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Style="{StaticResource App.Styles.MetroWindow}"
     Title="{x:Static r:Header.SelectMessagesGeneric}"
     Height="460" Width="780">
 
@@ -18,7 +18,7 @@
 
         <!-- Filter options -->
         <tk:RadioButtonPanel
-            Margin="{StaticResource Panama.Layout.Padding.Vertical}"
+            Margin="{StaticResource App.Layout.Padding.Vertical}"
             tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto,Auto"
             SelectedValue="{Binding SelectedFilterValue}">
 
@@ -43,7 +43,7 @@
 
         <Button
             Grid.Row="2"
-            Style="{StaticResource Panama.Styles.Button.Dialog}"
+            Style="{StaticResource App.Styles.Button.Dialog}"
             Content="{x:Static r:Text.Okay}"
             Command="{Binding Commands[Select]}"/>
 

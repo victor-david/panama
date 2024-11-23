@@ -28,7 +28,7 @@
 
     <tk:RadioButtonPanel
         TemplateStyle="Button"
-        Margin="{StaticResource Panama.Layout.Padding.Bottom}"
+        Margin="{StaticResource App.Layout.Padding.Bottom}"
         tk:Property.ColumnWidths="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
         SelectedValue="{Binding Config.DataGridAlternationCount}">
 
@@ -45,7 +45,7 @@
     <TextBlock Text="{x:Static r:Settings.NavigatorHeader}"/>
 
     <ListBox
-        Style="{StaticResource Panama.Styles.ListBox.Radio}"
+        Style="{StaticResource App.Styles.ListBox.Radio}"
         ItemsSource="{Binding NavigatorHeaders}"
         SelectedItem="{Binding Config.NavigatorHeader}"/>
 

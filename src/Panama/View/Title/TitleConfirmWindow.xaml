@@ -12,13 +12,13 @@
     mc:Ignorable="d"
     ResizeMode="NoResize"
     Title="{x:Static r:Header.ConfirmTitleSubmission}"
-    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Style="{StaticResource App.Styles.MetroWindow}"
     Height="370" Width="760">
 
     <Grid tk:Property.RowHeights="*,Auto">
         <!-- RowStyle="{StaticResource TitleConfirmDataGridRowStyle}" -->
         <tk:DataGrid
-            Style="{StaticResource Panama.Styles.DataGrid.Locked}"
+            Style="{StaticResource App.Styles.DataGrid.Locked}"
             BorderThickness="0,0,0,1"
             ItemsSource="{Binding ListView}"
             SelectedItem="{Binding SelectedItem}"
@@ -26,12 +26,12 @@
 
         <StackPanel
             Grid.Row="1"
-            Margin="{StaticResource Panama.Layout.Padding.Vertical}"
+            Margin="{StaticResource App.Layout.Padding.Vertical}"
             Orientation="Horizontal"
             HorizontalAlignment="Center">
 
             <StackPanel.Resources>
-                <Style TargetType="Button" BasedOn="{StaticResource Panama.Styles.Button.Dialog}"/>
+                <Style TargetType="Button" BasedOn="{StaticResource App.Styles.Button.Dialog}"/>
             </StackPanel.Resources>
 
             <Button

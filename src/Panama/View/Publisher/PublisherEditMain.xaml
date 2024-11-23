@@ -9,7 +9,7 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel" d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="400"
-    Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+    Style="{StaticResource App.Styles.Panel.DataEntry}"
     tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*">
 
     <TextBlock Grid.Row="0" Text="{x:Static r:Text.Name}"/>
@@ -29,7 +29,7 @@
     <TextBlock Grid.Row="10" Text="{x:Static r:Text.Notes}"/>
     <TextBox
         Grid.Row="11"
-        Style="{StaticResource Panama.Styles.TextBox.Multiline}"
+        Style="{StaticResource App.Styles.TextBox.Multiline}"
         Text="{Binding SelectedPublisher.Notes}"/>
 
 </Grid>

@@ -14,7 +14,7 @@
     d:DesignHeight="2260" d:DesignWidth="602"
     ResizeMode="NoResize"
     Title="{x:Static r:Header.Settings}"
-    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Style="{StaticResource App.Styles.MetroWindow}"
     Height="702" Width="622">
 
     <Grid tk:Property.ColumnWidths="126,*">
@@ -27,8 +27,8 @@
 
         <Grid
             Grid.Column="1"
-            Style="{StaticResource Panama.Styles.Panel.DataEntry}"
-            Margin="{StaticResource Panama.Layout.Padding.Full}"
+            Style="{StaticResource App.Styles.Panel.DataEntry}"
+            Margin="{StaticResource App.Layout.Padding.Full}"
             tk:Property.RowHeights="*">
 
             <!-- Section 1 (display) -->

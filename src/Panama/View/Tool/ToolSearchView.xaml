@@ -59,7 +59,7 @@
                 </DataGrid>
 
                 <TextBlock
-                    Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
+                    Style="{StaticResource App.Styles.TextBlock.ZeroResult}"
                     tk:Property.IsCollapsed="{Binding HaveResults}"
                     Text="{x:Static r:Text.ZeroSearchResults}"/>
 

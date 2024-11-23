@@ -79,12 +79,12 @@
 
         <tk:SplitterGrid.ContentRight>
             <StackPanel
-                Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+                Style="{StaticResource App.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
                 <StackPanel.Resources>
-                    <Style TargetType="tk:LineItem" BasedOn="{StaticResource Panama.Styles.LineItem}">
-                        <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
+                    <Style TargetType="tk:LineItem" BasedOn="{StaticResource App.Styles.LineItem}">
+                        <Setter Property="Margin" Value="{DynamicResource App.Layout.Margin.Control.Stacked}"/>
                     </Style>
                 </StackPanel.Resources>
 

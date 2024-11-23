@@ -14,13 +14,13 @@
     SizeToContent="Height"
     Width="472"
     Title="{x:Static r:Header.FatalError}"
-    Style="{StaticResource Panama.Styles.MetroWindow}">
+    Style="{StaticResource App.Styles.MetroWindow}">
 
     <Grid tk:Property.RowHeights="*,Auto">
 
         <TextBlock
-            Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
-            Margin="{StaticResource Panama.Layout.Padding.Full}"
+            Style="{StaticResource App.Styles.TextBlock.Highlight}"
+            Margin="{StaticResource App.Layout.Padding.Full}"
             VerticalAlignment="Top"
             FontSize="12"
             Text="{Binding Message, FallbackValue=Error}"/>

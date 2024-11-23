@@ -21,7 +21,7 @@
     <TextBox
         Grid.Row="1"
         Text="{Binding PreviewText, ElementName=ToolControl}"
-        Style="{StaticResource Panama.Styles.TextBox.Multiline}"
+        Style="{StaticResource App.Styles.TextBox.Multiline}"
         Visibility="{Binding TextPreviewVisibility, ElementName=ToolControl}"/>
 
     <!-- Image preview -->
@@ -43,7 +43,7 @@
     <!-- Unsupported notice -->
     <TextBlock
         Grid.Row="1"
-        Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
+        Style="{StaticResource App.Styles.TextBlock.ZeroResult}"
         Visibility="{Binding UnsupportedVisibility, ElementName=ToolControl}"
         Text="{x:Static r:Error.PreviewNotSupported}"/>
 

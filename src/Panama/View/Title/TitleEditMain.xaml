@@ -10,7 +10,7 @@
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="400"
-    Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+    Style="{StaticResource App.Styles.Panel.DataEntry}"
     tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,*" >
 
     <!-- Title -->
@@ -41,7 +41,7 @@
     <TextBlock Grid.Row="4" Text="{x:Static r:Text.Notes}"/>
     <TextBox
         Grid.Row="5"
-        Style="{StaticResource Panama.Styles.TextBox.Multiline}"
+        Style="{StaticResource App.Styles.TextBox.Multiline}"
         Text="{Binding SelectedTitle.Notes}"/>
 
 </Grid>
