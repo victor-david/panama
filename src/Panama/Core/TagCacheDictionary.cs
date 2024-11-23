@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Database.Tables;
 using System;
 using System.Collections.Generic;
@@ -45,13 +39,11 @@ namespace Restless.Panama.Core
         /************************************************************************/
 
         #region Constructor
-        #pragma warning disable 1591
         public TagCacheDictionary()
         {
             cache = new Dictionary<long, TagCache>();
             unknown = new TagCache(-1, "Unknown", "This is an unknown tag");
         }
-        #pragma warning restore 1591
         #endregion
 
         /************************************************************************/

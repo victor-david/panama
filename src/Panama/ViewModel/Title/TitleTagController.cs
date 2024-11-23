@@ -1,10 +1,4 @@
-﻿/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
-using Restless.Panama.Controls;
+﻿using Restless.Panama.Controls;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Mvvm;
@@ -101,7 +95,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Enables all entries in <see cref="Available"/> 
+        /// Enables all entries in <see cref="Available"/>
         /// and assigns entries to <see cref="Assigned"/>.
         /// </summary>
         public virtual void PopulateAssigned()
@@ -149,7 +143,7 @@ namespace Restless.Panama.ViewModel
         protected virtual bool RemoveTag(TagSelectorParm tagParm)
         {
             long titleId = Owner.SelectedTitle?.Id ?? 0;
-            
+
             if (TitleTagTable.RemoveIfExist(titleId, tagParm.TagSelectorItem.Id))
             {
                 Owner.Filters.Tags.Invalidate(tagParm.TagSelectorItem.Id);
