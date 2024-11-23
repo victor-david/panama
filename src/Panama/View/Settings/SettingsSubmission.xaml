@@ -38,7 +38,7 @@
     <TextBlock Text="Document Text"/>
     <TextBox
         DockPanel.Dock="Top"
-        Style="{StaticResource Panama.Styles.TextBox.Multiline}"
+        Style="{StaticResource App.Styles.TextBox.Multiline}"
         Text="{Binding Config.SubmissionDocBody}"/>
 
 

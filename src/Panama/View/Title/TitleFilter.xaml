@@ -11,7 +11,7 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d"
-    Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+    Style="{StaticResource App.Styles.Panel.DataEntry}"
     tk:Property.ColumnWidths="*,*,*"
     tk:Property.RowHeights="Auto,Auto,Auto,*"
     d:DesignHeight="450" d:DesignWidth="592">
@@ -64,7 +64,7 @@
         <TextBlock>
             <Run Text="{x:Static r:Text.WordCount}"/>
             <Run
-                Style="{StaticResource Panama.Styles.Run.Highlight}"
+                Style="{StaticResource App.Styles.Run.Highlight}"
                 Text="{Binding Filters.WordCountText, Mode=OneWay}"/>
         </TextBlock>
 

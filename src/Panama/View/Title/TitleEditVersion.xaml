@@ -9,7 +9,7 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d"
-    Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+    Style="{StaticResource App.Styles.Panel.DataEntry}"
     tk:Property.RowHeights="*,Auto,2*"
     d:DesignHeight="650" d:DesignWidth="400">
 
@@ -20,7 +20,7 @@
 
         <StackPanel
             Margin="{DynamicResource Panama.Layout.Padding.Right.Tight}"
-            Style="{StaticResource Panama.Styles.StackPanel.ToolBar.Vertical}">
+            Style="{StaticResource App.Styles.StackPanel.ToolBar.Vertical}">
 
             <Button
                 Margin="0,30,0,0"
@@ -42,7 +42,7 @@
 
         <tk:DataGrid
             Grid.Column="1"
-            Style="{StaticResource Panama.Styles.DataGrid.Locked}"
+            Style="{StaticResource App.Styles.DataGrid.Locked}"
             ItemsSource="{Binding Versions.ListView}"
             SelectedItem="{Binding Versions.SelectedItem}"
             tk:DataGridColumns.Columns="{Binding Versions.Columns}"
@@ -60,7 +60,7 @@
 
         <TextBlock
             Grid.Column="1"
-            Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
+            Style="{StaticResource App.Styles.TextBlock.ZeroResult}"
             tk:Property.IsCollapsed="{Binding Versions.HaveVersion}"
             Text="{x:Static r:Text.NoTitleVersions}"/>
     </Grid>
@@ -90,12 +90,12 @@
 
                 <TextBlock Text="{x:Static r:Text.Created}"/>
                 <TextBlock Grid.Row="1">
-                    <Run Style="{StaticResource Panama.Styles.Run.Highlight}" Text="{Binding Versions.Properties.Core.Created, Mode=OneWay}"/>
+                    <Run Style="{StaticResource App.Styles.Run.Highlight}" Text="{Binding Versions.Properties.Core.Created, Mode=OneWay}"/>
                 </TextBlock>
 
                 <TextBlock Grid.Column="1" Text="{x:Static r:Text.Modified}"/>
                 <TextBlock Grid.Row="1" Grid.Column="1">
-                    <Run Style="{StaticResource Panama.Styles.Run.Highlight}" Text="{Binding Versions.Properties.Core.Modified, Mode=OneWay}"/>
+                    <Run Style="{StaticResource App.Styles.Run.Highlight}" Text="{Binding Versions.Properties.Core.Modified, Mode=OneWay}"/>
                 </TextBlock>
 
                 <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
@@ -124,7 +124,7 @@
              <!-- Only displays when the selected version is not Open Xml -->
             <TextBlock
                 Grid.Row="1"
-                Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
+                Style="{StaticResource App.Styles.TextBlock.ZeroResult}"
                 Text="{x:Static r:Text.NotOpenXmlDocument}"
                 tk:Property.IsCollapsed="{Binding Versions.IsOpenXml}"/>
         </Grid>

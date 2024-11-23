@@ -10,7 +10,7 @@
     d:DataContext="{d:DesignInstance Type=vm:PublisherViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="400"
-    Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+    Style="{StaticResource App.Styles.Panel.DataEntry}"
     tk:Property.RowHeights="Auto,*,Auto,2*">
 
     <!-- Submissions -->
@@ -18,7 +18,7 @@
 
     <tk:DataGrid
         Grid.Row="1"
-        Style="{StaticResource Panama.Styles.DataGrid.Locked}"
+        Style="{StaticResource App.Styles.DataGrid.Locked}"
         Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
         ItemsSource="{Binding Submissions.ListView}"
         SelectedItem="{Binding Submissions.SelectedItem}"
@@ -26,7 +26,7 @@
 
     <TextBlock
         Grid.Row="1"
-        Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
+        Style="{StaticResource App.Styles.TextBlock.ZeroResult}"
         tk:Property.IsCollapsed="{Binding Submissions.HaveItems}"
         Text="{x:Static r:Text.NoPublisherSubmissions}"/>
 
@@ -35,7 +35,7 @@
 
     <tk:DataGrid
         Grid.Row="3"
-        Style="{StaticResource Panama.Styles.DataGrid.Locked}"
+        Style="{StaticResource App.Styles.DataGrid.Locked}"
         Margin="{DynamicResource Panama.Layout.Margin.Control.Stacked}"
         ItemsSource="{Binding Submissions.Titles.ListView}"
         SelectedItem="{Binding Submissions.Titles.SelectedItem}"
@@ -53,7 +53,7 @@
 
     <TextBlock
         Grid.Row="3"
-        Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
+        Style="{StaticResource App.Styles.TextBlock.ZeroResult}"
         tk:Property.IsCollapsed="{Binding Submissions.Titles.HaveItems}"
         Text="{x:Static r:Text.NoTitles}"/>
 

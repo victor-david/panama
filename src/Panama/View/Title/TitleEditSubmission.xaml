@@ -19,7 +19,7 @@
         tk:DataGridColumns.Columns="{Binding Submissions.Columns}"/>
 
     <TextBlock
-        Style="{StaticResource Panama.Styles.TextBlock.ZeroResult}"
+        Style="{StaticResource App.Styles.TextBlock.ZeroResult}"
         tk:Property.IsCollapsed="{Binding Submissions.HaveItems}"
         Text="{x:Static r:Text.NoTitleSubmissions}"/>
 
@@ -35,7 +35,7 @@
         <ScrollViewer Grid.Row="1" Margin="5" VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <StackPanel.Resources>
-                    <Style TargetType="tk:LineItem" BasedOn="{StaticResource Panama.Styles.LineItem}">
+                    <Style TargetType="tk:LineItem" BasedOn="{StaticResource App.Styles.LineItem}">
                         <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
                         <Setter Property="ItemDisplayWidth" Value="80"/>
                     </Style>

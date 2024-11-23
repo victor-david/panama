@@ -44,7 +44,7 @@
 
         <tk:SplitterGrid.ContentRight>
             <StackPanel
-                Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+                Style="{StaticResource App.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
                 <TextBlock Text="{x:Static r:Text.Name}"/>

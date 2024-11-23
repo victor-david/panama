@@ -15,7 +15,7 @@
 
     <tk:DataGrid
         Grid.Column="1"
-        Style="{StaticResource Panama.Styles.DataGrid.Locked}"
+        Style="{StaticResource App.Styles.DataGrid.Locked}"
         ItemsSource="{Binding Titles.ListView}"
         SelectedItem="{Binding Titles.SelectedItem}"
         tk:DataGridColumns.Columns="{Binding Titles.Columns}">
@@ -32,7 +32,7 @@
 
     <StackPanel
         Margin="{DynamicResource Panama.Layout.Padding.Right.Tight}"
-        Style="{StaticResource Panama.Styles.StackPanel.ToolBar.Vertical}">
+        Style="{StaticResource App.Styles.StackPanel.ToolBar.Vertical}">
 
         <Button
             Content="{StaticResource Panama.Icon.Arrow.Up}"

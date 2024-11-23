@@ -14,11 +14,11 @@
     <Grid tk:Property.ColumnWidths="*,*">
 
         <Grid.Resources>
-            <Style TargetType="StatusBar" BasedOn="{StaticResource Panama.Styles.StatusBar}">
+            <Style TargetType="StatusBar" BasedOn="{StaticResource App.Styles.StatusBar}">
                 <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom.Tight}"/>
             </Style>
 
-            <Style TargetType="DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid.Locked}">
+            <Style TargetType="DataGrid" BasedOn="{StaticResource App.Styles.DataGrid.Locked}">
                 <Setter Property="CanUserResizeColumns" Value="False"/>
                 <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Padding.Bottom}"/>
                 <Setter Property="MinRowHeight" Value="24"/>

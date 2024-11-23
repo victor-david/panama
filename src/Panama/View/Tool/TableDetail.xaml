@@ -13,7 +13,7 @@
     <Grid tk:Property.RowHeights="Auto,*">
 
         <Grid.Resources>
-            <Style TargetType="DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid.Locked}"/>
+            <Style TargetType="DataGrid" BasedOn="{StaticResource App.Styles.DataGrid.Locked}"/>
         </Grid.Resources>
 
         <tk:RadioButtonPanel

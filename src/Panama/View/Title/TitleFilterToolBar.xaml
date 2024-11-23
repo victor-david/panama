@@ -9,7 +9,7 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:TitleViewModel}"
     mc:Ignorable="d"
-    Style="{StaticResource Panama.Styles.StatusBar}"
+    Style="{StaticResource App.Styles.StatusBar}"
     d:DesignWidth="860" d:DesignHeight="76">
 
     <TextBlock Text="{x:Static r:Header.Titles}"/>
@@ -53,13 +53,13 @@
 
     <TextBlock>
         <Run
-            Style="{StaticResource Panama.Styles.Run.Highlight}"
+            Style="{StaticResource App.Styles.Run.Highlight}"
             Text="{Binding Filters.RecordCount, Mode=OneWay}"/>
         <Run Text="{x:Static r:Text.Records}"/>
     </TextBlock>
 
     <TextBlock
-        Style="{StaticResource Panama.Styles.TextBlock.Accent}"
+        Style="{StaticResource App.Styles.TextBlock.Accent}"
         tk:Property.IsVisible="{Binding Filters.IsAnyFilterActive}"
         Text="{x:Static r:Text.RowFilterInEffect}"/>
 

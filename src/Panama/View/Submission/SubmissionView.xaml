@@ -30,7 +30,7 @@
                     tk:Property.IsVisible="{Binding SelectedBatch.IsLocked, FallbackValue=False}"/>
 
                 <TextBlock
-                    Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
+                    Style="{StaticResource App.Styles.TextBlock.Highlight}"
                     tk:Property.IsVisible="{Binding SelectedBatch.IsLocked, FallbackValue=False}"
                     Text="{x:Static r:Text.Locked}"/>
             </StatusBar>

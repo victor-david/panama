@@ -49,7 +49,7 @@
         </tk:SplitterGrid.ContentLeft>
 
         <tk:SplitterGrid.ContentRight>
-            <StackPanel Style="{StaticResource Panama.Styles.Panel.DataEntry}" Visibility="{Binding EditVisibility}">
+            <StackPanel Style="{StaticResource App.Styles.Panel.DataEntry}" Visibility="{Binding EditVisibility}">
                 <TextBlock Text="{x:Static r:Text.Name}"/>
                 <TextBox Text="{Binding SelectedLink.Name}"/>
                 <TextBlock Text="{x:Static r:Text.Url}"/>

@@ -12,7 +12,7 @@
     mc:Ignorable="d"
     ResizeMode="NoResize"
     Title="{Binding DisplayName, Mode=OneTime}"
-    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Style="{StaticResource App.Styles.MetroWindow}"
     Width="440"
     SizeToContent="Height"
     ShowInTaskbar="False">
@@ -33,17 +33,17 @@
             <TextBlock
                 Margin="0"
                 VerticalAlignment="Center"
-                Style="{StaticResource Panama.Styles.TextBlock.NavTitle}"
+                Style="{StaticResource App.Styles.TextBlock.NavTitle}"
                 Text="{Binding AppInfo.Title, Mode=OneTime}"/>
 
             <TextBlock Grid.Column="2" Margin="0" HorizontalAlignment="Right">
                 <Run Text="Version"/>
                 <Run
-                    Style="{StaticResource Panama.Styles.Run.Highlight}"
+                    Style="{StaticResource App.Styles.Run.Highlight}"
                     Text="{Binding AppInfo.VersionMajor, Mode=OneTime}"/>
                 <Run Text="Build"/>
                 <Run
-                    Style="{StaticResource Panama.Styles.Run.Highlight}"
+                    Style="{StaticResource App.Styles.Run.Highlight}"
                     Text="{Binding AppInfo.VersionRaw.Build, Mode=OneTime}"/>
             </TextBlock>
         </Grid>
@@ -57,13 +57,13 @@
         <TextBlock>
             <Run Text="{x:Static r:Settings.DatabaseLocation}"/>
             <Run
-                Style="{StaticResource Panama.Styles.Run.Highlight}"
+                Style="{StaticResource App.Styles.Run.Highlight}"
                 Text="{Binding DatabaseLocation, Mode=OneTime}"/>
         </TextBlock>
         <TextBlock>
             <Run Text="{x:Static r:Text.Startup}"/>
             <Run
-                Style="{StaticResource Panama.Styles.Run.Highlight}"
+                Style="{StaticResource App.Styles.Run.Highlight}"
                 Text="{Binding Config.StartupCount, Mode=OneTime, StringFormat='{}{0:#,0}'}"/>
         </TextBlock>
 

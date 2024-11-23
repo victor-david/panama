@@ -12,7 +12,7 @@
     d:DesignHeight="450" d:DesignWidth="800">
 
     <StackPanel.Resources>
-        <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource Panama.Styles.NavigatorExpander}">
+        <Style TargetType="tk:NavigatorExpander" BasedOn="{StaticResource App.Styles.NavigatorExpander}">
             <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
     </StackPanel.Resources>

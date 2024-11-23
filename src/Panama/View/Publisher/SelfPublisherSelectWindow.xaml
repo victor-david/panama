@@ -12,12 +12,12 @@
     mc:Ignorable="d"
     ResizeMode="NoResize"
     Title="{x:Static r:Header.SelectPublisherGeneric}"
-    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Style="{StaticResource App.Styles.MetroWindow}"
     Height="680" Width="568">
 
     <Grid tk:Property.RowHeights="Auto,*">
 
-        <StatusBar Style="{StaticResource Panama.Styles.StatusBar.Selector}">
+        <StatusBar Style="{StaticResource App.Styles.StatusBar.Selector}">
             <TextBlock Text="{x:Static r:Text.Publisher}"/>
             <TextBox Width="100" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
             <Separator/>

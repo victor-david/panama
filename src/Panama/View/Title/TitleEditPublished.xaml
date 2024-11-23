@@ -13,10 +13,10 @@
     tk:Property.RowHeights="Auto,*">
 
     <Grid.Resources>
-        <Style TargetType="tk:RadioButton" BasedOn="{StaticResource Panama.Styles.RadioButton}">
+        <Style TargetType="tk:RadioButton" BasedOn="{StaticResource App.Styles.RadioButton}">
             <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent2}"/>
         </Style>
-        <Style TargetType="tk:DataGrid" BasedOn="{StaticResource Panama.Styles.DataGrid}">
+        <Style TargetType="tk:DataGrid" BasedOn="{StaticResource App.Styles.DataGrid}">
             <Setter Property="Margin" Value="{DynamicResource Panama.Layout.Margin.Control.Stacked}"/>
         </Style>
     </Grid.Resources>
@@ -57,7 +57,7 @@
         <Grid
             Grid.Row="1"
             tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,*"
-            Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+            Style="{StaticResource App.Styles.Panel.DataEntry}"
             Visibility="{Binding Published.EditVisibility}">
 
             <TextBlock Grid.Row="0" Text="{x:Static r:Text.Published}"/>
@@ -71,7 +71,7 @@
             <TextBlock Grid.Row="4" Text="{x:Static r:Text.Note}"/>
             <TextBox
                 Grid.Row="5"
-                Style="{StaticResource Panama.Styles.TextBox.Multiline}"
+                Style="{StaticResource App.Styles.TextBox.Multiline}"
                 Text="{Binding Published.SelectedPublished.Notes}"/>
         </Grid>
     </Grid>
@@ -102,7 +102,7 @@
         <Grid
             Grid.Row="1"
             tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,*"
-            Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+            Style="{StaticResource App.Styles.Panel.DataEntry}"
             Visibility="{Binding SelfPublished.EditVisibility}">
 
             <TextBlock Grid.Row="0" Text="{x:Static r:Text.Published}"/>
@@ -116,7 +116,7 @@
             <TextBlock Grid.Row="4" Text="{x:Static r:Text.Note}"/>
             <TextBox
                 Grid.Row="5"
-                Style="{StaticResource Panama.Styles.TextBox.Multiline}"
+                Style="{StaticResource App.Styles.TextBox.Multiline}"
                 Text="{Binding SelfPublished.SelectedPublished.Notes}"/>
         </Grid>
     </Grid>

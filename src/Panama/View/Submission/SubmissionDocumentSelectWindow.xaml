@@ -9,7 +9,7 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SubmissionDocumentSelectWindowViewModel}"
     mc:Ignorable="d"
-    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Style="{StaticResource App.Styles.MetroWindow}"
     ResizeMode="NoResize"
     SizeToContent="Height"
     Title="{x:Static r:Text.CreateSubmissionDocument0}"
@@ -17,7 +17,7 @@
 
     <StackPanel Margin="{DynamicResource Panama.Layout.Padding.Full}">
         <StackPanel.Resources>
-            <Style TargetType="Button" BasedOn="{StaticResource Panama.Styles.Button.Dialog}"/>
+            <Style TargetType="Button" BasedOn="{StaticResource App.Styles.Button.Dialog}"/>
 
             <Style TargetType="TextBlock">
                 <Setter Property="Margin" Value="{StaticResource Panama.Layout.Padding.Bottom}"/>
@@ -26,7 +26,7 @@
         </StackPanel.Resources>
 
         <TextBlock
-            Style="{StaticResource Panama.Styles.TextBlock.Highlight}"
+            Style="{StaticResource App.Styles.TextBlock.Highlight}"
             Margin="{StaticResource Panama.Layout.Padding.Bottom}"
             Text="{x:Static r:Text.CreateSubmissionDocument1}"/>
 

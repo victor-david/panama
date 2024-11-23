@@ -45,7 +45,7 @@
     <TextBlock Text="{x:Static r:Settings.NavigatorHeader}"/>
 
     <ListBox
-        Style="{StaticResource Panama.Styles.ListBox.Radio}"
+        Style="{StaticResource App.Styles.ListBox.Radio}"
         ItemsSource="{Binding NavigatorHeaders}"
         SelectedItem="{Binding Config.NavigatorHeader}"/>
 

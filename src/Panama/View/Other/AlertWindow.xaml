@@ -12,7 +12,7 @@
     mc:Ignorable="d"
     ResizeMode="NoResize"
     Title="{Binding DisplayName, Mode=OneTime}"
-    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Style="{StaticResource App.Styles.MetroWindow}"
     Height="360" Width="584" >
 
     <Grid

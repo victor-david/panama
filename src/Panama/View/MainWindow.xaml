@@ -13,7 +13,7 @@
     d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
     d:DesignHeight="300" d:DesignWidth="610"
     mc:Ignorable="d"
-    Style="{StaticResource Panama.Styles.MetroWindow}"
+    Style="{StaticResource App.Styles.MetroWindow}"
     Title="{Binding Path=DisplayName, Mode=OneTime}"
     WindowStartupLocation="CenterScreen">
 
@@ -21,7 +21,7 @@
         <mah:WindowCommands Margin="16,0" ShowSeparators="False">
 
             <mah:WindowCommands.Resources>
-                <Style TargetType="ico:PackIconMaterial" BasedOn="{StaticResource Panama.Styles.Icon.TitleBar}"/>
+                <Style TargetType="ico:PackIconMaterial" BasedOn="{StaticResource App.Styles.Icon.TitleBar}"/>
             </mah:WindowCommands.Resources>
 
             <Button
@@ -60,18 +60,18 @@
 
     <Grid tk:Property.RowHeights="*,Auto">
         <tk:MultiSplitterGrid
-            Style="{StaticResource Panama.Styles.MainSplitter}"
+            Style="{StaticResource App.Styles.MainSplitter}"
             MinDetailSize="{x:Static core:Config+MainNavigation.MinWidth}"
             MaxDetailSize="{x:Static core:Config+MainNavigation.MaxWidth}"
             DetailSize="{Binding Config.MainNavigationWidth , Mode=TwoWay}">
 
             <tk:MultiSplitterGrid.DetailContent>
                 <Grid tk:Property.RowHeights="Auto,*">
-                    <TextBlock Style="{StaticResource Panama.Styles.TextBlock.NavTitle}" Text="{Binding AppInfo.Product, Mode=OneTime}"/>
+                    <TextBlock Style="{StaticResource App.Styles.TextBlock.NavTitle}" Text="{Binding AppInfo.Product, Mode=OneTime}"/>
 
                     <ListBox
                         Grid.Row="1"
-                        Style="{StaticResource Panama.Styles.ListBox.Navigator}"
+                        Style="{StaticResource App.Styles.ListBox.Navigator}"
                         ItemsSource="{Binding NavigatorItems}"
                         SelectedItem="{Binding SelectedNavigatorItem}"/>
 
@@ -87,7 +87,7 @@
         <StatusBar Grid.Row="1">
             <StatusBarItem>
                 <TextBlock
-                    Style="{StaticResource Panama.Styles.TextBlock.NotificationMessage}"
+                    Style="{StaticResource App.Styles.TextBlock.NotificationMessage}"
                     Text="{Binding NotificationMessage, NotifyOnTargetUpdated=True}"/>
             </StatusBarItem>
 

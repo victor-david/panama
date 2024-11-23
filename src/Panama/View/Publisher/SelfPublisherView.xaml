@@ -53,7 +53,7 @@
 
             <DockPanel
                 tk:Property.DefaultDock="Top"
-                Style="{StaticResource Panama.Styles.Panel.DataEntry}"
+                Style="{StaticResource App.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
                 <TextBlock Text="{x:Static r:Text.Name}"/>
@@ -64,7 +64,7 @@
 
                 <TextBlock Text="{x:Static r:Text.Notes}"/>
                 <TextBox
-                    Style="{StaticResource Panama.Styles.TextBox.Multiline}"
+                    Style="{StaticResource App.Styles.TextBox.Multiline}"
                     Text="{Binding SelectedPublisher.Notes}"/>
             </DockPanel>
 

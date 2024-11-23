@@ -73,7 +73,7 @@
                         tk:DataGridColumns.Columns="{Binding Columns}">
 
                         <DataGrid.RowStyle>
-                            <Style TargetType="DataGridRow" BasedOn="{StaticResource Panama.Styles.DataGridRow}">
+                            <Style TargetType="DataGridRow" BasedOn="{StaticResource App.Styles.DataGridRow}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding status}" Value="{x:Static table:QueueTitleStatusTable+Defs+Values.StatusPending}">
                                         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Accent}"/>
@@ -118,7 +118,7 @@
                             </StatusBar>
                         </tk:Flyout.Header>
 
-                        <StackPanel Style="{StaticResource Panama.Styles.Panel.DataEntry}">
+                        <StackPanel Style="{StaticResource App.Styles.Panel.DataEntry}">
                             <TextBlock Text="{x:Static r:Text.Name}"/>
                             <TextBox MaxLength="32" Text="{Binding SelectedQueue.Name}"/>
                         </StackPanel>
