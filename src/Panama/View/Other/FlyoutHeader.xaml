@@ -21,13 +21,13 @@
 
         <StatusBarItem DockPanel.Dock="Right">
             <Button
-                Content="{StaticResource Panama.Icon.Close}"
+                Content="{StaticResource App.Icon.Close}"
                 Command="{Binding ToggleCustomFilterCommand}"/>
         </StatusBarItem>
 
         <StatusBarItem DockPanel.Dock="Right" tk:Property.IsVisible="{Binding ShowClearButton, ElementName=LocalControl}">
             <Button
-                Content="{StaticResource Panama.Icon.Filter.Off}"
+                Content="{StaticResource App.Icon.Filter.Off}"
                 Command="{Binding ClearFilterCommand}"/>
         </StatusBarItem>
 
