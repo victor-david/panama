@@ -43,39 +43,39 @@ namespace Restless.Panama.Core
             public static object GetTitleStatusIcon(long status) => LocalResources.Get(GetTitleStatusIconKey(status));
 
             //  Named icons as resources. Names must correspond
-            public const string IconAdd = "Panama.Icon.Plus";
-            public const string IconAlert = "Panama.Icon.Alert";
-            public const string IconArrowDown = "Panama.Icon.Arrow.Down";
-            public const string IconArrowUp = "Panama.Icon.Arrow.Up";
-            public const string IconCalendar = "Panama.Icon.Calendar";
-            public const string IconCalendarClear = "Panama.Icon.Calendar.Clear";
-            public const string IconCheck = "Panama.Icon.Check";
-            public const string IconChevronDown = "Panama.Icon.Chevron.Down";
-            public const string IconChevronLeft = "Panama.Icon.Chevron.Left";
-            public const string IconChevronRight = "Panama.Icon.Chevron.Right";
-            public const string IconChevronUp = "Panama.Icon.Chevron.Up";
-            public const string IconClose = "Panama.Icon.Close";
-            public const string IconCopy = "Panama.Icon.Copy";
-            public const string IconDelete = "Panama.Icon.Delete";
+            public const string IconAdd = "App.Icon.Plus";
+            public const string IconAlert = "App.Icon.Alert";
+            public const string IconArrowDown = "App.Icon.Arrow.Down";
+            public const string IconArrowUp = "App.Icon.Arrow.Up";
+            public const string IconCalendar = "App.Icon.Calendar";
+            public const string IconCalendarClear = "App.Icon.Calendar.Clear";
+            public const string IconCheck = "App.Icon.Check";
+            public const string IconChevronDown = "App.Icon.Chevron.Down";
+            public const string IconChevronLeft = "App.Icon.Chevron.Left";
+            public const string IconChevronRight = "App.Icon.Chevron.Right";
+            public const string IconChevronUp = "App.Icon.Chevron.Up";
+            public const string IconClose = "App.Icon.Close";
+            public const string IconCopy = "App.Icon.Copy";
+            public const string IconDelete = "App.Icon.Delete";
             public const string IconError = IconAlert;
-            public const string IconFile = "Panama.Icon.File";
-            public const string IconFileExtension = "Panama.Icon.File.Extension";
-            public const string IconFileReplace = "Panama.Icon.File.Replace";
-            public const string IconFilter = "Panama.Icon.Filter";
-            public const string IconFilterOff = "Panama.Icon.Filter.Off";
-            public const string IconFolder = "Panama.Icon.Folder";
+            public const string IconFile = "App.Icon.File";
+            public const string IconFileExtension = "App.Icon.File.Extension";
+            public const string IconFileReplace = "App.Icon.File.Replace";
+            public const string IconFilter = "App.Icon.Filter";
+            public const string IconFilterOff = "App.Icon.Filter.Off";
+            public const string IconFolder = "App.Icon.Folder";
             public const string IconInUse = IconTrayFull;
-            public const string IconMinus = "Panama.Icon.Minus";
+            public const string IconMinus = "App.Icon.Minus";
             public const string IconOpenWebSite = IconChevronRight;
-            public const string IconRemove = "Panama.Icon.Remove";
-            public const string IconSquare = "Panama.Icon.Square";
+            public const string IconRemove = "App.Icon.Remove";
+            public const string IconSquare = "App.Icon.Square";
             public const string IconStatusAccepted = IconCheck;
             public const string IconStatusWithdrawn = IconRemove;
-            public const string IconSynchronize = "Panama.Icon.Synchronize";
-            public const string IconToggle = "Panama.Icon.Toggle";
-            public const string IconTrayFull = "Panama.Icon.Tray.Full";
-            public const string IconTrayPlus = "Panama.Icon.Tray.Plus";
-            public const string IconTrayRemove = "Panama.Icon.Tray.Remove";
+            public const string IconSynchronize = "App.Icon.Synchronize";
+            public const string IconToggle = "App.Icon.Toggle";
+            public const string IconTrayFull = "App.Icon.Tray.Full";
+            public const string IconTrayPlus = "App.Icon.Tray.Plus";
+            public const string IconTrayRemove = "App.Icon.Tray.Remove";
         }
     }
 }

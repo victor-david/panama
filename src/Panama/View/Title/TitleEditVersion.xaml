@@ -24,17 +24,17 @@
 
             <Button
                 Margin="0,30,0,0"
-                Content="{StaticResource Panama.Icon.Arrow.Up}"
+                Content="{StaticResource App.Icon.Arrow.Up}"
                 Command="{Binding Versions.Commands[VersionMoveUp]}"
                 ToolTip="{x:Static r:ToolTip.MoveTitleVersionUp}"/>
 
             <Button
-                Content="{StaticResource Panama.Icon.Arrow.Down}"
+                Content="{StaticResource App.Icon.Arrow.Down}"
                 Command="{Binding Versions.Commands[VersionMoveDown]}"
                 ToolTip="{x:Static r:ToolTip.MoveTitleVersionDown}"/>
 
             <Button
-                Content="{StaticResource Panama.Icon.Synchronize}"
+                Content="{StaticResource App.Icon.Synchronize}"
                 Command="{Binding Versions.Commands[VersionSync]}"
                 ToolTip="{x:Static r:ToolTip.SynchonizeTitles}"/>
 

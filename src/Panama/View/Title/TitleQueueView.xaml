@@ -110,7 +110,7 @@
                                 <StatusBarItem DockPanel.Dock="Right">
                                     <Button
                                         Style="{StaticResource MahApps.Styles.Button.Reveal}"
-                                        Content="{StaticResource Panama.Icon.Close}"
+                                        Content="{StaticResource App.Icon.Close}"
                                         Command="{Binding CloseQueueEditCommand}"/>
                                 </StatusBarItem>
 
