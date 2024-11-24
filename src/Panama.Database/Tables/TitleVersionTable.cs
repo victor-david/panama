@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Core.OpenXml;
@@ -131,7 +125,7 @@ namespace Restless.Panama.Database.Tables
         {
             Load(null, $"{Defs.Columns.TitleId},{Defs.Columns.Version}");
         }
-        
+
         /// <summary>
         /// Gets a <see cref="TitleVersionController"/> object that describes version information
         /// and provides version management for the specified title.
@@ -217,7 +211,7 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         /// <param name="e">The event arguments.</param>
         /// <remarks>
-        /// This method watches for changes on the <see cref="Defs.Columns.FileName"/> property and updates the 
+        /// This method watches for changes on the <see cref="Defs.Columns.FileName"/> property and updates the
         /// <see cref="Defs.Columns.Size"/>,
         /// <see cref="Defs.Columns.Updated"/> and
         /// <see cref="Defs.Columns.WordCount"/> columns accordingly.

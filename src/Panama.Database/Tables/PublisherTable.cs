@@ -1,10 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
-using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Collections.Generic;
@@ -365,7 +358,7 @@ namespace Restless.Panama.Database.Tables
                 // for every row in the table. At this time, isInitializing is true.
                 // Later, this method is called from SubmissionPeriodTable to update when
                 // a period is added or deleted. At that point, isInitializing is false
-                // and therefore we save the table first because we don't want any other pending 
+                // and therefore we save the table first because we don't want any other pending
                 // changes on the row to be lost with row.AcceptChanges()
                 if (!isInitializing)
                 {
