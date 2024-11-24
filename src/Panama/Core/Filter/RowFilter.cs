@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Data;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Filter
 {
     /// <summary>
     /// Represents the base class for a data row filter. This class must be inherited.
@@ -30,7 +30,7 @@ namespace Restless.Panama.Core
         /// </summary>
         /// <remarks>
         /// This property is public in order to be able to serialize it.
-        /// However, do not add items directly to this collection. 
+        /// However, do not add items directly to this collection.
         /// Instead use <see cref="SetMultipleIdFilter(List{long})"/>
         /// </remarks>
         public List<long> Ids

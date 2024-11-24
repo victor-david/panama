@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Filter
 {
     /// <summary>
     /// Provides filtering capabilities for title rows

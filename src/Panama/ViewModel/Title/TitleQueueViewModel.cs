@@ -1,4 +1,5 @@
 ﻿using Restless.Panama.Core;
+using Restless.Panama.Core.Filter;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;

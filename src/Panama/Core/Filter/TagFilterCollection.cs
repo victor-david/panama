@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Filter
 {
     /// <summary>
     /// Provides a specialized list of tag ids used to filter
@@ -87,10 +87,7 @@ namespace Restless.Panama.Core
         /// <param name="tagId">The tag id</param>
         public void Invalidate(long tagId)
         {
-            if (tagTitleMap.ContainsKey(tagId))
-            {
-                tagTitleMap.Remove(tagId);
-            }
+            tagTitleMap.Remove(tagId);
         }
 
         /// <summary>

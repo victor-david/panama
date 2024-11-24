@@ -1,4 +1,4 @@
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Filter
 {
     /// <summary>
     /// Provides enumeration values that describe how multiple tag selections in a title filter are combined.
