@@ -1,5 +1,5 @@
 using Restless.Panama.Controls;
-using Restless.Panama.Core;
+using Restless.Panama.Core.Converters;
 using Restless.Panama.Database.Core;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Database.SQLite;

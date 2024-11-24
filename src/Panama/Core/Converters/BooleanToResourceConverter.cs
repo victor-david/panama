@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Data;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Converters
 {
     /// <summary>
     /// Provides a converter that accepts a boolean value and if true, returns a specified resource object.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Converters
 {
     /// <summary>
     /// Provides a converter that accepts a long integer value and returns a resource

@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Converters
 {
     /// <summary>
     /// Provides a converter that returns a representation of a series of boolean flags
