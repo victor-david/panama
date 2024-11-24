@@ -121,4 +121,13 @@
   <data name="PreviewNotSupported">
     <value>Vista previa del documento no soportada</value>
   </data>
+  <data name="FileNotAvailable" xml:space="preserve">
+    <value>El archivo no está disponible para esta operación. Verifique que exista y que no esté siendo utilizado por otra aplicación.</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>El archivo no existe.</value>
+  </data>
+  <data name="RenameFilesExist" xml:space="preserve">
+    <value>Uno o más de los nuevos nombres de archivo propuestos ya existen</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Restless.Panama.Core
 {
@@ -9,44 +10,39 @@ namespace Restless.Panama.Core
     {
         #region Public properties
         /// <summary>
-        /// Gets a boolean value that indicates if all of the items in the collection
-        /// represent a rename candidate for which the original file exists on disk.
+        /// Gets a boolean value that indicates if any of the rename items is missing its original file.
         /// </summary>
-        public bool AllOriginalExist
+        /// <returns></returns>
+        public bool HaveAnyWithOriginalMissing()
         {
-            get
-            {
-                foreach (TitleVersionRenameItem item in this)
-                {
-                    if (!item.OriginalExists)
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
+            return this.Any(item => !item.OriginalExists);
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates if all of the items in the collection
-        /// represent a rename candidate for which the original file and the proposed new file are the same,
-        /// that is, already renamed.
+        /// Gets a boolean value that indicates if all of the items are already renamed.
         /// </summary>
-        public bool AllSame
+        public bool AreAllRenamed()
         {
-            get
-            {
-                foreach (TitleVersionRenameItem item in this)
-                {
-                    if (!item.Same)
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
+            return this.Count(item => item.Same) == Count;
         }
 
+        /// <summary>
+        /// Gets a boolean value that indicates if any of the rename items have a new name that already exists.
+        /// </summary>
+        /// <returns></returns>
+        public bool HaveAnyWithNewExists()
+        {
+            return this.Any(item => item.NewExists);
+        }
+
+        /// <summary>
+        /// Gets a boolean values that indicates if any of the items can be renamed.
+        /// </summary>
+        /// <returns></returns>
+        public bool HaveAnyCanRename()
+        {
+            return this.Any(item => item.CanRename);
+        }
         #endregion
 
         /************************************************************************/

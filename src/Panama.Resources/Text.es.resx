@@ -430,4 +430,7 @@
   <data name="Unassigned" xml:space="preserve">
     <value>Sin asignar</value>
   </data>
+  <data name="TitleRenameStatusNewExists" xml:space="preserve">
+    <value>El nuevo nombre ya existe</value>
+  </data>
 </root>

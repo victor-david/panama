@@ -133,6 +133,24 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file is not available for this operation. Check that it exists and is not in use by another application..
+        /// </summary>
+        public static string FileNotAvailable {
+            get {
+                return ResourceManager.GetString("FileNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The file does not exist..
+        /// </summary>
+        public static string FileNotFound {
+            get {
+                return ResourceManager.GetString("FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The file {0} does not exist. Please make sure that {1} is set correctly in configuration settings. File specifications are relative to this setting..
         /// </summary>
         public static string FileNotFoundFormat {
@@ -192,6 +210,15 @@ namespace Restless.Panama.Resources {
         public static string RenameCandidateListEmpty {
             get {
                 return ResourceManager.GetString("RenameCandidateListEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or more of the proposed new file names already exists.
+        /// </summary>
+        public static string RenameFilesExist {
+            get {
+                return ResourceManager.GetString("RenameFilesExist", resourceCulture);
             }
         }
         

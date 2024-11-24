@@ -5,7 +5,9 @@ using Restless.Panama.Resources;
 using Restless.Panama.View;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
 using System;
+using System.Windows.Input;
 
 namespace Restless.Panama.ViewModel
 {
@@ -32,6 +34,8 @@ namespace Restless.Panama.ViewModel
             get => operationMessage;
             private set => SetProperty(ref operationMessage, value);
         }
+
+        public ICommand RenameCommand { get; }
         #endregion
 
         /************************************************************************/
@@ -57,10 +61,10 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.NewName, nameof(TitleVersionRenameItem.NewNameDisplay));
             Columns.Create(Header.Status, nameof(TitleVersionRenameItem.Status)).MakeFlexWidth(0.75);
 
-            Commands.Add("Rename", p => RunRenameCommand(), p => canRename);
-
             PopulateRenameItems(titleId);
             InitListView(renameItems);
+
+            RenameCommand = RelayCommand.Create(p => RunRenameCommand(), p => canRename);
         }
         #endregion
 
@@ -101,17 +105,21 @@ namespace Restless.Panama.ViewModel
 
             canRename = false;
 
-            if (!renameItems.AllOriginalExist)
+            if (renameItems.HaveAnyWithOriginalMissing())
             {
                 OperationMessage = Error.RenameFilesMissing;
             }
-            else if (renameItems.AllSame)
+            else if (renameItems.AreAllRenamed())
             {
                 OperationMessage = Error.RenameAllCandidatesAlreadyRenamed;
             }
+            else if (renameItems.HaveAnyWithNewExists())
+            {
+                OperationMessage = Error.RenameFilesExist;
+            }
             else
             {
-                canRename = true;
+                canRename = renameItems.HaveAnyCanRename();
             }
         }
 

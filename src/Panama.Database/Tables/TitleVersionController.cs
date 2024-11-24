@@ -1,9 +1,3 @@
-/*
- * Copyright 2019 Victor D. Sandiego
- * This file is part of Panama.
- * Panama is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0
- * Panama is distributed in the hope that it will be useful, but without warranty of any kind.
-*/
 using Restless.Panama.Database.Core;
 using System;
 using System.Collections.Generic;
@@ -68,10 +62,7 @@ namespace Restless.Panama.Database.Tables
         /// Gets the total number of versions. If no version carries multiple revisions,
         /// this value is the same as <see cref="Versions"/>.Count. Otherwise, it is less.
         /// </summary>
-        public int VersionCount
-        {
-            get => versionMap.Count;
-        }
+        public int VersionCount => versionMap.Count;
         #endregion
 
         /************************************************************************/
@@ -80,7 +71,6 @@ namespace Restless.Panama.Database.Tables
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleVersionController"/> class.
         /// </summary>
-        /// <param name="owner">The title version table that owns this instance.</param>
         /// <param name="titleId">The title id to get the version information for.</param>
         internal TitleVersionController(long titleId)
         {
@@ -123,10 +113,7 @@ namespace Restless.Panama.Database.Tables
         /// <param name="current">The version to remove.</param>
         public void Remove(TitleVersionRow current)
         {
-            if (current == null)
-            {
-                throw new ArgumentNullException(nameof(current));
-            }
+            _ = current ?? throw new ArgumentNullException(nameof(current));
             current.Row.Delete();
             RenumberAllVersions();
             RenumberAllRevisions();
@@ -141,10 +128,7 @@ namespace Restless.Panama.Database.Tables
         /// </remarks>
         public void MoveUp(TitleVersionRow current)
         {
-            if (current == null)
-            {
-                throw new ArgumentNullException(nameof(current));
-            }
+            _ = current ?? throw new ArgumentNullException(nameof(current));
 
             if (!IsLatest(current))
             {
@@ -158,8 +142,8 @@ namespace Restless.Panama.Database.Tables
                 }
                 else
                 {
-                    // Crossing a version boundary. 
-                    //  1. Change revisions of CURRENT by decreasing all by 1 
+                    // Crossing a version boundary.
+                    //  1. Change revisions of CURRENT by decreasing all by 1
                     //  2. Set version of CURRENT to the version of PREV
                     //  3. Set revision of CURRENT to the highest revision of PREV + 1.
                     //  4. if revision of CURRENT was A, then adjust all versions
@@ -198,10 +182,7 @@ namespace Restless.Panama.Database.Tables
         /// </remarks>
         public void MoveDown(TitleVersionRow current)
         {
-            if (current == null)
-            {
-                throw new ArgumentNullException(nameof(current));
-            }
+            _ = current ?? throw new ArgumentNullException(nameof(current));
 
             if (!IsEarliest(current))
             {
@@ -215,7 +196,7 @@ namespace Restless.Panama.Database.Tables
                 }
                 else
                 {
-                    // Crossing a version boundary. 
+                    // Crossing a version boundary.
                     //  1. Change revisions of NEXT by increasing all by 1, leaving room for rev A.
                     //  2. Set version of CURRENT to the version of NEXT
                     //  3. Set revision of CURRENT to A.
@@ -248,11 +229,8 @@ namespace Restless.Panama.Database.Tables
         /// </remarks>
         public void ConvertToVersion(TitleVersionRow current)
         {
-            if (current == null)
-            {
-                throw new ArgumentNullException(nameof(current));
-            }
-            
+            _ = current ?? throw new ArgumentNullException(nameof(current));
+
             if (GetRevisionCount(current.Version) > 1)
             {
                 long ver = current.Version;
@@ -264,6 +242,15 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Gets the latest version
+        /// </summary>
+        /// <returns>The title version row of the latest version, or null if no versions exist.</returns>
+        public TitleVersionRow GetLatest()
+        {
+            return Versions.Count > 0 ? Versions[0] : null;
+        }
+
+        /// <summary>
         /// Gets a boolean value that indicates if the specified <see cref="TitleVersionRow"/>
         /// represents the latest version / revision, i.e. HighestVersion.RevA
         /// </summary>
@@ -271,10 +258,7 @@ namespace Restless.Panama.Database.Tables
         /// <returns>true if <paramref name="row"/> represents HighestVersion.RevA; otherwise, false</returns>
         public bool IsLatest(TitleVersionRow row)
         {
-            if (row == null)
-            {
-                throw new ArgumentNullException(nameof(row));
-            }
+            _ = row ?? throw new ArgumentNullException(nameof(row));
             return row.Version == VersionCount && row.Revision == Defs.Values.RevisionA;
         }
 
@@ -286,10 +270,7 @@ namespace Restless.Panama.Database.Tables
         /// <returns>true if <paramref name="row"/> represents Ver1.Rev[MaxRev]; otherwise, false</returns>
         public bool IsEarliest(TitleVersionRow row)
         {
-            if (row == null)
-            {
-                throw new ArgumentNullException(nameof(row));
-            }
+            _ = row ?? throw new ArgumentNullException(nameof(row));
 
             if (row.Version == 1)
             {
@@ -432,7 +413,7 @@ namespace Restless.Panama.Database.Tables
         /// </summary>
         private void RenumberAllRevisions()
         {
-            foreach (var kp in versionMap)
+            foreach (KeyValuePair<long, List<long>> kp in versionMap)
             {
                 RenumberAllRevisions(kp.Key, false);
             }
@@ -447,7 +428,7 @@ namespace Restless.Panama.Database.Tables
         private void RenumberAllRevisions(long version, bool rebuildMap)
         {
             long rev = Defs.Values.RevisionA;
-            foreach (var row in Versions.Where((r) => r.Version == version))
+            foreach (TitleVersionRow row in Versions.Where((r) => r.Version == version))
             {
                 row.Revision = rev++;
             }

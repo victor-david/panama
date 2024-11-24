@@ -9,6 +9,7 @@ using Restless.Toolkit.Core.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
@@ -26,6 +27,7 @@ namespace Restless.Panama.ViewModel
         private PropertiesAdapter properties;
         private Database.Tables.TitleVersionController verController;
         private TitleVersionRow selectedVersion;
+        private const string InvalidVersionController = "Internal error. Invalid version or controller";
         #endregion
 
         /************************************************************************/
@@ -106,18 +108,27 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.File, TitleVersionTable.Defs.Columns.FileName);
 
-            Commands.Add("VersionMoveUp", RunMoveUpCommand, CanRunMoveUpCommand);
-            Commands.Add("VersionMoveDown", RunMoveDownCommand, CanRunMoveDownCommand);
-            Commands.Add("VersionSync", RunSyncCommand);
-            Commands.Add("ContextMenuOpening", RunContextMenuOpeningCommand);
-            Commands.Add("SaveProperty", RunSavePropertyCommand, CanRunSavePropertyCommand);
-            Commands.Add("SetLanguage", RunSetLanguageCommand, o => IsSelectedRowAccessible);
+            Commands.Add("VersionMoveUp", p => RunMoveUpCommand(), p => CanRunMoveUpCommand());
+            Commands.Add("VersionMoveDown", p => RunMoveDownCommand(), p => CanRunMoveDownCommand());
+            Commands.Add("VersionSync", p => RunSyncCommand());
+            Commands.Add("ContextMenuOpening", p => RunContextMenuOpeningCommand());
+            Commands.Add("SaveProperty", p => RunSavePropertyCommand(), p => CanRunSavePropertyCommand());
+            Commands.Add("SetLanguage", RunSetLanguageCommand, p => IsSelectedRowAccessible);
 
-            MenuItems.AddItem(Menu.AddTitleVersion, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
-            MenuItems.AddItem(Menu.ReplaceTitleVersion, RelayCommand.Create(RunReplaceVersionCommand, p => CanRunVersionCommand()))
+            MenuItems.AddItem(Menu.AddTitleVersion, AddCommand)
+                .AddIconResource(ResourceKeys.Icon.IconAdd);
+
+            MenuItems.AddItem(Menu.ReplaceTitleVersion,
+                RelayCommand.Create(p => RunReplaceVersionCommand(), p => CanRunVersionCommand()))
                 .AddIconResource(ResourceKeys.Icon.IconFileReplace);
+
+            MenuItems.AddItem(Menu.CreateTitleVersionCopy,
+                RelayCommand.Create(p => RunCreateTitleVersionCopyCommand(), p=> CanRunCreateTitleVersionCopyCommand()))
+                .AddIconResource(ResourceKeys.Icon.IconCopy);
+
             MenuItems.AddSeparator();
-            MenuItems.AddItem(Menu.MakeSeparateVersion, RelayCommand.Create(RunConvertToVersionCommand, CanRunConvertToVersionCommand));
+
+            MenuItems.AddItem(Menu.MakeSeparateVersion, RelayCommand.Create(p => RunConvertToVersionCommand(), p => CanRunConvertToVersionCommand()));
             MenuItems.AddSeparator();
 
             foreach (DataRow row in DatabaseController.Instance.GetTable<LanguageTable>().Rows)
@@ -180,20 +191,27 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunAddCommand()
         {
-            if (verController != null)
+            try
             {
+                ValidateObject(verController, InvalidVersionController);
+
                 using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Header.SelectTitleVersionAddByFile))
                 {
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
                         string fileName = Paths.Title.WithoutRoot(dialog.FileName);
-                        if (CanAddFileToTitle(fileName))
-                        {
-                            verController.Add(fileName);
-                            OnUpdate();
-                        }
+                        // throws if file name already belongs to title
+                        ValidateAddFileToTitle(fileName);
+
+                        verController.Add(fileName);
+                        OnUpdate();
                     }
                 }
+
+            }
+            catch (Exception e)
+            {
+                MessageWindow.ShowError(e.Message);
             }
         }
 
@@ -221,7 +239,7 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Private methods
-        private void RunConvertToVersionCommand(object parm)
+        private void RunConvertToVersionCommand()
         {
             if (CanRunVersionCommand())
             {
@@ -229,39 +247,82 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private bool CanRunConvertToVersionCommand(object parm)
+        private bool CanRunConvertToVersionCommand()
         {
             return
                 CanRunVersionCommand() &&
                 verController.GetRevisionCount(SelectedVersion.Version) > 1;
         }
 
-        private void RunReplaceVersionCommand(object parm)
+        private void RunReplaceVersionCommand()
         {
-            if (SelectedVersion != null)
+            try
             {
+                ValidateObject(SelectedVersion, InvalidVersionController);
+
                 using (CommonOpenFileDialog dialog = CommonDialogFactory.Create(Config.Instance.FolderTitleVersion, Header.SelectTitleVersionReplaceByFile))
                 {
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
                         string fileName = Paths.Title.WithoutRoot(dialog.FileName);
-                        if (CanAddFileToTitle(fileName))
-                        {
-                            SelectedVersion.FileName = fileName;
-                            OnPropertyChanged(nameof(VersionFileName));
-                        }
+                        // throws if file name already belongs to title
+                        ValidateAddFileToTitle(fileName);
+
+                        SelectedVersion.FileName = fileName;
+                        OnPropertyChanged(nameof(VersionFileName));
                     }
                 }
             }
+            catch (Exception e)
+            {
+                MessageWindow.ShowError(e.Message);
+            }
+        }
+
+        private void RunCreateTitleVersionCopyCommand()
+        {
+            try
+            {
+                ValidateObject(verController, InvalidVersionController);
+
+                if (MessageWindow.ShowContinueCancel(Confirm.AddTitleVersionCopy))
+                {
+                    TitleVersionRow latest = verController.GetLatest();
+                    string sourceFile = Paths.Title.WithRoot(latest.FileName);
+                    string destFile = Path.Combine(Path.GetDirectoryName(sourceFile), Guid.NewGuid().ToString() + Path.GetExtension(sourceFile));
+                    string versionFile = Paths.Title.WithoutRoot(destFile);
+
+                    // throws if file name already belongs to title
+                    // this should never throw because we created a unique file name
+                    ValidateAddFileToTitle(versionFile);
+
+                    // throws if the file doesn't exist or is in use
+                    FileOperation.ValidateFile(sourceFile);
+
+                    File.Copy(sourceFile, destFile);
+                    TitleVersionRow newLatest = verController.Add(versionFile).GetLatest();
+                    TitleVersionRenameItem rename = new(newLatest, Owner.SelectedTitle.Title);
+                    rename.Rename();
+                    OnUpdate();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageWindow.ShowError(e.Message);
+            }
+        }
+
+        private bool CanRunCreateTitleVersionCopyCommand()
+        {
+            return ((verController?.VersionCount) ?? -1) > 0;
         }
 
         /// <summary>
-        /// Checks to see if <paramref name="fileName"/> already belongs to the title.
-        /// If so, displays a message and returns false.
+        /// Validates that <paramref name="fileName"/> may be added to the title.
         /// </summary>
         /// <param name="fileName">The file name to check.</param>
-        /// <returns>true if <paramref name="fileName"/> does not already belong to </returns>
-        private bool CanAddFileToTitle(string fileName)
+        /// <exception cref="InvalidOperationException">The file name already belongs to the title</exception>
+        private void ValidateAddFileToTitle(string fileName)
         {
             foreach (TitleVersionRow ver in Table.EnumerateVersions(fileName))
             {
@@ -271,14 +332,20 @@ namespace Restless.Panama.ViewModel
                     sb.AppendLine(fileName);
                     sb.AppendLine();
                     sb.Append(Error.CannotAddVersionFile);
-                    MessageWindow.ShowError(sb.ToString());
-                    return false;
+                    throw new InvalidOperationException(sb.ToString());
                 }
             }
-            return true;
         }
 
-        private void RunMoveUpCommand(object parm)
+        private static void ValidateObject(object obj, string message)
+        {
+            if (obj is null)
+            {
+                throw new InvalidOperationException(message);
+            }
+        }
+
+        private void RunMoveUpCommand()
         {
             if (CanRunVersionCommand())
             {
@@ -286,7 +353,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void RunMoveDownCommand(object parm)
+        private void RunMoveDownCommand()
         {
             if (CanRunVersionCommand())
             {
@@ -294,12 +361,12 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private bool CanRunMoveUpCommand(object parm)
+        private bool CanRunMoveUpCommand()
         {
             return CanRunVersionCommand() && !verController.IsLatest(SelectedVersion);
         }
 
-        private bool CanRunMoveDownCommand(object parm)
+        private bool CanRunMoveDownCommand()
         {
             return CanRunVersionCommand() && !verController.IsEarliest(SelectedVersion);
         }
@@ -312,7 +379,7 @@ namespace Restless.Panama.ViewModel
             return (SelectedVersion?.TitleId ?? -2) == (verController?.TitleId ?? -1);
         }
 
-        private void RunSyncCommand(object parm)
+        private void RunSyncCommand()
         {
             if (CurrentTitleId > 0)
             {
@@ -320,7 +387,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void RunContextMenuOpeningCommand(object args)
+        private void RunContextMenuOpeningCommand()
         {
             if (SelectedVersion != null)
             {
@@ -347,7 +414,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private void RunSavePropertyCommand(object parm)
+        private void RunSavePropertyCommand()
         {
             if (Properties != null)
             {
@@ -358,7 +425,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        private bool CanRunSavePropertyCommand(object parm)
+        private bool CanRunSavePropertyCommand()
         {
             return IsOpenXml && Properties != null;
         }

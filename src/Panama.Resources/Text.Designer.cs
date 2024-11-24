@@ -1042,6 +1042,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New name already exists.
+        /// </summary>
+        public static string TitleRenameStatusNewExists {
+            get {
+                return ResourceManager.GetString("TitleRenameStatusNewExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready to rename.
         /// </summary>
         public static string TitleRenameStatusReady {

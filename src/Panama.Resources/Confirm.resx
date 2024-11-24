@@ -244,4 +244,7 @@
   <data name="SubmissionCreated" xml:space="preserve">
     <value>Submission created</value>
   </data>
+  <data name="AddTitleVersionCopy" xml:space="preserve">
+    <value>This operation creates a new title version from a copy of the file for latest version of this title.</value>
+  </data>
 </root>

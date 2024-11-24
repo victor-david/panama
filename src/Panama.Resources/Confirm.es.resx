@@ -178,4 +178,7 @@
   <data name="SubmissionCreated" xml:space="preserve">
     <value>Envío creado</value>
   </data>
+  <data name="AddTitleVersionCopy" xml:space="preserve">
+    <value>Esta operación crea una nueva versión del título a partir de una copia del archivo de la última versión de este título.</value>
+  </data>
 </root>

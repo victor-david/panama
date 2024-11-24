@@ -354,4 +354,7 @@
   <data name="AddToQueue" xml:space="preserve">
     <value>Add to queue</value>
   </data>
+  <data name="CreateTitleVersionCopy" xml:space="preserve">
+    <value>Create a new title version from a copy of the latest version</value>
+  </data>
 </root>

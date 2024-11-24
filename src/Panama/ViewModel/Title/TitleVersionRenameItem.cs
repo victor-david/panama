@@ -72,9 +72,19 @@ namespace Restless.Panama.Core
         public string NewName { get; }
 
         /// <summary>
+        /// Gets a boolean value that indicates if the new file name already exists.
+        /// </summary>
+        public bool NewExists => File.Exists(NewName);
+
+        /// <summary>
         /// Gets the proposed new name without any path part.
         /// </summary>
         public string NewNameDisplay { get; }
+
+        /// <summary>
+        /// Gets a boolean value that indicates if this item can be renamed.
+        /// </summary>
+        public bool CanRename { get; }
         #endregion
 
         /************************************************************************/
@@ -112,7 +122,25 @@ namespace Restless.Panama.Core
             NewName = Path.Combine(Path.GetDirectoryName(OriginalName), newNameWithoutPath);
             NewNameDisplay = Path.GetFileName(NewName);
 
-            Status = !OriginalExists ? Text.TitleRenameStatusMissing : Same ? Text.TitleRenameStatusAlready : Text.TitleRenameStatusReady;
+            CanRename = false;
+
+            if (!OriginalExists)
+            {
+                Status = Text.TitleRenameStatusMissing;
+            }
+            else if (Same)
+            {
+                Status = Text.TitleRenameStatusAlready;
+            }
+            else if (NewExists)
+            {
+                Status = Text.TitleRenameStatusNewExists;
+            }
+            else
+            {
+                Status = Text.TitleRenameStatusReady;
+                CanRename = true;
+            }
         }
         #endregion
 
@@ -120,15 +148,11 @@ namespace Restless.Panama.Core
 
         #region Public methods
         /// <summary>
-        /// Performs the rename operation on this item.
+        /// If allowed, performs the rename operation on this item.
         /// </summary>
-        /// <remarks>
-        /// This method performs the rename operation for this item
-        /// if <see cref="Same"/> is false, and <see cref="OriginalExists"/> is true.
-        /// </remarks>
         public void Rename()
         {
-            if (!Same && OriginalExists)
+            if (CanRename)
             {
                 File.Move(OriginalName, NewName);
                 ver.FileName = Paths.Title.WithoutRoot(NewName);

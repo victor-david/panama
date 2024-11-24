@@ -25,7 +25,7 @@
         <StatusBar Grid.Row="1">
             <Button
                 Content="{x:Static r:Text.Rename}"
-                Command="{Binding Commands[Rename]}"/>
+                Command="{Binding RenameCommand}"/>
 
             <StatusBarItem HorizontalAlignment="Right">
                 <TextBlock Text="{Binding OperationMessage}"/>

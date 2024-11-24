@@ -133,6 +133,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This operation creates a new title version from a copy of the file for latest version of this title..
+        /// </summary>
+        public static string AddTitleVersionCopy {
+            get {
+                return ResourceManager.GetString("AddTitleVersionCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Success. All eligible version files renamed..
         /// </summary>
         public static string AllVersionFilesRenamed {

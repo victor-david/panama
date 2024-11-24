@@ -289,4 +289,7 @@
   <data name="AddToQueue" xml:space="preserve">
     <value>Agregar a la cola</value>
   </data>
+  <data name="CreateTitleVersionCopy" xml:space="preserve">
+    <value>Crear una nueva versión del título a partir de una copia de la última versión</value>
+  </data>
 </root>

@@ -304,6 +304,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a new title version from a copy of the latest version.
+        /// </summary>
+        public static string CreateTitleVersionCopy {
+            get {
+                return ResourceManager.GetString("CreateTitleVersionCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom.
         /// </summary>
         public static string Custom {

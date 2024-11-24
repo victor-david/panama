@@ -489,4 +489,7 @@
   <data name="Unassigned" xml:space="preserve">
     <value>Unassigned</value>
   </data>
+  <data name="TitleRenameStatusNewExists" xml:space="preserve">
+    <value>New name already exists</value>
+  </data>
 </root>
