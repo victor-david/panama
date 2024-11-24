@@ -1,4 +1,4 @@
-﻿namespace Restless.Panama.Core
+﻿namespace Restless.Panama.Core.Filter
 {
     /// <summary>
     /// Provides an enumeration of submission row filter types

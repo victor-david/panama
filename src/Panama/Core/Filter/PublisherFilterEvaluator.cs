@@ -3,7 +3,7 @@ using System;
 using System.Data;
 using Columns = Restless.Panama.Database.Tables.PublisherTable.Defs.Columns;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Filter
 {
     /// <summary>
     /// Represents a publisher filter evaluator. This class provides a series

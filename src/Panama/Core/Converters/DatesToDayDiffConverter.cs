@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Data;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Converters
 {
     /// <summary>
     /// Provides a converter that accepts two <see cref="DateTime"/> objects and returns the number of days between them.

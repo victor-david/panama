@@ -4,7 +4,7 @@ using System.Data;
 using Columns = Restless.Panama.Database.Tables.SubmissionBatchTable.Defs.Columns;
 using Responses = Restless.Panama.Database.Tables.ResponseTable.Defs.Values;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Filter
 {
     /// <summary>
     /// Represents a submission filter evaluator. This class provides a series

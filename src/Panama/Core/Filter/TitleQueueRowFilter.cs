@@ -4,7 +4,7 @@ using System.Data;
 using TableColumns = Restless.Panama.Database.Tables.QueueTitleTable.Defs.Columns;
 using QueueStatusValues = Restless.Panama.Database.Tables.QueueTitleStatusTable.Defs.Values;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Filter
 {
     public class TitleQueueRowFilter : RowFilter
     {

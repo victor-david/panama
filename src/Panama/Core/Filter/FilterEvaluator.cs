@@ -2,10 +2,10 @@
 using System;
 using System.Data;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Filter
 {
     /// <summary>
-    /// Represents the base class for a filter action. 
+    /// Represents the base class for a filter action.
     /// This class must be inherited.
     /// </summary>
     public abstract class FilterEvaluator<T> where T : RowFilter

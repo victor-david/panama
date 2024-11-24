@@ -134,10 +134,10 @@ namespace Restless.Panama.Core
             {
                 if (fileName.ToLower().IndexOf(root.ToLower()) == 0)
                 {
-                    fileName = fileName.Substring(root.Length);
+                    fileName = fileName[root.Length..];
                     while (Path.IsPathRooted(fileName) && fileName.Length > 1)
                     {
-                        fileName = fileName.Substring(1);
+                        fileName = fileName[1..];
                     }
                 }
                 return fileName;
@@ -145,11 +145,7 @@ namespace Restless.Panama.Core
 
             public static string WithRoot(string fileName, string root)
             {
-                if (Path.IsPathRooted(fileName))
-                {
-                    return fileName;
-                }
-                return Path.Combine(root, fileName);
+                return Path.IsPathRooted(fileName) ? fileName : Path.Combine(root, fileName);
             }
         }
         #endregion

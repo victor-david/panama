@@ -1,4 +1,5 @@
 using Restless.Panama.Core;
+using Restless.Panama.Core.Converters;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;

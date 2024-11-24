@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace Restless.Panama.Core
+namespace Restless.Panama.Core.Filter
 {
     /// <summary>
     /// Provides filtering capabilities for submissionr rows
@@ -165,10 +165,7 @@ namespace Restless.Panama.Core
         #region Private methods
         private void SetFilterEvaluatorState(SubmissionRowFilterType key, ThreeWayState state)
         {
-            if (filterEvaluators != null)
-            {
-                filterEvaluators[key].SetState(state);
-            }
+            filterEvaluators?[key].SetState(state);
         }
 
         private void ClearAllPropertyState()
