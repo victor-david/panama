@@ -1,7 +1,6 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
-using Restless.Toolkit.Core.Utility;
 using System.IO;
 
 namespace Restless.Panama.Tools
@@ -28,7 +27,7 @@ namespace Restless.Panama.Tools
         /// <summary>
         /// Gets the name of the readme file that is created in the export directory during an export operation.
         /// </summary>
-        public const string ReadMe = "_ReadMeExport.txt";
+        public const string ReadMe = "@ReadMeExport.txt";
         #endregion
 
         /************************************************************************/
@@ -112,7 +111,6 @@ namespace Restless.Panama.Tools
             string readMeFile = Path.Combine(OutputDirectory, ReadMe);
             if (result.Updated.Count > 0 || result.NotFound.Count > 0 || !File.Exists(readMeFile))
             {
-                AssemblyInfo a = new(AssemblyInfoType.Entry);
                 File.WriteAllText(readMeFile, StringHelper.GetExportFileText());
             }
         }

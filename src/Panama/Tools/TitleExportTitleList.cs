@@ -8,11 +8,6 @@ namespace Restless.Panama.Tools
     /// </summary>
     public class TitleExportTitleList : List<TitleExportCandidate>
     {
-        #region Private Vars
-        #endregion
-
-        /************************************************************************/
-
         #region Public Methods
         /// <summary>
         /// Returns a boolean value that indicates whether the specified export path is represented in the list.
