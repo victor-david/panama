@@ -16,7 +16,7 @@ namespace Restless.Panama.ViewModel
     {
         #region Private
         private NavigatorSection selectedSection;
-        private readonly VersionUpdater versionUpdater;
+        private readonly TitleVersionUpdater versionUpdater;
         private readonly SubmissionUpdater submissionUpdater;
         private readonly TitleExporter titleExporter;
         private readonly TitleLister titleLister;
@@ -88,7 +88,7 @@ namespace Restless.Panama.ViewModel
             TitleListCommand = RelayCommand.Create(p => RunTitleListCommand());
             MessageSyncCommand = RelayCommand.Create(p => RunMessageSyncCommand());
 
-            versionUpdater = new VersionUpdater();
+            versionUpdater = new TitleVersionUpdater();
             submissionUpdater = new SubmissionUpdater();
 
             titleExporter = new TitleExporter()

@@ -17,7 +17,7 @@ namespace Restless.Panama.ViewModel
         private const int ExportIdx = 2;
         private const int ListIdx = 3;
 
-        private readonly VersionUpdater versionUpdater;
+        private readonly TitleVersionUpdater versionUpdater;
         private readonly SubmissionUpdater submissionUpdater;
         private readonly TitleExporter titleExporter;
         private readonly TitleLister titleLister;

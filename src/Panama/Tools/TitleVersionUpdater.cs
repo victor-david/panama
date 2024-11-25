@@ -8,16 +8,16 @@ namespace Restless.Panama.Tools
     /// <summary>
     /// Provides functionality to update title version meta data
     /// </summary>
-    public class VersionUpdater : Scanner
+    public class TitleVersionUpdater : Scanner
     {
         private TitleTable TitleTable => DatabaseController.Instance.GetTable<TitleTable>();
         private TitleVersionTable TitleVersionTable => DatabaseController.Instance.GetTable<TitleVersionTable>();
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="VersionUpdater"/> class.
+        /// Initializes a new instance of the <see cref="TitleVersionUpdater"/> class.
         /// </summary>
-        public VersionUpdater()
+        public TitleVersionUpdater()
         {
         }
         #endregion
