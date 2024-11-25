@@ -1077,10 +1077,10 @@ namespace Restless.Panama.Core
         /// should be syncronized with title written date and file system modified date
         /// during the meta-data update operation. Only Open XML documents are affected.
         /// </summary>
-        public bool SyncDocumentInternalDates
-        {
-            get => GetItem(true);
-        }
+        /// <remarks>
+        /// Always returns false.
+        /// </remarks>
+        public bool SyncDocumentInternalDates => false;
 
         /// <summary>
         /// Gets or sets the display filter value for submission messages.
