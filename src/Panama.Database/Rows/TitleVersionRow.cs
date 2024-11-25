@@ -150,18 +150,6 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates whether the properties of this instance
-        /// require synchronization with those of <see cref="Info"/>.
-        /// Checks last updated date, size, and the specified word count.
-        /// </summary>
-        /// <param name="wordCount">The word count</param>
-        /// <returns>true if synchronization needed; otherwise, false</returns>
-        public bool RequireSynchonization(long wordCount)
-        {
-            return RequireSynchonization() || WordCount != wordCount;
-        }
-
-        /// <summary>
         /// Sets the properties of this object to be synchronized with those of <see cref="Info"/>
         /// and the specified word count.
         /// </summary>
