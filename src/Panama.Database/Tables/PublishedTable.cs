@@ -106,7 +106,7 @@ namespace Restless.Panama.Database.Tables
         {
             foreach (DataRow row in EnumerateRows(null, Defs.Columns.Id))
             {
-                yield return new PublishedRow(row);
+                yield return PublishedRow.Create(row);
             }
         }
 
