@@ -21,6 +21,10 @@
         <vw:LinkVerifyView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:PublishedViewModel}">
+        <vw:PublishedView />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vm:PublisherViewModel}">
         <vw:PublisherView />
     </DataTemplate>
