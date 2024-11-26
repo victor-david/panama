@@ -1,28 +1,24 @@
-using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Core.Filter;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
-using Restless.Panama.View;
 using Restless.Toolkit.Controls;
-using Restless.Toolkit.Core;
 using Restless.Toolkit.Core.Utility;
 using System;
 using System.Data;
-using System.Globalization;
 using System.Windows.Threading;
-using TableColumns = Restless.Panama.Database.Tables.PublishedTable.Defs.Columns;
+using TableColumns = Restless.Panama.Database.Tables.PublishedAllTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
     /// Provides the logic that is used to view and manage published records.
     /// </summary>
-    public class PublishedViewModel : DataRowViewModel<PublishedTable>
+    public class PublishedViewModel : DataRowViewModel<PublishedAllTable>
     {
         #region Private
         private int selectedEditSection;
-        private PublishedRow selectedPublished;
+        private PublishedAllRow selectedPublished;
         #endregion
 
         /************************************************************************/
@@ -52,7 +48,7 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the currently selected published row
         /// </summary>
-        public PublishedRow SelectedPublished
+        public PublishedAllRow SelectedPublished
         {
             get => selectedPublished;
             private set => SetProperty(ref selectedPublished, value);
@@ -76,31 +72,18 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            //Columns.Add(CreateFlagsColumn(Header.Flags, GetFlagGridColumns())
-            //    .MakeCentered()
-            //    .MakeFixedWidth(FixedWidth.W076)
-            //    .AddToolTip(PublisherFlagsToolTip.Create(this)));
-
-            Columns.Create(Header.Name, TableColumns.Joined.Publisher);
-            Columns.Create(Header.Url, TableColumns.Url);
+            Columns.Create(Header.Type, TableColumns.TypeId).MakeFixedWidth(FixedWidth.W058);
 
             Columns.Create(Header.Added, TableColumns.Added)
                 .MakeDate()
-                .AddToolTip(ToolTip.PublisherAdded)
                 .MakeInitialSortDescending();
 
-            //Columns.Create(Header.LastSubmissionShort, TableColumns.Calculated.LastSub)
-            //    .MakeDate()
-            //    .AddToolTip(ToolTip.PublisherLastSubmission)
-            //    .SetSelectorName(Header.LastSubmission);
+            Columns.Create(Header.Published, TableColumns.Published)
+                .MakeDate();
 
-            //Columns.Create(Header.SubmissionTotalCountShort, TableColumns.Calculated.SubCount)
-            //    .MakeCentered()
-            //    .MakeFixedWidth(FixedWidth.W042)
-            //    .AddToolTip(ToolTip.PublisherSubmissionCount)
-            //    .SetPrimarySort(SortType.Long)
-            //    .SetSecondarySort(TableColumns.Name, SortType.String, true)
-            //    .SetSelectorName(Header.SubmissionTotalCount);
+            Columns.Create(Header.Title, TableColumns.Title);
+
+            Columns.Create(Header.Publisher, TableColumns.Publisher);
 
             //Columns.RestoreColumnState(Config.PublisherGridColumnState);
 
@@ -135,14 +118,14 @@ namespace Restless.Panama.ViewModel
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
-            SelectedPublished = PublishedRow.Create(SelectedRow);
+            SelectedPublished = PublishedAllRow.Create(SelectedRow);
         }
 
         /// <inheritdoc/>
-        protected override bool OnDataRowFilter(DataRow item)
-        {
-            return Filters?.OnDataRowFilter(item) ?? false;
-        }
+        //protected override bool OnDataRowFilter(DataRow item)
+        //{
+        //    return Filters?.OnDataRowFilter(item) ?? false;
+        //}
 
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
@@ -206,7 +189,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void OnSave()
         {
-            Config.PublisherGridColumnState = Columns.GetColumnState();
+            //Config.PublisherGridColumnState = Columns.GetColumnState();
         }
 
         /// <inheritdoc/>

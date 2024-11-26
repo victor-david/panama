@@ -24,8 +24,6 @@ namespace Restless.Panama.Database.Core
 #endif
         #endregion
 
-
-
         /************************************************************************/
 
         #region Public
@@ -89,8 +87,13 @@ namespace Restless.Panama.Database.Core
             DatabaseRoot = databaseRoot;
             CopyDatabaseIfNeeded();
             CreateAndOpen(MemoryDatabase);
+
             AttachMemorySchema();
             AttachMainSchema(DataSetV5, MainFileNameV5);
+
+            TableRegistrationComplete(MainAppSchemaName);
+            TableRegistrationComplete(MemorySchemaName);
+
             RegisterSchema();
             PerformTableUpdate();
         }
@@ -150,7 +153,6 @@ namespace Restless.Panama.Database.Core
                 CreateAndRegisterTable<TitleTagTable>();
                 CreateAndRegisterTable<TitleVersionTable>();
                 CreateAndRegisterTable<UserNoteTable>();
-                TableRegistrationComplete(MainAppSchemaName);
             });
         }
 
@@ -178,8 +180,8 @@ namespace Restless.Panama.Database.Core
         {
             Attach(MemorySchemaName, MemoryDatabase, () =>
             {
+                CreateAndRegisterTable<PublishedAllTable>();
                 CreateAndRegisterTable<SearchTable>();
-                TableRegistrationComplete(MemorySchemaName);
             });
         }
 
