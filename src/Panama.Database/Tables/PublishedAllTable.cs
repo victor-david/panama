@@ -44,6 +44,14 @@ namespace Restless.Panama.Database.Tables
             Load(null, $"{Defs.Columns.Added} desc");
         }
 
+        public void Initialize()
+        {
+            if (Rows.Count == 0)
+            {
+                Populate();
+            }
+        }
+
         protected override ColumnDefinitionCollection GetColumnDefinitions()
         {
             return new ColumnDefinitionCollection()
@@ -60,7 +68,7 @@ namespace Restless.Panama.Database.Tables
             };
         }
 
-        protected override void OnInitializationComplete()
+        private void Populate()
         {
             long id = 1;
             foreach (PublishedRow item in Controller.GetTable<PublishedTable>().EnumerateAll())

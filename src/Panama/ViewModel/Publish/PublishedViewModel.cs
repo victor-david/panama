@@ -126,6 +126,11 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected Methods
+        protected override void OnActivated()
+        {
+            Table.Initialize();
+        }
+
         /// <summary>
         /// Called when the selected item on the associated data grid has changed.
         /// </summary>
