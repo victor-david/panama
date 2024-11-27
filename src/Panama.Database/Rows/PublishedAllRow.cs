@@ -104,6 +104,25 @@ namespace Restless.Panama.Database.Tables
 
         #region Public methods
         /// <summary>
+        /// Deletes this record and its associated record.
+        /// </summary>
+        public void Delete()
+        {
+            if (TypeId == Values.TypePublisher)
+            {
+                DeletePublished();
+                Row.Delete();
+                Save();
+            }
+            else if (TypeId == Values.TypeSelfPublisher)
+            {
+                DeleteSelfPublished();
+                Row.Delete();
+                Save();
+            }
+        }
+
+        /// <summary>
         /// Gets a string representation of this object
         /// </summary>
         /// <returns>A string</returns>
@@ -123,7 +142,7 @@ namespace Restless.Panama.Database.Tables
             {
                 pub.SetPublishedDate(value);
             }
-            if (TypeId == Values.TypeSelfPublisher && SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow spub)
+            else if (TypeId == Values.TypeSelfPublisher && SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow spub)
             {
                 spub.SetPublishedDate(value);
             }
@@ -136,8 +155,7 @@ namespace Restless.Panama.Database.Tables
             {
                 pub.Url = value;
             }
-
-            if (TypeId == Values.TypeSelfPublisher && SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow spub)
+            else if (TypeId == Values.TypeSelfPublisher && SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow spub)
             {
                 spub.Url = value;
             }
@@ -150,10 +168,27 @@ namespace Restless.Panama.Database.Tables
             {
                 pub.Notes = value;
             }
-
-            if (TypeId == Values.TypeSelfPublisher && SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow spub)
+            else if (TypeId == Values.TypeSelfPublisher && SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow spub)
             {
                 spub.Notes = value;
+            }
+        }
+
+        private void DeletePublished()
+        {
+            if (PublishedTable.GetRow(RelatedId) is PublishedRow pub)
+            {
+                pub.Row.Delete();
+                PublishedTable.Save();
+            }
+        }
+
+        private void DeleteSelfPublished()
+        {
+            if (SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow pub)
+            {
+                pub.Row.Delete();
+                SelfPublishedTable.Save();
             }
         }
         #endregion

@@ -53,6 +53,10 @@
                     <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
                 </DataGrid.InputBindings>
 
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                </DataGrid.ContextMenu>
+
             </tk:DataGrid>
 
         </tk:SplitterGrid.ContentLeft>

@@ -10,6 +10,7 @@ using System.Data;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using Menu = Restless.Panama.Resources.Menu;
 using TableColumns = Restless.Panama.Database.Tables.PublishedAllTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
@@ -110,6 +111,8 @@ namespace Restless.Panama.ViewModel
 
             Columns.RestoreColumnState(Config.PublishedGridColumnState);
 
+            MenuItems.AddItem(Menu.RemovePublished, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
+
             typeGroup = new PropertyGroupDescription(TableColumns.TypeId);
             publisherGroup = new PropertyGroupDescription(TableColumns.Publisher);
             titleGroup = new PropertyGroupDescription(TableColumns.Title);
@@ -173,6 +176,11 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
+            if (IsSelectedRowAccessible && MessageWindow.ShowContinueCancel(Confirm.RemoveTitlePublished))
+            {
+                SelectedPublished?.Delete();
+                ListView.Refresh();
+            }
         }
 
         /// <inheritdoc/>
