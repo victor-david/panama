@@ -88,6 +88,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear the published date.
+        /// </summary>
+        public static string ClearPublishedDate {
+            get {
+                return ResourceManager.GetString("ClearPublishedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy the list of titles to the clipboard.
         /// </summary>
         public static string CopyTitles {

@@ -116,5 +116,18 @@ namespace Restless.Panama.Database.Tables
             return $"{nameof(PublishedRow)} {Id} {PublisherName}";
         }
         #endregion
+
+        /************************************************************************/
+
+        #region Internal methods
+        internal object GetDataPublishedValue()
+        {
+            if (Published.HasValue)
+            {
+                return Published;
+            }
+            return DBNull.Value;
+        }
+        #endregion
     }
 }

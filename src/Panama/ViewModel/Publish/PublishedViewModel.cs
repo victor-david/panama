@@ -3,10 +3,12 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
+using Restless.Toolkit.Mvvm;
 using System;
 using System.Data;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using TableColumns = Restless.Panama.Database.Tables.PublishedAllTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
@@ -75,6 +77,8 @@ namespace Restless.Panama.ViewModel
             get => searchText;
             set => SetProperty(ref searchText, value, SearchTextUpdated);
         }
+
+        public ICommand ClearPublishedDateCommand { get; }
         #endregion
 
         /************************************************************************/
@@ -108,6 +112,8 @@ namespace Restless.Panama.ViewModel
             publisherGroup = new PropertyGroupDescription(TableColumns.Publisher);
             titleGroup = new PropertyGroupDescription(TableColumns.Title);
 
+            ClearPublishedDateCommand = RelayCommand.Create(p => RunClearPublishedDateCommand(), p => SelectedPublished?.HasPublishedDate ?? false);
+
             SearchText = Config.PublishedSearchText;
             ApplyListViewGrouping(Config.PublishedGroupIndex, true);
         }
@@ -116,14 +122,13 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected Methods
+        /// <inheritdoc/>
         protected override void OnActivated()
         {
             Table.Initialize();
         }
 
-        /// <summary>
-        /// Called when the selected item on the associated data grid has changed.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void OnSelectedItemChanged()
         {
             base.OnSelectedItemChanged();
@@ -148,16 +153,13 @@ namespace Restless.Panama.ViewModel
             return DataRowCompareDateTime(item2, item1, TableColumns.Added);
         }
 
-
+        /// <inheritdoc/>
         protected override void RunClearFilterCommand()
         {
             SearchText = null;
         }
 
-        /// <summary>
-        /// Runs the <see cref="DataRowViewModel{T}.OpenRowCommand"/> command.
-        /// This command opens the publisher's web site.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void RunOpenRowCommand()
         {
             if (SelectedPublished?.HasUrl ?? false)
@@ -166,9 +168,7 @@ namespace Restless.Panama.ViewModel
             }
         }
 
-        /// <summary>
-        /// Runs the delete command to delete a record from the data table
-        /// </summary>
+        /// <inheritdoc/>
         protected override void RunDeleteCommand()
         {
         }
@@ -186,6 +186,18 @@ namespace Restless.Panama.ViewModel
             SignalSave();
         }
         #endregion
+
+        /************************************************************************/
+
+        #region Private methods
+        private void RunClearPublishedDateCommand()
+        {
+            if (SelectedPublished is not null && MessageWindow.ShowContinueCancel(Confirm.ClearPublishedDate))
+            {
+                SelectedPublished.Published = null;
+                OnPropertyChanged(nameof(SelectedPublished));
+            }
+        }
 
         private void SearchTextUpdated()
         {
@@ -243,5 +255,6 @@ namespace Restless.Panama.ViewModel
                 }
             }
         }
+        #endregion
     }
 }

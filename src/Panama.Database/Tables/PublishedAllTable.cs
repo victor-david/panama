@@ -1,4 +1,5 @@
 ﻿using Restless.Toolkit.Core.Database.SQLite;
+using System;
 using System.Data;
 
 namespace Restless.Panama.Database.Tables
@@ -83,7 +84,7 @@ namespace Restless.Panama.Database.Tables
                 row[Defs.Columns.Id] = id++;
                 row[Defs.Columns.Added] = item.Added;
                 row[Defs.Columns.Note] = item.Notes;
-                row[Defs.Columns.Published] = item.Published;
+                row[Defs.Columns.Published] = item.GetDataPublishedValue();
                 row[Defs.Columns.Publisher] = item.PublisherName;
                 row[Defs.Columns.RelatedId] = item.Id;
                 row[Defs.Columns.Title] = GetTitle(item.TitleId);
@@ -98,7 +99,7 @@ namespace Restless.Panama.Database.Tables
                 row[Defs.Columns.Id] = id++;
                 row[Defs.Columns.Added] = item.Added;
                 row[Defs.Columns.Note] = item.Notes;
-                row[Defs.Columns.Published] = item.Published;
+                row[Defs.Columns.Published] = item.GetDataPublishedValue();
                 row[Defs.Columns.Publisher] = item.PublisherName;
                 row[Defs.Columns.RelatedId] = item.Id;
                 row[Defs.Columns.Title] = GetTitle(item.TitleId);

@@ -113,15 +113,20 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Private methods
-
         private PublishedTable PublishedTable => Core.DatabaseController.Instance.GetTable<PublishedTable>();
         private SelfPublishedTable SelfPublishedTable => Core.DatabaseController.Instance.GetTable<SelfPublishedTable>();
-
 
         private void SetPublished(DateTime? value)
         {
             SetValue(Columns.Published, value);
-            // TODO - propagate to proper real table
+            if (TypeId == Values.TypePublisher && PublishedTable.GetRow(RelatedId) is PublishedRow pub)
+            {
+                pub.SetPublishedDate(value);
+            }
+            if (TypeId == Values.TypeSelfPublisher && SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow spub)
+            {
+                spub.SetPublishedDate(value);
+            }
         }
 
         private void SetUrl(string value)

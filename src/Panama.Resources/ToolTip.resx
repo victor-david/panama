@@ -309,4 +309,7 @@
   <data name="WindowRestore" xml:space="preserve">
     <value>Restore</value>
   </data>
+  <data name="ClearPublishedDate" xml:space="preserve">
+    <value>Clear the published date</value>
+  </data>
 </root>
