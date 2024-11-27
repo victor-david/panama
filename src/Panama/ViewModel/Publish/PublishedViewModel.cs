@@ -1,4 +1,5 @@
 using Restless.Panama.Core;
+using Restless.Panama.Core.Converters;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
@@ -93,7 +94,8 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
-            Columns.Create(Header.Type, TableColumns.TypeId).MakeFixedWidth(FixedWidth.W058);
+            Columns.Create<PublishedTypeToStringConverter>(Header.Type, TableColumns.TypeId)
+                .MakeFixedWidth(FixedWidth.W112);
 
             Columns.Create(Header.Added, TableColumns.Added)
                 .MakeDate()
