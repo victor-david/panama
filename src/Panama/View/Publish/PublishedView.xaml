@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
+    xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
     d:DataContext="{d:DesignInstance Type=vm:PublishedViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800">
@@ -13,7 +14,19 @@
     <tk:SplitterGrid>
 
         <tk:SplitterGrid.HeaderLeft>
-            <StatusBar/>
+            <StatusBar>
+                <TextBlock Text="{x:Static r:Header.Published}"/>
+                <Separator/>
+                <TextBlock Text="Group by:"/>
+                <CheckBox IsChecked="{Binding GroupByNone}" Content="None"/>
+                <CheckBox IsChecked="{Binding GroupByType}" Content="Type"/>
+                <CheckBox IsChecked="{Binding GroupByTitle}" Content="Title"/>
+                <CheckBox IsChecked="{Binding GroupByPublisher}" Content="Publisher"/>
+                <Separator/>
+                <TextBlock Text="Title / Publisher"/>
+                <TextBox Width="120" Text="{Binding SearchText, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
+
+            </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
 
         <tk:SplitterGrid.HeaderRight>

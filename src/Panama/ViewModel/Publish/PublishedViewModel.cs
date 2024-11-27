@@ -1,12 +1,12 @@
 using Restless.Panama.Core;
-using Restless.Panama.Core.Filter;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Core.Utility;
 using System;
 using System.Data;
-using System.Windows.Threading;
+using System.Windows.Controls;
+using System.Windows.Data;
 using TableColumns = Restless.Panama.Database.Tables.PublishedAllTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
@@ -17,8 +17,12 @@ namespace Restless.Panama.ViewModel
     public class PublishedViewModel : DataRowViewModel<PublishedAllTable>
     {
         #region Private
-        private int selectedEditSection;
         private PublishedAllRow selectedPublished;
+        private readonly bool[] groups = { false, false, false, false };
+        private string searchText;
+        private readonly PropertyGroupDescription typeGroup;
+        private readonly PropertyGroupDescription publisherGroup;
+        private readonly PropertyGroupDescription titleGroup;
         #endregion
 
         /************************************************************************/
@@ -31,19 +35,10 @@ namespace Restless.Panama.ViewModel
         public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
 
         /// <inheritdoc/>
-        public override bool ClearFilterCommandEnabled => Filters.IsAnyFilterActive;
+        //public override bool ClearFilterCommandEnabled => Filters.IsAnyFilterActive;
 
         /// <inheritdoc/>
         public override bool OpenRowCommandEnabled => SelectedPublished?.HasUrl ?? false;
-
-        /// <summary>
-        /// Gets or sets the selected edit section
-        /// </summary>
-        public int SelectedEditSection
-        {
-            get => selectedEditSection;
-            set => SetProperty(ref selectedEditSection, value);
-        }
 
         /// <summary>
         /// Gets the currently selected published row
@@ -54,10 +49,35 @@ namespace Restless.Panama.ViewModel
             private set => SetProperty(ref selectedPublished, value);
         }
 
-        /// <summary>
-        /// Gets the filters
-        /// </summary>
-        public PublisherRowFilter Filters => Config.PublisherFilter;
+        public bool GroupByNone
+        {
+            get => groups[0];
+            set => ApplyListViewGrouping(0);
+        }
+
+        public bool GroupByType
+        {
+            get => groups[1];
+            set => ApplyListViewGrouping(1);
+        }
+
+        public bool GroupByTitle
+        {
+            get => groups[2];
+            set => ApplyListViewGrouping(2);
+        }
+
+        public bool GroupByPublisher
+        {
+            get => groups[3];
+            set => ApplyListViewGrouping(3);
+        }
+
+        public string SearchText
+        {
+            get => searchText;
+            set => SetProperty(ref searchText, value, SearchTextUpdated);
+        }
         #endregion
 
         /************************************************************************/
@@ -85,13 +105,7 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.Publisher, TableColumns.Publisher);
 
-            //Columns.RestoreColumnState(Config.PublisherGridColumnState);
-
-            //Commands.Add("ActiveFilter", p => Filters.SetToActive());
-            //Commands.Add("HaveSubFilter", p => Filters.SetToOpenSubmission());
-            //Commands.Add("InPeriodFilter", p => Filters.SetToInPeriod());
-            //Commands.Add("PayingFilter", p => Filters.SetToPaying());
-            //Commands.Add("FollowupFilter", p => Filters.SetToFollowup());
+            Columns.RestoreColumnState(Config.PublishedGridColumnState);
 
             /* Context menu items */
             //MenuItems.AddItem(Menu.CreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
@@ -100,12 +114,12 @@ namespace Restless.Panama.ViewModel
             //MenuItems.AddSeparator();
             //MenuItems.AddItem(Menu.DeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
-            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
-            {
-                SelectedEditSection = 1;
-                Filters.SetListView(ListView);
-                Filters.ApplyFilter();
-            }));
+            typeGroup = new PropertyGroupDescription(TableColumns.TypeId);
+            publisherGroup = new PropertyGroupDescription(TableColumns.Publisher);
+            titleGroup = new PropertyGroupDescription(TableColumns.Title);
+
+            SearchText = Config.PublishedSearchText;
+            ApplyListViewGrouping(Config.PublishedGroupIndex, true);
         }
         #endregion
 
@@ -122,10 +136,16 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <inheritdoc/>
-        //protected override bool OnDataRowFilter(DataRow item)
-        //{
-        //    return Filters?.OnDataRowFilter(item) ?? false;
-        //}
+        protected override bool OnDataRowFilter(DataRow item)
+        {
+            if (!string.IsNullOrWhiteSpace(SearchText))
+            {
+                return
+                    item[TableColumns.Title].ToString().Contains(SearchText, StringComparison.InvariantCultureIgnoreCase) ||
+                    item[TableColumns.Publisher].ToString().Contains(SearchText, StringComparison.InvariantCultureIgnoreCase);
+            }
+            return true;
+        }
 
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
@@ -133,24 +153,18 @@ namespace Restless.Panama.ViewModel
             return DataRowCompareDateTime(item2, item1, TableColumns.Added);
         }
 
-        /// <inheritdoc/>
-        protected override void RunClearFilterCommand()
-        {
-            Filters.ClearAll();
-        }
-
         /// <summary>
         /// Runs the add command to add a new record to the data table
         /// </summary>
         protected override void RunAddCommand()
         {
-            if (MessageWindow.ShowContinueCancel(Confirm.AddPublisher))
-            {
-                Table.AddDefaultRow();
-                Table.Save();
-                Filters.ClearAll();
-                ForceListViewSort();
-            }
+            //if (MessageWindow.ShowContinueCancel(Confirm.AddPublisher))
+            //{
+            //    Table.AddDefaultRow();
+            //    Table.Save();
+            //    //Filters.ClearAll();
+            //    ForceListViewSort();
+            //}
         }
 
         /// <summary>
@@ -189,7 +203,7 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override void OnSave()
         {
-            //Config.PublisherGridColumnState = Columns.GetColumnState();
+            Config.PublishedGridColumnState = Columns.GetColumnState();
         }
 
         /// <inheritdoc/>
@@ -199,5 +213,62 @@ namespace Restless.Panama.ViewModel
             SignalSave();
         }
         #endregion
+
+        private void SearchTextUpdated()
+        {
+            Config.PublishedSearchText = SearchText;
+            ListView.Refresh();
+        }
+
+        private void ApplyListViewGrouping(int groupIndex, bool initializing = false)
+        {
+            if (Config.PublishedGroupIndex == groupIndex && !initializing)
+            {
+                return;
+            }
+
+            Config.PublishedGroupIndex = groupIndex;
+
+            for (int k = 0; k < groups.Length; k++)
+            {
+                groups[k] = k == groupIndex;
+            }
+
+            OnPropertyChanged(nameof(GroupByNone));
+            OnPropertyChanged(nameof(GroupByType));
+            OnPropertyChanged(nameof(GroupByTitle));
+            OnPropertyChanged(nameof(GroupByPublisher));
+
+            using (ListView.DeferRefresh())
+            {
+                ListView.GroupDescriptions.Clear();
+                switch (groupIndex)
+                {
+                    case 1:
+                        ListView.GroupDescriptions.Add(typeGroup);
+                        ListView.GroupDescriptions.Add(publisherGroup);
+                        ListView.GroupDescriptions.Add(titleGroup);
+                        break;
+                    case 2:
+                        ListView.GroupDescriptions.Add(titleGroup);
+                        ListView.GroupDescriptions.Add(publisherGroup);
+                        break;
+                    case 3:
+                        ListView.GroupDescriptions.Add(publisherGroup);
+                        ListView.GroupDescriptions.Add(titleGroup);
+                        break;
+                }
+            }
+
+            bool canSort = groupIndex == 0;
+            foreach (DataGridColumn col in Columns)
+            {
+                col.CanUserSort = canSort;
+                if (!canSort)
+                {
+                    col.SortDirection = null;
+                }
+            }
+        }
     }
 }

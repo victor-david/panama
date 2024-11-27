@@ -565,6 +565,15 @@ namespace Restless.Panama.Core
         }
 
         /// <summary>
+        /// Gets or sets the state of the published (combined view) grid columns
+        /// </summary>
+        public string PublishedGridColumnState
+        {
+            get => GetItem(null);
+            set => SetItem(value);
+        }
+
+        /// <summary>
         /// Gets or sets the state of the submission grid columns
         /// </summary>
         public string SubmissionGridColumnState
@@ -1006,6 +1015,18 @@ namespace Restless.Panama.Core
         public bool SearchVersionOnly
         {
             get => GetItem(false);
+            set => SetItem(value);
+        }
+
+        public int PublishedGroupIndex
+        {
+            get => GetItem(0);
+            set => SetItem(value);
+        }
+
+        public string PublishedSearchText
+        {
+            get => GetItem(null);
             set => SetItem(value);
         }
         #endregion
