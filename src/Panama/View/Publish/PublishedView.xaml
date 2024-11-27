@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:tk="http://schemas.restless.toolkit.com/2021"
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     xmlns:r="clr-namespace:Restless.Panama.Resources;assembly=Panama.Resources"
@@ -24,7 +25,10 @@
                 <CheckBox IsChecked="{Binding GroupByPublisher}" Content="{x:Static r:Header.Publisher}"/>
                 <Separator/>
                 <TextBlock Text="{x:Static r:Header.TitlePublisher}"/>
-                <TextBox Width="180" Text="{Binding SearchText, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox
+                    Style="{StaticResource MahApps.Styles.TextBox.Button}"
+                    mah:TextBoxHelper.ButtonCommand="{Binding ClearFilterCommand}"
+                    Width="180" Text="{Binding SearchText, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
 
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
@@ -49,9 +53,6 @@
                     <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
                 </DataGrid.InputBindings>
 
-                <DataGrid.ContextMenu>
-                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
-                </DataGrid.ContextMenu>
             </tk:DataGrid>
 
         </tk:SplitterGrid.ContentLeft>

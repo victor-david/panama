@@ -29,13 +29,10 @@ namespace Restless.Panama.ViewModel
 
         #region Properties
         /// <inheritdoc/>
-        public override bool AddCommandEnabled => true;
+        public override bool ClearFilterCommandEnabled => true;
 
         /// <inheritdoc/>
         public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
-
-        /// <inheritdoc/>
-        //public override bool ClearFilterCommandEnabled => Filters.IsAnyFilterActive;
 
         /// <inheritdoc/>
         public override bool OpenRowCommandEnabled => SelectedPublished?.HasUrl ?? false;
@@ -107,13 +104,6 @@ namespace Restless.Panama.ViewModel
 
             Columns.RestoreColumnState(Config.PublishedGridColumnState);
 
-            /* Context menu items */
-            //MenuItems.AddItem(Menu.CreatePublisher, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
-            //MenuItems.AddSeparator();
-            //MenuItems.AddItem(Menu.BrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
-            //MenuItems.AddSeparator();
-            //MenuItems.AddItem(Menu.DeletePublisher, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
-
             typeGroup = new PropertyGroupDescription(TableColumns.TypeId);
             publisherGroup = new PropertyGroupDescription(TableColumns.Publisher);
             titleGroup = new PropertyGroupDescription(TableColumns.Title);
@@ -158,18 +148,10 @@ namespace Restless.Panama.ViewModel
             return DataRowCompareDateTime(item2, item1, TableColumns.Added);
         }
 
-        /// <summary>
-        /// Runs the add command to add a new record to the data table
-        /// </summary>
-        protected override void RunAddCommand()
+
+        protected override void RunClearFilterCommand()
         {
-            //if (MessageWindow.ShowContinueCancel(Confirm.AddPublisher))
-            //{
-            //    Table.AddDefaultRow();
-            //    Table.Save();
-            //    //Filters.ClearAll();
-            //    ForceListViewSort();
-            //}
+            SearchText = null;
         }
 
         /// <summary>
@@ -189,20 +171,6 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected override void RunDeleteCommand()
         {
-            //if (IsSelectedRowAccessible)
-            //{
-            //    int childRowCount = SelectedRow.GetChildRows(PublisherTable.Defs.Relations.ToSubmissionBatch).Length;
-            //    if (childRowCount > 0)
-            //    {
-            //        MessageWindow.ShowError(string.Format(CultureInfo.InvariantCulture, Error.CannotDeletePublisher, childRowCount));
-            //        return;
-            //    }
-
-            //    if (MessageWindow.ShowYesNo(Confirm.DeletePublisher))
-            //    {
-            //        DeleteSelectedRow();
-            //    }
-            //}
         }
 
         /// <inheritdoc/>
