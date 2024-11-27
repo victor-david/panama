@@ -603,4 +603,13 @@
   <data name="TableRelationsParent" xml:space="preserve">
     <value>Relations (P)</value>
   </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="GroupBy" xml:space="preserve">
+    <value>Group by</value>
+  </data>
+  <data name="TitlePublisher" xml:space="preserve">
+    <value>Title / Publisher</value>
+  </data>
 </root>

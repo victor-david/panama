@@ -17,14 +17,14 @@
             <StatusBar>
                 <TextBlock Text="{x:Static r:Header.Published}"/>
                 <Separator/>
-                <TextBlock Text="Group by:"/>
-                <CheckBox IsChecked="{Binding GroupByNone}" Content="None"/>
-                <CheckBox IsChecked="{Binding GroupByType}" Content="Type"/>
-                <CheckBox IsChecked="{Binding GroupByTitle}" Content="Title"/>
-                <CheckBox IsChecked="{Binding GroupByPublisher}" Content="Publisher"/>
+                <TextBlock Text="{x:Static r:Header.GroupBy}"/>
+                <CheckBox IsChecked="{Binding GroupByNone}" Content="{x:Static r:Header.None}"/>
+                <CheckBox IsChecked="{Binding GroupByType}" Content="{x:Static r:Header.Type}"/>
+                <CheckBox IsChecked="{Binding GroupByTitle}" Content="{x:Static r:Header.Title}"/>
+                <CheckBox IsChecked="{Binding GroupByPublisher}" Content="{x:Static r:Header.Publisher}"/>
                 <Separator/>
-                <TextBlock Text="Title / Publisher"/>
-                <TextBox Width="120" Text="{Binding SearchText, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="{x:Static r:Header.TitlePublisher}"/>
+                <TextBox Width="180" Text="{Binding SearchText, Delay=500, UpdateSourceTrigger=PropertyChanged}"/>
 
             </StatusBar>
         </tk:SplitterGrid.HeaderLeft>
@@ -59,7 +59,6 @@
         <tk:SplitterGrid.ContentRight>
             <Grid
                 tk:Property.RowHeights="Auto,Auto,Auto,*,*"
-                tk:Property.DefaultDock="Top"
                 Style="{StaticResource App.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
