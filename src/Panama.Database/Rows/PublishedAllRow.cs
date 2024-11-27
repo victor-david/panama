@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using Columns = Restless.Panama.Database.Tables.PublishedAllTable.Defs.Columns;
+using Values = Restless.Panama.Database.Tables.PublishedAllTable.Defs.Values;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -113,6 +114,10 @@ namespace Restless.Panama.Database.Tables
 
         #region Private methods
 
+        private PublishedTable PublishedTable => Core.DatabaseController.Instance.GetTable<PublishedTable>();
+        private SelfPublishedTable SelfPublishedTable => Core.DatabaseController.Instance.GetTable<SelfPublishedTable>();
+
+
         private void SetPublished(DateTime? value)
         {
             SetValue(Columns.Published, value);
@@ -122,13 +127,29 @@ namespace Restless.Panama.Database.Tables
         private void SetUrl(string value)
         {
             SetValue(Columns.Url, value);
-            // TODO - propagate to proper real table
+            if (TypeId == Values.TypePublisher && PublishedTable.GetRow(RelatedId) is PublishedRow pub)
+            {
+                pub.Url = value;
+            }
+
+            if (TypeId == Values.TypeSelfPublisher && SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow spub)
+            {
+                spub.Url = value;
+            }
         }
 
         private void SetNote(string value)
         {
             SetValue(Columns.Note, value);
-            // TODO - propagate to proper real table
+            if (TypeId == Values.TypePublisher && PublishedTable.GetRow(RelatedId) is PublishedRow pub)
+            {
+                pub.Notes = value;
+            }
+
+            if (TypeId == Values.TypeSelfPublisher && SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow spub)
+            {
+                spub.Notes = value;
+            }
         }
         #endregion
     }

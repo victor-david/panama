@@ -32,6 +32,12 @@ namespace Restless.Panama.Database.Tables
 
                 public const string Note = "note";
             }
+
+            public static class Values
+            {
+                public const long TypePublisher = 1;
+                public const long TypeSelfPublisher = 2;
+            }
         }
 
         public PublishedAllTable() : base(Core.DatabaseController.MemorySchemaName, Defs.TableName)
@@ -81,7 +87,7 @@ namespace Restless.Panama.Database.Tables
                 row[Defs.Columns.Publisher] = item.PublisherName;
                 row[Defs.Columns.RelatedId] = item.Id;
                 row[Defs.Columns.Title] = GetTitle(item.TitleId);
-                row[Defs.Columns.TypeId] = 1;
+                row[Defs.Columns.TypeId] = Defs.Values.TypePublisher;
                 row[Defs.Columns.Url] = item.Url;
                 Rows.Add(row);
             }
@@ -96,7 +102,7 @@ namespace Restless.Panama.Database.Tables
                 row[Defs.Columns.Publisher] = item.PublisherName;
                 row[Defs.Columns.RelatedId] = item.Id;
                 row[Defs.Columns.Title] = GetTitle(item.TitleId);
-                row[Defs.Columns.TypeId] = 2;
+                row[Defs.Columns.TypeId] = Defs.Values.TypeSelfPublisher;
                 row[Defs.Columns.Url] = item.Url;
                 Rows.Add(row);
             }

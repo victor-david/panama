@@ -56,6 +56,24 @@
 
         </tk:SplitterGrid.ContentLeft>
 
+        <tk:SplitterGrid.ContentRight>
+            <Grid
+                tk:Property.RowHeights="Auto,Auto,Auto,*,*"
+                tk:Property.DefaultDock="Top"
+                Style="{StaticResource App.Styles.Panel.DataEntry}"
+                Visibility="{Binding EditVisibility}">
+
+                <TextBlock Grid.Row="0" Text="{x:Static r:Text.Url}"/>
+                <TextBox Grid.Row="1" Text="{Binding SelectedPublished.Url}"/>
+                <TextBlock Grid.Row="2" Text="{x:Static r:Text.Notes}"/>
+                <TextBox
+                    Grid.Row="3"
+                    Style="{StaticResource App.Styles.TextBox.Multiline}"
+                    Text="{Binding SelectedPublished.Note}"/>
+
+            </Grid>
+        </tk:SplitterGrid.ContentRight>
+
     </tk:SplitterGrid>
 
 </UserControl>
