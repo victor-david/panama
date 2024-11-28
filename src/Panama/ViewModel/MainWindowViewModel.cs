@@ -211,6 +211,7 @@ namespace Restless.Panama.ViewModel
             NavigatorItems.AddNavigator<PublisherViewModel>(Header.Publishers, IconKind.MessageCheckOutline);
             NavigatorItems.AddNavigator<SelfPublisherViewModel>(Header.SelfPublishers, IconKind.MessageFlashOutline);
             NavigatorItems.AddNavigator<SubmissionViewModel>(Header.Submissions, IconKind.MessageReplyTextOutline);
+            NavigatorItems.AddNavigator<PublishedViewModel>(Header.Published, IconKind.NewspaperVariantOutline);
 
             NavigatorItems.AddHeader(Header.Settings);
 

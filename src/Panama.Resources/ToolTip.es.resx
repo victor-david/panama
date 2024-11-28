@@ -250,4 +250,7 @@
   <data name="WindowRestore" xml:space="preserve">
     <value>Restaurar</value>
   </data>
+  <data name="ClearPublishedDate" xml:space="preserve">
+    <value>Limpiar la fecha de publicación</value>
+  </data>
 </root>

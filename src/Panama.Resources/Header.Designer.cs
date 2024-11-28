@@ -502,6 +502,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Group by.
+        /// </summary>
+        public static string GroupBy {
+            get {
+                return ResourceManager.GetString("GroupBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
         public static string Id {
@@ -624,6 +633,15 @@ namespace Restless.Panama.Resources {
         public static string NewName {
             get {
                 return ResourceManager.GetString("NewName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
             }
         }
         
@@ -1344,6 +1362,15 @@ namespace Restless.Panama.Resources {
         public static string TitleMetadata {
             get {
                 return ResourceManager.GetString("TitleMetadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title / Publisher.
+        /// </summary>
+        public static string TitlePublisher {
+            get {
+                return ResourceManager.GetString("TitlePublisher", resourceCulture);
             }
         }
         

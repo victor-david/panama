@@ -544,4 +544,13 @@
   <data name="TableRelationsParent" xml:space="preserve">
     <value>Relaciones (P)</value>
   </data>
+  <data name="None" xml:space="preserve">
+    <value>Ninguno</value>
+  </data>
+  <data name="GroupBy" xml:space="preserve">
+    <value>Agrupar por</value>
+  </data>
+  <data name="TitlePublisher" xml:space="preserve">
+    <value>Título / Editor</value>
+  </data>
 </root>

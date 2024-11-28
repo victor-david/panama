@@ -106,9 +106,16 @@ namespace Restless.Panama.Database.Tables
         {
             foreach (DataRow row in EnumerateRows(null, Defs.Columns.Id))
             {
-                yield return new PublishedRow(row);
+                yield return PublishedRow.Create(row);
             }
         }
+
+        /// <summary>
+        /// Gets the row with the specified id or null if doesn't exist
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PublishedRow GetRow(long id) => EnumerateAll().FirstOrDefault(p => p.Id == id);
 
         /// <summary>
         /// Adds a published record

@@ -81,14 +81,6 @@ namespace Restless.Panama.Database.Tables
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="PublishedRow"/> class.
-        /// </summary>
-        /// <param name="row">The data row</param>
-        public PublishedRow(DataRow row) : base(row)
-        {
-        }
-
-        /// <summary>
         /// Creates a new <see cref="PublishedRow"/> object if <paramref name="row"/> is not null
         /// </summary>
         /// <param name="row">The row</param>
@@ -96,6 +88,10 @@ namespace Restless.Panama.Database.Tables
         public static PublishedRow Create(DataRow row)
         {
             return row != null ? new PublishedRow(row) : null;
+        }
+
+        private PublishedRow(DataRow row) : base(row)
+        {
         }
         #endregion
 
@@ -118,6 +114,19 @@ namespace Restless.Panama.Database.Tables
         public override string ToString()
         {
             return $"{nameof(PublishedRow)} {Id} {PublisherName}";
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Internal methods
+        internal object GetDataPublishedValue()
+        {
+            if (Published.HasValue)
+            {
+                return Published;
+            }
+            return DBNull.Value;
         }
         #endregion
     }
