@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restless.Panama.Database.Core;
+using System;
 using System.Data;
 using Columns = Restless.Panama.Database.Tables.SubmissionBatchTable.Defs.Columns;
 

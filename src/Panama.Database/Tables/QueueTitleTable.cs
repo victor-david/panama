@@ -1,3 +1,4 @@
+using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Collections.Generic;
@@ -255,6 +256,7 @@ namespace Restless.Panama.Database.Tables
         #endregion
 
         /************************************************************************/
+
         #region Update (Internal)
         internal override long DataVersion => 2;
         internal override void PerformSchemaUpdate()

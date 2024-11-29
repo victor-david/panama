@@ -1,3 +1,4 @@
+using Restless.Panama.Database.Core;
 using Restless.Toolkit.Core.Database.SQLite;
 using System;
 using System.Collections.Generic;

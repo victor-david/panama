@@ -1,3 +1,4 @@
+using Restless.Panama.Database.Core;
 using System;
 using System.Data;
 using Columns = Restless.Panama.Database.Tables.AlertTable.Defs.Columns;
