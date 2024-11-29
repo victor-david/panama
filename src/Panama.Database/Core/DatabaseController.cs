@@ -91,11 +91,13 @@ namespace Restless.Panama.Database.Core
             AttachMemorySchema();
             AttachMainSchema(DataSetV5, MainFileNameV5);
 
+            RegisterSchema();
+
+            PerformSchemaUpdate();
+            PerformDataUpdate();
+
             TableRegistrationComplete(MainAppSchemaName);
             TableRegistrationComplete(MemorySchemaName);
-
-            RegisterSchema();
-            PerformTableUpdate();
         }
         #endregion
 
@@ -190,14 +192,18 @@ namespace Restless.Panama.Database.Core
             GetTable<SchemaTable>().RegisterSchema(DefaultSchemaVersion);
         }
 
-        /// <summary>
-        /// Performs table schema / data updates if needed
-        /// </summary>
-        private void PerformTableUpdate()
+        private void PerformSchemaUpdate()
         {
             foreach (ApplicationTableBase table in DataSet.Tables.OfType<ApplicationTableBase>())
             {
                 table.PerformSchemaUpdate();
+            }
+        }
+
+        private void PerformDataUpdate()
+        {
+            foreach (ApplicationTableBase table in DataSet.Tables.OfType<ApplicationTableBase>())
+            {
                 table.PerformDataUpdate();
             }
         }
