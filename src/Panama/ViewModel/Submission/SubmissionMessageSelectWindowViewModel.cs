@@ -6,6 +6,7 @@ using Restless.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -16,7 +17,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the view model logic for the <see cref="SubmissionMessageSelectWindow"/>.
     /// </summary>
-    public class SubmissionMessageSelectWindowViewModel : DataViewModel<MimeKitMessage>, IWindowOwner
+    public class SubmissionMessageSelectWindowViewModel : DataViewModel<MimeKitMessage>, IWindow
     {
         #region Private
         private readonly ObservableCollection<MimeKitMessage> messageCollection;
@@ -49,12 +50,27 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets or sets the window owner. Set in <see cref="WindowFactory"/>
         /// </summary>
-        public Window WindowOwner { get; set; }
+        public Window Window { get; set; }
 
         /// <summary>
         /// Gets or sets a command to close the window. Set in <see cref="WindowFactory"/>
         /// </summary>
         public ICommand CloseWindowCommand { get; set; }
+
+        /// <summary>
+        /// Called when the window is closing. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        /// <param name="e">The event args</param>
+        public void OnWindowClosing(CancelEventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// Called when the window has closed. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        public void OnWindowClosed()
+        {
+        }
         #endregion
 
         /************************************************************************/
@@ -130,10 +146,10 @@ namespace Restless.Panama.ViewModel
         private void RunSelectCommand(object parm)
         {
             PopulateSelectedMessages();
-            if (WindowOwner != null && SelectedMessages.Count > 0)
+            if (Window != null && SelectedMessages.Count > 0)
             {
-                WindowOwner.DialogResult = true;
-                WindowOwner.Close();
+                Window.DialogResult = true;
+                Window.Close();
             }
         }
 

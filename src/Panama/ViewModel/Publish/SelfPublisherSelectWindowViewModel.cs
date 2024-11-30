@@ -3,7 +3,10 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System;
+using System.ComponentModel;
 using System.Data;
+using System.Windows;
+using System.Windows.Input;
 using TableColumns = Restless.Panama.Database.Tables.SelfPublisherTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
@@ -11,7 +14,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the display and selection logic for the <see cref="View.SelfPublisherSelectWindow"/>.
     /// </summary>
-    public class SelfPublisherSelectWindowViewModel : WindowViewModel<SelfPublisherTable>
+    public class SelfPublisherSelectWindowViewModel : DataRowViewModel<SelfPublisherTable>, IWindow
     {
         #region Private
         private string searchText;
@@ -67,6 +70,35 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
+        #region IWindow
+        /// <summary>
+        /// Gets or sets the window owner. Set in <see cref="WindowFactory"/>
+        /// </summary>
+        public Window Window { get; set; }
+
+        /// <summary>
+        /// Gets or sets a command to close the window. Set in <see cref="WindowFactory"/>
+        /// </summary>
+        public ICommand CloseWindowCommand { get; set; }
+
+        /// <summary>
+        /// Called when the window is closing. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        /// <param name="e">The event args</param>
+        public void OnWindowClosing(CancelEventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// Called when the window has closed. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        public void OnWindowClosed()
+        {
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region Protected methods
         /// <inheritdoc/>
         protected override void OnSelectedItemChanged()
@@ -97,7 +129,7 @@ namespace Restless.Panama.ViewModel
         {
             if (SelectedPublisher != null)
             {
-                WindowOwner.DialogResult = true;
+                Window.DialogResult = true;
                 CloseWindowCommand.Execute(null);
             }
         }

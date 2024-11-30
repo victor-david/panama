@@ -5,8 +5,11 @@ using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 using TableColumns = Restless.Panama.Database.Tables.TitleTable.Defs.Columns;
 
 namespace Restless.Panama.ViewModel
@@ -14,7 +17,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the display and selection logic for the <see cref="View.TitleSelectWindow"/>.
     /// </summary>
-    public class TitleSelectWindowViewModel : WindowViewModel<TitleTable>
+    public class TitleSelectWindowViewModel : DataRowViewModel<TitleTable>, IWindow
     {
         #region Private
         private string searchText;
@@ -109,6 +112,35 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
+        #region IWindowOwner
+        /// <summary>
+        /// Gets or sets the window owner. Set in <see cref="WindowFactory"/>
+        /// </summary>
+        public Window Window { get; set; }
+
+        /// <summary>
+        /// Gets or sets a command to close the window. Set in <see cref="WindowFactory"/>
+        /// </summary>
+        public ICommand CloseWindowCommand { get; set; }
+
+        /// <summary>
+        /// Called when the window is closing. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        /// <param name="e">The event args</param>
+        public void OnWindowClosing(CancelEventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// Called when the window has closed. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        public void OnWindowClosed()
+        {
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region Protected methods
         /// <inheritdoc/>
         protected override int OnDataRowCompare(DataRow item1, DataRow item2)
@@ -131,7 +163,7 @@ namespace Restless.Panama.ViewModel
             PopulateSelectedTitles();
             if (SelectedTitles.Count > 0)
             {
-                WindowOwner.DialogResult = true;
+                Window.DialogResult = true;
                 CloseWindowCommand.Execute(null);
             }
         }

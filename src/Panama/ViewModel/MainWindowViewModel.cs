@@ -5,6 +5,7 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using IconKind = MahApps.Metro.IconPacks.PackIconMaterialKind;
 
@@ -13,7 +14,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// The ViewModel for the application's main window.
     /// </summary>
-    public class MainWindowViewModel : WindowViewModel
+    public class MainWindowViewModel : ApplicationViewModel, IWindow
     {
         #region Private
         private const int ToolHeaderId = 10;
@@ -114,6 +115,37 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
+        #region IWindow
+        /// <summary>
+        /// Gets or sets the window owner. Set in <see cref="WindowFactory"/>
+        /// </summary>
+        public Window Window { get; set; }
+
+        /// <summary>
+        /// Gets or sets a command to close the window. Set in <see cref="WindowFactory"/>
+        /// </summary>
+        public ICommand CloseWindowCommand { get; set; }
+
+        /// <summary>
+        /// Called when the window is closing. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        /// <param name="e">The event args</param>
+        public void OnWindowClosing(CancelEventArgs e)
+        {
+            viewModelCache.SignalClosing();
+            Config.SaveMainWindow(Window);
+        }
+
+        /// <summary>
+        /// Called when the window has closed. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        public void OnWindowClosed()
+        {
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region Public methods
         /// <summary>
         /// Creates a notification message that displays on the main status bar
@@ -170,19 +202,9 @@ namespace Restless.Panama.ViewModel
 
         #region Protected methods
         /// <inheritdoc/>
-        protected override void OnWindowClosing(CancelEventArgs e)
-        {
-            if (!e.Cancel)
-            {
-                viewModelCache.SignalClosing();
-                Config.SaveMainWindow(WindowOwner);
-            }
-        }
-
-        /// <inheritdoc/>
         protected override void RunResetWindowCommand()
         {
-            Config.ResetMainWindow(WindowOwner);
+            Config.ResetMainWindow(Window);
         }
         #endregion
 

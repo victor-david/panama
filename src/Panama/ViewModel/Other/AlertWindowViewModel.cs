@@ -13,9 +13,9 @@ using TableColumns = Restless.Panama.Database.Tables.AlertTable.Defs.Columns;
 namespace Restless.Panama.ViewModel
 {
     /// <summary>
-    /// Provides the view model logic for the <see cref="View.AboutWindow"/>.
+    /// Provides the view model logic for the <see cref="View.AlertWindow"/>.
     /// </summary>
-    public class AlertWindowViewModel : WindowViewModel<AlertTable>
+    public class AlertWindowViewModel : DataRowViewModel<AlertTable>
     {
         #region Private
         private AlertRow selectedAlert;

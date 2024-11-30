@@ -457,10 +457,12 @@ namespace Restless.Panama.Core
 
         private static void SetWindowOwner(Window window)
         {
-            if (window.DataContext is IWindowOwner owner)
+            if (window.DataContext is IWindow owner)
             {
-                owner.WindowOwner = window;
-                owner.CloseWindowCommand = RelayCommand.Create(p => owner.WindowOwner?.Close());
+                owner.Window = window;
+                owner.CloseWindowCommand = RelayCommand.Create(p => window.Close());
+                window.Closing += (s, e) => owner.OnWindowClosing(e);
+                window.Closed += (s, e) => owner.OnWindowClosed();
             }
         }
 

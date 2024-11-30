@@ -8,11 +8,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Restless.Panama.ViewModel
 {
-    public class ToolWindowViewModel : WindowViewModel
+    public class ToolWindowViewModel : ApplicationViewModel, IWindow
     {
         #region Private
         private NavigatorSection selectedSection;
@@ -109,17 +110,42 @@ namespace Restless.Panama.ViewModel
 
         /************************************************************************/
 
-        #region Protected methods
-        /// <inheritdoc/>
-        protected override void OnWindowClosing(CancelEventArgs e)
+        #region IWindow
+        /// <summary>
+        /// Gets or sets the window owner. Set in <see cref="WindowFactory"/>
+        /// </summary>
+        public Window Window { get; set; }
+
+        /// <summary>
+        /// Gets or sets a command to close the window. Set in <see cref="WindowFactory"/>
+        /// </summary>
+        public ICommand CloseWindowCommand { get; set; }
+
+        /// <summary>
+        /// Called when the window is closing. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        /// <param name="e">The event args</param>
+        public void OnWindowClosing(CancelEventArgs e)
         {
-            Config.SaveToolWindow(WindowOwner);
+            Config.SaveToolWindow(Window);
         }
+
+        /// <summary>
+        /// Called when the window has closed. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        public void OnWindowClosed()
+        {
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Protected methods
 
         /// <inheritdoc/>
         protected override void RunResetWindowCommand()
         {
-            Config.ResetToolWindow(WindowOwner);
+            Config.ResetToolWindow(Window);
         }
         #endregion
 

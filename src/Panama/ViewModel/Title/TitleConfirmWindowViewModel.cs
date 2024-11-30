@@ -5,6 +5,7 @@ using Restless.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -14,7 +15,7 @@ namespace Restless.Panama.ViewModel
     /// <summary>
     /// Provides the display and selection logic for the <see cref="View.TitleConfirmWindow"/>.
     /// </summary>
-    public class TitleConfirmWindowViewModel : DataViewModel<TitleSubmission>, IWindowOwner
+    public class TitleConfirmWindowViewModel : DataViewModel<TitleSubmission>, IWindow
     {
         #region Private
         private readonly SubmissionBatchRow submissionBatch;
@@ -27,12 +28,27 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets or sets the window owner. Set in <see cref="WindowFactory"/>
         /// </summary>
-        public Window WindowOwner { get; set; }
+        public Window Window { get; set; }
 
         /// <summary>
         /// Gets or sets a command to close the window. Set in <see cref="WindowFactory"/>
         /// </summary>
         public ICommand CloseWindowCommand { get; set; }
+
+        /// <summary>
+        /// Called when the window is closing. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        /// <param name="e">The event args</param>
+        public void OnWindowClosing(CancelEventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// Called when the window has closed. Established in <see cref="WindowFactory"/>
+        /// </summary>
+        public void OnWindowClosed()
+        {
+        }
         #endregion
 
         /************************************************************************/
@@ -93,7 +109,7 @@ namespace Restless.Panama.ViewModel
         #region Private methods
         private void RunConfirmCommand(object parm)
         {
-            WindowOwner.DialogResult = true;
+            Window.DialogResult = true;
             CloseWindowCommand.Execute(null);
         }
 

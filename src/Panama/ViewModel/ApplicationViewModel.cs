@@ -3,6 +3,7 @@ using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
 using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
+using System.Windows.Input;
 using System.Windows.Markup;
 
 namespace Restless.Panama.ViewModel
@@ -42,6 +43,10 @@ namespace Restless.Panama.ViewModel
             get => isOperationInProgress;
             protected set => SetProperty(ref isOperationInProgress, value);
         }
+        #endregion
+
+        #region Commands
+        public ICommand ResetWindowCommand { get; }
         #endregion
 
         /************************************************************************/
@@ -101,6 +106,7 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         protected ApplicationViewModel()
         {
+            ResetWindowCommand = RelayCommand.Create(p => RunResetWindowCommand());
         }
         #endregion
 
@@ -115,6 +121,13 @@ namespace Restless.Panama.ViewModel
         {
             base.OnLanguageChanged();
             OnPropertyChanged(nameof(CurrentXmlLanguage));
+        }
+
+        /// <summary>
+        /// Runs the reset window command. Override as needed, The base implementation does nothing.
+        /// </summary>
+        protected virtual void RunResetWindowCommand()
+        {
         }
         #endregion
     }
