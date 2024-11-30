@@ -89,7 +89,7 @@ namespace Restless.Panama.Database.Core
             CreateAndOpen(MemoryDatabase);
 
             AttachMemorySchema();
-            AttachMainSchema(DataSetV5, MainFileNameV5);
+            AttachMainSchema();
 
             RegisterSchema();
 
@@ -116,10 +116,10 @@ namespace Restless.Panama.Database.Core
             }
         }
 
-        private void AttachMainSchema(string dataSet, string fileName)
+        private void AttachMainSchema()
         {
             // throws if either is empty
-            string fullFileName =  GetFullFileName(dataSet, fileName);
+            string fullFileName =  GetFullFileName(DataSetV5, MainFileNameV5);
 
             Attach(MainAppSchemaName, fullFileName, () =>
             {
