@@ -5,9 +5,9 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Restless.Panama.ViewModel
@@ -111,13 +111,15 @@ namespace Restless.Panama.ViewModel
 
         #region Protected methods
         /// <inheritdoc/>
+        protected override void OnWindowClosing(CancelEventArgs e)
+        {
+            Config.SaveToolWindow(WindowOwner);
+        }
+
+        /// <inheritdoc/>
         protected override void RunResetWindowCommand()
         {
-            WindowOwner.Width = Config.ToolWindow.DefaultWidth;
-            WindowOwner.Height = Config.ToolWindow.DefaultHeight;
-            WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
-            WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
-            WindowOwner.WindowState = WindowState.Normal;
+            Config.ResetToolWindow(WindowOwner);
         }
         #endregion
 

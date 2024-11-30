@@ -27,13 +27,16 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static MainWindow Create()
             {
+                Size min = GetAdaptedSize(Config.MainWindow.MinWidth, Config.MainWindow.MinHeight);
+                Size size = GetAdaptedSize(Config.Instance.MainWindowWidth, Config.Instance.MainWindowHeight);
+
                 MainWindow window = new()
                 {
                     Owner = null, // this is a top level window
-                    MinWidth = Config.MainWindow.MinWidth,
-                    MinHeight = Config.MainWindow.MinHeight,
-                    Width = Config.Instance.MainWindowWidth,
-                    Height = Config.Instance.MainWindowHeight,
+                    MinWidth = min.Width,
+                    MinHeight = min.Height,
+                    Width = size.Width,
+                    Height = size.Height,
                     WindowState = Config.Instance.MainWindowState,
                     DataContext = MainWindowViewModel.Instance,
                 };
@@ -57,9 +60,13 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static SettingsWindow Create()
             {
+                Size size = GetAdaptedSize(Config.SettingsWindow.DefaultWidth, Config.SettingsWindow.DefaultHeight);
+
                 SettingsWindow window = new()
                 {
                     Owner = Application.Current.MainWindow,
+                    Width = size.Width,
+                    Height = size.Height,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = new SettingsWindowViewModel()
                 };
@@ -83,14 +90,17 @@ namespace Restless.Panama.Core
             /// <returns>The window</returns>
             public static ToolWindow Create()
             {
+                Size min = GetAdaptedSize(Config.ToolWindow.MinWidth, Config.ToolWindow.MinHeight);
+                Size size = GetAdaptedSize(Config.Instance.ToolWindowWidth, Config.Instance.ToolWindowHeight);
+
                 ToolWindow window = new()
                 {
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
-                    MinHeight = Config.ToolWindow.MinHeight,
-                    MinWidth = Config.ToolWindow.MinWidth,
-                    Height = Config.Instance.ToolWindowHeight,
-                    Width = Config.Instance.ToolWindowWidth,
+                    MinWidth = min.Width,
+                    MinHeight = min.Height,
+                    Width = size.Width,
+                    Height = size.Height,
                     DataContext = new ToolWindowViewModel()
                 };
                 SetWindowProperties(window);
@@ -404,7 +414,40 @@ namespace Restless.Panama.Core
 
         /************************************************************************/
 
+        #region Public methods
+        /// <summary>
+        /// Resets the specified window
+        /// </summary>
+        /// <param name="window">The window</param>
+        /// <param name="width">The proposed width</param>
+        /// <param name="height">The proposed height</param>
+        public static void ResetWindow(Window window, int width, int height)
+        {
+            ArgumentNullException.ThrowIfNull(window, nameof(window));
+            Size size = GetAdaptedSize(width, height);
+            window.Width = size.Width;
+            window.Height = size.Height;
+            window.WindowState = WindowState.Normal;
+            window.Top = (SystemParameters.WorkArea.Height / 2) - (window.Height / 2);
+            window.Left = (SystemParameters.WorkArea.Width / 2) - (window.Width / 2);
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region Private methods
+
+        private static Size GetAdaptedSize(int proposedWidth, int proposedHeight)
+        {
+            double maxWidth = SystemParameters.WorkArea.Width - 2.0;
+            double maxHeight = SystemParameters.WorkArea.Height - 2.0;
+
+            double width = Math.Min(proposedWidth, maxWidth);
+            double height = Math.Min(proposedHeight, maxHeight);
+
+            return new Size(width, height);
+        }
+
         private static void SetWindowProperties(Window window)
         {
             SetWindowOwner(window);

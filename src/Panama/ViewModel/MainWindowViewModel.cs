@@ -5,7 +5,6 @@ using Restless.Toolkit.Controls;
 using Restless.Toolkit.Mvvm;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using IconKind = MahApps.Metro.IconPacks.PackIconMaterialKind;
 
@@ -170,32 +169,20 @@ namespace Restless.Panama.ViewModel
         /************************************************************************/
 
         #region Protected methods
-        /// <summary>
-        /// Called when the window is closing.
-        /// </summary>
-        /// <param name="e">Event args.</param>
+        /// <inheritdoc/>
         protected override void OnWindowClosing(CancelEventArgs e)
         {
             if (!e.Cancel)
             {
                 viewModelCache.SignalClosing();
-                Config.Instance.MainWindowWidth = (int)WindowOwner.Width;
-                Config.Instance.MainWindowHeight = (int)WindowOwner.Height;
-                if (WindowOwner.WindowState != WindowState.Minimized)
-                {
-                    Config.Instance.MainWindowState = WindowOwner.WindowState;
-                }
+                Config.SaveMainWindow(WindowOwner);
             }
         }
 
         /// <inheritdoc/>
         protected override void RunResetWindowCommand()
         {
-            WindowOwner.Width = Config.MainWindow.DefaultWidth;
-            WindowOwner.Height = Config.MainWindow.DefaultHeight;
-            WindowOwner.Top = (SystemParameters.WorkArea.Height / 2) - (WindowOwner.Height / 2);
-            WindowOwner.Left = (SystemParameters.WorkArea.Width / 2) - (WindowOwner.Width / 2);
-            WindowOwner.WindowState = WindowState.Normal;
+            Config.ResetMainWindow(WindowOwner);
         }
         #endregion
 

@@ -90,6 +90,22 @@ namespace Restless.Panama.Core
 
         /************************************************************************/
 
+        #region Fields (SettingsWindow)
+        public static class SettingsWindow
+        {
+            /// <summary>
+            /// Gets the default width for the settings window
+            /// </summary>
+            public const int DefaultWidth = 622;
+            /// <summary>
+            /// Gets the default height for the settings window
+            /// </summary>
+            public const int DefaultHeight = 702;
+        }
+        #endregion
+
+        /************************************************************************/
+
         #region Fields (ToolWindow)
         /// <summary>
         /// Provides static values for the tools window
@@ -1219,7 +1235,55 @@ namespace Restless.Panama.Core
 
         /************************************************************************/
 
-        #region Public methods
+        #region Public methods (save / reset window)
+        /// <summary>
+        /// Saves the state of the main window
+        /// </summary>
+        /// <param name="window">The window</param>
+        public void SaveMainWindow(Window window)
+        {
+            MainWindowWidth = (int)window.Width;
+            MainWindowHeight = (int)window.Height;
+            if (window.WindowState != WindowState.Minimized)
+            {
+                MainWindowState = window.WindowState;
+            }
+        }
+
+        /// <summary>
+        /// Saves the state of the tool window
+        /// </summary>
+        /// <param name="window">The window</param>
+        public void SaveToolWindow(Window window)
+        {
+            ToolWindowWidth = (int)window.Width;
+            ToolWindowHeight = (int)window.Height;
+        }
+
+        /// <summary>
+        /// Resets and saves the state of the main window.
+        /// </summary>
+        /// <param name="window">The window</param>
+        public void ResetMainWindow(Window window)
+        {
+            WindowFactory.ResetWindow(window, MainWindow.DefaultWidth, MainWindow.DefaultHeight);
+            SaveMainWindow(window);
+        }
+
+        /// <summary>
+        /// Resets and saves the state of the tool window.
+        /// </summary>
+        /// <param name="window">The window</param>
+        public void ResetToolWindow(Window window)
+        {
+            WindowFactory.ResetWindow(window, ToolWindow.DefaultWidth, ToolWindow.DefaultHeight);
+            SaveToolWindow(window);
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Public methods (other)
         /// <summary>
         /// Increments the startup count.
         /// </summary>
