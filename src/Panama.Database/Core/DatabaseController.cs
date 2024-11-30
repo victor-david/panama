@@ -109,7 +109,8 @@ namespace Restless.Panama.Database.Core
             string fileNameV4 = GetFullFileName(DataSetV4, MainFileNameV4);
             string fileNameV5 = GetFullFileName(DataSetV5, MainFileNameV5);
             Directory.CreateDirectory(Path.GetDirectoryName(fileNameV5));
-            if (!File.Exists(fileNameV5))
+            // copy if v4 exists and v5 doesn't
+            if (File.Exists(fileNameV4) && !File.Exists(fileNameV5))
             {
                 File.Copy(fileNameV4, fileNameV5);
             }
