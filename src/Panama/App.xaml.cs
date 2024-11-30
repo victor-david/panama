@@ -48,6 +48,7 @@ namespace Restless.Panama
 
             catch (Exception ex)
             {
+                ThemeManager.EnsureTheme();
                 MessageWindow.ShowError(ex.Message, null, false);
                 Environment.Exit(0);
             }

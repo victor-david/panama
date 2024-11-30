@@ -8,7 +8,9 @@ namespace Restless.Panama.Core
 {
     public static class ThemeManager
     {
-        public const string DefaultTheme = "Light.Blue";
+        private static string currentThemeId;
+
+        public const string DefaultTheme = "Light.Cobalt";
 
         static ThemeManager()
         {
@@ -30,10 +32,20 @@ namespace Restless.Panama.Core
             if (Mah.ThemeManager.Current.Themes.Where(t => t.Name == themeId).FirstOrDefault() is not null)
             {
                 Mah.ThemeManager.Current.ChangeTheme(Application.Current, themeId);
+                currentThemeId = themeId;
             }
             else
             {
                 Mah.ThemeManager.Current.ChangeTheme(Application.Current, DefaultTheme);
+                currentThemeId = DefaultTheme;
+            }
+        }
+
+        public static void EnsureTheme()
+        {
+            if (string.IsNullOrEmpty(currentThemeId))
+            {
+                SetTheme(DefaultTheme);
             }
         }
     }
