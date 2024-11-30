@@ -74,18 +74,12 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets the collection of columns
         /// </summary>
-        public DataGridColumnCollection Columns
-        {
-            get;
-        }
+        public DataGridColumnCollection Columns { get; }
 
         /// <summary>
         /// Gets the collection of menu items
         /// </summary>
-        public MenuItemCollection MenuItems
-        {
-            get;
-        }
+        public MenuItemCollection MenuItems { get; }
         #endregion
 
         /************************************************************************/
@@ -94,50 +88,32 @@ namespace Restless.Panama.ViewModel
         /// <summary>
         /// Gets a command to add a new record to the data table
         /// </summary>
-        public RelayCommand AddCommand
-        {
-            get;
-        }
+        public RelayCommand AddCommand { get; }
 
         /// <summary>
         /// Gets a command to delete a record from the data table
         /// </summary>
-        public RelayCommand DeleteCommand
-        {
-            get;
-        }
+        public RelayCommand DeleteCommand { get; }
 
         /// <summary>
         /// Gets a command to clear the filter.
         /// </summary>
-        public ICommand ClearFilterCommand
-        {
-            get;
-        }
+        public ICommand ClearFilterCommand { get; }
 
         /// <summary>
         /// Gets a command to toggle the value of <see cref="IsCustomFilterOpen"/>.
         /// </summary>
-        public ICommand ToggleCustomFilterCommand
-        {
-            get;
-        }
+        public ICommand ToggleCustomFilterCommand { get; }
 
         /// <summary>
         /// Gets a command to open the selected row.
         /// </summary>
-        public ICommand OpenRowCommand
-        {
-            get;
-        }
+        public ICommand OpenRowCommand { get; }
 
         /// <summary>
         /// Gets a command for column header. Supported by <see cref="Toolkit.Controls.DataGrid"/>
         /// </summary>
-        public ICommand HeaderCommand
-        {
-            get;
-        }
+        public ICommand HeaderCommand { get; }
 
         /// <summary>
         /// Gets a boolean value that determines if <see cref="AddCommand"/> is enabled.
@@ -178,7 +154,7 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <summary>
-        /// Gets a visibility value that determines if the edit control section is visible.
+        /// Gets a visibility value that determines if an edit control section is visible.
         /// </summary>
         public Visibility EditVisibility => (SelectedItem != null) ? Visibility.Visible : Visibility.Collapsed;
 
