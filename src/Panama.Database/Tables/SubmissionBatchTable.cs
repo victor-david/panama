@@ -329,27 +329,7 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn(Defs.Columns.Joined.PublisherUrl, PublisherTable.Defs.Relations.ToSubmissionBatch, PublisherTable.Defs.Columns.Url);
             CreateChildToParentColumn<bool>(Defs.Columns.Joined.PublisherExclusive, PublisherTable.Defs.Relations.ToSubmissionBatch, PublisherTable.Defs.Columns.Exclusive);
             CreateChildToParentColumn(Defs.Columns.Joined.ResponseTypeName, ResponseTable.Defs.Relations.ToSubmissionBatch, ResponseTable.Defs.Columns.Name);
-            //CreateActionExpressionColumn<DateTime>
-            //    (
-            //        Defs.Columns.Calculated.Submitted,
-            //        this,
-            //        UpdateCalculatedSubmitted,
-            //        Defs.Columns.Submitted,
-            //        Defs.Columns.Response
-            //    );
         }
-
-        ///// <summary>
-        ///// Called when database initialization is complete to populate the <see cref="Defs.Columns.Calculated.Submitted"/> column.
-        ///// </summary>
-        //protected override void OnInitializationComplete()
-        //{
-        //    foreach (DataRow row in Rows)
-        //    {
-        //        UpdateCalculatedSubmitted(row);
-        //    }
-        //    AcceptChanges();
-        //}
 
         /// <summary>
         /// Called when a data column is changing its value.
@@ -357,8 +337,7 @@ namespace Restless.Panama.Database.Tables
         /// <param name="e">The event args.</param>
         /// <remarks>
         /// This method checks for changes to the <see cref="Defs.Columns.Response"/> column
-        /// in order to auto manage the corresponding <see cref="Defs.Columns.ResponseType"/> column,
-        /// and to sync the associated publisher's virtual <see cref="PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission"/> column.
+        /// in order to auto manage the corresponding <see cref="Defs.Columns.ResponseType"/> column.
         /// </remarks>
         protected override void OnColumnChanging(DataColumnChangeEventArgs e)
         {
@@ -377,7 +356,23 @@ namespace Restless.Panama.Database.Tables
                 {
                     e.Row[Defs.Columns.ResponseType] = ResponseTable.Defs.Values.NoResponse;
                 }
+            }
+        }
 
+        /// <summary>
+        /// Called when a data column has changed its value.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <remarks>
+        /// This method checks for changes to the <see cref="Defs.Columns.Response"/> column
+        /// in order to sync the <see cref="PublisherTable.Defs.Columns.Calculated.HaveActiveSubmission"/>
+        /// column of the associated publisher.
+        /// </remarks>
+        protected override void OnColumnChanged(DataColumnChangeEventArgs e)
+        {
+            base.OnColumnChanged(e);
+            if (e.Column.ColumnName == Defs.Columns.Response)
+            {
                 /* Get the publisher parent row and update it */
                 DataRow parentRow = e.Row.GetParentRow(PublisherTable.Defs.Relations.ToSubmissionBatch);
                 Controller.GetTable<PublisherTable>().UpdateHaveActive(parentRow);
