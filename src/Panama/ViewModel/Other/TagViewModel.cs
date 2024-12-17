@@ -106,8 +106,7 @@ namespace Restless.Panama.ViewModel
             }
             if (MessageWindow.ShowYesNo(Confirm.DeleteTag))
             {
-                SelectedRow.Delete();
-                Table.Save();
+                DeleteSelectedRow();
             }
         }
         #endregion
