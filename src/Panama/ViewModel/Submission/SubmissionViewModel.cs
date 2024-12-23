@@ -166,7 +166,7 @@ namespace Restless.Panama.ViewModel
 
             MenuItems.AddSeparator();
 
-            MenuItems.AddItem(Menu.BrowseToPublisherUrl, OpenRowCommand)
+            MenuItems.AddItem(Menu.BrowseToPublisherUrlOrClick, OpenRowCommand)
                 .AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
 
             MenuItems.AddItem(
