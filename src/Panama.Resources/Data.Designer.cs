@@ -142,6 +142,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Withdrawn.
+        /// </summary>
+        public static string SubmissionResponse100 {
+            get {
+                return ResourceManager.GetString("SubmissionResponse100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accepted.
         /// </summary>
         public static string SubmissionResponse255 {

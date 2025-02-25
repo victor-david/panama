@@ -1,6 +1,7 @@
 using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Restless.Panama.Database.Tables
 {
@@ -94,6 +95,11 @@ namespace Restless.Panama.Database.Tables
                 public const long ResponseFlakey = 11;
 
                 /// <summary>
+                /// Withdrawn
+                /// </summary>
+                public const long ResponseWithdrawn = 100;
+
+                /// <summary>
                 /// The value used when the response is an acceptance.
                 /// </summary>
                 public const long ResponseAccepted = 255;
@@ -166,6 +172,7 @@ namespace Restless.Panama.Database.Tables
             yield return new object[] { Defs.Values.ResponsePersonal, "Personal Note", "Received a personal note." };
             yield return new object[] { Defs.Values.ResponseGeneralBlast, "General Blast", "Sent a general email announcing new issue / contest winners, or just posted on web site." };
             yield return new object[] { Defs.Values.ResponseFlakey, "Flakey", "Flakey. No response." };
+            yield return new object[] { Defs.Values.ResponseWithdrawn, "Withdrawn", "Author withdrew the submission." };
             yield return new object[] { Defs.Values.ResponseAccepted, "Accepted", "Acceptance of one or more pieces in the submission." };
         }
 
@@ -173,6 +180,48 @@ namespace Restless.Panama.Database.Tables
         protected override void SetDataRelations()
         {
             CreateParentChildRelation<SubmissionBatchTable>(Defs.Relations.ToSubmissionBatch, Defs.Columns.Id, SubmissionBatchTable.Defs.Columns.ResponseType);
+        }
+
+        /// <inheritdoc/>
+        protected override void SetColumnProperties()
+        {
+            // override the base method to do nothing
+        }
+        #endregion
+
+        /************************************************************************/
+
+        #region Update (Internal)
+        internal override long DataVersion => 2;
+        internal override void PerformDataUpdate()
+        {
+            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
+            {
+                switch (DataVersion)
+                {
+                    case 2:
+                        UpdateRespones();
+                        break;
+                }
+                // normally read only, disable to save
+                IsReadOnly = false;
+                Save();
+                IsReadOnly = true;
+                SchemaTable.Save();
+            }
+        }
+
+        private void UpdateRespones()
+        {
+            if (!EnumerateResponses().Where((r) => r.Id == Defs.Values.ResponseWithdrawn).Any())
+            {
+                DataRow row = NewRow();
+                row[Defs.Columns.Id] = Defs.Values.ResponseWithdrawn;
+                row[Defs.Columns.Name] = "Withdrawn";
+                row[Defs.Columns.Description] = "Author withdrew the submission.";
+                Rows.Add(row);
+                SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Add withdrawn status");
+            }
         }
         #endregion
     }

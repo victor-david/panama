@@ -88,4 +88,7 @@
   <data name="QueueTitleStatus002" xml:space="preserve">
     <value>Publicado</value>
   </data>
+  <data name="SubmissionResponse100" xml:space="preserve">
+    <value>Retirado</value>
+  </data>
 </root>
