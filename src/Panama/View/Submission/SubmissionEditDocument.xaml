@@ -12,7 +12,7 @@
     mc:Ignorable="d"
     d:DesignHeight="900" d:DesignWidth="400">
 
-    <Grid tk:Property.RowHeights="200,Auto,*">
+    <Grid tk:Property.RowHeights="228,Auto,*">
         <tk:DataGrid
             Margin="{DynamicResource App.Layout.Margin.Control.Stacked}"
             Style="{StaticResource App.Styles.DataGrid.Locked}"
