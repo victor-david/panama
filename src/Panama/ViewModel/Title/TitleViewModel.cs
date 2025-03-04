@@ -30,6 +30,7 @@ namespace Restless.Panama.ViewModel
     public class TitleViewModel : DataRowViewModel<TitleTable>
     {
         #region Private
+        private readonly int colWrittenIdx;
         private int selectedEditSection;
         private int selectedPublishedEditSection;
         private TitleRow selectedTitle;
@@ -190,6 +191,8 @@ namespace Restless.Panama.ViewModel
                 .MakeDate()
                 .SetPrimarySort(SortType.DateTime)
                 .MakeInitialSortDescending();
+
+            colWrittenIdx = Columns.Count - 1;
 
             Columns.Create(Header.Updated, TableColumns.Calculated.LatestVersionDate)
                 .MakeDate()
@@ -356,6 +359,17 @@ namespace Restless.Panama.ViewModel
         }
 
         /// <inheritdoc/>
+        protected override int OnDataRowCompare(DataRow item1, DataRow item2)
+        {
+            int value = DataRowCompareDateTime(item2, item1, TableColumns.Written);
+            if (value == 0)
+            {
+                value = DataRowCompareLong(item2, item1, TableColumns.Id);
+            }
+            return value;
+        }
+
+        /// <inheritdoc/>
         protected override void RunClearFilterCommand()
         {
             Filters.ClearAll();
@@ -370,7 +384,16 @@ namespace Restless.Panama.ViewModel
                 Table.AddDefaultRow();
                 Table.Save();
                 Filters.ClearAll();
+
+                /* causes sort by written / id desc so new item is on top */
                 ForceListViewSort();
+
+                /* make data grid show the sorted by written */
+                foreach (DataGridColumn col in Columns)
+                {
+                    col.SortDirection = null;
+                }
+                Columns[colWrittenIdx].MakeInitialSortDescending();
             }
         }
 
