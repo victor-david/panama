@@ -167,7 +167,7 @@ namespace Restless.Panama.Database.Tables
         {
             yield return new object[] { Defs.Values.NoResponse, null, "None. The submission has not yet received a response." };
             yield return new object[] { Defs.Values.ResponseNotSpecified, "(not specified)", "Not Specified. The response type has not been specified." };
-            yield return new object[] { Defs.Values.ResponseBfn, "BFN", "Form Rejection. Standard BFN note. No personalization. No encouragement." };
+            yield return new object[] { Defs.Values.ResponseBfn, "No Thanks", "Form Rejection. Standard BFN note. No personalization. No encouragement." };
             yield return new object[] { Defs.Values.ResponseTryAgain, "Try Again", "A rejection with at least a hint of encouragement to submit again." };
             yield return new object[] { Defs.Values.ResponsePersonal, "Personal Note", "Received a personal note." };
             yield return new object[] { Defs.Values.ResponseGeneralBlast, "General Blast", "Sent a general email announcing new issue / contest winners, or just posted on web site." };

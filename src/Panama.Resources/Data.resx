@@ -130,7 +130,7 @@
     <comment>Flakey. Didn't respond at all.</comment>
   </data>
   <data name="SubmissionResponse002" xml:space="preserve">
-    <value>BFN</value>
+    <value>No Thanks</value>
     <comment>Form Rejection. Standard BFN note. No personalization. No encouragement.</comment>
   </data>
   <data name="SubmissionResponse255" xml:space="preserve">

@@ -97,7 +97,7 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BFN.
+        ///   Looks up a localized string similar to No Thanks.
         /// </summary>
         public static string SubmissionResponse002 {
             get {
