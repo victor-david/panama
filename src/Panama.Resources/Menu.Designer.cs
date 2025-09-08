@@ -761,5 +761,14 @@ namespace Restless.Panama.Resources {
                 return ResourceManager.GetString("TryAgain", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Withdrawn.
+        /// </summary>
+        public static string Withdrawn {
+            get {
+                return ResourceManager.GetString("Withdrawn", resourceCulture);
+            }
+        }
     }
 }

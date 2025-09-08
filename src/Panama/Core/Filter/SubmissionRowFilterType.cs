@@ -10,6 +10,10 @@
         /// </summary>
         Id,
         /// <summary>
+        /// Filter according to the specified text
+        /// </summary>
+        Text,
+        /// <summary>
         /// Submission is active
         /// </summary>
         Active,
@@ -25,5 +29,9 @@
         /// Submission has an accepted response
         /// </summary>
         Accepted,
+        /// <summary>
+        /// Submission has a withdrawn state
+        /// </summary>
+        Withdrawn,
     }
 }

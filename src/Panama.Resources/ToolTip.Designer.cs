@@ -448,6 +448,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Submission was withdrawn.
+        /// </summary>
+        public static string SubmissionFilterWithdrawn {
+            get {
+                return ResourceManager.GetString("SubmissionFilterWithdrawn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submission is locked.
         /// </summary>
         public static string SubmissionLocked {

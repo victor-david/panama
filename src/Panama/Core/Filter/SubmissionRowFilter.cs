@@ -15,6 +15,7 @@ namespace Restless.Panama.Core.Filter
         private ThreeWayState tryAgainState;
         private ThreeWayState personalState;
         private ThreeWayState acceptedState;
+        private ThreeWayState withdrawnState;
         #endregion
 
         /************************************************************************/
@@ -22,6 +23,9 @@ namespace Restless.Panama.Core.Filter
         #region Properties
         /// <inheritdoc/>
         protected override bool IsIdFilterSupported => true;
+
+        /// <inheritdoc/>
+        protected override bool IsTextFilterSupported => true;
 
         /// <inheritdoc/>
         public override bool IsAnyFilterActive => base.IsAnyFilterActive || IsAnyEvaluatorActive();
@@ -81,6 +85,20 @@ namespace Restless.Panama.Core.Filter
                 ApplyFilter();
             }
         }
+
+        /// <summary>
+        /// Gets or sets the filter state for whether a submission has an withdrawn status
+        /// </summary>
+        public ThreeWayState WithdrawnState
+        {
+            get => withdrawnState;
+            set
+            {
+                SetProperty(ref withdrawnState, value);
+                SetFilterEvaluatorState(SubmissionRowFilterType.Withdrawn, value);
+                ApplyFilter();
+            }
+        }
         #endregion
 
         /************************************************************************/
@@ -94,10 +112,12 @@ namespace Restless.Panama.Core.Filter
             filterEvaluators = new Dictionary<SubmissionRowFilterType, SubmissionFilterEvaluator>()
             {
                 { SubmissionRowFilterType.Id, new SubmissionFilterEvaluator(this, SubmissionRowFilterType.Id) },
+                { SubmissionRowFilterType.Text, new SubmissionFilterEvaluator(this, SubmissionRowFilterType.Text) },
                 { SubmissionRowFilterType.Active, new SubmissionFilterEvaluator(this, SubmissionRowFilterType.Active) },
                 { SubmissionRowFilterType.TryAgain, new SubmissionFilterEvaluator(this, SubmissionRowFilterType.TryAgain) },
                 { SubmissionRowFilterType.Personal, new SubmissionFilterEvaluator(this, SubmissionRowFilterType.Personal) },
-                { SubmissionRowFilterType.Accepted, new SubmissionFilterEvaluator(this, SubmissionRowFilterType.Accepted) }
+                { SubmissionRowFilterType.Accepted, new SubmissionFilterEvaluator(this, SubmissionRowFilterType.Accepted) },
+                { SubmissionRowFilterType.Withdrawn, new SubmissionFilterEvaluator(this, SubmissionRowFilterType.Withdrawn) },
             };
         }
         #endregion
@@ -148,15 +168,26 @@ namespace Restless.Panama.Core.Filter
             SetCustomPropertyState(() => AcceptedState = ThreeWayState.On);
         }
 
+
+        /// <summary>
+        /// Sets <see cref="WithdrawnState"/> to on, clearing all other filters
+        /// </summary>
+        public void SetToWithdrawn()
+        {
+            SetCustomPropertyState(() => WithdrawnState = ThreeWayState.On);
+        }
+
         /// <inheritdoc/>
         public override bool OnDataRowFilter(DataRow item)
         {
             return
                 filterEvaluators[SubmissionRowFilterType.Id].Evaluate(item) &&
+                filterEvaluators[SubmissionRowFilterType.Text].Evaluate(item) &&
                 filterEvaluators[SubmissionRowFilterType.Active].Evaluate(item) &&
                 filterEvaluators[SubmissionRowFilterType.TryAgain].Evaluate(item) &&
                 filterEvaluators[SubmissionRowFilterType.Personal].Evaluate(item) &&
-                filterEvaluators[SubmissionRowFilterType.Accepted].Evaluate(item);
+                filterEvaluators[SubmissionRowFilterType.Accepted].Evaluate(item) &&
+                filterEvaluators[SubmissionRowFilterType.Withdrawn].Evaluate(item);
         }
         #endregion
 
@@ -174,6 +205,7 @@ namespace Restless.Panama.Core.Filter
             TryAgainState = ThreeWayState.Neutral;
             PersonalState = ThreeWayState.Neutral;
             AcceptedState = ThreeWayState.Neutral;
+            WithdrawnState = ThreeWayState.Neutral;
         }
 
         private bool IsAnyEvaluatorActive()

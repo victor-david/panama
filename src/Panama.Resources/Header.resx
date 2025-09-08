@@ -612,4 +612,7 @@
   <data name="TitlePublisher" xml:space="preserve">
     <value>Title / Publisher</value>
   </data>
+  <data name="SubmissionFilter" xml:space="preserve">
+    <value>Submission Filter</value>
+  </data>
 </root>

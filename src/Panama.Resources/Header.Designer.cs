@@ -1168,6 +1168,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Submission Filter.
+        /// </summary>
+        public static string SubmissionFilter {
+            get {
+                return ResourceManager.GetString("SubmissionFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submission Data.
         /// </summary>
         public static string SubmissionMetadata {

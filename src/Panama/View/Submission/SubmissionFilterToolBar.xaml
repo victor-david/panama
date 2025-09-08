@@ -36,7 +36,18 @@
         ToolTip="{x:Static r:ToolTip.SubmissionFilterAccepted}"
         Command="{Binding Commands[AcceptedFilter]}"/>
 
+    <Button
+        Content="{x:Static r:Menu.Withdrawn}"
+        ToolTip="{x:Static r:ToolTip.SubmissionFilterWithdrawn}"
+        Command="{Binding Commands[WithdrawnFilter]}"/>
+
     <Separator/>
+
+    <Button
+        x:Name="CustomFilterButton"
+        Content="{x:Static r:Menu.Custom}"
+        ToolTip="{x:Static r:ToolTip.FilterCustom}"
+        Command="{Binding ToggleCustomFilterCommand}"/>
 
     <Button
         Content="{x:Static r:Menu.Clear}"

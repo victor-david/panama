@@ -553,4 +553,7 @@
   <data name="TitlePublisher" xml:space="preserve">
     <value>Título / Editor</value>
   </data>
+  <data name="SubmissionFilter" xml:space="preserve">
+    <value>Filtro de envío</value>
+  </data>
 </root>

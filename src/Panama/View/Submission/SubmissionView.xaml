@@ -37,24 +37,38 @@
         </tk:SplitterGrid.HeaderRight>
 
         <tk:SplitterGrid.ContentLeft>
-            <tk:DataGrid
-                CanUserReorderColumns="True"
-                HeaderMode="ColumnSelector"
-                ColumnSelectorMinimumVisible="3"
-                RowHeight="{Binding Config.DataGridRowHeight}"
-                ItemsSource="{Binding ListView}"
-                SelectedItem="{Binding SelectedItem}"
-                tk:DataGridColumns.Columns="{Binding Columns}">
+            <Grid>
+                <tk:DataGrid
+                    CanUserReorderColumns="True"
+                    HeaderMode="ColumnSelector"
+                    ColumnSelectorMinimumVisible="3"
+                    RowHeight="{Binding Config.DataGridRowHeight}"
+                    ItemsSource="{Binding ListView}"
+                    SelectedItem="{Binding SelectedItem}"
+                    tk:DataGridColumns.Columns="{Binding Columns}">
 
-                <DataGrid.InputBindings>
-                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
-                </DataGrid.InputBindings>
+                    <DataGrid.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenRowCommand}"/>
+                    </DataGrid.InputBindings>
 
-                <DataGrid.ContextMenu>
-                    <ContextMenu ItemsSource="{Binding MenuItems}"/>
-                </DataGrid.ContextMenu>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItems}"/>
+                    </DataGrid.ContextMenu>
 
-            </tk:DataGrid>
+                </tk:DataGrid>
+
+                <tk:Flyout Width="592" IsOpen="{Binding IsCustomFilterOpen}">
+                    <tk:Flyout.Header>
+                        <vw:FlyoutHeader Title="{x:Static r:Header.SubmissionFilter}"/>
+                    </tk:Flyout.Header>
+
+                    <vw:SubmissionFilter/>
+
+                </tk:Flyout>
+
+            </Grid>
+
+
         </tk:SplitterGrid.ContentLeft>
 
         <tk:SplitterGrid.ContentRight>

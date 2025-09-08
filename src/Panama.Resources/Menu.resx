@@ -357,4 +357,7 @@
   <data name="CreateTitleVersionCopy" xml:space="preserve">
     <value>Create a new title version from a copy of the latest version</value>
   </data>
+  <data name="Withdrawn" xml:space="preserve">
+    <value>Withdrawn</value>
+  </data>
 </root>

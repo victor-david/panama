@@ -312,4 +312,7 @@
   <data name="ClearPublishedDate" xml:space="preserve">
     <value>Clear the published date</value>
   </data>
+  <data name="SubmissionFilterWithdrawn" xml:space="preserve">
+    <value>Submission was withdrawn</value>
+  </data>
 </root>

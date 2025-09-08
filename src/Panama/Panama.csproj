@@ -5,7 +5,7 @@
     <ApplicationIcon>App.Main.ico</ApplicationIcon>
     <AssemblyTitle>Panama ∑en</AssemblyTitle>
     <Company>Restless Animal Development</Company>
-    <Copyright>(c) 2020-2024 Restless Animal Development</Copyright>
+    <Copyright>(c) 2020-2025 Restless Animal Development</Copyright>
     <Description>Provides overall tracking services for titles (date written, updated, multiple version support, search, analysis), publications, submissions, associated submission documents and submission email messages.</Description>
     <OutputType>WinExe</OutputType>
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
@@ -15,7 +15,7 @@
     <RootNamespace>Restless.Panama</RootNamespace>
     <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>5.0.14</Version>
+    <Version>5.0.15</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -253,4 +253,7 @@
   <data name="ClearPublishedDate" xml:space="preserve">
     <value>Limpiar la fecha de publicación</value>
   </data>
+  <data name="SubmissionFilterWithdrawn" xml:space="preserve">
+    <value>La presentación fue retirada</value>
+  </data>
 </root>

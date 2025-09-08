@@ -32,10 +32,12 @@ namespace Restless.Panama.Core.Filter
             return filterType switch
             {
                 SubmissionRowFilterType.Id => EvaluateId,
+                SubmissionRowFilterType.Text => EvaluateText,
                 SubmissionRowFilterType.Active => EvaluateActive,
                 SubmissionRowFilterType.TryAgain => EvaluateTryAgain,
                 SubmissionRowFilterType.Personal => EvaluatePersonal,
                 SubmissionRowFilterType.Accepted => EvaluateAccepted,
+                SubmissionRowFilterType.Withdrawn => EvaluateWithdrawn,
                 _ => EvaluateTrue,
             };
         }
@@ -44,6 +46,13 @@ namespace Restless.Panama.Core.Filter
         {
             long id = Filter.GetIdFilter();
             return id == -1 || id == (long)item[Columns.PublisherId];
+        }
+
+        private bool EvaluateText(DataRow item)
+        {
+            return
+                string.IsNullOrWhiteSpace(Filter.Text) ||
+                item[Columns.Joined.Publisher].ToString().Contains(Filter.Text, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private bool EvaluateActive(DataRow item)
@@ -64,6 +73,11 @@ namespace Restless.Panama.Core.Filter
         private bool EvaluateAccepted(DataRow item)
         {
             return State == ThreeWayState.Neutral || EvaluateLongColumn(item[Columns.ResponseType], Responses.ResponseAccepted);
+        }
+
+        private bool EvaluateWithdrawn(DataRow item)
+        {
+            return State == ThreeWayState.Neutral || EvaluateLongColumn(item[Columns.ResponseType], Responses.ResponseWithdrawn);
         }
         #endregion
     }

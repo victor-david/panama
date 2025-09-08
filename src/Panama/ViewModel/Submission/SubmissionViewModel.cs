@@ -159,6 +159,8 @@ namespace Restless.Panama.ViewModel
             Commands.Add("TryAgainFilter", p => Filters.SetToTryAgain());
             Commands.Add("PersonalFilter", p => Filters.SetToPersonal());
             Commands.Add("AcceptedFilter", p => Filters.SetToAccepted());
+            Commands.Add("WithdrawnFilter", p => Filters.SetToWithdrawn());
+
 
             /* Context menu items */
             MenuItems.AddItem(Menu.CreateSubmission, AddCommand)
