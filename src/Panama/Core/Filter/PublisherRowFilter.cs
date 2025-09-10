@@ -17,6 +17,7 @@ namespace Restless.Panama.Core.Filter
         private ThreeWayState exclusiveState;
         private ThreeWayState followUpState;
         private ThreeWayState payingState;
+        private ThreeWayState neverState;
         private ThreeWayState gonerState;
         #endregion
 
@@ -114,6 +115,20 @@ namespace Restless.Panama.Core.Filter
         }
 
         /// <summary>
+        /// Gets or sets the filter state for whether a publisher has zero submissions
+        /// </summary>
+        public ThreeWayState NeverState
+        {
+            get => neverState;
+            set
+            {
+                SetProperty(ref neverState, value);
+                SetFilterEvaluatorState(PublisherRowFilterType.Never, value);
+                ApplyFilter();
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the filter state for whether a publisher is flagged as a goner
         /// </summary>
         public ThreeWayState GonerState
@@ -145,6 +160,7 @@ namespace Restless.Panama.Core.Filter
                 { PublisherRowFilterType.Exclusive, new PublisherFilterEvaluator(this, PublisherRowFilterType.Exclusive) },
                 { PublisherRowFilterType.FollowUp, new PublisherFilterEvaluator(this, PublisherRowFilterType.FollowUp) },
                 { PublisherRowFilterType.Paying, new PublisherFilterEvaluator(this, PublisherRowFilterType.Paying) },
+                { PublisherRowFilterType.Never, new PublisherFilterEvaluator(this, PublisherRowFilterType.Never) },
                 { PublisherRowFilterType.Goner, new PublisherFilterEvaluator(this, PublisherRowFilterType.Goner) },
             };
         }
@@ -185,31 +201,45 @@ namespace Restless.Panama.Core.Filter
         /// </summary>
         public void SetToInPeriod()
         {
-            SetCustomPropertyState(() => InPeriodState = ThreeWayState.On);
+            SetCustomPropertyState(() => { InPeriodState = ThreeWayState.On; GonerState = ThreeWayState.Off; });
         }
 
-        /// <summary>
-        /// Sets <see cref="ExclusiveState"/> to on, clearing all other filters
-        /// </summary>
-        public void SetToExclusive()
-        {
-            SetCustomPropertyState(() => ExclusiveState = ThreeWayState.On);
-        }
+        ///// <summary>
+        ///// Sets <see cref="ExclusiveState"/> to on, clearing all other filters
+        ///// </summary>
+        ///// <remarks>
+        ///// This method is currently not being used
+        ///// </remarks>
+        //public void SetToExclusive()
+        //{
+        //    SetCustomPropertyState(() => ExclusiveState = ThreeWayState.On);
+        //}
 
-        /// <summary>
-        /// Sets <see cref="FollowUpState"/> to on, clearing all other filters
-        /// </summary>
-        public void SetToFollowup()
-        {
-            SetCustomPropertyState(() => FollowUpState = ThreeWayState.On);
-        }
+        ///// <summary>
+        ///// Sets <see cref="FollowUpState"/> to on, clearing all other filters
+        ///// </summary>
+        ///// <remarks>
+        ///// This method is currently not being used
+        ///// </remarks>
+        //public void SetToFollowup()
+        //{
+        //    SetCustomPropertyState(() => FollowUpState = ThreeWayState.On);
+        //}
 
         /// <summary>
         /// Sets <see cref="PayingState"/> to on, clearing all other filters
         /// </summary>
         public void SetToPaying()
         {
-            SetCustomPropertyState(() => PayingState = ThreeWayState.On);
+            SetCustomPropertyState(() => { PayingState = ThreeWayState.On; GonerState = ThreeWayState.Off; });
+        }
+
+        /// <summary>
+        /// Sets <see cref="NeverState"/> to on, clearing all other filters
+        /// </summary>
+        public void SetToNever()
+        {
+            SetCustomPropertyState(() => { NeverState = ThreeWayState.On; GonerState = ThreeWayState.Off; });
         }
 
         /// <summary>
@@ -231,6 +261,7 @@ namespace Restless.Panama.Core.Filter
                 filterEvaluators[PublisherRowFilterType.Exclusive].Evaluate(item) &&
                 filterEvaluators[PublisherRowFilterType.FollowUp].Evaluate(item) &&
                 filterEvaluators[PublisherRowFilterType.Paying].Evaluate(item) &&
+                filterEvaluators[PublisherRowFilterType.Never].Evaluate(item) &&
                 filterEvaluators[PublisherRowFilterType.Goner].Evaluate(item);
         }
         #endregion
@@ -251,6 +282,7 @@ namespace Restless.Panama.Core.Filter
             ExclusiveState = ThreeWayState.Neutral;
             FollowUpState = ThreeWayState.Neutral;
             PayingState = ThreeWayState.Neutral;
+            NeverState = ThreeWayState.Neutral;
             GonerState = ThreeWayState.Neutral;
         }
 

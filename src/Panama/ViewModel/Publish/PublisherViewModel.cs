@@ -118,7 +118,8 @@ namespace Restless.Panama.ViewModel
             Commands.Add("HaveSubFilter", p => Filters.SetToOpenSubmission());
             Commands.Add("InPeriodFilter", p => Filters.SetToInPeriod());
             Commands.Add("PayingFilter", p => Filters.SetToPaying());
-            Commands.Add("FollowupFilter", p => Filters.SetToFollowup());
+            //Commands.Add("FollowupFilter", p => Filters.SetToFollowup());
+            Commands.Add("NeverFilter", p => Filters.SetToNever());
 
             Periods = new PublisherPeriodController(this);
             Submissions = new PublisherSubmissionController(this);

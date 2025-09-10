@@ -36,6 +36,11 @@
         ToolTip="{x:Static r:ToolTip.PublisherFilterPaying}"
         Command="{Binding Commands[PayingFilter]}"/>
 
+    <Button
+        Content="{x:Static r:Menu.Never}"
+        ToolTip="{x:Static r:ToolTip.PublisherFilterNever}"
+        Command="{Binding Commands[NeverFilter]}"/>
+
     <Separator/>
 
     <Button

@@ -37,6 +37,7 @@ namespace Restless.Panama.Core.Filter
                 PublisherRowFilterType.Exclusive => EvaluateExclusive,
                 PublisherRowFilterType.FollowUp => EvaluateFollowUp,
                 PublisherRowFilterType.Paying => EvaluatePaying,
+                PublisherRowFilterType.Never => EvaluateNever,
                 PublisherRowFilterType.Goner => EvaluateGoner,
                 _ => EvaluateTrue,
             };
@@ -77,6 +78,11 @@ namespace Restless.Panama.Core.Filter
         private bool EvaluatePaying(DataRow item)
         {
             return State == ThreeWayState.Neutral || EvaluateBoolColumn(item[Columns.Paying]);
+        }
+
+        private bool EvaluateNever(DataRow item)
+        {
+            return State == ThreeWayState.Neutral || EvaluateLongColumn(item[Columns.Calculated.SubCount], 0);
         }
 
         private bool EvaluateGoner(DataRow item)

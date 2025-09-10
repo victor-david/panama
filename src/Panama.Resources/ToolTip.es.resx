@@ -256,4 +256,7 @@
   <data name="SubmissionFilterWithdrawn" xml:space="preserve">
     <value>La presentación fue retirada</value>
   </data>
+  <data name="PublisherFilterNever" xml:space="preserve">
+    <value>Filtrar la lista de editores para mostrar los editores que están activos y no tienen envíos</value>
+  </data>
 </root>

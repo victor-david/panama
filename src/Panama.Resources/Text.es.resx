@@ -433,4 +433,7 @@
   <data name="TitleRenameStatusNewExists" xml:space="preserve">
     <value>El nuevo nombre ya existe</value>
   </data>
+  <data name="NeverSubmitted" xml:space="preserve">
+    <value>Nunca enviado</value>
+  </data>
 </root>

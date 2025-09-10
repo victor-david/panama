@@ -664,6 +664,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Never Submitted.
+        /// </summary>
+        public static string NeverSubmitted {
+            get {
+                return ResourceManager.GetString("NeverSubmitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {

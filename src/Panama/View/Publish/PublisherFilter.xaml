@@ -26,6 +26,7 @@
         <tk:ThreeWay Header="{x:Static r:Text.Active}" State="{Binding Filters.ActiveState}"/>
         <tk:ThreeWay Header="{x:Static r:Text.OpenSubmission}" State="{Binding Filters.OpenState}"/>
         <tk:ThreeWay Header="{x:Static r:Text.InPeriod}" State="{Binding Filters.InPeriodState}"/>
+        <tk:ThreeWay Header="{x:Static r:Text.NeverSubmitted}" State="{Binding Filters.NeverState}"/>
     </StackPanel>
 
     <StackPanel Grid.Row="1" Grid.Column="1">

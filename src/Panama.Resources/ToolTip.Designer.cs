@@ -268,6 +268,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter publisher list to display publishers that are active and have zero submissions.
+        /// </summary>
+        public static string PublisherFilterNever {
+            get {
+                return ResourceManager.GetString("PublisherFilterNever", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter publisher list to display only publishers that are active and are a paying market.
         /// </summary>
         public static string PublisherFilterPaying {

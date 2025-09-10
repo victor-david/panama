@@ -34,6 +34,10 @@
         /// </summary>
         Paying,
         /// <summary>
+        /// Publisher has zero submissions
+        /// </summary>
+        Never,
+        /// <summary>
         /// Publisher is flagged as a goner
         /// </summary>
         Goner

@@ -295,4 +295,7 @@
   <data name="Withdrawn" xml:space="preserve">
     <value>Retirado</value>
   </data>
+  <data name="Never" xml:space="preserve">
+    <value>Nunca</value>
+  </data>
 </root>

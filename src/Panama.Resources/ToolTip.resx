@@ -315,4 +315,7 @@
   <data name="SubmissionFilterWithdrawn" xml:space="preserve">
     <value>Submission was withdrawn</value>
   </data>
+  <data name="PublisherFilterNever" xml:space="preserve">
+    <value>Filter publisher list to display publishers that are active and have zero submissions</value>
+  </data>
 </root>

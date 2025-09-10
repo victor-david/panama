@@ -492,4 +492,7 @@
   <data name="TitleRenameStatusNewExists" xml:space="preserve">
     <value>New name already exists</value>
   </data>
+  <data name="NeverSubmitted" xml:space="preserve">
+    <value>Never Submitted</value>
+  </data>
 </root>
