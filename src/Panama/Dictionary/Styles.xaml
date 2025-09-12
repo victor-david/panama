@@ -564,6 +564,7 @@
     <!-- TextBox -->
     <Style x:Key="App.Styles.TextBox.Multiline" TargetType="TextBox" BasedOn="{StaticResource MahApps.Styles.TextBox}">
         <Setter Property="AcceptsReturn" Value="True" />
+        <Setter Property="Margin" Value="0,0,0,6"/>
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>

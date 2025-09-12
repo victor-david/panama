@@ -109,6 +109,15 @@ namespace Restless.Panama.Database.Tables
         }
 
         /// <summary>
+        /// Gets or sets cover letter
+        /// </summary>
+        public string Cover
+        {
+            get => GetString(Columns.Cover);
+            set => SetValue(Columns.Cover, value);
+        }
+
+        /// <summary>
         /// Gets a boolean value that indicates if <see cref="Response"/> has a value
         /// </summary>
         public bool HasResponseDate => Response != null;

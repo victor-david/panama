@@ -86,6 +86,11 @@ namespace Restless.Panama.Database.Tables
                 public const string Notes = "notes";
 
                 /// <summary>
+                /// The name of the cover letter column.
+                /// </summary>
+                public const string Cover = "cover";
+
+                /// <summary>
                 /// Provides static column names for columns that get their value fron another table.
                 /// </summary>
                 public static class Joined
@@ -383,9 +388,21 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Update (Internal)
-        internal override long DataVersion => 2;
+        internal override long DataVersion => 3;
         internal override void PerformSchemaUpdate()
         {
+            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
+            {
+                switch (DataVersion)
+                {
+                    case 3:
+                        AddColumn(Defs.Columns.Cover, "text");
+                        SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Add column for cover letter");
+                        break;
+                }
+                Save();
+                SchemaTable.Save();
+            }
         }
 
         internal override void PerformDataUpdate()

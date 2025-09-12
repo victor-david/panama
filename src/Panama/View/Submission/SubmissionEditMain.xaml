@@ -9,7 +9,7 @@
     xmlns:vm="clr-namespace:Restless.Panama.ViewModel"
     d:DataContext="{d:DesignInstance Type=vm:SubmissionViewModel}"
     mc:Ignorable="d"
-    tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"
+    tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,*,Auto,2*"
     Style="{StaticResource App.Styles.Panel.DataEntry}"
     d:DesignHeight="400" d:DesignWidth="400">
 
@@ -17,15 +17,27 @@
     <CheckBox Grid.Row="1" IsChecked="{Binding SelectedBatch.IsContest}" Content="{x:Static r:Text.Contest}"/>
     <CheckBox Grid.Row="2" IsChecked="{Binding SelectedBatch.IsLocked}" Content="{x:Static r:Text.Locked}"/>
 
-    <TextBlock Grid.Row="3" Text="{x:Static r:Text.Fee}"/>
-    <TextBox Grid.Row="4" Text="{Binding SelectedBatch.Fee, StringFormat=N2}"/>
+    <Grid Grid.Row="3" tk:Property.ColumnWidths="*,6,*">
+        <StackPanel>
+            <TextBlock Grid.Row="3" Text="{x:Static r:Text.Fee}"/>
+            <TextBox Grid.Row="4" Text="{Binding SelectedBatch.Fee, StringFormat=N2}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+            <TextBlock Grid.Row="5" Text="{x:Static r:Text.Award}"/>
+            <TextBox Grid.Row="6" Text="{Binding SelectedBatch.Award, StringFormat=N2}"/>
+        </StackPanel>
+    </Grid>
 
-    <TextBlock Grid.Row="5" Text="{x:Static r:Text.Award}"/>
-    <TextBox Grid.Row="6" Text="{Binding SelectedBatch.Award, StringFormat=N2}"/>
-
-    <TextBlock Grid.Row="7" Text="{x:Static r:Text.Notes}"/>
+    <TextBlock Grid.Row="4" Text="{x:Static r:Text.Notes}"/>
     <TextBox
-        Grid.Row="8"
+        Grid.Row="5"
         Style="{StaticResource App.Styles.TextBox.Multiline}"
         Text="{Binding SelectedBatch.Notes}"/>
+
+    <TextBlock Grid.Row="6" Text="{x:Static r:Text.CoverLetter}"/>
+    <TextBox
+        Grid.Row="7"
+        Style="{StaticResource App.Styles.TextBox.Multiline}"
+        Text="{Binding SelectedBatch.Cover}"/>
+
 </Grid>

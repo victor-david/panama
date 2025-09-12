@@ -436,4 +436,7 @@
   <data name="NeverSubmitted" xml:space="preserve">
     <value>Nunca enviado</value>
   </data>
+  <data name="CoverLetter" xml:space="preserve">
+    <value>Carta de presentación</value>
+  </data>
 </root>

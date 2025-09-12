@@ -495,4 +495,7 @@
   <data name="NeverSubmitted" xml:space="preserve">
     <value>Never Submitted</value>
   </data>
+  <data name="CoverLetter" xml:space="preserve">
+    <value>Cover Letter</value>
+  </data>
 </root>

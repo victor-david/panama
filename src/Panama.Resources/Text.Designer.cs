@@ -232,6 +232,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cover Letter.
+        /// </summary>
+        public static string CoverLetter {
+            get {
+                return ResourceManager.GetString("CoverLetter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created.
         /// </summary>
         public static string Created {
