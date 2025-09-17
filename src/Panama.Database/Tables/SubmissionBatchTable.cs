@@ -111,6 +111,11 @@ namespace Restless.Panama.Database.Tables
                     public const string PublisherExclusive = "JoinPubExclusive";
 
                     /// <summary>
+                    /// The name of the publisher paying column. This column gets its value from the <see cref="PublisherTable"/>.
+                    /// </summary>
+                    public const string PublisherPaying = "JoinPubPaying";
+
+                    /// <summary>
                     /// The name of the response type column. This column gets its value from the <see cref="ResponseTable"/>.
                     /// </summary>
                     public const string ResponseTypeName = "JoinRespTypeName";
@@ -333,6 +338,7 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn(Defs.Columns.Joined.Publisher, PublisherTable.Defs.Relations.ToSubmissionBatch, PublisherTable.Defs.Columns.Name);
             CreateChildToParentColumn(Defs.Columns.Joined.PublisherUrl, PublisherTable.Defs.Relations.ToSubmissionBatch, PublisherTable.Defs.Columns.Url);
             CreateChildToParentColumn<bool>(Defs.Columns.Joined.PublisherExclusive, PublisherTable.Defs.Relations.ToSubmissionBatch, PublisherTable.Defs.Columns.Exclusive);
+            CreateChildToParentColumn<bool>(Defs.Columns.Joined.PublisherPaying, PublisherTable.Defs.Relations.ToSubmissionBatch, PublisherTable.Defs.Columns.Paying);
             CreateChildToParentColumn(Defs.Columns.Joined.ResponseTypeName, ResponseTable.Defs.Relations.ToSubmissionBatch, ResponseTable.Defs.Columns.Name);
         }
 

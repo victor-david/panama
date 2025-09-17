@@ -105,6 +105,11 @@ namespace Restless.Panama.Database.Tables
                     public const string PublisherExclusive = "JoinToJoinPubExclusive";
 
                     /// <summary>
+                    /// The name of the publisher paying column.
+                    /// </summary>
+                    public const string PublisherPaying = "JoinToJoinPubPaying";
+
+                    /// <summary>
                     /// The name of the column that holds the name of the response for the submission batch.
                     /// </summary>
                     public const string ResponseTypeName = "JoinToJoinReponseName";
@@ -314,6 +319,7 @@ namespace Restless.Panama.Database.Tables
             CreateChildToParentColumn<long>(Defs.Columns.Joined.PublisherId, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.PublisherId);
             CreateChildToParentColumn(Defs.Columns.Joined.Publisher, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Joined.Publisher);
             CreateChildToParentColumn<bool>(Defs.Columns.Joined.PublisherExclusive, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Joined.PublisherExclusive);
+            CreateChildToParentColumn<bool>(Defs.Columns.Joined.PublisherPaying, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Joined.PublisherPaying);
             CreateChildToParentColumn(Defs.Columns.Joined.ResponseTypeName, SubmissionBatchTable.Defs.Relations.ToSubmission, SubmissionBatchTable.Defs.Columns.Joined.ResponseTypeName);
         }
         #endregion

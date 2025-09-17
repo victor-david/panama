@@ -745,6 +745,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to P.
+        /// </summary>
+        public static string PayingShort {
+            get {
+                return ResourceManager.GetString("PayingShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Periods.
         /// </summary>
         public static string Periods {

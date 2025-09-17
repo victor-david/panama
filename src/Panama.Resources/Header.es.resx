@@ -556,4 +556,7 @@
   <data name="SubmissionFilter" xml:space="preserve">
     <value>Filtro de envío</value>
   </data>
+  <data name="PayingShort" xml:space="preserve">
+    <value>P</value>
+  </data>
 </root>

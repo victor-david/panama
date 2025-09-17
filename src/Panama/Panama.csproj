@@ -15,7 +15,7 @@
     <RootNamespace>Restless.Panama</RootNamespace>
     <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>5.0.17</Version>
+    <Version>5.0.18</Version>
   </PropertyGroup>
 
   <ItemGroup>
