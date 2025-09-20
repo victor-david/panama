@@ -27,6 +27,9 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         public override bool DeleteCommandEnabled => IsSelectedRowAccessible;
 
+        /// <inheritdoc/>
+        public override bool OpenRowCommandEnabled => SelectedAlert?.HasUrl ?? false;
+
         /// <summary>
         /// Gets the selected alert
         /// </summary>
@@ -65,6 +68,8 @@ namespace Restless.Panama.ViewModel
             /* Context menu items */
             MenuItems.AddItem(Menu.AddAlert, AddCommand).AddIconResource(ResourceKeys.Icon.IconAdd);
             MenuItems.AddSeparator();
+            MenuItems.AddItem(Menu.BrowseToPublisherUrlOrClick, OpenRowCommand).AddIconResource(ResourceKeys.Icon.IconOpenWebSite);
+            MenuItems.AddSeparator();
             MenuItems.AddItem(Menu.DeleteAlert, DeleteCommand).AddIconResource(ResourceKeys.Icon.IconDelete);
 
             ListView.IsLiveSorting = true;
@@ -98,6 +103,15 @@ namespace Restless.Panama.ViewModel
                 Table.Save();
                 // Filters.ClearAll();
                 ForceListViewSort();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void RunOpenRowCommand()
+        {
+            if (SelectedAlert?.HasUrl ?? false)
+            {
+                OpenHelper.OpenWebSite(null, SelectedAlert.Url);
             }
         }
 
