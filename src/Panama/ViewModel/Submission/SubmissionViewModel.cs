@@ -125,6 +125,8 @@ namespace Restless.Panama.ViewModel
 
             Columns.Create(Header.Submitted, TableColumns.Submitted)
                 .MakeDate()
+                .SetPrimarySort(Toolkit.Core.SortType.DateTime)
+                .SetSecondarySort(TableColumns.Id, Toolkit.Core.SortType.Long, false)
                 .MakeInitialSortDescending();
 
             Columns.Create(Header.Response, TableColumns.Response)
