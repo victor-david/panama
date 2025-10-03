@@ -498,4 +498,7 @@
   <data name="CoverLetter" xml:space="preserve">
     <value>Cover Letter</value>
   </data>
+  <data name="PublisherOrNote" xml:space="preserve">
+    <value>Publisher or submission note</value>
+  </data>
 </root>

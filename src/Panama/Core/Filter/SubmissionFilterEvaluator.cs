@@ -52,7 +52,8 @@ namespace Restless.Panama.Core.Filter
         {
             return
                 string.IsNullOrWhiteSpace(Filter.Text) ||
-                item[Columns.Joined.Publisher].ToString().Contains(Filter.Text, StringComparison.InvariantCultureIgnoreCase);
+                item[Columns.Joined.Publisher].ToString().Contains(Filter.Text, StringComparison.InvariantCultureIgnoreCase) ||
+                item[Columns.Notes].ToString().Contains(Filter.Text, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private bool EvaluateActive(DataRow item)

@@ -14,9 +14,9 @@
     tk:Property.RowHeights="Auto,Auto,Auto,*"
     d:DesignHeight="450" d:DesignWidth="592">
 
-    <!-- Title -->
+    <!-- Publisher or submission note -->
     <StackPanel Grid.ColumnSpan="3" Margin="{StaticResource App.Layout.Margin.Control.Stacked.Right}">
-        <TextBlock Text="{x:Static r:Text.Publisher}"/>
+        <TextBlock Text="{x:Static r:Text.PublisherOrNote}"/>
         <TextBox
             Text="{Binding Filters.Text,
             UpdateSourceTrigger=PropertyChanged,

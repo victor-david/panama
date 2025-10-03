@@ -880,6 +880,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Publisher or submission note.
+        /// </summary>
+        public static string PublisherOrNote {
+            get {
+                return ResourceManager.GetString("PublisherOrNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
         public static string Ready {

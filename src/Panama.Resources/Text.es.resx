@@ -439,4 +439,7 @@
   <data name="CoverLetter" xml:space="preserve">
     <value>Carta de presentación</value>
   </data>
+  <data name="PublisherOrNote" xml:space="preserve">
+    <value>Editor o nota de entrega</value>
+  </data>
 </root>
