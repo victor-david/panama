@@ -32,6 +32,8 @@ namespace Restless.Panama.Database.Tables
                 public const string Url = "url";
 
                 public const string Note = "note";
+
+                public const string Active = "active";
             }
 
             public static class Values
@@ -72,6 +74,7 @@ namespace Restless.Panama.Database.Tables
                 { Defs.Columns.Publisher, ColumnType.Text },
                 { Defs.Columns.Url, ColumnType.Text, false, true },
                 { Defs.Columns.Note, ColumnType.Text, false, true },
+                { Defs.Columns.Active, ColumnType.Boolean }
             };
         }
 
@@ -90,6 +93,7 @@ namespace Restless.Panama.Database.Tables
                 row[Defs.Columns.Title] = GetTitle(item.TitleId);
                 row[Defs.Columns.TypeId] = Defs.Values.TypePublisher;
                 row[Defs.Columns.Url] = item.Url;
+                row[Defs.Columns.Active] = item.Active;
                 Rows.Add(row);
             }
 
@@ -105,6 +109,7 @@ namespace Restless.Panama.Database.Tables
                 row[Defs.Columns.Title] = GetTitle(item.TitleId);
                 row[Defs.Columns.TypeId] = Defs.Values.TypeSelfPublisher;
                 row[Defs.Columns.Url] = item.Url;
+                row[Defs.Columns.Active] = item.Active;
                 Rows.Add(row);
             }
         }

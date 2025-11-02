@@ -95,6 +95,10 @@ namespace Restless.Panama.ViewModel
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
 
+            Columns.CreateResource<BooleanToResourceConverter>(Header.EnabledShort, TableColumns.Active, ResourceKeys.Icon.IconSquare)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028);
+
             Columns.Create<PublishedTypeToStringConverter>(Header.Type, TableColumns.TypeId)
                 .MakeFixedWidth(FixedWidth.W112);
 

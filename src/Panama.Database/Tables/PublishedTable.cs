@@ -64,6 +64,11 @@ namespace Restless.Panama.Database.Tables
                 public const string Notes = "notes";
 
                 /// <summary>
+                /// Holds whether the record is active or not. Used to mark defunct publications.
+                /// </summary>
+                public const string Active = "active";
+
+                /// <summary>
                 /// Provides static column names for columns that get their value fron another table.
                 /// </summary>
                 public static class Joined
@@ -152,6 +157,7 @@ namespace Restless.Panama.Database.Tables
                 { Defs.Columns.Published, ColumnType.Timestamp, false, true },
                 { Defs.Columns.Url, ColumnType.Text, false, true },
                 { Defs.Columns.Notes, ColumnType.Text, false, true },
+                { Defs.Columns.Active, ColumnType.Boolean }
             };
         }
 
@@ -167,7 +173,24 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Update (Internal)
-        internal override long DataVersion => 2;
+        internal override long DataVersion => 3;
+
+        internal override void PerformSchemaUpdate()
+        {
+            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
+            {
+                switch (DataVersion)
+                {
+                    case 3:
+                        AddColumn(Defs.Columns.Active, "boolean not null default 1");
+                        Columns.Add(Defs.Columns.Active, typeof(bool));
+                        SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Add column for active");
+                        break;
+                }
+                Save();
+                SchemaTable.Save();
+            }
+        }
 
         internal override void PerformDataUpdate()
         {
