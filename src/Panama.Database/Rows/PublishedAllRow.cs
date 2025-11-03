@@ -79,6 +79,15 @@ namespace Restless.Panama.Database.Tables
             set => SetNote(value);
         }
 
+        /// <summary>
+        /// Gets or sets the active flag
+        /// </summary>
+        public bool Active
+        {
+            get => GetBoolean(Columns.Active);
+            set => SetActive(value);
+        }
+
         public string Display => $"{Title} [{Publisher}]";
         #endregion
 
@@ -171,6 +180,19 @@ namespace Restless.Panama.Database.Tables
             else if (TypeId == Values.TypeSelfPublisher && SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow spub)
             {
                 spub.Notes = value;
+            }
+        }
+
+        private void SetActive(bool value)
+        {
+            SetValue(Columns.Active, value);
+            if (TypeId == Values.TypePublisher && PublishedTable.GetRow(RelatedId) is PublishedRow pub)
+            {
+                pub.Active = value;
+            }
+            else if (TypeId == Values.TypeSelfPublisher && SelfPublishedTable.GetRow(RelatedId) is SelfPublishedRow spub)
+            {
+                spub.Active = value;
             }
         }
 

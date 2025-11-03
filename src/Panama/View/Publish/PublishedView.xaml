@@ -90,6 +90,12 @@
                     Style="{StaticResource App.Styles.TextBox.Multiline}"
                     Text="{Binding SelectedPublished.Note}"/>
 
+                <CheckBox
+                    Grid.Row="6"
+                    VerticalAlignment="Top"
+                    Content="{x:Static r:Text.Active}"
+                    IsChecked="{Binding SelectedPublished.Active}"/>
+
             </Grid>
         </tk:SplitterGrid.ContentRight>
 
