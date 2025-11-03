@@ -64,6 +64,11 @@ namespace Restless.Panama.Database.Tables
                 public const string Notes = "notes";
 
                 /// <summary>
+                /// Holds whether the record is active or not. Used to mark defunct publications.
+                /// </summary>
+                public const string Active = "active";
+
+                /// <summary>
                 /// Provides static column names for columns that get their value fron another table.
                 /// </summary>
                 public static class Joined
@@ -72,6 +77,17 @@ namespace Restless.Panama.Database.Tables
                     /// The name of the self publisher column. This column gets its value from the <see cref="SelfPublisherTable"/>.
                     /// </summary>
                     public const string SelfPublisher = "JoinSelfPubName";
+                }
+
+                /// <summary>
+                /// Provides static column names for calculated columns
+                /// </summary>
+                public static class Calculated
+                {
+                    /// <summary>
+                    /// The name of the column that holds the current active count.
+                    /// </summary>
+                    public const string CurrentActiveCount = "CalcCurrActiveCount";
                 }
             }
         }
@@ -129,6 +145,7 @@ namespace Restless.Panama.Database.Tables
             row[Defs.Columns.TitleId] = titleId;
             row[Defs.Columns.SelfPublisherId] = selfPublisherId;
             row[Defs.Columns.Added] = DateTime.Now.ToZero();
+            row[Defs.Columns.Active] = true;
             Rows.Add(row);
             Save();
         }
@@ -152,6 +169,7 @@ namespace Restless.Panama.Database.Tables
                 { Defs.Columns.Published, ColumnType.Timestamp, false, true },
                 { Defs.Columns.Url, ColumnType.Text, false, true },
                 { Defs.Columns.Notes, ColumnType.Text, false, true },
+                { Defs.Columns.Active, ColumnType.Boolean }
             };
         }
 
@@ -161,15 +179,29 @@ namespace Restless.Panama.Database.Tables
         protected override void UseDataRelations()
         {
             CreateChildToParentColumn(Defs.Columns.Joined.SelfPublisher, SelfPublisherTable.Defs.Relations.ToPublished, SelfPublisherTable.Defs.Columns.Name);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.CurrentActiveCount, $"IIF({Defs.Columns.Active}=1,1,0)");
         }
         #endregion
 
         /************************************************************************/
 
         #region Update (Internal)
-        internal override long DataVersion => 2;
+        internal override long DataVersion => 3;
+
         internal override void PerformSchemaUpdate()
         {
+            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
+            {
+                switch (DataVersion)
+                {
+                    case 3:
+                        AddColumnIf(Defs.Columns.Active, "boolean not null default 1", typeof(bool));
+                        SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Add column for active");
+                        break;
+                }
+                Save();
+                SchemaTable.Save();
+            }
         }
 
         internal override void PerformDataUpdate()

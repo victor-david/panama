@@ -23,6 +23,7 @@ namespace Restless.Panama.ViewModel
         #region Private
         private PublishedAllRow selectedPublished;
         private readonly bool[] groups = { false, false, false, false };
+        private bool activeOnly;
         private string searchText;
         private readonly PropertyGroupDescription typeGroup;
         private readonly PropertyGroupDescription publisherGroup;
@@ -74,6 +75,12 @@ namespace Restless.Panama.ViewModel
             set => ApplyListViewGrouping(3);
         }
 
+        public bool ActiveOnly
+        {
+            get => activeOnly;
+            set => SetProperty(ref activeOnly, value, ActiveOnlyUpdated);
+
+        }
         public string SearchText
         {
             get => searchText;
@@ -94,6 +101,11 @@ namespace Restless.Panama.ViewModel
             Columns.Create(Header.Id, TableColumns.Id)
                 .MakeCentered()
                 .MakeFixedWidth(FixedWidth.W042);
+
+            Columns.CreateResource<BooleanToResourceConverter>(Header.ActiveShort, TableColumns.Active, ResourceKeys.Icon.IconCheck)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028)
+                .SetSelectorName(Text.Active);
 
             Columns.Create<PublishedTypeToStringConverter>(Header.Type, TableColumns.TypeId)
                 .MakeFixedWidth(FixedWidth.W112);
@@ -119,6 +131,7 @@ namespace Restless.Panama.ViewModel
 
             ClearPublishedDateCommand = RelayCommand.Create(p => RunClearPublishedDateCommand(), p => SelectedPublished?.HasPublishedDate ?? false);
 
+            ActiveOnly = Config.PublishedActiveOnly;
             SearchText = Config.PublishedSearchText;
             ApplyListViewGrouping(Config.PublishedGroupIndex, true);
         }
@@ -143,13 +156,16 @@ namespace Restless.Panama.ViewModel
         /// <inheritdoc/>
         protected override bool OnDataRowFilter(DataRow item)
         {
+            bool active = !ActiveOnly || (bool)item[TableColumns.Active];
+            bool title = true;
+
             if (!string.IsNullOrWhiteSpace(SearchText))
             {
-                return
+                title =
                     item[TableColumns.Title].ToString().Contains(SearchText, StringComparison.InvariantCultureIgnoreCase) ||
                     item[TableColumns.Publisher].ToString().Contains(SearchText, StringComparison.InvariantCultureIgnoreCase);
             }
-            return true;
+            return active && title;
         }
 
         /// <inheritdoc/>
@@ -207,6 +223,12 @@ namespace Restless.Panama.ViewModel
                 SelectedPublished.Published = null;
                 OnPropertyChanged(nameof(SelectedPublished));
             }
+        }
+
+        private void ActiveOnlyUpdated()
+        {
+            Config.PublishedActiveOnly = ActiveOnly;
+            ListView.Refresh();
         }
 
         private void SearchTextUpdated()

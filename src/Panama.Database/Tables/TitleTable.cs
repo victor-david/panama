@@ -317,29 +317,29 @@ namespace Restless.Panama.Database.Tables
             expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Id);
             CreateExpressionColumn<long>(Defs.Columns.Calculated.SubCount, expr);
 
-            expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToPublished, PublishedTable.Defs.Columns.Id);
-            CreateExpressionColumn<long>(Defs.Columns.Calculated.PublishedCount, expr);
-
-            expr = string.Format("Count(Child({0}).{1})", Defs.Relations.ToSelfPublished, SelfPublishedTable.Defs.Columns.Id);
-            CreateExpressionColumn<long>(Defs.Columns.Calculated.SelfPublishedCount, expr);
-
-            expr = string.Format("Count(Child({0}).{1}) > 0", Defs.Relations.ToPublished, PublishedTable.Defs.Columns.Id);
-            CreateExpressionColumn<bool>(Defs.Columns.Calculated.IsPublished, expr);
-
-            expr = string.Format("Count(Child({0}).{1}) > 0", Defs.Relations.ToSelfPublished, SelfPublishedTable.Defs.Columns.Id);
-            CreateExpressionColumn<bool>(Defs.Columns.Calculated.IsSelfPublished, expr);
-
             expr = string.Format("Sum(Child({0}).{1})", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Calculated.CurrentSubCount);
             CreateExpressionColumn<long>(Defs.Columns.Calculated.CurrentSubCount, expr);
 
             expr = string.Format("Sum(Child({0}).{1}) > 0", Defs.Relations.ToSubmission, SubmissionTable.Defs.Columns.Calculated.CurrentSubCount);
             CreateExpressionColumn<bool>(Defs.Columns.Calculated.IsSubmitted, expr);
 
+            expr = string.Format("Sum(Child({0}).{1})", Defs.Relations.ToPublished, PublishedTable.Defs.Columns.Calculated.CurrentActiveCount);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.PublishedCount, expr);
+
+            expr = string.Format("Sum(Child({0}).{1}) > 0", Defs.Relations.ToPublished, PublishedTable.Defs.Columns.Calculated.CurrentActiveCount);
+            CreateExpressionColumn<bool>(Defs.Columns.Calculated.IsPublished, expr);
+
+            expr = string.Format("Sum(Child({0}).{1})", Defs.Relations.ToSelfPublished, SelfPublishedTable.Defs.Columns.Calculated.CurrentActiveCount);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.SelfPublishedCount, expr);
+
+            expr = string.Format("Sum(Child({0}).{1}) > 0", Defs.Relations.ToSelfPublished, SelfPublishedTable.Defs.Columns.Calculated.CurrentActiveCount);
+            CreateExpressionColumn<bool>(Defs.Columns.Calculated.IsSelfPublished, expr);
+
             CreateActionExpressionColumn<DateTime>
                 (
                     Defs.Columns.Calculated.LatestVersionDate,
                     Controller.GetTable<TitleVersionTable>(),
-                    UpdateLatestVersionDate,
+                    UpdateLatestVersionDateAction,
                     TitleVersionTable.Defs.Columns.Updated,
                     TitleVersionTable.Defs.Columns.Version
                 );
@@ -348,7 +348,7 @@ namespace Restless.Panama.Database.Tables
                 (
                     Defs.Columns.Calculated.LatestVersionWordCount,
                     Controller.GetTable<TitleVersionTable>(),
-                    UpdateLatestVersionWordCount,
+                    UpdateLatestVersionWordCountAction,
                     TitleVersionTable.Defs.Columns.WordCount,
                     TitleVersionTable.Defs.Columns.Version
                 );
@@ -357,7 +357,7 @@ namespace Restless.Panama.Database.Tables
                 (
                     Defs.Columns.Calculated.LatestVersionPath,
                     Controller.GetTable<TitleVersionTable>(),
-                    UpdateLatestVersionPath,
+                    UpdateLatestVersionPathAction,
                     TitleVersionTable.Defs.Columns.FileName
                 );
         }
@@ -369,14 +369,9 @@ namespace Restless.Panama.Database.Tables
         {
             foreach (DataRow row in Rows)
             {
-                long titleId = (long)row[Defs.Columns.Id];
-                TitleVersionController verController = TitleVersionTable.GetVersionController(titleId);
-                if (verController.Versions.Count > 0)
-                {
-                    row[Defs.Columns.Calculated.LatestVersionWordCount] = verController.Versions[0].WordCount;
-                    row[Defs.Columns.Calculated.LatestVersionDate] = verController.Versions[0].Updated;
-                    row[Defs.Columns.Calculated.LatestVersionPath] = verController.Versions[0].FileName;
-                }
+                UpdateLatestVersion(row, Defs.Columns.Calculated.LatestVersionDate, TitleVersionTable.Defs.Columns.Updated);
+                UpdateLatestVersion(row, Defs.Columns.Calculated.LatestVersionWordCount, TitleVersionTable.Defs.Columns.WordCount);
+                UpdateLatestVersion(row, Defs.Columns.Calculated.LatestVersionPath, TitleVersionTable.Defs.Columns.FileName);
             }
             AcceptChanges();
         }
@@ -399,31 +394,32 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Private methods
-        private void UpdateLatestVersionDate(ActionDataColumn col, DataRowChangeEventArgs e)
+
+        private void UpdateLatestVersionDateAction(ActionDataColumn col, DataRowChangeEventArgs e)
         {
-            UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LatestVersionDate, TitleVersionTable.Defs.Columns.Updated);
+            UpdateLatestVersion(e.Row.GetParentRow(Defs.Relations.ToVersion), col.ColumnName, TitleVersionTable.Defs.Columns.Updated);
         }
 
-        private void UpdateLatestVersionWordCount(ActionDataColumn col, DataRowChangeEventArgs e)
+        private void UpdateLatestVersionWordCountAction(ActionDataColumn col, DataRowChangeEventArgs e)
         {
-            UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LatestVersionWordCount, TitleVersionTable.Defs.Columns.WordCount);
+            UpdateLatestVersion(e.Row.GetParentRow(Defs.Relations.ToVersion), col.ColumnName, TitleVersionTable.Defs.Columns.WordCount);
         }
 
-        private void UpdateLatestVersionPath(ActionDataColumn col, DataRowChangeEventArgs e)
+        private void UpdateLatestVersionPathAction(ActionDataColumn col, DataRowChangeEventArgs e)
         {
-            UpdateFromLatestVersionCalculated(e, Defs.Columns.Calculated.LatestVersionPath, TitleVersionTable.Defs.Columns.FileName);
+            UpdateLatestVersion(e.Row.GetParentRow(Defs.Relations.ToVersion), col.ColumnName, TitleVersionTable.Defs.Columns.FileName);
         }
 
-        private void UpdateFromLatestVersionCalculated(DataRowChangeEventArgs e, string titleColumn, string titleVersionColumn)
+        private void UpdateLatestVersion(DataRow titleRow, string titleColumn, string titleVersionColumn)
         {
-            long titleId = (long)e.Row[TitleVersionTable.Defs.Columns.TitleId];
-            DataRow[] titleRows = Select($"{Defs.Columns.Id}={titleId}");
-            if (titleRows.Length == 1)
+            if (titleRow != null)
             {
+                long titleId = (long)titleRow[Defs.Columns.Id];
                 TitleVersionController verController = TitleVersionTable.GetVersionController(titleId);
+
                 if (verController.Versions.Count > 0)
                 {
-                    titleRows[0][titleColumn] = verController.Versions[0].Row[titleVersionColumn];
+                    titleRow[titleColumn] = verController.Versions[0].Row[titleVersionColumn];
                 }
             }
         }

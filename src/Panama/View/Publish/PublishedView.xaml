@@ -24,6 +24,8 @@
                 <CheckBox IsChecked="{Binding GroupByTitle}" Content="{x:Static r:Header.Title}"/>
                 <CheckBox IsChecked="{Binding GroupByPublisher}" Content="{x:Static r:Header.Publisher}"/>
                 <Separator/>
+                <CheckBox IsChecked="{Binding ActiveOnly}" Content="{x:Static r:Header.ActiveOnly}"/>
+                <Separator/>
                 <TextBlock Text="{x:Static r:Header.TitlePublisher}"/>
                 <TextBox
                     Style="{StaticResource MahApps.Styles.TextBox.Button}"
@@ -62,14 +64,13 @@
         </tk:SplitterGrid.ContentLeft>
 
         <tk:SplitterGrid.ContentRight>
-            <Grid
-                tk:Property.RowHeights="Auto,Auto,Auto,Auto,Auto,*,*"
+            <StackPanel
                 Style="{StaticResource App.Styles.Panel.DataEntry}"
                 Visibility="{Binding EditVisibility}">
 
-                <TextBlock Grid.Row="0" Text="{x:Static r:Text.Published}"/>
+                <TextBlock Text="{x:Static r:Text.Published}"/>
 
-                <Grid Grid.Row="1" tk:Property.ColumnWidths="*,Auto" Margin="{StaticResource App.Layout.Margin.Control.Stacked}">
+                <Grid tk:Property.ColumnWidths="*,Auto" Margin="{StaticResource App.Layout.Margin.Control.Stacked}">
                     <DatePicker
                         Grid.Column="0"
                         Margin="{StaticResource App.Layout.Margin.Control.Stacked.Right}"
@@ -82,15 +83,18 @@
                         ToolTip="{x:Static r:ToolTip.ClearPublishedDate}"/>
                 </Grid>
 
-                <TextBlock Grid.Row="2" Text="{x:Static r:Text.Url}"/>
-                <TextBox Grid.Row="3" Text="{Binding SelectedPublished.Url}"/>
-                <TextBlock Grid.Row="4" Text="{x:Static r:Text.Notes}"/>
+                <TextBlock Text="{x:Static r:Text.Url}"/>
+                <TextBox Text="{Binding SelectedPublished.Url}"/>
+
+                <TextBlock Text="{x:Static r:Text.Notes}"/>
                 <TextBox
-                    Grid.Row="5"
                     Style="{StaticResource App.Styles.TextBox.Multiline}"
+                    MinHeight="150"
                     Text="{Binding SelectedPublished.Note}"/>
 
-            </Grid>
+                <CheckBox Content="{x:Static r:Text.Active}" IsChecked="{Binding SelectedPublished.Active}"/>
+
+            </StackPanel>
         </tk:SplitterGrid.ContentRight>
 
     </tk:SplitterGrid>

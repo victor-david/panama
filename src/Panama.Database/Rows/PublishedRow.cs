@@ -75,6 +75,15 @@ namespace Restless.Panama.Database.Tables
             get => GetString(Columns.Notes);
             set => SetValue(Columns.Notes, value);
         }
+
+        /// <summary>
+        /// Gets or sets whether the record is active.
+        /// </summary>
+        public bool Active
+        {
+            get => GetBoolean(Columns.Active);
+            set => SetValue(Columns.Active, value);
+        }
         #endregion
 
         /************************************************************************/
