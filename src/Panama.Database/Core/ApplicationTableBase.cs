@@ -1,4 +1,5 @@
 ﻿using Restless.Panama.Database.Tables;
+using System;
 
 namespace Restless.Panama.Database.Core
 {
@@ -37,6 +38,29 @@ namespace Restless.Panama.Database.Core
         {
         }
         protected SchemaTable SchemaTable => Controller.GetTable<SchemaTable>();
+
+        /// <summary>
+        /// Adds a column to the database (if it doesn't exists) and
+        /// adds a column to the Columns collection (if it doesn't exist)
+        /// </summary>
+        /// <param name="colName">The column name</param>
+        /// <param name="colDefinition">The column definition for the database</param>
+        /// <param name="type">The type used when adding to the Columns collection</param>
+        /// <remarks>
+        /// When updating an existing table, the column doesn't exist the first run.
+        /// This method will add it, and add the corresponding column to the Columns collection.
+        /// When creating from scratch (fresh install with no upgrade), the column should already
+        /// exist both in the database and the Columns collection because GetColumnDefinitions()
+        /// will have been called on the table.
+        /// </remarks>
+        protected void AddColumnIf(string colName, string colDefinition, Type type)
+        {
+            AddColumn(colName, colDefinition);
+            if (Columns[colName] == null)
+            {
+                Columns.Add(colName, type);
+            }
+        }
         #endregion
     }
 }

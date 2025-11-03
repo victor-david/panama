@@ -182,8 +182,7 @@ namespace Restless.Panama.Database.Tables
                 switch (DataVersion)
                 {
                     case 3:
-                        AddColumn(Defs.Columns.Active, "boolean not null default 1");
-                        Columns.Add(Defs.Columns.Active, typeof(bool));
+                        AddColumnIf(Defs.Columns.Active, "boolean not null default 1", typeof(bool));
                         SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Add column for active");
                         break;
                 }

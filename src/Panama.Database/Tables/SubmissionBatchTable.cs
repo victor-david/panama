@@ -317,6 +317,7 @@ namespace Restless.Panama.Database.Tables
                 { Defs.Columns.Response, ColumnType.Timestamp, false, true },
                 { Defs.Columns.ResponseType, ColumnType.Integer, false, false, 0 },
                 { Defs.Columns.Notes, ColumnType.Text, false, true },
+                { Defs.Columns.Cover, ColumnType.Text, false, true }
             };
         }
 
@@ -402,7 +403,7 @@ namespace Restless.Panama.Database.Tables
                 switch (DataVersion)
                 {
                     case 3:
-                        AddColumn(Defs.Columns.Cover, "text");
+                        AddColumnIf(Defs.Columns.Cover, "text", typeof(string));
                         SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Add column for cover letter");
                         break;
                 }
