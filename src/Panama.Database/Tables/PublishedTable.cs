@@ -134,6 +134,7 @@ namespace Restless.Panama.Database.Tables
             row[Defs.Columns.TitleId] = titleId;
             row[Defs.Columns.PublisherId] = publisherId;
             row[Defs.Columns.Added] = DateTime.Now.ToZero();
+            row[Defs.Columns.Active] = true;
             Rows.Add(row);
             Save();
         }
