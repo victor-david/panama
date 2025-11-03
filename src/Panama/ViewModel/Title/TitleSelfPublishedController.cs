@@ -1,4 +1,5 @@
 using Restless.Panama.Core;
+using Restless.Panama.Core.Converters;
 using Restless.Panama.Database.Tables;
 using Restless.Panama.Resources;
 using Restless.Toolkit.Controls;
@@ -63,6 +64,11 @@ namespace Restless.Panama.ViewModel
         /// <param name="owner">The view model that owns this controller.</param>
         public TitleSelfPublishedController(TitleViewModel owner) : base(owner)
         {
+
+            Columns.CreateResource<BooleanToResourceConverter>(Header.ActiveShort, TableColumns.Active, ResourceKeys.Icon.IconCheck)
+                .MakeCentered()
+                .MakeFixedWidth(FixedWidth.W028);
+
             Columns.Create(Header.Added, TableColumns.Added)
                 .MakeDate()
                 .MakeInitialSortDescending();

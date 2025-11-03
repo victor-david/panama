@@ -621,4 +621,7 @@
   <data name="ActiveOnly" xml:space="preserve">
     <value>Active Only</value>
   </data>
+  <data name="ActiveShort" xml:space="preserve">
+    <value>A</value>
+  </data>
 </root>
