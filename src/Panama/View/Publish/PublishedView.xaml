@@ -24,6 +24,8 @@
                 <CheckBox IsChecked="{Binding GroupByTitle}" Content="{x:Static r:Header.Title}"/>
                 <CheckBox IsChecked="{Binding GroupByPublisher}" Content="{x:Static r:Header.Publisher}"/>
                 <Separator/>
+                <CheckBox IsChecked="{Binding ActiveOnly}" Content="{x:Static r:Header.ActiveOnly}"/>
+                <Separator/>
                 <TextBlock Text="{x:Static r:Header.TitlePublisher}"/>
                 <TextBox
                     Style="{StaticResource MahApps.Styles.TextBox.Button}"

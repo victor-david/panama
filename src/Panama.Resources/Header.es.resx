@@ -559,4 +559,7 @@
   <data name="PayingShort" xml:space="preserve">
     <value>P</value>
   </data>
+  <data name="ActiveOnly" xml:space="preserve">
+    <value>Solo Activo</value>
+  </data>
 </root>

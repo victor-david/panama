@@ -70,6 +70,15 @@ namespace Restless.Panama.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active Only.
+        /// </summary>
+        public static string ActiveOnly {
+            get {
+                return ResourceManager.GetString("ActiveOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Added.
         /// </summary>
         public static string Added {

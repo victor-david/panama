@@ -1040,6 +1040,12 @@ namespace Restless.Panama.Core
             set => SetItem(value);
         }
 
+        public bool PublishedActiveOnly
+        {
+            get => GetItem(false);
+            set => SetItem(value);
+        }
+
         public string PublishedSearchText
         {
             get => GetItem(null);
