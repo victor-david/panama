@@ -78,6 +78,17 @@ namespace Restless.Panama.Database.Tables
                     /// </summary>
                     public const string SelfPublisher = "JoinSelfPubName";
                 }
+
+                /// <summary>
+                /// Provides static column names for calculated columns
+                /// </summary>
+                public static class Calculated
+                {
+                    /// <summary>
+                    /// The name of the column that holds the current active count.
+                    /// </summary>
+                    public const string CurrentActiveCount = "CalcCurrActiveCount";
+                }
             }
         }
         #endregion
@@ -168,6 +179,7 @@ namespace Restless.Panama.Database.Tables
         protected override void UseDataRelations()
         {
             CreateChildToParentColumn(Defs.Columns.Joined.SelfPublisher, SelfPublisherTable.Defs.Relations.ToPublished, SelfPublisherTable.Defs.Columns.Name);
+            CreateExpressionColumn<long>(Defs.Columns.Calculated.CurrentActiveCount, $"IIF({Defs.Columns.Active}=1,1,0)");
         }
         #endregion
 
