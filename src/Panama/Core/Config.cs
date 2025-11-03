@@ -4,7 +4,9 @@ using Restless.Panama.Database.Tables;
 using Restless.Panama.ViewModel;
 using Restless.Toolkit.Core.Database.SQLite;
 using Restless.Toolkit.Core.Utility;
+using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 
 namespace Restless.Panama.Core
@@ -14,7 +16,26 @@ namespace Restless.Panama.Core
     /// </summary>
     public sealed class Config : KeyValueTableBase, INotifyPropertyChanged
     {
-        #region Static singleton access and constructor
+        #region Application constants
+        /// <summary>
+        /// Gets the company, used in application directory path.
+        /// </summary>
+        public const string Company = "RestlessAnimal";
+
+        /// <summary>
+        /// Gets the product, used in application directory path.
+        /// </summary>
+        public const string Product = "Panama";
+
+        /// <summary>
+        /// Gets the application directory.
+        /// </summary>
+        public static string ApplicationDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Company, Product);
+        #endregion
+
+        /************************************************************************/
+
+        #region Constructors
         /// <summary>
         /// Gets the singleton instance of this class
         /// </summary>

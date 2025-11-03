@@ -2,7 +2,6 @@
 using Restless.Panama.Controls;
 using Restless.Panama.Core;
 using Restless.Panama.Resources;
-using Restless.Panama.Utility;
 using System.Collections.Generic;
 
 namespace Restless.Panama.ViewModel
@@ -12,6 +11,8 @@ namespace Restless.Panama.ViewModel
         #region Private
         private NavigatorSection selectedSection;
         private LanguageItem selectedLanguage;
+        private readonly StartupConfig startupConfig;
+        //private string databaseLocation;
         #endregion
 
         /************************************************************************/
@@ -45,8 +46,12 @@ namespace Restless.Panama.ViewModel
         /// </summary>
         public string DatabaseLocation
         {
-            get => RegistryManager.DatabaseDirectory;
-            set => RegistryManager.SetDatabaseDirectory(value);
+            get => startupConfig.DatabaseLocation;
+            set
+            {
+                startupConfig.DatabaseLocation = value;
+                startupConfig.Save();
+            }
         }
 
         /// <summary>
@@ -112,6 +117,8 @@ namespace Restless.Panama.ViewModel
             Themes = new SettingsThemeController();
 
             SetInitialSection();
+
+            startupConfig = StartupConfig.GetStartupConfig();
 
             Commands.Add("SelectPath", RunSelectPathCommand);
             Commands.Add("ResetColors", p => Config.Colors.Reset());
