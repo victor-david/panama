@@ -1,5 +1,5 @@
+using Restless.Panama.Core;
 using Restless.Panama.Resources;
-using Restless.Panama.Utility;
 using Restless.Toolkit.Mvvm;
 using System;
 using System.Text;

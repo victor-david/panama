@@ -1,7 +1,6 @@
 using Restless.Panama.Core;
 using Restless.Panama.Database.Core;
 using Restless.Panama.Database.Tables;
-using Restless.Panama.Utility;
 using Restless.Panama.ViewModel;
 using Restless.Toolkit.Controls;
 using System;
@@ -83,8 +82,10 @@ namespace Restless.Panama
 #endif
             // Validations.ThrowIfNotWindows7();
             ShutdownMode = ShutdownMode.OnMainWindowClose;
+
             StartupOptions ops = new(e.Args);
-            DatabaseController.Instance.Init(RegistryManager.DatabaseDirectory);
+            StartupConfig startup = StartupConfig.GetStartupConfig();
+            DatabaseController.Instance.Init(startup.DatabaseLocation);
 
             LanguageManager.Instance.SetLanguage(Config.Instance.LanguageId);
 
