@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Restless.Panama.Utility
+namespace Restless.Panama.Core
 {
     /// <summary>
     /// Provides simple logging capabilities
@@ -30,8 +30,8 @@ namespace Restless.Panama.Utility
 
         private Logger()
         {
-            LogFile = Path.Combine(RegistryManager.AppDataDirectory, LogFileName);
-            Directory.CreateDirectory(RegistryManager.AppDataDirectory);
+            LogFile = Path.Combine(Config.ApplicationDirectory, LogFileName);
+            Directory.CreateDirectory(Config.ApplicationDirectory);
         }
         #endregion
 
@@ -64,7 +64,7 @@ namespace Restless.Panama.Utility
         #region Private methods
         private string GetLogExceptionMessage(string source, Exception e)
         {
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new();
             string header = $"{source} unhandled exception: {DateTime.Now} local time";
             builder.AppendLine(header);
             builder.AppendLine(string.Empty.PadLeft(header.Length, '='));
@@ -85,11 +85,11 @@ namespace Restless.Panama.Utility
 
         private string GetExceptionMessage(Exception e, int level)
         {
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new();
 
             builder.AppendLine($"Level {level} => {e.GetType().FullName}");
             builder.AppendLine(e.Message);
-            
+
             if (e.InnerException != null)
             {
                 builder.AppendLine();

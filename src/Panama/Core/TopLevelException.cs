@@ -1,5 +1,4 @@
-﻿using Restless.Panama.Utility;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -20,10 +19,7 @@ namespace Restless.Panama.Core
         #region Setup / teardown
         public static void Initialize()
         {
-            if (instance == null)
-            {
-                instance = new TopLevelException();
-            }
+            instance ??= new TopLevelException();
         }
 
         private TopLevelException()

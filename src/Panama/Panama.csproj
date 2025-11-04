@@ -33,7 +33,6 @@
     <ProjectReference Include="..\Panama.Database\Panama.Database.csproj" />
     <ProjectReference Include="..\Panama.Network\Panama.Network.csproj" />
     <ProjectReference Include="..\Panama.Resources\Panama.Resources.csproj" />
-    <ProjectReference Include="..\Panama.Utility\Panama.Utility.csproj" />
   </ItemGroup>
 
 </Project>
