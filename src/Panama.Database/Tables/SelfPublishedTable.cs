@@ -186,37 +186,10 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Update (Internal)
-        internal override long DataVersion => 3;
-
-        internal override void PerformSchemaUpdate()
-        {
-            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
-            {
-                switch (DataVersion)
-                {
-                    case 3:
-                        AddColumnIf(Defs.Columns.Active, "boolean not null default 1", typeof(bool));
-                        SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Add column for active");
-                        break;
-                }
-                Save();
-                SchemaTable.Save();
-            }
-        }
-
         internal override void PerformDataUpdate()
         {
-            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
-            {
-                switch (DataVersion)
-                {
-                    case 2:
-                        UpdateDates();
-                        break;
-                }
-                Save();
-                SchemaTable.Save();
-            }
+            PerformUpdateFor(2, UpdateDates, "Set dates to zeroed time");
+            PerformUpdateFor(3, AddActiveColumn, "Add active column");
         }
 
         private void UpdateDates()
@@ -226,7 +199,11 @@ namespace Restless.Panama.Database.Tables
                 item.SetPublishedDate(item.Published.Value.ToZero());
                 item.Row[Defs.Columns.Added] = item.Added.ToZero();
             }
-            SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Set dates to zeroed time");
+        }
+
+        private void AddActiveColumn()
+        {
+            AddColumnIf(Defs.Columns.Active, "boolean not null default 1", typeof(bool));
         }
         #endregion
     }

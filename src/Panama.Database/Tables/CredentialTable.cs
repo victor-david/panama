@@ -1,3 +1,4 @@
+using DocumentFormat.OpenXml.Spreadsheet;
 using Restless.Toolkit.Core.Database.SQLite;
 using System.Collections.Generic;
 using System.Data;
@@ -124,24 +125,9 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Update (Internal)
-        internal override long DataVersion => 2;
-        internal override void PerformSchemaUpdate()
-        {
-        }
-
         internal override void PerformDataUpdate()
         {
-            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
-            {
-                switch (DataVersion)
-                {
-                    case 2:
-                        RemoveAllRows();
-                        break;
-                }
-                Save();
-                SchemaTable.Save();
-            }
+            PerformUpdateFor(2, RemoveAllRows, "Remove all records");
         }
 
         private void RemoveAllRows()
@@ -153,7 +139,6 @@ namespace Restless.Panama.Database.Tables
                     item.Row.Delete();
                 }
             }
-            SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Removed all records");
         }
         #endregion
     }

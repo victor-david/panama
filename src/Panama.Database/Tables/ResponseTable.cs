@@ -192,23 +192,9 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Update (Internal)
-        internal override long DataVersion => 2;
         internal override void PerformDataUpdate()
         {
-            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
-            {
-                switch (DataVersion)
-                {
-                    case 2:
-                        UpdateRespones();
-                        break;
-                }
-                // normally read only, disable to save
-                IsReadOnly = false;
-                Save();
-                IsReadOnly = true;
-                SchemaTable.Save();
-            }
+            PerformUpdateFor(2, UpdateRespones, "Add withdrawn status");
         }
 
         private void UpdateRespones()
@@ -220,7 +206,6 @@ namespace Restless.Panama.Database.Tables
                 row[Defs.Columns.Name] = "Withdrawn";
                 row[Defs.Columns.Description] = "Author withdrew the submission.";
                 Rows.Add(row);
-                SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Add withdrawn status");
             }
         }
         #endregion

@@ -395,36 +395,10 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Update (Internal)
-        internal override long DataVersion => 3;
-        internal override void PerformSchemaUpdate()
-        {
-            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
-            {
-                switch (DataVersion)
-                {
-                    case 3:
-                        AddColumnIf(Defs.Columns.Cover, "text", typeof(string));
-                        SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Add column for cover letter");
-                        break;
-                }
-                Save();
-                SchemaTable.Save();
-            }
-        }
-
         internal override void PerformDataUpdate()
         {
-            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
-            {
-                switch (DataVersion)
-                {
-                    case 2:
-                        UpdateDates();
-                        break;
-                }
-                Save();
-                SchemaTable.Save();
-            }
+            PerformUpdateFor(2, UpdateDates, "Set dates to zeroed time");
+            PerformUpdateFor(3, AddCoverLetterColumn, "Add column for cover letter");
         }
 
         private void UpdateDates()
@@ -437,8 +411,13 @@ namespace Restless.Panama.Database.Tables
                     item.Response = item.Response.Value.ToZero();
                 }
             }
-            SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Set dates to zeroed time");
         }
+
+        private void AddCoverLetterColumn()
+        {
+            AddColumnIf(Defs.Columns.Cover, "text", typeof(string));
+        }
+
         #endregion
     }
 }

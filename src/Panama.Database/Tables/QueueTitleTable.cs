@@ -258,24 +258,9 @@ namespace Restless.Panama.Database.Tables
         /************************************************************************/
 
         #region Update (Internal)
-        internal override long DataVersion => 2;
-        internal override void PerformSchemaUpdate()
-        {
-        }
-
         internal override void PerformDataUpdate()
         {
-            if (!SchemaTable.HaveSchemaRecord(Defs.TableName, SchemaVersion, DataVersion))
-            {
-                switch (DataVersion)
-                {
-                    case 2:
-                        UpdateDates();
-                        break;
-                }
-                Save();
-                SchemaTable.Save();
-            }
+            PerformUpdateFor(2, UpdateDates, "Set dates to zeroed time");
         }
 
         private void UpdateDates()
@@ -284,7 +269,6 @@ namespace Restless.Panama.Database.Tables
             {
                 item.Date = item.Date.Value.ToZero();
             }
-            SchemaTable.AddSchemaRecord(Defs.TableName, SchemaVersion, DataVersion, "Set dates to zeroed time");
         }
         #endregion
 

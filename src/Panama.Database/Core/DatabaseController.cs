@@ -92,8 +92,6 @@ namespace Restless.Panama.Database.Core
             AttachMainSchema();
 
             RegisterSchema();
-
-            PerformSchemaUpdate();
             PerformDataUpdate();
 
             TableRegistrationComplete(MainAppSchemaName);
@@ -191,14 +189,6 @@ namespace Restless.Panama.Database.Core
         private void RegisterSchema()
         {
             GetTable<SchemaTable>().RegisterSchema(DefaultSchemaVersion);
-        }
-
-        private void PerformSchemaUpdate()
-        {
-            foreach (ApplicationTableBase table in DataSet.Tables.OfType<ApplicationTableBase>())
-            {
-                table.PerformSchemaUpdate();
-            }
         }
 
         private void PerformDataUpdate()
