@@ -213,17 +213,25 @@ namespace Restless.Panama.ViewModel
 
                 AssemblyInfo ai = new(AssemblyInfoType.Entry);
                 string publisherName = Owner.SelectedBatch.PublisherName;
-                string fileName = Path.Combine(Config.Instance.FolderSubmissionDocument, Format.MakeFileName(publisherName));
+                string rawFileName = Path.Combine(Config.Instance.FolderSubmissionDocument, Format.MakeFileName(publisherName));
+                // Raw ends with: 2026-07-29-11-30-42-679
+                // Remove the seconds and mseconds
+                string fileName = rawFileName.Remove(rawFileName.Length - 7);
+                string docxFileName = $"{fileName}.docx";
+                if (File.Exists(docxFileName))
+                {
+                    throw new InvalidOperationException("The file name already exists. File names are unique to the minute.");
+                }
 
                 OpenXmlDocumentCreator xml = new()
                 {
-                    Filename = $"{fileName}.docx",
+                    Filename = docxFileName,
                     TemplateFile = Config.TemplateFile,
                     HeaderText = ProcessPlaceholders(ops.Header),
                     FooterText = ProcessPlaceholders(ops.Footer),
                     HeaderPageNumbers = ops.HeaderPageNumbers,
                     FooterPageNumbers = ops.FooterPageNumbers,
-                    Paragraphs = GetParagraphs(ProcessPlaceholders(ops.Text)),
+                    // Paragraphs = GetParagraphs(ProcessPlaceholders(ops.Text)),
                     Author = AuthorTable.GetDefaultAuthorName(),
                     Description = $"Created by {ai.Title} {ai.Version}",
                     Title = $"Submissions to {publisherName}",
