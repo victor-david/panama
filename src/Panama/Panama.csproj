@@ -15,14 +15,14 @@
     <RootNamespace>Restless.Panama</RootNamespace>
     <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>5.0.25</Version>
+    <Version>5.0.26</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MahApps.Metro" Version="2.4.10" />
-    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="5.1.0" />
-    <PackageReference Include="MahApps.Metro.IconPacks.PhosphorIcons" Version="5.1.0" />
-    <PackageReference Include="MimeKitLite" Version="4.7.1" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.11" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="6.2.1" />
+    <PackageReference Include="MahApps.Metro.IconPacks.PhosphorIcons" Version="6.2.1" />
+    <PackageReference Include="MimeKitLite" Version="4.17.0" />
     <PackageReference Include="Restless.Toolkit" Version="2.5.25" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
     <PackageReference Include="System.Data.OleDb" Version="8.0.0" />
