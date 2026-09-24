@@ -13,9 +13,9 @@
     <Product>Panama</Product>
     <RepositoryUrl>https://github.com/victor-david/panama</RepositoryUrl>
     <RootNamespace>Restless.Panama</RootNamespace>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>5.0.26</Version>
+    <Version>5.0.27</Version>
   </PropertyGroup>
 
   <ItemGroup>
