@@ -22,10 +22,10 @@
     <PackageReference Include="MahApps.Metro" Version="2.4.11" />
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="6.2.1" />
     <PackageReference Include="MahApps.Metro.IconPacks.PhosphorIcons" Version="6.2.1" />
-    <PackageReference Include="MimeKitLite" Version="4.17.0" />
+    <PackageReference Include="MimeKitLite" Version="4.18.1" />
     <PackageReference Include="Restless.Toolkit" Version="2.5.25" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
-    <PackageReference Include="System.Data.OleDb" Version="8.0.0" />
+    <PackageReference Include="System.Data.OleDb" Version="10.0.12" />
   </ItemGroup>
 
   <ItemGroup>
